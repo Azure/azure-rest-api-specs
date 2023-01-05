@@ -3100,9 +3100,9 @@
           "Glossary"
         ],
         "description": "Delete Glossary Terms",
-        "operationId": "Glossary_DeleteTermsByGuids",
+        "operationId": "Glossary_BulkDeleteTermsByGuids",
         "x-ms-examples": {
-          "Glossary_DeleteGlossaryTerms": {
+          "Glossary_BulkDeleteTermsByGuids": {
             "$ref": "./examples/Glossary_GetBulkDeleteOperationStatus.json"
           }
         },
@@ -3386,8 +3386,8 @@
         "description": "Get lineage info of the entity specified by GUID.",
         "operationId": "Lineage_GetLineageGraph",
         "x-ms-examples": {
-          "GetLineageGraph": {
-            "$ref": "./examples/GetLineageGraph.json"
+          "Lineage_GetLineageGraph": {
+            "$ref": "./examples/Lineage_GetLineageGraph.json"
           }
         },
         "parameters": [
@@ -3434,8 +3434,8 @@
         "description": "Return immediate next page lineage info about entity with pagination",
         "operationId": "Lineage_NextPageLineage",
         "x-ms-examples": {
-          "NextPageLineage": {
-            "$ref": "./examples/NextPageLineage.json"
+          "Lineage_NextPageLineage": {
+            "$ref": "./examples/Lineage_NextPageLineage.json"
           }
         },
         "parameters": [
@@ -3481,6 +3481,11 @@
         ],
         "description": "Returns lineage info about entity.\n\nIn addition to the typeName path parameter, attribute key-value pair(s) can be provided in the following format\n\nattr:[attrName]=[attrValue]\n\nNOTE: The attrName and attrValue should be unique across entities, eg. qualifiedName.\nThe REST request would look something like this:\nGET /v2/lineage/uniqueAttribute/type/aType?attr:aTypeAttribute=someValue.",
         "operationId": "Lineage_GetLineageByUniqueAttribute",
+        "x-ms-examples": {
+          "Lineage_GetLineageByUniqueAttribute": {
+            "$ref": "./examples/Lineage_GetLineageByUniqueAttribute.json"
+          }
+        },
         "produces": [
           "application/json"
         ],
