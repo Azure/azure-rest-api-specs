@@ -63,7 +63,7 @@
         "description": "List networkGroupMemberships applied on a virtual network.",
         "responses": {
           "200": {
-            "description": "OK - Returns information about the configurations.",
+            "description": "OK - Returns information about the group membership.",
             "schema": {
               "$ref": "#/definitions/NetworkGroupMembershipsListResult"
             }
@@ -111,7 +111,7 @@
         },
         "location": {
           "type": "string",
-          "description": "Resource Location."
+          "description": "Parent Resource Virtual Network Location."
         }
       },
       "allOf": [
@@ -149,7 +149,7 @@
           "description": "Source list"
         }
       },
-      "description": "The network manager effective connectivity configuration"
+      "description": "The network manager Network Group Membership Group"
     },
     "BaseNetworkGroupMembershipSource": {
       "type": "object",
@@ -214,7 +214,7 @@
           "$ref": "#/definitions/BaseNetworkGroupMembershipSource"
         }
       ],
-      "description": "Policy Membership Source.",
+      "description": "Policy Network Group Membership Source.",
       "x-ms-discriminator-value": "Policy"
     }
   },
