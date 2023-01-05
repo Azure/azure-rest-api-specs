@@ -274,8 +274,8 @@
             "AgentlessVmScanning",
             "AgentlessDiscoveryForKubernetes",
             "DataSensitivityScanning",
-            "StorageAntiMalware",
-            "StorageSensitivityScanning",
+            "OnUploadMalwareScanning",
+            "DataSensitivityDiscovery",
             "ContainerRegistriesVulnerabilityAssessments"
           ],
           "x-ms-enum": {
@@ -295,12 +295,12 @@
                 "description": "Available for DCSPM plan."
               },
               {
-                "value": "StorageAntiMalware",
-                "description": "Available for StorageAccounts plan."
+                "value": "OnUploadMalwareScanning",
+                "description": "Limits the GB to be scanned per month for each storage account within the subscription. Once this limit reached on a given storage account, Blobs won't be scanned during current calendar month.\r\nAvailable for StorageAccounts plan."
               },
               {
-                "value": "StorageSensitivityScanning",
-                "description": "Available for StorageAccounts plan."
+                "value": "DataSensitivityDiscovery",
+                "description": "Data sensitivity discovery identifies Blob storage container with sensitive data such as credentials, credit cards, and more, to help prioritize and investigate security events.\r\nAvailable for StorageAccounts plan."
               },
               {
                 "value": "ContainerRegistriesVulnerabilityAssessments",

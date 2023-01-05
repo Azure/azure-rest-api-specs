@@ -16,14 +16,14 @@
           "subPlan": "PerStorageAccount",
           "extensions": [
             {
-              "type": "StorageAntiMalware",
+              "type": "OnUploadMalwareScanning",
               "isEnabled": true,
               "additionalExtensionProperties": {
-                "capGBPerMonth": 10
+                "capGBPerMonthPerStorageAccount": 10
               }
             },
             {
-              "type": "StorageSensitivityScanning",
+              "type": "DataSensitivityDiscovery",
               "isEnabled": true
             }
           ]
