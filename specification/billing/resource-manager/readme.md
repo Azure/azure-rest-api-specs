@@ -26,7 +26,26 @@ These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05
+tag: package-2023-04
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04'
+title: BillingManagementClient
+description: Billing Client
+input-file:
+- Microsoft.Billing/stable/2023-04-01/billing.json
+- Microsoft.Billing/stable/2023-04-01/billingOperations.json
+directive:
+  - suppress: R4009
+    from: Microsoft.Billing/stable/2023-04-01/billing.json
+    reason: systemData is not in this API version
+  - suppress: R4009
+    from: Microsoft.Billing/stable/2023-04-01/billingOperations.json
+    reason: systemData is not in this API version
 ```
 
 ### Tag: package-2021-10
