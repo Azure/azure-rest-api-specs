@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-03-01",
+    "version": "2022-11-01",
     "title": "Azure Orbital",
     "description": "Azure Orbital service.",
     "license": {
@@ -1122,7 +1122,10 @@
     "SpacecraftsProperties": {
       "type": "object",
       "required": [
-        "noradId"
+        "titleLine",
+        "tleLine1",
+        "tleLine2",
+        "links"
       ],
       "properties": {
         "provisioningState": {
@@ -1269,7 +1272,12 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SpacecraftsProperties",
-          "description": "Spacecraft Properties"
+          "description": "Spacecraft Properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SpacecraftsProperties"
+            }
+          ]
         },
         "etag": {
           "readOnly": true,
@@ -1528,6 +1536,14 @@
               "description": "ARM resource identifier of the subnet delegated to the Microsoft.Orbital/orbitalGateways. Needs to be at least a class C subnet, and should not have any IP created in it."
             }
           }
+        },
+        "thirdPartyConfigurations": {
+          "type": "array",
+          "x-ms-identifiers": [],
+          "items": {
+            "$ref": "#/definitions/ContactProfileThirdPartyConfiguration"
+          },
+          "description": "Third-party mission configuration of the Contact Profile. Describes RF links, modem processing, and IP endpoints."
         },
         "links": {
           "type": "array",
@@ -2052,6 +2068,10 @@
     },
     "AuthorizedGroundstation": {
       "type": "object",
+      "required": [
+        "groundStation",
+        "expirationDate"
+      ],
       "readOnly": true,
       "properties": {
         "groundStation": {
@@ -2147,6 +2167,23 @@
         }
       },
       "description": "Operation result error properties."
+    },
+    "ContactProfileThirdPartyConfiguration": {
+      "type": "object",
+      "required": [
+        "providerName",
+        "missionConfiguration"
+      ],
+      "properties": {
+        "providerName": {
+          "type": "string",
+          "description": "Name of the third-party provider."
+        },
+        "missionConfiguration": {
+          "type": "string",
+          "description": "Name of string referencing the configuration describing contact set-up for a particular mission. Expected values are those which have been created in collaboration with the partner network."
+        }
+      }
     }
   },
   "parameters": {
@@ -2158,13 +2195,14 @@
       "enum": [
         "2020-09-01-preview",
         "2021-04-04-preview",
-        "2022-03-01"
+        "2022-03-01",
+        "2022-11-01"
       ],
       "x-ms-enum": {
         "name": "apiVersionParameter",
         "modelAsString": true
       },
-      "default": "2022-03-01",
+      "default": "2022-11-01",
       "description": "Version of the API to be used with the client request."
     },
     "contactNameParameter": {

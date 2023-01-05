@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2022-03-01",
+    "api-version": "2022-11-01",
     "subscriptionId": "c1be1141-a7c9-4aac-9608-3c2e2f1152c3",
     "resourceGroupName": "contoso-Rgp",
     "contactProfileName": "CONTOSO-CP",
@@ -31,6 +31,16 @@
           "networkConfiguration": {
             "subnetId": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Network/virtualNetworks/contoso-vnet/subnets/orbital-delegated-subnet"
           },
+          "thirdPartyConfigurations": [
+            {
+              "providerName": "KSAT",
+              "missionConfiguration": "Ksat_MissionConfiguration"
+            },
+            {
+              "providerName": "VIASAT",
+              "missionConfiguration": "Viasat_Configuration"
+            }
+          ],
           "links": [
             {
               "name": "contoso-uplink",
@@ -86,7 +96,7 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/Microsoft.Orbital/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-03-01"
+        "Location": "https://management.azure.com/Microsoft.Orbital/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2022-11-01"
       }
     }
   }
