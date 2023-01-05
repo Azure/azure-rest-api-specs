@@ -73,6 +73,14 @@ interface Monitors extends ResourceOperations<NewRelicMonitorResource,MonitorPro
   ): ArmResponse<AppServicesListResponse> | ErrorResponse;
 
   @post
+  @doc("Switches the billing for NewRelic monitor resource.")
+  @segment("switchBilling")
+  op SwitchBilling(
+    ...ResourceInstanceParameters<NewRelicMonitorResource>,
+    ...SwitchBillingParameter
+  ): void | ErrorResponse;
+  
+  @post
   @doc("Get metric rules")
   @segment("getMetricRules")
   op getMetricRules(
@@ -545,6 +553,28 @@ model AppServicesGetParameter {
 model AppServicesGetRequest {
   @doc("Azure resource IDs")
   azureResourceIds?: string[]; 
+
+  @doc("User Email")
+  userEmail: email;
+}
+
+@doc("Switch Billing Parameter specification.")
+model SwitchBillingParameter {
+  @doc("The details of the switch billing request.")
+  @body
+  request: SwitchBillingRequest;
+}
+
+@doc("Request of a switch billing Operation.")
+model SwitchBillingRequest {
+  @doc("Azure resource Id")
+  azureResourceId?: string;
+
+  @doc("Organization id")
+  organizationId?: string;
+
+  @doc("Plan details")
+  planData?: PlanData;
 
   @doc("User Email")
   userEmail: email;

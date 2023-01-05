@@ -711,6 +711,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/switchBilling": {
+      "post": {
+        "tags": [
+          "Monitors"
+        ],
+        "operationId": "Monitors_SwitchBilling",
+        "description": "Switches the billing for NewRelic monitor resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "monitorName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the Monitors resource",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SwitchBillingParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_SwitchBilling_MaximumSet_Gen": {
+            "$ref": "./examples/Monitors_SwitchBilling_MaximumSet_Gen.json"
+          },
+          "Monitors_SwitchBilling_MinimumSet_Gen": {
+            "$ref": "./examples/Monitors_SwitchBilling_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/NewRelic.Observability/monitors/{monitorName}/listHosts": {
       "post": {
         "tags": [
@@ -1353,6 +1402,44 @@
       "description": "App services Get Parameter specification.",
       "required": [
         "request"
+      ]
+    },
+    "SwitchBillingParameter": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/SwitchBillingRequest",
+          "description": "The details of the switch billing request."
+        }
+      },
+      "description": "Switch Billing Parameter specification.",
+      "required": [
+        "request"
+      ]
+    },
+    "SwitchBillingRequest": {
+      "type": "object",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "Azure resource Id"
+        },
+        "organizationId": {
+          "type": "string",
+          "description": "Organization id"
+        },
+        "planData": {
+          "$ref": "#/definitions/PlanData",
+          "description": "Plan details"
+        },
+        "userEmail": {
+          "$ref": "#/definitions/email",
+          "description": "User Email"
+        }
+      },
+      "description": "Request of a switch billing Operation.",
+      "required": [
+        "userEmail"
       ]
     },
     "AppServicesGetRequest": {
@@ -2842,6 +2929,16 @@
       "description": "The details of the app services get request.",
       "schema": {
         "$ref": "#/definitions/AppServicesGetRequest"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "SwitchBillingParameter": {
+      "name": "request",
+      "in": "body",
+      "required": true,
+      "description": "The details of the switch billing request.",
+      "schema": {
+        "$ref": "#/definitions/SwitchBillingRequest"
       },
       "x-ms-parameter-location": "method"
     },
