@@ -3450,268 +3450,268 @@
         }
       }
     },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies": {
-        "get": {
-          "tags": [
-            "DppResourceGuardProxies"
-          ],
-          "operationId": "DppResourceGuardProxy_List",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionId"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupName"
-            },
-            {
-              "$ref": "#/parameters/VaultName"
-            },
-            {
-              "$ref": "#/parameters/ApiVersion"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/ResourceGuardProxyBaseResourceList"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
-            }
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies": {
+      "get": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
-          "x-ms-examples": {
-            "Get ResourceGuardProxies": {
-              "$ref": "./examples/ResourceGuardProxyCRUD/ListResourceGuardProxy.json"
-            }
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}": {
-        "get": {
-          "tags": [
-            "DppResourceGuardProxies"
-          ],
-          "operationId": "DppResourceGuardProxy_Get",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionId"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupName"
-            },
-            {
-              "$ref": "#/parameters/VaultName"
-            },
-            {
-              "name": "resourceGuardProxyName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "$ref": "#/parameters/ApiVersion"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/ResourceGuardProxyBaseResource"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResourceList"
             }
           },
-          "x-ms-examples": {
-            "Get ResourceGuardProxy": {
-              "$ref": "./examples/ResourceGuardProxyCRUD/GetResourceGuardProxy.json"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
-        "put": {
-          "tags": [
-            "DppResourceGuardProxies"
-          ],
-          "operationId": "DppResourceGuardProxy_Put",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionId"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupName"
-            },
-            {
-              "$ref": "#/parameters/VaultName"
-            },
-            {
-              "name": "resourceGuardProxyName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "$ref": "#/parameters/ApiVersion"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "description": "Request body for operation",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/ResourceGuardProxyBaseResource"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/ResourceGuardProxyBaseResource"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
-            }
-          },
-          "x-ms-examples": {
-            "Create ResourceGuardProxy": {
-              "$ref": "./examples/ResourceGuardProxyCRUD/PutResourceGuardProxy.json"
-            }
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        "delete": {
-          "tags": [
-            "DppResourceGuardProxies"
-          ],
-          "operationId": "DppResourceGuardProxy_Delete",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionId"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupName"
-            },
-            {
-              "$ref": "#/parameters/VaultName"
-            },
-            {
-              "name": "resourceGuardProxyName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "$ref": "#/parameters/ApiVersion"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK"
-            },
-            "204": {
-              "description": "NoContent"
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
-            }
-          },
-          "x-ms-examples": {
-            "Delete ResourceGuardProxy": {
-              "$ref": "./examples/ResourceGuardProxyCRUD/DeleteResourceGuardProxy.json"
-            }
-          }
-        }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}/unlockDelete": {
-        "post": {
-          "tags": [
-            "DppResourceGuardProxies"
-          ],
-          "operationId": "DppResourceGuardProxy_UnlockDelete",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "#/parameters/SubscriptionId"
-            },
-            {
-              "$ref": "#/parameters/ResourceGroupName"
-            },
-            {
-              "$ref": "#/parameters/VaultName"
-            },
-            {
-              "name": "resourceGuardProxyName",
-              "in": "path",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "$ref": "#/parameters/ApiVersion"
-            },
-            {
-              "name": "parameters",
-              "in": "body",
-              "description": "Request body for operation",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/UnlockDeleteRequest"
-              }
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK",
-              "schema": {
-                "$ref": "#/definitions/UnlockDeleteResponse"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/CloudError"
-              }
-            }
-          },
-          "x-ms-examples": {
-            "UnlockDelete ResourceGuardProxy": {
-              "$ref": "./examples/ResourceGuardProxyCRUD/UnlockDeleteResourceGuardProxy.json"
-            }
+        "x-ms-examples": {
+          "Get ResourceGuardProxies": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/ListResourceGuardProxy.json"
           }
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}": {
+      "get": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/GetResourceGuardProxy.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_Put",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResourceGuardProxyBaseResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/PutResourceGuardProxy.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/DeleteResourceGuardProxy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupResourceGuardProxies/{resourceGuardProxyName}/unlockDelete": {
+      "post": {
+        "tags": [
+          "DppResourceGuardProxies"
+        ],
+        "operationId": "DppResourceGuardProxy_UnlockDelete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "resourceGuardProxyName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UnlockDeleteResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UnlockDelete ResourceGuardProxy": {
+            "$ref": "./examples/ResourceGuardProxyCRUD/UnlockDeleteResourceGuardProxy.json"
+          }
+        }
+      }
+    }
+  },
   "definitions": {
     "AbsoluteDeleteOption": {
       "allOf": [
