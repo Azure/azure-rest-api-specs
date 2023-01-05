@@ -467,7 +467,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecretsCollection"
+              "$ref": "#/definitions/JobSecretsCollection"
             }
           },
           "default": {
@@ -486,7 +486,7 @@
     }
   },
   "definitions": {
-    "Configuration": {
+    "JobConfiguration": {
       "description": "Non versioned Container Apps Job configuration properties",
       "type": "object",
       "required": [
@@ -810,7 +810,7 @@
         }
       }
     },
-    "SecretsCollection": {
+    "JobSecretsCollection": {
       "description": "Container Apps Job Secrets Collection ARM resource.",
       "required": [
         "value"
@@ -821,28 +821,11 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ContainerAppsJobSecret"
+            "$ref": "./CommonDefinitions.json#/definitions/Secret"
           },
           "x-ms-identifiers": [
             "name"
           ]
-        }
-      }
-    },
-    "ContainerAppsJobSecret": {
-      "description": "Container App Secret.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Secret Name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "description": "Secret Value.",
-          "type": "string",
-          "x-ms-secret": true,
-          "readOnly": true
         }
       }
     },
