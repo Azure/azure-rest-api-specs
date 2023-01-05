@@ -2,15 +2,17 @@
   "parameters": {
     "subscriptionId": "subscription-id",
     "resourceGroupName": "OneResourceGroupName",
-    "api-version": "2022-06-15-preview",
+    "api-version": "2021-05-01-preview",
     "resourceName": "samplebotname",
-    "channelName": "AlexaChannel",
+    "channelName": "EmailChannel",
     "parameters": {
       "location": "global",
       "properties": {
-        "channelName": "AlexaChannel",
+        "channelName": "EmailChannel",
         "properties": {
-          "alexaSkillId": "XAlexaSkillIdX",
+          "emailAddress": "a@b.com",
+          "authMethod": 1,
+          "magicCode": "000000",
           "isEnabled": true
         }
       }
@@ -22,11 +24,10 @@
         "id": "/subscriptions/subscription-id/providers/Microsoft.BotService/botServices",
         "location": "global",
         "properties": {
-          "channelName": "AlexaChannel",
+          "channelName": "EmailChannel",
           "properties": {
-            "alexaSkillId": "XAlexaSkillIdX",
-            "urlFragment": "XUrlFragmentX",
-            "serviceEndpointUri": "https://domain/XUrlFragmentX/botId",
+            "emailAddress": "a@b.com",
+            "authMethod": 1,
             "isEnabled": true
           }
         }
@@ -37,11 +38,10 @@
         "id": "/subscriptions/subscription-id/providers/Microsoft.BotService/botServices",
         "location": "global",
         "properties": {
-          "channelName": "AlexaChannel",
+          "channelName": "EmailChannel",
           "properties": {
-            "alexaSkillId": "XAlexaSkillIdX",
-            "urlFragment": "XUrlFragmentX",
-            "serviceEndpointUri": "https://domain/XUrlFragmentX/botId",
+            "emailAddress": "a@b.com",
+            "authMethod": 1,
             "isEnabled": true
           }
         }
