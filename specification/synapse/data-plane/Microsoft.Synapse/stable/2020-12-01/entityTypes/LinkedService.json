@@ -6705,6 +6705,44 @@
       "required": [
         "endpoint"
       ]
+    },
+    "PowerBIWorkspaceLinkedService": {
+      "x-ms-discriminator-value": "PowerBIWorkspace",
+      "description": "Power BI Workspace linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Power BI Workspace linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PowerBIWorkspaceLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "PowerBIWorkspaceLinkedServiceTypeProperties": {
+      "description": "Power BI Workspace linked service properties.",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The Power BI workspace id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id to which the Power BI workspace belongs."
+        }
+      },
+      "required": [
+        "workspaceId",
+        "tenantId"
+      ]
     }
   }
 }
