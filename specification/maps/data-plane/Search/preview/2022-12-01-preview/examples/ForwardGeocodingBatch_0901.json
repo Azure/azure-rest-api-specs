@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2022-09-01-preview",
+    "api-version": "2022-12-01-preview",
     "AzureKey": "[subscription-key]",
     "geocodingBatchRequestBody": {
       "batchItems": [
@@ -163,7 +163,7 @@
         ]
       }
     },
-    "206": {
+    "207": {
       "body": {
         "summary": {
           "successfulRequests": 1,
@@ -247,8 +247,8 @@
           },
           {
             "error": {
-              "code": "400",
-              "message": "Invalid request."
+              "code": "Conflicting Parameters",
+              "message": "When 'query' is present, only the following parameters are valid: 'bbox, location, view, top'. 'addressLine' was passed"
             }
           }
         ]
