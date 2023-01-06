@@ -1,8 +1,8 @@
-# How to integrate test-proxy with API Scenario test
+# How to use API Scenario Test and test-proxy to make traffic recording
 
-In this section, we'll show you how to make test-proxy recording with API Scenario test, assuming you've already learnt how to use API Scenario test. If not, please go to [QuickStart](./QuickStart.md).
+In this section, we'll show you how to make traffic recording with API Scenario Test and test-proxy, assuming you've already learnt how to use API Scenario test. If not, please go to [QuickStart](./QuickStart.md).
 
-Test-proxy is a tool that provides out-of-process record/playback capabilities compatible with any language. It also supports pushing/restoring the API test recordings from external git repository. See [how to install test-proxy](https://github.com/Azure/azure-sdk-tools/blob/main/tools/test-proxy/Azure.Sdk.Tools.TestProxy/README.md#installation)
+Test-proxy is a tool that provides out-of-process record/playback capabilities compatible with any language. It also supports pushing/restoring the API test recordings from external git repository. Traffic recording can be an evidence of running API test, and also help validate Swagger consistency. See [how to install test-proxy](https://github.com/Azure/azure-sdk-tools/blob/main/tools/test-proxy/Azure.Sdk.Tools.TestProxy/README.md#installation)
 
 ## Prepare assets.json file
 
