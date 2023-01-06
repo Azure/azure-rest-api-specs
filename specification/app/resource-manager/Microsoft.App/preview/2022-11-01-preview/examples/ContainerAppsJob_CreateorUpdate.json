@@ -141,6 +141,78 @@
     "201": {
       "headers": {
         "Location": "location"
+      },
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppsJob0",
+        "name": "testcontainerAppsJob0",
+        "type": "Microsoft.App/containerAppsJobs",
+        "location": "East US",
+        "properties": {
+          "provisioningState": "InProgress",
+          "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
+          "configuration": {
+            "replicaTimeout": 10,
+            "replicaRetryLimit": 10,
+            "manualTriggerConfig": {
+              "replicaCount": 1,
+              "parallelism": 4
+            },
+            "triggerType": "Manual",
+            "dapr": {
+              "enabled": true,
+              "appPort": 3000,
+              "appProtocol": "http",
+              "httpReadBufferSize": 30
+            }
+          },
+          "template": {
+            "containers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "probes": [
+                  {
+                    "type": "Liveness",
+                    "httpGet": {
+                      "path": "/health",
+                      "port": 8080,
+                      "httpHeaders": [
+                        {
+                          "name": "Custom-Header",
+                          "value": "Awesome"
+                        }
+                      ]
+                    },
+                    "initialDelaySeconds": 3,
+                    "periodSeconds": 3
+                  }
+                ]
+              }
+            ],
+            "initContainers": [
+              {
+                "image": "repo/testcontainerAppsJob0:v4",
+                "name": "testinitcontainerAppsJob0",
+                "resources": {
+                  "cpu": 0.2,
+                  "memory": "100Mi"
+                },
+                "command": [
+                  "/bin/sh"
+                ],
+                "args": [
+                  "-c",
+                  "while true; do echo hello; sleep 10;done"
+                ]
+              }
+            ]
+          },
+          "eventStreamEndpoint": "testEndpoint"
+        }
       }
     }
   }
