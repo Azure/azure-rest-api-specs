@@ -911,11 +911,6 @@
     "UserRequestPayload": {
       "type": "object",
       "properties": {
-        "requestId": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The user request id."
-        },
         "operations": {
           "type": "array",
           "description": "The list of operations user want to submit, each operation matches one Purview API call and will do the operation directly.",
@@ -929,7 +924,6 @@
         }
       },
       "required": [
-        "requestId",
         "operations"
       ]
     },
@@ -1402,6 +1396,7 @@
           "$ref": "#/definitions/WorkflowTask"
         },
         {
+          "type": "object",
           "properties": {
             "approvalDetail": {
               "$ref": "#/definitions/ApprovalDetail"
@@ -1494,6 +1489,7 @@
           "$ref": "#/definitions/WorkflowTask"
         },
         {
+          "type": "object",
           "properties": {
             "taskDetail": {
               "$ref": "#/definitions/TaskDetail"
