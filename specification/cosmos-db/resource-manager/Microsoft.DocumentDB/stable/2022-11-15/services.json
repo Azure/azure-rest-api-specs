@@ -135,7 +135,17 @@
             }
           },
           "202": {
-            "description": "The job will complete asynchronously."
+            "description": "The job will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation" : {
+                "type" : "string",
+                "description" : "URI to poll for completion status."
+              },
+              "location" : {
+                "type" : "string",
+                "description" : "URI to poll for completion status."
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -243,7 +253,17 @@
         ],
         "responses": {
           "202": {
-            "description": "The job will complete asynchronously."
+            "description": "The job will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation" : {
+                "type" : "string",
+                "description" : "URI to poll for completion status."
+              },
+              "location" : {
+                "type" : "string",
+                "description" : "URI to poll for completion status."
+              }
+            }
           },
           "204": {
             "description": "The response for service deletion."
