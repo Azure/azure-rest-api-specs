@@ -23417,13 +23417,17 @@
           "200": {
             "description": "OK"
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "Error response describing why the trigger run failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/hostruntime/runtime/webhooks/workflow/api/management/workflows/{workflowName}/triggers/{triggerName}/schemas/json": {
