@@ -2114,6 +2114,23 @@
         "read"
       ]
     },
+    "ApplicationServerVirtualMachineType": {
+      "description": "Defines the type of application server VM.",
+      "enum": [
+        "Active",
+        "Standby",
+        "Unknown"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ApplicationServerVirtualMachineType",
+        "modelAsString": true
+      },
+      "x-ms-mutability": [
+        "read"
+      ]
+    },
     "SAPDatabaseType": {
       "description": "Defines the supported SAP Database types.",
       "enum": [
@@ -3437,6 +3454,29 @@
         }
       }
     },
+    "ApplicationServerVmDetails": {
+      "description": "The Application Server VM Details.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ApplicationServerVirtualMachineType",
+          "readOnly": true
+        },
+        "virtualMachineId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "storageDetails": {
+          "description": "Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageInformation"
+          },
+          "x-ms-identifiers": [],
+          "readOnly": true
+        }
+      }
+    },
     "DatabaseVmDetails": {
       "description": "Database VM details.",
       "type": "object",
@@ -3672,22 +3712,22 @@
           "readOnly": true,
           "x-nullable": true
         },
-        "virtualMachineId": {
-          "type": "string",
-          "description": "The virtual machine.",
+        "loadBalancerDetails": {
+          "description": "The Load Balancer details such as LoadBalancer ID attached to Application Server Virtual Machines",
+          "$ref": "#/definitions/LoadBalancerDetails",
+          "readOnly": true
+        },
+        "vmDetails": {
+          "description": "The list of virtual machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationServerVmDetails"
+          },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "status": {
           "$ref": "#/definitions/SAPVirtualInstanceStatus",
-          "readOnly": true
-        },
-        "storageDetails": {
-          "description": "Storage details of all the Storage Accounts attached to the App Virtual Machine. For e.g. NFS on AFS Shared Storage.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageInformation"
-          },
-          "x-ms-identifiers": [],
           "readOnly": true
         },
         "health": {
