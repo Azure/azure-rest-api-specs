@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{name}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/connectors/{name}/start": {
       "post": {
         "tags": [
-          "consortiums_Start"
+          "connectors_Start"
         ],
         "summary": "Perform Start operation.",
-        "operationId": "consortiums_Start",
+        "operationId": "connectors_Start",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -64,10 +64,17 @@
           },
           {
             "in": "path",
+            "name": "chamberName",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
             "name": "name",
             "required": true,
             "type": "string",
-            "description": "Name of the consortium"
+            "description": "Name of the connector"
           }
         ],
         "responses": {
@@ -95,19 +102,19 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Consortiums Start": {
-            "$ref": "./examples/ConsortiumsStart.json"
+          "Connectors Start": {
+            "$ref": "./examples/ConnectorsStart.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{name}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/connectors/{name}/stop": {
       "post": {
         "tags": [
-          "consortiums_Stop"
+          "connectors_Stop"
         ],
         "summary": "Perform Stop operation.",
-        "operationId": "consortiums_Stop",
+        "operationId": "connectors_Stop",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -131,8 +138,15 @@
           },
           {
             "in": "path",
+            "name": "chamberName",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
             "name": "name",
-            "description": "the consortium name.",
+            "description": "the connector name.",
             "required": true,
             "type": "string"
           }
@@ -162,19 +176,19 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Consortiums stop": {
-            "$ref": "./examples/ConsortiumsStop.json"
+          "Connectors stop": {
+            "$ref": "./examples/ConnectorsStop.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{name}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/connectors/{name}/restart": {
       "post": {
         "tags": [
-          "consortiums_Restart"
+          "connectors_Restart"
         ],
         "summary": "Perform Restart operation.",
-        "operationId": "consortiums_Restart",
+        "operationId": "connectors_Restart",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -198,8 +212,15 @@
           },
           {
             "in": "path",
+            "name": "chamberName",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
             "name": "name",
-            "description": "the consortium name.",
+            "description": "the connector name.",
             "required": true,
             "type": "string"
           }
@@ -229,19 +250,19 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Consortiums Restart": {
-            "$ref": "./examples/ConsortiumsRestart.json"
+          "Connectors Restart": {
+            "$ref": "./examples/ConnectorsRestart.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{consortiumName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/connectors/{connectorName}": {
       "put": {
         "tags": [
-          "consortiums_CreateOrUpdate"
+          "connectors_CreateOrUpdate"
         ],
-        "operationId": "consortiums_CreateOrUpdate",
-        "description": "Creates or updates the specified consortium.",
+        "operationId": "connectors_CreateOrUpdate",
+        "description": "Creates or updates the specified connector.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -264,32 +285,39 @@
             "description": "The name of the instance."
           },
           {
-            "name": "consortiumName",
+            "name": "chamberName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the consortium."
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connector."
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to the create or update consortium operation.",
+            "description": "Parameters supplied to the create or update connector operation.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Connector"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting Consortium resource.",
+            "description": "Update successful. The operation returns the resulting Connector resource.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Connector"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting Consortium resource.",
+            "description": "Create successful. The operation returns the resulting Connector resource.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Connector"
             }
           },
           "default": {
@@ -305,17 +333,17 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create Consortium": {
-            "$ref": "./examples/ConsortiumsCreateOrUpdate.json"
+          "Create Connector": {
+            "$ref": "./examples/ConnectorsCreateOrUpdate.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "consortiums_Update"
+          "connectors_Update"
         ],
-        "operationId": "consortiums_Update",
-        "description": "Updates the specified consortium.",
+        "operationId": "connectors_Update",
+        "description": "Updates the specified connectors.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -338,32 +366,39 @@
             "description": "The name of the instance."
           },
           {
-            "name": "consortiumName",
+            "name": "chamberName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the consortium."
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connector."
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to the create or update consortium operation.",
+            "description": "Parameters supplied to the create or update connector operation.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Connector"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting Consortium resource.",
+            "description": "Update successful. The operation returns the resulting Connector resource.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Connector"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting Consortium resource.",
+            "description": "Create successful. The operation returns the resulting Connector resource.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Connector"
             }
           },
           "default": {
@@ -375,17 +410,17 @@
           }
         },
         "x-ms-examples": {
-          "Update Consortium": {
-            "$ref": "./examples/ConsortiumsPatch.json"
+          "Update Connector": {
+            "$ref": "./examples/ConnectorsPatch.json"
           }
         }
       },
       "get": {
         "tags": [
-          "consortiums_Get"
+          "connectors_Get"
         ],
-        "operationId": "consortiums_Get",
-        "description": "Gets information about the specified consortium.",
+        "operationId": "connectors_Get",
+        "description": "Gets information about the specified connector.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -408,18 +443,25 @@
             "description": "The name of the instance."
           },
           {
-            "name": "consortiumName",
+            "name": "chamberName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the consortium."
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connector."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns the specified consortium.",
+            "description": "Request is successful. The operation returns the specified connector.",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Connector"
             }
           },
           "default": {
@@ -431,17 +473,17 @@
           }
         },
         "x-ms-examples": {
-          "Get Consortium": {
-            "$ref": "./examples/ConsortiumsGet.json"
+          "Get Connector": {
+            "$ref": "./examples/ConnectorsGet.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "consortiums_Delete"
+          "connectors_Delete"
         ],
-        "operationId": "consortiums_Delete",
-        "description": "Deletes the specified consortium.",
+        "operationId": "connectors_Delete",
+        "description": "Deletes the specified connector.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -464,18 +506,25 @@
             "description": "The name of the instance."
           },
           {
-            "name": "consortiumName",
+            "name": "chamberName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the consortium."
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connector."
           }
         ],
         "responses": {
           "200": {
             "description": "The operation is completed successfully",
             "schema": {
-              "$ref": "#/definitions/Consortium"
+              "$ref": "#/definitions/Connector"
             }
           },
           "204": {
@@ -502,19 +551,19 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Delete Consortium": {
-            "$ref": "./examples/ConsortiumsDelete.json"
+          "Delete Connector": {
+            "$ref": "./examples/ConnectorsDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/connectors": {
       "get": {
         "tags": [
-          "consortiums_List"
+          "connectors_List"
         ],
-        "operationId": "consortiums_List",
-        "description": "Lists all consortiums.",
+        "operationId": "connectors_List",
+        "description": "Lists all connectors.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -535,13 +584,20 @@
             "required": true,
             "type": "string",
             "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns the list of all consortiums",
+            "description": "Request is successful. The operation returns the list of all connectors",
             "schema": {
-              "$ref": "#/definitions/ConsortiumPageableList"
+              "$ref": "#/definitions/ConnectorPageableList"
             }
           },
           "default": {
@@ -556,19 +612,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List all consortiums": {
-            "$ref": "./examples/ConsortiumsList.json"
+          "List all connectors": {
+            "$ref": "./examples/ConnectorsList.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/consortiums/{name}/licenseAdd": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/connectors/{name}/licenseAdd": {
       "post": {
         "tags": [
-          "consortiums_LicenseAdd"
+          "connectors_LicenseAdd"
         ],
-        "description": "Add license to an ModSim Workbench consortium.",
-        "operationId": "consortiums_LicenseAdd",
+        "description": "Add license to an ModSim Workbench connector.",
+        "operationId": "connectors_LicenseAdd",
         "consumes": [
           "application/json"
         ],
@@ -597,11 +653,18 @@
             "description": "The name of the instance"
           },
           {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
             "in": "path",
             "name": "name",
             "required": true,
             "type": "string",
-            "description": "The name of the consortium."
+            "description": "The name of the connector."
           },
           {
             "in": "body",
@@ -638,8 +701,8 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Consortiums License Add": {
-            "$ref": "./examples/ConsortiumsLicenseAdd.json"
+          "Connectors License Add": {
+            "$ref": "./examples/ConnectorsLicenseAdd.json"
           }
         },
         "security": [
@@ -758,7 +821,7 @@
         }
       }
     },
-    "ConsortiumPageableList": {
+    "ConnectorPageableList": {
       "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
       "type": "object",
       "properties": {
@@ -770,7 +833,7 @@
           "description": "Gets or sets the values to emit from this list.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Consortium"
+            "$ref": "#/definitions/Connector"
           },
           "x-ms-identifiers": [
             "value"
@@ -778,7 +841,7 @@
         }
       }
     },
-    "ConsortiumPropertiesFormat": {
+    "ConnectorPropertiesFormat": {
       "type": "object",
       "properties": {
         "accessConfigurations": {
@@ -800,23 +863,23 @@
           "items": {
             "$ref": "#/definitions/NetworkAcls"
           },
-          "description": "Specifies set of source IP address ranges to allow access the Modsim Workbench instance."
+          "description": "Specifies set of source IP address ranges to allow access the ModSim Workbench instance."
         },
         "provisioningState": {
           "$ref": "./modsimworkbench.json#/definitions/ProvisioningState",
-          "description": "Gets the status of the consortium at the time the operation was called"
+          "description": "Gets the status of the connector at the time the operation was called"
         }
       },
-      "description": "Consortium properties."
+      "description": "Connector properties."
     },
-    "Consortium": {
-      "description": "Consortium resource",
+    "Connector": {
+      "description": "Connector resource",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConsortiumPropertiesFormat",
-          "description": "Consortium properties.",
+          "$ref": "#/definitions/ConnectorPropertiesFormat",
+          "description": "Connector properties.",
           "type": "object"
         }
       },
