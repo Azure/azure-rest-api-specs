@@ -2843,6 +2843,10 @@
           "description": "The password used in Basic authentication type.",
           "$ref": "../artifacts.json#/definitions/SecretBase"
         },
+        "authHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to RESTful API used for authorization. Type: object (or Expression with resultType object)."
+        },
         "servicePrincipalId": {
           "description": "The application's client ID used in AadServicePrincipal authentication type.",
           "type": "object"
@@ -3249,6 +3253,43 @@
       "required": [
         "userName",
         "password"
+      ]
+    },
+    "GoogleSheetsLinkedService": {
+      "x-ms-discriminator-value": "GoogleSheets",
+      "description": "Linked service for GoogleSheets.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "GoogleSheets linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleSheetsLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "GoogleSheetsLinkedServiceTypeProperties": {
+      "description": "GoogleSheets linked service type properties.",
+      "type": "object",
+      "properties": {
+        "apiToken": {
+          "$ref": "../artifacts.json#/definitions/SecretBase",
+          "description": "The api token for the GoogleSheets source."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "apiToken"
       ]
     },
     "AmazonS3LinkedService": {
@@ -6655,10 +6696,52 @@
         "authentication": {
           "type": "object",
           "description": "Required to specify MSI, if using system assigned managed identity as authentication method. Type: string (or Expression with resultType string)."
+        },
+        "workspaceResourceId": {
+          "type": "object",
+          "description": "The resource ID of the Synapse workspace. The format should be: /subscriptions/{subscriptionID}/resourceGroups/{resourceGroup}/providers/Microsoft.Synapse/workspaces/{workspaceName}. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
         "endpoint"
+      ]
+    },
+    "PowerBIWorkspaceLinkedService": {
+      "x-ms-discriminator-value": "PowerBIWorkspace",
+      "description": "Power BI Workspace linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Power BI Workspace linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PowerBIWorkspaceLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "PowerBIWorkspaceLinkedServiceTypeProperties": {
+      "description": "Power BI Workspace linked service properties.",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "The Power BI workspace id."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id to which the Power BI workspace belongs."
+        }
+      },
+      "required": [
+        "workspaceId",
+        "tenantId"
       ]
     }
   }

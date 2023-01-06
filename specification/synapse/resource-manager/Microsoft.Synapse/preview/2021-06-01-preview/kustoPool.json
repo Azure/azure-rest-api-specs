@@ -2299,6 +2299,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "KustoPoolPrivateLinkResources"
+        ],
+        "operationId": "KustoPoolPrivateLinkResources_List",
+        "x-ms-examples": {
+          "KustoPoolPrivateLinkResourcesList": {
+            "$ref": "./examples/KustoPoolPrivateLinkResourcesList.json"
+          }
+        },
+        "description": "Lists all Kusto pool PrivateLinkResources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResources"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -2619,7 +2667,11 @@
         },
         "workspaceUID": {
           "type": "string",
-          "description": "The workspace unique identifier."
+          "description": "The workspace unique identifier.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "description": "Class representing the Kusto pool properties."
@@ -3874,6 +3926,72 @@
           "description": "The collection of available SKUs for an existing resource."
         }
       }
+    },
+    "PrivateLinkResources": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KustoPoolPrivateLinkResources"
+          },
+          "description": "The list of Kusto Private Link Resources."
+        }
+      },
+      "description": "The list Kusto Private Link Resources operation response."
+    },
+    "KustoPoolPrivateLinkResources": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateLinkResourcesProperties",
+          "description": "The Private Link Resources."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a Private Link Resources."
+    },
+    "PrivateLinkResourcesProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Private link resources GroupId"
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource required zone names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "description": "Private Link Resources Properties."
     }
   },
   "parameters": {

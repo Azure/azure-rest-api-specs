@@ -57,6 +57,132 @@ batch:
   - tag: package-preview-2022-05
   - tag: package-preview-2022-06
   - tag: package-2022-06
+  - tag: package-preview-2022-07
+  - tag: package-2022-07
+  - tag: package-preview-2022-08
+  - tag: package-preview-2022-08-03
+  - tag: package-preview-2022-09
+  - tag: package-2022-09
+  - tag: package-preview-2022-10
+  - tag: package-preview-2022-11
+  - tag: package-2022-11
+```
+
+### Tag: package-2022-11 and java
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_11_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_11_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2022-11 and java
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-11' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_11_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_11_02_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2022-10 and java
+
+These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-10' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_10_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_10_02_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2022-09 and java
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_09_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2022-09 and java
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_09_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_09_02_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2022-08-03 and java
+
+These settings apply only when `--tag=package-preview-2022-08-03` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-08-03' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_08_03_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_08_03_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2022-08 and java
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_08_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_08_02_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2022-07 and java
+
+These settings apply only when `--tag=package-2022-07` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2022-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_07_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_07_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-preview-2022-07 and java
+
+These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-preview-2022-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.containerservice.v2022_07_02_preview
+  output-folder: $(azure-libraries-for-java-folder)/sdk/containerservice/mgmt-v2022_07_02_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2022-06 and java

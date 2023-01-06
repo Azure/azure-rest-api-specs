@@ -27,9 +27,18 @@ These are the global settings for the Batch API.
 ``` yaml
 title: BatchServiceClient
 openapi-type: data-plane
-tag: package-2022-01.15.0
+tag: package-2022-10-01.16.0
 ```
 
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10-01.16.0` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10-01.16.0'
+input-file:
+  - Microsoft.Batch/stable/2022-10-01.16.0/BatchService.json
+```
 ### Tag: package-2022-01.15.0
 
 These settings apply only when `--tag=package-2022-01.15.0` is specified on the command line.
@@ -317,7 +326,7 @@ input-file:
 
 ## Code Generation
 
-## C\#
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.

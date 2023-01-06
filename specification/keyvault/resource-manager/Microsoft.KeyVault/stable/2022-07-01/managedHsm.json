@@ -932,7 +932,11 @@
                 "description": "Create a new managed HSM pool. This is the default option."
               }
             ]
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "statusMessage": {
           "readOnly": true,
@@ -1021,6 +1025,11 @@
           "type": "string",
           "format": "date-time",
           "description": "The scheduled purge date in UTC."
+        },
+        "securityDomainProperties": {
+          "readOnly": true,
+          "$ref": "#/definitions/ManagedHSMSecurityDomainProperties",
+          "description": "Managed HSM security domain properties."
         }
       },
       "description": "Properties of the managed HSM Pool",
@@ -1265,6 +1274,9 @@
           "items": {
             "$ref": "#/definitions/MHSMIPRule"
           },
+          "x-ms-identifiers": [
+            "value"
+          ],
           "description": "The list of IP address rules."
         },
         "virtualNetworkRules": {

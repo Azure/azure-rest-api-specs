@@ -28,18 +28,36 @@ These are the global settings for the Kusto API.
 title: KustoManagementClient
 description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
 openapi-type: arm
-tag: package-2022-02
+tag: package-2022-11
 ```
 
+
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.Kusto/stable/2022-11-11/kusto.json
+```
+### Tag: package-2022-07
+
+These settings apply only when `--tag=package-2022-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-07'
+input-file:
+  - Microsoft.Kusto/stable/2022-07-07/kusto.json
+```
 
 ### Tag: package-2022-02
 
 These settings apply only when `--tag=package-2022-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-02'
+``` yaml $(tag) == 'package-2022-02'
 input-file:
   - Microsoft.Kusto/stable/2022-02-01/kusto.json
 ```
+
 ### Tag: package-2021-08-27
 
 These settings apply only when `--tag=package-2021-08-27` is specified on the command line.
@@ -203,7 +221,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go

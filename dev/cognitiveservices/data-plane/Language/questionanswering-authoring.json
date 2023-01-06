@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Service - Question Answering - Authoring",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview</a>.",
-    "version": "2022-07-01-preview"
+    "version": "2023-05-01"
   },
   "securityDefinitions": {
     "AADToken": {
@@ -17,6 +17,7 @@
     },
     "apim_key": {
       "type": "apiKey",
+      "description": "A subscription key for a Language service resource.",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     }
@@ -32,7 +33,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/language/authoring",
+    "hostTemplate": "{Endpoint}/language",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -41,7 +42,7 @@
     ]
   },
   "paths": {
-    "/query-knowledgebases/projects": {
+    "/authoring/query-knowledgebases/projects": {
       "get": {
         "summary": "Gets all projects for a user.",
         "operationId": "QuestionAnsweringProjects_ListProjects",
@@ -90,7 +91,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}": {
+    "/authoring/query-knowledgebases/projects/{projectName}": {
       "get": {
         "summary": "Get the requested project metadata.",
         "operationId": "QuestionAnsweringProjects_GetProjectDetails",
@@ -221,7 +222,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/deletion-jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/deletion-jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of a Project delete job.",
         "operationId": "QuestionAnsweringProjects_GetDeleteStatus",
@@ -260,7 +261,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/:export": {
+    "/authoring/query-knowledgebases/projects/{projectName}/:export": {
       "post": {
         "summary": "Export project metadata and assets.",
         "operationId": "QuestionAnsweringProjects_Export",
@@ -314,7 +315,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/export/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of an Export job, once job completes, returns the project metadata, and assets.",
         "operationId": "QuestionAnsweringProjects_GetExportStatus",
@@ -356,7 +357,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/:import": {
+    "/authoring/query-knowledgebases/projects/{projectName}/:import": {
       "post": {
         "summary": "Import project assets.",
         "operationId": "QuestionAnsweringProjects_Import",
@@ -412,7 +413,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of an Import job.",
         "operationId": "QuestionAnsweringProjects_GetImportStatus",
@@ -454,7 +455,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}": {
       "put": {
         "summary": "Deploy project to production.",
         "operationId": "QuestionAnsweringProjects_DeployProject",
@@ -499,7 +500,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments/{deploymentName}/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of a Deploy job.",
         "operationId": "QuestionAnsweringProjects_GetDeployStatus",
@@ -544,7 +545,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/deployments": {
+    "/authoring/query-knowledgebases/projects/{projectName}/deployments": {
       "get": {
         "summary": "List all deployments of a project.",
         "operationId": "QuestionAnsweringProjects_ListDeployments",
@@ -596,7 +597,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/synonyms": {
+    "/authoring/query-knowledgebases/projects/{projectName}/synonyms": {
       "get": {
         "summary": "Gets all the synonyms of a project.",
         "operationId": "QuestionAnsweringProjects_GetSynonyms",
@@ -691,7 +692,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/sources": {
+    "/authoring/query-knowledgebases/projects/{projectName}/sources": {
       "get": {
         "summary": "Gets all the sources of a project.",
         "operationId": "QuestionAnsweringProjects_GetSources",
@@ -792,7 +793,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/sources/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update sources job.",
         "operationId": "QuestionAnsweringProjects_GetUpdateSourcesStatus",
@@ -834,7 +835,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/qnas": {
+    "/authoring/query-knowledgebases/projects/{projectName}/qnas": {
       "get": {
         "summary": "Gets all the QnAs of a project.",
         "operationId": "QuestionAnsweringProjects_GetQnas",
@@ -938,7 +939,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
+    "/authoring/query-knowledgebases/projects/{projectName}/qnas/jobs/{jobId}": {
       "get": {
         "summary": "Gets the status of update QnAs job.",
         "operationId": "QuestionAnsweringProjects_GetUpdateQnasStatus",
@@ -980,7 +981,7 @@
         }
       }
     },
-    "/query-knowledgebases/projects/{projectName}/feedback": {
+    "/authoring/query-knowledgebases/projects/{projectName}/feedback": {
       "post": {
         "summary": "Update Active Learning feedback.",
         "operationId": "QuestionAnsweringProjects_AddFeedback",

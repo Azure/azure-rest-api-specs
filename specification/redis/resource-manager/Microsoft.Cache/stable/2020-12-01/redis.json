@@ -42,8 +42,8 @@
         "description": "Lists all of the available REST API operations of the Microsoft.Cache provider.",
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "RedisOperationsList": {
-            "$ref": "./examples/RedisOperations_List.json"
+          "RedisCacheOperations": {
+            "$ref": "./examples/RedisCacheOperations.json"
           }
         },
         "parameters": [
@@ -1388,7 +1388,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The redis cache was successfully deleted."
+            "description": "Linked server was successfully deleted."
           },
           "204": {
             "description": "Linked server was successfully deleted."
@@ -1662,6 +1662,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
           "201": {
             "description": "OK -- Update the private endpoint connection properties successfully.",
             "schema": {
@@ -1897,7 +1903,7 @@
         },
         "redisVersion": {
           "type": "string",
-          "description": "Redis version. Only major version will be used in PUT/PATCH request with current valid values: (4, 6)"
+          "description": "Redis version. This should be in the form 'major[.minor[.build]]' (only 'major' is required) or the value 'latest' which refers to the latest stable Redis version that is available. Only the major and minor version are used in a PUT/PATCH request. Supported versions: 4.0, 6.0."
         },
         "enableNonSslPort": {
           "type": "boolean",
@@ -1964,6 +1970,17 @@
         },
         "subnetId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "type": "Microsoft.ClassicNetwork/virtualNetworks/subnets"
+              }
+            ]
+          },
           "pattern": "^/subscriptions/[^/]*/resourceGroups/[^/]*/providers/Microsoft.(ClassicNetwork|Network)/virtualNetworks/[^/]*/subnets/[^/]*$",
           "description": "The full resource ID of a subnet in a virtual network to deploy the Redis cache in. Example format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/vnet1/subnets/subnet1"
         },
@@ -2548,6 +2565,14 @@
       "properties": {
         "linkedRedisCacheId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Cache/Redis"
+              }
+            ]
+          },
           "description": "Fully qualified resourceId of the linked redis cache."
         },
         "linkedRedisCacheLocation": {

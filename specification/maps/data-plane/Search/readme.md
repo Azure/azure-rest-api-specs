@@ -40,6 +40,14 @@ modelerfour:
 ```
 
 
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - preview/2022-09-01-preview/search.json
+```
 ### Tag: 1.0
 
 These settings apply only when `--tag=1.0` is specified on the command line.
