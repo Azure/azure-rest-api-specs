@@ -384,7 +384,7 @@
         }
       },
       "post": {
-        "description": "The Post Feature API creates a feature with the provided attributes in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features API follows the [Open Geospatial Consortium API - Features](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "This Post Feature API creates a feature with the provided attributes in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features API follows the [Open Geospatial Consortium API - Features](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_Create",
         "x-ms-examples": {
           "PostFeature": {
@@ -678,7 +678,7 @@
       }
     },
     "FeaturesEndpointLink": {
-      "description": "Links to other Features endpoints",
+      "description": "Links to other Features endpoints. For more details about link relations, please visit the [OGC API - Features - Part 1](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1#_link_relations) standard.",
       "type": "object",
       "required": [
         "href"
@@ -1029,7 +1029,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The type of feature. Currently only 'Feature' value is supported.",
+          "description": "Specifies the `GeoJSON` type: Feature",
           "type": "string"
         }
       }
