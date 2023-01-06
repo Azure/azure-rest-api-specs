@@ -835,6 +835,52 @@
           "nextLinkName": null
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/networkProfile": {
+      "get": {
+        "tags": [
+          "MachineNetworkProfile"
+        ],
+        "operationId": "NetworkProfile_Get",
+        "description": "The operation to get network information of hybrid machine",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the hybrid machine."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET Network Profile": {
+            "$ref": "./examples/GETNetworkProfile.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1661,6 +1707,56 @@
         }
       },
       "description": "Describes the Machine Extension Upgrade Properties"
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "networkInterfaces": {
+          "type": "array",
+            "items": {
+              "$ref": "#/definitions/NetworkInterface"
+            },
+          "description": "The list of network interfaces."
+        }
+      },
+      "description": "Describes the network information on this machine."
+    },
+    "NetworkInterface": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "ipAddresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpAddress"
+          },
+          "description": "The list of IP addresses in this interface."
+        }
+      },
+      "description": "Describes a network interface."
+    },
+    "IpAddress": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "ipAddress": "string",
+        "ipAddressVersion": "string",
+        "subnet": {
+          "type": "object",
+          "$ref": "#/definitions/Subnet",
+          "description": "The subnet to which this IP address belongs."
+        }
+      },
+      "description": "Describes properties of the IP address."
+    },
+    "Subnet": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "addressPrefix": "string"
+      },
+      "description": "Describes the subnet."
     }
   },
   "parameters": {}
