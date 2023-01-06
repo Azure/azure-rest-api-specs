@@ -104,10 +104,29 @@
             }
           },
           {
-            "$ref": "#/definitions/Debug",
             "name": "debug",
             "in": "query",
             "type": "string",
+            "enum": [
+              "disabled",
+              "semantic"
+            ],
+            "x-ms-enum": {
+              "name": "QueryDebugMode",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "disabled",
+                  "name": "Disabled",
+                  "description": "Do not return debug information for the query."
+                },
+                {
+                  "value": "semantic",
+                  "name": "Semantic",
+                  "description": "Return semantic debug information for the query."
+                }
+              ]
+            },
             "x-ms-client-name": "Debug",
             "x-ms-parameter-grouping": {
               "name": "SearchOptions"
