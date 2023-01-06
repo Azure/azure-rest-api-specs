@@ -332,7 +332,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResourcePaginatedResult"
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesResourcePaginatedResult"
             }
           },
           "default": {
@@ -448,7 +448,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesResource"
             }
           },
           "default": {
@@ -497,7 +497,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesResource"
             }
           }
         ],
@@ -505,7 +505,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesResource"
             }
           },
           "202": {
@@ -564,7 +564,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+                  "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesResource"
                 },
                 {
                   "$ref": "#/definitions/MockResource"
@@ -577,7 +577,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesResource"
             }
           },
           "202": {
@@ -972,7 +972,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResourcePaginatedResult"
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesResourcePaginatedResult"
             }
           },
           "default": {
@@ -6561,7 +6561,7 @@
         }
       }
     },
-    "FeatureStoreWorkspaceCreationPropertiesBasicResourcePaginatedResult": {
+    "FeatureStoreWorkspaceCreationPropertiesResourcePaginatedResult": {
       "type": "object",
       "properties": {
         "value": {
@@ -6569,7 +6569,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+                "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesResource"
               }
             ]
           }
@@ -6582,7 +6582,7 @@
         }
       }
     },
-    "FeatureStoreWorkspaceCreationPropertiesBasicResource": {
+    "FeatureStoreWorkspaceCreationPropertiesResource": {
       "required": [
         "properties"
       ],
@@ -6593,6 +6593,25 @@
         }
       ],
       "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "identity": {
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+            }
+          ]
+        },
         "properties": {
           "allOf": [
             {
