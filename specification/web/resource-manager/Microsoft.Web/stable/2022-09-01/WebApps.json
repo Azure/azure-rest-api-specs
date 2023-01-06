@@ -274,7 +274,7 @@
           }
         },
         "x-ms-examples": {
-          "Get trigger schema": {
+          "Delete Web app": {
             "$ref": "./examples/DeleteWebApp.json"
           }
         }
@@ -600,7 +600,7 @@
           }
         },
         "x-ms-examples": {
-          "List web app backups": {
+          "Get web app backup": {
             "$ref": "./examples/GetWebAppBackup.json"
           }
         }
@@ -1333,7 +1333,7 @@
           }
         },
         "x-ms-examples": {
-          "List Auth Settings": {
+          "List Auth Settings without Secrets": {
             "$ref": "./examples/GetAuthSettingsV2WithoutSecrets.json"
           }
         }
@@ -1434,7 +1434,7 @@
           }
         },
         "x-ms-examples": {
-          "List Auth Settings": {
+          "List Auth Settings V2": {
             "$ref": "./examples/ListAuthSettingsV2.json"
           }
         }
@@ -8902,7 +8902,7 @@
           }
         },
         "x-ms-examples": {
-          "Update Web App Slot": {
+          "Get Web App Slot": {
             "$ref": "./examples/GetWebAppSlot.json"
           }
         }
@@ -8972,7 +8972,7 @@
           "Create or Update Web App Slot": {
             "$ref": "./examples/CreateOrUpdateWebAppSlot.json"
           },
-          "Clone web app": {
+          "Clone web app slot": {
             "$ref": "./examples/CloneWebAppSlot.json"
           }
         },
@@ -21765,7 +21765,7 @@
           }
         },
         "x-ms-examples": {
-          "Deploys workflow artifacts": {
+          "Deploys workflow artifacts slot": {
             "$ref": "./examples/PostDeployWorkflowArtifactsSlot.json"
           }
         },
@@ -21811,7 +21811,7 @@
           }
         },
         "x-ms-examples": {
-          "List the workflows": {
+          "List the workflows Slot": {
             "$ref": "./examples/ListWorkflows.json"
           }
         },
@@ -21845,7 +21845,10 @@
             "in": "path",
             "description": "Workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -21870,13 +21873,13 @@
           }
         },
         "x-ms-examples": {
-          "GET a workflow": {
+          "GET a workflow Slot": {
             "$ref": "./examples/GetWorkflow.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/workflowsConfiguration/connections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/workflowConfigurations/{configurationName}": {
       "get": {
         "tags": [
           "WebApps"
@@ -21897,6 +21900,14 @@
             "$ref": "#/parameters/slotNameParameter"
           },
           {
+            "name": "configurationName",
+            "in": "path",
+            "description": "Name of workflow configurations.",
+            "required": true,
+            "type": "string",
+            "pattern": "^connections$"
+          },
+          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -21915,7 +21926,7 @@
           }
         },
         "x-ms-examples": {
-          "List the ListInstanceWorkflowsConfigurationConnections": {
+          "List the Instance Workflows Configuration Connections Slot": {
             "$ref": "./examples/ListWorkflowsConfigurationConnections.json"
           }
         }
@@ -21988,7 +21999,10 @@
             "in": "path",
             "description": "Workflow name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -22019,7 +22033,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflowsConfiguration/connections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflowConfigurations/{configurationName}": {
       "get": {
         "tags": [
           "WebApps"
@@ -22035,6 +22049,14 @@
           },
           {
             "$ref": "#/parameters/siteNameParameter"
+          },
+          {
+            "name": "configurationName",
+            "in": "path",
+            "description": "Name of workflow configurations.",
+            "required": true,
+            "type": "string",
+            "pattern": "^connections$"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -22055,7 +22077,7 @@
           }
         },
         "x-ms-examples": {
-          "List the ListInstanceWorkflowsConfigurationConnections": {
+          "List the Instance Workflows Configuration Connections": {
             "$ref": "./examples/ListWorkflowsConfigurationConnections.json"
           }
         }
@@ -27960,7 +27982,7 @@
               "type": "boolean"
             },
             "allowedAudiences": {
-              "description": "Allowed audience values to consider when validating JWTs issued by \nAzure Active Directory. Note that the <code>ClientID</code> value is always considered an\nallowed audience, regardless of this setting.",
+              "description": "Allowed audience values to consider when validating JSON Web Tokens issued by \nAzure Active Directory. Note that the <code>ClientID</code> value is always considered an\nallowed audience, regardless of this setting.",
               "type": "array",
               "items": {
                 "type": "string"
@@ -29800,7 +29822,11 @@
         },
         "location": {
           "type": "string",
-          "description": "The resource location."
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "properties": {
           "description": "Additional workflow properties.",
@@ -30846,7 +30872,8 @@
       "in": "path",
       "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location":"client"
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -30864,7 +30891,8 @@
       "in": "query",
       "description": "API Version",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location":"client"
     }
   },
   "securityDefinitions": {
