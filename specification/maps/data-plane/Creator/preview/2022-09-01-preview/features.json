@@ -114,8 +114,8 @@
       "x-ms-parameter-location": "method"
     },
     "FeatureBody": {
-      "in": "body",
       "name": "feature",
+      "in": "body",
       "required": true,
       "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
       "x-ms-parameter-location": "client",
@@ -124,8 +124,8 @@
       }
     },
     "FeatureAttributesBody": {
-      "in": "body",
       "name": "featureAttributes",
+      "in": "body",
       "required": true,
       "description": "The geometry and properties of a feature.",
       "x-ms-parameter-location": "client",
@@ -1012,11 +1012,10 @@
     },
     "Feature": {
       "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
-      "x-ms-discriminator-value": "Feature",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/GeoJsonObject"
+          "$ref": "#/definitions/FeatureType"
         },
         {
           "$ref": "#/definitions/FeatureId"
@@ -1025,6 +1024,15 @@
           "$ref": "#/definitions/FeatureAttributes"
         }
       ]
+    },
+    "FeatureType": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of feature. Currently only 'Feature' value is supported.",
+          "type": "string"
+        }
+      }
     },
     "FeatureId": {
       "type": "object",
@@ -1039,11 +1047,10 @@
       "type": "object",
       "properties": {
         "geometry": {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/GeoJsonGeometry"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
         },
         "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value",
+          "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value.",
           "type": "object"
         }
       }
