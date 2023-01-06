@@ -307,6 +307,297 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestoreworkspaces": {
+      "get": {
+        "tags": [
+          "FeatureStore"
+        ],
+        "summary": "Lists all the available featureStore workspaces under the specified resource group.",
+        "operationId": "FeatureStoreWorkspaces_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResourcePaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FeatureStore Workspaces by Resource Group": {
+            "$ref": "./examples/FeatureStoreWorkspace/listByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestoreworkspaces/{resourceName}": {
+      "delete": {
+        "tags": [
+          "FeatureStore"
+        ],
+        "summary": "Deletes a featureStore workspace.",
+        "operationId": "FeatureStoreWorkspaces_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "Azure Machine Learning Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "forceToPurge",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete FeatureStore Workspace": {
+            "$ref": "./examples/FeatureStoreWorkspace/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "FeatureStore"
+        ],
+        "summary": "Gets the properties of the specified featureStore workspace.",
+        "operationId": "FeatureStoreWorkspaces_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "Azure Machine Learning Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "getacrskutier",
+            "description": "Whether we want to get the Acr SKU info",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FeatureStore Workspace": {
+            "$ref": "./examples/FeatureStoreWorkspace/get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "FeatureStore"
+        ],
+        "summary": "Updates a featureStore workspace with the specified parameters.",
+        "operationId": "FeatureStoreWorkspaces_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "Azure Machine Learning Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+            }
+          },
+          "202": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update FeatureStore Workspace": {
+            "$ref": "./examples/FeatureStoreWorkspace/update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "put": {
+        "tags": [
+          "FeatureStore"
+        ],
+        "summary": "Creates or updates a featureStore workspace with the specified parameters.",
+        "operationId": "FeatureStoreWorkspaces_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceName",
+            "description": "Azure Machine Learning Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+                },
+                {
+                  "$ref": "#/definitions/MockResource"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+            }
+          },
+          "202": {
+            "description": "Success"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create FeatureStore Workspace": {
+            "$ref": "./examples/FeatureStoreWorkspace/create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose": {
       "post": {
         "tags": [
@@ -656,6 +947,48 @@
           "List workspace quotas by VMFamily": {
             "$ref": "./examples/Quota/list.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/featurestoreworkspaces": {
+      "get": {
+        "tags": [
+          "FeatureStore"
+        ],
+        "summary": "Lists all the available featureStore workspaces under the specified subscription.",
+        "operationId": "FeatureStoreWorkspaces_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResourcePaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get FeatureStore Workspaces by subscription": {
+            "$ref": "./examples/FeatureStoreWorkspace/listBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6227,6 +6560,132 @@
           "description": "Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days."
         }
       }
-    }
+    },
+    "FeatureStoreWorkspaceCreationPropertiesBasicResourcePaginatedResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/FeatureStoreWorkspaceCreationPropertiesBasicResource"
+              }
+            ]
+          }
+        },
+        "continuationToken": {
+          "type": "string"
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "FeatureStoreWorkspaceCreationPropertiesBasicResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeatureStoreWorkspaceCreationProperties"
+            }
+          ]
+        }
+      }
+    },
+    "FeatureStoreWorkspaceCreationProperties": {
+      "type": "object",
+      "properties": {
+        "computeRuntime": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/ComputeRuntimeDto"
+            }
+          ]
+        },
+        "offlineStoreConnectionName": {
+          "type": "string"
+        },
+        "onlineStoreConnectionName": {
+          "type": "string"
+        },
+        "storageArmId": {
+          "type": "string"
+        },
+        "keyVaultArmId": {
+          "type": "string"
+        },
+        "appInsightsArmId": {
+          "type": "string"
+        },
+        "acrArmId": {
+          "type": "string"
+        },
+        "encryption": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/EncryptionProperty"
+            }
+          ]
+        },
+        "imageBuildCompute": {
+          "type": "string"
+        },
+        "systemDatastoresAuthMode": {
+          "type": "string"
+        },
+        "primaryUserAssignedIdentity": {
+          "type": "string"
+        },
+        "publicNetworkAccess": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/PublicNetworkAccessType"
+            }
+          ]
+        },
+        "sharedPrivateLinkResources": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/SharedPrivateLinkResource"
+              }
+            ]
+          }
+        },
+        "allowRoleAssignmentsOnResourceGroupLevel": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ComputeRuntimeDto": {
+      "type": "object",
+      "properties": {
+        "sparkRuntimeVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "PublicNetworkAccessType": {
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PublicNetworkAccessType",
+        "modelAsString": true
+      }
+    },
   }
 }
