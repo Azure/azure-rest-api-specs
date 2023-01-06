@@ -35,7 +35,7 @@ tag: package-2022-11
 
 These settings apply only when `--tag=package-2022-11` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-11'
+``` yaml $(tag) == 'package-2022-11'
 input-file:
   - Microsoft.DocumentDB/stable/2022-11-15/cosmos-db.json
   - Microsoft.DocumentDB/stable/2022-11-15/managedCassandra.json
