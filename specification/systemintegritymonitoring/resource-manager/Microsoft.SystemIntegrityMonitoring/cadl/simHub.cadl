@@ -1,0 +1,16 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "./provisioningstate.cadl";
+import "./resourceconnection.cadl";
+
+@doc("SIM Hub properties.")
+model SIMHubProperties {
+  @doc("The status of the last operation.")
+  @visibility("read")
+  provisioningState?: ProvisioningStateValues;
+
+  @doc("Resources that are connected to the account.")
+  resourceConnections?: ResourceConnectionProperties[]
+}

@@ -1,0 +1,1479 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.SystemIntegrityMonitoring",
+    "version": "2022-08-01-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "SIMHubs"
+    },
+    {
+      "name": "DeviceProfiles"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.SystemIntegrityMonitoring/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SystemIntegrityMonitoring/simHubs": {
+      "get": {
+        "tags": [
+          "SIMHubs"
+        ],
+        "operationId": "SimHubs_ListBySubscription",
+        "description": "List SIMHubResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SIMHubResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SimHubs_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/SimHubs_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "SimHubs_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/SimHubs_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SystemIntegrityMonitoring/simHubs/{simHubName}/deviceProfiles": {
+      "get": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_ListBySubscription",
+        "description": "List DeviceProfileResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DeviceProfiles_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SystemIntegrityMonitoring/simHubs": {
+      "get": {
+        "tags": [
+          "SIMHubs"
+        ],
+        "operationId": "SimHubs_ListByResourceGroup",
+        "description": "List SIMHubResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SIMHubResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SimHubs_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/SimHubs_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "SimHubs_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/SimHubs_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SystemIntegrityMonitoring/simHubs/{simHubName}": {
+      "get": {
+        "tags": [
+          "SIMHubs"
+        ],
+        "operationId": "SimHubs_Get",
+        "description": "Get a SIMHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SIMHubResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SimHubs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/SimHubs_Get_MaximumSet_Gen.json"
+          },
+          "SimHubs_Get_MinimumSet_Gen": {
+            "$ref": "./examples/SimHubs_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SIMHubs"
+        ],
+        "operationId": "SimHubs_CreateOrUpdate",
+        "description": "Create a SIMHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/SIMHubResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SIMHubResource"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/SIMHubResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SimHubs_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/SimHubs_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "SimHubs_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/SimHubs_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SIMHubs"
+        ],
+        "operationId": "SimHubs_Update",
+        "description": "Update a SIMHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/SIMHubResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SIMHubResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SimHubs_Update_MaximumSet_Gen": {
+            "$ref": "./examples/SimHubs_Update_MaximumSet_Gen.json"
+          },
+          "SimHubs_Update_MinimumSet_Gen": {
+            "$ref": "./examples/SimHubs_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SIMHubs"
+        ],
+        "operationId": "SimHubs_Delete",
+        "description": "Delete a SIMHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SimHubs_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/SimHubs_Delete_MaximumSet_Gen.json"
+          },
+          "SimHubs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/SimHubs_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SystemIntegrityMonitoring/simHubs/{simHubName}/deviceProfiles": {
+      "get": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_ListBySimHubResource",
+        "description": "List DeviceProfileResource resources by SIMHubResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DeviceProfiles_ListBySimHubResource_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_ListBySimHubResource_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_ListBySimHubResource_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_ListBySimHubResource_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SystemIntegrityMonitoring/simHubs/{simHubName}/deviceProfiles/{deviceProfileName}": {
+      "get": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_Get",
+        "description": "Get a DeviceProfileResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "deviceProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceProfiles_Get_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_Get_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_Get_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_CreateOrUpdate",
+        "description": "Create a DeviceProfileResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "deviceProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResource"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DeviceProfiles_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_Update",
+        "description": "Update a DeviceProfileResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "deviceProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceProfiles_Update_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_Update_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_Update_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_Delete",
+        "description": "Delete a DeviceProfileResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "deviceProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "DeviceProfiles_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_Delete_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SystemIntegrityMonitoring/simHubs/{simHubName}/deviceProfiles/{deviceProfileName}/applyForResourceConnection": {
+      "post": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_ApplyForResourceConnections",
+        "description": "Applies measurement profile version to specified azure resource connections.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "deviceProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "applyForResourceConnectionPayload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ApplyForResourceConnectionPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceProfiles_ApplyForResourceConnections_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_ApplyForResourceConnections_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_ApplyForResourceConnections_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_ApplyForResourceConnections_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SystemIntegrityMonitoring/simHubs/{simHubName}/deviceProfiles/{deviceProfileName}/initiate": {
+      "post": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_Initiate",
+        "description": "Initiates operations that require challenge and service context values.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "deviceProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/InitiateRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceProfiles_Initiate_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_Initiate_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_Initiate_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_Initiate_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SystemIntegrityMonitoring/simHubs/{simHubName}/deviceProfiles/{deviceProfileName}/removeForResourceConnection": {
+      "post": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_RemoveForResourceConnections",
+        "description": "Removes measurement profile version currently applied to specified azure resource connections.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "deviceProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "removeForResourceConnectionPayload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RemoveForResourceConnectionPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceProfiles_RemoveForResourceConnections_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_RemoveForResourceConnections_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_RemoveForResourceConnections_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_RemoveForResourceConnections_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SystemIntegrityMonitoring/simHubs/{simHubName}/deviceProfiles/{deviceProfileName}/uploadMeasurementProfile": {
+      "post": {
+        "tags": [
+          "DeviceProfiles"
+        ],
+        "operationId": "DeviceProfiles_UploadNewMeasurementProfileVersion",
+        "description": "Upload a new device measurement profile version",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "simHubName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "deviceProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the resource",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "newMeasurementProfilePayload",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewMeasurementProfilePayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeviceProfileResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeviceProfiles_UploadNewMeasurementProfileVersion_MaximumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_UploadNewMeasurementProfileVersion_MaximumSet_Gen.json"
+          },
+          "DeviceProfiles_UploadNewMeasurementProfileVersion_MinimumSet_Gen": {
+            "$ref": "./examples/DeviceProfiles_UploadNewMeasurementProfileVersion_MinimumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ApplyForResourceConnectionPayload": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Measurement profile version to be applied."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Supported azure resource to apply measurement profile versions to."
+        }
+      },
+      "description": "Payload for applying measurement profile version to a specified supported azure resource.",
+      "required": [
+        "version",
+        "resourceId"
+      ]
+    },
+    "AttestationProperties": {
+      "type": "object",
+      "properties": {
+        "attestationType": {
+          "$ref": "#/definitions/AttestationType",
+          "description": "Type of attestation to perform."
+        },
+        "attestationData": {
+          "type": "string",
+          "description": "JWT token received from MAA."
+        }
+      },
+      "description": "Attestation properties.",
+      "required": [
+        "attestationType",
+        "attestationData"
+      ]
+    },
+    "AttestationType": {
+      "type": "string",
+      "enum": [
+        "Boot"
+      ],
+      "x-ms-enum": {
+        "name": "AttestationType",
+        "modelAsString": true
+      }
+    },
+    "DeviceProfileProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateValues",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "measurementProfileVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MeasurementProfileProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "MeasurementProfileProperties[]",
+          "description": "List of every measurement version that was created for the given IoT device profile.",
+          "readOnly": true
+        }
+      },
+      "description": "SIM Device Profile properties."
+    },
+    "DeviceProfileResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeviceProfileProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A device profile that holds measurement profiles uploaded by a clean room device. Scoped under a SIM Hub.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DeviceProfileResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceProfileResource"
+          },
+          "x-cadl-name": "DeviceProfileResource[]",
+          "description": "The DeviceProfileResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a DeviceProfileResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "DeviceProfileResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        }
+      },
+      "description": "The type used for update operations of the DeviceProfileResource."
+    },
+    "InitiateRequestResponse": {
+      "type": "object",
+      "properties": {
+        "challenge": {
+          "$ref": "#/definitions/ServiceChallenge",
+          "description": "Challenge received from the Initiate request."
+        },
+        "serviceContext": {
+          "$ref": "#/definitions/ServiceContext",
+          "description": "Service context received from the Initiate request."
+        },
+        "requiredAttestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttestationType"
+          },
+          "x-cadl-name": "AttestationType[]",
+          "description": "List of attestations the service requires from the device."
+        },
+        "maaUrl": {
+          "$ref": "#/definitions/Url",
+          "description": "Endpoint for devices to call MAA APIs."
+        }
+      },
+      "description": "Response received from Initiate.",
+      "required": [
+        "challenge",
+        "serviceContext",
+        "requiredAttestations",
+        "maaUrl"
+      ]
+    },
+    "MeasurementProfileProperties": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The version of this measurement.",
+          "readOnly": true
+        },
+        "values": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "The values that this measurement profile holds. Used for field devices to attest against."
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MeasurementProfileResourceConnection"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "MeasurementProfileResourceConnection[]",
+          "description": "The scopes where this measurement profile should be applied on."
+        }
+      },
+      "description": "Definition for a set of measurements that were taken from a clean room device. Once approved, field devices can use it to match their measurements against and get attested if the matching succeeds.",
+      "required": [
+        "values",
+        "scopes"
+      ]
+    },
+    "MeasurementProfileResourceConnection": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource of the scope. Expected to match any linked resources under SIM Hub."
+        },
+        "state": {
+          "$ref": "#/definitions/MeasurementProfileStateValues",
+          "description": "The current state of the measurement in the specific scope."
+        }
+      },
+      "description": "Scope where a measurement profile applies to.",
+      "required": [
+        "resourceId",
+        "state"
+      ]
+    },
+    "MeasurementProfileStateValues": {
+      "type": "string",
+      "enum": [
+        "Staged",
+        "Approved"
+      ],
+      "x-ms-enum": {
+        "name": "MeasurementProfileStateValues",
+        "modelAsString": true
+      }
+    },
+    "NewMeasurementProfilePayload": {
+      "type": "object",
+      "properties": {
+        "challenge": {
+          "$ref": "#/definitions/ServiceChallenge",
+          "description": "Challenge received from the Initiate request."
+        },
+        "serviceContext": {
+          "$ref": "#/definitions/ServiceContext",
+          "description": "Service context received from the Initiate request."
+        },
+        "deviceName": {
+          "type": "string",
+          "description": "Name of the device."
+        },
+        "attestations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttestationProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "AttestationProperties[]",
+          "description": "List of attestations."
+        }
+      },
+      "description": "Payload for uploading new measurements from a clean room device to a device profile.",
+      "required": [
+        "challenge",
+        "serviceContext",
+        "deviceName",
+        "attestations"
+      ]
+    },
+    "ProvisioningStateValues": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningStateValues",
+        "modelAsString": true
+      }
+    },
+    "RemoveForResourceConnectionPayload": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "Measurement profile version to be removed."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Supported azure resource to remove measurement profile version from."
+        }
+      },
+      "description": "Payload for removing measurement profile version applied to a specified supported azure resource.",
+      "required": [
+        "version",
+        "resourceId"
+      ]
+    },
+    "ResourceConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "description": "Resource identifier of the connected azure resource."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Connection string used to connect to the resource, if needed.",
+          "format": "password",
+          "x-ms-secret": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location where the resource is provisioned at."
+        }
+      },
+      "description": "Resource Connection properties.",
+      "required": [
+        "resourceId",
+        "location"
+      ]
+    },
+    "SIMHubProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningStateValues",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "resourceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceConnectionProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "ResourceConnectionProperties[]",
+          "description": "Resources that are connected to the account."
+        }
+      },
+      "description": "SIM Hub properties."
+    },
+    "SIMHubResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SIMHubProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A SystemIntegrityMonitoring Hub.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "SIMHubResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SIMHubResource"
+          },
+          "x-cadl-name": "SIMHubResource[]",
+          "description": "The SIMHubResource items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a SIMHubResource list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "SIMHubResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/SIMHubResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the SIMHubResource."
+    },
+    "SIMHubResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "resourceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceConnectionProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "ResourceConnectionProperties[]",
+          "description": "Resources that are connected to the account."
+        }
+      },
+      "description": "The updatable properties of the SIMHubResource."
+    },
+    "ServiceChallenge": {
+      "type": "string"
+    },
+    "ServiceContext": {
+      "type": "string"
+    },
+    "Url": {
+      "type": "string"
+    }
+  },
+  "parameters": {}
+}
