@@ -307,13 +307,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores": {
       "get": {
         "tags": [
           "Featurestore"
         ],
-        "summary": "Lists all the available featureStore workspaces under the specified resource group.",
-        "operationId": "FeaturestoreWorkspaces_ListByResourceGroup",
+        "summary": "Lists all the available featurestores under the specified resource group.",
+        "operationId": "Featurestores_ListByResourceGroup",
         "produces": [
           "application/json"
         ],
@@ -343,8 +343,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Featurestore Workspaces by Resource Group": {
-            "$ref": "./examples/FeaturestoreWorkspace/listByResourceGroup.json"
+          "Get Featurestores by Resource Group": {
+            "$ref": "./examples/Featurestore/listByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -352,13 +352,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{resourceName}": {
       "delete": {
         "tags": [
           "Featurestore"
         ],
-        "summary": "Deletes a featureStore workspace.",
-        "operationId": "FeaturestoreWorkspaces_Delete",
+        "summary": "Deletes a featurestores.",
+        "operationId": "Featurestores_Delete",
         "produces": [
           "application/json"
         ],
@@ -404,8 +404,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Featurestore Workspace": {
-            "$ref": "./examples/FeaturestoreWorkspace/delete.json"
+          "Delete Featurestore": {
+            "$ref": "./examples/Featurestore/delete.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -414,8 +414,8 @@
         "tags": [
           "Featurestore"
         ],
-        "summary": "Gets the properties of the specified featureStore workspace.",
-        "operationId": "FeaturestoreWorkspaces_Get",
+        "summary": "Gets the properties of the specified featurestores.",
+        "operationId": "Featurestores_Get",
         "produces": [
           "application/json"
         ],
@@ -459,8 +459,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Featurestore Workspace": {
-            "$ref": "./examples/FeaturestoreWorkspace/get.json"
+          "Get FeatureStores": {
+            "$ref": "./examples/Featurestore/get.json"
           }
         }
       },
@@ -468,8 +468,8 @@
         "tags": [
           "Featurestore"
         ],
-        "summary": "Updates a featureStore workspace with the specified parameters.",
-        "operationId": "FeaturestoreWorkspaces_Update",
+        "summary": "Updates a featurestores with the specified parameters.",
+        "operationId": "Featurestores_Update",
         "consumes": [
           "application/json"
         ],
@@ -522,8 +522,8 @@
           }
         },
         "x-ms-examples": {
-          "Update Featurestore Workspace": {
-            "$ref": "./examples/FeaturestoreWorkspace/update.json"
+          "Update FeatureStores": {
+            "$ref": "./examples/Featurestore/update.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -532,8 +532,8 @@
         "tags": [
           "Featurestore"
         ],
-        "summary": "Creates or updates a featureStore workspace with the specified parameters.",
-        "operationId": "FeaturestoreWorkspaces_CreateOrUpdate",
+        "summary": "Creates or updates a featurestores with the specified parameters.",
+        "operationId": "Featurestores_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -591,8 +591,8 @@
           }
         },
         "x-ms-examples": {
-          "Create Featurestore Workspace": {
-            "$ref": "./examples/FeaturestoreWorkspace/create.json"
+          "Create FeatureStores": {
+            "$ref": "./examples/Featurestore/create.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -2262,12 +2262,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/connections/{connectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/connections/{connectionName}": {
       "put": {
         "tags": [
-          "FeaturestoreV2WorkspaceConnectionResource"
+          "FeaturestoreConnectionResource"
         ],
-        "operationId": "FeaturestoreWorkspaceConnections_Create",
+        "operationId": "FeaturestoreConnections_Create",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2316,9 +2316,9 @@
       },
       "get": {
         "tags": [
-          "FeaturestoreV2WorkspaceConnectionResource"
+          "FeaturestoreConnectionResource"
         ],
-        "operationId": "FeaturestoreWorkspaceConnections_Get",
+        "operationId": "FeaturestoreConnections_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2358,9 +2358,9 @@
       },
       "delete": {
         "tags": [
-          "FeaturestoreV2WorkspaceConnectionResource"
+          "FeaturestoreConnectionResource"
         ],
-        "operationId": "FeaturestoreWorkspaceConnections_Delete",
+        "operationId": "FeaturestoreConnections_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2399,12 +2399,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/connections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/connections": {
       "get": {
         "tags": [
-          "FeaturestoreV2WorkspaceConnectionResource"
+          "FeaturestoreConnectionResource"
         ],
-        "operationId": "FeaturestoreWorkspaceConnections_List",
+        "operationId": "FeaturestoreConnections_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -2449,13 +2449,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/privateEndpointConnections": {
       "get": {
         "tags": [
           "FeaturestorePrivateEndpointConnections"
         ],
         "operationId": "FeaturestorePrivateEndpointConnections_List",
-        "description": "List all the private endpoint connections associated with the workspace.",
+        "description": "List all the private endpoint connections associated with the featurestore.",
         "x-ms-examples": {
           "StorageAccountListPrivateEndpointConnections": {
             "$ref": "./examples/FeaturestorePrivateEndpointConnection/list.json"
@@ -2494,13 +2494,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "FeaturestoreWorkspacePrivateEndpointConnections"
         ],
         "operationId": "FeaturestorePrivateEndpointConnections_Get",
-        "description": "Gets the specified private endpoint connection associated with the workspace.",
+        "description": "Gets the specified private endpoint connection associated with the featurestore.",
         "x-ms-examples": {
           "WorkspaceGetPrivateEndpointConnection": {
             "$ref": "./examples/FeaturestorePrivateEndpointConnection/get.json"
@@ -2543,7 +2543,7 @@
           "FeaturestoreWorkspacePrivateEndpointConnections"
         ],
         "operationId": "FeaturestorePrivateEndpointConnections_CreateOrUpdate",
-        "description": "Update the state of specified private endpoint connection associated with the workspace.",
+        "description": "Update the state of specified private endpoint connection associated with the featurestore.",
         "x-ms-examples": {
           "WorkspacePutPrivateEndpointConnection": {
             "$ref": "./examples/FeaturestorePrivateEndpointConnection/createOrUpdate.json"
@@ -2595,7 +2595,7 @@
           "FeaturestoreWorkspacePrivateEndpointConnections"
         ],
         "operationId": "FeaturestorePrivateEndpointConnections_Delete",
-        "description": "Deletes the specified private endpoint connection associated with the workspace.",
+        "description": "Deletes the specified private endpoint connection associated with the featurestore.",
         "x-ms-examples": {
           "WorkspaceDeletePrivateEndpointConnection": {
             "$ref": "./examples/FeaturestorePrivateEndpointConnection/delete.json"
@@ -2634,13 +2634,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/privateLinkResources": {
       "get": {
         "tags": [
-          "FeaturestoreWorkspacePrivateLinkResources"
+          "FeaturestorePrivateLinkResources"
         ],
         "operationId": "FeaturestorePrivateLinkResources_List",
-        "description": "Gets the private link resources that need to be created for a workspace.",
+        "description": "Gets the private link resources that need to be created for a featurestore.",
         "x-ms-examples": {
           "WorkspaceListPrivateLinkResources": {
             "$ref": "./examples/FeaturestorePrivateLinkResource/list.json"
@@ -2676,13 +2676,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/featurestore": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/featurestores": {
       "get": {
         "tags": [
           "Featurestore"
         ],
-        "summary": "Lists all the available featureStore workspaces under the specified subscription.",
-        "operationId": "FeaturestoreWorkspaces_ListBySubscription",
+        "summary": "Lists all the available featurestores under the specified subscription.",
+        "operationId": "Featurestores_ListBySubscription",
         "produces": [
           "application/json"
         ],
@@ -2709,8 +2709,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Featurestore Workspaces by subscription": {
-            "$ref": "./examples/FeaturestoreWorkspace/listBySubscription.json"
+          "Get FeatureStoress by subscription": {
+            "$ref": "./examples/Featurestore/listBySubscription.json"
           }
         },
         "x-ms-pageable": {
