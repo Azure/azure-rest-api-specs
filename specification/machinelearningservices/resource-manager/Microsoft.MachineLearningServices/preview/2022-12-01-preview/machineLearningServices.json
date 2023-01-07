@@ -950,48 +950,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/featurestore": {
-      "get": {
-        "tags": [
-          "Featurestore"
-        ],
-        "summary": "Lists all the available featureStore workspaces under the specified subscription.",
-        "operationId": "FeaturestoreWorkspaces_ListBySubscription",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResourcePaginatedResult"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Featurestore Workspaces by subscription": {
-            "$ref": "./examples/FeaturestoreWorkspace/listBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -1027,6 +985,48 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/featurestore": {
+      "get": {
+        "tags": [
+          "Featurestore"
+        ],
+        "summary": "Lists all the available featureStore workspaces under the specified subscription.",
+        "operationId": "FeaturestoreWorkspaces_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResourcePaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Featurestore Workspaces by subscription": {
+            "$ref": "./examples/FeaturestoreWorkspace/listBySubscription.json"
           }
         },
         "x-ms-pageable": {
