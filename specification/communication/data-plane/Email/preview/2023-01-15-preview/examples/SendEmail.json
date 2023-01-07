@@ -3,8 +3,7 @@
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2023-01-15-preview",
     "x-ms-client-request-id": "1377af77-47e8-4fb3-8e84-5a848305daea",
-    "repeatability-request-id": "8540c0de-899f-5cce-acb5-3ec493af3800",
-    "repeatability-first-sent": "Sun, 06 Nov 1994 08:49:37 GMT",
+    "operation-id": "8540c0de-899f-5cce-acb5-3ec493af3800",
     "authorization": "HMAC-SHA256 SignedHeaders=x-ms-date;host;x-ms-content-sha256&Signature=aaaa",
     "emailMessage": {
       "headers": {
@@ -73,9 +72,13 @@
   "responses": {
     "202": {
       "headers": {
-        "Repeatability-Result": "accepted",
-        "Operation-Location": "https://contoso.westus.communications.azure.com//email/status/8540c0de-899f-5cce-acb5-3ec493af3800?api-version=2023-01-15-preview",
-        "x-ms-request-id": "8540c0de-899f-5cce-acb5-3ec493af3800"
+        "Operation-Location": "https://contoso.westus.communications.azure.com//emails/operations/8540c0de-899f-5cce-acb5-3ec493af3800?api-version=2023-01-15-preview",
+        "x-ms-request-id": "9853552C-3AB3-478B-BE63-A14BFFC309A0",
+        "retry-after": 60
+      },
+      "operationStatus": {
+        "id": "8540c0de-899f-5cce-acb5-3ec493af3800",
+        "status": "running"
       }
     }
   }

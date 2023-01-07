@@ -6,13 +6,13 @@
     "version": "2023-01-15-preview"
   },
   "paths": {
-    "/emails/{messageId}/status": {
+    "/emails/operations/{operationId}": {
       "get": {
         "tags": [
-          "EmailGetSendStatus"
+          "EmailGetOperationStatus"
         ],
-        "summary": "Gets the status of a message sent previously.",
-        "operationId": "Email_GetSendStatus",
+        "summary": "Gets the status of the email send operation.",
+        "operationId": "Email_GetOperationStatus",
         "produces": [
           "application/json"
         ],
@@ -22,8 +22,8 @@
         "parameters": [
           {
             "in": "path",
-            "name": "messageId",
-            "description": "System generated message id (GUID) returned from a previous call to send email",
+            "name": "operationId",
+            "description": "ID of the long running operation (GUID) returned from a previous call to send email",
             "required": true,
             "type": "string"
           },
@@ -47,19 +47,19 @@
           "200": {
             "description": "Message status was successfully retrieved.",
             "headers": {
-              "Retry-After": {
-                "description": "Amount of time client should wait before retrying the request, specified in seconds ",
+              "retry-after": {
+                "description": "Minimum amount of time in seconds to wait before polling for operation status again.",
                 "type": "integer"
               }
             },
             "schema": {
-              "$ref": "#/definitions/SendStatusResult"
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
         "x-ms-examples": {
           "Get Message Status": {
-            "$ref": "./examples/GetSendStatus.json"
+            "$ref": "./examples/GetOperationStatus.json"
           }
         }
       }
@@ -80,17 +80,11 @@
         "parameters": [
           {
             "in": "header",
-            "name": "repeatability-request-id",
-            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs.",
+            "name": "Operation-Id",
+            "description": "This is the ID used by the status monitor for this long running operation.",
             "type": "string",
-            "required": true
-          },
-          {
-            "in": "header",
-            "name": "repeatability-first-sent",
-            "description": "Must be sent by clients to specify that a request is repeatable. Repeatability-First-Sent is used to specify the date and time at which the request was first created in the IMF-fix date form of HTTP-date as defined in RFC7231. eg- Tue, 26 Mar 2019 16:06:51 GMT",
-            "type": "string",
-            "required": true
+            "required": false,
+            "format": "uuid"
           },
           {
             "in": "header",
@@ -131,18 +125,21 @@
           "202": {
             "description": "The service has accepted the request and will start processing the message later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation/message status using the URL specified in 'Operation-Location' header.",
             "headers": {
-              "Repeatability-Result": {
-                "description": "Status of a repeatable request.",
+              "Operation-Location": {
+                "description": "Location url of where to poll the status of this operation from.",
                 "type": "string"
               },
-              "Operation-Location": {
-                "description": "Location url of where to poll the status of this message from.",
-                "type": "string"
+              "retry-after": {
+                "description": "Minimum amount of time in seconds to wait before polling for operation status again.",
+                "type": "integer"
               },
               "x-ms-request-id": {
-                "description": "System generated GUID indicating the id of this specific message, to be used for tracking purposes.",
+                "description": "System generated GUID indicating the id of this specific message, to be used for tracking the message over its lifetime.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
             }
           }
         },
@@ -156,6 +153,40 @@
     }
   },
   "definitions": {
+    "OperationStatus": {
+      "description": "Status of the long running operation",
+      "required": [
+        "id",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The unique id of the operation",
+          "type": "string",
+          "example": "8540c0de-899f-5cce-acb5-3ec493af3800"
+        },
+        "status": {
+          "description": "Status of operation.",
+          "enum": [
+            "notStarted",
+            "running",
+            "succeeded",
+            "failed",
+            "canceled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EmailSendOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "error": {
+          "description": "Error details when status is a non-success terminal state.",
+          "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationError"
+        }
+      }
+    },
     "EmailMessage": {
       "description": "Message payload for sending an email",
       "required": [
