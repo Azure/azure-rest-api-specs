@@ -307,7 +307,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featureStoreWorkspaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore": {
       "get": {
         "tags": [
           "FeatureStore"
@@ -352,7 +352,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featureStoreWorkspaces/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{resourceName}": {
       "delete": {
         "tags": [
           "FeatureStore"
@@ -950,7 +950,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/featureStoreWorkspaces": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/featurestore": {
       "get": {
         "tags": [
           "FeatureStore"
@@ -1939,6 +1939,233 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "FeatureStorePrivateEndpointConnections"
+        ],
+        "operationId": "FeatureStorePrivateEndpointConnections_List",
+        "description": "List all the private endpoint connections associated with the workspace.",
+        "x-ms-examples": {
+          "StorageAccountListPrivateEndpointConnections": {
+            "$ref": "./examples/FeatureStorePrivateEndpointConnection/list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Successfully retrieved private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "FeatureStoreWorkspacePrivateEndpointConnections"
+        ],
+        "operationId": "FeatureStorePrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the workspace.",
+        "x-ms-examples": {
+          "WorkspaceGetPrivateEndpointConnection": {
+            "$ref": "./examples/FeatureStorePrivateEndpointConnection/get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FeatureStoreWorkspacePrivateEndpointConnections"
+        ],
+        "operationId": "FeatureStorePrivateEndpointConnections_CreateOrUpdate",
+        "description": "Update the state of specified private endpoint connection associated with the workspace.",
+        "x-ms-examples": {
+          "WorkspacePutPrivateEndpointConnection": {
+            "$ref": "./examples/FeatureStorePrivateEndpointConnection/createOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "description": "The private endpoint connection properties."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Update the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FeatureStoreWorkspacePrivateEndpointConnections"
+        ],
+        "operationId": "FeatureStorePrivateEndpointConnections_Delete",
+        "description": "Deletes the specified private endpoint connection associated with the workspace.",
+        "x-ms-examples": {
+          "WorkspaceDeletePrivateEndpointConnection": {
+            "$ref": "./examples/FeatureStorePrivateEndpointConnection/delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the private endpoint connection successfully."
+          },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "FeatureStoreWorkspacePrivateLinkResources"
+        ],
+        "operationId": "FeatureStorePrivateLinkResources_List",
+        "description": "Gets the private link resources that need to be created for a workspace.",
+        "x-ms-examples": {
+          "WorkspaceListPrivateLinkResources": {
+            "$ref": "./examples/FeatureStorePrivateLinkResource/list.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook": {
       "post": {
         "tags": [
@@ -2252,6 +2479,193 @@
         "x-ms-examples": {
           "ListWorkspaceConnections": {
             "$ref": "./examples/WorkspaceConnection/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/connections/{connectionName}": {
+      "put": {
+        "tags": [
+          "FeatureStoreV2WorkspaceConnectionResource"
+        ],
+        "operationId": "FeatureStoreWorkspaceConnections_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The object for creating or updating a new workspace connection",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateWorkspaceConnection": {
+            "$ref": "./examples/FeatureStoreWorkspaceConnection/create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FeatureStoreV2WorkspaceConnectionResource"
+        ],
+        "operationId": "FeatureStoreWorkspaceConnections_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetWorkspaceConnection": {
+            "$ref": "./examples/FeatureStoreWorkspaceConnection/get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FeatureStoreV2WorkspaceConnectionResource"
+        ],
+        "operationId": "FeatureStoreWorkspaceConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "Success"
+          }
+        },
+        "x-ms-examples": {
+          "DeleteWorkspaceConnection": {
+            "$ref": "./examples/FeatureStoreWorkspaceConnection/delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/connections": {
+      "get": {
+        "tags": [
+          "FeatureStoreV2WorkspaceConnectionResource"
+        ],
+        "operationId": "FeatureStoreWorkspaceConnections_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/TargetParameter"
+          },
+          {
+            "$ref": "#/parameters/CategoryParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListWorkspaceConnections": {
+            "$ref": "./examples/FeatureStoreWorkspaceConnection/list.json"
           }
         },
         "x-ms-pageable": {
