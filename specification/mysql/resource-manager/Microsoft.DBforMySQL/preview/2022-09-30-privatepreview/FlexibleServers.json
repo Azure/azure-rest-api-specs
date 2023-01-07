@@ -480,7 +480,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },
@@ -1131,6 +1131,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-z0-9][-a-z0-9]*(?<!-)$"，
       "description": "The name of the server.",
       "x-ms-parameter-location": "method"
     }
