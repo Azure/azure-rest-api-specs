@@ -352,7 +352,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{featurestoreName}": {
       "delete": {
         "tags": [
           "Featurestore"
@@ -370,11 +370,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "resourceName",
-            "description": "Azure Machine Learning Workspace Name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -427,11 +423,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "resourceName",
-            "description": "Azure Machine Learning Workspace Name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -484,11 +476,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "resourceName",
-            "description": "Azure Machine Learning Workspace Name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -548,11 +536,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "resourceName",
-            "description": "Azure Machine Learning Workspace Name",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2262,7 +2246,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/connections/{connectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{featurestoreName}/connections/{connectionName}": {
       "put": {
         "tags": [
           "FeaturestoreConnectionResource"
@@ -2276,7 +2260,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "#/parameters/ConnectionName"
@@ -2327,7 +2311,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "#/parameters/ConnectionName"
@@ -2369,7 +2353,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "#/parameters/ConnectionName"
@@ -2399,7 +2383,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/connections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{featurestoreName}/connections": {
       "get": {
         "tags": [
           "FeaturestoreConnectionResource"
@@ -2413,7 +2397,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "#/parameters/TargetParameter"
@@ -2449,7 +2433,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{featurestoreName}/privateEndpointConnections": {
       "get": {
         "tags": [
           "FeaturestorePrivateEndpointConnections"
@@ -2466,7 +2450,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2494,7 +2478,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{featurestoreName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "FeaturestorePrivateEndpointConnections"
@@ -2514,7 +2498,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionName"
@@ -2557,7 +2541,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionName"
@@ -2609,7 +2593,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionName"
@@ -2634,7 +2618,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/privateLinkResources": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{featurestoreName}/privateLinkResources": {
       "get": {
         "tags": [
           "FeaturestorePrivateLinkResources"
@@ -2654,7 +2638,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkspaceNameParameter"
+            "$ref": "#/parameters/FeaturestoreNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2824,6 +2808,14 @@
       "type": "string",
       "description": "Category of the workspace connection.",
       "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "FeaturestoreNameParameter": {
+      "name": "featurestoreName",
+      "description": "Name of Azure Machine Learning featurestore.",
+      "in": "path",
+      "type": "string",
+      "required": true,
       "x-ms-parameter-location": "method"
     }
   },
