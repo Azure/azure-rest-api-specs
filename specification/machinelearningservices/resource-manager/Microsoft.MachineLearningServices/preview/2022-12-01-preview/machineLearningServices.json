@@ -992,48 +992,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/featurestore": {
-      "get": {
-        "tags": [
-          "Featurestore"
-        ],
-        "summary": "Lists all the available featureStore workspaces under the specified subscription.",
-        "operationId": "FeaturestoreWorkspaces_ListBySubscription",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResourcePaginatedResult"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Featurestore Workspaces by subscription": {
-            "$ref": "./examples/FeaturestoreWorkspace/listBySubscription.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes": {
       "get": {
         "tags": [
@@ -2259,6 +2217,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints": {
+      "get": {
+        "tags": [
+          "OutboundNetworkDependenciesEndpoints"
+        ],
+        "summary": "Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.",
+        "operationId": "Workspaces_ListOutboundNetworkDependenciesEndpoints",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ExternalFQDNResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListOutboundNetworkDependenciesEndpoints": {
+            "$ref": "./examples/ExternalFQDN/get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestore/{workspaceName}/connections/{connectionName}": {
       "put": {
         "tags": [
@@ -2673,13 +2676,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/featurestore": {
       "get": {
         "tags": [
-          "OutboundNetworkDependenciesEndpoints"
+          "Featurestore"
         ],
-        "summary": "Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.",
-        "operationId": "Workspaces_ListOutboundNetworkDependenciesEndpoints",
+        "summary": "Lists all the available featureStore workspaces under the specified subscription.",
+        "operationId": "FeaturestoreWorkspaces_ListBySubscription",
         "produces": [
           "application/json"
         ],
@@ -2688,20 +2691,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ExternalFQDNResponse"
+              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResourcePaginatedResult"
             }
           },
           "default": {
@@ -2712,9 +2709,12 @@
           }
         },
         "x-ms-examples": {
-          "ListOutboundNetworkDependenciesEndpoints": {
-            "$ref": "./examples/ExternalFQDN/get.json"
+          "Get Featurestore Workspaces by subscription": {
+            "$ref": "./examples/FeaturestoreWorkspace/listBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
