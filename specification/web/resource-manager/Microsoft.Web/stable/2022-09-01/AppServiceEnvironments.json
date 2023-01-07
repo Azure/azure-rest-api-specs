@@ -195,6 +195,12 @@
             "description": "Operation is in progress.",
             "schema": {
               "$ref": "#/definitions/AppServiceEnvironmentResource"
+            },
+            "headers": {
+              "location": {
+                "description": "Location header for asynchronous response.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -3274,7 +3280,8 @@
       "in": "path",
       "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -3292,7 +3299,8 @@
       "in": "query",
       "description": "API Version",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     }
   },
   "securityDefinitions": {
