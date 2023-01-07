@@ -332,7 +332,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResourcePaginatedResult"
+              "$ref": "#/definitions/FeaturestoreCreationPropertiesResourcePaginatedResult"
             }
           },
           "default": {
@@ -448,7 +448,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResource"
+              "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
             }
           },
           "default": {
@@ -497,7 +497,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResource"
+              "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
             }
           }
         ],
@@ -505,7 +505,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResource"
+              "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
             }
           },
           "202": {
@@ -564,7 +564,7 @@
             "schema": {
               "allOf": [
                 {
-                  "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResource"
+                  "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
                 },
                 {
                   "$ref": "#/definitions/MockResource"
@@ -577,7 +577,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResource"
+              "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
             }
           },
           "202": {
@@ -2310,7 +2310,7 @@
         },
         "x-ms-examples": {
           "CreateWorkspaceConnection": {
-            "$ref": "./examples/FeaturestoreWorkspaceConnection/create.json"
+            "$ref": "./examples/FeaturestoreConnection/create.json"
           }
         }
       },
@@ -2352,7 +2352,7 @@
         },
         "x-ms-examples": {
           "GetWorkspaceConnection": {
-            "$ref": "./examples/FeaturestoreWorkspaceConnection/get.json"
+            "$ref": "./examples/FeaturestoreConnection/get.json"
           }
         }
       },
@@ -2394,7 +2394,7 @@
         },
         "x-ms-examples": {
           "DeleteWorkspaceConnection": {
-            "$ref": "./examples/FeaturestoreWorkspaceConnection/delete.json"
+            "$ref": "./examples/FeaturestoreConnection/delete.json"
           }
         }
       }
@@ -2441,7 +2441,7 @@
         },
         "x-ms-examples": {
           "ListWorkspaceConnections": {
-            "$ref": "./examples/FeaturestoreWorkspaceConnection/list.json"
+            "$ref": "./examples/FeaturestoreConnection/list.json"
           }
         },
         "x-ms-pageable": {
@@ -2497,7 +2497,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/featurestores/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
-          "FeaturestoreWorkspacePrivateEndpointConnections"
+          "FeaturestorePrivateEndpointConnections"
         ],
         "operationId": "FeaturestorePrivateEndpointConnections_Get",
         "description": "Gets the specified private endpoint connection associated with the featurestore.",
@@ -2540,7 +2540,7 @@
       },
       "put": {
         "tags": [
-          "FeaturestoreWorkspacePrivateEndpointConnections"
+          "FeaturestorePrivateEndpointConnections"
         ],
         "operationId": "FeaturestorePrivateEndpointConnections_CreateOrUpdate",
         "description": "Update the state of specified private endpoint connection associated with the featurestore.",
@@ -2592,7 +2592,7 @@
       },
       "delete": {
         "tags": [
-          "FeaturestoreWorkspacePrivateEndpointConnections"
+          "FeaturestorePrivateEndpointConnections"
         ],
         "operationId": "FeaturestorePrivateEndpointConnections_Delete",
         "description": "Deletes the specified private endpoint connection associated with the featurestore.",
@@ -2698,7 +2698,7 @@
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResourcePaginatedResult"
+              "$ref": "#/definitions/FeaturestoreCreationPropertiesResourcePaginatedResult"
             }
           },
           "default": {
@@ -6975,7 +6975,7 @@
         }
       }
     },
-    "FeaturestoreWorkspaceCreationPropertiesResourcePaginatedResult": {
+    "FeaturestoreCreationPropertiesResourcePaginatedResult": {
       "type": "object",
       "properties": {
         "value": {
@@ -6983,7 +6983,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/FeaturestoreWorkspaceCreationPropertiesResource"
+                "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
               }
             ]
           }
@@ -6996,7 +6996,7 @@
         }
       }
     },
-    "FeaturestoreWorkspaceCreationPropertiesResource": {
+    "FeaturestoreCreationPropertiesResource": {
       "required": [
         "properties"
       ],
@@ -7029,13 +7029,13 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/FeaturestoreWorkspaceCreationProperties"
+              "$ref": "#/definitions/FeaturestoreCreationProperties"
             }
           ]
         }
       }
     },
-    "FeaturestoreWorkspaceCreationProperties": {
+    "FeaturestoreCreationProperties": {
       "type": "object",
       "properties": {
         "computeRuntime": {
