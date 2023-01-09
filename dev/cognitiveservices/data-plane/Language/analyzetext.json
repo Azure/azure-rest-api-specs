@@ -849,7 +849,7 @@
       },
       "allOf": [
         {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
+          "$ref": "#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -866,6 +866,20 @@
         }
       ],
       "x-ms-discriminator-value": "Healthcare"
+    },
+    "CustomHealthcareLROTask": {
+      "type": "object",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/CustomHealthcareTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomHealthcare"
     },
     "HealthcareResult": {
       "type": "object",
@@ -1027,7 +1041,7 @@
           }
         },
         "EntityComponentInformation": {
-          "description": "(Optional) Entity component information listing fired components of the extracted entity.",
+          "description": "(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/EntityComponentInformation"
