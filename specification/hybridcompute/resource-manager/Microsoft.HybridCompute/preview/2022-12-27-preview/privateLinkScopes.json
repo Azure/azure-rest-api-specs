@@ -135,7 +135,12 @@
             "description": "Successful request when deleting an Azure Arc PrivateLinkScope."
           },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The specified PrivateLinkScope does not exist."
@@ -474,7 +479,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -522,7 +532,12 @@
             "description": "Successfully deleted private endpoint connection."
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Private endpoint connection does not exist."
