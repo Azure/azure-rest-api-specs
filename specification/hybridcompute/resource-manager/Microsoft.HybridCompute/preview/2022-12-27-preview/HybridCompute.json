@@ -1187,11 +1187,18 @@
           "description": "The correlation ID passed in from RSM per upgrade."
         },
         "enableAutomaticUpgrade": {
-          "type": "boolean",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "EnableAutomaticUpgradeTypes",
+            "modelAsString": true
+          },
           "description": "Specifies if RSM should try to upgrade this machine"
         },
         "lastAttemptTimestamp": {
-          "type": "timestamp",
+          "type": "string",
           "readOnly": true,
           "description": "Timestamp of last upgrade attempt"
         },
