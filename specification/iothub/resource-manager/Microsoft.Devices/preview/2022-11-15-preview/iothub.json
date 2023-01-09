@@ -1735,6 +1735,12 @@
             "description": "Long running manual failover operation for the IoT hub completed"
           },
           "202": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "description": "Manual failover initiated"
           },
           "default": {
@@ -2454,6 +2460,19 @@
         },
         "rootCertificate": {
           "$ref": "#/definitions/RootCertificateProperties"
+        },
+        "ipVersion": {
+          "description": "This property specifies the IP Version the hub is currently utilizing.",
+          "enum": [
+            "ipv4",
+            "ipv6",
+            "ipv4ipv6"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ipVersion",
+            "modelAsString": true
+          }
         }
       }
     },
