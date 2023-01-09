@@ -387,7 +387,13 @@
             "description": "Success"
           },
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success"
@@ -404,7 +410,10 @@
             "$ref": "./examples/Featurestore/delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -486,7 +495,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
+              "$ref": "#/definitions/FeaturestoreUpdatePropertiesResource"
             }
           }
         ],
@@ -498,7 +507,13 @@
             }
           },
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success"
@@ -559,7 +574,13 @@
             }
           },
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error",
@@ -2810,6 +2831,7 @@
       "in": "path",
       "type": "string",
       "required": true,
+      "pattern" : "^[a-zA-Z0-9][a-zA-Z0-9-]{2,32}$",
       "x-ms-parameter-location": "method"
     }
   },
@@ -6967,11 +6989,7 @@
         "value": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
-              }
-            ]
+              "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
           }
         },
         "continuationToken": {
@@ -6979,6 +6997,31 @@
         },
         "nextLink": {
           "type": "string"
+        }
+      }
+    },
+    "FeaturestoreUpdatePropertiesResource":{
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+            }
+          ]
+        },
+        "properties": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/FeaturestoreCreationProperties"
+            }
+          ]
         }
       }
     },
@@ -7066,20 +7109,12 @@
           "type": "string"
         },
         "publicNetworkAccess": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PublicNetworkAccessType"
-            }
-          ]
+          "$ref": "#/definitions/PublicNetworkAccessType"
         },
         "sharedPrivateLinkResources": {
           "type": "array",
           "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/SharedPrivateLinkResource"
-              }
-            ]
+            "$ref": "#/definitions/SharedPrivateLinkResource"
           }
         },
         "allowRoleAssignmentsOnResourceGroupLevel": {
