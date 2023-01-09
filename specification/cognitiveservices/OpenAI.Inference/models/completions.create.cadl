@@ -123,10 +123,15 @@ alias CompletionsPrompt = string | string[] | string[][];
 
 alias CompletionsStop = string | string[];
 
-@doc("Expected response schema to completion request")
-model Completion {
+alias CompletionResponse = {
     @doc("Request ID for troubleshooting purposes")
     @header "apim-request-id": string;
+
+    ...Completion;
+};
+
+@doc("Expected response schema to completion request")
+model Completion {
     @doc("Id for completion response")
     id?: string;
     @doc("Object for completion response")
