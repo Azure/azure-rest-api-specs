@@ -2265,7 +2265,7 @@
           "type": "string"
         },
         "recognizedPhrase": {
-          "description": "Phrases are set to the value if choice is seletected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
+          "description": "Phrases are set to the value if choice is selected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
           "type": "string"
         }
       }
@@ -2374,12 +2374,19 @@
     }
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}",
-    "useSchemePrefix": false,
-    "parameters": [
-      {
-        "$ref": "#/parameters/Endpoint"
-      }
-    ]
+      "hostTemplate": "{endpoint}",
+      "useSchemePrefix": false,
+      "parameters": [
+          {
+              "name": "endpoint",
+              "description": "The endpoint of the Azure Communication resource.",
+              "required": true,
+              "type": "string",
+              "format": "url",
+              "in": "path",
+              "x-ms-skip-url-encoding": true,
+              "x-ms-parameter-location": "client"
+          }
+      ]
   }
 }
