@@ -5217,6 +5217,10 @@
               "type": "string",
               "description": "The home ID of the entity."
             },
+            "collectionId": {
+              "type": "string",
+              "description": "The collection ID of the entity."
+            },
             "isIncomplete": {
               "readOnly": false,
               "description": "Whether it is a shell entity",
@@ -5528,24 +5532,6 @@
             "usage": {
               "type": "string",
               "description": "The usage of the glossary."
-            },
-            "createTime": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The created time of the record."
-            },
-            "createdBy": {
-              "type": "string",
-              "description": "The user who created the record."
-            },
-            "updateTime": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The update time of the record."
-            },
-            "updatedBy": {
-              "type": "string",
-              "description": "The user who updated the record."
             }
           }
         }
@@ -5586,6 +5572,24 @@
             },
             "lastModifiedTS": {
               "$ref": "#/definitions/LastModifiedTS"
+            },
+            "createTime": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The created time of the record."
+            },
+            "createdBy": {
+              "type": "string",
+              "description": "The user who created the record."
+            },
+            "updateTime": {
+              "type": "integer",
+              "format": "int64",
+              "description": "The update time of the record."
+            },
+            "updatedBy": {
+              "type": "string",
+              "description": "The user who updated the record."
             }
           }
         }
@@ -5701,24 +5705,6 @@
               "items": {
                 "$ref": "#/definitions/AtlasRelatedTermHeader"
               }
-            },
-            "createTime": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The created time of the record."
-            },
-            "createdBy": {
-              "type": "string",
-              "description": "The user who created the record."
-            },
-            "updateTime": {
-              "type": "integer",
-              "format": "int64",
-              "description": "The update time of the record."
-            },
-            "updatedBy": {
-              "type": "string",
-              "description": "The user who updated the record."
             },
             "status": {
               "$ref": "#/definitions/TermStatus"
