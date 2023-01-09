@@ -6,18 +6,22 @@
     "widgetName": "searchbox"
   },
   "responses": {
-    "204": {},
     "202": {
       "headers": {
         "location": "https://contosowidgetmanager.azure.com/operations/00000000-0000-0000-0000-000000000123/result?api-version=2022-11-01-preview",
         "operation-location": "https://contosowidgetmanager.azure.com/operations/00000000-0000-0000-0000-000000000123?api-version=2022-11-01-preview"
+      },
+      "body": {
+        "id": "id1",
+        "status": "deleted"
       }
     },
     "default": {
       "body": {
         "error": {
           "code": "Error code",
-          "message": "Error message"
+          "message": "Error message",
+          "details": []
         }
       }
     }
