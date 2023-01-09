@@ -22,7 +22,7 @@
         ],
         "summary": "Create an outbound call.",
         "description": "Create an outbound call.",
-        "operationId": "ServerCalling_CreateCall",
+        "operationId": "CreateCall",
         "parameters": [
           {
             "name": "createCallRequest",
@@ -66,7 +66,7 @@
         },
         "x-ms-examples": {
           "Create an outbound call.": {
-            "$ref": "./examples/ServerCalling_CreateCall.json"
+            "$ref": "./examples/CreateCall.json"
           }
         }
       }
@@ -78,7 +78,7 @@
         ],
         "summary": "Answer a Call.",
         "description": "Answer a call using the IncomingCallContext from Event Grid.",
-        "operationId": "ServerCalling_AnswerCall",
+        "operationId": "AnswerCall",
         "parameters": [
           {
             "name": "answerCallRequest",
@@ -122,7 +122,7 @@
         },
         "x-ms-examples": {
           "Answer a Call.": {
-            "$ref": "./examples/ServerCalling_AnswerCall.json"
+            "$ref": "./examples/AnswerCall.json"
           }
         }
       }
@@ -134,7 +134,7 @@
         ],
         "summary": "Redirect a call.",
         "description": "Redirect a call.",
-        "operationId": "ServerCalling_RedirectCall",
+        "operationId": "RedirectCall",
         "parameters": [
           {
             "name": "redirectCallRequest",
@@ -175,7 +175,7 @@
         },
         "x-ms-examples": {
           "Redirect a call.": {
-            "$ref": "./examples/ServerCalling_RedirectCall.json"
+            "$ref": "./examples/RedirectCall.json"
           }
         }
       }
@@ -187,7 +187,7 @@
         ],
         "summary": "Reject the call.",
         "description": "Reject the call.",
-        "operationId": "ServerCalling_RejectCall",
+        "operationId": "RejectCall",
         "parameters": [
           {
             "name": "rejectCallRequest",
@@ -228,7 +228,7 @@
         },
         "x-ms-examples": {
           "Reject the call.": {
-            "$ref": "./examples/ServerCalling_RejectCall.json"
+            "$ref": "./examples/RejectCall.json"
           }
         }
       }
@@ -239,7 +239,7 @@
           "MidConnections"
         ],
         "summary": "Get call connection.",
-        "operationId": "CallConnections_GetCall",
+        "operationId": "CallConnection_GetCall",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -268,7 +268,7 @@
         },
         "x-ms-examples": {
           "Get call connection.": {
-            "$ref": "./examples/CallConnections_GetCall.json"
+            "$ref": "./examples/CallConnection_GetCall.json"
           }
         }
       },
@@ -278,7 +278,7 @@
         ],
         "summary": "Hangup the call.",
         "description": "Hangup the call.",
-        "operationId": "CallConnections_HangupCall",
+        "operationId": "CallConnection_HangupCall",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -304,7 +304,7 @@
         },
         "x-ms-examples": {
           "Hangup the call.": {
-            "$ref": "./examples/CallConnections_HangupCall.json"
+            "$ref": "./examples/CallConnection_HangupCall.json"
           }
         }
       }
@@ -316,7 +316,7 @@
         ],
         "summary": "Terminate a call using CallConnectionId.",
         "description": "Terminate a call using CallConnectionId.",
-        "operationId": "CallConnections_TerminateCall",
+        "operationId": "CallConnection_TerminateCall",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -355,7 +355,7 @@
         },
         "x-ms-examples": {
           "Terminate a call using CallConnectionId.": {
-            "$ref": "./examples/CallConnections_TerminateCall.json"
+            "$ref": "./examples/CallConnection_TerminateCall.json"
           }
         }
       }
@@ -367,7 +367,7 @@
         ],
         "summary": "Transfer the call to a participant.",
         "description": "Transfer the call to a participant.",
-        "operationId": "CallConnections_TransferToParticipant",
+        "operationId": "CallConnection_TransferToParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -418,7 +418,7 @@
         },
         "x-ms-examples": {
           "Transfer the call to a participant.": {
-            "$ref": "./examples/CallConnections_TransferToParticipant.json"
+            "$ref": "./examples/CallConnection_TransferToParticipant.json"
           }
         }
       }
@@ -430,7 +430,7 @@
         ],
         "summary": "Plays audio to participants in the call.",
         "description": "Plays audio to participants in the call.",
-        "operationId": "Content_Play",
+        "operationId": "CallMedia_Play",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -465,7 +465,7 @@
         },
         "x-ms-examples": {
           "Plays audio to participants in the call.": {
-            "$ref": "./examples/Content_Play.json"
+            "$ref": "./examples/CallMedia_Play.json"
           }
         }
       }
@@ -477,7 +477,7 @@
         ],
         "summary": "Cancel all media operations in a call.",
         "description": "Cancel all media operations in a call.",
-        "operationId": "Content_CancelAllMediaOperations",
+        "operationId": "CallMedia_CancelAllMediaOperations",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -503,7 +503,7 @@
         },
         "x-ms-examples": {
           "Cancel all media operations in a call.": {
-            "$ref": "./examples/Content_CancelAllMediaOperations.json"
+            "$ref": "./examples/CallMedia_CancelAllMediaOperations.json"
           }
         }
       }
@@ -515,7 +515,7 @@
         ],
         "summary": "Recognize media from call.",
         "description": "Recognize media from call.",
-        "operationId": "Content_Recognize",
+        "operationId": "CallMedia_Recognize",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -550,7 +550,7 @@
         },
         "x-ms-examples": {
           "Recognize media from call.": {
-            "$ref": "./examples/Content_Recognize.json"
+            "$ref": "./examples/CallMedia_Recognize.json"
           }
         }
       }
@@ -562,7 +562,7 @@
         ],
         "summary": "Get participants from a call.",
         "description": "Get participants from a call.",
-        "operationId": "CallConnections_GetParticipants",
+        "operationId": "CallConnection_GetParticipants",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -591,7 +591,7 @@
         },
         "x-ms-examples": {
           "Get participants from a call.": {
-            "$ref": "./examples/CallConnections_GetParticipants.json"
+            "$ref": "./examples/CallConnection_GetParticipants.json"
           }
         }
       }
@@ -603,7 +603,7 @@
         ],
         "summary": "Add participants to the call.",
         "description": "Add participants to the call.",
-        "operationId": "CallConnections_AddParticipant",
+        "operationId": "CallConnection_AddParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -654,7 +654,7 @@
         },
         "x-ms-examples": {
           "Add participants to the call.": {
-            "$ref": "./examples/CallConnections_AddParticipant.json"
+            "$ref": "./examples/CallConnection_AddParticipant.json"
           }
         }
       }
@@ -666,7 +666,7 @@
         ],
         "summary": "Remove participant from the call using identifier.",
         "description": "Remove participant from the call using identifier.",
-        "operationId": "CallConnections_RemoveParticipants",
+        "operationId": "CallConnection_RemoveParticipants",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -717,7 +717,7 @@
         },
         "x-ms-examples": {
           "Remove participant from the call using identifier.": {
-            "$ref": "./examples/CallConnections_RemoveParticipants.json"
+            "$ref": "./examples/CallConnection_RemoveParticipants.json"
           }
         }
       }
@@ -729,7 +729,7 @@
         ],
         "summary": "Get participant from a call.",
         "description": "Get participant from a call.",
-        "operationId": "CallConnections_GetParticipant",
+        "operationId": "CallConnection_GetParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -765,7 +765,7 @@
         },
         "x-ms-examples": {
           "Get participant from a call.": {
-            "$ref": "./examples/CallConnections_GetParticipant.json"
+            "$ref": "./examples/CallConnection_GetParticipant.json"
           }
         }
       }
@@ -773,10 +773,10 @@
     "/calling/recordings": {
       "post": {
         "tags": [
-          "Content_Recording"
+          "Recording"
         ],
         "summary": "Start recording the call.",
-        "operationId": "Content_Recording",
+        "operationId": "CallRecording_StartRecording",
         "parameters": [
           {
             "name": "startCallRecording",
@@ -820,7 +820,7 @@
         },
         "x-ms-examples": {
           "Start recording the call.": {
-            "$ref": "./examples/Content_Recording.json"
+            "$ref": "./examples/CallRecording_StartRecording.json"
           }
         }
       }
@@ -828,10 +828,10 @@
     "/calling/recordings/{recordingId}": {
       "get": {
         "tags": [
-          "Content_Recording"
+          "Recording"
         ],
         "summary": "Get call recording properties.",
-        "operationId": "ServerCalls_GetRecordingProperties",
+        "operationId": "CallRecording_GetRecordingProperties",
         "parameters": [
           {
             "name": "recordingId",
@@ -860,16 +860,16 @@
         },
         "x-ms-examples": {
           "Get call recording properties.": {
-            "$ref": "./examples/ServerCalls_GetRecordingProperties.json"
+            "$ref": "./examples/CallRecording_GetRecordingProperties.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "Content_Recording"
+          "Recording"
         ],
         "summary": "Stop recording the call.",
-        "operationId": "ServerCalls_StopRecording",
+        "operationId": "CallRecording_StopRecording",
         "parameters": [
           {
             "name": "recordingId",
@@ -895,7 +895,7 @@
         },
         "x-ms-examples": {
           "Stop recording the call.": {
-            "$ref": "./examples/ServerCalls_StopRecording.json"
+            "$ref": "./examples/CallRecording_StopRecording.json"
           }
         }
       }
@@ -903,10 +903,10 @@
     "/calling/recordings/{recordingId}:pause": {
       "post": {
         "tags": [
-          "Content_Recording"
+          "Recording"
         ],
         "summary": "Pause recording the call.",
-        "operationId": "ServerCalls_PauseRecording",
+        "operationId": "CallRecording_PauseRecording",
         "parameters": [
           {
             "name": "recordingId",
@@ -932,7 +932,7 @@
         },
         "x-ms-examples": {
           "Pause recording the call.": {
-            "$ref": "./examples/ServerCalls_PauseRecording.json"
+            "$ref": "./examples/CallRecording_PauseRecording.json"
           }
         }
       }
@@ -940,10 +940,10 @@
     "/calling/recordings/{recordingId}:resume": {
       "post": {
         "tags": [
-          "Content_Recording"
+          "Recording"
         ],
         "summary": "Resume recording the call.",
-        "operationId": "ServerCalls_ResumeRecording",
+        "operationId": "CallRecording_ResumeRecording",
         "parameters": [
           {
             "name": "recordingId",
@@ -969,7 +969,7 @@
         },
         "x-ms-examples": {
           "Resume recording the call.": {
-            "$ref": "./examples/ServerCalls_ResumeRecording.json"
+            "$ref": "./examples/CallRecording_ResumeRecording.json"
           }
         }
       }
@@ -2265,7 +2265,7 @@
           "type": "string"
         },
         "recognizedPhrase": {
-          "description": "Phrases are set to the value if choice is selected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
+          "description": "Phrases are set to the value if choice is seletected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
           "type": "string"
         }
       }
@@ -2332,7 +2332,6 @@
       "description": "The endpoint of the Azure Communication resource.",
       "required": true,
       "type": "string",
-      "format": "uri",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     }
@@ -2375,19 +2374,12 @@
     }
   },
   "x-ms-parameterized-host": {
-      "hostTemplate": "{endpoint}",
-      "useSchemePrefix": false,
-      "parameters": [
-          {
-              "name": "endpoint",
-              "description": "The endpoint of the Azure Communication resource.",
-              "required": true,
-              "type": "string",
-              "format": "url",
-              "in": "path",
-              "x-ms-skip-url-encoding": true,
-              "x-ms-parameter-location": "client"
-          }
-      ]
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
   }
 }
