@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "3.0",
+    "version": "4.0",
     "title": "Common types"
   },
   "paths": {},
@@ -14,7 +14,7 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
         },
         "name": {
           "readOnly": true,
@@ -117,7 +117,7 @@
             "read",
             "create"
           ],
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type. E.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
           "pattern": "^[-\\w\\._,\\(\\)]+$"
         },
         "etag": {
@@ -174,7 +174,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the SKU. Ex - P3. It is typically a letter+number code"
+          "description": "The name of the SKU. E.g. P3. It is typically a letter+number code"
         },
         "tier": {
           "$ref": "#/definitions/SkuTier"
@@ -204,12 +204,14 @@
         "principalId": {
           "readOnly": true,
           "type": "string",
-          "description": "The principal ID of resource identity."
+          "format": "uuid",
+          "description": "The principal ID of resource identity. The value must be an UUID."
         },
         "tenantId": {
           "readOnly": true,
           "type": "string",
-          "description": "The tenant ID of resource."
+          "format": "uuid",
+          "description": "The tenant ID of resource. The value must be an UUID."
         },
         "type": {
           "type": "string",
@@ -410,6 +412,7 @@
         },
         "nextLink": {
           "type": "string",
+          "format": "uri",
           "description": "URL to get the next set of operation list results (if there are any).",
           "readOnly": true
         }
@@ -624,8 +627,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription.",
-      "minLength": 1
+      "format": "uuid",
+      "description": "The ID of the target subscription. The value must be an UUID."
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -645,6 +648,36 @@
       "maxLength": 90,
       "x-ms-parameter-location": "method"
     },
+    "ManagementGroupNameParameter": {
+      "name": "managementGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the management group. The name is case insensitive.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope at which the operation is performed.",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "TenantIdParameter": {
+      "name": "tenantId",
+      "in": "path",
+      "description": "The Azure tenant ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
     "OperationIdParameter": {
       "name": "operationId",
       "in": "path",
@@ -659,8 +692,24 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of Azure region.",
+      "description": "The name of the Azure region.",
       "minLength": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "If-Match": {
+      "name": "ifMatch",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "description": "The If-Match header that makes a request conditional.",
+      "x-ms-parameter-location": "method"
+    },
+    "If-None-Match": {
+      "name": "ifNoneMatch",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "description": "The If-None-Match header that makes a request conditional.",
       "x-ms-parameter-location": "method"
     }
   }
