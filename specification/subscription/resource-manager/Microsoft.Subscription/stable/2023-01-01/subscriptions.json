@@ -34,10 +34,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CanceledSubscriptionId"
+          "202": {
+            "description": "Cancel Subscription is in progress",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
             }
           },
           "default": {
@@ -103,10 +111,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EnabledSubscriptionId"
+          "202": {
+            "description": "Enable Subscription is in progress",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
             }
           },
           "default": {
@@ -540,34 +556,12 @@
         }
       }
     },
-    "CanceledSubscriptionId": {
-      "description": "The ID of the canceled subscription",
-      "type": "object",
-      "properties": {
-        "subscriptionId": {
-          "description": "The ID of the canceled subscription",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
     "RenamedSubscriptionId": {
       "description": "The ID of the subscriptions that is being renamed",
       "type": "object",
       "properties": {
         "subscriptionId": {
           "description": "The ID of the subscriptions that is being renamed",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "EnabledSubscriptionId": {
-      "description": "The ID of the subscriptions that is being enabled",
-      "type": "object",
-      "properties": {
-        "subscriptionId": {
-          "description": "The ID of the subscriptions that is being enabled",
           "type": "string",
           "readOnly": true
         }
