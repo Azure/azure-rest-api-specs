@@ -3327,6 +3327,20 @@
             "modelAsString": true
           }
         },
+        "analysisModes": {
+          "type": "string",
+          "description": "Analysis Modes.",
+          "enum": [
+            "NextHop",
+            "NCD",
+            "PortScan",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "Protocol",
+            "modelAsString": true
+          }
+        },
         "protocolConfiguration": {
           "$ref": "#/definitions/ProtocolConfiguration",
           "description": "Configuration of the protocol."
@@ -3353,6 +3367,10 @@
           "format": "int32",
           "minimum": 0,
           "maximum": 65535
+        },
+        "vmssIndex": {
+          "description": "The vmss instance name from which a connectivity check will be performed.",
+          "type": "string"
         }
       }
     },
