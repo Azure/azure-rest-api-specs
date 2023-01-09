@@ -484,6 +484,7 @@
           {
             "in": "body",
             "name": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
             }
@@ -546,14 +547,7 @@
             "name": "body",
             "required": true,
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
-                },
-                {
-                  "$ref": "#/definitions/MockResource"
-                }
-              ]
+              "$ref": "#/definitions/FeaturestoreCreationPropertiesResource"
             }
           }
         ],
@@ -2693,7 +2687,7 @@
           }
         },
         "x-ms-examples": {
-          "Get FeatureStoress by subscription": {
+          "Get FeatureStores by subscription": {
             "$ref": "./examples/Featurestore/listBySubscription.json"
           }
         },
