@@ -594,7 +594,10 @@
             "$ref": "./examples/Featurestore/create.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose": {
@@ -7115,7 +7118,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SharedPrivateLinkResource"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of shared private link resources in this workspace."
         },
         "allowRoleAssignmentsOnResourceGroupLevel": {
           "type": "boolean"
