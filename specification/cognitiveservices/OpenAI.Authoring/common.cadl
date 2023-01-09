@@ -16,7 +16,7 @@ enum TypeDiscriminatorKnownValues {
 }
 
 @knownValues(TypeDiscriminatorKnownValues)
-model TypeDiscriminator is string;
+scalar TypeDiscriminator extends string;
 
 enum ScaleTypeKnownValues {
   Manual: "manual",
@@ -24,7 +24,7 @@ enum ScaleTypeKnownValues {
 }
 
 @knownValues(ScaleTypeKnownValues)
-model ScaleType is string;
+scalar ScaleType extends string;
 
 enum ErrorCodeKnownValues {
   Conflict: "conflict",
@@ -39,14 +39,14 @@ enum ErrorCodeKnownValues {
 }
 
 @knownValues(ErrorCodeKnownValues)
-model ErrorCode is string;
+scalar ErrorCode extends string;
 
 enum InnerErrorCodeKnownValues {
   InvalidPayload: "invalidPayload",
 }
 
 @knownValues(InnerErrorCodeKnownValues)
-model InnerErrorCode is string;
+scalar InnerErrorCode extends string;
 
 enum PurposeKnownValues {
   FineTune: "fine-tune",
@@ -54,7 +54,7 @@ enum PurposeKnownValues {
 }
 
 @knownValues(PurposeKnownValues)
-model Purpose is string;
+scalar Purpose extends string;
 
 enum State {
   NotRunning: "notRunning",
@@ -78,7 +78,7 @@ model CreatedResponse {
   statusCode: 201;
 
   @doc("Location of the newly created item")
-  @header 
+  @header
   @format("uri")
-  "location": string;
+  location: string;
 }
