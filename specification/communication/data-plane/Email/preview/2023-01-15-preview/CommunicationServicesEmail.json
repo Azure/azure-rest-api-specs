@@ -336,51 +336,6 @@
           }
         }
       }
-    },
-    "SendStatusResult": {
-      "description": "Status of an email message that was sent previously.",
-      "type": "object",
-      "required": [
-        "messageId",
-        "status"
-      ],
-      "properties": {
-        "messageId": {
-          "description": "System generated id of an email message sent.",
-          "type": "string",
-          "example": "F9168C5E-CEB2-4faa-B6BF-329BF39FA1E4"
-        },
-        "status": {
-          "$ref": "#/definitions/SendStatus"
-        }
-      }
-    },
-    "SendStatus": {
-      "description": "The type indicating the status of a request.",
-      "enum": [
-        "queued",
-        "outForDelivery",
-        "dropped"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "SendStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "queued",
-            "description": "The message has passed basic validations and has been queued to be processed further."
-          },
-          {
-            "value": "outForDelivery",
-            "description": "The message has been processed and is now out for delivery."
-          },
-          {
-            "value": "dropped",
-            "description": "The message could not be processed and was dropped."
-          }
-        ]
-      }
     }
   },
   "parameters": {
