@@ -89,7 +89,7 @@ List events for the fine-tune job specified by the given fine_tune_id.
 Events are created when the job status changes, e.g. running or
 complete, and when results are uploaded.
 """)
-  @Cadl.Rest.segmentSeparator("/")
+  @Cadl.Rest.actionSeparator("/")
   @get
   ListFineTuneEvents is Azure.Core.ResourceAction<FineTune, 
   { 
@@ -102,6 +102,6 @@ complete, and when results are uploaded.
   @doc("Cancels the processing of the fine-tune job specified by the given fine_tune_id.")
   @post
   @action("cancel")
-  @segmentSeparator("/")
+  @actionSeparator("/")
   CancelFineTune is ResourceAction<FineTune, {}, FineTune>;
 }
