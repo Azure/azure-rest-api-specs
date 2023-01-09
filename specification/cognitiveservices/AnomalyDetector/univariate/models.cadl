@@ -7,7 +7,7 @@ using Azure.Core;
 
 namespace AnomalyDetector.Univariate;
 
-enum ImputeModeKnownValues {
+enum ImputeMode {
   Auto: "auto",
   Previous: "previous",
   Linear: "linear",
@@ -16,10 +16,7 @@ enum ImputeModeKnownValues {
   NotFill: "notFill",
 }
 
-@knownValues(ImputeModeKnownValues)
-model ImputeMode is string;
-
-enum AnomalyDetectorErrorCodesKnownValues {
+enum AnomalyDetectorErrorCodes {
   "InvalidCustomInterval",
   "BadArgument",
   "InvalidGranularity",
@@ -33,9 +30,7 @@ enum AnomalyDetectorErrorCodesKnownValues {
   "InvalidImputeFixedValue",
 }
 
-@knownValues(AnomalyDetectorErrorCodesKnownValues)
-model AnomalyDetectorErrorCodes is string;
-
+@fixed
 enum TimeGranularity {
   Yearly: "yearly",
   Monthly: "monthly",
