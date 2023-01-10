@@ -389,7 +389,12 @@
             }
           },
           "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -456,7 +461,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -511,7 +521,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -686,7 +701,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1204,7 +1224,7 @@
           "description": "Specifies if RSM should try to upgrade this machine"
         },
         "lastAttemptTimestamp": {
-          "type": "timestamp",
+          "type": "string",
           "readOnly": true,
           "description": "Timestamp of last upgrade attempt"
         },
@@ -1216,6 +1236,10 @@
             "Success",
             "Failed"
           ],
+          "x-ms-enum": {
+            "name": "LastAttemptStatusEnum",
+            "modelAsString": true
+          },
           "description": "Specifies the status of Agent Upgrade."
         },
         "lastAttemptMessage": {
@@ -1744,9 +1768,9 @@
       "properties": {
         "networkInterfaces": {
           "type": "array",
-            "items": {
-              "$ref": "#/definitions/NetworkInterface"
-            },
+          "items": {
+            "$ref": "#/definitions/NetworkInterface"
+          },
           "description": "The list of network interfaces."
         }
       },
