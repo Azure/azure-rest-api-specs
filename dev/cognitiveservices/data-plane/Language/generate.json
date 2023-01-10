@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft Cognitive Language Generation Service",
     "description": "The language generation service API is a suite of natural language generation (NLG) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to generate summaries, marketing emails, conversation responses, questions and answers. Further documentation can be found in <a href=\"https://docs.microsoft.com/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/azure/cognitive-services/language-service/overview</a>.",
-    "version": "2023-04-15-private-preview-for-2023-10-01-public-preview"
+    "version": "2023-04-15-preview"
   },
   "security": [
     {
@@ -57,21 +57,30 @@
             }
           }
         },
+        "responses":{
+
+        },
         "x-ms-examples": {
         }
       }
-    }
-  },
+    },
   "components": {
     "schemas": {
-
       "SummarizationTask":{
         "type": "object",
-        "description": "The base class of a summarization task.",
-        "discriminator": "kind",
+        "description": "The summarization task.",
+        "discriminator": {
+          "propertyName": "kind"
+        },
         "properties": {
           "kind": {
-            "$ref": "#/components/SummarizationTaskKind"
+            "$ref": "#/components/schemas/SummarizationTaskKind"
+          },
+          "stream":{
+            "description": "Whether to stream back partial progress. If set, sentences will be sent as data-only server-sent events as they become available.",
+            "type": "boolean",
+            "nullable": true,
+            "default": false
           },
           "input":{
             "oneOf":[
@@ -83,13 +92,16 @@
               }
             ]
           },
-          "parameters":{
+          "allOf":{
             "oneOf":[
               {
                 "$ref":"analyzetext.json#/definitions/ExtractiveSummarizationTaskParameters"
               },
               {
-                "$ref":"analyzetext.json#/definitions/MultiLanguageInput"
+                "$ref":"analyzetext.json#/definitions/AbstractiveSummarizationTaskParameters"
+              },
+              {
+                "$ref":"analyzeconversations.json#/definitions/ConversationSummarizationTaskParameters"
               }
             ]
           }
