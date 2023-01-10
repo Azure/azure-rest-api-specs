@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-100000000000",
+    "api-version": "2023-01-01",
+    "requestBody": {
+      "properties": {
+        "minimumTlsVersion": "Tls12"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "contosoaccounttls12",
+        "id": "/subscriptions/00000000-0000-0000-0000-100000000000/resourceGroups/contosorg/providers/Microsoft.Media/mediaservices/contosoaccounttls12",
+        "type": "Microsoft.Media/mediaservices",
+        "location": "brazilus",
+        "properties": {
+          "mediaServiceId": "$ignored$",
+          "storageAccounts": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-100000000000/resourceGroups/contosorg/providers/Microsoft.Storage/storageAccounts/contosoprimarystore",
+              "type": "Primary"
+            }
+          ],
+          "storageAuthentication": "System",
+          "keyDelivery": {
+            "accessControl": {
+              "defaultAction": "Allow",
+              "ipAllowList": []
+            }
+          },
+          "publicNetworkAccess": "Enabled",
+          "provisioningState": "InProgress",
+          "privateEndpointConnections": [],
+          "minimumTlsVersion": "Tls12"
+        },
+        "systemData": {
+          "createdBy": "abc@constoso.com",
+          "createdByType": "User",
+          "createdAt": "2022-11-28T12:24:20.589735-08:00",
+          "lastModifiedBy": "abc@constoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2022-11-28T12:24:20.5897419-08:00"
+        },
+        "identity": {
+          "type": "SystemAssigned,UserAssigned"
+        }
+      }
+    }
+  }
+}
