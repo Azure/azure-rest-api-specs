@@ -2653,44 +2653,6 @@
         "operationName"
       ]
     },
-    "SAPDiskConfiguration": {
-      "description": "The SAP Disk Configuration.",
-      "type": "object",
-      "properties": {
-        "volume": {
-          "type": "string",
-          "description": "The volume name."
-        },
-        "diskType": {
-          "type": "string",
-          "description": "The disk type."
-        },
-        "diskCount": {
-          "description": "The disk count.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "diskSizeGB": {
-          "description": "The disk size in GB.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "diskIopsReadWrite": {
-          "description": "The disk Iops.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "diskMBpsReadWrite": {
-          "description": "The disk provisioned throughput in MBps.",
-          "type": "integer",
-          "format": "int64"
-        },
-        "diskStorageType": {
-          "description": "The disk storage type",
-          "type": "string"
-        }
-      }
-    },
     "LastOperationDetailsResult": {
       "description": "The result for last operation details.",
       "type": "object",
@@ -2730,17 +2692,72 @@
         }
       }
     },
+    "DiskDetails": {
+      "description": "The supported disk size details for a disk type.",
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/DiskSku"
+        },
+        "sizeGB": {
+          "description": "The disk size in GB.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "minimumSupportedDiskCount": {
+          "description": "The minimum supported disk count.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "maximumSupportedDiskCount": {
+          "description": "The maximum supported disk count.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "iopsReadWrite": {
+          "description": "The disk Iops.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "mbpsReadWrite": {
+          "description": "The disk provisioned throughput in MBps.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "diskTier": {
+          "description": "The disk tier, e.g. P10, E10.",
+          "type": "string"
+        }
+      }
+    },
+    "SAPDiskConfiguration": {
+      "description": "The SAP Disk Configuration contains 'recommended disk' details and list of supported disks detail for a volume type.",
+      "type": "object",
+      "properties": {
+        "recommendedConfiguration": {
+          "$ref": "#/definitions/DiskVolumeConfiguration",
+          "description": "The recommended disk details for a given VM Sku."
+        },
+        "supportedConfigurations": {
+          "description": "The list of supported disks for a given VM Sku.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiskDetails"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "SAPDiskConfigurationsResult": {
       "description": "The list of disk configuration for vmSku which are part of SAP deployment.",
       "type": "object",
       "properties": {
-        "diskConfigurations": {
-          "description": "Gets the list of Disk Configurations.",
-          "type": "array",
-          "items": {
+        "volumeConfigurations": {
+          "description": "The disk configuration for the db volume. For HANA, Required volumes are: ['hana/data', 'hana/log', hana/shared', 'usr/sap', 'os'], Optional volume : ['backup'].",
+          "type": "object",
+          "additionalProperties": {
             "$ref": "#/definitions/SAPDiskConfiguration"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
