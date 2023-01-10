@@ -978,6 +978,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1022,6 +1028,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1069,6 +1081,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1114,6 +1132,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1128,6 +1152,11 @@
         "produces": [
           "application/octet-stream"
         ],
+        "x-ms-examples": {
+          "Entity_GetSampleBusinessMetadataTemplate": {
+            "$ref": "./examples/Entity_GetSampleBusinessMetadataTemplate.json"
+          }
+        },
         "parameters": [],
         "responses": {
           "200": {
@@ -1137,8 +1166,11 @@
             },
             "description": "Template File"
           },
-          "400": {
-            "description": "If the provided fileType is not supported"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1156,6 +1188,11 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-examples": {
+          "Entity_ImportBusinessMetadata": {
+            "$ref": "./examples/Entity_ImportBusinessMetadata.json"
+          }
+        },
         "parameters": [
           {
             "name": "uploadedInputStream",
@@ -1170,109 +1207,13 @@
               "$ref": "#/definitions/BulkImportResponse",
               "description": "If Business Metadata creation was successful"
             },
-            "examples": {
-              "application/json": {
-                "failedImportInfoList": [
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "SUCCESS",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  },
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "FAILED",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  }
-                ],
-                "successImportInfoList": [
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "SUCCESS",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  },
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "FAILED",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  }
-                ]
-              }
-            },
             "description": "If Business Metadata creation was successful"
           },
-          "400": {
-            "examples": {
-              "application/json": {
-                "failedImportInfoList": [
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "SUCCESS",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  },
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "FAILED",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  }
-                ],
-                "successImportInfoList": [
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "FAILED",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  },
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "SUCCESS",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  }
-                ]
-              }
-            },
-            "description": "If Business Metadata definition has invalid or missing information"
-          },
-          "409": {
-            "examples": {
-              "application/json": {
-                "failedImportInfoList": [
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "FAILED",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  },
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "SUCCESS",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  }
-                ],
-                "successImportInfoList": [
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "FAILED",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  },
-                  {
-                    "childObjectName": "...",
-                    "importStatus": "FAILED",
-                    "parentObjectName": "...",
-                    "remarks": "..."
-                  }
-                ]
-              }
-            },
-            "description": "If Business Metadata already exists (duplicate qualifiedName)"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1313,6 +1254,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1351,6 +1298,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1389,6 +1342,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -1403,6 +1362,11 @@
         "consumes": [
           "application/json"
         ],
+        "x-ms-examples": {
+          "Entity_DeleteLabelsByUniqueAttribute": {
+            "$ref": "./examples/Entity_DeleteLabelsByUniqueAttribute.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/typeName"
@@ -1431,6 +1395,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1443,6 +1413,11 @@
         "consumes": [
           "application/json"
         ],
+        "x-ms-examples": {
+          "Entity_SetLabelsByUniqueAttribute": {
+            "$ref": "./examples/Entity_SetLabelsByUniqueAttribute.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/typeName"
@@ -1471,6 +1446,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -1483,6 +1464,11 @@
         "consumes": [
           "application/json"
         ],
+        "x-ms-examples": {
+          "Entity_AddLabelsByUniqueAttribute": {
+            "$ref": "./examples/Entity_AddLabelsByUniqueAttribute.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/typeName"
@@ -1511,6 +1497,12 @@
         "responses": {
           "204": {
             "description": "Success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
