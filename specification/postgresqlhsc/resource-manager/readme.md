@@ -39,6 +39,31 @@ These settings apply only when `--tag=package-2022-11-08` is specified on the co
 input-file:
   - Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json
 ```
+
+### Tag: package-2020-10-05-privatepreview
+
+These settings apply only when `--tag=package-2020-10-05-privatepreview` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-10-05-privatepreview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2020-10-05-privatepreview/postgresqlhsc.json
+```
+
+## Suppression
+``` yaml
+directive:
+- suppress: PathResourceProviderNamePascalCase
+    from: postgresqlhsc.json
+    reason: Service provider name Microsoft.DBforPostgreSQL directly violates this rule.
+- suppress: ConsistentPatchProperties
+    from: postgresqlhsc.json
+    reason: we only support admin password inside request body and don't return it
+- suppress: CreateOperationAsyncResponseValidation
+    from: postgresqlhsc.json
+    reason: Our control plane returns 202 for most of the put async operation other than cluster creation.
+- suppress: LongRunningResponseStatusCode
+    from: postgresqlhsc.json
+    reason: Our control plane returns 202 for most of the put async operation other than cluster creation.
 ---
 
 # Code Generation
