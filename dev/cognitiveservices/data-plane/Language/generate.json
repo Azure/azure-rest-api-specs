@@ -25,16 +25,34 @@
     ]
   },
   "paths": {
-    "/generate/response":{
-    },
-    "/generate/question":{
-    },
-    "/generate/answer":{
-    },
-    "/generate/marketing-email":{
-    },
+    "/generate/response": {},
+    "/generate/question": {},
+    "/generate/answer": {},
+    "/generate/marketing-email": {},
     "/generate/summary": {
       "post": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf":[
+                    {
+                      "$ref":"analyzetext.json#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
+                    },
+                    {
+                      "$ref":"analyzetext.json#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
+                    },
+                    {
+                      "$ref":"analyzeconversations.json#/definitions/ConversationsSummaryResult"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
         "summary": "Summarize text or conversation.",
         "description": "Specify a single task and a single text or conversation to be executed immediately. The result is returned in a streaming way.",
         "operationId": "Summarize",
@@ -46,27 +64,23 @@
             "$ref": "common.json#/parameters/ShowStats"
           }
         ],
-        "requestBody":{
+        "requestBody": {
           "required": true,
           "content": {
-            "application/json":{
-              "schema":{
+            "application/json": {
+              "schema": {
                 "$ref": "#/components/schemas/SummarizationTask"
-                }
               }
             }
           }
-        },
-        "responses":{
-
-        },
-        "x-ms-examples": {
         }
-      }
-    },
+      },
+      "x-ms-examples": {}
+    }
+  },
   "components": {
     "schemas": {
-      "SummarizationTask":{
+      "SummarizationTask": {
         "type": "object",
         "description": "The summarization task.",
         "discriminator": {
@@ -76,32 +90,32 @@
           "kind": {
             "$ref": "#/components/schemas/SummarizationTaskKind"
           },
-          "stream":{
+          "stream": {
             "description": "Whether to stream back partial progress. If set, sentences will be sent as data-only server-sent events as they become available.",
             "type": "boolean",
             "nullable": true,
             "default": false
           },
-          "input":{
-            "oneOf":[
+          "input": {
+            "oneOf": [
               {
-                "$ref":"analyzetext.json#/definitions/MultiLanguageInput"
+                "$ref": "analyzetext.json#/definitions/MultiLanguageInput"
               },
               {
-                "$ref":"analyzeconversations.json#/definitions/Conversation"
+                "$ref": "analyzeconversations.json#/definitions/Conversation"
               }
             ]
           },
-          "allOf":{
-            "oneOf":[
+          "allOf": {
+            "oneOf": [
               {
-                "$ref":"analyzetext.json#/definitions/ExtractiveSummarizationTaskParameters"
+                "$ref": "analyzetext.json#/definitions/ExtractiveSummarizationTaskParameters"
               },
               {
-                "$ref":"analyzetext.json#/definitions/AbstractiveSummarizationTaskParameters"
+                "$ref": "analyzetext.json#/definitions/AbstractiveSummarizationTaskParameters"
               },
               {
-                "$ref":"analyzeconversations.json#/definitions/ConversationSummarizationTaskParameters"
+                "$ref": "analyzeconversations.json#/definitions/ConversationSummarizationTaskParameters"
               }
             ]
           }
@@ -120,9 +134,7 @@
           "modelAsString": true
         }
       },
-      "SummarizationTaskResult":{
-
-      }
+      "SummarizationTaskResult": {}
     }
   }
 }
