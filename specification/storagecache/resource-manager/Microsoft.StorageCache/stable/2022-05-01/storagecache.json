@@ -541,6 +541,19 @@
               "$ref": "#/definitions/Cache"
             }
           },
+          "202": {
+            "description": "Cache update has been initiated.  Poll the Cache's provisioningState property to monitor update progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -555,6 +568,10 @@
           "Caches_Update_ldap_only": {
             "$ref": "./examples/Caches_Update_ldap_only.json"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "tags": [
           "Caches"
