@@ -1876,7 +1876,7 @@
         "nodeCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Worker node count of the cluster"
+          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
@@ -2018,7 +2018,7 @@
         "nodeCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Worker node count of the cluster"
+          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
@@ -2074,6 +2074,10 @@
       "description": "Properties of the cluster response body.",
       "type": "object",
       "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of the servers in the cluster."
+        },
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of the cluster",
@@ -2805,10 +2809,6 @@
       "description": "The properties used to create a private endpoint connection",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Private endpoint which the connection belongs to."
-        },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "Connection state of the private endpoint connection."
