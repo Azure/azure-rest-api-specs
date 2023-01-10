@@ -53,17 +53,19 @@ input-file:
 ``` yaml
 directive:
 - suppress: PathResourceProviderNamePascalCase
-    from: postgresqlhsc.json
-    reason: Service provider name Microsoft.DBforPostgreSQL directly violates this rule.
+  from: postgresqlhsc.json
+  reason: Service provider name Microsoft.DBforPostgreSQL directly violates this rule.
 - suppress: ConsistentPatchProperties
-    from: postgresqlhsc.json
-    reason: we only support admin password inside request body and don't return it
+  from: postgresqlhsc.json
+  reason: we only support admin password inside request body and don't return it
 - suppress: CreateOperationAsyncResponseValidation
-    from: postgresqlhsc.json
-    reason: Our control plane returns 202 for most of the put async operation other than cluster creation.
+  from: postgresqlhsc.json
+  reason: Our control plane returns 202 for most of the put async operation other than cluster creation.
 - suppress: LongRunningResponseStatusCode
-    from: postgresqlhsc.json
-    reason: Our control plane returns 202 for most of the put async operation other than cluster creation.
+  from: postgresqlhsc.json
+  reason: Our control plane returns 202 for most of the put async operation other than cluster creation.
+```
+
 ---
 
 # Code Generation
