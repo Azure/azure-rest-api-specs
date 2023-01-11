@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-10-01",
+    "version": "2023-01-01",
     "title": "SubscriptionClient",
     "description": "Subscription client provides an interface to create and manage Azure subscriptions programmatically."
   },
@@ -34,11 +34,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CanceledSubscriptionId"
-            }
+          "202": {
+            "description": "Cancel Subscription is in progress",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
           },
           "default": {
             "description": "Describes the error if the operation is not successful.",
@@ -67,10 +74,18 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EnabledSubscriptionId"
+          "202": {
+            "description": "Enable Subscription is in progress",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
             }
           },
           "default": {
@@ -115,28 +130,6 @@
           "type": "string"
         }
       }
-    },
-    "CanceledSubscriptionId": {
-      "description": "The ID of the canceled subscription",
-      "type": "object",
-      "properties": {
-        "subscriptionId": {
-          "description": "The ID of the canceled subscription",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "EnabledSubscriptionId": {
-      "description": "The ID of the subscriptions that is being enabled",
-      "type": "object",
-      "properties": {
-        "subscriptionId": {
-          "description": "The ID of the subscriptions that is being enabled",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
@@ -145,7 +138,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. Current version is 2021-10-01"
+      "description": "Version of the API to be used with the client request. Current version is 2023-01-01"
     },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
