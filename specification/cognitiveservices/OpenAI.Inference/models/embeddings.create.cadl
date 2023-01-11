@@ -1,0 +1,39 @@
+import "@cadl-lang/rest";
+
+using Cadl.Rest;
+using Cadl.Http;
+
+namespace Azure.OpenAI.Embeddings;
+
+alias EmbeddingsRequest = {
+    @doc("The ID of the end-user, for use in tracking and rate-limiting.")
+    user?: string;
+
+    @doc("input type of embedding search to use")
+    input_type?: string;
+
+    @doc("ID of the model to use")
+    "model"?: string;
+
+    @doc("""
+    An input to embed, encoded as a string, a list of strings, or a list of token
+    lists
+    """)
+    input: string | string[] | integer[] | integer[][];
+};
+
+model Embeddings {
+    object: "list",
+    data: Embedding[],
+}
+
+model Usage {
+    prompt_tokens: int32,
+    total_tokens: int32
+}
+
+model Embedding {
+    object: "embedding",
+    embedding: float32[];
+    index: int32;
+}
