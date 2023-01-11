@@ -4,7 +4,7 @@ These settings apply only when `--tag=package-encoding-2022-07` is specified on 
 
 ``` yaml $(tag) == 'package-encoding-2022-07'
 test-resources:
-- Microsoft.Media/Encoding/stable/2022-07-01/scenarios/basic.yaml
+- Microsoft.Media/Accounts/stable/2021-11-01/scenarios/basic.yaml
 - Microsoft.Media/Metadata/stable/2022-08-01/scenarios/basic.yaml
 - Microsoft.Media/Encoding/stable/2022-07-01/scenarios/basic.yaml
 - Microsoft.Media/Streaming/stable/2022-08-01/scenarios/basic.yaml
