@@ -564,7 +564,17 @@
         },
         "tags": {
           "description": "Key-value pairs that allow grouping/filtering individual tests.",
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "key": {
+              "description": "Key that allow grouping/filtering individual tests.",
+              "type": "string"
+            },
+            "value": {
+              "description": "Value of the key that allow grouping/filtering individual tests.",
+              "type": "string"
+            }
+          }
         },
         "title": {
           "description": "User-facing name; one or more sentences indicating the direct issue.",
@@ -611,6 +621,10 @@
         },
         "targetResourceName": {
           "description": "The name of the affected resource.",
+          "type": "string"
+        },
+        "targetResourceType": {
+          "description": "The type of resource being referred to (well-known set of nouns in infrastructure, aligning with Monitoring).",
           "type": "string"
         },
         "timestamp": {
