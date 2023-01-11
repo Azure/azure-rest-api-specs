@@ -24,7 +24,8 @@
                 "dbUsername": "user",
                 "dbPasswordUri": "",
                 "sslHostNameInCertificate": "xyz.domain.com",
-                "dbSslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename"
+                "sslPreference": "ServerCertificate",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename"
               }
             }
           },
@@ -46,7 +47,8 @@
                 "sapPasswordUri": "",
                 "sapPortNumber": "1234",
                 "sapClientId": "111",
-                "sapSslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename"
+                "sslPreference": "ServerCertificate",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename"
               }
             }
           },
@@ -61,7 +63,9 @@
                 "dbUsername": "user",
                 "dbPort": "5912",
                 "hostname": "hostname",
-                "sapSid": "sid"
+                "sapSid": "sid",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslPreference": "ServerCertificate"
               }
             }
           },
@@ -73,7 +77,9 @@
               "provisioningState": "Succeeded",
               "providerSettings": {
                 "providerType": "PrometheusOS",
-                "prometheusUrl": "http://192.168.0.0:9090/metrics"
+                "prometheusUrl": "http://192.168.0.0:9090/metrics",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslPreference": "ServerCertificate"
               }
             }
           },
@@ -88,7 +94,28 @@
                 "prometheusUrl": "http://192.168.0.0:9090/metrics",
                 "hostname": "hostname",
                 "sid": "sid",
-                "clusterName": "clusterName"
+                "clusterName": "clusterName",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslPreference": "ServerCertificate"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Workloads/workloads/mySapMonitor/providerInstances/myProviderInstance1",
+            "name": "myProviderInstance3",
+            "type": "Microsoft.Workloads/workloads/providerInstances",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "providerSettings": {
+                "providerType": "Db2",
+                "sapSid": "SID",
+                "hostname": "vmname.azure.com",
+                "dbUsername": "Db2OPA",
+                "dbName": "OPA",
+                "dbPort": "5912",
+                "dbPasswordUri": "",
+                "sslCertificateUri": "https://storageaccount.blob.core.windows.net/containername/filename",
+                "sslPreference": "ServerCertificate"
               }
             }
           }

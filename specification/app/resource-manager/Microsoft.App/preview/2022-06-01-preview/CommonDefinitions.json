@@ -317,7 +317,6 @@
           "x-ms-secret": true
         },
         "certificatePassword": {
-          "format": "byte",
           "description": "Certificate password",
           "type": "string",
           "x-ms-secret": true
@@ -485,7 +484,8 @@
         "maxReplicas": {
           "format": "int32",
           "description": "Optional. Maximum number of container replicas. Defaults to 10 if not set.",
-          "type": "integer"
+          "type": "integer",
+          "default": 10
         },
         "rules": {
           "description": "Scaling rules.",
@@ -758,7 +758,7 @@
           "description": "Collection of secrets used by a Dapr component",
           "type": "array",
           "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/Secret"
+            "$ref": "./CommonDefinitions.json#/definitions/DaprSecret"
           },
           "x-ms-identifiers": [
             "name"

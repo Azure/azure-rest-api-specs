@@ -172,6 +172,19 @@
                 "modelAsString": true
               }
             },
+            "publicNetworkAccess": {
+              "type": "string",
+              "description": "This determines if traffic is allowed over public network. By default it is enabled",
+              "enum": [
+                "Disabled",
+                "Enabled",
+                "SecuredByPerimeter"
+              ],
+              "x-ms-enum": {
+                "name": "PublicNetworkAccess",
+                "modelAsString": true
+              }
+            },
             "ipRules": {
               "type": "array",
               "items": {
