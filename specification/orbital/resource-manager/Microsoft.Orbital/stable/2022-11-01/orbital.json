@@ -1268,6 +1268,9 @@
     },
     "Spacecraft": {
       "type": "object",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1278,11 +1281,6 @@
               "$ref": "#/definitions/SpacecraftsProperties"
             }
           ]
-        },
-        "etag": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -1294,6 +1292,9 @@
     },
     "ResourceReference": {
       "type": "object",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "id": {
           "type": "string",
@@ -1670,6 +1671,7 @@
             "$ref": "#/definitions/ContactProfileLinkChannel"
           },
           "x-ms-identifiers": [
+            "name",
             "centerFrequencyMHz",
             "bandwidthMHz",
             "/endPoint/endPointName"
@@ -1681,6 +1683,9 @@
     },
     "ContactProfile": {
       "type": "object",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1690,11 +1695,6 @@
             }
           ],
           "description": "Properties of the contact profile resource."
-        },
-        "etag": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -1813,15 +1813,13 @@
     },
     "Contact": {
       "type": "object",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ContactsProperties"
-        },
-        "etag": {
-          "readOnly": true,
-          "type": "string",
-          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -1938,6 +1936,9 @@
     "AvailableGroundStation": {
       "type": "object",
       "x-ms-client-flatten": true,
+      "required": [
+        "properties"
+      ],
       "properties": {
         "id": {
           "readOnly": true,
@@ -2121,6 +2122,24 @@
           "minimum": 0,
           "maximum": 100,
           "description": "Percentage completed.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "The Azure Resource ID."
+              }
+            }
+          },
+          "description": "A list of Azure Resource IDs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
           "readOnly": true
         },
         "properties": {
