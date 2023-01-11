@@ -1,0 +1,73 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  accountName:
+    type: string
+    prefix: accountn
+  assetName:
+    type: string
+    prefix: assetnam
+  liveEventName:
+    type: string
+    prefix: liveeven
+  operationId:
+    type: string
+    prefix: operatio
+  transformName:
+    type: string
+    prefix: transfor
+  streamingEndpointName:
+    type: string
+    prefix: streamin
+  filterName:
+    type: string
+    prefix: filterna
+  trackName:
+    type: string
+    prefix: tracknam
+  contentKeyPolicyName:
+    type: string
+    prefix: contentk
+  jobName:
+    type: string
+    prefix: jobname
+  streamingLocatorName:
+    type: string
+    prefix: streamin
+  name:
+    type: string
+    prefix: name
+  liveOutputName:
+    type: string
+    prefix: liveoutp
+  locationName:
+    type: string
+    prefix: location
+  streamingPolicyName:
+    type: string
+    prefix: streamin
+scenarios:
+  - scenario: GeneratedScenario
+    steps:
+      - operationId: Transforms_CreateOrUpdate
+        exampleFile: ../examples/transforms-create.json
+      - operationId: Transforms_List
+        exampleFile: ../examples/transforms-list-all.json
+      - operationId: Transforms_Get
+        exampleFile: ../examples/transforms-get-by-name.json
+      - operationId: Transforms_Update
+        exampleFile: ../examples/transforms-update.json
+      - operationId: Jobs_Create
+        exampleFile: ../examples/jobs-create.json
+      - operationId: Jobs_List
+        exampleFile: ../examples/jobs-list-all.json
+      - operationId: Jobs_Get
+        exampleFile: ../examples/jobs-get-by-name.json
+      - operationId: Jobs_Update
+        exampleFile: ../examples/jobs-update.json
+      - operationId: Jobs_CancelJob
+        exampleFile: ../examples/jobs-cancel.json
+      - operationId: Jobs_Delete
+        exampleFile: ../examples/jobs-delete.json
+      - operationId: Transforms_Delete
+        exampleFile: ../examples/transforms-delete.json
