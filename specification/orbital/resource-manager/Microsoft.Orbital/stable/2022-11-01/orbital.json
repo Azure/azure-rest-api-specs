@@ -1671,10 +1671,7 @@
             "$ref": "#/definitions/ContactProfileLinkChannel"
           },
           "x-ms-identifiers": [
-            "name",
-            "centerFrequencyMHz",
-            "bandwidthMHz",
-            "/endPoint/endPointName"
+            "name"
           ],
           "description": "Contact Profile Link Channel."
         }
@@ -1813,9 +1810,6 @@
     },
     "Contact": {
       "type": "object",
-      "required": [
-        "properties"
-      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -2126,16 +2120,11 @@
         },
         "value": {
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "description": "The Azure Resource ID."
-              }
-            }
-          },
-          "description": "A list of Azure Resource IDs."
+            "properties": {}
+          }
         },
         "nextLink": {
           "type": "string",
