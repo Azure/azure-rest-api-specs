@@ -84,6 +84,30 @@
         "modelAsString": true
       }
     },
+    "CallingCommunicationIdentifierModel": {
+      "description": "Calling communication identifier model",
+      "allof": [
+        {
+          "$ref": "#/definitions/CommunicationIdentifierModel"
+        }
+      ],
+      "properties": {
+        "unknownIdentifiers": {
+          "$ref": "#/definitions/UnknownIdentifierModel",
+          "description": "The unknown identifier."
+        }
+      }
+    },
+    "UnknownIdentifierModel": {
+      "description": "Unknown identifier identifier model",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description":  "The unkown id."
+        }
+      }
+    },
     "CommunicationIdentifierModel": {
       "description": "Identifies a participant in Azure Communication services. A participant is, for example, a phone number or an Azure communication user. This model is polymorphic: Apart from kind and rawId, at most one further property may be set which must match the kind enum value.",
       "type": "object",
