@@ -12,32 +12,11 @@
       "type": "object",
       "properties": {
         "serialNumber": {
-          "description": "Serial Number of the device associated with the event, separated by comma delimiter in case of multiple",
+          "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated.",
           "type": "string"
         },
         "stageDetails": {
-          "description": "Metadata related to the stage detail",
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Name of the current Stage",
-              "enum": [
-                "CopyStarted",
-                "CopyCompleted",
-                "OrderCompleted"
-              ],
-              "x-ms-enum": {
-                "name": "name",
-                "modelAsString": true
-              }
-            },
-            "time": {
-              "description": "The time at which the stage happened.",
-              "format": "date-time",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/StageDetail"
         }
       }
     },
@@ -46,32 +25,11 @@
       "type": "object",
       "properties": {
         "serialNumber": {
-          "description": "Serial Number of the device associated with the event, separated by comma delimiter in case of multiple",
+          "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated.",
           "type": "string"
         },
         "stageDetails": {
-          "description": "Metadata related to the stage detail",
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Name of the current Stage",
-              "enum": [
-                "CopyStarted",
-                "CopyCompleted",
-                "OrderCompleted"
-              ],
-              "x-ms-enum": {
-                "name": "name",
-                "modelAsString": true
-              }
-            },
-            "time": {
-              "description": "The time at which the stage happened.",
-              "format": "date-time",
-              "type": "string"
-            }
-          }
+          "$ref": "#/definitions/StageDetail"
         }
       }
     },
@@ -80,32 +38,48 @@
       "type": "object",
       "properties": {
         "serialNumber": {
-          "description": "Serial Number of the device associated with the event, separated by comma delimiter in case of multiple",
+          "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated.",
           "type": "string"
         },
         "stageDetails": {
-          "description": "Metadata related to the stage detail",
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Name of the current Stage",
-              "enum": [
-                "CopyStarted",
-                "CopyCompleted",
-                "OrderCompleted"
-              ],
-              "x-ms-enum": {
-                "name": "name",
-                "modelAsString": true
+          "$ref": "#/definitions/StageDetail"
+        }
+      }
+    },
+    "StageDetail": {
+      "description": "Metadata related to the stage detail",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the current Stage",
+          "enum": [
+            "CopyStarted",
+            "CopyCompleted",
+            "OrderCompleted"
+          ],
+          "x-ms-enum": {
+            "name": "DataBoxStage",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "CopyStarted",
+                "description": "Copy has started"
+              },
+              {
+                "value": "CopyCompleted",
+                "description": "Copy has completed"
+              },
+              {
+                "value": "OrderCompleted",
+                "description": "Order has been completed"
               }
-            },
-            "time": {
-              "description": "The time at which the stage happened.",
-              "format": "date-time",
-              "type": "string"
-            }
+            ]
           }
+        },
+        "time": {
+          "description": "The time at which the stage happened.",
+          "format": "date-time",
+          "type": "string"
         }
       }
     }
