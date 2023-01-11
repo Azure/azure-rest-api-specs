@@ -35,9 +35,6 @@
             "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
-          },
-          {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           }
         ],
@@ -145,7 +142,11 @@
               "properties": {
                 "manufacturerId": {
                   "type": "string",
-                  "description": "The ID of the widget's manufacturer."
+                  "description": "The ID of the manufacturer."
+                },
+                "sharedModel": {
+                  "$ref": "#/definitions/FakedSharedModel",
+                  "description": "The faked shared model."
                 }
               },
               "description": "The template for adding optional properties.",
@@ -173,7 +174,11 @@
                 },
                 "manufacturerId": {
                   "type": "string",
-                  "description": "The ID of the widget's manufacturer."
+                  "description": "The ID of the manufacturer."
+                },
+                "sharedModel": {
+                  "$ref": "#/definitions/FakedSharedModel",
+                  "description": "The faked shared model."
                 }
               },
               "required": [
@@ -202,7 +207,11 @@
                 },
                 "manufacturerId": {
                   "type": "string",
-                  "description": "The ID of the widget's manufacturer."
+                  "description": "The ID of the manufacturer."
+                },
+                "sharedModel": {
+                  "$ref": "#/definitions/FakedSharedModel",
+                  "description": "The faked shared model."
                 }
               },
               "description": "A  resource was successfully created.",
@@ -444,6 +453,25 @@
         "modelAsString": true
       }
     },
+    "FakedSharedModel": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "The tag."
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created date."
+        }
+      },
+      "description": "Faked shared model",
+      "required": [
+        "tag",
+        "createdDate"
+      ]
+    },
     "Versions": {
       "type": "string",
       "enum": [
@@ -470,7 +498,11 @@
         },
         "manufacturerId": {
           "type": "string",
-          "description": "The ID of the widget's manufacturer."
+          "description": "The ID of the manufacturer."
+        },
+        "sharedModel": {
+          "$ref": "#/definitions/FakedSharedModel",
+          "description": "The faked shared model."
         }
       },
       "description": "A widget.",
@@ -498,17 +530,6 @@
       "description": "The maximum number of result items per page.",
       "type": "integer",
       "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "Azure.Core.SelectQueryParameter": {
-      "name": "select",
-      "in": "query",
-      "required": false,
-      "description": "Select the specified fields to be included in the response.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
       "x-ms-parameter-location": "method"
     },
     "Azure.Core.SkipQueryParameter": {
