@@ -220,7 +220,7 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "RevGCResultTypes": {
+    "ReverseGeocodingResultTypes": {
       "name": "resultTypes",
       "in": "query",
       "description": "Specify entity types that you want in the response. Only the types you specify will be returned. If the point cannot be mapped to the entity types you specify, no location information is returned in the response.\nDefault value is all possible entities.\nA comma separated list of entity types selected from the following options.\n\n- Address\n- Neighborhood\n- PopulatedPlace\n- Postcode1\n- AdminDivision1\n- AdminDivision2\n- CountryRegion\n\nThese entity types are ordered from the most specific entity to the least specific entity. When entities of more than one entity type are found, only the most specific entity is returned. For example, if you specify Address and AdminDistrict1 as entity types and entities were found for both types, only the Address entity information is returned in the response.",
@@ -238,7 +238,7 @@
           "CountryRegion"
         ],
         "x-ms-enum": {
-          "name": "RevGCResultTypeEnum",
+          "name": "ReverseGeocodingResultTypeEnum",
           "modelAsString": true,
           "values": [
             {
@@ -575,7 +575,7 @@
             "x-ms-parameter-location": "method"
           },
           {
-            "$ref": "#/parameters/RevGCResultTypes"
+            "$ref": "#/parameters/ReverseGeocodingResultTypes"
           }
         ],
         "responses": {
