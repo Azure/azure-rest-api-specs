@@ -389,7 +389,12 @@
             }
           },
           "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -403,10 +408,7 @@
             "$ref": "./examples/PUTExtension.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -459,7 +461,12 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -473,10 +480,7 @@
             "$ref": "./examples/UpdateExtension.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -517,7 +521,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -530,9 +539,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "Delete a Machine Extension": {
             "$ref": "./examples/DELETEExtension.json"
@@ -695,7 +701,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -709,10 +720,7 @@
             "$ref": "./examples/Extensions_Upgrade.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HybridCompute/locations/{location}/publishers/{publisher}/extensionTypes/{extensionType}/versions/{version}": {
