@@ -46,6 +46,7 @@
                 "type": "integer",
                 "format": "int32"
               }
+            }
           },
           "default": {
             "description": "Describes the error if the operation is not successful.",
@@ -93,6 +94,26 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Subscription/OperationResults/{operationId}": {
+      "get": {
+        "operationId": "OperationResults",
+        "x-ms-examples": {
+          "getOperationResults": {
+            "$ref": "./examples/getOperationResults.json"
+          }
+        },
+        "description": "Get the status the given operationId",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Operation is completed successfully"
+          },
+          "202": {
+            "description": "Operation still in progress"
           }
         }
       }
