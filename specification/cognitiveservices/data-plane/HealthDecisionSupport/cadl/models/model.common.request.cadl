@@ -3,7 +3,7 @@ import "./model.common.shared.cadl";
 
 using Cadl.Rest;
 
-namespace HealthDecisionSupportAPI;
+namespace HealthDecisionSupportApi;
 
 @doc("The generic part of the Health Decision Support request, common to all models.")
 model Request {
@@ -54,30 +54,22 @@ model PatientInfo {
 }
 
 @doc("The patient's gender.")
-@knownValues(PatientInfoGenderKnownValues)
-scalar PatientInfoGender extends string;
-@doc("Patient gender known values.")
-enum PatientInfoGenderKnownValues {
+enum PatientInfoGender {
   Female: "female",
   Male: "male",
   Unspecified: "unspecified",
 }
 
 @doc("The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).")
-@knownValues(DocumentTypeKnownValues)
-scalar DocumentType extends string;
-@doc("Document type, known values")
-enum DocumentTypeKnownValues {
+enum DocumentType {
   Note: "note",
   FhirBundle: "fhirBundle",
   Dicom: "dicom",
   GenomicSequencing: "genomicSequencing",
 }
 
-@knownValues(ClinicalDocumentTypeKnownValues)
-scalar ClinicalDocumentType extends string;
 @doc("The type of the clinical document.")
-enum ClinicalDocumentTypeKnownValues {
+enum ClinicalDocumentType {
   Consultation: "consultation",
   DischargeSummary: "dischargeSummary",
   HistoryAndPhysical: "historyAndPhysical",
@@ -93,10 +85,7 @@ The type of the content's source.
 In case the source type is 'inline', the content is given as a string (for instance, text). 
 In case the source type is 'reference', the content is given as a URI.
 """)
-@knownValues(DocumentContentSourceTypeKnownValues)
-scalar DocumentContentSourceType extends string;
-@doc("Document content source, known values")
-enum DocumentContentSourceTypeKnownValues {
+enum DocumentContentSourceType {
   Inline: "inline",
   Reference: "reference",
 }

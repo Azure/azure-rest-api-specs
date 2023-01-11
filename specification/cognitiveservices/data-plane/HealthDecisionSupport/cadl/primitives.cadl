@@ -1,7 +1,7 @@
 import "@cadl-lang/rest";
 using Cadl.Http;
 
-namespace HealthDecisionSupportAPI;
+namespace HealthDecisionSupportApi;
 
 @doc("The request was accepted and a job was created.")
 model SuccessfulPostJobResponse {
@@ -19,9 +19,7 @@ model SuccessfulPostJobResponse {
 @doc("""
 "The result of a repeatable request (`accepted`/`rejected`), as specified in [OASIS Repeatable Requests Version 1.0](https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html#sec_RepeatabilityResult).
 """)
-@knownValues(RepeatabilityResultKnownValues)
-scalar RepeatabilityResult extends string;
-enum RepeatabilityResultKnownValues {
+enum RepeatabilityResult {
   Accepted: "accepted",
   Rejected: "rejected",
 }

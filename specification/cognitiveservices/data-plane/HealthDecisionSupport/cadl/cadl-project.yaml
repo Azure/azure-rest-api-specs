@@ -1,12 +1,15 @@
-emit:
-   - "@azure-tools/cadl-autorest"
-   - "@azure-tools/cadl-csharp"
+emit: [
+   "@azure-tools/cadl-autorest",
+   "@azure-tools/cadl-csharp"
+]
 options:
+   "@azure-tools/cadl-autorest":
+      "output-file": "openapi.json"
    "@azure-tools/cadl-csharp":
-    namespace: "Azure.AI.HealthDecisionSupport"
-    clear-output-folder: true
-    new-project: true
-    model-namespace: true
+      namespace : "Azure.AI.HealthDecisionSupport"
+      clear-output-folder : true
+      new-project : true
+      model-namespace : true
   # Uncomment this line and add "@azure-tools/cadl-python" to your package.json to generate Python code
   # "@azure-tools/cadl-python":
   #   "basic-setup-py": true

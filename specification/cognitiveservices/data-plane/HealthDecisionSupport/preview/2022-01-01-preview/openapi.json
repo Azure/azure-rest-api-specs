@@ -93,6 +93,7 @@
                 "format": "int32"
               },
               "Repeatability-Result": {
+                "description": "\"The result of a repeatable request (`accepted`/`rejected`), as specified in [OASIS Repeatable Requests Version 1.0](https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html#sec_RepeatabilityResult).",
                 "type": "string",
                 "enum": [
                   "accepted",
@@ -215,6 +216,7 @@
                 "format": "int32"
               },
               "Repeatability-Result": {
+                "description": "\"The result of a repeatable request (`accepted`/`rejected`), as specified in [OASIS Repeatable Requests Version 1.0](https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html#sec_RepeatabilityResult).",
                 "type": "string",
                 "enum": [
                   "accepted",
@@ -323,7 +325,7 @@
     },
     "AgeUnit": {
       "type": "string",
-      "description": "Age units, known values",
+      "description": "Possible units for a person's age.",
       "enum": [
         "years",
         "months",
@@ -331,33 +333,6 @@
       ],
       "x-ms-enum": {
         "name": "AgeUnit",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Years",
-            "value": "years"
-          },
-          {
-            "name": "Months",
-            "value": "months"
-          },
-          {
-            "name": "Days",
-            "value": "days"
-          }
-        ]
-      }
-    },
-    "AgeUnitKnownValues": {
-      "type": "string",
-      "description": "Age units, known values",
-      "enum": [
-        "years",
-        "months",
-        "days"
-      ],
-      "x-ms-enum": {
-        "name": "AgeUnitKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -537,7 +512,7 @@
     },
     "ClinicalDocumentType": {
       "type": "string",
-      "description": "Clinical document type, known values.",
+      "description": "The type of the clinical document.",
       "enum": [
         "consultation",
         "dischargeSummary",
@@ -550,58 +525,6 @@
       ],
       "x-ms-enum": {
         "name": "ClinicalDocumentType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Consultation",
-            "value": "consultation"
-          },
-          {
-            "name": "DischargeSummary",
-            "value": "dischargeSummary"
-          },
-          {
-            "name": "HistoryAndPhysical",
-            "value": "historyAndPhysical"
-          },
-          {
-            "name": "Procedure",
-            "value": "procedure"
-          },
-          {
-            "name": "Progress",
-            "value": "progress"
-          },
-          {
-            "name": "Imaging",
-            "value": "imaging"
-          },
-          {
-            "name": "Laboratory",
-            "value": "laboratory"
-          },
-          {
-            "name": "Pathology",
-            "value": "pathology"
-          }
-        ]
-      }
-    },
-    "ClinicalDocumentTypeKnownValues": {
-      "type": "string",
-      "description": "Clinical document type, known values.",
-      "enum": [
-        "consultation",
-        "dischargeSummary",
-        "historyAndPhysical",
-        "procedure",
-        "progress",
-        "imaging",
-        "laboratory",
-        "pathology"
-      ],
-      "x-ms-enum": {
-        "name": "ClinicalDocumentTypeKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -672,35 +595,13 @@
     },
     "ClinicalTrialAcceptedGender": {
       "type": "string",
-      "description": "Clinical trial accepted gender, known values",
+      "description": "Gender definitions as accepted by clinical trials.",
       "enum": [
         "female",
         "male"
       ],
       "x-ms-enum": {
         "name": "ClinicalTrialAcceptedGender",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Female",
-            "value": "female"
-          },
-          {
-            "name": "Male",
-            "value": "male"
-          }
-        ]
-      }
-    },
-    "ClinicalTrialAcceptedGenderKnownValues": {
-      "type": "string",
-      "description": "Clinical trial accepted gender, known values",
-      "enum": [
-        "female",
-        "male"
-      ],
-      "x-ms-enum": {
-        "name": "ClinicalTrialAcceptedGenderKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -836,7 +737,7 @@
     },
     "ClinicalTrialPhase": {
       "type": "string",
-      "description": "Clinical trial, possible phases known values",
+      "description": "Possible phases of a clinical trial.",
       "enum": [
         "notApplicable",
         "earlyPhase1",
@@ -876,51 +777,9 @@
         ]
       }
     },
-    "ClinicalTrialPhaseKnownValues": {
-      "type": "string",
-      "description": "Clinical trial, possible phases known values",
-      "enum": [
-        "notApplicable",
-        "earlyPhase1",
-        "phase1",
-        "phase2",
-        "phase3",
-        "phase4"
-      ],
-      "x-ms-enum": {
-        "name": "ClinicalTrialPhaseKnownValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotApplicable",
-            "value": "notApplicable"
-          },
-          {
-            "name": "EarlyPhase1",
-            "value": "earlyPhase1"
-          },
-          {
-            "name": "Phase1",
-            "value": "phase1"
-          },
-          {
-            "name": "Phase2",
-            "value": "phase2"
-          },
-          {
-            "name": "Phase3",
-            "value": "phase3"
-          },
-          {
-            "name": "Phase4",
-            "value": "phase4"
-          }
-        ]
-      }
-    },
     "ClinicalTrialPurpose": {
       "type": "string",
-      "description": "Clinical trial, possible purposes, known values.",
+      "description": "Possible purposes of a clinical trial.",
       "enum": [
         "notApplicable",
         "screening",
@@ -980,71 +839,9 @@
         ]
       }
     },
-    "ClinicalTrialPurposeKnownValues": {
-      "type": "string",
-      "description": "Clinical trial, possible purposes, known values.",
-      "enum": [
-        "notApplicable",
-        "screening",
-        "diagnostic",
-        "prevention",
-        "healthServicesResearch",
-        "treatment",
-        "deviceFeasibility",
-        "supportiveCare",
-        "basicScience",
-        "other"
-      ],
-      "x-ms-enum": {
-        "name": "ClinicalTrialPurposeKnownValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotApplicable",
-            "value": "notApplicable"
-          },
-          {
-            "name": "Screening",
-            "value": "screening"
-          },
-          {
-            "name": "Diagnostic",
-            "value": "diagnostic"
-          },
-          {
-            "name": "Prevention",
-            "value": "prevention"
-          },
-          {
-            "name": "HealthServicesResearch",
-            "value": "healthServicesResearch"
-          },
-          {
-            "name": "Treatment",
-            "value": "treatment"
-          },
-          {
-            "name": "DeviceFeasibility",
-            "value": "deviceFeasibility"
-          },
-          {
-            "name": "SupportiveCare",
-            "value": "supportiveCare"
-          },
-          {
-            "name": "BasicScience",
-            "value": "basicScience"
-          },
-          {
-            "name": "Other",
-            "value": "other"
-          }
-        ]
-      }
-    },
     "ClinicalTrialRecruitmentStatus": {
       "type": "string",
-      "description": "Clinical trial, possible recruitment status, known values.",
+      "description": "Possible recruitment status of a clinical trial.",
       "enum": [
         "unknownStatus",
         "notYetRecruiting",
@@ -1053,38 +850,6 @@
       ],
       "x-ms-enum": {
         "name": "ClinicalTrialRecruitmentStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "UnknownStatus",
-            "value": "unknownStatus"
-          },
-          {
-            "name": "NotYetRecruiting",
-            "value": "notYetRecruiting"
-          },
-          {
-            "name": "Recruiting",
-            "value": "recruiting"
-          },
-          {
-            "name": "EnrollingByInvitation",
-            "value": "enrollingByInvitation"
-          }
-        ]
-      }
-    },
-    "ClinicalTrialRecruitmentStatusKnownValues": {
-      "type": "string",
-      "description": "Clinical trial, possible recruitment status, known values.",
-      "enum": [
-        "unknownStatus",
-        "notYetRecruiting",
-        "recruiting",
-        "enrollingByInvitation"
-      ],
-      "x-ms-enum": {
-        "name": "ClinicalTrialRecruitmentStatusKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -1230,7 +995,7 @@
     },
     "ClinicalTrialSource": {
       "type": "string",
-      "description": "Clinical trial, possible sources, known values.",
+      "description": "Possible sources of a clinical trial.",
       "enum": [
         "custom",
         "clinicaltrials.gov"
@@ -1250,31 +1015,9 @@
         ]
       }
     },
-    "ClinicalTrialSourceKnownValues": {
-      "type": "string",
-      "description": "Clinical trial, possible sources, known values.",
-      "enum": [
-        "custom",
-        "clinicaltrials.gov"
-      ],
-      "x-ms-enum": {
-        "name": "ClinicalTrialSourceKnownValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Custom",
-            "value": "custom"
-          },
-          {
-            "name": "ClinicaltrialsGov",
-            "value": "clinicaltrials.gov"
-          }
-        ]
-      }
-    },
     "ClinicalTrialStudyType": {
       "type": "string",
-      "description": "Clinical trial, possible study types, known values.",
+      "description": "Possible study types of a clinical trial.",
       "enum": [
         "interventional",
         "observational",
@@ -1283,38 +1026,6 @@
       ],
       "x-ms-enum": {
         "name": "ClinicalTrialStudyType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Interventional",
-            "value": "interventional"
-          },
-          {
-            "name": "Observational",
-            "value": "observational"
-          },
-          {
-            "name": "ExpandedAccess",
-            "value": "expandedAccess"
-          },
-          {
-            "name": "PatientRegistries",
-            "value": "patientRegistries"
-          }
-        ]
-      }
-    },
-    "ClinicalTrialStudyTypeKnownValues": {
-      "type": "string",
-      "description": "Clinical trial, possible study types, known values.",
-      "enum": [
-        "interventional",
-        "observational",
-        "expandedAccess",
-        "patientRegistries"
-      ],
-      "x-ms-enum": {
-        "name": "ClinicalTrialStudyTypeKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -1399,7 +1110,7 @@
     },
     "DocumentContentSourceType": {
       "type": "string",
-      "description": "Document content source, known values",
+      "description": "The type of the content's source. \nIn case the source type is 'inline', the content is given as a string (for instance, text). \nIn case the source type is 'reference', the content is given as a URI.",
       "enum": [
         "inline",
         "reference"
@@ -1419,31 +1130,9 @@
         ]
       }
     },
-    "DocumentContentSourceTypeKnownValues": {
-      "type": "string",
-      "description": "Document content source, known values",
-      "enum": [
-        "inline",
-        "reference"
-      ],
-      "x-ms-enum": {
-        "name": "DocumentContentSourceTypeKnownValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Inline",
-            "value": "inline"
-          },
-          {
-            "name": "Reference",
-            "value": "reference"
-          }
-        ]
-      }
-    },
     "DocumentType": {
       "type": "string",
-      "description": "Document type, known values",
+      "description": "The type of the patient document, such as 'note' (text document) or 'fhirBundle' (FHIR JSON document).",
       "enum": [
         "note",
         "fhirBundle",
@@ -1452,38 +1141,6 @@
       ],
       "x-ms-enum": {
         "name": "DocumentType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Note",
-            "value": "note"
-          },
-          {
-            "name": "FhirBundle",
-            "value": "fhirBundle"
-          },
-          {
-            "name": "Dicom",
-            "value": "dicom"
-          },
-          {
-            "name": "GenomicSequencing",
-            "value": "genomicSequencing"
-          }
-        ]
-      }
-    },
-    "DocumentTypeKnownValues": {
-      "type": "string",
-      "description": "Document type, known values",
-      "enum": [
-        "note",
-        "fhirBundle",
-        "dicom",
-        "genomicSequencing"
-      ],
-      "x-ms-enum": {
-        "name": "DocumentTypeKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -1541,7 +1198,7 @@
     },
     "GeoJsonGeometryType": {
       "type": "string",
-      "description": "`GeoJSON` geometry type, known values.",
+      "description": "`GeoJSON` geometry type.",
       "enum": [
         "Point"
       ],
@@ -1556,26 +1213,9 @@
         ]
       }
     },
-    "GeoJsonGeometryTypeKnownValues": {
-      "type": "string",
-      "description": "`GeoJSON` geometry type, known values.",
-      "enum": [
-        "Point"
-      ],
-      "x-ms-enum": {
-        "name": "GeoJsonGeometryTypeKnownValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Point",
-            "value": "Point"
-          }
-        ]
-      }
-    },
     "GeoJsonPropertiesSubType": {
       "type": "string",
-      "description": "`GeoJSON` object sub-type, known values",
+      "description": "`GeoJSON` object sub-type.",
       "enum": [
         "Circle"
       ],
@@ -1590,48 +1230,14 @@
         ]
       }
     },
-    "GeoJsonPropertiesSubTypeKnownValues": {
-      "type": "string",
-      "description": "`GeoJSON` object sub-type, known values",
-      "enum": [
-        "Circle"
-      ],
-      "x-ms-enum": {
-        "name": "GeoJsonPropertiesSubTypeKnownValues",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Circle",
-            "value": "Circle"
-          }
-        ]
-      }
-    },
     "GeoJsonType": {
       "type": "string",
-      "description": "`GeoJSON` type, known values",
+      "description": "`GeoJSON` type.",
       "enum": [
         "Feature"
       ],
       "x-ms-enum": {
         "name": "GeoJsonType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Feature",
-            "value": "Feature"
-          }
-        ]
-      }
-    },
-    "GeoJsonTypeKnownValues": {
-      "type": "string",
-      "description": "`GeoJSON` type, known values",
-      "enum": [
-        "Feature"
-      ],
-      "x-ms-enum": {
-        "name": "GeoJsonTypeKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -1688,6 +1294,7 @@
     },
     "JobStatus": {
       "type": "string",
+      "description": "The status of the processing job.",
       "enum": [
         "notStarted",
         "running",
@@ -1697,42 +1304,6 @@
       ],
       "x-ms-enum": {
         "name": "JobStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "NotStarted",
-            "value": "notStarted"
-          },
-          {
-            "name": "Running",
-            "value": "running"
-          },
-          {
-            "name": "Succeeded",
-            "value": "succeeded"
-          },
-          {
-            "name": "Failed",
-            "value": "failed"
-          },
-          {
-            "name": "PartiallyCompleted",
-            "value": "partiallyCompleted"
-          }
-        ]
-      }
-    },
-    "JobStatusKnownValues": {
-      "type": "string",
-      "enum": [
-        "notStarted",
-        "running",
-        "succeeded",
-        "failed",
-        "partiallyCompleted"
-      ],
-      "x-ms-enum": {
-        "name": "JobStatusKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -1852,6 +1423,7 @@
     },
     "OncoPhenotypeInferenceType": {
       "type": "string",
+      "description": "The type of the Onco Phenotype inference.",
       "enum": [
         "tumorSite",
         "histology",
@@ -1864,57 +1436,6 @@
       ],
       "x-ms-enum": {
         "name": "OncoPhenotypeInferenceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "TumorSite",
-            "value": "tumorSite"
-          },
-          {
-            "name": "Histology",
-            "value": "histology"
-          },
-          {
-            "name": "ClinicalStageT",
-            "value": "clinicalStageT"
-          },
-          {
-            "name": "ClinicalStageN",
-            "value": "clinicalStageN"
-          },
-          {
-            "name": "ClinicalStageM",
-            "value": "clinicalStageM"
-          },
-          {
-            "name": "PathologicStageT",
-            "value": "pathologicStageT"
-          },
-          {
-            "name": "PathologicStageN",
-            "value": "pathologicStageN"
-          },
-          {
-            "name": "PathologicStageM",
-            "value": "pathologicStageM"
-          }
-        ]
-      }
-    },
-    "OncoPhenotypeInferenceTypeKnownValues": {
-      "type": "string",
-      "enum": [
-        "tumorSite",
-        "histology",
-        "clinicalStageT",
-        "clinicalStageN",
-        "clinicalStageM",
-        "pathologicStageT",
-        "pathologicStageN",
-        "pathologicStageM"
-      ],
-      "x-ms-enum": {
-        "name": "OncoPhenotypeInferenceTypeKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -2175,7 +1696,7 @@
     },
     "PatientInfoGender": {
       "type": "string",
-      "description": "Patient gender known values.",
+      "description": "The patient's gender.",
       "enum": [
         "female",
         "male",
@@ -2183,33 +1704,6 @@
       ],
       "x-ms-enum": {
         "name": "PatientInfoGender",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Female",
-            "value": "female"
-          },
-          {
-            "name": "Male",
-            "value": "male"
-          },
-          {
-            "name": "Unspecified",
-            "value": "unspecified"
-          }
-        ]
-      }
-    },
-    "PatientInfoGenderKnownValues": {
-      "type": "string",
-      "description": "Patient gender known values.",
-      "enum": [
-        "female",
-        "male",
-        "unspecified"
-      ],
-      "x-ms-enum": {
-        "name": "PatientInfoGenderKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -2245,33 +1739,13 @@
     },
     "RepeatabilityResult": {
       "type": "string",
+      "description": "\"The result of a repeatable request (`accepted`/`rejected`), as specified in [OASIS Repeatable Requests Version 1.0](https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html#sec_RepeatabilityResult).",
       "enum": [
         "accepted",
         "rejected"
       ],
       "x-ms-enum": {
         "name": "RepeatabilityResult",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "accepted"
-          },
-          {
-            "name": "Rejected",
-            "value": "rejected"
-          }
-        ]
-      }
-    },
-    "RepeatabilityResultKnownValues": {
-      "type": "string",
-      "enum": [
-        "accepted",
-        "rejected"
-      ],
-      "x-ms-enum": {
-        "name": "RepeatabilityResultKnownValues",
         "modelAsString": true,
         "values": [
           {
@@ -2431,29 +1905,12 @@
     },
     "TrialMatcherInferenceType": {
       "type": "string",
-      "description": "Trial matcher inference type, known values.",
+      "description": "The type of the Trial Matcher inference.",
       "enum": [
         "trialEligibility"
       ],
       "x-ms-enum": {
         "name": "TrialMatcherInferenceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "TrialEligibility",
-            "value": "trialEligibility"
-          }
-        ]
-      }
-    },
-    "TrialMatcherInferenceTypeKnownValues": {
-      "type": "string",
-      "description": "Trial matcher inference type, known values.",
-      "enum": [
-        "trialEligibility"
-      ],
-      "x-ms-enum": {
-        "name": "TrialMatcherInferenceTypeKnownValues",
         "modelAsString": true,
         "values": [
           {

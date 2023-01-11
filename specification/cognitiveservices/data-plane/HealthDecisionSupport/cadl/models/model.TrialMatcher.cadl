@@ -5,7 +5,7 @@ import "./model.common.shared.cadl";
 
 using Cadl.Rest;
 
-namespace HealthDecisionSupportAPI;
+namespace HealthDecisionSupportApi;
 
 @doc("The body of the Trial Matcher request.")
 model TrialMatcherRequest extends Request {
@@ -350,29 +350,20 @@ model ClinicalTrialResearchFacility {
 }
 
 @doc("Gender definitions as accepted by clinical trials.")
-@knownValues(ClinicalTrialAcceptedGenderKnownValues)
-scalar ClinicalTrialAcceptedGender extends string;
-@doc("Clinical trial accepted gender, known values")
-enum ClinicalTrialAcceptedGenderKnownValues {
+enum ClinicalTrialAcceptedGender {
   Female: "female",
   Male: "male",
 }
 
 @doc("Possible units for a person's age.")
-@knownValues(AgeUnitKnownValues)
-scalar AgeUnit extends string;
-@doc("Age units, known values")
-enum AgeUnitKnownValues {
+enum AgeUnit {
   Years: "years",
   Months: "months",
   Days: "days",
 }
 
 @doc("Possible phases of a clinical trial.")
-@knownValues(ClinicalTrialPhaseKnownValues)
-scalar ClinicalTrialPhase extends string;
-@doc("Clinical trial, possible phases known values")
-enum ClinicalTrialPhaseKnownValues {
+enum ClinicalTrialPhase {
   NotApplicable: "notApplicable",
   EarlyPhase1: "earlyPhase1",
   Phase1: "phase1",
@@ -382,10 +373,7 @@ enum ClinicalTrialPhaseKnownValues {
 }
 
 @doc("Possible study types of a clinical trial.")
-@knownValues(ClinicalTrialStudyTypeKnownValues)
-scalar ClinicalTrialStudyType extends string;
-@doc("Clinical trial, possible study types, known values.")
-enum ClinicalTrialStudyTypeKnownValues {
+enum ClinicalTrialStudyType {
   Interventional: "interventional",
   Observational: "observational",
   ExpandedAccess: "expandedAccess",
@@ -393,10 +381,7 @@ enum ClinicalTrialStudyTypeKnownValues {
 }
 
 @doc("Possible recruitment status of a clinical trial.")
-@knownValues(ClinicalTrialRecruitmentStatusKnownValues)
-scalar ClinicalTrialRecruitmentStatus extends string;
-@doc("Clinical trial, possible recruitment status, known values.")
-enum ClinicalTrialRecruitmentStatusKnownValues {
+enum ClinicalTrialRecruitmentStatus {
   UnknownStatus: "unknownStatus",
   NotYetRecruiting: "notYetRecruiting",
   Recruiting: "recruiting",
@@ -404,10 +389,7 @@ enum ClinicalTrialRecruitmentStatusKnownValues {
 }
 
 @doc("Possible purposes of a clinical trial.")
-@knownValues(ClinicalTrialPurposeKnownValues)
-scalar ClinicalTrialPurpose extends string;
-@doc("Clinical trial, possible purposes, known values.")
-enum ClinicalTrialPurposeKnownValues {
+enum ClinicalTrialPurpose {
   NotApplicable: "notApplicable",
   Screening: "screening",
   Diagnostic: "diagnostic",
@@ -421,42 +403,27 @@ enum ClinicalTrialPurposeKnownValues {
 }
 
 @doc("Possible sources of a clinical trial.")
-@knownValues(ClinicalTrialSourceKnownValues)
-scalar ClinicalTrialSource extends string;
-@doc("Clinical trial, possible sources, known values.")
-enum ClinicalTrialSourceKnownValues {
+enum ClinicalTrialSource {
   Custom: "custom",
   ClinicaltrialsGov: "clinicaltrials.gov",
 }
 
 @doc("`GeoJSON` type.")
-@knownValues(GeoJsonTypeKnownValues)
-scalar GeoJsonType extends string;
-@doc("`GeoJSON` type, known values")
-enum GeoJsonTypeKnownValues {
+enum GeoJsonType {
   Feature: "Feature",
 }
 
 @doc("`GeoJSON` geometry type.")
-@knownValues(GeoJsonGeometryTypeKnownValues)
-scalar GeoJsonGeometryType extends string;
-@doc("`GeoJSON` geometry type, known values.")
-enum GeoJsonGeometryTypeKnownValues {
+enum GeoJsonGeometryType {
   Point: "Point",
 }
 
 @doc("`GeoJSON` object sub-type.")
-@knownValues(GeoJsonPropertiesSubTypeKnownValues)
-scalar GeoJsonPropertiesSubType extends string;
-@doc("`GeoJSON` object sub-type, known values")
-enum GeoJsonPropertiesSubTypeKnownValues {
+enum GeoJsonPropertiesSubType {
   Circle: "Circle",
 }
 
 @doc("The type of the Trial Matcher inference.")
-@knownValues(TrialMatcherInferenceTypeKnownValues)
-scalar TrialMatcherInferenceType extends string;
-@doc("Trial matcher inference type, known values.")
-enum TrialMatcherInferenceTypeKnownValues {
+enum TrialMatcherInferenceType {
   TrialEligibility: "trialEligibility",
 }

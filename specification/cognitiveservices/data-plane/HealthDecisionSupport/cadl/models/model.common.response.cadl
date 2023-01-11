@@ -3,7 +3,7 @@ import "./model.common.shared.cadl";
 
 using Cadl.Rest;
 
-namespace HealthDecisionSupportAPI;
+namespace HealthDecisionSupportApi;
 
 @doc("The generic part of the Health Decision Support response, common to all models.")
 model Response {
@@ -74,9 +74,7 @@ model TrialMatcherInferenceEvidence {
 }
 
 @doc("The status of the processing job.")
-@knownValues(JobStatusKnownValues)
-scalar JobStatus extends string;
-enum JobStatusKnownValues {
+enum JobStatus {
   NotStarted: "notStarted",
   Running: "running",
   Succeeded: "succeeded",

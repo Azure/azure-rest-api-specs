@@ -5,7 +5,7 @@ import "./model.common.shared.cadl";
 
 using Cadl.Rest;
 
-namespace HealthDecisionSupportAPI;
+namespace HealthDecisionSupportApi;
 
 @doc("The body of the Onco Phenotype request.")
 model OncoPhenotypeRequest extends Request {
@@ -70,7 +70,10 @@ An indication whether to perform a preliminary step on the patient's documents t
   checkForCancerCase?: boolean = false;
 }
 
-enum OncoPhenotypeInferenceTypeKnownValues {
+
+
+@doc("The type of the Onco Phenotype inference.")
+enum OncoPhenotypeInferenceType {
   TumorSite: "tumorSite",
   Histology: "histology",
   ClinicalStageT: "clinicalStageT",
@@ -80,7 +83,3 @@ enum OncoPhenotypeInferenceTypeKnownValues {
   PathologicStageN: "pathologicStageN",
   PathologicStageM: "pathologicStageM",
 }
-
-@doc("The type of the Onco Phenotype inference.")
-@knownValues(OncoPhenotypeInferenceTypeKnownValues)
-scalar OncoPhenotypeInferenceType extends string;
