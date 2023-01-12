@@ -105,26 +105,22 @@ To distinguish between folders which define a service, an SDK, or both, one can 
 
 The service family library concept allows a family of services to share common models, linter rules, templates, etc.
 
-Service libraries can include unpublished service _family_ libraries via source dependency annotations in `package.json`:
+Service libraries can reference unpublished service _family_ libraries via relative path import in `*.cadl`:
 
-```json
-"peerDependencies": {
-  "@azure-tools/cadl-azure-core": "~x.x.x",
-  "@cadl-api-spec/azure-communication-common": "file: ../Communication.Shared"
-},
+```cadl
+import "../Contoso.WidgetManager.Shared";
 ```
 
 While this would permit services from importing any service library described in the specs repo, as a matter of policy we should probably avoid that and have tooling to detect this scenario. Service family libraries **should** use versioning decorators and spec packages should reference them as versioned dependencies. Tooling would need to ensure that changes to service family libraries does not result in unexpected changes to any service version. One way to do this would be to diff the projection of the service versions on the `main` branch against the projection of the service versions that result from the change.
 
-We treat the shared library as a sibling with other packages within the service family. This is similar to what we currently do for services that have a "Shared" package and would allow an arbitrary number of shared packages.
+We treat the shared library as a sibling with other packages within the service family. This is similar to what we currently do for services that have a "Shared" package and would allow an arbitrary number of shared packages. A shared library folder should not contain `cadl-project.yaml` and `package.json` as it's not requried to be released. See [Sample Project](#sample-project) for reference.
 
 ```
 -> specification
-   -> communication
-      -> Communication.Chat         (data-plane)
-      -> Communication.Calling      (data-plane)
-      -> Communication.Management   (management)
-      -> Communication.Shared       (shared)
+   -> contosowidgetmanager
+      -> Contoso.WidgetManager            (data-plane)
+      -> Contoso.WidgetManager.Management (management)
+      -> Contoso.WidgetManager.Shared     (shared)
 ```
 
 Here's an example of how Cognitive Services might use multiple shared libraries:
