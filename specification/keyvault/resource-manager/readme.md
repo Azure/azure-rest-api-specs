@@ -42,6 +42,7 @@ input-file:
   - Microsoft.KeyVault/preview/2022-02-01-preview/managedHsm.json
   - Microsoft.KeyVault/preview/2022-02-01-preview/providers.json
   - Microsoft.KeyVault/preview/2022-02-01-preview/secrets.json
+  - Microsoft.KeyVault/preview/2015-11-01/keyvault.json
 ```
 ### Tag: package-2022-07
 
