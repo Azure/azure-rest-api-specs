@@ -20,6 +20,7 @@ clear-output-folder: true
 multiapi: true
 batch:
   - tag: package-2022-10-01-only
+  - tag: package-2022-08-01-preview-only
   - tag: package-2022-06-01-only
   - tag: package-2022-04-01-only
   - tag: package-2022-02-01-preview-only
