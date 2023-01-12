@@ -85,5 +85,64 @@
         ]
       }
     }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
+    },
+    "ResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Resource"
+          },
+          "description": "The list of vault resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of vault resources."
+        }
+      },
+      "description": "List of vault resources."
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified identifier of the key vault resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the key vault resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type of the key vault resource."
+        },
+        "location": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure location of the key vault resource."
+        },
+        "tags": {
+          "readOnly": true,
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags assigned to the key vault resource."
+        }
+      },
+      "description": "Key Vault resource",
+      "x-ms-azure-resource": true
+    }
   }
 }
