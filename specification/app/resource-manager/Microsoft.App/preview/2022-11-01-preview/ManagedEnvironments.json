@@ -1114,17 +1114,9 @@
             "read"
           ]
         },
-        "controlPlaneSubnetId": {
-          "type": "string",
-          "description": "Resource ID of a subnet for control plane components. This subnet must be in the same VNET as the subnet defined in infrastructureSubnetId. Must not overlap with any other provided IP ranges.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "infrastructureSubnetId": {
           "type": "string",
-          "description": "Resource ID of a subnet for infrastructure components. This subnet must be in the same VNET as the subnet defined in controlPlaneSubnetId if provided. Must not overlap with any other provided IP ranges.",
+          "description": "Resource ID of a subnet for infrastructure components. This subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with any other provided IP ranges.",
           "x-ms-mutability": [
             "create",
             "read"
