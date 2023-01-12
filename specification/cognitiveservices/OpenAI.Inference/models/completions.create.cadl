@@ -6,7 +6,7 @@ using Cadl.Http;
 namespace Azure.OpenAI.Completions;
 
 //@doc("Post body schema to create a prompt completion from a deployment")
-alias CompletionsRequest = {
+model CompletionsRequest {
     @doc("""
 An optional prompt to complete from, encoded as a string, a list of strings, or
 a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
@@ -117,11 +117,11 @@ How many generations to create server side, and display only the best. Will not
 stream intermediate progress if best_of > 1. Has maximum value of 128.
 """)
     best_of?: int32;
-};
+}
 
-alias CompletionsPrompt = string | string[] | string[][];
+alias CompletionsPrompt = string[][];
 
-alias CompletionsStop = string | string[];
+alias CompletionsStop = string[];
 
 @doc("Expected response schema to completion request")
 model Completion {
@@ -148,7 +148,7 @@ model Choice {
     @doc("Log Prob Model")
     logprobs?: CompletionsLogProbsModel;
     @doc("Reason for finishing")
-    finish_reason?: string;
+    finishReason?: string;
 }
 
 @doc("LogProbs model within completion choice")
@@ -156,9 +156,9 @@ model CompletionsLogProbsModel {
     @doc("Tokens")
     tokens?: string[];
     @doc("LogProbs of Tokens")
-    token_logprobs?: float32[];
+    tokenLogprobs?: float32[];
     @doc("Top LogProbs")
-    top_logprobs?: Record<float32>[];
+    topLogprobs?: Record<float32>[];
     @doc("Text offset")
-    text_offset?: int32[];
+    textOffset?: int32[];
 }
