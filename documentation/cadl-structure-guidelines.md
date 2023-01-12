@@ -1,3 +1,17 @@
+- [Repository Guidelines for Cadl Specs](#repository-guidelines-for-cadl-specs)
+  - [Purpose](#purpose)
+  - [Repository](#repository)
+  - [Structure Overview](#structure-overview)
+  - [Service Folders](#service-folders)
+    - [Packages](#packages)
+    - [Structure](#structure)
+  - [Service Family Libraries](#service-family-libraries)
+  - [Sample Project](#sample-project)
+- [Spec Versioning](#spec-versioning)
+    - [Service Folder](#service-folder)
+    - [Working in Feature Branches](#working-in-feature-branches)
+    - [Publishing Specs](#publishing-specs)
+
 # Repository Guidelines for Cadl Specs
 
 ## Purpose
@@ -83,7 +97,7 @@ Additionally, packages which wish to define custom linter rules or otherwise use
 
 To distinguish between folders which define a service, an SDK, or both, one can look to the `cadl-project.yaml` and/or the `package.json`.
 
-- SDKs will take dependencies on the `@azure-tools/cadl-dpg` library, as well as SDK-specific emitters such as `@azure-tools/cadl-python` and configure them within `cadl-project.yaml`.
+- SDKs will take dependencies on the `@azure-tools/cadl-dpg` library, as well as SDK-specific emitters such as `@azure-tools/cadl-python` and configure their options within `cadl-project.yaml` but the emitter version should not be configured within `cadl-project.yaml`, and it should be configured globally in SDK repo instead.
 - SDKs _may_ have a sidecar file to customize how the SDK is shaped. Folders that describe service definitions only will not have a sidecar file. _Note: the absence of a sidecar does not mean that a folder does not describe an SDK, but the presence of one means it is an SDK._
 - Services will take a dependency on `@azure-tools/autorest` and configure the emitter in `cadl-project.yaml`.
 
@@ -125,6 +139,9 @@ Here's an example of how Cognitive Services might use multiple shared libraries:
       -> Vision.CustomVision     (data-plane)
       -> Vision.Shared           (shared)
 ```
+## Sample Project
+
+Here's a [cadl-sample-project](./cadl-sample-project) to demonstrate the files and folders supposed to be included when check in to this `azure-rest-api-specs` repository.
 
 # Spec Versioning
 
