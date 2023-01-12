@@ -223,11 +223,9 @@ directive:
     - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
     - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and syncronous return types (200, 201, 204) as directed by SDK team.
     - R4009 # Vault object is the only one that need to be tracked with SystemData
-- suppress:
-    - INVALID_REQUEST_PARAMETER
-    - OBJECT_MISSING_REQUIRED_PROPERTY
+- suppress: INVALID_REQUEST_PARAMETER
   where:
-    - $.paths./subscriptions/{subscriptionId}/resources
+    - $.paths."/subscriptions/{subscriptionId}/resources"
   from: keyvault.json
   reason: The Vaults_List API endpoint only support 2015-11-01.
 ```
