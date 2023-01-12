@@ -323,11 +323,6 @@
       }
     },
     "metadataPatch": {
-      "allOf": [
-        {
-          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
-        }
-      ],
       "description": "Metadata patch request body.",
       "type": "object",
       "properties": {
@@ -508,7 +503,10 @@
           "items": {
             "$ref": "#/definitions/metadataDependencies",
             "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
-          }
+          },
+          "x-ms-identifiers": [
+            "contentId"
+          ]
         }
       }
     },
@@ -816,6 +814,7 @@
       "in": "path",
       "name": "metadataName",
       "required": true,
+      "pattern": "^\\S+$",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
