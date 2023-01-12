@@ -175,24 +175,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           },
           {
             "name": "snapshot",
@@ -271,24 +254,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           },
           {
             "name": "snapshot",
@@ -369,24 +335,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -644,24 +593,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -727,30 +659,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "x-ms-enum": {
-                "name": "SnapshotFields",
-                "modelAsString": true
-              },
-              "enum": [
-                "etag",
-                "name",
-                "status",
-                "filters",
-                "composition_type",
-                "created",
-                "expires",
-                "size",
-                "items_count",
-                "tags"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/SnapshotFields"
           },
           {
             "name": "Status",
@@ -881,30 +790,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "x-ms-enum": {
-                "name": "SnapshotFields",
-                "modelAsString": true
-              },
-              "enum": [
-                "etag",
-                "name",
-                "status",
-                "filters",
-                "composition_type",
-                "created",
-                "expires",
-                "size",
-                "items_count",
-                "tags"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/SnapshotFields"
           }
         ],
         "responses": {
@@ -1217,17 +1103,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "name"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/LabelFields"
           }
         ],
         "responses": {
@@ -1294,17 +1170,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "name"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/LabelFields"
           }
         ],
         "responses": {
@@ -1528,24 +1394,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -1618,24 +1467,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -1742,7 +1574,8 @@
         "status_code": {
           "description": "Provides additional information about the status of the snapshot. The status code values are modeled after HTTP status codes.",
           "type": "integer",
-          "readOnly": true
+          "readOnly": true,
+          "format": "int32"
         },
         "filters": {
           "description": "A list of filters used to filter the key-values included in the snapshot.",
@@ -1783,7 +1616,8 @@
           "description": "The amount of time, in seconds, that a snapshot will remain in the archived state before expiring. This property is only writable during the creation of a snapshot. If not specified, the default lifetime of key-value revisions will be used.",
           "type": "integer",
           "minimum": 0,
-          "maximum": 7776000
+          "maximum": 7776000,
+          "format": "int64"
         },
         "size": {
           "description": "The size in bytes of the snapshot.",
@@ -1977,6 +1811,78 @@
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "KeyValueFields": {
+      "name": "$Select",
+      "in": "query",
+      "description": "Used to select what fields are present in the returned resource(s).",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "key",
+          "label",
+          "content_type",
+          "value",
+          "last_modified",
+          "tags",
+          "locked",
+          "etag"
+        ],
+        "x-ms-enum": {
+          "name": "KeyValueFields",
+          "modelAsString": true
+        }
+      },
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
+    },
+    "LabelFields": {
+      "name": "$Select",
+      "in": "query",
+      "description": "Used to select what fields are present in the returned resource(s).",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "name"
+        ],
+        "x-ms-enum": {
+          "name": "LabelFields",
+          "modelAsString": true
+        }
+      },
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
+    },
+    "SnapshotFields": {
+      "name": "$Select",
+      "in": "query",
+      "description": "Used to select what fields are present in the returned resource(s).",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "name",
+          "status",
+          "status_code",
+          "filters",
+          "composition_type",
+          "created",
+          "expires",
+          "retention_period",
+          "size",
+          "items_count",
+          "tags",
+          "etag"
+        ],
+        "x-ms-enum": {
+          "name": "SnapshotFields",
+          "modelAsString": true
+        }
+      },
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
     }
   },
   "x-ms-parameterized-host": {
