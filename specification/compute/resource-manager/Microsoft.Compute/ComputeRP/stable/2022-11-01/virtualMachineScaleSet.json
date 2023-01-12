@@ -5569,6 +5569,30 @@
         "placementGroupId": {
           "type": "string",
           "description": "The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId."
+        },
+        "computerName": {
+          "type": "string",
+          "description": "Specifies the host OS name of the virtual machine. <br><br> This name cannot be updated after the VM is created. <br><br> **Max-length (Windows):** 15 characters <br><br> **Max-length (Linux):** 64 characters. <br><br> For naming conventions and restrictions see [Azure infrastructure services implementation guidelines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-infrastructure-subscription-accounts-guidelines?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json#1-naming-conventions)."
+        },
+        "osName": {
+          "type": "string",
+          "description": "The Operating System running on the hybrid machine."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "The version of Operating System running on the hybrid machine."
+        },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "The hypervisor generation of the Virtual Machine [V1, V2]",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGeneration",
+            "modelAsString": true
+          }
         }
       },
       "description": "The instance view of a virtual machine scale set VM."
