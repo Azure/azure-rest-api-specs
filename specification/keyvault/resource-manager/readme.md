@@ -217,8 +217,7 @@ input-file:
 ``` yaml
 directive:
   - suppress: INVALID_REQUEST_PARAMETER
-    from: keyvault.json
-    reason: The Vaults_List API endpoint only supports version 2015-11-01.
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
 ```
 
 ---
