@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-metadata-2022-08
+tag: package-encoding-2022-07
 opt-in-extensible-enums: true
 ```
 
@@ -67,13 +67,28 @@ directive:
 
 These settings apply only when `--tag=package-encoding-2022-05-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05'
+``` yaml $(tag) == 'package-preview-2022-05'
 input-file:
   - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
   - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
   - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
   - Microsoft.Media/Metadata/stable/2022-08-01/ContentKeyPolicies.json
   - Microsoft.Media/Encoding/preview/2022-05-01-preview/Encoding.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
+```
+
+### Tag: package-encoding-2022-07
+
+These settings apply only when `--tag=package-encoding-2022-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-encoding-2022-07'
+input-file:
+  - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2022-08-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
   - Microsoft.Media/Metadata/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
 ```
