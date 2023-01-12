@@ -225,8 +225,6 @@ directive:
     - R4009 # Vault object is the only one that need to be tracked with SystemData
 - suppress: INVALID_REQUEST_PARAMETER
   from: keyvault.json
-  where:
-    - '$.paths["/subscriptions/{subscriptionId}/resources"].get'
   reason: The Vaults_List API endpoint only supports version 2015-11-01.
 ```
 
