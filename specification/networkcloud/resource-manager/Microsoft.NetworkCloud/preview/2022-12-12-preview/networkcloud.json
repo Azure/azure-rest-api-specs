@@ -6950,8 +6950,9 @@
       }
     },
     "CloudServicesNetwork": {
-      "description": "CloudServicesNetwork represents additional egress information that will be used by associated virtual machines or hybrid\nAKS clusters. Upon creation, the additional services that are provided by the platform will be allocated and\nrepresented in the status of this resource. All resources associated with this cloud services network will be part\nof the same layer 2 (L2) isolation domain. At least one service network must be created but may be reused across many\nvirtual machines and/or Hybrid AKS clusters.",
+      "description": "Upon creation, the additional services that are provided by the platform will be allocated and\nrepresented in the status of this resource. All resources associated with this cloud services network will be part\nof the same layer 2 (L2) isolation domain. At least one service network must be created but may be reused across many\nvirtual machines and/or Hybrid AKS clusters.",
       "type": "object",
+      "title": "CloudServicesNetwork represents additional egress information that will be used by associated virtual machines or hybrid AKS clusters.",
       "required": [
         "extendedLocation",
         "properties"
@@ -7318,8 +7319,8 @@
       }
     },
     "ClusterManagerProperties": {
-      "description": "ClusterManagerProperties represents the properties of a cluster manager",
       "type": "object",
+      "title": "ClusterManagerProperties represents the properties of a cluster manager.",
       "required": [
         "fabricControllerId"
       ],
@@ -8046,8 +8047,8 @@
       }
     },
     "DefaultCniNetwork": {
-      "description": "DefaultCniNetwork represents the user-managed portions of the default CNI (pod) network that is created in\nsupport of a Hybrid AKS Cluster.",
       "type": "object",
+      "title": "DefaultCniNetwork represents the user-managed portions of the default CNI (pod) network that is created in support of a Hybrid AKS Cluster.",
       "required": [
         "extendedLocation",
         "properties"
@@ -8323,9 +8324,8 @@
       }
     },
     "HardwareInventory": {
-      "description": "including information acquired from the model/sku information and from the ironic inspector.",
       "type": "object",
-      "title": "HardwareInventory represents the hardware configuration of this machine as exposed to the customer,",
+      "title": "HardwareInventory represents the hardware configuration of this machine as exposed to the customer, including information acquired from the model/sku information and from the ironic inspector.",
       "properties": {
         "additionalHostInformation": {
           "description": "Freeform data extracted from the environment about this machine. This information varies depending on the specific hardware and configuration.",
@@ -9536,7 +9536,7 @@
       ],
       "properties": {
         "availabilityZone": {
-          "description": "The zone name used for this rack when created",
+          "description": "The zone name used for this rack when created.",
           "type": "string",
           "pattern": "^[a-zA-Z0-9]{1,10}$"
         },
@@ -10772,7 +10772,7 @@
           "readOnly": true
         },
         "sshPublicKeys": {
-          "description": "A list of ssh public keys. Each key will be added to the virtual machine using the cloud-init\nssh_authorized_keys mechanism for the adminUsername",
+          "description": "The list of ssh public keys. Each key will be added to the virtual machine using the cloud-init ssh_authorized_keys mechanism for the adminUsername.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SshPublicKey"
@@ -10981,7 +10981,7 @@
   },
   "securityDefinitions": {
     "azure_auth": {
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "type": "oauth2",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
