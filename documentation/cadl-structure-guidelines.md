@@ -108,7 +108,7 @@ The service family library concept allows a family of services to share common m
 Service libraries can reference unpublished service _family_ libraries via relative path import in `*.cadl`:
 
 ```cadl
-import "../Communication.Shared";
+import "../Contoso.WidgetManager.Shared";
 ```
 
 While this would permit services from importing any service library described in the specs repo, as a matter of policy we should probably avoid that and have tooling to detect this scenario. Service family libraries **should** use versioning decorators and spec packages should reference them as versioned dependencies. Tooling would need to ensure that changes to service family libraries does not result in unexpected changes to any service version. One way to do this would be to diff the projection of the service versions on the `main` branch against the projection of the service versions that result from the change.
