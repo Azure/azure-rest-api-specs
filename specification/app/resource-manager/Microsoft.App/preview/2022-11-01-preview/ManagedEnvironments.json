@@ -1102,6 +1102,34 @@
         }
       }
     },
+    "ManagedEnvironmentQuota":{
+      "type": "object",
+      "description": "Managed environment quota status",
+      "properties": {
+        "cores":{
+          "description": "The cores quota status",
+          "$ref": "#/definitions/QuotaStatus"
+        }
+      }
+    },
+    "QuotaStatus": {
+      "type": "object",
+      "description": "Quota status",
+      "properties":{
+        "total": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "Total quota amount"
+        },
+        "used": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "Used quota amount"
+        }
+      }
+    },
     "VnetConfiguration": {
       "type": "object",
       "description": "Configuration properties for apps environment to join a Virtual Network",
@@ -1277,6 +1305,10 @@
             "daprConfiguration": {
               "$ref": "#/definitions/DaprConfiguration",
               "description": "The configuration of Dapr component."
+            },
+            "quotas":{
+              "$ref": "#/definitions/ManagedEnvironmentQuota",
+              "description": "Quota status for the environment."
             }
           },
           "x-ms-client-flatten": true
