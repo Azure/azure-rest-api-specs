@@ -2278,9 +2278,6 @@
           },
           "CosmosDBSqlContainerRestore": {
             "$ref": "./examples/CosmosDBSqlContainerRestore.json"
-          },
-          "CosmosDBSqlMaterializedViewCreateUpdate": {
-            "$ref": "./examples/CosmosDBSqlMaterializedViewCreateUpdate.json"
           }
         },
         "description": "Create or update an Azure Cosmos DB SQL container",
@@ -9836,10 +9833,6 @@
         "createMode": {
           "description": "Enum to indicate the mode of resource creation.",
           "$ref": "#/definitions/CreateMode"
-        },
-        "materializedViewDefinition": {
-          "$ref": "#/definitions/MaterializedViewDefinition",
-          "description": "The configuration for defining Materialized Views. This must be specified only for creating a Materialized View container."
         }
       },
       "required": [
@@ -10168,29 +10161,6 @@
         "clientEncryptionKeyId",
         "encryptionType",
         "encryptionAlgorithm"
-      ]
-    },
-    "MaterializedViewDefinition": {
-      "type": "object",
-      "description": "Materialized View definition for the container.",
-      "properties": {
-        "sourceCollectionRid": {
-          "description": "An unique identifier for the source collection. This is a system generated property.",
-          "type": "string",
-          "readOnly": true
-        },
-        "sourceCollectionId": {
-          "description": "The name of the source container on which the Materialized View will be created.",
-          "type": "string"
-        },
-        "definition": {
-          "description": "The definition should be an SQL query which would be used to fetch data from the source container to populate into the Materialized View container.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "sourceCollectionId",
-        "definition"
       ]
     },
     "SqlStoredProcedureResource": {
