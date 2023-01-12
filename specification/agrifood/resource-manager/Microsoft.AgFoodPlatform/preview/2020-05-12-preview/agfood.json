@@ -276,6 +276,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "description": "Get operationResults for a FarmBeats resource.",
+        "operationId": "OperationResults_GetOperationResult",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "locations",
+            "description": "Location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationResultsId",
+            "description": "operationResultsId.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationResults_GetOperationResult": {
+            "$ref": "./examples/OperationResults_GetOperationResult.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.AgFoodPlatform/farmBeatsExtensionDefinitions": {
       "get": {
         "tags": [
