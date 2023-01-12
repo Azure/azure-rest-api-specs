@@ -1,7 +1,7 @@
 {
   "parameters": {
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2022-10-01-preview",
+    "api-version": "2023-05-01",
     "Endpoint": "{Endpoint}",
     "jobId": "{Job ID}",
     "body": {
@@ -17,7 +17,9 @@
                 "participantId": "1",
                 "id": "1",
                 "text": "I like the service. I do not like the food",
-                "lexical": "i like the service i do not like the food"
+                "lexical": "i like the service i do not like the food",
+                "itn": "",
+                "maskedItn": ""
               }
             ]
           }
@@ -38,7 +40,7 @@
   "responses": {
     "202": {
       "headers": {
-        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version={api-version}"
+        "Operation-Location": "{Endpoint}/language/analyze-conversation/jobs/{jobId}?api-version=2023-05-01"
       }
     }
   }

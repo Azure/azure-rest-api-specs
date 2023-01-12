@@ -68,7 +68,13 @@
             "description": "Request successful. Resource does not exist."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Delete successful."
@@ -404,7 +410,7 @@
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the DDoS protection plan resource."
         },
-        "publicIpAddresses": {
+        "publicIPAddresses": {
           "readOnly": true,
           "type": "array",
           "items": {
