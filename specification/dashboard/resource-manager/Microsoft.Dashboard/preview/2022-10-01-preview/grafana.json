@@ -1018,37 +1018,31 @@
         },
         "host": {
           "description": "SMTP server hostname with port, e.g. test.email.net:587",
-          "type": "string",
-          "x-ms-secret": true
+          "type": "string"
         },
         "user": {
           "description": "User of SMTP auth",
-          "type": "string",
-          "x-ms-secret": true
+          "type": "string"
         },
         "password": {
           "description": "Password of SMTP auth. If the password contains # or ;, then you have to wrap it with triple quotes. Example: \"\"\"#password;\"\"\"",
           "type": "string",
           "x-ms-secret": true
         },
-        "from_address": {
+        "fromAddress": {
           "description": "Address used when sending out emails\r\nhttps://pkg.go.dev/net/mail#Address",
-          "type": "string",
-          "x-ms-secret": true
+          "type": "string"
         },
-        "from_name": {
-          "description": "Name to be used when sending out emails. Default is \"Azure Managed Grafana\"\r\nhttps://pkg.go.dev/net/mail#Address",
-          "type": "string",
-          "x-ms-secret": true
+        "fromName": {
+          "description": "Name to be used when sending out emails. Default is \"Azure Managed Grafana Notification\"\r\nhttps://pkg.go.dev/net/mail#Address",
+          "type": "string"
         },
-        "starttls_policy": {
-          "$ref": "#/definitions/StartTLSPolicy",
-          "x-ms-secret": true
+        "startTLSPolicy": {
+          "$ref": "#/definitions/StartTLSPolicy"
         },
-        "skip_verify": {
+        "skipVerify": {
           "description": "Verify SSL for SMTP server. Default is false\r\nhttps://pkg.go.dev/crypto/tls#Config",
-          "type": "boolean",
-          "x-ms-secret": true
+          "type": "boolean"
         }
       }
     },
