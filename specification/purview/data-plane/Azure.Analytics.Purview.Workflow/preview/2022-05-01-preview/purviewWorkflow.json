@@ -1267,7 +1267,8 @@
           "description": "The workflow task type.",
           "enum": [
             "approval",
-            "task"
+            "simpleTask",
+            "dsarTask"
           ],
           "x-ms-enum": {
             "name": "TaskType",
@@ -1300,12 +1301,81 @@
         },
         "payload": {
           "$ref": "#/definitions/TaskPayload"
+        },
+        "reminderInfo":{
+          "type":"object",
+          "description": "Info of task reminder.",
+          "properties": {
+            "lastRemindTime":{
+              "type":"string",
+              "format": "date-time",
+              "description": "The last update time."
+            },
+            "nextRemindTime":{
+              "type":"string",
+              "format": "date-time",
+              "description": "The next remind time."
+            },
+            "reminderSettings":{
+              "type": "object",
+              "description": "The reminder settings."
+            }
+          },
+          "required": [
+            "nextRemindTime",
+            "reminderSettings"
+          ]
+        },
+        "expiryInfo":{
+          "type": "object",
+          "description": "Info of task expiry.",
+          "properties": {
+            "lastExpiryNotificationTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The last expiry notification time."
+            },
+            "nextExpiryNotificationTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The next expiry notification time."
+            },
+            "expiryTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The expiry time."
+            },
+            "expirySettings": {
+              "type": "object",
+              "properties": {
+                "expireAfter": {
+                  "type": "object",
+                  "description": "The time of expiry."
+                },
+                "notifyOnExpiration": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Notify user on expiration."
+                  }
+                }
+              },
+              "required": [
+                "expireAfter"
+              ]
+            }
+          },
+          "required": [
+            "nextExpiryNotificationTime",
+            "expiryTime",
+            "expirySettings"
+          ]
         }
       },
       "required": [
         "type",
         "id",
-        "title",
         "workflowRunId",
         "workflowId",
         "requestorId",
@@ -1480,9 +1550,9 @@
         "reply"
       ]
     },
-    "Task": {
-      "x-ms-discriminator-value": "task",
-      "description": "The workflow task request properties.",
+    "SimpleTask": {
+      "x-ms-discriminator-value": "simpleTask",
+      "description": "The workflow simple task properties.",
       "type": "object",
       "allOf": [
         {
@@ -1492,15 +1562,185 @@
           "type": "object",
           "properties": {
             "taskDetail": {
-              "$ref": "#/definitions/TaskDetail"
+              "$ref": "#/definitions/SimpleTaskDetail"
             }
           }
         }
       ]
     },
-    "TaskDetail": {
+    "SimpleTaskDetail": {
       "type": "object",
-      "description": "The workflow task details."
+      "description": "Workflow simple task details.",
+      "properties": {
+        "taskBody":{
+          "type": "string",
+          "description": "The simple task body."
+        },
+        "assignedTo":{
+          "type":"array",
+          "description": "The users or groups were assigned the simple task.",
+          "items": {
+            "type":"string",
+            "format": "uuid"
+          }
+        },
+        "status":{
+          "type":"string",
+          "description": "Simple task status.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "SimpleTaskStatus",
+            "modelAsString": true
+          }
+        },
+        "changeHistory":{
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/TaskChangeEvent"
+          }
+        }
+      },
+      "required": [
+        "taskBody",
+        "assignedTo",
+        "status",
+        "changeHistory"
+      ]
+    },
+    "DSARTask": {
+      "x-ms-discriminator-value": "dsarTask",
+      "description": "The workflow dsar task properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/WorkflowTask"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "taskDetail": {
+              "$ref": "#/definitions/DSARTaskDetail"
+            }
+          }
+        }
+      ]
+    },
+    "DSARTaskDetail":{
+      "type": "object",
+      "description": "Workflow dsar task details.",
+      "properties": {
+        "taskBody":{
+          "type": "string",
+          "description": "The dsar task body."
+        },
+        "assignedTo":{
+          "type":"array",
+          "description": "The users or groups were assigned the dsar task.",
+          "items": {
+            "type":"string",
+            "format": "uuid"
+          }
+        },
+        "claimedBy":{
+          "type": "string",
+          "description": "The user who claimed the dsar task.",
+          "format": "uuid"
+        },
+        "approvers":{
+          "type":"array",
+          "description": "The list of approvers.",
+          "items": {
+            "type": "string",
+            "description": "The approver of Dsar task.",
+            "format": "uuid"
+          }
+        },
+        "dsarId":{
+          "type": "string",
+          "description": "The dsar id.",
+          "format": "uuid"
+        },
+        "dsarTaskId":{
+          "type": "string",
+          "description": "The dsar task id.",
+          "format": "uuid"
+        },
+        "status":{
+          "type":"string",
+          "description": "The dsar task status.",
+          "enum": [
+            "NotStarted",
+            "InProgress",
+            "Completed",
+            "NotApplicable",
+            "Approved",
+            "Reopened"
+          ],
+          "x-ms-enum": {
+            "name": "DSARTaskStatus",
+            "modelAsString": true
+          }
+        },
+        "changeHistory":{
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/TaskChangeEvent"
+          }
+        }
+      },
+      "required": [
+        "taskBody",
+        "assignedTo",
+        "approvers",
+        "dsarId",
+        "dsarTaskId",
+        "status",
+        "changeHistory"
+      ]
+    },
+    "TaskChangeEvent":{
+      "type":"object",
+      "description": "History of changes made on task.",
+      "properties": {
+        "updatedBy":{
+          "type":"string",
+          "format":"uuid"
+        },
+        "updatedTime":{
+          "type":"string",
+          "format": "date-time"
+        },
+        "type":{
+          "type": "string",
+          "enum": [
+            "ApproveApproval",
+            "RejectApproval",
+            "Reassign",
+            "ChangeTaskStatus",
+            "ClaimTask",
+            "ReleaseTask"
+          ],
+          "x-ms-enum": {
+            "name": "TaskChangeEventType",
+            "modelAsString": true
+          }
+        },
+        "change":{
+          "type":"object",
+          "description": "The changes made on this task."
+        }
+      },
+      "required": [
+        "updatedBy",
+        "updatedTime",
+        "type",
+        "change"
+      ]
     },
     "ApprovalResponseComment": {
       "type": "object",
@@ -1513,6 +1753,7 @@
     },
     "ReassignCommand": {
       "type": "object",
+      "description": "The request payload of reassigning a workflow task.",
       "properties": {
         "reassignments": {
           "type": "array",
@@ -1715,7 +1956,8 @@
         "type": "string",
         "enum": [
           "approval",
-          "task"
+          "simpleTask",
+          "dsarTask"
         ],
         "x-ms-enum": {
           "name": "TaskType",
