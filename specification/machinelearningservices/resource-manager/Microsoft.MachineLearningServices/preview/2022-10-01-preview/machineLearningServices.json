@@ -2637,12 +2637,7 @@
         },
         "managedNetwork": {
           "description": "Managed network settings.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/ManagedNetworkSettings"
-            }
-          ],
-          "x-nullable": true
+          "$ref": "#/definitions/ManagedNetworkSettings"
         }
       }
     },
@@ -6592,11 +6587,7 @@
       "type": "object",
       "properties": {
         "isolationMode": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/IsolationMode"
-            }
-          ]
+          "$ref": "#/definitions/IsolationMode"
         },
         "networkId": {
           "format": "uuid",
@@ -6605,14 +6596,9 @@
         "outboundRules": {
           "type": "object",
           "additionalProperties": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/OutboundRule"
-              }
-            ]
+            "$ref": "#/definitions/OutboundRule"
           },
-          "readOnly": true,
-          "x-nullable": true
+          "readOnly": true
         }
       }
     },
@@ -6635,18 +6621,10 @@
       "type": "object",
       "properties": {
         "type": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/RuleType"
-            }
-          ]
+          "$ref": "#/definitions/RuleType"
         },
         "category": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/RuleCategory"
-            }
-          ]
+          "$ref": "#/definitions/RuleCategory"
         }
       },
       "discriminator": "type"
