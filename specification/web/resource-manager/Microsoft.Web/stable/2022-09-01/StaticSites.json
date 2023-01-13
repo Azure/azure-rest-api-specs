@@ -933,7 +933,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverview"
+              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
             }
           },
           "default": {
@@ -1187,7 +1187,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverview"
+              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
             }
           },
           "default": {
@@ -2288,7 +2288,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverview"
+              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
             }
           },
           "default": {
@@ -2514,7 +2514,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverview"
+              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
             }
           },
           "default": {
@@ -4328,7 +4328,7 @@
           "description": "Database connections for the static site",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StaticSiteDatabaseConnectionOverview"
+            "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
           },
           "readOnly": true
         }
@@ -4441,7 +4441,7 @@
               "description": "Database connections for the static site build",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/StaticSiteDatabaseConnectionOverview"
+                "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
               },
               "readOnly": true
             }
@@ -4655,57 +4655,6 @@
             },
             "type": {
               "description": "The type of configuration file.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "StaticSiteDatabaseConnectionOverview": {
-      "description": "A static site database connection.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "StaticSiteDatabaseConnectionOverview resource specific properties",
-          "type": "object",
-          "properties": {
-            "resourceId": {
-              "description": "The resource id of the database.",
-              "type": "string",
-              "readOnly": true
-            },
-            "connectionIdentity": {
-              "description": "If present, the identity is used in conjunction with ConnectionString to connect to the database.",
-              "type": "string",
-              "readOnly": true
-            },
-            "connectionString": {
-              "description": "The connection string to use to connect to the database.",
-              "type": "string",
-              "readOnly": true
-            },
-            "region": {
-              "description": "The region of the database resource.",
-              "type": "string",
-              "readOnly": true
-            },
-            "configurationFiles": {
-              "description": "A list of configuration files associated with this database connection.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/StaticSiteDatabaseConnectionConfigurationFileOverview"
-              },
-              "readOnly": true
-            },
-            "name": {
-              "description": "If present, the name of this database connection resource.",
               "type": "string",
               "readOnly": true
             }
