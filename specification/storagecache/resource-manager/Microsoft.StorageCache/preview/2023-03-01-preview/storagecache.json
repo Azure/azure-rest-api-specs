@@ -2095,13 +2095,19 @@
           "description": "Properties of the Cache.",
           "properties": {
             "cacheSizeGB": {
-              "description": "The size of this Cache, in GB.",
+              "description": "The size of this Cache, in GB, when scalingFactor is 1.0. Values depend on the cache SKU - <a href=\"https://learn.microsoft.com/en-us/rest/api/storagecache/skus/list?tabs=HTTP\">List SKUs</a>.",
               "type": "integer",
               "format": "int32",
               "x-ms-mutability": [
                 "read",
                 "create"
               ]
+            },
+            "scalingFactor": {
+              "description": "Multiplier that sets the current storage and throughput capacity of the cache. Values depend on the cache SKU - <a href=\"https://learn.microsoft.com/en-us/rest/api/storagecache/skus/list?tabs=HTTP\">List SKUs</a>. Values above 1.0 increase the cache size and throughput - for example, the scaling factor 1.33 gives a cache that's 33% larger than its base size.",
+              "type": "number",
+              "format": "double",
+              "default": 1.0
             },
             "health": {
               "description": "Health of the Cache.",
