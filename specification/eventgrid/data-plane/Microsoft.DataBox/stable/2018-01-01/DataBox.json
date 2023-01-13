@@ -15,8 +15,14 @@
           "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated.",
           "type": "string"
         },
-        "stageDetails": {
-          "$ref": "#/definitions/StageDetail"
+        "stageName": {
+          "description": "Name of the current Stage",
+          "$ref": "#/definitions/DataboxStageName"
+        },
+        "stageTime": {
+          "description": "The time at which the stage happened.",
+          "format": "date-time",
+          "type": "string"
         }
       }
     },
@@ -28,8 +34,14 @@
           "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated.",
           "type": "string"
         },
-        "stageDetails": {
-          "$ref": "#/definitions/StageDetail"
+        "stageName": {
+          "description": "Name of the current Stage",
+          "$ref": "#/definitions/DataboxStageName"
+        },
+        "stageTime": {
+          "description": "The time at which the stage happened.",
+          "format": "date-time",
+          "type": "string"
         }
       }
     },
@@ -41,46 +53,41 @@
           "description": "Serial Number of the device associated with the event. The list is comma separated if more than one serial number is associated.",
           "type": "string"
         },
-        "stageDetails": {
-          "$ref": "#/definitions/StageDetail"
-        }
-      }
-    },
-    "StageDetail": {
-      "description": "Metadata related to the stage detail",
-      "type": "object",
-      "properties": {
-        "name": {
+        "stageName": {
           "description": "Name of the current Stage",
-          "enum": [
-            "CopyStarted",
-            "CopyCompleted",
-            "OrderCompleted"
-          ],
-          "x-ms-enum": {
-            "name": "DataBoxStage",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "CopyStarted",
-                "description": "Copy has started"
-              },
-              {
-                "value": "CopyCompleted",
-                "description": "Copy has completed"
-              },
-              {
-                "value": "OrderCompleted",
-                "description": "Order has been completed"
-              }
-            ]
-          }
+          "$ref": "#/definitions/DataboxStageName"
         },
-        "time": {
+        "stageTime": {
           "description": "The time at which the stage happened.",
           "format": "date-time",
           "type": "string"
         }
+      }
+    },
+    "DataboxStageName": {
+      "description": "Schema of Databox Stage Name enumeration.",
+      "enum": [
+        "CopyStarted",
+        "CopyCompleted",
+        "OrderCompleted"
+      ],
+      "x-ms-enum": {
+        "name": "DataboxStageName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "CopyStarted",
+            "description": "Copy has started"
+          },
+          {
+            "value": "CopyCompleted",
+            "description": "Copy has completed"
+          },
+          {
+            "value": "OrderCompleted",
+            "description": "Order has been completed"
+          }
+        ]
       }
     }
   }
