@@ -2,7 +2,7 @@
   "parameters": {
     "resourceGroupName": "scgroup",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "api-version": "2022-11-01-preview",
+    "api-version": "2023-01-01",
     "cacheName": "sc1",
     "storageTargetName": "st1",
     "storagetarget": {
@@ -15,7 +15,9 @@
         ],
         "blobNfs": {
           "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/blofnfs/blobServices/default/containers/blobnfs",
-          "usageModel": "WRITE_WORKLOAD_15"
+          "usageModel": "READ_WRITE",
+          "verificationTimer": 28800,
+          "writeBackTimer": 3600
         }
       }
     }
@@ -44,7 +46,9 @@
           "state": "Ready",
           "blobNfs": {
             "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/blofnfs/blobServices/default/containers/blobnfs",
-            "usageModel": "WRITE_WORKLOAD_15"
+            "usageModel": "READ_WRITE",
+            "verificationTimer": 28800,
+            "writeBackTimer": 3600
           }
         }
       }
@@ -72,7 +76,9 @@
           "state": "Ready",
           "blobNfs": {
             "target": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.Storage/storageAccounts/blofnfs/blobServices/default/containers/blobnfs",
-            "usageModel": "WRITE_WORKLOAD_15"
+            "usageModel": "READ_WRITE",
+            "verificationTimer": 28800,
+            "writeBackTimer": 3600
           }
         }
       }
