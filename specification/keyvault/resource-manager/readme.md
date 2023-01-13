@@ -229,7 +229,7 @@ directive:
 - suppress: INVALID_REQUEST_PARAMETER
    from: keyvault.json
    where:
-    - '$.paths./subscriptions/{subscriptionId}/resources.get.parameters[2]'
+    - '$.paths["/subscriptions/{subscriptionId}/resources"].get.parameters[2]'
    reason: The Vaults_List API endpoint only supports version 2015-11-01.
 ```
 
