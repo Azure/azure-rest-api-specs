@@ -1113,7 +1113,7 @@
             "description": "A JSON representation of the database connection request properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionRequestPropertiesARMResource"
+              "$ref": "#/definitions/StaticSiteDatabaseConnectionPatchRequestPropertiesARMResource"
             }
           },
           {
@@ -4633,35 +4633,24 @@
     "StaticSiteDatabaseConnectionConfigurationFileOverview": {
       "description": "A database connection configuration file",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "StaticSiteDatabaseConnectionConfigurationFileOverview resource specific properties",
-          "type": "object",
-          "properties": {
-            "fileName": {
-              "description": "The name of the configuration file.",
-              "type": "string",
-              "readOnly": true
-            },
-            "contents": {
-              "description": "The Base64 encoding of the file contents.",
-              "type": "string",
-              "readOnly": true
-            },
-            "type": {
-              "description": "The type of configuration file.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
+        "fileName": {
+          "description": "The name of the configuration file.",
+          "type": "string",
+          "readOnly": true
+        },
+        "contents": {
+          "description": "The Base64 encoding of the file contents.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of configuration file.",
+          "type": "string",
+          "readOnly": true
         }
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "StaticSiteDatabaseConnectionOverviewARMResource": {
       "description": "Static Site Database Connection Overview ARM resource.",
