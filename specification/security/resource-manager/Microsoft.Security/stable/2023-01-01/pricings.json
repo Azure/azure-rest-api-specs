@@ -152,12 +152,6 @@
               "$ref": "#/definitions/Pricing"
             }
           },
-          "207": {
-            "description": "You do not have the required permissions to set some of the relevant extensions for this plan.",
-            "schema": {
-              "$ref": "#/definitions/Pricing"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -317,6 +311,11 @@
           "type": "object",
           "description": "Property values associated with the extension.",
           "additionalProperties": {}
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Optional. A message describing the error occurred during enablement/disablement of the extension."
         }
       },
       "required": [

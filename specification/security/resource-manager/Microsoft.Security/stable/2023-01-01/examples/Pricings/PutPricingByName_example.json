@@ -40,30 +40,24 @@
         }
       }
     },
-    "207": {
+    "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/CloudPosture",
-        "name": "CloudPosture",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts",
+        "name": "StorageAccounts",
         "type": "Microsoft.Security/pricings",
         "properties": {
           "pricingTier": "Standard",
           "freeTrialRemainingTime": "PT0S",
+          "subPlan": "PerStorageAccount",
           "extensions": [
             {
-              "type": "AgentlessVmScanning",
+              "type": "OnUploadMalwareScanning",
+              "isEnabled": false,
+              "errorMessage": "Last enablemment attempt failed due to missing permissions.",
+            },
+            {
+              "type": "DataSensitivityDiscovery",
               "isEnabled": true
-            },
-            {
-              "type": "AgentlessDiscoveryForKubernetes",
-              "isEnabled": false
-            },
-            {
-              "type": "DataSensitivityScanning",
-              "isEnabled": false
-            },
-            {
-              "type": "ContainerRegistriesVulnerabilityAssessments",
-              "isEnabled": false
             }
           ]
         }
