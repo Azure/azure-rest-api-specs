@@ -1188,7 +1188,7 @@
       }
     },
     "EntityComponentInformation": {
-      "description": "The object for entity component information.",
+      "description": "This object contains information of the detected entity components. The possible component types may expand in the future. Parsing code should handle unexpected values gracefully",
       "type": "object",
       "discriminator": "entityComponentKind",
       "properties": {
@@ -1211,7 +1211,7 @@
       ]
     },
     "PrebuiltComponent": {
-      "description": "The prebuilt entity component of component information.",
+      "description": "This object contains information of the prebuilt component of the detected entity.",
       "allOf": [
         {
           "$ref": "#/definitions/EntityComponentInformation"
@@ -1227,7 +1227,7 @@
       }
     },
     "LearnedComponent": {
-      "description": "The learned entity component of component information.",
+      "description": "This object contains information of the learned component of the detected entity.",
       "allOf": [
         {
           "$ref": "#/definitions/EntityComponentInformation"
@@ -1243,7 +1243,7 @@
       }
     },
     "ListComponent": {
-      "description": "The list component of component information.",
+      "description": "This object contains information of the list component of the detected entity.",
       "allOf": [
         {
           "$ref": "#/definitions/EntityComponentInformation"
