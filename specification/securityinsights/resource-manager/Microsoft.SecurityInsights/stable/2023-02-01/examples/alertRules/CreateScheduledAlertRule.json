@@ -54,29 +54,42 @@
         ],
         "alertDetailsOverride": {
           "alertDisplayNameFormat": "Alert from {{Computer}}",
-          "alertDescriptionFormat": "Suspicious activity was made by {{ComputerIP}}"
-        },
-        "incidentConfiguration": {
-          "createIncident": true,
-          "groupingConfiguration": {
-            "enabled": true,
-            "reopenClosedIncident": false,
-            "lookbackDuration": "PT5H",
-            "matchingMethod": "Selected",
-            "groupByEntities": [
-              "Host"
-            ],
-            "groupByAlertDetails": [
-              "DisplayName"
-            ],
-            "groupByCustomDetails": [
-              "OperatingSystemType",
-              "OperatingSystemName"
-            ]
+          "alertDescriptionFormat": "Suspicious activity was made by {{ComputerIP}}",
+          "alertDynamicProperties": [
+            {
+              "alertProperty": "ProductComponentName",
+              "value": "ProductComponentNameCustomColumn"
+            },
+            {
+              "alertProperty": "ProductName",
+              "value": "ProductNameCustomColumn"
+            },
+            {
+              "alertProperty": "AlertLink",
+              "value": "Link"
+            }
+          ],
+          "incidentConfiguration": {
+            "createIncident": true,
+            "groupingConfiguration": {
+              "enabled": true,
+              "reopenClosedIncident": false,
+              "lookbackDuration": "PT5H",
+              "matchingMethod": "Selected",
+              "groupByEntities": [
+                "Host"
+              ],
+              "groupByAlertDetails": [
+                "DisplayName"
+              ],
+              "groupByCustomDetails": [
+                "OperatingSystemType",
+                "OperatingSystemName"
+              ]
+            }
           }
         }
       }
-    }
   },
   "responses": {
     "200": {
