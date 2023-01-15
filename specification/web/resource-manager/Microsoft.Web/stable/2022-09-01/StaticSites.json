@@ -871,7 +871,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewCollection"
+              "$ref": "#/definitions/DatabaseConnectionResponseCollection"
             }
           },
           "default": {
@@ -936,7 +936,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+              "$ref": "#/definitions/DatabaseConnectionResponse"
             }
           },
           "default": {
@@ -992,7 +992,7 @@
             "description": "A JSON representation of the database connection request properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionRequestPropertiesARMResource"
+              "$ref": "#/definitions/DatabaseConnectionRequest"
             }
           },
           {
@@ -1006,7 +1006,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+              "$ref": "#/definitions/DatabaseConnectionResponse"
             }
           },
           "default": {
@@ -1122,7 +1122,7 @@
             "description": "A JSON representation of the database connection request properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionPatchRequestPropertiesARMResource"
+              "$ref": "#/definitions/DatabaseConnectionPatchRequest"
             }
           },
           {
@@ -1136,7 +1136,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+              "$ref": "#/definitions/DatabaseConnectionResponse"
             }
           },
           "default": {
@@ -1198,7 +1198,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+              "$ref": "#/definitions/DatabaseConnectionResponse"
             }
           },
           "default": {
@@ -1417,7 +1417,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewCollection"
+              "$ref": "#/definitions/DatabaseConnectionResponseCollection"
             }
           },
           "default": {
@@ -2244,7 +2244,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewCollection"
+              "$ref": "#/definitions/DatabaseConnectionResponseCollection"
             }
           },
           "default": {
@@ -2301,7 +2301,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+              "$ref": "#/definitions/DatabaseConnectionResponse"
             }
           },
           "default": {
@@ -2349,7 +2349,7 @@
             "description": "A JSON representation of the database connection request properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionRequestPropertiesARMResource"
+              "$ref": "#/definitions/DatabaseConnectionRequest"
             }
           },
           {
@@ -2363,7 +2363,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+              "$ref": "#/definitions/DatabaseConnectionResponse"
             }
           },
           "default": {
@@ -2463,7 +2463,7 @@
             "description": "A JSON representation of the database connection request properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionPatchRequestPropertiesARMResource"
+              "$ref": "#/definitions/DatabaseConnectionPatchRequest"
             }
           },
           {
@@ -2477,7 +2477,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+              "$ref": "#/definitions/DatabaseConnectionResponse"
             }
           },
           "default": {
@@ -2531,7 +2531,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+              "$ref": "#/definitions/DatabaseConnectionResponse"
             }
           },
           "default": {
@@ -3199,7 +3199,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewCollection"
+              "$ref": "#/definitions/DatabaseConnectionResponseCollection"
             }
           },
           "default": {
@@ -4345,7 +4345,7 @@
           "description": "Database connections for the static site",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+            "$ref": "#/definitions/DatabaseConnectionResponse"
           },
           "readOnly": true
         }
@@ -4458,7 +4458,7 @@
               "description": "Database connections for the static site build",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+                "$ref": "#/definitions/DatabaseConnectionResponse"
               },
               "readOnly": true
             }
@@ -4669,7 +4669,7 @@
       },
       "x-ms-client-flatten": true
     },
-    "StaticSiteDatabaseConnectionOverviewARMResource": {
+    "DatabaseConnectionResponse": {
       "description": "Static Site Database Connection Overview ARM resource.",
       "type": "object",
       "allOf": [
@@ -4679,7 +4679,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "StaticSiteDatabaseConnectionOverviewARMResource resource specific properties",
+          "description": "DatabaseConnectionResponse resource specific properties",
           "type": "object",
           "properties": {
             "resourceId": {
@@ -4721,7 +4721,7 @@
         }
       }
     },
-    "StaticSiteDatabaseConnectionOverviewCollection": {
+    "DatabaseConnectionResponseCollection": {
       "description": "Collection of static site database connections.",
       "required": [
         "value"
@@ -4732,7 +4732,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StaticSiteDatabaseConnectionOverviewARMResource"
+            "$ref": "#/definitions/DatabaseConnectionResponse"
           }
         },
         "nextLink": {
@@ -4742,12 +4742,12 @@
         }
       }
     },
-    "StaticSiteDatabaseConnectionPatchRequestPropertiesARMResource": {
+    "DatabaseConnectionPatchRequest": {
       "description": "Static Site Database Connection Request Properties ARM resource when patching",
       "type": "object",
       "properties": {
         "properties": {
-          "description": "StaticSiteDatabaseConnectionPatchRequestPropertiesARMResource resource specific properties",
+          "description": "DatabaseConnectionPatchRequest resource specific properties",
           "type": "object",
           "properties": {
             "resourceId": {
@@ -4771,7 +4771,7 @@
         }
       }
     },
-    "StaticSiteDatabaseConnectionRequestPropertiesARMResource": {
+    "DatabaseConnectionRequest": {
       "description": "Static Site Database Connection Request Properties ARM resource",
       "type": "object",
       "allOf": [
@@ -4781,7 +4781,7 @@
       ],
       "properties": {
         "properties": {
-          "description": "StaticSiteDatabaseConnectionRequestPropertiesARMResource resource specific properties",
+          "description": "DatabaseConnectionRequest resource specific properties",
           "type": "object",
           "properties": {
             "resourceId": {
