@@ -41,7 +41,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -83,7 +83,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -128,7 +128,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -176,7 +176,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -236,7 +236,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -294,7 +294,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -340,7 +340,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -381,40 +381,6 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "CreatedByType"
-      }
-    },
-    "ErrorResponseBody": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "x-ms-identifiers": [],
-          "items": {
-            "$ref": "#/definitions/ErrorResponseBody"
-          }
-        }
-      }
-    },
-    "LastModifiedByType": {
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "LastModifiedByType"
       }
     },
     "ManagedGrafana": {
@@ -530,6 +496,19 @@
             "type": "string"
           }
         }
+      }
+    },
+    "LastModifiedByType": {
+      "enum": [
+        "User",
+        "Application",
+        "ManagedIdentity",
+        "Key"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "LastModifiedByType"
       }
     },
     "ManagedIdentity": {
@@ -673,14 +652,6 @@
         "name": "ProvisioningState"
       }
     },
-    "ResourceProviderDefaultErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorResponseBody"
-        }
-      }
-    },
     "ResourceSku": {
       "required": [
         "name"
@@ -718,6 +689,18 @@
         }
       }
     },
+    "ZoneRedundancy": {
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "default": "Disabled",
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "ZoneRedundancy"
+      }
+    },
     "UserAssignedIdentity": {
       "type": "object",
       "properties": {
@@ -731,18 +714,6 @@
           "type": "string",
           "readOnly": true
         }
-      }
-    },
-    "ZoneRedundancy": {
-      "enum": [
-        "Disabled",
-        "Enabled"
-      ],
-      "default": "Disabled",
-      "type": "string",
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "ZoneRedundancy"
       }
     },
     "AutoGeneratedDomainNameLabelScope": {
