@@ -218,23 +218,16 @@ input-file:
 directive:
 - suppress:
     - R3016 # The 'release_policy' property for KeyCreateParameters does not support camelCase.
-- suppress:
     - R3026 # The 'PrivateEndpointConnection' and 'PrivateLinkResource' sub-resources don't define PATCH as per Network Team's specification.
-- suppress:
     - R3025 # The 'PrivateLinkResource' is only accessible via List operation; does not define GET as per Network Team's specification.
-- suppress:
     - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
-- suppress:
     - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and syncronous return types (200, 201, 204) as directed by SDK team.
-- suppress:
     - R4009 # Vault object is the only one that need to be tracked with SystemData
 - suppress: INVALID_REQUEST_PARAMETER
   from: keyvault.json
   reason: The Vaults_List API endpoint only supports version 2015-11-01.
 - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
   from: keyvault.json
-  where:
-    - '$.paths["/subscriptions/{subscriptionId}/resources"].get'
   reason: The Vaults_List API endpoint only supports version 2015-11-01.
 ```
 
