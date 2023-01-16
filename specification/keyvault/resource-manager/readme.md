@@ -212,7 +212,7 @@ input-file:
 - Microsoft.KeyVault/stable/2019-09-01/secrets.json
 ```
 
-### Supressions
+### Suppression
 
 ``` yaml
 directive:
@@ -223,6 +223,12 @@ directive:
     - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
     - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and syncronous return types (200, 201, 204) as directed by SDK team.
     - R4009 # Vault object is the only one that need to be tracked with SystemData
+- suppress: INVALID_REQUEST_PARAMETER
+  from: keyvault.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
+- suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+  from: keyvault.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
 ```
 
 ---
