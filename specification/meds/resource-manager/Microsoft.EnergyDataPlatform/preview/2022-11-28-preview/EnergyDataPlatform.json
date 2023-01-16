@@ -333,6 +333,16 @@
         }
       }
     },
+    "ManagedRGConfiguration": {
+      "description": "Managed resource group configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
+    },
     "EnergyServiceList": {
       "description": "The list of Energy services resources.",
       "type": "object",
@@ -420,6 +430,10 @@
           "type": "object",
           "description": "Properties to configure network blade",
           "$ref": "#/definitions/Settings"
+        },
+        "managedResourceGroupConfiguration": {
+          "description": "Managed resource group configuration",
+          "$ref": "#/definitions/ManagedRGConfiguration"
         }
       }
     },
