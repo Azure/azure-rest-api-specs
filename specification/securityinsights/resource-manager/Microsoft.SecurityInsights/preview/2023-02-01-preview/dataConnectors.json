@@ -121,6 +121,9 @@
           "Get an Office365 Project data connector": {
             "$ref": "./examples/dataConnectors/GetOffice365ProjectDataConnetorById.json"
           },
+          "Get a MicrosoftPurviewInformationProtection data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftPurviewInformationProtectionDataConnetorById.json"
+          },
           "Get an Office365 PowerBI data connector": {
             "$ref": "./examples/dataConnectors/GetOfficePowerBIDataConnetorById.json"
           },
@@ -187,6 +190,9 @@
           },
           "Creates or updates an Office365 Project data connector": {
             "$ref": "./examples/dataConnectors/CreateOffice365ProjectDataConnetor.json"
+          },
+          "Creates or updates an MicrosoftPurviewInformationProtection data connector": {
+            "$ref": "./examples/dataConnectors/CreateMicrosoftPurviewInformationProtectionDataConnetor.json"
           },
           "Creates or updates an Office PowerBI data connector": {
             "$ref": "./examples/dataConnectors/CreateOfficePowerBIDataConnector.json"
@@ -260,6 +266,9 @@
           },
           "Delete an Office365 Project data connector": {
             "$ref": "./examples/dataConnectors/DeleteOffice365ProjectDataConnetor.json"
+          },
+          "Delete an MicrosoftPurviewInformationProtection data connector": {
+            "$ref": "./examples/dataConnectors/DeleteMicrosoftPurviewInformationProtectionDataConnetor.json"
           },
           "Delete an Office PowerBI data connector": {
             "$ref": "./examples/dataConnectors/DeleteOfficePowerBIDataConnetor.json"
@@ -434,6 +443,9 @@
           },
           "Check requirements for Office365Project.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsOffice365Project.json"
+          },
+          "Check requirements for MicrosoftPurviewInformationProtection.": {
+            "$ref": "./examples/dataConnectors/CheckRequirementsMicrosoftPurviewInformationProtection.json"
           },
           "Check requirements for OfficePowerBI.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsOfficePowerBI.json"
@@ -843,6 +855,32 @@
         }
       ],
       "description": "OfficeIRM (Microsoft Insider Risk Management) requirements check properties.",
+      "type": "object"
+    },
+    "MicrosoftPurviewInformationProtectionCheckRequirements": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorsCheckRequirements"
+        }
+      ],
+      "description": "Represents MicrosoftPurviewInformationProtection requirements check request.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftPurviewInformationProtectionCheckRequirementsProperties",
+          "description": "MicrosoftPurviewInformationProtection requirements check properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftPurviewInformationProtection"
+    },
+    "MicrosoftPurviewInformationProtectionCheckRequirementsProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MicrosoftPurviewInformationProtection requirements check properties.",
       "type": "object"
     },
     "Office365ProjectCheckRequirements": {
@@ -1398,6 +1436,7 @@
         "OfficeATP",
         "OfficeIRM",
         "Office365Project",
+        "MicrosoftPurviewInformationProtection",
         "OfficePowerBI",
         "AmazonWebServicesCloudTrail",
         "AmazonWebServicesS3",
@@ -1441,6 +1480,9 @@
           },
           {
             "value": "Office365Project"
+          },
+          {
+            "value": "MicrosoftPurviewInformationProtection"
           },
           {
             "value": "OfficePowerBI"
@@ -1643,6 +1685,59 @@
       ],
       "description": "OfficeATP (Office 365 Advanced Threat Protection) data connector properties.",
       "type": "object"
+    },
+    "MicrosoftPurviewInformationProtectionDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents Microsoft Purview Information Protection data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftPurviewInformationProtectionDataConnectorProperties",
+          "description": "Microsoft Purview Information Protection data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftPurviewInformationProtection"
+    },
+    "MicrosoftPurviewInformationProtectionConnectorDataTypes": {
+      "description": "The available data types for Microsoft Purview Information Protection data connector.",
+      "properties": {
+        "logs": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Logs data type.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "logs"
+      ]
+    },
+    "MicrosoftPurviewInformationProtectionDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "Microsoft Purview Information Protection data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MicrosoftPurviewInformationProtectionConnectorDataTypes",
+          "description": "The available data types for the connector."
+        }
+      },
+      "type": "object",
+      "required": [
+        "dataTypes"
+      ]
     },
     "Office365ProjectDataConnector": {
       "allOf": [
