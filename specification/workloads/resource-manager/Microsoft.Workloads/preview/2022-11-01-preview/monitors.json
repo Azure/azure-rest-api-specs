@@ -570,6 +570,233 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/sapLandscapeMonitor/default": {
+      "get": {
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "operationId": "SapLandscapeMonitor_Get",
+        "summary": "Gets configuration values for Single Pane Of Glass for SAP monitor.",
+        "description": "Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.",
+        "x-ms-examples": {
+          "Get properties of a SAP monitor": {
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "operationId": "SapLandscapeMonitor_Create",
+        "summary": "Creates a SAP Landscape Monitor Dashboard.",
+        "description": "Creates a SAP Landscape Monitor Dashboard for the specified subscription, resource group, and resource name.",
+        "x-ms-examples": {
+          "Create for SAP Landscape monitor Dashboard": {
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SapLandscapeMonitorParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated SAP Landscape Monitor Dashboard.",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitor"
+            }
+          },
+          "201": {
+            "description": "Creating SAP Landscape Monitor Dashboard",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "operationId": "SapLandscapeMonitor_Delete",
+        "summary": "Deletes a SAP Landscape Monitor Dashboard.",
+        "description": "Deletes a SAP Landscape Monitor Dashboard with the specified subscription, resource group, and SAP monitor name.",
+        "x-ms-examples": {
+          "Deletes SAP monitor": {
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete SAP Landscape Monitor Dashboard"
+          },
+          "204": {
+            "description": "SAP Landscape Monitor Dashboard is already deleted or not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "operationId": "SapLandscapeMonitor_Update",
+        "summary": "Patches the SAP Landscape Monitor Dashboard.",
+        "description": "Patches the SAP Landscape Monitor Dashboard for the specified subscription, resource group, and SAP monitor name.",
+        "x-ms-examples": {
+          "Update SAP monitor": {
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SapLandscapeMonitorParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/monitors/{monitorName}/sapLandscapeMonitor": {
+      "get": {
+        "tags": [
+          "SapLandscapeMonitor"
+        ],
+        "operationId": "SapLandscapeMonitor_List",
+        "summary": "Gets configuration values for Single Pane Of Glass for SAP monitor.",
+        "description": "Gets configuration values for Single Pane Of Glass for SAP monitor for the specified subscription, resource group, and resource name.",
+        "x-ms-examples": {
+          "Get properties of a SAP monitor": {
+            "$ref": "./examples/workloadmonitor/SapLandscapeMonitor_List.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/monitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SapLandscapeMonitorListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1253,6 +1480,140 @@
         }
       },
       "description": "Describes the properties of a provider instance."
+    },
+    "SapLandscapeMonitorMetricThresholds": {
+      "description": "Gets or sets the Threshold Values for Top Metrics Health.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the threshold.",
+          "type": "string"
+        },
+        "green": {
+          "description": "Gets or sets the threshold value for Green.",
+          "type": "number"
+        },
+        "yellow": {
+          "description": "Gets or sets the threshold value for Yellow.",
+          "type": "number"
+        },
+        "red": {
+          "description": "Gets or sets the threshold value for Red.",
+          "type": "number"
+        }
+      }
+    },
+    "SapLandscapeMonitorSidMapping": {
+      "description": "Gets or sets the mapping for SID to Environment/Applications.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the name of the grouping.",
+          "type": "string"
+        },
+        "topSid": {
+          "description": "Gets or sets the list of SID's.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxLength": 50
+        }
+      }
+    },
+    "SapLandscapeMonitorListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitor"
+          },
+          "description": "The list of Sap Landscape Monitor configuration."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of SAP Landscape Monitor Dashboard."
+        }
+      },
+      "description": "The response from the List SAP Landscape Monitor Dashboard operation."
+    },
+    "SapLandscapeMonitor": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapLandscapeMonitorProperties",
+          "description": "Sap Landscape Monitor properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "configuration associated with SAP Landscape Monitor Dashboard."
+    },
+    "SapLandscapeMonitorProperties": {
+      "description": "Gets or sets the properties for Sap Landscape Monitor Dashboard.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Created",
+            "Failed",
+            "Succeeded",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "SapLandscapeMonitorProvisioningState",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the SAP monitor."
+        },
+        "grouping": {
+          "description": "Gets or sets the SID groupings by landscape and Environment.",
+          "type": "object",
+          "properties": {
+            "landscape": {
+              "description": "Gets or sets the list of landscape to SID mappings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SapLandscapeMonitorSidMapping"
+              },
+              "maxLength": 50,
+              "x-ms-identifiers": [
+                "name"
+              ]
+            },
+            "sapApplication": {
+              "description": "Gets or sets the list of Sap Applications to SID mappings.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/SapLandscapeMonitorSidMapping"
+              },
+              "maxLength": 50,
+              "x-ms-identifiers": [
+                "name"
+              ]
+            }
+          }
+        },
+        "topMetricsThresholds": {
+          "description": "Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SapLandscapeMonitorMetricThresholds"
+          },
+          "maxLength": 50,
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     }
   },
   "parameters": {
@@ -1290,6 +1651,16 @@
         "$ref": "#/definitions/ProviderInstance"
       },
       "description": "Request body representing a provider instance",
+      "x-ms-parameter-location": "method"
+    },
+    "SapLandscapeMonitorParameter": {
+      "name": "sapLandscapeMonitorParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SapLandscapeMonitor"
+      },
+      "description": "Request body representing a configuration for Sap Landscape Monitor Dashboard",
       "x-ms-parameter-location": "method"
     }
   }
