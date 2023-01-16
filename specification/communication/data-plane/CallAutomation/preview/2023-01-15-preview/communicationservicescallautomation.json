@@ -741,7 +741,7 @@
           {
             "name": "participantMri",
             "in": "path",
-            "description": "MRI of the participants to retrieve.",
+            "description": "MRI of the participant to retrieve.",
             "required": true,
             "type": "string"
           },
@@ -1689,6 +1689,14 @@
           "$ref": "#/definitions/PhoneNumberIdentifierModel",
           "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when inviting a PSTN participant."
         },
+        "sourceDisplayName": {
+          "description": "(Optional) The display name of the source that is associated with this invite operation when\r\nadding a PSTN participant or teams user.  Note: Will not update the display name in the roster.",
+          "type": "string"
+        },
+        "sourceIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "(Optional) The identifier of the source of the call for this invite operation. If SourceDisplayName\r\nis not set, the display name of the source will be used by default when adding a PSTN participant or teams user."
+        },
         "participantsToAdd": {
           "description": "The participants to invite.",
           "type": "array",
@@ -2265,7 +2273,7 @@
           "type": "string"
         },
         "recognizedPhrase": {
-          "description": "Phrases are set to the value if choice is selected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
+          "description": "Phrases are set to the value if choice is seletected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
           "type": "string"
         }
       }
@@ -2374,19 +2382,19 @@
     }
   },
   "x-ms-parameterized-host": {
-      "hostTemplate": "{endpoint}",
-      "useSchemePrefix": false,
-      "parameters": [
-          {
-              "name": "endpoint",
-              "description": "The endpoint of the Azure Communication resource.",
-              "required": true,
-              "type": "string",
-              "format": "url",
-              "in": "path",
-              "x-ms-skip-url-encoding": true,
-              "x-ms-parameter-location": "client"
-          }
-      ]
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "description": "The endpoint of the Azure Communication resource.",
+        "required": true,
+        "type": "string",
+        "format": "url",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
+    }
+    ]
   }
 }
