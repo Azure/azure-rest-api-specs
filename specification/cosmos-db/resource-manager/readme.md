@@ -27,20 +27,20 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2022-11
+tag: package-preview-2022-11
 ```
 
 
-### Tag: package-2022-11
+### Tag: package-preview-2022-11
 
-These settings apply only when `--tag=package-2022-11` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2022-11'
 input-file:
 
-These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-08'
+```yaml $(tag) == 'package-preview-2022-11'
 input-file:
   - Microsoft.DocumentDB/preview/2022-11-15-preview/cosmos-db.json
   - Microsoft.DocumentDB/preview/2022-11-15-preview/dataTransferService.json
