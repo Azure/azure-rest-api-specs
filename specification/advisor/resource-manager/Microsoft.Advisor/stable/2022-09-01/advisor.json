@@ -1650,6 +1650,64 @@
           "readOnly": true
         }
       }
+    },
+    "timeSeriesEntity": {
+      "description": "The historic data at different aggregation levels.",
+      "type": "array",
+      "items": {
+        "description": "The data from different aggregation levels.",
+        "type": "object",
+        "properties": {
+          "aggregationLevel": {
+            "description": "The aggregation level of the score.",
+            "type": "string",
+            "enum": [
+              "week",
+              "day",
+              "month"
+            ]
+          },
+          "scoreHistory": {
+            "description": "The past score data",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/scoreEntity"
+            }
+          }
+        }
+      }
+    },
+    "advisorScoreEntity": {
+      "description": "The details of Advisor score for a single category.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The ID of the resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The category.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of resource.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The Advisor score data.",
+          "type": "object",
+          "properties": {
+            "lastRefreshedScore": {
+              "description": "The details of latest available score.",
+              "$ref": "#/definitions/scoreEntity"
+            },
+            "timeSeries": {
+              "description": "The historic Advisor score data.",
+              "$ref": "#/definitions/timeSeriesEntity"
+            }
+          }
+        }
+      }
     }
   },
   "parameters": {
