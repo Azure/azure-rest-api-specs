@@ -5671,6 +5671,10 @@
         "publisherId": {
           "type": "string",
           "description": "Publisher Id"
+        },
+        "marketplaceSubscriptionStatus": {
+          "$ref": "#/definitions/MarketplaceSubscriptionStatus",
+          "description": "Marketplace Subscription Status"
         }
       },
       "description": "MarketplaceDetails of PAN Firewall resource",
@@ -5678,6 +5682,22 @@
         "offerId",
         "publisherId"
       ]
+    },
+    "MarketplaceSubscriptionStatus": {
+      "type": "string",
+      "description": "Marketplace SUbscription Status",
+      "enum": [
+        "PendingFulfillmentStart",
+        "Subscribed",
+        "Suspended",
+        "Unsubscribed",
+        "NotStarted",
+        "FulfillmentRequested"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceSubscriptionStatus",
+        "modelAsString": true
+      }
     },
     "MediumString": {
       "type": "string",
