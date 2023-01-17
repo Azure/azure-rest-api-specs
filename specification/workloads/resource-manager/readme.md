@@ -41,8 +41,6 @@ input-file:
   - Microsoft.Workloads/preview/2022-11-01-preview/commonTypes.json
   - Microsoft.Workloads/preview/2022-11-01-preview/monitors.json
   - Microsoft.Workloads/preview/2022-11-01-preview/operations.json
-  - Microsoft.Workloads/preview/2022-11-01-preview/phpWorkloads.json
-  - Microsoft.Workloads/preview/2022-11-01-preview/skus.json
 ```
 ### Tag: package-2021-12-01-preview
 
