@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Analyze Text Authoring",
-    "version": "2023-05-01",
+    "version": "2023-04-15-preview",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms. The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview\">https://docs.microsoft.com/en-us/azure/cognitive-services/language-service/overview</a>."
   },
   "securityDefinitions": {
@@ -286,6 +286,13 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
+            "in": "header",
+            "name": "format",
+            "description": "The format of the project to import. The currently supported formats are json and aml formats. If not provided, the default is set to json.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "The project data to import.",
@@ -293,13 +300,6 @@
             "schema": {
               "$ref": "#/definitions/TextAnalysisAuthoringExportedProject"
             }
-          },
-          {
-            "in": "header",
-            "name": "format",
-            "description": "The format of the project to import. The currently supported formats are json and aml formats. If not provided, the default is set to json.",
-            "type": "string",
-            "x-ms-parameter-location": "method"
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -1847,6 +1847,28 @@
       },
       "x-ms-client-name": "AssignedResourceDeploymentsMetadata"
     },
+    "TextAnalysisAuthoringCompositionSetting": {
+      "enum": [
+        "separateComponents",
+        "combineComponents"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "CompositionSetting",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "separateComponents",
+            "description": "Every component's match or prediction is returned as a separate instance of the entity."
+          },
+          {
+            "value": "combineComponents",
+            "description": "When two or more components are found in the text and overlap, the components' spans are merged together into one span combining all of them."
+          }
+        ]
+      },
+      "x-ms-client-name": "CompositionSetting"
+    },
     "TextAnalysisAuthoringConfusionMatrix": {
       "type": "object",
       "additionalProperties": {
@@ -2471,6 +2493,29 @@
       },
       "x-ms-client-name": "ExportedClass"
     },
+    "TextAnalysisAuthoringExportedCompositeEntity": {
+      "description": "Represents an entity in an exported project with composite entities enabled.",
+      "type": "object",
+      "properties": {
+        "compositionSetting": {
+          "description": "The behavior to follow when the entity's components overlap with each other.",
+          "$ref": "#/definitions/TextAnalysisAuthoringCompositionSetting"
+        },
+        "list": {
+          "description": "The list component of the entity.",
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedEntityList"
+        },
+        "prebuilt": {
+          "description": "The prebuilt entity component.",
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedPrebuiltEntity"
+        },
+        "category": {
+          "description": "The entity category.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedCompositeEntity"
+    },
     "TextAnalysisAuthoringExportedCustomAbstractiveSummarizationDocument": {
       "description": "Represents an exported document for a custom abstractive summarization project.",
       "required": [
@@ -2739,6 +2784,70 @@
       },
       "x-ms-client-name": "ExportedEntity"
     },
+    "TextAnalysisAuthoringExportedEntityList": {
+      "description": "Represents a list component of an entity.",
+      "type": "object",
+      "properties": {
+        "sublists": {
+          "description": "The sub-lists of the list component.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntitySublist"
+          }
+        }
+      },
+      "x-ms-client-name": "ExportedEntityList"
+    },
+    "TextAnalysisAuthoringExportedEntityListSynonym": {
+      "description": "Represents a list of synonyms inside a list component",
+      "type": "object",
+      "properties": {
+        "language": {
+          "description": "Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "type": "string"
+        },
+        "values": {
+          "description": "The list of synonyms.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-client-name": "ExportedEntityListSynonym"
+    },
+    "TextAnalysisAuthoringExportedEntitySublist": {
+      "description": "Represents a sub-list inside a list component.",
+      "type": "object",
+      "properties": {
+        "listKey": {
+          "description": "The key of the sub-list.",
+          "type": "string"
+        },
+        "synonyms": {
+          "description": "The phrases of that correspond to the sub-list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedEntityListSynonym"
+          }
+        }
+      },
+      "x-ms-client-name": "ExportedEntitySublist"
+    },
+    "TextAnalysisAuthoringExportedPrebuiltEntity": {
+      "description": "Represents an exported prebuilt entity component",
+      "required": [
+        "category"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The prebuilt entity category.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedPrebuiltEntity"
+    },
     "TextAnalysisAuthoringExportedProject": {
       "description": "Represents an exported project.",
       "required": [
@@ -2781,6 +2890,59 @@
       },
       "discriminator": "projectKind",
       "x-ms-client-name": "ExportedProjectAssets"
+    },
+    "TextAnalysisAuthoringExportedTA4HDocument": {
+      "description": "Represents an exported document for a TA4H project.",
+      "type": "object",
+      "properties": {
+        "entities": {
+          "description": "The list of entity labels belonging to the document.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedDocumentRegion"
+          }
+        },
+        "location": {
+          "description": "The location of the document in the storage.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Represents the document language. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+          "type": "string"
+        },
+        "dataset": {
+          "description": "The dataset for this document. Allowed values are 'Train' and 'Test'.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "ExportedTA4HDocument"
+    },
+    "TextAnalysisAuthoringExportedTA4HProjectAssets": {
+      "description": "Represents the exported assets for a TA4H project.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringExportedProjectAssets"
+        }
+      ],
+      "properties": {
+        "entities": {
+          "description": "The list of entities belonging to the project.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedCompositeEntity"
+          }
+        },
+        "documents": {
+          "description": "The list of documents belonging to the project.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringExportedTA4HDocument"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "TA4H",
+      "x-ms-client-name": "ExportedTA4HProjectAssets"
     },
     "TextAnalysisAuthoringExportProjectJobState": {
       "description": "Represents the state of an export job.",
@@ -3007,7 +3169,8 @@
         "lastTrainedDateTime",
         "lastDeployedDateTime",
         "deploymentExpirationDate",
-        "modelTrainingConfigVersion"
+        "modelTrainingConfigVersion",
+        "assignedResources"
       ],
       "type": "object",
       "properties": {
@@ -3076,7 +3239,8 @@
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
         "CustomEntityRecognition",
-        "CustomAbstractiveSummarization"
+        "CustomAbstractiveSummarization",
+        "CustomHealthcare"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -3098,6 +3262,10 @@
           {
             "value": "CustomAbstractiveSummarization",
             "description": "For building an abstractive summarization models which are able to summarize long documents."
+          },
+          {
+            "value": "CustomHealthcare",
+            "description": "For building an text analytics for health model to identify your health domain data."
           }
         ]
       },
@@ -3174,6 +3342,23 @@
           "format": "float",
           "description": "The threshold of the class with the highest confidence, at which the prediction will automatically be changed to \"None\". The value of the threshold should be between 0 and 1 inclusive.",
           "type": "number"
+        },
+        "amlProjectPath": {
+          "description": "The path to the AML connected project.",
+          "type": "string"
+        },
+        "isLabelingLocked": {
+          "description": "Indicates whether the labeling experience can be modified or not.",
+          "type": "boolean"
+        },
+        "runGptPredictions": {
+          "description": "Indicates whether to run GPT predictions or not.",
+          "type": "boolean"
+        },
+        "gptPredictiveLookahead": {
+          "format": "int32",
+          "description": "The predictive lookahead for GPT predictions that is specified by the user.",
+          "type": "integer"
         }
       },
       "x-ms-client-name": "ProjectSettings"
@@ -3209,7 +3394,8 @@
         "lastTrainedDateTime",
         "lastTrainingDurationInSeconds",
         "modelExpirationDate",
-        "modelTrainingConfigVersion"
+        "modelTrainingConfigVersion",
+        "hasSnapshot"
       ],
       "type": "object",
       "properties": {
@@ -3736,7 +3922,8 @@
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
         "CustomEntityRecognition",
-        "CustomAbstractiveSummarization"
+        "CustomAbstractiveSummarization",
+        "CustomHealthcare"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
@@ -3757,6 +3944,10 @@
           {
             "value": "CustomAbstractiveSummarization",
             "description": "For building an abstractive summarization models which are able to summarize long documents."
+          },
+          {
+            "value": "CustomHealthcare",
+            "description": "For building an text analytics for health model to identify your health domain data."
           }
         ]
       },
@@ -3772,7 +3963,8 @@
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
         "CustomEntityRecognition",
-        "CustomAbstractiveSummarization"
+        "CustomAbstractiveSummarization",
+        "CustomHealthcare"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
@@ -3793,6 +3985,10 @@
           {
             "value": "CustomAbstractiveSummarization",
             "description": "For building an abstractive summarization models which are able to summarize long documents."
+          },
+          {
+            "value": "CustomHealthcare",
+            "description": "For building an text analytics for health model to identify your health domain data."
           }
         ]
       },
