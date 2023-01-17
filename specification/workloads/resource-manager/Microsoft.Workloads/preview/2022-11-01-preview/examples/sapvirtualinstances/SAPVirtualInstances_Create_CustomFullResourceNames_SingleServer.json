@@ -17,7 +17,7 @@
             "deploymentType": "SingleServer",
             "appResourceGroup": "X00-RG",
             "databaseType": "HANA",
-            "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
+            "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
             "networkConfiguration": {
               "isSecondaryIpEnabled": true
             },
@@ -37,52 +37,6 @@
                   "sshKeyPair": {
                     "publicKey": "abc",
                     "privateKey": "xyz"
-                  }
-                }
-              }
-            },
-            "dbDiskConfiguration": {
-              "diskVolumeConfigurations": {
-                "hana/data": {
-                  "count": 4,
-                  "sizeGB": 128,
-                  "sku": {
-                    "name": "Premium_LRS"
-                  }
-                },
-                "hana/log": {
-                  "count": 3,
-                  "sizeGB": 128,
-                  "sku": {
-                    "name": "Premium_LRS"
-                  }
-                },
-                "hana/shared": {
-                  "count": 1,
-                  "sizeGB": 256,
-                  "sku": {
-                    "name": "StandardSSD_LRS"
-                  }
-                },
-                "usr/sap": {
-                  "count": 1,
-                  "sizeGB": 128,
-                  "sku": {
-                    "name": "Premium_LRS"
-                  }
-                },
-                "backup": {
-                  "count": 2,
-                  "sizeGB": 256,
-                  "sku": {
-                    "name": "StandardSSD_LRS"
-                  }
-                },
-                "os": {
-                  "count": 1,
-                  "sizeGB": 64,
-                  "sku": {
-                    "name": "StandardSSD_LRS"
                   }
                 }
               }
@@ -121,7 +75,7 @@
               "deploymentType": "SingleServer",
               "appResourceGroup": "X00-RG",
               "databaseType": "HANA",
-              "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
+              "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
               "networkConfiguration": {
                 "isSecondaryIpEnabled": true
               },
@@ -144,49 +98,34 @@
                   }
                 }
               },
-              "dbDiskConfiguration": {
-                "diskVolumeConfigurations": {
-                  "hana/data": {
-                    "count": 4,
-                    "sizeGB": 128,
-                    "sku": {
-                      "name": "Premium_LRS"
+              "customResourceNames": {
+                "namingPatternType": "FullResourceName",
+                "virtualMachine": {
+                  "vmName": "ssvm",
+                  "hostName": "sshostName",
+                  "networkInterfaces": [
+                    {
+                      "networkInterfaceName": "ssnic"
                     }
-                  },
-                  "hana/log": {
-                    "count": 3,
-                    "sizeGB": 128,
-                    "sku": {
-                      "name": "Premium_LRS"
-                    }
-                  },
-                  "hana/shared": {
-                    "count": 1,
-                    "sizeGB": 256,
-                    "sku": {
-                      "name": "StandardSSD_LRS"
-                    }
-                  },
-                  "usr/sap": {
-                    "count": 1,
-                    "sizeGB": 128,
-                    "sku": {
-                      "name": "Premium_LRS"
-                    }
-                  },
-                  "backup": {
-                    "count": 2,
-                    "sizeGB": 256,
-                    "sku": {
-                      "name": "StandardSSD_LRS"
-                    }
-                  },
-                  "os": {
-                    "count": 1,
-                    "sizeGB": 64,
-                    "sku": {
-                      "name": "StandardSSD_LRS"
-                    }
+                  ],
+                  "osDiskName": "ssosdisk",
+                  "dataDiskNames": {
+                    "hanaData": [
+                      "hanadata0",
+                      "hanadata1"
+                    ],
+                    "hanaLog": [
+                      "hanalog0",
+                      "hanalog1",
+                      "hanalog2"
+                    ],
+                    "usrSap": [
+                      "usrsap0"
+                    ],
+                    "hanaShared": [
+                      "hanashared0",
+                      "hanashared1"
+                    ]
                   }
                 }
               }
@@ -227,7 +166,7 @@
               "deploymentType": "SingleServer",
               "appResourceGroup": "X00-RG",
               "databaseType": "HANA",
-              "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/dindurkhya-e2etesting/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
+              "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
               "networkConfiguration": {
                 "isSecondaryIpEnabled": true
               },
@@ -250,49 +189,34 @@
                   }
                 }
               },
-              "dbDiskConfiguration": {
-                "diskVolumeConfigurations": {
-                  "hana/data": {
-                    "count": 4,
-                    "sizeGB": 128,
-                    "sku": {
-                      "name": "Premium_LRS"
+              "customResourceNames": {
+                "namingPatternType": "FullResourceName",
+                "virtualMachine": {
+                  "vmName": "ssvm",
+                  "hostName": "sshostName",
+                  "networkInterfaces": [
+                    {
+                      "networkInterfaceName": "ssnic"
                     }
-                  },
-                  "hana/log": {
-                    "count": 3,
-                    "sizeGB": 128,
-                    "sku": {
-                      "name": "Premium_LRS"
-                    }
-                  },
-                  "hana/shared": {
-                    "count": 1,
-                    "sizeGB": 256,
-                    "sku": {
-                      "name": "StandardSSD_LRS"
-                    }
-                  },
-                  "usr/sap": {
-                    "count": 1,
-                    "sizeGB": 128,
-                    "sku": {
-                      "name": "Premium_LRS"
-                    }
-                  },
-                  "backup": {
-                    "count": 2,
-                    "sizeGB": 256,
-                    "sku": {
-                      "name": "StandardSSD_LRS"
-                    }
-                  },
-                  "os": {
-                    "count": 1,
-                    "sizeGB": 64,
-                    "sku": {
-                      "name": "StandardSSD_LRS"
-                    }
+                  ],
+                  "osDiskName": "ssosdisk",
+                  "dataDiskNames": {
+                    "hanaData": [
+                      "hanadata0",
+                      "hanadata1"
+                    ],
+                    "hanaLog": [
+                      "hanalog0",
+                      "hanalog1",
+                      "hanalog2"
+                    ],
+                    "usrSap": [
+                      "usrsap0"
+                    ],
+                    "hanaShared": [
+                      "hanashared0",
+                      "hanashared1"
+                    ]
                   }
                 }
               }

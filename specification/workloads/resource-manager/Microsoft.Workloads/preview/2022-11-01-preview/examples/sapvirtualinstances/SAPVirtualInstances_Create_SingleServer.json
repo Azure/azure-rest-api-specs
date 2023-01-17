@@ -11,7 +11,7 @@
         "environment": "NonProd",
         "sapProduct": "S4HANA",
         "configuration": {
-          "configurationType": "DeploymentWithOSConfig",
+          "configurationType": "Deployment",
           "appLocation": "eastus",
           "infrastructureConfiguration": {
             "deploymentType": "SingleServer",
@@ -24,30 +24,26 @@
             "virtualMachineConfiguration": {
               "vmSize": "Standard_E32ds_v4",
               "imageReference": {
-                "sku": "84sapha-gen2",
+                "sku": "7.4",
                 "publisher": "RedHat",
-                "version": "8.4.2021091202",
-                "offer": "RHEL-SAP-HA"
+                "version": "7.4.2019062505",
+                "offer": "RHEL-SAP"
               },
               "osProfile": {
                 "adminUsername": "{your-username}",
                 "osConfiguration": {
                   "osType": "Linux",
                   "disablePasswordAuthentication": true,
-                  "sshKeyPair": {
-                    "publicKey": "abc",
-                    "privateKey": "xyz"
+                  "ssh": {
+                    "publicKeys": [
+                      {
+                        "keyData": "ssh-rsa public key"
+                      }
+                    ]
                   }
                 }
               }
             }
-          },
-          "softwareConfiguration": {
-            "softwareInstallationType": "External",
-            "centralServerVmId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/sapq20scsvm0"
-          },
-          "osSapConfiguration": {
-            "sapFqdn": "xyz.test.com"
           }
         }
       }
@@ -73,45 +69,41 @@
           "environment": "NonProd",
           "sapProduct": "S4HANA",
           "configuration": {
-            "configurationType": "DeploymentWithOSConfig",
+            "configurationType": "Deployment",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
               "deploymentType": "SingleServer",
               "appResourceGroup": "X00-RG",
               "databaseType": "HANA",
               "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
-              "networkConfiguration": {
-                "isSecondaryIpEnabled": true
-              },
               "virtualMachineConfiguration": {
                 "vmSize": "Standard_E32ds_v4",
                 "imageReference": {
-                  "sku": "84sapha-gen2",
+                  "sku": "7.4",
                   "publisher": "RedHat",
-                  "version": "8.4.2021091202",
-                  "offer": "RHEL-SAP-HA"
+                  "version": "7.4.2019062505",
+                  "offer": "RHEL-SAP"
                 },
                 "osProfile": {
                   "adminUsername": "{your-username}",
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "sshKeyPair": {
-                      "publicKey": "abc"
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa public key"
+                        }
+                      ]
                     }
                   }
                 }
               }
-            },
-            "softwareConfiguration": {
-              "softwareInstallationType": "External",
-              "centralServerVmId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/sapq20scsvm0"
-            },
-            "osSapConfiguration": {
-              "sapFqdn": "xyz.test.com"
             }
           },
-          "state": "RegistrationComplete",
+          "status": "Unknown",
+          "health": "Unknown",
+          "state": "SoftwareInstallationPending",
           "provisioningState": "Succeeded"
         }
       }
@@ -135,46 +127,42 @@
           "environment": "NonProd",
           "sapProduct": "S4HANA",
           "configuration": {
-            "configurationType": "DeploymentWithOSConfig",
+            "configurationType": "Deployment",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
               "deploymentType": "SingleServer",
               "appResourceGroup": "X00-RG",
               "databaseType": "HANA",
               "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
-              "networkConfiguration": {
-                "isSecondaryIpEnabled": true
-              },
               "virtualMachineConfiguration": {
                 "vmSize": "Standard_E32ds_v4",
                 "imageReference": {
-                  "sku": "84sapha-gen2",
+                  "sku": "7.4",
                   "publisher": "RedHat",
-                  "version": "8.4.2021091202",
-                  "offer": "RHEL-SAP-HA"
+                  "version": "7.4.2019062505",
+                  "offer": "RHEL-SAP"
                 },
                 "osProfile": {
                   "adminUsername": "{your-username}",
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "sshKeyPair": {
-                      "publicKey": "abc"
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa public key"
+                        }
+                      ]
                     }
                   }
                 }
               }
-            },
-            "softwareConfiguration": {
-              "softwareInstallationType": "External",
-              "centralServerVmId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/sapq20scsvm0"
-            },
-            "osSapConfiguration": {
-              "sapFqdn": "xyz.test.com"
             }
           },
-          "state": "SoftwareDetectionInProgress",
-          "provisioningState": "Accepted"
+          "status": "Unknown",
+          "health": "Unknown",
+          "state": "InfrastructureDeploymentInProgress",
+          "provisioningState": "Updating"
         }
       }
     }

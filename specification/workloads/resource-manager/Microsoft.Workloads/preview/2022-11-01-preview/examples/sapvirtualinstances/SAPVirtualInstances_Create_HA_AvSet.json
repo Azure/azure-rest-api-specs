@@ -11,11 +11,14 @@
         "environment": "Prod",
         "sapProduct": "S4HANA",
         "configuration": {
-          "configurationType": "DeploymentWithOSConfig",
+          "configurationType": "Deployment",
           "appLocation": "eastus",
           "infrastructureConfiguration": {
-            "deploymentType": "ThreeTier",
             "appResourceGroup": "X00-RG",
+            "deploymentType": "ThreeTier",
+            "highAvailabilityConfig": {
+              "highAvailabilityType": "AvailabilitySet"
+            },
             "centralServer": {
               "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
               "virtualMachineConfiguration": {
@@ -31,14 +34,17 @@
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "sshKeyPair": {
-                      "publicKey": "abc",
-                      "privateKey": "xyz"
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa public key"
+                        }
+                      ]
                     }
                   }
                 }
               },
-              "instanceCount": 1
+              "instanceCount": 2
             },
             "applicationServer": {
               "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
@@ -55,14 +61,17 @@
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "sshKeyPair": {
-                      "publicKey": "abc",
-                      "privateKey": "xyz"
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa public key"
+                        }
+                      ]
                     }
                   }
                 }
               },
-              "instanceCount": 6
+              "instanceCount": 5
             },
             "databaseServer": {
               "databaseType": "HANA",
@@ -80,18 +89,18 @@
                   "osConfiguration": {
                     "osType": "Linux",
                     "disablePasswordAuthentication": true,
-                    "sshKeyPair": {
-                      "publicKey": "abc",
-                      "privateKey": "xyz"
+                    "ssh": {
+                      "publicKeys": [
+                        {
+                          "keyData": "ssh-rsa public key"
+                        }
+                      ]
                     }
                   }
                 }
               },
-              "instanceCount": 1
+              "instanceCount": 2
             }
-          },
-          "osSapConfiguration": {
-            "sapFqdn": "xyz.test.com"
           }
         }
       }
@@ -117,11 +126,14 @@
           "environment": "Prod",
           "sapProduct": "S4HANA",
           "configuration": {
-            "configurationType": "DeploymentWithOSConfig",
+            "configurationType": "Deployment",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
-              "deploymentType": "ThreeTier",
               "appResourceGroup": "X00-RG",
+              "deploymentType": "ThreeTier",
+              "highAvailabilityConfig": {
+                "highAvailabilityType": "AvailabilitySet"
+              },
               "centralServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
@@ -137,13 +149,17 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "sshKeyPair": {
-                        "publicKey": "abc"
+                      "ssh": {
+                        "publicKeys": [
+                          {
+                            "keyData": "ssh-rsa public key"
+                          }
+                        ]
                       }
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               },
               "applicationServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
@@ -160,13 +176,17 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "sshKeyPair": {
-                        "publicKey": "abc"
+                      "ssh": {
+                        "publicKeys": [
+                          {
+                            "keyData": "ssh-rsa public key"
+                          }
+                        ]
                       }
                     }
                   }
                 },
-                "instanceCount": 6
+                "instanceCount": 5
               },
               "databaseServer": {
                 "databaseType": "HANA",
@@ -184,17 +204,18 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "sshKeyPair": {
-                        "publicKey": "abc"
+                      "ssh": {
+                        "publicKeys": [
+                          {
+                            "keyData": "ssh-rsa public key"
+                          }
+                        ]
                       }
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               }
-            },
-            "osSapConfiguration": {
-              "sapFqdn": "xyz.test.com"
             }
           },
           "status": "Unknown",
@@ -223,11 +244,14 @@
           "environment": "Prod",
           "sapProduct": "S4HANA",
           "configuration": {
-            "configurationType": "DeploymentWithOSConfig",
+            "configurationType": "Deployment",
             "appLocation": "eastus",
             "infrastructureConfiguration": {
-              "deploymentType": "ThreeTier",
               "appResourceGroup": "X00-RG",
+              "deploymentType": "ThreeTier",
+              "highAvailabilityConfig": {
+                "highAvailabilityType": "AvailabilitySet"
+              },
               "centralServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
                 "virtualMachineConfiguration": {
@@ -243,13 +267,17 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "sshKeyPair": {
-                        "publicKey": "abc"
+                      "ssh": {
+                        "publicKeys": [
+                          {
+                            "keyData": "ssh-rsa public key"
+                          }
+                        ]
                       }
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               },
               "applicationServer": {
                 "subnetId": "/subscriptions/49d64d54-e966-4c46-a868-1999802b762c/resourceGroups/test-rg/providers/Microsoft.Networks/virtualNetworks/test-vnet/subnets/appsubnet",
@@ -266,13 +294,17 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "sshKeyPair": {
-                        "publicKey": "abc"
+                      "ssh": {
+                        "publicKeys": [
+                          {
+                            "keyData": "ssh-rsa public key"
+                          }
+                        ]
                       }
                     }
                   }
                 },
-                "instanceCount": 6
+                "instanceCount": 5
               },
               "databaseServer": {
                 "databaseType": "HANA",
@@ -290,17 +322,18 @@
                     "osConfiguration": {
                       "osType": "Linux",
                       "disablePasswordAuthentication": true,
-                      "sshKeyPair": {
-                        "publicKey": "abc"
+                      "ssh": {
+                        "publicKeys": [
+                          {
+                            "keyData": "ssh-rsa public key"
+                          }
+                        ]
                       }
                     }
                   }
                 },
-                "instanceCount": 1
+                "instanceCount": 2
               }
-            },
-            "osSapConfiguration": {
-              "sapFqdn": "xyz.test.com"
             }
           },
           "status": "Unknown",
