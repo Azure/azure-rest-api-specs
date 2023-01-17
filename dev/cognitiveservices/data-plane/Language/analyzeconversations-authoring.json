@@ -993,6 +993,61 @@
         }
       }
     },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
+      "post": {
+        "description": "Triggers evaluation operation on a trained model.",
+        "operationId": "ConversationalAnalysisAuthoring_EvaluateModel",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringTrainedModelLabelPathParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The training input parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
+            }
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "A successful call results with an Operation-Location header used to check the status of the job.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the created job.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Evaluation": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulEvaluationProject.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
         "description": "Restores the snapshot of this trained model to be the current working directory of the project.",
@@ -1034,6 +1089,48 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
+      "get": {
+        "description": "Gets the status for an evaluation job.",
+        "operationId": "ConversationalAnalysisAuthoring_GetEvaluationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNamePathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringTrainedModelLabelPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationalAnalysisAuthoringJobIdPathParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The evaluation job result.",
+            "schema": {
+              "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationJobState"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Evaluation Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulEvaluationProject.json"
+          }
+        }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
@@ -2330,6 +2427,54 @@
         }
       },
       "x-ms-client-name": "EntityEvaluationSummary"
+    },
+    "ConversationalAnalysisAuthoringEvaluationJobResult": {
+      "required": [
+        "evaluationOptions",
+        "modelLabel",
+        "trainingConfigVersion",
+        "percentComplete"
+      ],
+      "type": "object",
+      "properties": {
+        "evaluationOptions": {
+          "description": "Represents the options used running the evaluation.",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationOptions"
+        },
+        "modelLabel": {
+          "description": "Represents trained model label.",
+          "type": "string"
+        },
+        "trainingConfigVersion": {
+          "description": "Represents training config version.",
+          "type": "string"
+        },
+        "percentComplete": {
+          "format": "int32",
+          "description": "Represents progress percentage.",
+          "type": "integer"
+        }
+      },
+      "x-ms-client-name": "EvaluationJobResult"
+    },
+    "ConversationalAnalysisAuthoringEvaluationJobState": {
+      "description": "Represents the state of a evaluation job.",
+      "required": [
+        "result"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringJobState"
+        }
+      ],
+      "properties": {
+        "result": {
+          "description": "Represents evaluation task detailed result.",
+          "$ref": "#/definitions/ConversationalAnalysisAuthoringEvaluationJobResult"
+        }
+      },
+      "x-ms-client-name": "EvaluationJobState"
     },
     "ConversationalAnalysisAuthoringEvaluationKind": {
       "enum": [
