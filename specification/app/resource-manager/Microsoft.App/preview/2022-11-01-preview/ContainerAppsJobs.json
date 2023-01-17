@@ -532,10 +532,10 @@
         },
         "manualTriggerConfig": {
           "type": "object",
-          "description": "Manual trigger configuration for a single execution job. Properties replicaCount and parallelism would be set to 1 by default",
+          "description": "Manual trigger configuration for a single execution job. Properties replicaCompletionCount and parallelism would be set to 1 by default",
           "properties": {
-            "replicaCount": {
-              "$ref": "#/definitions/ReplicaCount"
+            "replicaCompletionCount": {
+              "$ref": "#/definitions/ReplicaCompletionCount"
             },
             "parallelism": {
               "$ref": "#/definitions/Parallelism"
@@ -549,8 +549,8 @@
           ],
           "type": "object",
           "properties": {
-            "replicaCount": {
-              "$ref": "#/definitions/ReplicaCount"
+            "replicaCompletionCount": {
+              "$ref": "#/definitions/ReplicaCompletionCount"
             },
             "cronExpression": {
               "description": "Cron formatted repeating schedule (\"* * * * *\") of a Cron Job.",
@@ -749,7 +749,7 @@
         }
       }
     },
-    "ReplicaCount": {
+    "ReplicaCompletionCount": {
       "description": "Minimum number of successful replica completions before overall job completion.",
       "format": "int32",
       "type": "integer"
