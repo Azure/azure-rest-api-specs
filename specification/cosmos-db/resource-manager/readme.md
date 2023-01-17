@@ -35,9 +35,6 @@ tag: package-preview-2022-11
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-11'
-input-file:
-
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2022-11'
@@ -52,14 +49,11 @@ input-file:
   - Microsoft.DocumentDB/preview/2022-11-15-preview/rbac.json
   - Microsoft.DocumentDB/preview/2022-11-15-preview/restorable.json
   - Microsoft.DocumentDB/preview/2022-11-15-preview/services.json
-``````
+```
 
 ### Tag: package-preview-2022-08
 
 These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2022-08'
-input-file:
 
 These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
 
@@ -75,7 +69,7 @@ input-file:
   - Microsoft.DocumentDB/preview/2022-08-15-preview/rbac.json
   - Microsoft.DocumentDB/preview/2022-08-15-preview/restorable.json
   - Microsoft.DocumentDB/preview/2022-08-15-preview/services.json
-``````
+```
 
 ### Tag: package-2022-08
 
