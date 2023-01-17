@@ -1619,6 +1619,37 @@
           "description": "A summary of the recommendation."
         }
       }
+    },
+    "scoreEntity": {
+      "description": "The details of Advisor Score",
+      "type": "object",
+      "properties": {
+        "date": {
+          "description": "The date score was calculated.",
+          "type": "string"
+        },
+        "score": {
+          "description": "The percentage score.",
+          "type": "number"
+        },
+        "consumptionUnits": {
+          "description": "The consumption units for the score.",
+          "type": "number"
+        },
+        "impactedResourceCount": {
+          "description": "The number of impacted resources.",
+          "type": "number"
+        },
+        "potentialScoreIncrease": {
+          "description": "The potential percentage increase in overall score at subscription level once all recommendations in this scope are implemented.",
+          "type": "number"
+        },
+        "categoryCount": {
+          "description": "The count of impacted categories.",
+          "type": "number",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
