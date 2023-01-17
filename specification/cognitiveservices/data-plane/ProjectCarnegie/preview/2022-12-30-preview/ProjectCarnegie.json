@@ -376,7 +376,7 @@
           "201": {
             "description": "Text List created successfully",
             "headers": {
-              "TextList-Location": {
+              "Location": {
                 "type": "string",
                 "description": "URL used to get the created Text List."
               }
@@ -578,8 +578,14 @@
           "application/json"
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "201": {
+            "description": "Text List created successfully",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL used to get the created List Item."
+              }
+            }
           },
           "default": {
             "description": "Error response.",
@@ -945,11 +951,6 @@
           "description": "The blob url of image",
           "type": "string",
           "format": "url"
-        },
-        "format": {
-          "description": "The format of image",
-          "type": "string",
-          "default": "jpeg"
         }
       }
     },
