@@ -65,14 +65,6 @@ input-file:
   - Microsoft.RecoveryServices/stable/2023-01-01/bms.json
 ```
 
-### Tag: package-preview-2022-09
-
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2022-09'
-input-file:
-  - Microsoft.RecoveryServices/preview/2022-09-30-preview/bms.json
-```
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
@@ -80,6 +72,15 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 ``` yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-10-01/bms.json
+```
+
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - Microsoft.RecoveryServices/preview/2022-09-30-preview/bms.json
 ```
 
 ### Tag: package-2022-09-preview
