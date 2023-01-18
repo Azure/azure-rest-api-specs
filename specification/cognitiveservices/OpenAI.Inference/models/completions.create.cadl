@@ -5,8 +5,8 @@ using Cadl.Http;
 
 namespace Azure.OpenAI.Completions;
 
-//@doc("Post body schema to create a prompt completion from a deployment")
-alias CompletionsRequest = {
+@doc("Post body schema to create a prompt completion from a deployment")
+model CompletionsRequest {
     @doc("""
 An optional prompt to complete from, encoded as a string, a list of strings, or
 a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
@@ -119,9 +119,9 @@ stream intermediate progress if best_of > 1. Has maximum value of 128.
     best_of?: int32;
 };
 
-alias CompletionsPrompt = string | string[] | string[][];
+alias CompletionsPrompt = string[][];
 
-alias CompletionsStop = string | string[];
+alias CompletionsStop = string[];
 
 @doc("Expected response schema to completion request")
 model Completion {

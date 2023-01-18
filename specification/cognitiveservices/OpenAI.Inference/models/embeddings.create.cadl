@@ -5,7 +5,7 @@ using Cadl.Http;
 
 namespace Azure.OpenAI.Embeddings;
 
-alias EmbeddingsRequest = {
+model EmbeddingsRequest {
     @doc("The ID of the end-user, for use in tracking and rate-limiting.")
     user?: string;
 
@@ -28,7 +28,7 @@ alias EmbeddingsRequest = {
 
 model Embeddings {
     object: "list",
-    data: Embedding[],
+    data: EmbeddingItem[],
 }
 
 model Usage {
@@ -36,7 +36,7 @@ model Usage {
     total_tokens: int32
 }
 
-model Embedding {
+model EmbeddingItem {
     object: "embedding",
     embedding: float32[];
     index: int32;
