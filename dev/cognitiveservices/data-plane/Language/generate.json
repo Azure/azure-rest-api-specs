@@ -37,15 +37,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "oneOf":[
+                  "oneOf": [
                     {
-                      "$ref":"analyzetext.json#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
+                      "$ref": "analyzetext.json#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
                     },
                     {
-                      "$ref":"analyzetext.json#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
+                      "$ref": "analyzetext.json#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
                     },
                     {
-                      "$ref":"analyzeconversations.json#/definitions/ConversationsSummaryResult"
+                      "$ref": "analyzeconversations.json#/definitions/ConversationsSummaryResult"
                     }
                   ]
                 }
@@ -105,8 +105,10 @@
                 "$ref": "analyzeconversations.json#/definitions/Conversation"
               }
             ]
-          },
-          "allOf": {
+          }
+        },
+        "allOf": [
+          {
             "oneOf": [
               {
                 "$ref": "analyzetext.json#/definitions/ExtractiveSummarizationTaskParameters"
@@ -119,7 +121,7 @@
               }
             ]
           }
-        }
+        ]
       },
       "SummarizationTaskKind": {
         "type": "string",
