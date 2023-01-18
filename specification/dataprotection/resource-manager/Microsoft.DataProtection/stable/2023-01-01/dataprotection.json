@@ -481,7 +481,8 @@
           "Delete BackupVault": {
             "$ref": "./examples/VaultCRUD/DeleteBackupVault.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -5204,7 +5205,7 @@
           "type": "string"
         },
         "systemData": {
-          "$ref": "#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
         }
       },
       "title": "DppResource",
@@ -5255,7 +5256,7 @@
           "type": "string"
         },
         "systemData": {
-          "$ref": "#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
         }
       },
       "type": "object",
@@ -5320,64 +5321,11 @@
           "type": "object"
         },
         "systemData": {
-          "$ref": "#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData"
         }
       },
       "type": "object",
       "x-ms-azure-resource": true
-    },
-    "systemData": {
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource."
-        },
-        "createdByType": {
-          "type": "string",
-          "description": "The type of identity that created the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The timestamp of resource creation (UTC)."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource."
-        },
-        "lastModifiedByType": {
-          "type": "string",
-          "description": "The type of identity that last modified the resource.",
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The type of identity that last modified the resource."
-        }
-      }
     },
     "DppTrackedResourceList": {
       "properties": {
@@ -6125,7 +6073,7 @@
           "type": "array"
         },
         "persistentVolumeRestoreMode": {
-          "description": "Gets or sets the PV Restore Mode property. This property sets whether volumes needs to be restored.",
+          "description": "Gets or sets the PV (Persistent Volume) Restore Mode property. This property sets whether volumes needs to be restored.",
           "enum": [
             "RestoreWithVolumeData",
             "RestoreWithoutVolumeData"
@@ -7022,21 +6970,6 @@
     }
   },
   "parameters": {
-    "SubscriptionId": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "The subscription Id.",
-      "required": true,
-      "type": "string"
-    },
-    "ResourceGroupName": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "description": "The name of the resource group where the backup vault is present.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "VaultName": {
       "name": "vaultName",
       "in": "path",
@@ -7044,13 +6977,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "ApiVersion": {
-      "name": "api-version",
-      "in": "query",
-      "description": "Client Api Version.",
-      "required": true,
-      "type": "string"
     },
     "BackupInstanceName": {
       "name": "backupInstanceName",
