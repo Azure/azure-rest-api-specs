@@ -61,7 +61,7 @@
         },
         "engagementType": {
           "description": "The type of engagement user have with email",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2021-03-07/common.json#/definitions/UserEngagementTypeModel"
+          "$ref": "#/definitions/UserEngagementTypeModel"
         }
       }
     },
@@ -797,6 +797,18 @@
           "description": "The location to delete all chunk storage",
           "type": "string"
         }
+      }
+    },
+    "UserEngagementTypeModel": {
+      "description": "The email user engagement type",
+      "type": "string",
+      "enum": [
+        "view",
+        "click"
+      ],
+      "x-ms-enum": {
+        "name": "UserEngagementTypeModel",
+        "modelAsString": true
       }
     }
   }
