@@ -137,7 +137,7 @@ Here's an example of how Cognitive Services might use multiple shared libraries:
 ```
 ## Sample Project
 
-Here's a [cadl-sample-project](./cadl-sample-project) to demonstrate the files and folders supposed to be included when check in to this `azure-rest-api-specs` repository.
+Here's a [cadl-sample-project](../specification/contosowidgetmanager) to demonstrate the files and folders supposed to be included when check in to this `azure-rest-api-specs` repository.
 
 # Spec Versioning
 
