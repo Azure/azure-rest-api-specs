@@ -529,7 +529,7 @@
     },
     "ApplicationClaimProtocol": {
       "type": "string",
-      "description": "Represents the protocol to be used to dervice the digest of a claim from the given data.",
+      "description": "Represents the protocol to be used to compute the digest of a claim from the given claim data.",
       "enum": [
         "LedgerEntryV1"
       ],
@@ -557,7 +557,7 @@
     "LedgerEntryClaim": {
       "description": "An application claim derived from ledger entry data.",
       "required": [
-        "version"
+        "protocol"
       ],
       "properties": {
         "collectionId": {
