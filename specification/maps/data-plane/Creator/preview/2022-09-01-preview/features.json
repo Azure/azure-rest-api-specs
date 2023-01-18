@@ -628,11 +628,13 @@
           "properties": {
             "parameters": {
               "description": "The OpenAPI parameters object.",
-              "type": "object"
+              "type": "object",
+              "additionalProperties": true
             },
             "schemas": {
               "description": "The OpenAPI schemas object.",
-              "type": "object"
+              "type": "object",
+              "additionalProperties": true
             }
           }
         },
@@ -641,6 +643,9 @@
           "type": "array",
           "items": {
             "type": "object",
+            "required": [
+              "name"
+            ],
             "properties": {
               "name": {
                 "description": "The name of the tag.",
@@ -686,7 +691,8 @@
       "properties": {
         "href": {
           "description": "The link target.",
-          "type": "string"
+          "type": "string",
+          "format": "uri"
         },
         "rel": {
           "description": "The relation type.",
