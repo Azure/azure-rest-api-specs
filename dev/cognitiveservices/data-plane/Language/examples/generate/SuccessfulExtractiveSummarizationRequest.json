@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-05-01",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "ExtractiveSummarization",
+      "id": "1",
+      "language": "en",
+      "text": "Microsoft was founded by Bill Gates and Paul Allen. 2nd sentence example.",
+      "sentenceCount": 1
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "ExtractiveSummarization",
+        "sentences": [
+          {
+            "text": "Microsoft was founded by Bill Gates and Paul Allen.",
+            "rankScore": 0.9,
+            "offset": 0,
+            "length": 51
+          }
+        ],
+        "id": "1",
+        "warnings": []
+      }
+    }
+  }
+}
