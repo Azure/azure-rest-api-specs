@@ -195,16 +195,6 @@ namespace: azure.mgmt.containerregistry.v2019_05_01
 output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_05_01
 ```
 
-### Tag: package-2019-05 and python
-
-These settings apply only when `--tag=package-2019-05 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2019-05' && $(python)
-namespace: azure.mgmt.containerregistry.v2019_05_01
-output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_05_01
-```
-
 ### Tag: package-2019-05-preview-only and python
 
 These settings apply only when `--tag=package-2019-05-preview-only --python` is specified on the command line.
