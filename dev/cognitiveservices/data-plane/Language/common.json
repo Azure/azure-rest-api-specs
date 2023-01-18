@@ -808,9 +808,9 @@
           "format": "int32",
           "description": "It controls the approximate number of sentences in the output summaries."
         },
-        "detailLevel": {
-          "$ref": "#/definitions/DetailLevel",
-          "description": "It controls the detail level of the summary. Use this parameter exclusively with sentenceCount parameter."
+        "summaryLength": {
+          "$ref": "#/definitions/SummaryLength",
+          "description": "It controls the approximate length of the summary by buckets. Use this parameter exclusively with sentenceCount parameter."
         },
         "phraseControls": {
           "type": "array",
@@ -887,29 +887,29 @@
         }
       }
     },
-    "DetailLevel":{
+    "SummaryLength":{
       "enum": [
-        "high",
+        "short",
         "medium",
-        "low"
+        "long"
       ],
       "type": "string",
-      "description": "The detail level of the summary.",
+      "description": "The length of the summary.",
       "x-ms-enum": {
         "modelAsString": false,
-        "name": "DetailLevel",
+        "name": "SummaryLength",
         "values": [
           {
-            "value": "high",
-            "description": "High level summary is usually shorter and contains less details."
+            "value": "short",
+            "description": "Short summary"
           },
           {
             "value": "medium",
-            "description": "Medium level summary is in between high level and low level."
+            "description": "Medium length summary"
           },
           {
-            "value": "low",
-            "description": "Low level summary is usually longer and contains more details."
+            "value": "long",
+            "description": "Long summary"
           }
         ]
       }
