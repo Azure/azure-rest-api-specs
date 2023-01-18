@@ -7379,12 +7379,11 @@
     "volumeQuotaRulePatch": {
       "description": "Patchable Quota Rule of a Volume",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
-        }
-      ],
       "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
         "properties": {
           "description": "Volume Quota Rule Properties",
           "$ref": "#/definitions/volumeQuotaRulesProperties",
