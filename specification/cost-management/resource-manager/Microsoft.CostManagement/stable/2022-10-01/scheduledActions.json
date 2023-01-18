@@ -648,8 +648,7 @@
       "properties": {
         "eTag": {
           "type": "string",
-          "readOnly": true,
-          "description": "Resource Etag."
+          "description": "Resource Etag. For update calls, eTag is mandatory. Fetch the resource's eTag by doing a 'GET' call first and then including the latest eTag as part of the request body while performing the update. For create calls, eTag is not required."
         },
         "kind": {
           "$ref": "#/definitions/ScheduledActionKind",
