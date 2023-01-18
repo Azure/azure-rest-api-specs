@@ -260,6 +260,10 @@
             "required": false,
             "type": "string",
             "enum": [
+              "status desc",
+              "status asc",
+              "requestor desc",
+              "requestor asc",
               "startTime desc",
               "startTime asc"
             ],
@@ -397,7 +401,7 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "$ref": "#/parameters/requestRole"
+            "$ref": "#/parameters/viewMode"
           },
           {
             "$ref": "#/parameters/workflowIds"
@@ -1266,9 +1270,9 @@
           "type": "string",
           "description": "The workflow task type.",
           "enum": [
-            "approval",
-            "simpleTask",
-            "dsarTask"
+            "Approval",
+            "SimpleTask",
+            "DsarTask"
           ],
           "x-ms-enum": {
             "name": "TaskType",
@@ -1290,7 +1294,7 @@
         "workflowId": {
           "$ref": "#/definitions/WorkflowId"
         },
-        "requestorId": {
+        "requestor": {
           "$ref": "#/definitions/RequestorId"
         },
         "createdTime": {
@@ -1302,21 +1306,21 @@
         "payload": {
           "$ref": "#/definitions/TaskPayload"
         },
-        "reminderInfo":{
-          "type":"object",
+        "reminderInfo": {
+          "type": "object",
           "description": "Info of task reminder.",
           "properties": {
-            "lastRemindTime":{
-              "type":"string",
+            "lastRemindTime": {
+              "type": "string",
               "format": "date-time",
               "description": "The last update time."
             },
-            "nextRemindTime":{
-              "type":"string",
+            "nextRemindTime": {
+              "type": "string",
               "format": "date-time",
               "description": "The next remind time."
             },
-            "reminderSettings":{
+            "reminderSettings": {
               "type": "object",
               "description": "The reminder settings."
             }
@@ -1326,7 +1330,7 @@
             "reminderSettings"
           ]
         },
-        "expiryInfo":{
+        "expiryInfo": {
           "type": "object",
           "description": "Info of task expiry.",
           "properties": {
@@ -1378,7 +1382,7 @@
         "id",
         "workflowRunId",
         "workflowId",
-        "requestorId",
+        "requestor",
         "createdTime",
         "lastUpdateTime",
         "payload"
@@ -1402,8 +1406,7 @@
       },
       "required": [
         "type",
-        "targetValue",
-        "payload"
+        "targetValue"
       ]
     },
     "TaskPayloadType": {
@@ -1458,7 +1461,7 @@
       "description": "The last update time."
     },
     "Approval": {
-      "x-ms-discriminator-value": "approval",
+      "x-ms-discriminator-value": "Approval",
       "description": "The workflow approval task properties.",
       "type": "object",
       "allOf": [
@@ -1551,7 +1554,7 @@
       ]
     },
     "SimpleTask": {
-      "x-ms-discriminator-value": "simpleTask",
+      "x-ms-discriminator-value": "SimpleTask",
       "description": "The workflow simple task properties.",
       "type": "object",
       "allOf": [
@@ -1572,20 +1575,20 @@
       "type": "object",
       "description": "Workflow simple task details.",
       "properties": {
-        "taskBody":{
+        "taskBody": {
           "type": "string",
           "description": "The simple task body."
         },
-        "assignedTo":{
-          "type":"array",
+        "assignedTo": {
+          "type": "array",
           "description": "The users or groups were assigned the simple task.",
           "items": {
-            "type":"string",
+            "type": "string",
             "format": "uuid"
           }
         },
-        "status":{
-          "type":"string",
+        "status": {
+          "type": "string",
           "description": "Simple task status.",
           "enum": [
             "NotStarted",
@@ -1598,8 +1601,8 @@
             "modelAsString": true
           }
         },
-        "changeHistory":{
-          "type":"array",
+        "changeHistory": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/TaskChangeEvent"
           }
@@ -1612,8 +1615,8 @@
         "changeHistory"
       ]
     },
-    "DSARTask": {
-      "x-ms-discriminator-value": "dsarTask",
+    "DsarTask": {
+      "x-ms-discriminator-value": "DsarTask",
       "description": "The workflow dsar task properties.",
       "type": "object",
       "allOf": [
@@ -1630,29 +1633,29 @@
         }
       ]
     },
-    "DSARTaskDetail":{
+    "DSARTaskDetail": {
       "type": "object",
       "description": "Workflow dsar task details.",
       "properties": {
-        "taskBody":{
+        "taskBody": {
           "type": "string",
           "description": "The dsar task body."
         },
-        "assignedTo":{
-          "type":"array",
+        "assignedTo": {
+          "type": "array",
           "description": "The users or groups were assigned the dsar task.",
           "items": {
-            "type":"string",
+            "type": "string",
             "format": "uuid"
           }
         },
-        "claimedBy":{
+        "claimedBy": {
           "type": "string",
           "description": "The user who claimed the dsar task.",
           "format": "uuid"
         },
-        "approvers":{
-          "type":"array",
+        "approvers": {
+          "type": "array",
           "description": "The list of approvers.",
           "items": {
             "type": "string",
@@ -1660,18 +1663,18 @@
             "format": "uuid"
           }
         },
-        "dsarId":{
+        "dsarId": {
           "type": "string",
           "description": "The dsar id.",
           "format": "uuid"
         },
-        "dsarTaskId":{
+        "dsarTaskId": {
           "type": "string",
           "description": "The dsar task id.",
           "format": "uuid"
         },
-        "status":{
-          "type":"string",
+        "status": {
+          "type": "string",
           "description": "The dsar task status.",
           "enum": [
             "NotStarted",
@@ -1686,8 +1689,8 @@
             "modelAsString": true
           }
         },
-        "changeHistory":{
-          "type":"array",
+        "changeHistory": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/TaskChangeEvent"
           }
@@ -1703,19 +1706,19 @@
         "changeHistory"
       ]
     },
-    "TaskChangeEvent":{
-      "type":"object",
+    "TaskChangeEvent": {
+      "type": "object",
       "description": "History of changes made on task.",
       "properties": {
-        "updatedBy":{
-          "type":"string",
-          "format":"uuid"
+        "updatedBy": {
+          "type": "string",
+          "format": "uuid"
         },
-        "updatedTime":{
-          "type":"string",
+        "updatedTime": {
+          "type": "string",
           "format": "date-time"
         },
-        "type":{
+        "type": {
           "type": "string",
           "enum": [
             "ApproveApproval",
@@ -1730,8 +1733,8 @@
             "modelAsString": true
           }
         },
-        "change":{
-          "type":"object",
+        "change": {
+          "type": "object",
           "description": "The changes made on this task."
         }
       },
@@ -1785,7 +1788,17 @@
       "properties": {
         "newStatus": {
           "type": "string",
-          "description": "The new status will be used to update the task."
+          "description": "The new status will be used to update the task.",
+          "enum": [
+            "Not Started",
+            "In Progress",
+            "Completed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "TaskStatus",
+            "modelAsString": true
+          }
         },
         "comment": {
           "type": "string",
@@ -1799,11 +1812,6 @@
     "DSARTaskClaimCommand": {
       "type": "object",
       "properties": {
-        "claimedBy": {
-          "type": "string",
-          "format": "uuid",
-          "description": "The user claimed this DSAR task request."
-        },
         "comment": {
           "type": "string",
           "description": "The comment when claiming a DSAR task."
@@ -2045,8 +2053,8 @@
       "description": "The key word which could used to filter workflow item with related workflow.",
       "x-ms-parameter-location": "method"
     },
-    "requestRole": {
-      "name": "requestRole",
+    "viewMode": {
+      "name": "viewMode",
       "in": "query",
       "required": false,
       "type": "string",

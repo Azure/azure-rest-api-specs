@@ -7,22 +7,23 @@
   "responses": {
     "200": {
       "body": {
-        "id": "c3e0138c-39f1-4720-ad54-06561793dee5",
-        "workflowId": "0c838aad-de31-4109-ae00-840d68b083b3",
-        "startTime": "2022-09-07T06:24:26.136961800Z",
-        "requestor": "36e42dc0-3401-11ed-a261-0242ac120002",
-        "userRequestId": "80a7619c-7b92-11ed-a1eb-0242ac120002",
+        "id": "4f8d70c3-c09b-4e56-bfd1-8b86c79bd4d9",
+        "workflowId": "3fb9ba13-bf35-4f29-ab63-70b5234923c2",
+        "startTime": "2023-01-12T09:36:11.533263721Z",
+        "requestor": "eece94d9-0619-4669-bb8a-d6ecec5220bc",
         "runPayload": {
           "type": "CreateTerm",
-          "targetValue": "term-sample",
+          "targetValue": "term123",
           "payload": {
-            "name": "term-sample",
-            "anchor": {
-              "glossaryGuid": "1d9d4db5-611d-4f07-9b3d-a3a44da72ebb"
-            },
-            "status": "Approved",
-            "nickName": "term-sample",
-            "attributes": {}
+            "glossaryTerm": {
+              "name": "term123",
+              "anchor": {
+                "glossaryGuid": "20031e20-b4df-4a66-a61d-1b0716f3fa48"
+              },
+              "status": "Approved",
+              "nickName": "term123",
+              "attributes": {}
+            }
           }
         },
         "status": "InProgress",
@@ -36,7 +37,14 @@
                   "title": "Approval Request for Create Glossary Term",
                   "assignedTo": [
                     "eece94d9-0619-4669-bb8a-d6ecec5220bc"
-                  ]
+                  ],
+                  "reminderSettings": {
+                    "interval": "1 day"
+                  },
+                  "expirySettings": {
+                    "expireAfter": "1 month",
+                    "notifyOnExpiration": []
+                  }
                 }
               },
               "runAfter": {}
@@ -110,13 +118,23 @@
           }
         },
         "detail": {
-          "runInput": {},
+          "runInput": {
+            "request": {
+              "requestor": "eece94d9-0619-4669-bb8a-d6ecec5220bc",
+              "term": {
+                "name": "term123",
+                "formalName": "term123",
+                "definition": null,
+                "experts": [],
+                "stewards": [],
+                "parent": null
+              }
+            }
+          },
           "actions": {
             "Start and wait for an approval": {
-              "startTime": "2022-12-19T09:08:25.311263300Z",
-              "status": {
-                "type": "Running"
-              },
+              "startTime": "2023-01-12T09:36:12.347229300Z",
+              "status": "Running",
               "input": {
                 "type": "inlined",
                 "parameters": {
@@ -124,7 +142,14 @@
                   "title": "Approval Request for Create Glossary Term",
                   "assignedTo": [
                     "eece94d9-0619-4669-bb8a-d6ecec5220bc"
-                  ]
+                  ],
+                  "reminderSettings": {
+                    "interval": "1 day"
+                  },
+                  "expirySettings": {
+                    "expireAfter": "1 month",
+                    "notifyOnExpiration": []
+                  }
                 }
               }
             }
