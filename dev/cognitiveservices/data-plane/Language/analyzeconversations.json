@@ -2225,7 +2225,7 @@
         "levels": {
           "type": "integer",
           "format": "int32",
-          "description": " The supported values are 0, 1, 2. If not specified, the value is determined automatically by the service. 0 level means only 1 summary is generated for the whole input and no chaptering is performed. 1 level means flat chapters. 2 levels means each high level chapter can have child low level sub chapters."
+          "description": " The supported values are 0, 1, 2 and 3. If not specified, the value is determined automatically by the service. 0 level means only 1 summary is generated for the whole input and no chaptering is performed. 1 level means flat chapters. 2 levels means each high level chapter can have child low level sub chapters. The 3rd level is the raw segmentation result without any post processing."
         },
         "parametersOnEachLevel": {
           "description": "The parameters on each level. The array length must be the same as levels.",
@@ -2242,6 +2242,16 @@
       "properties": {
         "maxChaptersCount": {
           "description": "The maximum number of chapters under the parent node. If not specified, the service will determine automatically.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "minTokens": {
+          "description": "The recommended minimum of tokens of each chapter in this level.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxTokens": {
+          "description": "The recommended maximum of tokens of each chapter in this level.",
           "type": "integer",
           "format": "int32"
         },
