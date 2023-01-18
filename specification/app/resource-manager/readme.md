@@ -49,6 +49,9 @@ input-file:
   - Microsoft.App/preview/2022-11-01-preview/Diagnostics.json
   - Microsoft.App/preview/2022-11-01-preview/Global.json
   - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsDaprResiliencyCircuitBreakerPolicies.json
+  - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsDaprResiliencyTimeoutPolicies.json
+  - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsDaprResiliencyRetryPolicies.json
   - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2022-11-01-preview/SourceControls.json

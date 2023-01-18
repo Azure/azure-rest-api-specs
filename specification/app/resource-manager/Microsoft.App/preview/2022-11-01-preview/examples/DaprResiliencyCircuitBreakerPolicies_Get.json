@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
+    "policyName": "reddog",
+    "api-version": "2022-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/myenvironment/daprResiliencyCircuitBreakerPolicies/reddog",
+        "name": "reddog",
+        "type": "Microsoft.App/managedEnvironments/daprResiliencyCircuitBreakerPolicies",
+        "properties": {
+          "maxRequests": 1,
+          "interval": "8s",
+          "timeout": "45s",
+          "trip": "consecutiveFailures > 8",
+          "circuitBreakerScope": "both",
+          "circuitBreakerCacheSize": 5000
+        }
+      }
+    }
+  }
+}

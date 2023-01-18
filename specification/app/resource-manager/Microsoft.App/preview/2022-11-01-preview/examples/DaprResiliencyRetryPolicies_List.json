@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
+    "api-version": "2022-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1/daprResiliencyRetryPolicies/reddog",
+            "name": "reddog",
+            "type": "Microsoft.App/managedEnvironments/daprResiliencyRetryPolicies",
+            "properties": {
+              "policy": "constant",
+              "duration": "8s",
+              "maxInterval": "45s",
+              "maxRetries": 10
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1/daprResiliencyRetryPolicies/bluedog",
+            "name": "bluedog",
+            "type": "Microsoft.App/managedEnvironments/daprResiliencyRetryPolicies",
+            "properties": {
+              "policy": "exponential",
+              "duration": "18s",
+              "maxInterval": "25s",
+              "maxRetries": 1
+            }
+          },
+          {
+            "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1/daprResiliencyRetryPolicies/yellowdog",
+            "name": "yellowdog",
+            "type": "Microsoft.App/managedEnvironments/daprResiliencyRetryPolicies",
+            "properties": {
+              "policy": "constant",
+              "duration": "1s",
+              "maxInterval": "5s",
+              "maxRetries": 3
+            }
+          }
+        ]
+      }
+    }
+  }
+}

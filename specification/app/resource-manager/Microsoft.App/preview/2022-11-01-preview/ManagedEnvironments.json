@@ -1080,6 +1080,30 @@
         }
       }
     },
+    "DaprResiliencyDefaults": {
+      "description": "Default Resiliency Policy",
+      "type": "object",
+      "properties": {
+        "retries": {
+          "description": "retry policies",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyRetryPolicy"
+          }
+        },
+        "timeouts": {
+          "description": "timeout policy",
+          "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPolicy"
+        },
+        "circuitBreakers": {
+          "description": "circuit breaker policies",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPolicy"
+          }
+        }
+      }
+    },
     "KedaConfiguration": {
       "type": "object",
       "description": "Configuration properties Keda component",
@@ -1243,6 +1267,10 @@
             "vnetConfiguration": {
               "description": "Vnet configuration for the environment",
               "$ref": "#/definitions/VnetConfiguration"
+            },
+            "daprResiliencyDefaults": {
+              "description": "Dapr Resiliency Default Policies",
+              "$ref": "#/definitions/DaprResiliencyDefaults"
             },
             "deploymentErrors": {
               "description": "Any errors that occurred during deployment or deployment validation",
