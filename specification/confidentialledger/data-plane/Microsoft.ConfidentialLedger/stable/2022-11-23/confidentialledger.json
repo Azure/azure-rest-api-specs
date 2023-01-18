@@ -491,46 +491,89 @@
   },
   "definitions": {
     "ApplicationClaims": {
-      "description": "List of application claim objects.",
+      "description": "List of application claims.",
       "type": "array",
       "items": {
-        "$ref": "#/definitions/ApplicationClaimObject"
+        "$ref": "#/definitions/ApplicationClaim"
       }
     },
-    "ApplicationClaimData": {
-      "description": "Data used to build an application claim.",
+    "ApplicationClaim": {
+      "description": "A claim of a ledger application.",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "digest": {
+          "$ref": "#/definitions/ClaimDigest"
+        },
+        "kind": {
+          "$ref": "#/definitions/ApplicationClaimKind"
+        },
+        "ledgerEntry": {
+          "$ref": "#/definitions/LedgerEntryClaim"
+        }
+      },
+      "type": "object"
+    },
+    "ApplicationClaimKind": {
+      "type": "string",
+      "description": "Represents the kind of an application claim.",
+      "enum": [
+        "LedgerEntry",
+        "ClaimDigest"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationClaimKind",
+        "modelAsString": true
+      }
+    },
+    "ApplicationClaimProtocol": {
+      "type": "string",
+      "description": "Represents the protocol to be used to dervice the digest of a claim from the given data.",
+      "enum": [
+        "LedgerEntryV1"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationClaimProtocol",
+        "modelAsString": true
+      }
+    },
+    "ClaimDigest": {
+      "description": "An application claim in digested form.",
+      "required": [
+        "protocol"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The digest of the application claim, in hexadecimal form."
+        },
+        "protocol": {
+          "$ref": "#/definitions/ApplicationClaimProtocol"
+        }
+      },
+      "type": "object"
+    },
+    "LedgerEntryClaim": {
+      "description": "An application claim derived from ledger entry data.",
+      "required": [
+        "version"
+      ],
       "properties": {
         "collectionId": {
-          "description": "Identifier for a collection id.",
+          "description": "Identifier of a collection.",
           "type": "string"
         },
         "contents": {
           "description": "Contents of a ledger entry.",
           "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "ApplicationClaimObject": {
-      "description": "Representation of an application claim object.",
-      "required": [
-        "version"
-      ],
-      "properties": {
-        "claimData": {
-          "$ref": "#/definitions/ApplicationClaimData"
-        },
-        "claimDigest": {
-          "type": "string",
-          "description": "The digest of the application claim, in hexadecimal form."
         },
         "secretKey": {
           "type": "string",
           "description": "Base64-encoded secret key."
         },
-        "version": {
-          "type": "string",
-          "description": "Version of the application claim."
+        "protocol": {
+          "$ref": "#/definitions/ApplicationClaimProtocol"
         }
       },
       "type": "object"
