@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2021-10-01",
+    "version": "2022-06-01",
     "title": "ConsumptionManagementClient",
     "description": "Consumption management client provides access to consumption resources for Azure Enterprise Subscriptions."
   },
@@ -40,7 +40,7 @@
           "PriceSheet"
         ],
         "operationId": "PriceSheet_Get",
-        "description": "Gets the price sheet for a subscription. Price sheet is available via this API only for May 1, 2014 or later.",
+        "description": "List the price sheet for a subscription. Price sheet is available via this API only for May 1, 2014 or later.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
@@ -75,10 +75,10 @@
             "maximum": 1000
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -91,7 +91,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -141,10 +141,10 @@
             "maximum": 1000
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingPeriodNameParameter"
@@ -160,7 +160,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -174,26 +174,26 @@
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
         "x-ms-examples": {
-          "PriceSheetForBillingPeriod": {
+          "OperationList": {
             "$ref": "./examples/OperationList.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -209,7 +209,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -221,6 +221,7 @@
       }
     },
     "PriceSheetModel": {
+      "type": "object",
       "description": "price sheet result. It contains the pricesheet associated with billing period",
       "properties": {
         "pricesheets": {
@@ -247,12 +248,15 @@
       }
     },
     "DownloadProperties": {
+      "type": "object",
       "description": "The properties of the price sheet download.",
       "properties": {
         "downloadUrl": {
           "description": "The link (url) to download the pricesheet.",
           "type": "string",
-          "readOnly": true
+          "format": "uri",
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "validTill": {
           "description": "Download link validity.",
@@ -262,6 +266,7 @@
       }
     },
     "PriceSheetProperties": {
+      "type": "object",
       "description": "The properties of the price sheet.",
       "properties": {
         "billingPeriodId": {
@@ -288,7 +293,6 @@
         "includedQuantity": {
           "description": "Included quality for an offer",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "partNumber": {
@@ -299,7 +303,6 @@
         "unitPrice": {
           "description": "Unit Price",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "currencyCode": {
@@ -315,6 +318,7 @@
       }
     },
     "MeterDetails": {
+      "type": "object",
       "description": "The properties of the meter detail.",
       "properties": {
         "meterName": {
@@ -345,13 +349,11 @@
         "totalIncludedQuantity": {
           "description": "The total included quantity associated with the offer.",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "pretaxStandardRate": {
           "description": "The pretax listing price.",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "serviceName": {
@@ -369,26 +371,13 @@
   },
   "parameters": {
     "billingPeriodNameParameter": {
+      "pattern": "[0-9]+",
       "name": "billingPeriodName",
       "in": "path",
       "description": "Billing Period Name.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "subscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "description": "Azure Subscription ID.",
-      "required": true,
-      "type": "string"
-    },
-    "apiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2021-10-01."
     }
   }
 }
