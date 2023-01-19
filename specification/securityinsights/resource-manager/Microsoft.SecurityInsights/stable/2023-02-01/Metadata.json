@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2022-12-01-preview"
+    "version": "2023-02-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -323,11 +323,6 @@
       }
     },
     "metadataPatch": {
-      "allOf": [
-        {
-          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
-        }
-      ],
       "description": "Metadata patch request body.",
       "type": "object",
       "properties": {
@@ -352,83 +347,7 @@
     },
     "metadataKind": {
       "type": "string",
-      "description": "The kind of content the metadata is for.",
-      "enum": [
-        "DataConnector",
-        "DataType",
-        "Workbook",
-        "WorkbookTemplate",
-        "Playbook",
-        "PlaybookTemplate",
-        "AnalyticsRuleTemplate",
-        "AnalyticsRule",
-        "HuntingQuery",
-        "InvestigationQuery",
-        "Parser",
-        "Watchlist",
-        "WatchlistTemplate",
-        "Solution",
-        "AzureFunction",
-        "LogicAppsCustomConnector",
-        "AutomationRule"
-      ],
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "kind",
-        "values": [
-          {
-            "value": "DataConnector"
-          },
-          {
-            "value": "DataType"
-          },
-          {
-            "value": "Workbook"
-          },
-          {
-            "value": "WorkbookTemplate"
-          },
-          {
-            "value": "Playbook"
-          },
-          {
-            "value": "PlaybookTemplate"
-          },
-          {
-            "value": "AnalyticsRuleTemplate"
-          },
-          {
-            "value": "AnalyticsRule"
-          },
-          {
-            "value": "HuntingQuery"
-          },
-          {
-            "value": "InvestigationQuery"
-          },
-          {
-            "value": "Parser"
-          },
-          {
-            "value": "Watchlist"
-          },
-          {
-            "value": "WatchlistTemplate"
-          },
-          {
-            "value": "Solution"
-          },
-          {
-            "value": "AzureFunction"
-          },
-          {
-            "value": "LogicAppsCustomConnector"
-          },
-          {
-            "value": "AutomationRule"
-          }
-        ]
-      }
+      "description": "The kind of content the metadata is for."
     },
     "metadataSource": {
       "description": "The original source of the content item, where it comes from.",
@@ -584,7 +503,10 @@
           "items": {
             "$ref": "#/definitions/metadataDependencies",
             "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
-          }
+          },
+          "x-ms-identifiers": [
+            "contentId"
+          ]
         }
       }
     },
@@ -892,6 +814,7 @@
       "in": "path",
       "name": "metadataName",
       "required": true,
+      "pattern": "^\\S+$",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
