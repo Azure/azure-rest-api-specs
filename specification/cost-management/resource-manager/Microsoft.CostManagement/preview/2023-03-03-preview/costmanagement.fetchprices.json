@@ -43,7 +43,7 @@
             "$ref": "./examples/FetchPrices/SubscriptionScope.json"
           }
         },
-        "operationId": "FetchPrices_Post",
+        "operationId": "FetchPrices_SubscriptionScope",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -102,7 +102,7 @@
             "OfferingId"
           ],
           "x-ms-enum": {
-            "name": "idType",
+            "name": "IdType",
             "modelAsString": true
           }
         },
@@ -169,7 +169,7 @@
             "Spot"
           ],
           "x-ms-enum": {
-            "name": "type",
+            "name": "PriceType",
             "modelAsString": true
           }
         },
@@ -182,7 +182,7 @@
             "P3Y"
           ],
           "x-ms-enum": {
-            "name": "term",
+            "name": "Term",
             "modelAsString": true
           }
         },
@@ -220,7 +220,7 @@
             "InvalidOfferingId"
           ],
           "x-ms-enum": {
-            "name": "errorType",
+            "name": "ErrorType",
             "modelAsString": true
           }
         },
@@ -235,7 +235,7 @@
       "type": "object",
       "description": "Parameters that needs to be included in the request to retrieve prices.",
       "properties":{
-        "regionAgnoticId":{
+        "regionAgnosticId":{
           "description": "Uniquely identifies a product for which the prices will be returned.",
           "type": "object",
           "readOnly": true,
@@ -255,7 +255,7 @@
           }
         },
         "armLocation": {
-          "description": "Name of the location where the resource resides.",
+          "description": "Name of the location where the resource resides. ARM locations can be fetched from [Subscriptions - List Locations | Microsoft Docs](https://learn.microsoft.com/en-us/rest/api/resources/subscriptions/list-locations?tabs=HTTP). The value in 'name' property of this API response should be used.",
           "type": "string",
           "readOnly": true
         }
