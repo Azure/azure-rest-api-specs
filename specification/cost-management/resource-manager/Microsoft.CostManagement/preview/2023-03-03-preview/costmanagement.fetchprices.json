@@ -55,19 +55,28 @@
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RequestDefinition"
+            },
+            "description": "Parameters supplied to the FetchPrices post operation."
           }
         ],
         "responses": {          
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/prices"
+              "$ref": "#/definitions/FetchPricesResult"
             }
           },
-          "209": {
+          "206": {
             "description": "PartialContent. The request has partially succeeded.",
             "schema": {
-              "$ref": "#/definitions/prices"
+              "$ref": "#/definitions/FetchPricesResult"
             }
           },
           "default": {
@@ -81,20 +90,27 @@
     }
   },
   "definitions": {
-    "prices": {
+    "FetchPricesResult": {
       "type": "object",
       "description": "Pricing related properties for each identifier requested.",
       "properties":{
         "idType": {
           "description": "Type of the identifier for which prices are returned. Currently support OfferingId only.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "OfferingId"
+          ],
+          "x-ms-enum": {
+            "name": "idType",
+            "modelAsString": true
+          }
         },
         "items": {
           "type": "object",
           "description": "Collection of prices for the given identifiers.",
           "readOnly": true,
-          "$ref": "#/definitions/priceSet"
+          "$ref": "#/definitions/PriceSet"
         },
         "count": {
           "type": "integer",
@@ -104,7 +120,7 @@
         }        
       }
     },
-    "priceSet": {
+    "PriceSet": {
       "type": "object",
       "description": "Pricing details by identifier",
       "properties":{
@@ -122,7 +138,7 @@
           "description": "Collection of prices for the given product identifier.",
           "type": "object",
           "readOnly": true,
-          "$ref": "#/definitions/price"
+          "$ref": "#/definitions/Price"
         },
         "currency": {
           "description": "Currency in which the price is represented.",
@@ -133,23 +149,42 @@
           "description": "Details of the error, if any.",
           "type": "string",
           "readOnly": true,
-          "$ref": "#/definitions/error"
+          "$ref": "#/definitions/PricingError"
         }
       }
     },
-    "price":{
+    "Price":{
       "type": "object",
       "description": "Pricing details by identifier",
       "properties":{
         "type": {
           "description": "Type of the price.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Consumption",
+            "DevTest",
+            "SavingsPlan",
+            "Reservation",
+            "Spot"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true
+          }
         },
         "term": {
           "description": "Applicable for SavingsPlan and Entitlement price types. ",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "P1Y",
+            "P3Y"
+          ],
+          "x-ms-enum": {
+            "name": "term",
+            "modelAsString": true
+          }
         },
         "discountPercent": {
           "description": "Discount percentage for a specific customer.",
@@ -173,28 +208,65 @@
         }
       }      
     },
-    "error":{
+    "PricingError":{
       "type": "object",
       "description": "Pricing details by identifier",
       "properties":{
-        "type": {
+        "errorType": {
           "description": "Type of error.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "InvalidOfferingId"
+          ],
+          "x-ms-enum": {
+            "name": "errorType",
+            "modelAsString": true
+          }
         },
-        "description": {
+        "errorDescription": {
           "description": "Text describing why prices weren't returned for an identifier.",
           "type": "string",
           "readOnly": true
         }
       }      
+    },
+    "RequestDefinition":{
+      "type": "object",
+      "description": "Parameters that needs to be included in the request to retrieve prices.",
+      "properties":{
+        "regionAgnoticId":{
+          "description": "Uniquely identifies a product for which the prices will be returned.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/RegionAgnosticId"
+        }
+      }
+    },
+    "RegionAgnosticId":{
+      "type": "object",
+      "description": "Pricing details by identifier",
+      "properties":{
+        "ids": {
+          "description": "List of OfferingIds.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "armLocation": {
+          "description": "Name of the location where the resource resides.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "The ID that uniquely identifies an azure subscription.",
+      "description": "The Id that uniquely identifies an azure subscription.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
