@@ -26,15 +26,15 @@ These are the global settings for the extendedLocation.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-04
+tag: package-preview-2023-04-01
 ```
 
 
-### Tag: package-preview-2023-04
+### Tag: package-preview-2023-04-01
 
-These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-04-01` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-04'
+```yaml $(tag) == 'package-preview-2023-04-01'
 input-file:
   - Microsoft.ExtendedLocation/preview/2023-04-01-preview/customlocations.json
 ```
