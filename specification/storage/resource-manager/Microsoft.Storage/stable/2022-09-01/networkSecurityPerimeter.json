@@ -30,7 +30,7 @@
         "description": "Gets list of effective NetworkSecurityPerimeterConfiguration for storage account",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -39,7 +39,7 @@
             "$ref": "./storage.json#/parameters/StorageAccountName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -72,7 +72,7 @@
         "description": "Gets effective NetworkSecurityPerimeterConfiguration for association",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -84,7 +84,7 @@
             "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -117,7 +117,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "./storage.json#/parameters/ResourceGroupName"
@@ -129,7 +129,7 @@
             "$ref": "#/parameters/networkSecurityPerimeterConfigurationName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -162,21 +162,13 @@
     "NetworkSecurityPerimeterConfiguration": {
       "description": "The Network Security Perimeter configuration resource.",
       "type": "object",
+      "readOnly": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ARM identifier for Network Security Perimeter configuration."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name for Network Security Perimeter configuration."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ARM resource type."
-        },
         "properties": {
           "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
           "description": "Properties of the Network Security Perimeter Configuration",
@@ -206,16 +198,13 @@
         "provisioningState": {
           "description": "Provisioning state of Network Security Perimeter configuration propagation",
           "enum": [
-            "Creating",
-            "Updating",
             "Accepted",
             "Succeeded",
             "Failed",
-            "Deleting",
-            "Deleted",
-            "Canceled"
+            "Deleting"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "NetworkSecurityPerimeterConfigurationProvisioningState",
             "modelAsString": true
@@ -224,6 +213,7 @@
         "provisioningIssues": {
           "description": "List of Provisioning Issues if any",
           "type": "array",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ProvisioningIssue"
           },
@@ -232,7 +222,8 @@
           ]
         },
         "networkSecurityPerimeter": {
-          "$ref": "#/definitions/NetworkSecurityPerimeter"
+          "$ref": "#/definitions/NetworkSecurityPerimeter",
+          "readOnly": true
         },
         "resourceAssociation": {
           "description": "Information about resource association",
@@ -298,7 +289,7 @@
       }
     },
     "ProvisioningIssue": {
-      "description": "Describes Provisioning issue for given NetworkSecurityPerimeterConfiguration",
+      "description": "Describes provisioning issue for given NetworkSecurityPerimeterConfiguration",
       "type": "object",
       "readOnly": true,
       "properties": {
@@ -307,12 +298,24 @@
           "type": "string"
         },
         "properties": {
-          "description": "Properties of Provisioning Issue",
+          "description": "Properties of provisioning issue",
           "type": "object",
           "readOnly": true,
           "properties": {
             "issueType": {
-              "description": "Type of Issue",
+              "description": "Type of issue",
+              "enum": [
+                "Unknown",
+                "ConfigurationPropagationFailure"
+              ],
+              "type": "string"
+            },
+            "severity": {
+              "description": "Severity of the issue.",
+              "enum": [
+                "Warning",
+                "Error"
+              ],
               "type": "string"
             },
             "description": {
