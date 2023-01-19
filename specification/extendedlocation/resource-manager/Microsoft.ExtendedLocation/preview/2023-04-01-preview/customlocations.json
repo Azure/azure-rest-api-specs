@@ -192,7 +192,7 @@
         },
         "x-ms-examples": {
           "Get Custom Location": {
-            "$ref": "./examples/CustomLocationsGet.json"
+            "$ref": "./examples/CustomLocationsGet_AWS.json"
           }
         }
       },
@@ -252,7 +252,7 @@
         },
         "x-ms-examples": {
           "Create/Update Custom Location": {
-            "$ref": "./examples/CustomLocationsCreate_Update.json"
+            "$ref": "./examples/CustomLocationsCreate_Update_AWS.json"
           }
         }
       },
@@ -748,6 +748,24 @@
     }
   },
   "definitions": {
+    "AwsCloudProfile": {
+      "description": "Cloud profile for AWS",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "description": "Account id for the AWS account",
+          "type": "string"
+        },
+        "excludedAccounts": {
+          "description": "List of AWS accounts which needs to be excluded",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "EnabledResourceType": {
       "description": "EnabledResourceType definition.",
       "type": "object",
@@ -832,6 +850,22 @@
         }
       }
     },
+    "GCPCloudProfile": {
+      "description": "Cloud profile for GCP",
+      "type": "object",
+      "properties": {
+        "organizationProject": {
+          "$ref": "#/definitions/OrganizationProject",
+          "description": "Project details for an organization project in GCP account",
+          "x-ms-client-flatten": true
+        },
+        "singleProject": {
+          "$ref": "#/definitions/SingleProject",
+          "description": "Project details for a single project in GCP account",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "Identity": {
       "description": "Identity for the resource.",
       "type": "object",
@@ -857,6 +891,46 @@
             "name": "ResourceIdentityType",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "OrganizationProject": {
+      "description": "Project details for an organization project in GCP account",
+      "type": "object",
+      "properties": {
+        "excludedFolderIds": {
+          "description": "List of folder id's that needs to be excluded",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "excludedProjectNumbers": {
+          "description": "List of project numbers that needs to be excluded",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "organizationId": {
+          "description": "Organization id for the GCP organization",
+          "type": "string"
+        }
+      }
+    },
+    "SingleProject": {
+      "description": "Project details for a single project in GCP account",
+      "type": "object",
+      "properties": {
+        "projectId": {
+          "description": "Project id for the GCP single account",
+          "type": "string"
+        },
+        "projectNumber": {
+          "description": "Project number for GCP single account",
+          "type": "string"
         }
       }
     },
@@ -1034,6 +1108,11 @@
             }
           }
         },
+        "awsCloudProfile": {
+          "$ref": "#/definitions/AwsCloudProfile",
+          "description": "Contains the aws account details of the customer",
+          "x-ms-client-flatten": true
+        },
         "clusterExtensionIds": {
           "description": "Contains the reference to the add-on that contains charts to deploy CRDs and operators.",
           "type": "array",
@@ -1048,6 +1127,11 @@
           "description": "Display name for the Custom Locations location.",
           "type": "string"
         },
+        "gcpCloudProfile": {
+          "$ref": "#/definitions/GCPCloudProfile",
+          "description": "Contains the gcp account details of the customer",
+          "x-ms-client-flatten": true
+        },
         "hostResourceId": {
           "description": "Connected Cluster or AKS Cluster. The Custom Locations RP will perform a checkAccess API for listAdminCredentials permissions.",
           "type": "string"
@@ -1056,7 +1140,9 @@
           "description": "Type of host the Custom Locations is referencing (Kubernetes, etc...).",
           "type": "string",
           "enum": [
-            "Kubernetes"
+            "Kubernetes",
+            "AWS",
+            "GCP"
           ],
           "x-ms-enum": {
             "name": "HostType",
