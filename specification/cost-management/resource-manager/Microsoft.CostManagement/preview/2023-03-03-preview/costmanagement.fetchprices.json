@@ -37,18 +37,14 @@
       "post": {
         "tags": [
           "FetchPrices"
-        ],
+        ],        
+        "operationId": "FetchPrices_SubscriptionScope",        
+        "description": "Retrieves prices for a given set of product identifiers.",
         "x-ms-examples": {
           "FetchPrices": {
             "$ref": "./examples/FetchPrices/SubscriptionScope.json"
           }
         },
-        "operationId": "FetchPrices_SubscriptionScope",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "description": "Retrieves prices for a given set of product identifiers.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -118,6 +114,36 @@
           "description": "Total number of items returned.",
           "readOnly": true
         }        
+      }
+    },
+    "RequestDefinition":{
+      "type": "object",
+      "description": "Parameters that needs to be included in the request to retrieve prices.",
+      "properties":{
+        "regionAgnosticId":{
+          "description": "Uniquely identifies a product for which the prices will be returned.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/RegionAgnosticId"
+        }
+      }
+    },
+    "RegionAgnosticId":{
+      "type": "object",
+      "description": "Pricing details by identifier",
+      "properties":{
+        "ids": {
+          "description": "List of OfferingIds.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "armLocation": {
+          "description": "Name of the location where the resource resides. ARM locations can be fetched from [Subscriptions - List Locations | Microsoft Docs](https://learn.microsoft.com/en-us/rest/api/resources/subscriptions/list-locations?tabs=HTTP). The value in 'name' property of this API response should be used.",
+          "type": "string",
+          "readOnly": true
+        }
       }
     },
     "PriceSet": {
@@ -230,36 +256,6 @@
           "readOnly": true
         }
       }      
-    },
-    "RequestDefinition":{
-      "type": "object",
-      "description": "Parameters that needs to be included in the request to retrieve prices.",
-      "properties":{
-        "regionAgnosticId":{
-          "description": "Uniquely identifies a product for which the prices will be returned.",
-          "type": "object",
-          "readOnly": true,
-          "$ref": "#/definitions/RegionAgnosticId"
-        }
-      }
-    },
-    "RegionAgnosticId":{
-      "type": "object",
-      "description": "Pricing details by identifier",
-      "properties":{
-        "ids": {
-          "description": "List of OfferingIds.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "armLocation": {
-          "description": "Name of the location where the resource resides. ARM locations can be fetched from [Subscriptions - List Locations | Microsoft Docs](https://learn.microsoft.com/en-us/rest/api/resources/subscriptions/list-locations?tabs=HTTP). The value in 'name' property of this API response should be used.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
     }
   },
   "parameters": {
