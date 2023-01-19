@@ -67,20 +67,20 @@
                         "schema": {
                             "$ref": "#/definitions/ErrorResponse"
                         }
+                    }
+                },
+                "x-ms-examples": {
+                    "List alert rule recommendations for virtual machines at resource level": {
+                        "$ref": "./examples/AlertRuleRecommendations_GetByResource_VM.json"
                     },
-                    "x-ms-examples": {
-                        "List alert rule recommendations for virtual machines at subscription level": {
-                            "$ref": "./examples/AlertRuleRecommendations_GetBySubscription_VM.json"
-                        },
-                        "List alert rule recommendations for Monitoring accounts at subscription level": {
-                            "$ref": "./examples/AlertRuleRecommendations_GetBySubscription_MAC.json"
-                        },
-                        "List alert rule recommendations for virtual machines at resource level": {
-                            "$ref": "./examples/AlertRuleRecommendations_GetByResource_VM.json"
-                        },
-                        "List alert rule recommendations for Monitoring accounts at resource level": {
-                            "$ref": "./examples/AlertRuleRecommendations_GetByResource_MAC.json"
-                        }
+                    "List alert rule recommendations for virtual machines at subscription level": {
+                        "$ref": "./examples/AlertRuleRecommendations_GetBySubscription_VM.json"
+                    },
+                    "List alert rule recommendations for Monitoring accounts at subscription level": {
+                        "$ref": "./examples/AlertRuleRecommendations_GetBySubscription_MAC.json"
+                    },
+                    "List alert rule recommendations for Monitoring accounts at resource level": {
+                        "$ref": "./examples/AlertRuleRecommendations_GetByResource_MAC.json"
                     }
                 }
             }
@@ -101,13 +101,19 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The recommendations target type."
+            "description": "The recommendations target type.",
+            "x-ms-parameter-location": "client"
         }
     },
     "definitions": {
         "AlertRuleRecommendationsResponse": {
             "description": "Describes the format of Alert Rule Recommendations response.",
             "type": "object",
+            "required": [
+                "requestedTargetType",
+                "displayInformation",
+                "rulesArmTemplate"
+            ],
             "properties": {
                 "requestedTargetType": {
                     "type": "string",
@@ -149,6 +155,10 @@
         "MetricAlertsDisplayInformation": {
             "description": "Provides disaply information specific for Metric Alerts rule.",
             "type": "object",
+            "required": [
+                "metricDisplayName",
+                "displayUnits"
+            ],
             "properties": {
                 "metricDisplayName": {
                     "type": "string",
@@ -163,6 +173,13 @@
         "RulesArmTemplate": {
             "description": "A complete ARM template to deploy the alert rules.",
             "type": "object",
+            "required": [
+                "$schema",
+                "contentVersion",
+                "variables",
+                "parameters",
+                "resources"
+            ],
             "properties": {
                 "$schema": {
                     "type": "string",
