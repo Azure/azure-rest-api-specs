@@ -6470,12 +6470,23 @@
       "description": "Snapshot of a Volume",
       "type": "object",
       "x-ms-azure-resource": true,
+      "required": [
+        "location"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "description": "Snapshot Properties",
           "$ref": "#/definitions/snapshotProperties",
@@ -6894,6 +6905,7 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "required": [
+        "location",
         "properties"
       ],
       "allOf": [
