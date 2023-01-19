@@ -105,6 +105,9 @@
           },
           "Get a MDATP data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
+          },
+          "Get a MicrosoftThreatProtection data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftThreatProtectionById.json"
           }
         },
         "tags": [
@@ -151,6 +154,9 @@
           },
           "Creates or updates an Threat Intelligence Platform data connector.": {
             "$ref": "./examples/dataConnectors/CreateThreatIntelligenceDataConnector.json"
+          },
+          "Creates or updates a MicrosoftThreatProtection data connector": {
+            "$ref": "./examples/dataConnectors/CreateMicrosoftThreatProtectionDataConnetor.json"
           }
         },
         "tags": [
@@ -425,7 +431,8 @@
         "Office365",
         "AmazonWebServicesCloudTrail",
         "AzureAdvancedThreatProtection",
-        "MicrosoftDefenderAdvancedThreatProtection"
+        "MicrosoftDefenderAdvancedThreatProtection",
+        "MicrosoftThreatProtection"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -455,6 +462,9 @@
           },
           {
             "value": "MicrosoftDefenderAdvancedThreatProtection"
+          },
+          {
+            "value": "MicrosoftThreatProtection"
           }
         ]
       }
@@ -713,6 +723,100 @@
           "description": "The available data types for the connector."
         }
       },
+      "type": "object"
+    },
+    "MTPDataConnector": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "description": "Represents MTP (Microsoft Threat Protection) data connector.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MTPDataConnectorProperties",
+          "description": "MTP (Microsoft Threat Protection) data connector properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftThreatProtection"
+    },
+    "MTPDataConnectorDataTypes": {
+      "description": "The available data types for Microsoft Threat Protection Platforms data connector.",
+      "properties": {
+        "incidents": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Incidents data type for Microsoft Threat Protection Platforms data connector.",
+          "type": "object"
+        },
+        "alerts": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Alerts data type for Microsoft Threat Protection Platforms data connector.",
+          "type": "object"
+        }
+      },
+      "type": "object",
+      "required": [
+        "incidents"
+      ]
+    },
+    "MtpProvider": {
+      "description": "The available data providers.",
+      "enum": [
+        "microsoftDefenderForCloudApps",
+        "microsoftDefenderForIdentity"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MtpProvider"
+      }
+    },
+    "MtpFilteredProviders": {
+      "description": "Represents the connector's Filtered providers",
+      "properties": {
+        "alerts": {
+          "description": "Alerts filtered providers. When filters are not applied, all alerts will stream through the MTP pipeline, still in private preview for all products EXCEPT MDA and MDI, which are in GA state.",
+          "items": {
+            "$ref": "#/definitions/MtpProvider"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "alerts"
+      ]
+    },
+    "MTPDataConnectorProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "description": "MTP (Microsoft Threat Protection) data connector properties.",
+      "properties": {
+        "dataTypes": {
+          "$ref": "#/definitions/MTPDataConnectorDataTypes",
+          "description": "The available data types for the connector."
+        },
+        "filteredProviders": {
+          "$ref": "#/definitions/MtpFilteredProviders",
+          "description": "The available filtered providers for the connector."
+        }
+      },
+      "required": [
+        "dataTypes"
+      ],
       "type": "object"
     }
   },
