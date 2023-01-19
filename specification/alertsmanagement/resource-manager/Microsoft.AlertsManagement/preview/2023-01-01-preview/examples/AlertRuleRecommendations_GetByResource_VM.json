@@ -1,0 +1,470 @@
+{
+    "parameters": {
+        "resourceUriParameter": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted",
+        "api-version": "2023-01-01-preview"
+    },
+    "responses": {
+        "200":{
+            "body": {
+                "requestedTargetType": "microsoft.compute/virtualmachines",
+                "displayInformation": [
+                    {
+                        "metricAlertsDisplayInformation": {
+                            "metricDisplayName": "Percentage CPU",
+                            "displayUnits": "%"
+                        }
+                    },
+                    {
+                        "metricAlertsDisplayInformation": {
+                            "metricDisplayName": "Available Memory Bytes",
+                            "displayUnits": "GB"
+                        }
+                    },
+                    {
+                        "metricAlertsDisplayInformation": {
+                            "metricDisplayName": "Data Disk IOPS Consumed Percentage",
+                            "displayUnits": "%"
+                        }
+                    },
+                    {
+                        "metricAlertsDisplayInformation": {
+                            "metricDisplayName": "OS Disk IOPS Consumed Percentage",
+                            "displayUnits": "%"
+                        }
+                    },
+                    {
+                        "metricAlertsDisplayInformation": {
+                            "metricDisplayName": "Network In Total",
+                            "displayUnits": "GB"
+                        }
+                    },
+                    {
+                        "metricAlertsDisplayInformation": {
+                            "metricDisplayName": "Network Out Total",
+                            "displayUnits": "GB"
+                        }
+                    }
+                ],
+                "rulesArmTemplate": {
+                    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+                    "contentVersion": "1.0.0.0",
+                    "parameters": {
+                        "targetResourceId": {
+                            "type": "string",
+                            "defaultValue": "/subscriptions/2f00cc51-6809-498f-9ffc-48c42aff570d/resourcegroups/test/providers/Microsoft.Compute/virtualMachines/testMachineCanBeSafelyDeleted"
+                        },
+                        "targetResourceName": {
+                            "type": "string",
+                            "defaultValue": "testmachinecanbesafelydeleted"
+                        },
+                        "actionGroupIds": {
+                            "type": "array",
+                            "defaultValue": [],
+                            "metadata": {
+                                "description": "Insert Action groups ids to attach them to the below alert rules."
+                            }
+                        },
+                        "alertNamePrefix_0": {
+                            "type": "string",
+                            "defaultValue": "Percentage CPU",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "prefix of the alert rule name"
+                            }
+                        },
+                        "alertName_0": {
+                            "type": "string",
+                            "defaultValue": "[concat('parameters('alertNamePrefix_0'), ' - ', parameters('targetResourceName'))]",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "Name of the alert rule"
+                            }
+                        },
+                        "alertSeverity_0": {
+                            "type": "int",
+                            "allowedValues": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "defaultValue": 3,
+                            "metadata": {
+                                "description": "Severity of alert {0,1,2,3,4}"
+                            }
+                        },
+                        "threshold_0": {
+                            "type": "int",
+                            "defaultValue": 80,
+                            "metadata": {
+                                "description": "The threshold value at which the alert is activated."
+                            }
+                        },
+                        "alertNamePrefix_1": {
+                            "type": "string",
+                            "defaultValue": "Available Memory Bytes",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "prefix of the alert rule name"
+                            }
+                        },
+                        "alertName_1": {
+                            "type": "string",
+                            "defaultValue": "[concat('parameters('alertNamePrefix_1'), ' - ', parameters('targetResourceName'))]",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "Name of the alert rule"
+                            }
+                        },
+                        "alertSeverity_1": {
+                            "type": "int",
+                            "allowedValues": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "defaultValue": 3,
+                            "metadata": {
+                                "description": "Severity of alert {0,1,2,3,4}"
+                            }
+                        },
+                        "threshold_1": {
+                            "type": "int",
+                            "defaultValue": 1000000000,
+                            "metadata": {
+                                "description": "The threshold value at which the alert is activated."
+                            }
+                        },
+                        "alertNamePrefix_2": {
+                            "type": "string",
+                            "defaultValue": "Data Disk IOPS Consumed Percentage",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "prefix of the alert rule name"
+                            }
+                        },
+                        "alertName_2": {
+                            "type": "string",
+                            "defaultValue": "[concat('parameters('alertNamePrefix_2'), ' - ', parameters('targetResourceName'))]",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "Name of the alert rule"
+                            }
+                        },
+                        "alertSeverity_2": {
+                            "type": "int",
+                            "allowedValues": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "defaultValue": 3,
+                            "metadata": {
+                                "description": "Severity of alert {0,1,2,3,4}"
+                            }
+                        },
+                        "threshold_2": {
+                            "type": "int",
+                            "defaultValue": 95,
+                            "metadata": {
+                                "description": "The threshold value at which the alert is activated."
+                            }
+                        },
+                        "alertNamePrefix_3": {
+                            "type": "string",
+                            "defaultValue": "OS Disk IOPS Consumed Percentage",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "prefix of the alert rule name"
+                            }
+                        },
+                        "alertName_3": {
+                            "type": "string",
+                            "defaultValue": "[concat('parameters('alertNamePrefix_3'), ' - ', parameters('targetResourceName'))]",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "Name of the alert rule"
+                            }
+                        },
+                        "alertSeverity_3": {
+                            "type": "int",
+                            "allowedValues": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "defaultValue": 3,
+                            "metadata": {
+                                "description": "Severity of alert {0,1,2,3,4}"
+                            }
+                        },
+                        "threshold_3": {
+                            "type": "int",
+                            "defaultValue": 95,
+                            "metadata": {
+                                "description": "The threshold value at which the alert is activated."
+                            }
+                        },
+                        "alertNamePrefix_4": {
+                            "type": "string",
+                            "defaultValue": "Network In Total",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "prefix of the alert rule name"
+                            }
+                        },
+                        "alertName_4": {
+                            "type": "string",
+                            "defaultValue": "[concat('parameters('alertNamePrefix_4'), ' - ', parameters('targetResourceName'))]",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "Name of the alert rule"
+                            }
+                        },
+                        "alertSeverity_4": {
+                            "type": "int",
+                            "allowedValues": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "defaultValue": 3,
+                            "metadata": {
+                                "description": "Severity of alert {0,1,2,3,4}"
+                            }
+                        },
+                        "threshold_4": {
+                            "type": "int",
+                            "defaultValue": 500000000000,
+                            "metadata": {
+                                "description": "The threshold value at which the alert is activated."
+                            }
+                        },
+                        "alertNamePrefix_5": {
+                            "type": "string",
+                            "defaultValue": "Network Out Total",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "prefix of the alert rule name"
+                            }
+                        },
+                        "alertName_5": {
+                            "type": "string",
+                            "defaultValue": "[concat('parameters('alertNamePrefix_5'), ' - ', parameters('targetResourceName'))]",
+                            "minLength": 1,
+                            "metadata": {
+                                "description": "Name of the alert rule"
+                            }
+                        },
+                        "alertSeverity_5": {
+                            "type": "int",
+                            "allowedValues": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4
+                            ],
+                            "defaultValue": 3,
+                            "metadata": {
+                                "description": "Severity of alert {0,1,2,3,4}"
+                            }
+                        },
+                        "threshold_5": {
+                            "type": "int",
+                            "defaultValue": 200000000000,
+                            "metadata": {
+                                "description": "The threshold value at which the alert is activated."
+                            }
+                        }
+                    },
+                    "variables": {
+                        "scopes": "[array(parameters('targetResourceId'))]",
+                        "copy": [
+                            {
+                                "name": "actionsForMetricAlerts",
+                                "count": "[length(parameters('actionGroupIds'))]",
+                                "input": {
+                                    "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForMetricAlerts')]]"
+                                }
+                            }
+                        ]
+                    },
+                    "resources": [
+                        {
+                            "name": "[parameters('alertName_0')]",
+                            "type": "Microsoft.Insights/metricAlerts",
+                            "apiVersion": "2018-03-01",
+                            "location": "global",
+                            "properties": {
+                                "description": "Percentage CPU is greater than 80 %",
+                                "severity": "[parameters('alertSeverity_0')]",
+                                "enabled": true,
+                                "scopes": "[variables('scopes')]",
+                                "evaluationFrequency": "PT5M",
+                                "windowSize": "PT5M",
+                                "criteria": {
+                                    "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+                                    "allOf": [
+                                        {
+                                            "name": "Metric1",
+                                            "metricName": "Percentage CPU",
+                                            "operator": "GreaterThan",
+                                            "threshold": "[parameters('threshold_0')]",
+                                            "timeAggregation": "Average"
+                                        }
+                                    ]
+                                },
+                                "actions": "[variables('actionsForMetricAlerts')]"
+                            }
+                        },
+                        {
+                            "name": "[parameters('alertName_1')]",
+                            "type": "Microsoft.Insights/metricAlerts",
+                            "apiVersion": "2018-03-01",
+                            "location": "global",
+                            "properties": {
+                                "description": "Available Memory Bytes is less than 1 GB",
+                                "severity": "[parameters('alertSeverity_1')]",
+                                "enabled": true,
+                                "scopes": "[variables('scopes')]",
+                                "evaluationFrequency": "PT5M",
+                                "windowSize": "PT5M",
+                                "criteria": {
+                                    "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+                                    "allOf": [
+                                        {
+                                            "name": "Metric1",
+                                            "metricName": "Available Memory Bytes",
+                                            "operator": "LessThan",
+                                            "threshold": "[parameters('threshold_1')]",
+                                            "timeAggregation": "Average"
+                                        }
+                                    ]
+                                },
+                                "actions": "[variables('actionsForMetricAlerts')]"
+                            }
+                        },
+                        {
+                            "name": "[parameters('alertName_2')]",
+                            "type": "Microsoft.Insights/metricAlerts",
+                            "apiVersion": "2018-03-01",
+                            "location": "global",
+                            "properties": {
+                                "description": "Data Disk IOPS Consumed Percentage is greater than 95 %",
+                                "severity": "[parameters('alertSeverity_2')]",
+                                "enabled": true,
+                                "scopes": "[variables('scopes')]",
+                                "evaluationFrequency": "PT5M",
+                                "windowSize": "PT5M",
+                                "criteria": {
+                                    "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+                                    "allOf": [
+                                        {
+                                            "name": "Metric1",
+                                            "metricName": "Data Disk IOPS Consumed Percentage",
+                                            "operator": "GreaterThan",
+                                            "threshold": "[parameters('threshold_2')]",
+                                            "timeAggregation": "Average"
+                                        }
+                                    ]
+                                },
+                                "actions": "[variables('actionsForMetricAlerts')]"
+                            }
+                        },
+                        {
+                            "name": "[parameters('alertName_3')]",
+                            "type": "Microsoft.Insights/metricAlerts",
+                            "apiVersion": "2018-03-01",
+                            "location": "global",
+                            "properties": {
+                                "description": "OS Disk IOPS Consumed Percentage is greater than 95 %",
+                                "severity": "[parameters('alertSeverity_3')]",
+                                "enabled": true,
+                                "scopes": "[variables('scopes')]",
+                                "evaluationFrequency": "PT5M",
+                                "windowSize": "PT5M",
+                                "criteria": {
+                                    "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+                                    "allOf": [
+                                        {
+                                            "name": "Metric1",
+                                            "metricName": "OS Disk IOPS Consumed Percentage",
+                                            "operator": "GreaterThan",
+                                            "threshold": "[parameters('threshold_3')]",
+                                            "timeAggregation": "Average"
+                                        }
+                                    ]
+                                },
+                                "actions": "[variables('actionsForMetricAlerts')]"
+                            }
+                        },
+                        {
+                            "name": "[parameters('alertName_4')]",
+                            "type": "Microsoft.Insights/metricAlerts",
+                            "apiVersion": "2018-03-01",
+                            "location": "global",
+                            "properties": {
+                                "description": "Network In Total is greater than 500 GB",
+                                "severity": "[parameters('alertSeverity_4')]",
+                                "enabled": true,
+                                "scopes": "[variables('scopes')]",
+                                "evaluationFrequency": "PT5M",
+                                "windowSize": "PT5M",
+                                "criteria": {
+                                    "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+                                    "allOf": [
+                                        {
+                                            "name": "Metric1",
+                                            "metricName": "Network In Total",
+                                            "operator": "GreaterThan",
+                                            "threshold": "[parameters('threshold_4')]",
+                                            "timeAggregation": "Total"
+                                        }
+                                    ]
+                                },
+                                "actions": "[variables('actionsForMetricAlerts')]"
+                            }
+                        },
+                        {
+                            "name": "[parameters('alertName_5')]",
+                            "type": "Microsoft.Insights/metricAlerts",
+                            "apiVersion": "2018-03-01",
+                            "location": "global",
+                            "properties": {
+                                "description": "Network Out Total is greater than 200 GB",
+                                "severity": "[parameters('alertSeverity_5')]",
+                                "enabled": true,
+                                "scopes": "[variables('scopes')]",
+                                "evaluationFrequency": "PT5M",
+                                "windowSize": "PT5M",
+                                "criteria": {
+                                    "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
+                                    "allOf": [
+                                        {
+                                            "name": "Metric1",
+                                            "metricName": "Network Out Total",
+                                            "operator": "GreaterThan",
+                                            "threshold": "[parameters('threshold_5')]",
+                                            "timeAggregation": "Total"
+                                        }
+                                    ]
+                                },
+                                "actions": "[variables('actionsForMetricAlerts')]"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
