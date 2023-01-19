@@ -564,6 +564,21 @@
         "modelAsString": true
       }
     },
+    "RunningState": {
+      "type": "string",
+      "description": "Object representing LedgerRunningState for Confidential Ledger.",
+      "enum": [
+        "Active",
+        "Paused",
+        "Unknown",
+        "Pausing",
+        "Resuming"
+      ],
+      "x-ms-enum": {
+        "name": "LedgerRunningState",
+        "modelAsString": true
+      }
+    },
     "LedgerRoleName": {
       "description": "LedgerRole associated with the Security Principal of Ledger",
       "type": "string",
@@ -640,6 +655,11 @@
           "description": "Provisioning state of Ledger Resource",
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "runningState": {
+          "description": "Running state of Ledger Resource",
+          "readOnly": true,
+          "$ref": "#/definitions/RunningState"
         },
         "aadBasedSecurityPrincipals": {
           "description": "Array of all AAD based Security Principals.",
