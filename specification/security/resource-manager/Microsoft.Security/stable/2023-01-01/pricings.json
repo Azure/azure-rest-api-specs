@@ -312,16 +312,49 @@
           "description": "Property values associated with the extension.",
           "additionalProperties": {}
         },
-        "errorMessage": {
-          "type": "string",
+        "operationStatus": {
+          "type": "object",
+          "$ref": "#/definitions/OperationStatus",
           "readOnly": true,
-          "description": "Optional. A message describing the error occurred during enablement/disablement of the extension."
+          "description": "Optional. A status describing the success/failure of the extension's enablement/disablement operation."
         }
       },
       "required": [
         "type",
         "isEnabled"
       ]
+    },
+    "OperationStatus": {      
+      "type": "object",
+      "description": "A status describing the success/failure of the extension's enablement/disablement operation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The operation status code.",
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "Extension was created/updated successfully."
+              },
+              {
+                "value": "Failed",
+                "description": "Extension was not created/updated successfully. See operation status message for more details."
+              }
+            ]
+          }
+        },
+        "message": {
+          "type": "boolean",
+          "description": "Additional information regarding the success/failure of the operation."
+        }
+      }
     }
   },
   "parameters": {

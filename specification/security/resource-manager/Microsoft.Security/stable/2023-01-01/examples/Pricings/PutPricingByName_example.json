@@ -22,19 +22,35 @@
           "extensions": [
             {
               "type": "AgentlessVmScanning",
-              "isEnabled": true
+              "isEnabled": true,
+              "operationStatus": {
+                "code": "Succeeded",
+                "message": ""
+              }
             },
             {
               "type": "AgentlessDiscoveryForKubernetes",
-              "isEnabled": true
+              "isEnabled": true,
+              "operationStatus": {
+                "code": "Succeeded",
+                "message": ""
+              }
             },
             {
               "type": "DataSensitivityScanning",
-              "isEnabled": true
+              "isEnabled": true,
+              "operationStatus": {
+                "code": "Succeeded",
+                "message": ""
+              }
             },
             {
               "type": "ContainerRegistriesVulnerabilityAssessments",
-              "isEnabled": true
+              "isEnabled": true,
+              "operationStatus": {
+                "code": "Succeeded",
+                "message": ""
+              }
             }
           ]
         }
@@ -53,11 +69,18 @@
             {
               "type": "OnUploadMalwareScanning",
               "isEnabled": false,
-              "errorMessage": "Last enablemment attempt failed due to missing permissions.",
+              "operationStatus": {
+                "code": "Failed",
+                "message": "Extension enablemment failed due to missing permissions."
+              }
             },
             {
               "type": "DataSensitivityDiscovery",
-              "isEnabled": true
+              "isEnabled": true,
+              "operationStatus": {
+                "code": "Succeeded",
+                "message": ""
+              }
             }
           ]
         }
