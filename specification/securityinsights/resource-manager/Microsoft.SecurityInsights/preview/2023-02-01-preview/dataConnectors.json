@@ -211,6 +211,9 @@
           },
           "Creates or updates a APIPolling data connector": {
             "$ref": "./examples/dataConnectors/CreateAPIPolling.json"
+          },
+          "Creates or updates a MicrosoftThreatProtection data connector": {
+            "$ref": "./examples/dataConnectors/CreateMicrosoftThreatProtectionDataConnetor.json"
           }
         },
         "tags": [
@@ -1165,13 +1168,58 @@
               "$ref": "#/definitions/DataConnectorDataTypeCommon"
             }
           ],
-          "description": "Data type for Microsoft Threat Protection Platforms data connector.",
+          "description": "Incidents data type for Microsoft Threat Protection Platforms data connector.",
+          "type": "object"
+        },
+        "alerts": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ],
+          "description": "Alerts data type for Microsoft Threat Protection Platforms data connector.",
           "type": "object"
         }
       },
       "type": "object",
       "required": [
         "incidents"
+      ]
+    },
+    "MtpProvider": {
+      "description": "The available data providers.",
+      "enum": [
+        "microsoftDefenderForCloudApps",
+        "microsoftDefenderForIdentity"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "MtpProviders"
+      },
+      "values": [
+        {
+          "value": "microsoftDefenderForCloudApps"
+        },
+        {
+          "value": "microsoftDefenderForIdentity"
+        }
+      ]
+    },
+    "MtpFilteredProviders": {
+      "description": "Represents the connector's Filtered providers",
+      "properties": {
+        "alerts": {
+          "description": "Alerts filtered providers. When filters are not applied, all alerts will stream through the MTP pipeline, still in private preview for all products EXCEPT MDA and MDI, which are in GA state.",
+          "items": {
+            "$ref": "#/definitions/MtpProvider"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "alerts"
       ]
     },
     "MTPDataConnectorProperties": {
@@ -1185,6 +1233,10 @@
         "dataTypes": {
           "$ref": "#/definitions/MTPDataConnectorDataTypes",
           "description": "The available data types for the connector."
+        },
+        "filteredProviders": {
+          "$ref": "#/definitions/MtpFilteredProviders",
+          "description": "The available filtered providers for the connector."
         }
       },
       "required": [
