@@ -1,0 +1,203 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-03-03-preview",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/fetchPrices": {
+      "post": {
+        "tags": [
+          "FetchPrices"
+        ],
+        "x-ms-examples": {
+          "FetchPrices": {
+            "$ref": "./examples/FetchPrices/SubscriptionScope.json"
+          }
+        },
+        "operationId": "FetchPrices_Post",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "description": "Retrieves prices for a given set of product identifiers.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {          
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/prices"
+            }
+          },
+          "209": {
+            "description": "PartialContent. The request has partially succeeded.",
+            "schema": {
+              "$ref": "#/definitions/prices"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "prices": {
+      "type": "object",
+      "description": "Pricing related properties for each identifier requested.",
+      "properties":{
+        "idType": {
+          "description": "Type of the identifier for which prices are returned. Currently support OfferingId only.",
+          "type": "string",
+          "readOnly": true
+        },
+        "items": {
+          "type": "object",
+          "description": "Collection of prices for the given identifiers.",
+          "readOnly": true,
+          "$ref": "#/definitions/priceSet"
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of items returned.",
+          "readOnly": true
+        }        
+      }
+    },
+    "priceSet": {
+      "type": "object",
+      "description": "Pricing details by identifier",
+      "properties":{
+        "id": {
+          "description": "Product identifier for which the prices will be returned.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "How usage is measured for the service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "price": {
+          "description": "Collection of prices for the given product identifier.",
+          "type": "object",
+          "readOnly": true,
+          "$ref": "#/definitions/price"
+        },
+        "currency": {
+          "description": "Currency in which the price is represented.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Details of the error, if any.",
+          "type": "string",
+          "readOnly": true,
+          "$ref": "#/definitions/error"
+        }
+      }
+    },
+    "price":{
+      "type": "object",
+      "description": "Pricing details by identifier",
+      "properties":{
+        "type": {
+          "description": "Type of the price.",
+          "type": "string",
+          "readOnly": true
+        },
+        "term": {
+          "description": "Applicable for SavingsPlan and Entitlement price types. ",
+          "type": "string",
+          "readOnly": true
+        },
+        "discountPercent": {
+          "description": "Discount percentage for a specific customer.",
+          "type": "string",
+          "readOnly": true
+        },
+        "termMinimumUnits": {
+          "description": "Minimum units of consumption to avail the price.",
+          "type": "string",
+          "readOnly": true
+        },
+        "perUnitPrice": {
+          "description": "Unit price without discount.",
+          "type": "string",
+          "readOnly": true
+        },
+        "perUnitEffectivePrice": {
+          "description": "Unit price with discount.",
+          "type": "string",
+          "readOnly": true
+        }
+      }      
+    },
+    "error":{
+      "type": "object",
+      "description": "Pricing details by identifier",
+      "properties":{
+        "type": {
+          "description": "Type of error.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Text describing why prices weren't returned for an identifier.",
+          "type": "string",
+          "readOnly": true
+        }
+      }      
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The ID that uniquely identifies an azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
