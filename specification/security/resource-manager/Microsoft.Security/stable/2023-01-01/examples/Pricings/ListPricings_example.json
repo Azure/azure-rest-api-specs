@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2022-03-01",
+    "api-version": "2023-01-01",
     "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
   },
   "responses": {
@@ -14,7 +14,13 @@
             "properties": {
               "pricingTier": "Standard",
               "freeTrialRemainingTime": "PT0S",
-              "subPlan": "P2"
+              "subPlan": "P2",
+              "extensions": [
+                {
+                  "type": "AgentlessVmScanning",
+                  "isEnabled": true
+                }
+              ]
             }
           },
           {
@@ -42,7 +48,20 @@
             "properties": {
               "pricingTier": "Standard",
               "freeTrialRemainingTime": "PT0S",
-              "subPlan": "PerStorageAccount"
+              "subPlan": "PerStorageAccount",
+              "extensions": [
+                {
+                  "type": "OnUploadMalwareScanning",
+                  "isEnabled": true,
+                  "additionalExtensionProperties": {
+                    "capGBPerMonthPerStorageAccount": 10
+                  }
+                },
+                {
+                  "type": "DataSensitivityDiscovery",
+                  "isEnabled": true
+                }
+              ]
             }
           },
           {
@@ -122,7 +141,40 @@
             "type": "Microsoft.Security/pricings",
             "properties": {
               "pricingTier": "Standard",
-              "freeTrialRemainingTime": "PT0S"
+              "freeTrialRemainingTime": "PT0S",
+              "extensions": [
+                {
+                  "type": "ContainerRegistriesVulnerabilityAssessments",
+                  "isEnabled": true
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/d34fd44c-ebfa-4a9c-bceb-9eeafe72ac15/providers/Microsoft.Security/pricings/CloudPosture",
+            "name": "CloudPosture",
+            "type": "Microsoft.Security/pricings",
+            "properties": {
+              "pricingTier": "Standard",
+              "freeTrialRemainingTime": "PT0S",
+              "extensions": [
+                {
+                  "type": "AgentlessVmScanning",
+                  "isEnabled": true
+                },
+                {
+                  "type": "AgentlessDiscoveryForKubernetes",
+                  "isEnabled": true
+                },
+                {
+                  "type": "DataSensitivityScanning",
+                  "isEnabled": true
+                },
+                {
+                  "type": "ContainerRegistriesVulnerabilityAssessments",
+                  "isEnabled": true
+                }
+              ]
             }
           }
         ]
