@@ -719,10 +719,10 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions": {
       "get": {
         "tags": [
-          "Upcoming Actions"
+          "Actions"
         ],
         "parameters": [
           {
@@ -739,12 +739,12 @@
           }
         ],
         "description": "Lists upcoming actions on a Dev Box.",
-        "operationId": "DevBoxes_ListUpcomingActions",
+        "operationId": "DevBoxes_ListActions",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpcomingActionsListResult"
+              "$ref": "#/definitions/ActionsListResult"
             }
           },
           "default": {
@@ -761,20 +761,20 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_ListUpcomingActions": {
-            "$ref": "./examples/UpcomingActions_List.json"
+          "DevBoxes_ListActions": {
+            "$ref": "./examples/Actions_List.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/UpcomingAction"
+        "x-ms-odata": "#/definitions/Action"
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions/{upcomingActionId}": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}": {
       "get": {
         "tags": [
-          "Upcoming Actions"
+          "Actions"
         ],
         "parameters": [
           {
@@ -790,16 +790,16 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/UpcomingActionIdParameter"
+            "$ref": "#/parameters/ActionNameParameter"
           }
         ],
-        "description": "Gets an Upcoming Action.",
-        "operationId": "DevBoxes_GetUpcomingAction",
+        "description": "Gets an upcoming action.",
+        "operationId": "DevBoxes_GetAction",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpcomingAction"
+              "$ref": "#/definitions/Action"
             }
           },
           "default": {
@@ -816,16 +816,16 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_GetUpcomingAction": {
-            "$ref": "./examples/UpcomingActions_Get.json"
+          "DevBoxes_GetAction": {
+            "$ref": "./examples/Actions_Get.json"
           }
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions/{upcomingActionId}:skip": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip": {
       "post": {
         "tags": [
-          "Upcoming Actions"
+          "Actions"
         ],
         "parameters": [
           {
@@ -841,11 +841,11 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/UpcomingActionIdParameter"
+            "$ref": "#/parameters/ActionNameParameter"
           }
         ],
-        "description": "Skips an Upcoming Action.",
-        "operationId": "DevBoxes_SkipUpcomingAction",
+        "description": "Skips an upcoming action.",
+        "operationId": "DevBoxes_SkipAction",
         "responses": {
           "204": {
             "description": "No content"
@@ -864,16 +864,16 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_SkipUpcomingAction": {
-            "$ref": "./examples/UpcomingActions_Skip.json"
+          "DevBoxes_SkipAction": {
+            "$ref": "./examples/Actions_Skip.json"
           }
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions/{upcomingActionId}:delay": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay": {
       "post": {
         "tags": [
-          "Upcoming Actions"
+          "Actions"
         ],
         "parameters": [
           {
@@ -889,19 +889,19 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/UpcomingActionIdParameter"
+            "$ref": "#/parameters/ActionNameParameter"
           },
           {
-            "$ref": "#/parameters/DelayUntilParameter"
+            "$ref": "#/parameters/UntilParameter"
           }
         ],
-        "description": "Delays an Upcoming Action.",
-        "operationId": "DevBoxes_DelayUpcomingAction",
+        "description": "Delays an upcoming action.",
+        "operationId": "DevBoxes_DelayAction",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpcomingAction"
+              "$ref": "#/definitions/Action"
             }
           },
           "default": {
@@ -918,8 +918,63 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_DelayUpcomingAction": {
-            "$ref": "./examples/UpcomingActions_Delay.json"
+          "DevBoxes_DelayAction": {
+            "$ref": "./examples/Actions_Delay.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay": {
+      "post": {
+        "tags": [
+          "Actions"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UntilParameter"
+          }
+        ],
+        "description": "Delays all upcoming actions.",
+        "operationId": "DevBoxes_DelayActions",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "The request was accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_DelayActions": {
+            "$ref": "./examples/Actions_DelayMultiple.json"
           }
         }
       }
@@ -1376,17 +1431,20 @@
           "format": "int32",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "idleAction"
+      ]
     },
-    "UpcomingActionsListResult": {
+    "ActionsListResult": {
       "type": "object",
-      "description": "The Upcoming Action list result",
+      "description": "The actions list result",
       "properties": {
         "value": {
           "description": "Current page of results",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UpcomingAction"
+            "$ref": "#/definitions/Action"
           }
         },
         "nextLink": {
@@ -1398,25 +1456,47 @@
         "value"
       ]
     },
-    "UpcomingAction": {
+    "Action": {
       "type": "object",
-      "description": "An upcoming Action.",
+      "description": "An  Action.",
       "properties": {
-        "id": {
-          "description": "Uniquely identifies the action.",
+        "name": {
+          "description": "The name of the action.",
           "type": "string",
           "readOnly": true
         },
         "actionType": {
           "description": "The action that will be taken.",
-          "$ref": "#/definitions/UpcomingActionType",
+          "$ref": "#/definitions/ActionType",
           "readOnly": true
         },
-        "reason": {
-          "description": "The reason for this action.",
-          "$ref": "#/definitions/UpcomingActionReason",
+        "sourceId": {
+          "description": "The id of the resource which triggered this action",
+          "type": "string",
           "readOnly": true
         },
+        "next": {
+          "description": "Details about the next run of this action.",
+          "$ref": "#/definitions/NextAction",
+          "readOnly": true
+        }
+      }
+    },
+    "ActionType": {
+      "description": "The action types.",
+      "type": "string",
+      "enum": [
+        "Stop"
+      ],
+      "x-ms-enum": {
+        "name": "ActionType",
+        "modelAsString": true
+      }
+    },
+    "NextAction": {
+      "description": "Details about the next run of an action.",
+      "type": "object",
+      "properties":{
         "scheduledTime": {
           "description": "The target time the action will be triggered (UTC).",
           "type": "string",
@@ -1428,35 +1508,7 @@
           "type": "string",
           "readOnly": true,
           "format": "date-time"
-        },
-        "sourceId": {
-          "description": "The id of the resource which triggered this action",
-          "type": "string",
-          "readOnly": true
         }
-      }
-    },
-    "UpcomingActionType": {
-      "description": "The upcoming action types.",
-      "type": "string",
-      "enum": [
-        "Stop"
-      ],
-      "x-ms-enum": {
-        "name": "UpcomingActionType",
-        "modelAsString": true
-      }
-    },
-    "UpcomingActionReason": {
-      "description": "The reason for the upcoming action.",
-      "type": "string",
-      "enum": [
-        "Schedule",
-        "Idle"
-      ],
-      "x-ms-enum": {
-        "name": "UpcomingActionReason",
-        "modelAsString": true
       }
     }
   },
@@ -1491,31 +1543,32 @@
       "description": "The name of a Dev Box.",
       "x-ms-parameter-location": "method"
     },
-    "UpcomingActionIdParameter": {
-      "description": "The upcoming action id.",
-      "in": "path",
-      "name": "upcomingActionId",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
-      "maxLength": 36,
-      "x-ms-parameter-location": "method"
-    },
-    "DelayUntilParameter": {
-      "name": "delayUntil",
-      "description": "The delayed action time (UTC).",
-      "required": true,
-      "type": "string",
-      "format": "date-time",
-      "in": "query",
-      "x-ms-parameter-location": "method"
-    },
     "HibernateParameter": {
       "name": "hibernate",
       "in": "query",
       "required": false,
       "type": "boolean",
       "description": "Optional parameter to hibernate the dev box.",
+      "x-ms-parameter-location": "method"
+    },
+    "ActionNameParameter": {
+      "name": "actionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of an action.",
+      "x-ms-parameter-location": "method"
+    },
+    "UntilParameter": {
+      "name": "until",
+      "description": "The time to delay the action or actions until.",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "in": "query",
       "x-ms-parameter-location": "method"
     }
   }
