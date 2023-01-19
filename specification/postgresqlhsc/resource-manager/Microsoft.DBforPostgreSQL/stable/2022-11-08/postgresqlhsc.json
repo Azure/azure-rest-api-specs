@@ -1470,6 +1470,10 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Approve or reject a private endpoint connection with a given name": {
             "$ref": "./examples/PrivateEndpointConnectionCreateOrUpdate.json"
@@ -2018,7 +2022,7 @@
         "nodeCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1."
+          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1. Required for creation."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
@@ -2400,9 +2404,15 @@
               "type": "string"
             }
           },
+          "required": [
+            "value"
+          ],
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "ServerConfiguration": {
       "description": "Represents a configuration.",
@@ -2523,7 +2533,10 @@
           "x-ms-client-flatten": true,
           "description": "The properties of a role."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "RoleListResult": {
       "properties": {
@@ -2602,7 +2615,7 @@
             "type": "object"
           },
           "readOnly": true,
-          "x-ms-client-flatten": false,
+          "x-ms-client-flatten": true,
           "description": "Additional descriptions for the operation."
         }
       }
@@ -2727,7 +2740,10 @@
           "x-ms-client-flatten": true,
           "description": "Properties of the private endpoint connection."
         }
-      }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "PrivateEndpointConnectionListResult": {
       "type": "object",
@@ -2813,7 +2829,10 @@
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "Connection state of the private endpoint connection."
         }
-      }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
     },
     "PrivateEndpointConnectionProperties": {
       "description": "The properties in private endpoint connection",
