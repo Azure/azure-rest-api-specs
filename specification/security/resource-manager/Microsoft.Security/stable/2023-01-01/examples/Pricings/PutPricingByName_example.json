@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "api-version": "2023-01-01",
+    "api-version": "2022-03-01",
     "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "pricingName": "CloudPosture",
+    "pricingName": "VirtualMachines",
     "pricing": {
       "properties": {
         "pricingTier": "Standard",
@@ -13,76 +13,13 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/CloudPosture",
-        "name": "CloudPosture",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+        "name": "VirtualMachines",
         "type": "Microsoft.Security/pricings",
         "properties": {
           "pricingTier": "Standard",
           "freeTrialRemainingTime": "PT0S",
-          "extensions": [
-            {
-              "type": "AgentlessVmScanning",
-              "isEnabled": true,
-              "operationStatus": {
-                "code": "Succeeded",
-                "message": ""
-              }
-            },
-            {
-              "type": "AgentlessDiscoveryForKubernetes",
-              "isEnabled": true,
-              "operationStatus": {
-                "code": "Succeeded",
-                "message": ""
-              }
-            },
-            {
-              "type": "DataSensitivityScanning",
-              "isEnabled": true,
-              "operationStatus": {
-                "code": "Succeeded",
-                "message": ""
-              }
-            },
-            {
-              "type": "ContainerRegistriesVulnerabilityAssessments",
-              "isEnabled": true,
-              "operationStatus": {
-                "code": "Succeeded",
-                "message": ""
-              }
-            }
-          ]
-        }
-      }
-    },
-    "200": {
-      "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/StorageAccounts",
-        "name": "StorageAccounts",
-        "type": "Microsoft.Security/pricings",
-        "properties": {
-          "pricingTier": "Standard",
-          "freeTrialRemainingTime": "PT0S",
-          "subPlan": "PerStorageAccount",
-          "extensions": [
-            {
-              "type": "OnUploadMalwareScanning",
-              "isEnabled": false,
-              "operationStatus": {
-                "code": "Failed",
-                "message": "Extension enablemment failed due to missing permissions."
-              }
-            },
-            {
-              "type": "DataSensitivityDiscovery",
-              "isEnabled": true,
-              "operationStatus": {
-                "code": "Succeeded",
-                "message": ""
-              }
-            }
-          ]
+          "subPlan": "P2"
         }
       }
     }
