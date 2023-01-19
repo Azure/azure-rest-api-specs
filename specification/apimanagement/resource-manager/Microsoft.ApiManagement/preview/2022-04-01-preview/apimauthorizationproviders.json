@@ -582,6 +582,69 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderId}/authorizations/{authorizationId}/confirmConsentCode": {
+      "post": {
+        "tags": [
+          "AuthorizationConfirmConsentCode"
+        ],
+        "operationId": "AuthorizationConfirmConsentCode_Post",
+        "description": "Confirm valid consent code to suppress Authorizations anti-phishing page.",
+        "x-ms-examples": {
+          "ApiManagementPostAuthorizationConfirmConsentCodeRequest": {
+            "$ref": "./examples/ApiManagementPostAuthorizationConfirmConsentCodeRequest.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AuthorizationProviderIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AuthorizationIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationConfirmConsentCodeRequestContract"
+            },
+            "description": "Create parameters."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body is empty.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/AuthorizationConfirmConsentCodeResponseContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationProviders/{authorizationProviderId}/authorizations/{authorizationId}/accessPolicies": {
       "get": {
         "tags": [
