@@ -1004,17 +1004,18 @@
       "type": "object",
       "properties": {
         "smtp": {
-          "$ref": "#/definitions/SMTP"
+          "$ref": "#/definitions/Smtp"
         }
       }
     },
-    "SMTP": {
+    "Smtp": {
       "description": "Email server settings.\r\nhttps://grafana.com/docs/grafana/v9.0/setup-grafana/configure-grafana/#smtp",
       "type": "object",
       "properties": {
         "enabled": {
           "description": "Enable this to allow Grafana to send email. Default is false",
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "host": {
           "description": "SMTP server hostname with port, e.g. test.email.net:587",
@@ -1025,7 +1026,7 @@
           "type": "string"
         },
         "password": {
-          "description": "Password of SMTP auth. If the password contains # or ;, then you have to wrap it with triple quotes. Example: \"\"\"#password;\"\"\"",
+          "description": "Password of SMTP auth. If the password contains # or ;, then you have to wrap it with triple quotes",
           "type": "string",
           "x-ms-secret": true
         },
