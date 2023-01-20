@@ -222,7 +222,7 @@
       },
       "get": {
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a list of all routesets in the current Azure Maps Creator account.",
-        "operationId": "routesetList",
+        "operationId": "Routeset_List",
         "x-ms-examples": {
           "Enumerate all routesets for a given subscription": {
             "$ref": "./examples/wayfind/Routeset_List.json"
@@ -256,7 +256,7 @@
     "/routesets/{routesetId}": {
       "get": {
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to fetch a routeset.",
-        "operationId": "routesetGet",
+        "operationId": "Routeset_Get",
         "x-ms-examples": {
           "Get details for a previously created dataset": {
             "$ref": "./examples/wayfind/Routeset_Get.json"
@@ -287,7 +287,7 @@
       },
       "delete": {
         "description": "**Applies to:** see [pricing tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. See the [Creator for indoor maps](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article for an introduction to the Azure Maps Creator concepts and tools.\n\nThis API allows the caller to delete an existing routeset. Use this API when a routeset is no longer needed.\n\n### Submit Delete Request\n\nTo delete your routeset, send a `DELETE` request with the `routesetId` of the routeset to delete.",
-        "operationId": "routesetDelete",
+        "operationId": "Routeset_Delete",
         "x-ms-examples": {
           "Delete an existing routeset": {
             "$ref": "./examples/wayfind/Routeset_Delete.json"
@@ -317,7 +317,7 @@
     "/routesets/operations/{operationId}": {
       "get": {
         "description": "This API allows the caller to view the current progress of a routeset operation. The path is obtained from a call to the Create Routeset API.\n\n### Submit Operations Request\n\nTo view the current progress of a routeset operation, you will use a `GET` request with the `operationId` of the desired operation.\n\n### Operation Response\n\nWhile in progress, a `200-OK` http status code will be returned with no extra headers. If the operation succeeds, a `200-OK` http status code with Resource-Location header will be returned.",
-        "operationId": "routesetGetOperation",
+        "operationId": "Routeset_GetOperation",
         "x-ms-examples": {
           "Get the status of an operation which is still running": {
             "$ref": "./examples/wayfind/Routeset_GetOperationStillRunning.json"
