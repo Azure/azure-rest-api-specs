@@ -122,6 +122,7 @@ input-file:
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
 - Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
@@ -214,6 +215,7 @@ input-file:
   - $(this-folder)/Microsoft.EventHub/stable/2018-01-01/EventHub.json
   - $(this-folder)/Microsoft.Resources/stable/2018-01-01/Resources.json
   - $(this-folder)/Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+  - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/DataBox.json
   - $(this-folder)/Microsoft.Devices/stable/2018-01-01/IotHub.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
   - $(this-folder)/Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
