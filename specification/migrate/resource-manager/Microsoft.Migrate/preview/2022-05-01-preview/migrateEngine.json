@@ -275,7 +275,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Success",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/MigrateAgentModel"
             }
@@ -335,7 +335,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -347,7 +347,7 @@
             }
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error",
@@ -464,7 +464,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -660,7 +660,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Success",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/ModernizeProjectModel"
             }
@@ -723,7 +723,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ModernizeProjectModel"
             },
@@ -788,7 +788,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -800,7 +800,7 @@
             }
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error",
@@ -1362,7 +1362,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Success",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/WorkloadDeploymentModel"
             }
@@ -1428,7 +1428,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -1440,7 +1440,7 @@
             }
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error",
@@ -1633,7 +1633,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -1716,7 +1716,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -1799,7 +1799,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -1882,7 +1882,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -2094,7 +2094,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Success",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/WorkloadInstanceModel"
             }
@@ -2154,7 +2154,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -2166,7 +2166,7 @@
             }
           },
           "204": {
-            "description": "Success"
+            "description": "No Content"
           },
           "default": {
             "description": "Error",
@@ -2355,7 +2355,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -2427,7 +2427,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "description": "Tracking URL for long running operation.",
@@ -3097,8 +3097,8 @@
             "modelAsString": true
           }
         },
-        "containerRegistry": {
-          "description": "Gets or sets the container registry.",
+        "containerRegistryId": {
+          "description": "Gets or sets the container registry ARM Id.",
           "type": "string",
           "readOnly": true
         },
@@ -3117,8 +3117,8 @@
           "type": "string",
           "readOnly": true
         },
-        "secretStoreName": {
-          "description": "Gets or sets the secret store name.",
+        "secretStoreId": {
+          "description": "Gets or sets the secret store ARM Id.",
           "type": "string"
         },
         "customProperties": {
@@ -3135,7 +3135,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Gets the ID.",
+          "description": "Gets or sets the ID.",
           "type": "string",
           "readOnly": true
         },
@@ -3257,6 +3257,57 @@
         }
       }
     },
+    "GmsaAuthenticationProperties": {
+      "description": "Class for GMSA authentication details to configure Active Directory connectivity.",
+      "type": "object",
+      "properties": {
+        "gmsaAccountName": {
+          "description": "Gets or sets the name to be used for GMSA.",
+          "type": "string"
+        },
+        "gmsaUsername": {
+          "description": "Gets or sets username of the user having authorization to access GMSA on Active Directory.",
+          "type": "string"
+        },
+        "gmsaUserPassword": {
+          "description": "Gets or sets the password of the user specified by RestApi.Controllers.V2022_05_01_preview.Models.WorkloadDeployment.Gmsa.GmsaAuthenticationProperties.GmsaUsername.",
+          "type": "string"
+        },
+        "adDomainControllerDns": {
+          "description": "Gets or sets the list of dns server that can resolve the Active Directory Domain Name/Address.",
+          "type": "string"
+        },
+        "adDomainFqdn": {
+          "description": "Gets or sets the FQDN of the Active Directory Domain. For e.g. 'contoso.local', 'fareast.corp.microsoft.com' etc.",
+          "type": "string"
+        },
+        "domainControllerAddress": {
+          "description": "Gets or sets the address of the Active Directory Domain Controller running Domain Services.",
+          "type": "string"
+        },
+        "domainAdminUsername": {
+          "description": "Gets or sets the name of the user having admin rights on the Active Directory Domain Controller.",
+          "type": "string"
+        },
+        "domainAdminPassword": {
+          "description": "Gets or sets the password of the user specified by RestApi.Controllers.V2022_05_01_preview.Models.WorkloadDeployment.Gmsa.GmsaAuthenticationProperties.DomainAdminUsername.",
+          "type": "string"
+        },
+        "akvProperties": {
+          "$ref": "#/definitions/KeyVaultSecretStoreProperties"
+        },
+        "GmsaCredSpecName": {
+          "description": "Gets Cred Spec Name to be used.",
+          "type": "string",
+          "readOnly": true
+        },
+        "GmsaSecretName": {
+          "description": "Gets name of the secret where GMSA secret is stored in the KeyVault.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "HealthErrorModel": {
       "description": "Health error model.",
       "type": "object",
@@ -3342,32 +3393,6 @@
         }
       }
     },
-    "IdentityModel": {
-      "description": "Identity model.",
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "description": "Gets or sets the tenant Id of the SPN with which MigrateAgent communicates to service.",
-          "type": "string"
-        },
-        "applicationId": {
-          "description": "Gets or sets the client/application Id of the SPN with which MigrateAgent communicates to\r\nservice.",
-          "type": "string"
-        },
-        "objectId": {
-          "description": "Gets or sets the object Id of the SPN with which MigrateAgent communicates to service.",
-          "type": "string"
-        },
-        "audience": {
-          "description": "Gets or sets the audience of the SPN with which MigrateAgent communicates to service.",
-          "type": "string"
-        },
-        "aadAuthority": {
-          "description": "Gets or sets the authority of the SPN with which MigrateAgent communicates to service.",
-          "type": "string"
-        }
-      }
-    },
     "IISAKSWorkloadDeployment": {
       "description": "IIS AKS workload deployment.",
       "type": "object",
@@ -3387,7 +3412,7 @@
           "readOnly": true
         },
         "authenticationProperties": {
-          "$ref": "#/definitions/AuthenticationProperties"
+          "$ref": "#/definitions/GmsaAuthenticationProperties"
         },
         "deploymentNamePrefix": {
           "description": "Gets or sets the deployment name prefix.",
@@ -3686,6 +3711,32 @@
         }
       }
     },
+    "IdentityModel": {
+      "description": "Identity model.",
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "description": "Gets or sets the tenant Id of the SPN with which MigrateAgent communicates to service.",
+          "type": "string"
+        },
+        "applicationId": {
+          "description": "Gets or sets the client/application Id of the SPN with which MigrateAgent communicates to\r\nservice.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "Gets or sets the object Id of the SPN with which MigrateAgent communicates to service.",
+          "type": "string"
+        },
+        "audience": {
+          "description": "Gets or sets the audience of the SPN with which MigrateAgent communicates to service.",
+          "type": "string"
+        },
+        "aadAuthority": {
+          "description": "Gets or sets the authority of the SPN with which MigrateAgent communicates to service.",
+          "type": "string"
+        }
+      }
+    },
     "InnerHealthErrorModel": {
       "description": "Inner health error model.",
       "type": "object",
@@ -3802,6 +3853,9 @@
           "type": "string"
         },
         "clientId": {
+          "type": "string"
+        },
+        "principalId": {
           "type": "string"
         }
       }
@@ -4177,6 +4231,9 @@
         },
         "osVersion": {
           "type": "string"
+        },
+        "osArchitecture": {
+          "type": "string"
         }
       }
     },
@@ -4185,7 +4242,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Resource Id.",
+          "description": "Gets the Id.",
           "type": "string",
           "readOnly": true
         },
@@ -4759,7 +4816,8 @@
             "MigrateWorkflow",
             "TestMigrateWorkflow",
             "TestMigrateCleanupWorkflow",
-            "CompleteMigrationWorkflow"
+            "CompleteMigrationWorkflow",
+            "DisableReplicationWorkflow"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -5028,13 +5086,17 @@
           "enum": [
             "None",
             "InitialReplication",
+            "ReplicationFailed",
             "ImageBuildPending",
+            "ImageBuildInProgress",
+            "ImageBuildFailed",
             "TestMigrating",
             "CleanUpPending",
+            "CleanUpInProgress",
             "ReadyToMigrate",
             "Migrating",
             "Migrated",
-            "Failed"
+            "MigrationFailed"
           ],
           "type": "string",
           "readOnly": true,
@@ -5053,8 +5115,10 @@
           "enum": [
             "None",
             "ImageBuildPending",
+            "ImageBuildInProgress",
+            "ImageBuildFailed",
             "ReadyToTestMigrate",
-            "InProgress",
+            "TestMigrationInProgress",
             "TestMigrated",
             "Failed",
             "CleanupInProgress",
@@ -5077,6 +5141,8 @@
           "enum": [
             "None",
             "ImageBuildPending",
+            "ImageBuildInProgress",
+            "ImageBuildFailed",
             "ReadyToTestMigrate",
             "ReadyToMigrate",
             "TestMigrating",
@@ -5299,7 +5365,7 @@
       "description": "Workload instance model properties.",
       "type": "object",
       "properties": {
-        "name": {
+        "Name": {
           "description": "Gets or sets the workload instance name.",
           "type": "string"
         },
@@ -5358,9 +5424,7 @@
             "Scheduled",
             "InitialSync",
             "Completed",
-            "Failed",
-            "Disabling",
-            "Disabled"
+            "Failed"
           ],
           "type": "string",
           "readOnly": true,
