@@ -1655,13 +1655,45 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "../../stable/2022-11-15/cosmos-db.json#/definitions/GremlinDatabaseRestoreResource"
+            "$ref": "#/definitions/RestorableGremlinResourcesGetResult"
           },
           "description": "List of restorable Gremlin resources, including the gremlin database and graph names.",
           "x-ms-identifiers": []
         }
       },
       "description": "The List operation response, that contains the restorable Gremlin resources."
+    },
+    "RestorableGremlinResourcesGetResult": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the gremlin database available for restore."
+        },
+        "graphNames": {
+          "type": "array",
+          "description": "The names of the graphs available for restore.",
+          "items": {
+            "$ref": "cosmos-db.json#/definitions/GraphName"
+          }
+        }
+      }
     },
     "RestorableTablesListResult": {
       "type": "object",
@@ -1749,12 +1781,33 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "../../stable/2022-11-15/cosmos-db.json#/definitions/TableName"
+            "$ref": "#/definitions/RestorableTableResourcesGetResult"
           },
           "description": "List of restorable table names."
         }
       },
       "description": "List of restorable table names."
+    },
+    "RestorableTableResourcesGetResult": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the Table."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        }
+      }
     },
     "OperationType": {
       "description": "Enum to indicate the operation type of the event.",
