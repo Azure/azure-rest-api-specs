@@ -1437,56 +1437,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/lastOperationDetails": {
-      "post": {
-        "tags": [
-          "LastOperations"
-        ],
-        "operationId": "SAPVirtualInstance_LastOperationDetails",
-        "x-ms-examples": {
-          "SAPVirtualInstance_LastOperationDetails": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstance_LastOperationDetails.json"
-          }
-        },
-        "description": "Gets the last operation details of the VIS. Request body contains the list of operations whose details need to be fetched.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SAPVirtualInstanceNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "LastOperationDetailsRequest",
-            "description": "Get Last Operation Details Request body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/LastOperationDetailsRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/LastOperationDetailsResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Workloads/sapVirtualInstances/{sapVirtualInstanceName}/start": {
       "post": {
         "tags": [
@@ -2662,62 +2612,6 @@
         "deploymentType",
         "dbVmSku"
       ]
-    },
-    "LastOperationDetailsRequest": {
-      "description": "The SAP request to get list of last operation details.",
-      "type": "object",
-      "properties": {
-        "operationName": {
-          "type": "array",
-          "items": {
-            "description": "Name of the operation whose last operation details is needed",
-            "type": "string"
-          },
-          "description": "List of operation names whose last operation data is needed."
-        }
-      },
-      "required": [
-        "operationName"
-      ]
-    },
-    "LastOperationDetailsResult": {
-      "description": "The result for last operation details.",
-      "type": "object",
-      "properties": {
-        "lastOperations": {
-          "x-ms-identifiers": [],
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LastOperationObject"
-          }
-        }
-      }
-    },
-    "LastOperationObject": {
-      "description": "Definition of the LastOperation object that is returned as an array item in the lastOperationObject endpoint's response.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the operation. Corresponds to the name of the workflow run by the service.",
-          "type": "string"
-        },
-        "activityID": {
-          "description": "Activity ID / Correlation ID of the operation.",
-          "type": "string"
-        },
-        "trackingURL": {
-          "description": "Tracking URL to get the operation status associated with this operation.",
-          "type": "string"
-        },
-        "progressDetails": {
-          "description": "Represents upto what step the operation has executed.",
-          "type": "string"
-        },
-        "state": {
-          "description": "Shows the current state of the operation.",
-          "type": "string"
-        }
-      }
     },
     "DiskDetails": {
       "description": "The supported disk size details for a disk type.",
