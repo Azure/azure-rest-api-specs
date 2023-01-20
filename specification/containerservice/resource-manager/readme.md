@@ -34,7 +34,35 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2022-10
+tag: package-2022-11
+```
+
+### Tag: package-2022-11
+
+These settings apply only when `--tag=package-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11'
+input-file:
+  - Microsoft.ContainerService/stable/2022-11-01/managedClusters.json
+```
+
+### Tag: package-preview-2022-11-only
+
+These settings apply only when `--tag=package-preview-2022-11-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-11-only'
+input-file:
+  - Microsoft.ContainerService/preview/2022-11-02-preview/managedClusters.json
+```
+
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.ContainerService/preview/2022-11-02-preview/managedClusters.json
+  - Microsoft.ContainerService/preview/2022-09-02-preview/fleets.json
 ```
 
 ### Tag: package-preview-2022-10-only

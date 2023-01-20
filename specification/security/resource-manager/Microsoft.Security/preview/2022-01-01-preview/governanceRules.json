@@ -366,7 +366,7 @@
             "description": "OK - Governance rule was deleted"
           },
           "202": {
-            "description": "Accepted - Governance rule deletion on management scope",
+            "description": "Accepted - The operation still in progress",
             "headers": {
               "location": {
                 "type": "string",
@@ -437,7 +437,7 @@
           "GovernanceRules"
         ],
         "description": "Get a specific governance rule for the requested scope by ruleId",
-        "operationId": "managementGroupGovernanceRules_Get",
+        "operationId": "ManagementGroupGovernanceRules_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -534,7 +534,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted - Governance rule deletion on management scope",
+            "description": "Accepted - The operation still in progress",
             "headers": {
               "location": {
                 "type": "string",
@@ -711,15 +711,15 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
       "get": {
         "x-ms-examples": {
-          "Get governance rules execution status by specific governanceRuleId": {
+          "Get governance rules long run operation result by specific governance rule ID": {
             "$ref": "./examples/GovernanceRules/GetGovernanceRuleExecuteStatus_example.json"
           }
         },
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Get a specific governance rule execution status for the requested scope by ruleId and operationId",
-        "operationId": "SubscriptionGovernanceRulesExecuteStatus_Get",
+        "description": "Get governance rules long run operation result for the requested scope by ruleId and operationId",
+        "operationId": "SubscriptionGovernanceRulesOperationResult_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -736,13 +736,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK - The operation completed",
             "schema": {
-              "$ref": "#/definitions/ExecuteRuleStatus"
+              "$ref": "#/definitions/OperationResult"
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted - The operation still in progress",
             "headers": {
               "location": {
                 "type": "string",
@@ -762,15 +762,15 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
       "get": {
         "x-ms-examples": {
-          "Get governance rules execution status by specific governanceRuleId": {
+          "Get governance rules long run operation result by specific governance rule ID": {
             "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRuleExecuteStatus_example.json"
           }
         },
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Get a specific governance rule execution status for the requested scope by ruleId and operationId",
-        "operationId": "SecurityConnectorGovernanceRulesExecuteStatus_Get",
+        "description": "Get governance rule long run operation result for the requested scope by ruleId and operationId",
+        "operationId": "SecurityConnectorGovernanceRulesOperationResult_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -793,13 +793,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK - The operation completed",
             "schema": {
-              "$ref": "#/definitions/ExecuteRuleStatus"
+              "$ref": "#/definitions/OperationResult"
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted - The operation still in progress",
             "headers": {
               "location": {
                 "type": "string",
@@ -816,18 +816,18 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute/operationResults/{operationId}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
       "get": {
         "x-ms-examples": {
-          "Get governance rules execution status by specific governance rule ID": {
+          "Get governance rules long run operation result by specific governance rule ID": {
             "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRuleExecuteStatus_example.json"
           }
         },
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Get a specific governance rule execution status for the requested scope by ruleId and operationId",
-        "operationId": "ManagementGroupGovernanceRulesExecuteStatus_Get",
+        "description": "Get governance rules long run operation result for the requested scope by ruleId and operationId",
+        "operationId": "ManagementGroupGovernanceRulesOperationResult_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -844,65 +844,17 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK - The operation completed",
             "schema": {
-              "$ref": "#/definitions/ExecuteRuleStatus"
+              "$ref": "#/definitions/OperationResult"
             }
           },
           "202": {
-            "description": "Accepted",
+            "description": "Accepted - The operation still in progress",
             "headers": {
               "location": {
                 "type": "string",
                 "description": "Location URL for the execution status"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}/delete/operationResults/{operationId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get governance rules deletion status by specific governance rule ID": {
-            "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRuleDeleteStatus_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get a specific governance rule deletion status for the requested scope by rule ID and operation ID",
-        "operationId": "ManagementGroupGovernanceRulesDeleteStatus_Get",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          },
-          {
-            "$ref": "#/parameters/OperationId"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Delete succeeded"
-          },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "Location URL for the deletion status"
               }
             }
           },
@@ -1205,14 +1157,37 @@
         }
       }
     },
-    "ExecuteRuleStatus": {
+    "OperationResult": {
       "type": "object",
-      "description": "Execute status of governance rule over a given scope",
+      "description": "Long run operation status of governance rule over a given scope",
       "properties": {
-        "operationId": {
-          "description": "Unique key for the execution of governance rule",
+        "status": {
           "type": "string",
-          "readOnly": true
+          "description": "The status of the long run operation result of governance rule",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "OperationResult",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Succeeded",
+                "description": "The operation succeeded"
+              },
+              {
+                "value": "Failed",
+                "description": "The operation failed"
+              },
+              {
+                "value": "Canceled",
+                "description": "The operation canceled"
+              }
+            ]
+          }
         }
       }
     }

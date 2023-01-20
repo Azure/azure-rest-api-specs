@@ -7,7 +7,8 @@ using Azure.Core;
 
 namespace AnomalyDetector.Multivariate;
 
-enum FillNAMethodKnownValues {
+@doc("An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.")
+enum FillNAMethod {
   "Previous",
   "Subsequent",
   "Linear",
@@ -15,10 +16,7 @@ enum FillNAMethodKnownValues {
   "Fixed",
 }
 
-@doc("An optional field, indicating how missing values will be filled. One of Previous, Subsequent, Linear, Zero, Fixed.")
-@knownValues(FillNAMethodKnownValues)
-model FillNAMethod is string;
-
+@fixed
 enum MultivariateBatchDetectionStatus {
   Created: "CREATED",
   Running: "RUNNING",
@@ -26,22 +24,21 @@ enum MultivariateBatchDetectionStatus {
   Failed: "FAILED",
 }
 
-enum DataSchemaValues {
+@doc("Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.")
+enum DataSchema {
   @doc("OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable.")
   "OneTable",
   @doc("MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable.")
   "MultiTable",
 }
 
-@doc("Data schema of input data source: OneTable or MultiTable. The default DataSchema is OneTable.")
-@knownValues(DataSchemaValues)
-model DataSchema is string;
-
+@fixed
 enum AlignMode {
   "Inner",
   "Outer",
 }
 
+@fixed
 enum ModelStatus {
   Created: "CREATED",
   Running: "RUNNING",
