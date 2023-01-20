@@ -71,7 +71,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_loadtestservice']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_loadtesting']
   - repo: azure-powershell
 ```
 
@@ -94,3 +94,7 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 ## CSharp
 
 See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
