@@ -47,6 +47,49 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful request for a list of alert rule recommendations",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleRecommendationsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null,
+          "itemName": "displayInformation"
+        },
+        "x-ms-examples": {
+          "List alert rule recommendations for virtual machines at resource level": {
+            "$ref": "./examples/AlertRuleRecommendations_GetByResource_VM.json"
+          },
+          "List alert rule recommendations for Monitoring accounts at resource level": {
+            "$ref": "./examples/AlertRuleRecommendations_GetByResource_MAC.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alertRuleRecommendations": {
+      "get": {
+        "tags": [
+          "alertRuleRecommendations"
+        ],
+        "description": "Retrieve alert rule recommendations for a resource type.",
+        "operationId": "AlertRuleRecommendations_ListByResourceType",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TargetTypeParameter"
@@ -68,20 +111,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null,
-          "value": "displayInformation"
+          "itemName": "displayInformation"
         },
         "x-ms-examples": {
-          "List alert rule recommendations for virtual machines at resource level": {
-            "$ref": "./examples/AlertRuleRecommendations_GetByResource_VM.json"
-          },
           "List alert rule recommendations for virtual machines at subscription level": {
             "$ref": "./examples/AlertRuleRecommendations_GetBySubscription_VM.json"
           },
           "List alert rule recommendations for Monitoring accounts at subscription level": {
             "$ref": "./examples/AlertRuleRecommendations_GetBySubscription_MAC.json"
-          },
-          "List alert rule recommendations for Monitoring accounts at resource level": {
-            "$ref": "./examples/AlertRuleRecommendations_GetByResource_MAC.json"
           }
         }
       }
@@ -100,7 +137,7 @@
     "TargetTypeParameter": {
       "name": "targetType",
       "in": "query",
-      "required": false,
+      "required": true,
       "type": "string",
       "description": "The recommendations target type.",
       "x-ms-parameter-location": "client"
