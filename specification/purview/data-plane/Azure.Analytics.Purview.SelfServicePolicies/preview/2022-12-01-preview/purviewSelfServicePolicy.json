@@ -65,7 +65,7 @@
           {
             "in": "path",
             "name": "policyId",
-            "description": "The policyId of the self-service policy. System.String.",
+            "description": "The policyId of the self-service policy.",
             "required": true,
             "type": "string"
           },
@@ -109,7 +109,7 @@
           {
             "in": "path",
             "name": "policyId",
-            "description": "The policyId of the self-service policy. System.String.",
+            "description": "The policyId of the self-service policy.",
             "required": true,
             "type": "string",
             "maxLength": 100
@@ -168,13 +168,21 @@
           "type": "string",
           "description": "This is field will indicate the role of a self service policy."
         },
-        "principal": {
-          "type": "string",
-          "description": "Azure Active Directory Id for users"
+        "principals": {
+          "type": "array",
+          "description": "Azure Active Directory Ids for users",
+          "items": {
+            "type": "string",
+            "description": "Azure Active Directory Id"
+          }
         },
-        "principalGroup": {
-          "type": "string",
-          "description": "Azure Active Directory Id for groups"
+        "principalGroups": {
+          "type": "array",
+          "description": "Azure Active Directory Ids for groups",
+          "items": {
+            "type": "string",
+            "description": "Azure Active Directory Id"
+          }
         },
         "resourceAzurePath": {
           "type": "string",
