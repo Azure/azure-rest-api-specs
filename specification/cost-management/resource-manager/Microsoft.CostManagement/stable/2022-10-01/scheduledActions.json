@@ -161,6 +161,9 @@
             "schema": {
               "$ref": "#/definitions/ScheduledAction"
             }
+          },
+          {
+            "$ref": "#/parameters/IfMatchOptionalParameter"
           }
         ],
         "responses": {
@@ -292,6 +295,9 @@
             "schema": {
               "$ref": "#/definitions/ScheduledAction"
             }
+          },
+          {
+            "$ref": "#/parameters/IfMatchOptionalParameter"
           }
         ],
         "responses": {
@@ -648,7 +654,8 @@
       "properties": {
         "eTag": {
           "type": "string",
-          "description": "Resource Etag. For update calls, eTag is mandatory. Fetch the resource's eTag by doing a 'GET' call first and then including the latest eTag as part of the request body while performing the update. For create calls, eTag is not required."
+          "readOnly": true,
+          "description": "Resource Etag. For update calls, eTag is mandatory. Fetch the resource's eTag by doing a 'GET' call first and then including the latest eTag as part of the request body or 'If-Match' header while performing the update. For create calls, eTag is not required."
         },
         "kind": {
           "$ref": "#/definitions/ScheduledActionKind",
@@ -912,6 +919,13 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "IfMatchOptionalParameter": {
+      "name": "If-Match",
+      "in": "header",
+      "required": false,
+      "description": "ETag of the Entity. Not required when creating an entity, but required when updating an entity.",
+      "type": "string"
     }
   }
 }
