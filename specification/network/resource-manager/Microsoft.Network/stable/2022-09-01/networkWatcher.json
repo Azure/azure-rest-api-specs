@@ -3327,6 +3327,20 @@
             "modelAsString": true
           }
         },
+        "analysisModes": {
+          "type": "string",
+          "description": "Analysis Modes.",
+          "enum": [
+            "NextHop",
+            "NCD",
+            "PortScan",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "AnalysisModes",
+            "modelAsString": true
+          }
+        },
         "protocolConfiguration": {
           "$ref": "#/definitions/ProtocolConfiguration",
           "description": "Configuration of the protocol."
@@ -3353,6 +3367,14 @@
           "format": "int32",
           "minimum": 0,
           "maximum": 65535
+        },
+        "address": {
+          "description": "The IP address of the NIC chosen.",
+          "type": "string"
+        },
+        "vmssIndex": {
+          "description": "The vmss index from which a connectivity check will be performed.",
+          "type": "string"
         }
       }
     },
@@ -3431,6 +3453,46 @@
           "readOnly": true,
           "type": "integer",
           "format": "int32"
+        },
+        "nextHopAnalysis": {
+          "$ref": "#/definitions/NextHopResult",
+          "description": "The NextHop Details from the source."
+        },
+        "sourceSecurityRuleAnalysis": {
+          "$ref": "#/definitions/NetworkConfigurationDiagnosticResponse",
+          "description": "SecurityAnalysis results at the source endpoint."
+        },
+        "destinationSecurityRuleAnalysis": {
+          "$ref": "#/definitions/NetworkConfigurationDiagnosticResponse",
+          "description": "SecurityAnalysis results at the destination endpoint."
+        },
+        "sourcePortStatus": {
+          "type": "string",
+          "description": "Port Status at the Source.",
+          "enum": [
+            "NextHop",
+            "NCD",
+            "PortScan",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "SourcePortStatus",
+            "modelAsString": true
+          }
+        },
+        "destinationPortStatus": {
+          "type": "string",
+          "description": "port Status at the Destination.",
+          "enum": [
+            "NextHop",
+            "NCD",
+            "PortScan",
+            "Default"
+          ],
+          "x-ms-enum": {
+            "name": "DestinationPortStatus",
+            "modelAsString": true
+          }
         }
       }
     },
