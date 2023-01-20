@@ -694,6 +694,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairStatus": {
       "post": {
         "operationId": "CassandraRepair_GetClusterStatus",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -709,7 +710,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraReaperClusterStatus"
@@ -721,6 +728,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairTables": {
       "post": {
         "operationId": "CassandraRepair_GetTableStatus",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -736,7 +744,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "type": "object",
@@ -754,6 +768,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns": {
       "post": {
         "operationId": "CassandraRepair_Create",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -778,7 +793,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraReaperRunStatus"
@@ -790,6 +811,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}": {
       "delete": {
         "operationId": "CassandraRepair_Delete",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -808,8 +830,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "202": {
+            "description": "Success. The async operation to delete repair run will begin as soon as possible."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
           }
         }
       }
@@ -817,6 +845,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/list": {
       "post": {
         "operationId": "CassandraRepair_List",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -832,7 +861,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraReaperRunStatusFeedResponse"
@@ -844,6 +879,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/pause": {
       "post": {
         "operationId": "CassandraRepair_Pause",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -862,8 +898,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
+            "description": "Success. The async operation will begin as soon as possible."
           }
         }
       }
@@ -871,6 +913,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/resume": {
       "post": {
         "operationId": "CassandraRepair_Resume",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -889,8 +932,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
+            "description": "Success. The async operation will begin as soon as possible."
           }
         }
       }
@@ -898,6 +947,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/segments": {
       "post": {
         "operationId": "CassandraRepair_ListSegments",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -916,7 +966,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraRepairSegmentResourceFeedResponse"
@@ -928,6 +984,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/show": {
       "post": {
         "operationId": "CassandraRepair_Show",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -946,7 +1003,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraReaperRunStatus"
@@ -958,6 +1021,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/segments/{segmentId}/abort": {
       "post": {
         "operationId": "CassandraRepair_AbortSegment",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -979,8 +1043,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
+            "description": "Success. The async operation will begin as soon as possible."
           }
         }
       }
@@ -988,6 +1058,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/intensity/{intensityValue}": {
       "post": {
         "operationId": "CassandraRepair_Update",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1009,8 +1080,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "202": {
+            "description": "Success. The async operation will begin as soon as possible."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
           }
         }
       }
