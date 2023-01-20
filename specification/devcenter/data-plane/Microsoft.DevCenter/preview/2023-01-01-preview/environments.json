@@ -259,64 +259,6 @@
           }
         }
       },
-      "patch": {
-        "tags": [
-          "Environments"
-        ],
-        "description": "Partially updates an environment",
-        "consumes": [
-          "application/merge-patch+json"
-        ],
-        "parameters": [
-          {
-            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/UserIdParameter"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Updatable environment properties.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EnvironmentUpdateProperties"
-            }
-          }
-        ],
-        "operationId": "Environments_UpdateEnvironment",
-        "responses": {
-          "200": {
-            "description": "Succeeded",
-            "schema": {
-              "$ref": "#/definitions/Environment"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "devcenter.json#/definitions/CloudError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Environments_UpdateEnvironment": {
-            "$ref": "./examples/Environments_Patch.json"
-          }
-        }
-      },
       "delete": {
         "tags": [
           "Environments"
@@ -399,7 +341,7 @@
             "description": "Action properties overriding the environment's default values.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ActionRequest"
+              "$ref": "#/definitions/EnvironmentActionRequest"
             }
           }
         ],
@@ -836,8 +778,8 @@
     }
   },
   "definitions": {
-    "ActionRequest": {
-      "description": "Action request",
+    "EnvironmentActionRequest": {
+      "description": "Properties of an action on an Environment",
       "type": "object",
       "properties": {
         "actionId": {
@@ -846,31 +788,13 @@
         },
         "parameters": {
           "type": "object",
-          "description": "Parameters object for the Action"
-        }
-      }
-    },
-    "EnvironmentUpdateProperties": {
-      "description": "Properties of an environment. These properties can be updated after the resource has been created.",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "Key value pairs that will be applied to resources deployed in this environment as tags.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "Parameters object for the action"
         }
       }
     },
     "Environment": {
       "description": "Properties of an environment.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EnvironmentUpdateProperties"
-        }
-      ],
       "properties": {
         "name": {
           "type": "string",

@@ -722,7 +722,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions": {
       "get": {
         "tags": [
-          "Actions"
+          "DevBoxActions"
         ],
         "parameters": [
           {
@@ -744,7 +744,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ActionsListResult"
+              "$ref": "#/definitions/DevBoxActionsListResult"
             }
           },
           "default": {
@@ -762,19 +762,19 @@
         },
         "x-ms-examples": {
           "DevBoxes_ListActions": {
-            "$ref": "./examples/Actions_List.json"
+            "$ref": "./examples/DevBoxActions_List.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/Action"
+        "x-ms-odata": "#/definitions/DevBoxAction"
       }
     },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}": {
       "get": {
         "tags": [
-          "Actions"
+          "DevBoxActions"
         ],
         "parameters": [
           {
@@ -790,7 +790,7 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/ActionNameParameter"
+            "$ref": "#/parameters/DevBoxActionNameParameter"
           }
         ],
         "description": "Gets an upcoming action.",
@@ -799,7 +799,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Action"
+              "$ref": "#/definitions/DevBoxAction"
             }
           },
           "default": {
@@ -817,7 +817,7 @@
         },
         "x-ms-examples": {
           "DevBoxes_GetAction": {
-            "$ref": "./examples/Actions_Get.json"
+            "$ref": "./examples/DevBoxActions_Get.json"
           }
         }
       }
@@ -825,7 +825,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip": {
       "post": {
         "tags": [
-          "Actions"
+          "DevBoxActions"
         ],
         "parameters": [
           {
@@ -841,7 +841,7 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/ActionNameParameter"
+            "$ref": "#/parameters/DevBoxActionNameParameter"
           }
         ],
         "description": "Skips an upcoming action.",
@@ -865,7 +865,7 @@
         },
         "x-ms-examples": {
           "DevBoxes_SkipAction": {
-            "$ref": "./examples/Actions_Skip.json"
+            "$ref": "./examples/DevBoxActions_Skip.json"
           }
         }
       }
@@ -873,7 +873,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay": {
       "post": {
         "tags": [
-          "Actions"
+          "DevBoxActions"
         ],
         "parameters": [
           {
@@ -889,7 +889,7 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/ActionNameParameter"
+            "$ref": "#/parameters/DevBoxActionNameParameter"
           },
           {
             "$ref": "#/parameters/UntilParameter"
@@ -901,7 +901,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Action"
+              "$ref": "#/definitions/DevBoxAction"
             }
           },
           "default": {
@@ -919,7 +919,7 @@
         },
         "x-ms-examples": {
           "DevBoxes_DelayAction": {
-            "$ref": "./examples/Actions_Delay.json"
+            "$ref": "./examples/DevBoxActions_Delay.json"
           }
         }
       }
@@ -927,7 +927,7 @@
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay": {
       "post": {
         "tags": [
-          "Actions"
+          "DevBoxActions"
         ],
         "parameters": [
           {
@@ -974,7 +974,7 @@
         },
         "x-ms-examples": {
           "DevBoxes_DelayActions": {
-            "$ref": "./examples/Actions_DelayMultiple.json"
+            "$ref": "./examples/DevBoxActions_DelayMultiple.json"
           }
         }
       }
@@ -1027,7 +1027,7 @@
         },
         "hibernateSupport": {
           "description": "Indicates whether hibernate is enabled/disabled or unknown.",
-          "$ref": "#/definitions/HibernateSupport",
+          "$ref": "devcenter.json#/definitions/EnableStatus",
           "readOnly": true
         },
         "storageProfile": {
@@ -1042,31 +1042,31 @@
         },
         "localAdministrator": {
           "description": "Indicates whether owners of Dev Boxes in this pool are local administrators on the Dev Boxes.",
-          "$ref": "#/definitions/LocalAdminStatus"
+          "$ref": "devcenter.json#/definitions/EnableStatus"
         },
-        "idleConfiguration": {
-          "description": "Idle configuration settings for Dev Boxes created in this pool.",
-          "$ref": "#/definitions/IdleConfiguration"
+        "stopOnDisconnect": {
+          "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
+          "$ref": "#/definitions/StopOnDisconnectConfiguration"
         },
-        "poolStatus": {
-          "description": "Overall status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.",
-          "$ref": "#/definitions/PoolStatus",
+        "healthStatus": {
+          "description": "Overall health status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.",
+          "$ref": "#/definitions/PoolHealthStatus",
           "readOnly": true
         }
       }
     },
-    "PoolStatus": {
+    "PoolHealthStatus": {
       "description": "Pool status indicating whether a pool is available to create Dev Boxes.",
       "enum": [
+        "Unknown",
         "Pending",
         "Healthy",
         "Warning",
-        "Unhealthy",
-        "Unknown"
+        "Unhealthy"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "PoolStatus",
+        "name": "PoolHealthStatus",
         "modelAsString": true
       }
     },
@@ -1165,7 +1165,7 @@
     },
     "DevBox": {
       "type": "object",
-      "description": "A DevBox Dev Box",
+      "description": "A Dev Box",
       "properties": {
         "name": {
           "description": "Display name for the Dev Box",
@@ -1190,7 +1190,7 @@
         },
         "hibernateSupport": {
           "description": "Indicates whether hibernate is enabled/disabled or unknown.",
-          "$ref": "#/definitions/HibernateSupport",
+          "$ref": "devcenter.json#/definitions/EnableStatus",
           "readOnly": true
         },
         "provisioningState": {
@@ -1256,7 +1256,7 @@
         },
         "localAdministrator": {
           "description": "Indicates whether the owner of the Dev Box is a local administrator.",
-          "$ref": "#/definitions/LocalAdminStatus"
+          "$ref": "devcenter.json#/definitions/EnableStatus"
         }
       },
       "required": [
@@ -1351,16 +1351,16 @@
       }
     },
     "RemoteConnection": {
-      "description": "Provides RDP connection information",
+      "description": "Provides remote connection information for a Dev Box.",
       "type": "object",
       "properties": {
         "webUrl": {
-          "description": "URL to open a browser based RDP session",
+          "description": "URL to open a browser based RDP session.",
           "type": "string",
           "readOnly": true
         },
         "rdpConnectionUrl": {
-          "description": "Link to open a Remote Desktop session",
+          "description": "Link to open a Remote Desktop session.",
           "type": "string",
           "readOnly": true
         }
@@ -1370,9 +1370,9 @@
       "type": "string",
       "enum": [
         "Unknown",
+        "Running",
         "Deallocated",
         "PoweredOff",
-        "Running",
         "Hibernated"
       ],
       "description": "The power states of a Dev Box.",
@@ -1381,62 +1381,24 @@
         "modelAsString": true
       }
     },
-    "HibernateSupport": {
-      "description": "Indicates whether hibernate is supported and enabled or disabled. Unknown hibernate support is represented as null.",
-      "enum": [
-        "Disabled",
-        "Enabled"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "HibernateSupport",
-        "modelAsString": true
-      }
-    },
-    "LocalAdminStatus": {
-      "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "LocalAdminStatus",
-        "modelAsString": true
-      }
-    },
-    "IdleAction": {
-      "description": "The action to take on a Dev Box when idle is detected.",
-      "type": "string",
-      "enum": [
-        "None",
-        "Hibernate"
-      ],
-      "x-ms-enum": {
-        "name": "IdleAction",
-        "modelAsString": true
-      }
-    },
-    "IdleConfiguration": {
+    "StopOnDisconnectConfiguration": {
       "type": "object",
-      "description": "Idle configuration settings for Dev Boxes created in this pool.",
+      "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
       "properties": {
-        "idleAction": {
-          "description": "The action to take on a Dev Box once idle is detected and the grace period has lapsed.",
-          "$ref": "#/definitions/IdleAction",
+        "status": {
+          "description": "Whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.",
+          "$ref": "devcenter.json#/definitions/EnableStatus",
           "readOnly": true
         },
         "gracePeriodMinutes": {
-          "description": "The specified time in minutes to wait before acting on a Dev Box once idle is detected.",
+          "description": "The specified time in minutes to wait before stopping a Dev Box once disconnect is detected.",
           "type": "integer",
           "format": "int32",
           "readOnly": true
         }
-      },
-      "required": [
-        "idleAction"
-      ]
+      }
     },
-    "ActionsListResult": {
+    "DevBoxActionsListResult": {
       "type": "object",
       "description": "The actions list result",
       "properties": {
@@ -1444,7 +1406,7 @@
           "description": "Current page of results",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Action"
+            "$ref": "#/definitions/DevBoxAction"
           }
         },
         "nextLink": {
@@ -1456,9 +1418,9 @@
         "value"
       ]
     },
-    "Action": {
+    "DevBoxAction": {
       "type": "object",
-      "description": "An  Action.",
+      "description": "An action which will take place on a Dev Box.",
       "properties": {
         "name": {
           "description": "The name of the action.",
@@ -1467,7 +1429,7 @@
         },
         "actionType": {
           "description": "The action that will be taken.",
-          "$ref": "#/definitions/ActionType",
+          "$ref": "#/definitions/DevBoxActionType",
           "readOnly": true
         },
         "sourceId": {
@@ -1477,26 +1439,26 @@
         },
         "next": {
           "description": "Details about the next run of this action.",
-          "$ref": "#/definitions/NextAction",
+          "$ref": "#/definitions/DevBoxNextAction",
           "readOnly": true
         }
       }
     },
-    "ActionType": {
-      "description": "The action types.",
+    "DevBoxActionType": {
+      "description": "The type of action which will take place on a Dev Box.",
       "type": "string",
       "enum": [
         "Stop"
       ],
       "x-ms-enum": {
-        "name": "ActionType",
+        "name": "DevBoxActionType",
         "modelAsString": true
       }
     },
-    "NextAction": {
+    "DevBoxNextAction": {
       "description": "Details about the next run of an action.",
       "type": "object",
-      "properties":{
+      "properties": {
         "scheduledTime": {
           "description": "The target time the action will be triggered (UTC).",
           "type": "string",
@@ -1551,7 +1513,7 @@
       "description": "Optional parameter to hibernate the dev box.",
       "x-ms-parameter-location": "method"
     },
-    "ActionNameParameter": {
+    "DevBoxActionNameParameter": {
       "name": "actionName",
       "in": "path",
       "required": true,
@@ -1559,7 +1521,7 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63,
-      "description": "The name of an action.",
+      "description": "The name of an action that will take place on a Dev Box.",
       "x-ms-parameter-location": "method"
     },
     "UntilParameter": {
