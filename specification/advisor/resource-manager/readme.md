@@ -26,7 +26,7 @@ These are the global settings for the Advisor API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-10
+tag: package-2022-09
 ```
 ### Tag: package-2022-10
 
