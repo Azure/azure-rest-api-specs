@@ -30,10 +30,7 @@ openapi-type: arm
 tag: package-preview-2022-11
 ```
 
-
 ### Tag: package-preview-2022-11
-
-These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
@@ -52,8 +49,6 @@ input-file:
 ```
 
 ### Tag: package-preview-2022-08
-
-These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
 
 These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
 
