@@ -1,0 +1,435 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-09-15-preview",
+    "title": "Syntex",
+    "description": "Syntex provider"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Syntex/documentProcessors": {
+      "get": {
+        "description": "Returns document processors in the subscription.",
+        "operationId": "DocumentProcessor_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document processor details.",
+            "schema": {
+              "$ref": "#/definitions/DocumentProcessorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DocumentProcessor_List": {
+            "$ref": "./examples/DocumentProcessor_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Syntex/documentProcessors": {
+      "get": {
+        "description": "Returns document processors in a resource group.",
+        "operationId": "DocumentProcessor_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document processor details.",
+            "schema": {
+              "$ref": "#/definitions/DocumentProcessorList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DocumentProcessor_ListByResourceGroup": {
+            "$ref": "./examples/DocumentProcessor_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Syntex/documentProcessors/{processorName}": {
+      "get": {
+        "description": "Returns a document processor for a given name.",
+        "operationId": "DocumentProcessor_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProcessorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document processor details.",
+            "schema": {
+              "$ref": "#/definitions/DocumentProcessorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DocumentProcessor_Get": {
+            "$ref": "./examples/DocumentProcessor_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes document processor resource for a given name.",
+        "operationId": "DocumentProcessor_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProcessorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the document processor details."
+          },
+          "204": {
+            "description": "The document processor details are not present."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DocumentProcessor_Delete": {
+            "$ref": "./examples/DocumentProcessor_Delete.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Creates a document processor resource for a given name.",
+        "operationId": "DocumentProcessor_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProcessorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Document processor details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentProcessorResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentProcessorResource"
+            }
+          },
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentProcessorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DocumentProcessor_Create": {
+            "$ref": "./examples/DocumentProcessor_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates a document processor resource for a given name.",
+        "operationId": "DocumentProcessor_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ProcessorNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Document processor details.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DocumentProcessorPatchableProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentProcessorResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DocumentProcessor_Update": {
+            "$ref": "./examples/DocumentProcessor_Update.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Syntex/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "List of all REST operations supported by the Microsoft.Syntex provider.",
+        "tags": [
+          "Operations"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Describes the result of a successful operation.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DocumentProcessorResource": {
+      "type": "object",
+      "description": "Document processor details",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": false,
+          "description": "Document processor properties.",
+          "$ref": "#/definitions/DocumentProcessorProperties"
+        }
+      }
+    },
+    "DocumentProcessorPatchableProperties": {
+      "type": "object",
+      "description": "Document processor properties that can be updated",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "description": "Syntex properties for PATCH.",
+          "properties": {
+            "spoTenantUrl": {
+              "type": "string",
+              "description": "The URL of an SharePoint Online (SPO) tenant associated with this document processor resource"
+            },
+            "spoTenantId": {
+              "type": "string",
+              "description": "The ID (GUID) of an SharePoint Online (SPO) tenant associated with this document processor resource"
+            }
+          }
+        }
+      }
+    },
+    "DocumentProcessorProperties": {
+      "type": "object",
+      "description": "Document processor properties",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The managed resource provisioning state."
+        },
+        "spoTenantUrl": {
+          "type": "string",
+          "description": "The URL of an SharePoint Online (SPO) tenant associated with this document processor resource"
+        },
+        "spoTenantId": {
+          "type": "string",
+          "description": "The ID (GUID) of an SharePoint Online (SPO) tenant associated with this document processor resource"
+        }
+      },
+      "required": [
+        "spoTenantUrl",
+        "spoTenantId"
+      ]
+    },
+    "ProvisioningState": {
+      "description": "Provisioning status of the managed resource.",
+      "readOnly": true,
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "DocumentProcessorList": {
+      "type": "object",
+      "description": "Document processor list",
+      "properties": {
+        "value": {
+          "description": "Array of document processors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentProcessorResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ProcessorNameParameter": {
+      "name": "processorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of document processor resource.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
