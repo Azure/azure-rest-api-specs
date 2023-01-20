@@ -28,7 +28,7 @@ model EmbeddingsRequest {
 
 model Embeddings {
     object: "list",
-    data: Embedding[],
+    data: EmbeddingItem[],
 }
 
 model Usage {
@@ -36,7 +36,7 @@ model Usage {
     total_tokens: int32
 }
 
-model Embedding {
+model EmbeddingItem {
     object: "embedding",
     embeddingFloat: float32[];
     index: int32;
