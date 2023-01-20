@@ -12,7 +12,7 @@
           "Test"
         ],
         "summary": "Create a new test or update an existing test.",
-        "operationId": "Test_CreateOrUpdate",
+        "operationId": "LoadTestAdministration_CreateOrUpdateTest",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -73,7 +73,7 @@
           "Test"
         ],
         "summary": "Delete a test by its name.",
-        "operationId": "Test_Delete",
+        "operationId": "LoadTestAdministration_DeleteTest",
         "produces": [
           "application/json"
         ],
@@ -113,7 +113,7 @@
           "Test"
         ],
         "summary": "Get load test details by test name",
-        "operationId": "Test_Get",
+        "operationId": "LoadTestAdministration_GetTest",
         "produces": [
           "application/json"
         ],
@@ -158,7 +158,7 @@
           "Test"
         ],
         "summary": "Get all load tests by the fully qualified resource Id e.g subscriptions/{subId}/resourceGroups/{rg}/providers/Microsoft.LoadTestService/loadtests/{resName}.",
-        "operationId": "Test_List",
+        "operationId": "LoadTestAdministration_ListTests",
         "produces": [
           "application/json"
         ],
@@ -188,12 +188,6 @@
             "description": "End DateTime(ISO 8601 literal format) of the last updated time range to filter tests.",
             "type": "string",
             "format": "date-time"
-          },
-          {
-            "in": "query",
-            "name": "continuationToken",
-            "description": "Continuation token to get the next page of response",
-            "type": "string"
           },
           {
             "in": "query",
@@ -243,7 +237,7 @@
           "Test"
         ],
         "summary": "Upload input file for a given test name. File size can't be more than 50 MB. Existing file with same name for the given test will be overwritten. File should be provided in the request body as application/octet-stream.",
-        "operationId": "Test_UploadFile",
+        "operationId": "LoadTestAdministration_UploadTestFile",
         "consumes": [
           "application/octet-stream"
         ],
@@ -335,7 +329,7 @@
           "Test"
         ],
         "summary": "Get test file by the file name.",
-        "operationId": "Test_GetFile",
+        "operationId": "LoadTestAdministration_GetTestFile",
         "produces": [
           "application/json"
         ],
@@ -385,7 +379,7 @@
           "Test"
         ],
         "summary": "Delete file by the file name for a test",
-        "operationId": "Test_DeleteFile",
+        "operationId": "LoadTestAdministration_DeleteTestFile",
         "produces": [
           "application/json"
         ],
@@ -434,19 +428,13 @@
           "Test"
         ],
         "summary": "Get all test files.",
-        "operationId": "Test_ListFiles",
+        "operationId": "LoadTestAdministration_ListTestFiles",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
             "$ref": "#/parameters/TestIdPathParameter"
-          },
-          {
-            "in": "query",
-            "name": "continuationToken",
-            "description": "Continuation token to get the next page of response",
-            "type": "string"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -488,7 +476,7 @@
           "Test"
         ],
         "summary": "Associate an app component (collection of azure resources) to a test",
-        "operationId": "Test_CreateOrUpdateAppComponents",
+        "operationId": "LoadTestAdministration_CreateOrUpdateAppComponents",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -549,7 +537,7 @@
           "Test"
         ],
         "summary": "Get associated app component (collection of azure resources) for the given test.",
-        "operationId": "Test_ListAppComponents",
+        "operationId": "LoadTestAdministration_GetAppComponents",
         "produces": [
           "application/json"
         ],
@@ -594,7 +582,7 @@
           "Test"
         ],
         "summary": "Configure server metrics for a test",
-        "operationId": "Test_CreateOrUpdateServerMetricsConfig",
+        "operationId": "LoadTestAdministration_CreateOrUpdateServerMetricsConfig",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -655,7 +643,7 @@
           "Test"
         ],
         "summary": "List server metrics configuration for the given test.",
-        "operationId": "Test_ListServerMetricsConfig",
+        "operationId": "LoadTestAdministration_GetServerMetricsConfig",
         "produces": [
           "application/json"
         ],
@@ -695,52 +683,12 @@
       }
     },
     "/test-runs/{testRunId}": {
-      "delete": {
-        "tags": [
-          "TestRun"
-        ],
-        "summary": "Delete a test run by its name.",
-        "operationId": "TestRun_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/TestRunIdPathParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersion"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "The test run is deleted."
-          },
-          "default": {
-            "description": "Load Testing service error response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponseBody"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Delete a test run": {
-            "$ref": "./examples/DeleteTestRun.json"
-          }
-        }
-      },
       "patch": {
         "tags": [
           "TestRun"
         ],
         "summary": "Create and start a new test run with the given name.",
-        "operationId": "TestRun_CreateOrUpdate",
+        "operationId": "LoadTestRun_CreateOrUpdateTestRun",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -807,7 +755,7 @@
           "TestRun"
         ],
         "summary": "Get test run details by name.",
-        "operationId": "TestRun_Get",
+        "operationId": "LoadTestRun_GetTestRun",
         "produces": [
           "application/json"
         ],
@@ -844,6 +792,46 @@
             "$ref": "./examples/GetTestRun.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Delete a test run by its name.",
+        "operationId": "LoadTestRun_DeleteTestRun",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TestRunIdPathParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The test run is deleted."
+          },
+          "default": {
+            "description": "Load Testing service error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a test run": {
+            "$ref": "./examples/DeleteTestRun.json"
+          }
+        }
       }
     },
     "/test-runs/{testRunId}/files/{fileName}": {
@@ -852,7 +840,7 @@
           "TestRun"
         ],
         "summary": "Get test run file by file name.",
-        "operationId": "TestRun_GetFile",
+        "operationId": "LoadTestRun_GetTestRunFile",
         "produces": [
           "application/json"
         ],
@@ -904,7 +892,7 @@
           "TestRun"
         ],
         "summary": "Get all test runs with given filters",
-        "operationId": "TestRun_List",
+        "operationId": "LoadTestRun_ListTestRuns",
         "produces": [
           "application/json"
         ],
@@ -913,12 +901,6 @@
             "in": "query",
             "name": "orderby",
             "description": "Sort on the supported fields in (field asc/desc) format. eg: executedDateTime asc. Supported fields - executedDateTime",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "continuationToken",
-            "description": "Continuation token to get the next page of response",
             "type": "string"
           },
           {
@@ -998,7 +980,7 @@
           "TestRun"
         ],
         "summary": "Stop test run by name.",
-        "operationId": "TestRun_Stop",
+        "operationId": "LoadTestRun_StopTestRun",
         "produces": [
           "application/json"
         ],
@@ -1043,7 +1025,7 @@
           "TestRun"
         ],
         "summary": "List the metric namespaces for a load test run.",
-        "operationId": "TestRun_ListMetricNamespaces",
+        "operationId": "LoadTestRun_ListMetricNamespaces",
         "produces": [
           "application/json"
         ],
@@ -1088,7 +1070,7 @@
           "TestRun"
         ],
         "summary": "List the metric definitions for a load test run.",
-        "operationId": "TestRun_ListMetricDefinitions",
+        "operationId": "LoadTestRun_ListMetricDefinitions",
         "produces": [
           "application/json"
         ],
@@ -1140,7 +1122,7 @@
           "TestRun"
         ],
         "summary": "List the metric values for a load test run.",
-        "operationId": "TestRun_ListMetrics",
+        "operationId": "LoadTestRun_ListMetrics",
         "consumes": [
           "application/json"
         ],
@@ -1254,6 +1236,9 @@
           "Lists the metric values for a load test run.": {
             "$ref": "./examples/ListTestRunMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1263,7 +1248,7 @@
           "TestRun"
         ],
         "summary": "List the dimension values for the given metric dimension name.",
-        "operationId": "TestRun_ListMetricDimensionValues",
+        "operationId": "LoadTestRun_ListMetricDimensionValues",
         "produces": [
           "application/json"
         ],
@@ -1367,6 +1352,9 @@
           "Lists the metric dimension values for a load test run.": {
             "$ref": "./examples/ListMetricDimensionValues.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1376,7 +1364,7 @@
           "TestRun"
         ],
         "summary": "Associate an app component (collection of azure resources) to a test run",
-        "operationId": "TestRun_CreateOrUpdateAppComponents",
+        "operationId": "LoadTestRun_CreateOrUpdateAppComponents",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1437,7 +1425,7 @@
           "TestRun"
         ],
         "summary": "Get associated app component (collection of azure resources) for the given test run.",
-        "operationId": "TestRun_ListAppComponents",
+        "operationId": "LoadTestRun_GetAppComponents",
         "produces": [
           "application/json"
         ],
@@ -1482,7 +1470,7 @@
           "TestRun"
         ],
         "summary": "Configure server metrics for a test run",
-        "operationId": "TestRun_CreateOrUpdateServerMetricsConfig",
+        "operationId": "LoadTestRun_CreateOrUpdateServerMetricsConfig",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -1543,7 +1531,7 @@
           "TestRun"
         ],
         "summary": "List server metrics configuration for the given test run.",
-        "operationId": "TestRun_ListServerMetricsConfig",
+        "operationId": "LoadTestRun_GetServerMetricsConfig",
         "produces": [
           "application/json"
         ],
@@ -2142,7 +2130,7 @@
       "description": "The response to a metrics query.",
       "type": "object",
       "properties": {
-        "timeseries": {
+        "value": {
           "description": "Timeseries data for metric query.",
           "type": "array",
           "items": {
@@ -2322,8 +2310,8 @@
           "description": "Action taken after the threshold is met. Default is ‘continue’.",
           "default": "continue",
           "enum": [
-            "stop",
-            "continue"
+            "continue",
+            "stop"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2331,12 +2319,12 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "stop",
-                "description": "Test run will stop if pass fail criteria metric is not passed."
-              },
-              {
                 "value": "continue",
                 "description": "Test will continue to run even if pass fail metric criteria metric gets failed"
+              },
+              {
+                "value": "stop",
+                "description": "Test run will stop if pass fail criteria metric is not passed."
               }
             ]
           }
@@ -3231,6 +3219,7 @@
       "description": "URL to perform data plane API operations on the resource.",
       "required": true,
       "type": "string",
+      "format": "uri",
       "x-ms-parameter-location": "client",
       "x-ms-skip-url-encoding": true
     }
