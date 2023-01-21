@@ -587,6 +587,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/EncryptionProtectors.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FirewallRules.json
+- ./Microsoft.Sql/preview/2020-11-01-preview/InstanceFailoverGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/InstancePools.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobAgents.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobCredentials.json
@@ -698,7 +699,6 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/SynapseLinkWorkspaces.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/Databases.json
-- ./Microsoft.Sql/preview/2022-05-01-preview/InstanceFailoverGroups.json
 
 
 # Needed when there is more than one input file
