@@ -75,8 +75,83 @@ namespace EventGrid.ApiManagement {
     ...ApiManagementBase;
   }
 
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCreated event.")
+  model ApiManagementGatewayCreatedEventData{
+    ...ApiGatewayBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayUpdated event.")
+  model ApiManagementGatewayUpdatedEventData{
+    ...ApiGatewayBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayDeleted event.")
+  model ApiManagementGatewayDeletedEventData{
+    ...ApiGatewayBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationCreated event.")
+  model ApiManagementGatewayHostnameConfigurationCreatedEventData{
+    ...ApiGatewayHostnameBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationUpdated event.")
+  model ApiManagementGatewayHostnameConfigurationUpdatedEventData{
+    ...ApiGatewayHostnameBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayHostnameConfigurationDeleted event.")
+  model ApiManagementGatewayHostnameConfigurationDeletedEventData{
+    ...ApiGatewayHostnameBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityCreated event.")
+  model ApiManagementGatewayCertificateAuthorityCreatedEventData{
+    ...ApiGatewayCertificateBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityUpdated event.")
+  model ApiManagementGatewayCertificateAuthorityUpdatedEventData{
+    ...ApiGatewayCertificateBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayCertificateAuthorityDeleted event.")
+  model ApiManagementGatewayCertificateAuthorityDeletedEventData{
+    ...ApiGatewayCertificateBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIAdded event.")
+  model ApiManagementGatewayApiAddedEventData{
+    ...ApiGatewayApiBase;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.ApiManagement.GatewayAPIRemoved event.")
+  model ApiManagementGatewayApiRemovedEventData{
+    ...ApiGatewayApiBase;
+  }
+
   alias ApiManagementBase = {
     @doc("The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/<ResourceType>/<ResourceName>`")
+    resourceUri?: string;
+  };
+
+  alias ApiGatewayBase = {
+    @doc("The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<ResourceName>`")
+    resourceUri?: string;   
+  };
+
+  alias ApiGatewayHostnameBase = {
+    @doc("The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/hostnameConfigurations/<ResourceName>`")
+    resourceUri?: string;
+  };
+
+  alias ApiGatewayCertificateBase = {
+    @doc("The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/certificateAuthorities/<ResourceName>`")
+    resourceUri?: string;
+  };
+
+  alias ApiGatewayApiBase = {
+    @doc("The fully qualified ID of the resource that the compliance state change is for, including the resource name and resource type. Uses the format, `/subscriptions/<SubscriptionID>/resourceGroups/<ResourceGroup>/Microsoft.ApiManagement/service/<ServiceName>/gateways/<GatewayName>/apis/<ResourceName>`")
     resourceUri?: string;
   };
 }
