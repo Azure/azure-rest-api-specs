@@ -502,6 +502,64 @@
         }
       }
     },
+    "AcsEmailDeliveryReportReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailDeliveryReportReceived event.",
+      "type": "object",
+      "properties": {
+        "sender": {
+          "description": "The Sender Email Address",
+          "type": "string"
+        },
+        "recipient": {
+          "description": "The recipient Email Address",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The Id of the email been sent",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the email",
+          "type": "string"
+        },
+        "deliveryAttemptTimeStamp": {
+          "description": "The time at which the email delivery report received timestamp",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "AcsEmailEngagementTrackingReportReceivedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.AcsEmailEngagementTrackingReportReceived event.",
+      "type": "object",
+      "properties": {
+        "sender": {
+          "description": "The Sender Email Address",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The Id of the email been sent",
+          "type": "string"
+        },
+        "userActionTimeStamp": {
+          "description": "The time at which the user interacted with the email",
+          "format": "date-time",
+          "type": "string"
+        },
+        "engagementContext": {
+          "description": "The context of the type of engagement user had with email",
+          "type": "string"
+        },
+        "userAgent": {
+          "description": "The user agent interacting with the email",
+          "type": "string"
+        },
+        "engagementType": {
+          "description": "The type of engagement user have with email",
+          "$ref": "#/definitions/UserEngagementTypeModel"
+        }
+      }
+    },
     "AcsChatThreadEventBaseProperties": {
       "description": "Schema of common properties of all chat thread events",
       "allOf": [
@@ -739,6 +797,18 @@
           "description": "The location to delete all chunk storage",
           "type": "string"
         }
+      }
+    },
+    "UserEngagementTypeModel": {
+      "description": "The email user engagement type",
+      "type": "string",
+      "enum": [
+        "view",
+        "click"
+      ],
+      "x-ms-enum": {
+        "name": "UserEngagementTypeModel",
+        "modelAsString": true
       }
     }
   }
