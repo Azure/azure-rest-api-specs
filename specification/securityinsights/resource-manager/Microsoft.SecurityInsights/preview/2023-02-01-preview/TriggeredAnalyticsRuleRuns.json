@@ -100,57 +100,57 @@
             "$ref": "./examples/triggeredAnalyticsRuleRuns/triggeredAnalyticsRuleRuns_Get.json"
           }
         }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/triggerRuleRun": {
-        "post": {
-          "tags": [
-            "trigger analytics rule run"
-          ],
-          "description": "triggers analytics rule run",
-          "operationId": "triggerRuleRun_Post",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-            },
-            {
-              "$ref": "#/parameters/RuleId"
-            },
-            {
-              "$ref": "#/parameters/AnalyticsRuleRunTriggerParameter"
-            }
-          ],
-          "responses": {
-            "202": {
-              "description": "The analytics rule run was successfully triggered."
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-              }
-            }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/triggerRuleRun": {
+      "post": {
+        "tags": [
+          "trigger analytics rule run"
+        ],
+        "description": "triggers analytics rule run",
+        "operationId": "triggerRuleRun_Post",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
-          "x-ms-examples": {
-            "triggerRuleRun_Post": {
-              "$ref": "./examples/triggeredAnalyticsRuleRuns/triggerRuleRun_Post.json"
-            }
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "location"
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/RuleId"
+          },
+          {
+            "$ref": "#/parameters/AnalyticsRuleRunTriggerParameter"
           }
+        ],
+        "responses": {
+          "202": {
+            "description": "The analytics rule run was successfully triggered."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "triggerRuleRun_Post": {
+            "$ref": "./examples/triggeredAnalyticsRuleRuns/triggerRuleRun_Post.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     }
