@@ -41,7 +41,7 @@ directive:
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2021-08
+tag: package-preview-2023-01
 ```
 
 ### Tag: package-preview-2023-01
@@ -51,6 +51,10 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 ```yaml $(tag) == 'package-preview-2023-01'
 input-file:
   - Microsoft.AlertsManagement/preview/2023-01-01-preview/AlertRuleRecommendations.json
+  - Microsoft.AlertsManagement/stable/2021-08-08/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2021-07-22-preview/PrometheusRuleGroups.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
 ```
 
 ### Tag: package-2021-08
