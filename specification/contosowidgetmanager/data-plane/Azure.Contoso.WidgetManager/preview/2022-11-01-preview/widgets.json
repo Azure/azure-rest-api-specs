@@ -1,0 +1,568 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Contoso Widget Manager",
+    "version": "2022-11-01-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/widgets": {
+      "get": {
+        "operationId": "Widgets_ListWidgets",
+        "description": "List Widget resources",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SelectQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Widget"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-cadl-name": "Widget[]",
+                  "description": "The Widget items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-cadl-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of Widget items",
+              "required": [
+                "value"
+              ],
+              "x-cadl-name": "Azure.Core.Foundations.CustomPage<Widget, (anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Widgets_ListWidgets": {
+            "$ref": "./examples/Widgets_ListWidgetsSample.json"
+          }
+        }
+      }
+    },
+    "/widgets/{widgetName}": {
+      "get": {
+        "operationId": "Widgets_GetWidget",
+        "description": "Fetch a Widget by name.",
+        "parameters": [
+          {
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "description": "The widget name.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Widget"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get widget by widget name.": {
+            "$ref": "./examples/Widgets_GetWidgetSample.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Widgets_CreateOrUpdateWidget",
+        "description": "Creates or updates a Widget asynchronously.",
+        "parameters": [
+          {
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "description": "The widget name.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "manufacturerId": {
+                  "type": "string",
+                  "description": "The ID of the widget's manufacturer."
+                },
+                "sharedModel": {
+                  "$ref": "#/definitions/FakedSharedModel",
+                  "description": "The faked shared model."
+                }
+              },
+              "description": "The template for adding optional properties.",
+              "x-cadl-name": "Azure.Core.Foundations.ResourceCreateOrUpdateModel<Widget>"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of OperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The widget name.",
+                  "readOnly": true
+                },
+                "manufacturerId": {
+                  "type": "string",
+                  "description": "The ID of the widget's manufacturer."
+                },
+                "sharedModel": {
+                  "$ref": "#/definitions/FakedSharedModel",
+                  "description": "The faked shared model."
+                }
+              },
+              "required": [
+                "name",
+                "manufacturerId"
+              ],
+              "x-cadl-name": "Azure.Core.Foundations.ResourceOkResponse<Azure.Core.(anonymous model)>"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of OperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The widget name.",
+                  "readOnly": true
+                },
+                "manufacturerId": {
+                  "type": "string",
+                  "description": "The ID of the widget's manufacturer."
+                },
+                "sharedModel": {
+                  "$ref": "#/definitions/FakedSharedModel",
+                  "description": "The faked shared model."
+                }
+              },
+              "description": "A  resource was successfully created.",
+              "required": [
+                "name",
+                "manufacturerId"
+              ],
+              "x-cadl-name": "Azure.Core.Foundations.ResourceCreatedResponse<Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "x-ms-examples": {
+          "Widgets_CreateOrUpdateWidget": {
+            "$ref": "./examples/Widgets_CreateOrUpdateWidgetSample.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Widgets_DeleteWidget",
+        "description": "Delete a Widget asynchronously.",
+        "parameters": [
+          {
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "description": "The widget name.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "description": "The location of an instance of OperationStatus",
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                }
+              },
+              "required": [
+                "id",
+                "status"
+              ],
+              "x-cadl-name": "Azure.Core.Foundations.AcceptedResponse<Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete widget by widget name using long-running operation.": {
+            "$ref": "./examples/Widgets_DeleteWidgetSample.json"
+          }
+        }
+      }
+    },
+    "/widgets/{widgetName}/operations/{operationId}": {
+      "get": {
+        "operationId": "Widgets_GetWidgetOperationStatus",
+        "description": "Gets status of a Widget operation.",
+        "parameters": [
+          {
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "description": "The widget name.",
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "The unique ID of the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "The unique ID of the operation."
+                },
+                "status": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+                  "description": "The status of the operation"
+                },
+                "error": {
+                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
+                  "description": "Error object that describes the error when status is \"Failed\"."
+                },
+                "result": {
+                  "$ref": "#/definitions/Widget",
+                  "description": "The result of the operation."
+                },
+                "widgetName": {
+                  "type": "string",
+                  "description": "The widget name."
+                }
+              },
+              "required": [
+                "id",
+                "status",
+                "widgetName"
+              ],
+              "x-cadl-name": "(anonymous model)"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Widgets_GetWidgetOperationStatus": {
+            "$ref": "./examples/Widgets_GetWidgetOperationStatusSample.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Azure.Core.Foundations.Error[]",
+          "description": "An array of details about specific errors that led to this reported error."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "description": "The error object.",
+      "required": [
+        "code",
+        "message",
+        "details"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "A response containing error details.",
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      },
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "required": [
+        "code"
+      ]
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "enum": [
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true
+      }
+    },
+    "FakedSharedModel": {
+      "type": "object",
+      "properties": {
+        "tag": {
+          "type": "string",
+          "description": "The tag."
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created date."
+        }
+      },
+      "description": "Faked shared model",
+      "required": [
+        "tag",
+        "createdDate"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "enum": [
+        "2022-11-01-preview"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_11_01_Preview",
+            "value": "2022-11-01-preview"
+          }
+        ]
+      }
+    },
+    "Widget": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The widget name.",
+          "readOnly": true
+        },
+        "manufacturerId": {
+          "type": "string",
+          "description": "The ID of the widget's manufacturer."
+        },
+        "sharedModel": {
+          "$ref": "#/definitions/FakedSharedModel",
+          "description": "The faked shared model."
+        }
+      },
+      "description": "A widget.",
+      "required": [
+        "name",
+        "manufacturerId"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "description": "The API version to use for this operation.",
+      "x-ms-client-name": "apiVersion",
+      "minLength": 1,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "required": false,
+      "description": "The maximum number of result items per page.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SelectQueryParameter": {
+      "name": "select",
+      "in": "query",
+      "required": false,
+      "description": "Select the specified fields to be included in the response.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "required": false,
+      "description": "The number of result items to skip.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "required": false,
+      "description": "The number of result items to return.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
