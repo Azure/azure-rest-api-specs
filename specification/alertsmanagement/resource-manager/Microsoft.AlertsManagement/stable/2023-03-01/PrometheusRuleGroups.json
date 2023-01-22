@@ -421,13 +421,6 @@
         "labels": {
           "type": "object",
           "description": "Labels to add or overwrite before storing the result.",
-          "patternProperties": {
-            "^(?!__)[a-zA-Z_][a-zA-Z0-9_]{0,1023}$": {
-              "type": "string",
-              "maxLength": 1024
-            }
-          },
-          "additionalProperties": false,
           "maxProperties": 10
         }
       }
@@ -468,14 +461,7 @@
         },
         "annotations": {
           "type": "object",
-          "description": "Annotations for rule group.",
-          "patternProperties": {
-            "^[a-zA-Z_][a-zA-Z0-9_]{0,1023}$": {
-              "type": "string",
-              "maxLength": 1024
-            }
-          },
-          "additionalProperties": false
+          "description": "Annotations for rule group."
         },
         "actions": {
           "$ref": "#/definitions/PrometheusRuleGroupActions",
