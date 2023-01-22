@@ -45,6 +45,15 @@ tag: package-2021-08
 ```
 
 
+
+### Tag: package-2023-03
+
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-03'
+input-file:
+  - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
+```
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
