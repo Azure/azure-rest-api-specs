@@ -88,11 +88,15 @@
           "type": "string"
         }
       },
-      "required": ["record"]
+      "required": [
+        "record"
+      ]
     },
     "AlertingRule": {
       "type": "object",
-      "required": ["alert"],
+      "required": [
+        "alert"
+      ],
       "properties": {
         "alert": {
           "description": "The name of the alert. Must be a valid metric name.",
@@ -164,10 +168,16 @@
         }
       },
       "if": {
-        "properties": { "autoResolved": { "const": true } }
+        "properties": {
+          "autoResolved": {
+            "const": true
+          }
+        }
       },
       "then": {
-        "required": ["timeToResolve"]
+        "required": [
+          "timeToResolve"
+        ]
       }
     },
     "StringDictionary": {
