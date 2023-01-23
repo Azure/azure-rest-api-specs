@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "KustoManagementClient",
-    "version": "2022-11-11"
+    "version": "2022-12-29"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -4051,8 +4051,10 @@
             "Standard_L16s_v2",
             "Standard_L8s_v3",
             "Standard_L16s_v3",
+            "Standard_L32s_v3",
             "Standard_L8as_v3",
             "Standard_L16as_v3",
+            "Standard_L32as_v3",
             "Standard_E64i_v3",
             "Standard_E80ids_v4",
             "Standard_E2a_v4",
@@ -6366,7 +6368,7 @@
           "items": {
             "type": "string"
           },
-          "description": "List of external tables exclude from the follower database"
+          "description": "List of external tables to exclude from the follower database"
         },
         "materializedViewsToInclude": {
           "type": "array",
@@ -6380,7 +6382,21 @@
           "items": {
             "type": "string"
           },
-          "description": "List of materialized views exclude from the follower database"
+          "description": "List of materialized views to exclude from the follower database"
+        },
+        "functionsToInclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of functions to include in the follower database"
+        },
+        "functionsToExclude": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of functions to exclude from the follower database"
         }
       },
       "description": "Tables that will be included and excluded in the follower database"
