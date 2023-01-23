@@ -719,10 +719,10 @@
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions": {
       "get": {
         "tags": [
-          "Upcoming Actions"
+          "DevBoxActions"
         ],
         "parameters": [
           {
@@ -739,12 +739,12 @@
           }
         ],
         "description": "Lists upcoming actions on a Dev Box.",
-        "operationId": "DevBoxes_ListUpcomingActions",
+        "operationId": "DevBoxes_ListActions",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpcomingActionsListResult"
+              "$ref": "#/definitions/DevBoxActionsListResult"
             }
           },
           "default": {
@@ -761,20 +761,20 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_ListUpcomingActions": {
-            "$ref": "./examples/UpcomingActions_List.json"
+          "DevBoxes_ListActions": {
+            "$ref": "./examples/DevBoxActions_List.json"
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/UpcomingAction"
+        "x-ms-odata": "#/definitions/DevBoxAction"
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions/{upcomingActionId}": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}": {
       "get": {
         "tags": [
-          "Upcoming Actions"
+          "DevBoxActions"
         ],
         "parameters": [
           {
@@ -790,16 +790,16 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/UpcomingActionIdParameter"
+            "$ref": "#/parameters/DevBoxActionNameParameter"
           }
         ],
-        "description": "Gets an Upcoming Action.",
-        "operationId": "DevBoxes_GetUpcomingAction",
+        "description": "Gets an upcoming action.",
+        "operationId": "DevBoxes_GetAction",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpcomingAction"
+              "$ref": "#/definitions/DevBoxAction"
             }
           },
           "default": {
@@ -816,16 +816,16 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_GetUpcomingAction": {
-            "$ref": "./examples/UpcomingActions_Get.json"
+          "DevBoxes_GetAction": {
+            "$ref": "./examples/DevBoxActions_Get.json"
           }
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions/{upcomingActionId}:skip": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:skip": {
       "post": {
         "tags": [
-          "Upcoming Actions"
+          "DevBoxActions"
         ],
         "parameters": [
           {
@@ -841,11 +841,11 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/UpcomingActionIdParameter"
+            "$ref": "#/parameters/DevBoxActionNameParameter"
           }
         ],
-        "description": "Skips an Upcoming Action.",
-        "operationId": "DevBoxes_SkipUpcomingAction",
+        "description": "Skips an upcoming action.",
+        "operationId": "DevBoxes_SkipAction",
         "responses": {
           "204": {
             "description": "No content"
@@ -864,16 +864,16 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_SkipUpcomingAction": {
-            "$ref": "./examples/UpcomingActions_Skip.json"
+          "DevBoxes_SkipAction": {
+            "$ref": "./examples/DevBoxActions_Skip.json"
           }
         }
       }
     },
-    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/upcomingActions/{upcomingActionId}:delay": {
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions/{actionName}:delay": {
       "post": {
         "tags": [
-          "Upcoming Actions"
+          "DevBoxActions"
         ],
         "parameters": [
           {
@@ -889,19 +889,19 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/UpcomingActionIdParameter"
+            "$ref": "#/parameters/DevBoxActionNameParameter"
           },
           {
-            "$ref": "#/parameters/DelayUntilParameter"
+            "$ref": "#/parameters/UntilParameter"
           }
         ],
-        "description": "Delays an Upcoming Action.",
-        "operationId": "DevBoxes_DelayUpcomingAction",
+        "description": "Delays an upcoming action.",
+        "operationId": "DevBoxes_DelayAction",
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/UpcomingAction"
+              "$ref": "#/definitions/DevBoxAction"
             }
           },
           "default": {
@@ -918,8 +918,63 @@
           }
         },
         "x-ms-examples": {
-          "DevBoxes_DelayUpcomingAction": {
-            "$ref": "./examples/UpcomingActions_Delay.json"
+          "DevBoxes_DelayAction": {
+            "$ref": "./examples/DevBoxActions_Delay.json"
+          }
+        }
+      }
+    },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/actions:delay": {
+      "post": {
+        "tags": [
+          "DevBoxActions"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UntilParameter"
+          }
+        ],
+        "description": "Delays all upcoming actions.",
+        "operationId": "DevBoxes_DelayActions",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "The request was accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_DelayActions": {
+            "$ref": "./examples/DevBoxActions_DelayMultiple.json"
           }
         }
       }
@@ -972,7 +1027,7 @@
         },
         "hibernateSupport": {
           "description": "Indicates whether hibernate is enabled/disabled or unknown.",
-          "$ref": "#/definitions/HibernateSupport",
+          "$ref": "devcenter.json#/definitions/EnableStatus",
           "readOnly": true
         },
         "storageProfile": {
@@ -987,8 +1042,32 @@
         },
         "localAdministrator": {
           "description": "Indicates whether owners of Dev Boxes in this pool are local administrators on the Dev Boxes.",
-          "$ref": "#/definitions/LocalAdminStatus"
+          "$ref": "devcenter.json#/definitions/EnableStatus"
+        },
+        "stopOnDisconnect": {
+          "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
+          "$ref": "#/definitions/StopOnDisconnectConfiguration"
+        },
+        "healthStatus": {
+          "description": "Overall health status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.",
+          "$ref": "#/definitions/PoolHealthStatus",
+          "readOnly": true
         }
+      }
+    },
+    "PoolHealthStatus": {
+      "description": "Pool status indicating whether a pool is available to create Dev Boxes.",
+      "enum": [
+        "Unknown",
+        "Pending",
+        "Healthy",
+        "Warning",
+        "Unhealthy"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PoolHealthStatus",
+        "modelAsString": true
       }
     },
     "ScheduleListResult": {
@@ -1086,7 +1165,7 @@
     },
     "DevBox": {
       "type": "object",
-      "description": "A DevBox Dev Box",
+      "description": "A Dev Box",
       "properties": {
         "name": {
           "description": "Display name for the Dev Box",
@@ -1111,7 +1190,7 @@
         },
         "hibernateSupport": {
           "description": "Indicates whether hibernate is enabled/disabled or unknown.",
-          "$ref": "#/definitions/HibernateSupport",
+          "$ref": "devcenter.json#/definitions/EnableStatus",
           "readOnly": true
         },
         "provisioningState": {
@@ -1177,7 +1256,7 @@
         },
         "localAdministrator": {
           "description": "Indicates whether the owner of the Dev Box is a local administrator.",
-          "$ref": "#/definitions/LocalAdminStatus"
+          "$ref": "devcenter.json#/definitions/EnableStatus"
         }
       },
       "required": [
@@ -1272,16 +1351,16 @@
       }
     },
     "RemoteConnection": {
-      "description": "Provides RDP connection information",
+      "description": "Provides remote connection information for a Dev Box.",
       "type": "object",
       "properties": {
         "webUrl": {
-          "description": "URL to open a browser based RDP session",
+          "description": "URL to open a browser based RDP session.",
           "type": "string",
           "readOnly": true
         },
         "rdpConnectionUrl": {
-          "description": "Link to open a Remote Desktop session",
+          "description": "Link to open a Remote Desktop session.",
           "type": "string",
           "readOnly": true
         }
@@ -1291,9 +1370,9 @@
       "type": "string",
       "enum": [
         "Unknown",
+        "Running",
         "Deallocated",
         "PoweredOff",
-        "Running",
         "Hibernated"
       ],
       "description": "The power states of a Dev Box.",
@@ -1302,38 +1381,32 @@
         "modelAsString": true
       }
     },
-    "HibernateSupport": {
-      "description": "Indicates whether hibernate is supported and enabled or disabled. Unknown hibernate support is represented as null.",
-      "enum": [
-        "Disabled",
-        "Enabled"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "HibernateSupport",
-        "modelAsString": true
-      }
-    },
-    "LocalAdminStatus": {
-      "type": "string",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "LocalAdminStatus",
-        "modelAsString": true
-      }
-    },
-    "UpcomingActionsListResult": {
+    "StopOnDisconnectConfiguration": {
       "type": "object",
-      "description": "The Upcoming Action list result",
+      "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
+      "properties": {
+        "status": {
+          "description": "Whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.",
+          "$ref": "devcenter.json#/definitions/EnableStatus",
+          "readOnly": true
+        },
+        "gracePeriodMinutes": {
+          "description": "The specified time in minutes to wait before stopping a Dev Box once disconnect is detected.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        }
+      }
+    },
+    "DevBoxActionsListResult": {
+      "type": "object",
+      "description": "The actions list result",
       "properties": {
         "value": {
           "description": "Current page of results",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UpcomingAction"
+            "$ref": "#/definitions/DevBoxAction"
           }
         },
         "nextLink": {
@@ -1345,25 +1418,47 @@
         "value"
       ]
     },
-    "UpcomingAction": {
+    "DevBoxAction": {
       "type": "object",
-      "description": "An upcoming Action.",
+      "description": "An action which will take place on a Dev Box.",
       "properties": {
-        "id": {
-          "description": "Uniquely identifies the action.",
+        "name": {
+          "description": "The name of the action.",
           "type": "string",
           "readOnly": true
         },
         "actionType": {
           "description": "The action that will be taken.",
-          "$ref": "#/definitions/UpcomingActionType",
+          "$ref": "#/definitions/DevBoxActionType",
           "readOnly": true
         },
-        "reason": {
-          "description": "The reason for this action.",
-          "$ref": "#/definitions/UpcomingActionReason",
+        "sourceId": {
+          "description": "The id of the resource which triggered this action",
+          "type": "string",
           "readOnly": true
         },
+        "next": {
+          "description": "Details about the next run of this action.",
+          "$ref": "#/definitions/DevBoxNextAction",
+          "readOnly": true
+        }
+      }
+    },
+    "DevBoxActionType": {
+      "description": "The type of action which will take place on a Dev Box.",
+      "type": "string",
+      "enum": [
+        "Stop"
+      ],
+      "x-ms-enum": {
+        "name": "DevBoxActionType",
+        "modelAsString": true
+      }
+    },
+    "DevBoxNextAction": {
+      "description": "Details about the next run of an action.",
+      "type": "object",
+      "properties": {
         "scheduledTime": {
           "description": "The target time the action will be triggered (UTC).",
           "type": "string",
@@ -1375,34 +1470,7 @@
           "type": "string",
           "readOnly": true,
           "format": "date-time"
-        },
-        "sourceId": {
-          "description": "The id of the resource which triggered this action",
-          "type": "string",
-          "readOnly": true
         }
-      }
-    },
-    "UpcomingActionType": {
-      "description": "The upcoming action types.",
-      "type": "string",
-      "enum": [
-        "Stop"
-      ],
-      "x-ms-enum": {
-        "name": "UpcomingActionType",
-        "modelAsString": true
-      }
-    },
-    "UpcomingActionReason": {
-      "description": "The reason for the upcoming action.",
-      "type": "string",
-      "enum": [
-        "Schedule"
-      ],
-      "x-ms-enum": {
-        "name": "UpcomingActionReason",
-        "modelAsString": true
       }
     }
   },
@@ -1437,31 +1505,32 @@
       "description": "The name of a Dev Box.",
       "x-ms-parameter-location": "method"
     },
-    "UpcomingActionIdParameter": {
-      "description": "The upcoming action id.",
-      "in": "path",
-      "name": "upcomingActionId",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
-      "maxLength": 36,
-      "x-ms-parameter-location": "method"
-    },
-    "DelayUntilParameter": {
-      "name": "delayUntil",
-      "description": "The delayed action time (UTC).",
-      "required": true,
-      "type": "string",
-      "format": "date-time",
-      "in": "query",
-      "x-ms-parameter-location": "method"
-    },
     "HibernateParameter": {
       "name": "hibernate",
       "in": "query",
       "required": false,
       "type": "boolean",
       "description": "Optional parameter to hibernate the dev box.",
+      "x-ms-parameter-location": "method"
+    },
+    "DevBoxActionNameParameter": {
+      "name": "actionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of an action that will take place on a Dev Box.",
+      "x-ms-parameter-location": "method"
+    },
+    "UntilParameter": {
+      "name": "until",
+      "description": "The time to delay the action or actions until.",
+      "required": true,
+      "type": "string",
+      "format": "date-time",
+      "in": "query",
       "x-ms-parameter-location": "method"
     }
   }
