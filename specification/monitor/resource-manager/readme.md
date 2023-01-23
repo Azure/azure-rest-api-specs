@@ -35,7 +35,7 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-preview-2022-08
+tag: package-composite-v1
 directive:
   - suppress: Example Validations
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
@@ -95,7 +95,7 @@ input-file:
 - Microsoft.Insights/stable/2016-03-01/logProfiles_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2022-06-01/actionGroups_API.json
+- Microsoft.Insights/stable/2023-01-01/actionGroups_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
