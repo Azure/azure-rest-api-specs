@@ -371,11 +371,7 @@
           "description": "The cluster name of the rule group evaluation."
         },
         "scopes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "_pattern": "^/subscriptions/[^/]*/resourcegroups/[^/]*/providers/microsoft.monitor/accounts/[^/?&\\s]*$"
-          },
+          "$ref": "#/definitions/StringArray",
           "description": "The list of azure resource id's that this rule group is scoped to.",
           "minItems": 1,
           "maxItems": 1
@@ -401,16 +397,15 @@
       "required": [
         "expression"
       ],
-      "oneOf": [
-        {
-          "$ref": "#/definitions/RecordingRule"
-        },
-        {
-          "$ref": "#/definitions/AlertingRule"
-        }
-      ],
-      "additionalProperties": true,
       "properties": {
+        "record": {
+          "description": "The name of the time series to output to. Must be a valid metric name.",
+          "type": "string"
+        },
+        "alert": {
+          "description": "The name of the alert. Must be a valid metric name.",
+          "type": "string"
+        },
         "enabled": {
           "type": "boolean",
           "description": "the flag that indicates whether the Prometheus rule is enabled."
@@ -420,42 +415,9 @@
           "type": "string"
         },
         "labels": {
-          "type": "object",
+          "$ref": "#/definitions/StringDictionary",
           "description": "Labels to add or overwrite before storing the result.",
-          "patternProperties": {
-            "^(?!__)[a-zA-Z_][a-zA-Z0-9_]{0,1023}$": {
-              "type": "string",
-              "maxLength": 1024
-            }
-          },
-          "additionalProperties": false,
           "maxProperties": 10
-        }
-      }
-    },
-    "RecordingRule": {
-      "type": "object",
-      "required": [
-        "record"
-      ],
-      "properties": {
-        "record": {
-          "description": "The name of the time series to output to. Must be a valid metric name.",
-          "type": "string"
-        }
-      },
-      "additionalProperties": true
-    },
-    "AlertingRule": {
-      "type": "object",
-      "required": [
-        "alert"
-      ],
-      "additionalProperties": true,
-      "properties": {
-        "alert": {
-          "description": "The name of the alert. Must be a valid metric name.",
-          "type": "string"
         },
         "severity": {
           "type": "integer",
@@ -470,15 +432,8 @@
           "format": "duration"
         },
         "annotations": {
-          "type": "object",
-          "description": "Annotations for rule group.",
-          "patternProperties": {
-            "^[a-zA-Z_][a-zA-Z0-9_]{0,1023}$": {
-              "type": "string",
-              "maxLength": 1024
-            }
-          },
-          "additionalProperties": false
+          "$ref": "#/definitions/StringDictionary",
+          "description": "Annotations for rule group."
         },
         "actions": {
           "$ref": "#/definitions/PrometheusRuleGroupActions",
@@ -521,18 +476,6 @@
           "description": "the duration a rule must evaluate as healthy before the fired alert is automatically resolved represented in ISO 8601 duration format. Should be between 1 and 15 minutes",
           "format": "duration"
         }
-      },
-      "if": {
-        "properties": {
-          "autoResolved": {
-            "const": true
-          }
-        }
-      },
-      "then": {
-        "required": [
-          "timeToResolve"
-        ]
       }
     },
     "StringDictionary": {
