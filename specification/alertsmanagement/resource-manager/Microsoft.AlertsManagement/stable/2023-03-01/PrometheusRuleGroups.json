@@ -409,6 +409,7 @@
           "$ref": "#/definitions/AlertingRule"
         }
       ],
+      "additionalProperties": true,
       "properties": {
         "enabled": {
           "type": "boolean",
@@ -434,15 +435,15 @@
     },
     "RecordingRule": {
       "type": "object",
+      "required": [
+        "record"
+      ],
       "properties": {
         "record": {
           "description": "The name of the time series to output to. Must be a valid metric name.",
           "type": "string"
         }
       },
-      "required": [
-        "record"
-      ],
       "additionalProperties": true
     },
     "AlertingRule": {
