@@ -497,6 +497,17 @@
           },
           "x-ms-identifiers": [],
           "x-nullable": true
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnectionARMResource"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of private endpoint connections in the registry."
         }
       },
       "x-ms-client-name": "RegistryProperties",
@@ -531,6 +542,96 @@
         }
       },
       "additionalProperties": false
+    },
+    "PrivateEndpointConnectionARMResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Resource properties."
+        },
+        "location": {
+          "description": "Specifies the location of the resource.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Private Endpoint Connection resource."
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The resource of private end point."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the private endpoint connection resource.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "Properties of the PrivateEndpointConnectProperties."
+    },
+    "PrivateEndpoint": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for Private Endpoint"
+        },
+        "subnetArmId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for Subnet resource that private endpoint links to"
+        }
+      },
+      "description": "The Private Endpoint resource."
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
+        },
+        "description": {
+          "type": "string",
+          "description": "The reason for approval/rejection of the connection."
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "A message indicating if changes on the service provider require any updates on the consumer."
+        }
+      },
+      "description": "A collection of information about the state of the connection between service consumer and provider."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected",
+        "Timeout"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
     },
     "RegistryTrackedResource": {
       "required": [
