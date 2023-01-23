@@ -135,8 +135,6 @@ input-file:
 - Microsoft.Cache/stable/2018-01-01/RedisCache.json
 - Microsoft.Web/stable/2018-01-01/Web.json
 - Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json
-- Microsoft.Communication/stable/2018-01-01/examples/cloud-events-schema/email_delivery_report_received.json
-- Microsoft.Communication/stable/2018-01-01/examples/event-grid-schema/email_delivery_report_received.json
 - Microsoft.PolicyInsights/stable/2018-01-01/PolicyInsights.json
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
