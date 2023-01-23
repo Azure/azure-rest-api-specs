@@ -2240,18 +2240,23 @@
       "type": "object",
       "description": "The parameters to control the chaptering on specific level.",
       "properties": {
-        "maxChaptersCount": {
+        "minChapterCount": {
+          "description": "The minimum number of chapters under the parent node. If not specified, the service will determine automatically.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxChapterCount": {
           "description": "The maximum number of chapters under the parent node. If not specified, the service will determine automatically.",
           "type": "integer",
           "format": "int32"
         },
-        "minTokens": {
-          "description": "The recommended minimum of tokens of each chapter in this level.",
+        "minCharacters": {
+          "description": "The requested minimum of characters of each chapter in this level. Note this is just a hint to the model.",
           "type": "integer",
           "format": "int32"
         },
-        "maxTokens": {
-          "description": "The recommended maximum of tokens of each chapter in this level.",
+        "maxCharacters": {
+          "description": "The requested maximum of characters of each chapter in this level. Note this is just a hint to the model.",
           "type": "integer",
           "format": "int32"
         },
