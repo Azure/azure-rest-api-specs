@@ -7,6 +7,32 @@
   },
   "paths": {},
   "definitions": {
+    "AcsIncomingCallEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The communication identifier of the target user.",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CallingCommunicationIdentifierModel"
+        },
+        "from": {
+          "description": "The communication identifier of the user who initiated the call.",
+          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CallingCommunicationIdentifierModel"
+        },
+        "callerDisplayName": {
+          "description": "Display name of caller.",
+          "type": "string"
+        },
+        "incomingCallContext": {
+          "description": "Incoming call context & compact payload.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "CorrelationId (Callid).",
+          "type": "string"
+        }
+      }
+    },
     "AcsUserDisconnectedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.UserDisconnected event.",
       "properties": {
@@ -737,32 +763,6 @@
         },
         "deleteLocation": {
           "description": "The location to delete all chunk storage",
-          "type": "string"
-        }
-      }
-    },
-    "AcsIncomingCallEventData": {
-      "descripttion": "Schema of the Data property of an EventGridEvent for an Microsoft.Communication.IncomingCall event",
-      "type": "object",
-      "properties": {
-        "to": {
-          "description": "The communication identifier of the target user.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CallingCommunicationIdentifierModel"
-        },
-        "from": {
-          "description": "The communication identifier of the user who initiated the call.",
-          "$ref": "../../../../../communication/data-plane/Common/stable/2022-07-13/common.json#/definitions/CallingCommunicationIdentifierModel"
-        },
-        "callerDisplayName": {
-          "description": "Display name of caller.",
-          "type": "string"
-        },
-        "incomingCallContext": {
-          "description": "Incoming call context & compact payload.",
-          "type": "string"
-        },
-        "correlationId": {
-          "description": "CorrelationId (Callid).",
           "type": "string"
         }
       }
