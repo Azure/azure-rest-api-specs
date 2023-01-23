@@ -35,7 +35,7 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-composite-v1
+tag: package-preview-2022-08
 directive:
   - suppress: Example Validations
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
