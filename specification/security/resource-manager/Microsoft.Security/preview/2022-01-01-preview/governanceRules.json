@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Security Center",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "version": "2022-01-01-preview"
   },
   "host": "management.azure.com",
@@ -34,24 +34,30 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules": {
+    "/{scope}/providers/Microsoft.Security/governanceRules": {
       "get": {
         "x-ms-examples": {
-          "List governance rules by subscription level scope": {
+          "List governance rules by subscription scope": {
             "$ref": "./examples/GovernanceRules/ListBySubscriptionGovernanceRules_example.json"
+          },
+          "List governance rules by security connector scope": {
+            "$ref": "./examples/GovernanceRules/ListBySecurityConnectorGovernanceRules_example.json"
+          },
+          "List governance rules by management group scope": {
+            "$ref": "./examples/GovernanceRules/ListByManagementGroupGovernanceRules_example.json"
           }
         },
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Get a list of the governance rules on the subscription level scope",
-        "operationId": "GovernanceRule_List",
+        "description": "Get a list of all relevant governance rules over a scope",
+        "operationId": "GovernanceRules_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/Scope"
           }
         ],
         "responses": {
@@ -73,11 +79,17 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}": {
+    "/{scope}/providers/Microsoft.Security/governanceRules/{ruleId}": {
       "get": {
         "x-ms-examples": {
-          "Get a governance rule by its' ID": {
+          "Get a governance rule over subscription scope": {
             "$ref": "./examples/GovernanceRules/GetGovernanceRule_example.json"
+          },
+          "Get a governance rule over security connector scope": {
+            "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRule_example.json"
+          },
+          "Get a governance rule over management group scope": {
+            "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRule_example.json"
           }
         },
         "tags": [
@@ -90,7 +102,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/RuleId"
@@ -113,21 +125,27 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create governance rule": {
+          "Create or update governance rule over subscription scope": {
             "$ref": "./examples/GovernanceRules/PutGovernanceRule_example.json"
+          },
+          "Create or update governance rule over security connector scope": {
+            "$ref": "./examples/GovernanceRules/PutSecurityConnectorGovernanceRule_example.json"
+          },
+          "Create or update governance rule over management group scope": {
+            "$ref": "./examples/GovernanceRules/PutManagementGroupGovernanceRule_example.json"
           }
         },
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Creates or updates a governance rule on a subscription",
+        "description": "Creates or updates a governance rule over a given scope",
         "operationId": "GovernanceRules_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/RuleId"
@@ -159,8 +177,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete governance rule": {
+          "Delete a Governance rule over subscription scope": {
             "$ref": "./examples/GovernanceRules/DeleteGovernanceRule_example.json"
+          },
+          "Delete a Governance rule over security connector scope": {
+            "$ref": "./examples/GovernanceRules/DeleteSecurityConnectorGovernanceRule_example.json"
+          },
+          "Delete a Governance rule over management group scope": {
+            "$ref": "./examples/GovernanceRules/DeleteManagementGroupGovernanceRule_example.json"
           }
         },
         "tags": [
@@ -173,189 +197,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Governance rule was deleted"
-          },
-          "204": {
-            "description": "No Content - GovernanceRule does not exist"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules": {
-      "get": {
-        "x-ms-examples": {
-          "List governance rules by security connector level scope": {
-            "$ref": "./examples/GovernanceRules/ListBySecurityConnectorGovernanceRules_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get a list of all relevant governance rules over a security connector level scope",
-        "operationId": "SecurityConnectorGovernanceRule_List",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SecurityConnectorName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GovernanceRuleList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get a governance rule by its' ID": {
-            "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRule_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get a specific governance rule for the requested scope by ruleId",
-        "operationId": "SecurityConnectorGovernanceRules_Get",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SecurityConnectorName"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GovernanceRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "x-ms-examples": {
-          "Create Governance rule": {
-            "$ref": "./examples/GovernanceRules/PutSecurityConnectorGovernanceRule_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Creates or updates a governance rule on the given security connector",
-        "operationId": "SecurityConnectorGovernanceRules_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SecurityConnectorName"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          },
-          {
-            "$ref": "#/parameters/GovernanceRuleBody"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/GovernanceRule"
-            }
-          },
-          "200": {
-            "description": "OK - Updated",
-            "schema": {
-              "$ref": "#/definitions/GovernanceRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "x-ms-examples": {
-          "Delete governance rule": {
-            "$ref": "./examples/GovernanceRules/DeleteSecurityConnectorGovernanceRule_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Delete a Governance rule over a given scope",
-        "operationId": "SecurityConnectorGovernanceRules_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SecurityConnectorName"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/RuleId"
@@ -387,296 +229,30 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules": {
-      "get": {
-        "x-ms-examples": {
-          "List governance rules by management group level scope": {
-            "$ref": "./examples/GovernanceRules/ListByManagementGroupGovernanceRules_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get a list of all relevant governance rules over a management group level scope",
-        "operationId": "ManagementGroupGovernanceRule_List",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ManagementGroupId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GovernanceRuleList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get governance rules by specific governanceRuleId": {
-            "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRule_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get a specific governance rule for the requested scope by ruleId",
-        "operationId": "ManagementGroupGovernanceRules_Get",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/GovernanceRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "put": {
-        "x-ms-examples": {
-          "Create Governance rule": {
-            "$ref": "./examples/GovernanceRules/PutManagementGroupGovernanceRule_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Creates or updates governance rule on the given management group",
-        "operationId": "ManagementGroupGovernanceRules_CreateOrUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          },
-          {
-            "$ref": "#/parameters/GovernanceRuleBody"
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/GovernanceRule"
-            }
-          },
-          "200": {
-            "description": "OK - Updated",
-            "schema": {
-              "$ref": "#/definitions/GovernanceRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "x-ms-examples": {
-          "Delete Governance rule": {
-            "$ref": "./examples/GovernanceRules/DeleteManagementGroupGovernanceRule_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Delete a Governance rule over a given scope",
-        "operationId": "ManagementGroupGovernanceRules_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ManagementGroupId"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted - The operation still in progress",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "Location URL for the deletion status"
-              }
-            }
-          },
-          "204": {
-            "description": "No Content - Governance rule does not exist"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed"
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute": {
+    "/{scope}/providers/Microsoft.Security/governanceRules/{ruleId}/execute": {
       "post": {
         "x-ms-examples": {
-          "Execute Governance rule": {
+          "Execute Governance rule over subscription scope": {
             "$ref": "./examples/GovernanceRules/PostGovernanceRule_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Execute a governance rule on a subscription",
-        "operationId": "GovernanceRules_RuleIdExecuteSingleSubscription",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          },
-          {
-            "$ref": "#/parameters/ExecuteGovernanceRuleBody"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "Location URL for the execution status"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/execute": {
-      "post": {
-        "x-ms-examples": {
-          "Execute governance rule": {
+          "Execute governance rule over security connector scope": {
             "$ref": "./examples/GovernanceRules/PostSecurityConnectorGovernanceRule_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Execute a governance rule on the given security connector",
-        "operationId": "GovernanceRules_RuleIdExecuteSingleSecurityConnector",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SecurityConnectorName"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          },
-          {
-            "$ref": "#/parameters/ExecuteGovernanceRuleBody"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "Location URL for the execution status"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}/execute": {
-      "post": {
-        "x-ms-examples": {
-          "Execute governance rule": {
+          "Execute governance rule over management group scope": {
             "$ref": "./examples/GovernanceRules/PostManagementGroupGovernanceRule_example.json"
           }
         },
         "tags": [
           "GovernanceRules"
         ],
-        "description": "Execute governance rule on the given management group",
-        "operationId": "GovernanceRules_RuleIdExecuteSingleManagementGroup",
+        "description": "Execute a governance rule",
+        "operationId": "GovernanceRules_Execute",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ManagementGroupId"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/RuleId"
@@ -708,118 +284,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
+    "/{scope}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
       "get": {
         "x-ms-examples": {
-          "Get governance rules long run operation result by specific governance rule ID": {
+          "Get governance rules long run operation result over subscription": {
             "$ref": "./examples/GovernanceRules/GetGovernanceRuleExecuteStatus_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get governance rules long run operation result for the requested scope by ruleId and operationId",
-        "operationId": "SubscriptionGovernanceRulesOperationResult_Get",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          },
-          {
-            "$ref": "#/parameters/OperationId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - The operation completed",
-            "schema": {
-              "$ref": "#/definitions/OperationResult"
-            }
-          },
-          "202": {
-            "description": "Accepted - The operation still in progress",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "Location URL for the execution status"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get governance rules long run operation result by specific governance rule ID": {
+          "Get governance rules long run operation result over security connector": {
             "$ref": "./examples/GovernanceRules/GetSecurityConnectorGovernanceRuleExecuteStatus_example.json"
-          }
-        },
-        "tags": [
-          "GovernanceRules"
-        ],
-        "description": "Get governance rule long run operation result for the requested scope by ruleId and operationId",
-        "operationId": "SecurityConnectorGovernanceRulesOperationResult_Get",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SecurityConnectorName"
-          },
-          {
-            "$ref": "#/parameters/RuleId"
-          },
-          {
-            "$ref": "#/parameters/OperationId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - The operation completed",
-            "schema": {
-              "$ref": "#/definitions/OperationResult"
-            }
-          },
-          "202": {
-            "description": "Accepted - The operation still in progress",
-            "headers": {
-              "location": {
-                "type": "string",
-                "description": "Location URL for the execution status"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/governanceRules/{ruleId}/operationResults/{operationId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get governance rules long run operation result by specific governance rule ID": {
+          "Get governance rules long run operation result over management group": {
             "$ref": "./examples/GovernanceRules/GetManagementGroupGovernanceRuleExecuteStatus_example.json"
           }
         },
@@ -827,13 +301,13 @@
           "GovernanceRules"
         ],
         "description": "Get governance rules long run operation result for the requested scope by ruleId and operationId",
-        "operationId": "ManagementGroupGovernanceRulesOperationResult_Get",
+        "operationId": "GovernanceRules_OperationResults",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ManagementGroupId"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/RuleId"
@@ -931,7 +405,7 @@
           "type": "boolean"
         },
         "rulePriority": {
-          "description": "The governance rule priority, priority to the lower number. Rules with the same priority on the same subscription will not be allowed",
+          "description": "The governance rule priority, priority to the lower number. Rules with the same priority on the same scope will not be allowed",
           "type": "integer",
           "format": "int32",
           "minimum": 0,
@@ -1220,13 +694,12 @@
       "description": "Execute governance rule over a given scope",
       "x-ms-parameter-location": "method"
     },
-    "SecurityConnectorName": {
-      "name": "securityConnectorName",
+    "Scope": {
+      "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "description": "The security connector name.",
+      "description": "The scope of the Governance rules. Valid scopes are: management group (format: 'providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
       "x-ms-parameter-location": "method"
     },
     "OperationId": {
@@ -1234,7 +707,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The governance rule execution key - unique key for the execution of governance rule",
+      "description": "The governance rule long running operation unique key",
       "x-ms-parameter-location": "method"
     }
   }
