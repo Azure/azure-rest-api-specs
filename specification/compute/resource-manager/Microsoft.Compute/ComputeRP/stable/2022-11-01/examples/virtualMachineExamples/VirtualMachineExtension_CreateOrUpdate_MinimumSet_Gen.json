@@ -1,8 +1,8 @@
 {
   "parameters": {
     "resourceGroupName": "rgcompute",
-    "vmName": "aaaa",
-    "vmExtensionName": "aaaaaaaaaaaaaaaaaaaaaaaa",
+    "vmName": "myVM",
+    "vmExtensionName": "myVMExtension",
     "extensionParameters": {
       "location": "westus"
     },
@@ -12,7 +12,8 @@
   "responses": {
     "200": {
       "body": {
-        "location": "westus"
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension"
       }
     },
     "201": {
@@ -20,7 +21,8 @@
         "location": "https://foo.com/operationstatus"
       },
       "body": {
-        "location": "westus"
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/rgcompute/providers/Microsoft.Compute/virtualMachines/myVM/extensions/myVMExtension"
       }
     }
   }
