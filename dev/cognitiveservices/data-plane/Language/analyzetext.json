@@ -906,7 +906,7 @@
         "documents": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
+            "$ref": "#/definitions/CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
           }
         }
       },
@@ -924,6 +924,17 @@
       "allOf": [
         {
           "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
+        },
+        {
+          "$ref": "#/definitions/DocumentDetectedLanguageString"
+        }
+      ]
+    },
+    "CustomHealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomHealthcareEntitiesDocumentResult"
         },
         {
           "$ref": "#/definitions/DocumentDetectedLanguageString"
@@ -951,6 +962,34 @@
           "type": "object",
           "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html.",
           "additionalProperties": {}
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "entities",
+        "relations"
+      ]
+    },
+    "CustomHealthcareEntitiesDocumentResult": {
+      "type": "object",
+      "properties": {
+        "entities": {
+          "description": "Healthcare entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomHealthcareEntity"
+          }
+        },
+        "relations": {
+          "type": "array",
+          "description": "Healthcare entity relations.",
+          "items": {
+            "$ref": "#/definitions/HealthcareRelation"
+          }
         }
       },
       "allOf": [
@@ -1039,13 +1078,6 @@
           "items": {
             "$ref": "#/definitions/HealthcareEntityLink"
           }
-        },
-        "entityComponentInformation": {
-          "description": "(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntityComponentInformation"
-          }
         }
       },
       "required": [
@@ -1054,6 +1086,23 @@
         "offset",
         "length",
         "confidenceScore"
+      ]
+    },
+    "CustomHealthcareEntity": {
+      "type": "object",
+      "properties": {
+        "entityComponentInformation": {
+          "description": "(Optional) Entity component information listing fired components of the extracted entity. This object only applies for custom healthcare.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityComponentInformation"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/HealthcareEntity"
+        }
       ]
     },
     "HealthcareRelation": {
