@@ -162,7 +162,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterResponse"
+            }
           },
           "201": {
             "description": "Created",
@@ -330,7 +333,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterResponse"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -627,7 +633,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -696,7 +705,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -765,7 +777,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -977,7 +992,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -1525,7 +1543,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
           },
           "202": {
             "description": "Accepted",
@@ -1731,8 +1752,8 @@
           "type": "string",
           "description": "If high availability is enabled or not for the server.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "enableHaEnum",
@@ -1744,8 +1765,8 @@
           "description": "If public IP is requested or not for a server.",
           "readOnly": true,
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "enablePublicIpEnum",
@@ -1884,8 +1905,8 @@
           "type": "string",
           "description": "If shards on coordinator is enabled or not for the cluster.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "enableShardsOnCoordinatorEnum",
@@ -1896,8 +1917,8 @@
           "type": "string",
           "description": "If high availability is enabled or not for the cluster.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "enableHaEnum",
@@ -1926,8 +1947,8 @@
           "type": "string",
           "description": "If public IP is requested or not for the coordinator.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "coordinatorEnablePublicIpEnum",
@@ -1958,8 +1979,8 @@
           "description": "If public IP is requested or not for a node.",
           "readOnly": true,
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "nodeEnablePublicIpEnum",
@@ -2032,8 +2053,8 @@
           "type": "string",
           "description": "If shards on coordinator is enabled or not for the cluster.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "enableShardsOnCoordinatorEnum",
@@ -2050,8 +2071,8 @@
           "type": "string",
           "description": "If high availability is enabled or not for the cluster.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "enableHaEnum",
@@ -2080,8 +2101,8 @@
           "type": "string",
           "description": "If public IP is requested or not for the coordinator.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "coordinatorEnablePublicIpEnum",
@@ -2111,8 +2132,8 @@
           "type": "string",
           "description": "If public IP is requested or not for a node.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "nodeEnablePublicIpEnum",
@@ -2193,8 +2214,8 @@
           "type": "string",
           "description": "If shards on coordinator is enabled or not for the cluster.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "enableShardsOnCoordinatorEnum",
@@ -2205,8 +2226,8 @@
           "type": "string",
           "description": "If high availability is enabled or not for the server.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "enableHaEnum",
@@ -2231,8 +2252,8 @@
           "type": "string",
           "description": "If public IP is requested or not for a server.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "coordinatorEnablePublicIpEnum",
@@ -2263,8 +2284,8 @@
           "description": "If public IP is requested or not for a server.",
           "readOnly": true,
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "nodeEnablePublicIpEnum",
@@ -2376,8 +2397,8 @@
           "type": "string",
           "description": "If configuration change requires restart.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "requiresRestartEnum",
@@ -2507,8 +2528,8 @@
           "type": "string",
           "description": "If configuration change requires restart.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "requiresRestartEnum",
@@ -2724,8 +2745,8 @@
           "description": "Indicates whether the operation is a data action",
           "type": "string",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "isDataActionEnum",
@@ -2816,8 +2837,8 @@
           "type": "string",
           "description": "Indicates whether the resource name is available.",
           "enum": [
-            "True",
-            "False"
+            "true",
+            "false"
           ],
           "x-ms-enum": {
             "name": "nameAvailableEnum",
