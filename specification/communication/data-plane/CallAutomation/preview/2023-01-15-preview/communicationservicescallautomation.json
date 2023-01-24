@@ -853,8 +853,8 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Mute participant from the call using identifier.",
-        "description": "Mute participant from the call using identifier.",
+        "summary": "Mute participants from the call using identifier.",
+        "description": "Mute participants from the call using identifier.",
         "operationId": "CallConnection_Mute",
         "parameters": [
           {
@@ -865,12 +865,12 @@
             "type": "string"
           },
           {
-            "name": "muteParticipantRequest",
+            "name": "muteParticipantsRequest",
             "in": "body",
-            "description": "The participant to be muted from the call.",
+            "description": "The participants to be muted from the call.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MuteParticipantRequest"
+              "$ref": "#/definitions/MuteParticipantsRequest"
             }
           },
           {
@@ -905,7 +905,7 @@
           }
         },
         "x-ms-examples": {
-          "Mute participant from the call using identifier.": {
+          "Mute participants from the call using identifier.": {
             "$ref": "./examples/CallConnection_Mute.json"
           }
         }
@@ -916,8 +916,8 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Unmute participant from the call using identifier.",
-        "description": "Unmute participant from the call using identifier.",
+        "summary": "Unmute participants from the call using identifier.",
+        "description": "Unmute participants from the call using identifier.",
         "operationId": "CallConnection_Unmute",
         "parameters": [
           {
@@ -928,12 +928,12 @@
             "type": "string"
           },
           {
-            "name": "unmuteParticipantRequest",
+            "name": "unmuteParticipantsRequest",
             "in": "body",
-            "description": "The participant to be unmuted from the call.",
+            "description": "The participants to be unmuted from the call.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UnmuteParticipantRequest"
+              "$ref": "#/definitions/UnmuteParticipantsRequest"
             }
           },
           {
@@ -968,13 +968,13 @@
           }
         },
         "x-ms-examples": {
-          "Unmute participant from the call using identifier.": {
+          "Unmute participants from the call using identifier.": {
             "$ref": "./examples/CallConnection_Unmute.json"
           }
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/{participantMri}": {
+    "/calling/callConnections/{callConnectionId}/participants/{participantRawId}": {
       "get": {
         "tags": [
           "MidConnections"
@@ -991,9 +991,9 @@
             "type": "string"
           },
           {
-            "name": "participantMri",
+            "name": "participantRawId",
             "in": "path",
-            "description": "MRI of the participant to retrieve.",
+            "description": "Raw id of the participant to retrieve.",
             "required": true,
             "type": "string"
           },
@@ -1011,7 +1011,7 @@
           "200": {
             "description": "Returns the get participant response.",
             "schema": {
-              "$ref": "#/definitions/AcsCallParticipant"
+              "$ref": "#/definitions/CallParticipant"
             }
           }
         },
@@ -1907,7 +1907,7 @@
           "description": "List of the current participants in the call.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AcsCallParticipant"
+            "$ref": "#/definitions/CallParticipant"
           }
         },
         "nextLink": {
@@ -1916,7 +1916,7 @@
         }
       }
     },
-    "AcsCallParticipant": {
+    "CallParticipant": {
       "description": "Contract model of an ACS call participant",
       "type": "object",
       "properties": {
@@ -1977,7 +1977,7 @@
           "description": "List of current participants in the call.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AcsCallParticipant"
+            "$ref": "#/definitions/CallParticipant"
           }
         },
         "operationContext": {
@@ -2060,15 +2060,18 @@
         }
       }
     },
-    "MuteParticipantRequest": {
+    "MuteParticipantsRequest": {
       "description": "The request payload for muting participants from the call.",
       "required": [
-        "targetParticipant"
+        "targetParticipants"
       ],
       "type": "object",
       "properties": {
-        "targetParticipant": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+        "targetParticipants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
@@ -2076,15 +2079,18 @@
         }
       }
     },
-    "UnmuteParticipantRequest": {
+    "UnmuteParticipantsRequest": {
       "description": "The request payload for unmuting participant from the call.",
       "required": [
-        "targetParticipant"
+        "targetParticipants"
       ],
       "type": "object",
       "properties": {
-        "targetParticipant": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
+        "targetParticipants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
@@ -2426,7 +2432,7 @@
           "description": "The list of participants in the call.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AcsCallParticipant"
+            "$ref": "#/definitions/CallParticipant"
           }
         }
       }
