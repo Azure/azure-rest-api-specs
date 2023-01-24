@@ -1,0 +1,55 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+import "./models-languages.cadl";
+import "./models-translate.cadl";
+import "./models-transliterate.cadl";
+import "./models-detect.cadl";
+import "./models-breaksentence.cadl";
+import "./models-dictionary.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+
+namespace Translator.TextTranslation;
+
+@get
+@route("languages")
+@summary("Gets the set of languages currently supported by other operations of the Translator.")
+@doc("Gets the set of languages currently supported by other operations of the Translator.")
+op GetLanguages(parameters: GetLanguageParameters) : GetLanguagesResult | MtErrorResponse;
+
+@post
+@route("translate")
+@summary("Translate Text")
+@doc("Translate Text")
+op Translate(parameters: TranslateParameters): TranslationResult | MtErrorResponse;
+
+@post
+@route("transliterate")
+@summary("Transliterate Text")
+@doc("Transliterate Text")
+op Transliterate(parameters: TransliterateParameters): TransliterateResult | MtErrorResponse;
+
+@post
+@route("detect")
+@summary("Detect Languages")
+@doc("Detect Languages")
+op Detect(parameters: DetectParameters): DetectedLanguagesResult | MtErrorResponse;
+
+@post
+@route("breaksentence")
+@summary("Break Sentence")
+@doc("Break Sentence")
+op BreakSentence(parameters: BreakSentenceParameters): BreakSentenceResult | MtErrorResponse;
+
+@post
+@route("dictionary/lookup")
+@summary("Dictionary Lookup")
+@doc("Dictionary Lookup")
+op DictionaryLookup(parameters: DictionaryLookupParamters): DictionaryLookupResult | MtErrorResponse;
+
+@post
+@route("dictionary/examples")
+@summary("Dictionary Examples")
+@doc("Dictionary Examples")
+op DictionaryExamples(parameters: DictionaryExamplesParamters): DictionaryExamplesResult | MtErrorResponse;

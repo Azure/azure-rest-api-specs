@@ -1,0 +1,49 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-azure-core";
+import "./models-shared.cadl";
+import "./models-translate.cadl";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.Core;
+
+namespace Translator.TextTranslation;
+
+@doc("Request parameters for the break sentence API.")
+model BreakSentenceParameters extends CommonParameters {
+    @query
+    @doc("""
+    Language tag identifying the language of the input text. 
+    If a code isn't specified, automatic language detection will be applied.
+    """)
+    language?: string;
+
+    @query
+    @doc("""
+    Script tag identifying the script used by the input text. 
+    If a script isn't specified, the default script of the language will be assumed.
+    """)
+    script?: string;
+
+    @body
+    @doc("Array of the text for which values the sentence boundaries will be calculated.")
+    body: InputTextElement[];
+}
+
+@doc("Response for the Break SEntence API.")
+model BreakSentenceResult extends CommonResultHeaders {
+    @body
+    @doc("Array of the break sentence elements.")
+    body: BreakSentenceElement[];
+}
+
+@doc("Elemented containing break sentence result.")
+model BreakSentenceElement {
+    @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
+    detectedLanguage?: DetectedLanguage;
+
+    @doc("""
+    Sentence boundaries in the input and output texts.
+    """)
+    sentLen: SentenceLength;
+}
