@@ -1,0 +1,361 @@
+{
+  "x-generator": "NSwag v13.18.2.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))",
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Microsoft Marketplace Rating And Reviews API",
+    "description": "Microsoft Marketplace Rating And Reviews API",
+    "version": "2023-01-01-preview"
+  },
+  "servers": [
+    {
+      "url": "https://catalogapi.azure.com"
+    }
+  ],
+  "paths": {
+    "/products/{productId}/reviews": {
+      "get": {
+        "tags": [
+          "Reviews Public API"
+        ],
+        "summary": "Get reviews by unique product id",
+        "operationId": "Reviews_GetReviewsByOfferId",
+        "parameters": [
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Skip token to continue getting comments from a given point",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Maximum number of reviews to return",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50,
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 4,
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of reviews for the given unique product",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfReviewDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "In case request is malformed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "In case an error encountered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/products/{productId}/reviews/{reviewId}/comments": {
+      "get": {
+        "tags": [
+          "Reviews Public API"
+        ],
+        "summary": "Get the comments of a given review",
+        "operationId": "ReviewComment_GetComments",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "description": "Review Id",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 1
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "skipToken",
+            "in": "query",
+            "description": "Skip token to continue getting comments from a given point",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "maximum number of comments to return",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 50
+            },
+            "x-position": 4
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 5,
+            "default": "2023-01-01-preview"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a list of comments for the given review",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageResultOfReviewCommentDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "In case request structure is wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "In case an error has occurred in the server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PageResultOfReviewDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ReviewDto"
+            }
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextPageLink": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        }
+      },
+      "ReviewDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "uniqueProductId": {
+            "type": "string",
+            "nullable": true
+          },
+          "rating": {
+            "type": "number",
+            "format": "decimal"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "source": {
+            "type": "string",
+            "nullable": true
+          },
+          "reviewerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "externalReviewUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "isvReply": {
+            "nullable": true,
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/IsvReplyDto"
+              }
+            ]
+          },
+          "createdDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "commentsCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "helpfulCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "IsvReplyDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "repliedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PageResultOfReviewCommentDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "items": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/ReviewCommentDto"
+            }
+          },
+          "count": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nextPageLink": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          }
+        }
+      },
+      "ReviewCommentDto": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "nullable": true
+          },
+          "content": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "customerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "isOwner": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Reviews Public API"
+    }
+  ]
+}
