@@ -72,12 +72,6 @@
               "$ref": "#/definitions/FetchPricesResult"
             }
           },
-          "206": {
-            "description": "PartialContent. The request has partially succeeded.",
-            "schema": {
-              "$ref": "#/definitions/FetchPricesResult"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -92,31 +86,13 @@
     "FetchPricesResult": {
       "type": "object",
       "description": "Pricing related properties for each identifier requested.",
-      "properties":{
-        "idType": {
-          "description": "Type of the identifier for which prices are returned. Currently support OfferingId only.",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "OfferingId"
-          ],
-          "x-ms-enum": {
-            "name": "IdType",
-            "modelAsString": true
-          }
-        },
+      "properties":{        
         "items": {
           "type": "object",
           "description": "Collection of prices for the given identifiers.",
           "readOnly": true,
           "$ref": "#/definitions/PriceSet"
-        },
-        "count": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Total number of items returned.",
-          "readOnly": true
-        }        
+        }      
       }
     },
     "RequestDefinition":{

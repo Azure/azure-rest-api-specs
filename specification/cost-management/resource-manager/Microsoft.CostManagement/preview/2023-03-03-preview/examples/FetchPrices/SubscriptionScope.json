@@ -15,122 +15,117 @@
         }
     },
     "responses": {
-        "200": {
-            "body": {
-                "idType": "offeringId",
-                "items": [
+        "200 Without Errors": {
+            "body": [
+              {
+                "id": "2fee86b7-7c49-46ac-851f-95094c188ef6",
+                "unitOfMeasure": "1 Hour",
+                "currency": "USD",
+                "price": [
                   {
-                    "id": "2fee86b7-7c49-46ac-851f-95094c188ef6",
-                    "meterId":"ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
-                    "unitOfMeasure": "1 Hour",
-                    "currency": "USD",
-                    "price": [
-                      {
-                        "type": "consumption",
-                        "term": null,
-                        "tierMinimumUnits": 0,
-                        "discountPrice": 0.1,
-                        "perUnitPrice": 1.65,
-                        "perUnitEffectivePrice": 1.485
-                      },
-                      {
-                        "type": "devTest",
-                        "term": null,
-                        "tierMinimumUnits": 0,
-                        "discountPrice": 0.05,
-                        "perUnitPrice": 1.10,
-                        "perUnitEffectivePrice": 0.945
-                      }
-                    ],
-                    "error": null
+                    "type": "standard consumption",
+                    "term": null,
+                    "tierMinimumUnits": 0,
+                    "discount": 0.1,
+                    "perUnitPrice": 1.65,
+                    "perUnitEffectivePrice": 1.485
                   },
                   {
-                    "id": "2416f530-b190-43d7-9fec-239e1a57ea66",
-                    "meterId": "67e24f6b-1ec2-4c90-993a-dc2d25b00b6c",
-                    "unitOfMeasure": "1 Hour",
-                    "price": [
-                      {
-                        "type": "consumption",
-                        "term": null,
-                        "tierMinimumUnits": 0,
-                        "discountPrice": 0.1,
-                        "perUnitPrice": 1.396,
-                        "perUnitEffectivePrice": 1.2564
-                      },
-                      {
-                        "type": "devTest",
-                        "term": null,
-                        "tierMinimumUnits": 0,
-                        "discountPrice": 0.03,
-                        "perUnitPrice": 1.096,
-                        "perUnitEffectivePrice": 1.0631
-                      },
-                      {
-                        "type": "savingsPlan",
-                        "term": "P1Y",
-                        "tierMinimumUnits": 0,
-                        "discountPrice": 0.03,
-                        "perUnitPrice": 1.05,
-                        "perUnitEffectivePrice": 1.0185
-                      },
-                      {
-                        "type": "savingsPlan",
-                        "term": "P3Y",
-                        "tierMinimumUnits": 0,
-                        "discountPrice": 0.03,
-                        "perUnitPrice": 1.0,
-                        "perUnitEffectivePrice": 0.97
-                      }
-                    ],
-                    "error": null
+                    "type": "devTest",
+                    "term": null,
+                    "tierMinimumUnits": 0,
+                    "discount": 0.05,
+                    "perUnitPrice": 1.10,
+                    "perUnitEffectivePrice": 0.945
                   }
                 ],
-                "count": 2
-            }            
+                "error": null
+              },
+              {
+                "id": "2416f530-b190-43d7-9fec-239e1a57ea66",
+                "unitOfMeasure": "1 Hour",
+                "price": [
+                  {
+                    "type": "consumption",
+                    "term": null,
+                    "tierMinimumUnits  ": 0,
+                    "discount": 0.1,
+                    "perUnitPrice": 1.396,
+                    "perUnitEffectivePrice": 1.2564
+                  },
+                  {
+                    "type": "consumption",
+                    "term": null,
+                    "tierMinimumUnits  ": 200,
+                    "discount": 0.2,
+                    "perUnitPrice": 0.5,
+                    "perUnitEffectivePrice": 0.4
+                  },
+            
+                  {
+                    "type": "devTest",
+                    "term": null,
+                    "tierMinimumUnits": 0,
+                    "discount": 0.03,
+                    "perUnitPrice": 1.096,
+                    "perUnitEffectivePrice": 1.0631
+                  },
+                  {
+                    "type": "savingsPlan",
+                    "term": "P1Y",
+                    "tierMinimumUnits": 0,
+                    "discount": 0.03,
+                    "perUnitPrice": 1.05,
+                    "perUnitEffectivePrice": 1.0185
+                  },
+                  {
+                    "type": "savingsPlan",
+                    "term": "P3Y",
+                    "tierMinimumUnits": 0,
+                    "discount": 0.03,
+                    "perUnitPrice": 1.0,
+                    "perUnitEffectivePrice": 0.97
+                  }
+                ]
+              }
+            ]              
         },
-        "206":{
-            "body": {
-                "idType": "offeringId",
-                "items": [
-                    {
-                        "id": "2416f530-b190-43d7-9fec-239e1a57ea66",
-                        "meterId": null,
-                        "unitOfMeasure": null,
-                        "price": null,
-                        "currency": null,
-                        "error": {
-                        "type": "InvalidOfferingId",
-                        "description": "The OfferingId provided is invalid."
-                        }
-                    },
-                    {
-                        "id": "2fee86b7-7c49-46ac-851f-95094c188ef6",
-                        "meterId": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
-                        "unitOfMeasure": "1 Hour",
-                        "currency": "USD",
-                        "price": [
-                        {
-                            "type": "consumption",
-                            "term": null,
-                            "tierMinimumUnits": 0,
-                            "discountPrice": 0.1,
-                            "perUnitPrice": 1.65,
-                            "perUnitEffectivePrice": 1.485
-                        },
-                        {
-                            "type": "devTest",
-                            "term": null,
-                            "tierMinimumUnits": 0,
-                            "discountPrice": 0.05,
-                            "perUnitPrice": 1.10,
-                            "perUnitEffectivePrice": 0.945
-                        }
-                        ],
-                        "error": null
-                    }
-                ],
-                "count": 2
-            }
+        "200 With Errors":{
+            "body": [
+              {
+                "id": "e0e25f73-0d85-4350-bd93-d9d5bca75a58",
+                "unitOfMeasure": null,
+                "price": null,
+                "currency": null,
+                "error": {
+                  "type": "InvalidResource",
+                  "description": "The resource id provided is invalid."
+                }
+              },
+              {
+                "id": "2fee86b7-7c49-46ac-851f-95094c188ef6",
+                "unitOfMeasure": "1 Hour",
+                "currency": "USD",
+                "price": [
+                  {
+                    "type": "consumption",
+                    "term": null,
+                    "tierMinimumUnits": 0,
+                    "discount": 0.1,
+                    "perUnitPrice": 1.65,
+                    "perUnitEffectivePrice": 1.485
+                  },
+                  {
+                    "type": "devTest",
+                    "term": null,
+                    "tierMinimumUnits": 0,
+                    "discount": 0.05,
+                    "perUnitPrice": 1.10,
+                    "perUnitEffectivePrice": 0.945
+                  }
+                ]
+              }
+            ]            
         }        
     }
 }
