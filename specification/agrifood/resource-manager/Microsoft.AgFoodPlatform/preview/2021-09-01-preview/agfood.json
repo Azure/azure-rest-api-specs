@@ -2368,6 +2368,20 @@
           "type": "string",
           "readOnly": true
         },
+        "saaSApplicationId": {
+          "format": "uuid",
+          "description": "Application id of the SaaS multi tenant application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionIds": {
+          "description": "List of ActionIds needed to make the SaaS multi tenant application access relevant fb data.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "roleId": {
           "description": "Role Id of the SaaS multi tenant application to access relevant fb data.",
           "type": "string",
@@ -2459,7 +2473,8 @@
       "description": "Solution Id of the solution.",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
+      "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
