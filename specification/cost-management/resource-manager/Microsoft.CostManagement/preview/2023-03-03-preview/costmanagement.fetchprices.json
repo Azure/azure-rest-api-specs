@@ -119,15 +119,14 @@
             "type": "string"
           }
         },
-        "armLocation": {
-          "description": "Name of the location where the resource resides. ARM locations can be fetched from [Subscriptions - List Locations | Microsoft Docs](https://learn.microsoft.com/en-us/rest/api/resources/subscriptions/list-locations?tabs=HTTP). The value in 'name' property of this API response should be used.",
+        "location": {
+          "description": "Name of the location or zone where the resource is present. If empty, the default value is Global. ARM locations can be fetched from [Subscriptions - List Locations | Microsoft Docs](https://learn.microsoft.com/en-us/rest/api/resources/subscriptions/list-locations?tabs=HTTP). The value in 'name' property of this API response should be used.",
           "type": "string",
           "readOnly": true
         }
       },
       "required": [
-        "ids",
-        "armLocation"
+        "ids"
       ]
     },
     "PriceSet": {
