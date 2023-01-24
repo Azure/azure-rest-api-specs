@@ -1,0 +1,1943 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.NetworkAnalytics",
+    "version": "2023-03-31",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Storage"
+    },
+    {
+      "name": "NetworkAnalyticsProduct"
+    },
+    {
+      "name": "DataConnector"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.NetworkAnalytics/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_Max": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_Min": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataConnectors": {
+      "get": {
+        "tags": [
+          "DataConnector"
+        ],
+        "operationId": "DataConnector_ListBySubscription",
+        "description": "List DataConnectors resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataConnector_ListBySubscription_Max": {
+            "$ref": "./examples/DataConnector_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "DataConnector_ListBySubscription_Min": {
+            "$ref": "./examples/DataConnector_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/dataLakeHouses": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_ListBySubscription",
+        "description": "List DataLakeHouseResources resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeHouseResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Storage_ListBySubscription_Max": {
+            "$ref": "./examples/Storage_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "Storage_ListBySubscription_Min": {
+            "$ref": "./examples/Storage_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkAnalytics/networkAnalyticsProducts": {
+      "get": {
+        "tags": [
+          "NetworkAnalyticsProduct"
+        ],
+        "operationId": "NetworkAnalyticsProduct_ListBySubscription",
+        "description": "List NetworkAnalyticsProducts resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkAnalyticsProductsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkAnalyticsProduct_ListBySubscription_Max": {
+            "$ref": "./examples/NetworkAnalyticsProduct_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "NetworkAnalyticsProduct_ListBySubscription_Min": {
+            "$ref": "./examples/NetworkAnalyticsProduct_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataConnectors": {
+      "get": {
+        "tags": [
+          "DataConnector"
+        ],
+        "operationId": "DataConnector_ListByResourceGroup",
+        "description": "List DataConnectors resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "DataConnector_ListByResourceGroup_Max": {
+            "$ref": "./examples/DataConnector_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "DataConnector_ListByResourceGroup_Min": {
+            "$ref": "./examples/DataConnector_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataConnectors/{dataConnectorName}": {
+      "get": {
+        "tags": [
+          "DataConnector"
+        ],
+        "operationId": "DataConnector_Get",
+        "description": "Get a DataConnectors",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataConnectorName",
+            "in": "path",
+            "required": true,
+            "description": "The data connector name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectors"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnector_Get_Max": {
+            "$ref": "./examples/DataConnector_Get_MaximumSet_Gen.json"
+          },
+          "DataConnector_Get_Min": {
+            "$ref": "./examples/DataConnector_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataConnector"
+        ],
+        "operationId": "DataConnector_CreateOrUpdate",
+        "description": "Create a DataConnectors",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataConnectorName",
+            "in": "path",
+            "required": true,
+            "description": "The data connector name",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectors"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectors"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DataConnectors"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnector_CreateOrUpdate_Max": {
+            "$ref": "./examples/DataConnector_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "DataConnector_CreateOrUpdate_Min": {
+            "$ref": "./examples/DataConnector_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "DataConnector"
+        ],
+        "operationId": "DataConnector_Update",
+        "description": "Update a DataConnectors",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataConnectorName",
+            "in": "path",
+            "required": true,
+            "description": "The data connector name",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectorsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataConnectors"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnector_Update_Max": {
+            "$ref": "./examples/DataConnector_Update_MaximumSet_Gen.json"
+          },
+          "DataConnector_Update_Min": {
+            "$ref": "./examples/DataConnector_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataConnector"
+        ],
+        "operationId": "DataConnector_Delete",
+        "description": "Delete a DataConnectors",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dataConnectorName",
+            "in": "path",
+            "required": true,
+            "description": "The data connector name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataConnector_Delete_Max": {
+            "$ref": "./examples/DataConnector_Delete_MaximumSet_Gen.json"
+          },
+          "DataConnector_Delete_Min": {
+            "$ref": "./examples/DataConnector_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataLakeHouses": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_ListByResourceGroup",
+        "description": "List DataLakeHouseResources resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeHouseResourcesListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Storage_ListByResourceGroup_Max": {
+            "$ref": "./examples/Storage_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "Storage_ListByResourceGroup_Min": {
+            "$ref": "./examples/Storage_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/dataLakeHouses/{storageName}": {
+      "get": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_Get",
+        "description": "Get a DataLakeHouseResources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "required": true,
+            "description": "The data lake house resource name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeHouseResources"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storage_Get_Max": {
+            "$ref": "./examples/Storage_Get_MaximumSet_Gen.json"
+          },
+          "Storage_Get_Min": {
+            "$ref": "./examples/Storage_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_CreateOrUpdate",
+        "description": "Create a DataLakeHouseResources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "required": true,
+            "description": "The data lake house resource name",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeHouseResources"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeHouseResources"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/DataLakeHouseResources"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storage_CreateOrUpdate_Max": {
+            "$ref": "./examples/Storage_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Storage_CreateOrUpdate_Min": {
+            "$ref": "./examples/Storage_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_Update",
+        "description": "Update a DataLakeHouseResources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "required": true,
+            "description": "The data lake house resource name",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeHouseResourcesUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataLakeHouseResources"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storage_Update_Max": {
+            "$ref": "./examples/Storage_Update_MaximumSet_Gen.json"
+          },
+          "Storage_Update_Min": {
+            "$ref": "./examples/Storage_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Storage"
+        ],
+        "operationId": "Storage_Delete",
+        "description": "Delete a DataLakeHouseResources",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "required": true,
+            "description": "The data lake house resource name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Storage_Delete_Max": {
+            "$ref": "./examples/Storage_Delete_MaximumSet_Gen.json"
+          },
+          "Storage_Delete_Min": {
+            "$ref": "./examples/Storage_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/networkAnalyticsProducts": {
+      "get": {
+        "tags": [
+          "NetworkAnalyticsProduct"
+        ],
+        "operationId": "NetworkAnalyticsProduct_ListByResourceGroup",
+        "description": "List NetworkAnalyticsProducts resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkAnalyticsProductsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NetworkAnalyticsProduct_ListByResourceGroup_Max": {
+            "$ref": "./examples/NetworkAnalyticsProduct_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "NetworkAnalyticsProduct_ListByResourceGroup_Min": {
+            "$ref": "./examples/NetworkAnalyticsProduct_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkAnalytics/networkAnalyticsProducts/default": {
+      "get": {
+        "tags": [
+          "NetworkAnalyticsProduct"
+        ],
+        "operationId": "NetworkAnalyticsProduct_Get",
+        "description": "Get a NetworkAnalyticsProducts",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkAnalyticsProducts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkAnalyticsProduct_Get_Max": {
+            "$ref": "./examples/NetworkAnalyticsProduct_Get_MaximumSet_Gen.json"
+          },
+          "NetworkAnalyticsProduct_Get_Min": {
+            "$ref": "./examples/NetworkAnalyticsProduct_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "NetworkAnalyticsProduct"
+        ],
+        "operationId": "NetworkAnalyticsProduct_CreateOrUpdate",
+        "description": "Create a NetworkAnalyticsProducts",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/NetworkAnalyticsProducts"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkAnalyticsProducts"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/NetworkAnalyticsProducts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkAnalyticsProduct_CreateOrUpdate_Max": {
+            "$ref": "./examples/NetworkAnalyticsProduct_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "NetworkAnalyticsProduct_CreateOrUpdate_Min": {
+            "$ref": "./examples/NetworkAnalyticsProduct_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "NetworkAnalyticsProduct"
+        ],
+        "operationId": "NetworkAnalyticsProduct_Update",
+        "description": "Update a NetworkAnalyticsProducts",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/NetworkAnalyticsProductsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NetworkAnalyticsProducts"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkAnalyticsProduct_Update_Max": {
+            "$ref": "./examples/NetworkAnalyticsProduct_Update_MaximumSet_Gen.json"
+          },
+          "NetworkAnalyticsProduct_Update_Min": {
+            "$ref": "./examples/NetworkAnalyticsProduct_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NetworkAnalyticsProduct"
+        ],
+        "operationId": "NetworkAnalyticsProduct_Delete",
+        "description": "Delete a NetworkAnalyticsProducts",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NetworkAnalyticsProduct_Delete_Max": {
+            "$ref": "./examples/NetworkAnalyticsProduct_Delete_MaximumSet_Gen.json"
+          },
+          "NetworkAnalyticsProduct_Delete_Min": {
+            "$ref": "./examples/NetworkAnalyticsProduct_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AzureDataExplorerProperties": {
+      "type": "object",
+      "properties": {
+        "virtualNetworkConfiguration": {
+          "$ref": "#/definitions/VirtualNetworkConfiguration",
+          "description": "Virtual Network Configuration",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "kustoClusterPrincipalAssignments": {
+          "$ref": "#/definitions/KustoClusterPrincipalAssignments",
+          "description": "Kusto Cluster Principal Assignments"
+        }
+      },
+      "description": "ADx Properties",
+      "required": [
+        "kustoClusterPrincipalAssignments"
+      ]
+    },
+    "BlobServices": {
+      "type": "object",
+      "properties": {
+        "restorePolicy": {
+          "$ref": "#/definitions/RestorePolicy",
+          "description": "Restore Policy"
+        }
+      },
+      "description": "Configuration for creating Blob Service",
+      "required": [
+        "restorePolicy"
+      ]
+    },
+    "BronzeStorageAccountProperties": {
+      "type": "object",
+      "properties": {
+        "isSftpEnabled": {
+          "type": "boolean",
+          "description": "Enables Secure File Transfer Protocol, if set to true"
+        }
+      },
+      "description": "Configuration for BronzeAccount",
+      "required": [
+        "isSftpEnabled"
+      ]
+    },
+    "Bypass": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Logging",
+        "Metrics",
+        "AzureServices"
+      ],
+      "x-ms-enum": {
+        "name": "Bypass",
+        "modelAsString": true
+      }
+    },
+    "CommonStorageAccountProperties": {
+      "type": "object",
+      "properties": {
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Allow or disallow public network access to Storage Account.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "networkacls": {
+          "$ref": "#/definitions/NetworkAcls",
+          "description": "Network rule set"
+        },
+        "blobServices": {
+          "$ref": "#/definitions/BlobServices",
+          "description": "Blob Services",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "privateEndPoint": {
+          "$ref": "#/definitions/PrivateEndPoint",
+          "description": "Private End Point"
+        }
+      },
+      "description": "Common Storage Account Properties."
+    },
+    "ComputeConfiguration": {
+      "type": "object",
+      "properties": {
+        "failureAlertEmail": {
+          "type": "string",
+          "description": "The alert email in case of a failure"
+        },
+        "throughput": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The data throughput speed in mbps. The accepted values are: 10, 100, 300, 500, 1024"
+        }
+      },
+      "description": "The compute configuration",
+      "required": [
+        "throughput"
+      ]
+    },
+    "DataConnectorConfiguration": {
+      "type": "object",
+      "properties": {
+        "dataRetentionProperties": {
+          "$ref": "#/definitions/DataRetentionProperties",
+          "description": "The data retention configuration"
+        },
+        "dataset": {
+          "$ref": "#/definitions/DatasetConfiguration",
+          "description": "The datasets configuration array "
+        },
+        "compute": {
+          "$ref": "#/definitions/ComputeConfiguration",
+          "description": "The compute configuration"
+        }
+      },
+      "description": "The data retention, dataset and compute configurations for the connector",
+      "required": [
+        "dataRetentionProperties",
+        "dataset",
+        "compute"
+      ]
+    },
+    "DataConnectors": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataConnectorsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The data connector resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DataConnectorsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnectors"
+          },
+          "x-cadl-name": "DataConnectors[]",
+          "description": "The DataConnectors items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a DataConnectors list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "DataConnectorsProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The data connector provisioning state",
+          "readOnly": true
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
+        },
+        "productName": {
+          "type": "string",
+          "description": "The network analytics product to which this connector belongs to",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "productVersion": {
+          "type": "string",
+          "description": "The version of the corresponding product",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "productConnector": {
+          "type": "string",
+          "description": "The product connector",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "productConnectorDataset": {
+          "type": "string",
+          "description": "The product connector dataset",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "dataLakeHouses": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "An array of the ARM IDs for the Data Lake House resources",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "dataIngestionPath": {
+          "type": "string",
+          "description": "The data ingestion path",
+          "readOnly": true
+        },
+        "dataConnectorConfiguration": {
+          "$ref": "#/definitions/DataConnectorConfiguration",
+          "description": "The data connector configuration",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Details of the Data Connector Properties. The product details are to be added from the supported values which can be fetched by making a GET call on the Network Analytics Product resource.",
+      "required": [
+        "productName",
+        "productVersion",
+        "productConnector",
+        "productConnectorDataset",
+        "dataLakeHouses",
+        "dataConnectorConfiguration"
+      ]
+    },
+    "DataConnectorsUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataConnectorsUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the DataConnectors."
+    },
+    "DataConnectorsUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed resource group configuration."
+        }
+      },
+      "description": "The updatable properties of the DataConnectors."
+    },
+    "DataLakeHouseResources": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/StorageProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The data lake house resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "DataLakeHouseResourcesListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataLakeHouseResources"
+          },
+          "x-cadl-name": "DataLakeHouseResources[]",
+          "description": "The DataLakeHouseResources items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a DataLakeHouseResources list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "DataLakeHouseResourcesUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/DataLakeHouseResourcesUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the DataLakeHouseResources."
+    },
+    "DataLakeHouseResourcesUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed Resource Group configuration."
+        }
+      },
+      "description": "The updatable properties of the DataLakeHouseResources."
+    },
+    "DataRetentionProperties": {
+      "type": "object",
+      "properties": {
+        "dataExplorer": {
+          "$ref": "#/definitions/RetentionProperties",
+          "description": "The Azure data explorer retention properties"
+        },
+        "bronzeStorageAccount": {
+          "$ref": "#/definitions/RetentionProperties",
+          "description": "The bronze storage account retention properties"
+        },
+        "silverStorageAccount": {
+          "$ref": "#/definitions/RetentionProperties",
+          "description": "The silver storage account retention properties"
+        },
+        "goldStorageAccount": {
+          "$ref": "#/definitions/RetentionProperties",
+          "description": "The gold storage account retention properties"
+        }
+      },
+      "description": "The data retention properties",
+      "required": [
+        "dataExplorer",
+        "bronzeStorageAccount",
+        "silverStorageAccount",
+        "goldStorageAccount"
+      ]
+    },
+    "DatasetConfiguration": {
+      "type": "object",
+      "properties": {
+        "datasetName": {
+          "type": "string",
+          "description": "The name of the dataset"
+        },
+        "timestampKey": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The column key holding the timestamp data"
+        },
+        "columnsToMask": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Columns to be masked"
+        }
+      },
+      "description": "The connector dataset information ",
+      "required": [
+        "datasetName"
+      ]
+    },
+    "DefaultAction": {
+      "type": "string",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultAction",
+        "modelAsString": true
+      }
+    },
+    "IPRules": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "IP Rules Value"
+        },
+        "action": {
+          "type": "string",
+          "description": "The action of virtual network rule."
+        }
+      },
+      "description": "IP rule with specific IP or IP range in CIDR format.",
+      "required": [
+        "action"
+      ]
+    },
+    "KustoClusterPrincipalAssignments": {
+      "type": "object",
+      "properties": {
+        "systemIdentityName": {
+          "type": "string",
+          "description": "system Identity Name",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "role": {
+          "$ref": "#/definitions/KustoRole",
+          "description": "Kusto roles"
+        },
+        "principalType": {
+          "$ref": "#/definitions/PrincipalType",
+          "description": "Principal type."
+        }
+      },
+      "description": "ADx Role assignments",
+      "required": [
+        "role",
+        "principalType"
+      ]
+    },
+    "KustoRole": {
+      "type": "string",
+      "enum": [
+        "AllDatabasesAdmin",
+        "AllDatabasesViewer"
+      ],
+      "x-ms-enum": {
+        "name": "KustoRole",
+        "modelAsString": true
+      }
+    },
+    "Location": {
+      "type": "string",
+      "description": "Resource Location"
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of managed resource group"
+        },
+        "location": {
+          "type": "string",
+          "description": "Managed Resource Group location"
+        }
+      },
+      "description": "ManagedResourceGroup related properties",
+      "required": [
+        "name",
+        "location"
+      ]
+    },
+    "NetworkAcls": {
+      "type": "object",
+      "properties": {
+        "bypass": {
+          "$ref": "#/definitions/Bypass",
+          "description": "Specifies whether traffic is bypassed for Logging/Metrics/AzureServices"
+        },
+        "virtualNetworkRule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "x-cadl-name": "VirtualNetworkRule[]",
+          "description": "Virtual Network Rule"
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRules"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "IPRules[]",
+          "description": "IP rule with specific IP or IP range in CIDR format."
+        },
+        "resourceAccessRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceAccessRules"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "ResourceAccessRules[]",
+          "description": "Resource Access Rules."
+        },
+        "defaultActionType": {
+          "$ref": "#/definitions/DefaultAction",
+          "description": "Default Action"
+        }
+      },
+      "description": "Network rule set",
+      "required": [
+        "bypass",
+        "virtualNetworkRule",
+        "ipRules",
+        "resourceAccessRules",
+        "defaultActionType"
+      ]
+    },
+    "NetworkAnalyticsProductConnectorInformation": {
+      "type": "object",
+      "properties": {
+        "connectorName": {
+          "type": "string",
+          "description": "The connector name",
+          "minLength": 3,
+          "maxLength": 63
+        },
+        "datasets": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The datasets supported by the connector"
+        }
+      },
+      "description": "Data Connector Information",
+      "required": [
+        "connectorName",
+        "datasets"
+      ]
+    },
+    "NetworkAnalyticsProductInformation": {
+      "type": "object",
+      "properties": {
+        "productName": {
+          "type": "string",
+          "description": "Name of the network analytics product",
+          "minLength": 3,
+          "maxLength": 63
+        },
+        "productVersions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The available versions for the product"
+        },
+        "productConnectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkAnalyticsProductConnectorInformation"
+          },
+          "x-ms-identifiers": [
+            "connectorName"
+          ],
+          "x-cadl-name": "NetworkAnalyticsProductConnectorInformation[]",
+          "description": "The connectors supported by the product"
+        }
+      },
+      "description": "The network analytics product information",
+      "required": [
+        "productName",
+        "productVersions",
+        "productConnectors"
+      ]
+    },
+    "NetworkAnalyticsProducts": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkAnalyticsProductsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The network analytics product resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "NetworkAnalyticsProductsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkAnalyticsProducts"
+          },
+          "x-cadl-name": "NetworkAnalyticsProducts[]",
+          "description": "The NetworkAnalyticsProducts items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a NetworkAnalyticsProducts list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "NetworkAnalyticsProductsProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The network analytics product provisioning state",
+          "readOnly": true
+        },
+        "networkAnalyticsProductInformation": {
+          "$ref": "#/definitions/NetworkAnalyticsProductInformation",
+          "description": "The network analytics product information",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Details of the network analytics product properties",
+      "required": [
+        "networkAnalyticsProductInformation"
+      ]
+    },
+    "NetworkAnalyticsProductsUpdate": {
+      "type": "object",
+      "properties": {},
+      "description": "The type used for update operations of the NetworkAnalyticsProducts."
+    },
+    "PrincipalType": {
+      "type": "string",
+      "enum": [
+        "App",
+        "Group",
+        "User"
+      ],
+      "x-ms-enum": {
+        "name": "PrincipalType",
+        "modelAsString": true
+      }
+    },
+    "PrivateEndPoint": {
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Resource ID of a subnet"
+        },
+        "privateLinkServiceId": {
+          "type": "string",
+          "description": "The private link resource service id"
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "The private link resource group id."
+        },
+        "customDnsConfigs": {
+          "type": "string",
+          "description": "The private link resource customDnsConfigs."
+        }
+      },
+      "description": "Private End Point Resource",
+      "required": [
+        "subnetId",
+        "privateLinkServiceId",
+        "groupIds",
+        "customDnsConfigs"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ResourceAccessRules": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Resource ID"
+        }
+      },
+      "description": "Resource Access Rules.",
+      "required": [
+        "tenantId",
+        "resourceId"
+      ]
+    },
+    "RestorePolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Restore Policy enabled or disabled boolean value"
+        },
+        "days": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Restore Policy in days"
+        }
+      },
+      "description": "Restore Policy",
+      "required": [
+        "enabled",
+        "days"
+      ]
+    },
+    "RetentionProperties": {
+      "type": "object",
+      "properties": {
+        "retentionDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The data retention period in days"
+        }
+      },
+      "description": "The retention properties model",
+      "required": [
+        "retentionDays"
+      ]
+    },
+    "StorageProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Storage properties",
+          "readOnly": true
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Managed Resource Group configuration."
+        },
+        "uniqueIdentifierName": {
+          "type": "string",
+          "description": "unique Identifier Name",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "commonStorageAccountProperties": {
+          "$ref": "#/definitions/CommonStorageAccountProperties",
+          "description": "Common Storage Account properties.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "bronzeStorageAccountProperties": {
+          "$ref": "#/definitions/BronzeStorageAccountProperties",
+          "description": "Bronze Storage Account properties.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "azureDataExplorerProperties": {
+          "$ref": "#/definitions/AzureDataExplorerProperties",
+          "description": "Azure DataExplorer Cluster properties.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Details of the NetworkAnalytics Storage.",
+      "required": [
+        "uniqueIdentifierName",
+        "azureDataExplorerProperties"
+      ]
+    },
+    "Versions": {
+      "type": "string",
+      "enum": [
+        "2022-11-15-preview",
+        "2023-03-31"
+      ],
+      "x-ms-enum": {
+        "name": "Versions",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "v2022_11_15_preview",
+            "value": "2022-11-15-preview"
+          },
+          {
+            "name": "v2023_03_31",
+            "value": "2023-03-31"
+          }
+        ]
+      }
+    },
+    "VirtualNetworkConfiguration": {
+      "type": "object",
+      "properties": {
+        "subnetId": {
+          "type": "string",
+          "description": "Resource ID of a subnet"
+        },
+        "enginePublicIpId": {
+          "type": "string",
+          "description": "Engine Public IP ID"
+        },
+        "dataManagementPublicIpId": {
+          "type": "string",
+          "description": "Data Management Public Ip ID"
+        }
+      },
+      "description": "Virtual Network Configuration",
+      "required": [
+        "subnetId",
+        "enginePublicIpId",
+        "dataManagementPublicIpId"
+      ]
+    },
+    "VirtualNetworkRule": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID of a subnet"
+        },
+        "action": {
+          "type": "string",
+          "description": "The action of virtual network rule."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of virtual network rule."
+        }
+      },
+      "description": "Virtual Network Rule",
+      "required": [
+        "id"
+      ]
+    }
+  },
+  "parameters": {}
+}
