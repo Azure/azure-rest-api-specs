@@ -1,0 +1,1598 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview Share Client",
+    "description": "Creates a data plane client for Purview Share.",
+    "version": "2022-06-30-preview"
+  },
+  "paths": {
+    "/v2/receivedShares/{receivedShareId}": {
+      "get": {
+        "tags": ["ReceivedShare"],
+        "summary": "Get a received share by unique id.",
+        "description": "Get a received share",
+        "operationId": "ReceivedShares_Get",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/receivedShareId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ReceivedShare"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReceivedShares_Get": {
+            "$ref": "./examples/ReceivedShares_Get.json"
+          },
+          "ReceivedShares_AdlsGen2AccountGet": {
+            "$ref": "./examples/ReceivedShares_AdlsGen2AccountGet.json"
+          },
+          "ReceivedShares_BlobAccountGet": {
+            "$ref": "./examples/ReceivedShares_BlobAccountGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": ["ReceivedShare"],
+        "summary": "Put changes to a received share.",
+        "description": "Update changes to a received share",
+        "operationId": "ReceivedShares_CreateOrUpdate_ReceivedShare",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/receivedShareId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "receivedShare",
+            "description": "The updated received share",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReceivedShare"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ReceivedShare"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReceivedShares_CreateOrUpdate_ReceivedShare": {
+            "$ref": "./examples/ReceivedShares_CreateOrUpdate_ReceivedShare.json"
+          },
+          "ReceivedShares_AdlsGen2AccountUpdate": {
+            "$ref": "./examples/ReceivedShares_AdlsGen2AccountUpdate.json"
+          },
+          "ReceivedShares_BlobAccountUpdate": {
+            "$ref": "./examples/ReceivedShares_BlobAccountUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": ["ReceivedShare"],
+        "summary": "Deletes a received share",
+        "description": "Delete a received share",
+        "operationId": "ReceivedShares_Delete_ReceivedShare",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/receivedShareId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReceivedShares_Delete_ReceivedShare": {
+            "$ref": "./examples/ReceivedShares_Delete_ReceivedShare.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/v2/receivedShares/attached": {
+      "get": {
+        "tags": ["ReceivedShare"],
+        "summary": "Get a list of attached received shares.",
+        "description": "List attached received shares",
+        "operationId": "ReceivedShares_GetAll_AttachedReceivedShares",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/referenceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/skipToken"
+          },
+          {
+            "$ref": "#/parameters/$filter"
+          },
+          {
+            "$ref": "#/parameters/$orderby"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ReceivedShareList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReceivedShares_GetAll_AttachedReceivedShares": {
+            "$ref": "./examples/ReceivedShares_GetAll_AttachedReceivedShares.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/v2/receivedShares/detached": {
+      "get": {
+        "tags": ["ReceivedShare"],
+        "summary": "Get a list of detached received shares.",
+        "description": "List detached received shares",
+        "operationId": "ReceivedShares_GetAll_DetachedReceivedShares",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/skipToken"
+          },
+          {
+            "$ref": "#/parameters/$filter"
+          },
+          {
+            "$ref": "#/parameters/$orderby"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ReceivedShareList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReceivedShares_GetAll_DetachedReceivedShares": {
+            "$ref": "./examples/ReceivedShares_GetAll_DetachedReceivedShares.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/v2/sentShares": {
+      "get": {
+        "tags": ["SentShare"],
+        "summary": "Get a list of sent shares.",
+        "description": "List sent shares",
+        "operationId": "SentShares_GetAll_SentShares",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/referenceName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/skipToken"
+          },
+          {
+            "$ref": "#/parameters/$filter"
+          },
+          {
+            "$ref": "#/parameters/$orderby"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SentShareList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SentShares_GetAll_SentShares": {
+            "$ref": "./examples/SentShares_GetAll_SentShares.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/v2/sentShares/{sentShareId}": {
+      "get": {
+        "tags": ["SentShare"],
+        "summary": "Get a sent share by guid.",
+        "description": "Get a sent share",
+        "operationId": "SentShares_Get",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sentShareId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SentShare"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SentShares_Get": {
+            "$ref": "./examples/SentShares_Get.json"
+          },
+          "SentShares_AdlsGen2AccountGet": {
+            "$ref": "./examples/SentShares_AdlsGen2AccountGet.json"
+          },
+          "SentShares_BlobAccountGet": {
+            "$ref": "./examples/SentShares_BlobAccountGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": ["SentShare"],
+        "summary": "Create a sent share.",
+        "description": "Create a sent share",
+        "operationId": "SentShares_Create_SentShare",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sentShareId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "sentShare",
+            "description": "The sent share to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SentShare"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/SentShare"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SentShares_Create_SentShare": {
+            "$ref": "./examples/SentShares_Create_SentShare.json"
+          },
+          "SentShares_AdlsGen2Account_Create": {
+            "$ref": "./examples/SentShares_AdlsGen2Account_Create.json"
+          },
+          "SentShares_BlobAccount_Create": {
+            "$ref": "./examples/SentShares_BlobAccount_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": ["SentShare"],
+        "summary": "Deletes a sent share.",
+        "description": "Delete a sent share",
+        "operationId": "SentShares_Delete_SentShare",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sentShareId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SentShares_Delete_SentShare": {
+            "$ref": "./examples/SentShares_Delete_SentShare.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/v2/sentShares/{sentShareId}/sentShareInvitations": {
+      "get": {
+        "tags": ["SentShareInvitation"],
+        "summary": "List all sent share invitations in a sent share",
+        "description": "List sent share recipients",
+        "operationId": "SentShares_GetAll_SentShareInvitations",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sentShareId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/skipToken"
+          },
+          {
+            "$ref": "#/parameters/$filter"
+          },
+          {
+            "$ref": "#/parameters/$orderby"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SentShareInvitationList"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SentShares_GetAll_SentShareInvitations": {
+            "$ref": "./examples/SentShares_GetAll_SentShareInvitations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/v2/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}": {
+      "get": {
+        "tags": ["SentShareInvitation"],
+        "summary": "Get sent share invitation for a given sent share",
+        "description": "Get recipient for a given sent share",
+        "operationId": "SentShares_Get_SentShareInvitation",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sentShareId"
+          },
+          {
+            "$ref": "#/parameters/sentShareInvitationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SentShareInvitation"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SentShares_Get_SentShareInvitation": {
+            "$ref": "./examples/SentShares_Get_SentShareInvitation.json"
+          },
+          "SentShares_Invitation_UserInvitationGet": {
+            "$ref": "./examples/SentShares_Invitation_UserInvitationGet.json"
+          },
+          "SentShares_Invitation_ServiceInvitationGet": {
+            "$ref": "./examples/SentShares_Invitation_ServiceInvitationGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": ["SentShareInvitation"],
+        "summary": "Create a sent share invitation.",
+        "description": "Create a recipient for a given sent share",
+        "operationId": "SentShares_Create_SentShareInvitation",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sentShareId"
+          },
+          {
+            "$ref": "#/parameters/sentShareInvitationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "body",
+            "name": "sentShareInvitation",
+            "description": "The sent share invitation to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SentShareInvitation"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SentShareInvitation"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SentShares_Create_SentShareInvitation": {
+            "$ref": "./examples/SentShares_Create_SentShareInvitation.json"
+          },
+          "SentShares_Invitation_ServiceInvitation_Create": {
+            "$ref": "./examples/SentShares_Invitation_ServiceInvitation_Create.json"
+          },
+          "SentShares_Invitation_UserInvitation_Create": {
+            "$ref": "./examples/SentShares_Invitation_UserInvitation_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["SentShareInvitation"],
+        "summary": "Delete Invitation in a share.",
+        "description": "Delete a sent share invitation",
+        "operationId": "SentShares_Delete_SentShareInvitation",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sentShareId"
+          },
+          {
+            "$ref": "#/parameters/sentShareInvitationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SentShares_Delete_SentShareInvitation": {
+            "$ref": "./examples/SentShares_Delete_SentShareInvitation.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/v2/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}:notify": {
+      "post": {
+        "tags": ["SentShareInvitation"],
+        "summary": "Notifies recipient of the sent share invitation.",
+        "description": "Notifies recipient of the sent share invitation.",
+        "operationId": "SentShares_Notify_UserSentShareInvitation",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sentShareId"
+          },
+          {
+            "$ref": "#/parameters/sentShareInvitationId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "header",
+            "name": "repeatability-request-id",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SentShareInvitation"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SentShares_Notify_UserSentShareInvitation": {
+            "$ref": "./examples/SentShares_Notify_UserSentShareInvitation.json"
+          }
+        }
+      }
+    },
+    "/v2/activateEmail": {
+      "post": {
+        "tags": ["TenantEmailRegistration"],
+        "summary": "Activates the tenant and email combination using the activation code received.",
+        "description": "Activates the email registration for current tenant",
+        "operationId": "ReceivedShares_Activate_TenantEmailRegistration",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "header",
+            "name": "repeatability-request-id",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs.",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "tenantEmailRegistration",
+            "description": "The tenant email registration payload",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TenantEmailRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TenantEmailRegistration"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReceivedShares_Activate_TenantEmailRegistration": {
+            "$ref": "./examples/ReceivedShares_Activate_TenantEmailRegistration.json"
+          }
+        }
+      }
+    },
+    "/v2/registerEmail": {
+      "post": {
+        "tags": ["TenantEmailRegistration"],
+        "summary": "Registers the tenant and email combination for activation.",
+        "description": "Register an email for the current tenant",
+        "operationId": "ReceivedShares_Register_TenantEmailRegistration",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "in": "header",
+            "name": "repeatability-request-id",
+            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated, globally unique for all time, identifier for the request. It is recommended to use version 4 (random) UUIDs.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/TenantEmailRegistration"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/PurviewShareError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReceivedShares_Register_TenantEmailRegistration": {
+            "$ref": "./examples/ReceivedShares_Register_TenantEmailRegistration.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ADLSGen2Artifact": {
+      "description": "An ADLS Gen2 account artifact.",
+      "required": ["properties", "storeKind", "storeReference"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Artifact"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ADLSGen2ArtifactProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2Account"
+    },
+    "ADLSGen2ArtifactProperties": {
+      "description": "Properties for ADLS Gen2 account.",
+      "required": ["paths"],
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Location of the storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paths": {
+          "description": "A list of ADLS Gen2 storage account paths.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccountPath"
+          }
+        }
+      }
+    },
+    "AdlsGen2AccountSink": {
+      "description": "AdlsGen2 Sink",
+      "required": ["properties", "storeKind", "storeReference"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Sink"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdlsGen2AccountSinkProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2Account"
+    },
+    "AdlsGen2AccountSinkProperties": {
+      "description": "Properties for AdlsGen2 storage account",
+      "required": ["containerName", "folder"],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Adls Gen 2 Container Name",
+          "type": "string"
+        },
+        "folder": {
+          "description": "Adls Gen 2 Folder",
+          "type": "string"
+        },
+        "location": {
+          "description": "Adls Gen 2 Location",
+          "type": "string",
+          "readOnly": true
+        },
+        "mountPath": {
+          "description": "Adls Gen 2 Mount Path",
+          "type": "string"
+        }
+      }
+    },
+    "Artifact": {
+      "description": "A class for sent share artifact.",
+      "required": ["storeKind", "storeReference"],
+      "type": "object",
+      "properties": {
+        "storeKind": {
+          "$ref": "#/definitions/StoreKind"
+        },
+        "storeReference": {
+          "$ref": "#/definitions/StoreReference"
+        }
+      },
+      "discriminator": "storeKind"
+    },
+    "BlobAccountSink": {
+      "description": "Blob Sink",
+      "required": ["properties", "storeKind", "storeReference"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Sink"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobAccountSinkProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "BlobAccount"
+    },
+    "BlobAccountSinkProperties": {
+      "description": "Properties for blob storage account",
+      "required": ["containerName", "folder"],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Blob Container Name",
+          "type": "string"
+        },
+        "folder": {
+          "description": "Blob Folder",
+          "type": "string"
+        },
+        "location": {
+          "description": "Blob Location",
+          "type": "string",
+          "readOnly": true
+        },
+        "mountPath": {
+          "description": "Blob Mount Path",
+          "type": "string"
+        }
+      }
+    },
+    "BlobStorageArtifact": {
+      "description": "Blob storage account artifact.",
+      "required": ["properties", "storeKind", "storeReference"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Artifact"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BlobStorageArtifactProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "BlobAccount"
+    },
+    "BlobStorageArtifactProperties": {
+      "description": "Properties for blob storage account.",
+      "required": ["paths"],
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Location of the storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paths": {
+          "description": "A list of blob storage account paths.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccountPath"
+          }
+        }
+      }
+    },
+    "InPlaceReceivedShare": {
+      "description": "An InPlace received share kind.",
+      "required": ["properties", "shareKind"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReceivedShare"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InPlaceReceivedShareProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "InPlace"
+    },
+    "InPlaceReceivedShareProperties": {
+      "description": "Properties of in place received share.",
+      "required": ["sink"],
+      "type": "object",
+      "properties": {
+        "assetLocation": {
+          "description": "Location of the shared Asset.",
+          "type": "string",
+          "readOnly": true
+        },
+        "assetStoreKind": {
+          "$ref": "#/definitions/StoreKind"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "Time at which the received share was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Received Share Name",
+          "type": "string"
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "The expiration date of the received share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "receiverEmail": {
+          "description": "Email of the user/receiver who received the sent share invitation",
+          "type": "string",
+          "readOnly": true
+        },
+        "receiverName": {
+          "description": "Name of the user/receiver who received the sent share invitation",
+          "type": "string",
+          "readOnly": true
+        },
+        "receiverTenantName": {
+          "description": "Tenant name of the user/receiver who received the sent share invitation",
+          "type": "string",
+          "readOnly": true
+        },
+        "senderEmail": {
+          "description": "Email of the sender who created the sent share invitation",
+          "type": "string",
+          "readOnly": true
+        },
+        "senderName": {
+          "description": "Name of the sender who created the sent share invitation",
+          "type": "string",
+          "readOnly": true
+        },
+        "senderTenantName": {
+          "description": "Tenant name of the sender who created the sent share invitation",
+          "type": "string",
+          "readOnly": true
+        },
+        "sentShareDescription": {
+          "description": "Share description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sharedAt": {
+          "format": "date-time",
+          "description": "Time at which the sent share was shared.",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareStatus": {
+          "$ref": "#/definitions/ShareStatus"
+        },
+        "sink": {
+          "$ref": "#/definitions/Sink"
+        }
+      }
+    },
+    "InPlaceSentShare": {
+      "description": "An InPlace share kind.",
+      "required": ["properties", "shareKind"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SentShare"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/InPlaceSentShareProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "InPlace"
+    },
+    "InPlaceSentShareProperties": {
+      "description": "Properties for InPlace sent share.",
+      "required": ["artifact", "displayName"],
+      "type": "object",
+      "properties": {
+        "artifact": {
+          "$ref": "#/definitions/Artifact"
+        },
+        "createdAt": {
+          "format": "date-time",
+          "description": "Time at which the sent share was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "dependsOn": {
+          "description": "List of shares on which the sent share depends.",
+          "type": "array",
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "description": {
+          "description": "Sent share description.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The name of the sent share",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "senderEmail": {
+          "description": "Email of the sender who created the sent share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "senderName": {
+          "description": "Name of the sender who created the sent share.",
+          "type": "string",
+          "readOnly": true
+        },
+        "senderTenantName": {
+          "description": "Tenant name of the sender who created the sent share.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InvitationKind": {
+      "description": "The types of invitations.",
+      "enum": ["User", "Service"],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "InvitationKind",
+        "modelAsString": true
+      }
+    },
+    "ProvisioningState": {
+      "description": "Provisioning status of the resource",
+      "enum": ["Unknown", "Succeeded", "Creating", "Deleting", "Moving", "Failed"],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "PurviewShareError": {
+      "description": "The purview share error model.",
+      "required": ["error"],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/PurviewShareErrorInfo"
+        }
+      }
+    },
+    "PurviewShareErrorInfo": {
+      "description": "The purview share error body model.",
+      "required": ["code", "message"],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Code of the error",
+          "type": "string"
+        },
+        "details": {
+          "description": "Nested details of the error model",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PurviewShareErrorInfo"
+          }
+        },
+        "message": {
+          "description": "Message of the error",
+          "type": "string"
+        },
+        "target": {
+          "description": "Target of the error",
+          "type": "string"
+        }
+      }
+    },
+    "ReceivedShare": {
+      "description": "A received share data transfer object.",
+      "required": ["shareKind"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "shareKind": {
+          "$ref": "#/definitions/ShareKind"
+        }
+      },
+      "discriminator": "shareKind"
+    },
+    "ReceivedShareList": {
+      "description": "List of received shares.",
+      "required": ["value"],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReceivedShare"
+          }
+        }
+      }
+    },
+    "ReferenceNameType": {
+      "description": "Defines the type of resource being shared",
+      "enum": ["ArmResourceReference"],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ReferenceNameType",
+        "modelAsString": true
+      }
+    },
+    "Resource": {
+      "description": "Base data transfer object implementation for proxy resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SentShare": {
+      "description": "A sent share data transfer object.",
+      "required": ["shareKind"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "shareKind": {
+          "$ref": "#/definitions/ShareKind"
+        }
+      },
+      "discriminator": "shareKind"
+    },
+    "SentShareInvitation": {
+      "description": "A sent share invitation data transfer object.",
+      "required": ["invitationKind"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "invitationKind": {
+          "$ref": "#/definitions/InvitationKind"
+        }
+      },
+      "discriminator": "invitationKind"
+    },
+    "SentShareInvitationList": {
+      "description": "List of the sent share invitations",
+      "required": ["value"],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SentShareInvitation"
+          }
+        }
+      }
+    },
+    "SentShareList": {
+      "description": "List of sent shares.",
+      "required": ["value"],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SentShare"
+          }
+        }
+      }
+    },
+    "ServiceInvitation": {
+      "description": "An service invitation kind.",
+      "required": ["invitationKind", "properties"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SentShareInvitation"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServiceInvitationProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "Service"
+    },
+    "ServiceInvitationProperties": {
+      "description": "Properties of the service invitation type.",
+      "required": ["targetActiveDirectoryId", "targetObjectId"],
+      "type": "object",
+      "properties": {
+        "expirationDate": {
+          "format": "date-time",
+          "description": "The time at which the invitation will expire.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "senderEmail": {
+          "description": "Email address of the sender.",
+          "type": "string",
+          "readOnly": true
+        },
+        "senderName": {
+          "description": "Name of the sender",
+          "type": "string",
+          "readOnly": true
+        },
+        "senderTenantName": {
+          "description": "Tenant name of the sender",
+          "type": "string",
+          "readOnly": true
+        },
+        "sentAt": {
+          "format": "date-time",
+          "description": "Gets the time at which the invitation was sent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareStatus": {
+          "$ref": "#/definitions/ShareStatus"
+        },
+        "targetActiveDirectoryId": {
+          "format": "uuid",
+          "description": "The target azure active directory id the invitation is sent to.",
+          "type": "string"
+        },
+        "targetObjectId": {
+          "format": "uuid",
+          "description": "The target object id in the azure active directory the invitation is sent to.",
+          "type": "string"
+        }
+      }
+    },
+    "ShareKind": {
+      "description": "Defines the supported types for share.",
+      "enum": ["InPlace"],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ShareKind",
+        "modelAsString": true
+      }
+    },
+    "ShareStatus": {
+      "description": "Share status.",
+      "enum": ["Detached", "Attached"],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ShareStatus",
+        "modelAsString": true
+      }
+    },
+    "Sink": {
+      "description": "Received share sink",
+      "required": ["storeKind", "storeReference"],
+      "type": "object",
+      "properties": {
+        "storeKind": {
+          "$ref": "#/definitions/StoreKind"
+        },
+        "storeReference": {
+          "$ref": "#/definitions/StoreReference"
+        }
+      },
+      "discriminator": "storeKind"
+    },
+    "StorageAccountPath": {
+      "description": "Defines a single StorageAccountPath path",
+      "required": ["containerName"],
+      "type": "object",
+      "properties": {
+        "containerName": {
+          "description": "Gets or sets the container name",
+          "type": "string"
+        },
+        "receiverPath": {
+          "description": "Gets or sets the path on the receiver side where the artifact is to be mapped",
+          "type": "string"
+        },
+        "senderPath": {
+          "description": "Gets or sets the path to file/folder within the container to be shared",
+          "type": "string"
+        }
+      }
+    },
+    "StoreKind": {
+      "description": "The types of asset.",
+      "enum": ["AdlsGen2Account", "BlobAccount"],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StoreKind",
+        "modelAsString": true
+      }
+    },
+    "StoreReference": {
+      "description": "A Store Reference for an artifact or sink.",
+      "type": "object",
+      "properties": {
+        "referenceName": {
+          "description": "Reference name for resource associated with the sink or artifact.",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/ReferenceNameType"
+        }
+      }
+    },
+    "TenantEmailRegistration": {
+      "description": "A tenant email registration data transfer object.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TenantEmailRegistrationProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "TenantEmailRegistrationProperties": {
+      "description": "Tenant email registration property bag.",
+      "required": ["activationCode"],
+      "type": "object",
+      "properties": {
+        "activationCode": {
+          "description": "Activation code for the registration.",
+          "type": "string"
+        },
+        "activationExpiration": {
+          "format": "date-time",
+          "description": "Date of the activation expiration.",
+          "type": "string",
+          "readOnly": true
+        },
+        "email": {
+          "description": "The email to register.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "registrationStatus": {
+          "$ref": "#/definitions/TenantEmailRegistrationStatus",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant id to register.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantEmailRegistrationStatus": {
+      "description": "Defines the supported types for registration.",
+      "enum": ["ActivationPending", "Activated", "ActivationAttemptsExhausted"],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "TenantEmailRegistrationStatus",
+        "modelAsString": true
+      }
+    },
+    "UserInvitation": {
+      "description": "A user invitation kind.",
+      "required": ["invitationKind", "properties"],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SentShareInvitation"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UserInvitationProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "User"
+    },
+    "UserInvitationProperties": {
+      "description": "Properties of the user invitation type.",
+      "required": ["targetEmail"],
+      "type": "object",
+      "properties": {
+        "expirationDate": {
+          "format": "date-time",
+          "description": "The time at which the invitation will expire.",
+          "type": "string"
+        },
+        "notify": {
+          "description": "Whether or not the recipient was notfied via email.",
+          "type": "boolean"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "senderEmail": {
+          "description": "Email address of the sender.",
+          "type": "string",
+          "readOnly": true
+        },
+        "senderName": {
+          "description": "Name of the sender",
+          "type": "string",
+          "readOnly": true
+        },
+        "senderTenantName": {
+          "description": "Tenant name of the sender",
+          "type": "string",
+          "readOnly": true
+        },
+        "sentAt": {
+          "format": "date-time",
+          "description": "Gets the time at which the invitation was sent.",
+          "type": "string",
+          "readOnly": true
+        },
+        "shareStatus": {
+          "$ref": "#/definitions/ShareStatus"
+        },
+        "targetEmail": {
+          "description": "The receiver email for the invitation is being sent.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com/share",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    },
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api version to use",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "jobId": {
+      "in": "path",
+      "name": "jobId",
+      "description": "Id of the corresponding job to the LRO",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "receivedShareId": {
+      "in": "path",
+      "name": "receivedShareId",
+      "description": "Id of the received share",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sentShareId": {
+      "in": "path",
+      "name": "sentShareId",
+      "description": "Id of the sent share",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sentShareInvitationId": {
+      "in": "path",
+      "name": "sentShareInvitationId",
+      "description": "Id of the sent share invitation",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "referenceName": {
+      "in": "query",
+      "name": "referenceName",
+      "description": "A name that references a data store.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "skipToken": {
+      "in": "query",
+      "name": "skipToken",
+      "description": "The continuation token to list the next page",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$filter": {
+      "in": "query",
+      "name": "$filter",
+      "description": "Filters the results using OData syntax",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$orderby": {
+      "in": "query",
+      "name": "$orderby",
+      "description": "Sorts the results using OData syntax",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure-auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  }
+}
