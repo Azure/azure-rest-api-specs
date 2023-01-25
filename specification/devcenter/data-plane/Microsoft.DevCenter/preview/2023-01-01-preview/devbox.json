@@ -1437,6 +1437,12 @@
           "type": "string",
           "readOnly": true
         },
+        "suspendedUntil": {
+          "description": "The earliest time that the action could occur (UTC).",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
         "next": {
           "description": "Details about the next run of this action.",
           "$ref": "#/definitions/DevBoxNextAction",
@@ -1460,13 +1466,7 @@
       "type": "object",
       "properties": {
         "scheduledTime": {
-          "description": "The target time the action will be triggered (UTC).",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "originalScheduledTime": {
-          "description": "The original scheduled time for the action (UTC).",
+          "description": "The time the action will be triggered (UTC).",
           "type": "string",
           "readOnly": true,
           "format": "date-time"
