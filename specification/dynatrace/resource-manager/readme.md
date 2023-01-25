@@ -24,7 +24,7 @@ These are the global settings for the dynatrace.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-09-01-preview
+tag: package-2021-09-01
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -34,6 +34,15 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
   - Dynatrace.Observability/preview/2021-09-01-preview/dynatrace.json
+```
+
+### Tag: package-2021-09-01
+
+These settings apply only when `--tag=package-2021-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-09-01'
+input-file:
+  - Dynatrace.Observability/stable/2021-09-01/dynatrace.json
 ```
 
 ---
@@ -50,8 +59,9 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
 

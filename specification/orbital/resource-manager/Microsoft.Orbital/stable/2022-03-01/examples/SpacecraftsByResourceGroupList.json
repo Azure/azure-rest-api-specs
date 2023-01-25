@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2022-03-01",
-    "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
+    "subscriptionId": "c1be1141-a7c9-4aac-9608-3c2e2f1152c3",
+    "resourceGroupName": "contoso-Rgp",
     "$skipToken": "opaqueString"
   },
   "responses": {
@@ -10,43 +10,49 @@
       "body": {
         "value": [
           {
-            "name": "AQUA",
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Orbital/spacecrafts/AQUA",
-            "location": "westus",
+            "location": "eastus2",
+            "tags": null,
+            "id": "/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Orbital/spacecrafts/CONTOSO_SAT",
+            "name": "CONTOSO_SAT",
+            "type": "Microsoft.Orbital/spacecrafts",
             "properties": {
               "provisioningState": "Succeeded",
-              "noradId": "27424",
-              "titleLine": "AQUA",
-              "tleLine1": "1 27424U 02022A   20195.59202355  .00000039  00000-0  18634-4 0  9991",
-              "tleLine2": "2 27424  98.2098 135.8486 0000176  28.4050 144.5909 14.57108832967671",
+              "noradId": "36411",
+              "titleLine": "CONTOSO_SAT",
+              "tleLine1": "1 27424U 02022A   22167.05119303  .00000638  00000+0  15103-3 0  9994",
+              "tleLine2": "2 27424  98.2477 108.9546 0000928  92.9194 327.0802 14.57300770 69982",
               "links": [
                 {
-                  "name": "S_RHCP_UL",
-                  "centerFrequencyMHz": 2106.4063,
-                  "bandwidthMHz": 0.036,
+                  "name": "uplink_lhcp1",
+                  "centerFrequencyMHz": 2250.0,
+                  "bandwidthMHz": 2.0,
                   "direction": "uplink",
-                  "polarization": "RHCP",
+                  "polarization": "LHCP",
                   "authorizations": [
                     {
-                      "groundStation": "Microsoft_Quincy",
-                      "expirationDate": "2020-07-16"
+                      "groundStation": "EASTUS2_0",
+                      "expirationDate": "2023-06-02"
                     }
                   ]
                 },
                 {
-                  "name": "X_RHCP_DL",
-                  "centerFrequencyMHz": 8125,
-                  "bandwidthMHz": 150,
+                  "name": "downlink_rhcp1",
+                  "centerFrequencyMHz": 8160.0,
+                  "bandwidthMHz": 15.0,
                   "direction": "downlink",
                   "polarization": "RHCP",
-                  "authorizations": []
+                  "authorizations": [
+                    {
+                      "groundStation": "EASTUS2_0",
+                      "expirationDate": "2023-06-02"
+                    }
+                  ]
                 }
               ]
-            },
-            "type": "Microsoft.Orbital/spacecrafts"
+            }
           }
         ],
-        "nextLink": "string"
+        "nextLink": "https://management.azure.com/subscriptions/c1be1141-a7c9-4aac-9608-3c2e2f1152c3/resourceGroups/contoso-Rgp/providers/Microsoft.Orbital/spacecrafts?api-version=2022-03-01&$skiptoken=opaqueString"
       }
     }
   }

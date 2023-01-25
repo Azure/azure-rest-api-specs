@@ -1,0 +1,33 @@
+{
+  "title": "List device relationships",
+  "description": "List all relationships for your device.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "deviceId": "device1",
+    "api-version": "2022-07-31"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "relationship1",
+            "source": "device1",
+            "target": "device2"
+          },
+          {
+            "id": "relationship2",
+            "source": "device3",
+            "target": "device1"
+          },
+          {
+            "id": "relationship3",
+            "source": "device1",
+            "target": "device4"
+          }
+        ]
+      }
+    }
+  }
+}

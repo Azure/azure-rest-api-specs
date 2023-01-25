@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "endpoint": "https://aoairesource.openai.azure.com",
+    "api-key": "{api key}",
+    "api-version": "2022-03-01-preview",
+    "deployment_id": "deployment-afa0669ca01e4693ae3a93baf40f26d6",
+    "deployment": {
+      "scale_settings": {
+        "capacity": 1,
+        "scale_type": "manual"
+      }
+    },
+    "content-Type": "application/merge-patch+json"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "scale_settings": {
+          "capacity": 1,
+          "scale_type": "manual"
+        },
+        "model": "curie",
+        "owner": "organization-owner",
+        "id": "deployment-afa0669ca01e4693ae3a93baf40f26d6",
+        "status": "notRunning",
+        "created_at": 1646126127,
+        "updated_at": 1646127311,
+        "object": "deployment"
+      }
+    },
+    "409": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "unexpectedEntityState",
+          "message": "The specified deployment cannot be updated because it's in a non-terminal state."
+        }
+      }
+    }
+  }
+}

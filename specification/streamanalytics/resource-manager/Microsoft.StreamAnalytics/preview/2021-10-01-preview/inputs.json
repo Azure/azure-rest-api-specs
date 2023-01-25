@@ -58,6 +58,9 @@
           },
           "Create an Event Grid input": {
             "$ref": "./examples/Input_Create_EventGrid.json"
+          },
+          "Create a reference file input": {
+            "$ref": "./examples/Input_Create_Reference_File.json"
           }
         },
         "parameters": [
@@ -690,6 +693,33 @@
         "type"
       ]
     },
+    "FileReferenceInputDataSource": {
+      "type": "object",
+      "description": "Describes a file input data source that contains reference data.",
+      "x-ms-discriminator-value": "File",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReferenceInputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FileReferenceInputDataSourceProperties",
+          "description": "The properties that are associated with a file input containing reference data. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "FileReferenceInputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a file input containing reference data.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path of the file."
+        }
+      }
+    },
     "BlobReferenceInputDataSource": {
       "type": "object",
       "description": "Describes a blob input data source that contains reference data.",
@@ -941,12 +971,50 @@
         "Avro",
         "Json",
         "CustomClr",
-        "Parquet"
+        "Parquet",
+        "Delta"
       ],
       "x-ms-enum": {
         "name": "EventSerializationType",
         "modelAsString": true
       }
+    },
+    "DeltaSerialization": {
+      "type": "object",
+      "description": "Describes how data from an input is serialized or how data is serialized when written to an output in Delta Lake format.",
+      "x-ms-discriminator-value": "Delta",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Serialization"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DeltaSerializationProperties",
+          "description": "The properties that are associated with the Delta Lake serialization type. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DeltaSerializationProperties": {
+      "type": "object",
+      "description": "The properties that are associated with the Delta Lake serialization type.",
+      "properties": {
+        "deltaTablePath": {
+          "type": "string",
+          "description": "Specifies the path of the Delta Lake table that the output will be written to."
+        },
+        "partitionColumns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Specifies the names of the columns for which the Delta Lake table will be partitioned. We are only supporting 1 partition column, but keeping it as an array for extensibility."
+        }
+      },
+      "required": [
+        "deltaTablePath"
+      ]
     },
     "ParquetSerialization": {
       "type": "object",
@@ -1185,7 +1253,8 @@
       "x-ms-enum": {
         "name": "CompressionType",
         "modelAsString": true
-      }
+      },
+      "default": "None"
     },
     "AzureSqlReferenceInputDataSource": {
       "type": "object",

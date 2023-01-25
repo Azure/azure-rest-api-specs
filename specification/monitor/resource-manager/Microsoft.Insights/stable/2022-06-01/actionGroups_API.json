@@ -242,12 +242,18 @@
         ],
         "responses": {
           "202": {
-            "description": "The notification succeeded",
+            "description": "The notification request accepted",
             "headers": {
               "location": {
                 "type": "string",
                 "description": "The location header that has the polling uri."
               }
+            }
+          },
+          "200": {
+            "description": "The notification succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
             }
           },
           "default": {
@@ -294,12 +300,18 @@
         ],
         "responses": {
           "202": {
-            "description": "The notification succeeded",
+            "description": "The notification request accepted",
             "headers": {
               "location": {
                 "type": "string",
                 "description": "The location header that has the polling uri."
               }
+            }
+          },
+          "200": {
+            "description": "The notification succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
             }
           },
           "default": {
@@ -349,12 +361,18 @@
         ],
         "responses": {
           "202": {
-            "description": "The notification succeeded",
+            "description": "The notification request accepted",
             "headers": {
               "location": {
                 "type": "string",
                 "description": "The location header that has the polling uri."
               }
+            }
+          },
+          "200": {
+            "description": "The notification succeeded",
+            "schema": {
+              "$ref": "#/definitions/TestNotificationDetailsResponse"
             }
           },
           "default": {
@@ -626,16 +644,6 @@
           "readOnly": true,
           "description": "Azure resource type"
         },
-        "kind": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource kind"
-        },
-        "identity": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource identity"
-        },
         "location": {
           "type": "string",
           "description": "Resource location",
@@ -663,23 +671,23 @@
       "description": "The details of the test notification results.",
       "type": "object",
       "properties": {
-        "Context": {
+        "context": {
           "type": "object",
           "$ref": "#/definitions/Context"
         },
-        "State": {
+        "state": {
           "type": "string",
           "description": "The overall state"
         },
-        "CompletedTime": {
+        "completedTime": {
           "type": "string",
           "description": "The completed time"
         },
-        "CreatedTime": {
+        "createdTime": {
           "type": "string",
           "description": "The created time"
         },
-        "ActionDetails": {
+        "actionDetails": {
           "x-ms-identifiers": [],
           "type": "array",
           "items": {
@@ -689,7 +697,7 @@
         }
       },
       "required": [
-        "State"
+        "state"
       ]
     },
     "ActionDetail": {
@@ -726,11 +734,11 @@
       "description": "The context info",
       "type": "object",
       "properties": {
-        "NotificationSource": {
+        "notificationSource": {
           "type": "string",
           "description": "The source of the notification request"
         },
-        "ContextType": {
+        "contextType": {
           "type": "string",
           "description": "The context id type"
         }
@@ -777,7 +785,7 @@
         "alertType": {
           "type": "string",
           "maxLength": 30,
-          "description": "The name of the supported alert type."
+          "description": "The value of the supported alert type. Supported alert type values are: servicehealth, metricstaticthreshold, metricsdynamicthreshold, logalertv2, smartalert, webtestalert, logalertv1numresult, logalertv1metricmeasurement, resourcehealth, activitylog, actualcostbudget, forecastedbudget"
         },
         "emailReceivers": {
           "x-ms-identifiers": [],

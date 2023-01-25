@@ -5,19 +5,27 @@
       - "specification/cognitiveservices/data-plane/TranslatorText/**"
     reviewers:
       - kristapratico
-      - maririos
+      
+- rule:
+    # Cognitive Services - Language pillar data-plane PR
+    paths:
+      - "specification/cognitiveservices/data-plane/Language/**"
+    reviewers:
+      - kristapratico
+      - heaths
+      
+- rule:
+    # Key Vault data-plane PR
+    paths:
+      - "specification/keyvault/data-plane/**"
+    reviewers:
+      - heaths
 
 - rule:
     paths:
       - "specification/confidentialledger/data-plane/**"
     reviewers:
       - christothes 
-      
-- rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights)/**"
-    reviewers:
-      - akning-ms
 
 - rule:
     # eventgrid data-plane PR
@@ -51,6 +59,7 @@
     # data-plane PR
     paths:
       - "specification/**/data-plane/**"
+      - "dev/**/data-plane/**"
     reviewers:
       - anuchandy
       - jhendrixMSFT
@@ -62,6 +71,8 @@
     reviewers:
       - lirenhe
       - raych1
+    branches:
+      - network-
 
 
 - rule:
@@ -76,10 +87,39 @@
    
       
 - rule:
-    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker)/**"
+    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker|imagebuilder|throttling|secretmanagementtestsvc|containerservice|azure-kusto)/**"
     reviewers:
       - raych1
       - xiaoxuqi-ms
+      
+- rule:
+    paths: "specification/voiceservices/**"
+    reviewers:
+      - raych1
+      - xiaoxuqi-ms
+
+- rule:
+    paths: "specification/@(financialdataservices|standbypool)/**"
+    reviewers:
+      - jianyexi
+      - xiaoxuqi-ms
+    branches:
+      - RPSaaSDev
+
+- rule:
+    paths: "specification/sql/**"
+    reviewers:
+      - raych1
+      - xiaoxuqi-ms
+    branches:
+      - dev-sql-
+      
+- rule:
+    paths:
+      - "specification/@(applicationinsights|operationalinsights|eventgrid)/**"
+    reviewers:
+      - akning-ms
+      
       
 - rule:
     paths: "specification/@(security|edgeorder|synapse)/**"
@@ -113,16 +153,24 @@
 
 - rule:
     paths:
+      - "specification/monitor/**"
+    reviewers:
+      - ArcturusZhang
+
+- rule:
+    paths:
       - "specification/authorization/**"
     reviewers:
       - ruowan
 
 - rule:
     paths:
-      - "specification/@(resources|datafactory)/**"
+      - "specification/@(resources|datafactory|app)/**"
     reviewers:
       - leni-msft
-
+    branches:
+      - Microsoft.App-
+      
 - rule:
     paths:
       - "specification/storage/**"
@@ -208,5 +256,6 @@
       - dw511214992
       - honghr
       - tianxchen-ms
-      - tadelesh
       - xiaoxuqi-ms
+      - live1206
+      - tadelesh
