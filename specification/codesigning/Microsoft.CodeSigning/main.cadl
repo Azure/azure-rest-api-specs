@@ -90,23 +90,8 @@ model OperationStatus {
   @doc("The status of the sign operation.")
   status?: Status;
 
-  @doc("Any error that occurred if the operation failed.")
-  errorDetail?: ErrorDetail;
-
   @doc("The resulting sign operation including the signature and signing certificate.")
   signStatus?: SignStatus;
-}
-
-@doc("The error detail model.")
-model ErrorDetail {
-  @doc("One of a server-defined set of error codes.")
-  code?: string;
-
-  @doc("A human-readable representation of the error.")
-  message?: string;
-
-  @doc("The target of the error.")
-  target?: string;
 }
 
 @doc("The sign status model.")
@@ -125,13 +110,6 @@ Signing certificate corresponding to the private key used to sign the requested
 digest.
 """)
   signingCertificate?: bytes;
-}
-
-@doc("The error response base model for all operations.")
-@error
-model ErrorResponse {
-  @doc("The error detail model.")
-  errorDetail?: ErrorDetail;
 }
 
 @doc("Sign request parameters")
