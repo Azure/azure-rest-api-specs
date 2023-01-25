@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
-  - Microsoft.HybridCloud/preview/2023-01-01-preview/hybridcloud.json
+  - Microsoft.HybridCloud/preview/2023-01-01-preview/hybridCloud.json
 ```
 
 ---
