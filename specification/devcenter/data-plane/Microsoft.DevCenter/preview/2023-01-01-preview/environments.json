@@ -222,12 +222,6 @@
           "final-state-via": "original-uri"
         },
         "responses": {
-          "200": {
-            "description": "Succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Environment"
-            }
-          },
           "201": {
             "description": "Created. Operation will complete asynchronously.",
             "schema": {
@@ -312,73 +306,6 @@
         "x-ms-examples": {
           "Environments_DeleteEnvironment": {
             "$ref": "./examples/Environments_Delete.json"
-          }
-        }
-      }
-    },
-    "/projects/{projectName}/users/{userId}/environments/{environmentName}:deploy": {
-      "post": {
-        "tags": [
-          "Environment Deploy"
-        ],
-        "description": "Executes a deploy action",
-        "parameters": [
-          {
-            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/UserIdParameter"
-          },
-          {
-            "$ref": "#/parameters/EnvironmentNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Action properties overriding the environment's default values.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/EnvironmentActionRequest"
-            }
-          }
-        ],
-        "operationId": "Environments_DeployEnvironmentAction",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
-        "responses": {
-          "200": {
-            "description": "The environment deploy action succeeded."
-          },
-          "202": {
-            "description": "Accepted. Operation will complete asynchronously.",
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "devcenter.json#/definitions/CloudError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Environments_DeployEnvironmentAction": {
-            "$ref": "./examples/Environments_DeployAction.json"
           }
         }
       }
@@ -623,111 +550,6 @@
         }
       }
     },
-    "/projects/{projectName}/catalogs/{catalogName}/catalogItems/{itemName}/versions": {
-      "get": {
-        "tags": [
-          "Catalog Item Versions"
-        ],
-        "description": "List all versions of a catalog item from a project.",
-        "parameters": [
-          {
-            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/CatalogNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CatalogItemNameParameter"
-          }
-        ],
-        "operationId": "Environments_ListCatalogItemVersions",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CatalogItemVersionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "devcenter.json#/definitions/CloudError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Environments_ListCatalogItemVersions": {
-            "$ref": "./examples/CatalogItemVersions_ListByProject.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/projects/{projectName}/catalogs/{catalogName}/catalogItems/{itemName}/versions/{version}": {
-      "get": {
-        "tags": [
-          "Catalog Item Versions"
-        ],
-        "description": "Get a specific catalog item version from a project.",
-        "parameters": [
-          {
-            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CatalogItemNameParameter"
-          },
-          {
-            "$ref": "#/parameters/CatalogNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VersionParameter"
-          }
-        ],
-        "operationId": "Environments_GetCatalogItemVersion",
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/CatalogItemVersion"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "devcenter.json#/definitions/CloudError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "description": "The error code for specific error that occurred.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Environments_GetCatalogItemVersion": {
-            "$ref": "./examples/CatalogItemVersions_Get.json"
-          }
-        }
-      }
-    },
     "/projects/{projectName}/environmentTypes": {
       "get": {
         "tags": [
@@ -778,23 +600,24 @@
     }
   },
   "definitions": {
-    "EnvironmentActionRequest": {
-      "description": "Properties of an action on an Environment",
+    "EnvironmentUpdateProperties": {
+      "description": "Properties of an environment. These properties can be updated after the resource has been created.",
       "type": "object",
       "properties": {
-        "actionId": {
-          "type": "string",
-          "description": "The Catalog Item action id to execute"
-        },
         "parameters": {
           "type": "object",
-          "description": "Parameters object for the action"
+          "description": "Parameters object for the environment."
         }
       }
     },
     "Environment": {
       "description": "Properties of an environment.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentUpdateProperties"
+        }
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -811,7 +634,11 @@
         },
         "user": {
           "type": "string",
-          "description": "The AAD object id of the owner of this Environment."
+          "description": "The AAD object id of the owner of this Environment.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "provisioningState": {
           "description": "The provisioning state of the environment.",
@@ -839,13 +666,10 @@
             "create"
           ]
         },
-        "parameters": {
-          "type": "object",
-          "description": "Parameters object for the deploy action",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+        "errorDetails": {
+          "description": "Provisioning or action error details. Populated only for error states.",
+          "readOnly": true,
+          "$ref": "devcenter.json#/definitions/ProvisioningError"
         }
       },
       "required": [
@@ -929,6 +753,11 @@
       "description": "A catalog item.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "The ID of the catalog item.",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "Name of the catalog item.",
           "type": "string",
@@ -939,105 +768,39 @@
           "type": "string",
           "readOnly": true
         },
-        "type": {
-          "description": "Type of the catalog item.",
-          "readOnly": true,
-          "$ref": "#/definitions/CatalogItemType"
-        }
-      }
-    },
-    "CatalogItemType": {
-      "type": "string",
-      "enum": [
-        "EnvironmentManifest",
-        "DevBoxConfiguration",
-        "DevBoxTask"
-      ],
-      "description": "The type of the catalog item.",
-      "x-ms-enum": {
-        "name": "CatalogItemType",
-        "modelAsString": true
-      }
-    },
-    "CatalogItemVersionListResult": {
-      "description": "Results of the catalog item list operation.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Current page of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CatalogItemVersion"
-          }
-        },
-        "nextLink": {
-          "description": "URL to get the next set of results if there are any.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "CatalogItemVersion": {
-      "description": "A catalog item version.",
-      "type": "object",
-      "properties": {
-        "catalogItemName": {
-          "description": "Name of the catalog item.",
-          "type": "string",
-          "readOnly": true
-        },
-        "catalogName": {
-          "description": "Name of the catalog.",
-          "type": "string",
-          "readOnly": true
-        },
-        "version": {
-          "description": "The version of the catalog item.",
-          "type": "string",
-          "readOnly": true
-        },
-        "summary": {
-          "description": "A short summary of the catalog item.",
-          "type": "string",
-          "readOnly": true
-        },
         "description": {
-          "description": "A long description of the catalog item.",
+          "description": "A short description of the catalog item.",
           "type": "string",
           "readOnly": true
         },
-        "templatePath": {
-          "description": "Path to the catalog item entrypoint file.",
-          "type": "string",
+        "environmentProperties": {
+          "description": "Properties that apply to environments.",
+          "$ref": "#/definitions/CatalogItemEnvironmentProperties",
           "readOnly": true
-        },
-        "type": {
-          "description": "Type of the catalog item.",
-          "readOnly": true,
-          "$ref": "#/definitions/CatalogItemType"
-        },
-        "parametersSchema": {
-          "type": "string",
-          "readOnly": true,
-          "description": "JSON schema defining the parameters object passed to actions"
-        },
+        }
+      }
+    },
+    "CatalogItemEnvironmentProperties": {
+      "description": "Properties that apply to environments.",
+      "type": "object",
+      "properties": {
         "parameters": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/CatalogItemParameter"
           },
-          "description": "Input parameters passed to actions",
+          "description": "Input parameters passed to an environment.",
           "readOnly": true
         },
-        "status": {
-          "description": "Defines whether the specific catalog item version can be used.",
-          "$ref": "devcenter.json#/definitions/EnableStatus"
+        "parametersSchema": {
+          "type": "string",
+          "readOnly": true,
+          "description": "JSON schema defining the parameters object passed to an environment."
         },
-        "eligibleForLatestVersion": {
-          "description": "Whether the version is eligible to be the latest version.",
-          "type": "boolean"
+        "templatePath": {
+          "description": "Path to the catalog item entrypoint file.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1066,7 +829,7 @@
           "readOnly": true
         },
         "type": {
-          "description": "A string of one of the basic JSON types (number, integer, null, array, object, boolean, string)",
+          "description": "A string of one of the basic JSON types (number, integer, array, object, boolean, string)",
           "readOnly": true,
           "$ref": "#/definitions/ParameterType"
         },
@@ -1139,7 +902,6 @@
         "array",
         "boolean",
         "integer",
-        "null",
         "number",
         "object",
         "string"
@@ -1183,17 +945,6 @@
       "minLength": 3,
       "maxLength": 63,
       "description": "The name of the catalog item",
-      "x-ms-parameter-location": "method"
-    },
-    "VersionParameter": {
-      "name": "version",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[0-9]{1,20}.[0-9]{1,20}.[0-9]{1,20}$|^latest$",
-      "minLength": 3,
-      "maxLength": 63,
-      "description": "The version of the catalog item.",
       "x-ms-parameter-location": "method"
     }
   }
