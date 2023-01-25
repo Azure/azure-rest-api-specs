@@ -451,7 +451,6 @@
         }
       }
     },
-
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCloud/cloudConnections": {
       "get": {
         "tags": [
@@ -809,17 +808,26 @@
         "cloudConnector": {
           "$ref": "#/definitions/ResourceReference",
           "description": "The cloud connector which discovered the remote resource.",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "remoteResourceId": {
           "type": "string",
           "description": "Identifier for the remote cloud resource",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "virtualHub": {
           "$ref": "#/definitions/ResourceReference",
           "description": "The virtualHub to which the cloud connection belongs.",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sharedKey": {
           "type": "string",
