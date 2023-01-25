@@ -6,7 +6,7 @@ using Cadl.Http;
 namespace Azure.OpenAI.Completions;
 
 @doc("Post body schema to create a prompt completion from a deployment")
-model CompletionsRequest {
+model CompletionsOptions {
     @doc("""
 An optional prompt to complete from, encoded as a string, a list of strings, or
 a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
@@ -67,11 +67,12 @@ allowed.
 """)
     n?: int32;
 
-    @doc("""
-Whether to enable streaming for this endpoint. If set, tokens will be sent as
-server-sent events as they become available.
-""")
-    stream?: boolean;
+// stream mode requires some API update that we cannot generate nbow
+//     @doc("""
+// Whether to enable streaming for this endpoint. If set, tokens will be sent as
+// server-sent events as they become available.
+// """)
+//     stream?: boolean;
 
     @doc("""
 Include the log probabilities on the `logprobs` most likely tokens, as well the
@@ -124,7 +125,7 @@ alias CompletionsPrompt = string[];
 alias CompletionsStop = string[];
 
 @doc("Expected response schema to completion request")
-model Completion {
+model Completions {
     @doc("Request ID for troubleshooting purposes")
     @header "apim-request-id": string;
     @doc("Id for completion response")
