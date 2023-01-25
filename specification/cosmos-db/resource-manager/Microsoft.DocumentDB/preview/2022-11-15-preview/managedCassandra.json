@@ -802,7 +802,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/owner/{ownerName}": {
       "delete": {
         "operationId": "CassandraRepair_Delete",
         "x-ms-long-running-operation": true,
@@ -818,6 +818,9 @@
           },
           {
             "$ref": "#/parameters/repairRunId"
+          },
+          {
+            "$ref": "#/parameters/ownerName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1128,6 +1131,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Id of repair run created to repair Cassandra cluster."
+    },
+    "ownerName": {
+      "name": "ownerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Owner Name that was used to create the Repair Run."
     },
     "intensityValue": {
       "name": "intensityValue",
