@@ -67,11 +67,12 @@ allowed.
 """)
     n?: int32;
 
-    @doc("""
-Whether to enable streaming for this endpoint. If set, tokens will be sent as
-server-sent events as they become available.
-""")
-    stream?: boolean;
+// stream mode requires some API update that we cannot generate nbow
+//     @doc("""
+// Whether to enable streaming for this endpoint. If set, tokens will be sent as
+// server-sent events as they become available.
+// """)
+//     stream?: boolean;
 
     @doc("""
 Include the log probabilities on the `logprobs` most likely tokens, as well the
