@@ -8,8 +8,11 @@
       "location": "East US",
       "properties": {
         "description": "This is the description of the following rule group",
+        "enabled": true,
+        "interval": "PT10M",
+        "clusterName": "myClusterName",
         "scopes": [
-          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myMonitoringAccount"
+          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myAzureMonitorWorkspace"
         ],
         "rules": [
           {
@@ -22,6 +25,7 @@
           {
             "alert": "Billing_Processing_Very_Slow",
             "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
+            "enabled": true,
             "severity": 2,
             "for": "PT5M",
             "labels": {
@@ -42,10 +46,6 @@
               "actionProperties": {
                 "ActionType1.Field1": "value11",
                 "ActionType2.Field1": "value12"
-              },
-              "customProperties": {
-                "key11": "value11",
-                "key12": "value12"
               }
             }
           }
@@ -62,8 +62,11 @@
         "location": "East US",
         "properties": {
           "description": "This is the description of the following rule group",
+          "enabled": true,
+          "interval": "PT10M",
+          "clusterName": "myClusterName",
           "scopes": [
-            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myMonitoringAccount"
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myAzureMonitorWorkspace"
           ],
           "rules": [
             {
@@ -76,6 +79,7 @@
             {
               "alert": "Billing_Processing_Very_Slow",
               "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
+              "enabled": true,
               "severity": 2,
               "for": "PT5M",
               "labels": {
@@ -96,10 +100,6 @@
                 "actionProperties": {
                   "ActionType1.Field1": "value11",
                   "ActionType2.Field1": "value12"
-                },
-                "customProperties": {
-                  "key11": "value11",
-                  "key12": "value12"
                 }
               }
             }
@@ -115,8 +115,11 @@
         "location": "East US",
         "properties": {
           "description": "This is the description of the following rule group",
+          "enabled": true,
+          "interval": "PT10M",
+          "clusterName": "myClusterName",
           "scopes": [
-            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myMonitoringAccount"
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/myResourceGroup/providers/microsoft.monitor/accounts/myAzureMonitorWorkspace"
           ],
           "rules": [
             {
@@ -129,6 +132,7 @@
             {
               "alert": "Billing_Processing_Very_Slow",
               "expression": "job_type:billing_jobs_duration_seconds:99p5m > 30",
+              "enabled": true,
               "severity": 2,
               "for": "PT5M",
               "labels": {
@@ -149,10 +153,6 @@
                 "actionProperties": {
                   "ActionType1.Field1": "value11",
                   "ActionType2.Field1": "value12"
-                },
-                "customProperties": {
-                  "key11": "value11",
-                  "key12": "value12"
                 }
               }
             }
