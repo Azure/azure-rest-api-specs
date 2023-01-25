@@ -6,7 +6,7 @@
     "version": "2022-06-30-preview"
   },
   "paths": {
-    "/v2/receivedShares/{receivedShareId}": {
+    "/receivedShares/{receivedShareId}": {
       "get": {
         "tags": ["ReceivedShare"],
         "summary": "Get a received share by unique id.",
@@ -131,7 +131,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/v2/receivedShares/attached": {
+    "/receivedShares/attached": {
       "get": {
         "tags": ["ReceivedShare"],
         "summary": "Get a list of attached received shares.",
@@ -179,7 +179,7 @@
         }
       }
     },
-    "/v2/receivedShares/detached": {
+    "/receivedShares/detached": {
       "get": {
         "tags": ["ReceivedShare"],
         "summary": "Get a list of detached received shares.",
@@ -224,7 +224,7 @@
         }
       }
     },
-    "/v2/sentShares": {
+    "/sentShares": {
       "get": {
         "tags": ["SentShare"],
         "summary": "Get a list of sent shares.",
@@ -272,7 +272,7 @@
         }
       }
     },
-    "/v2/sentShares/{sentShareId}": {
+    "/sentShares/{sentShareId}": {
       "get": {
         "tags": ["SentShare"],
         "summary": "Get a sent share by guid.",
@@ -397,7 +397,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/v2/sentShares/{sentShareId}/sentShareInvitations": {
+    "/sentShares/{sentShareId}/sentShareInvitations": {
       "get": {
         "tags": ["SentShareInvitation"],
         "summary": "List all sent share invitations in a sent share",
@@ -445,7 +445,7 @@
         }
       }
     },
-    "/v2/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}": {
+    "/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}": {
       "get": {
         "tags": ["SentShareInvitation"],
         "summary": "Get sent share invitation for a given sent share",
@@ -578,7 +578,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/v2/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}:notify": {
+    "/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}:notify": {
       "post": {
         "tags": ["SentShareInvitation"],
         "summary": "Notifies recipient of the sent share invitation.",
@@ -623,7 +623,7 @@
         }
       }
     },
-    "/v2/activateEmail": {
+    "/activateEmail": {
       "post": {
         "tags": ["TenantEmailRegistration"],
         "summary": "Activates the tenant and email combination using the activation code received.",
@@ -672,7 +672,7 @@
         }
       }
     },
-    "/v2/registerEmail": {
+    "/registerEmail": {
       "post": {
         "tags": ["TenantEmailRegistration"],
         "summary": "Registers the tenant and email combination for activation.",
@@ -900,7 +900,6 @@
     },
     "InPlaceReceivedShareProperties": {
       "description": "Properties of in place received share.",
-      "required": ["sink"],
       "type": "object",
       "properties": {
         "assetLocation": {
