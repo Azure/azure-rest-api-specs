@@ -1,0 +1,180 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-azure-core";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+
+@service({
+  title: "Azure.CodeSigning service",
+})
+@versioned(Azure.CodeSigning.Versions)
+@versionedDependency(
+  [[Azure.CodeSigning.Versions.v2022_06_15_preview, Azure.Core.Versions.v1_0_Preview_1]]
+)
+
+@server(
+  "https://{region}.codesigning.azure.net/", 
+  "Azure CodeSigning is a service that provides managed code signing for all.", {
+    @doc("The region where we will sign code.")
+     region?: string = "eus"
+  }
+)
+
+namespace Azure.CodeSigning;
+
+enum Versions {
+  v2022_06_15_preview: "2022-06-15-preview",
+}
+
+#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is a custom operation status endpoint."
+interface CertificateProfileOperations {
+  @summary("Gets the status of a sign operation.")
+  @doc("Gets the status of a sign operation.")
+  @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
+  GetSignOperation is Foundations.GetOperationStatus<CodeSignStatusParams,OperationStatus>;
+
+  @summary("Initiates a sign operation.")
+  @doc("Initiates a sign operation.")
+  @pollingOperation("GetSignOperation")
+  Sign is LongRunningResourceAction<CodeSigningParam,CertificateProfileParam,OperationStatus>;
+}
+
+
+@doc("Algorithms supported for signing.")
+enum SignatureAlgorithm {
+  "RS256",
+  "RS384",
+  "RS512",
+  "PS256",
+  "PS384",
+  "PS512",
+  "ES256",
+  "ES384",
+  "ES512",
+  "ES256K",
+}
+
+@doc("Sign status of the operation.")
+@lroStatus
+enum Status {
+  "NotStarted",
+  "Running",
+  "Succeeded",
+  "Failed",
+  "Canceled",
+}
+
+@doc("The sign request information to be signed.")
+model SignRequest {
+  @doc("The following algorithm identifiers are supported.")
+  signatureAlgorithm: SignatureAlgorithm;
+
+  @doc("Digest to sign.")
+  digest: bytes;
+
+  @doc("List of full file hash.")
+  fileHashList?: bytes[];
+
+  @doc("List of authenticode hash.")
+  authenticodeHashList?: bytes[];
+}
+
+@doc("The operation status response model.")
+model OperationStatus {
+  @doc("Unique ID of the operation.")
+  id?: string;
+
+  @doc("The status of the sign operation.")
+  status?: Status;
+
+  @doc("Any error that occurred if the operation failed.")
+  errorDetail?: ErrorDetail;
+
+  @doc("The resulting sign operation including the signature and signing certificate.")
+  signStatus?: SignStatus;
+}
+
+@doc("The error detail model.")
+model ErrorDetail {
+  @doc("One of a server-defined set of error codes.")
+  code?: string;
+
+  @doc("A human-readable representation of the error.")
+  message?: string;
+
+  @doc("The target of the error.")
+  target?: string;
+}
+
+@doc("The sign status model.")
+model SignStatus {
+  @doc("ID of the operation.")
+  operationId: string;
+
+  @doc("The status of the sign operation.")
+  status: Status;
+
+  @doc("Signature of the requested digest.")
+  signature?: bytes;
+
+  @doc("""
+Signing certificate corresponding to the private key used to sign the requested
+digest.
+""")
+  signingCertificate?: bytes;
+}
+
+@doc("The error response base model for all operations.")
+@error
+model ErrorResponse {
+  @doc("The error detail model.")
+  errorDetail?: ErrorDetail;
+}
+
+@doc("Sign request parameters")
+@resource("codesigningaccounts")
+model CodeSigningParam {
+  @key("codeSigningAccount")
+  @visibility("read")
+  @doc("Azure Code Signing account name.")
+  @path
+  codeSigningAccountName: string;
+
+  @doc("Sign request details.")
+  @body
+  body: SignRequest;
+}
+
+@doc("Sign request parameters")
+@resource("certificateprofiles")
+model CertificateProfileParam {
+  @key("certificateProfileName")
+  @visibility("read")
+  @doc("Certificate profile name.")
+  @path
+  certificateProfileName: string;
+
+  @doc("Client optional correlation id to organize sub-processes")
+  @header correlationId?: string;
+}
+
+@doc("Sign status request parameters")
+@resource("codesigningaccounts")
+model CodeSignStatusParams {
+  @key("operatId")
+  @visibility("read")
+  @doc("ID of the operation.")
+  @path
+  operatId: string;
+  
+  @doc("Azure Code Signing account name.")
+  @path
+  codeSigningAccountName: string;
+
+  @doc("Certificate profile name.")
+  @path
+  certificateProfileName: string;
+}
