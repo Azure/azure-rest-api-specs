@@ -855,6 +855,15 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CassandraClusterRepairListFilter"
+            },
+            "description": "Optional filter parameters to list repairs."
           }
         ],
         "responses": {
@@ -2003,6 +2012,40 @@
         }
       },
       "additionalProperties": false
+    },
+    "CassandraClusterRepairListFilter": {
+      "description": "Request object to filter list of repair runs.",
+      "type": "object",
+      "properties": {
+        "keyspaceName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Keyspace name of the repair run."
+        },
+        "datacenters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraRepairRunStateEnum"
+          }
+        }
+      }
+    },
+    "CassandraRepairRunStateEnum": {
+      "description": "Valid states of repair run.",
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "RUNNING",
+        "ERROR",
+        "DONE",
+        "PAUSED",
+        "ABORTED",
+        "DELETED"
+      ],
+      "x-ms-enum": {
+        "name": "CassandraRepairRunStateEnum",
+        "modelAsString": true
+      }
     },
     "CassandraReaperScheduleStatus": {
       "type": "object",
