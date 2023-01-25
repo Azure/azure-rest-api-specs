@@ -327,6 +327,7 @@
         },
         "properties": {
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "enabled": {
               "type": "boolean",
@@ -387,6 +388,7 @@
             "$ref": "#/definitions/PrometheusRule"
           },
           "description": "Defines the rules in the Prometheus rule group.",
+          "x-ms-identifiers": [],
           "minItems": 1,
           "maxItems": 20
         }
@@ -394,6 +396,7 @@
     },
     "PrometheusRule": {
       "type": "object",
+      "description": "An Azure Prometheus alerting or recording rule.",
       "required": [
         "expression"
       ],
