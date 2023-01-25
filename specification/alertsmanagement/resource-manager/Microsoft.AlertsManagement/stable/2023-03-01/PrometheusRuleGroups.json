@@ -360,25 +360,25 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "The description of the Prometheus rule group that will be included in the alert email."
+          "description": "Rule group description."
         },
         "enabled": {
           "type": "boolean",
-          "description": "The flag that indicates whether the Prometheus rule group is enabled."
+          "description": "Enable/disable rule group."
         },
         "clusterName": {
           "type": "string",
-          "description": "The cluster name of the rule group evaluation."
+          "description": "Apply rule to data from a specific cluster."
         },
         "scopes": {
           "$ref": "#/definitions/StringArray",
-          "description": "The list of azure resource id's that this rule group is scoped to.",
+          "description": "Target Azure Monitor workspaces resource ids. Only one scope currently supported.",
           "minItems": 1,
           "maxItems": 1
         },
         "interval": {
           "type": "string",
-          "description": "the interval in which to run the Prometheus rule group represented in ISO 8601 duration format. Should be between 1 and 15 minutes",
+          "description": "The interval in which to run the Prometheus rule group represented in ISO 8601 duration format. Should be between 1 and 15 minutes",
           "format": "duration"
         },
         "rules": {
@@ -386,7 +386,7 @@
           "items": {
             "$ref": "#/definitions/PrometheusRule"
           },
-          "description": "defines the rules in the Prometheus rule group.",
+          "description": "Defines the rules in the Prometheus rule group.",
           "minItems": 1,
           "maxItems": 20
         }
@@ -399,16 +399,16 @@
       ],
       "properties": {
         "record": {
-          "description": "The name of the time series to output to. Must be a valid metric name.",
+          "description": "Recorded metrics name.",
           "type": "string"
         },
         "alert": {
-          "description": "The name of the alert. Must be a valid metric name.",
+          "description": "Alert rule name.",
           "type": "string"
         },
         "enabled": {
           "type": "boolean",
-          "description": "the flag that indicates whether the Prometheus rule is enabled."
+          "description": "Enable/disable rule."
         },
         "expression": {
           "description": "The PromQL expression to evaluate. Every evaluation cycle this is evaluated at the current time, and the result recorded as a new set of time series with the metric name as given by 'record'.",
@@ -433,15 +433,15 @@
         },
         "annotations": {
           "$ref": "#/definitions/StringDictionary",
-          "description": "Annotations for rule group."
+          "description": "Alert annotation key-value pairs."
         },
         "actions": {
           "$ref": "#/definitions/PrometheusRuleGroupActions",
-          "description": "The array of actions that are performed when the alert rule becomes active, and when an alert condition is resolved. Only relevant for alerts."
+          "description": "Actions that are performed when the alert rule becomes active, and when an alert condition is resolved."
         },
         "resolveConfiguration": {
           "$ref": "#/definitions/PrometheusRuleResolveConfiguration",
-          "description": "defines the configuration for resolving fired alerts. Only relevant for alerts."
+          "description": "Defines the configuration for resolving fired alerts. Only relevant for alerts."
         }
       }
     },
@@ -451,15 +451,11 @@
       "properties": {
         "actionGroups": {
           "$ref": "#/definitions/StringArray",
-          "description": "The resource ids of the action group to use."
+          "description": "One or more action group resource IDs. Each is activated when an alert is fired."
         },
         "actionProperties": {
           "$ref": "#/definitions/StringDictionary",
           "description": "The properties of an action group object."
-        },
-        "customProperties": {
-          "$ref": "#/definitions/StringDictionary",
-          "description": "The custom properties of an action group object."
         }
       }
     },
@@ -469,11 +465,11 @@
       "properties": {
         "autoResolved": {
           "type": "boolean",
-          "description": "The flag that indicates whether or not to auto resolve a fired alert."
+          "description": "Enable alert auto-resolution."
         },
         "timeToResolve": {
           "type": "string",
-          "description": "the duration a rule must evaluate as healthy before the fired alert is automatically resolved represented in ISO 8601 duration format. Should be between 1 and 15 minutes",
+          "description": "Alert auto-resolution timeout.",
           "format": "duration"
         }
       }
