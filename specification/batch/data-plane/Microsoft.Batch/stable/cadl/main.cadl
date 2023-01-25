@@ -1,17 +1,34 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-autorest";
+import "@cadl-lang/openapi";
 import "./routes.cadl";
 
-using Cadl.Rest;
+using Cadl.Reflection;
 using Cadl.Http;
-@serviceTitle("BatchServiceClient")
-@serviceVersion("2022-01-01.15.0")
-@server(
-  "{batchUrl}",
-  "A client for issuing REST requests to the Azure Batch service.",
-  {
-    @doc("The base URL for all Azure Batch service requests.")
-    batchUrl: string,
-  }
-)
+using Cadl.Rest;
+using Autorest;
+using Cadl.Versioning;
+using Azure.Core;
+using OpenAPI;
+
+@service({
+  title: "BatchServiceClient",
+  version: "2022-10-01.16.0",
+})
+@useAuth(AADToken)
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+
 @doc("A client for issuing REST requests to the Azure Batch service.")
 namespace BatchServiceClient;
+
+@doc("The Azure Active Directory OAuth2 Flow")
+model AADToken
+  is OAuth2Auth<[
+    {
+      type: OAuth2FlowType.implicit;
+      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize";
+      scopes: ["user_impersonation"];
+    }
+  ]>;
