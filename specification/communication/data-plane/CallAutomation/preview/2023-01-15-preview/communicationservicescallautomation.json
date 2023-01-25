@@ -309,14 +309,14 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}:answer": {
+    "/calling/callConnections/{callConnectionId}:answerPma": {
       "post": {
         "tags": [
           "MidConnections"
         ],
         "summary": "Answer a Call.",
         "description": "Answer a call using the call connection Id.",
-        "operationId": "AnswerCall",
+        "operationId": "AnswerCallPma",
         "parameters": [
           {
             "name": "answerCallRequest",
@@ -367,7 +367,7 @@
         },
         "x-ms-examples": {
           "Answer a Call.": {
-            "$ref": "./examples/AnswerCall.json"
+            "$ref": "./examples/AnswerCallPma.json"
           }
         }
       }
@@ -2664,7 +2664,7 @@
           "type": "string"
         },
         "recognizedPhrase": {
-          "description": "Phrases are set to the value if choice is selected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
+          "description": "Phrases are set to the value if choice is seletected via phrase detection.\r\nIf Dtmf input is recognized, then Label will be the identifier for the choice detected and phrases will be set to null",
           "type": "string"
         }
       }
