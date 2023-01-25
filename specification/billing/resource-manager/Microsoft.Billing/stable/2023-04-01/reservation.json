@@ -112,6 +112,13 @@
             "type": "string"
           },
           {
+            "description": "The number of reservations to skip from the list before returning results",
+            "in": "query",
+            "name": "$skiptoken",
+            "required": false,
+            "type": "number"
+          },
+          {
             "description": "To indicate whether to refresh the roll up counts of the reservations group by provisioning states",
             "in": "query",
             "name": "refreshSummary",
@@ -231,6 +238,45 @@
           "readOnly": true,
           "type": "string"
         },
+        "expiryDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the reservation will expire."
+        },
+        "purchaseDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the reservation was purchased."
+        },
+        "purchaseDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the reservation was purchased."
+        },
+        "benefitStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the reservation benefit started."
+        },
+        "lastUpdatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "DateTime of the last time the reservation was updated.",
+          "readOnly": true
+        },
+        "instanceFlexibility": {
+          "description": "Allows reservation discount to be applied across skus within the same auto fit group. Not all skus support instance size flexibility.",
+          "$ref": "#/definitions/InstanceFlexibility"
+        },
+        "billingPlan": {
+          "description": "The billing plan options available for this sku.",
+          "$ref": "#/definitions/ReservationBillingPlan"
+        },
+        "billingScopeId": {
+          "description": "Subscription that will be charged for purchasing reservation or savings plan",
+          "readOnly": true,
+          "type": "string"
+        },
         "provisioningState": {
           "description": "The provisioning state of the reservation, e.g. Succeeded",
           "readOnly": true,
@@ -299,6 +345,13 @@
           },
           "readOnly": true,
           "type": "object"
+        },
+        "archived": {
+          "description": "Indicates if the reservation is archived",
+          "type": "boolean"
+        },
+        "renewProperties": {
+          "$ref": "#/definitions/RenewPropertiesResponse"
         }
       }
     },
@@ -367,6 +420,21 @@
           "description": "The number of reservation in Succeeded state",
           "readOnly": true,
           "type": "number"
+        },
+        "noBenefitCount": {
+          "description": "The number of reservation in 'No Benefit' state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "warningCount": {
+          "description": "The number of reservation in Warning state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "processingCount": {
+          "description": "The number of reservation in Processing state",
+          "readOnly": true,
+          "type": "number"
         }
       },
       "type": "object"
@@ -396,6 +464,202 @@
         }
       },
       "type": "object"
+    },
+    "RenewPropertiesResponse": {
+      "type": "object",
+      "description": "The renew properties for a reservation.",
+      "properties": {
+        "purchaseProperties": {
+          "$ref": "#/definitions/PurchaseRequest"
+        },
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount that Microsoft uses for record. Used during refund for calculating refund limit. Tax is not included. This is locked price 30 days before expiry."
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Currency and amount that customer will be charged in customer's local currency for renewal purchase. Tax is not included."
+        }
+      }
+    },
+    "PurchaseRequest": {
+      "type": "object",
+      "description": "The request for reservation purchase",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/SkuName"
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the reserved resource lives.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PurchaseRequestProperties"
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "The ISO 4217 3-letter currency code for the currency used by this purchase record."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "SkuName": {
+      "type": "object",
+      "description": "The name of sku",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "PurchaseRequestProperties": {
+      "type": "object",
+      "description": "Properties of reservation purchase request",
+      "properties": {
+        "reservedResourceType": {
+          "description": "The reserved source type of the reservation, e.g. virtual machine.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingScopeId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Subscription that will be charged for purchasing reservation or savings plan"
+        },
+        "term": {
+          "description": "The term of the reservation, e.g. P1Y",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
+        },
+        "quantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Quantity of the skus that are part of the reservation. Must be greater than zero."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the reservation"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopes": {
+          "$ref": "#/definitions/AppliedScopes"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
+        "reservedResourceProperties": {
+          "type": "object",
+          "description": "Properties specific to each reserved resource type. Not required if not applicable.",
+          "properties": {
+            "instanceFlexibility": {
+              "$ref": "#/definitions/InstanceFlexibility"
+            }
+          }
+        },
+        "reviewDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the Azure hybrid benefit needs to be reviewed."
+        }
+      }
+    },
+    "ReservationBillingPlan": {
+      "type": "string",
+      "description": "Represent the billing plans.",
+      "enum": [
+        "Upfront",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationBillingPlan",
+        "modelAsString": true
+      }
+    },
+    "AppliedScopeType": {
+      "type": "string",
+      "description": "Type of the Applied Scope.",
+      "enum": [
+        "Single",
+        "Shared",
+        "ManagementGroup"
+      ],
+      "x-ms-enum": {
+        "name": "AppliedScopeType",
+        "modelAsString": true
+      }
+    },
+    "AppliedScopes": {
+      "type": "array",
+      "description": "List of the subscriptions that the benefit will be applied. Do not specify if AppliedScopeType is Shared.",
+      "items": {
+        "type": "string",
+        "minItems": 1,
+        "maxItems": 1
+      },
+      "x-ms-identifiers": []
+    },
+    "AppliedScopeProperties": {
+      "type": "object",
+      "description": "Properties specific to applied scope type. Not required if not applicable. Required and need to provide tenantId and managementGroupId if AppliedScopeType is ManagementGroup",
+      "properties": {
+        "tenantId": {
+          "$ref": "#/definitions/TenantId"
+        },
+        "managementGroupId": {
+          "type": "string",
+          "description": "Fully-qualified identifier of the management group where the benefit must be applied."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Fully-qualified identifier of the subscription."
+        },
+        "resourceGroupId": {
+          "type": "string",
+          "description": "Fully-qualified identifier of the resource group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
+        }
+      }
+    },
+    "Renew": {
+      "type": "boolean",
+      "default": false,
+      "description": "Setting this to true will automatically purchase a new reservation on the expiration date time."
+    },
+    "InstanceFlexibility": {
+      "type": "string",
+      "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group. Only specify for VirtualMachines reserved resource type.",
+      "enum": [
+        "On",
+        "Off"
+      ],
+      "x-ms-enum": {
+        "name": "InstanceFlexibility",
+        "modelAsString": true
+      }
     }
   },
   "securityDefinitions": {
