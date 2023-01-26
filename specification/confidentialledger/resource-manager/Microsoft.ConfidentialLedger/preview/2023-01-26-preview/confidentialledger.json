@@ -564,6 +564,21 @@
         "modelAsString": true
       }
     },
+    "RunningState": {
+      "type": "string",
+      "description": "Object representing RunningState for Confidential Ledger.",
+      "enum": [
+        "Active",
+        "Paused",
+        "Unknown",
+        "Pausing",
+        "Resuming"
+      ],
+      "x-ms-enum": {
+        "name": "RunningState",
+        "modelAsString": true
+      }
+    },
     "LedgerRoleName": {
       "description": "LedgerRole associated with the Security Principal of Ledger",
       "type": "string",
@@ -676,6 +691,10 @@
         }
       ],
       "properties": {
+        "runningState": {
+          "description": "Object representing RunningState for Ledger.",
+          "$ref": "#/definitions/RunningState"
+        },
         "properties": {
           "description": "Properties of Confidential Ledger Resource.",
           "$ref": "#/definitions/LedgerProperties"
