@@ -99,21 +99,21 @@
       "type": "object",
       "description": "Parameters that needs to be included in the request to retrieve prices.",
       "properties":{
-        "regionAgnosticId":{
+        "regionAgnosticIds":{
           "description": "Uniquely identifies a product for which the prices will be returned.",
-          "$ref": "#/definitions/RegionAgnosticId"
+          "$ref": "#/definitions/RegionAgnosticIds"
         }
       },
       "required": [
-        "regionAgnosticId"
+        "regionAgnosticIds"
       ]
     },
-    "RegionAgnosticId":{
+    "RegionAgnosticIds":{
       "type": "object",
       "description": "Pricing details by identifier",
       "properties":{
         "ids": {
-          "description": "List of OfferingIds.",
+          "description": "List of OfferingIds. The array can hold a maximum of 1000 elements.",
           "type": "array",
           "items": {
             "type": "string"
@@ -134,7 +134,7 @@
       "description": "Pricing details by identifier",
       "properties":{
         "id": {
-          "description": "Product identifier for which the prices will be returned.",
+          "description": "OfferingId for which the prices will be returned.",
           "type": "string",
           "readOnly": true
         },
@@ -177,9 +177,8 @@
           "readOnly": true,
           "enum": [
             "Consumption",
-            "DevTest",
-            "SavingsPlan",
-            "Reservation",
+            "DevTest Consumption",
+            "SavingsPlan Consumption",
             "Spot"
           ],
           "x-ms-enum": {

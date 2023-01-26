@@ -4,7 +4,7 @@
         "subscriptionId": "43342d79-afa0-48b8-9397-5134621370d0",
         "parameters": {
             "properties": {
-                "regionAgnoticId":{
+                "regionAgnoticIds":{
                     "ids": [
                         "2fee86b7-7c49-46ac-851f-95094c188ef6",
                         "2416f530-b190-43d7-9fec-239e1a57ea66"
@@ -23,23 +23,20 @@
                 "currency": "USD",
                 "price": [
                   {
-                    "type": "standard consumption",
-                    "term": null,
+                    "type": "consumption",
                     "tierMinimumUnits": 0,
                     "discount": 0.1,
                     "perUnitPrice": 1.65,
                     "perUnitEffectivePrice": 1.485
                   },
                   {
-                    "type": "devTest",
-                    "term": null,
+                    "type": "devTest consumption",
                     "tierMinimumUnits": 0,
                     "discount": 0.05,
                     "perUnitPrice": 1.10,
                     "perUnitEffectivePrice": 0.945
                   }
-                ],
-                "error": null
+                ]
               },
               {
                 "id": "2416f530-b190-43d7-9fec-239e1a57ea66",
@@ -47,8 +44,7 @@
                 "price": [
                   {
                     "type": "consumption",
-                    "term": null,
-                    "tierMinimumUnits  ": 0,
+                    "tierMinimumUnits": 0,
                     "discount": 0.1,
                     "perUnitPrice": 1.396,
                     "perUnitEffectivePrice": 1.2564
@@ -56,7 +52,7 @@
                   {
                     "type": "consumption",
                     "term": null,
-                    "tierMinimumUnits  ": 200,
+                    "tierMinimumUnits": 200,
                     "discount": 0.2,
                     "perUnitPrice": 0.5,
                     "perUnitEffectivePrice": 0.4
@@ -64,14 +60,13 @@
             
                   {
                     "type": "devTest",
-                    "term": null,
                     "tierMinimumUnits": 0,
                     "discount": 0.03,
                     "perUnitPrice": 1.096,
                     "perUnitEffectivePrice": 1.0631
                   },
                   {
-                    "type": "savingsPlan",
+                    "type": "savingsPlan consumption",
                     "term": "P1Y",
                     "tierMinimumUnits": 0,
                     "discount": 0.03,
@@ -79,7 +74,7 @@
                     "perUnitEffectivePrice": 1.0185
                   },
                   {
-                    "type": "savingsPlan",
+                    "type": "savingsPlan consumption",
                     "term": "P3Y",
                     "tierMinimumUnits": 0,
                     "discount": 0.03,
@@ -88,18 +83,15 @@
                   }
                 ]
               }
-            ]              
+            ]                         
         },
         "200 With Errors":{
             "body": [
               {
                 "id": "e0e25f73-0d85-4350-bd93-d9d5bca75a58",
-                "unitOfMeasure": null,
-                "price": null,
-                "currency": null,
                 "error": {
-                  "type": "InvalidResource",
-                  "description": "The resource id provided is invalid."
+                  "type": "InvalidOfferingId",
+                  "description": "The OfferingId provided is invalid."
                 }
               },
               {
@@ -109,15 +101,13 @@
                 "price": [
                   {
                     "type": "consumption",
-                    "term": null,
                     "tierMinimumUnits": 0,
                     "discount": 0.1,
                     "perUnitPrice": 1.65,
                     "perUnitEffectivePrice": 1.485
                   },
                   {
-                    "type": "devTest",
-                    "term": null,
+                    "type": "devTest consumption",
                     "tierMinimumUnits": 0,
                     "discount": 0.05,
                     "perUnitPrice": 1.10,
@@ -125,7 +115,7 @@
                   }
                 ]
               }
-            ]            
+            ]                       
         }        
     }
 }
