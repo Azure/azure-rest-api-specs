@@ -4664,18 +4664,18 @@
         },
         "lastCommitted": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "lastCommitted timestamp"
         },
         "lastModified": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "description": "lastModified timestamp"
         }
       },
       "description": "Changelog list",
       "required": [
-        "changes",
-        "lastCommitted",
-        "lastModified"
+        "changes"
       ]
     },
     "CountriesResponse": {
@@ -5685,7 +5685,7 @@
     },
     "MarketplaceSubscriptionStatus": {
       "type": "string",
-      "description": "Marketplace SUbscription Status",
+      "description": "Marketplace Subscription Status",
       "enum": [
         "PendingFulfillmentStart",
         "Subscribed",
@@ -5698,11 +5698,6 @@
         "name": "MarketplaceSubscriptionStatus",
         "modelAsString": true
       }
-    },
-    "MediumString": {
-      "type": "string",
-      "description": "Shorthand for setting length limit.",
-      "maxLength": 50
     },
     "MonitorLog": {
       "type": "object",
@@ -5816,8 +5811,9 @@
           "description": "different billing cycles like MONTHLY/WEEKLY"
         },
         "planId": {
-          "$ref": "#/definitions/MediumString",
-          "description": "plan id as published by Liftr.PAN"
+          "type": "string",
+          "description": "plan id as published by Liftr.PAN",
+          "maxLength": 50
         },
         "effectiveDate": {
           "type": "string",
@@ -6182,8 +6178,7 @@
       "description": "Rule counter",
       "required": [
         "priority",
-        "ruleName",
-        "requestTimestamp"
+        "ruleName"
       ]
     },
     "RuleCounterReset": {
