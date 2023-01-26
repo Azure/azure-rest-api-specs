@@ -161,6 +161,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterResponse"
+            }
+          },
           "201": {
             "description": "Created",
             "headers": {
@@ -326,6 +332,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ClusterResponse"
+            }
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -577,7 +589,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/configurations/{configurationName}/coordinator": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/coordinatorConfigurations/{configurationName}": {
       "put": {
         "description": "Updates configuration of coordinator in a cluster",
         "tags": [
@@ -620,6 +632,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -643,7 +661,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/configurations/{configurationName}/node": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/nodeConfigurations/{configurationName}": {
       "put": {
         "description": "Updates configuration of nodes in a cluster",
         "tags": [
@@ -686,6 +704,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -752,6 +776,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -1453,7 +1483,7 @@
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProperty"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1506,10 +1536,16 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionProperty"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "headers": {
               "location": {
@@ -1662,7 +1698,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -1707,13 +1743,29 @@
           "description": "The vCores count of a server (max: 64)."
         },
         "enableHa": {
-          "type": "boolean",
-          "description": "If high availability is enabled or not for the server."
+          "type": "string",
+          "description": "If high availability is enabled or not for the server.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "enableHaEnum",
+            "modelAsString": true
+          }
         },
         "enablePublicIp": {
-          "type": "boolean",
+          "type": "string",
           "description": "If public IP is requested or not for a server.",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "enablePublicIpEnum",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1844,12 +1896,28 @@
           "description": "The Citus version of the cluster."
         },
         "enableShardsOnCoordinator": {
-          "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the cluster."
+          "type": "string",
+          "description": "If shards on coordinator is enabled or not for the cluster.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "enableShardsOnCoordinatorEnum",
+            "modelAsString": true
+          }
         },
         "enableHa": {
-          "type": "boolean",
-          "description": "If high availability is enabled or not for the cluster."
+          "type": "string",
+          "description": "If high availability is enabled or not for the cluster.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "enableHaEnum",
+            "modelAsString": true
+          }
         },
         "preferredPrimaryZone": {
           "type": "string",
@@ -1870,8 +1938,16 @@
           "description": "The vCores count of the coordinator (max: 64)."
         },
         "coordinatorEnablePublicIpAccess": {
-          "type": "boolean",
-          "description": "If public IP is requested or not for the coordinator."
+          "type": "string",
+          "description": "If public IP is requested or not for the coordinator.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "coordinatorEnablePublicIpEnum",
+            "modelAsString": true
+          }
         },
         "nodeServerEdition": {
           "type": "string",
@@ -1893,9 +1969,17 @@
           "description": "The vCores count of a node (max: 64)."
         },
         "nodeEnablePublicIpAccess": {
-          "type": "boolean",
+          "type": "string",
           "description": "If public IP is requested or not for a node.",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "nodeEnablePublicIpEnum",
+            "modelAsString": true
+          }
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
@@ -1929,31 +2013,11 @@
           "$ref": "#/definitions/ClusterProperties",
           "x-ms-client-flatten": true,
           "description": "Properties of the cluster create."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1980,8 +2044,16 @@
           "description": "The Citus version of cluster."
         },
         "enableShardsOnCoordinator": {
-          "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the cluster."
+          "type": "string",
+          "description": "If shards on coordinator is enabled or not for the cluster.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "enableShardsOnCoordinatorEnum",
+            "modelAsString": true
+          }
         },
         "earliestRestoreTime": {
           "type": "string",
@@ -1990,8 +2062,16 @@
           "readOnly": true
         },
         "enableHa": {
-          "type": "boolean",
-          "description": "If high availability is enabled or not for the cluster."
+          "type": "string",
+          "description": "If high availability is enabled or not for the cluster.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "enableHaEnum",
+            "modelAsString": true
+          }
         },
         "preferredPrimaryZone": {
           "type": "string",
@@ -2012,8 +2092,16 @@
           "description": "The vCores count of the coordinator (max: 64). Required for creation."
         },
         "coordinatorEnablePublicIpAccess": {
-          "type": "boolean",
-          "description": "If public IP is requested or not for the coordinator."
+          "type": "string",
+          "description": "If public IP is requested or not for the coordinator.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "coordinatorEnablePublicIpEnum",
+            "modelAsString": true
+          }
         },
         "nodeServerEdition": {
           "type": "string",
@@ -2035,8 +2123,16 @@
           "description": "The vCores count of a node (max: 64)."
         },
         "nodeEnablePublicIpAccess": {
-          "type": "boolean",
-          "description": "If public IP is requested or not for a node."
+          "type": "string",
+          "description": "If public IP is requested or not for a node.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "nodeEnablePublicIpEnum",
+            "modelAsString": true
+          }
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
@@ -2109,12 +2205,28 @@
           "description": "Preferred primary zone for the cluster"
         },
         "enableShardsOnCoordinator": {
-          "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the cluster."
+          "type": "string",
+          "description": "If shards on coordinator is enabled or not for the cluster.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "enableShardsOnCoordinatorEnum",
+            "modelAsString": true
+          }
         },
         "enableHa": {
-          "type": "boolean",
-          "description": "If high availability is enabled or not for the server."
+          "type": "string",
+          "description": "If high availability is enabled or not for the server.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "enableHaEnum",
+            "modelAsString": true
+          }
         },
         "coordinatorServerEdition": {
           "type": "string",
@@ -2131,8 +2243,16 @@
           "description": "The vCores count of a server (max: 64)."
         },
         "coordinatorEnablePublicIpAccess": {
-          "type": "boolean",
-          "description": "If public IP is requested or not for a server."
+          "type": "string",
+          "description": "If public IP is requested or not for a server.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "coordinatorEnablePublicIpEnum",
+            "modelAsString": true
+          }
         },
         "nodeServerEdition": {
           "type": "string",
@@ -2154,9 +2274,17 @@
           "description": "The vCores count of a server (max: 64)."
         },
         "nodeEnablePublicIpAccess": {
-          "type": "boolean",
+          "type": "string",
           "description": "If public IP is requested or not for a server.",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "nodeEnablePublicIpEnum",
+            "modelAsString": true
+          }
         },
         "serverNames": {
           "type": "array",
@@ -2199,7 +2327,7 @@
           "description": "The private endpoint connections for a cluster.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/SimplePrivateEndpointConnection"
           },
           "readOnly": true
         }
@@ -2260,8 +2388,16 @@
           "readOnly": true
         },
         "requiresRestart": {
-          "type": "boolean",
-          "description": "If configuration change requires restart."
+          "type": "string",
+          "description": "If configuration change requires restart.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "requiresRestartEnum",
+            "modelAsString": true
+          }
         },
         "serverRoleGroupConfigurations": {
           "type": "array",
@@ -2383,8 +2519,16 @@
           "readOnly": true
         },
         "requiresRestart": {
-          "type": "boolean",
-          "description": "If configuration change requires restart."
+          "type": "string",
+          "description": "If configuration change requires restart.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "requiresRestartEnum",
+            "modelAsString": true
+          }
         }
       },
       "required": [
@@ -2593,7 +2737,15 @@
         },
         "isDataAction": {
           "description": "Indicates whether the operation is a data action",
-          "type": "boolean"
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "isDataActionEnum",
+            "modelAsString": true
+          }
         },
         "origin": {
           "type": "string",
@@ -2676,8 +2828,16 @@
           "description": "Error Message."
         },
         "nameAvailable": {
-          "type": "boolean",
-          "description": "Indicates whether the resource name is available."
+          "type": "string",
+          "description": "Indicates whether the resource name is available.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "nameAvailableEnum",
+            "modelAsString": true
+          }
         },
         "name": {
           "type": "string",
@@ -2699,7 +2859,7 @@
         }
       }
     },
-    "PrivateEndpointConnection": {
+    "SimplePrivateEndpointConnection": {
       "description": "A private endpoint connection",
       "type": "object",
       "allOf": [
@@ -2715,21 +2875,18 @@
         }
       }
     },
-    "PrivateEndpointConnectionProperty": {
-      "description": "A private endpoint connection property",
+    "PrivateEndpointConnectionListResult": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of the private endpoint connection."
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
         }
-      }
+      },
+      "description": "List of private endpoint connections associated with the specified resource."
     },
     "PrivateEndpointConnectionActionRequest": {
       "description": "A private endpoint connection",
@@ -2745,119 +2902,18 @@
         "properties"
       ]
     },
-    "PrivateEndpointConnectionListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionProperty"
-          },
-          "description": "The list of private endpoint connections"
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "description": "A list of private endpoint connections."
-    },
-    "PrivateLinkResource": {
-      "description": "A private link resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of the private link resource."
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "description": "Properties of a private link resource.",
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The private link resource group id."
-        },
-        "requiredMembers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The private link resource required member names."
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The private link resource zone names."
-        }
-      }
-    },
-    "PrivateLinkResourceListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
-          },
-          "description": "The list of private link resources."
-        },
-        "nextLink": {
-          "description": "The link used to get the next page of private link resources.",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "description": "A list of private link resources."
-    },
     "PrivateEndpointConnectionActionRequestProperties": {
       "description": "The properties used to create a private endpoint connection",
       "type": "object",
       "properties": {
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionRequestState",
           "description": "Connection state of the private endpoint connection."
         }
       },
       "required": [
         "privateLinkServiceConnectionState"
       ]
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "The properties in private endpoint connection",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "groupIds": {
-          "type": "array",
-          "description": "Group ids of the private endpoint connection.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection state of the private endpoint connection."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "State of the private endpoint connection."
-        }
-      }
     },
     "PrivateEndpointConnectionSimpleProperties": {
       "description": "The properties in private endpoint connection",
@@ -2875,42 +2931,36 @@
           }
         },
         "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection state of the private endpoint connection."
+          "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
         }
       }
     },
-    "PrivateLinkServiceConnectionStateProperty": {
-      "type": "object",
-      "description": "The properties in private link service connection state",
-      "properties": {
-        "actionsRequired": {
-          "type": "string",
-          "description": "The actions required for private link service connection."
-        },
-        "description": {
-          "type": "string",
-          "description": "The private link service connection description."
-        },
-        "status": {
-          "type": "string",
-          "description": "The private link service connection status."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionState": {
+    "PrivateLinkServiceConnectionRequestState": {
       "type": "object",
       "description": "The private link service connection state",
       "properties": {
         "description": {
           "type": "string",
-          "description": "The private link service connection description."
+          "description": "The reason for approval/rejection of the connection."
         },
         "status": {
           "type": "string",
-          "description": "The private link service connection status."
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
         }
       }
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources."
     }
   },
   "parameters": {
@@ -2970,7 +3020,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the private endpoint connection.",
+      "description": "The name of the private endpoint connection associated with the Azure resource.",
       "pattern": "^[-\\w\\._]+$",
       "x-ms-parameter-location": "method"
     },
