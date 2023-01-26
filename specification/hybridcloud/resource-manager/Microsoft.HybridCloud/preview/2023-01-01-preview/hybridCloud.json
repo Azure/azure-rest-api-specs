@@ -3,10 +3,7 @@
   "info": {
     "version": "2023-01-01-preview",
     "title": "HybridCloud",
-    "description": "Hybrid cloud connectivity Management API.",
-    "x-ms-code-generation-settings": {
-      "name": "HybridCloudClient"
-    }
+    "description": "Hybrid cloud connectivity Management API."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -288,8 +285,7 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URI to poll for the operation status.",
+              "Location": {
                 "type": "string"
               }
             }
@@ -414,7 +410,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     },

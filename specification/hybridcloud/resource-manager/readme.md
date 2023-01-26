@@ -1,8 +1,8 @@
-# hybridcloud
+# Hybrid Cloud API
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for hybridcloud.
+This is the AutoRest configuration file for Hybrid Cloud API.
 
 ## Getting Started
 
@@ -22,11 +22,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the hybridcloud.
+These are the global settings for the Hybrid Cloud API.
 
 ```yaml
 openapi-type: arm
 tag: package-2023-01-01-preview
+title: HybridCloudClient
 ```
 
 ### Tag: package-2023-01-01-preview
