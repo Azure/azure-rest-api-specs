@@ -233,6 +233,50 @@
       },
       "description": "Paged API list representation."
     },
+    "DocumentationCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentationContract"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Documentation list representation."
+    },
+    "WikiCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WikiContract"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Page values.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any.",
+          "readOnly": true
+        }
+      },
+      "description": "Paged Wiki list representation."
+    },
     "ApiContract": {
       "properties": {
         "properties": {
@@ -7930,6 +7974,100 @@
       "additionalProperties": {
         "type": "string"
       }
+    },
+    "DocumentationContractProperties": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "documentation title."
+        },
+        "content": {
+          "type": "string",
+          "description": "Markdown documentation content."
+        }
+      },
+      "description": "Markdown documentation details."
+    },
+    "DocumentationContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DocumentationContractProperties",
+          "description": "Markdown Documentation details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Markdown documentation details."
+    },
+    "DocumentationUpdateContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DocumentationContractProperties",
+          "description": "Markdown Documentation details."
+        }
+      },
+      "description": "Documentation update contract details."
+    },
+    "WikiDocumentationContract": {
+      "type": "object",
+      "properties": {
+        "documentationId": {
+          "type": "string",
+          "description": "Documentation Identifier"
+        }
+      },
+      "description": "Wiki documentation details."
+    },
+    "WikiContractProperties": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Collection wiki documents included into this wiki.",
+          "items": {
+            "$ref": "#/definitions/WikiDocumentationContract"
+          },
+          "x-ms-identifiers": [
+            "documentationId"
+          ]
+        }
+      },
+      "description": "Wiki contract details"
+    },
+    "WikiContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WikiContractProperties",
+          "description": "Wiki details."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Wiki properties"
+    },
+    "WikiUpdateContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WikiContractProperties",
+          "description": "Wiki details."
+        }
+      },
+      "description": "Wiki update contract details."
     }
   },
   "parameters": {}

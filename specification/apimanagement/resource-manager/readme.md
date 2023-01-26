@@ -83,6 +83,7 @@ input-file:
   - Microsoft.ApiManagement/stable/2022-08-01/apimtenant.json
   - Microsoft.ApiManagement/stable/2022-08-01/apimusers.json
   - Microsoft.ApiManagement/stable/2022-08-01/definitions.json
+  - Microsoft.ApiManagement/stable/2022-08-01/apimdocumentations.json
 ```
 
 ### Tag: package-preview-2022-04
