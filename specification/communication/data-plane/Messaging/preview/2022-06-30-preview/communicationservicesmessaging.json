@@ -25,6 +25,7 @@
           {
             "in": "body",
             "name": "body",
+            "required": true,
             "schema": {
               "$ref": "#/definitions/SendMessageRequest"
             }
@@ -43,6 +44,53 @@
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Send Message": {
+            "$ref": "./examples/SendMessage.json"
+          }
+        }
+      }
+    },
+    "/messaging/stream/{id}": {
+      "get": {
+        "tags": [
+          "Stream"
+        ],
+        "operationId": "Stream_DownloadMedia",
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Communication Error Response",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Send Message": {
+            "$ref": "./examples/DownloadMedia.json"
           }
         }
       }
