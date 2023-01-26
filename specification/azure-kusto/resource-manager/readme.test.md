@@ -1,4 +1,4 @@
-### Tag: package-2022-12-29
+### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12-29` is specified on the command line.
 
