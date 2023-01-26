@@ -139,6 +139,9 @@
     "AlertRuleRecommendationsListResponse": {
       "type": "object",
       "description": "List of alert rule recommendations.",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -158,7 +161,7 @@
         "ruleArmTemplate"
       ],
       "properties": {
-        "alertRuleType":{
+        "alertRuleType": {
           "type": "string",
           "description": "The recommendation alert rule type."
         },
@@ -191,6 +194,52 @@
         }
       }
     },
+    "MetricAlertsDisplayUnit": {
+      "type": "string",
+      "description": "The unit to disaply for a metric alert rule.",
+      "enum": [
+        "None",
+        "Percentage",
+        "Bytes",
+        "Kilobytes",
+        "Megabytes",
+        "Gigabytes",
+        "Terabytes",
+        "Petabytes",
+        "BytesPerDay",
+        "BytesPerHour",
+        "BytesPerMinute",
+        "BytesPerSecond",
+        "KilobytesPerSecond",
+        "MegabytesPerSecond",
+        "GigabytesPerSecond",
+        "TerabytesPerSecond",
+        "PetabytesPerSecond",
+        "Count",
+        "Thousand",
+        "Million",
+        "Billion",
+        "Trillion",
+        "MicroSeconds",
+        "MilliSeconds",
+        "Seconds",
+        "Minutes",
+        "Hours",
+        "Days",
+        "CountPerDay",
+        "CountPerHour",
+        "CountPerMinute",
+        "CountPerSecond",
+        "ThousandPerSecond",
+        "MillionPerSecond",
+        "BillionPerSecond",
+        "TrillionPerSecond"
+      ],
+      "x-ms-enum": {
+        "name": "MetricAlertsDisplayUnit",
+        "modelAsString": true
+      }
+    },
     "MetricAlertsDisplayInformation": {
       "description": "Provides display information specific for Metric Alerts rule.",
       "type": "object",
@@ -204,7 +253,7 @@
           "description": "The metric display name to use in the UI for the metric alert rule."
         },
         "displayUnits": {
-          "type": "string",
+          "$ref": "#/definitions/MetricAlertsDisplayUnit",
           "description": "The display units to use in the UI for the metric alert rule."
         }
       }
