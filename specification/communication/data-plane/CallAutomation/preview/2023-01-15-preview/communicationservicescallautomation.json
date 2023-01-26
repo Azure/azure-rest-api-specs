@@ -727,8 +727,8 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Mute all participants from the call.",
-        "description": "Mute all participants from the call.",
+        "summary": "Mute all participants from the call, except for requestor.",
+        "description": "Mute all participants from the call, except for requestor.",
         "operationId": "CallConnection_MuteAll",
         "parameters": [
           {
@@ -741,7 +741,7 @@
           {
             "name": "muteAllParticipantsRequest",
             "in": "body",
-            "description": "The participant to be excluded from the mute all operation, if any.",
+            "description": "Requestor of the Mute All operation. If not passed, the Call Source Participant is assumed as requestor.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/MuteAllParticipantsRequest"
@@ -779,7 +779,7 @@
           }
         },
         "x-ms-examples": {
-          "Mute all participants from the call.": {
+          "Mute all participants from the call, except for requestor.": {
             "$ref": "./examples/CallConnection_MuteAll.json"
           }
         }
@@ -2068,6 +2068,7 @@
       "type": "object",
       "properties": {
         "targetParticipants": {
+          "description": "Participants to be muted from the call.\r\nOnly ACS Users are supported.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
@@ -2087,6 +2088,7 @@
       "type": "object",
       "properties": {
         "targetParticipants": {
+          "description": "Participants to be unmuted from the call.\r\nOnly ACS Users are supported.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
@@ -2719,7 +2721,7 @@
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
-        {
+      {
             "name": "endpoint",
             "description": "The endpoint of the Azure Communication resource.",
             "required": true,
