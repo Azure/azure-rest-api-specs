@@ -1435,7 +1435,7 @@
           "200": {
             "description": "Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
             }
           },
           "default": {
@@ -1650,7 +1650,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResourceListResult"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           },
           "default": {
@@ -2875,6 +2875,19 @@
         }
       }
     },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections.",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        }
+      },
+      "description": "List of private endpoint connections associated with the specified resource."
+    },
     "PrivateEndpointConnectionActionRequest": {
       "description": "A private endpoint connection",
       "type": "object",
@@ -2935,6 +2948,19 @@
           "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
         }
       }
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "description": "A list of private link resources."
     }
   },
   "parameters": {
