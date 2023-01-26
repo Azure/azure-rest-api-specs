@@ -7,7 +7,7 @@
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: 2022-01-01-preview
+tag: 2022-10-01-preview
 ```
 
 ### Supported API Versions
@@ -45,6 +45,13 @@ input-file:
   - Wandisco.Fusion/preview/2022-01-01-preview/commonTypes.json
   - Wandisco.Fusion/preview/2022-01-01-preview/migrators.json
   - Wandisco.Fusion/preview/2022-01-01-preview/operations.json
+```
+
+```yaml $(tag) == '2022-10-01-preview'
+input-file:
+  - Wandisco.Fusion/preview/2022-10-01-preview/commonTypes.json
+  - Wandisco.Fusion/preview/2022-10-01-preview/migrators.json
+  - Wandisco.Fusion/preview/2022-10-01-preview/operations.json
 ```
 
 ## Language specific configurations
