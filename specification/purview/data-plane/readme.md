@@ -169,6 +169,21 @@ input-file:
 
 ``` yaml
 openapi-type: data-plane
+tag: package-2022-06-30-preview
+title: PurviewShareClient
+```
+
+### Tag: package-2022-06-30-preview
+
+These settings apply only when `--tag=package-2022-06-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-06-30-preview'
+input-file:
+  - Azure.Analytics.Purview.Share/preview/2022-06-30-preview/share.json
+```
+
+``` yaml
+openapi-type: data-plane
 tag: package-2022-11-01-preview
 title: PurviewPDSClient
 ```
