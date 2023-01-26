@@ -18,7 +18,7 @@
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservations": {
       "get": {
-        "description": "Lists the reservations for a billing account and the roll up counts of reservations group by provisioning states.",
+        "description": "Lists the reservations in the billing account and the roll up counts of reservations group by provisioning states.",
         "operationId": "Reservations_ListAllByBillingAccount",
         "parameters": [
           {
@@ -92,20 +92,20 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}": {
       "get": {
-        "summary": "Get `Reservation` details for a billing account.",
-        "description": "Get specific `Reservation` details for a billing account.",
+        "summary": "Get Reservation details in the billing account.",
+        "description": "Get specific Reservation details in the billing account.",
         "operationId": "Reservation_GetByBillingAccount",
         "x-ms-examples": {
-          "GetReservationByBillingAccount": {
+          "reservationGetByBillingAccount": {
             "$ref": "./examples/reservationGetByBillingAccount.json"
           },
-          "GetReservationByBillingAccountSingleScope": {
+          "reservationGetByBillingAccountSingleScope": {
             "$ref": "./examples/reservationGetByBillingAccountSingleScope.json"
           },
-          "GetReservationByBillingAccountSingleResourceGroup": {
+          "reservationGetByBillingAccountSingleResourceGroup": {
             "$ref": "./examples/reservationGetByBillingAccountSingleResourceGroup.json"
           },
-          "GetReservationByBillingAccountManagementGroup": {
+          "reservationGetByBillingAccountManagementGroup": {
             "$ref": "./examples/reservationGetByBillingAccountManagementGroup.json"
           }
         },
@@ -147,11 +147,11 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations": {
       "get": {
-        "summary": "Get `Reservation`s in a given reservation Order for a billing account",
-        "description": "List `Reservation`s within a single `ReservationOrder` for a billing account.",
+        "summary": "Get Reservations in a given reservation Order in the billing account",
+        "description": "List Reservations within a single ReservationOrder in the billing account.",
         "operationId": "Reservations_ListByBillingAccount",
         "x-ms-examples": {
-          "ReservationList": {
+          "reservationsGetFromOrderByBillingAccount": {
             "$ref": "./examples/reservationsGetFromOrderByBillingAccount.json"
           }
         },
@@ -170,7 +170,7 @@
           }
         ],
         "tags": [
-          "Reservation"
+          "Reservations"
         ],
         "responses": {
           "200": {
@@ -190,14 +190,14 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders/{reservationOrderId}": {
       "get": {
-        "summary": "Get a specific `ReservationOrder` for a billing account.",
-        "description": "Get the details of the `ReservationOrder` for a billing account.",
+        "summary": "Get a specific ReservationOrder in the billing account.",
+        "description": "Get the details of the ReservationOrder in the billing account.",
         "operationId": "ReservationOrder_GetByBillingAccount",
         "x-ms-examples": {
-          "GetReservationOrderByBillingAccount": {
+          "reservationOrderGetByBillingAccount": {
             "$ref": "./examples/reservationOrderGetByBillingAccount.json"
           },
-          "GetReservationByBillingAccountWithExpandPayments": {
+          "reservationOrderGetByBillingAccountWithExpandPlanInformation": {
             "$ref": "./examples/reservationOrderGetByBillingAccountWithExpandPlanInformation.json"
           }
         },
@@ -228,7 +228,47 @@
           "default": {
             "description": "Unexpected error",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders": {
+      "get": {
+        "summary": "Get all `ReservationOrders in the billing account.",
+        "description": "List all the `ReservationOrders in the billing account.",
+        "operationId": "ReservationOrders_ListByBillingAccount",
+        "x-ms-examples": {
+          "reservationOrderListByBillingAccount": {
+            "$ref": "./examples/reservationOrdersListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          }
+        ],
+        "tags": [
+          "ReservationOrders"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of ReservationOrders",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrderList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -236,7 +276,7 @@
     }
   },
   "definitions": {
-    "ReservationOrderResponse": {
+    "ReservationOrder": {
       "type": "object",
       "description": "Details of a reservation order being returned.",
       "x-ms-azure-resource": true,
@@ -600,6 +640,22 @@
           },
           "readOnly": true,
           "type": "array"
+        }
+      }
+    },
+    "ReservationOrderList": {
+      "type": "object",
+      "description": "List of ReservationOrders",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReservationOrder"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of reservationOrders."
         }
       }
     },
