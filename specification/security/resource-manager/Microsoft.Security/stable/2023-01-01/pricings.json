@@ -270,9 +270,8 @@
           "enum": [
             "AgentlessVmScanning",
             "AgentlessDiscoveryForKubernetes",
-            "DataSensitivityScanning",
             "OnUploadMalwareScanning",
-            "DataSensitivityDiscovery",
+            "SensitiveDataDiscovery",
             "ContainerRegistriesVulnerabilityAssessments"
           ],
           "x-ms-enum": {
@@ -281,27 +280,23 @@
             "values": [
               {
                 "value": "AgentlessVmScanning",
-                "description": "Available for DCSPM and D4Servers P2 plans."
+                "description": "Available for CloudPosture and VirtualMachines plans."
               },
               {
                 "value": "AgentlessDiscoveryForKubernetes",
-                "description": "API-based discovery of information about Kubernetes cluster architecture, workload objects, and setup. Required for Kubernetes inventory, identity and network exposure detection, attack path analysis and risk hunting as part of the cloud security explorer.\r\nAvailable for DCSPM plan."
-              },
-              {
-                "value": "DataSensitivityScanning",
-                "description": "Available for DCSPM plan."
+                "description": "API-based discovery of information about Kubernetes cluster architecture, workload objects, and setup. Required for Kubernetes inventory, identity and network exposure detection, attack path analysis and risk hunting as part of the cloud security explorer.\r\nAvailable for CloudPosture plan."
               },
               {
                 "value": "OnUploadMalwareScanning",
                 "description": "Limits the GB to be scanned per month for each storage account within the subscription. Once this limit reached on a given storage account, Blobs won't be scanned during current calendar month.\r\nAvailable for StorageAccounts plan."
               },
               {
-                "value": "DataSensitivityDiscovery",
-                "description": "Data sensitivity discovery identifies Blob storage container with sensitive data such as credentials, credit cards, and more, to help prioritize and investigate security events.\r\nAvailable for StorageAccounts plan."
+                "value": "SensitiveDataDiscovery",
+                "description": "Sensitive data discovery identifies Blob storage container with sensitive data such as credentials, credit cards, and more, to help prioritize and investigate security events.\r\nAvailable for StorageAccounts and CloudPosture plans."
               },
               {
                 "value": "ContainerRegistriesVulnerabilityAssessments",
-                "description": "Provides vulnerability management for images stored in your container registries.\r\nAvailable for DCSPM and Containers plans."
+                "description": "Provides vulnerability management for images stored in your container registries.\r\nAvailable for CloudPosture and Containers plans."
               }
             ]
           }
