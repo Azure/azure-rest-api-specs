@@ -473,7 +473,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of cloud connectors resources.",
+            "description": "Request successful. The operation returns a list of cloud connections resources.",
             "schema": {
               "$ref": "#/definitions/CloudConnectionListResult"
             }
@@ -486,7 +486,7 @@
           }
         },
         "x-ms-examples": {
-          "List of Cloud Connectors by ResourceGroup": {
+          "List of Cloud Connections by ResourceGroup": {
             "$ref": "./examples/CloudConnectionsByResourceGroupList.json"
           }
         },
@@ -540,7 +540,7 @@
         "tags": [
           "CloudConnections"
         ],
-        "description": "Creates or updates a cloud connector resource",
+        "description": "Creates or updates a cloud connection resource",
         "operationId": "CloudConnections_CreateOrUpdate",
         "parameters": [
           {
@@ -935,7 +935,8 @@
           "description": "Properties of the remote cloud resource.",
           "readOnly": true
         }
-      }
+      },
+      "description": "Discovered Resource properties."
     },
     "ResourceReference": {
       "type": "object",
