@@ -790,7 +790,7 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           }
         ],
-        "description": "Lists upcoming actions on a Dev Box.",
+        "description": "Lists actions on a Dev Box.",
         "operationId": "DevBoxes_ListActions",
         "responses": {
           "200": {
@@ -845,7 +845,7 @@
             "$ref": "#/parameters/DevBoxActionNameParameter"
           }
         ],
-        "description": "Gets an upcoming action.",
+        "description": "Gets an action.",
         "operationId": "DevBoxes_GetAction",
         "responses": {
           "200": {
@@ -896,7 +896,7 @@
             "$ref": "#/parameters/DevBoxActionNameParameter"
           }
         ],
-        "description": "Skips an upcoming action.",
+        "description": "Skips an occurrence of an action.",
         "operationId": "DevBoxes_SkipAction",
         "responses": {
           "204": {
@@ -944,10 +944,10 @@
             "$ref": "#/parameters/DevBoxActionNameParameter"
           },
           {
-            "$ref": "#/parameters/UntilParameter"
+            "$ref": "#/parameters/DevBoxActionDelayUntilParameter"
           }
         ],
-        "description": "Delays an upcoming action.",
+        "description": "Delays the occurrence of an action.",
         "operationId": "DevBoxes_DelayAction",
         "responses": {
           "200": {
@@ -995,10 +995,10 @@
             "$ref": "#/parameters/DevBoxNameParameter"
           },
           {
-            "$ref": "#/parameters/UntilParameter"
+            "$ref": "#/parameters/DevBoxActionDelayUntilParameter"
           }
         ],
-        "description": "Delays all upcoming actions.",
+        "description": "Delays all actions.",
         "operationId": "DevBoxes_DelayActions",
         "x-ms-long-running-operation": true,
         "responses": {
@@ -1079,7 +1079,7 @@
         },
         "hibernateSupport": {
           "description": "Indicates whether hibernate is enabled/disabled or unknown.",
-          "$ref": "devcenter.json#/definitions/EnableStatus",
+          "$ref": "#/definitions/HibernateSupport",
           "readOnly": true
         },
         "storageProfile": {
@@ -1094,7 +1094,7 @@
         },
         "localAdministrator": {
           "description": "Indicates whether owners of Dev Boxes in this pool are local administrators on the Dev Boxes.",
-          "$ref": "devcenter.json#/definitions/EnableStatus"
+          "$ref": "#/definitions/LocalAdminStatus"
         },
         "stopOnDisconnect": {
           "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
@@ -1119,6 +1119,43 @@
       "type": "string",
       "x-ms-enum": {
         "name": "PoolHealthStatus",
+        "modelAsString": true
+      }
+    },
+    "HibernateSupport": {
+      "description": "Indicates whether hibernate is supported and enabled, disabled, or unsupported by the operating system. Unknown hibernate support is represented as null.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "OsUnsupported"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "HibernateSupport",
+        "modelAsString": true
+      }
+    },
+    "LocalAdminStatus": {
+      "description": "Indicates whether owners of Dev Boxes in a pool are local administrators on the Dev Boxes.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "LocalAdminStatus",
+        "modelAsString": true
+      }
+    },
+    "StopOnDisconnectEnableStatus": {
+      "description": "Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "StopOnDisconnectEnableStatus",
         "modelAsString": true
       }
     },
@@ -1242,7 +1279,7 @@
         },
         "hibernateSupport": {
           "description": "Indicates whether hibernate is enabled/disabled or unknown.",
-          "$ref": "devcenter.json#/definitions/EnableStatus",
+          "$ref": "#/definitions/HibernateSupport",
           "readOnly": true
         },
         "provisioningState": {
@@ -1308,7 +1345,7 @@
         },
         "localAdministrator": {
           "description": "Indicates whether the owner of the Dev Box is a local administrator.",
-          "$ref": "devcenter.json#/definitions/EnableStatus"
+          "$ref": "#/definitions/LocalAdminStatus"
         }
       },
       "required": [
@@ -1438,8 +1475,8 @@
       "description": "Stop on disconnect configuration settings for Dev Boxes created in this pool.",
       "properties": {
         "status": {
-          "description": "Whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.",
-          "$ref": "devcenter.json#/definitions/EnableStatus",
+          "description": "Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.",
+          "$ref": "#/definitions/StopOnDisconnectEnableStatus",
           "readOnly": true
         },
         "gracePeriodMinutes": {
@@ -1576,9 +1613,9 @@
       "description": "The name of an action that will take place on a Dev Box.",
       "x-ms-parameter-location": "method"
     },
-    "UntilParameter": {
+    "DevBoxActionDelayUntilParameter": {
       "name": "until",
-      "description": "The time to delay the action or actions until.",
+      "description": "The time to delay the Dev Box action or actions until.",
       "required": true,
       "type": "string",
       "format": "date-time",

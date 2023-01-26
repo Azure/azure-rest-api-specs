@@ -635,10 +635,7 @@
         "user": {
           "type": "string",
           "description": "The AAD object id of the owner of this Environment.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "provisioningState": {
           "description": "The provisioning state of the environment.",
@@ -667,7 +664,7 @@
           ]
         },
         "errorDetails": {
-          "description": "Provisioning or action error details. Populated only for error states.",
+          "description": "Provisioning error details. Populated only for error states.",
           "readOnly": true,
           "$ref": "devcenter.json#/definitions/ProvisioningError"
         }
@@ -890,10 +887,22 @@
           "readOnly": true
         },
         "status": {
-          "description": "Defines whether this Environment Type can be used in this Project.",
-          "$ref": "devcenter.json#/definitions/EnableStatus",
+          "description": "Indicates whether this environment type is enabled for use in this project.",
+          "$ref": "#/definitions/EnvironmentTypeEnableStatus",
           "readOnly": true
         }
+      }
+    },
+    "EnvironmentTypeEnableStatus": {
+      "description": "Indicates whether an environment type is enabled for use in a project.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EnvironmentTypeEnableStatus",
+        "modelAsString": true
       }
     },
     "ParameterType": {
