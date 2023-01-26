@@ -1000,15 +1000,11 @@
         ],
         "description": "Delays all actions.",
         "operationId": "DevBoxes_DelayActions",
-        "x-ms-long-running-operation": true,
         "responses": {
-          "202": {
-            "description": "The request was accepted",
-            "headers": {
-              "Operation-Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DevBoxActionsListResult"
             }
           },
           "default": {
