@@ -18,6 +18,10 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
       "post": {
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "operationId": "Subscription_Cancel",
         "x-ms-examples": {
           "cancelSubscription": {
@@ -59,6 +63,10 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable": {
       "post": {
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "operationId": "Subscription_Enable",
         "x-ms-examples": {
           "enableSubscription": {
@@ -98,8 +106,12 @@
         }
       }
     },
-    "/providers/Microsoft.Subscription/OperationResults/{operationId}": {
+    "/providers/Microsoft.Subscription/operationresults/{operationId}": {
       "get": {
+        "x-ms-long-running-operation:": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "operationId": "OperationResults",
         "x-ms-examples": {
           "getOperationResults": {
@@ -120,7 +132,13 @@
             "description": "Operation is completed successfully"
           },
           "202": {
-            "description": "Operation still in progress"
+            "description": "Operation still in progress",
+            "headers": {
+              "location": {
+                "description": "Get the status the given operationId",
+                "type": "string"
+              }
+            }
           }
         }
       }
