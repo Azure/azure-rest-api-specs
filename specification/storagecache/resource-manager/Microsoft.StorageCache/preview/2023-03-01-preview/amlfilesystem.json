@@ -655,6 +655,17 @@
           "description": "SKU for the resource.",
           "$ref": "#/definitions/SkuName"
         },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability zones for resources. This field should only contain a single element in the array.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of the AML file system.",
@@ -672,17 +683,6 @@
               "description": "Health of the AML file system.",
               "readOnly": true,
               "$ref": "#/definitions/AmlFilesystemHealth"
-            },
-            "zones": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "Availability zones for resources. This field should only contain a single element in the array.",
-              "x-ms-mutability": [
-                "read",
-                "create"
-              ]
             },
             "provisioningState": {
               "description": "ARM provisioning state.",
@@ -788,7 +788,6 @@
           "required": [
             "filesystemSubnet",
             "storageCapacityTiB",
-            "zones",
             "maintenanceWindow"
           ]
         }
