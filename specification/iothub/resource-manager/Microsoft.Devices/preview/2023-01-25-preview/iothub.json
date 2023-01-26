@@ -2953,8 +2953,8 @@
             "$ref": "#/definitions/RoutingStorageContainerProperties"
           }
         },
-        "cosmosDBSqlCollections": {
-          "description": "The list of Cosmos DB collection endpoints that IoT hub routes messages to, based on the routing rules.",
+        "cosmosDBSqlContainers": {
+          "description": "The list of Cosmos DB container endpoints that IoT hub routes messages to, based on the routing rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoutingCosmosDBSqlApiProperties"
@@ -3211,7 +3211,7 @@
       ]
     },
     "RoutingCosmosDBSqlApiProperties": {
-      "description": "The properties related to a cosmos DB sql collection endpoint.",
+      "description": "The properties related to a cosmos DB sql container endpoint.",
       "type": "object",
       "properties": {
         "name": {
@@ -3220,7 +3220,7 @@
           "pattern": "^[A-Za-z0-9-._]{1,64}$"
         },
         "id": {
-          "description": "Id of the cosmos DB sql collection endpoint",
+          "description": "Id of the cosmos DB sql container endpoint",
           "type": "string"
         },
         "subscriptionId": {
@@ -3236,7 +3236,7 @@
           "type": "string"
         },
         "authenticationType": {
-          "description": "Method used to authenticate against the cosmos DB sql collection endpoint",
+          "description": "Method used to authenticate against the cosmos DB sql container endpoint",
           "enum": [
             "keyBased",
             "identityBased"
@@ -3248,7 +3248,7 @@
           }
         },
         "identity": {
-          "description": "Managed identity properties of routing cosmos DB collection endpoint.",
+          "description": "Managed identity properties of routing cosmos DB container endpoint.",
           "$ref": "#/definitions/ManagedIdentity"
         },
         "primaryKey": {
@@ -3265,16 +3265,16 @@
           "description": "The name of the cosmos DB database in the cosmos DB account.",
           "type": "string"
         },
-        "collectionName": {
-          "description": "The name of the cosmos DB sql collection in the cosmos DB database.",
+        "containerName": {
+          "description": "The name of the cosmos DB sql container in the cosmos DB database.",
           "type": "string"
         },
         "partitionKeyName": {
-          "description": "The name of the partition key associated with this cosmos DB sql collection if one exists. This is an optional parameter.",
+          "description": "The name of the partition key associated with this cosmos DB sql container if one exists. This is an optional parameter.",
           "type": "string"
         },
         "partitionKeyTemplate": {
-          "description": "The template for generating a synthetic partition key value for use with this cosmos DB sql collection. The template must include at least one of the following placeholders: {iothub}, {deviceid}, {DD}, {MM}, and {YYYY}. Any one placeholder may be specified at most once, but order and non-placeholder components are arbitrary. This parameter is only required if PartitionKeyName is specified.",
+          "description": "The template for generating a synthetic partition key value for use with this cosmos DB sql container. The template must include at least one of the following placeholders: {iothub}, {deviceid}, {DD}, {MM}, and {YYYY}. Any one placeholder may be specified at most once, but order and non-placeholder components are arbitrary. This parameter is only required if PartitionKeyName is specified.",
           "type": "string"
         }
       },
@@ -3282,7 +3282,7 @@
         "name",
         "endpointUri",
         "databaseName",
-        "collectionName"
+        "containerName"
       ]
     },
     "RouteProperties": {
