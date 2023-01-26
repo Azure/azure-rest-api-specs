@@ -76,7 +76,7 @@
           "CloudConnectors"
         ],
         "description": "Return list of cloud connectors in a subscription.",
-        "operationId": "CloudConnectorsBySubscription_List",
+        "operationId": "CloudConnectors_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -115,7 +115,7 @@
           "CloudConnectors"
         ],
         "description": "Return list of cloud connectors in a resource group.",
-        "operationId": "CloudConnectorsByResourceGroup_List",
+        "operationId": "CloudConnectors_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -156,7 +156,7 @@
         "tags": [
           "CloudConnectors"
         ],
-        "operationId": "CloudConnector_Get",
+        "operationId": "CloudConnectors_Get",
         "description": "Gets the specified cloud connector in a specified resource group.",
         "parameters": [
           {
@@ -262,7 +262,7 @@
         "tags": [
           "CloudConnectors"
         ],
-        "operationId": "CloudConnector_Delete",
+        "operationId": "CloudConnectors_Delete",
         "description": "Deletes a specified cloud connector resource.",
         "parameters": [
           {
@@ -314,7 +314,7 @@
         "tags": [
           "CloudConnectors"
         ],
-        "operationId": "CloudConnector_UpdateTags",
+        "operationId": "CloudConnectors_UpdateTags",
         "description": "Updates the specified cloud connector tags.",
         "parameters": [
           {
@@ -420,7 +420,7 @@
           "CloudConnections"
         ],
         "description": "Return list of cloud connections in a subscription.",
-        "operationId": "CloudConnectionsBySubscription_List",
+        "operationId": "CloudConnections_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -459,7 +459,7 @@
           "CloudConnections"
         ],
         "description": "Return list of cloud connections in a resource group.",
-        "operationId": "CloudConnectionsByResourceGroup_List",
+        "operationId": "CloudConnections_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -500,7 +500,7 @@
         "tags": [
           "CloudConnections"
         ],
-        "operationId": "CloudConnection_Get",
+        "operationId": "CloudConnections_Get",
         "description": "Gets the specified cloud connection in a specified resource group.",
         "parameters": [
           {
@@ -917,6 +917,19 @@
           "description": "Remote cloud resource identifier",
           "readOnly": true
         },
+        "bodyContentType": {
+          "type": "string",
+          "description": "Content type of the cloud resource body.",
+          "readOnly": true,
+          "enum": [
+            "Xml",
+            "Json"
+          ],
+          "x-ms-enum": {
+            "name": "bodyContentType",
+            "modelAsString": true
+          }
+        },
         "body": {
           "type": "string",
           "description": "Properties of the remote cloud resource.",
@@ -932,8 +945,7 @@
           "description": "Resource ID."
         }
       },
-      "description": "Resource reference properties.",
-      "x-ms-azure-resource": true
+      "description": "Resource reference properties."
     },
     "ProvisioningState": {
       "type": "string",
