@@ -288,7 +288,8 @@
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status.",
                 "type": "string"
               }
             }
@@ -392,7 +393,12 @@
             }
           },
           "202": {
-            "description": "Accepted and the operation discover will complete asynchronously."
+            "description": "Accepted and the operation discover will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -408,7 +414,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -927,12 +933,11 @@
       "properties": {
         "id": {
           "type": "string",
-          "format": "arm-id",
-          "readOnly": true,
           "description": "Resource ID."
         }
       },
-      "description": "Resource reference properties."
+      "description": "Resource reference properties.",
+      "x-ms-azure-resource": true
     },
     "ProvisioningState": {
       "type": "string",
@@ -942,7 +947,8 @@
         "Succeeded",
         "Updating",
         "Deleting",
-        "Failed"
+        "Failed",
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -965,7 +971,8 @@
       "x-ms-enum": {
         "name": "apiVersionParameter",
         "modelAsString": true
-      }
+      },
+      "x-ms-parameter-location":"client"
     },
     "cloudConnectorNameParameter": {
       "name": "cloudConnectorName",
