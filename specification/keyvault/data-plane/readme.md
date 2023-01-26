@@ -26,7 +26,24 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-7.4-preview.1
+tag: package-7.4
+```
+
+### Tag: package-7.4
+
+These settings apply only when `--tag=package-7.4` is specified on the command line.
+
+```yaml $(tag) == 'package-7.4'
+input-file:
+  - Microsoft.KeyVault/stable/7.4/admin/backuprestore.json
+  - Microsoft.KeyVault/stable/7.4/admin/rbac.json
+  - Microsoft.KeyVault/stable/7.4/admin/settings.json
+  - Microsoft.KeyVault/stable/7.4/certificates/certificates.json
+  - Microsoft.KeyVault/stable/7.4/common.json
+  - Microsoft.KeyVault/stable/7.4/keys/keys.json
+  - Microsoft.KeyVault/stable/7.4/keys/securitydomain.json
+  - Microsoft.KeyVault/stable/7.4/secrets/secrets.json
+  - Microsoft.KeyVault/stable/7.4/storage/storage.json
 ```
 
 ### Tag: package-preview-7.4-preview.1
