@@ -187,9 +187,87 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders/{reservationOrderId}": {
+      "get": {
+        "summary": "Get a specific `ReservationOrder` for a billing account.",
+        "description": "Get the details of the `ReservationOrder` for a billing account.",
+        "operationId": "ReservationOrder_GetByBillingAccount",
+        "x-ms-examples": {
+          "GetReservationOrderByBillingAccount": {
+            "$ref": "./examples/reservationOrderGetByBillingAccount.json"
+          },
+          "GetReservationByBillingAccountWithExpandPayments": {
+            "$ref": "./examples/reservationOrderGetByBillingAccountWithExpandPlanInformation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "tags": [
+          "ReservationOrder"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get the details of the `ReservationOrder`.",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrder"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "ReservationOrderResponse": {
+      "type": "object",
+      "description": "Details of a reservation order being returned.",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "etag": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Identifier of the reservation order"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the reservation order"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationOrderProperty",
+          "description": "The properties associated to this reservation order",
+          "type": "object"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Type of resource. \"Microsoft.Capacity/reservations\""
+        }
+      }
+    },
     "Reservation": {
       "description": "The definition of the reservation.",
       "properties": {
@@ -214,13 +292,13 @@
         },
         "properties": {
           "$ref": "#/definitions/ReservationProperty",
-          "description": "The properties associated to this reservation ",
+          "description": "The properties associated to this reservation",
           "type": "object",
           "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "#/definitions/ReservationSkuProperty",
-          "description": "The sku information associated to this reservation ",
+          "description": "The sku information associated to this reservation",
           "type": "object"
         },
         "type": {
@@ -234,6 +312,81 @@
       "description": "Reservation applied scope",
       "readOnly": true,
       "type": "string"
+    },
+    "ReservationOrderProperty": {
+      "type": "object",
+      "description": "Properties of a reservation order.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name for user to easily identified the reservation order."
+        },
+        "billingProfileId": {
+          "type": "string",
+          "description": "Billing profile Id associated to this reservation order."
+        },
+        "billingAccountId": {
+          "type": "string",
+          "description": "Billing account Id associated to this reservation order."
+        },
+        "requestDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the reservation order was initially requested for purchase."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the reservation order was created."
+        },
+        "expiryDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the reservation order will expire."
+        },
+        "expiryDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the reservation order will expire."
+        },
+        "benefitStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the reservation benefit started."
+        },
+        "originalQuantity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total original quantity of the skus purchased in the reservation order."
+        },
+        "term": {
+          "description": "The term of the reservation, e.g. P1Y",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the reservation, e.g. Succeeded",
+          "readOnly": true,
+          "type": "string"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
+        },
+        "planInformation": {
+          "$ref": "#/definitions/ReservationOrderBillingPlanInformation"
+        },
+        "reservations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Reservation"
+          }
+        },
+        "reviewDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the Azure Hybrid Benefit needs to be reviewed."
+        }
+      }
     },
     "ReservationProperty": {
       "description": "The property of reservation object.",
@@ -821,6 +974,81 @@
           "type": "string",
           "description": "Reservation resource id that the original resource gets swapped to. Format of the resource id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
         }
+      }
+    },
+    "ReservationOrderBillingPlanInformation": {
+      "type": "object",
+      "description": "Information describing the type of billing plan for this reservation order.",
+      "properties": {
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount of money to be paid for the Order. Tax is not included."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the billing plan has started."
+        },
+        "nextPaymentDueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off."
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentDetail"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PaymentDetail": {
+      "type": "object",
+      "description": "Information about payment related to a reservation order.",
+      "properties": {
+        "dueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the payment needs to be done."
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the transaction is completed. Is null when it is scheduled."
+        },
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount in pricing currency. Tax not included."
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount charged in Billing currency. Tax not included. Is null for future payments"
+        },
+        "billingAccount": {
+          "type": "string",
+          "description": "Shows the Account that is charged for this payment."
+        },
+        "status": {
+          "$ref": "#/definitions/PaymentStatus"
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo"
+        }
+      }
+    },
+    "PaymentStatus": {
+      "type": "string",
+      "description": "Describes whether the payment is completed, failed, cancelled or scheduled in the future.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Scheduled",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "PaymentStatus",
+        "modelAsString": true
       }
     }
   },
