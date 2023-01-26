@@ -73,7 +73,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "./types.json#/definitions/ArmError"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -87,6 +87,61 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}": {
+      "get": {
+        "summary": "Get `Reservation` details for a billing account.",
+        "description": "Get specific `Reservation` details for a billing account.",
+        "operationId": "Reservation_GetByBillingAccount",
+        "x-ms-examples": {
+          "GetReservationByBillingAccount": {
+            "$ref": "./examples/reservationGetByBillingAccount.json"
+          },
+          "GetReservationByBillingAccountSingleScope": {
+            "$ref": "./examples/reservationGetByBillingAccountSingleScope.json"
+          },
+          "GetReservationByBillingAccountSingleResourceGroup": {
+            "$ref": "./examples/reservationGetByBillingAccountSingleResourceGroup.json"
+          },
+          "GetReservationByBillingAccountManagementGroup": {
+            "$ref": "./examples/reservationGetByBillingAccountManagementGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ],
+        "responses": {
+          "200": {
+            "description": "Get `Reservation` details.",
+            "schema": {
+              "$ref": "#/definitions/Reservation"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
@@ -507,6 +562,10 @@
             }
           }
         },
+        "instanceFlexibility": {
+          "description": "Allows reservation discount to be applied across skus within the same auto fit group. Not all skus support instance size flexibility.",
+          "$ref": "#/definitions/InstanceFlexibility"
+        },
         "reviewDateTime": {
           "type": "string",
           "format": "date-time",
@@ -590,6 +649,32 @@
         "name": "InstanceFlexibility",
         "modelAsString": true
       }
+    }
+  },
+  "parameters" : {
+    "ExpandParameter": {
+      "name": "$expand",
+      "description": "May be used to expand the detail information of some properties.",
+      "in": "query",
+      "x-ms-parameter-location": "client",
+      "required": false,
+      "type": "string"
+    },
+    "ReservationIdParameter": {
+      "name": "reservationId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Id of the reservation item"
+    },
+    "ReservationOrderIdParameter": {
+      "name": "reservationOrderId",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Order Id of the reservation"
     }
   },
   "securityDefinitions": {
