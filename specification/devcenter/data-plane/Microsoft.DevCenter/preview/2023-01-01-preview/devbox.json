@@ -1004,7 +1004,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DevBoxActionsListResult"
+              "$ref": "#/definitions/DevBoxActionsDelayMultipleResult"
             }
           },
           "default": {
@@ -1023,8 +1023,15 @@
         "x-ms-examples": {
           "DevBoxes_DelayActions": {
             "$ref": "./examples/DevBoxActions_DelayMultiple.json"
+          },
+          "DevBoxes_DelayActionsWithError": {
+            "$ref": "./examples/DevBoxActions_DelayMultipleWithError.json"
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DevBoxActionDelayResult"
       }
     }
   },
@@ -1482,6 +1489,54 @@
           "readOnly": true
         }
       }
+    },
+    "DevBoxActionsDelayMultipleResult": {
+      "type": "object",
+      "description": "The actions list result",
+      "properties": {
+        "value": {
+          "description": "Current page of results",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DevBoxActionDelayResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "DevBoxActionDelayResult": {
+      "type": "object",
+      "description": "The action delay result",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the action."
+        },
+        "httpStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The result code of the delay operation on this action."
+        },
+        "action": {
+          "description": "The delayed action",
+          "type": "object",
+          "$ref": "#/definitions/DevBoxAction"
+        },
+        "errorDetails": {
+          "type": "object",
+          "$ref": "devcenter.json#/definitions/CloudErrorBody"
+        }
+      },
+      "required": [
+        "name",
+        "httpStatusCode"
+      ]
     },
     "DevBoxActionsListResult": {
       "type": "object",
