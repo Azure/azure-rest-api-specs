@@ -210,7 +210,8 @@
         }
       },
       "x-ms-azure-resource": true,
-      "description": "A proxy only azure resource object."
+      "description": "A proxy only azure resource object.",
+      "type": "object"
     },
     "RetentionPolicy": {
       "properties": {
@@ -229,7 +230,8 @@
         "enabled",
         "days"
       ],
-      "description": "Specifies the retention policy for the log."
+      "description": "Specifies the retention policy for the log.",
+      "type": "object"
     },
     "LogSettings": {
       "properties": {
@@ -255,7 +257,9 @@
         }
       },
       "required": [ "enabled" ],
-      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
+      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.",
+      "type": "object",
+      "x-ms-identifiers": ["category"]
     },
     "DiagnosticSettings": {
       "properties": {
@@ -285,7 +289,8 @@
           "description": "The list of logs settings."
         }
       },
-      "description": "The diagnostic settings."
+      "description": "The diagnostic settings.",
+      "type": "object"
     },
     "DiagnosticSettingsResource": {
       "type": "object",
@@ -311,10 +316,12 @@
           "description": "The collection of diagnostic settings resources."
         }
       },
-      "description": "Represents a collection of alert rule resources."
+      "description": "Represents a collection of alert rule resources.",
+      "type": "object"
     },
     "ErrorResponse": {
       "description": "Error response.",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -324,6 +331,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type": "object",
       "properties": {
         "code": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
@@ -340,7 +348,9 @@
           "type": "array",
           "items": { "$ref": "#/definitions/ErrorDefinition" },
           "readOnly": true
-        }
+        },
+        "x-ms-identifiers": [],
+        "readOnly": true
       }
     },
     "OperationsDiscoveryProperties": {
@@ -377,6 +387,7 @@
     "OperationsDiscovery": {
       "description": "Operations discovery class.",
       "type": "object",
+      "x-ms-identifiers": [],
       "properties": {
         "name": {
           "description": "Name of the API. The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service. Examples of operations include: * Microsoft.Compute/virtualMachine/capture/action * Microsoft.Compute/virtualMachine/restart/action * Microsoft.Compute/virtualMachine/write * Microsoft.Compute/virtualMachine/read * Microsoft.Compute/virtualMachine/delete Each action should include, in order: (1) Resource Provider Namespace (2) Type hierarchy for which the action applies (e.g. server/databases for a SQL Azure database) (3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH on a collection or named value, Write should be used. If it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it is a POST, Action should be used.",
@@ -424,7 +435,8 @@
           "description": "The type of the diagnostic settings category."
         }
       },
-      "description": "The diagnostic settings Category."
+      "description": "The diagnostic settings Category.",
+      "type": "object"
     },
     "DiagnosticSettingsCategoryResource": {
       "type": "object",
@@ -450,7 +462,8 @@
           "description": "The collection of diagnostic settings category resources."
         }
       },
-      "description": "Represents a collection of diagnostic setting category resources."
+      "description": "Represents a collection of diagnostic setting category resources.",
+      "type": "object"
     }
   },
   "parameters": {
@@ -459,7 +472,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "description": "The API version to be used with the HTTP request.",
+      "x-ms-parameter-location": "client"
     },
     "NameParameter": {
       "name": "name",
