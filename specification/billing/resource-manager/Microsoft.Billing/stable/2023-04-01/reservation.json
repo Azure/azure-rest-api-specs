@@ -19,7 +19,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservations": {
       "get": {
         "description": "Lists the reservations for a billing account and the roll up counts of reservations group by provisioning states.",
-        "operationId": "Reservations_ListByBillingAccount",
+        "operationId": "Reservations_ListAllByBillingAccount",
         "parameters": [
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -144,6 +144,49 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations": {
+      "get": {
+        "summary": "Get `Reservation`s in a given reservation Order for a billing account",
+        "description": "List `Reservation`s within a single `ReservationOrder` for a billing account.",
+        "operationId": "Reservations_ListByBillingAccount",
+        "x-ms-examples": {
+          "ReservationList": {
+            "$ref": "./examples/reservationsGetFromOrderByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          }
+        ],
+        "tags": [
+          "Reservation"
+        ],
+        "responses": {
+          "200": {
+            "description": "List `Reservation`s within a single `ReservationOrder`.",
+            "schema": {
+              "$ref": "#/definitions/ReservationList"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -159,6 +202,10 @@
           "description": "The location of the reservation.",
           "readOnly": true,
           "type": "string"
+        },
+        "etag": {
+          "type": "integer",
+          "format": "int32"
         },
         "name": {
           "description": "The name of the reservation.",
@@ -191,6 +238,20 @@
     "ReservationProperty": {
       "description": "The property of reservation object.",
       "properties": {
+        "reservedResourceType": {
+          "description": "The reserved source type of the reservation, e.g. virtual machine.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "instanceFlexibility": {
+          "description": "Allows reservation discount to be applied across skus within the same auto fit group. Not all skus support instance size flexibility.",
+          "$ref": "#/definitions/InstanceFlexibility"
+        },
+        "displayName": {
+          "description": "The display name of the reservation",
+          "readOnly": true,
+          "type": "string"
+        },
         "appliedScopes": {
           "description": "The array of applied scopes of a reservation. Will be null if the reservation is in Shared scope",
           "items": {
@@ -203,13 +264,21 @@
           "readOnly": true,
           "type": "string"
         },
-        "displayName": {
-          "description": "The display name of the reservation",
-          "readOnly": true,
+        "archived": {
+          "description": "Indicates if the reservation is archived",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "description": "Capabilities of the reservation",
           "type": "string"
         },
-        "displayProvisioningState": {
-          "description": "The provisioning state of the reservation for display, e.g. Succeeded",
+        "quantity": {
+          "description": "The number of the reservation.",
+          "readOnly": true,
+          "type": "number"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the reservation, e.g. Succeeded",
           "readOnly": true,
           "type": "string"
         },
@@ -217,26 +286,6 @@
           "description": "The effective date time of the reservation",
           "readOnly": true,
           "type": "string"
-        },
-        "expiryDate": {
-          "description": "The expiry date of the reservation",
-          "readOnly": true,
-          "type": "string"
-        },
-        "expiryDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "This is the date-time when the reservation will expire."
-        },
-        "purchaseDate": {
-          "type": "string",
-          "format": "date",
-          "description": "This is the date when the reservation was purchased."
-        },
-        "purchaseDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "This is the date-time when the reservation was purchased."
         },
         "benefitStartTime": {
           "type": "string",
@@ -249,21 +298,36 @@
           "description": "DateTime of the last time the reservation was updated.",
           "readOnly": true
         },
-        "instanceFlexibility": {
-          "description": "Allows reservation discount to be applied across skus within the same auto fit group. Not all skus support instance size flexibility.",
-          "$ref": "#/definitions/InstanceFlexibility"
+        "expiryDate": {
+          "description": "The expiry date of the reservation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "expiryDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the reservation will expire."
+        },
+        "reviewDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the Azure Hybrid Benefit needs to be reviewed."
+        },
+        "skuDescription": {
+          "description": "The sku description of the reservation",
+          "readOnly": true,
+          "type": "string"
+        },
+        "extendedStatusInfo": {
+          "description": "The message giving detailed information about the status code.",
+          "$ref": "#/definitions/ExtendedStatusInfo"
         },
         "billingPlan": {
           "description": "The billing plan options available for this sku.",
           "$ref": "#/definitions/ReservationBillingPlan"
         },
-        "billingScopeId": {
-          "description": "Subscription that will be charged for purchasing reservation or savings plan",
-          "readOnly": true,
-          "type": "string"
-        },
-        "provisioningState": {
-          "description": "The provisioning state of the reservation, e.g. Succeeded",
+        "displayProvisioningState": {
+          "description": "The provisioning state of the reservation for display, e.g. Succeeded",
           "readOnly": true,
           "type": "string"
         },
@@ -272,10 +336,32 @@
           "readOnly": true,
           "type": "string"
         },
-        "quantity": {
-          "description": "The number of the reservation.",
+        "purchaseDate": {
+          "type": "string",
+          "format": "date",
+          "description": "This is the date when the reservation was purchased."
+        },
+        "purchaseDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the reservation was purchased."
+        },
+        "splitProperties": {
+          "$ref": "#/definitions/ReservationSplitProperties"
+        },
+        "mergeProperties": {
+          "$ref": "#/definitions/ReservationMergeProperties"
+        },
+        "swapProperties": {
+          "$ref": "#/definitions/ReservationSwapProperties"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
+        "billingScopeId": {
+          "description": "Subscription that will be charged for purchasing reservation or savings plan",
           "readOnly": true,
-          "type": "number"
+          "type": "string"
         },
         "renew": {
           "description": "The renew state of the reservation",
@@ -287,15 +373,12 @@
           "readOnly": true,
           "type": "string"
         },
-        "reservedResourceType": {
-          "description": "The reserved source type of the reservation, e.g. virtual machine.",
-          "readOnly": true,
-          "type": "string"
+        "renewDestination": {
+          "type": "string",
+          "description": "Reservation Id of the reservation which is purchased because of renew. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}."
         },
-        "skuDescription": {
-          "description": "The sku description of the reservation",
-          "readOnly": true,
-          "type": "string"
+        "renewProperties": {
+          "$ref": "#/definitions/RenewPropertiesResponse"
         },
         "term": {
           "description": "The term of the reservation, e.g. P1Y",
@@ -313,30 +396,24 @@
           "type": "string"
         },
         "utilization": {
+          "readOnly": true,
+          "type": "object",
           "description": "Reservation utilization",
           "properties": {
+            "trend": {
+              "description": "last 7 day utilization trend for a reservation",
+              "readOnly": true,
+              "type": "string"
+            },
             "aggregates": {
               "description": "The array of aggregates of a reservation's utilization",
+              "type": "array",
               "items": {
                 "$ref": "#/definitions/ReservationUtilizationAggregates"
               },
-              "type": "array"
-            },
-            "trend": {
-              "description": "The number of days trend for a reservation",
-              "readOnly": true,
-              "type": "string"
+              "x-ms-identifiers": []
             }
-          },
-          "readOnly": true,
-          "type": "object"
-        },
-        "archived": {
-          "description": "Indicates if the reservation is archived",
-          "type": "boolean"
-        },
-        "renewProperties": {
-          "$ref": "#/definitions/RenewPropertiesResponse"
+          }
         }
       }
     },
@@ -370,6 +447,22 @@
           },
           "readOnly": true,
           "type": "array"
+        }
+      }
+    },
+    "ReservationList": {
+      "type": "object",
+      "description": "List of `Reservations",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Reservation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to get the next page of reservations."
         }
       }
     },
@@ -613,7 +706,8 @@
       "description": "Properties specific to applied scope type. Not required if not applicable. Required and need to provide tenantId and managementGroupId if AppliedScopeType is ManagementGroup",
       "properties": {
         "tenantId": {
-          "$ref": "#/definitions/TenantId"
+          "type": "string",
+          "description": "Tenant ID where the savings plan should apply benefit."
         },
         "managementGroupId": {
           "type": "string",
@@ -649,9 +743,88 @@
         "name": "InstanceFlexibility",
         "modelAsString": true
       }
+    },
+    "ExtendedStatusInfo": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "$ref": "#/definitions/ReservationStatusCode"
+        },
+        "message": {
+          "type": "string",
+          "description": "The message giving detailed information about the status code."
+        }
+      }
+    },
+    "ReservationStatusCode": {
+      "type": "string",
+      "enum": [
+        "None",
+        "Pending",
+        "Processing",
+        "Active",
+        "PurchaseError",
+        "PaymentInstrumentError",
+        "Split",
+        "Merged",
+        "Expired",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationStatusCode",
+        "modelAsString": true
+      }
+    },
+    "ReservationSplitProperties": {
+      "type": "object",
+      "description": "Properties of reservation split",
+      "properties": {
+        "splitDestinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of destination resource id that are created due to split. Format of the resource id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        },
+        "splitSource": {
+          "type": "string",
+          "description": "Resource id of the reservation from which this is split. Format of the resource id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        }
+      }
+    },
+    "ReservationMergeProperties": {
+      "type": "object",
+      "description": "Properties of reservation merge",
+      "properties": {
+        "mergeDestination": {
+          "type": "string",
+          "description": "Reservation resource id Created due to the merge. Format of the resource id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        },
+        "mergeSources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Resource ids of the source reservation's merged to form this reservation. Format of the resource id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        }
+      }
+    },
+    "ReservationSwapProperties": {
+      "type": "object",
+      "description": "Properties of reservation swap",
+      "properties": {
+        "swapSource": {
+          "type": "string",
+          "description": "Resource id of the source reservation that gets swapped. Format of the resource id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        },
+        "swapDestination": {
+          "type": "string",
+          "description": "Reservation resource id that the original resource gets swapped to. Format of the resource id is /providers/microsoft.capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}"
+        }
+      }
     }
   },
-  "parameters" : {
+  "parameters": {
     "ExpandParameter": {
       "name": "$expand",
       "description": "May be used to expand the detail information of some properties.",
