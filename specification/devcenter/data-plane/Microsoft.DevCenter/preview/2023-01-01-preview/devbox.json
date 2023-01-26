@@ -671,6 +671,58 @@
         }
       }
     },
+    "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}:restart": {
+      "post": {
+        "tags": [
+          "Dev Boxes"
+        ],
+        "parameters": [
+          {
+            "$ref": "devcenter.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/ProjectNameParameter"
+          },
+          {
+            "$ref": "devcenter.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DevBoxNameParameter"
+          }
+        ],
+        "description": "Restarts a Dev Box",
+        "operationId": "DevBoxes_RestartDevBox",
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "202": {
+            "description": "The request was accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "devcenter.json#/definitions/CloudError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "The error code for specific error that occurred.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DevBoxes_StartDevBox": {
+            "$ref": "./examples/DevBoxes_Restart.json"
+          }
+        }
+      }
+    },
     "/projects/{projectName}/users/{userId}/devboxes/{devBoxName}/remoteConnection": {
       "get": {
         "tags": [
