@@ -11,6 +11,9 @@ using Azure.Core;
   title: "Azure.CodeSigning service",
 })
 @versioned(Azure.CodeSigning.Versions)
+@versionedDependency(
+  [[Azure.CodeSigning.Versions.v2022_06_15_preview, Azure.Core.Versions.v1_0_Preview_1]]
+)
 
 @server(
   "https://{region}.codesigning.azure.net/", 
@@ -23,7 +26,6 @@ using Azure.Core;
 namespace Azure.CodeSigning;
 
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2022_06_15_preview: "2022-06-15-preview",
 }
 
