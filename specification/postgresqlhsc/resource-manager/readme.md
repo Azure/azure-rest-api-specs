@@ -64,6 +64,9 @@ directive:
 - suppress: LongRunningResponseStatusCode
   from: postgresqlhsc.json
   reason: Our control plane returns 202 for most of the put async operation other than cluster creation.
+- suppress: NestedResourcesMustHaveListOperation
+  from: postgresqlhsc.json
+  reason: We already have get/list endpoints for Configuration that covers both cases, node configurations and coordinator configurations.
 ```
 
 ---
