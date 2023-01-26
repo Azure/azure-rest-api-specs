@@ -7,438 +7,261 @@
   "responses": {
     "200": {
       "body": {
-        "requestedTargetType": "microsoft.monitor/accounts",
-        "displayInformation": [
+        "value": [
           {
-            "ruleInfo": "This would be the info message for prom recording rules"
-          },
-          {
-            "ruleInfo": "This would be the info message for prom recording rules"
-          },
-          {
-            "ruleInfo": "This would be the info message for prom"
-          }
-        ],
-        "rulesArmTemplate": {
-          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-          "contentVersion": "1.0.0.0",
-          "parameters": {
-            "targetResourceId": {
-              "type": "string"
+            "alertRuleType": "Microsoft.AlertsManagement/prometheusRuleGroups",
+            "displayInformation": {
+              "ruleInfo": "Rule Information for first recording rule."
             },
-            "targetResourceName": {
-              "type": "string"
-            },
-            "actionGroupIds": {
-              "type": "array",
-              "defaultValue": [],
-              "metadata": {
-                "description": "Insert Action groups ids to attach them to the below alert rules."
-              }
-            },
-            "location": {
-              "type": "string"
-            },
-            "clusterNameForPrometheus": {
-              "type": "string"
-            },
-            "alertNamePrefix_0": {
-              "type": "string",
-              "defaultValue": "NodeRecordingRulesRuleGroup",
-              "minLength": 1,
-              "metadata": {
-                "description": "prefix of the alert rule name"
-              }
-            },
-            "alertName_0": {
-              "type": "string",
-              "defaultValue": "[concat('parameters('alertNamePrefix_0'), ' - ', parameters('clusterNameForPrometheus'))]",
-              "minLength": 1,
-              "metadata": {
-                "description": "Name of the alert rule"
-              }
-            },
-            "alertNamePrefix_1": {
-              "type": "string",
-              "defaultValue": "KubernetesReccordingRulesRuleGroup",
-              "minLength": 1,
-              "metadata": {
-                "description": "prefix of the alert rule name"
-              }
-            },
-            "alertName_1": {
-              "type": "string",
-              "defaultValue": "[concat('parameters('alertNamePrefix_1'), ' - ', parameters('clusterNameForPrometheus'))]",
-              "minLength": 1,
-              "metadata": {
-                "description": "Name of the alert rule"
-              }
-            },
-            "alertNamePrefix_2": {
-              "type": "string",
-              "defaultValue": "KubernetesAlert-DefaultAlerts",
-              "minLength": 1,
-              "metadata": {
-                "description": "prefix of the alert rule name"
-              }
-            },
-            "alertName_2": {
-              "type": "string",
-              "defaultValue": "[concat('parameters('alertNamePrefix_2'), ' - ', parameters('clusterNameForPrometheus'))]",
-              "minLength": 1,
-              "metadata": {
-                "description": "Name of the alert rule"
-              }
-            }
-          },
-          "variables": {
-            "scopes": "[array(parameters('targetResourceId'))]",
-            "copy": [
-              {
-                "name": "actionsForPrometheusRuleGroups",
-                "count": "[length(parameters('actionGroupIds'))]",
-                "input": {
-                  "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForPrometheusRuleGroups')]]"
+            "ruleArmTemplate":{
+              "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                "targetResourceId": {
+                  "type": "string"
+                },
+                "targetResourceName": {
+                  "type": "string"
+                },
+                "actionGroupIds": {
+                  "type": "array",
+                  "defaultValue": [],
+                  "metadata": {
+                    "description": "Insert Action groups ids to attach them to the below alert rules."
+                  }
+                },
+                "location": {
+                  "type": "string"
+                },
+                "clusterNameForPrometheus": {
+                  "type": "string"
+                },
+                "alertNamePrefix": {
+                  "type": "string",
+                  "defaultValue": "NodeRecordingRulesRuleGroup",
+                  "minLength": 1,
+                  "metadata": {
+                    "description": "prefix of the alert rule name"
+                  }
+                },
+                "alertName": {
+                  "type": "string",
+                  "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('clusterNameForPrometheus'))]",
+                  "minLength": 1,
+                  "metadata": {
+                    "description": "Name of the alert rule"
+                  }
                 }
-              }
-            ]
-          },
-          "resources": [
-            {
-              "name": "[parameters('alertName_0')]",
-              "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
-              "apiVersion": "2021-07-22-preview",
-              "location": "[parameters('location')]",
-              "properties": {
-                "description": "Node Recording Rules RuleGroup",
-                "scopes": "[variables('scopes')]",
-                "clusterName": "[parameters('clusterNameForPrometheus')]",
-                "interval": "PT1M",
-                "rules": [
+              },
+              "variables": {
+                "scopes": "[array(parameters('targetResourceId'))]",
+                "copy": [
                   {
-                    "record": "instance:node_num_cpu:sum",
-                    "expression": "count without (cpu, mode) (  node_cpu_seconds_total{job=\"node\",mode=\"idle\"})"
-                  },
-                  {
-                    "record": "instance:node_cpu_utilisation:rate5m",
-                    "expression": "1 - avg without (cpu) (  sum without (mode) (rate(node_cpu_seconds_total{job=\"node\", mode=~\"idle|iowait|steal\"}[5m])))"
-                  },
-                  {
-                    "record": "instance:node_load1_per_cpu:ratio",
-                    "expression": "(  node_load1{job=\"node\"}/  instance:node_num_cpu:sum{job=\"node\"})"
-                  },
-                  {
-                    "record": "instance:node_memory_utilisation:ratio",
-                    "expression": "1 - (  (    node_memory_MemAvailable_bytes{job=\"node\"}    or    (      node_memory_Buffers_bytes{job=\"node\"}      +      node_memory_Cached_bytes{job=\"node\"}      +      node_memory_MemFree_bytes{job=\"node\"}      +      node_memory_Slab_bytes{job=\"node\"}    )  )/  node_memory_MemTotal_bytes{job=\"node\"})"
-                  },
-                  {
-                    "record": "instance:node_vmstat_pgmajfault:rate5m",
-                    "expression": "rate(node_vmstat_pgmajfault{job=\"node\"}[5m])"
-                  },
-                  {
-                    "record": "instance_device:node_disk_io_time_seconds:rate5m",
-                    "expression": "rate(node_disk_io_time_seconds_total{job=\"node\", device!=\"\"}[5m])"
-                  },
-                  {
-                    "record": "instance_device:node_disk_io_time_weighted_seconds:rate5m",
-                    "expression": "rate(node_disk_io_time_weighted_seconds_total{job=\"node\", device!=\"\"}[5m])"
-                  },
-                  {
-                    "record": "instance:node_network_receive_bytes_excluding_lo:rate5m",
-                    "expression": "sum without (device) (  rate(node_network_receive_bytes_total{job=\"node\", device!=\"lo\"}[5m]))"
-                  },
-                  {
-                    "record": "instance:node_network_transmit_bytes_excluding_lo:rate5m",
-                    "expression": "sum without (device) (  rate(node_network_transmit_bytes_total{job=\"node\", device!=\"lo\"}[5m]))"
-                  },
-                  {
-                    "record": "instance:node_network_receive_drop_excluding_lo:rate5m",
-                    "expression": "sum without (device) (  rate(node_network_receive_drop_total{job=\"node\", device!=\"lo\"}[5m]))"
-                  },
-                  {
-                    "record": "instance:node_network_transmit_drop_excluding_lo:rate5m",
-                    "expression": "sum without (device) (  rate(node_network_transmit_drop_total{job=\"node\", device!=\"lo\"}[5m]))"
+                    "name": "actionsForPrometheusRuleGroups",
+                    "count": "[length(parameters('actionGroupIds'))]",
+                    "input": {
+                      "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForPrometheusRuleGroups')]]"
+                    }
                   }
                 ]
-              }
-            },
-            {
-              "name": "[parameters('alertName_1')]",
-              "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
-              "apiVersion": "2021-07-22-preview",
-              "location": "[parameters('location')]",
-              "properties": {
-                "description": "Kubernetes Recording Rules RuleGroup",
-                "scopes": "[variables('scopes')]",
-                "clusterName": "[parameters('clusterNameForPrometheus')]",
-                "interval": "PT1M",
-                "rules": [
-                  {
-                    "record": "node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate",
-                    "expression": "sum by (cluster, namespace, pod, container) (  irate(container_cpu_usage_seconds_total{job=\"cadvisor\", image!=\"\"}[5m])) * on (cluster, namespace, pod) group_left(node) topk by (cluster, namespace, pod) (  1, max by(cluster, namespace, pod, node) (kube_pod_info{node!=\"\"}))"
-                  },
-                  {
-                    "record": "node_namespace_pod_container:container_memory_working_set_bytes",
-                    "expression": "container_memory_working_set_bytes{job=\"cadvisor\", image!=\"\"}* on (namespace, pod) group_left(node) topk by(namespace, pod) (1,  max by(namespace, pod, node) (kube_pod_info{node!=\"\"}))"
-                  },
-                  {
-                    "record": "node_namespace_pod_container:container_memory_rss",
-                    "expression": "container_memory_rss{job=\"cadvisor\", image!=\"\"}* on (namespace, pod) group_left(node) topk by(namespace, pod) (1,  max by(namespace, pod, node) (kube_pod_info{node!=\"\"}))"
-                  },
-                  {
-                    "record": "node_namespace_pod_container:container_memory_cache",
-                    "expression": "container_memory_cache{job=\"cadvisor\", image!=\"\"}* on (namespace, pod) group_left(node) topk by(namespace, pod) (1,  max by(namespace, pod, node) (kube_pod_info{node!=\"\"}))"
-                  },
-                  {
-                    "record": "node_namespace_pod_container:container_memory_swap",
-                    "expression": "container_memory_swap{job=\"cadvisor\", image!=\"\"}* on (namespace, pod) group_left(node) topk by(namespace, pod) (1,  max by(namespace, pod, node) (kube_pod_info{node!=\"\"}))"
-                  },
-                  {
-                    "record": "cluster:namespace:pod_memory:active:kube_pod_container_resource_requests",
-                    "expression": "kube_pod_container_resource_requests{resource=\"memory\",job=\"kube-state-metrics\"}  * on (namespace, pod, cluster)group_left() max by (namespace, pod, cluster) (  (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1))"
-                  },
-                  {
-                    "record": "namespace_memory:kube_pod_container_resource_requests:sum",
-                    "expression": "sum by (namespace, cluster) (    sum by (namespace, pod, cluster) (        max by (namespace, pod, container, cluster) (          kube_pod_container_resource_requests{resource=\"memory\",job=\"kube-state-metrics\"}        ) * on(namespace, pod, cluster) group_left() max by (namespace, pod, cluster) (          kube_pod_status_phase{phase=~\"Pending|Running\"} == 1        )    ))"
-                  },
-                  {
-                    "record": "cluster:namespace:pod_cpu:active:kube_pod_container_resource_requests",
-                    "expression": "kube_pod_container_resource_requests{resource=\"cpu\",job=\"kube-state-metrics\"}  * on (namespace, pod, cluster)group_left() max by (namespace, pod, cluster) (  (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1))"
-                  },
-                  {
-                    "record": "namespace_cpu:kube_pod_container_resource_requests:sum",
-                    "expression": "sum by (namespace, cluster) (    sum by (namespace, pod, cluster) (        max by (namespace, pod, container, cluster) (          kube_pod_container_resource_requests{resource=\"cpu\",job=\"kube-state-metrics\"}        ) * on(namespace, pod, cluster) group_left() max by (namespace, pod, cluster) (          kube_pod_status_phase{phase=~\"Pending|Running\"} == 1        )    ))"
-                  },
-                  {
-                    "record": "cluster:namespace:pod_memory:active:kube_pod_container_resource_limits",
-                    "expression": "kube_pod_container_resource_limits{resource=\"memory\",job=\"kube-state-metrics\"}  * on (namespace, pod, cluster)group_left() max by (namespace, pod, cluster) (  (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1))"
-                  },
-                  {
-                    "record": "namespace_memory:kube_pod_container_resource_limits:sum",
-                    "expression": "sum by (namespace, cluster) (    sum by (namespace, pod, cluster) (        max by (namespace, pod, container, cluster) (          kube_pod_container_resource_limits{resource=\"memory\",job=\"kube-state-metrics\"}        ) * on(namespace, pod, cluster) group_left() max by (namespace, pod, cluster) (          kube_pod_status_phase{phase=~\"Pending|Running\"} == 1        )    ))"
-                  },
-                  {
-                    "record": "cluster:namespace:pod_cpu:active:kube_pod_container_resource_limits",
-                    "expression": "kube_pod_container_resource_limits{resource=\"cpu\",job=\"kube-state-metrics\"}  * on (namespace, pod, cluster)group_left() max by (namespace, pod, cluster) ( (kube_pod_status_phase{phase=~\"Pending|Running\"} == 1) )"
-                  },
-                  {
-                    "record": "namespace_cpu:kube_pod_container_resource_limits:sum",
-                    "expression": "sum by (namespace, cluster) (    sum by (namespace, pod, cluster) (        max by (namespace, pod, container, cluster) (          kube_pod_container_resource_limits{resource=\"cpu\",job=\"kube-state-metrics\"}        ) * on(namespace, pod, cluster) group_left() max by (namespace, pod, cluster) (          kube_pod_status_phase{phase=~\"Pending|Running\"} == 1        )    ))"
-                  },
-                  {
-                    "record": "namespace_workload_pod:kube_pod_owner:relabel",
-                    "expression": "max by (cluster, namespace, workload, pod) (  label_replace(    label_replace(      kube_pod_owner{job=\"kube-state-metrics\", owner_kind=\"ReplicaSet\"},      \"replicaset\", \"$1\", \"owner_name\", \"(.*)\"    ) * on(replicaset, namespace) group_left(owner_name) topk by(replicaset, namespace) (      1, max by (replicaset, namespace, owner_name) (        kube_replicaset_owner{job=\"kube-state-metrics\"}      )    ),    \"workload\", \"$1\", \"owner_name\", \"(.*)\"  ))",
-                    "labels": {
-                      "workload_type": "deployment"
-                    }
-                  },
-                  {
-                    "record": "namespace_workload_pod:kube_pod_owner:relabel",
-                    "expression": "max by (cluster, namespace, workload, pod) (  label_replace(    kube_pod_owner{job=\"kube-state-metrics\", owner_kind=\"DaemonSet\"},    \"workload\", \"$1\", \"owner_name\", \"(.*)\"  ))",
-                    "labels": {
-                      "workload_type": "daemonset"
-                    }
-                  },
-                  {
-                    "record": "namespace_workload_pod:kube_pod_owner:relabel",
-                    "expression": "max by (cluster, namespace, workload, pod) (  label_replace(    kube_pod_owner{job=\"kube-state-metrics\", owner_kind=\"StatefulSet\"},    \"workload\", \"$1\", \"owner_name\", \"(.*)\"  ))",
-                    "labels": {
-                      "workload_type": "statefulset"
-                    }
-                  },
-                  {
-                    "record": "namespace_workload_pod:kube_pod_owner:relabel",
-                    "expression": "max by (cluster, namespace, workload, pod) (  label_replace(    kube_pod_owner{job=\"kube-state-metrics\", owner_kind=\"Job\"},    \"workload\", \"$1\", \"owner_name\", \"(.*)\"  ))",
-                    "labels": {
-                      "workload_type": "job"
-                    }
-                  },
-                  {
-                    "record": ":node_memory_MemAvailable_bytes:sum",
-                    "expression": "sum(  node_memory_MemAvailable_bytes{job=\"node\"} or  (    node_memory_Buffers_bytes{job=\"node\"} +    node_memory_Cached_bytes{job=\"node\"} +    node_memory_MemFree_bytes{job=\"node\"} +    node_memory_Slab_bytes{job=\"node\"}  )) by (cluster)"
-                  },
-                  {
-                    "record": "cluster:node_cpu:ratio_rate5m",
-                    "expression": "sum(rate(node_cpu_seconds_total{job=\"node\",mode!=\"idle\",mode!=\"iowait\",mode!=\"steal\"}[5m])) by (cluster) /count(sum(node_cpu_seconds_total{job=\"node\"}) by (cluster, instance, cpu)) by (cluster)"
+              },
+              "resources": [
+                {
+                  "name": "[parameters('alertName')]",
+                  "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+                  "apiVersion": "2021-07-22-preview",
+                  "location": "[parameters('location')]",
+                  "properties": {
+                    "description": "Node Recording Rules RuleGroup",
+                    "scopes": "[variables('scopes')]",
+                    "clusterName": "[parameters('clusterNameForPrometheus')]",
+                    "interval": "PT1M",
+                    "rules": [
+                      {
+                        "record": "instance:node_num_cpu:sum",
+                        "expression": "count without (cpu, mode) (  node_cpu_seconds_total{job=\"node\",mode=\"idle\"})"
+                      }
+                    ]
                   }
-                ]
-              }
-            },
-            {
-              "name": "[parameters('alertName_2')]",
-              "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
-              "apiVersion": "2021-07-22-preview",
-              "location": "[parameters('location')]",
-              "properties": {
-                "description": "Kubernetes Alert RuleGroup-DefaultAlerts",
-                "scopes": "[variables('scopes')]",
-                "clusterName": "[parameters('clusterNameForPrometheus')]",
-                "interval": "PT1M",
-                "rules": [
-                  {
-                    "alert": "KubePodCrashLooping",
-                    "expression": "max_over_time(kube_pod_container_status_waiting_reason{reason=\"CrashLoopBackOff\", job=\"kube-state-metrics\"}[5m]) >= 1",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubePodNotReady",
-                    "expression": "sum by (namespace, pod, cluster) (  max by(namespace, pod, cluster) (    kube_pod_status_phase{job=\"kube-state-metrics\", phase=~\"Pending|Unknown\"}  ) * on(namespace, pod, cluster) group_left(owner_kind) topk by(namespace, pod, cluster) (    1, max by(namespace, pod, owner_kind, cluster) (kube_pod_owner{owner_kind!=\"Job\"})  )) > 0",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeDeploymentReplicasMismatch",
-                    "expression": "(  kube_deployment_spec_replicas{job=\"kube-state-metrics\"}    >  kube_deployment_status_replicas_available{job=\"kube-state-metrics\"}) and (  changes(kube_deployment_status_replicas_updated{job=\"kube-state-metrics\"}[10m])    ==  0)",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeStatefulSetReplicasMismatch",
-                    "expression": "(  kube_statefulset_status_replicas_ready{job=\"kube-state-metrics\"}    !=  kube_statefulset_status_replicas{job=\"kube-state-metrics\"}) and (  changes(kube_statefulset_status_replicas_updated{job=\"kube-state-metrics\"}[10m])    ==  0)",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeJobNotCompleted",
-                    "expression": "time() - max by(namespace, job_name, cluster) (kube_job_status_start_time{job=\"kube-state-metrics\"}  and kube_job_status_active{job=\"kube-state-metrics\"} > 0) > 43200",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeJobFailed",
-                    "expression": "kube_job_failed{job=\"kube-state-metrics\"}  > 0",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeHpaReplicasMismatch",
-                    "expression": "(kube_horizontalpodautoscaler_status_desired_replicas{job=\"kube-state-metrics\"}  !=kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\"})  and(kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\"}  >kube_horizontalpodautoscaler_spec_min_replicas{job=\"kube-state-metrics\"})  and(kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\"}  <kube_horizontalpodautoscaler_spec_max_replicas{job=\"kube-state-metrics\"})  and changes(kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\"}[15m]) == 0",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeHpaMaxedOut",
-                    "expression": "kube_horizontalpodautoscaler_status_current_replicas{job=\"kube-state-metrics\"}  ==kube_horizontalpodautoscaler_spec_max_replicas{job=\"kube-state-metrics\"}",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeCPUQuotaOvercommit",
-                    "expression": "sum(min without(resource) (kube_resourcequota{job=\"kube-state-metrics\", type=\"hard\", resource=~\"(cpu|requests.cpu)\"}))  /sum(kube_node_status_allocatable{resource=\"cpu\", job=\"kube-state-metrics\"})  > 1.5",
-                    "for": "PT5M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeMemoryQuotaOvercommit",
-                    "expression": "sum(min without(resource) (kube_resourcequota{job=\"kube-state-metrics\", type=\"hard\", resource=~\"(memory|requests.memory)\"}))  /sum(kube_node_status_allocatable{resource=\"memory\", job=\"kube-state-metrics\"})  > 1.5",
-                    "for": "PT5M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeQuotaAlmostFull",
-                    "expression": "kube_resourcequota{job=\"kube-state-metrics\", type=\"used\"}  / ignoring(instance, job, type)(kube_resourcequota{job=\"kube-state-metrics\", type=\"hard\"} > 0)  > 0.9 < 1",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeVersionMismatch",
-                    "expression": "count by (cluster) (count by (git_version, cluster) (label_replace(kubernetes_build_info{job!~\"kube-dns|coredns\"},\"git_version\",\"$1\",\"git_version\",\"(v[0-9]*.[0-9]*).*\"))) > 1",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeNodeNotReady",
-                    "expression": "kube_node_status_condition{job=\"kube-state-metrics\",condition=\"Ready\",status=\"true\"} == 0",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeNodeUnreachable",
-                    "expression": "(kube_node_spec_taint{job=\"kube-state-metrics\",key=\"node.kubernetes.io/unreachable\",effect=\"NoSchedule\"} unless ignoring(key,value) kube_node_spec_taint{job=\"kube-state-metrics\",key=~\"ToBeDeletedByClusterAutoscaler|cloud.google.com/impending-node-termination|aws-node-termination-handler/spot-itn\"}) == 1",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeletTooManyPods",
-                    "expression": "count by(cluster, node) (  (kube_pod_status_phase{job=\"kube-state-metrics\",phase=\"Running\"} == 1) * on(instance,pod,namespace,cluster) group_left(node) topk by(instance,pod,namespace,cluster) (1, kube_pod_info{job=\"kube-state-metrics\"}))/max by(cluster, node) (  kube_node_status_capacity{job=\"kube-state-metrics\",resource=\"pods\"} != 1) > 0.95",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  },
-                  {
-                    "alert": "KubeNodeReadinessFlapping",
-                    "expression": "sum(changes(kube_node_status_condition{status=\"true\",condition=\"Ready\"}[15m])) by (cluster, node) > 2",
-                    "for": "PT15M",
-                    "labels": {
-                      "severity": "warning"
-                    },
-                    "Severity": 3,
-                    "actions": "[variables('actionsForPrometheusRuleGroups')]"
-                  }
-                ]
-              }
+                }
+              ]
             }
-          ]
-        }
+          },
+          {
+            "alertRuleType": "Microsoft.AlertsManagement/prometheusRuleGroups",
+            "displayInformation": {
+              "ruleInfo": "Rule Information for second recording rule."
+            },
+            "ruleArmTemplate": {
+              "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                "targetResourceId": {
+                  "type": "string"
+                },
+                "targetResourceName": {
+                  "type": "string"
+                },
+                "actionGroupIds": {
+                  "type": "array",
+                  "defaultValue": [],
+                  "metadata": {
+                    "description": "Insert Action groups ids to attach them to the below alert rules."
+                  }
+                },
+                "location": {
+                  "type": "string"
+                },
+                "clusterNameForPrometheus": {
+                  "type": "string"
+                },
+                "alertNamePrefix": {
+                  "type": "string",
+                  "defaultValue": "KubernetesReccordingRulesRuleGroup",
+                  "minLength": 1,
+                  "metadata": {
+                    "description": "prefix of the alert rule name"
+                  }
+                },
+                "alertName": {
+                  "type": "string",
+                  "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('clusterNameForPrometheus'))]",
+                  "minLength": 1,
+                  "metadata": {
+                    "description": "Name of the alert rule"
+                  }
+                }
+              },
+              "variables": {
+                "scopes": "[array(parameters('targetResourceId'))]",
+                "copy": [
+                  {
+                    "name": "actionsForPrometheusRuleGroups",
+                    "count": "[length(parameters('actionGroupIds'))]",
+                    "input": {
+                      "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForPrometheusRuleGroups')]]"
+                    }
+                  }
+                ]
+              },
+              "resources": [
+                {
+                  "name": "[parameters('alertName')]",
+                  "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+                  "apiVersion": "2021-07-22-preview",
+                  "location": "[parameters('location')]",
+                  "properties": {
+                    "description": "Kubernetes Recording Rules RuleGroup",
+                    "scopes": "[variables('scopes')]",
+                    "clusterName": "[parameters('clusterNameForPrometheus')]",
+                    "interval": "PT1M",
+                    "rules": [
+                      {
+                        "record": "node_namespace_pod_container:container_cpu_usage_seconds_total:sum_irate",
+                        "expression": "sum by (cluster, namespace, pod, container) (  irate(container_cpu_usage_seconds_total{job=\"cadvisor\", image!=\"\"}[5m])) * on (cluster, namespace, pod) group_left(node) topk by (cluster, namespace, pod) (  1, max by(cluster, namespace, pod, node) (kube_pod_info{node!=\"\"}))"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "alertRuleType": "Microsoft.AlertsManagement/prometheusRuleGroups",
+            "displayInformation": {
+              "ruleInfo": "Rule Information for alerting rule."
+            },
+            "ruleArmTemplate":{
+              "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+              "contentVersion": "1.0.0.0",
+              "parameters": {
+                "targetResourceId": {
+                  "type": "string"
+                },
+                "targetResourceName": {
+                  "type": "string"
+                },
+                "actionGroupIds": {
+                  "type": "array",
+                  "defaultValue": [],
+                  "metadata": {
+                    "description": "Insert Action groups ids to attach them to the below alert rules."
+                  }
+                },
+                "location": {
+                  "type": "string"
+                },
+                "clusterNameForPrometheus": {
+                  "type": "string"
+                },
+                "alertNamePrefix": {
+                  "type": "string",
+                  "defaultValue": "KubernetesAlert-DefaultAlerts",
+                  "minLength": 1,
+                  "metadata": {
+                    "description": "prefix of the alert rule name"
+                  }
+                },
+                "alertName": {
+                  "type": "string",
+                  "defaultValue": "[concat('parameters('alertNamePrefix'), ' - ', parameters('clusterNameForPrometheus'))]",
+                  "minLength": 1,
+                  "metadata": {
+                    "description": "Name of the alert rule"
+                  }
+                }
+              },
+              "variables": {
+                "scopes": "[array(parameters('targetResourceId'))]",
+                "copy": [
+                  {
+                    "name": "actionsForPrometheusRuleGroups",
+                    "count": "[length(parameters('actionGroupIds'))]",
+                    "input": {
+                      "actiongroupId": "[parameters('actionGroupIds')[copyIndex('actionsForPrometheusRuleGroups')]]"
+                    }
+                  }
+                ]
+              },
+              "resources": [
+                {
+                  "name": "[parameters('alertName')]",
+                  "type": "Microsoft.AlertsManagement/prometheusRuleGroups",
+                  "apiVersion": "2021-07-22-preview",
+                  "location": "[parameters('location')]",
+                  "properties": {
+                    "description": "Kubernetes Alert RuleGroup-DefaultAlerts",
+                    "scopes": "[variables('scopes')]",
+                    "clusterName": "[parameters('clusterNameForPrometheus')]",
+                    "interval": "PT1M",
+                    "rules": [
+                      {
+                        "alert": "KubePodCrashLooping",
+                        "expression": "max_over_time(kube_pod_container_status_waiting_reason{reason=\"CrashLoopBackOff\", job=\"kube-state-metrics\"}[5m]) >= 1",
+                        "for": "PT15M",
+                        "labels": {
+                          "severity": "warning"
+                        },
+                        "Severity": 3,
+                        "actions": "[variables('actionsForPrometheusRuleGroups')]"
+                      },
+                      {
+                        "alert": "KubePodNotReady",
+                        "expression": "sum by (namespace, pod, cluster) (  max by(namespace, pod, cluster) (    kube_pod_status_phase{job=\"kube-state-metrics\", phase=~\"Pending|Unknown\"}  ) * on(namespace, pod, cluster) group_left(owner_kind) topk by(namespace, pod, cluster) (    1, max by(namespace, pod, owner_kind, cluster) (kube_pod_owner{owner_kind!=\"Job\"})  )) > 0",
+                        "for": "PT15M",
+                        "labels": {
+                          "severity": "warning"
+                        },
+                        "Severity": 3,
+                        "actions": "[variables('actionsForPrometheusRuleGroups')]"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
       }
     }
   }

@@ -46,14 +46,14 @@
             "$ref": "#/parameters/ResourceUriParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful request for a list of alert rule recommendations",
             "schema": {
-              "$ref": "#/definitions/AlertRuleRecommendationsResponse"
+              "$ref": "#/definitions/AlertRuleRecommendationsListResponse"
             }
           },
           "default": {
@@ -78,14 +78,14 @@
         "tags": [
           "alertRuleRecommendations"
         ],
-        "description": "Retrieve alert rule recommendations for a resource type.",
-        "operationId": "AlertRuleRecommendations_ListByResourceType",
+        "description": "Retrieve alert rule recommendations for a target type.",
+        "operationId": "AlertRuleRecommendations_ListByTargetType",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/TargetTypeParameter"
@@ -95,7 +95,7 @@
           "200": {
             "description": "Successful request for a list of alert rule recommendations",
             "schema": {
-              "$ref": "#/definitions/AlertRuleRecommendationsResponse"
+              "$ref": "#/definitions/AlertRuleRecommendationsListResponse"
             }
           },
           "default": {
@@ -136,29 +136,37 @@
     }
   },
   "definitions": {
-    "AlertRuleRecommendationsResponse": {
+    "AlertRuleRecommendationsListResponse": {
+      "type": "object",
+      "description": "List of alert rule recommendations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertRuleRecommendation"
+          },
+          "description": "the values for the alert rule recommendations."
+        }
+      }
+    },
+    "AlertRuleRecommendation": {
       "description": "Describes the format of Alert Rule Recommendations response.",
       "type": "object",
       "required": [
-        "requestedTargetType",
+        "alertRuleType",
         "displayInformation",
-        "rulesArmTemplate"
+        "ruleArmTemplate"
       ],
       "properties": {
-        "requestedTargetType": {
+        "alertRuleType":{
           "type": "string",
-          "description": "The requested target resource type."
+          "description": "The recommendation alert rule type."
         },
         "displayInformation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DisplayInformationItem"
-          },
-          "x-ms-identifiers": [],
-          "description": "The list of display information, used by the UI. Each information matches a rule recommendation."
+          "$ref": "#/definitions/DisplayInformationItem"
         },
-        "rulesArmTemplate": {
-          "$ref": "#/definitions/RulesArmTemplate"
+        "ruleArmTemplate": {
+          "$ref": "#/definitions/ruleArmTemplate"
         }
       }
     },
@@ -201,7 +209,7 @@
         }
       }
     },
-    "RulesArmTemplate": {
+    "ruleArmTemplate": {
       "description": "A complete ARM template to deploy the alert rules.",
       "type": "object",
       "required": [
