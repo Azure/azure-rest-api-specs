@@ -611,45 +611,15 @@
       "description": "An AML file system instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
       "x-ms-azure-resource": true,
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "Resource ID of the AML file system.",
-          "readOnly": true,
-          "$ref": "storagecache.json#/definitions/URLString"
-        },
-        "name": {
-          "description": "Name of the AML file system.",
-          "readOnly": true,
-          "$ref": "#/definitions/AmlFilesystemName"
-        },
-        "type": {
-          "description": "Type of the resource; Microsoft.StorageCache/amlFilesystem",
-          "readOnly": true,
-          "type": "string"
-        },
-        "location": {
-          "description": "Region name string.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags."
-        },
         "identity": {
           "$ref": "#/definitions/AmlFilesystemIdentity",
           "description": "The managed identity used by the AML file system, if configured."
-        },
-        "systemData": {
-          "readOnly": true,
-          "description": "The system metadata related to this resource.",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         },
         "sku": {
           "description": "SKU for the resource.",
@@ -689,7 +659,6 @@
               "enum": [
                 "Succeeded",
                 "Failed",
-                "Canceled",
                 "Creating",
                 "Deleting",
                 "Updating"

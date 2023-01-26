@@ -154,7 +154,7 @@
         "tags": [
           "UsageModels"
         ],
-        "description": "Get the list of Cache Usage Models available to this subscription.",
+        "description": "Get the list of cache usage models available to this subscription.",
         "operationId": "UsageModels_List"
       }
     },
@@ -267,7 +267,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of Cache objects. Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "description": "A list of cache objects. Note that entity references might replace complete cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
               "$ref": "#/definitions/CachesListResult"
             }
@@ -290,7 +290,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Returns all Caches the user has access to under a subscription.",
+        "description": "Returns all caches the user has access to under a subscription.",
         "operationId": "Caches_List"
       }
     },
@@ -312,7 +312,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of Cache objects. Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "description": "A list of cache objects. Note that entity references might replace complete cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
               "$ref": "#/definitions/CachesListResult"
             }
@@ -335,7 +335,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Returns all Caches the user has access to under a resource group.",
+        "description": "Returns all caches the user has access to under a resource group.",
         "operationId": "Caches_ListByResourceGroup"
       }
     },
@@ -363,7 +363,7 @@
             "description": "Cache deleted."
           },
           "202": {
-            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor.",
+            "description": "Started the cache's transition to Deleted state. Poll the cache to monitor.",
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
@@ -394,7 +394,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Schedules a Cache for deletion.",
+        "description": "Schedules a cache for deletion.",
         "operationId": "Caches_Delete"
       },
       "get": {
@@ -417,7 +417,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the Cache object corresponding to cacheName.",
+            "description": "Returns the cache object corresponding to cache name.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
@@ -437,7 +437,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Returns a Cache.",
+        "description": "Returns a cache.",
         "operationId": "Caches_Get"
       },
       "put": {
@@ -461,7 +461,7 @@
             "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "description": "Object containing the user-selectable properties of the new Cache. If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the user-selectable properties of the new cache. If read-only properties are included, they must match the existing values of those properties.",
             "in": "body",
             "name": "cache",
             "required": true,
@@ -478,13 +478,13 @@
             }
           },
           "201": {
-            "description": "Cache creation or update has been initiated. Poll the Cache's provisioningState property to monitor creation/update progress.",
+            "description": "Cache creation or update has been initiated. Poll the cache's provisioningState property to monitor creation/update progress.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
           },
           "202": {
-            "description": "Cache creation or update has been initiated. Poll the Cache's provisioningState property to monitor creation/update progress."
+            "description": "Cache creation or update has been initiated. Poll the cache's provisioningState property to monitor creation/update progress."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -505,7 +505,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Create or update a Cache.",
+        "description": "Create or update a cache.",
         "operationId": "Caches_CreateOrUpdate"
       },
       "patch": {
@@ -529,7 +529,7 @@
             "$ref": "#/parameters/CacheNameParameter"
           },
           {
-            "description": "Object containing the user-selectable properties of the Cache. If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the user-selectable properties of the cache. If read-only properties are included, they must match the existing values of those properties.",
             "in": "body",
             "name": "cache",
             "schema": {
@@ -539,13 +539,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Updated the Cache.",
+            "description": "Updated the cache.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
           },
           "202": {
-            "description": "Cache update has been initiated.  Poll the Cache's provisioningState property to monitor update progress.",
+            "description": "Cache update has been initiated.  Poll the cache's provisioningState property to monitor update progress.",
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
@@ -579,7 +579,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Update a Cache instance.",
+        "description": "Update a cache instance.",
         "operationId": "Caches_Update"
       }
     },
@@ -703,7 +703,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Tells a Cache to write generate debug info for support to process.",
+        "description": "Tells a cache to write generate debug info for support to process.",
         "operationId": "Caches_DebugInfo"
       }
     },
@@ -731,7 +731,7 @@
             "description": "All cached data has been flushed to the Storage Target(s)."
           },
           "202": {
-            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor.",
+            "description": "Cache has started flushing to its Storage Target(s). Poll the cache's state field to monitor.",
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
@@ -765,7 +765,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Tells a Cache to write all dirty data to the Storage Target(s). During the flush, clients will see errors returned until the flush is complete.",
+        "description": "Tells a cache to write all dirty data to the Storage Target(s). During the flush, clients will see errors returned until the flush is complete.",
         "operationId": "Caches_Flush"
       }
     },
@@ -793,7 +793,7 @@
             "description": "Cache is Active."
           },
           "202": {
-            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor.",
+            "description": "Cache has started the transition to Active. Poll the cache's state field to monitor.",
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
@@ -827,7 +827,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Tells a Stopped state Cache to transition to Active state.",
+        "description": "Tells a Stopped state cache to transition to Active state.",
         "operationId": "Caches_Start"
       }
     },
@@ -855,7 +855,7 @@
             "description": "Cache is stopped."
           },
           "202": {
-            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor.",
+            "description": "Cache has started the transition to Stopped. Poll the cache's state field to monitor.",
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
@@ -889,7 +889,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Tells an Active Cache to transition to Stopped state.",
+        "description": "Tells an Active cache to transition to Stopped state.",
         "operationId": "Caches_Stop"
       }
     },
@@ -914,7 +914,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the list of Storage Targets defined by cacheName.",
+            "description": "Returns the list of Storage Targets defined by cache name.",
             "schema": {
               "$ref": "#/definitions/StorageTargetsResult"
             }
@@ -937,7 +937,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Returns a list of Storage Targets for the specified Cache.",
+        "description": "Returns a list of Storage Targets for the specified cache.",
         "operationId": "StorageTargets_ListByCache"
       }
     },
@@ -975,7 +975,7 @@
             "description": "Storage Target deleted."
           },
           "202": {
-            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor.",
+            "description": "Started the Storage Target's deletion. Poll the cache's Storage Targets to monitor.",
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
@@ -1006,7 +1006,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Removes a Storage Target from a Cache. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual removal of the Storage Target may be delayed until the Cache is healthy again. Note that if the Cache has data to flush to the Storage Target, the data will be flushed before the Storage Target will be deleted.",
+        "description": "Removes a Storage Target from a cache. This operation is allowed at any time, but if the cache is down or unhealthy, the actual removal of the Storage Target may be delayed until the cache is healthy again. Note that if the cache has data to flush to the Storage Target, the data will be flushed before the Storage Target will be deleted.",
         "operationId": "StorageTargets_Delete"
       },
       "get": {
@@ -1052,7 +1052,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Returns a Storage Target from a Cache.",
+        "description": "Returns a Storage Target from a cache.",
         "operationId": "StorageTargets_Get"
       },
       "put": {
@@ -1126,7 +1126,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.",
+        "description": "Create or update a Storage Target. This operation is allowed at any time, but if the cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the cache is healthy again.",
         "operationId": "StorageTargets_CreateOrUpdate"
       }
     },
@@ -1682,7 +1682,7 @@
             "description": "Cache firmware is up to date."
           },
           "202": {
-            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor.",
+            "description": "Cache has started the upgrade. Poll the cache's state field to monitor.",
             "headers": {
               "Location": {
                 "description": "Location URI to poll for result",
@@ -1716,7 +1716,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Upgrade a Cache's firmware if a new version is available. Otherwise, this operation has no effect.",
+        "description": "Upgrade a cache's firmware if a new version is available. Otherwise, this operation has no effect.",
         "operationId": "Caches_UpgradeFirmware"
       }
     },
@@ -2043,7 +2043,7 @@
       }
     },
     "Cache": {
-      "description": "A Cache instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "description": "A cache instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
       "properties": {
         "tags": {
           "type": "object",
@@ -2053,7 +2053,7 @@
           "description": "Resource tags."
         },
         "id": {
-          "description": "Resource ID of the Cache.",
+          "description": "Resource ID of the cache.",
           "readOnly": true,
           "$ref": "#/definitions/URLString"
         },
@@ -2066,12 +2066,12 @@
           ]
         },
         "name": {
-          "description": "Name of Cache.",
+          "description": "Name of cache.",
           "readOnly": true,
           "$ref": "#/definitions/ResourceName"
         },
         "type": {
-          "description": "Type of the Cache; Microsoft.StorageCache/Cache",
+          "description": "Type of the cache; Microsoft.StorageCache/Cache",
           "readOnly": true,
           "type": "string"
         },
@@ -2086,10 +2086,10 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties of the Cache.",
+          "description": "Properties of the cache.",
           "properties": {
             "cacheSizeGB": {
-              "description": "The size of this Cache, in GB, when scalingFactor is 1.0. Values depend on the cache SKU - <a href=\"https://learn.microsoft.com/en-us/rest/api/storagecache/skus/list?tabs=HTTP\">List SKUs</a>.",
+              "description": "The size of this cache, in GB, when scalingFactor is 1.0. Values depend on the cache SKU - <a href=\"https://learn.microsoft.com/en-us/rest/api/storagecache/skus/list?tabs=HTTP\">List SKUs</a>.",
               "type": "integer",
               "format": "int32",
               "x-ms-mutability": [
@@ -2104,12 +2104,12 @@
               "default": 1.0
             },
             "health": {
-              "description": "Health of the Cache.",
+              "description": "Health of the cache.",
               "readOnly": true,
               "$ref": "#/definitions/CacheHealth"
             },
             "mountAddresses": {
-              "description": "Array of IP addresses that can be used by clients mounting this Cache.",
+              "description": "Array of IPv4 addresses that can be used by clients mounting this cache.",
               "readOnly": true,
               "items": {
                 "type": "string"
@@ -2134,7 +2134,7 @@
               "readOnly": true
             },
             "subnet": {
-              "description": "Subnet used for the Cache.",
+              "description": "Subnet used for the cache.",
               "$ref": "#/definitions/URLString",
               "x-ms-mutability": [
                 "read",
@@ -2142,12 +2142,12 @@
               ]
             },
             "upgradeStatus": {
-              "description": "Upgrade status of the Cache.",
+              "description": "Upgrade status of the cache.",
               "$ref": "#/definitions/CacheUpgradeStatus",
               "readOnly": true
             },
             "upgradeSettings": {
-              "description": "Upgrade settings of the Cache.",
+              "description": "Upgrade settings of the cache.",
               "$ref": "#/definitions/CacheUpgradeSettings"
             },
             "networkSettings": {
@@ -2193,10 +2193,10 @@
             "read",
             "create"
           ],
-          "description": "SKU for the Cache.",
+          "description": "SKU for the cache.",
           "properties": {
             "name": {
-              "description": "SKU name for this Cache.",
+              "description": "SKU name for this cache.",
               "type": "string"
             }
           },
@@ -2273,7 +2273,7 @@
           "default": 1500
         },
         "utilityAddresses": {
-          "description": "Array of additional IP addresses used by this Cache.",
+          "description": "Array of additional IP addresses used by this cache.",
           "readOnly": true,
           "items": {
             "type": "string"
@@ -2305,11 +2305,11 @@
         "keyEncryptionKey": {
           "x-ms-secret": true,
           "$ref": "#/definitions/KeyVaultKeyReference",
-          "description": "Specifies the location of the key encryption key in Key Vault."
+          "description": "Specifies the location of the key encryption key in key vault."
         },
         "rotationToLatestKeyVersionEnabled": {
           "type": "boolean",
-          "description": "Specifies whether the service will automatically rotate to the newest version of the key in the Key Vault."
+          "description": "Specifies whether the service will automatically rotate to the newest version of the key in the key vault."
         }
       }
     },
@@ -2392,12 +2392,16 @@
             "password": {
               "description": "Plain text password of the Active Directory domain administrator. This value is stored encrypted and not returned on response.",
               "x-ms-secret": true,
-              "type": "string"
+              "type": "string",
+              "x-ms-mutability": [
+                "read",
+                "create",
+                "update"
+              ]
             }
           },
           "required": [
-            "username",
-            "password"
+            "username"
           ]
         }
       },
@@ -2450,15 +2454,18 @@
         },
         "encryptLdapConnection": {
           "type": "boolean",
-          "description": "Whether or not the LDAP connection should be encrypted."
+          "description": "Whether or not the LDAP connection should be encrypted.",
+          "default": false
         },
         "requireValidCertificate": {
           "type": "boolean",
-          "description": "Determines if the certificates must be validated by a certificate authority. When true, caCertificateURI must be provided."
+          "description": "Determines if the certificates must be validated by a certificate authority. When true, caCertificateURI must be provided.",
+          "default": false
         },
         "autoDownloadCertificate": {
           "type": "boolean",
-          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' only if 'requireValidCertificate' is true."
+          "description": "Determines if the certificate should be automatically downloaded. This applies to 'caCertificateURI' only if 'requireValidCertificate' is true.",
+          "default": false
         },
         "caCertificateURI": {
           "type": "string",
@@ -2484,7 +2491,12 @@
           "properties": {
             "bindDn": {
               "type": "string",
-              "description": "The Bind Distinguished Name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response."
+              "description": "The Bind Distinguished Name identity to be used in the secure LDAP connection. This value is stored encrypted and not returned on response.",
+              "x-ms-mutability": [
+                "read",
+                "create",
+                "update"
+              ]
             },
             "bindPassword": {
               "type": "string",
@@ -2579,15 +2591,15 @@
     },
     "KeyVaultKeyReference": {
       "type": "object",
-      "description": "Describes a reference to Key Vault Key.",
+      "description": "Describes a reference to key vault key.",
       "properties": {
         "keyUrl": {
           "type": "string",
-          "description": "The URL referencing a key encryption key in Key Vault."
+          "description": "The URL referencing a key encryption key in key vault."
         },
         "sourceVault": {
           "type": "object",
-          "description": "Describes a resource Id to source Key Vault.",
+          "description": "Describes a resource Id to source key vault.",
           "properties": {
             "id": {
               "type": "string",
@@ -2602,10 +2614,10 @@
       ]
     },
     "CachesListResult": {
-      "description": "Result of the request to list Caches. It contains a list of Caches and a URL link to get the next set of results.",
+      "description": "Result of the request to list caches. It contains a list of caches and a URL link to get the next set of results.",
       "properties": {
         "nextLink": {
-          "description": "URL to get the next set of Cache list results, if there are any.",
+          "description": "URL to get the next set of cache list results, if there are any.",
           "type": "string"
         },
         "value": {
@@ -2620,10 +2632,10 @@
     },
     "CacheHealth": {
       "type": "object",
-      "description": "An indication of Cache health. Gives more information about health than just that related to provisioning.",
+      "description": "An indication of cache health. Gives more information about health than just that related to provisioning.",
       "properties": {
         "state": {
-          "description": "List of Cache health states. Transitioning when it is creating or deleting. Unknown will be returned in old api versions when a new value is added in future versions. WaitingForKey is when the create is waiting for the system assigned identity to be given access to the encryption key in the encryption settings.",
+          "description": "List of cache health states. Down is when the cluster is not responding.  Degraded is when its functioning but has some alerts. Transitioning when it is creating or deleting. Unknown will be returned in old api versions when a new value is added in future versions. WaitingForKey is when the create is waiting for the system assigned identity to be given access to the encryption key in the encryption settings.",
           "enum": [
             "Unknown",
             "Healthy",
@@ -2677,15 +2689,15 @@
       }
     },
     "CacheUpgradeStatus": {
-      "description": "Properties describing the software upgrade state of the Cache.",
+      "description": "Properties describing the software upgrade state of the cache.",
       "properties": {
         "currentFirmwareVersion": {
-          "description": "Version string of the firmware currently installed on this Cache.",
+          "description": "Version string of the firmware currently installed on this cache.",
           "type": "string",
           "readOnly": true
         },
         "firmwareUpdateStatus": {
-          "description": "True if there is a firmware update ready to install on this Cache. The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
+          "description": "True if there is a firmware update ready to install on this cache. The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
           "enum": [
             "available",
             "unavailable"
@@ -2698,7 +2710,7 @@
           "type": "string"
         },
         "firmwareUpdateDeadline": {
-          "description": "Time at which the pending firmware update will automatically be installed on the Cache.",
+          "description": "Time at which the pending firmware update will automatically be installed on the cache.",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -2757,7 +2769,7 @@
     },
     "StorageTargetResource": {
       "type": "object",
-      "description": "Resource used by a Cache.",
+      "description": "Resource used by a cache.",
       "properties": {
         "name": {
           "description": "Name of the Storage Target.",
@@ -2795,7 +2807,7 @@
       ],
       "properties": {
         "junctions": {
-          "description": "List of Cache namespace junctions to target for namespace associations.",
+          "description": "List of cache namespace junctions to target for namespace associations.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/NamespaceJunction"
@@ -2825,7 +2837,7 @@
           "enum": [
             "Succeeded",
             "Failed",
-            "Cancelled",
+            "Canceled",
             "Creating",
             "Deleting",
             "Updating"
@@ -2959,7 +2971,7 @@
       }
     },
     "ResourceName": {
-      "description": "Schema for the name of resources served by this provider. Note that objects will contain an odata @id annotation as appropriate. This will contain the complete URL of the object. These names are case-preserving, but not case sensitive.",
+      "description": "Schema for the name of resources served by this provider. Note that objects will contain an odata @id annotation as appropriate. This will contain the complete resource id of the object. These names are case-preserving, but not case sensitive.",
       "pattern": "^[-0-9a-zA-Z_]{1,80}$",
       "type": "string"
     },
@@ -3079,7 +3091,7 @@
       "description": "The response from the List Cache SKUs operation.",
       "properties": {
         "nextLink": {
-          "description": "The URI to fetch the next page of Cache SKUs.",
+          "description": "The URI to fetch the next page of cache SKUs.",
           "type": "string"
         },
         "value": {
@@ -3098,7 +3110,7 @@
       "type": "object",
       "properties": {
         "namespacePath": {
-          "description": "Namespace path on a Cache for a Storage Target.",
+          "description": "Namespace path on a cache for a Storage Target.",
           "type": "string"
         },
         "targetPath": {
@@ -3124,7 +3136,7 @@
           "type": "string"
         },
         "value": {
-          "description": "The list of Storage Targets defined for the Cache.",
+          "description": "The list of Storage Targets defined for the cache.",
           "items": {
             "$ref": "#/definitions/StorageTarget"
           },
@@ -3162,10 +3174,10 @@
       "type": "object"
     },
     "UsageModelsResult": {
-      "description": "A list of Cache usage models.",
+      "description": "A list of cache usage models.",
       "properties": {
         "nextLink": {
-          "description": "The URI to fetch the next page of Cache usage models.",
+          "description": "The URI to fetch the next page of cache usage models.",
           "type": "string"
         },
         "value": {
@@ -3468,7 +3480,7 @@
   },
   "parameters": {
     "CacheNameParameter": {
-      "description": "Name of Cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
+      "description": "Name of cache. Length of name must not be greater than 80 and chars must be from the [-0-9a-zA-Z_] char class.",
       "in": "path",
       "name": "cacheName",
       "pattern": "^[-0-9a-zA-Z_]{1,80}$",
