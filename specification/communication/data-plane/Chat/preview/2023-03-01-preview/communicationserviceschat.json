@@ -1241,8 +1241,36 @@
               "type": "file"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
@@ -1307,14 +1335,43 @@
               "type": "file"
             }
           },
-          "default": {
-            "description": "Error Response",
+          "401": {
+            "description": "Unauthorized.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "403": {
+            "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "429": {
+            "description": "Too many requests.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "503": {
+            "description": "Service unavailable.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
             "x-ms-error-response": true
           }
-        },
+        }
+      },
         "x-ms-examples": {
           "Get Message": {
             "$ref": "./examples/Attachments_GetTeamsInteropImageBySize.json"
