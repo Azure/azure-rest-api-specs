@@ -1330,6 +1330,13 @@
             },
             "x-ms-error-response": true
           },
+          "404": {
+            "description": "Not found.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
           "429": {
             "description": "Too many requests.",
             "schema": {
@@ -1347,7 +1354,7 @@
         },
         "x-ms-examples": {
           "Get Message": {
-            "$ref": "./examples/Messages_GetChatMessage.json"
+            "$ref": "./examples/Attachments_GetTeamsInteropImage.json"
           }
         }
       }
@@ -1413,6 +1420,13 @@
           },
           "403": {
             "description": "Forbidden.",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "x-ms-error-response": true
+          },
+          "404": {
+            "description": "Not found.",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             },

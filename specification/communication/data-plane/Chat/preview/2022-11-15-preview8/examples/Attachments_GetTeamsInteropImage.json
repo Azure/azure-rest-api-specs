@@ -2,16 +2,14 @@
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
     "api-version": "2022-11-15-preview8",
-    "chatThreadId": "19:f2167429acf6482880c6b7790a9086c1@thread.v2",
-    "participantCommunicationIdentifier": {
-      "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b",
-      "communicationUser": {
-        "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
-      }
-    }
+    "chatThreadId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "chatMessageId": "1591768249318",
+    "imagId": "74732D7E-F40D-4E22-9BD0-E976EC320489"
   },
   "responses": {
-    "204": {},
+    "200": {
+      "body": "101010101"
+    },
     "401": {
       "body": {
         "error": {
@@ -25,6 +23,14 @@
         "error": {
           "code": "Forbidden",
           "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "Not Found",
+          "message": "The image was not found."
         }
       }
     },
