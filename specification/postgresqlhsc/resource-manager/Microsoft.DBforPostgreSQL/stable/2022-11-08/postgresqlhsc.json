@@ -598,7 +598,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_CreateorUpdateCoordinator",
+        "operationId": "Configurations_CreateOrUpdateCoordinator",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -670,7 +670,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_CreateorUpdateNode",
+        "operationId": "Configurations_CreateOrUpdateNode",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -995,7 +995,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
           },
           "202": {
             "description": "Accepted",
