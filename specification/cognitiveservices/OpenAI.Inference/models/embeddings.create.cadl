@@ -25,7 +25,6 @@ model EmbeddingsOptions {
     """)
     input: string | string[];
 
-    @added(ServiceApiVersions.v2022_12_01)
     @doc("Usage counts for tokens input using the embeddings API")
     usage: Usage;
 };
@@ -39,4 +38,12 @@ model EmbeddingItem {
     object: "embedding",
     embedding: float32[];
     index: int32;
+}
+
+@doc("Measurment of the amount of tokens used in this request and response")
+model Usage {
+    @doc("Number of tokens sent in the original request")
+    prompt_tokens: int32,
+    @doc("Total number of tokens transacted in this request/response")
+    total_tokens: int32
 }
