@@ -278,6 +278,10 @@
           "202": {
             "description": "AML file system creation or update has been initiated. Poll the AML file system's provisioningState property to monitor creation/update progress.",
             "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
               "azure-async-operation": {
                 "description": "URI to poll for the operation status",
                 "type": "string"
@@ -661,7 +665,8 @@
                 "Failed",
                 "Creating",
                 "Deleting",
-                "Updating"
+                "Updating",
+                "Canceled"
               ],
               "x-ms-enum": {
                 "name": "AmlFilesystemProvisioningStateType",
