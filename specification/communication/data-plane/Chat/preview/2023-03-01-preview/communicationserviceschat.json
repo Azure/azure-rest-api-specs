@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Communication Chat Service",
     "description": "Azure Communication Chat Service",
-    "version": "2022-11-15-preview8"
+    "version": "2023-03-01-preview"
   },
   "paths": {
     "/chat/threads/{chatThreadId}/readReceipts": {
@@ -1196,7 +1196,7 @@
         }
       }
     },
-    "/chat/threads/{chatThreadId}/{chatMessageId}/teamsinterop/image/{imageId}/$value": {
+    "/chat/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}": {
       "get": {
         "tags": [
           "Image"
@@ -1241,36 +1241,8 @@
               "type": "file"
             }
           },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
+          "default": {
+            "description": "Error Response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
@@ -1284,7 +1256,7 @@
         }
       }
     },
-    "/chat/threads/{chatThreadId}/{chatMessageId}/teamsinterop/image/{imageId}/{imageSize}/$value": {
+    "/chat/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/{imageSize}/$value": {
       "get": {
         "tags": [
           "Image"
@@ -1292,8 +1264,7 @@
         "summary": "Get a teams interop image by id and size.",
         "operationId": "TeamsInterop_GetImageBySize",
         "produces": [
-          "application/octet-stream",
-          "application/json"
+          "application/octet-stream"
         ],
         "parameters": [
           {
@@ -1336,36 +1307,8 @@
               "type": "file"
             }
           },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "404": {
-            "description": "Not found.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
+          "default": {
+            "description": "Error Response",
             "schema": {
               "$ref": "#/definitions/CommunicationErrorResponse"
             },
@@ -1553,6 +1496,10 @@
     },
     "ChatAttachment": {
       "description": "An attachment in a chat message.",
+      "required": [
+        "id",
+        "url"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -1575,6 +1522,11 @@
         },
         "url": {
           "description": "The URL where the attachment can be downloaded",
+          "type": "string",
+          "example": "https://contoso.server.com/image/imageId"
+        },
+        "previewUrl": {
+          "description": "The URL where the preview of attachment can be downloaded",
           "type": "string",
           "example": "https://contoso.server.com/image/imageId"
         }
@@ -1688,6 +1640,13 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "attachments": {
+          "description": "Collection of chat messages attachments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatAttachment"
           }
         }
       }

@@ -117,13 +117,13 @@ title:
   Azure Communication Services
 ```
 
-### Tag: package-chat-2022-11-15-preview8
+### Tag: package-chat-2023-03-01-preview
 
-These settings apply only when `--tag=2022-11-15-preview8` is specified on the command line.
+These settings apply only when `--tag=2023-03-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-chat-2022-11-15-preview8'
+```yaml $(tag) == 'package-chat-2023-03-01-preview'
 input-file:
-  - preview/2022-11-15-preview8/communicationserviceschat.json
+  - preview/2023-03-01-preview/communicationserviceschat.json
 title:
   Azure Communication Services
 ```

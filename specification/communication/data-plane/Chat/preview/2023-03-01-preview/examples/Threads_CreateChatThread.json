@@ -1,9 +1,9 @@
 {
   "parameters": {
     "endpoint": "https://contoso.westus.communications.azure.com",
-    "api-version": "2022-11-15-preview8",
-    "chatThreadId": "19:f2167429acf6482880c6b7790a9086c1@thread.v2",
-    "addChatParticipantsRequest": {
+    "api-version": "2023-03-01-preview",
+    "createChatThreadRequest": {
+      "topic": "Lunch",
       "participants": [
         {
           "communicationIdentifier": {
@@ -12,8 +12,7 @@
               "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_c94ff260-162d-46d6-94fd-e79f4d213715"
             }
           },
-          "displayName": "Alex",
-          "shareHistoryTime": "2020-06-06T05:55:41Z"
+          "displayName": "Jane"
         },
         {
           "communicationIdentifier": {
@@ -22,25 +21,46 @@
               "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_0e59221d-0c1d-46ae-9544-c963ce56c10b"
             }
           },
-          "displayName": "Peter",
-          "shareHistoryTime": "2020-06-06T05:55:41Z"
+          "displayName": "Alex"
         },
         {
           "communicationIdentifier": {
-            "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_f13a9208-0bb8-45c0-916c-f3ed922728ce",
+            "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_a34d2d65-d72f-4c48-a12c-2d5c9ac75a1a",
             "communicationUser": {
-              "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_f13a9208-0bb8-45c0-916c-f3ed922728ce"
+              "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_a34d2d65-d72f-4c48-a12c-2d5c9ac75a1a"
             }
           },
-          "displayName": "Rama",
-          "shareHistoryTime": "2020-06-06T05:55:41Z"
+          "displayName": "Bob"
+        },
+        {
+          "communicationIdentifier": {
+            "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_f6762773-e33a-4727-985f-50bd1d197c7b",
+            "communicationUser": {
+              "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_f6762773-e33a-4727-985f-50bd1d197c7b"
+            }
+          },
+          "displayName": "Peter"
         }
       ]
     }
   },
   "responses": {
     "201": {
+      "headers": {
+        "Location": "https://contoso.westus.communications.azure.com/chat/threads/19%3Auni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2"
+      },
       "body": {
+        "chatThread": {
+          "id": "19:uni01_zbnh3nt2dfuffezc3sox7dog7wfhk6y5qe2rwlnfhlhdzirihdpq@thread.v2",
+          "topic": "Lunch",
+          "createdOn": "2020-06-06T05:55:41.6460000Z",
+          "createdByCommunicationIdentifier": {
+            "rawId": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_c94ff260-162d-46d6-94fd-e79f4d213715",
+            "communicationUser": {
+              "id": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_c94ff260-162d-46d6-94fd-e79f4d213715"
+            }
+          }
+        },
         "invalidParticipants": [
           {
             "target": "8:acs:8540c0de-899f-5cce-acb5-3ec493af3800_a34d2d65-d72f-4c48-a12c-2d5c9ac75a1a",
