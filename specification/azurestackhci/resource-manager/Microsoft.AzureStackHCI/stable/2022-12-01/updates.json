@@ -327,12 +327,6 @@
           ],
           "description": "The geo-location where the resource lives"
         },
-        "systemData": {
-          "description": "System data of Updates resource.",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "x-ms-client-flatten": true,
-          "readOnly": true
-        },
         "properties": {
           "description": "Update properties",
           "type": "object",
@@ -564,7 +558,17 @@
         },
         "tags": {
           "description": "Key-value pairs that allow grouping/filtering individual tests.",
-          "type": "string"
+          "type": "object",
+          "properties": {
+            "key": {
+              "description": "Key that allow grouping/filtering individual tests.",
+              "type": "string"
+            },
+            "value": {
+              "description": "Value of the key that allow grouping/filtering individual tests.",
+              "type": "string"
+            }
+          }
         },
         "title": {
           "description": "User-facing name; one or more sentences indicating the direct issue.",

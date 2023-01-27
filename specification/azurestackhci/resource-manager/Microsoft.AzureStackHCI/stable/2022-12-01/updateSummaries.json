@@ -412,11 +412,30 @@
         },
         "status": {
           "description": "The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "severity": {
           "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Critical",
+            "Warning",
+            "Informational",
+            "Hidden"
+          ],
+          "x-ms-enum": {
+            "name": "severity",
+            "modelAsString": true
+          }
         },
         "description": {
           "description": "Detailed overview of the issue and what impact the issue has on the stamp.",
