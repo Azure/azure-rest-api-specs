@@ -138,6 +138,9 @@ model Completions {
     "model"?: string;
     @doc("Array of choices returned containing text completions to prompts sent")
     choices?: Choice[];
+    @added(ServiceApiVersions.v2022_12_01)
+    @doc("Usage counts for tokens input using the completions API")
+    usage: Usage;
 }
 
 @doc("Choice model within completion response")

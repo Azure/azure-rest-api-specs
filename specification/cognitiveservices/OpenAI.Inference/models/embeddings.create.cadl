@@ -24,16 +24,15 @@ model EmbeddingsOptions {
     as we have observed inferior results when newlines are present.
     """)
     input: string | string[];
+
+    @added(ServiceApiVersions.v2022_12_01)
+    @doc("Usage counts for tokens input using the completions API")
+    usage: Usage;
 };
 
 model Embeddings {
     object: "list",
     data: EmbeddingItem[],
-}
-
-model Usage {
-    prompt_tokens: int32,
-    total_tokens: int32
 }
 
 model EmbeddingItem {
