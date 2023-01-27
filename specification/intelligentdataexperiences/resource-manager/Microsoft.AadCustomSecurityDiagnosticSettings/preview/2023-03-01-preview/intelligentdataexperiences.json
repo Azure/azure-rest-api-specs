@@ -348,10 +348,10 @@
           "type": "array",
           "items": { "$ref": "#/definitions/ErrorDefinition" },
           "readOnly": true
-        },
-        "x-ms-identifiers": [],
-        "readOnly": true
-      }
+        }
+      },
+      "x-ms-identifiers": [],
+      "readOnly": true
     },
     "OperationsDiscoveryProperties": {
       "description": "ClientDiscovery properties.",
@@ -387,7 +387,7 @@
     "OperationsDiscovery": {
       "description": "Operations discovery class.",
       "type": "object",
-      "x-ms-identifiers": [],
+      "x-ms-identifiers": ["name"],
       "properties": {
         "name": {
           "description": "Name of the API. The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service. Examples of operations include: * Microsoft.Compute/virtualMachine/capture/action * Microsoft.Compute/virtualMachine/restart/action * Microsoft.Compute/virtualMachine/write * Microsoft.Compute/virtualMachine/read * Microsoft.Compute/virtualMachine/delete Each action should include, in order: (1) Resource Provider Namespace (2) Type hierarchy for which the action applies (e.g. server/databases for a SQL Azure database) (3) Read, Write, Action or Delete indicating which type applies. If it is a PUT/PATCH on a collection or named value, Write should be used. If it is a GET, Read should be used. If it is a DELETE, Delete should be used. If it is a POST, Action should be used.",
