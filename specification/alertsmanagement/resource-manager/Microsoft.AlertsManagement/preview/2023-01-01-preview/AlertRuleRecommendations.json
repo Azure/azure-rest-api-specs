@@ -63,6 +63,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List alert rule recommendations for virtual machines at resource level": {
             "$ref": "./examples/AlertRuleRecommendations_GetByResource_VM.json"
@@ -104,6 +107,9 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List alert rule recommendations for virtual machines at subscription level": {
@@ -149,31 +155,25 @@
             "$ref": "#/definitions/AlertRuleRecommendationResource"
           },
           "description": "the values for the alert rule recommendations."
+        },
+        "nextLink": {
+          "description": "URL to fetch the next set of recommendations.",
+          "type": "string"
         }
       }
     },
     "AlertRuleRecommendationResource": {
       "type": "object",
       "description": "A single alert rule recommendation resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
       "required": [
-        "id",
-        "type",
-        "name",
         "properties"
       ],
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "The recommendation resource Id."
-        },
-        "type": {
-          "type": "string",
-          "description": "The resource type."
-        },
-        "name": {
-          "type": "string",
-          "description": "The recommendation name."
-        },
         "properties": {
           "$ref": "#/definitions/AlertRuleRecommendation",
           "description": "recommendation properties."
