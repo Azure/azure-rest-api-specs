@@ -257,7 +257,7 @@
           {
             "in": "query",
             "name": "maxPageSize",
-            "description": "The maximum number of messages to be returned per page. The limit can be found at https://docs.microsoft.com/en-us/azure/communication-services/concepts/service-limits#size-limits.",
+            "description": "The maximum number of messages to be returned per page.",
             "type": "integer",
             "format": "int32"
           },
@@ -772,81 +772,6 @@
         }
       }
     },
-    "/chat/threads/{chatThreadId}/participants/:update": {
-      "post": {
-        "tags": [
-          "Participants"
-        ],
-        "summary": "Update a participant from a thread.",
-        "operationId": "ChatThread_UpdateChatParticipant",
-        "consumes": [
-          "application/json",
-          "application/merge-patch+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "chatThreadId",
-            "description": "Id of the parent chat thread.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "chatParticipant",
-            "description": "ChatParticipant to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ChatParticipant"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Request successful."
-          },
-          "401": {
-            "description": "Unauthorized.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "403": {
-            "description": "Forbidden.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "429": {
-            "description": "Too many requests.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "503": {
-            "description": "Service unavailable.",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Update participant": {
-            "$ref": "./examples/Participants_UpdateChatParticipant.json"
-          }
-        }
-      }
-    },
     "/chat/threads": {
       "post": {
         "tags": [
@@ -1277,7 +1202,7 @@
           "Image"
         ],
         "summary": "Get a teams interop image by id.",
-        "operationId": "ChatThread_TeamsInterop_GetImage",
+        "operationId": "TeamsInterop_GetImage",
         "produces": [
           "application/octet-stream",
           "application/json"
@@ -1365,7 +1290,7 @@
           "Image"
         ],
         "summary": "Get a teams interop image by id and size.",
-        "operationId": "ChatThread_TeamsInterop_GetImageBySize",
+        "operationId": "TeamsInterop_GetImageBySize",
         "produces": [
           "application/octet-stream",
           "application/json"
@@ -1612,13 +1537,6 @@
           "description": "Time from which the chat history is shared with the participant. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
-        },
-        "roleIds": {
-          "description": "Identifiers of roles for this chat participant",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
