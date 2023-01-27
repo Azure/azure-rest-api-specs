@@ -259,6 +259,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -595,7 +598,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_UpdateCoordinator",
+        "operationId": "Configurations_CreateorUpdateCoordinator",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -667,7 +670,7 @@
         "tags": [
           "Configurations"
         ],
-        "operationId": "Configurations_UpdateNode",
+        "operationId": "Configurations_CreateorUpdateNode",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -991,6 +994,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -1743,29 +1749,13 @@
           "description": "The vCores count of a server (max: 64)."
         },
         "enableHa": {
-          "type": "string",
-          "description": "If high availability is enabled or not for the server.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "enableHaEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the server."
         },
         "enablePublicIp": {
-          "type": "string",
+          "type": "boolean",
           "description": "If public IP is requested or not for a server.",
-          "readOnly": true,
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "enablePublicIpEnum",
-            "modelAsString": true
-          }
+          "readOnly": true
         }
       }
     },
@@ -1896,28 +1886,12 @@
           "description": "The Citus version of the cluster."
         },
         "enableShardsOnCoordinator": {
-          "type": "string",
-          "description": "If shards on coordinator is enabled or not for the cluster.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "enableShardsOnCoordinatorEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If shards on coordinator is enabled or not for the cluster."
         },
         "enableHa": {
-          "type": "string",
-          "description": "If high availability is enabled or not for the cluster.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "enableHaEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the cluster."
         },
         "preferredPrimaryZone": {
           "type": "string",
@@ -1938,16 +1912,8 @@
           "description": "The vCores count of the coordinator (max: 64)."
         },
         "coordinatorEnablePublicIpAccess": {
-          "type": "string",
-          "description": "If public IP is requested or not for the coordinator.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "coordinatorEnablePublicIpEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If public IP is requested or not for the coordinator."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -1969,17 +1935,9 @@
           "description": "The vCores count of a node (max: 64)."
         },
         "nodeEnablePublicIpAccess": {
-          "type": "string",
+          "type": "boolean",
           "description": "If public IP is requested or not for a node.",
-          "readOnly": true,
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "nodeEnablePublicIpEnum",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
@@ -2044,16 +2002,8 @@
           "description": "The Citus version of cluster."
         },
         "enableShardsOnCoordinator": {
-          "type": "string",
-          "description": "If shards on coordinator is enabled or not for the cluster.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "enableShardsOnCoordinatorEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If shards on coordinator is enabled or not for the cluster."
         },
         "earliestRestoreTime": {
           "type": "string",
@@ -2062,16 +2012,8 @@
           "readOnly": true
         },
         "enableHa": {
-          "type": "string",
-          "description": "If high availability is enabled or not for the cluster.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "enableHaEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the cluster."
         },
         "preferredPrimaryZone": {
           "type": "string",
@@ -2092,16 +2034,8 @@
           "description": "The vCores count of the coordinator (max: 64). Required for creation."
         },
         "coordinatorEnablePublicIpAccess": {
-          "type": "string",
-          "description": "If public IP is requested or not for the coordinator.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "coordinatorEnablePublicIpEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If public IP is requested or not for the coordinator."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -2123,16 +2057,8 @@
           "description": "The vCores count of a node (max: 64)."
         },
         "nodeEnablePublicIpAccess": {
-          "type": "string",
-          "description": "If public IP is requested or not for a node.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "nodeEnablePublicIpEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If public IP is requested or not for a node."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
@@ -2205,28 +2131,12 @@
           "description": "Preferred primary zone for the cluster"
         },
         "enableShardsOnCoordinator": {
-          "type": "string",
-          "description": "If shards on coordinator is enabled or not for the cluster.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "enableShardsOnCoordinatorEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If shards on coordinator is enabled or not for the cluster."
         },
         "enableHa": {
-          "type": "string",
-          "description": "If high availability is enabled or not for the server.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "enableHaEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the server."
         },
         "coordinatorServerEdition": {
           "type": "string",
@@ -2243,16 +2153,8 @@
           "description": "The vCores count of a server (max: 64)."
         },
         "coordinatorEnablePublicIpAccess": {
-          "type": "string",
-          "description": "If public IP is requested or not for a server.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "coordinatorEnablePublicIpEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If public IP is requested or not for a server."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -2274,17 +2176,9 @@
           "description": "The vCores count of a server (max: 64)."
         },
         "nodeEnablePublicIpAccess": {
-          "type": "string",
+          "type": "boolean",
           "description": "If public IP is requested or not for a server.",
-          "readOnly": true,
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "nodeEnablePublicIpEnum",
-            "modelAsString": true
-          }
+          "readOnly": true
         },
         "serverNames": {
           "type": "array",
@@ -2388,16 +2282,8 @@
           "readOnly": true
         },
         "requiresRestart": {
-          "type": "string",
-          "description": "If configuration change requires restart.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "requiresRestartEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If configuration change requires restart."
         },
         "serverRoleGroupConfigurations": {
           "type": "array",
@@ -2519,16 +2405,8 @@
           "readOnly": true
         },
         "requiresRestart": {
-          "type": "string",
-          "description": "If configuration change requires restart.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "requiresRestartEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "If configuration change requires restart."
         }
       },
       "required": [
@@ -2737,15 +2615,7 @@
         },
         "isDataAction": {
           "description": "Indicates whether the operation is a data action",
-          "type": "string",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "isDataActionEnum",
-            "modelAsString": true
-          }
+          "type": "boolean"
         },
         "origin": {
           "type": "string",
@@ -2828,16 +2698,8 @@
           "description": "Error Message."
         },
         "nameAvailable": {
-          "type": "string",
-          "description": "Indicates whether the resource name is available.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "nameAvailableEnum",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "Indicates whether the resource name is available."
         },
         "name": {
           "type": "string",
