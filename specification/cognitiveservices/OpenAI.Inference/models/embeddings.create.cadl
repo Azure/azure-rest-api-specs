@@ -24,6 +24,9 @@ model EmbeddingsOptions {
     as we have observed inferior results when newlines are present.
     """)
     input: string | string[];
+
+    @doc("Usage counts for tokens input using the embeddings API")
+    usage: EmbeddingsUsage;
 };
 
 model Embeddings {
@@ -31,13 +34,16 @@ model Embeddings {
     data: EmbeddingItem[],
 }
 
-model Usage {
-    prompt_tokens: int32,
-    total_tokens: int32
-}
-
 model EmbeddingItem {
     object: "embedding",
     embedding: float32[];
     index: int32;
+}
+
+@doc("Measurment of the amount of tokens used in this request and response")
+model EmbeddingsUsage {
+    @doc("Number of tokens sent in the original request")
+    prompt_tokens: int32,
+    @doc("Total number of tokens transacted in this request/response")
+    total_tokens: int32
 }
