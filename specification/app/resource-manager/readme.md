@@ -45,7 +45,7 @@ input-file:
   - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsDaprComponents.json
   - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsStorages.json
   - Microsoft.App/preview/2022-11-01-preview/ContainerApps.json
-  - Microsoft.App/preview/2022-11-01-preview/ContainerAppsJobs.json
+  - Microsoft.App/preview/2022-11-01-preview/Jobs.json
   - Microsoft.App/preview/2022-11-01-preview/ContainerAppsRevisions.json
   - Microsoft.App/preview/2022-11-01-preview/Diagnostics.json
   - Microsoft.App/preview/2022-11-01-preview/Global.json
