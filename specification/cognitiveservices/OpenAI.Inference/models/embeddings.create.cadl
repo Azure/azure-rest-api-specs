@@ -26,7 +26,7 @@ model EmbeddingsOptions {
     input: string | string[];
 
     @doc("Usage counts for tokens input using the embeddings API")
-    usage: Usage;
+    usage: EmbeddingsUsage;
 };
 
 model Embeddings {
@@ -41,7 +41,7 @@ model EmbeddingItem {
 }
 
 @doc("Measurment of the amount of tokens used in this request and response")
-model Usage {
+model EmbeddingsUsage {
     @doc("Number of tokens sent in the original request")
     prompt_tokens: int32,
     @doc("Total number of tokens transacted in this request/response")

@@ -139,7 +139,7 @@ model Completions {
     @doc("Array of choices returned containing text completions to prompts sent")
     choices?: Choice[];
     @doc("Usage counts for tokens input using the completions API")
-    usage: Usage;
+    usage: CompletionsUsage;
 }
 
 @doc("Choice model within completion response")
@@ -159,6 +159,7 @@ model CompletionsLogProbsModel {
     @doc("Tokens")
     tokens?: string[];
     @doc("LogProbs of Tokens")
+    @projectedName("client", "LogsProbability")
     token_logprobs?: float32[];
     @doc("Top LogProbs")
     top_logprobs?: Record<float32>[];
@@ -166,9 +167,8 @@ model CompletionsLogProbsModel {
     text_offset?: int32[];
 }
 
-@Versioning.added(Azure.OpenAI.ServiceApiVersions.v2022_12_01)
 @doc("Measurment of the amount of tokens used in this request and response")
-model Usage {
+model CompletionsUsage {
     @doc("Number of tokens received in the completion")
     completion_token: int32,
     @doc("Number of tokens sent in the original request")
