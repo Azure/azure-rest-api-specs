@@ -20,7 +20,8 @@
               }
             ]
           }
-        ]
+        ],
+        "enableDefaultEgressEndpoints": "False"
       }
     }
   },
@@ -59,6 +60,7 @@
               ]
             }
           ],
+          "enableDefaultEgressEndpoints": "False",
           "provisioningState": "Succeeded",
           "interfaceName": "eth0",
           "clusterId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
@@ -67,6 +69,17 @@
           ],
           "virtualMachinesAssociatedIds": [
             "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "enabledEgressEndpoints": [
+            {
+              "category": "azure-resource-management",
+              "endpoints": [
+                {
+                  "domainName": "https://storageaccountex.blob.core.windows.net",
+                  "port": 443
+                }
+              ]
+            }
           ],
           "detailedStatus": "Available",
           "detailedStatusMessage": "Cloud services network is up"
@@ -107,6 +120,7 @@
               ]
             }
           ],
+          "enableDefaultEgressEndpoints": "False",
           "provisioningState": "Accepted",
           "interfaceName": "eth0",
           "clusterId": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName",
@@ -115,6 +129,17 @@
           ],
           "virtualMachinesAssociatedIds": [
             "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
+          ],
+          "enabledEgressEndpoints": [
+            {
+              "category": "azure-resource-management",
+              "endpoints": [
+                {
+                  "domainName": "https://storageaccountex.blob.core.windows.net",
+                  "port": 443
+                }
+              ]
+            }
           ],
           "detailedStatus": "Available",
           "detailedStatusMessage": "Cloud services network is up"
