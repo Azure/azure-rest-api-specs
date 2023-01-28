@@ -15,13 +15,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.App/containerAppsJobs": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/jobs": {
       "get": {
         "tags": [
-          "ContainerAppsJobs"
+          "Jobs"
         ],
         "summary": "Get the Container Apps Jobs in a given subscription.",
-        "operationId": "ContainerAppsJobs_ListBySubscription",
+        "operationId": "Jobs_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
@@ -34,7 +34,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ContainerAppsJobsCollection"
+              "$ref": "#/definitions/JobsCollection"
             }
           },
           "default": {
@@ -46,7 +46,7 @@
         },
         "x-ms-examples": {
           "List Container Apps Jobs by subscription": {
-            "$ref": "./examples/ContainerAppsJobs_ListBySubscription.json"
+            "$ref": "./examples/Jobs_ListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -54,13 +54,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs": {
       "get": {
         "tags": [
-          "ContainerAppsJobs"
+          "Jobs"
         ],
         "summary": "Get the Container Apps Jobs in a given resource group.",
-        "operationId": "ContainerAppsJobs_ListByResourceGroup",
+        "operationId": "Jobs_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
@@ -76,7 +76,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ContainerAppsJobsCollection"
+              "$ref": "#/definitions/JobsCollection"
             }
           },
           "default": {
@@ -88,7 +88,7 @@
         },
         "x-ms-examples": {
           "List Container Apps Jobs by resource group": {
-            "$ref": "./examples/ContainerAppsJobs_ListByResourceGroup.json"
+            "$ref": "./examples/Jobs_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -96,13 +96,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{JobName}": {
       "get": {
         "tags": [
-          "ContainerAppsJobs"
+          "Jobs"
         ],
         "summary": "Get the properties of a Container Apps Job.",
-        "operationId": "ContainerAppsJob_Get",
+        "operationId": "Job_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
@@ -111,7 +111,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
+            "name": "JobName",
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
@@ -126,7 +126,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
+              "$ref": "#/definitions/Job"
             }
           },
           "default": {
@@ -138,13 +138,13 @@
         },
         "x-ms-examples": {
           "Get Container Apps Job": {
-            "$ref": "./examples/ContainerAppsJob_Get.json"
+            "$ref": "./examples/Job_Get.json"
           }
         }
       },
       "put": {
         "tags": [
-          "ContainerAppsJobs"
+          "Jobs"
         ],
         "summary": "Create or Update a Container Apps Job.",
         "description": "Create or Update a Container Apps Job.",
@@ -157,7 +157,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
+            "name": "JobName",
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
@@ -169,7 +169,7 @@
             "description": "Properties used to create a container apps job",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
+              "$ref": "#/definitions/Job"
             }
           },
           {
@@ -180,13 +180,13 @@
           "201": {
             "description": "Container Apps Job create has been started.",
             "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
+              "$ref": "#/definitions/Job"
             }
           },
           "200": {
             "description": "No change performed on the Container Apps Job.",
             "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
+              "$ref": "#/definitions/Job"
             }
           },
           "default": {
@@ -198,7 +198,7 @@
         },
         "x-ms-examples": {
           "Create or Update Container Apps Job": {
-            "$ref": "./examples/ContainerAppsJob_CreateorUpdate.json"
+            "$ref": "./examples/Job_CreateorUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -208,11 +208,11 @@
       },
       "delete": {
         "tags": [
-          "ContainerAppsJobs"
+          "Jobs"
         ],
         "summary": "Delete a Container Apps Job.",
         "description": "Delete a Container Apps Job.",
-        "operationId": "ContainerAppsJob_Delete",
+        "operationId": "Job_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
@@ -221,7 +221,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
+            "name": "JobName",
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
@@ -255,7 +255,7 @@
         },
         "x-ms-examples": {
           "Delete Container Apps Job": {
-            "$ref": "./examples/ContainerAppsJob_Delete.json"
+            "$ref": "./examples/Job_Delete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -265,11 +265,11 @@
       },
       "patch": {
         "tags": [
-          "ContainerAppsJobs"
+          "Jobs"
         ],
         "summary": "Update properties of a Container Apps Job",
         "description": "Patches a Container Apps Job using JSON Merge Patch",
-        "operationId": "ContainerAppsJob_Update",
+        "operationId": "Job_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
@@ -278,7 +278,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
+            "name": "JobName",
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
@@ -290,7 +290,7 @@
             "required": true,
             "description": "Properties used to create a container apps job",
             "schema": {
-              "$ref": "#/definitions/ContainerAppsJobPatchProperties"
+              "$ref": "#/definitions/JobPatchProperties"
             }
           },
           {
@@ -301,7 +301,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/ContainerAppsJob"
+              "$ref": "#/definitions/Job"
             }
           },
           "202": {
@@ -321,19 +321,19 @@
         },
         "x-ms-examples": {
           "Patch Container Apps Job": {
-            "$ref": "./examples/ContainerAppsJob_Patch.json"
+            "$ref": "./examples/Job_Patch.json"
           }
         },
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{JobName}/start": {
       "post": {
         "tags": [
-          "ContainerAppsJobs"
+          "Jobs"
         ],
         "summary": "Runs a Container Apps Job",
-        "operationId": "ContainerAppsJob_run",
+        "operationId": "Job_run",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
@@ -342,7 +342,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "containerAppsJobName",
+            "name": "JobName",
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
@@ -374,7 +374,7 @@
         },
         "x-ms-examples": {
           "Run a Container Apps Job": {
-            "$ref": "./examples/ContainerAppsJob_Start.json"
+            "$ref": "./examples/Job_Start.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -383,13 +383,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{JobName}/stop": {
       "post": {
         "tags": [
-          "ContainerAppsJobs"
+          "Jobs"
         ],
         "summary": "Terminates execution of a running container apps job",
-        "operationId": "ContainerAppsJob_terminate",
+        "operationId": "Job_terminate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
@@ -401,7 +401,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "containerAppsJobName",
+            "name": "JobName",
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
@@ -430,7 +430,7 @@
         },
         "x-ms-examples": {
           "Terminate a Container Apps Job": {
-            "$ref": "./examples/ContainerAppsJob_Stop.json"
+            "$ref": "./examples/Job_Stop.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -439,13 +439,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerAppsJobs/{containerAppsJobName}/listSecrets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{JobName}/listSecrets": {
       "post": {
         "tags": [
-          "ContainerAppsJobs"
+          "Jobs"
         ],
         "summary": "List secrets for a container apps job",
-        "operationId": "ContainerAppsJobs_ListSecrets",
+        "operationId": "Jobs_ListSecrets",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
@@ -457,7 +457,7 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "containerAppsJobName",
+            "name": "JobName",
             "in": "path",
             "description": "Name of the Container Apps Job.",
             "required": true,
@@ -481,7 +481,7 @@
         },
         "x-ms-examples": {
           "List Container Apps Job Secrets": {
-            "$ref": "./examples/ContainerAppsJob_ListSecrets.json"
+            "$ref": "./examples/Job_ListSecrets.json"
           }
         }
       }
@@ -573,7 +573,7 @@
         }
       }
     },
-    "ContainerAppsJob": {
+    "Job": {
       "type": "object",
       "description": "Container App Job",
       "allOf": [
@@ -622,7 +622,7 @@
               "description": "Container Apps Job configuration properties."
             },
             "template": {
-              "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
+              "$ref": "./CommonDefinitions.json#/definitions/JobTemplate",
               "description": "Container Apps job definition."
             },
             "outboundIpAddresses": {
@@ -644,7 +644,7 @@
       },
       "required": []
     },
-    "ContainerAppsJobPatchProperties": {
+    "JobPatchProperties": {
       "type": "object",
       "description": "ContainerApp resource specific properties.",
       "properties": {
@@ -669,7 +669,7 @@
               "description": "Container Apps Job configuration properties."
             },
             "template": {
-              "$ref": "./CommonDefinitions.json#/definitions/ContainerAppsJobTemplate",
+              "$ref": "./CommonDefinitions.json#/definitions/JobTemplate",
               "description": "Container Apps job definition."
             },
             "outboundIpAddresses": {
@@ -687,7 +687,7 @@
         }
       }
     },
-    "ContainerAppsJobsCollection": {
+    "JobsCollection": {
       "description": "Container Apps Jobs collection ARM resource.",
       "required": [
         "value"
@@ -698,7 +698,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ContainerAppsJob"
+            "$ref": "#/definitions/Job"
           }
         },
         "nextLink": {
