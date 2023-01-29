@@ -10,7 +10,7 @@
     "https"
   ],
   "paths": {
-    "/products/{productId}/reviews": {
+    "/products/{uniqueProductId}/reviews": {
       "get": {
         "tags": [
           "Reviews Public API"
@@ -23,21 +23,19 @@
           }
         },
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
             "type": "string",
-            "name": "productId",
+            "name": "uniqueProductId",
             "in": "path",
             "required": true,
             "description": "Unique Product Id"
           },
           {
             "type": "integer",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "in": "query",
             "description": "Maximum number of reviews to return",
             "format": "int32",
@@ -67,7 +65,7 @@
         }
       }
     },
-    "/products/{productId}/reviews/{reviewId}/comments": {
+    "/products/{uniqueProductId}/reviews/{reviewId}/comments": {
       "get": {
         "tags": [
           "Reviews Public API"
@@ -80,14 +78,12 @@
           }
         },
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
             "type": "string",
-            "name": "productId",
+            "name": "uniqueProductId",
             "in": "path",
             "required": true,
             "description": "Unique Product Id"
@@ -101,7 +97,7 @@
           },
           {
             "type": "integer",
-            "name": "maxPageSize",
+            "name": "maxpagesize",
             "in": "query",
             "description": "maximum number of comments to return",
             "format": "int32",
@@ -163,7 +159,7 @@
         "count"
       ],
       "properties": {
-        "items": {
+        "value": {
           "type": "array",
           "description": "List of items in the current page",
           "items": {
@@ -214,7 +210,25 @@
         },
         "source": {
           "type": "string",
-          "description": "Review Source (possible values: AppSource, Ibiza, G2, ect.)"
+          "description": "Review Source (possible values: AppSource, Ibiza, G2, ect.)",
+          "x-ms-enum": {
+            "name": "source",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AppSource",
+                "description": "AppSource"
+              },
+              {
+                "value": "Amp",
+                "description": "Azure MarketPlace"
+              },
+              {
+                "value": "Ibiza",
+                "description": "Azure Portal"
+              }
+            ]
+          }
         },
         "reviewerName": {
           "type": "string",
@@ -277,7 +291,7 @@
         "count"
       ],
       "properties": {
-        "items": {
+        "value": {
           "type": "array",
           "description": "List of items in the current page",
           "items": {
@@ -301,7 +315,7 @@
       "required": [
         "createdDateTime",
         "lastModifiedDateTime",
-        "isDeleted"
+        "deleted"
       ],
       "properties": {
         "id": {
@@ -326,7 +340,7 @@
           "type": "string",
           "description": "Commenter Full Name"
         },
-        "isDeleted": {
+        "deleted": {
           "type": "boolean",
           "description": "Is Deleted. If true all other properties will be empty"
         }
