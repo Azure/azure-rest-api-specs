@@ -17,9 +17,9 @@ namespace Microsoft.AzureSphere;
 @doc("An device resource belonging to a device group resource.")
 @parentResource(DeviceGroup)
 model Device is ProxyResource<DeviceProperties> {
-  @doc("ID of Device")
-  @pattern("^[a-zA-Z0-9-]{3,150}$")
-  @key("deviceId")
+  @doc("Device name")
+  @pattern("^[a-zA-Z0-9-]{3,128}$")
+  @key("deviceName")
   @path
   @segment("devices")
   name: string;
@@ -31,8 +31,9 @@ interface ProxyResourceOperationsDevice<
     extends Azure.ResourceManager.ResourceRead<TResource>,
     ResourceListByParent<TResource, TListParameters & BaseParameters<TResource>>,
     ResourceCreate<TResource>,
-    Azure.ResourceManager.ResourceDelete<TResource>,
-    ProxyResourceUpdate<Device, DevicePatchProperties>{}
+    Azure.ResourceManager.ResourceDelete<TResource>{
+        update is ArmResourcePatchAsync<Device, DevicePatchProperties>
+    }
 
 @armResourceOperations
 interface Devices extends ProxyResourceOperationsDevice<Device>{
@@ -49,6 +50,11 @@ interface Devices extends ProxyResourceOperationsDevice<Device>{
 
 @doc("The properties of device")
 model DeviceProperties {
+
+  @doc("Device ID")
+  @visibility("create", "read")
+  deviceId?: string;
+
   @doc("SKU of the chip")
   @visibility("read")
   chipSku?: string;

@@ -204,7 +204,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           }
         ],
@@ -249,7 +249,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
@@ -320,7 +320,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
@@ -374,7 +374,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           }
         ],
@@ -447,7 +447,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           }
         ],
@@ -497,14 +497,14 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "serialNumber",
             "in": "path",
             "required": true,
-            "description": "Serial number of the certificate.",
+            "description": "Serial number of the certificate. Use '.default' to get current active certificate.",
             "type": "string"
           }
         ],
@@ -551,14 +551,14 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "serialNumber",
             "in": "path",
             "required": true,
-            "description": "Serial number of the certificate.",
+            "description": "Serial number of the certificate. Use '.default' to get current active certificate.",
             "type": "string"
           }
         ],
@@ -605,14 +605,14 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "serialNumber",
             "in": "path",
             "required": true,
-            "description": "Serial number of the certificate.",
+            "description": "Serial number of the certificate. Use '.default' to get current active certificate.",
             "type": "string"
           },
           {
@@ -668,7 +668,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           }
         ],
@@ -727,7 +727,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           }
         ],
@@ -755,7 +755,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageID}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/images/{imageName}": {
       "get": {
         "tags": [
           "Images"
@@ -777,14 +777,14 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
-            "name": "imageID",
+            "name": "imageName",
             "in": "path",
             "required": true,
-            "description": "ID of image",
+            "description": "Image name",
             "type": "string"
           }
         ],
@@ -829,14 +829,14 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
-            "name": "imageID",
+            "name": "imageName",
             "in": "path",
             "required": true,
-            "description": "ID of image",
+            "description": "Image name",
             "type": "string"
           },
           {
@@ -907,14 +907,14 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
-            "name": "imageID",
+            "name": "imageName",
             "in": "path",
             "required": true,
-            "description": "ID of image",
+            "description": "Image name",
             "type": "string"
           }
         ],
@@ -975,7 +975,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
@@ -1046,7 +1046,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
@@ -1108,7 +1108,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
@@ -1157,18 +1157,6 @@
         "description": "List Product resources by Catalog",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
@@ -1182,7 +1170,7 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           }
         ],
@@ -1232,15 +1220,15 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           }
         ],
@@ -1285,15 +1273,15 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
@@ -1364,15 +1352,15 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           }
         ],
@@ -1433,15 +1421,15 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           }
         ],
@@ -1500,15 +1488,15 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           }
         ],
@@ -1558,23 +1546,23 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           }
         ],
@@ -1619,23 +1607,23 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
@@ -1706,23 +1694,23 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           }
         ],
@@ -1783,23 +1771,23 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
@@ -1853,23 +1841,23 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           }
         ],
@@ -1928,23 +1916,23 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           }
         ],
@@ -1994,30 +1982,30 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
-            "description": "Deployment name.",
+            "description": "Deployment name",
             "type": "string"
           }
         ],
@@ -2062,30 +2050,30 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
-            "description": "Deployment name.",
+            "description": "Deployment name",
             "type": "string"
           },
           {
@@ -2156,30 +2144,30 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
             "name": "deploymentName",
             "in": "path",
             "required": true,
-            "description": "Deployment name.",
+            "description": "Deployment name",
             "type": "string"
           }
         ],
@@ -2240,23 +2228,23 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           }
         ],
@@ -2284,7 +2272,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}": {
       "get": {
         "tags": [
           "Devices"
@@ -2306,31 +2294,31 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
-            "name": "deviceId",
+            "name": "deviceName",
             "in": "path",
             "required": true,
-            "description": "ID of Device",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Device name",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$",
             "type": "string"
           }
         ],
@@ -2375,31 +2363,31 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
-            "name": "deviceId",
+            "name": "deviceName",
             "in": "path",
             "required": true,
-            "description": "ID of Device",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Device name",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$",
             "type": "string"
           },
           {
@@ -2470,31 +2458,31 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
-            "name": "deviceId",
+            "name": "deviceName",
             "in": "path",
             "required": true,
-            "description": "ID of Device",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Device name",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$",
             "type": "string"
           }
         ],
@@ -2553,31 +2541,31 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
-            "name": "deviceId",
+            "name": "deviceName",
             "in": "path",
             "required": true,
-            "description": "ID of Device",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Device name",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$",
             "type": "string"
           },
           {
@@ -2597,6 +2585,16 @@
               "$ref": "#/definitions/Device"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2608,10 +2606,14 @@
           "Devices_Update": {
             "$ref": "./examples/PatchDevice.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceId}/generateCapabilityImage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/deviceGroups/{deviceGroupName}/devices/{deviceName}/generateCapabilityImage": {
       "post": {
         "tags": [
           "Devices"
@@ -2633,31 +2635,31 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           },
           {
             "name": "deviceGroupName",
             "in": "path",
             "required": true,
-            "description": "Device group name",
-            "pattern": "^[a-zA-Z0-9-]{3,50}$",
+            "description": "Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.",
+            "pattern": "^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$",
             "type": "string"
           },
           {
-            "name": "deviceId",
+            "name": "deviceName",
             "in": "path",
             "required": true,
-            "description": "ID of Device",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Device name",
+            "pattern": "^[a-zA-Z0-9-]{3,128}$",
             "type": "string"
           },
           {
@@ -2713,15 +2715,15 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
           }
         ],
@@ -2771,28 +2773,16 @@
             "in": "path",
             "required": true,
             "description": "Name of catalog",
-            "pattern": "^[a-zA-Z0-9-_]{3,150}$",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
             "type": "string"
           },
           {
             "name": "productName",
             "in": "path",
             "required": true,
-            "description": "Name of product",
-            "pattern": "^[a-zA-Z0-9-]{3,150}$",
+            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
+            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -3069,6 +3059,11 @@
     "DeploymentProperties": {
       "type": "object",
       "properties": {
+        "deploymentId": {
+          "type": "string",
+          "description": "Deployment ID",
+          "readOnly": true
+        },
         "deployedImages": {
           "type": "array",
           "items": {
@@ -3279,6 +3274,14 @@
     "DeviceProperties": {
       "type": "object",
       "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "Device ID",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "chipSku": {
           "type": "string",
           "description": "SKU of the chip",
@@ -3406,9 +3409,23 @@
             "create"
           ]
         },
+        "imageId": {
+          "type": "string",
+          "description": "Image ID",
+          "readOnly": true
+        },
+        "imageFileName": {
+          "type": "string",
+          "description": "Image file name",
+          "readOnly": true
+        },
         "regionalDataBoundary": {
           "$ref": "#/definitions/RegionalDataBoundary",
-          "description": "Regional data boundary for an image"
+          "description": "Regional data boundary for an image",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "uri": {
           "type": "string",
@@ -3436,10 +3453,7 @@
           "readOnly": true
         }
       },
-      "description": "The properties of image",
-      "required": [
-        "image"
-      ]
+      "description": "The properties of image"
     },
     "ImageType": {
       "type": "string",

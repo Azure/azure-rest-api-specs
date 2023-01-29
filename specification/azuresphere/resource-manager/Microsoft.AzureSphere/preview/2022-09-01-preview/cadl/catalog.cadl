@@ -17,7 +17,7 @@ namespace Microsoft.AzureSphere;
 @doc("An Azure Sphere catalog")
 model Catalog is TrackedResource<CatalogProperties> {
   @doc("Name of catalog")
-  @pattern("^[a-zA-Z0-9-_]{3,150}$")
+  @pattern("^[A-Za-z0-9_-]{1,30}$")
   @key("catalogName")
   @path
   @segment("catalogs")
@@ -66,7 +66,7 @@ model DeviceInsight {
 }
 
 @armResourceOperations
-interface Catalogs extends ResourceOperations<Catalog, CatalogProperties> {
+interface Catalogs extends Azure.ResourceManager.ResourceOperations<Catalog, CatalogProperties> {
 
   @autoRoute
   @doc("Counts devices in catalog.")

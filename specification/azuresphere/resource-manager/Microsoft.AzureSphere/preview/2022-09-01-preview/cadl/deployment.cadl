@@ -17,7 +17,7 @@ namespace Microsoft.AzureSphere;
 @doc("An deployment resource belonging to a device group resource.")
 @parentResource(DeviceGroup)
 model Deployment is ProxyResource<DeploymentProperties> {
-  @doc("Deployment name.")
+  @doc("Deployment name")
   @key("deploymentName")
   @path
   @segment("deployments")
@@ -29,6 +29,11 @@ interface Deployments extends ProxyResourceOperationsReadListCreateDelete<Deploy
 
 @doc("The properties of deployment")
 model DeploymentProperties {
+
+  @visibility("read")
+  @doc("Deployment ID")
+  deploymentId?: string;
+
   @doc("Images deployed")
   @visibility("create", "read")
   deployedImages?: Image[];

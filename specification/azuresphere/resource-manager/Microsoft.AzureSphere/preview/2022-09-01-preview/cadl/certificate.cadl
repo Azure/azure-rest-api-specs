@@ -17,7 +17,7 @@ namespace Microsoft.AzureSphere;
 @doc("An certificate resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Certificate is ProxyResource<CertificateProperties> {
-  @doc("Serial number of the certificate.")
+  @doc("Serial number of the certificate. Use '.default' to get current active certificate.")
   @key("serialNumber")
   @path
   @segment("certificates")
@@ -41,7 +41,7 @@ interface Certificates extends ProxyResourceOperationsReadList<Certificate, List
   @doc("Gets the proof of possession nonce.")
   op retrieveProofOfPossessionNonce(
     ...ResourceInstanceParameters<Certificate>, 
-    @doc("Proof of possesion nonce request body ")
+    @doc("Proof of possession nonce request body ")
     @body request: ProofOfPossessionNonceRequest
   ): ArmResponse<ProofOfPossessionNonceResponse> | ErrorResponse;
 }

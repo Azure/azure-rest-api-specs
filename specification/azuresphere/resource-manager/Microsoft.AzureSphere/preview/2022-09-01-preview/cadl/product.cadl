@@ -17,8 +17,8 @@ namespace Microsoft.AzureSphere;
 @doc("An product resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Product is ProxyResource<ProductProperties> {
-  @doc("Name of product")
-  @pattern("^[a-zA-Z0-9-]{3,150}$")
+  @doc("Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.")
+  @pattern("^[\\w][\\w\\s]{1,48}[\\w]|\\.default$")
   @key("productName")
   @path
   @segment("products")
