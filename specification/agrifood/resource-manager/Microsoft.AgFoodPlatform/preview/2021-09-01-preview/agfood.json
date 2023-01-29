@@ -761,7 +761,7 @@
           "default": {
             "description": "Error",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1899,6 +1899,32 @@
         }
       }
     },
+    "ArmAsyncOperation": {
+      "description": "Arm async operation class.\r\nRef: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ArmAsyncOperationError"
+        }
+      }
+    },    "ArmAsyncOperationError": {
+      "description": "Arm async operation error class.\r\nRef: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        }
+      }
+    },
     "SensorIntegration": {
       "description": "Sensor integration request model.",
       "type": "object",
@@ -2048,16 +2074,6 @@
           "description": "Continuation link (absolute URI) to the next page of results in the list.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ArmAsyncOperation": {
-      "description": "Arm async operation class.\r\nRef: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of the async operation.",
-          "type": "string"
         }
       }
     },
