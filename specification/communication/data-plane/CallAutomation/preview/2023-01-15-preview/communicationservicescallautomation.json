@@ -722,139 +722,13 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants:muteAll": {
-      "post": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Mute all participants from the call.",
-        "description": "Mute all participants from the call.",
-        "operationId": "CallConnection_MuteAll",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "muteAllParticipantsRequest",
-            "in": "body",
-            "description": "The participant to be excluded from the mute all operation, if any.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MuteAllParticipantsRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "Repeatability-Request-ID",
-            "in": "header",
-            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "Repeatability-First-Sent",
-            "in": "header",
-            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "202": {
-            "description": "Returns the mute participants response",
-            "schema": {
-              "$ref": "#/definitions/MuteParticipantsResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Mute all participants from the call.": {
-            "$ref": "./examples/CallConnection_MuteAll.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/participants:unmuteAll": {
-      "post": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Unmute all participants from the call.",
-        "description": "Unmute all participants from the call.",
-        "operationId": "CallConnection_UnmuteAll",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "unmuteAllParticipantsRequest",
-            "in": "body",
-            "description": "Operation context, if any.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UnmuteAllParticipantsRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "Repeatability-Request-ID",
-            "in": "header",
-            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "Repeatability-First-Sent",
-            "in": "header",
-            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "202": {
-            "description": "Returns the unmute participants response",
-            "schema": {
-              "$ref": "#/definitions/UnmuteParticipantsResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Unmute all participants from the call.": {
-            "$ref": "./examples/CallConnection_UnmuteAll.json"
-          }
-        }
-      }
-    },
     "/calling/callConnections/{callConnectionId}/participants:mute": {
       "post": {
         "tags": [
           "MidConnections"
         ],
-        "summary": "Mute participant from the call using identifier.",
-        "description": "Mute participant from the call using identifier.",
+        "summary": "Mute participants from the call using identifier.",
+        "description": "Mute participants from the call using identifier.",
         "operationId": "CallConnection_Mute",
         "parameters": [
           {
@@ -865,12 +739,12 @@
             "type": "string"
           },
           {
-            "name": "muteParticipantRequest",
+            "name": "muteParticipantsRequest",
             "in": "body",
-            "description": "The participant to be muted from the call.",
+            "description": "The participants to be muted from the call.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MuteParticipantRequest"
+              "$ref": "#/definitions/MuteParticipantsRequest"
             }
           },
           {
@@ -905,7 +779,7 @@
           }
         },
         "x-ms-examples": {
-          "Mute participant from the call using identifier.": {
+          "Mute participants from the call using identifier.": {
             "$ref": "./examples/CallConnection_Mute.json"
           }
         }
@@ -916,8 +790,8 @@
         "tags": [
           "MidConnections"
         ],
-        "summary": "Unmute participant from the call using identifier.",
-        "description": "Unmute participant from the call using identifier.",
+        "summary": "Unmute participants from the call using identifier.",
+        "description": "Unmute participants from the call using identifier.",
         "operationId": "CallConnection_Unmute",
         "parameters": [
           {
@@ -928,12 +802,12 @@
             "type": "string"
           },
           {
-            "name": "unmuteParticipantRequest",
+            "name": "unmuteParticipantsRequest",
             "in": "body",
-            "description": "The participant to be unmuted from the call.",
+            "description": "The participants to be unmuted from the call.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UnmuteParticipantRequest"
+              "$ref": "#/definitions/UnmuteParticipantsRequest"
             }
           },
           {
@@ -968,13 +842,13 @@
           }
         },
         "x-ms-examples": {
-          "Unmute participant from the call using identifier.": {
+          "Unmute participants from the call using identifier.": {
             "$ref": "./examples/CallConnection_Unmute.json"
           }
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants/{participantMri}": {
+    "/calling/callConnections/{callConnectionId}/participants/{participantRawId}": {
       "get": {
         "tags": [
           "MidConnections"
@@ -991,9 +865,9 @@
             "type": "string"
           },
           {
-            "name": "participantMri",
+            "name": "participantRawId",
             "in": "path",
-            "description": "MRI of the participant to retrieve.",
+            "description": "Raw id of the participant to retrieve.",
             "required": true,
             "type": "string"
           },
@@ -1011,7 +885,7 @@
           "200": {
             "description": "Returns the get participant response.",
             "schema": {
-              "$ref": "#/definitions/AcsCallParticipant"
+              "$ref": "#/definitions/CallParticipant"
             }
           }
         },
@@ -1907,7 +1781,7 @@
           "description": "List of the current participants in the call.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AcsCallParticipant"
+            "$ref": "#/definitions/CallParticipant"
           }
         },
         "nextLink": {
@@ -1916,7 +1790,7 @@
         }
       }
     },
-    "AcsCallParticipant": {
+    "CallParticipant": {
       "description": "Contract model of an ACS call participant",
       "type": "object",
       "properties": {
@@ -1977,7 +1851,7 @@
           "description": "List of current participants in the call.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AcsCallParticipant"
+            "$ref": "#/definitions/CallParticipant"
           }
         },
         "operationContext": {
@@ -2016,17 +1890,23 @@
         }
       }
     },
-    "MuteAllParticipantsRequest": {
+    "MuteParticipantsRequest": {
       "description": "The request payload for muting participants from the call.",
+      "required": [
+        "targetParticipants"
+      ],
       "type": "object",
       "properties": {
+        "targetParticipants": {
+          "description": "Participants to be muted from the call.\r\nOnly ACS Users are supported.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
+        },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
-        },
-        "requestInitiator": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "Used by customers to idenfity the mute request initiator."
         }
       }
     },
@@ -2040,10 +1920,20 @@
         }
       }
     },
-    "UnmuteAllParticipantsRequest": {
-      "description": "The request payload for unmuting all participants from the call.",
+    "UnmuteParticipantsRequest": {
+      "description": "The request payload for unmuting participant from the call.",
+      "required": [
+        "targetParticipants"
+      ],
       "type": "object",
       "properties": {
+        "targetParticipants": {
+          "description": "Participants to be unmuted from the call.\r\nOnly ACS Users are supported.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CommunicationIdentifierModel"
+          }
+        },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
@@ -2056,38 +1946,6 @@
       "properties": {
         "operationContext": {
           "description": "The operation context provided by client.",
-          "type": "string"
-        }
-      }
-    },
-    "MuteParticipantRequest": {
-      "description": "The request payload for muting participants from the call.",
-      "required": [
-        "targetParticipant"
-      ],
-      "type": "object",
-      "properties": {
-        "targetParticipant": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string"
-        }
-      }
-    },
-    "UnmuteParticipantRequest": {
-      "description": "The request payload for unmuting participant from the call.",
-      "required": [
-        "targetParticipant"
-      ],
-      "type": "object",
-      "properties": {
-        "targetParticipant": {
-          "$ref": "#/definitions/CommunicationIdentifierModel"
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
         }
       }
@@ -2426,7 +2284,7 @@
           "description": "The list of participants in the call.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AcsCallParticipant"
+            "$ref": "#/definitions/CallParticipant"
           }
         }
       }
@@ -2713,7 +2571,7 @@
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
     "parameters": [
-        {
+      {
             "name": "endpoint",
             "description": "The endpoint of the Azure Communication resource.",
             "required": true,
