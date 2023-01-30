@@ -1,0 +1,88 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.ResourceManager;
+
+namespace Microsoft.AzureSphere;
+
+@doc("An device group resource belonging to a product resource.")
+@parentResource(Product)
+model DeviceGroup is ProxyResource<DeviceGroupProperties> {
+  @doc("Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.")
+  @pattern("^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$")
+  @key("deviceGroupName")
+  @path
+  @segment("deviceGroups")
+  name: string;
+}
+
+@armResourceOperations
+interface DeviceGroups extends ProxyResourceOperationsReadListCreateDelete<DeviceGroup, ListQueryParameters> {
+  @autoRoute
+  @doc("Counts devices in device group.")
+  @armResourceAction(DeviceGroup)
+  @post
+  op countDevices(
+    ...ResourceInstanceParameters<DeviceGroup>,
+  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+
+  @autoRoute
+  @armResourceAction(DeviceGroup)
+  @doc("Bulk claims the devices.")
+  @post
+  op claimDevices(
+    ...ResourceInstanceParameters<DeviceGroup>, 
+    @doc("Bulk claim devices request body.")
+    @body request: ClaimDevicesRequest
+  ): ArmAcceptedResponse;
+}
+
+@doc("The properties of deviceGroup")
+model DeviceGroupProperties {
+  @doc("Description of the device group.")
+  description?: string;
+
+  @doc("Operating system feed type of the device group.")
+  osFeedType?: OSFeedType;
+
+  @doc("Update policy of the device group.")
+  updatePolicy?: UpdatePolicy;
+
+  @doc("Flag to define if the user allows for crash dump collection.")
+  allowCrashDumpsCollection?: AllowCrashDumpCollection;
+  
+  @doc("Regional data boundary for the device group.")
+  regionalDataBoundary?: RegionalDataBoundary;
+
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("OS feed type values.")
+enum OSFeedType {
+  Retail,
+  RetailEval
+}
+
+@doc("Update policy values.")
+enum UpdatePolicy {
+  UpdateAll,
+  No3rdPartyAppUpdates
+}
+
+// Device group models
+
+@doc("Request to the action call to bulk claim devices.")
+model ClaimDevicesRequest {
+  @doc("Device identifiers of the devices to be claimed.")
+  deviceIdentifiers: string[]
+}

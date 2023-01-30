@@ -75,10 +75,10 @@
         "description": "List all planned quotas in the subscription.",
         "x-ms-examples": {
           "List PlannedQuotas in a subscription": {
-            "$ref": "./examples/GetAllPlannedQuota.json"
+            "$ref": "./examples/GetAllPlannedQuotas.json"
           }
         },
-        "operationId": "PlannedQuota_ListSubscriptionLevel",
+        "operationId": "PlannedQuota_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -106,264 +106,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/plannedQuotas": {
-      "get": {
-        "description": "List all planned quotas in the resource group.",
-        "x-ms-examples": {
-          "List all PlannedQuotas in a resource group": {
-            "$ref": "./examples/GetPlannedQuotaInResourceGroup.json"
-          }
-        },
-        "operationId": "PlannedQuota_ListResourceGroupLevel",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "List all planned quotas in the resource group.",
-            "schema": {
-              "$ref": "#/definitions/PlannedQuotaModelListResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureCIS/plannedQuotas/{resourceName}": {
-      "put": {
-        "description": "Create or update planned quota in the resource group.",
-        "x-ms-examples": {
-          "Create or update PlannedQuota": {
-            "$ref": "./examples/CreatePlannedQuota.json"
-          }
-        },
-        "operationId": "PlannedQuota_CreateUpdate",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "name": "PlannedQuota",
-            "description": "Planned quota details.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PlannedQuotaModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Planned quota updated successfully.",
-            "schema": {
-              "$ref": "#/definitions/PlannedQuotaModel"
-            }
-          },
-          "201": {
-            "description": "Planned quota created successfully.",
-            "schema": {
-              "$ref": "#/definitions/PlannedQuotaModel"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "patch": {
-        "description": "Patch planned quota in the resource group.",
-        "x-ms-examples": {
-          "Patch PlannedQuota": {
-            "$ref": "./examples/PatchPlannedQuota.json"
-          }
-        },
-        "operationId": "plannedQuota_Patch",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          },
-          {
-            "name": "PlannedQuota",
-            "description": "Planned quota details",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PlannedQuotaModel"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Patch request has been accepted, resource is already in the state matching the PATCH request body.",
-            "schema": {
-              "$ref": "#/definitions/PlannedQuotaModel"
-            }
-          },
-          "202": {
-            "description": "Patch request has been accepted.",
-            "schema": {
-              "$ref": "#/definitions/PlannedQuotaModel"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "get": {
-        "description": "Returns planned quota.",
-        "x-ms-examples": {
-          "Get PlannedQuota": {
-            "$ref": "./examples/GetPlannedQuota.json"
-          }
-        },
-        "operationId": "plannedQuota_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get planned quota.",
-            "schema": {
-              "$ref": "#/definitions/PlannedQuotaModel"
-            }
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "description": "Delete planned quota.",
-        "x-ms-examples": {
-          "Delete PlannedQuota": {
-            "$ref": "./examples/DeletePlannedQuota.json"
-          }
-        },
-        "operationId": "plannedQuota_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Delete request has been accepted."
-          },
-          "202": {
-            "description": "Delete request has been accepted.",
-            "headers": {
-              "Location": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            }
-          },
-          "204": {
-            "description": "Delete request has been accepted."
-          },
-          "default": {
-            "description": "Error response describing the reason for operation failure.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureCIS/plannedQuotas/{resourceName}": {
       "put": {
         "description": "Create or update planned quota in the subscription.",
         "x-ms-examples": {
           "Create or update plannedQuota": {
-            "$ref": "./examples/CreatePlannedQuotaSubOnly.json"
+            "$ref": "./examples/CreatePlannedQuota.json"
           }
         },
-        "operationId": "PlannedQuota_SubOnlyCreateUpdate",
+        "operationId": "PlannedQuota_CreateUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -419,10 +170,10 @@
         "description": "Patch planned quota.",
         "x-ms-examples": {
           "Patch plannedQuota": {
-            "$ref": "./examples/PatchPlannedQuotaSubOnly.json"
+            "$ref": "./examples/PatchPlannedQuota.json"
           }
         },
-        "operationId": "PlannedQuota_SubOnlyPatch",
+        "operationId": "PlannedQuota_Patch",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -478,10 +229,10 @@
         "description": "Returns planned quota.",
         "x-ms-examples": {
           "Get plannedQuota": {
-            "$ref": "./examples/GetPlannedQuotaSubOnly.json"
+            "$ref": "./examples/GetPlannedQuota.json"
           }
         },
-        "operationId": "PlannedQuota_SubOnlyGet",
+        "operationId": "PlannedQuota_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -512,10 +263,10 @@
         "description": "Delete planned quota.",
         "x-ms-examples": {
           "Delete plannedQuota": {
-            "$ref": "./examples/DeletePlannedQuotaSubOnly.json"
+            "$ref": "./examples/DeletePlannedQuota.json"
           }
         },
-        "operationId": "PlannedQuota_SubOnlyDelete",
+        "operationId": "PlannedQuota_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -583,6 +334,11 @@
     },
     "PlannedQuotaResource": {
       "type": "object",
+      "required": [
+        "region",
+        "serviceTreeId",
+        "subscriptionNameInPlan"
+      ],
       "description": "Resource of a planned quota.",
       "properties": {
         "provisioningState": {
@@ -600,6 +356,10 @@
         "planVersion": {
           "description": "Plan version in integer.",
           "type": "number"
+        },
+        "region": {
+          "description": "Region name",
+          "type": "string"
         },
         "serviceTreeId": {
           "description": "Service tree id.",
@@ -621,6 +381,14 @@
             "$ref": "#/definitions/PropertyBinding"
           },
           "x-ms-identifiers": []
+        },
+        "fulfilledplan": {
+          "description": "The fulfilled plan.",
+          "type": "object"
+        },
+        "alternatives": {
+          "description": "The alternative SKUs.",
+          "type": "object"
         }
       }
     },

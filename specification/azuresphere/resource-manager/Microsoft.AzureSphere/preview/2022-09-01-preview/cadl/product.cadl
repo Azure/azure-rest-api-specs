@@ -1,0 +1,66 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.ResourceManager.Foundations;
+using Azure.Core;
+using Azure.ResourceManager;
+
+namespace Microsoft.AzureSphere;
+
+//Products
+@doc("An product resource belonging to a catalog resource.")
+@parentResource(Catalog)
+model Product is ProxyResource<ProductProperties> {
+  @doc("Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.")
+  @pattern("^[\\w][\\w\\s]{1,48}[\\w]|\\.default$")
+  @key("productName")
+  @path
+  @segment("products")
+  name: string;
+}
+
+@armResourceOperations
+interface Products extends ProxyResourceOperations<Product> {
+
+  @autoRoute
+  @doc("Lists devices in product.")
+  @armResourceAction(Product)
+  @post
+  op listDevices(
+    ...ResourceInstanceParameters<Product>,
+  ): ArmResponse<ResourceListResult<Device>> | ErrorResponse;
+
+
+  @autoRoute
+  @doc("Generates default device groups for the product.")
+  @armResourceAction(Product)
+  @post
+  op generateDefaultDeviceGroups(
+    ...ResourceInstanceParameters<Product>,
+  ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
+
+  @autoRoute
+  @doc("Counts devices in product.")
+  @armResourceAction(Product)
+  @post
+  op countDevices(
+    ...ResourceInstanceParameters<Product>,
+  ): ArmResponse<CountDeviceResponse> | ErrorResponse;
+}
+
+
+@doc("The properties of product")
+model ProductProperties {
+  @doc("Description of the product")
+  description: string;
+
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}

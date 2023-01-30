@@ -16,27 +16,6 @@ using Azure.ResourceManager;
 model enclaveVirtualNetwork {
   @doc("Network Size.")
   networkSize?: string;
-  
-  @doc("Network Address.")
-  networkCidr?: string;
-
-  @doc("Subnet Gateway Address.")
-  subnetGatewayCidr?: string;
-
-  @doc("Subnet Client Address.")
-  subnetClientCidr?: string;
-  
-  @doc("Subnet Management Address.")
-  subnetManagementCidr?: string;
-
-  @doc("Subnet Resources Address.")
-  subnetResourcesCidr?: string;
-
-  @doc("Subnet HostPool Address.")
-  subnetHostPoolCidr?: string;
-
-  @doc("VPN asn.")
-  vpnASN?: int32;
 }
 
 
@@ -69,23 +48,4 @@ model enclaveCore{
 
   @doc("Ip Address.")
   ipAddress?: string;
-}
-
-@doc("Virtual Enclave Resource properties")
-model virtualEnclaveProperties{
-  @doc("Virtual Enclave Resource Group Id.")
-  enclaveResourcesGroupId?: string;
-
-  @doc("Virtual Enclave Virtual Network.")
-  enclaveVirtualNetwork?: enclaveVirtualNetwork;
-
-  @doc("Virtual Enclave Core.")
-  enclaveCore?: enclaveCore;
-
-  @doc("Virtual Enclave Administrators Object Id.")
-  enclaveAdministratorsObjectId?: string;
-
-  @doc("Provisioning State.")
-  @visibility("read")
-  provisioningState?: provisioningState;
 }

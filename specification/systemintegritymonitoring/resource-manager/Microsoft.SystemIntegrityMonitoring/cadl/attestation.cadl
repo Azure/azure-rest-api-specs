@@ -1,0 +1,77 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "./provisioningstate.cadl";
+
+@doc("Payload for applying measurement profile version to a specified supported azure resource.")
+model ApplyForResourceConnectionPayload {
+  @doc("Measurement profile version to be applied.")
+  version: string;
+
+  @doc("Supported azure resource to apply measurement profile versions to.")
+  resourceId: string;
+}
+
+@doc("Payload for removing measurement profile version applied to a specified supported azure resource.")
+model RemoveForResourceConnectionPayload {
+  @doc("Measurement profile version to be removed.")
+  version: string;
+
+  @doc("Supported azure resource to remove measurement profile version from.")
+  resourceId: string;
+}
+
+@doc("Payload for uploading new measurements from a clean room device to a device profile.")
+model NewMeasurementProfilePayload {
+  @doc("Challenge received from the Initiate request.")
+  challenge: ServiceChallenge;
+
+  @doc("Service context received from the Initiate request.")
+  serviceContext: ServiceContext;
+
+  @doc("Name of the device.")
+  deviceName: string;
+
+  @doc("List of attestations.")
+  attestations: AttestationProperties[];
+}
+
+@doc("Attestation properties.")
+model AttestationProperties {
+  @doc("Type of attestation to perform.")
+  attestationType: AttestationType;
+
+  @doc("JWT token received from MAA.")
+  attestationData: string;
+}
+
+@doc("Response received from Initiate.")
+model InitiateRequestResponse {
+  @doc("Challenge received from the Initiate request.")
+  challenge: ServiceChallenge;
+
+  @doc("Service context received from the Initiate request.")
+  serviceContext: ServiceContext;
+
+  @doc("List of attestations the service requires from the device.")
+  requiredAttestations: AttestationType[];
+
+  @doc("Endpoint for devices to call MAA APIs.")
+  maaUrl: Url;
+}
+
+@doc("Currently supported attestation types.")
+@knownValues(AttestationTypeValues)
+scalar AttestationType extends string;
+enum AttestationTypeValues {
+  Boot,
+}
+
+scalar ServiceChallenge extends string;
+
+scalar ServiceContext extends string;
+
+scalar DeviceId extends string;
+
+scalar Url extends string;

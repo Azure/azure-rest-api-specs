@@ -43,6 +43,7 @@ input-file:
   - Microsoft.HpcWorkbench/preview/2021-03-01-preview/workload.json
   - Microsoft.HpcWorkbench/preview/2021-03-01-preview/files.json
   - Microsoft.HpcWorkbench/preview/2021-03-01-preview/fileRequests.json
+  - Microsoft.HpcWorkbench/preview/2021-03-01-preview/storage.json
 ```
 
 ---

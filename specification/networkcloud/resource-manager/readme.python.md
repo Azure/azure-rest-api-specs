@@ -9,7 +9,7 @@ azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-networkcloud
 no-namespace-folders: true
-package-version: 2022-09-30-preview
+package-version: 2022-12-12-preview
 ```
 
 ``` yaml $(python-mode) == 'update' && $(track2)

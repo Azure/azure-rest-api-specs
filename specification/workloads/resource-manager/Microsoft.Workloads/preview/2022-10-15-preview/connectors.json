@@ -702,6 +702,10 @@
           "description": "Indicates any errors on the connector resource.",
           "$ref": "#/definitions/ConnectorErrorDefinition",
           "readOnly": true
+        },
+        "managedResourceGroupConfiguration": {
+          "description": "Managed resource group configuration",
+          "$ref": "#/definitions/ManagedRGConfiguration"
         }
       }
     },
@@ -1050,6 +1054,16 @@
           },
           "x-ms-identifiers": [],
           "readOnly": true
+        }
+      }
+    },
+    "ManagedRGConfiguration": {
+      "description": "Managed resource group configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
         }
       }
     }

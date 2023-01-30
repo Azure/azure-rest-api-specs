@@ -1,0 +1,1036 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ModSimWorkbench",
+    "description": "Microsoft.ModSimWorkbench resource provider OpenAPI Spec",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{name}/getUploadUri": {
+      "post": {
+        "tags": [
+          "chambers_GetUploadUri"
+        ],
+        "summary": "Gets a URI to upload files to the specified Chamber resource.",
+        "operationId": "chambers_GetUploadUri",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "the file upload parameters.",
+            "schema": {
+              "$ref": "#/definitions/FileUploadParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GetUploadUri"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Chambers get upload Uri": {
+            "$ref": "./examples/ChambersGetUploadUri.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{name}/start": {
+      "post": {
+        "tags": [
+          "chambers_Start"
+        ],
+        "summary": "Perform Start operation.",
+        "operationId": "chambers_Start",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Chambers start": {
+            "$ref": "./examples/ChambersStart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{name}/stop": {
+      "post": {
+        "tags": [
+          "chambers_Stop"
+        ],
+        "summary": "Perform Stop operation.",
+        "operationId": "chambers_Stop",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Chambers stop": {
+            "$ref": "./examples/ChambersStop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{name}/restart": {
+      "post": {
+        "tags": [
+          "chambers_Restart"
+        ],
+        "summary": "Perform Restart operation.",
+        "operationId": "chambers_Restart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Chambers Restart": {
+            "$ref": "./examples/ChambersRestart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{name}/licenseUpdate": {
+      "post": {
+        "tags": [
+          "chambers_LicenseUpdate"
+        ],
+        "summary": "Perform Update LicenseServices operation.",
+        "operationId": "chambers_LicenseUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "the update license services parameters.",
+            "schema": {
+              "$ref": "#/definitions/UpdateLicenseParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Update chamber license": {
+            "$ref": "./examples/ChambersLicenseUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{name}/licenseRestart": {
+      "post": {
+        "tags": [
+          "chambers_LicenseRestart"
+        ],
+        "summary": "Perform License Restart operation.",
+        "operationId": "chambers_LicenseRestart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "description": "the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "instanceName",
+            "description": "the instance name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "the chamber name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Restart License body",
+            "schema": {
+              "$ref": "#/definitions/RestartLicenseParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Chamber License Restart": {
+            "$ref": "./examples/ChambersLicenseRestart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}": {
+      "put": {
+        "tags": [
+          "chambers_CreateOrUpdate"
+        ],
+        "operationId": "chambers_CreateOrUpdate",
+        "description": "Creates or updates the specified Chamber.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update chamber operation.",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting chamber resource.",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting chamber resource.",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create Chamber": {
+            "$ref": "./examples/ChambersCreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "chambers_Update"
+        ],
+        "operationId": "chambers_Update",
+        "description": "Updates the specified Chamber.",
+        "consumes": [
+          "application/merge-patch+json",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update Chamber operation.",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting Chamber resource.",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting Chamber resource.",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Update Chamber": {
+            "$ref": "./examples/ChambersPatch.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "chambers_Get"
+        ],
+        "operationId": "chambers_Get",
+        "description": "Gets information about the specified Chamber.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the specified Chamber.",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get Chamber": {
+            "$ref": "./examples/ChambersGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "chambers_Delete"
+        ],
+        "operationId": "chambers_Delete",
+        "description": "Deletes the specified Chamber.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed successfully",
+            "schema": {
+              "$ref": "#/definitions/Chamber"
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource with the specified name does not exist."
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Chamber": {
+            "$ref": "./examples/ChambersDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers": {
+      "get": {
+        "tags": [
+          "chambers_List"
+        ],
+        "operationId": "chambers_List",
+        "description": "Lists all Chambers.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "instanceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the instance."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the list of all Chambers",
+            "schema": {
+              "$ref": "#/definitions/ChamberPageableList"
+            }
+          },
+          "default": {
+            "description": "",
+            "schema": {
+              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Chambers": {
+            "$ref": "./examples/ChambersList.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ChamberPageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Chamber"
+          },
+          "x-ms-identifiers": [
+            "value"
+          ]
+        }
+      }
+    },
+    "FileUploadParameters": {
+      "description": "File Upload Parameters DTO.",
+      "type": "object",
+      "properties": {
+        "fileSize": {
+          "format": "int64",
+          "description": "Gets or sets the size of the file being uploaded.",
+          "type": "integer",
+          "example": 1073741824
+        }
+      }
+    },
+    "RestartLicenseParameters": {
+      "description": "File Upload Parameters DTO.",
+      "type": "object",
+      "properties": {
+        "licenseService": {
+          "description": "Gets or sets the license service to update.",
+          "type": "string",
+          "enum": [
+            "ansys",
+            "cadence",
+            "siemens",
+            "synopsys"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseService",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "UpdateLicenseParameters": {
+      "description": "File Upload Parameters DTO.",
+      "type": "object",
+      "properties": {
+        "licenseService": {
+          "description": "Gets or sets the license service to update.",
+          "type": "string",
+          "enum": [
+            "ansys",
+            "cadence",
+            "siemens",
+            "synopsys"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseService",
+            "modelAsString": true
+          }
+        },
+        "enable": {
+          "description": "Switch to show if License Service is activated.",
+          "type": "boolean"
+        },
+        "licenseKey": {
+          "description": "EDA License file contents",
+          "type": "string"
+        }
+      }
+    },
+    "Ansys": {
+      "type": "object",
+      "description": "Ansys Common Licensing.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Switch to show if License Service is activated."
+        },
+        "server": {
+          "type": "string",
+          "description": "License Service server."
+        },
+        "lmhostId": {
+          "type": "array",
+          "description": "Unique identifier of ModSim Workbench chamber license servers used by FlexNet Licensing Service.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "lmhostId"
+          ]
+        }
+      }
+    },
+    "Cadence": {
+      "type": "object",
+      "description": "Cadence License Manager",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Switch to show if License Service is activated."
+        },
+        "server": {
+          "type": "string",
+          "description": "License Service server."
+        },
+        "lmhostId": {
+          "type": "array",
+          "description": "Unique identifier of ModSim Workbench chamber license servers used by FlexNet Licensing Service.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "lmhostId"
+          ]
+        },
+        "mfp": {
+          "type": "array",
+          "description": "License server information for Cadence License Manager.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "mfp"
+          ]
+        }
+      }
+    },
+    "Siemens": {
+      "type": "object",
+      "description": "Siemens Standard Licensing.",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Switch to show if License Service is activated."
+        },
+        "server": {
+          "type": "string",
+          "description": "License Service server."
+        },
+        "lmhostId": {
+          "type": "array",
+          "description": "Unique identifier of ModSim Workbench chamber license servers used by FlexNet Licensing Service.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "lmhostId"
+          ]
+        }
+      }
+    },
+    "Synopsys": {
+      "type": "object",
+      "description": "Synopsys Common Licensing",
+      "properties": {
+        "enable": {
+          "type": "boolean",
+          "description": "Switch to show if License Service is activated."
+        },
+        "server": {
+          "type": "string",
+          "description": "License Service server."
+        },
+        "vmUuid": {
+          "type": "array",
+          "description": "Virtual machine universal unique identifier of ModSim Workbench chamber license servers used by FlexNet Licensing Service.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "vmUuid"
+          ]
+        }
+      }
+    },
+    "ChamberPropertiesFormat": {
+      "type": "object",
+      "properties": {
+        "licenseServices": {
+          "description": "Gets or sets the license services for each EDA vendor.",
+          "type": "object",
+          "properties": {
+            "cadence": {
+              "$ref": "#/definitions/Cadence",
+              "description": "Gets or sets the cadence properties."
+            },
+            "ansys": {
+              "$ref": "#/definitions/Ansys",
+              "description": "Gets or sets the ansys properties."
+            },
+            "siemens": {
+              "$ref": "#/definitions/Siemens",
+              "description": "Gets or sets the siemens properties."
+            },
+            "synopsys": {
+              "$ref": "#/definitions/Synopsys",
+              "description": "Gets or sets the synopsys properties."
+            }
+          }
+        },
+        "provisioningState": {
+          "$ref": "./modsimworkbench.json#/definitions/ProvisioningState",
+          "description": "Gets the status of the Chamber at the time the operation was called"
+        }
+      },
+      "description": "Chamber properties."
+    },
+    "GetUploadUri": {
+      "description": "Datasync file upload SAS token",
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string",
+          "description": "Datasync file upload SAS token"
+        }
+      }
+    },
+    "Chamber": {
+      "description": "Chamber resource",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ChamberPropertiesFormat",
+          "description": "Chamber properties.",
+          "type": "object"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./modsimworkbench.json#/definitions/Resource"
+        }
+      ]
+    }
+  }
+}

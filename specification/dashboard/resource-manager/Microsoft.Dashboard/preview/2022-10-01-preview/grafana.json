@@ -847,6 +847,9 @@
         },
         "enterpriseConfigurations": {
           "$ref": "#/definitions/EnterpriseConfigurations"
+        },
+        "grafanaConfigurations": {
+          "$ref": "#/definitions/GrafanaConfigurations"
         }
       }
     },
@@ -896,6 +899,9 @@
         },
         "enterpriseConfigurations": {
           "$ref": "#/definitions/EnterpriseConfigurations"
+        },
+        "grafanaConfigurations": {
+          "$ref": "#/definitions/GrafanaConfigurations"
         }
       }
     },
@@ -992,6 +998,67 @@
         "read",
         "create"
       ]
+    },
+    "GrafanaConfigurations": {
+      "description": "Server configurations of a Grafana instance",
+      "type": "object",
+      "properties": {
+        "smtp": {
+          "$ref": "#/definitions/Smtp"
+        }
+      }
+    },
+    "Smtp": {
+      "description": "Email server settings.\r\nhttps://grafana.com/docs/grafana/v9.0/setup-grafana/configure-grafana/#smtp",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Enable this to allow Grafana to send email. Default is false",
+          "type": "boolean",
+          "default": false
+        },
+        "host": {
+          "description": "SMTP server hostname with port, e.g. test.email.net:587",
+          "type": "string"
+        },
+        "user": {
+          "description": "User of SMTP auth",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password of SMTP auth. If the password contains # or ;, then you have to wrap it with triple quotes",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "fromAddress": {
+          "description": "Address used when sending out emails\r\nhttps://pkg.go.dev/net/mail#Address",
+          "type": "string"
+        },
+        "fromName": {
+          "description": "Name to be used when sending out emails. Default is \"Azure Managed Grafana Notification\"\r\nhttps://pkg.go.dev/net/mail#Address",
+          "type": "string"
+        },
+        "startTLSPolicy": {
+          "$ref": "#/definitions/StartTLSPolicy"
+        },
+        "skipVerify": {
+          "description": "Verify SSL for SMTP server. Default is false\r\nhttps://pkg.go.dev/crypto/tls#Config",
+          "type": "boolean"
+        }
+      }
+    },
+    "StartTLSPolicy": {
+      "description": "The StartTLSPolicy setting of the SMTP configuration\r\nhttps://pkg.go.dev/github.com/go-mail/mail#StartTLSPolicy",
+      "enum": [
+        "OpportunisticStartTLS",
+        "MandatoryStartTLS",
+        "NoStartTLS"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "StartTLSPolicy"
+      }
     },
     "GrafanaIntegrations": {
       "description": "GrafanaIntegrations is a bundled observability experience (e.g. pre-configured data source, tailored Grafana dashboards, alerting defaults) for common monitoring scenarios.",

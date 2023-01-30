@@ -37,10 +37,27 @@
           "gatewayPort": 3300,
           "icmHttpPort": 3312,
           "icmHttpsPort": 3313,
-          "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/app01-vm",
-          "storageDetails": [
+          "loadBalancerDetails": {
+            "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Network/loadBalancers/cs-loadBalancer"
+          },
+          "vmDetails": [
             {
-              "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/nfsstorageaccount"
+              "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/cs-vm1",
+              "type": "Active",
+              "storageDetails": [
+                {
+                  "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/nfsstorageaccount"
+                }
+              ]
+            },
+            {
+              "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/cs-vm2",
+              "type": "Standby",
+              "storageDetails": [
+                {
+                  "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/nfsstorageaccount"
+                }
+              ]
             }
           ],
           "status": "Running",
@@ -75,10 +92,27 @@
           "gatewayPort": 3300,
           "icmHttpPort": 3312,
           "icmHttpsPort": 3313,
-          "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/app01-vm",
-          "storageDetails": [
+          "loadBalancerDetails": {
+            "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Network/loadBalancers/cs-loadBalancer"
+          },
+          "vmDetails": [
             {
-              "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/nfsstorageaccount"
+              "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/cs-vm1",
+              "type": "Active",
+              "storageDetails": [
+                {
+                  "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/nfsstorageaccount"
+                }
+              ]
+            },
+            {
+              "virtualMachineId": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Compute/virtualMachines/cs-vm2",
+              "type": "Standby",
+              "storageDetails": [
+                {
+                  "id": "/subscriptions/6d875e77-e412-4d7d-9af4-8895278b4443/resourceGroups/test-rg/providers/Microsoft.Storage/storageAccounts/nfsstorageaccount"
+                }
+              ]
             }
           ],
           "status": "Running",

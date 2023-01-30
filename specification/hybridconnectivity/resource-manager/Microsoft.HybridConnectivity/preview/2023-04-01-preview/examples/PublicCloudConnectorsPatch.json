@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "testresourcegroup",
+    "publicCloudConnector": "connector1",
+    "PublicCloudConnectorsPatchRequest": {
+      "properties": {
+        "hostType": "AWS",
+        "awsCloudProfile": {
+          "accountId": "7219623818",
+          "excludedAccounts": [
+            "72196236453"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testresourcegroup/providers/Microsoft.HybridConnectivity/publicCloudConnectors/connector1",
+        "name": "connector1",
+        "type": "Microsoft.HybridConnectivity/publicCloudConnectors",
+        "location": "West US",
+        "properties": {
+          "hostType": "AWS",
+          "awsCloudProfile": {
+            "accountId": "7219623818",
+            "excludedAccounts": [
+              "72196236453"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,163 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-providerhub-controller";
+
+@service({
+  title: "Microsoft.DatabaseInsights",
+  version: "2023-03-01-preview",
+})
+@Versioning.versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armProviderNamespace
+namespace Microsoft.DatabaseInsights;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.ResourceManager;
+using OpenAPI;
+
+interface Operations extends Azure.ResourceManager.Operations {}
+
+@doc("A DatabaseInsightsProviderHub resource")
+model DatabaseMonitoringAgent is TrackedResource<DatabaseMonitoringAgentProperties> {
+  @doc("Database Monitoring Agent name")
+  @key("databaseMonitoringAgentName")
+  @pattern("^[a-zA-Z0-9-]{3,60}$")
+  @path
+  @segment("databaseMonitoringAgents")
+  name: string;
+}
+
+@doc("rp specific properties of the resource DatabaseMonitoring Agent")
+model DatabaseMonitoringAgentProperties {
+  @doc("Principal Id of the identity assigned to DBMA that has access to monitoring targets (database instances), Key Vault secrets (if used to store database authentication credentials), and an Azure Data Explorer database used as the monitoring data store")
+  identity?: string;
+
+  @doc("A data store for collected monitoring data")
+  datastore?: Datastore;
+  
+ ...DefaultProvisioningStateProperty;
+}
+
+@doc("Properties of data store")
+model Datastore {
+  @doc("ARM ResourceId of an Azure Data Explorer database")
+  adxDatabaseResourceId: string;
+  @doc("URI of an Azure Data Explorer Cluster")
+  adxClusterUri: string;
+}
+
+@armResourceOperations
+interface DatabaseMonitoringAgents extends ResourceOperations<DatabaseMonitoringAgent, DatabaseMonitoringAgentProperties> {
+  @doc("Action to start monitoring all monitoring targets in a given Database Monitoring Agent")
+  @action 
+  @post
+  @armResourceAction(DatabaseMonitoringAgent)
+  startAgent(...ResourceInstanceParameters<DatabaseMonitoringAgent>): ArmResponse<DatabaseMonitoringAgent> | ErrorResponse;
+}
+
+@parentResource(DatabaseMonitoringAgent)
+model MonitoringTarget is ProxyResource<MonitoringTargetProperties> {
+  @doc("Monitoring target resource name")
+  @key("monitoringTargetName")
+  @segment("monitoringTargets")
+  @path
+  name: string;
+}
+
+@doc("Generic properties of a monitoring target")
+@discriminator("targetType")
+model MonitoringTargetProperties {
+ 
+  @doc("To use SQL authentication for monitoring targets, specify the vault where username and password secrets are stored")
+  targetVault?: VaultSecret;
+
+  @doc("The server name to use in the connection string when connecting to a target. Port number and instance name must be specified separately.")
+  @maxLength(200)
+  connectionServerName: string;
+
+  @doc("Monitoring target collection status")
+  @knownValues(MonitoringTargetCollectionStatus)
+  targetCollectionStatus?: string;
+
+  ...DefaultProvisioningStateProperty;
+}
+
+@doc("Properties specific to single database in Azure SQL Database")
+model SqlDbTargetProperties extends MonitoringTargetProperties {
+  @doc("Azure SQL DB single database target")
+  targetType: "SqlDb";
+
+  @doc("ARM ResourceId of an Azure SQL DB single database target")
+  sqlDbResourceId: string;
+
+  @doc("Set to true to monitor a high availability replica of specified monitoring target, if any")
+  readIntent?: boolean
+}
+
+@doc("Properties specific to elastic pool in Azure SQL Database")
+model ElasticPoolTargetProperties extends MonitoringTargetProperties {
+  @doc("Azure SQL DB elastic pool target")
+  targetType: "SqlEp";
+  @doc("ARM ResourceId of an Azure SQL DB elastic pool target")
+  sqlEpResourceId: string;
+
+  @doc("ARM ResourceId of the anchor database used to connect to an elastic pool")
+  anchorDatabaseResourceId: string;
+
+  @doc("Set to true to monitor a high availability replica of specified monitoring target, if any")
+  readIntent?: boolean
+}
+
+@doc("Properties specific to Azure SQL Managed Instance targets")
+model ManagedInstanceTargetProperties extends MonitoringTargetProperties {
+  @doc("Azure SQL Managed Instance target")
+  targetType: "SqlMi";
+
+  @doc("ARM ResourceId of an Azure SQL Managed Instance target")
+  sqlMiResourceId: string;
+
+  @doc("The TCP port number to optionally use in the connection string when connecting to an Azure SQL Managed Instance target")
+  connectionTCPPort?: int32;
+
+  @doc("Set to true to monitor a high availability replica of specified monitoring target, if any")
+  readIntent?: boolean
+}
+
+@doc("Properties specific to Azure SQL VM targets")
+model SQLVMTargetProperties extends MonitoringTargetProperties {
+  @doc("Azure SQL VM target")
+  targetType: "SqlVm";
+
+  @doc("ARM ResourceId of an Azure SQL VM target")
+  sqlVmResourceId: string;
+
+  @doc("The TCP port number to optionally use in the connection string when connecting to an Azure SQL VM target")
+  connectionTCPPort?: int32;
+
+  @doc("The SQL instance name to optionally use in the connection string when connecting to an Azure SQL VM target")
+  sqlNamedInstanceName?: string;
+}
+
+@doc("Vault specific details required if using SQL authentication to connect to a target")
+model VaultSecret {
+  @doc("ARM ResourceId of the Key Vault instance storing database authentication secrets")
+  akvResourceId?: string;
+  
+  @doc("The path to the Key Vault secret storing the login name (aka user name, aka account name) for authentication to a monitoring target")
+  akvTargetUser?: string;
+
+  @doc("The path to the Key Vault secret storing the password for authentication to a monitoring target")
+  akvTargetPassword?: string;
+}
+
+@doc("Monitoring target states")
+enum MonitoringTargetCollectionStatus {
+  Enabled,
+  Disabled
+}
+
+@armResourceOperations
+interface MonitoringTargets extends ProxyResourceOperations<MonitoringTarget> {}

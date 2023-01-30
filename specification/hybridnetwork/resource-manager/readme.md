@@ -27,8 +27,21 @@ These are the global settings for the hybridnetwork.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-05-01
+tag: package-2023-01-01
 ```
+### Tag: package-2023-01-01
+
+These settings apply only when `--tag=package-2023-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01-01'
+input-file:
+  - Microsoft.HybridNetwork/stable/2023-01-01/common.json
+  - Microsoft.HybridNetwork/stable/2023-01-01/networkFunction.json
+  - Microsoft.HybridNetwork/stable/2023-01-01/publisher.json
+  - Microsoft.HybridNetwork/stable/2023-01-01/networkFunctionDefinition.json
+  - Microsoft.HybridNetwork/stable/2023-01-01/operation.json
+```
+
 ### Tag: package-2022-09-01-preview
 
 These settings apply only when `--tag=package-2022-09-01-preview` is specified on the command line.
@@ -40,6 +53,7 @@ input-file:
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/publisher.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/networkFunctionDefinition.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/proxyPublisher.json
+  - Microsoft.HybridNetwork/preview/2022-09-01-preview/pureProxyArtifact.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/operation.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/configurationGroupSchema.json
   - Microsoft.HybridNetwork/preview/2022-09-01-preview/networkServiceDesign.json
