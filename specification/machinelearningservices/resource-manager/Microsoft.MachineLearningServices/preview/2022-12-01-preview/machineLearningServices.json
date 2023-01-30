@@ -2337,17 +2337,9 @@
           "description": "The auth mode used for accessing the system datastores of the workspace",
           "type": "string"
         },
-        "computeRuntime": {
-          "$ref": "#/definitions/ComputeRuntimeDto"
-        },
-        "offlineStoreConnectionName": {
-          "type": "string"
-        },
-        "onlineStoreConnectionName": {
-          "type": "string"
-        },
-        "allowRoleAssignmentsOnResourceGroupLevel": {
-          "type": "boolean"
+        "featureStoreSettings": {
+          "description": "Settings for feature store type workspace.",
+          "$ref": "#/definitions/FeatureStoreSettings"
         }
       }
     },
@@ -2425,17 +2417,9 @@
           "$ref": "#/definitions/EncryptionUpdateProperties",
           "description": "The encryption settings of the workspace."
         },
-        "computeRuntime": {
-          "$ref": "#/definitions/ComputeRuntimeDto"
-        },
-        "offlineStoreConnectionName": {
-          "type": "string"
-        },
-        "onlineStoreConnectionName": {
-          "type": "string"
-        },
-        "allowRoleAssignmentsOnResourceGroupLevel": {
-          "type": "boolean"
+        "featureStoreSettings": {
+          "description": "Settings for feature store type workspace.",
+          "$ref": "#/definitions/FeatureStoreSettings"
         }
       }
     },
@@ -6260,6 +6244,23 @@
         "idleTimeBeforeShutdown": {
           "type": "string",
           "description": "Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days."
+        }
+      }
+    },
+    "FeatureStoreSettings": {
+      "type": "object",
+      "properties": {
+        "computeRuntime": {
+          "$ref": "#/definitions/ComputeRuntimeDto"
+        },
+        "offlineStoreConnectionName": {
+          "type": "string"
+        },
+        "onlineStoreConnectionName": {
+          "type": "string"
+        },
+        "allowRoleAssignmentsOnResourceGroupLevel": {
+          "type": "boolean"
         }
       }
     }
