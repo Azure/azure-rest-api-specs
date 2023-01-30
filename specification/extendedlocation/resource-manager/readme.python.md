@@ -19,7 +19,7 @@ batch:
   - tag: package-2021-03-15-preview
   - tag: package-2021-08-15
   - tag: package-2021-08-31-preview
-  - tag: package-2023-04-01-preview
+  - tag: package-preview-2023-04-01
   - multiapiscript: true
 ```
 
@@ -58,12 +58,12 @@ namespace: azure.mgmt.extendedlocation.v2021_08_31_preview
 output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/v2021_08_31_preview
 ```
 
-### Tag: package-2023-04-01-preview and python
+### Tag: package-preview-2023-04-01 and python
 
-These settings apply only when `--tag=package-2023-04-01-preview --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-04-01 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-```yaml $(tag) == 'package-2023-04-01-preview' && $(python)
+```yaml $(tag) == 'package-preview-2023-04-01' && $(python)
 namespace: azure.mgmt.extendedlocation.v2023_04_01_preview
 output-folder: $(python-sdks-folder)/extendedlocation/azure-mgmt-extendedlocation/azure/mgmt/extendedlocation/v2023_04_01_preview
 ```
