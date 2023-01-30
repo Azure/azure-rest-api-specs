@@ -67,7 +67,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List metric alert rules": {
@@ -109,7 +109,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "List metric alert rules": {
@@ -669,6 +669,10 @@
       "description": "The metric alert resource for patch operations."
     },
     "MetricAlertResourceCollection": {
+      "type": "object",
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
@@ -676,6 +680,10 @@
             "$ref": "#/definitions/MetricAlertResource"
           },
           "description": "the values for the alert rule resources."
+        },
+        "nextLink": {
+          "description": "URL to fetch the next set of alert rule resources.",
+          "type": "string"
         }
       },
       "description": "Represents a collection of alert rule resources."
