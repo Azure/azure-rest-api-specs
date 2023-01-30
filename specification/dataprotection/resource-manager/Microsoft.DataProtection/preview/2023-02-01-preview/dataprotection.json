@@ -369,6 +369,9 @@
           },
           "Get BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/GetBackupVaultWithMSI.json"
+          },
+          "Get BackupVault With CMK": {
+            "$ref": "./examples/VaultCRUD/GetBackupVaultWithCMK.json"
           }
         }
       },
@@ -433,6 +436,9 @@
           },
           "Create BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithMSI.json"
+          },
+          "Create BackupVault With CMK": {
+            "$ref": "./examples/VaultCRUD/PutBackupVaultWithCMK.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -537,6 +543,9 @@
         "x-ms-examples": {
           "Patch BackupVault": {
             "$ref": "./examples/VaultCRUD/PatchBackupVault.json"
+          },
+          "Patch BackupVault with CMK": {
+            "$ref": "./examples/VaultCRUD/PatchBackupVaultWithCMK.json"
           }
         }
       }
@@ -4801,6 +4810,38 @@
       "title": "CloudError",
       "x-ms-external": true
     },
+    "CmkKeyVaultProperties": {
+      "type": "object",
+      "description": "The properties of the Key Vault which hosts CMK",
+      "properties": {
+        "keyUri": {
+          "description": "The key uri of the Customer Managed Key",
+          "type": "string"
+        }
+      }
+    },
+    "CmkKekIdentity": {
+      "type": "object",
+      "description": "The details of the managed identity used for CMK",
+      "properties": {
+        "identityType": {
+          "type": "string",
+          "description": "The identity type. 'SystemAssigned' and 'UserAssigned' are mutually exclusive. 'SystemAssigned' will use implicitly created managed identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": true
+          }
+        },
+        "identityId": {
+          "type": "string",
+          "description": "The managed identity to be used which has access permissions to the Key Vault. Provide a value here in case identity types: 'UserAssigned' only."
+        }
+      }
+    },
     "CopyOnExpiryOption": {
       "allOf": [
         {
@@ -5377,6 +5418,30 @@
         },
         "httpMethod": {
           "type": "string"
+        }
+      }
+    },
+    "encryptionSettings": {
+      "description": "Customer Managed Key details of the resource.",
+      "type": "object",
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/CmkKeyVaultProperties"
+        },
+        "kekIdentity": {
+          "$ref": "#/definitions/CmkKekIdentity"
+        },
+        "infrastructureEncryption": {
+          "description": "Enabling/Disabling the Double Encryption state",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "InfrastructureEncryptionState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -6535,6 +6600,9 @@
         },
         "immutabilitySettings": {
           "$ref": "#/definitions/ImmutabilitySettings"
+        },
+        "encryptionSettings": {
+          "$ref": "#/definitions/encryptionSettings"
         }
       }
     },
