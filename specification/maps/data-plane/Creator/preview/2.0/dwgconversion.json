@@ -280,7 +280,16 @@
         ],
         "responses": {
           "200": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/200AsyncV2"
+            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
+            "headers": {
+              "Resource-Location": {
+                "type": "string",
+                "description": "If successful, a URI where details on the newly created resource can be found."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/LongRunningOperationResult"
+            }
           },
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
@@ -344,6 +353,27 @@
           },
           "type": "object",
           "readOnly": true
+        }
+      }
+    },
+    "LongRunningOperationResult": {
+      "description": "The response model for a Long-Running Operations API.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "diagnosticPackageLocation": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Download URL for the operation's error and warning visualizer."
+            }
+          }
         }
       }
     }
