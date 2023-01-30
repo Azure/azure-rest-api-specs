@@ -263,6 +263,9 @@
           "Register existing SAP system as Virtual Instance for SAP solutions.": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Discover.json"
           },
+          "Register existing SAP system as Virtual Instance for SAP solutions with optional customizations.": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Discover_CustomMrgStorageAccountName.json"
+          },
           "Create Infrastructure with OS configuration for Single Server System (Recommended)": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_WithOSConfig_SingleServer.json"
           },
@@ -3571,6 +3574,12 @@
         "centralServerVmId": {
           "type": "string",
           "description": "The virtual machine ID of the Central Server."
+        },
+        "managedRgStorageAccountName": {
+          "type": "string",
+          "description": "The custom storage account name for the storage account created by the service in the managed resource group created as part of VIS deployment.<br><br>Refer to the storage account naming rules [here](https://learn.microsoft.com/azure/azure-resource-manager/management/resource-name-rules#microsoftstorage).<br><br>If not provided, the service will create the storage account with a random name.",
+          "minLength": 3,
+          "maxLength": 24
         },
         "appLocation": {
           "type": "string",
