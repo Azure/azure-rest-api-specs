@@ -2,16 +2,16 @@
   "parameters": {
     "subscriptionId": "daefabc0-95b4-48b3-b645-8a753a63c4fa",
     "resourceGroupName": "resourceGroup1",
-    "scalingPlanName": "scalingPlan1",
-    "scalingPlanScheduleName": "scalingPlanScheduleWeekdays1",
+    "scalingPlanName": "PersonalScalingPlan1",
+    "scalingPlanScheduleName": "PersonalScalingPlanSchedule",
     "api-version": "2023-01-30-preview"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "scalingPlanScheduleWeekdays1",
-        "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/scalingPlan1/pooledSchedules/scalingPlanScheduleWeekdays1",
-        "type": "Microsoft.DesktopVirtualization/scalingPlans/pooledSchedules",
+        "name": "PersonalScalingPlanSchedule",
+        "id": "/subscriptions/daefabc0-95b4-48b3-b645-8a753a63c4fa/resourceGroups/resourceGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/scalingPlan1/personalSchedules/PersonalScalingPlanScheduleWeekdays1",
+        "type": "Microsoft.DesktopVirtualization/scalingPlans/personalSchedules",
         "systemData": {
           "createdBy": "user1",
           "createdByType": "User",
@@ -32,32 +32,32 @@
             "hour": 6,
             "minute": 0
           },
-          "rampUpLoadBalancingAlgorithm": "DepthFirst",
-          "rampUpMinimumHostsPct": 20,
-          "rampUpCapacityThresholdPct": 80,
           "peakStartTime": {
             "hour": 8,
             "minute": 0
           },
-          "peakLoadBalancingAlgorithm": "BreadthFirst",
+          "PeakActionOnDisconnect": "Hibernate",
+          "PeakMinutesToWaitOnDisconnect": 10,
+          "PeakActionOnLogoff": "Deallocate",
+          "PeakMinutesToWaitOnLogoff": 10,
           "rampDownStartTime": {
             "hour": 18,
             "minute": 0
           },
-          "rampDownLoadBalancingAlgorithm": "DepthFirst",
-          "rampDownMinimumHostsPct": 20,
-          "rampDownCapacityThresholdPct": 50,
-          "rampDownForceLogoffUsers": true,
-          "rampDownWaitTimeMinutes": 30,
-          "rampDownNotificationMessage": "message",
+          "RampDownActionOnDisconnect": "Hibernate",
+          "RampDownMinutesToWaitOnDisconnect": 10,
+          "RampDownActionOnLogoff": "Deallocate",
+          "RampDownMinutesToWaitOnLogoff": 10,
           "offPeakStartTime": {
             "hour": 20,
             "minute": 0
           },
-          "offPeakLoadBalancingAlgorithm": "DepthFirst"
+          "OffPeakActionOnDisconnect": "Hibernate",
+          "OffPeakMinutesToWaitOnDisconnect": 10,
+          "OffPeakActionOnLogoff": "Deallocate",
+          "OffPeakMinutesToWaitOnLogoff": 10
         }
       }
-    },
-    "204": {}
+    }
   }
 }

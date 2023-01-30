@@ -869,6 +869,272 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/personalSchedules/{scalingPlanScheduleName}": {
+      "get": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_Get",
+        "description": "Get a ScalingPlanPersonalSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_Get": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved ScalingPlanPersonalSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_Create",
+        "description": "Create or update a ScalingPlanPersonalSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_Create": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          },
+          {
+            "name": "scalingPlanSchedule",
+            "description": "Object containing ScalingPlanPersonalSchedule definitions.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated ScalingPlanPersonalSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          },
+          "201": {
+            "description": "Successfully created ScalingPlanPersonalSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_Delete",
+        "description": "Remove a ScalingPlanPersonalSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_Delete": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully removed ScalingPlanPersonalSchedule."
+          },
+          "204": {
+            "description": "ScalingPlanPersonalSchedule does not exist."
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_Update",
+        "description": "Update a ScalingPlanPersonalSchedule.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_Update": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanScheduleNameParameter"
+          },
+          {
+            "name": "scalingPlanSchedule",
+            "description": "Object containing ScalingPlanPersonalSchedule definitions.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedulePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated ScalingPlanPersonalSchedule.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/scalingPlans/{scalingPlanName}/personalSchedules": {
+      "get": {
+        "tags": [
+          "ScalingPlanPersonalSchedule"
+        ],
+        "operationId": "ScalingPlanPersonalSchedules_List",
+        "description": "List ScalingPlanPersonalSchedules.",
+        "x-ms-examples": {
+          "ScalingPlanPersonalSchedules_List": {
+            "$ref": "./examples/ScalingPlanPersonalSchedule_List.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ScalingPlanNameParameter"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of items per page."
+          },
+          {
+            "name": "isDescending",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Indicates whether the collection is descending."
+          },
+          {
+            "name": "initialSkip",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Initial number of items to skip."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved ScalingPlanPersonalSchedules.",
+            "schema": {
+              "$ref": "#/definitions/ScalingPlanPersonalScheduleList"
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DesktopVirtualization/scalingPlans": {
       "get": {
         "tags": [
@@ -5345,7 +5611,7 @@
         "rampDownCapacityThresholdPct": {
           "type": "integer",
           "format": "int32",
-          "minimum": 0,
+          "minimum": 1,
           "maximum": 100,
           "description": "Capacity threshold for ramp down period."
         },
@@ -5547,7 +5813,7 @@
         "rampDownCapacityThresholdPct": {
           "type": "integer",
           "format": "int32",
-          "minimum": 0,
+          "minimum": 1,
           "maximum": 100,
           "description": "Capacity threshold for ramp down period."
         },
@@ -5591,6 +5857,221 @@
           },
           "type": "string",
           "description": "Load balancing algorithm for off-peak period."
+        }
+      }
+    },
+    "ScalingPlanPersonalSchedulePatch": {
+      "type": "object",
+      "description": "ScalingPlanPersonalSchedule properties that can be patched.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Detailed properties for ScalingPlanPersonalSchedule",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScalingPlanPersonalScheduleProperties"
+        }
+      }
+    },
+    "ScalingPlanPersonalScheduleList": {
+      "type": "object",
+      "title": "ScalingPlanPersonalScheduleList",
+      "description": "List of ScalingPlanPersonalSchedule definitions.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of ScalingPlanPersonalSchedule definitions.",
+          "items": {
+            "$ref": "#/definitions/ScalingPlanPersonalSchedule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "ScalingPlanPersonalSchedule": {
+      "type": "object",
+      "description": "Represents a ScalingPlanPersonalSchedule definition.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource."
+        },
+        "properties": {
+          "description": "Detailed properties for ScalingPlanPersonalSchedule",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ScalingPlanPersonalScheduleProperties",
+          "x-nullable": false
+        }
+      }
+    },
+    "ScalingPlanPersonalScheduleProperties": {
+      "description": "A ScalingPlanPersonalSchedule.",
+      "type": "object",
+      "properties": {
+        "daysOfWeek": {
+          "type": "array",
+          "description": "Set of days of the week on which this schedule is active.",
+          "items": {
+            "enum": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": true
+            }
+          }
+        },
+        "rampUpStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp up period."
+        },
+        "peakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for peak period."
+        },
+        "peakActionOnDisconnect": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a user disconnect during the peak period."
+        },
+        "peakMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before peforming the desired session handling action when a user disconnects during the peak period."
+        },
+        "peakActionOnLogoff": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a logoff during the peak period."
+        },
+        "peakMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before peforming the desired session handling action when a user logs off during the peak period."
+        },
+        "rampDownStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for ramp down period."
+        },
+        "rampDownActionOnDisconnect": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a user disconnect during the ramp down period."
+        },
+        "rampDownMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before peforming the desired session handling action when a user disconnects during the ramp down period."
+        },
+        "rampDownActionOnLogoff": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a logoff during the ramp down period."
+        },
+        "rampDownMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before peforming the desired session handling action when a user logs off during the ramp down period."
+        },
+        "offPeakStartTime": {
+          "$ref": "#/definitions/Time",
+          "description": "Starting time for off-peak period."
+        },
+        "offPeakActionOnDisconnect": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a user disconnect during the off-peak period."
+        },
+        "offPeakMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before peforming the desired session handling action when a user disconnects during the off-peak period."
+        },
+        "offPeakActionOnLogoff": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a logoff during the off-peak period."
+        },
+        "offPeakMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before peforming the desired session handling action when a user logs off during the off-peak period."
         }
       }
     },
