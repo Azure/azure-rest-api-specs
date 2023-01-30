@@ -96,14 +96,14 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "triggeredAnalyticsRuleRuns_Get": {
             "$ref": "./examples/triggeredAnalyticsRuleRuns/triggeredAnalyticsRuleRuns_Get.json"
           }
         }
-      },
-      "x-ms-pageable": {
-        "nextLinkName": "nextLink"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/triggerRuleRun": {
@@ -112,7 +112,7 @@
           "trigger analytics rule run"
         ],
         "description": "triggers analytics rule run",
-        "operationId": "triggerrulerun_Post",
+        "operationId": "alertRule_TriggerRuleRun",
         "produces": [
           "application/json"
         ],
@@ -210,6 +210,7 @@
         }
       ],
       "properties": {
+        "x-ms-client-flatten": true,
         "properties": {
           "$ref": "#/definitions/TriggeredAnalyticsRuleRunProperties"
         }
