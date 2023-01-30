@@ -1305,10 +1305,10 @@
           "type": "string",
           "readOnly": true
         },
-        "errorDetails": {
+        "error": {
           "description": "Provisioning or action error details. Populated only for error states.",
           "readOnly": true,
-          "$ref": "devcenter.json#/definitions/ProvisioningError"
+          "$ref": "devcenter.json#/definitions/CloudErrorBody"
         },
         "location": {
           "description": "Azure region where this Dev Box is located. This will be the same region as the Virtual Network it is attached to.",
@@ -1528,7 +1528,8 @@
           "type": "object",
           "$ref": "#/definitions/DevBoxAction"
         },
-        "errorDetails": {
+        "error": {
+          "description": "Information about the error that occurred. Only populated on error.",
           "type": "object",
           "$ref": "devcenter.json#/definitions/CloudErrorBody"
         }
