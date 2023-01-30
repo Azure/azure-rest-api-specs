@@ -8,11 +8,15 @@
   "paths": {
     "/receivedShares/{receivedShareId}": {
       "get": {
-        "tags": ["ReceivedShare"],
+        "tags": [
+          "ReceivedShare"
+        ],
         "summary": "Get a received share by unique id.",
         "description": "Get a received share",
         "operationId": "ReceivedShares_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/receivedShareId"
@@ -48,12 +52,18 @@
         }
       },
       "put": {
-        "tags": ["ReceivedShare"],
+        "tags": [
+          "ReceivedShare"
+        ],
         "summary": "Put changes to a received share.",
         "description": "Update changes to a received share",
         "operationId": "ReceivedShares_CreateOrUpdate",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/receivedShareId"
@@ -105,11 +115,15 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": ["ReceivedShare"],
+        "tags": [
+          "ReceivedShare"
+        ],
         "summary": "Deletes a received share",
         "description": "Delete a received share",
         "operationId": "ReceivedShares_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/receivedShareId"
@@ -145,11 +159,15 @@
     },
     "/receivedShares/attached": {
       "get": {
-        "tags": ["ReceivedShare"],
+        "tags": [
+          "ReceivedShare"
+        ],
         "summary": "Get a list of attached received shares.",
         "description": "List attached received shares",
         "operationId": "ReceivedShares_GetAllAttached",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/referenceName"
@@ -193,11 +211,15 @@
     },
     "/receivedShares/detached": {
       "get": {
-        "tags": ["ReceivedShare"],
+        "tags": [
+          "ReceivedShare"
+        ],
         "summary": "Get a list of detached received shares.",
         "description": "List detached received shares",
         "operationId": "ReceivedShares_GetAllDetached",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -238,11 +260,15 @@
     },
     "/sentShares": {
       "get": {
-        "tags": ["SentShare"],
+        "tags": [
+          "SentShare"
+        ],
         "summary": "Get a list of sent shares.",
         "description": "List sent shares",
         "operationId": "SentShares_GetAll",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/referenceName"
@@ -286,11 +312,15 @@
     },
     "/sentShares/{sentShareId}": {
       "get": {
-        "tags": ["SentShare"],
+        "tags": [
+          "SentShare"
+        ],
         "summary": "Get a sent share by guid.",
         "description": "Get a sent share",
         "operationId": "SentShares_Get",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/sentShareId"
@@ -326,12 +356,18 @@
         }
       },
       "put": {
-        "tags": ["SentShare"],
+        "tags": [
+          "SentShare"
+        ],
         "summary": "Create a sent share.",
         "description": "Create a sent share",
         "operationId": "SentShares_Create",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/sentShareId"
@@ -383,11 +419,15 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": ["SentShare"],
+        "tags": [
+          "SentShare"
+        ],
         "summary": "Deletes a sent share.",
         "description": "Delete a sent share",
         "operationId": "SentShares_Delete",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/sentShareId"
@@ -423,11 +463,15 @@
     },
     "/sentShares/{sentShareId}/sentShareInvitations": {
       "get": {
-        "tags": ["SentShareInvitation"],
+        "tags": [
+          "SentShareInvitation"
+        ],
         "summary": "List all sent share invitations in a sent share",
         "description": "List sent share recipients",
         "operationId": "SentShares_GetAllInvitations",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/sentShareId"
@@ -471,11 +515,15 @@
     },
     "/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}": {
       "get": {
-        "tags": ["SentShareInvitation"],
+        "tags": [
+          "SentShareInvitation"
+        ],
         "summary": "Get sent share invitation for a given sent share",
         "description": "Get recipient for a given sent share",
         "operationId": "SentShares_GetInvitation",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/sentShareId"
@@ -514,12 +562,18 @@
         }
       },
       "put": {
-        "tags": ["SentShareInvitation"],
+        "tags": [
+          "SentShareInvitation"
+        ],
         "summary": "Create a sent share invitation.",
         "description": "Create a recipient for a given sent share",
         "operationId": "SentShares_CreateInvitation",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/sentShareId"
@@ -567,11 +621,15 @@
         }
       },
       "delete": {
-        "tags": ["SentShareInvitation"],
+        "tags": [
+          "SentShareInvitation"
+        ],
         "summary": "Delete Invitation in a share.",
         "description": "Delete a sent share invitation",
         "operationId": "SentShares_DeleteInvitation",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/sentShareId"
@@ -610,11 +668,15 @@
     },
     "/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}:notify": {
       "post": {
-        "tags": ["SentShareInvitation"],
+        "tags": [
+          "SentShareInvitation"
+        ],
         "summary": "Notifies recipient of the sent share invitation.",
         "description": "Notifies recipient of the sent share invitation.",
         "operationId": "SentShares_NotifyUserInvitation",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/sentShareId"
@@ -655,12 +717,18 @@
     },
     "/activateEmail": {
       "post": {
-        "tags": ["TenantEmailRegistration"],
+        "tags": [
+          "TenantEmailRegistration"
+        ],
         "summary": "Activates the tenant and email combination using the activation code received.",
         "description": "Activates the email registration for current tenant",
         "operationId": "ReceivedShares_ActivateTenantEmailRegistration",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -704,11 +772,15 @@
     },
     "/registerEmail": {
       "post": {
-        "tags": ["TenantEmailRegistration"],
+        "tags": [
+          "TenantEmailRegistration"
+        ],
         "summary": "Registers the tenant and email combination for activation.",
         "description": "Register an email for the current tenant",
         "operationId": "ReceivedShares_RegisterTenantEmailRegistration",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -745,7 +817,11 @@
   "definitions": {
     "ADLSGen2Artifact": {
       "description": "An ADLS Gen2 account artifact.",
-      "required": ["properties", "storeKind", "storeReference"],
+      "required": [
+        "properties",
+        "storeKind",
+        "storeReference"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -762,7 +838,9 @@
     },
     "ADLSGen2ArtifactProperties": {
       "description": "Properties for ADLS Gen2 account.",
-      "required": ["paths"],
+      "required": [
+        "paths"
+      ],
       "type": "object",
       "properties": {
         "location": {
@@ -781,7 +859,11 @@
     },
     "AdlsGen2AccountSink": {
       "description": "AdlsGen2 Sink",
-      "required": ["properties", "storeKind", "storeReference"],
+      "required": [
+        "properties",
+        "storeKind",
+        "storeReference"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -798,7 +880,10 @@
     },
     "AdlsGen2AccountSinkProperties": {
       "description": "Properties for AdlsGen2 storage account",
-      "required": ["containerName", "folder"],
+      "required": [
+        "containerName",
+        "folder"
+      ],
       "type": "object",
       "properties": {
         "containerName": {
@@ -822,7 +907,10 @@
     },
     "Artifact": {
       "description": "A class for sent share artifact.",
-      "required": ["storeKind", "storeReference"],
+      "required": [
+        "storeKind",
+        "storeReference"
+      ],
       "type": "object",
       "properties": {
         "storeKind": {
@@ -836,7 +924,11 @@
     },
     "BlobAccountSink": {
       "description": "Blob Sink",
-      "required": ["properties", "storeKind", "storeReference"],
+      "required": [
+        "properties",
+        "storeKind",
+        "storeReference"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -853,7 +945,10 @@
     },
     "BlobAccountSinkProperties": {
       "description": "Properties for blob storage account",
-      "required": ["containerName", "folder"],
+      "required": [
+        "containerName",
+        "folder"
+      ],
       "type": "object",
       "properties": {
         "containerName": {
@@ -877,7 +972,11 @@
     },
     "BlobStorageArtifact": {
       "description": "Blob storage account artifact.",
-      "required": ["properties", "storeKind", "storeReference"],
+      "required": [
+        "properties",
+        "storeKind",
+        "storeReference"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -894,7 +993,9 @@
     },
     "BlobStorageArtifactProperties": {
       "description": "Properties for blob storage account.",
-      "required": ["paths"],
+      "required": [
+        "paths"
+      ],
       "type": "object",
       "properties": {
         "location": {
@@ -913,7 +1014,10 @@
     },
     "InPlaceReceivedShare": {
       "description": "An InPlace received share kind.",
-      "required": ["properties", "shareKind"],
+      "required": [
+        "properties",
+        "shareKind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1011,7 +1115,10 @@
     },
     "InPlaceSentShare": {
       "description": "An InPlace share kind.",
-      "required": ["properties", "shareKind"],
+      "required": [
+        "properties",
+        "shareKind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1028,7 +1135,10 @@
     },
     "InPlaceSentShareProperties": {
       "description": "Properties for InPlace sent share.",
-      "required": ["artifact", "displayName"],
+      "required": [
+        "artifact",
+        "displayName"
+      ],
       "type": "object",
       "properties": {
         "artifact": {
@@ -1080,7 +1190,10 @@
     },
     "InvitationKind": {
       "description": "The types of invitations.",
-      "enum": ["User", "Service"],
+      "enum": [
+        "User",
+        "Service"
+      ],
       "type": "string",
       "x-ms-enum": {
         "name": "InvitationKind",
@@ -1089,7 +1202,14 @@
     },
     "ProvisioningState": {
       "description": "Provisioning status of the resource",
-      "enum": ["Unknown", "Succeeded", "Creating", "Deleting", "Moving", "Failed"],
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Moving",
+        "Failed"
+      ],
       "type": "string",
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -1114,7 +1234,9 @@
     },
     "PurviewShareError": {
       "description": "The purview share error model.",
-      "required": ["error"],
+      "required": [
+        "error"
+      ],
       "type": "object",
       "properties": {
         "error": {
@@ -1124,7 +1246,10 @@
     },
     "PurviewShareErrorInfo": {
       "description": "The purview share error body model.",
-      "required": ["code", "message"],
+      "required": [
+        "code",
+        "message"
+      ],
       "type": "object",
       "properties": {
         "code": {
@@ -1150,7 +1275,9 @@
     },
     "ReceivedShare": {
       "description": "A received share data transfer object.",
-      "required": ["shareKind"],
+      "required": [
+        "shareKind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1166,7 +1293,9 @@
     },
     "ReceivedShareList": {
       "description": "List of received shares.",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "nextLink": {
@@ -1184,7 +1313,9 @@
     },
     "ReferenceNameType": {
       "description": "Defines the type of resource being shared",
-      "enum": ["ArmResourceReference"],
+      "enum": [
+        "ArmResourceReference"
+      ],
       "type": "string",
       "x-ms-enum": {
         "name": "ReferenceNameType",
@@ -1193,7 +1324,9 @@
     },
     "SentShare": {
       "description": "A sent share data transfer object.",
-      "required": ["shareKind"],
+      "required": [
+        "shareKind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1209,7 +1342,9 @@
     },
     "SentShareInvitation": {
       "description": "A sent share invitation data transfer object.",
-      "required": ["invitationKind"],
+      "required": [
+        "invitationKind"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1225,7 +1360,9 @@
     },
     "SentShareInvitationList": {
       "description": "List of the sent share invitations",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "nextLink": {
@@ -1243,7 +1380,9 @@
     },
     "SentShareList": {
       "description": "List of sent shares.",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "type": "object",
       "properties": {
         "nextLink": {
@@ -1261,7 +1400,10 @@
     },
     "ServiceInvitation": {
       "description": "An service invitation kind.",
-      "required": ["invitationKind", "properties"],
+      "required": [
+        "invitationKind",
+        "properties"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1278,7 +1420,10 @@
     },
     "ServiceInvitationProperties": {
       "description": "Properties of the service invitation type.",
-      "required": ["targetActiveDirectoryId", "targetObjectId"],
+      "required": [
+        "targetActiveDirectoryId",
+        "targetObjectId"
+      ],
       "type": "object",
       "properties": {
         "expirationDate": {
@@ -1328,7 +1473,9 @@
     },
     "ShareKind": {
       "description": "Defines the supported types for share.",
-      "enum": ["InPlace"],
+      "enum": [
+        "InPlace"
+      ],
       "type": "string",
       "x-ms-enum": {
         "name": "ShareKind",
@@ -1337,7 +1484,10 @@
     },
     "ShareStatus": {
       "description": "Share status.",
-      "enum": ["Detached", "Attached"],
+      "enum": [
+        "Detached",
+        "Attached"
+      ],
       "type": "string",
       "x-ms-enum": {
         "name": "ShareStatus",
@@ -1346,7 +1496,10 @@
     },
     "Sink": {
       "description": "Received share sink",
-      "required": ["storeKind", "storeReference"],
+      "required": [
+        "storeKind",
+        "storeReference"
+      ],
       "type": "object",
       "properties": {
         "storeKind": {
@@ -1360,7 +1513,9 @@
     },
     "StorageAccountPath": {
       "description": "Defines a single StorageAccountPath path",
-      "required": ["containerName"],
+      "required": [
+        "containerName"
+      ],
       "type": "object",
       "properties": {
         "containerName": {
@@ -1379,7 +1534,10 @@
     },
     "StoreKind": {
       "description": "The types of asset.",
-      "enum": ["AdlsGen2Account", "BlobAccount"],
+      "enum": [
+        "AdlsGen2Account",
+        "BlobAccount"
+      ],
       "type": "string",
       "x-ms-enum": {
         "name": "StoreKind",
@@ -1416,7 +1574,9 @@
     },
     "TenantEmailRegistrationProperties": {
       "description": "Tenant email registration property bag.",
-      "required": ["activationCode"],
+      "required": [
+        "activationCode"
+      ],
       "type": "object",
       "properties": {
         "activationCode": {
@@ -1451,7 +1611,11 @@
     },
     "TenantEmailRegistrationStatus": {
       "description": "Defines the supported types for registration.",
-      "enum": ["ActivationPending", "Activated", "ActivationAttemptsExhausted"],
+      "enum": [
+        "ActivationPending",
+        "Activated",
+        "ActivationAttemptsExhausted"
+      ],
       "type": "string",
       "x-ms-enum": {
         "name": "TenantEmailRegistrationStatus",
@@ -1460,7 +1624,10 @@
     },
     "UserInvitation": {
       "description": "A user invitation kind.",
-      "required": ["invitationKind", "properties"],
+      "required": [
+        "invitationKind",
+        "properties"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -1477,7 +1644,9 @@
     },
     "UserInvitationProperties": {
       "description": "Properties of the user invitation type.",
-      "required": ["targetEmail"],
+      "required": [
+        "targetEmail"
+      ],
       "type": "object",
       "properties": {
         "expirationDate": {
