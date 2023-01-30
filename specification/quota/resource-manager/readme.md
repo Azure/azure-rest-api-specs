@@ -26,14 +26,23 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-03-15-preview
+tag: package-2023-02
 ```
 
+
+### Tag: package-2023-02
+
+These settings apply only when `--tag=package-2023-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-02'
+input-file:
+  - Microsoft.Quota/stable/2023-02-01/quota.json
+```
 ### Tag: package-2021-03-15
 
 These settings apply only when `--tag=package-2021-03-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03-15'
+``` yaml $(tag) == 'package-2021-03-15'
 input-file:
   - Microsoft.Quota/stable/2021-03-15/quota.json
 ```
@@ -42,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-2021-03-15-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03-15-preview'
+``` yaml $(tag) == 'package-2021-03-15-preview'
 input-file:
   - Microsoft.Quota/preview/2021-03-15-preview/quota.json
 ```
@@ -58,7 +67,9 @@ directive:
 ```
 
 ---
+
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -105,7 +116,7 @@ See configuration in [readme.cli.md](./readme.cli.md)
 
 ## AZ
 
- See configuration in [readme.az.md](./readme.az.md)
+See configuration in [readme.az.md](./readme.az.md)
 
 ## Go
 
@@ -118,4 +129,3 @@ See configuration in [readme.java.md](./readme.java.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
-
