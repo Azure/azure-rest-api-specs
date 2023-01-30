@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-preview-2023-02` is specified on t
 ```yaml $(tag) == 'package-preview-2023-02'
 input-file:
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2023-02-01-preview/TriggeredAnalyticsRuleRuns.json
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/AutomationRules.json
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/Bookmarks.json
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/Enrichment.json
