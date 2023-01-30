@@ -76,6 +76,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ReceivedShare"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -114,7 +120,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Default error response.",
@@ -342,6 +354,12 @@
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/SentShare"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -380,7 +398,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Default error response.",
@@ -561,7 +585,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Default error response.",
