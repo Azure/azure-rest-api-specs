@@ -1368,6 +1368,60 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/reapply": {
+      "post": {
+        "tags": [
+          "VirtualMachineScaleSets"
+        ],
+        "operationId": "VirtualMachineScaleSets_Reapply",
+        "description": "Reapplies the Virtual Machine Scale Set Virtual Machine Profile to the Virtual Machine Instances",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachineScaleSets_Reapply_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSets_Reapply_MaximumSet_Gen.json"
+          },
+          "VirtualMachineScaleSets_Reapply_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSets_Reapply_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/redeploy": {
       "post": {
         "tags": [
