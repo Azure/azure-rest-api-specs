@@ -27,6 +27,7 @@
             "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
           },
           {
+            "description": "the triggered rule id",
             "in": "path",
             "name": "ruleRunId",
             "required": true,
@@ -63,7 +64,7 @@
           "triggered analytics rule runs"
         ],
         "description": "Gets the triggered analytics rule runs.",
-        "operationId": "triggeredAnalyticsRuleRuns_Get",
+        "operationId": "getTriggeredAnalyticsRuleRuns_List",
         "produces": [
           "application/json"
         ],
@@ -100,6 +101,9 @@
             "$ref": "./examples/triggeredAnalyticsRuleRuns/triggeredAnalyticsRuleRuns_Get.json"
           }
         }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/triggerRuleRun": {
@@ -108,7 +112,7 @@
           "trigger analytics rule run"
         ],
         "description": "triggers analytics rule run",
-        "operationId": "triggerRuleRun_Post",
+        "operationId": "triggerrulerun_Post",
         "produces": [
           "application/json"
         ],
@@ -169,6 +173,7 @@
         "Failed",
         "Canceled"
       ],
+      "description": "The triggered analytics rule run provisioning state",
       "type": "string",
       "example": "Accepted",
       "x-ms-enum": {
@@ -197,6 +202,7 @@
       "required": [
         "properties"
       ],
+      "description": "The triggered analytics rule run",
       "type": "object",
       "allOf": [
         {
@@ -216,6 +222,7 @@
         "ruleId",
         "triggeredAnalyticsRuleRunId"
       ],
+      "description": "The triggered analytics rule run Properties",
       "type": "object",
       "properties": {
         "executionTimeUtc": {
@@ -241,6 +248,7 @@
       "required": [
         "value"
       ],
+      "description": "The triggered analytics rule run array",
       "type": "object",
       "properties": {
         "value": {
