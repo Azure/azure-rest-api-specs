@@ -1088,6 +1088,12 @@
           },
           {
             "in": "formData",
+            "name": "partyId",
+            "description": "PartyId id for this attachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
             "name": "id",
             "description": "Unique id.",
             "type": "string"
@@ -1319,6 +1325,12 @@
             "in": "query",
             "name": "parentType",
             "description": "Type of the parent it belongs to.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Type it belongs to.",
             "type": "string"
           },
           {
@@ -1674,6 +1686,12 @@
             "in": "query",
             "name": "parentType",
             "description": "Type of the parent it belongs to.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "description": "Type it belongs to.",
             "type": "string"
           },
           {
@@ -2194,6 +2212,16 @@
             "in": "query",
             "name": "products",
             "description": "Products of the resource.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "traits",
+            "description": "Traits of the resource.",
             "type": "array",
             "items": {
               "type": "string"
@@ -5801,6 +5829,9 @@
           },
           "default": {
             "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
             "headers": {
               "x-ms-error-code": {
                 "type": "string",
@@ -6116,8 +6147,32 @@
           },
           {
             "in": "formData",
+            "name": "modelId",
+            "description": "ModelID for this InsightAttachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "resourceType",
+            "description": "Associated Resource type for this attachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "resourceId",
+            "description": "Associated Resource id for this attachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
             "name": "originalFileName",
             "description": "Original File Name for this attachment.",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "partyId",
+            "description": "PartyId id for this attachment.",
             "type": "string"
           },
           {
@@ -12716,9 +12771,9 @@
           {
             "in": "query",
             "name": "source",
-            "description": "Source name of scene data, default value Sentinel_2_L2A (Sentinel 2 L2A).",
-            "type": "string",
-            "default": "Sentinel_2_L2A"
+            "description": "Source name of scene data, Available Values: Sentinel_2_L2A, Sentinel_2_L1C.",
+            "required": true,
+            "type": "string"
           },
           {
             "in": "query",
@@ -12836,6 +12891,126 @@
         "x-ms-examples": {
           "Scenes_List": {
             "$ref": "./examples/Scenes_List.json"
+          }
+        }
+      }
+    },
+    "/scenes/collections/{collectionId}/features/{featureId}": {
+      "get": {
+        "tags": [
+          "Scenes"
+        ],
+        "description": "Get a feature(STAC Item) for given collection and feature id.",
+        "operationId": "Scenes_GetStacFeature",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "collectionId",
+            "description": "Collection Id to be fetched. Available Values are: Sentinel_2_L2A, Sentinel_2_L1C.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "featureId",
+            "description": "Feature Id to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StacFeature"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_GetStacFeature": {
+            "$ref": "./examples/Scenes_GetStacFeature.json"
+          }
+        }
+      }
+    },
+    "/scenes/collections/search": {
+      "post": {
+        "tags": [
+          "Scenes"
+        ],
+        "description": "Search for STAC features by collection id, bbox, intersecting geometry, start and end datetime.",
+        "operationId": "Scenes_SearchFeatures",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "searchFeaturesQuery",
+            "description": "Query filters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchFeaturesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchFeaturesResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_SearchFeatures": {
+            "$ref": "./examples/Scenes_SearchFeatures.json"
           }
         }
       }
@@ -15848,7 +16023,7 @@
             "description": "Success",
             "schema": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": { }
             }
           },
           "default": {
@@ -15916,7 +16091,7 @@
             "description": "Accepted",
             "schema": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": { }
             }
           },
           "default": {
@@ -15988,7 +16163,7 @@
             "description": "Success",
             "schema": {
               "type": "object",
-              "additionalProperties": {}
+              "additionalProperties": { }
             }
           },
           "default": {
@@ -17183,7 +17358,7 @@
           "WeatherData"
         ],
         "description": "Returns a list of WeatherData.",
-        "operationId": "WeatherData_Get",
+        "operationId": "WeatherData_GetWeatherData",
         "consumes": [
           "application/json"
         ],
@@ -17230,8 +17405,8 @@
           }
         },
         "x-ms-examples": {
-          "WeatherData_Get": {
-            "$ref": "./examples/WeatherData_Get.json"
+          "WeatherData_GetWeatherData": {
+            "$ref": "./examples/WeatherData_GetWeatherData.json"
           }
         }
       }
@@ -18019,7 +18194,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -18271,7 +18446,8 @@
           "description": "Source of satellite data. Available Value: Sentinel_2_L2A.",
           "minLength": 1,
           "enum": [
-            "Sentinel_2_L2A"
+            "Sentinel_2_L2A",
+            "Sentinel_2_L1C"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -18314,6 +18490,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -18366,7 +18547,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -18488,7 +18669,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
       },
       "example": {
@@ -18571,6 +18752,10 @@
             "modelAsString": true
           }
         },
+        "type": {
+          "description": "Type it belongs to.",
+          "type": "string"
+        },
         "id": {
           "description": "Unique resource ID.",
           "type": "string",
@@ -18632,7 +18817,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
       },
       "example": {
@@ -18780,6 +18965,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -18902,7 +19092,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -19035,7 +19225,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -19174,14 +19364,14 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and\r\nonly string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
           }
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": { }
     },
     "DeviceDataModel": {
       "description": "DeviceDataModel API model.",
@@ -19272,14 +19462,14 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and\r\nonly string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
           }
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": { }
     },
     "DeviceDataModelListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
@@ -19468,7 +19658,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -19557,6 +19747,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -19606,7 +19801,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -19688,7 +19883,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -19871,7 +20066,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -20017,6 +20212,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -20066,7 +20266,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -20086,7 +20286,7 @@
           "$ref": "#/definitions/InnerError"
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": { }
     },
     "Insight": {
       "description": "Schema of insight resource.",
@@ -20204,14 +20404,14 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and\r\nonly string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
           }
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": { }
     },
     "InsightAttachment": {
       "description": "Schema of insight attachment resource.",
@@ -20551,7 +20751,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -20608,37 +20808,33 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "$ref": "#/definitions/MultiPolygonCoordinates"
-        }
-      ],
-      "x-ms-discriminator-value": "MultiPolygon"
-    },
-    "MultiPolygonCoordinates": {
-      "description": "Schema of multi polygon coordinates.",
-      "required": [
-        "coordinates"
-      ],
-      "type": "object",
-      "properties": {
-        "coordinates": {
-          "description": "Gets or sets coordinates of GeoJSON Object.\r\nIt must be an array of polygons, each polygon contains list of linear rings.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
-          "minLength": 1,
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
+          "required": [
+            "coordinates"
+          ],
+          "type": "object",
+          "properties": {
+            "coordinates": {
+              "description": "Gets or sets Coordinates of GeoJSON Object.\r\nIt must be an array of polygons, each polygon contains list of linear rings.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
+              "minItems": 1,
               "type": "array",
               "items": {
                 "type": "array",
                 "items": {
-                  "format": "double",
-                  "type": "number"
+                  "type": "array",
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "format": "double",
+                      "type": "number"
+                    }
+                  }
                 }
               }
             }
           }
         }
-      }
+      ],
+      "x-ms-discriminator-value": "MultiPolygon"
     },
     "NutrientAnalysis": {
       "description": "Api Model for nutrient analysis object.",
@@ -20765,7 +20961,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -20906,7 +21102,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and\r\nonly string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -20944,6 +21140,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -20996,7 +21197,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -21018,7 +21219,7 @@
             "$ref": "#/definitions/OAuthProvider"
           }
         },
-        "skipToken": {
+        "$skipToken": {
           "description": "Token used in retrieving the next page. If null, there are no additional pages.",
           "type": "string"
         },
@@ -21160,7 +21361,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -21336,7 +21537,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -21484,7 +21685,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -21543,29 +21744,25 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "$ref": "#/definitions/PointCoordinates"
+          "required": [
+            "coordinates"
+          ],
+          "type": "object",
+          "properties": {
+            "coordinates": {
+              "description": "Gets or sets the coordinate of this point.\r\nIt must be an array of 2 or 3 elements for a 2D or 3D system.",
+              "maximum": 3,
+              "minimum": 2,
+              "type": "array",
+              "items": {
+                "format": "double",
+                "type": "number"
+              }
+            }
+          }
         }
       ],
       "x-ms-discriminator-value": "Point"
-    },
-    "PointCoordinates": {
-      "description": "Schema of the coordinates of a point.",
-      "type": "object",
-      "required": [
-        "coordinates"
-      ],
-      "properties": {
-        "coordinates": {
-          "description": "Gets or sets the coordinate of this point.\r\nIt must be an array of 2 or 3 elements for a 2D or 3D system respectively.",
-          "maximum": 3,
-          "minimum": 2,
-          "type": "array",
-          "items": {
-            "format": "double",
-            "type": "number"
-          }
-        }
-      }
     },
     "Polygon": {
       "description": "Polygon geometry.",
@@ -21575,34 +21772,30 @@
           "$ref": "#/definitions/GeoJsonObject"
         },
         {
-          "$ref": "#/definitions/PolygonCoordinates"
-        }
-      ],
-      "x-ms-discriminator-value": "Polygon"
-    },
-    "PolygonCoordinates": {
-      "description": "Schema of polygon coordinates.",
-      "required": [
-        "coordinates"
-      ],
-      "type": "object",
-      "properties": {
-        "coordinates": {
-          "description": "Gets or sets type of the GeoJSON Object.\r\nIt must be an array of linear ring coordinate arrays.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
-          "minLength": 1,
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {
+          "required": [
+            "coordinates"
+          ],
+          "type": "object",
+          "properties": {
+            "coordinates": {
+              "description": "Gets or sets type of the GeoJSON Object.\r\nIt must be an array of linear ring coordinate arrays.\r\nFor Polygons with more than one of these rings, the first MUST be the exterior ring,\r\nand any others MUST be interior rings.",
+              "minItems": 1,
               "type": "array",
               "items": {
-                "format": "double",
-                "type": "number"
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "format": "double",
+                    "type": "number"
+                  }
+                }
               }
             }
           }
         }
-      }
+      ],
+      "x-ms-discriminator-value": "Polygon"
     },
     "Port": {
       "description": "Schema for storing port values.",
@@ -21721,7 +21914,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -21841,7 +22034,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -21994,6 +22187,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -22043,7 +22241,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -22231,6 +22429,10 @@
             "modelAsString": true
           }
         },
+        "type": {
+          "description": "Type it belongs to.",
+          "type": "string"
+        },
         "parentIds": {
           "description": "Parent Ids of the resource.",
           "type": "array",
@@ -22253,6 +22455,92 @@
         }
       }
     },
+    "SearchFeaturesQuery": {
+      "description": "Search stac Features parameters.",
+      "required": [
+        "collectionId",
+        "endDateTime",
+        "startDateTime"
+      ],
+      "type": "object",
+      "properties": {
+        "collectionId": {
+          "$ref": "#/definitions/Source"
+        },
+        "startDateTime": {
+          "format": "date-time",
+          "description": "Start datetime of the time interval in which to search for Features.",
+          "type": "string"
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "description": "End datetime of the time interval in which to search for Features.",
+          "type": "string"
+        },
+        "intersects": {
+          "$ref": "#/definitions/GeoJsonObject"
+        },
+        "bbox": {
+          "description": "Only features that have a geometry that intersects the bounding box are selected.\r\nThe bounding box is provided as four numbers. The coordinate reference system of the values is WGS84 longitude/latitude.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "featureIds": {
+          "description": "Array of feature ids to return.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "limit": {
+          "format": "int32",
+          "description": "Maximum number of features needed (inclusive).\r\nMinimum = 1, Maximum = 100, Default value = 10.",
+          "default": 10,
+          "maximum": 100,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "next": {
+          "format": "int32",
+          "description": "Skip token for getting next set of results.",
+          "default": null,
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "additionalProperties": { }
+    },
+    "SearchFeaturesResponse": {
+      "description": "Paged response contains list of features and next property to get the next set of results.",
+      "required": [
+        "features",
+        "returned"
+      ],
+      "type": "object",
+      "properties": {
+        "features": {
+          "description": "List of features.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StacFeature"
+          }
+        },
+        "next": {
+          "format": "int32",
+          "description": "Merge this next property in next search request\r\nto get next set of results.",
+          "type": "integer"
+        },
+        "returned": {
+          "format": "int32",
+          "description": "No of features returned.",
+          "type": "integer"
+        }
+      }
+    },
     "Season": {
       "description": "Schema of season resource.",
       "type": "object",
@@ -22271,6 +22559,10 @@
           "format": "int32",
           "description": "Season year.",
           "type": "integer"
+        },
+        "geographicIdentifier": {
+          "description": "Geographic Identifier.",
+          "type": "string"
         },
         "id": {
           "description": "Unique resource ID.",
@@ -22333,7 +22625,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -22459,7 +22751,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -22591,14 +22883,14 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and\r\nonly string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
           }
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": { }
     },
     "SensorDataModel": {
       "description": "SensorModel API model.",
@@ -22692,14 +22984,14 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and\r\nonly string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
           }
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": { }
     },
     "SensorDataModelListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
@@ -22812,7 +23104,7 @@
         "measures": {
           "description": "Sensor measures.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
       }
     },
@@ -22939,14 +23231,14 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and\r\nonly string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
           }
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": { }
     },
     "SensorMappingListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
@@ -23081,7 +23373,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and\r\nonly string, numeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -23170,7 +23462,8 @@
           "description": "Source of satellite data. Available Value: Sentinel_2_L2A.",
           "minLength": 1,
           "enum": [
-            "Sentinel_2_L2A"
+            "Sentinel_2_L2A",
+            "Sentinel_2_L1C"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -23205,6 +23498,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -23257,7 +23555,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -23353,7 +23651,8 @@
           "description": "Source of satellite data. Available Value: Sentinel_2_L2A.",
           "minLength": 1,
           "enum": [
-            "Sentinel_2_L2A"
+            "Sentinel_2_L2A",
+            "Sentinel_2_L1C"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -23407,6 +23706,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -23456,7 +23760,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -23505,19 +23809,150 @@
         "partnerRequestBody": {
           "description": "Api input parameters required by partner to trigger/cancel job request.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
-      }
+      },
+      "additionalProperties": { }
     },
     "Source": {
       "description": "Source of satellite data.",
       "enum": [
-        "Sentinel_2_L2A"
+        "Sentinel_2_L2A",
+        "Sentinel_2_L1C"
       ],
       "type": "string",
       "x-ms-enum": {
         "name": "Source",
         "modelAsString": true
+      }
+    },
+    "StacFeature": {
+      "description": "Schema of STAC Feature(Item).\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#item-fields.",
+      "required": [
+        "assets",
+        "id",
+        "links",
+        "properties",
+        "stacVersion",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "stacVersion": {
+          "description": "The STAC version the Feature implements.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "stacExtensions": {
+          "description": "A list of extensions the Feature implements.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "description": "Provider identifier. Globally unique ID by Data provider.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the GeoJSON Object. It's value is always Feature.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "geometry": {
+          "description": "Defines the full footprint of the asset represented by this item.\r\nIts a GeoJSON geometry."
+        },
+        "bbox": {
+          "description": "Bounding box of the feature.",
+          "type": "array",
+          "items": {
+            "format": "double",
+            "type": "number"
+          }
+        },
+        "properties": {
+          "description": "A dictionary of additional metadata for the item."
+        },
+        "links": {
+          "description": "List of link objects to resources and related URLs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StacFeatureLink"
+          }
+        },
+        "assets": {
+          "description": "Dictionary of asset objects, each with a unique key.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StacFeatureAsset"
+          }
+        },
+        "collection": {
+          "description": "The id of the STAC Collection this Feature references.",
+          "type": "string"
+        }
+      }
+    },
+    "StacFeatureAsset": {
+      "description": "Schema of STAC Feature's Asset.\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#asset-object.",
+      "required": [
+        "href"
+      ],
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "Link to the asset object.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "title": {
+          "description": "The displayed title for clients and users.",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the Asset providing additional details, such as how it was processed or created.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Media type of the asset.",
+          "type": "string"
+        },
+        "roles": {
+          "description": "The semantic roles of the asset, similar to the use of rel in links.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "StacFeatureLink": {
+      "description": "The Link object describes a relationship of this Feature with another entity.\r\nRefer for spec: https://github.com/radiantearth/stac-spec/blob/v1.0.0-beta.2/item-spec/item-spec.md#link-object.",
+      "required": [
+        "href",
+        "rel"
+      ],
+      "type": "object",
+      "properties": {
+        "href": {
+          "description": "The actual link in the format of an URL.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "rel": {
+          "description": "Relationship between the current document and the linked document.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": {
+          "description": "Media type of the referenced entity.",
+          "type": "string"
+        },
+        "title": {
+          "description": "A human readable title to be used in rendered displays of the link.",
+          "type": "string"
+        }
       }
     },
     "TillageData": {
@@ -23626,13 +24061,14 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
           }
         }
-      }
+      },
+      "additionalProperties": { }
     },
     "TillageDataListResponse": {
       "description": "Paged response contains list of requested objects and a URL link to get the next set of results.",
@@ -23723,6 +24159,11 @@
           "type": "string",
           "readOnly": true
         },
+        "errorCode": {
+          "description": "Error Code when job failed.",
+          "type": "string",
+          "readOnly": true
+        },
         "createdDateTime": {
           "format": "date-time",
           "description": "Job created at dateTime. Sample format: yyyy-MM-ddTHH:mm:ssZ.",
@@ -23772,7 +24213,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -23887,7 +24328,7 @@
         "additionalAttributes": {
           "description": "A collection of key value pairs that belongs to the resource. Each pair must not have a key greater than 50 characters and must not have a value greater than 250 characters. Note: A maximum of 100 key value pairs can be provided for a resource and only string and numeral values are supported.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
       }
     },
@@ -23928,7 +24369,7 @@
         "extensionApiInput": {
           "description": "Extension api input dictionary which would be used to feed request query/body/parameter information.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "extensionDataProviderAppId": {
           "description": "App id of the weather data provider.",
@@ -23960,6 +24401,11 @@
         },
         "message": {
           "description": "Status message to capture more details of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "errorCode": {
+          "description": "Error Code when job failed.",
           "type": "string",
           "readOnly": true
         },
@@ -24012,7 +24458,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -24147,7 +24593,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 250 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string and numeral values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -24250,7 +24696,7 @@
           "$ref": "#/definitions/AdditionalProviderParameters"
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": { }
     },
     "WeatherDataProviderResponse": {
       "description": "Schema of Weather Data Provider Response.",
@@ -24463,7 +24909,7 @@
         "properties": {
           "description": "A collection of key value pairs that belongs to the resource.\r\nEach pair must not have a key greater than 50 characters\r\nand must not have a value greater than 150 characters.\r\nNote: A maximum of 25 key value pairs can be provided for a resource and only string,\r\nnumeral and datetime (yyyy-MM-ddTHH:mm:ssZ) values are supported.",
           "type": "object",
-          "additionalProperties": {},
+          "additionalProperties": { },
           "example": {
             "key1": "value1",
             "key2": 123.45
@@ -24506,7 +24952,7 @@
   },
   "security": [
     {
-      "Bearer": []
+      "Bearer": [ ]
     }
   ]
 }
