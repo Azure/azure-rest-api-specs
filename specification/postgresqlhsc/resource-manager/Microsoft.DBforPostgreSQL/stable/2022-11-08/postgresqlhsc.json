@@ -641,7 +641,7 @@
               "$ref": "#/definitions/ServerConfiguration"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ServerConfiguration"
@@ -713,7 +713,7 @@
               "$ref": "#/definitions/ServerConfiguration"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/ServerConfiguration"
@@ -785,7 +785,7 @@
               "$ref": "#/definitions/FirewallRule"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/FirewallRule"
@@ -952,6 +952,49 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/roles/{roleName}": {
+      "get": {
+        "description": "Gets information about a cluster role.",
+        "tags": [
+          "Roles"
+        ],
+        "operationId": "Roles_Get",
+        "x-ms-examples": {
+          "Get the role of the cluster": {
+            "$ref": "./examples/RoleGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RoleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Role"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Roles"
@@ -1000,7 +1043,7 @@
               "$ref": "#/definitions/Role"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted",
             "schema": {
               "$ref": "#/definitions/Role"
@@ -1551,7 +1594,7 @@
               "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
-          "202": {
+          "201": {
             "description": "Accepted",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
@@ -2310,6 +2353,11 @@
           },
           "x-ms-identifiers": [],
           "uniqueItems": true
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the configuration",
+          "readOnly": true
         }
       },
       "required": [
@@ -2424,6 +2472,11 @@
         "requiresRestart": {
           "type": "boolean",
           "description": "If configuration change requires restart."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the configuration",
+          "readOnly": true
         }
       },
       "required": [
@@ -2487,7 +2540,7 @@
         }
       }
     },
-    "FirewallRuleProperties": {
+    "FirewallRuleProperties2": {
       "description": "The properties of a cluster firewall rule.",
       "type": "object",
       "properties": {
@@ -2506,6 +2559,45 @@
         "startIpAddress",
         "endIpAddress"
       ]
+    },
+    "FirewallRuleProperties": {
+      "description": "The properties of a cluster firewall rule.",
+      "type": "object",
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the cluster firewall rule. Must be IPv4 format.",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the cluster firewall rule. Must be IPv4 format.",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the firewall rule",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
+      ]
+    },
+    "FirewallRule2": {
+      "description": "The properties of a cluster firewall rule.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FirewallRuleProperties2"
+        }
+      }
     },
     "FirewallRule": {
       "description": "Represents a cluster firewall rule.",
@@ -2539,7 +2631,7 @@
         }
       }
     },
-    "RoleProperties": {
+    "RoleProperties2": {
       "properties": {
         "password": {
           "type": "string",
@@ -2557,6 +2649,49 @@
       ],
       "description": "The properties of a cluster role.",
       "type": "object"
+    },
+    "RoleProperties": {
+      "properties": {
+        "password": {
+          "type": "string",
+          "x-ms-secret": true,
+          "format": "password",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ],
+          "description": "The password of the cluster role."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the cluster role",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "password"
+      ],
+      "description": "The properties of a cluster role.",
+      "type": "object"
+    },
+    "Role2": {
+      "description": "Represents a cluster role.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RoleProperties2",
+          "x-ms-client-flatten": true,
+          "description": "The properties of a role."
+        }
+      },
+      "required": [
+        "properties"
+      ]
     },
     "Role": {
       "description": "Represents a cluster role.",
