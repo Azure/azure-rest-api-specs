@@ -26,15 +26,15 @@ These are the global settings for the Quota API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2023-02
+tag: package-2023-02-01
 ```
 
 
-### Tag: package-2023-02
+### Tag: package-2023-02-01
 
-These settings apply only when `--tag=package-2023-02` is specified on the command line.
+These settings apply only when `--tag=package-2023-02-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02'
+```yaml $(tag) == 'package-2023-02-01'
 input-file:
   - Microsoft.Quota/stable/2023-02-01/quota.json
 ```
