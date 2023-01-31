@@ -370,16 +370,6 @@
               "$ref": "#/definitions/HyperVSite"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -387,10 +377,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HyperVSites_PatchSite_MaximumSet_Gen": {
             "$ref": "./examples/HyperVSites_PatchSite_MaximumSet_Gen.json"
@@ -430,16 +416,6 @@
           "200": {
             "description": "Resource deleted successfully."
           },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -450,10 +426,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HyperVSites_DeleteSite_MaximumSet_Gen": {
             "$ref": "./examples/HyperVSites_DeleteSite_MaximumSet_Gen.json"
@@ -633,6 +605,19 @@
               "$ref": "#/definitions/HyperVCluster"
             }
           },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/HyperVCluster"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -640,6 +625,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HyperVCluster_PutCluster_MaximumSet_Gen": {
             "$ref": "./examples/HyperVCluster_PutCluster_MaximumSet_Gen.json"
@@ -1599,7 +1588,7 @@
         "tags": [
           "HypervSites"
         ],
-        "operationId": "HypervSites_Summary",
+        "operationId": "HyperVSites_GetSiteUsage",
         "description": "Method to get site usage.",
         "parameters": [
           {
@@ -1669,11 +1658,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "HypervSites_Summary_MaximumSet_Gen": {
-            "$ref": "./examples/HypervSites_Summary_MaximumSet_Gen.json"
+          "HyperVSites_GetSiteUsage_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSiteUsage_MaximumSet_Gen.json"
           },
-          "HypervSites_Summary_MinimumSet_Gen": {
-            "$ref": "./examples/HypervSites_Summary_MinimumSet_Gen.json"
+          "HyperVSites_GetSiteUsage_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSiteUsage_MinimumSet_Gen.json"
           }
         }
       }
@@ -3969,16 +3958,6 @@
               "$ref": "#/definitions/VMwareSite"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -3986,10 +3965,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Sites_PatchSite_MaximumSet_Gen": {
             "$ref": "./examples/Sites_PatchSite_MaximumSet_Gen.json"
@@ -4029,16 +4004,6 @@
           "200": {
             "description": "Resource deleted successfully."
           },
-          "202": {
-            "description": "Resource deletion accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
           "204": {
             "description": "Resource deleted successfully."
           },
@@ -4049,10 +4014,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Sites_DeleteSite_MaximumSet_Gen": {
             "$ref": "./examples/Sites_DeleteSite_MaximumSet_Gen.json"
@@ -5351,6 +5312,16 @@
               "x-cadl-name": "{}"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -5358,6 +5329,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Machines_StopMachine_MaximumSet_Gen": {
             "$ref": "./examples/Machines_StopMachine_MaximumSet_Gen.json"
@@ -5706,7 +5681,7 @@
         "tags": [
           "VmwareSites"
         ],
-        "operationId": "VmwareSites_Summary",
+        "operationId": "Sites_GetSiteUsage",
         "description": "Method to get site usage.",
         "parameters": [
           {
@@ -5776,11 +5751,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VmwareSites_Summary_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_Summary_MaximumSet_Gen.json"
+          "Sites_GetSiteUsage_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteUsage_MaximumSet_Gen.json"
           },
-          "VmwareSites_Summary_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_Summary_MinimumSet_Gen.json"
+          "Sites_GetSiteUsage_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteUsage_MinimumSet_Gen.json"
           }
         }
       }
