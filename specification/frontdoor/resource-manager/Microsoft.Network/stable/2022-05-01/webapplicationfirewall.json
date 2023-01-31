@@ -76,6 +76,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/frontDoorWebApplicationFirewallPolicies": {
+      "get": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Lists all of the protection policies within a subscription.",
+        "operationId": "Policies_List",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/WebApplicationFirewallPolicyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get all Policies in a Resource Group": {
+            "$ref": "./examples/WafListPoliciesUnderSubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies/{policyName}": {
       "get": {
         "tags": [
