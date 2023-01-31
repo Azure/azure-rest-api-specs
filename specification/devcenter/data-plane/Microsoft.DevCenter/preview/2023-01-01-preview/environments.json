@@ -890,7 +890,17 @@
       "type": "string",
       "x-ms-enum": {
         "name": "EnvironmentTypeEnableStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "The environment type is enabled for use in the project."
+          },
+          {
+            "value": "Disabled",
+            "description": "The environment type is not enabled for use in the project."
+          }
+        ]
       }
     },
     "ParameterType": {
@@ -906,7 +916,33 @@
       "description": "The type of data a parameter accepts.",
       "x-ms-enum": {
         "name": "ParameterType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "array",
+            "description": "The parameter accepts an array of values."
+          },
+          {
+            "value": "boolean",
+            "description": "The parameter accepts a boolean value."
+          },
+          {
+            "value": "integer",
+            "description": "The parameter accepts an integer value."
+          },
+          {
+            "value": "number",
+            "description": "The parameter accepts a number value."
+          },
+          {
+            "value": "object",
+            "description": "The parameter accepts an object value."
+          },
+          {
+            "value": "string",
+            "description": "The parameter accepts a string value."
+          }
+        ]
       }
     }
   },

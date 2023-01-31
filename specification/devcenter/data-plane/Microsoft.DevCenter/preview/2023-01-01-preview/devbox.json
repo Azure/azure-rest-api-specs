@@ -1131,7 +1131,29 @@
       "type": "string",
       "x-ms-enum": {
         "name": "PoolHealthStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "description": "The pool health status is not known."
+          },
+          {
+            "value": "Pending",
+            "description": "The pool health status waiting for health checks to run."
+          },
+          {
+            "value": "Healthy",
+            "description": "The pool health status is healthy."
+          },
+          {
+            "value": "Warning",
+            "description": "The pool health status has one or more warnings."
+          },
+          {
+            "value": "Unhealthy",
+            "description": "The pool health status is not healthy."
+          }
+        ]
       }
     },
     "HibernateSupport": {
@@ -1144,7 +1166,21 @@
       "type": "string",
       "x-ms-enum": {
         "name": "HibernateSupport",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Hibernate is enabled."
+          },
+          {
+            "value": "Disabled",
+            "description": "Hibernate is not enabled."
+          },
+          {
+            "value": "OsUnsupported",
+            "description": "Hibernate is not supported by the operating system."
+          }
+        ]
       }
     },
     "LocalAdminStatus": {
@@ -1156,7 +1192,17 @@
       "type": "string",
       "x-ms-enum": {
         "name": "LocalAdminStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Owners of Dev Boxes in the pool are local administrators on the Dev Boxes."
+          },
+          {
+            "value": "Disabled",
+            "description": "Owners of Dev Boxes in the pool are not local administrators on the Dev Boxes."
+          }
+        ]
       }
     },
     "StopOnDisconnectEnableStatus": {
@@ -1168,7 +1214,17 @@
       "type": "string",
       "x-ms-enum": {
         "name": "StopOnDisconnectEnableStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Enabled",
+            "description": "Stop on disconnect is enabled on the Dev Box."
+          },
+          {
+            "value": "Disabled",
+            "description": "Stop on disconnect is not enabled on the Dev Box."
+          }
+        ]
       }
     },
     "ScheduleListResult": {
@@ -1232,7 +1288,13 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ScheduledType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "StopDevBox",
+            "description": "The scheduled task will stop impacted Dev Boxes."
+          }
+        ]
       }
     },
     "ScheduledFrequency": {
@@ -1243,7 +1305,13 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ScheduledFrequency",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Daily",
+            "description": "The scheduled task will run every day."
+          }
+        ]
       }
     },
     "DevBoxListResult": {
@@ -1374,7 +1442,13 @@
       "description": "The operating system type.",
       "x-ms-enum": {
         "name": "OsType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Windows",
+            "description": "The Windows operating system."
+          }
+        ]
       }
     },
     "HardwareProfile": {
@@ -1479,7 +1553,29 @@
       "description": "The power states of a Dev Box.",
       "x-ms-enum": {
         "name": "PowerState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "description": "The Dev Box power state is not known."
+          },
+          {
+            "value": "Running",
+            "description": "The Dev Box is running."
+          },
+          {
+            "value": "Deallocated",
+            "description": "The Dev Box is deallocated."
+          },
+          {
+            "value": "PoweredOff",
+            "description": "The Dev Box is powered off."
+          },
+          {
+            "value": "Hibernated",
+            "description": "The Dev Box is hibernated."
+          }
+        ]
       }
     },
     "StopOnDisconnectConfiguration": {
@@ -1557,7 +1653,17 @@
       "description": "The result of the delay operation on this action.",
       "x-ms-enum": {
         "name": "DevBoxActionDelayResultStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "description": "The delay operation succeeded."
+          },
+          {
+            "value": "Failed",
+            "description": "The delay operation failed."
+          }
+        ]
       }
     },
     "DevBoxActionsListResult": {
@@ -1620,7 +1726,13 @@
       ],
       "x-ms-enum": {
         "name": "DevBoxActionType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Stop",
+            "description": "The action will stop the Dev Box."
+          }
+        ]
       }
     },
     "DevBoxNextAction": {
