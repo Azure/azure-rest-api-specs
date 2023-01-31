@@ -275,9 +275,6 @@
         "operationId": "Environments_DeleteEnvironment",
         "x-ms-long-running-operation": true,
         "responses": {
-          "200": {
-            "description": "Deletion was successful."
-          },
           "202": {
             "description": "Accepted. Operation will complete asynchronously.",
             "headers": {
@@ -288,7 +285,7 @@
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "Deletion was successful or resource does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",

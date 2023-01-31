@@ -1062,38 +1062,31 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Pool name",
-          "readOnly": true
+          "description": "Pool name"
         },
         "location": {
           "description": "Azure region where Dev Boxes in the pool are located",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "osType": {
           "description": "The operating system type of Dev Boxes in this pool",
-          "$ref": "#/definitions/OsType",
-          "readOnly": true
+          "$ref": "#/definitions/OsType"
         },
         "hardwareProfile": {
           "description": "Hardware settings for the Dev Boxes created in this pool",
-          "$ref": "#/definitions/HardwareProfile",
-          "readOnly": true
+          "$ref": "#/definitions/HardwareProfile"
         },
         "hibernateSupport": {
           "description": "Indicates whether hibernate is enabled/disabled or unknown.",
-          "$ref": "#/definitions/HibernateSupport",
-          "readOnly": true
+          "$ref": "#/definitions/HibernateSupport"
         },
         "storageProfile": {
           "description": "Storage settings for Dev Box created in this pool",
-          "$ref": "#/definitions/StorageProfile",
-          "readOnly": true
+          "$ref": "#/definitions/StorageProfile"
         },
         "imageReference": {
           "description": "Image settings for Dev Boxes create in this pool",
-          "$ref": "#/definitions/ImageReference",
-          "readOnly": true
+          "$ref": "#/definitions/ImageReference"
         },
         "localAdministrator": {
           "description": "Indicates whether owners of Dev Boxes in this pool are local administrators on the Dev Boxes.",
@@ -1105,10 +1098,14 @@
         },
         "healthStatus": {
           "description": "Overall health status of the Pool. Indicates whether or not the Pool is available to create Dev Boxes.",
-          "$ref": "#/definitions/PoolHealthStatus",
-          "readOnly": true
+          "$ref": "#/definitions/PoolHealthStatus"
         }
-      }
+      },
+      "required": [
+        "name",
+        "location",
+        "healthStatus"
+      ]
     },
     "PoolHealthStatus": {
       "description": "Pool status indicating whether a pool is available to create Dev Boxes.",
@@ -1188,30 +1185,32 @@
       "properties": {
         "name": {
           "description": "Display name for the Schedule",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "type": {
           "description": "Supported type this scheduled task represents.",
-          "$ref": "#/definitions/ScheduledType",
-          "readOnly": true
+          "$ref": "#/definitions/ScheduledType"
         },
         "frequency": {
           "description": "The frequency of this scheduled task.",
-          "$ref": "#/definitions/ScheduledFrequency",
-          "readOnly": true
+          "$ref": "#/definitions/ScheduledFrequency"
         },
         "time": {
           "description": "The target time to trigger the action. The format is HH:MM.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "timeZone": {
           "description": "The IANA timezone id at which the schedule should execute.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
-      }
+      },
+      "required": [
+        "name",
+        "type",
+        "frequency",
+        "time",
+        "timeZone"
+      ]
     },
     "ScheduledType": {
       "description": "The supported types for a scheduled task.",
@@ -1448,13 +1447,11 @@
       "properties": {
         "webUrl": {
           "description": "URL to open a browser based RDP session.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "rdpConnectionUrl": {
           "description": "Link to open a Remote Desktop session.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -1479,16 +1476,17 @@
       "properties": {
         "status": {
           "description": "Indicates whether the feature to stop the devbox on disconnect once the grace period has lapsed is enabled.",
-          "$ref": "#/definitions/StopOnDisconnectEnableStatus",
-          "readOnly": true
+          "$ref": "#/definitions/StopOnDisconnectEnableStatus"
         },
         "gracePeriodMinutes": {
           "description": "The specified time in minutes to wait before stopping a Dev Box once disconnect is detected.",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         }
-      }
+      },
+      "required": [
+        "status"
+      ]
     },
     "DevBoxActionsDelayMultipleResult": {
       "type": "object",
@@ -1518,10 +1516,9 @@
           "type": "string",
           "description": "The name of the action."
         },
-        "httpStatusCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The result code of the delay operation on this action."
+        "result": {
+          "$ref": "#/definitions/DevBoxActionDelayResultStatus",
+          "description": "The result of the delay operation on this action."
         },
         "action": {
           "description": "The delayed action",
@@ -1536,8 +1533,20 @@
       },
       "required": [
         "name",
-        "httpStatusCode"
+        "result"
       ]
+    },
+    "DevBoxActionDelayResultStatus": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "description": "The result of the delay operation on this action.",
+      "x-ms-enum": {
+        "name": "DevBoxActionDelayResultStatus",
+        "modelAsString": true
+      }
     },
     "DevBoxActionsListResult": {
       "type": "object",
@@ -1565,31 +1574,31 @@
       "properties": {
         "name": {
           "description": "The name of the action.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "actionType": {
           "description": "The action that will be taken.",
-          "$ref": "#/definitions/DevBoxActionType",
-          "readOnly": true
+          "$ref": "#/definitions/DevBoxActionType"
         },
         "sourceId": {
           "description": "The id of the resource which triggered this action",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "suspendedUntil": {
           "description": "The earliest time that the action could occur (UTC).",
           "type": "string",
-          "readOnly": true,
           "format": "date-time"
         },
         "next": {
           "description": "Details about the next run of this action.",
-          "$ref": "#/definitions/DevBoxNextAction",
-          "readOnly": true
+          "$ref": "#/definitions/DevBoxNextAction"
         }
-      }
+      },
+      "required": [
+        "name",
+        "actionType",
+        "sourceId"
+      ]
     },
     "DevBoxActionType": {
       "description": "The type of action which will take place on a Dev Box.",
@@ -1609,10 +1618,12 @@
         "scheduledTime": {
           "description": "The time the action will be triggered (UTC).",
           "type": "string",
-          "readOnly": true,
           "format": "date-time"
         }
-      }
+      },
+      "required": [
+        "scheduledTime"
+      ]
     }
   },
   "parameters": {

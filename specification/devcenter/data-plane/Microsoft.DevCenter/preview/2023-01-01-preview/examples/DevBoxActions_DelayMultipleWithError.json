@@ -13,7 +13,7 @@
         "value": [
           {
             "name": "schedule-default",
-            "httpStatusCode": 400,
+            "result": "Failed",
             "error": {
               "code": "DelayOverMaxTime",
               "message": "The schedule cannot be delayed more than 8 hours from the original invocation time."
@@ -21,8 +21,9 @@
           },
           {
             "name": "idle-hibernateondisconnect",
-            "httpStatusCode": 200,
+            "result": "Succeeded",
             "action": {
+              "name": "idle-hibernateondisconnect",
               "actionType": "Stop",
               "sourceId": "/projects/myProject/pools/myPool",
               "suspendedUntil": "2022-09-30T17:00:00Z"

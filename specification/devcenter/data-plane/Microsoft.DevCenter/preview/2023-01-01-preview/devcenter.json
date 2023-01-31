@@ -147,22 +147,21 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the project",
-          "readOnly": true
+          "description": "Name of the project"
         },
         "description": {
           "type": "string",
-          "description": "Description of the project.",
-          "readOnly": true
+          "description": "Description of the project."
         },
         "maxDevBoxesPerUser": {
           "type": "integer",
           "format": "int32",
           "minimum": 0,
-          "description": "When specified, indicates the maximum number of Dev Boxes a single user can create across all pools in the project.",
-          "readOnly": true
-        }
-      }
+          "description": "When specified, indicates the maximum number of Dev Boxes a single user can create across all pools in the project."        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "CloudError": {
       "x-ms-external": true,
