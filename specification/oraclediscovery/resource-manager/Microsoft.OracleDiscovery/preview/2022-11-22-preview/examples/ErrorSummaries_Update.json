@@ -4,7 +4,7 @@
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "testrg",
     "siteName": "testSite",
-    "databaseName": "testDatabaseName",
+    "errorSummaryName": "testErrorSummaryName",
     "body": {
       "tags": {
         "tag1": "value1",
@@ -15,18 +15,37 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.OracleDiscovery/OracleSites/testSite/Summaries/testSummaryName",
-        "name": "testSummaryName",
-        "type": "Microsoft.OracleDiscovery/OracleSites/Summary",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.OracleDiscovery/OracleSites/testSite/ErrorSummries/testErrorSummaryName",
+        "name": "testErrorSummaryName",
+        "type": "Microsoft.OracleDiscovery/OracleSites/ErrorSummries",
         "properties": {
-          "DiscoveryScopeErrorSummaries": [
+          "discoveryScopeErrorSummaries": [
             {
-              "AffectedResourceType": "Server",
-              "AffectedObjectsCount ": "20"
+              "affectedResourceType": "Server",
+              "affectedObjectsCount": "20"
             },
             {
-              "AffectedResourceType ": "Database",
-              "AffectedObjectsCount ": "10"
+              "affectedResourceType": "Database",
+              "affectedObjectsCount": "10"
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/testrg/providers/Microsoft.OracleDiscovery/OracleSites/testSite/ErrorSummries/testErrorSummaryName",
+        "name": "testErrorSummaryName",
+        "type": "Microsoft.OracleDiscovery/OracleSites/ErrorSummries",
+        "properties": {
+          "discoveryScopeErrorSummaries": [
+            {
+              "affectedResourceType": "Server",
+              "affectedObjectsCount": "20"
+            },
+            {
+              "affectedResourceType": "Database",
+              "affectedObjectsCount": "10"
             }
           ]
         }
