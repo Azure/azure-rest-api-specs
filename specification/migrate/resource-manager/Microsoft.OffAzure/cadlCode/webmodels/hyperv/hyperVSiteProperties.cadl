@@ -1,0 +1,23 @@
+@doc("The properties of VMwareSiteResource")
+model SiteProperties {
+  @doc("Gets the Master Site this site is linked to.")
+  masterSiteId: string;
+
+  @doc("Service principal identity details used by agent for communication to the service.")
+  servicePrincipalIdentityDetails: SiteSpnProperties; 
+
+  @doc("On-premises agent details.")
+  agentDetails: SiteAgentProperties; 
+
+  @doc("Service endpoint.")
+  serviceEndpoint: string;
+
+  @doc("RM ID of migration hub solution for SDS.")
+  discoverySolutionId: string;
+
+  @doc("Appliance Name.")
+  applianceName: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}

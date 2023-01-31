@@ -1,0 +1,229 @@
+@doc("Cosmos db Imported Machines JobEntity")
+enum CosmosDBDeleteImportedMachinesJobEntityDeleteImportedMachinesJobPropertiesJobState {
+    "Unknown",
+    "Verified",
+    "VerifiedWithErrors",
+    "Completed",
+    "Failed",
+}
+
+enum CosmosDBImportMachinesJobEntityImportMachinesJobProperties {
+    "Unknown",
+    "Completed",
+    "CompletedWithWarnings",
+    "CompletedWithErrors",
+    "Failed",
+    "WaitingForBlobUpload",
+    "InProgress",
+}
+
+@doc("Import URI response class.")
+model SasUriResponse {
+    @doc("Gets or sets the job ARM ID.")
+    jobArmId?: string;
+
+    @doc("Gets or sets the SAS URI.")
+    uri?: string;
+}
+
+@doc("The delete import machines job web model.")
+model V20200201DeleteImportMachinesJob {
+    @doc("Handled by resource provider. Type = Microsoft.OffAzure/ImportSites/DeleteJobs.")
+    @visibility("read")
+    type?: string;
+
+    @doc("Gets or sets the delete import machines job properties.")
+    properties?: CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties;
+
+    @doc("Gets or sets the relative ARM name to get job.")
+    id?: string;
+
+    @doc("Gets or sets the Job ID.")
+    name?: string;
+
+    @doc("Gets or sets the Job status.")
+    status?: string;
+
+    @doc("Gets or sets the Job start time.")
+    startTime?: string;
+
+    @doc("Gets or sets the Job end time.")
+    endTime?: string;
+
+    @doc("Gets or sets the Display name.")
+    displayName?: string;
+}
+
+@doc("Delete Imported Machines Job Properties")
+model CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties {
+    @doc("blob name")
+    blobName?: string;
+
+    @doc("error Sas Uri")
+    errorSasUri?: string;
+
+    @doc("job State")
+    jobState?: CosmosDBDeleteImportedMachinesJobEntityDeleteImportedMachinesJobPropertiesJobState;
+
+    @doc("number Of Machines Deleted")
+    numberOfMachinesDeleted?: int32;
+
+    @doc("deletion Confirmation")
+    deletionConfirmation?: boolean;
+
+    @doc("errors list")
+    @visibility("read")
+    errors?: string[];
+
+    @doc("The status of the last operation.")
+    provisioningState?: ProvisioningState;
+}
+
+@doc("The delete import machines job web model.")
+model ImportDeleteImportMachinesJob {
+    @doc("Handled by resource provider. Type = Microsoft.OffAzure/ImportSites/DeleteJobs.")
+    @visibility("read")
+    type?: string;
+
+    @doc("Gets or sets the delete import machines job properties.")
+    properties?: CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties;
+
+    @doc("Gets or sets the relative ARM name to get job.")
+    id?: string;
+
+    @doc("Gets or sets the Job ID.")
+    name?: string;
+
+    @doc("Gets or sets the Job status.")
+    status?: string;
+
+    @doc("Gets or sets the Job start time.")
+    startTime?: string;
+
+    @doc("Gets or sets the Job end time.")
+    endTime?: string;
+
+    @doc("Gets or sets the Display name.")
+    displayName?: string;
+}
+
+@doc("Delete import machines job collection.")
+model ImportDeleteImportMachinesJobDeleteImportMachinesJobCollection {
+    @doc("Gets the list of jobs.")
+    @visibility("read")
+    value?: ImportDeleteImportMachinesJob[];
+
+    @doc("Gets the value of next link.")
+    @visibility("read")
+    nextLink?: string;
+}
+
+@doc("Delete import machines job collection.")
+model V20200201DeleteImportMachinesJobDeleteImportMachinesJobCollection {
+    @doc("Gets the list of jobs.")
+    @visibility("read")
+    value?: V20200201DeleteImportMachinesJob[];
+
+    @doc("Gets the value of next link.")
+    @visibility("read")
+    nextLink?: string;
+}
+
+@doc("Export imported machines job collection.")
+model V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection {
+    @doc("Gets the list of jobs.")
+    @visibility("read")
+    value?: V20200201ExportImportedMachinesJob[];
+
+    @doc("Gets the value of next link.")
+    @visibility("read")
+    nextLink?: string;
+}
+
+@doc("Export machines job REST resource.")
+model V20200201ExportImportedMachinesJob {
+    @doc("Type name for export job.")
+    @visibility("read")
+    type?: string;
+
+    @doc("Gets or sets the export machines job properties.")
+    properties?: CosmosDbExportImportedMachinesJobEntityExportImportedMachinesJobEntityProperties;
+
+    @doc("Gets or sets the relative ARM name to get job.")
+    id?: string;
+
+    @doc("Gets or sets the Job ID.")
+    name?: string;
+
+    @doc("Gets or sets the Job status.")
+    status?: string;
+
+    @doc("Gets or sets the Job start time.")
+    startTime?: string;
+
+    @doc("Gets or sets the Job end time.")
+    endTime?: string;
+
+    @doc("Gets or sets the Display name.")
+    displayName?: string;
+}
+
+@doc(" Export Imported Machines JobEntity Properties ")
+model CosmosDbExportImportedMachinesJobEntityExportImportedMachinesJobEntityProperties {
+    @doc("blob name")
+    blobName?: string;
+
+    @doc("sas uri")
+    sasUri?: string;
+}
+
+@doc("Collection of VMware jobs.")
+model V20200201ImportMachinesJobImportMachinesJobCollection {
+    @doc("Gets the list of jobs.")
+    @visibility("read")
+    value?: V20200201ImportMachinesJob[];
+
+    @doc("Gets the value of next link.")
+    @visibility("read")
+    nextLink?: string;
+}
+
+@doc("Import machines Job REST Resource.")
+model V20200201ImportMachinesJob {
+    @doc("""
+Handled by resource provider. Type =
+Microsoft.OffAzure/ImportSites/jobs/importJobs.
+""")
+    @visibility("read")
+    type?: string;
+
+    @doc("Gets or sets the import job properties.")
+    properties?: CosmosDBImportMachinesJobEntityImportMachinesJobProperties;
+
+    @doc("Gets or sets the relative ARM name to get job.")
+    id?: string;
+
+    @doc("Gets or sets the Job ID.")
+    name?: string;
+
+    @doc("Gets or sets the Job status.")
+    status?: string;
+
+    @doc("Gets or sets the Job start time.")
+    startTime?: string;
+
+    @doc("Gets or sets the Job end time.")
+    endTime?: string;
+
+    @doc("Gets or sets the Display name.")
+    displayName?: string;
+}
+
+@doc("Import URI response class.")
+model V20190501PreviewSasUriResponse {
+    @doc("Gets or sets the job ARM ID.")
+    jobArmId?: string;
+
+    @doc("Gets or sets the SAS URI.")
+    uri?: string;
+}

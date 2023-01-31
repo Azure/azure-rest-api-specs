@@ -1,0 +1,174 @@
+@doc("Second level object returned as part of Machine REST resource.")
+model WebRoleOperatingSystem {
+    @doc("Gets or sets the type of the operating system.")
+    osType?: string;
+
+    @doc("Gets or sets the Name of the operating system.")
+    osName?: string;
+
+    @doc("Gets or sets the Version of the operating system.")
+    osVersion?: string;
+
+    @doc("Gets or sets the Architecture of the operating system.")
+    osArchitecture?: string;
+}
+
+@doc("Class representing the imported machine web model.")
+model WebRoleImportDisk {
+    @doc("Disk read throughput.")
+    @visibility("read")
+    megabytesPerSecondOfRead?: float32;
+
+    @doc("Disk write throughput.")
+    @visibility("read")
+    megabytesPerSecondOfWrite?: float32;
+
+    @doc("Disk read IOPS.")
+    @visibility("read")
+    numberOfReadOperationsPerSecond?: float32;
+
+    @doc("Disk write IOPS.")
+    @visibility("read")
+    numberOfWriteOperationsPerSecond?: float32;
+
+    @doc("Gets or sets Bytes allocated for the disk.")
+    maxSizeInBytes?: int32;
+
+    @doc("Gets or sets Name of the disk.")
+    name?: string;
+
+    @doc("Gets or sets Type of the disk.")
+    diskType?: string;
+
+    @doc("Gets or sets LUN of the disk.")
+    lun?: int32;
+
+    @doc("Gets or sets Path of the disk.")
+    path?: string;
+}
+
+@doc("Class for machine properties.")
+model ImportMachineProperties {
+    @doc("Firmware of the machine.")
+    @visibility("read")
+    firmware?: string;
+
+    @doc("CPU utilization.")
+    @visibility("read")
+    percentageCpuUtilization?: float32;
+
+    @doc("Memory utilization.")
+    @visibility("read")
+    percentageMemoryUtilization?: float32;
+
+    @doc("Number of disks.")
+    @visibility("read")
+    numberOfDisks?: int32;
+
+    @doc("Total disk read operations per second.")
+    @visibility("read")
+    totalDiskReadOperationsPerSecond?: float32;
+
+    @doc("Total disk write operations per second.")
+    @visibility("read")
+    totalDiskWriteOperationsPerSecond?: float32;
+
+    @doc("Total disk write throughput.")
+    @visibility("read")
+    totalDiskWriteThroughput?: float32;
+
+    @doc("Total disk read throughput.")
+    @visibility("read")
+    totalDiskReadThroughput?: float32;
+
+    @doc("MAC Address.")
+    @visibility("read")
+    macAddress?: string;
+
+    @doc("IP Addresses.")
+    @visibility("read")
+    ipAddresses?: string[];
+
+    @doc("Machine ID.")
+    @visibility("read")
+    machineId?: string;
+
+    @doc("Machine manager ID.")
+    @visibility("read")
+    machineManagerId?: string;
+
+    @doc("Number of network adapters.")
+    @visibility("read")
+    numberOfNetworkAdapters?: int32;
+
+    @doc("Network in throughput.")
+    @visibility("read")
+    networkInThroughput?: float32;
+
+    @doc("Network out throughput.")
+    @visibility("read")
+    networkOutThroughput?: float32;
+
+    @doc("Server type.")
+    @visibility("read")
+    serverType?: string;
+
+    @doc("Fabric type.")
+    @visibility("read")
+    hypervisor?: string;
+
+    @doc("Hypervisor version number.")
+    @visibility("read")
+    hypervisorVersionNumber?: string;
+
+    @doc("Disks attached to the machine.")
+    @visibility("read")
+    @OpenAPI.extension("x-ms-identifiers", ["name"])
+    disks?: WebRoleImportDisk[];
+
+    @doc("Server FQDN.")
+    @visibility("read")
+    vmFqdn?: string;
+
+    @doc("Total storage in use.")
+    @visibility("read")
+    storageInUseGb?: float32;
+
+    @doc("""
+    Gets or sets the Number of Processor Cores 
+                allocated for the
+    machine.
+    """)
+    numberOfProcessorCore?: int32;
+
+    @doc("Gets or sets the allocated Memory in MB.")
+    allocatedMemoryInMb?: float32;
+
+    @doc("Gets or sets the Operating System Details installed on the machine.")
+    operatingSystemDetails?: WebRoleOperatingSystem;
+
+    @doc("Gets or sets the Machine BIOS serial number.")
+    biosSerialNumber?: string;
+
+    @doc("Gets or sets the BIOS GUID.")
+    biosGuid?: string;
+
+    @doc("Gets the Display name of the machine.")
+    @visibility("read")
+    displayName?: string;
+
+    @doc("Value indicating whether VM is deleted.")
+    @visibility("read")
+    isDeleted?: boolean;
+
+    @doc("Gets the marking machine creation.")
+    @visibility("read")
+    createdTimestamp?: string;
+
+    @doc("Gets the timestamp marking last updated on the machine.")
+    @visibility("read")
+    updatedTimestamp?: string;
+
+    @doc("The status of the last operation.")
+    provisioningState?: ProvisioningState;
+}

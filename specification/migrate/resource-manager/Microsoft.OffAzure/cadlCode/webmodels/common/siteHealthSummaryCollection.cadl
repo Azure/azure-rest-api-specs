@@ -1,0 +1,58 @@
+using Azure.Core;
+
+@doc("Gets or sets the list of site health summary.")
+@pagedResult
+model SiteHealthSummaryCollection {
+  @OpenAPI.extension("x-ms-identifiers", ["applianceName"])
+  @doc("Gets or sets the list of machine meta data.")
+  siteHealthSummary?: SiteHealthSummary[];
+
+  @doc("The link to fetch more models.")
+  @nextLink
+  nextLink?: string;
+}
+
+enum LayoutUpdateSources {
+  "RefreshFabricLayout",
+  "RefreshFabricLayoutGuest",
+  "RefreshFabricLayoutDependencyMap",
+}
+
+@doc("The properties of ServerSiteResource.")
+model SiteHealthSummary {
+  @doc("Appliance Name.")
+  applianceName: string;
+
+  @doc("Gets the error message.")
+  errorMessage: string;
+
+  @doc("Gets the summary message.")
+  summaryMessage: string;
+
+  @doc("Gets the error Id.")
+  errorId: int64;
+
+  @doc("Gets the error code.")
+  errorCode: string;
+
+  @doc("Gets or sets the count of affected objects.")
+  affectedObjectsCount: int64;
+
+  @doc("Gets or sets the hit count of the error.")
+  hitCount: int64;
+
+  @doc("Gets the severity of error..")
+  severity: string;
+
+  @doc("Gets the remediation guidance.")
+  remediationGuidance: string;
+
+  @doc("Gets the affected resource type.")
+  affectedResourceType: string;
+
+  @doc("Gets or sets the affected resources.")
+  affectedResources: string[];
+
+  @doc("RM ID of migration hub solution for SDS.")
+  fabricLayoutUpdateSources: LayoutUpdateSources[];
+}

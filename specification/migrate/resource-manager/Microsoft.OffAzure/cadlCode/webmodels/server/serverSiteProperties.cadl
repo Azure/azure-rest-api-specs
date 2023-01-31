@@ -1,0 +1,21 @@
+@doc("The properties of ServerSiteResource.")
+model ServerSitesProperties {
+
+  @doc("Service principal identity details used by agent for communication to the service.")
+  servicePrincipalIdentityDetails: SiteSpnProperties;
+
+  @doc("On-premises agent details.")
+  agentDetails: AgentDetailsProperties;
+
+  @doc("RM ID of migration hub solution for SDS.")
+  discoverySolutionId: string;
+
+  @doc("Appliance Name.")
+  applianceName: string;
+
+  @doc("Service endpoint.")
+  serviceEndpoint: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState; 
+}

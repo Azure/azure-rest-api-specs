@@ -1,0 +1,27 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@cadl-lang/compiler";
+
+import "../common/provisioningstate.cadl";
+import "../common/siteSpnProperties.cadl";
+
+@doc("Hyper-V site usage.")
+model SiteUsageResponse {
+  @doc("Gets or sets the number of machines discovered in the site.")
+  machineCount: int32; //TODO
+
+  @doc("Gets or sets the number of run as accounts in the site.")
+  runAsAccountCount: int32; //TODO
+  
+  @doc("Gets or sets the number of hosts part of the site.")
+  hostCount: int32;
+
+  @doc("Gets or sets the number of clusters part of the site.")
+  clusterCount: int32;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState; 
+}

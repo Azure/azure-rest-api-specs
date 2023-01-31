@@ -1,0 +1,37 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@cadl-lang/compiler";
+
+import "./provisioningstate.cadl";
+
+@doc("The properties of VMwareSiteResource")
+model HypervSitesUsage { //TODO
+
+  @doc("Gets the Master Site this site is linked to.")
+  masterSiteId: string;
+
+  @doc("Gets the Master Site this site is linked to.")
+  type: string;
+
+  @doc("Gets the Master Site this site is linked to.")
+  id: string;
+
+  @doc("On-premises agent details.")
+  agentDetails: string; //TODO
+  
+  @doc("Service endpoint.")
+  serviceEndpoint: string;
+
+  @doc("RM ID of migration hub solution for SDS.")
+  discoverySolutionId: string;
+
+  @doc("Appliance Name.")
+  applianceName: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState; //todo
+
+}

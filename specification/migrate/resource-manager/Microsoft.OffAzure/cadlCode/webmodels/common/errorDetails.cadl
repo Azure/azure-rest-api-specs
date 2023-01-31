@@ -1,0 +1,52 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@cadl-lang/compiler";
+
+import "./source.cadl";
+import "./discoveryScope.cadl";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+@doc("Error contract returned when some exception occurs in Rest API.")
+model ErrorDetails {
+  
+  @doc("Gets the error name.")
+  code: string;
+  
+  @doc("Gets the error message.")
+  message: string;
+
+  @doc("Gets the error ID.")
+  id: int64;
+
+  @doc("Gets the possible causes of error.")
+  possibleCauses: string;
+
+  @doc("Gets the recommended action to resolve error.")
+  recommendedAction: string;
+
+  @doc("Gets the error severity.")
+  severity: string;
+  
+  @doc("Gets a value indicating whether the error originated from a agent or not.")
+  isAgentReportedError: boolean;
+
+  @doc("Gets the agent error code.")
+  agentErrorCode: string;  
+
+  @doc("Gets the error message from the agent.")
+  agentErrorMessage: string;
+
+  @doc("Gets possible causes for the agent error.")
+  agentErrorPossibleCauses: string;
+
+  @doc("Gets the recommended action for the agent error.")
+  agentErrorRecommendedAction: string;
+}

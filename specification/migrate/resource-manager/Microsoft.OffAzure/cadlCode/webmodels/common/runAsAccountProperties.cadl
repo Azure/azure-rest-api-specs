@@ -1,0 +1,21 @@
+@doc("RunAsAccount REST Resource.")
+model RunAsAccountProperties {
+
+  @doc("Display name of the run as account.")
+  displayName: string;
+  
+  @doc("Gets the credential type of the run as account.")
+  credentialType: string;
+
+  @doc("Timestamp marking run as account creation.")
+  createdTimestamp: string;
+  
+  @doc("Timestamp marking last updated on the run as account.")
+  updatedTimestamp: string;
+
+  @doc("Gets the appliance name of the run as account.")
+  applianceName: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState; 
+}

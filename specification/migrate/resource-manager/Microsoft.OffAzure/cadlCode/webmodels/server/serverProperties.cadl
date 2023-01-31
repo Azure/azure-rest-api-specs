@@ -1,0 +1,124 @@
+import "../common/machinePropertiesInternal.cadl";
+
+using Azure.Core;
+
+@doc("Gets or sets the list of server machine inventory.")
+@pagedResult
+model ServerPropertiesCollection {
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @doc("Gets or sets the list of server machine inventory.")
+  serverList?: ServerProperties[];
+
+  @doc("The link to fetch more models.")
+  @nextLink
+  nextLink?: string;
+}
+
+@doc("Server REST resource.")
+model ServerProperties {
+  @doc(" Gets the Display name of the machine.")
+  displayName: string;
+
+  @doc("Gets or sets the FQDN/IPAddress of the server.")
+  fqdn: string;
+
+  @doc("The name of the server machine")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  networkAdapters: NetworkAdapters[];
+
+  @doc("Gets or sets the FQDN of machine which can be changed.")
+  hydratedFqdn: string;
+
+  @doc("Gets or sets the disk details of server.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  disks?: Disks[];
+
+  @doc("The name of the server machine")
+  validationRequired: string;
+
+  @doc("Gets or sets the firmware.")
+  firmware: string;
+
+  @doc(" Operating System Details extracted from the guest")
+  guestOsDetails: GuestOsDetails;
+
+  @doc(" Number of applications installed in the guest VM.")
+  numberOfApplications: int64;
+
+  @doc("The last time at which the Guest Details was discovered.")
+  guestDetailsDiscoveryTimestamp: zonedDateTime;
+
+  @doc("The name of the server machine")
+  isGuestDetailsDiscoveryInProgress: boolean;
+
+  @doc("Gets or sets if dependency mapping feature is enabled or not for the VM.")
+  dependencyMapping: string;
+
+  @doc(" Gets or sets when dependency mapping collection is last started.")
+  dependencyMappingStartTime: zonedDateTime;
+
+  @doc("Gets or sets when dependency mapping collection was last disabled.")
+  dependencyMappingEndTime: zonedDateTime;
+
+  @doc(" Gets or sets the run as account ID of the machine.")
+  runAsAccountId: string;
+
+  @doc("Gets the appliance names.")
+  applianceNames: string[];
+
+  @doc("Errors for machine.")
+  errors: Errors[];
+
+  @doc("application discovery state of the machine.")
+  applicationDiscovery: DiscoveryState;
+
+  @doc("dependency map discovery state of the machine.")
+  dependencyMapDiscovery: DiscoveryState;
+
+  @doc("discovery state of the machine.")
+  staticDiscovery: DiscoveryState;
+
+  @doc("SQL discovery state of the machine.")
+  sqlDiscovery: SqlDiscovery;
+
+  @doc("WebApp discovery state of the machine.")
+  webAppDiscovery: WebAppDiscovery;
+
+  @doc("Oracle discovery state of the machine.")
+  oracleDiscovery: OracleDiscovery;
+
+  @doc("Spring Boot discovery state of the machine.")
+  springBootDiscovery: SpringBootDiscovery;
+
+  @doc("Apps And Roles of the Server.")
+  appsAndRoles: AppsAndRoles;
+
+  @doc("number of processor cores of the machine.")
+  numberofProcessorCores: int64;
+
+  @doc("allocated memory in MB of the machine.")
+  allocatedMemoryInMb: int64;
+
+  @doc("Operating system details of the machine.")
+  operatingSystemDetails: OperatingSystemDetails;
+
+  @doc("bios serial number of the machine.")
+  biosSerialNumber: string;
+
+  @doc("Gets or sets the BIOS GUID.")
+  biosGuid: string;
+
+  @doc("Value indicating whether VM is deleted.")
+  isDeleted: boolean;
+
+  @doc("Gets the timestamp marking created timestamp of the machine.")
+  createdTimestamp: string;
+
+  @doc(" Gets the timestamp marking last updated on the machine.")
+  updatedTimestamp: string;
+  @doc("Server machine tags.") //TODO: check placement
+  tags?: Record<string>;
+
+  @doc("Provisioning state of the server resource.")
+  provisioningState?: ProvisioningState;
+}

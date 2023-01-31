@@ -1,0 +1,77 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@cadl-lang/compiler";
+
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-autorest";
+
+using Autorest;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using OpenAPI;
+
+@doc("Azure rest Object")
+model AzureRestObject {
+  @doc("Gets the relative URL to get this cluster.")
+  id: string;
+
+  @doc("Handled by resource provider. Type = Microsoft.OffAzure/hyperVSites/clusters.")
+  type: string;
+
+  @doc("Gets or sets the Name of the cluster.")
+  name: string;
+}
+
+@doc("inner error")
+model InnerError {
+  @doc("code string ")
+  code: string;
+
+  @doc("inner error")
+  innererror: InnerError;
+}
+
+model ResponseWithHypervSiteUsageSchema<T> {
+  @statusCode statusCode: T;
+  schema: AzureRestObject; //TODO required Schema
+}
+
+model ResponseWithVmwareSiteUsageSchema<T> {
+  @statusCode statusCode: T;
+  schema: AzureRestObject; //TODO required Schema
+}
+
+@doc("A wrapper for required parameter in the body. The intent of model is to add description to 'body' and make it requred.")
+model CustomRequiredBodyWrapper<T extends object> {
+  @doc("Parameter of type '{name}' in the body.", T)
+  @body
+  body: T;
+}
+
+@doc("Class for site agent properties.")
+model SiteAgentProperties {
+  @doc("Gets the ID of the agent.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Gets the version of the agent.")
+  @visibility("read")
+  version?: string;
+
+  @doc("Gets the last heartbeat time of the agent in UTC.")
+  @visibility("read")
+  lastHeartBeatUtc?: zonedDateTime;
+
+  @doc("Gets or sets the key vault URI.")
+  keyVaultUri?: string;
+
+  @doc("Gets or sets the key vault ARM Id.")
+  keyVaultId?: string;
+}

@@ -1,0 +1,47 @@
+import "./source.cadl";
+import "./discoveryScope.cadl";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+@doc("Error contract returned when some exception occurs in Rest API.")
+model SiteHealthErrorDetails {
+  @doc("Gets the error message.")
+  message: string;
+
+  @doc("Gets the message parameters.")
+  messageParameters: string;
+
+  @doc("Gets the appliance name.")
+  applianceName: string;
+
+  @doc("Gets the error ID.")
+  id: int64;
+
+  @doc("Gets the error name.")
+  code: string;
+
+  @doc("Gets the possible causes of error.")
+  possibleCauses: string;
+
+  @doc("Gets the recommended action to resolve error.")
+  recommendedAction: string;
+
+  @doc("Gets the error severity.")
+  severity: string;
+
+  @doc("Gets the error source.")
+  source: Source;
+
+  @doc("Gets the time stamp when the error was updated.")
+  updatedTimeStamp: zonedDateTime;
+
+  @doc("Gets run as account id used while performing discovery\r\n            of entity.")
+  runAsAccountId: string;
+
+  @doc("Gets discovery scope for which \r\n            error is encountered.")
+  discoveryScope: DiscoveryScope;
+}

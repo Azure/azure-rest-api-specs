@@ -1,0 +1,39 @@
+@doc("Operation status error details.")
+model OperationStatusErrorDetails {
+  @doc("Error code.")
+  code: string;
+
+  @doc("Error message.")
+  message: string;
+}
+
+@doc("result properties.")
+model Properties {
+  @doc("result properties string.")
+  result: string;
+}
+
+//TODO model this as non ARM resource model
+@doc("Operation status REST Resource.")
+model OperationStatusProperties {
+  @doc("Gets operation status.")
+  routeId: string;
+
+  @doc("Gets operation status.")
+  status: string;
+
+  @doc("Gets operation start time.")
+  startTime: string;
+
+  @doc("Gets operation end time.")
+  endTime: string;
+
+  @doc("Gets the errors.")
+  errors: OperationStatusErrorDetails;
+
+  @doc("Gets the error properties.")
+  properties2: Properties; //TODO: fix this
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}

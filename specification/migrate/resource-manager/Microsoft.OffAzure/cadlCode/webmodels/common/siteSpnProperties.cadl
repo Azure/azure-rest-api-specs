@@ -1,0 +1,20 @@
+@doc("Class for site properties.")
+model SiteSpnProperties {
+  @doc("Tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.")
+  tenantId: string;
+
+  @doc("Application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.")
+  applicationId: string;
+
+  @doc("Object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.")
+  objectId: string;
+
+  @doc("Intended audience for the service principal.")
+  audience: string;
+
+  @doc("AAD Authority URL which was used to request the token for the service principal.")
+  aadAutority: string;
+
+  @doc("Raw certificate data for building certificate expiry flows.")
+  rawCertData: string;
+}

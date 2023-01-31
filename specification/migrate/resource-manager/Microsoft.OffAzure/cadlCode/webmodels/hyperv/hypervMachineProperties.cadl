@@ -1,0 +1,167 @@
+import "../common/machinePropertiesInternal.cadl";
+
+@doc("The properties of AddressResource")
+model HypervMachineProperties {
+  @doc("On-premise Instance UUID of the machine.")
+  instanceUuid: string;
+
+  @doc("Host FQDN/IPAddress.")
+  hostFqdn: string;
+
+  @doc("Host ARM ID.")
+  hostId: string;
+
+  @doc("Generation of the virtual machine.")
+  generation: int32;
+
+  @doc("The VM version.")
+  version: string;
+
+  @doc("Value indicating whether the VM is highly available.")
+  highAvailability: HighAvailability;
+
+  @doc("Cluster FQDN/IPAddress.")
+  clusterFqdn: string;
+
+  @doc("Host ARM ID.")
+  clusterId: string;
+
+  @doc("Max memory of the virtual machine in MB.")
+  maxMemoryMb: int32;
+
+  @doc("Value indicating whether dynamic memory is enabled for the VM.")
+  isDynamicMemoryEnabled: boolean;
+
+  @doc("Disks attached to the machine.")
+  disks: Disks[];
+
+  @doc("Network adapters attached to the machine.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  networkAdapters: NetworkAdapters[];
+
+  @doc("Management server type captured as a string representation of the\r\n            {Microsoft.Azure.FDS.WebRole.HyperVMachineBase.HyperVMachineBaseProperties.ManagementServerType} enumeration.")
+  managementServerType: string;
+
+  @doc("Gets or sets the SecureBootTemplateId setting of the VM.")
+  secureBootTemplateId: string;
+
+  @doc("Gets or sets a value indicating whether Secure boot is enabled for the VM.")
+  secureBootEnabled: boolean;
+
+  @doc("Gets or sets the SecureBootTemplateId setting of the VM.")
+  secureBootTemplate: string;
+
+  @doc("Gets or sets a value indicating whether trusted platform module is enabled on the VM.")
+  tpmEnabled: boolean;
+
+  @doc("Gets or sets a value indicating whether key storage device is enabled on the VM.")
+  ksdEnabled: boolean;
+
+  @doc("Gets or sets a value indicating whether shielding is enabled for the VM.")
+  shieldingRequested: boolean;
+
+  @doc("Gets or sets a value indicating whether data protection is requested for a VM.")
+  dataProtectionRequested: boolean;
+
+  @doc("Gets or sets a value indicating whether encryption of state and migration traffic is enabled for the VM.")
+  encryptStateAndVmMigrationTraffic: boolean;
+
+  @doc("Gets or sets a value indicating whether VM virtualization based security is enabled for the VM.")
+  virtualizationBasedSecurityOptOut: boolean;
+
+  @doc("Machine power status.")
+  powerStatus: string;
+
+  @doc("Machine FQDN.")
+  vmFqdn: string;
+
+  @doc("Root location of the VM configuration file.")
+  vmConfigurationFileLocation: string;
+
+  @doc("Gets or sets the firmware.")
+  firmware: string;
+
+  @doc("Operating System Details extracted from the guest\r\n            bu executing script inside the guest VM.")
+  guestOsDetails: GuestOsDetails;
+
+  @doc("Number of applications installed in the guest VM.")
+  numberOfApplications: int32;
+
+  @doc("The last time at which the Guest Details was discovered or the error while discovering guest details based discovery of the machine.")
+  guestDetailsDiscoveryTimestamp: zonedDateTime;
+
+  @doc("Whether Refresh Fabric Layout Guest Details has been completed once. Portal will show discovery in progress, if this value is true.")
+  isGuestDetailsDiscoveryInProgress: boolean;
+
+  @doc("If dependency mapping feature is enabled or not for the VM.")
+  dependencyMapping: string;
+
+  @doc("When dependency mapping collection is last started.")
+  dependencyMappingStartTime: zonedDateTime;
+
+  @doc("When dependency mapping collection was last disabled.")
+  dependencyMappingEndTime: zonedDateTime;
+
+  @doc("Gets or sets the run as account ID of the machine.")
+  runAsAccountId: string;
+
+  @doc("Gets the appliance names.")
+  applianceNames: string[];
+
+  @doc("Errors for machine.")
+  errors: SiteHealthErrorDetails;
+
+  @doc("Gets the data related to application discovery.")
+  applicationDiscovery: DiscoveryState;
+
+  @doc("Gets the data related to dependency Map discovery.")
+  dependencyMapDiscovery: DiscoveryState;
+
+  @doc("Gets the data related to static discovery.")
+  staticDiscovery: DiscoveryState;
+
+  @doc("Gets the data related to sql discovery.")
+  sqlDiscovery: SqlDiscovery;
+
+  @doc("Gets the data related to webapp discovery.")
+  webAppDiscovery: WebAppDiscovery;
+
+  @doc("Gets the data related to oracle discovery.")
+  oracleDiscovery: OracleDiscovery;
+
+  @doc("Gets the data related to spring boot discovery.")
+  springBootDiscovery: SpringBootDiscovery;
+
+  @doc("Apps And Roles of the Server.")
+  appsAndRoles: AppsAndRoles;
+
+  @doc("Gets or sets the Number of Processor Cores \r\n            allocated for the machine.")
+  numberOfProcessorCore: int32;
+
+  @doc("Gets or sets the allocated Memory in MB.")
+  allocatedMemoryInMb: int64;
+
+  @doc("Operating System Details installed on the machine.")
+  operatingSystemDetails: OperatingSystemDetails;
+
+  @doc("Gets or sets the Machine BIOS serial number.")
+  biosSerialNumber: string;
+
+  @doc("Gets or sets the BIOS GUID.")
+  biosGuid: string;
+
+  @doc("Gets the Display name of the machine.")
+  displayName: string;
+
+  @doc("Value indicating whether VM is deleted.")
+  isDeleted: boolean;
+
+  @doc("Timestamp marking machine creation.")
+  createdTimestamp: string;
+
+  @doc("Timestamp marking last updated on the machine.")
+  updatedTimestamp: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}

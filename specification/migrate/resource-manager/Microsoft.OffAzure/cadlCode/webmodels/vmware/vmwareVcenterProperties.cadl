@@ -1,0 +1,20 @@
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@doc("The properties of VMwareSiteResource")
+model VCenterProperties {
+
+  @doc("On-premises agent details.")
+  agentDetails: string; //TODO
+  
+  @doc("Service endpoint.")
+  serviceEndpoint: string;
+
+  @doc("RM ID of migration hub solution for SDS.")
+  discoverySolutionId: string;
+
+  @doc("Appliance Name.")
+  applianceName: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState; 
+
+}

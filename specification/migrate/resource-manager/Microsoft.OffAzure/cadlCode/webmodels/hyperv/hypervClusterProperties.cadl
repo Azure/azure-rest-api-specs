@@ -1,0 +1,30 @@
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@doc("The properties of Hyperv Cluster")
+model HyperVClusterProperties {
+  @doc("Gets the timestamp marking Hyper-V cluster creation.")
+  createdTimestamp: string;
+
+  @doc("Gets the timestamp marking last updated on the Hyper-V cluster.")
+  updatedTimestamp: string;
+
+  @doc("Gets or sets the FQDN/IPAddress of the Hyper-V cluster.")
+  fqdn: string;
+
+  @doc("Gets the functional level of the Hyper-V cluster.")
+  functionalLevel: int32;
+
+  @doc("Gets the status of the Hyper-V cluster.")
+  status: string;
+
+  @doc("Gets or sets Run as account ID of the Hyper-V cluster.")
+  runAsAccountId: string;
+
+  @doc("Gets or sets list of hosts (FQDN) currently being tracked by the cluster.")
+  hostFqdnList: string; //ToDO array
+
+  @doc("Gets the errors.")
+  errors: SiteHealthErrorDetails[];
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
