@@ -248,8 +248,8 @@
           }
         },
         "x-ms-examples": {
-          "Environments_CreateByCatalogItem": {
-            "$ref": "./examples/Environments_CreateByCatalogItem.json"
+          "Environments_CreateByEnvironmentDefinition": {
+            "$ref": "./examples/Environments_CreateByEnvironmentDefinition.json"
           }
         }
       },
@@ -400,12 +400,12 @@
         }
       }
     },
-    "/projects/{projectName}/catalogItems": {
+    "/projects/{projectName}/environmentDefinitions": {
       "get": {
         "tags": [
-          "Catalog Items"
+          "Environment Definitions"
         ],
-        "description": "Lists all catalog items available for a project.",
+        "description": "Lists all environment definitions available for a project.",
         "parameters": [
           {
             "$ref": "devcenter.json#/parameters/ApiVersionParameter"
@@ -417,12 +417,12 @@
             "$ref": "devcenter.json#/parameters/TopParameter"
           }
         ],
-        "operationId": "Environments_ListCatalogItemsByProject",
+        "operationId": "Environments_ListEnvironmentDefinitionsByProject",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CatalogItemListResult"
+              "$ref": "#/definitions/EnvironmentDefinitionListResult"
             }
           },
           "default": {
@@ -439,8 +439,8 @@
           }
         },
         "x-ms-examples": {
-          "Environments_ListCatalogItems": {
-            "$ref": "./examples/CatalogItems_ListByProject.json"
+          "Environments_ListEnvironmentDefinitions": {
+            "$ref": "./examples/EnvironmentDefinitions_ListByProject.json"
           }
         },
         "x-ms-pageable": {
@@ -448,12 +448,12 @@
         }
       }
     },
-    "/projects/{projectName}/catalogs/{catalogName}/catalogItems": {
+    "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions": {
       "get": {
         "tags": [
-          "Catalog Items"
+          "Environment Definitions"
         ],
-        "description": "Lists all catalog items available within a catalog.",
+        "description": "Lists all environment definitions available within a catalog.",
         "parameters": [
           {
             "$ref": "devcenter.json#/parameters/ApiVersionParameter"
@@ -468,12 +468,12 @@
             "$ref": "#/parameters/CatalogNameParameter"
           }
         ],
-        "operationId": "Environments_ListCatalogItemsByCatalog",
+        "operationId": "Environments_ListEnvironmentDefinitionsByCatalog",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CatalogItemListResult"
+              "$ref": "#/definitions/EnvironmentDefinitionListResult"
             }
           },
           "default": {
@@ -490,8 +490,8 @@
           }
         },
         "x-ms-examples": {
-          "Environments_ListCatalogItemsByCatalog": {
-            "$ref": "./examples/CatalogItems_ListByCatalog.json"
+          "Environments_ListEnvironmentDefinitionsByCatalog": {
+            "$ref": "./examples/EnvironmentDefinitions_ListByCatalog.json"
           }
         },
         "x-ms-pageable": {
@@ -499,12 +499,12 @@
         }
       }
     },
-    "/projects/{projectName}/catalogs/{catalogName}/catalogItems/{itemName}": {
+    "/projects/{projectName}/catalogs/{catalogName}/environmentDefinitions/{definitionName}": {
       "get": {
         "tags": [
-          "Catalog Items"
+          "Environment Definitions"
         ],
-        "description": "Get a catalog item from a catalog.",
+        "description": "Get an environment definition from a catalog.",
         "parameters": [
           {
             "$ref": "devcenter.json#/parameters/ApiVersionParameter"
@@ -516,15 +516,15 @@
             "$ref": "#/parameters/CatalogNameParameter"
           },
           {
-            "$ref": "#/parameters/CatalogItemNameParameter"
+            "$ref": "#/parameters/EnvironmentDefinitionNameParameter"
           }
         ],
-        "operationId": "Environments_GetCatalogItem",
+        "operationId": "Environments_GetEnvironmentDefinition",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CatalogItem"
+              "$ref": "#/definitions/EnvironmentDefinition"
             }
           },
           "default": {
@@ -541,8 +541,8 @@
           }
         },
         "x-ms-examples": {
-          "Environments_GetCatalogItem": {
-            "$ref": "./examples/CatalogItems_Get.json"
+          "Environments_GetEnvironmentDefinition": {
+            "$ref": "./examples/EnvironmentDefinitions_Get.json"
           }
         }
       }
@@ -652,9 +652,9 @@
             "create"
           ]
         },
-        "catalogItemName": {
+        "environmentDefinitionName": {
           "type": "string",
-          "description": "Name of the catalog item.",
+          "description": "Name of the environment definition.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -669,7 +669,7 @@
       "required": [
         "environmentType",
         "catalogName",
-        "catalogItemName"
+        "environmentDefinitionName"
       ]
     },
     "EnvironmentListResult": {
@@ -723,15 +723,15 @@
         }
       }
     },
-    "CatalogItemListResult": {
-      "description": "Results of the catalog item list operation.",
+    "EnvironmentDefinitionListResult": {
+      "description": "Results of the environment definition list operation.",
       "type": "object",
       "properties": {
         "value": {
           "description": "Current page of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CatalogItem"
+            "$ref": "#/definitions/EnvironmentDefinition"
           }
         },
         "nextLink": {
@@ -743,17 +743,17 @@
         "value"
       ]
     },
-    "CatalogItem": {
-      "description": "A catalog item.",
+    "EnvironmentDefinition": {
+      "description": "An environment definition.",
       "type": "object",
       "properties": {
         "id": {
-          "description": "The ID of the catalog item.",
+          "description": "The ID of the environment definition.",
           "type": "string",
           "readOnly": true
         },
         "name": {
-          "description": "Name of the catalog item.",
+          "description": "Name of the environment definition.",
           "type": "string",
           "readOnly": true
         },
@@ -763,25 +763,14 @@
           "readOnly": true
         },
         "description": {
-          "description": "A short description of the catalog item.",
+          "description": "A short description of the environment definition.",
           "type": "string",
           "readOnly": true
         },
-        "environmentProperties": {
-          "description": "Properties that apply to environments.",
-          "$ref": "#/definitions/CatalogItemEnvironmentProperties",
-          "readOnly": true
-        }
-      }
-    },
-    "CatalogItemEnvironmentProperties": {
-      "description": "Properties that apply to environments.",
-      "type": "object",
-      "properties": {
         "parameters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CatalogItemParameter"
+            "$ref": "#/definitions/EnvironmentDefinitionParameter"
           },
           "description": "Input parameters passed to an environment.",
           "readOnly": true
@@ -792,15 +781,15 @@
           "description": "JSON schema defining the parameters object passed to an environment."
         },
         "templatePath": {
-          "description": "Path to the catalog item entrypoint file.",
+          "description": "Path to the Environment Definition entrypoint file.",
           "type": "string",
           "readOnly": true
         }
       }
     },
-    "CatalogItemParameter": {
+    "EnvironmentDefinitionParameter": {
       "type": "object",
-      "description": "Properties of an Catalog Item parameter",
+      "description": "Properties of an Environment Definition parameter",
       "properties": {
         "id": {
           "type": "string",
@@ -942,15 +931,15 @@
       "description": "The name of the catalog",
       "x-ms-parameter-location": "method"
     },
-    "CatalogItemNameParameter": {
-      "name": "itemName",
+    "EnvironmentDefinitionNameParameter": {
+      "name": "definitionName",
       "in": "path",
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{2,62}$",
       "minLength": 3,
       "maxLength": 63,
-      "description": "The name of the catalog item",
+      "description": "The name of the environment definition",
       "x-ms-parameter-location": "method"
     }
   }
