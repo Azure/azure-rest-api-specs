@@ -25,7 +25,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "./types.json#/parameters/billingAccountName"
+            "$ref": "#/parameters/BillingAccountName"
           },
           {
             "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'.",
@@ -90,7 +90,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations/{reservationId}": {
       "get": {
         "summary": "Get Reservation details in the billing account.",
         "description": "Get specific Reservation details in the billing account.",
@@ -114,7 +114,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "./types.json#/parameters/billingAccountName"
+            "$ref": "#/parameters/BillingAccountName"
           },
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -145,7 +145,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}/reservations": {
       "get": {
         "summary": "Get Reservations in a given reservation Order in the billing account",
         "description": "List Reservations within a single ReservationOrder in the billing account.",
@@ -163,7 +163,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "./types.json#/parameters/billingAccountName"
+            "$ref": "#/parameters/BillingAccountName"
           },
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -188,7 +188,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders/{reservationOrderId}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders/{reservationOrderId}": {
       "get": {
         "summary": "Get a specific ReservationOrder in the billing account.",
         "description": "Get the details of the ReservationOrder in the billing account.",
@@ -206,7 +206,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "./types.json#/parameters/billingAccountName"
+            "$ref": "#/parameters/BillingAccountName"
           },
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -234,7 +234,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/Microsoft.Capacity/reservationOrders": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/reservationOrders": {
       "get": {
         "summary": "Get all `ReservationOrders in the billing account.",
         "description": "List all the `ReservationOrders in the billing account.",
@@ -252,7 +252,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "./types.json#/parameters/billingAccountName"
+            "$ref": "#/parameters/BillingAccountName"
           }
         ],
         "tags": [
@@ -309,6 +309,7 @@
       }
     },
     "Reservation": {
+      "type":"object",
       "description": "The definition of the reservation.",
       "properties": {
         "id": {
@@ -429,6 +430,7 @@
       }
     },
     "ReservationProperty": {
+      "type":"object",
       "description": "The property of reservation object.",
       "properties": {
         "reservedResourceType": {
@@ -611,6 +613,7 @@
       }
     },
     "ReservationSkuProperty": {
+      "type":"object",
       "description": "The property of reservation sku object.",
       "properties": {
         "name": {
@@ -621,6 +624,7 @@
       }
     },
     "ReservationsListResult": {
+      "type":"object",
       "description": "The list of reservations and summary of roll out count of reservations in each state.",
       "properties": {
         "nextLink": {
@@ -1109,6 +1113,15 @@
     }
   },
   "parameters": {
+    "BillingAccountName": {
+      "in": "path",
+      "name": "billingAccountName",
+      "description": "The ID that uniquely identifies a billing account.",
+      "required": true,
+      "type": "string",
+      "pattern": "^([0-9]+|[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}(:[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}_[0-9]{4}(-[0-9]{2}){2})?)$",
+      "x-ms-parameter-location": "method"
+    },
     "ExpandParameter": {
       "name": "$expand",
       "description": "May be used to expand the detail information of some properties.",
