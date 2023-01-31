@@ -27,15 +27,15 @@ These are the global settings for the devcenter.
 ``` yaml
 openapi-type: data-plane
 azure-arm: false
-tag: 2023-01-01-preview
+tag: package-2023-01-01-preview
 ```
 
 
 ### Tag: 2023-01-01-preview
 
-These settings apply only when `--tag=2023-01-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == '2023-01-01-preview'
+```yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
   - Microsoft.DevCenter/preview/2023-01-01-preview/devbox.json
   - Microsoft.DevCenter/preview/2023-01-01-preview/devcenter.json
