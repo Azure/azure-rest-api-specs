@@ -4,7 +4,7 @@
 
 Configuration for generating Form Recognizer SDK.
 
-The current release is `release_2_1`.
+The current release is `2022-08-31`.
 
 ``` yaml
 
