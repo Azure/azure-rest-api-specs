@@ -355,6 +355,13 @@
             "required": true,
             "type": "string",
             "description": "Query parameter for the new primary location after failover."
+          },
+          {
+            "name": "maximumGracePeriodInMins",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "description": "Maximum time duration allowed complete data replication from primary to secondary. Use maximumGracePeriodInMins = 0: For Unplanned Geo-Failover, which switches the role between primary and secondary immediately. The data that is not being replicated yet will be discarded. Use maximumGracePeriodInMins > 0: For Planned Geo-Failover/DR Drill, continue replicating data until grace period expires.  Any data that is not replicated during the grace period will be discarded. During the replication the namespace stops accepting any new publishing requests. "
           }
         ],
         "responses": {
