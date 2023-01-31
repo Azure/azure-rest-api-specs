@@ -34,9 +34,14 @@
   ],
   "tags": [],
   "paths": {
-    "/codesigningaccounts/{codeSigningAccount}:sign": {
+    "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}:sign": {
       "post": {
         "operationId": "CertificateProfileOperations_Sign",
+        "x-ms-examples": {
+          "Sign": {
+            "$ref": "../../examples/2022-06-15-preview/CertificateProfile_Sign.json"
+          }
+        },
         "summary": "Initiates a sign operation.",
         "description": "Initiates a sign operation.",
         "parameters": [
@@ -44,11 +49,10 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "codeSigningAccount",
-            "in": "path",
-            "required": true,
-            "description": "Azure Code Signing account name.",
-            "type": "string"
+            "$ref": "#/parameters/CodeSignStatusParams.codeSigningAccountName"
+          },
+          {
+            "$ref": "#/parameters/CodeSignStatusParams.certificateProfileName"
           },
           {
             "$ref": "#/parameters/CertificateProfileParam.correlationId"
@@ -113,6 +117,11 @@
     "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}": {
       "post": {
         "operationId": "CertificateProfileOperations_GetSignOperation",
+        "x-ms-examples": {
+          "GetSignOperation": {
+            "$ref": "../../examples/2022-06-15-preview/CertificateProfile_GetSignOperation.json"
+          }
+        },
         "summary": "Gets the status of a sign operation.",
         "description": "Gets the status of a sign operation.",
         "parameters": [
