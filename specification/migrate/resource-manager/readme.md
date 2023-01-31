@@ -16,6 +16,15 @@ batch:
   - tag: package-2020-07
 ```
 
+
+### Tag: package-2021-05
+
+These settings apply only when `--tag=package-2021-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-05'
+input-file:
+  - Microsoft.Migrate/stable/2021-05-01/hubmigrate.json
+```
 ### Tag: package-2018-02 and java
 
 These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
@@ -88,7 +97,7 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-10
+tag: package-2021-05
 ```
 
 ### Tag: package-2018-02
@@ -171,6 +180,3 @@ swagger-to-sdk:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-
-
