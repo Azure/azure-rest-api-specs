@@ -718,10 +718,12 @@
       "properties": {
         "name": {
           "description": "Name of the catalog.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "EnvironmentDefinitionListResult": {
       "description": "Results of the environment definition list operation.",
@@ -749,43 +751,41 @@
       "properties": {
         "id": {
           "description": "The ID of the environment definition.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "Name of the environment definition.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "catalogName": {
           "description": "Name of the catalog.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "description": {
           "description": "A short description of the environment definition.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "parameters": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/EnvironmentDefinitionParameter"
           },
-          "description": "Input parameters passed to an environment.",
-          "readOnly": true
+          "description": "Input parameters passed to an environment."
         },
         "parametersSchema": {
           "type": "string",
-          "readOnly": true,
           "description": "JSON schema defining the parameters object passed to an environment."
         },
         "templatePath": {
           "description": "Path to the Environment Definition entrypoint file.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
-      }
+      },
+      "required": [
+        "name",
+        "catalogName",
+        "id"
+      ]
     },
     "EnvironmentDefinitionParameter": {
       "type": "object",
@@ -793,38 +793,31 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique ID of the parameter",
-          "readOnly": true
+          "description": "Unique ID of the parameter"
         },
         "name": {
           "type": "string",
-          "description": "Display name of the parameter",
-          "readOnly": true
+          "description": "Display name of the parameter"
         },
         "description": {
           "type": "string",
-          "description": "Description of the parameter",
-          "readOnly": true
+          "description": "Description of the parameter"
         },
         "default": {
           "type": "string",
-          "description": "Default value of the parameter",
-          "readOnly": true
+          "description": "Default value of the parameter"
         },
         "type": {
           "description": "A string of one of the basic JSON types (number, integer, array, object, boolean, string)",
-          "readOnly": true,
           "$ref": "#/definitions/ParameterType"
         },
         "readOnly": {
           "type": "boolean",
-          "description": "Whether or not this parameter is read-only.  If true, default should have a value.",
-          "readOnly": true
+          "description": "Whether or not this parameter is read-only.  If true, default should have a value."
         },
         "required": {
           "type": "boolean",
-          "description": "Whether or not this parameter is required",
-          "readOnly": true
+          "description": "Whether or not this parameter is required"
         },
         "allowed": {
           "type": "array",
@@ -833,10 +826,14 @@
           },
           "minItems": 1,
           "uniqueItems": true,
-          "description": "An array of allowed values",
-          "readOnly": true
+          "description": "An array of allowed values"
         }
-      }
+      },
+      "required": [
+        "id",
+        "type",
+        "required"
+      ]
     },
     "EnvironmentTypeListResult": {
       "description": "Result of the environment type list operation.",
@@ -864,20 +861,22 @@
       "properties": {
         "name": {
           "description": "Name of the environment type",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "deploymentTargetId": {
           "description": "Id of a subscription or management group that the environment type will be mapped to. The environment's resources will be deployed into this subscription or management group.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "status": {
           "description": "Indicates whether this environment type is enabled for use in this project.",
-          "$ref": "#/definitions/EnvironmentTypeEnableStatus",
-          "readOnly": true
+          "$ref": "#/definitions/EnvironmentTypeEnableStatus"
         }
-      }
+      },
+      "required": [
+        "name",
+        "deploymentTargetId",
+        "status"
+      ]
     },
     "EnvironmentTypeEnableStatus": {
       "description": "Indicates whether an environment type is enabled for use in a project.",
