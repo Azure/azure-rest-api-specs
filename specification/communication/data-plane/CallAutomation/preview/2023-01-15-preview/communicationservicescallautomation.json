@@ -1988,10 +1988,10 @@
       }
     },
     "RecordingStorageType": {
-      "description": "Recording storage mode. `External` enables bring your own storage.",
+      "description": "Recording storage mode. When set to 'BlobStorage', specify required parameter 'ExternalStorageLocation', to export recording to your own blob container.",
       "enum": [
         "acs",
-        "azureBlob"
+        "blobStorage"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2032,6 +2032,10 @@
         },
         "recordingStorageType": {
           "$ref": "#/definitions/RecordingStorageType"
+        },
+        "externalStorageLocation": {
+          "description": "The location where recording is stored, when RecordingStorageType is set to 'BlobStorage'.",
+          "type": "string"
         }
       }
     },
