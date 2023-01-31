@@ -375,6 +375,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/checkTrafficManagerNameAvailabilityV2": {
+      "post": {
+        "tags": [
+          "Profiles"
+        ],
+        "operationId": "Profiles_CheckTrafficManagerRelativeDnsNameAvailabilityV2",
+        "description": "Checks the availability of a Traffic Manager Relative DNS name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckTrafficManagerRelativeDnsNameAvailabilityParameters"
+            },
+            "description": "The Traffic Manager name parameters supplied to the CheckTrafficManagerNameAvailability operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Traffic Manager Name Availability.",
+            "schema": {
+              "$ref": "#/definitions/TrafficManagerNameAvailability"
+            }
+          },
+          "default": {
+            "description": "Default response. It will be deserialized as per the Error definition.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NameAvailabilityV2Test_NameAvailablePOST21": {
+            "$ref": "./examples/NameAvailabilityV2Test_NameAvailable-POST-example-21.json"
+          },
+          "NameAvailabilityV2Test_NameNotAvailablePOST23": {
+            "$ref": "./examples/NameAvailabilityV2Test_NameNotAvailable-POST-example-23.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles": {
       "get": {
         "tags": [
