@@ -14,26 +14,35 @@ model Properties {
 }
 
 //TODO model this as non ARM resource model
-@doc("Operation status REST Resource.")
+// @doc("Operation status REST Resource.")
+// model OperationStatusProperties {
+//   @doc("Gets operation status.")
+//   routeId: string;
+
+//   @doc("Gets operation status.")
+//   status: string;
+
+//   @doc("Gets operation start time.")
+//   startTime: string;
+
+//   @doc("Gets operation end time.")
+//   endTime: string;
+
+//   @doc("Gets the errors.")
+//   errors: OperationStatusErrorDetails;
+
+//   @doc("Gets the error properties.")
+//   properties2: Properties; //TODO: fix this
+
+//   @doc("The status of the last operation.")
+//   provisioningState?: ProvisioningState;
+// }
+
+@doc("Class for operation result properties.")
 model OperationStatusProperties {
-  @doc("Gets operation status.")
-  routeId: string;
-
-  @doc("Gets operation status.")
-  status: string;
-
-  @doc("Gets operation start time.")
-  startTime: string;
-
-  @doc("Gets operation end time.")
-  endTime: string;
-
-  @doc("Gets the errors.")
-  errors: OperationStatusErrorDetails;
-
-  @doc("Gets the error properties.")
-  properties2: Properties; //TODO: fix this
+  @doc("Gets or sets the result or output of the workflow.")
+  result?: string;
 
   @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
+   provisioningState?: ProvisioningState;
 }

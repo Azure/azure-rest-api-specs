@@ -173,6 +173,21 @@ interface VmwareSites {
   @operationId("Sites_RefreshSite")
   refresh is ArmResourceActionAsync<VMwareSite, {}, {}>;
 
+  @doc("A operation status resource belonging to a site resource.")
+  @armResourceRead(InnerError)
+  @get
+  @added(Versions.v2018_05_01_preview)
+  @operationId("VMwareOperationsStatus_GetOperationStatus")
+  VmwareOperationStatus(
+    ...ResourceInstanceParameters<VMwareSite>,
+
+    @doc("Operation status  Arm Name.")
+    @path
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    @segment("operationsStatus")
+    operationStatusName: string
+  ): ArmResponse<OperationStatus>;
+
   @doc("Method to get site health summary.")
   @armResourceRead(InnerError)
   @segment("healthSummary")
@@ -534,6 +549,21 @@ interface HypervSites {
   @operationId("HyperVSites_DeleteSite")
   delete is ArmResourceDeleteSync<HyperVSite>;
 
+  @doc("A operation status resource belonging to a site resource.")
+  @armResourceRead(InnerError)
+  @get
+  @added(Versions.v2018_05_01_preview)
+  @operationId("HyperVOperationsStatus_GetOperationStatus")
+  HyperVOperationsStatus(
+    ...ResourceInstanceParameters<HyperVSite>,
+
+    @doc("Operation status  Arm Name.")
+    @path
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    @segment("operationsStatus")
+    operationStatusName: string
+  ): ArmResponse<OperationStatus>;
+
   @doc("Method to get site health summary.")
   @armResourceRead(InnerError)
   @segment("healthSummary")
@@ -798,47 +828,6 @@ interface HypervMachines {
   >;
 }
 
-@doc("A operation status resource belonging to a site resource.")
-@parentResource(VMwareSite)
-model VmwareOperationStatusResource
-  is ProxyResource<OperationStatusProperties> {
-  @doc(" VmwareOperationStatus name")
-  @key("operationStatusName")
-  @segment("operationsStatus")
-  @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  name: string;
-}
-
-@tag("VmwareOperationsStatusController")
-@armResourceOperations
-@added(Versions.v2018_05_01_preview)
-interface VmwareOperationStatus {
-  @operationId("VMwareOperationsStatus_GetOperationStatus")
-  get is ArmResourceRead<VmwareOperationStatusResource>;
-}
-
-
-@doc("A operation status resource belonging to a site resource.")
-@parentResource(HyperVSite)
-model HypervOperationStatusResource
-  is ProxyResource<OperationStatusProperties> {
-  @doc(" OperationStatus name")
-  @key("operationStatusName")
-  @segment("operationsStatus")
-  @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  name: string;
-}
-
-@tag("HypervOperationsStatusController")
-@armResourceOperations
-@added(Versions.v2018_05_01_preview)
-interface HypervOperationStatus {
-  @operationId("HyperVOperationsStatus_GetOperationStatus")
-  get is ArmResourceRead<HypervOperationStatusResource>;
-}
-
 @doc("A machine resource belonging to a site resource.")
 @parentResource(HyperVSite)
 model HypervRunAsAccountResource is ProxyResource<RunAsAccountProperties> {
@@ -903,6 +892,21 @@ interface ServerSitesInterface {
     ServerSiteResource,
     MachineMetadataList
   >;
+
+  @doc("A operation status resource belonging to a site resource.")
+  @armResourceRead(InnerError)
+  @get
+  @added(Versions.v2019_05_01_preview)
+  @operationId("ServerSiteOperationsStatus_GetOperationStatus")
+  ServerSiteOperationsStatus(
+    ...ResourceInstanceParameters<ServerSiteResource>,
+
+    @doc("Operation status  Arm Name.")
+    @path
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
+    @segment("operationsStatus")
+    operationStatusName: string
+  ): ArmResponse<OperationStatus>;
 
   // TODO: These APIs do not conform to ARM modeling and hence using the raw form
   // of defining them. We will need to fix this in the future.
@@ -978,26 +982,6 @@ model ServerRunAsAccountResource is ProxyResource<RunAsAccountProperties> {
 interface ServerRunAsAccounts {
   get is ArmResourceRead<ServerRunAsAccountResource>;
   listByParent is ArmResourceListByParent<ServerRunAsAccountResource>;
-}
-
-//*** Server OperationsStatus "Proxy" Resource ***/
-
-@doc("A operation status resource belonging to a site resource.")
-@parentResource(ServerSiteResource)
-model ServerOperationStatusResource
-  is ProxyResource<OperationStatusProperties> {
-  @doc(" ServerOperationStatus name")
-  @key("serverOperationStatusName")
-  @segment("operationsStatus")
-  @path
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
-  name: string;
-}
-
-@armResourceOperations
-@added(Versions.v2019_05_01_preview)
-interface ServerOperationStatus {
-  get is ArmResourceRead<ServerOperationStatusResource>;
 }
 
 //*** Server Jobs Proxy Resource ***/
