@@ -1,4 +1,3 @@
-
 import "@cadl-lang/rest";
 import "@cadl-lang/versioning";
 import "@azure-tools/cadl-providerhub";
@@ -17,13 +16,12 @@ using Azure.ResourceManager;
 
 @doc("Job REST Resource.")
 model JobProperties {
-  
   @doc("Gets operation status.")
   status: string;
 
   @doc("Gets operation start time.")
   startTime: string;
-  
+
   @doc("Gets operation end time.")
   endTime: string;
 
@@ -36,10 +34,10 @@ model JobProperties {
   @doc("Gets the activity Id used in the operation execution context.")
   activityId: string;
 
+  @OpenAPI.extension("x-ms-identifiers", [])
   @doc("Gets the errors.")
   errors: ErrorDetails[];
 
   @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState; 
-  
+  provisioningState?: ProvisioningState;
 }

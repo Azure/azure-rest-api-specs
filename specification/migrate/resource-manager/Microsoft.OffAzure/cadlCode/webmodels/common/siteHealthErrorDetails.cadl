@@ -9,39 +9,43 @@ using Azure.ResourceManager;
 
 @doc("Error contract returned when some exception occurs in Rest API.")
 model SiteHealthErrorDetails {
-  @doc("Gets the error message.")
-  message: string;
-
-  @doc("Gets the message parameters.")
-  messageParameters: string;
-
-  @doc("Gets the appliance name.")
-  applianceName: string;
-
-  @doc("Gets the error ID.")
-  id: int64;
-
-  @doc("Gets the error name.")
-  code: string;
-
-  @doc("Gets the possible causes of error.")
-  possibleCauses: string;
-
-  @doc("Gets the recommended action to resolve error.")
-  recommendedAction: string;
-
-  @doc("Gets the error severity.")
-  severity: string;
-
-  @doc("Gets the error source.")
-  source: Source;
-
-  @doc("Gets the time stamp when the error was updated.")
-  updatedTimeStamp: zonedDateTime;
-
-  @doc("Gets run as account id used while performing discovery\r\n            of entity.")
-  runAsAccountId: string;
-
-  @doc("Gets discovery scope for which \r\n            error is encountered.")
-  discoveryScope: DiscoveryScope;
+  @doc("Gets the error message.")	
+@visibility("read")
+"message"?: string;
+@doc("Gets the message parameters.")
+@visibility("read")
+"messageParameters"?: Record<string>;
+@doc("Gets the appliance name.")
+@visibility("read")
+"applianceName"?: string;
+@doc("Gets the error ID.")
+@visibility("read")
+"id"?: int32;
+@doc("Gets the error name.")
+@visibility("read")
+"code"?: string;
+@doc("Gets the possible causes of error.")
+@visibility("read")
+"possibleCauses"?: string;
+@doc("Gets the recommended action to resolve error.")
+@visibility("read")
+"recommendedAction"?: string;
+@doc("Gets the error severity.")
+@visibility("read")
+"severity"?: string;
+@doc("Gets the error summary message.")
+@visibility("read")
+"summaryMessage"?: string;
+@doc("Gets the error source.")
+@visibility("read")
+"source"?: HealthErrorDetailsSource;
+@doc("Gets the time stamp when the error was updated.")
+@visibility("read")
+"updatedTimeStamp"?: zonedDateTime;
+@doc("Gets run as account id used while performing discovery             of entity.")
+@visibility("read")
+"runAsAccountId"?: string;
+@doc("Gets discovery scope for which             error is encountered.")
+@visibility("read")
+"discoveryScope"?: HealthErrorDetailsDiscoveryScope;
 }

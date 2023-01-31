@@ -18,7 +18,8 @@ model ServerOperationStatusProperties {
 
   @doc("Gets the activity Id used in the operation execution context.")
   activityId: string;
-
+  
+  @OpenAPI.extension("x-ms-identifiers", [])
   @doc("Gets the errors.")
   errors: ErrorDetails[];
 

@@ -6285,35 +6285,9 @@
     }
   },
   "definitions": {
-    "Application": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets Name of the Application.",
-          "readOnly": true
-        },
-        "version": {
-          "type": "string",
-          "description": "Gets or sets Version of the Application.",
-          "readOnly": true
-        },
-        "provider": {
-          "type": "string",
-          "description": "Gets or sets Provider of the Application.",
-          "readOnly": true
-        }
-      },
-      "description": "Application in the guest virtual machine."
-    },
     "ApplicationDiscovery": {
       "type": "object",
       "properties": {
-        "discoveryScopeStatus": {
-          "$ref": "#/definitions/ApplicationDiscoveryScopeStatus",
-          "description": "Gets discovery scope status.",
-          "readOnly": true
-        },
         "errors": {
           "type": "array",
           "items": {
@@ -6330,23 +6304,6 @@
         }
       },
       "description": "Contains data related application and roles discovery scope."
-    },
-    "ApplicationDiscoveryScopeStatus": {
-      "type": "string",
-      "enum": [
-        "DiscoverySucceededAtleastOnce",
-        "DiscoveryFailed",
-        "RunAsAccountNotAssociated",
-        "DiscoveryNotStarted",
-        "DiscoveryInProgress",
-        "Disabled",
-        "DiscoveryPartiallySucceded",
-        "DiscoverySucceeded"
-      ],
-      "x-ms-enum": {
-        "name": "ApplicationDiscoveryScopeStatus",
-        "modelAsString": true
-      }
     },
     "Applications": {
       "type": "object",
@@ -6783,64 +6740,56 @@
       "properties": {
         "code": {
           "type": "string",
-          "description": "Gets the error name."
+          "description": "Gets the error code.",
+          "readOnly": true
         },
         "message": {
           "type": "string",
-          "description": "Gets the error message."
-        },
-        "id": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets the error ID."
+          "description": "Gets the error message.",
+          "readOnly": true
         },
         "possibleCauses": {
           "type": "string",
-          "description": "Gets the possible causes of error."
+          "description": "Gets the possible causes of error.",
+          "readOnly": true
         },
         "recommendedAction": {
           "type": "string",
-          "description": "Gets the recommended action to resolve error."
+          "description": "Gets the recommended action to resolve error.",
+          "readOnly": true
         },
         "severity": {
           "type": "string",
-          "description": "Gets the error severity."
+          "description": "Gets the error severity.",
+          "readOnly": true
         },
         "isAgentReportedError": {
           "type": "boolean",
-          "description": "Gets a value indicating whether the error originated from a agent or not."
+          "description": "Gets a value indicating whether the error originated from a agent or not.",
+          "readOnly": true
         },
         "agentErrorCode": {
           "type": "string",
-          "description": "Gets the agent error code."
+          "description": "Gets the agent error code.",
+          "readOnly": true
         },
         "agentErrorMessage": {
           "type": "string",
-          "description": "Gets the error message from the agent."
+          "description": "Gets the error message from the agent.",
+          "readOnly": true
         },
         "agentErrorPossibleCauses": {
           "type": "string",
-          "description": "Gets possible causes for the agent error."
+          "description": "Gets possible causes for the agent error.",
+          "readOnly": true
         },
         "agentErrorRecommendedAction": {
           "type": "string",
-          "description": "Gets the recommended action for the agent error."
+          "description": "Gets the recommended action for the agent error.",
+          "readOnly": true
         }
       },
-      "description": "Error contract returned when some exception occurs in Rest API.",
-      "required": [
-        "code",
-        "message",
-        "id",
-        "possibleCauses",
-        "recommendedAction",
-        "severity",
-        "isAgentReportedError",
-        "agentErrorCode",
-        "agentErrorMessage",
-        "agentErrorPossibleCauses",
-        "agentErrorRecommendedAction"
-      ]
+      "description": "Error contract returned when some exception occurs in Rest API."
     },
     "Errors": {
       "type": "object",
@@ -6982,6 +6931,28 @@
         "status"
       ]
     },
+    "GuestOSDetails": {
+      "type": "object",
+      "properties": {
+        "osType": {
+          "type": "string",
+          "description": "Gets or sets the type of the operating system."
+        },
+        "osName": {
+          "type": "string",
+          "description": "Gets or sets the Name of the operating system."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "Gets or sets the Version of the operating system."
+        },
+        "osArchitecture": {
+          "type": "string",
+          "description": "Gets or sets the Architecture of the operating system."
+        }
+      },
+      "description": "Second level object.  Data related to a machine's operating system.             Serialized and stored as part of Machine Rest object. "
+    },
     "GuestOsDetails": {
       "type": "object",
       "properties": {
@@ -7113,19 +7084,6 @@
         "modelAsString": true
       }
     },
-    "HighAvailability": {
-      "type": "string",
-      "description": "High Availability.",
-      "enum": [
-        "Unknown",
-        "No",
-        "Yes"
-      ],
-      "x-ms-enum": {
-        "name": "HighAvailability",
-        "modelAsString": true
-      }
-    },
     "HyperVCluster": {
       "type": "object",
       "properties": {
@@ -7174,11 +7132,13 @@
       "properties": {
         "createdTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp marking Hyper-V cluster creation."
+          "description": "Gets the timestamp marking Hyper-V cluster creation.",
+          "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp marking last updated on the Hyper-V cluster."
+          "description": "Gets the timestamp marking last updated on the Hyper-V cluster.",
+          "readOnly": true
         },
         "fqdn": {
           "type": "string",
@@ -7187,11 +7147,13 @@
         "functionalLevel": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets the functional level of the Hyper-V cluster."
+          "description": "Gets the functional level of the Hyper-V cluster.",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "description": "Gets the status of the Hyper-V cluster."
+          "description": "Gets the status of the Hyper-V cluster.",
+          "readOnly": true
         },
         "runAsAccountId": {
           "type": "string",
@@ -7208,27 +7170,56 @@
         "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SiteHealthErrorDetails"
+            "$ref": "#/definitions/HealthErrorDetails"
           },
-          "x-cadl-name": "SiteHealthErrorDetails[]",
-          "description": "Gets the errors."
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the errors.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
         }
       },
-      "description": "The properties of Hyperv Cluster",
-      "required": [
-        "createdTimestamp",
-        "updatedTimestamp",
-        "fqdn",
-        "functionalLevel",
-        "status",
-        "runAsAccountId",
-        "hostFqdnList",
-        "errors"
-      ]
+      "description": "The properties of Hyperv Cluster"
+    },
+    "HyperVDisk": {
+      "type": "object",
+      "properties": {
+        "instanceId": {
+          "type": "string",
+          "description": "Id of the disk.",
+          "readOnly": true
+        },
+        "vhdId": {
+          "type": "string",
+          "description": "VHD Id of the disk.",
+          "readOnly": true
+        },
+        "maxSizeInBytes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets Bytes allocated for the disk."
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets or sets Name of the disk."
+        },
+        "diskType": {
+          "type": "string",
+          "description": "Gets or sets Type of the disk."
+        },
+        "lun": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets LUN of the disk."
+        },
+        "path": {
+          "type": "string",
+          "description": "Gets or sets Path of the disk."
+        }
+      },
+      "description": "Second level object returned as part of Machine REST resource."
     },
     "HyperVHost": {
       "type": "object",
@@ -7319,6 +7310,69 @@
         "errors"
       ]
     },
+    "HyperVMachineHyperVMachinePropertiesHighAvailability": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "No",
+        "Yes"
+      ],
+      "x-ms-enum": {
+        "name": "HyperVMachineHyperVMachinePropertiesHighAvailability",
+        "modelAsString": true
+      }
+    },
+    "HyperVNetworkAdapter": {
+      "type": "object",
+      "properties": {
+        "networkId": {
+          "type": "string",
+          "description": "Network Id.",
+          "readOnly": true
+        },
+        "subnetName": {
+          "type": "string",
+          "description": "Name of the VM subnet within the virtual network the NIC is attached to.",
+          "readOnly": true
+        },
+        "staticIpAdress": {
+          "type": "string",
+          "description": "Static IP address.",
+          "readOnly": true
+        },
+        "nicType": {
+          "type": "string",
+          "description": "Mac address of the NIC.",
+          "readOnly": true
+        },
+        "nicId": {
+          "type": "string",
+          "description": "Gets or sets the NIC Id."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "Gets or sets Mac address of the NIC."
+        },
+        "ipAddressList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets IP addresses for the machine.",
+          "readOnly": true
+        },
+        "networkName": {
+          "type": "string",
+          "description": "Gets or sets Network Name."
+        },
+        "ipAddressType": {
+          "type": "string",
+          "description": "Gets or sets Type of the IP address."
+        }
+      },
+      "description": "Second level object represented in responses as part of Machine REST resource."
+    },
     "HyperVSite": {
       "type": "object",
       "properties": {
@@ -7391,24 +7445,6 @@
       },
       "description": "The updatable properties of the HyperVSite."
     },
-    "HypervCluster": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HyperVClusterProperties",
-          "description": "Gets or sets nested properties."
-        }
-      },
-      "description": "Cluster REST Resource.",
-      "required": [
-        "properties"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureRestObject"
-        }
-      ]
-    },
     "HypervHost": {
       "type": "object",
       "properties": {
@@ -7480,150 +7516,182 @@
       "properties": {
         "instanceUuid": {
           "type": "string",
-          "description": "On-premise Instance UUID of the machine."
+          "description": "On-premise Instance UUID of the machine.",
+          "readOnly": true
         },
         "hostFqdn": {
           "type": "string",
-          "description": "Host FQDN/IPAddress."
+          "description": "Host FQDN/IPAddress.",
+          "readOnly": true
         },
         "hostId": {
           "type": "string",
-          "description": "Host ARM ID."
+          "description": "Host ARM ID.",
+          "readOnly": true
         },
         "generation": {
           "type": "integer",
           "format": "int32",
-          "description": "Generation of the virtual machine."
+          "description": "Generation of the virtual machine.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": "The VM version."
+          "description": "VM version.",
+          "readOnly": true
         },
         "highAvailability": {
-          "$ref": "#/definitions/HighAvailability",
-          "description": "Value indicating whether the VM is highly available."
+          "$ref": "#/definitions/HyperVMachineHyperVMachinePropertiesHighAvailability",
+          "description": "Value indicating whether the VM is highly available.",
+          "readOnly": true
         },
         "clusterFqdn": {
           "type": "string",
-          "description": "Cluster FQDN/IPAddress."
+          "description": "Cluster FQDN/IPAddress.",
+          "readOnly": true
         },
         "clusterId": {
           "type": "string",
-          "description": "Host ARM ID."
+          "description": "Cluster ARM ID.",
+          "readOnly": true
         },
-        "maxMemoryMb": {
+        "maxMemoryMB": {
           "type": "integer",
           "format": "int32",
-          "description": "Max memory of the virtual machine in MB."
+          "description": "Max memory of the virtual machine in MB.",
+          "readOnly": true
         },
         "isDynamicMemoryEnabled": {
           "type": "boolean",
-          "description": "Value indicating whether dynamic memory is enabled for the VM."
+          "description": "Value indicating whether dynamic memory is enabled for the VM.",
+          "readOnly": true
         },
         "disks": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Disks"
+            "$ref": "#/definitions/HyperVDisk"
           },
-          "x-cadl-name": "Disks[]",
-          "description": "Disks attached to the machine."
+          "x-ms-identifiers": [],
+          "x-cadl-name": "HyperVDisk[]",
+          "description": "Disks attached to the machine.",
+          "readOnly": true
         },
         "networkAdapters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkAdapters"
+            "$ref": "#/definitions/HyperVNetworkAdapter"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "NetworkAdapters[]",
-          "description": "Network adapters attached to the machine."
+          "x-cadl-name": "HyperVNetworkAdapter[]",
+          "description": "Network adapters attached to the machine.",
+          "readOnly": true
         },
         "managementServerType": {
           "type": "string",
-          "description": "Management server type captured as a string representation of the\r\n            {Microsoft.Azure.FDS.WebRole.HyperVMachineBase.HyperVMachineBaseProperties.ManagementServerType} enumeration."
+          "description": "Management server type captured as a string representation of the\n           \n{Microsoft.Azure.FDS.WebRole.HyperVMachineBase.HyperVMachineBaseProperties.ManagementServerType}\nenumeration.",
+          "readOnly": true
         },
         "secureBootTemplateId": {
           "type": "string",
-          "description": "Gets or sets the SecureBootTemplateId setting of the VM."
+          "description": "Gets or sets the SecureBootTemplateId setting of the VM.",
+          "readOnly": true
         },
         "secureBootEnabled": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether Secure boot is enabled for the VM."
+          "description": "Gets or sets a value indicating whether Secure boot is enabled for the VM.",
+          "readOnly": true
         },
         "secureBootTemplate": {
           "type": "string",
-          "description": "Gets or sets the SecureBootTemplateId setting of the VM."
+          "description": "Gets or sets the SecureBootTemplateId setting of the VM.",
+          "readOnly": true
         },
         "tpmEnabled": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether trusted platform module is enabled on the VM."
+          "description": "Gets or sets a value indicating whether trusted platform module is enabled on\nthe VM.",
+          "readOnly": true
         },
         "ksdEnabled": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether key storage device is enabled on the VM."
+          "description": "Gets or sets a value indicating whether key storage device is enabled on the VM.",
+          "readOnly": true
         },
         "shieldingRequested": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether shielding is enabled for the VM."
+          "description": "Gets or sets a value indicating whether shielding is enabled for the VM.",
+          "readOnly": true
         },
         "dataProtectionRequested": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether data protection is requested for a VM."
+          "description": "Gets or sets a value indicating whether data protection is requested for a VM.",
+          "readOnly": true
         },
         "encryptStateAndVmMigrationTraffic": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether encryption of state and migration traffic is enabled for the VM."
+          "description": "Gets or sets a value indicating whether encryption of state and migration\ntraffic is enabled for the VM.",
+          "readOnly": true
         },
         "virtualizationBasedSecurityOptOut": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether VM virtualization based security is enabled for the VM."
+          "description": "Gets or sets a value indicating whether VM virtualization based security is\nenabled for the VM.",
+          "readOnly": true
         },
         "powerStatus": {
           "type": "string",
-          "description": "Machine power status."
+          "description": "Gets the Machine power status.",
+          "readOnly": true
         },
         "vmFqdn": {
           "type": "string",
-          "description": "Machine FQDN."
+          "description": "Gets the VM FQDN.",
+          "readOnly": true
         },
         "vmConfigurationFileLocation": {
           "type": "string",
-          "description": "Root location of the VM configuration file."
+          "description": "Gets the Root location of the VM configuration file.",
+          "readOnly": true
         },
         "firmware": {
           "type": "string",
           "description": "Gets or sets the firmware."
         },
-        "guestOsDetails": {
-          "$ref": "#/definitions/GuestOsDetails",
-          "description": "Operating System Details extracted from the guest\r\n            bu executing script inside the guest VM."
+        "guestOSDetails": {
+          "$ref": "#/definitions/GuestOSDetails",
+          "description": "Operating System Details extracted from the guest             bu executing script inside the guest VM. ",
+          "readOnly": true
         },
         "numberOfApplications": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of applications installed in the guest VM."
+          "description": "Number of applications installed in the guest VM.",
+          "readOnly": true
         },
         "guestDetailsDiscoveryTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "The last time at which the Guest Details was discovered or the error while discovering guest details based discovery of the machine."
+          "description": "The last time at which the Guest Details was discovered\n            or the\nerror while discovering guest details based discovery\n            of the\nmachine.",
+          "readOnly": true
         },
         "isGuestDetailsDiscoveryInProgress": {
           "type": "boolean",
-          "description": "Whether Refresh Fabric Layout Guest Details has been completed once. Portal will show discovery in progress, if this value is true."
+          "description": "Whether Refresh Fabric Layout Guest Details has been completed once.\n         \n  Portal will show discovery in progress, if this value is true.",
+          "readOnly": true
         },
         "dependencyMapping": {
           "type": "string",
-          "description": "If dependency mapping feature is enabled or not for the VM."
+          "description": "Gets or sets if dependency mapping feature is enabled or not\n            for\nthe VM.",
+          "readOnly": true
         },
         "dependencyMappingStartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "When dependency mapping collection is last started."
+          "description": "Gets or sets when dependency mapping collection is last started.",
+          "readOnly": true
         },
         "dependencyMappingEndTime": {
           "type": "string",
-          "format": "date-time",
-          "description": "When dependency mapping collection was last disabled."
+          "description": "Gets or sets when dependency mapping collection was last disabled.",
+          "readOnly": true
         },
         "runAsAccountId": {
           "type": "string",
@@ -7635,57 +7703,71 @@
             "type": "string"
           },
           "x-cadl-name": "string[]",
-          "description": "Gets the appliance names."
+          "description": "Gets the appliance names.",
+          "readOnly": true
         },
         "errors": {
-          "$ref": "#/definitions/SiteHealthErrorDetails",
-          "description": "Errors for machine."
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Errors for machine.",
+          "readOnly": true
         },
         "applicationDiscovery": {
-          "$ref": "#/definitions/DiscoveryState",
-          "description": "Gets the data related to application discovery."
+          "$ref": "#/definitions/ApplicationDiscovery",
+          "description": "Gets the data related to application discovery.",
+          "readOnly": true
         },
         "dependencyMapDiscovery": {
-          "$ref": "#/definitions/DiscoveryState",
-          "description": "Gets the data related to dependency Map discovery."
+          "$ref": "#/definitions/DependencyMapDiscovery",
+          "description": "Gets the data related to dependency map discovery.",
+          "readOnly": true
         },
         "staticDiscovery": {
-          "$ref": "#/definitions/DiscoveryState",
-          "description": "Gets the data related to static discovery."
+          "$ref": "#/definitions/StaticDiscovery",
+          "description": "Gets the data related to static discovery.",
+          "readOnly": true
         },
         "sqlDiscovery": {
-          "$ref": "#/definitions/SqlDiscovery",
-          "description": "Gets the data related to sql discovery."
+          "$ref": "#/definitions/SQLDiscovery",
+          "description": "Gets the data related to SQL discovery.",
+          "readOnly": true
         },
         "webAppDiscovery": {
           "$ref": "#/definitions/WebAppDiscovery",
-          "description": "Gets the data related to webapp discovery."
+          "description": "Gets the data related to Web application discovery.",
+          "readOnly": true
         },
         "oracleDiscovery": {
           "$ref": "#/definitions/OracleDiscovery",
-          "description": "Gets the data related to oracle discovery."
+          "description": "Gets the data related to Oracle discovery.",
+          "readOnly": true
         },
         "springBootDiscovery": {
           "$ref": "#/definitions/SpringBootDiscovery",
-          "description": "Gets the data related to spring boot discovery."
+          "description": "Gets the data related to SpringBoot discovery.",
+          "readOnly": true
         },
         "appsAndRoles": {
           "$ref": "#/definitions/AppsAndRoles",
-          "description": "Apps And Roles of the Server."
+          "description": "Apps And Roles of the Server.",
+          "readOnly": true
         },
         "numberOfProcessorCore": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the Number of Processor Cores \r\n            allocated for the machine."
+          "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
         },
-        "allocatedMemoryInMb": {
-          "type": "integer",
-          "format": "int64",
+        "allocatedMemoryInMB": {
+          "type": "number",
+          "format": "float",
           "description": "Gets or sets the allocated Memory in MB."
         },
         "operatingSystemDetails": {
-          "$ref": "#/definitions/OperatingSystemDetails",
-          "description": "Operating System Details installed on the machine."
+          "$ref": "#/definitions/OperatingSystem",
+          "description": "Gets or sets the Operating System Details installed on the machine."
         },
         "biosSerialNumber": {
           "type": "string",
@@ -7697,81 +7779,30 @@
         },
         "displayName": {
           "type": "string",
-          "description": "Gets the Display name of the machine."
+          "description": "Gets the Display name of the machine.",
+          "readOnly": true
         },
         "isDeleted": {
           "type": "boolean",
-          "description": "Value indicating whether VM is deleted."
+          "description": "Value indicating whether VM is deleted.",
+          "readOnly": true
         },
         "createdTimestamp": {
           "type": "string",
-          "description": "Timestamp marking machine creation."
+          "description": "Gets the marking machine creation.",
+          "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
-          "description": "Timestamp marking last updated on the machine."
+          "description": "Gets the timestamp marking last updated on the machine.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
         }
       },
-      "description": "The properties of AddressResource",
-      "required": [
-        "instanceUuid",
-        "hostFqdn",
-        "hostId",
-        "generation",
-        "version",
-        "highAvailability",
-        "clusterFqdn",
-        "clusterId",
-        "maxMemoryMb",
-        "isDynamicMemoryEnabled",
-        "disks",
-        "networkAdapters",
-        "managementServerType",
-        "secureBootTemplateId",
-        "secureBootEnabled",
-        "secureBootTemplate",
-        "tpmEnabled",
-        "ksdEnabled",
-        "shieldingRequested",
-        "dataProtectionRequested",
-        "encryptStateAndVmMigrationTraffic",
-        "virtualizationBasedSecurityOptOut",
-        "powerStatus",
-        "vmFqdn",
-        "vmConfigurationFileLocation",
-        "firmware",
-        "guestOsDetails",
-        "numberOfApplications",
-        "guestDetailsDiscoveryTimestamp",
-        "isGuestDetailsDiscoveryInProgress",
-        "dependencyMapping",
-        "dependencyMappingStartTime",
-        "dependencyMappingEndTime",
-        "runAsAccountId",
-        "applianceNames",
-        "errors",
-        "applicationDiscovery",
-        "dependencyMapDiscovery",
-        "staticDiscovery",
-        "sqlDiscovery",
-        "webAppDiscovery",
-        "oracleDiscovery",
-        "springBootDiscovery",
-        "appsAndRoles",
-        "numberOfProcessorCore",
-        "allocatedMemoryInMb",
-        "operatingSystemDetails",
-        "biosSerialNumber",
-        "biosGuid",
-        "displayName",
-        "isDeleted",
-        "createdTimestamp",
-        "updatedTimestamp"
-      ]
+      "description": "The properties of AddressResource"
     },
     "HypervMachineResource": {
       "type": "object",
@@ -8383,6 +8414,7 @@
           "items": {
             "$ref": "#/definitions/ErrorDetails"
           },
+          "x-ms-identifiers": [],
           "x-cadl-name": "ErrorDetails[]",
           "description": "Gets the errors."
         },
@@ -8695,23 +8727,6 @@
         "discoveryScopeStatus"
       ]
     },
-    "OracleDiscoveryScopeStatus": {
-      "type": "string",
-      "enum": [
-        "DiscoverySucceededAtleastOnce",
-        "DiscoveryFailed",
-        "RunAsAccountNotAssociated",
-        "DiscoveryNotStarted",
-        "DiscoveryInProgress",
-        "Disabled",
-        "DiscoveryPartiallySucceded",
-        "DiscoverySucceeded"
-      ],
-      "x-ms-enum": {
-        "name": "OracleDiscoveryScopeStatus",
-        "modelAsString": true
-      }
-    },
     "OtherDatabases": {
       "type": "object",
       "properties": {
@@ -8839,6 +8854,34 @@
         }
       },
       "description": "Class for run as account properties."
+    },
+    "SQLDiscovery": {
+      "type": "object",
+      "properties": {
+        "successfullyDiscoveredServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": " successfully Discovered ServerCount"
+        },
+        "totalServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "total Server Count"
+        },
+        "sqlMetadataHydratedRunAsAccountId": {
+          "type": "string",
+          "description": "sql Metadata Hydrated RunAsAccountId"
+        },
+        "sqlMetadataDiscoveryPipe": {
+          "$ref": "#/definitions/SQLDiscoverySqlMetadataDiscoveryPipe",
+          "description": "sql Metadata DiscoveryPipe"
+        },
+        "discoveryScopeStatus": {
+          "$ref": "#/definitions/SQLDiscoveryScopeStatus",
+          "description": "discovery Scope Status"
+        }
+      },
+      "description": "Contains data related SQL discovery."
     },
     "SQLDiscoveryScopeStatus": {
       "type": "string",
@@ -9413,70 +9456,77 @@
       "properties": {
         "message": {
           "type": "string",
-          "description": "Gets the error message."
+          "description": "Gets the error message.",
+          "readOnly": true
         },
         "messageParameters": {
-          "type": "string",
-          "description": "Gets the message parameters."
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Gets the message parameters.",
+          "readOnly": true
         },
         "applianceName": {
           "type": "string",
-          "description": "Gets the appliance name."
+          "description": "Gets the appliance name.",
+          "readOnly": true
         },
         "id": {
           "type": "integer",
-          "format": "int64",
-          "description": "Gets the error ID."
+          "format": "int32",
+          "description": "Gets the error ID.",
+          "readOnly": true
         },
         "code": {
           "type": "string",
-          "description": "Gets the error name."
+          "description": "Gets the error name.",
+          "readOnly": true
         },
         "possibleCauses": {
           "type": "string",
-          "description": "Gets the possible causes of error."
+          "description": "Gets the possible causes of error.",
+          "readOnly": true
         },
         "recommendedAction": {
           "type": "string",
-          "description": "Gets the recommended action to resolve error."
+          "description": "Gets the recommended action to resolve error.",
+          "readOnly": true
         },
         "severity": {
           "type": "string",
-          "description": "Gets the error severity."
+          "description": "Gets the error severity.",
+          "readOnly": true
+        },
+        "summaryMessage": {
+          "type": "string",
+          "description": "Gets the error summary message.",
+          "readOnly": true
         },
         "source": {
-          "$ref": "#/definitions/Source",
-          "description": "Gets the error source."
+          "$ref": "#/definitions/HealthErrorDetailsSource",
+          "description": "Gets the error source.",
+          "readOnly": true
         },
         "updatedTimeStamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the time stamp when the error was updated."
+          "description": "Gets the time stamp when the error was updated.",
+          "readOnly": true
         },
         "runAsAccountId": {
           "type": "string",
-          "description": "Gets run as account id used while performing discovery\r\n            of entity."
+          "description": "Gets run as account id used while performing discovery             of entity.",
+          "readOnly": true
         },
         "discoveryScope": {
-          "$ref": "#/definitions/DiscoveryScope",
-          "description": "Gets discovery scope for which \r\n            error is encountered."
+          "$ref": "#/definitions/HealthErrorDetailsDiscoveryScope",
+          "description": "Gets discovery scope for which             error is encountered.",
+          "readOnly": true
         }
       },
-      "description": "Error contract returned when some exception occurs in Rest API.",
-      "required": [
-        "message",
-        "messageParameters",
-        "applianceName",
-        "id",
-        "code",
-        "possibleCauses",
-        "recommendedAction",
-        "severity",
-        "source",
-        "updatedTimeStamp",
-        "runAsAccountId",
-        "discoveryScope"
-      ]
+      "description": "Error contract returned when some exception occurs in Rest API."
     },
     "SiteHealthSummary": {
       "type": "object",
@@ -10210,34 +10260,62 @@
     "VCenterProperties": {
       "type": "object",
       "properties": {
-        "agentDetails": {
+        "runAsAccountId": {
           "type": "string",
-          "description": "On-premises agent details."
+          "description": "Gets or sets the run as account ID of the vCenter."
         },
-        "serviceEndpoint": {
-          "type": "string",
-          "description": "Service endpoint."
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the errors.",
+          "readOnly": true
         },
-        "discoverySolutionId": {
+        "createdTimestamp": {
           "type": "string",
-          "description": "RM ID of migration hub solution for SDS."
+          "description": "Gets the timestamp marking vCenter creation.",
+          "readOnly": true
         },
-        "applianceName": {
+        "updatedTimestamp": {
           "type": "string",
-          "description": "Appliance Name."
+          "description": "Gets the timestamp marking last updated on the vCenter.",
+          "readOnly": true
+        },
+        "fqdn": {
+          "type": "string",
+          "description": "Gets or sets the FQDN/IPAddress of the vCenter."
+        },
+        "port": {
+          "type": "string",
+          "description": "Gets or sets the port of the vCenter."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets the version of the vCenter.",
+          "readOnly": true
+        },
+        "perfStatisticsLevel": {
+          "type": "string",
+          "description": "Gets the performance statistics enabled on the vCenter.",
+          "readOnly": true
+        },
+        "instanceUuid": {
+          "type": "string",
+          "description": "Gets the instance UUID of the vCenter.",
+          "readOnly": true
+        },
+        "friendlyName": {
+          "type": "string",
+          "description": "Gets or sets the friendly name of the vCenter."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
         }
       },
-      "description": "The properties of VMwareSiteResource",
-      "required": [
-        "agentDetails",
-        "serviceEndpoint",
-        "discoverySolutionId",
-        "applianceName"
-      ]
+      "description": "The properties of VMwareSiteResource"
     },
     "VMwareSite": {
       "type": "object",

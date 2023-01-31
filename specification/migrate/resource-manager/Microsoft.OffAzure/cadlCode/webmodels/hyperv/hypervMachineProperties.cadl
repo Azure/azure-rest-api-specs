@@ -1,167 +1,318 @@
 import "../common/machinePropertiesInternal.cadl";
+import "../common/common.cadl";
 
+enum HyperVMachineHyperVMachinePropertiesHighAvailability {
+  "Unknown",
+  "No",
+  "Yes",
+}
 @doc("The properties of AddressResource")
 model HypervMachineProperties {
   @doc("On-premise Instance UUID of the machine.")
-  instanceUuid: string;
+  @visibility("read")
+  instanceUuid?: string;
 
   @doc("Host FQDN/IPAddress.")
-  hostFqdn: string;
+  @visibility("read")
+  hostFqdn?: string;
 
   @doc("Host ARM ID.")
-  hostId: string;
+  @visibility("read")
+  hostId?: string;
 
   @doc("Generation of the virtual machine.")
-  generation: int32;
+  @visibility("read")
+  generation?: int32;
 
-  @doc("The VM version.")
-  version: string;
+  @doc("VM version.")
+  @visibility("read")
+  version?: string;
 
   @doc("Value indicating whether the VM is highly available.")
-  highAvailability: HighAvailability;
+  @visibility("read")
+  highAvailability?: HyperVMachineHyperVMachinePropertiesHighAvailability;
 
   @doc("Cluster FQDN/IPAddress.")
-  clusterFqdn: string;
+  @visibility("read")
+  clusterFqdn?: string;
 
-  @doc("Host ARM ID.")
-  clusterId: string;
+  @doc("Cluster ARM ID.")
+  @visibility("read")
+  clusterId?: string;
 
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("Max memory of the virtual machine in MB.")
-  maxMemoryMb: int32;
+  @visibility("read")
+  maxMemoryMB?: int32;
 
   @doc("Value indicating whether dynamic memory is enabled for the VM.")
-  isDynamicMemoryEnabled: boolean;
+  @visibility("read")
+  isDynamicMemoryEnabled?: boolean;
 
-  @doc("Disks attached to the machine.")
-  disks: Disks[];
-
-  @doc("Network adapters attached to the machine.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  networkAdapters: NetworkAdapters[];
+  @doc("Disks attached to the machine.")
+  @visibility("read")
+  disks?: HyperVDisk[];
 
-  @doc("Management server type captured as a string representation of the\r\n            {Microsoft.Azure.FDS.WebRole.HyperVMachineBase.HyperVMachineBaseProperties.ManagementServerType} enumeration.")
-  managementServerType: string;
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @doc("Network adapters attached to the machine.")
+  @visibility("read")
+  networkAdapters?: HyperVNetworkAdapter[];
+
+  @doc("""
+Management server type captured as a string representation of the
+           
+{Microsoft.Azure.FDS.WebRole.HyperVMachineBase.HyperVMachineBaseProperties.ManagementServerType}
+enumeration.
+""")
+  @visibility("read")
+  managementServerType?: string;
 
   @doc("Gets or sets the SecureBootTemplateId setting of the VM.")
-  secureBootTemplateId: string;
+  @visibility("read")
+  secureBootTemplateId?: string;
 
   @doc("Gets or sets a value indicating whether Secure boot is enabled for the VM.")
-  secureBootEnabled: boolean;
+  @visibility("read")
+  secureBootEnabled?: boolean;
 
   @doc("Gets or sets the SecureBootTemplateId setting of the VM.")
-  secureBootTemplate: string;
+  @visibility("read")
+  secureBootTemplate?: string;
 
-  @doc("Gets or sets a value indicating whether trusted platform module is enabled on the VM.")
-  tpmEnabled: boolean;
+  @doc("""
+Gets or sets a value indicating whether trusted platform module is enabled on
+the VM.
+""")
+  @visibility("read")
+  tpmEnabled?: boolean;
 
   @doc("Gets or sets a value indicating whether key storage device is enabled on the VM.")
-  ksdEnabled: boolean;
+  @visibility("read")
+  ksdEnabled?: boolean;
 
   @doc("Gets or sets a value indicating whether shielding is enabled for the VM.")
-  shieldingRequested: boolean;
+  @visibility("read")
+  shieldingRequested?: boolean;
 
   @doc("Gets or sets a value indicating whether data protection is requested for a VM.")
-  dataProtectionRequested: boolean;
+  @visibility("read")
+  dataProtectionRequested?: boolean;
 
-  @doc("Gets or sets a value indicating whether encryption of state and migration traffic is enabled for the VM.")
-  encryptStateAndVmMigrationTraffic: boolean;
+  @doc("""
+Gets or sets a value indicating whether encryption of state and migration
+traffic is enabled for the VM.
+""")
+  @visibility("read")
+  encryptStateAndVmMigrationTraffic?: boolean;
 
-  @doc("Gets or sets a value indicating whether VM virtualization based security is enabled for the VM.")
-  virtualizationBasedSecurityOptOut: boolean;
+  @doc("""
+Gets or sets a value indicating whether VM virtualization based security is
+enabled for the VM.
+""")
+  @visibility("read")
+  virtualizationBasedSecurityOptOut?: boolean;
 
-  @doc("Machine power status.")
-  powerStatus: string;
+  @doc("Gets the Machine power status.")
+  @visibility("read")
+  powerStatus?: string;
 
-  @doc("Machine FQDN.")
-  vmFqdn: string;
+  @doc("Gets the VM FQDN.")
+  @visibility("read")
+  vmFqdn?: string;
 
-  @doc("Root location of the VM configuration file.")
-  vmConfigurationFileLocation: string;
+  @doc("Gets the Root location of the VM configuration file.")
+  @visibility("read")
+  vmConfigurationFileLocation?: string;
 
   @doc("Gets or sets the firmware.")
-  firmware: string;
+  firmware?: string;
 
-  @doc("Operating System Details extracted from the guest\r\n            bu executing script inside the guest VM.")
-  guestOsDetails: GuestOsDetails;
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
+  @doc("Operating System Details extracted from the guest             bu executing script inside the guest VM. ")
+  @visibility("read")
+  guestOSDetails?: GuestOSDetails;
 
   @doc("Number of applications installed in the guest VM.")
-  numberOfApplications: int32;
+  @visibility("read")
+  numberOfApplications?: int32;
 
-  @doc("The last time at which the Guest Details was discovered or the error while discovering guest details based discovery of the machine.")
-  guestDetailsDiscoveryTimestamp: zonedDateTime;
+  @doc("""
+The last time at which the Guest Details was discovered
+            or the
+error while discovering guest details based discovery
+            of the
+machine.
+""")
+  @visibility("read")
+  guestDetailsDiscoveryTimestamp?: zonedDateTime;
 
-  @doc("Whether Refresh Fabric Layout Guest Details has been completed once. Portal will show discovery in progress, if this value is true.")
-  isGuestDetailsDiscoveryInProgress: boolean;
+  @doc("""
+Whether Refresh Fabric Layout Guest Details has been completed once.
+         
+  Portal will show discovery in progress, if this value is true.
+""")
+  @visibility("read")
+  isGuestDetailsDiscoveryInProgress?: boolean;
 
-  @doc("If dependency mapping feature is enabled or not for the VM.")
-  dependencyMapping: string;
+  @doc("""
+Gets or sets if dependency mapping feature is enabled or not
+            for
+the VM.
+""")
+  @visibility("read")
+  dependencyMapping?: string;
 
-  @doc("When dependency mapping collection is last started.")
-  dependencyMappingStartTime: zonedDateTime;
+  @doc("Gets or sets when dependency mapping collection is last started.")
+  @visibility("read")
+  dependencyMappingStartTime?: zonedDateTime;
 
-  @doc("When dependency mapping collection was last disabled.")
-  dependencyMappingEndTime: zonedDateTime;
+  @doc("Gets or sets when dependency mapping collection was last disabled.")
+  @visibility("read")
+  dependencyMappingEndTime?: string;
 
   @doc("Gets or sets the run as account ID of the machine.")
-  runAsAccountId: string;
+  runAsAccountId?: string;
 
   @doc("Gets the appliance names.")
-  applianceNames: string[];
+  @visibility("read")
+  applianceNames?: string[];
 
   @doc("Errors for machine.")
-  errors: SiteHealthErrorDetails;
+  @visibility("read")
+  errors?: HealthErrorDetails[];
 
   @doc("Gets the data related to application discovery.")
-  applicationDiscovery: DiscoveryState;
+  @visibility("read")
+  applicationDiscovery?: ApplicationDiscovery;
 
-  @doc("Gets the data related to dependency Map discovery.")
-  dependencyMapDiscovery: DiscoveryState;
+  @doc("Gets the data related to dependency map discovery.")
+  @visibility("read")
+  dependencyMapDiscovery?: DependencyMapDiscovery;
 
   @doc("Gets the data related to static discovery.")
-  staticDiscovery: DiscoveryState;
+  @visibility("read")
+  staticDiscovery?: StaticDiscovery;
 
-  @doc("Gets the data related to sql discovery.")
-  sqlDiscovery: SqlDiscovery;
+  @doc("Gets the data related to SQL discovery.")
+  @visibility("read")
+  sqlDiscovery?: SQLDiscovery;
 
-  @doc("Gets the data related to webapp discovery.")
-  webAppDiscovery: WebAppDiscovery;
+  @doc("Gets the data related to Web application discovery.")
+  @visibility("read")
+  webAppDiscovery?: WebAppDiscovery;
 
-  @doc("Gets the data related to oracle discovery.")
-  oracleDiscovery: OracleDiscovery;
+  @doc("Gets the data related to Oracle discovery.")
+  @visibility("read")
+  oracleDiscovery?: OracleDiscovery;
 
-  @doc("Gets the data related to spring boot discovery.")
-  springBootDiscovery: SpringBootDiscovery;
+  @doc("Gets the data related to SpringBoot discovery.")
+  @visibility("read")
+  springBootDiscovery?: SpringBootDiscovery;
 
   @doc("Apps And Roles of the Server.")
-  appsAndRoles: AppsAndRoles;
+  @visibility("read")
+  appsAndRoles?: AppsAndRoles;
 
-  @doc("Gets or sets the Number of Processor Cores \r\n            allocated for the machine.")
-  numberOfProcessorCore: int32;
+  @doc("""
+Gets or sets the Number of Processor Cores 
+            allocated for the
+machine.
+""")
+  numberOfProcessorCore?: int32;
 
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("Gets or sets the allocated Memory in MB.")
-  allocatedMemoryInMb: int64;
+  allocatedMemoryInMB?: float32;
 
-  @doc("Operating System Details installed on the machine.")
-  operatingSystemDetails: OperatingSystemDetails;
+  @doc("Gets or sets the Operating System Details installed on the machine.")
+  operatingSystemDetails?: OperatingSystem;
 
   @doc("Gets or sets the Machine BIOS serial number.")
-  biosSerialNumber: string;
+  biosSerialNumber?: string;
 
   @doc("Gets or sets the BIOS GUID.")
-  biosGuid: string;
+  biosGuid?: string;
 
   @doc("Gets the Display name of the machine.")
-  displayName: string;
+  @visibility("read")
+  displayName?: string;
 
   @doc("Value indicating whether VM is deleted.")
-  isDeleted: boolean;
+  @visibility("read")
+  isDeleted?: boolean;
 
-  @doc("Timestamp marking machine creation.")
-  createdTimestamp: string;
+  @doc("Gets the marking machine creation.")
+  @visibility("read")
+  createdTimestamp?: string;
 
-  @doc("Timestamp marking last updated on the machine.")
-  updatedTimestamp: string;
+  @doc("Gets the timestamp marking last updated on the machine.")
+  @visibility("read")
+  updatedTimestamp?: string;
 
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@doc("Second level object represented in responses as part of Machine REST resource.")
+model HyperVNetworkAdapter {
+  @doc("Network Id.")
+  @visibility("read")
+  networkId?: string;
+
+  @doc("Name of the VM subnet within the virtual network the NIC is attached to.")
+  @visibility("read")
+  subnetName?: string;
+
+  @doc("Static IP address.")
+  @visibility("read")
+  staticIpAdress?: string;
+
+  @doc("Mac address of the NIC.")
+  @visibility("read")
+  nicType?: string;
+
+  @doc("Gets or sets the NIC Id.")
+  nicId?: string;
+
+  @doc("Gets or sets Mac address of the NIC.")
+  macAddress?: string;
+
+  @doc("Gets IP addresses for the machine.")
+  @visibility("read")
+  ipAddressList?: string[];
+
+  @doc("Gets or sets Network Name.")
+  networkName?: string;
+
+  @doc("Gets or sets Type of the IP address.")
+  ipAddressType?: string;
+}
+
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@doc("Second level object returned as part of Machine REST resource.")
+model HyperVDisk {
+  @doc("Id of the disk.")
+  @visibility("read")
+  instanceId?: string;
+
+  @doc("VHD Id of the disk.")
+  @visibility("read")
+  vhdId?: string;
+
+  @doc("Gets or sets Bytes allocated for the disk.")
+  maxSizeInBytes?: int32;
+
+  @doc("Gets or sets Name of the disk.")
+  name?: string;
+
+  @doc("Gets or sets Type of the disk.")
+  diskType?: string;
+
+  @doc("Gets or sets LUN of the disk.")
+  lun?: int32;
+
+  @doc("Gets or sets Path of the disk.")
+  path?: string;
 }

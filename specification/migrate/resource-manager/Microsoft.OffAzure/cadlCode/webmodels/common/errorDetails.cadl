@@ -16,37 +16,43 @@ using Azure.ResourceManager;
 
 @doc("Error contract returned when some exception occurs in Rest API.")
 model ErrorDetails {
-  
-  @doc("Gets the error name.")
-  code: string;
-  
-  @doc("Gets the error message.")
-  message: string;
+  @doc("Gets the error code.")
+  @visibility("read")
+  code?: string;
 
-  @doc("Gets the error ID.")
-  id: int64;
+  @doc("Gets the error message.")
+  @visibility("read")
+  message?: string;
 
   @doc("Gets the possible causes of error.")
-  possibleCauses: string;
+  @visibility("read")
+  possibleCauses?: string;
 
   @doc("Gets the recommended action to resolve error.")
-  recommendedAction: string;
+  @visibility("read")
+  recommendedAction?: string;
 
   @doc("Gets the error severity.")
-  severity: string;
-  
+  @visibility("read")
+  severity?: string;
+
   @doc("Gets a value indicating whether the error originated from a agent or not.")
-  isAgentReportedError: boolean;
+  @visibility("read")
+  isAgentReportedError?: boolean;
 
   @doc("Gets the agent error code.")
-  agentErrorCode: string;  
+  @visibility("read")
+  agentErrorCode?: string;
 
   @doc("Gets the error message from the agent.")
-  agentErrorMessage: string;
+  @visibility("read")
+  agentErrorMessage?: string;
 
   @doc("Gets possible causes for the agent error.")
-  agentErrorPossibleCauses: string;
+  @visibility("read")
+  agentErrorPossibleCauses?: string;
 
   @doc("Gets the recommended action for the agent error.")
-  agentErrorRecommendedAction: string;
+  @visibility("read")
+  agentErrorRecommendedAction?: string;
 }
