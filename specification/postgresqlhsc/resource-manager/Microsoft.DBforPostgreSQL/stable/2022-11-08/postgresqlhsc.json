@@ -593,6 +593,49 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/coordinatorConfigurations/{configurationName}": {
+      "get": {
+        "description": "Gets information of a configuration for coordinator.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_GetCoordinator",
+        "x-ms-examples": {
+          "Get configuration details for coordinator.": {
+            "$ref": "./examples/ConfigurationGetCoordinator.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "description": "Updates configuration of coordinator in a cluster",
         "tags": [
@@ -665,6 +708,49 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/nodeConfigurations/{configurationName}": {
+      "get": {
+        "description": "Gets information of a configuration for node.",
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "Configurations_GetCoordinator",
+        "x-ms-examples": {
+          "Get configuration details for node.": {
+            "$ref": "./examples/ConfigurationGetNode.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "put": {
         "description": "Updates configuration of nodes in a cluster",
         "tags": [
@@ -2471,7 +2557,8 @@
         },
         "requiresRestart": {
           "type": "boolean",
-          "description": "If configuration change requires restart."
+          "description": "If configuration change requires restart.",
+          "readOnly": true
         },
         "provisioningState": {
           "type": "string",
@@ -2488,22 +2575,26 @@
       "type": "object",
       "properties": {
         "properties": {
-          "description": "Represents a configuration properties",
-          "type": "object",
-          "properties": {
-            "value": {
-              "description": "Represents the value of a configuration.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "value"
-          ],
+          "$ref": "#/definitions/ServerConfigurationRequestProperties",
+          "description": "The properties of a configuration.",
           "x-ms-client-flatten": true
         }
       },
       "required": [
         "properties"
+      ]
+    },
+    "ServerConfigurationRequestProperties": {
+      "description": "The properties of a server configuration request.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Represents the value of a configuration.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "ServerConfiguration": {
@@ -2540,26 +2631,6 @@
         }
       }
     },
-    "FirewallRuleProperties2": {
-      "description": "The properties of a cluster firewall rule.",
-      "type": "object",
-      "properties": {
-        "startIpAddress": {
-          "type": "string",
-          "description": "The start IP address of the cluster firewall rule. Must be IPv4 format.",
-          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
-        },
-        "endIpAddress": {
-          "type": "string",
-          "description": "The end IP address of the cluster firewall rule. Must be IPv4 format.",
-          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
-        }
-      },
-      "required": [
-        "startIpAddress",
-        "endIpAddress"
-      ]
-    },
     "FirewallRuleProperties": {
       "description": "The properties of a cluster firewall rule.",
       "type": "object",
@@ -2584,20 +2655,6 @@
         "startIpAddress",
         "endIpAddress"
       ]
-    },
-    "FirewallRule2": {
-      "description": "The properties of a cluster firewall rule.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FirewallRuleProperties2"
-        }
-      }
     },
     "FirewallRule": {
       "description": "Represents a cluster firewall rule.",
@@ -2631,25 +2688,6 @@
         }
       }
     },
-    "RoleProperties2": {
-      "properties": {
-        "password": {
-          "type": "string",
-          "x-ms-secret": true,
-          "format": "password",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "description": "The password of the cluster role."
-        }
-      },
-      "required": [
-        "password"
-      ],
-      "description": "The properties of a cluster role.",
-      "type": "object"
-    },
     "RoleProperties": {
       "properties": {
         "password": {
@@ -2673,25 +2711,6 @@
       ],
       "description": "The properties of a cluster role.",
       "type": "object"
-    },
-    "Role2": {
-      "description": "Represents a cluster role.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RoleProperties2",
-          "x-ms-client-flatten": true,
-          "description": "The properties of a role."
-        }
-      },
-      "required": [
-        "properties"
-      ]
     },
     "Role": {
       "description": "Represents a cluster role.",
