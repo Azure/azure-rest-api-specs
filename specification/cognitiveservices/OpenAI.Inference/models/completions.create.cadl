@@ -16,7 +16,7 @@ during training, so if a prompt is not specified the model will generate as if
 from the beginning of a new document. Maximum allowed size of string list is
 2048.
 """)
-    prompt?: CompletionsPrompt;
+    prompt?: string[];
 
     @doc("The maximum number of tokens to generate. Has minimum of 0.")
     max_tokens?: int32;
@@ -83,13 +83,13 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
     logprobs?: int32;
 
     @doc("The name of the model to use")
-    "model"?: string;
+    "model": string;
 
     @doc("Echo back the prompt in addition to the completion")
     echo?: boolean;
 
     @doc("A sequence which indicates the end of the current document.")
-    stop?: CompletionsStop;
+    stop?: string[];
 
     @doc("Completion configuration")
     completion_config?: string;
@@ -120,10 +120,6 @@ stream intermediate progress if best_of > 1. Has maximum value of 128.
     best_of?: int32;
 };
 
-alias CompletionsPrompt = string[];
-
-alias CompletionsStop = string[];
-
 @doc("Expected response schema to completion request")
 model Completions {
     @doc("Request ID for troubleshooting purposes")
@@ -149,13 +145,13 @@ model Choice {
     @doc("Index")
     index?: int32;
     @doc("Log Prob Model")
-    logprobs?: CompletionsLogProbsModel;
+    logprobs?: CompletionsLogProbs;
     @doc("Reason for finishing")
     finish_reason?: string;
 }
 
 @doc("LogProbs model within completion choice")
-model CompletionsLogProbsModel {
+model CompletionsLogProbs {
     @doc("Tokens")
     tokens?: string[];
     @doc("LogProbs of Tokens")
