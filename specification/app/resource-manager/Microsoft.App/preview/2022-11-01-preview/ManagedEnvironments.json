@@ -1287,7 +1287,7 @@
                 "$ref": "#/definitions/WorkloadProfile"
               },
               "x-ms-identifiers": [
-                "workloadProfileType"
+                "workloadProfileName"
               ]
             },
             "kedaConfiguration": {
@@ -1385,6 +1385,10 @@
           "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
           "description": "Workload profile type for the workloads to run on."
         },
+        "workloadProfileName": {
+          "description": "Friendly Name of the Workload Profile",
+          "type": "string"
+        },
         "minimumCount": {
           "type": "integer",
           "format": "int32",
@@ -1398,6 +1402,7 @@
       },
       "required": [
         "workloadProfileType",
+        "workloadProfileName",
         "minimumCount",
         "maximumCount"
       ]
