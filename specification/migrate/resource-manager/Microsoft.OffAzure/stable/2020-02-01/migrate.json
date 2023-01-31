@@ -7198,7 +7198,11 @@
           "description": "Gets or sets Run as account ID of the Hyper-V cluster."
         },
         "hostFqdnList": {
-          "type": "string",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
           "description": "Gets or sets list of hosts (FQDN) currently being tracked by the cluster."
         },
         "errors": {
