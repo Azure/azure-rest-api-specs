@@ -29,6 +29,7 @@ directive:
 
 ``` yaml $(go) && $(multiapi)
 batch:
+  - tag: package-2022-07
   - tag: package-2021-08
   - tag: package-2021-05
   - tag: package-2021-03
@@ -62,6 +63,15 @@ batch:
   - tag: package-2017-11
   - tag: package-2017-10
   - tag: package-2015-06split
+```
+
+### Tag: package-2022-07 and go
+
+These settings apply only when `--tag=package-2022-07 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2022-07' && $(go)
+output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-07-01/$(namespace)
 ```
 
 ### Tag: package-2021-08 and go
