@@ -77,7 +77,6 @@ These settings apply only when `--tag=package-streaming-2022-11` is specified on
   - Microsoft.Media/Streaming/stable/2022-11-01/streamingservice.json
 ```
 
-
 ### Tag: package-encoding-2022-05-preview
 
 These settings apply only when `--tag=package-encoding-2022-05-preview` is specified on the command line.
