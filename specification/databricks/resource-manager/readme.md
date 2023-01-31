@@ -23,8 +23,8 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 
 ``` yaml $(tag) == 'package-2022-04-01-preview' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.databricks.v2022_02_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2022_02_01_preview
+  namespace: com.microsoft.azure.management.databricks.v2022_04_01_preview	
+  output-folder: $(azure-libraries-for-java-folder)/sdk/databricks/mgmt-v2022_04_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
@@ -135,7 +135,6 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-resource-manager-schemas

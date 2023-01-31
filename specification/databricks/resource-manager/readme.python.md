@@ -4,7 +4,7 @@ These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(python)
-title: DatabricksClient
+title: AzureDatabricksManagementClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-databricks
@@ -18,3 +18,7 @@ no-namespace-folders: true
 output-folder: $(python-sdks-folder)/databricks/azure-mgmt-databricks/azure/mgmt/databricks
 ```
 
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
