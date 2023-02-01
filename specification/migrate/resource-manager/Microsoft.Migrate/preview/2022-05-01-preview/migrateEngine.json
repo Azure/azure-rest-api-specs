@@ -3257,6 +3257,22 @@
       "description": "Class for GMSA authentication details to configure Active Directory connectivity.",
       "type": "object",
       "properties": {
+        "configurationState": {
+          "description": "Gets or sets the current state of GMSA configuration.",
+          "enum": [
+            "NotApplicable",
+            "Pending",
+            "InProgress",
+            "Completed",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "GmsaConfigurationState",
+            "modelAsString": true
+          }
+        },
         "gmsaAccountName": {
           "description": "Gets or sets the name to be used for GMSA.",
           "type": "string"
