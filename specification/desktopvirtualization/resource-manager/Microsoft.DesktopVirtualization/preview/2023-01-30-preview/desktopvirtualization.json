@@ -5863,11 +5863,6 @@
     "ScalingPlanPersonalSchedulePatch": {
       "type": "object",
       "description": "ScalingPlanPersonalSchedule properties that can be patched.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ],
       "properties": {
         "properties": {
           "description": "Detailed properties for ScalingPlanPersonalSchedule",
@@ -5903,7 +5898,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -6293,6 +6288,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*[A-Za-z0-9]$",
       "description": "The name of the scaling plan.",
       "maxLength": 64,
       "minLength": 3,
@@ -6303,6 +6299,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*[A-Za-z0-9]$",
       "description": "The name of the ScalingPlanSchedule",
       "maxLength": 64,
       "minLength": 1,
