@@ -55,9 +55,9 @@
         "tags": [
           "ReceivedShare"
         ],
-        "summary": "Put changes to a received share.",
+        "summary": "Create or replace a received share.",
         "description": "Update changes to a received share",
-        "operationId": "ReceivedShares_CreateOrUpdate",
+        "operationId": "ReceivedShares_Create",
         "consumes": [
           "application/json"
         ],
@@ -74,7 +74,7 @@
           {
             "in": "body",
             "name": "receivedShare",
-            "description": "The updated received share",
+            "description": "The received share to create or replace",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ReceivedShare"
@@ -82,8 +82,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/ReceivedShare"
             },
@@ -102,8 +102,8 @@
           }
         },
         "x-ms-examples": {
-          "ReceivedShares_CreateOrUpdate": {
-            "$ref": "./examples/ReceivedShares_CreateOrUpdate.json"
+          "ReceivedShares_Create": {
+            "$ref": "./examples/ReceivedShares_Create.json"
           },
           "ReceivedShares_UpdateAdlsGen2Account": {
             "$ref": "./examples/ReceivedShares_UpdateAdlsGen2Account.json"
@@ -164,7 +164,7 @@
         ],
         "summary": "Get a list of attached received shares.",
         "description": "List attached received shares",
-        "operationId": "ReceivedShares_GetAllAttached",
+        "operationId": "ReceivedShares_ListAttached",
         "produces": [
           "application/json"
         ],
@@ -200,8 +200,8 @@
           }
         },
         "x-ms-examples": {
-          "ReceivedShares_GetAllAttached": {
-            "$ref": "./examples/ReceivedShares_GetAllAttached.json"
+          "ReceivedShares_ListAttached": {
+            "$ref": "./examples/ReceivedShares_ListAttached.json"
           }
         },
         "x-ms-pageable": {
@@ -216,7 +216,7 @@
         ],
         "summary": "Get a list of detached received shares.",
         "description": "List detached received shares",
-        "operationId": "ReceivedShares_GetAllDetached",
+        "operationId": "ReceivedShares_ListDetached",
         "produces": [
           "application/json"
         ],
@@ -249,8 +249,8 @@
           }
         },
         "x-ms-examples": {
-          "ReceivedShares_GetAllDetached": {
-            "$ref": "./examples/ReceivedShares_GetAllDetached.json"
+          "ReceivedShares_ListDetached": {
+            "$ref": "./examples/ReceivedShares_ListDetached.json"
           }
         },
         "x-ms-pageable": {
@@ -265,7 +265,7 @@
         ],
         "summary": "Get a list of sent shares.",
         "description": "List sent shares",
-        "operationId": "SentShares_GetAll",
+        "operationId": "SentShares_List",
         "produces": [
           "application/json"
         ],
@@ -301,8 +301,8 @@
           }
         },
         "x-ms-examples": {
-          "SentShares_GetAll": {
-            "$ref": "./examples/SentShares_GetAll.json"
+          "SentShares_List": {
+            "$ref": "./examples/SentShares_List.json"
           }
         },
         "x-ms-pageable": {
@@ -359,7 +359,7 @@
         "tags": [
           "SentShare"
         ],
-        "summary": "Create a sent share.",
+        "summary": "Create or replace a sent share.",
         "description": "Create a sent share",
         "operationId": "SentShares_Create",
         "consumes": [
@@ -378,7 +378,7 @@
           {
             "in": "body",
             "name": "sentShare",
-            "description": "The sent share to create.",
+            "description": "The sent share to create or replace.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SentShare"
@@ -386,8 +386,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Success",
             "schema": {
               "$ref": "#/definitions/SentShare"
             },
@@ -468,7 +468,7 @@
         ],
         "summary": "List all sent share invitations in a sent share",
         "description": "List sent share recipients",
-        "operationId": "SentShares_GetAllInvitations",
+        "operationId": "SentShares_ListInvitations",
         "produces": [
           "application/json"
         ],
@@ -504,8 +504,8 @@
           }
         },
         "x-ms-examples": {
-          "SentShares_GetAllInvitations": {
-            "$ref": "./examples/SentShares_GetAllInvitations.json"
+          "SentShares_ListInvitations": {
+            "$ref": "./examples/SentShares_ListInvitations.json"
           }
         },
         "x-ms-pageable": {
@@ -666,7 +666,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}:notify": {
+    "/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}/notify": {
       "post": {
         "tags": [
           "SentShareInvitation"
@@ -815,48 +815,6 @@
     }
   },
   "definitions": {
-    "ADLSGen2Artifact": {
-      "description": "An ADLS Gen2 account artifact.",
-      "required": [
-        "properties",
-        "storeKind",
-        "storeReference"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Artifact"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ADLSGen2ArtifactProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "x-ms-discriminator-value": "AdlsGen2Account"
-    },
-    "ADLSGen2ArtifactProperties": {
-      "description": "Properties for ADLS Gen2 account.",
-      "required": [
-        "paths"
-      ],
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "Location of the storage account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "paths": {
-          "description": "A list of ADLS Gen2 storage account paths.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/StorageAccountPath"
-          }
-        }
-      }
-    },
     "AdlsGen2AccountSink": {
       "description": "AdlsGen2 Sink",
       "required": [
@@ -902,6 +860,48 @@
         "mountPath": {
           "description": "Adls Gen 2 Mount Path",
           "type": "string"
+        }
+      }
+    },
+    "AdlsGen2Artifact": {
+      "description": "An Alds Gen2 storage account artifact.",
+      "required": [
+        "properties",
+        "storeKind",
+        "storeReference"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Artifact"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AdlsGen2ArtifactProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "AdlsGen2Account"
+    },
+    "AdlsGen2ArtifactProperties": {
+      "description": "Properties for Adls Gen2 storage account.",
+      "required": [
+        "paths"
+      ],
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Location of the storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paths": {
+          "description": "A list of Adls Gen2 storage account paths.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorageAccountPath"
+          }
         }
       }
     },
@@ -1197,7 +1197,19 @@
       "type": "string",
       "x-ms-enum": {
         "name": "InvitationKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "User",
+            "description": "The invitation is sent to a user",
+            "name": "User invitation"
+          },
+          {
+            "value": "Service",
+            "description": "The invitation is sent to a service",
+            "name": "Service invitation"
+          }
+        ]
       }
     },
     "ProvisioningState": {
@@ -1213,7 +1225,39 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ProvisioningState",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "description": "The provisioning state of the resource is in 'Unknown' state",
+            "name": "Unkown provisioning state"
+          },
+          {
+            "value": "Succeeded",
+            "description": "The provisioning state of the resource is in 'Succeeded' state",
+            "name": "Succeeded provisioning state"
+          },
+          {
+            "value": "Creating",
+            "description": "The provisioning state of the resource is in 'Creating' state",
+            "name": "Creating provisioning state"
+          },
+          {
+            "value": "Deleting",
+            "description": "The provisioning state of the resource is in 'Deleting' state",
+            "name": "Deleting provisioning state"
+          },
+          {
+            "value": "Moving",
+            "description": "The provisioning state of the resource is in 'Moving' state",
+            "name": "Moving provisioning state"
+          },
+          {
+            "value": "Failed",
+            "description": "The provisioning state of the resource is in 'Failed' state",
+            "name": "Failed provisioning state"
+          }
+        ]
       }
     },
     "ProxyResource": {
@@ -1319,7 +1363,14 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ReferenceNameType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ArmResourceReference",
+            "description": "The type of reference is an ARM resource",
+            "name": "Arm resource reference"
+          }
+        ]
       }
     },
     "SentShare": {
@@ -1479,7 +1530,14 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ShareKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "InPlace",
+            "description": "The type of share is in-place sharing",
+            "name": "In place share kind"
+          }
+        ]
       }
     },
     "ShareStatus": {
@@ -1491,11 +1549,23 @@
       "type": "string",
       "x-ms-enum": {
         "name": "ShareStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Detached",
+            "description": "The share has not been accepted yet",
+            "name": "Detached share status"
+          },
+          {
+            "value": "Attached",
+            "description": "The share has been accepted by the recipient",
+            "name": "Attached share status"
+          }
+        ]
       }
     },
     "Sink": {
-      "description": "Received share sink",
+      "description": "Holds details on the destination of the mapped artifact",
       "required": [
         "storeKind",
         "storeReference"
@@ -1541,7 +1611,19 @@
       "type": "string",
       "x-ms-enum": {
         "name": "StoreKind",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AdlsGen2Account",
+            "description": "The store kind is a Adls Gen 2 storage account",
+            "name": "Adls gen 2 storage account store kind"
+          },
+          {
+            "value": "BlobAccount",
+            "description": "The store kind is a Blob storage account",
+            "name": "Blob storage account store kind"
+          }
+        ]
       }
     },
     "StoreReference": {
@@ -1619,7 +1701,24 @@
       "type": "string",
       "x-ms-enum": {
         "name": "TenantEmailRegistrationStatus",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ActivationPending",
+            "description": "The tenant email registration is in pending state",
+            "name": "Activation pending"
+          },
+          {
+            "value": "Activated",
+            "description": "The tenant email registration is complete and has been activated",
+            "name": "Activated"
+          },
+          {
+            "value": "ActivationAttemptsExhausted",
+            "description": "The tenant email registration has exhausted the max attempts",
+            "name": "Activation attempts exhausted"
+          }
+        ]
       }
     },
     "UserInvitation": {
@@ -1717,6 +1816,8 @@
       "description": "Id of the corresponding job to the LRO",
       "required": true,
       "type": "string",
+      "maxLength": 100,
+      "pattern": "^[a-zA-z0-9-]{1,100}$",
       "x-ms-parameter-location": "method"
     },
     "receivedShareId": {
@@ -1725,6 +1826,8 @@
       "description": "Id of the received share",
       "required": true,
       "type": "string",
+      "maxLength": 36,
+      "pattern": "^(?:\\{{0,1}(?:[0-9a-fA-F]){8}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){12}\\}{0,1})$",
       "x-ms-parameter-location": "method"
     },
     "sentShareId": {
@@ -1733,6 +1836,8 @@
       "description": "Id of the sent share",
       "required": true,
       "type": "string",
+      "maxLength": 36,
+      "pattern": "^(?:\\{{0,1}(?:[0-9a-fA-F]){8}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){12}\\}{0,1})$",
       "x-ms-parameter-location": "method"
     },
     "sentShareInvitationId": {
@@ -1741,6 +1846,8 @@
       "description": "Id of the sent share invitation",
       "required": true,
       "type": "string",
+      "maxLength": 36,
+      "pattern": "^(?:\\{{0,1}(?:[0-9a-fA-F]){8}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){12}\\}{0,1})$",
       "x-ms-parameter-location": "method"
     },
     "referenceName": {
@@ -1784,6 +1891,13 @@
       "description": "Azure Active Directory OAuth2 Flow."
     }
   },
+  "security": [
+    {
+      "AzureAuth": [
+        "<audience>/.default"
+      ]
+    }
+  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
