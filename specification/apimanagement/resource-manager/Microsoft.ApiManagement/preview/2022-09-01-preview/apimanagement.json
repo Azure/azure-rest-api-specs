@@ -613,6 +613,47 @@
       "default": "xml",
       "x-ms-parameter-location": "method"
     },
+    "PolicyRestrictionIdParameter": {
+      "name": "policyRestrictionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Policy restrictions for a product",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location":"method"
+    },
+    "PolicyRestrictionComplianceState": {
+      "name": "complianceState",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "description": "Policy restriction compliance state.",
+      "enum": [
+        "compliant", 
+        "nonCompliant", 
+        "pending"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyRestrictionComplianceState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "compliant",
+            "description": "The policy restriction is compliant after evalutation."
+          },
+          {
+            "value": "nonCompliant",
+            "description": "The policy restriction is non compliant after evalutation."
+          },
+          {
+            "value": "pending",
+            "description": "The policy restriction is pending evalutation."
+          }
+        ]
+      },
+      "default": "pending"
+    },
     "PortalRevisionIdParameter": {
       "name": "portalRevisionId",
       "in": "path",

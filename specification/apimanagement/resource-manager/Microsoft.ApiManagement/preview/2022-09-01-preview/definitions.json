@@ -4497,6 +4497,84 @@
       ],
       "description": "Policy fragment contract properties."
     },
+    "PolicyRestrictionCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyRestrictionContract"
+          },
+          "description": "Policy restriction contract value."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the get policy fragments operation."
+    },
+    "PolicyRestrictionContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyRestrictionContractProperties",
+          "description": "Properties of the Policy Restriction."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Policy restiction contract details."
+    },
+    "PolicyRestrictionContractProperties": {
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "Path to the policy document."
+        },
+        "requireBase": {
+          "type": "boolean",
+          "description": "Indicates if base policy should be enforced for the policy document."
+        },
+        "complianceState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Compliance state of the policy restriction.",
+          "enum": [
+            "compliant",
+            "nonCompliant",
+            "pending"
+          ],      
+          "x-ms-enum": {
+            "name": "PolicyRestrictionComplianceState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "compliant",
+                "description": "The policy restriction is compliant after evalutation."
+              },
+              {
+                "value": "nonCompliant",
+                "description": "The policy restriction is non compliant after evalutation."
+              },
+              {
+                "value": "pending",
+                "description": "The policy restriction is pending evalutation."
+              }
+            ]
+          },
+          "default": "pending"
+        }
+      },
+      "description": "Policy restrictions contract properties."
+    },
     "ResourceCollection": {
       "properties": {
         "value": {
