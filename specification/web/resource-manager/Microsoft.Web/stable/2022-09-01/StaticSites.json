@@ -866,7 +866,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponseCollection"
+              "$ref": "#/definitions/DatabaseConnectionCollection"
             }
           },
           "default": {
@@ -921,7 +921,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponse"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           "default": {
@@ -967,7 +967,7 @@
             "description": "A JSON representation of the database connection request properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionRequest"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           {
@@ -981,7 +981,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponse"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           "default": {
@@ -1091,7 +1091,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponse"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           "default": {
@@ -1143,7 +1143,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponse"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           "default": {
@@ -1357,7 +1357,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponseCollection"
+              "$ref": "#/definitions/DatabaseConnectionCollection"
             }
           },
           "default": {
@@ -2184,7 +2184,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponseCollection"
+              "$ref": "#/definitions/DatabaseConnectionCollection"
             }
           },
           "default": {
@@ -2236,7 +2236,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponse"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           "default": {
@@ -2279,7 +2279,7 @@
             "description": "A JSON representation of the database connection request properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionRequest"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           {
@@ -2293,7 +2293,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponse"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           "default": {
@@ -2397,7 +2397,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponse"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           "default": {
@@ -2446,7 +2446,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponse"
+              "$ref": "#/definitions/DatabaseConnection"
             }
           },
           "default": {
@@ -3114,7 +3114,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DatabaseConnectionResponseCollection"
+              "$ref": "#/definitions/DatabaseConnectionCollection"
             }
           },
           "default": {
@@ -4260,7 +4260,7 @@
           "description": "Database connections for the static site",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DatabaseConnectionResponse"
+            "$ref": "#/definitions/DatabaseConnection"
           },
           "readOnly": true
         }
@@ -4373,7 +4373,7 @@
               "description": "Database connections for the static site build",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/DatabaseConnectionResponse"
+                "$ref": "#/definitions/DatabaseConnection"
               },
               "readOnly": true
             }
@@ -4584,8 +4584,8 @@
       },
       "x-ms-client-flatten": true
     },
-    "DatabaseConnectionResponse": {
-      "description": "Static Site Database Connection Overview ARM resource.",
+    "DatabaseConnection": {
+      "description": "Static Site Database Connection ARM resource.",
       "type": "object",
       "allOf": [
         {
@@ -4594,28 +4594,25 @@
       ],
       "properties": {
         "properties": {
-          "description": "DatabaseConnectionResponse resource specific properties",
+          "description": "DatabaseConnection resource specific properties",
           "type": "object",
           "properties": {
             "resourceId": {
               "description": "The resource id of the database.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "connectionIdentity": {
               "description": "If present, the identity is used in conjunction with ConnectionString to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "connectionString": {
               "description": "The connection string to use to connect to the database.",
               "type": "string",
-              "readOnly": true
+              "x-ms-secret": true
             },
             "region": {
               "description": "The region of the database resource.",
-              "type": "string",
-              "readOnly": true
+              "type": "string"
             },
             "configurationFiles": {
               "description": "A list of configuration files associated with this database connection.",
@@ -4636,7 +4633,7 @@
         }
       }
     },
-    "DatabaseConnectionResponseCollection": {
+    "DatabaseConnectionCollection": {
       "description": "Collection of static site database connections.",
       "required": [
         "value"
@@ -4647,7 +4644,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DatabaseConnectionResponse"
+            "$ref": "#/definitions/DatabaseConnection"
           }
         },
         "nextLink": {
@@ -4675,41 +4672,8 @@
             },
             "connectionString": {
               "description": "The connection string to use to connect to the database.",
-              "type": "string"
-            },
-            "region": {
-              "description": "The region of the database resource.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "DatabaseConnectionRequest": {
-      "description": "Static Site Database Connection Request Properties ARM resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "DatabaseConnectionRequest resource specific properties",
-          "type": "object",
-          "properties": {
-            "resourceId": {
-              "description": "The resource id of the database.",
-              "type": "string"
-            },
-            "connectionIdentity": {
-              "description": "If provided, the identity is used in conjunction with ConnectionString to connect to the database.",
-              "type": "string"
-            },
-            "connectionString": {
-              "description": "The connection string to use to connect to the database.",
-              "type": "string"
+              "type": "string",
+              "x-ms-secret": true
             },
             "region": {
               "description": "The region of the database resource.",
