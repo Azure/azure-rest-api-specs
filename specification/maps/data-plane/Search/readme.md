@@ -27,11 +27,10 @@ These are the global settings for Search Client.
 ``` yaml
 title: SearchClient
 openapi-type: data-plane
-tag: 1.0
-# at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
+tag: package-preview-2022-12
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
-credential-scopes: https://atlas.microsoft.com/.default
+credential-scopes: 'https://atlas.microsoft.com/.default'
 track2: true
 verbose: true
 sdk-integration: true
@@ -68,7 +67,26 @@ input-file:
   - preview/2022-02-01-preview/geocoding.json
 ```
 
+### Tag: package-preview-2022-09
+
+These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-09'
+input-file:
+  - preview/2022-09-01-preview/search.json
+```
+
+### Tag: package-preview-2022-12
+
+These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-12'
+input-file:
+  - preview/2022-12-01-preview/search.json
+```
+
 # Code Generation
+
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)

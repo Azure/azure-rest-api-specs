@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServices API.
 title: RecoveryServicesClient
 description: Recovery Services Client
 openapi-type: arm
-tag: package-2022-10
+tag: package-2023-01
 ```
 
 ### Validations
@@ -43,22 +43,34 @@ message-format: json
 ```
 
 
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.RecoveryServices/stable/2023-01-01/registeredidentities.json
+  - Microsoft.RecoveryServices/stable/2023-01-01/replicationusages.json
+  - Microsoft.RecoveryServices/stable/2023-01-01/vaults.json
+  - Microsoft.RecoveryServices/stable/2023-01-01/vaultusages.json
+```
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10'
+``` yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-10-01/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2022-10-01/replicationusages.json
   - Microsoft.RecoveryServices/stable/2022-10-01/vaults.json
   - Microsoft.RecoveryServices/stable/2022-10-01/vaultusages.json
 ```
+
 ### Tag: package-preview-2022-09
 
 These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-09'
+``` yaml $(tag) == 'package-preview-2022-09'
 input-file:
   - Microsoft.RecoveryServices/preview/2022-09-30-preview/registeredidentities.json
   - Microsoft.RecoveryServices/preview/2022-09-30-preview/replicationusages.json
@@ -70,7 +82,7 @@ input-file:
 
 These settings apply only when `--tag=package-2022-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09'
+``` yaml $(tag) == 'package-2022-09'
 input-file:
   - Microsoft.RecoveryServices/stable/2022-09-10/registeredidentities.json
   - Microsoft.RecoveryServices/stable/2022-09-10/replicationusages.json
