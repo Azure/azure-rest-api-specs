@@ -51,6 +51,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2022-12' && $(python)
 namespace: azure.mgmt.databox.v2022_12_01
 output-folder: $(python-sdks-folder)/databox/azure-mgmt-databox/azure/mgmt/databox/v2022_12_01
+```
 
 ### Tag: package-2022-10 and python
 

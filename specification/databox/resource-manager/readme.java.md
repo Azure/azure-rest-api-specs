@@ -183,3 +183,6 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.databox.v2022_12-01
   output-folder: $(azure-libraries-for-java-folder)/sdk/databox/mgmt-v2022_12_01
+regenerate-manager: true
+generate-interface: true
+```

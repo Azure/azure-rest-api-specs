@@ -151,4 +151,5 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2022-12' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2022-12-01/$(namespace)
+```
 
