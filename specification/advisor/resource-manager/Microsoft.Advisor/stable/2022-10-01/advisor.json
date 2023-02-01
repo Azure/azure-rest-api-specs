@@ -852,20 +852,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "description": "The link used to get the next page of operations.",
-                  "type": "string"
-                },
-                "value": {
-                  "description": "The list of operations.",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/advisorScoreEntity"
-                  }
-                }
-              }
+              "$ref": "#/definitions/AdvisorScoreResponse"
             }
           },
           "default": {
@@ -1552,6 +1539,22 @@
         }
       }
     },
+    "AdvisorScoreResponse": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+          },
+        "value": {
+          "description": "The list of operations.",
+         "type": "array",
+          "items": {
+            "$ref": "#/definitions/advisorScoreEntity"
+          }
+        }
+     } 
+    },
     "PredictionResponse": {
       "description": "Response used by predictions.",
       "type": "object",
@@ -1671,17 +1674,23 @@
               "week",
               "day",
               "month"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "aggregated",
+              "modelAsString": true
+            }
           },
           "scoreHistory": {
             "description": "The past score data",
             "type": "array",
             "items": {
               "$ref": "#/definitions/scoreEntity"
-            }
+            },
+            "x-ms-identifiers":[]
           }
         }
-      }
+      },
+      "x-ms-identifiers":[]
     },
     "advisorScoreEntity": {
       "description": "The details of Advisor score for a single category.",
