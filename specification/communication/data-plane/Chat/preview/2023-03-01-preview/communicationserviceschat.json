@@ -1569,22 +1569,22 @@
         "contentType": {
           "description": "The type of content of the attachment as mime type, if available",
           "type": "string",
-          "example": "text/html"
+          "example": "png"
         },
         "name": {
           "description": "The name of the attachment content.",
           "type": "string",
-          "example": "filename.txt"
+          "example": "SomeImage.png"
         },
         "url": {
           "description": "The URL where the attachment can be downloaded",
           "type": "string",
-          "example": "https://contoso.server.com/image/imageId"
+          "example": "https://contoso.server.com/image/imageId/original"
         },
         "previewUrl": {
           "description": "The URL where the preview of attachment can be downloaded",
           "type": "string",
-          "example": "https://contoso.server.com/image/imageId"
+          "example": "https://contoso.server.com/image/imageId/small"
         }
       }
     },
@@ -1696,13 +1696,6 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          }
-        },
-        "attachments": {
-          "description": "Collection of chat messages attachments.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ChatAttachment"
           }
         }
       }
