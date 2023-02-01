@@ -1,12 +1,24 @@
 {
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2022-09-01-preview",
+    "subscriptionId": "subid",
+    "policyRestrictionId": "policyRestriction1",
+    "If-Match": "*",
     "parameters": {
-      "serviceName": "apimService1",
-      "resourceGroupName": "rg1",
-      "api-version": "2022-09-01-preview",
-      "subscriptionId": "subid",
-      "policyRestrictionId": "policyRestriction1",
-      "If-Match": "*",
-      "parameters": {
+      "properties": {
+        "scope": "Sample Path to the policy document.",
+        "requireBase": true,
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyRestrictions/policyRestriction1",
+        "type": "Microsoft.ApiManagement/service/policyFragments",
+        "name": "policyFragment1",
         "properties": {
           "scope": "Sample Path to the policy document.",
           "requireBase": true,
@@ -14,30 +26,17 @@
         }
       }
     },
-    "responses": {
-      "200": {
-        "body": {
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyRestrictions/policyRestriction1",
-          "type": "Microsoft.ApiManagement/service/policyFragments",
-          "name": "policyFragment1",
-          "properties": {
-            "scope": "Sample Path to the policy document.",
-            "requireBase": true,
-            "complianceState": "pending"
-          }
-        }
-      },
-      "201": {
-        "body": {
-          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyRestrictions/policyRestriction1",
-          "type": "Microsoft.ApiManagement/service/policyFragments",
-          "name": "policyFragment1",
-          "properties": {
-            "scope": "Sample Path to the policy document.",
-            "requireBase": true,
-            "complianceState": "pending"
-          }
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policyRestrictions/policyRestriction1",
+        "type": "Microsoft.ApiManagement/service/policyFragments",
+        "name": "policyFragment1",
+        "properties": {
+          "scope": "Sample Path to the policy document.",
+          "requireBase": true,
+          "complianceState": "pending"
         }
       }
     }
   }
+}

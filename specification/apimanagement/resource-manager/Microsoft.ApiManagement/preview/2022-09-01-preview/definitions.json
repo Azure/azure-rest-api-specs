@@ -4498,6 +4498,7 @@
       "description": "Policy fragment contract properties."
     },
     "PolicyRestrictionCollection": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -4519,6 +4520,7 @@
       "description": "The response of the get policy fragments operation."
     },
     "PolicyRestrictionContract": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -4531,9 +4533,10 @@
           "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
         }
       ],
-      "description": "Policy restiction contract details."
+      "description": "Policy restriction contract details."
     },
     "PolicyRestrictionContractProperties": {
+      "type": "object",
       "properties": {
         "scope": {
           "type": "string",
@@ -4551,22 +4554,22 @@
             "compliant",
             "nonCompliant",
             "pending"
-          ],      
+          ],
           "x-ms-enum": {
             "name": "PolicyRestrictionComplianceState",
             "modelAsString": true,
             "values": [
               {
                 "value": "compliant",
-                "description": "The policy restriction is compliant after evalutation."
+                "description": "The policy restriction is compliant after evaluation."
               },
               {
                 "value": "nonCompliant",
-                "description": "The policy restriction is non compliant after evalutation."
+                "description": "The policy restriction is non compliant after evaluation."
               },
               {
                 "value": "pending",
-                "description": "The policy restriction is pending evalutation."
+                "description": "The policy restriction is pending evaluation."
               }
             ]
           },
