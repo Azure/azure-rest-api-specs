@@ -14012,6 +14012,22 @@
       },
       "x-ms-discriminator-value": "HyperVReplica2012"
     },
+    "HyperVSiteFabricCreationInput": {
+      "description": "HyperVSite fabric provider specific settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FabricSpecificCreationInput"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "The Location.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HyperVSite"
+    },
     "HyperVSiteDetails": {
       "description": "HyperVSite fabric specific details.",
       "type": "object",
