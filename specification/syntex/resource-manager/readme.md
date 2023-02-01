@@ -28,7 +28,16 @@ These are the global settings for the syntex.
 openapi-type: arm
 openapi-subtype: providerHub
 clear-output-folder: true
-tag: package-2022-09-15-preview
+tag: package-2023-01-04-preview
+```
+
+### Tag: package-2023-01-04-preview
+
+These settings apply only when `--tag=package-2023-01-04-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01-04-preview'
+input-file:
+  - Microsoft.Syntex/preview/2023-01-04-preview/syntex.json
 ```
 
 ### Tag: package-2022-09-15-preview
