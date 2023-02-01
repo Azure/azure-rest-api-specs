@@ -1,0 +1,28 @@
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@doc("The properties of Hyperv Host")
+model HyperVHostProperties {
+  @doc("Gets the timestamp marking Hyper-V host creation.")
+  @visibility("read")
+  createdTimestamp?: string;
+
+  @doc("Gets the timestamp marking last updated on the Hyper-V host.")
+  @visibility("read")
+  updatedTimestamp?: string;
+
+  @doc("Gets or sets the FQDN/IPAddress of the Hyper-V host.")
+  fqdn?: string;
+
+  @doc("Gets or sets the run as account ID of the Hyper-V host.")
+  runAsAccountId?: string;
+
+  @doc("Gets the version of the Hyper-V host.")
+  @visibility("read")
+  version?: string;
+
+  @doc("Gets the errors.")
+  @visibility("read")
+  errors?: HealthErrorDetails[];
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}

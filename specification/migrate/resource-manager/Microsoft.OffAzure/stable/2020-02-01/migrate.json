@@ -211,7 +211,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -260,7 +259,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -315,8 +313,7 @@
       },
       "patch": {
         "tags": [
-          "HypervSites",
-          "HyperVSitesController"
+          "HypervSites"
         ],
         "operationId": "HyperVSites_PatchSite",
         "description": "Update a HyperVSite",
@@ -335,16 +332,15 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
             "required": true,
-            "description": "The resource properties to be updated.",
+            "description": "Job body with updated properties.",
             "schema": {
-              "$ref": "#/definitions/HyperVSiteUpdate"
+              "$ref": "#/definitions/HyperVSite"
             }
           }
         ],
@@ -353,12 +349,6 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HyperVSite"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -393,7 +383,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -431,11 +420,7 @@
         "description": "List HyperVCluster resources by HyperVSite",
         "parameters": [
           {
-            "name": "$filter",
-            "in": "query",
-            "required": true,
-            "description": "filter query",
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -444,14 +429,17 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "name": "$filter",
+            "in": "query",
+            "required": true,
+            "description": "filter query",
+            "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -505,7 +493,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -513,7 +500,6 @@
             "in": "path",
             "required": true,
             "description": " Cluster ARM name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -562,7 +548,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -570,7 +555,6 @@
             "in": "path",
             "required": true,
             "description": " Cluster ARM name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -646,7 +630,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -683,7 +666,7 @@
         "tags": [
           "HypervSites"
         ],
-        "operationId": "HypervSites_HealthSummary",
+        "operationId": "HyperVSites_GetSiteHealthSummary",
         "description": "Method to get site health summary.",
         "parameters": [
           {
@@ -700,7 +683,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -716,11 +698,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "HypervSites_HealthSummary_MaximumSet_Gen": {
-            "$ref": "./examples/HypervSites_HealthSummary_MaximumSet_Gen.json"
+          "HyperVSites_GetSiteHealthSummary_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSiteHealthSummary_MaximumSet_Gen.json"
           },
-          "HypervSites_HealthSummary_MinimumSet_Gen": {
-            "$ref": "./examples/HypervSites_HealthSummary_MinimumSet_Gen.json"
+          "HyperVSites_GetSiteHealthSummary_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSiteHealthSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -755,7 +737,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -809,7 +790,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -817,7 +797,6 @@
             "in": "path",
             "required": true,
             "description": " Host name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -866,7 +845,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -874,7 +852,6 @@
             "in": "path",
             "required": true,
             "description": " Host name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -949,7 +926,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -957,7 +933,6 @@
             "in": "path",
             "required": true,
             "description": " Host name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1008,7 +983,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1062,7 +1036,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -1070,7 +1043,6 @@
             "in": "path",
             "required": true,
             "description": " Job name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1150,7 +1122,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1204,7 +1175,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -1212,7 +1182,6 @@
             "in": "path",
             "required": true,
             "description": " HypervMachine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1264,7 +1233,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -1272,7 +1240,6 @@
             "in": "path",
             "required": true,
             "description": " HypervMachine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -1342,7 +1309,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -1350,7 +1316,6 @@
             "in": "path",
             "required": true,
             "description": "Operation status  Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1395,19 +1360,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
           }
         ],
         "responses": {
@@ -1472,7 +1425,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1525,7 +1477,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -1533,7 +1484,6 @@
             "in": "path",
             "required": true,
             "description": " RunAsAccounts name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1583,19 +1533,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
           }
         ],
         "responses": {
@@ -1667,7 +1605,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1712,7 +1649,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1760,7 +1696,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -1817,7 +1752,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -1875,7 +1809,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1926,7 +1859,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -1987,7 +1919,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2031,7 +1962,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2039,7 +1969,6 @@
             "in": "path",
             "required": true,
             "description": "Job Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2081,7 +2010,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2089,7 +2017,6 @@
             "in": "path",
             "required": true,
             "description": "Job Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2142,7 +2069,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2186,7 +2112,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2194,7 +2119,6 @@
             "in": "path",
             "required": true,
             "description": "Job Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2239,7 +2163,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2298,7 +2221,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2342,7 +2264,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2350,7 +2271,6 @@
             "in": "path",
             "required": true,
             "description": "Job Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2395,7 +2315,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2468,7 +2387,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2521,7 +2439,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2529,7 +2446,6 @@
             "in": "path",
             "required": true,
             "description": " Jobs name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2609,7 +2525,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2663,7 +2578,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2671,7 +2585,6 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2720,7 +2633,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2728,7 +2640,6 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2778,7 +2689,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2826,7 +2736,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2900,7 +2809,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2957,7 +2865,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3007,7 +2914,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3054,7 +2960,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3101,7 +3006,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3154,7 +3058,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3162,7 +3065,6 @@
             "in": "path",
             "required": true,
             "description": " Jobs name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3212,7 +3114,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3259,7 +3160,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3267,7 +3167,6 @@
             "in": "path",
             "required": true,
             "description": " A server machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3315,7 +3214,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3323,7 +3221,6 @@
             "in": "path",
             "required": true,
             "description": " A server machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3380,7 +3277,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3388,7 +3284,6 @@
             "in": "path",
             "required": true,
             "description": " A server machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3438,7 +3333,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3446,7 +3340,6 @@
             "in": "path",
             "required": true,
             "description": "Operation status  Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3490,7 +3383,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3562,7 +3454,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3615,7 +3506,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3623,7 +3513,6 @@
             "in": "path",
             "required": true,
             "description": " RunAsAccounts name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3673,7 +3562,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3743,7 +3631,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3788,7 +3675,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3836,7 +3722,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3910,7 +3795,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -3968,7 +3852,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -4018,7 +3901,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4026,7 +3908,6 @@
             "in": "path",
             "required": true,
             "description": "VmwareSite.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -4073,7 +3954,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4081,7 +3961,6 @@
             "in": "path",
             "required": true,
             "description": "VmwareSite.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -4126,7 +4005,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4211,7 +4089,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4289,7 +4166,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4374,7 +4250,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4459,7 +4334,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4530,7 +4404,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4615,7 +4488,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4682,7 +4554,7 @@
         "tags": [
           "VmwareSites"
         ],
-        "operationId": "VmwareSites_HealthSummary",
+        "operationId": "Sites_GetSiteHealthSummary",
         "description": "Method to get site health summary.",
         "parameters": [
           {
@@ -4699,7 +4571,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -4715,11 +4586,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "VmwareSites_HealthSummary_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_HealthSummary_MaximumSet_Gen.json"
+          "Sites_GetSiteHealthSummary_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteHealthSummary_MaximumSet_Gen.json"
           },
-          "VmwareSites_HealthSummary_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_HealthSummary_MinimumSet_Gen.json"
+          "Sites_GetSiteHealthSummary_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteHealthSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -4747,7 +4618,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -4801,7 +4671,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4809,7 +4678,6 @@
             "in": "path",
             "required": true,
             "description": " Hosts name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -4859,7 +4727,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -4912,7 +4779,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -4920,7 +4786,6 @@
             "in": "path",
             "required": true,
             "description": " Jobs name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -5000,7 +4865,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -5054,7 +4918,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5062,7 +4925,6 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -5113,7 +4975,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5121,7 +4982,6 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -5166,7 +5026,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5174,19 +5033,7 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
           }
         ],
         "responses": {
@@ -5252,7 +5099,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5260,19 +5106,7 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
           }
         ],
         "responses": {
@@ -5337,7 +5171,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5345,7 +5178,6 @@
             "in": "path",
             "required": true,
             "description": "Operation status  Arm Name.",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -5390,19 +5222,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
           }
         ],
         "responses": {
@@ -5467,7 +5287,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -5520,7 +5339,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5528,7 +5346,6 @@
             "in": "path",
             "required": true,
             "description": " RunAsAccounts name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -5579,7 +5396,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5663,19 +5479,7 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
           }
         ],
         "responses": {
@@ -5748,7 +5552,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5826,7 +5629,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5897,7 +5699,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -5975,7 +5776,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -6053,7 +5853,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -6107,7 +5906,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -6115,7 +5913,6 @@
             "in": "path",
             "required": true,
             "description": " VCenters name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -6164,7 +5961,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -6172,7 +5968,6 @@
             "in": "path",
             "required": true,
             "description": " VCenters name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -6247,7 +6042,6 @@
             "in": "path",
             "required": true,
             "description": "Site name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -6255,7 +6049,6 @@
             "in": "path",
             "required": true,
             "description": " VCenters name",
-            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -6310,23 +6103,21 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets Name of the Application."
+          "description": "Gets or sets Name of the Application.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets Version of the Application."
+          "description": "Gets or sets Version of the Application.",
+          "readOnly": true
         },
         "provider": {
           "type": "string",
-          "description": "Gets or sets Provider of the Application."
+          "description": "Gets or sets Provider of the Application.",
+          "readOnly": true
         }
       },
-      "description": "Application in the guest virtual machine.",
-      "required": [
-        "name",
-        "version",
-        "provider"
-      ]
+      "description": "Application in the guest virtual machine."
     },
     "AppsAndRoles": {
       "type": "object",
@@ -7113,7 +6904,8 @@
             "$ref": "#/definitions/HyperVCluster"
           },
           "x-cadl-name": "HyperVCluster[]",
-          "description": "The HyperVCluster items on this page"
+          "description": "The HyperVCluster items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -7250,7 +7042,8 @@
             "$ref": "#/definitions/HyperVHost"
           },
           "x-cadl-name": "HyperVHost[]",
-          "description": "The HyperVHost items on this page"
+          "description": "The HyperVHost items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -7269,46 +7062,42 @@
       "properties": {
         "createdTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp marking Hyper-V cluster creation."
+          "description": "Gets the timestamp marking Hyper-V host creation.",
+          "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
-          "description": "Gets the timestamp marking last updated on the Hyper-V cluster."
+          "description": "Gets the timestamp marking last updated on the Hyper-V host.",
+          "readOnly": true
         },
         "fqdn": {
           "type": "string",
-          "description": "Gets or sets the FQDN/IPAddress of the Hyper-V cluster."
+          "description": "Gets or sets the FQDN/IPAddress of the Hyper-V host."
         },
         "runAsAccountId": {
           "type": "string",
-          "description": "Gets or sets Run as account ID of the Hyper-V cluster."
+          "description": "Gets or sets the run as account ID of the Hyper-V host."
         },
         "version": {
           "type": "string",
-          "description": "Gets the version of the Hyper-V host."
+          "description": "Gets the version of the Hyper-V host.",
+          "readOnly": true
         },
         "errors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SiteHealthErrorDetails"
+            "$ref": "#/definitions/HealthErrorDetails"
           },
-          "x-cadl-name": "SiteHealthErrorDetails[]",
-          "description": "Gets the errors."
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the errors.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
         }
       },
-      "description": "The properties of Hyperv Host",
-      "required": [
-        "createdTimestamp",
-        "updatedTimestamp",
-        "fqdn",
-        "runAsAccountId",
-        "version",
-        "errors"
-      ]
+      "description": "The properties of Hyperv Host"
     },
     "HyperVMachineHyperVMachinePropertiesHighAvailability": {
       "type": "string",
@@ -7393,58 +7182,6 @@
         }
       ]
     },
-    "HyperVSiteUpdate": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/HyperVSiteUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the HyperVSite."
-    },
-    "HyperVSiteUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "masterSiteId": {
-          "type": "string",
-          "description": "Gets the Master Site this site is linked to."
-        },
-        "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Service principal identity details used by agent for communication to the service."
-        },
-        "agentDetails": {
-          "$ref": "#/definitions/SiteAgentProperties",
-          "description": "On-premises agent details."
-        },
-        "serviceEndpoint": {
-          "type": "string",
-          "description": "Service endpoint."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "RM ID of migration hub solution for SDS."
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Appliance Name."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "The updatable properties of the HyperVSite."
-    },
     "HypervHost": {
       "type": "object",
       "properties": {
@@ -7497,7 +7234,8 @@
             "$ref": "#/definitions/HypervJobResource"
           },
           "x-cadl-name": "HypervJobResource[]",
-          "description": "The HypervJobResource items on this page"
+          "description": "The HypervJobResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -7762,7 +7500,7 @@
         },
         "allocatedMemoryInMB": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Gets or sets the allocated Memory in MB."
         },
         "operatingSystemDetails": {
@@ -7833,7 +7571,8 @@
             "$ref": "#/definitions/HypervMachineResource"
           },
           "x-cadl-name": "HypervMachineResource[]",
-          "description": "The HypervMachineResource items on this page"
+          "description": "The HypervMachineResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -7896,7 +7635,8 @@
             "$ref": "#/definitions/HypervRunAsAccountResource"
           },
           "x-cadl-name": "HypervRunAsAccountResource[]",
-          "description": "The HypervRunAsAccountResource items on this page"
+          "description": "The HypervRunAsAccountResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -8034,7 +7774,8 @@
             "$ref": "#/definitions/ImportJobResource"
           },
           "x-cadl-name": "ImportJobResource[]",
-          "description": "The ImportJobResource items on this page"
+          "description": "The ImportJobResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -8185,7 +7926,7 @@
         },
         "allocatedMemoryInMb": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Gets or sets the allocated Memory in MB."
         },
         "operatingSystemDetails": {
@@ -8256,7 +7997,8 @@
             "$ref": "#/definitions/ImportMachineResource"
           },
           "x-cadl-name": "ImportMachineResource[]",
-          "description": "The ImportMachineResource items on this page"
+          "description": "The ImportMachineResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -8387,27 +8129,33 @@
       "properties": {
         "status": {
           "type": "string",
-          "description": "Gets operation status."
+          "description": "Gets operation status.",
+          "readOnly": true
         },
         "startTime": {
           "type": "string",
-          "description": "Gets operation start time."
+          "description": "Gets operation start time.",
+          "readOnly": true
         },
         "endTime": {
           "type": "string",
-          "description": "Gets operation end time."
+          "description": "Gets operation end time.",
+          "readOnly": true
         },
         "displayName": {
           "type": "string",
-          "description": "Gets or sets the display name of the Job."
+          "description": "Gets or sets the display name of the Job.",
+          "readOnly": true
         },
         "clientRequestId": {
           "type": "string",
-          "description": "Gets the client request Id used in the operation execution context."
+          "description": "Gets the client request Id used in the operation execution context.",
+          "readOnly": true
         },
         "activityId": {
           "type": "string",
-          "description": "Gets the activity Id used in the operation execution context."
+          "description": "Gets the activity Id used in the operation execution context.",
+          "readOnly": true
         },
         "errors": {
           "type": "array",
@@ -8416,23 +8164,15 @@
           },
           "x-ms-identifiers": [],
           "x-cadl-name": "ErrorDetails[]",
-          "description": "Gets the errors."
+          "description": "Gets the errors.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
         }
       },
-      "description": "Job REST Resource.",
-      "required": [
-        "status",
-        "startTime",
-        "endTime",
-        "displayName",
-        "clientRequestId",
-        "activityId",
-        "errors"
-      ]
+      "description": "Job REST Resource."
     },
     "LayoutUpdateSources": {
       "type": "string",
@@ -8519,7 +8259,8 @@
             "$ref": "#/definitions/MachineResource"
           },
           "x-cadl-name": "MachineResource[]",
-          "description": "The MachineResource items on this page"
+          "description": "The MachineResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -8958,7 +8699,8 @@
             "$ref": "#/definitions/ServerJobResource"
           },
           "x-cadl-name": "ServerJobResource[]",
-          "description": "The ServerJobResource items on this page"
+          "description": "The ServerJobResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -9103,8 +8845,8 @@
           "description": "number of processor cores of the machine."
         },
         "allocatedMemoryInMb": {
-          "type": "integer",
-          "format": "int64",
+          "type": "number",
+          "format": "double",
           "description": "allocated memory in MB of the machine."
         },
         "operatingSystemDetails": {
@@ -9248,7 +8990,8 @@
             "$ref": "#/definitions/ServerRunAsAccountResource"
           },
           "x-cadl-name": "ServerRunAsAccountResource[]",
-          "description": "The ServerRunAsAccountResource items on this page"
+          "description": "The ServerRunAsAccountResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -9451,83 +9194,6 @@
       },
       "description": "Gets or sets the list of site error summary."
     },
-    "SiteHealthErrorDetails": {
-      "type": "object",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "Gets the error message.",
-          "readOnly": true
-        },
-        "messageParameters": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Gets the message parameters.",
-          "readOnly": true
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Gets the appliance name.",
-          "readOnly": true
-        },
-        "id": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets the error ID.",
-          "readOnly": true
-        },
-        "code": {
-          "type": "string",
-          "description": "Gets the error name.",
-          "readOnly": true
-        },
-        "possibleCauses": {
-          "type": "string",
-          "description": "Gets the possible causes of error.",
-          "readOnly": true
-        },
-        "recommendedAction": {
-          "type": "string",
-          "description": "Gets the recommended action to resolve error.",
-          "readOnly": true
-        },
-        "severity": {
-          "type": "string",
-          "description": "Gets the error severity.",
-          "readOnly": true
-        },
-        "summaryMessage": {
-          "type": "string",
-          "description": "Gets the error summary message.",
-          "readOnly": true
-        },
-        "source": {
-          "$ref": "#/definitions/HealthErrorDetailsSource",
-          "description": "Gets the error source.",
-          "readOnly": true
-        },
-        "updatedTimeStamp": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Gets the time stamp when the error was updated.",
-          "readOnly": true
-        },
-        "runAsAccountId": {
-          "type": "string",
-          "description": "Gets run as account id used while performing discovery             of entity.",
-          "readOnly": true
-        },
-        "discoveryScope": {
-          "$ref": "#/definitions/HealthErrorDetailsDiscoveryScope",
-          "description": "Gets discovery scope for which             error is encountered.",
-          "readOnly": true
-        }
-      },
-      "description": "Error contract returned when some exception occurs in Rest API."
-    },
     "SiteHealthSummary": {
       "type": "object",
       "properties": {
@@ -9675,38 +9341,30 @@
       "properties": {
         "tenantId": {
           "type": "string",
-          "description": "Tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services."
+          "description": "Gets or sets the tenant Id for the service principal with which the\non-premise\n            management/data plane components would communicate with\nour Azure services."
         },
         "applicationId": {
           "type": "string",
-          "description": "Application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services."
+          "description": "Gets or sets the application/client Id for the service principal with which\nthe\n            on-premise management/data plane components would communicate\nwith our Azure \n            services."
         },
         "objectId": {
           "type": "string",
-          "description": "Object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services."
+          "description": "Gets or sets the object Id of the service principal with which the on-premise\n\n           management/data plane components would communicate with our Azure\nservices."
         },
         "audience": {
           "type": "string",
-          "description": "Intended audience for the service principal."
+          "description": "Gets or sets the intended audience for the service principal."
         },
-        "aadAutority": {
+        "aadAuthority": {
           "type": "string",
-          "description": "AAD Authority URL which was used to request the token for the service principal."
+          "description": "Gets or sets the AAD Authority URL which was used to request the token for\nthe\n            service principal."
         },
         "rawCertData": {
           "type": "string",
-          "description": "Raw certificate data for building certificate expiry flows."
+          "description": "Gets or sets the raw certificate data for building certificate expiry flows."
         }
       },
-      "description": "Class for site properties.",
-      "required": [
-        "tenantId",
-        "applicationId",
-        "objectId",
-        "audience",
-        "aadAutority",
-        "rawCertData"
-      ]
+      "description": "Class for site properties."
     },
     "SiteUsageResponse": {
       "type": "object",
@@ -10243,7 +9901,8 @@
             "$ref": "#/definitions/VCenter"
           },
           "x-cadl-name": "VCenter[]",
-          "description": "The VCenter items on this page"
+          "description": "The VCenter items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -10559,7 +10218,8 @@
             "$ref": "#/definitions/VmwareHostResource"
           },
           "x-cadl-name": "VmwareHostResource[]",
-          "description": "The VmwareHostResource items on this page"
+          "description": "The VmwareHostResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -10602,7 +10262,8 @@
             "$ref": "#/definitions/VmwareJobResource"
           },
           "x-cadl-name": "VmwareJobResource[]",
-          "description": "The VmwareJobResource items on this page"
+          "description": "The VmwareJobResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",
@@ -10857,7 +10518,7 @@
         },
         "allocatedMemoryInMb": {
           "type": "number",
-          "format": "float",
+          "format": "double",
           "description": "Gets or sets the allocated Memory in MB."
         },
         "operatingSystemDetails": {
@@ -10994,7 +10655,8 @@
             "$ref": "#/definitions/VmwareRunAsAccountResource"
           },
           "x-cadl-name": "VmwareRunAsAccountResource[]",
-          "description": "The VmwareRunAsAccountResource items on this page"
+          "description": "The VmwareRunAsAccountResource items on this page",
+          "readOnly": true
         },
         "nextLink": {
           "type": "string",

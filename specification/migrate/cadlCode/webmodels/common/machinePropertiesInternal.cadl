@@ -112,13 +112,16 @@ model DiscoveryState {
 @doc("Application in the guest virtual machine.")
 model Applications {
   @doc("Gets or sets Name of the Application.")
-  name: string;
+  @visibility("read")
+  name?: string;
 
   @doc("Gets or sets Version of the Application.")
-  version: string;
+  @visibility("read")
+  version?: string;
 
   @doc("Gets or sets Provider of the Application.")
-  provider: string;
+  @visibility("read")
+  provider?: string;
 }
 
 @doc(" WebApplication in the guest virtual machine.")

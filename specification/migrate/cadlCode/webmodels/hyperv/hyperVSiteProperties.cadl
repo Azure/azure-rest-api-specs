@@ -1,0 +1,75 @@
+@doc("The properties of VMwareSiteResource")
+model SiteProperties {
+  @doc("Gets the Master Site this site is linked to.")
+  masterSiteId: string;
+
+  @doc("Service principal identity details used by agent for communication to the service.")
+  servicePrincipalIdentityDetails: SiteSpnProperties;
+
+  @doc("On-premises agent details.")
+  agentDetails: SiteAgentProperties;
+
+  @doc("Service endpoint.")
+  serviceEndpoint: string;
+
+  @doc("RM ID of migration hub solution for SDS.")
+  discoverySolutionId: string;
+
+  @doc("Appliance Name.")
+  applianceName: string;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@doc("Site REST Resource.")
+model HyperVSite {
+  @doc("Gets the relative URL to get this Site.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Handled by resource provider. Type = Microsoft.OffAzure/HyperVSites.")
+  @visibility("read")
+  type?: string;
+
+  @doc("Gets or sets the nested properties.")
+  properties?: HyperVSiteHyperVSiteProperties;
+
+  @doc("Gets or sets the name of the site.")
+  name?: string;
+
+  @doc("Gets or sets the eTag for concurrency control.")
+  eTag?: string;
+
+  @doc("Gets or sets the Azure location in which Sites is created.")
+  location?: string;
+}
+
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@doc("Class for Server site properties.")
+model HyperVSiteHyperVSiteProperties {
+  @doc("Gets the Master Site this site is linked to.")
+  @visibility("read")
+  masterSiteId?: string;
+
+  @doc("""
+Gets or sets the service principal identity details used by agent for
+communication
+            to the service.
+""")
+  servicePrincipalIdentityDetails?: SiteSpnProperties;
+
+  @doc("Gets or sets the on-premises agent details.")
+  agentDetails?: SiteAgentProperties;
+
+  @doc("Gets or sets the Appliance Name.")
+  applianceName?: string;
+
+  @doc("Gets or sets the ARM ID of migration hub solution for SDS.")
+  discoverySolutionId?: string;
+
+  @doc("Gets the service endpoint.")
+  @visibility("read")
+  serviceEndpoint?: string;
+}
