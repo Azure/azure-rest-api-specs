@@ -164,7 +164,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterResponse"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "201": {
@@ -178,7 +178,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ClusterResponse"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "default": {
@@ -218,7 +218,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterResponse"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "default": {
@@ -338,7 +338,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterResponse"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "202": {
@@ -352,7 +352,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/ClusterResponse"
+              "$ref": "#/definitions/Cluster"
             }
           },
           "default": {
@@ -672,7 +672,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerConfigurationRequest"
+              "$ref": "#/definitions/ServerConfiguration"
             },
             "description": "The required parameters for updating a cluster configuration."
           }
@@ -787,7 +787,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServerConfigurationRequest"
+              "$ref": "#/definitions/ServerConfiguration"
             },
             "description": "The required parameters for updating a cluster configuration."
           }
@@ -1668,7 +1668,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionActionRequest"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             },
             "description": "The required parameters for approving a private endpoint connection."
           }
@@ -2083,7 +2083,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ClusterResponse"
+            "$ref": "#/definitions/Cluster"
           },
           "description": "The list of clusters"
         },
@@ -2096,13 +2096,13 @@
       "description": "A list of clusters."
     },
     "Cluster": {
-      "description": "Represents a cluster for create.",
+      "description": "Represents a cluster.",
       "type": "object",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ClusterProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of the cluster create."
+          "description": "Properties of the cluster."
         }
       },
       "allOf": [
@@ -2112,30 +2112,44 @@
       ]
     },
     "ClusterProperties": {
-      "description": "The properties used to create a new cluster.",
+      "description": "Properties of the cluster response body.",
       "type": "object",
       "properties": {
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of the servers in the cluster.",
+          "readOnly": true
+        },
         "administratorLoginPassword": {
           "type": "string",
           "x-ms-secret": true,
           "format": "password",
           "x-ms-mutability": [
-            "create",
-            "update"
+            "create"
           ],
           "description": "The password of the administrator login. Required for creation."
-        },
-        "postgresqlVersion": {
-          "type": "string",
-          "description": "The PostgreSQL version of cluster."
         },
         "citusVersion": {
           "type": "string",
           "description": "The Citus version of cluster."
         },
-        "enableShardsOnCoordinator": {
+        "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the cluster."
+          "description": "If public IP is requested or not for a server."
+        },
+        "coordinatorServerEdition": {
+          "type": "string",
+          "description": "The edition of a coordinator server (default: GeneralPurpose). Required for creation."
+        },
+        "coordinatorStorageQuotaInMb": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The storage of a server in MB. Required for creation."
+        },
+        "coordinatorVCores": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The vCores count of a server (max: 64). Required for creation."
         },
         "earliestRestoreTime": {
           "type": "string",
@@ -2145,154 +2159,22 @@
         },
         "enableHa": {
           "type": "boolean",
-          "description": "If high availability is enabled or not for the cluster."
+          "description": "If high availability is enabled or not for the server."
         },
-        "preferredPrimaryZone": {
-          "type": "string",
-          "description": "Preferred primary zone for the cluster"
-        },
-        "coordinatorServerEdition": {
-          "type": "string",
-          "description": "The edition of the coordinator (default: GeneralPurpose). Required for creation."
-        },
-        "coordinatorStorageQuotaInMb": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The storage of the coordinator in MB. Required for creation."
-        },
-        "coordinatorVCores": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The vCores count of the coordinator (max: 64). Required for creation."
-        },
-        "coordinatorEnablePublicIpAccess": {
+        "enableShardsOnCoordinator": {
           "type": "boolean",
-          "description": "If public IP is requested or not for the coordinator."
+          "description": "If shards on coordinator is enabled or not for the cluster."
         },
-        "nodeServerEdition": {
-          "type": "string",
-          "description": "The edition of a node (default: MemoryOptimized)."
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a cluster."
         },
         "nodeCount": {
           "type": "integer",
           "format": "int64",
           "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1. Required for creation."
         },
-        "nodeStorageQuotaInMb": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The storage of a node in MB."
-        },
-        "nodeVCores": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The vCores count of a node (max: 64)."
-        },
         "nodeEnablePublicIpAccess": {
-          "type": "boolean",
-          "description": "If public IP is requested or not for a node."
-        },
-        "maintenanceWindow": {
-          "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a cluster."
-        },
-        "sourceResourceId": {
-          "type": "string",
-          "description": "The source resource id to restore from. It's required to create 'ReadReplica'",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "sourceLocation": {
-          "type": "string",
-          "description": "The source cluster location to restore from. It's required for creating 'PointInTimeRestore' or 'ReadReplica' operations",
-          "x-ms-mutability": [
-            "create"
-          ]
-        },
-        "pointInTimeUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from. It's required to create 'PointInTimeRestore'",
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      }
-    },
-    "ClusterResponse": {
-      "description": "Represents a cluster in response body.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ClusterResponseProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of the cluster response body."
-        }
-      }
-    },
-    "ClusterResponseProperties": {
-      "description": "Properties of the cluster response body.",
-      "type": "object",
-      "properties": {
-        "administratorLogin": {
-          "type": "string",
-          "description": "The administrator's login name of the servers in the cluster."
-        },
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the cluster",
-          "readOnly": true
-        },
-        "state": {
-          "type": "string",
-          "description": "A state of a cluster/server that is visible to user.",
-          "readOnly": true
-        },
-        "postgresqlVersion": {
-          "type": "string",
-          "description": "The PostgreSQL version of cluster."
-        },
-        "citusVersion": {
-          "type": "string",
-          "description": "The Citus version of cluster."
-        },
-        "maintenanceWindow": {
-          "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a cluster."
-        },
-        "preferredPrimaryZone": {
-          "type": "string",
-          "description": "Preferred primary zone for the cluster"
-        },
-        "enableShardsOnCoordinator": {
-          "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the cluster."
-        },
-        "enableHa": {
-          "type": "boolean",
-          "description": "If high availability is enabled or not for the server."
-        },
-        "coordinatorServerEdition": {
-          "type": "string",
-          "description": "The edition of a coordinator server (default: GeneralPurpose)."
-        },
-        "coordinatorStorageQuotaInMb": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The storage of a server in MB."
-        },
-        "coordinatorVCores": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The vCores count of a server (max: 64)."
-        },
-        "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
           "description": "If public IP is requested or not for a server."
         },
@@ -2300,11 +2182,6 @@
           "type": "string",
           "description": "The edition of a node server (default: MemoryOptimized)."
         },
-        "nodeCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Worker node count of the cluster"
-        },
         "nodeStorageQuotaInMb": {
           "type": "integer",
           "format": "int64",
@@ -2315,10 +2192,40 @@
           "format": "int64",
           "description": "The vCores count of a server (max: 64)."
         },
-        "nodeEnablePublicIpAccess": {
-          "type": "boolean",
-          "description": "If public IP is requested or not for a server.",
+        "pointInTimeUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
+        },
+        "postgresqlVersion": {
+          "type": "string",
+          "description": "The PostgreSQL version of cluster."
+        },
+        "preferredPrimaryZone": {
+          "type": "string",
+          "description": "Preferred primary zone for the cluster"
+        },
+        "privateEndpointConnections": {
+          "description": "The private endpoint connections for a cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimplePrivateEndpointConnection"
+          },
           "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the cluster",
+          "readOnly": true
+        },
+        "readReplicas": {
+          "type": "array",
+          "description": "The array of read replica clusters.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "uniqueItems": true
         },
         "serverNames": {
           "type": "array",
@@ -2334,41 +2241,15 @@
         },
         "sourceResourceId": {
           "type": "string",
-          "description": "The resource id of source cluster for read replica clusters.",
-          "readOnly": true
+          "description": "The resource id of source cluster for read replica clusters."
         },
         "sourceLocation": {
           "type": "string",
-          "description": "The location of source cluster for read replica clusters.",
-          "readOnly": true
+          "description": "The location of source cluster for read replica clusters."
         },
-        "pointInTimeUTC": {
+        "state": {
           "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from.",
-          "readOnly": true
-        },
-        "readReplicas": {
-          "type": "array",
-          "description": "The array of read replica clusters.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "uniqueItems": true
-        },
-        "earliestRestoreTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The earliest restore point time (ISO8601 format) for the cluster.",
-          "readOnly": true
-        },
-        "privateEndpointConnections": {
-          "description": "The private endpoint connections for a cluster.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SimplePrivateEndpointConnection"
-          },
+          "description": "A state of a cluster/server that is visible to user.",
           "readOnly": true
         }
       }
@@ -2441,7 +2322,7 @@
           "uniqueItems": true
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the configuration",
           "readOnly": true
         }
@@ -2561,36 +2442,9 @@
           "readOnly": true
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the configuration",
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the configuration.",
           "readOnly": true
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ServerConfigurationRequest": {
-      "description": "Represents a configuration.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ServerConfigurationRequestProperties",
-          "description": "The properties of a configuration.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "ServerConfigurationRequestProperties": {
-      "description": "The properties of a server configuration request.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Represents the value of a configuration.",
-          "type": "string"
         }
       },
       "required": [
@@ -2646,8 +2500,8 @@
           "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the firewall rule",
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the firewall rule.",
           "readOnly": true
         }
       },
@@ -2701,8 +2555,8 @@
           "description": "The password of the cluster role."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of the cluster role",
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the role",
           "readOnly": true
         }
       },
@@ -2921,33 +2775,6 @@
       },
       "description": "List of private endpoint connections associated with the specified resource."
     },
-    "PrivateEndpointConnectionActionRequest": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionActionRequestProperties",
-          "x-ms-client-flatten": true,
-          "description": "Properties of the private endpoint connection."
-        }
-      },
-      "required": [
-        "properties"
-      ]
-    },
-    "PrivateEndpointConnectionActionRequestProperties": {
-      "description": "The properties used to create a private endpoint connection",
-      "type": "object",
-      "properties": {
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionRequestState",
-          "description": "Connection state of the private endpoint connection."
-        }
-      },
-      "required": [
-        "privateLinkServiceConnectionState"
-      ]
-    },
     "PrivateEndpointConnectionSimpleProperties": {
       "description": "The properties in private endpoint connection",
       "type": "object",
@@ -2968,20 +2795,6 @@
         }
       }
     },
-    "PrivateLinkServiceConnectionRequestState": {
-      "type": "object",
-      "description": "The private link service connection state",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "The reason for approval/rejection of the connection."
-        },
-        "status": {
-          "type": "string",
-          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
-        }
-      }
-    },
     "PrivateLinkResourceListResult": {
       "type": "object",
       "properties": {
@@ -2994,6 +2807,21 @@
         }
       },
       "description": "A list of private link resources."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Canceled",
+        "InProgress",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {

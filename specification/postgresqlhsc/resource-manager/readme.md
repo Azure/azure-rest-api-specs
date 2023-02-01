@@ -58,15 +58,6 @@ directive:
 - suppress: ConsistentPatchProperties
   from: postgresqlhsc.json
   reason: we only support admin password inside request body and don't return it
-- suppress: CreateOperationAsyncResponseValidation
-  from: postgresqlhsc.json
-  reason: Our control plane returns 202 for most of the put async operation other than cluster creation.
-- suppress: LongRunningResponseStatusCode
-  from: postgresqlhsc.json
-  reason: Our control plane returns 202 for most of the put async operation other than cluster creation.
-- suppress: NestedResourcesMustHaveListOperation
-  from: postgresqlhsc.json
-  reason: We already have get/list endpoints for Configuration that covers both cases, node configurations and coordinator configurations.
 - suppress: EnumInsteadOfBoolean
   from: postgresqlhsc.json
   reason: It's been used as boolean since 2019 by internal teams and also private preview customers like Azure Portal and we have no plans to use any values other than true/false.
