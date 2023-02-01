@@ -1,29 +1,29 @@
 {
   "parameters": {
-    "api-version": "2022-06-30-preview",
+    "api-version": "2023-02-15-preview",
     "endpoint": "accountName.purview.azure.com/share",
-    "receivedShareId": "0D67B9C8-A6C6-4990-9EDE-12EA059D3002",
+    "receivedShareId": "35E28F0E-DEA4-472F-84E4-5F1E45FB9937",
     "receivedShare": {
       "properties": {
-        "displayName": "updatedReceivedShareName",
+        "displayName": "updatedReceivedShareNameAdls",
         "sink": {
-          "properties": {
-            "containerName": "receivingContainer",
-            "folder": "receivingFolder",
-            "mountPath": "path"
-          },
           "storeReference": {
-            "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/blobAccount",
+            "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/adlsAccount",
             "type": "ArmResourceReference"
           },
-          "storeKind": "BlobAccount"
+          "properties": {
+            "containerName": "receivingContainerAbc",
+            "folder": "receivingFolderAbc",
+            "mountPath": "pathAbc"
+          },
+          "storeKind": "AdlsGen2Account"
         }
       },
       "shareKind": "InPlace"
     }
   },
   "responses": {
-    "202": {
+    "201": {
       "headers": {
         "Date": "Wed, 13 Sep 2017 18:04:32 GMT",
         "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
@@ -34,34 +34,34 @@
         "Operation-Id": "dad6baec-3a39-41df-a469-843a9ee94213"
       },
       "body": {
-        "id": "0D67B9C8-A6C6-4990-9EDE-12EA059D3002",
+        "id": "35E28F0E-DEA4-472F-84E4-5F1E45FB9937",
         "properties": {
           "assetLocation": "eastus",
-          "assetStoreKind": "BlobAccount",
-          "createdAt": "2022-07-12T18:18:50.7095202Z",
-          "sharedAt": "2022-07-12T18:17:56.1065304Z",
-          "displayName": "updatedReceivedShareName",
+          "assetStoreKind": "AdlsGen2Account",
+          "createdAt": "2022-07-19T18:18:50.7095202Z",
+          "displayName": "updatedReceivedShareNameAdls",
           "provisioningState": "Succeeded",
+          "receiverEmail": "johndoe@fabrikam.com",
+          "receiverName": "John Doe",
           "shareStatus": "Attached",
-          "sentShareDescription": "description",
-          "receiverName": "Jane Doe",
-          "receiverEmail": "janedoe@fabrikam.com",
           "receiverTenantName": "Fabrikam",
-          "senderName": "Ali Smith",
           "senderEmail": "ali.smith@contoso.com",
+          "senderName": "Ali Smith",
           "senderTenantName": "Contoso",
+          "sentShareDescription": "description",
+          "sharedAt": "2022-07-18T18:17:56.1065304Z",
           "sink": {
-            "properties": {
-              "containerName": "receivingContainer",
-              "folder": "receivingFolder",
-              "location": "eastus",
-              "mountPath": "path"
-            },
+            "storeKind": "AdlsGen2Account",
             "storeReference": {
-              "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/blobAccount",
+              "referenceName": "/subscriptions/4D8FD81D-431D-4B1D-B46C-C770CFC034FC/resourceGroups/contoso-rg/providers/Microsoft.Storage/storageAccounts/adlsAccount",
               "type": "ArmResourceReference"
             },
-            "storeKind": "BlobAccount"
+            "properties": {
+              "containerName": "receivingContainerAbc",
+              "folder": "receivingFolderAbc",
+              "location": "eastus",
+              "mountPath": "pathAbc"
+            }
           }
         },
         "shareKind": "InPlace",
