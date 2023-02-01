@@ -1,0 +1,103 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-06-01",
+    "title": "SynapseManagementClient",
+    "description": "Azure Synapse Analytics APIs"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "type": "oauth2",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Synapse/locations/{location}/usages": {
+      "post": {
+        "operationId": "Operations_GetWorkspacePerSubscriptionQuota",
+        "summary": "Gets the current usage and quota of workspaces in a subscription/region",
+        "description": "Gets the current usage and quota of workspaces in a subscription/region",
+        "tags": [
+          "Usages"
+        ],
+        "deprecated": false,
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location on which resource usage is queried."
+          }
+        ],
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/WorkspaceUsageQuotaResponse"
+            },
+            "description": ""
+          },
+          "default": {
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "description": ""
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Workspace per subscription usage in given location": {
+            "$ref": "./examples/WorkspacePerSubscriptionUsageGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WorkspaceUsageQuotaResponse": {
+      "description": "Workspaces per subscription usage and limit.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "User-readable name of the metric.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentValue": {
+          "format": "double",
+          "description": "Current value of the metric.",
+          "type": "number",
+          "readOnly": true
+        },
+        "limit": {
+          "format": "double",
+          "description": "Boundary value of the metric.",
+          "type": "number",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "Unit of the metric.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  }
+}
