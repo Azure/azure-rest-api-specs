@@ -777,7 +777,7 @@
           "type": "string",
           "description": "An identifier of the Azure AD B2C tenant."
         },
-        "goLocal": {
+        "isGoLocalTenant": {
           "$ref": "#/definitions/GoLocal"
         }
       }
@@ -1035,7 +1035,7 @@
         "countryCode": {
           "$ref": "#/definitions/CountryCode"
         },
-        "goLocal": {
+        "isGoLocalTenant": {
           "$ref": "#/definitions/GoLocal"
         }
       }
@@ -1046,19 +1046,7 @@
     },
     "GoLocal": {
       "description": "Enable GoLocal add-on to store data at rest in the specific Geo. Refer to [aka.ms/B2CDataResidency](https://aka.ms/B2CDataResidency) to see local data residency options.",
-      "type": "string",
-      "enum": [
-        "Enabled"
-      ],
-      "x-ms-enum": {
-        "name": "GoLocalType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Enabled"
-          }
-        ]
-      }
+      "type": "boolean"
     },
     "GuestUsagesResourceProperties": {
       "description": "Guest Usages Resource Properties",
