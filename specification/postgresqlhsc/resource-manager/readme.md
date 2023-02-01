@@ -55,9 +55,6 @@ directive:
 - suppress: PathResourceProviderNamePascalCase
   from: postgresqlhsc.json
   reason: Service provider name Microsoft.DBforPostgreSQL directly violates this rule.
-- suppress: ConsistentPatchProperties
-  from: postgresqlhsc.json
-  reason: we only support admin password inside request body and don't return it
 - suppress: EnumInsteadOfBoolean
   from: postgresqlhsc.json
   reason: It's been used as boolean since 2019 by internal teams and also private preview customers like Azure Portal and we have no plans to use any values other than true/false.

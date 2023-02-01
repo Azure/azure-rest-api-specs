@@ -2112,7 +2112,7 @@
       ]
     },
     "ClusterProperties": {
-      "description": "Properties of the cluster response body.",
+      "description": "Properties of the cluster.",
       "type": "object",
       "properties": {
         "administratorLogin": {
@@ -2129,13 +2129,39 @@
           ],
           "description": "The password of the administrator login. Required for creation."
         },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the cluster",
+          "readOnly": true
+        },
+        "state": {
+          "type": "string",
+          "description": "A state of a cluster/server that is visible to user.",
+          "readOnly": true
+        },
+        "postgresqlVersion": {
+          "type": "string",
+          "description": "The PostgreSQL version of cluster."
+        },
         "citusVersion": {
           "type": "string",
           "description": "The Citus version of cluster."
         },
-        "coordinatorEnablePublicIpAccess": {
+        "maintenanceWindow": {
+          "$ref": "#/definitions/MaintenanceWindow",
+          "description": "Maintenance window of a cluster."
+        },
+        "preferredPrimaryZone": {
+          "type": "string",
+          "description": "Preferred primary zone for the cluster"
+        },
+        "enableShardsOnCoordinator": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a server."
+          "description": "If shards on coordinator is enabled or not for the cluster."
+        },
+        "enableHa": {
+          "type": "boolean",
+          "description": "If high availability is enabled or not for the server."
         },
         "coordinatorServerEdition": {
           "type": "string",
@@ -2149,38 +2175,20 @@
         "coordinatorVCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of a server (max: 64). Required for creation."
+          "description": "The vCores count of a server (max: 64)."
         },
-        "earliestRestoreTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The earliest restore point time (ISO8601 format) for the cluster.",
-          "readOnly": true
-        },
-        "enableHa": {
-          "type": "boolean",
-          "description": "If high availability is enabled or not for the server."
-        },
-        "enableShardsOnCoordinator": {
-          "type": "boolean",
-          "description": "If shards on coordinator is enabled or not for the cluster."
-        },
-        "maintenanceWindow": {
-          "$ref": "#/definitions/MaintenanceWindow",
-          "description": "Maintenance window of a cluster."
-        },
-        "nodeCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1. Required for creation."
-        },
-        "nodeEnablePublicIpAccess": {
+        "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
           "description": "If public IP is requested or not for a server."
         },
         "nodeServerEdition": {
           "type": "string",
           "description": "The edition of a node server (default: MemoryOptimized)."
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1. Required for creation."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
@@ -2192,40 +2200,9 @@
           "format": "int64",
           "description": "The vCores count of a server (max: 64)."
         },
-        "pointInTimeUTC": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
-        },
-        "postgresqlVersion": {
-          "type": "string",
-          "description": "The PostgreSQL version of cluster."
-        },
-        "preferredPrimaryZone": {
-          "type": "string",
-          "description": "Preferred primary zone for the cluster"
-        },
-        "privateEndpointConnections": {
-          "description": "The private endpoint connections for a cluster.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SimplePrivateEndpointConnection"
-          },
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "Provisioning state of the cluster",
-          "readOnly": true
-        },
-        "readReplicas": {
-          "type": "array",
-          "description": "The array of read replica clusters.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "uniqueItems": true
+        "nodeEnablePublicIpAccess": {
+          "type": "boolean",
+          "description": "If public IP is requested or not for a server."
         },
         "serverNames": {
           "type": "array",
@@ -2247,9 +2224,32 @@
           "type": "string",
           "description": "The location of source cluster for read replica clusters."
         },
-        "state": {
+        "pointInTimeUTC": {
           "type": "string",
-          "description": "A state of a cluster/server that is visible to user.",
+          "format": "date-time",
+          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
+        },
+        "readReplicas": {
+          "type": "array",
+          "description": "The array of read replica clusters.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "uniqueItems": true
+        },
+        "earliestRestoreTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest restore point time (ISO8601 format) for the cluster.",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "The private endpoint connections for a cluster.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SimplePrivateEndpointConnection"
+          },
           "readOnly": true
         }
       }
