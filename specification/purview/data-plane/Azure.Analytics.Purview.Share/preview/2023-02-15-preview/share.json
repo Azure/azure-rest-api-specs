@@ -139,6 +139,10 @@
               "Operation-Location": {
                 "description": "The URL to track the status of the long running operation.",
                 "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
               }
             }
           },
@@ -443,6 +447,10 @@
               "Operation-Location": {
                 "description": "The URL to track the status of the long running operation.",
                 "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
               }
             }
           },
@@ -646,6 +654,10 @@
             "description": "Accepted",
             "headers": {
               "Operation-Location": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
                 "description": "The URL to track the status of the long running operation.",
                 "type": "string"
               }
@@ -1891,13 +1903,6 @@
       "description": "Azure Active Directory OAuth2 Flow."
     }
   },
-  "security": [
-    {
-      "AzureAuth": [
-        "<audience>/.default"
-      ]
-    }
-  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
