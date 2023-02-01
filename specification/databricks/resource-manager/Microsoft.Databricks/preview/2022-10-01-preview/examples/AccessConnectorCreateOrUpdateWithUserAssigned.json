@@ -5,7 +5,10 @@
     "connectorName": "myAccessConnector",
     "api-version": "2022-10-01-preview",
     "identity": {
-      "type": "SystemAssigned"
+      "type": "UserAssigned",
+      "userAssignedIdentities": {
+        "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuseridentity": {}
+      }
     },
     "parameters": {
       "location": "westus"
@@ -25,9 +28,13 @@
           "provisioningState": "Succeeded"
         },
         "identity": {
-          "principalId": "5619ff16-afe1-47e5-ae67-8393c6c3223d",
-          "tenantId": "e3fe3f22-4b98-4c04-82cc-d8817d1b17da",
-          "type": "SystemAssigned"
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuseridentity": {
+              "principalId": "329429bc-adec-4dce-9568-25a6d486e468",
+              "clientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            }
+          }
         }
       }
     },
@@ -42,9 +49,13 @@
           "provisioningState": "Succeeded"
         },
         "identity": {
-          "principalId": "5619ff16-afe1-47e5-ae67-8393c6c3223d",
-          "tenantId": "e3fe3f22-4b98-4c04-82cc-d8817d1b17da",
-          "type": "SystemAssigned"
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testuseridentity": {
+              "principalId": "329429bc-adec-4dce-9568-25a6d486e468",
+              "clientId": "329419bc-adec-4dce-9568-25a6d486e468"
+            }
+          }
         }
       }
     }
