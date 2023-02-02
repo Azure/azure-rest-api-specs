@@ -3470,10 +3470,11 @@
           "type": "string",
           "description": "Port Status at the Source.",
           "enum": [
-            "NextHop",
-            "NCD",
-            "PortScan",
-            "Default"
+            "Unknown",
+            "Reachable",
+            "Unstable",
+            "NoConnection",
+            "Timeout"
           ],
           "x-ms-enum": {
             "name": "SourcePortStatus",
@@ -3482,12 +3483,13 @@
         },
         "destinationPortStatus": {
           "type": "string",
-          "description": "port Status at the Destination.",
+          "description": "Port Status at the Destination.",
           "enum": [
-            "NextHop",
-            "NCD",
-            "PortScan",
-            "Default"
+            "Unknown",
+            "Reachable",
+            "Unstable",
+            "NoConnection",
+            "Timeout"
           ],
           "x-ms-enum": {
             "name": "DestinationPortStatus",
