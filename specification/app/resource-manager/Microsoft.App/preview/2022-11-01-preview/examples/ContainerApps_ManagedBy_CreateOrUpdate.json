@@ -2,10 +2,11 @@
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
-    "containerAppName": "testcontainerAppTcp",
+    "containerAppName": "testcontainerAppManagedBy",
     "api-version": "2022-11-01-preview",
     "containerAppEnvelope": {
       "location": "East US",
+      "managedBy": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/Spring/springapp",
       "properties": {
         "environmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
         "configuration": {
@@ -17,7 +18,7 @@
             "traffic": [
               {
                 "weight": 100,
-                "revisionName": "testcontainerAppTcp-ab1234"
+                "revisionName": "testcontainerAppManagedBy-ab1234"
               }
             ]
           }
@@ -25,8 +26,8 @@
         "template": {
           "containers": [
             {
-              "image": "repo/testcontainerAppTcp:v1",
-              "name": "testcontainerAppTcp",
+              "image": "repo/testcontainerAppManagedBy:v1",
+              "name": "testcontainerAppManagedBy",
               "probes": [
                 {
                   "type": "Liveness",
@@ -61,18 +62,19 @@
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppTcp",
-        "name": "testcontainerAppTcp",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppManagedBy",
+        "name": "testcontainerAppManagedBy",
         "type": "Microsoft.App/containerApps",
         "location": "East US",
+        "managedBy": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/Spring/springapp",
         "properties": {
           "provisioningState": "Succeeded",
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-          "latestRevisionFqdn": "testcontainerAppTcp-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
-          "latestReadyRevisionName": "testcontainerAppTcp-pjxhsye",
+          "latestRevisionFqdn": "testcontainerAppManagedBy-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestReadyRevisionName": "testcontainerAppManagedBy-pjxhsye",
           "configuration": {
             "ingress": {
-              "fqdn": "testcontainerAppTcp.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "fqdn": "testcontainerAppManagedBy.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "external": true,
               "targetPort": 3000,
               "exposedPort": 4000,
@@ -80,11 +82,11 @@
               "traffic": [
                 {
                   "weight": 80,
-                  "revisionName": "testcontainerAppTcp-ab1234"
+                  "revisionName": "testcontainerAppManagedBy-ab1234"
                 },
                 {
                   "weight": 20,
-                  "revisionName": "testcontainerAppTcp-ab4321"
+                  "revisionName": "testcontainerAppManagedBy-ab4321"
                 }
               ]
             }
@@ -92,8 +94,8 @@
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerAppTcp:v4",
-                "name": "testcontainerAppTcp",
+                "image": "repo/testcontainerAppManagedBy:v4",
+                "name": "testcontainerAppManagedBy",
                 "resources": {
                   "cpu": 0.2,
                   "memory": "100Mi"
@@ -131,17 +133,18 @@
     "201": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppTcp",
-        "name": "testcontainerAppTcp",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/containerApps/testcontainerAppManagedBy",
+        "name": "testcontainerAppManagedBy",
         "type": "Microsoft.App/containerApps",
         "location": "East US",
+        "managedBy": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.AppPlatform/Spring/springapp",
         "properties": {
           "provisioningState": "InProgress",
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
-          "latestRevisionFqdn": "testcontainerAppTcp-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestRevisionFqdn": "testcontainerAppManagedBy-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
           "configuration": {
             "ingress": {
-              "fqdn": "testcontainerAppTcp.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+              "fqdn": "testcontainerAppManagedBy.demokube-t24clv0g.eastus.containerApps.k4apps.io",
               "external": true,
               "targetPort": 3000,
               "exposedPort": 4000,
@@ -149,11 +152,11 @@
               "traffic": [
                 {
                   "weight": 80,
-                  "revisionName": "testcontainerAppTcp-ab1234"
+                  "revisionName": "testcontainerAppManagedBy-ab1234"
                 },
                 {
                   "weight": 20,
-                  "revisionName": "testcontainerAppTcp-ab4321"
+                  "revisionName": "testcontainerAppManagedBy-ab4321"
                 }
               ]
             }
@@ -161,8 +164,8 @@
           "template": {
             "containers": [
               {
-                "image": "repo/testcontainerAppTcp:v4",
-                "name": "testcontainerAppTcp",
+                "image": "repo/testcontainerAppManagedBy:v4",
+                "name": "testcontainerAppManagedBy",
                 "resources": {
                   "cpu": 0.2,
                   "memory": "100Mi"

@@ -1080,6 +1080,56 @@
         }
       }
     },
+    "KedaConfiguration": {
+      "type": "object",
+      "description": "Configuration properties Keda component",
+      "properties": {
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version of Keda"
+        }
+      }
+    },
+    "DaprConfiguration": {
+      "type": "object",
+      "description": "Configuration properties Dapr component",
+      "properties": {
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version of Dapr"
+        }
+      }
+    },
+    "ManagedEnvironmentQuota": {
+      "type": "object",
+      "description": "Managed environment quota status",
+      "properties": {
+        "cores": {
+          "description": "The cores quota status",
+          "$ref": "#/definitions/QuotaStatus"
+        }
+      }
+    },
+    "QuotaStatus": {
+      "type": "object",
+      "description": "Quota status",
+      "properties": {
+        "total": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "Total quota amount"
+        },
+        "used": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "Used quota amount"
+        }
+      }
+    },
     "VnetConfiguration": {
       "type": "object",
       "description": "Configuration properties for apps environment to join a Virtual Network",
@@ -1247,6 +1297,18 @@
               "x-ms-identifiers": [
                 "workloadProfileType"
               ]
+            },
+            "kedaConfiguration": {
+              "$ref": "#/definitions/KedaConfiguration",
+              "description": "The configuration of Keda component."
+            },
+            "daprConfiguration": {
+              "$ref": "#/definitions/DaprConfiguration",
+              "description": "The configuration of Dapr component."
+            },
+            "quotas": {
+              "$ref": "#/definitions/ManagedEnvironmentQuota",
+              "description": "Quota status for the environment."
             }
           },
           "x-ms-client-flatten": true

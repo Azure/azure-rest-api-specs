@@ -46,6 +46,9 @@
                 "action": "Allow"
               }
             ],
+            "stickySessions": {
+              "affinity": "sticky"
+            },
             "clientCertificateMode": "accept",
             "corsPolicy": {
               "allowedOrigins": [
@@ -152,6 +155,7 @@
           "managedEnvironmentId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/demokube",
           "workloadProfileType": "GeneralPurpose",
           "latestRevisionFqdn": "testcontainerApp0-pjxhsye.demokube-t24clv0g.eastus.containerApps.k4apps.io",
+          "latestReadyRevisionName": "testcontainerApp0-pjxhsye",
           "configuration": {
             "ingress": {
               "fqdn": "testcontainerApp0.demokube-t24clv0g.eastus.containerApps.k4apps.io",
@@ -194,7 +198,10 @@
                   "ipAddressRange": "192.168.1.1/8",
                   "action": "Allow"
                 }
-              ]
+              ],
+              "stickySessions": {
+                "affinity": "sticky"
+              }
             },
             "dapr": {
               "enabled": true,
