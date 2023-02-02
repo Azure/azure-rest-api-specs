@@ -26,15 +26,28 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-07
+tag: package-preview-2022-02
 ```
 
 
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.KeyVault/preview/2022-02-01-preview/common.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/secrets.json
+```
 ### Tag: package-2022-07
 
 These settings apply only when `--tag=package-2022-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-07'
+``` yaml $(tag) == 'package-2022-07'
 input-file:
   - Microsoft.KeyVault/stable/2022-07-01/common.json
   - Microsoft.KeyVault/stable/2022-07-01/keys.json
@@ -43,6 +56,7 @@ input-file:
   - Microsoft.KeyVault/stable/2022-07-01/providers.json
   - Microsoft.KeyVault/stable/2022-07-01/secrets.json
 ```
+
 ### Tag: package-preview-2021-11
 
 These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
@@ -198,7 +212,7 @@ input-file:
 - Microsoft.KeyVault/stable/2019-09-01/secrets.json
 ```
 
-### Supressions
+### Suppression
 
 ``` yaml
 directive:
@@ -209,6 +223,12 @@ directive:
     - R4015 # The 'MHSMPrivateEndpointConnection' sub-resource doesn't define List as per Network Team's specification.
     - R2005 # The 'ManagedHsms_PurgeDeleted' operation should not return a mix of 202 and syncronous return types (200, 201, 204) as directed by SDK team.
     - R4009 # Vault object is the only one that need to be tracked with SystemData
+- suppress: INVALID_REQUEST_PARAMETER
+  from: keyvault.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
+- suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+  from: keyvault.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
 ```
 
 ---
