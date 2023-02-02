@@ -3012,6 +3012,12 @@
             "$ref": "#/parameters/includeTermHierarchy"
           },
           {
+            "$ref": "#/parameters/extInfo"
+          },
+          {
+            "$ref": "#/parameters/includeAssignedEntityCount"
+          },
+          {
             "$ref": "#/parameters/purviewAPIVersion"
           }
         ],
@@ -8277,6 +8283,24 @@
     "includeTermHierarchy": {
       "name": "includeTermHierarchy",
       "description": "Whether include term hierarchy",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "includeAssignedEntityCount": {
+      "name": "includeAssignedEntityCount",
+      "description": "Whether include the number of entities assigned to this term",
+      "in": "query",
+      "required": false,
+      "type": "boolean",
+      "default": false,
+      "x-ms-parameter-location": "method"
+    },
+    "extInfo": {
+      "name": "extInfo",
+      "description": "Whether include extended information like contact display name and attribute values",
       "in": "query",
       "required": false,
       "type": "boolean",
