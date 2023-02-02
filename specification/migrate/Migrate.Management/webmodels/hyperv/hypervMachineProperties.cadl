@@ -1,10 +1,15 @@
 import "../common/machinePropertiesInternal.cadl";
 import "../common/common.cadl";
 
-enum HighlyAvailable {
-  "Unknown",
-  "No",
-  "Yes",
+
+
+@knownValues(HighlyAvailableKnownValues)
+scalar HighlyAvailable extends string;
+
+enum HighlyAvailableKnownValues {
+  Unknown,
+  No,
+  Yes,
 }
 @doc("The properties of AddressResource")
 model HypervMachineProperties {
@@ -267,7 +272,7 @@ model HyperVNetworkAdapter {
 
   @doc("Static IP address.")
   @visibility("read")
-  staticIpAdress?: string;
+  staticIpAddress?: string;
 
   @doc("Mac address of the NIC.")
   @visibility("read")

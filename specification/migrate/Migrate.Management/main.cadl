@@ -6,6 +6,9 @@ import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-autorest";
 import "@azure-tools/cadl-azure-resource-manager";
 
+import "./operationsTemp.cadl";
+import "./operationsCore.cadl";
+
 import "./webmodels/common/agentDetails.cadl";
 import "./webmodels/common/siteSpnProperties.cadl";
 import "./webmodels/common/hypervSiteUsage.cadl";
@@ -18,7 +21,7 @@ import "./webmodels/common/siteErrorSummaryCollection.cadl";
 import "./webmodels/common/siteUsageResponse.cadl";
 import "./webmodels/common/machineMetadata.cadl";
 import "./webmodels/common/runAsAccountProperties.cadl";
-import "./webmodels/common/OperationStatusProperties.cadl";
+import "./webmodels/common/operationStatusProperties.cadl";
 import "./webmodels/common/provisioningState.cadl";
 
 import "./webmodels/vmware/vmwareSiteProperties.cadl";
@@ -114,7 +117,6 @@ interface HyperVClusterInt {
   // @tag("HyperVClusterController")
   // delete is ArmResourceDeleteSync<HyperVCluster>;
 
-
   @added(Versions.v2018_05_01_preview)
   @tag("HyperVClusterController")
   @segment("clusters")
@@ -125,6 +127,7 @@ interface HyperVClusterInt {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
+
       @doc("filter query")
       @query
       $filter?: string;
@@ -142,6 +145,14 @@ model VMwareSite is TrackedResource<SitesProperties> {
   @path
   //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
+
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Gets or sets the eTag for concurrency control.")
+  eTag?: string;
+
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Gets or sets the Azure location in which Sites is created.")
+  location?: string;
 }
 
 @armResourceOperations
@@ -155,9 +166,22 @@ interface VmwareSites {
   @operationId("Sites_PutSite")
   create is ArmResourceCreateOrUpdateAsync<VMwareSite>;
 
+  // @added(Versions.v2018_05_01_preview)
+  // @operationId("Sites_PatchSite")
+  // update is ArmResourcePatchSync<VMwareSite, SitesProperties>;
+
+  @armResourceUpdate(InnerError)
+  @patch
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_PatchSite")
-  update is ArmResourcePatchSync<VMwareSite, SitesProperties>;
+  @doc("Update a VMwareSite")
+  updateVmwareSite(
+    ...ResourceInstanceParameters<VMwareSite>,
+
+    @doc(" body with updated properties.")
+    @body
+    body: VMwareSite
+  ): ArmResponse<VMwareSite>;
 
   @tag("SitesController")
   @added(Versions.v2018_05_01_preview)
@@ -173,7 +197,7 @@ interface VmwareSites {
   @tag("SitesController")
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_RefreshSite")
-  refresh is ArmResourceActionAsyncNoRequestBody<VMwareSite,  {}>;
+  refresh is ArmResourceActionAsyncNoRequestBody<VMwareSite, {}>;
 
   @doc("A operation status resource belonging to a site resource.")
   @armResourceRead(InnerError)
@@ -191,10 +215,9 @@ interface VmwareSites {
   ): ArmResponse<OperationStatus>;
 
   @doc("Method to get site health summary.")
-  @armResourceRead(InnerError)
-  @segment("healthSummary")
+  @armResourceAction(InnerError)
   @added(Versions.v2018_05_01_preview)
-  @get
+  @post
   @operationId("Sites_GetSiteHealthSummary")
   healthSummary(
     ...ResourceInstanceParameters<VMwareSite>
@@ -210,7 +233,7 @@ interface VmwareSites {
 
     @doc("VmwareSite.")
     @path
-   //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     vmwareSite: string
   ): ArmResponse<SiteErrorSummaryCollection>;
 
@@ -224,7 +247,7 @@ interface VmwareSites {
 
     @doc("VmwareSite.")
     @path
-   //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     vmwareSite: string
   ): ArmResponse<SiteUsageResponse>;
 
@@ -331,7 +354,7 @@ model MachineResource is ProxyResource<VmwareMachineProperties> {
   @key("machineName")
   @segment("machines")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -360,11 +383,11 @@ interface Machines {
       #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top: string;
+      $top?: int32;
 
       @query
       @doc("Optional parameter for continuation token.")
-      continuationToken: string;
+      continuationToken?: string;
 
       @query
       @doc("Total count of machines in the given site.")
@@ -376,13 +399,13 @@ interface Machines {
   @doc("Method to stop a machine.")
   @added(Versions.v2018_05_01_preview)
   @operationId("Machines_StopMachine")
-  stop is ArmResourceActionAsyncNoRequestBody<MachineResource,  {}>;
+  stop is ArmResourceActionAsyncNoRequestBody<MachineResource, {}>;
 
   @tag("MachinesController")
   @doc("Method to start a machine.")
   @added(Versions.v2018_05_01_preview)
   @operationId("Machines_StartMachine")
-  start is ArmResourceActionAsyncNoRequestBody<MachineResource,  {}>;
+  start is ArmResourceActionAsyncNoRequestBody<MachineResource, {}>;
 
   @doc("Method to get machine with application and roles present in it.")
   @segment("applications")
@@ -436,7 +459,7 @@ model VCenter is ProxyResource<VCenterProperties> {
   @key("vcenterName")
   @segment("vCenters")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -456,12 +479,12 @@ interface VmwareVcenters {
 
 @doc("A runasaccount resource belonging to a site resource.")
 @parentResource(VMwareSite)
-model VmwareRunAsAccountResource is ProxyResource<RunAsAccountProperties> {
+model VmwareRunAsAccountResource is ProxyResource<RunAsAccountRunAsAccountProperties> {
   @doc(" RunAsAccounts name")
   @key("accountName")
   @segment("runAsAccounts")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -482,7 +505,7 @@ model VmwareHostResource is ProxyResource<VmwareHostProperties> {
   @key("hostName")
   @segment("hosts")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -503,7 +526,7 @@ model VmwareJobResource is ProxyResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -525,13 +548,17 @@ model HyperVSite is TrackedResource<SiteProperties> {
   @segment("HyperVSites")
   @doc("Site name")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
-  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
-  @doc("Gets or sets the eTag .")
-  "eTag"?: string;
-}
 
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Gets or sets the eTag for concurrency control.")
+  eTag?: string;
+
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Gets or sets the Azure location in which Sites is created.")
+  location?: string;
+}
 
 @armResourceOperations
 interface HypervSites {
@@ -550,7 +577,6 @@ interface HypervSites {
   // @operationId("HyperVSites_PatchSite")
   // update is ArmResourcePatchSync<HyperVSite, SitesProperties>;
 
-  
   @armResourceUpdate(InnerError)
   @patch
   @added(Versions.v2018_05_01_preview)
@@ -563,7 +589,6 @@ interface HypervSites {
     @body
     body: HyperVSite
   ): ArmResponse<HyperVSite>;
-
 
   @tag("HyperVSitesController")
   @added(Versions.v2018_05_01_preview)
@@ -580,16 +605,15 @@ interface HypervSites {
 
     @doc("Operation status  Arm Name.")
     @path
-   //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("operationsStatus")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
 
   @doc("Method to get site health summary.")
-  @armResourceRead(InnerError)
-  @segment("healthSummary")
+  @armResourceAction(InnerError)
   @added(Versions.v2018_05_01_preview)
-  @get
+  @post
   @operationId("HyperVSites_GetSiteHealthSummary")
   healthSummary(
     ...ResourceInstanceParameters<HyperVSite>
@@ -711,7 +735,7 @@ model HypervJobResource is ProxyResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -722,7 +746,7 @@ model HypervOperationsStatusResource is ProxyResource<HyperVClusterProperties> {
   @key("clusterName")
   @segment("clusters")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -734,7 +758,7 @@ model HyperVCluster is ProxyResource<HyperVClusterProperties> {
   @key("clusterName")
   @segment("clusters")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -756,7 +780,7 @@ model HyperVHost is ProxyResource<HyperVHostProperties> {
   @key("hostName")
   @segment("hosts")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -786,6 +810,7 @@ interface HyperVHostInt {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
+
       @doc("filter query")
       @query
       $filter?: string;
@@ -800,7 +825,7 @@ model HypervMachineResource is ProxyResource<HypervMachineProperties> {
   @key("machineName")
   @segment("machines")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -828,11 +853,11 @@ interface HypervMachines {
       #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top: string;
+      $top?: int32;
 
       @query
       @doc("Optional parameter for continuation token.")
-      continuationToken: string;
+      continuationToken?: string;
 
       @query
       @doc("Total count of machines in the given site.")
@@ -851,12 +876,12 @@ interface HypervMachines {
 
 @doc("A machine resource belonging to a site resource.")
 @parentResource(HyperVSite)
-model HypervRunAsAccountResource is ProxyResource<RunAsAccountProperties> {
+model HypervRunAsAccountResource is ProxyResource<RunAsAccountRunAsAccountProperties> {
   @doc(" RunAsAccounts name")
   @key("accountName")
   @segment("runAsAccounts")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -890,7 +915,7 @@ model ServerSiteResource is TrackedResource<SitesProperties> {
   @segment("serverSites")
   @doc("Site name")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -924,7 +949,7 @@ interface ServerSitesInterface {
 
     @doc("Operation status  Arm Name.")
     @path
-   //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("operationsStatus")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
@@ -973,7 +998,7 @@ model ServerResource is ProxyResource<ServerProperties> {
   @key("machineName")
   @segment("machines")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -989,12 +1014,12 @@ interface ServerMachines {
 
 @doc("A run as account resource belonging to a site resource.")
 @parentResource(ServerSiteResource)
-model ServerRunAsAccountResource is ProxyResource<RunAsAccountProperties> {
+model ServerRunAsAccountResource is ProxyResource<RunAsAccountRunAsAccountProperties> {
   @doc(" RunAsAccounts name")
   @key("accountName")
   @segment("runAsAccounts")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -1014,7 +1039,7 @@ model ServerJobResource is ProxyResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -1031,7 +1056,7 @@ model ImportSiteResource is TrackedResource<SitesProperties> {
   @segment("importSites")
   @doc("Site name")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -1042,7 +1067,7 @@ model ImportJobResource is ProxyResource<ImportJobProperties> {
   @key("jobName")
   @segment("jobs")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 @armResourceOperations
@@ -1060,7 +1085,7 @@ model ImportMachineResource is ProxyResource<ImportMachineProperties> {
   @key("machineName")
   @segment("machines")
   @path
- //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -1089,7 +1114,7 @@ interface ImportMachines {
 
       @query
       @doc("Optional parameter for continuation token.")
-      continuationToken: string;
+      continuationToken?: string;
 
       @query
       @doc("Total count of machines in the given site.")
@@ -1153,9 +1178,9 @@ interface ImportSites {
 
     @doc("Job Arm Name.")
     @path
-   //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("DeleteJobs")
-    jobName: string;
+    jobName: string
   ): ArmResponse<V20200201DeleteImportMachinesJob>;
 
   @doc("Method to get all export import machines job for the given site.")
@@ -1176,7 +1201,7 @@ interface ImportSites {
 
     @doc("Job Arm Name.")
     @path
-   //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("ExportJobs")
     jobName: string
   ): ArmResponse<V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection>;
@@ -1199,7 +1224,7 @@ interface ImportSites {
 
     @doc("Job Arm Name.")
     @path
-   //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("ImportJobs")
     jobName: string
   ): ArmResponse<V20200201ImportMachinesJob>;
@@ -1213,7 +1238,7 @@ interface ImportSites {
 
     @doc("Job Arm Name.")
     @path
-   //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("DeleteJobs")
     jobName: string,
 

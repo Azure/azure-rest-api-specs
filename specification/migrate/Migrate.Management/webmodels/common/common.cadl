@@ -76,11 +76,19 @@ model SiteAgentProperties {
   keyVaultId?: string;
 }
 
+// enum HealthErrorDetailsSource {
+//   "RefreshFabricLayout",
+//   "RefreshFabricLayoutGuest",
+//   "RefreshFabricLayoutDependencyMap",
+//}
+
+@knownValues(HealthErrorDetailsSource)
+scalar MicrosoftAzureFDSWebRoleHealthErrorDetailsSource extends string;
 
 enum HealthErrorDetailsSource {
-  "RefreshFabricLayout",
-  "RefreshFabricLayoutGuest",
-  "RefreshFabricLayoutDependencyMap",
+  RefreshFabricLayout,
+  RefreshFabricLayoutGuest,
+  RefreshFabricLayoutDependencyMap,
 }
 
 @doc("Data related to a machine's SQL discovery.")
@@ -323,29 +331,6 @@ model OperatingSystem {
   @doc("Gets or sets the Architecture of the operating system.")
   osArchitecture?: string;
 }
-@doc("Class for run as account properties.")
-model RunAsAccountRunAsAccountProperties {
-  @doc("Display name of the run as account.")
-  @visibility("read")
-  displayName?: string;
-
-  @doc("Gets the credential type of the run as account.")
-  @visibility("read")
-  credentialType?: string;
-
-  @doc("Timestamp marking run as account creation.")
-  @visibility("read")
-  createdTimestamp?: string;
-
-  @doc("Timestamp marking last updated on the run as account.")
-  @visibility("read")
-  updatedTimestamp?: string;
-
-  @doc("Gets the appliance name of the run as account.")
-  @visibility("read")
-  applianceName?: string;
-}
-
 enum StaticDiscoveryScopeStatus {
   "DiscoverySucceededAtleastOnce",
   "DiscoveryFailed",
@@ -365,13 +350,13 @@ model SQLDiscovery {
 
   @doc("total Server Count")
   totalServerCount?: int32;
-  
+
   @doc("sql Metadata Hydrated RunAsAccountId")
   sqlMetadataHydratedRunAsAccountId?: string;
-  
+
   @doc("sql Metadata DiscoveryPipe")
   sqlMetadataDiscoveryPipe?: SQLDiscoverySqlMetadataDiscoveryPipe;
-  
+
   @doc("discovery Scope Status")
   discoveryScopeStatus?: SQLDiscoveryScopeStatus;
 }
@@ -409,12 +394,14 @@ It is discovered by the agent from the list of credentials.
 @doc("Second level object.  Data related to a machine's operating system.             Serialized and stored as part of Machine Rest object. ")
 model GuestOSDetails {
   @doc("Gets or sets the type of the operating system.")
-  "osType"?: string;
-  @doc("Gets or sets the Name of the operating system.")
-  "osName"?: string;
-  @doc("Gets or sets the Version of the operating system.")
-  "osVersion"?: string;
-  @doc("Gets or sets the Architecture of the operating system.")
-  "osArchitecture"?: string;
-  }
+  osType?: string;
 
+  @doc("Gets or sets the Name of the operating system.")
+  osName?: string;
+
+  @doc("Gets or sets the Version of the operating system.")
+  osVersion?: string;
+
+  @doc("Gets or sets the Architecture of the operating system.")
+  osArchitecture?: string;
+}

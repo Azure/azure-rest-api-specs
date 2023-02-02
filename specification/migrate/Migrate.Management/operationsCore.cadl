@@ -1,0 +1,29 @@
+import "@cadl-lang/rest";
+
+
+using Cadl.Http;
+using Cadl.Rest;
+
+using OpenAPI;
+using Autorest;
+
+namespace Azure.Core;
+//Tarun template
+
+@pagedResult
+@friendlyName("Paged{name}", TResource)
+@doc("Paged collection of {name} items", TResource)
+model PageUpdated<TResource extends object> {
+  @doc("The {name} items on this page", TResource)
+  @items
+  @visibility("read")
+  value?: TResource[];
+
+  @doc("The link to the next page of items")
+  @nextLink
+  nextLink?: ResourceLocation<TResource>;
+}
+
+// @doc("The location of an instance of {name}", TResource)
+// @Private.resourceLocationUpdated(TResource)
+// scalar ResourceLocationUpdated<TResource extends object> extends url;

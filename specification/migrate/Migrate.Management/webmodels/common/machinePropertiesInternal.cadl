@@ -43,43 +43,56 @@ model Disks {
 @doc("The properties of a server machine tracked resource")
 model Errors {
   @doc("Gets the error message.")
-  message: string;
+  @visibility("read")
+  message?: string;
 
   @doc("Gets the message parameters.")
-  messageParameters: Record<string>;
+  @visibility("read")
+  messageParameters?: Record<string>;
 
   @doc("Gets the appliance name.")
-  applianceName: string;
+  @visibility("read")
+  applianceName?: string;
 
   @doc("Gets the error ID.")
-  id: int64;
+  @visibility("read")
+  id?: int32;
 
   @doc("Gets the error name.")
-  code: string;
+  @visibility("read")
+  code?: string;
 
   @doc("Gets the possible causes of error.")
-  possibleCauses: string;
+  @visibility("read")
+  possibleCauses?: string;
 
   @doc("Gets the recommended action to resolve error.")
-  recommendedAction: string;
+  @visibility("read")
+  recommendedAction?: string;
 
   @doc("Gets the error severity.")
-  severity: string;
+  @visibility("read")
+  severity?: string;
 
   @doc("Gets the error summary message.")
-  summaryMessage: string;
+  @visibility("read")
+  summaryMessage?: string;
 
-  @doc("Source of the error.")
-  source: Source;
+  @doc("Gets the error source.")
+  @visibility("read")
+  source?: MicrosoftAzureFDSWebRoleHealthErrorDetailsSource;
 
   @doc("Gets the time stamp when the error was updated.")
-  updatedTimeStamp: zonedDateTime;
+  @visibility("read")
+  updatedTimeStamp?: zonedDateTime;
 
-  @doc("Gets run as account id used while performing discovery")
-  runAsAccountId: string;
+  @doc("Gets run as account id used while performing discovery             of entity.")
+  @visibility("read")
+  runAsAccountId?: string;
 
-  @doc("Gets discovery scope for which the error was encountered.")
-  discoveryScope: DiscoveryScope;
+  @doc("Gets discovery scope for which             error is encountered.")
+  @visibility("read")
+  discoveryScope?: HealthErrorDetailsDiscoveryScope;
 }
 
 @doc("Scoped discovery status.")
@@ -133,58 +146,77 @@ model WebApplications {
 @doc("Feature in the guest virtual machine.")
 model Features {
   @doc("Gets or sets Name of the Feature.")
-  name: string;
+  @visibility("read")
+  name?: string;
 
   @doc("Gets or sets FeatureType of the Feature.")
-  featureType: string;
+  @visibility("read")
+  featureType?: string;
 
   @doc("Gets or sets Parent of the Feature.")
-  parent: string;
+  @visibility("read")
+  parent?: string;
 
   @doc("Gets or sets Status of the Feature.")
-  status: string;
+  @visibility("read")
+  status?: string;
 }
 
 @doc("SQLServer in the guest virtual machine.")
 model SqlServers {
-  @doc(" Gets or sets Name of the SQLServer.")
-  name: string;
+  @doc("Gets or sets Name of the SQLServer.")
+  @visibility("read")
+  name?: string;
 
   @doc("Gets or sets Edition of the SQLServer.")
-  edition: string;
+  @visibility("read")
+  edition?: string;
 
   @doc("Gets or sets ServicePack of the SQLServer.")
-  servicePack: string;
+  @visibility("read")
+  servicePack?: string;
 
   @doc("Gets or sets Version of the SQLServer.")
-  version: string;
+  @visibility("read")
+  version?: string;
 
-  @doc("Gets or sets whether the SQLServer is Clustered or not.")
-  clustered: string;
+  @doc("Gets or sets Clustered of the SQLServer.")
+  @visibility("read")
+  clustered?: string;
 
-  @doc("Gets or sets the name of the cluster.")
-  clusterName: string;
+  @doc("Gets or sets ClusterName of the SQLServer.")
+  @visibility("read")
+  clusterName?: string;
 
-  @doc("Gets or sets the name of the DNS host.")
-  dnsHostName: string;
+  @doc("Gets or sets the DNS host name of SQLServer.")
+  @visibility("read")
+  dnsHostName?: string;
 
-  @doc("Gets or sets the comma separated list of available ports.")
-  port: string;
+  @doc("Gets or sets the port of the SQLServer.")
+  @visibility("read")
+  port?: string;
 
-  @doc("Gets or sets the comma separated IPs.")
-  commaSeperatedIps: string;
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
+  @doc("Gets or sets the comma separated IPs of the SQLServer.")
+  @visibility("read")
+  commaSeparatedIPs?: string;
 
-  @doc("Gets or sets the powered on status.")
-  status: string;
+  @doc("Gets the status.")
+  @visibility("read")
+  status?: string;
 
-  @doc("Gets or sets a value indicating whether Named Pipe protocol is enabled on SQL server")
-  isNamedPipeEnabled: string;
+  @doc("Gets or sets the value which reflects if Named Pipe is enabled or not.")
+  @visibility("read")
+  isNamedPipeEnabled?: boolean;
 
-  @doc("Gets or sets a value indicating whether TCP/IP protocol is enabled on SQL server.")
-  isTcpIpEnabled: string;
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
+  @doc("Gets or sets the value which reflects if Named Pipe is enabled or not.")
+  @visibility("read")
+  isTCPIPEnabled?: boolean;
 
-  @doc("Gets or sets the Named Pipe name of the SQL server used to construct connection.")
-  namedPipeName: string;
+  @doc("Gets the status.")
+  @visibility("read")
+  namedPipeName?: string;
 }
 
 @doc(" SharePointServer in the guest virtual machine.")
@@ -209,40 +241,50 @@ model SharePointServers {
 @doc(" SystemCenter in the guest virtual machine.")
 model SystemCenters {
   @doc("Gets or sets ProductName of the SystemCenter.")
-  productName: string;
+  @visibility("read")
+  productName?: string;
 
   @doc("Gets or sets Status of the SystemCenter.")
-  status: string;
+  @visibility("read")
+  status?: string;
 
-  @doc(" Gets or sets Version of the SystemCenter.")
-  version: string;
+  @doc("Gets or sets Version of the SystemCenter.")
+  @visibility("read")
+  version?: string;
 }
 
 @doc("BizTalkServer in the guest virtual machine.")
 model BizTalkServers {
   @doc("Gets or sets ProductName of the BizTalkServer.")
-  productName: string;
+  @visibility("read")
+  productName?: string;
 
   @doc("Gets or sets Status of the BizTalkServer.")
-  status: string;
+  @visibility("read")
+  status?: string;
 }
 
 @doc(" ExchangeServer in the guest virtual machine.")
 model ExchangeServers {
   @doc("Gets or sets ProductName of the ExchangeServer.")
-  productName: string;
+  @visibility("read")
+  productName?: string;
 
   @doc("Gets or sets Edition of the ExchangeServer.")
-  edition: string;
+  @visibility("read")
+  edition?: string;
 
   @doc("Gets or sets Roles of the ExchangeServer.")
-  roles: string;
+  @visibility("read")
+  roles?: string;
 
   @doc("Gets or sets ServicePack of the ExchangeServer.")
-  servicePack: string;
+  @visibility("read")
+  servicePack?: string;
 
   @doc("Gets or sets Version of the ExchangeServer.")
-  version: string;
+  @visibility("read")
+  version?: string;
 }
 
 @doc("OtherDatabase in the guest virtual machine.")

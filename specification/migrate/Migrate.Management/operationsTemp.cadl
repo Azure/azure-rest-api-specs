@@ -1,0 +1,38 @@
+import "@cadl-lang/rest";
+import "./operationsCore.cadl";
+
+//namespace Azure.Core;
+using Cadl.Http;
+using Cadl.Rest;
+using OpenAPI;
+using Autorest;
+using Azure.ResourceManager.Foundations;
+
+namespace Azure.ResourceManager;
+//namespace Azure.Core;
+//Tarun template
+@autoRoute
+@extension("x-ms-long-running-operation", true)
+//@asyncOperationOptions("azure-async-operation")
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    "final-state-via":"azure-async-operation",
+  }
+)
+@armResourceAction(TResource)
+@post
+@doc("Operation template for creating async arm resource action without body.")
+op ArmResourceActionAsyncNoRequestBody<
+  TResource extends ArmResource,
+  TResponse extends object,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+): ArmResponse<TResponse>  |  ArmAcceptedResponse |ErrorResponse;
+
+@doc("The response of a {name} list operation.", TResource)
+@friendlyName("{name}ListResult", TResource)
+model ResourceListResultUpdated<TResource extends ArmResource> is Azure.Core.Page<TResource>;
+

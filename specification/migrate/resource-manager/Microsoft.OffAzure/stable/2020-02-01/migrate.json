@@ -662,7 +662,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/healthSummary": {
-      "get": {
+      "post": {
         "tags": [
           "HypervSites"
         ],
@@ -1098,14 +1098,15 @@
           {
             "name": "$top",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "page size  query",
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "continuationToken",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "Optional parameter for continuation token.",
             "type": "string"
           },
@@ -2508,7 +2509,7 @@
           {
             "name": "continuationToken",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "Optional parameter for continuation token.",
             "type": "string"
           },
@@ -3801,9 +3802,9 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "description": "The resource properties to be updated.",
+            "description": " body with updated properties.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteUpdate"
+              "$ref": "#/definitions/VMwareSite"
             }
           }
         ],
@@ -3812,12 +3813,6 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/VMwareSite"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -4550,7 +4545,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/healthSummary": {
-      "get": {
+      "post": {
         "tags": [
           "VmwareSites"
         ],
@@ -4841,14 +4836,15 @@
           {
             "name": "$top",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "page size  query",
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "continuationToken",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "Optional parameter for continuation token.",
             "type": "string"
           },
@@ -6234,18 +6230,16 @@
       "properties": {
         "productName": {
           "type": "string",
-          "description": "Gets or sets ProductName of the BizTalkServer."
+          "description": "Gets or sets ProductName of the BizTalkServer.",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "description": "Gets or sets Status of the BizTalkServer."
+          "description": "Gets or sets Status of the BizTalkServer.",
+          "readOnly": true
         }
       },
-      "description": "BizTalkServer in the guest virtual machine.",
-      "required": [
-        "productName",
-        "status"
-      ]
+      "description": "BizTalkServer in the guest virtual machine."
     },
     "CosmosDBDeleteImportedMachinesJobEntityDeleteImportedMachinesJobPropertiesJobState": {
       "type": "string",
@@ -6371,20 +6365,6 @@
       ],
       "x-ms-enum": {
         "name": "DependencyMapDiscoveryScopeStatus",
-        "modelAsString": true
-      }
-    },
-    "DiscoveryScope": {
-      "type": "string",
-      "description": "Discovery Scope.",
-      "enum": [
-        "AppsAndRoles",
-        "DependencyMap",
-        "StaticData",
-        "SQLServerConnectionInfo"
-      ],
-      "x-ms-enum": {
-        "name": "DiscoveryScope",
         "modelAsString": true
       }
     },
@@ -6576,7 +6556,8 @@
       "properties": {
         "message": {
           "type": "string",
-          "description": "Gets the error message."
+          "description": "Gets the error message.",
+          "readOnly": true
         },
         "messageParameters": {
           "type": "object",
@@ -6584,132 +6565,125 @@
             "type": "string"
           },
           "x-cadl-name": "Record<string>",
-          "description": "Gets the message parameters."
+          "description": "Gets the message parameters.",
+          "readOnly": true
         },
         "applianceName": {
           "type": "string",
-          "description": "Gets the appliance name."
+          "description": "Gets the appliance name.",
+          "readOnly": true
         },
         "id": {
           "type": "integer",
-          "format": "int64",
-          "description": "Gets the error ID."
+          "format": "int32",
+          "description": "Gets the error ID.",
+          "readOnly": true
         },
         "code": {
           "type": "string",
-          "description": "Gets the error name."
+          "description": "Gets the error name.",
+          "readOnly": true
         },
         "possibleCauses": {
           "type": "string",
-          "description": "Gets the possible causes of error."
+          "description": "Gets the possible causes of error.",
+          "readOnly": true
         },
         "recommendedAction": {
           "type": "string",
-          "description": "Gets the recommended action to resolve error."
+          "description": "Gets the recommended action to resolve error.",
+          "readOnly": true
         },
         "severity": {
           "type": "string",
-          "description": "Gets the error severity."
+          "description": "Gets the error severity.",
+          "readOnly": true
         },
         "summaryMessage": {
           "type": "string",
-          "description": "Gets the error summary message."
+          "description": "Gets the error summary message.",
+          "readOnly": true
         },
         "source": {
-          "$ref": "#/definitions/Source",
-          "description": "Source of the error."
+          "$ref": "#/definitions/MicrosoftAzureFDSWebRoleHealthErrorDetailsSource",
+          "description": "Gets the error source.",
+          "readOnly": true
         },
         "updatedTimeStamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Gets the time stamp when the error was updated."
+          "description": "Gets the time stamp when the error was updated.",
+          "readOnly": true
         },
         "runAsAccountId": {
           "type": "string",
-          "description": "Gets run as account id used while performing discovery"
+          "description": "Gets run as account id used while performing discovery             of entity.",
+          "readOnly": true
         },
         "discoveryScope": {
-          "$ref": "#/definitions/DiscoveryScope",
-          "description": "Gets discovery scope for which the error was encountered."
+          "$ref": "#/definitions/HealthErrorDetailsDiscoveryScope",
+          "description": "Gets discovery scope for which             error is encountered.",
+          "readOnly": true
         }
       },
-      "description": "The properties of a server machine tracked resource",
-      "required": [
-        "message",
-        "messageParameters",
-        "applianceName",
-        "id",
-        "code",
-        "possibleCauses",
-        "recommendedAction",
-        "severity",
-        "summaryMessage",
-        "source",
-        "updatedTimeStamp",
-        "runAsAccountId",
-        "discoveryScope"
-      ]
+      "description": "The properties of a server machine tracked resource"
     },
     "ExchangeServers": {
       "type": "object",
       "properties": {
         "productName": {
           "type": "string",
-          "description": "Gets or sets ProductName of the ExchangeServer."
+          "description": "Gets or sets ProductName of the ExchangeServer.",
+          "readOnly": true
         },
         "edition": {
           "type": "string",
-          "description": "Gets or sets Edition of the ExchangeServer."
+          "description": "Gets or sets Edition of the ExchangeServer.",
+          "readOnly": true
         },
         "roles": {
           "type": "string",
-          "description": "Gets or sets Roles of the ExchangeServer."
+          "description": "Gets or sets Roles of the ExchangeServer.",
+          "readOnly": true
         },
         "servicePack": {
           "type": "string",
-          "description": "Gets or sets ServicePack of the ExchangeServer."
+          "description": "Gets or sets ServicePack of the ExchangeServer.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets Version of the ExchangeServer."
+          "description": "Gets or sets Version of the ExchangeServer.",
+          "readOnly": true
         }
       },
-      "description": " ExchangeServer in the guest virtual machine.",
-      "required": [
-        "productName",
-        "edition",
-        "roles",
-        "servicePack",
-        "version"
-      ]
+      "description": " ExchangeServer in the guest virtual machine."
     },
     "Features": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Gets or sets Name of the Feature."
+          "description": "Gets or sets Name of the Feature.",
+          "readOnly": true
         },
         "featureType": {
           "type": "string",
-          "description": "Gets or sets FeatureType of the Feature."
+          "description": "Gets or sets FeatureType of the Feature.",
+          "readOnly": true
         },
         "parent": {
           "type": "string",
-          "description": "Gets or sets Parent of the Feature."
+          "description": "Gets or sets Parent of the Feature.",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "description": "Gets or sets Status of the Feature."
+          "description": "Gets or sets Status of the Feature.",
+          "readOnly": true
         }
       },
-      "description": "Feature in the guest virtual machine.",
-      "required": [
-        "name",
-        "featureType",
-        "parent",
-        "status"
-      ]
+      "description": "Feature in the guest virtual machine."
     },
     "GuestOSDetails": {
       "type": "object",
@@ -7076,7 +7050,7 @@
           "description": "Name of the VM subnet within the virtual network the NIC is attached to.",
           "readOnly": true
         },
-        "staticIpAdress": {
+        "staticIpAddress": {
           "type": "string",
           "description": "Static IP address.",
           "readOnly": true
@@ -7128,7 +7102,11 @@
         },
         "eTag": {
           "type": "string",
-          "description": "Gets or sets the eTag ."
+          "description": "Gets or sets the eTag for concurrency control."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the Azure location in which Sites is created."
         }
       },
       "description": "A HyperV SiteResource",
@@ -7558,7 +7536,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RunAsAccountProperties",
+          "$ref": "#/definitions/RunAsAccountRunAsAccountProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -8217,6 +8195,18 @@
       },
       "description": "Class for machine software inventory properties."
     },
+    "MicrosoftAzureFDSWebRoleHealthErrorDetailsSource": {
+      "type": "string",
+      "enum": [
+        "RefreshFabricLayout",
+        "RefreshFabricLayoutGuest",
+        "RefreshFabricLayoutDependencyMap"
+      ],
+      "x-ms-enum": {
+        "name": "MicrosoftAzureFDSWebRoleHealthErrorDetailsSource",
+        "modelAsString": true
+      }
+    },
     "NetworkAdapters": {
       "type": "object",
       "properties": {
@@ -8458,43 +8448,6 @@
         "modelAsString": true
       }
     },
-    "RunAsAccountProperties": {
-      "type": "object",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Display name of the run as account."
-        },
-        "credentialType": {
-          "type": "string",
-          "description": "Gets the credential type of the run as account."
-        },
-        "createdTimestamp": {
-          "type": "string",
-          "description": "Timestamp marking run as account creation."
-        },
-        "updatedTimestamp": {
-          "type": "string",
-          "description": "Timestamp marking last updated on the run as account."
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Gets the appliance name of the run as account."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "RunAsAccount REST Resource.",
-      "required": [
-        "displayName",
-        "credentialType",
-        "createdTimestamp",
-        "updatedTimestamp",
-        "applianceName"
-      ]
-    },
     "RunAsAccountRunAsAccountProperties": {
       "type": "object",
       "properties": {
@@ -8522,6 +8475,10 @@
           "type": "string",
           "description": "Gets the appliance name of the run as account.",
           "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
         }
       },
       "description": "Class for run as account properties."
@@ -8891,7 +8848,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RunAsAccountProperties",
+          "$ref": "#/definitions/RunAsAccountRunAsAccountProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -9364,19 +9321,6 @@
         "applianceName"
       ]
     },
-    "Source": {
-      "type": "string",
-      "description": "The status of the current operation.",
-      "enum": [
-        "RefreshFabricLayout",
-        "RefreshFabricLayoutGuest",
-        "RefreshFabricLayoutDependencyMap"
-      ],
-      "x-ms-enum": {
-        "name": "Source",
-        "modelAsString": true
-      }
-    },
     "SpringBootDiscovery": {
       "type": "object",
       "properties": {
@@ -9442,73 +9386,71 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": " Gets or sets Name of the SQLServer."
+          "description": "Gets or sets Name of the SQLServer.",
+          "readOnly": true
         },
         "edition": {
           "type": "string",
-          "description": "Gets or sets Edition of the SQLServer."
+          "description": "Gets or sets Edition of the SQLServer.",
+          "readOnly": true
         },
         "servicePack": {
           "type": "string",
-          "description": "Gets or sets ServicePack of the SQLServer."
+          "description": "Gets or sets ServicePack of the SQLServer.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets Version of the SQLServer."
+          "description": "Gets or sets Version of the SQLServer.",
+          "readOnly": true
         },
         "clustered": {
           "type": "string",
-          "description": "Gets or sets whether the SQLServer is Clustered or not."
+          "description": "Gets or sets Clustered of the SQLServer.",
+          "readOnly": true
         },
         "clusterName": {
           "type": "string",
-          "description": "Gets or sets the name of the cluster."
+          "description": "Gets or sets ClusterName of the SQLServer.",
+          "readOnly": true
         },
         "dnsHostName": {
           "type": "string",
-          "description": "Gets or sets the name of the DNS host."
+          "description": "Gets or sets the DNS host name of SQLServer.",
+          "readOnly": true
         },
         "port": {
           "type": "string",
-          "description": "Gets or sets the comma separated list of available ports."
+          "description": "Gets or sets the port of the SQLServer.",
+          "readOnly": true
         },
-        "commaSeperatedIps": {
+        "commaSeparatedIPs": {
           "type": "string",
-          "description": "Gets or sets the comma separated IPs."
+          "description": "Gets or sets the comma separated IPs of the SQLServer.",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "description": "Gets or sets the powered on status."
+          "description": "Gets the status.",
+          "readOnly": true
         },
         "isNamedPipeEnabled": {
-          "type": "string",
-          "description": "Gets or sets a value indicating whether Named Pipe protocol is enabled on SQL server"
+          "type": "boolean",
+          "description": "Gets or sets the value which reflects if Named Pipe is enabled or not.",
+          "readOnly": true
         },
-        "isTcpIpEnabled": {
-          "type": "string",
-          "description": "Gets or sets a value indicating whether TCP/IP protocol is enabled on SQL server."
+        "isTCPIPEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets the value which reflects if Named Pipe is enabled or not.",
+          "readOnly": true
         },
         "namedPipeName": {
           "type": "string",
-          "description": "Gets or sets the Named Pipe name of the SQL server used to construct connection."
+          "description": "Gets the status.",
+          "readOnly": true
         }
       },
-      "description": "SQLServer in the guest virtual machine.",
-      "required": [
-        "name",
-        "edition",
-        "servicePack",
-        "version",
-        "clustered",
-        "clusterName",
-        "dnsHostName",
-        "port",
-        "commaSeperatedIps",
-        "status",
-        "isNamedPipeEnabled",
-        "isTcpIpEnabled",
-        "namedPipeName"
-      ]
+      "description": "SQLServer in the guest virtual machine."
     },
     "StaticDiscovery": {
       "type": "object",
@@ -9557,23 +9499,21 @@
       "properties": {
         "productName": {
           "type": "string",
-          "description": "Gets or sets ProductName of the SystemCenter."
+          "description": "Gets or sets ProductName of the SystemCenter.",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "description": "Gets or sets Status of the SystemCenter."
+          "description": "Gets or sets Status of the SystemCenter.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": " Gets or sets Version of the SystemCenter."
+          "description": "Gets or sets Version of the SystemCenter.",
+          "readOnly": true
         }
       },
-      "description": " SystemCenter in the guest virtual machine.",
-      "required": [
-        "productName",
-        "status",
-        "version"
-      ]
+      "description": " SystemCenter in the guest virtual machine."
     },
     "V20180501PreviewVmwareRunAsAccount": {
       "type": "object",
@@ -9903,6 +9843,14 @@
             "read",
             "create"
           ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the eTag for concurrency control."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the Azure location in which Sites is created."
         }
       },
       "description": "A VMwareSite",
@@ -9911,58 +9859,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
-    },
-    "VMwareSiteUpdate": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/VMwareSiteUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the VMwareSite."
-    },
-    "VMwareSiteUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "masterSiteId": {
-          "type": "string",
-          "description": "Gets the Master Site this site is linked to."
-        },
-        "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Service principal identity details used by agent for communication to the service."
-        },
-        "agentDetails": {
-          "$ref": "#/definitions/SiteAgentProperties",
-          "description": "On-premises agent details."
-        },
-        "serviceEndpoint": {
-          "type": "string",
-          "description": "Service endpoint."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "RM ID of migration hub solution for SDS."
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Appliance Name."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "The updatable properties of the VMwareSite."
     },
     "Versions": {
       "type": "string",
@@ -10538,7 +10434,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RunAsAccountProperties",
+          "$ref": "#/definitions/RunAsAccountRunAsAccountProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
