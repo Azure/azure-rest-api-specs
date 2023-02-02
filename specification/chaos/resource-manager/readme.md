@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-01'
 input-file:
+  - Microsoft.Chaos/preview/2023-01-31-preview/applications.json
   - Microsoft.Chaos/preview/2023-01-31-preview/capabilities.json
   - Microsoft.Chaos/preview/2023-01-31-preview/capabilityTypes.json
   - Microsoft.Chaos/preview/2023-01-31-preview/experiments.json
