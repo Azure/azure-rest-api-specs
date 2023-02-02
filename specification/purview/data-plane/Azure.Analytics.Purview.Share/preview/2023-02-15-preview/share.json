@@ -1893,16 +1893,23 @@
     }
   },
   "securityDefinitions": {
-    "azure-auth": {
+    "azureAuth": {
       "type": "oauth2",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "https://purview.azure.net/.default": "Purview service scope"
       },
       "description": "Azure Active Directory OAuth2 Flow."
     }
   },
+  "security": [
+    {
+      "azureAuth": [
+        "https://purview.azure.net/.default"
+      ]
+    }
+  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
