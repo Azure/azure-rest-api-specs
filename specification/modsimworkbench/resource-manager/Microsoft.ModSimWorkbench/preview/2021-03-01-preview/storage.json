@@ -1,0 +1,426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.ModSimWorkbench",
+    "description": "Microsoft.ModSimWorkbench resource provider OpenAPI Spec",
+    "version": "2021-03-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/storages/{storageName}": {
+      "put": {
+        "tags": [
+          "storages_CreateOrUpdate"
+        ],
+        "operationId": "storages_CreateOrUpdate",
+        "description": "Creates or updates the storage.",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workbench."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update storage resource.",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting storage resource.",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting storage resource.",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create storage": {
+            "$ref": "./examples/StorageCreateOrUpdate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "storages_Update"
+        ],
+        "operationId": "storages_Update",
+        "description": "Updates the storage.",
+        "consumes": [
+          "application/merge-patch+json",
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workbench."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update storage resource.",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. The operation returns the resulting storage resource.",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Update storage": {
+            "$ref": "./examples/StoragePatch.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "storages_Get"
+        ],
+        "operationId": "storages_Get",
+        "description": "Gets information about the storage.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workbench."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the storage resource.",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Get Storage": {
+            "$ref": "./examples/StorageGet.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "storages_Delete"
+        ],
+        "operationId": "storages_Delete",
+        "description": "Deletes the storage.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workbench."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "name": "storageName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the storage."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation is completed successfully",
+            "schema": {
+              "$ref": "#/definitions/Storage"
+            }
+          },
+          "204": {
+            "description": "Request is successful. Resource with the specified name does not exist."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete Storage": {
+            "$ref": "./examples/StorageDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "StoragePageableList": {
+      "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Gets or sets the URL (link) to the next result set.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Gets or sets the values to emit from this list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Storage"
+          }
+        }
+      }
+    },
+    "StoragePropertiesFormat": {
+      "description": "Storage properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./modsimworkbench.json#/definitions/ProvisioningState",
+          "description": "Gets the status of the storage at the time the operation was called"
+        },
+        "capacityAllocated": {
+          "description": "Provisioned size of the ModSim Workbench chamber storage in terabytes",
+          "format": "int32",
+          "type": "integer"
+        },
+        "performanceTier": {
+          "description": "Specifies performance tier of the ModSim Workbench chamber storage.",
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Premium",
+            "Ultra"
+          ],
+          "default": "Premium",
+          "x-ms-enum": {
+            "name": "performanceTier",
+            "modelAsString": true
+          }
+        },
+        "localMountPath": {
+          "description": "Directory where the SDW Private Storage volume mounted.",
+          "type": "string"
+        },
+        "dataPipelineInboundPath": {
+          "description": "Directory for the ModSim Workbench chamber data pipeline inbound.",
+          "type": "string"
+        },
+        "dataPipelineOutboundPath": {
+          "description": "Directory for the ModSim Workbench chamber data pipeline outbound.",
+          "type": "string"
+        },
+        "capacityUsed": {
+          "description": "Capacity used in the SDW Private Storage volume in gigabytes.",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Storage": {
+      "description": "Storage resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/StoragePropertiesFormat",
+          "description": "Storage properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./modsimworkbench.json#/definitions/Resource"
+        }
+      ]
+    }
+  }
+}

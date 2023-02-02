@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/fileRequests/{requestName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/fileRequests/{requestName}": {
       "get": {
         "tags": [
           "fileRequests_Get"
@@ -50,19 +50,22 @@
           },
           {
             "in": "path",
-            "name": "instanceName",
+            "name": "workbenchName",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "chamberName",
+            "description": "the chamber name.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "requestName",
+            "description": "the request name.",
             "required": true,
             "type": "string"
           },
@@ -99,7 +102,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/fileRequests/{requestName}/manage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/fileRequests/{requestName}/manage": {
       "post": {
         "tags": [
           "fileRequestsName_manage"
@@ -118,8 +121,8 @@
           },
           {
             "in": "path",
-            "name": "instanceName",
-            "description": "the instance name.",
+            "name": "workbenchName",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -180,7 +183,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/fileRequests/{requestName}/getDownloadUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/fileRequests/{requestName}/getDownloadUri": {
       "post": {
         "tags": [
           "fileRequest_getDownloadUri"
@@ -199,8 +202,8 @@
           },
           {
             "in": "path",
-            "name": "instanceName",
-            "description": "the instance name.",
+            "name": "workbenchName",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -253,7 +256,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/fileRequests": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/fileRequests": {
       "get": {
         "tags": [
           "fileRequests_List"
@@ -274,11 +277,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "instanceName",
+            "name": "workbenchName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the instance."
+            "description": "The name of the workbench."
           },
           {
             "name": "chamberName",
@@ -378,6 +381,7 @@
       }
     },
     "RequestPropertiesFormat": {
+      "description": "File requests properties.",
       "type": "object",
       "properties": {
         "timestamp": {
@@ -409,18 +413,22 @@
           "type": "object",
           "properties": {
             "id": {
+              "x-ms-client-flatten": true,
               "type": "string",
               "description": "The globally unique identifier for the approval."
             },
             "description": {
+              "x-ms-client-flatten": true,
               "type": "string",
               "description": "Description of approval"
             },
             "userId": {
+              "x-ms-client-flatten": true,
               "type": "string",
               "description": "Specifies the principal ID of Azure Active Directory User who approved to download."
             },
             "timestamp": {
+              "x-ms-client-flatten": true,
               "type": "string",
               "format": "date-time",
               "description": "The timestamp for the approval"
@@ -431,15 +439,18 @@
           "type": "object",
           "properties": {
             "location": {
+              "x-ms-client-flatten": true,
               "type": "string",
               "description": "Download destination location."
             },
             "startTime": {
+              "x-ms-client-flatten": true,
               "type": "string",
               "format": "date-time",
               "description": "The timestamp for the start of download."
             },
             "completeTime": {
+              "x-ms-client-flatten": true,
               "type": "string",
               "format": "date-time",
               "description": "The timestamp for the completion of download."
@@ -450,6 +461,7 @@
           "type": "object",
           "properties": {
             "sasUriId": {
+              "x-ms-client-flatten": true,
               "type": "string",
               "description": "sas uri id"
             }

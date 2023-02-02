@@ -59,17 +59,18 @@
         },
         "x-ms-examples": {
           "Lists Operations": {
-            "$ref": "./examples/InstancesOperationList.json"
+            "$ref": "./examples/WorkbenchesOperationList.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ModSimWorkbench/instances": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ModSimWorkbench/workbenches": {
       "get": {
         "tags": [
-          "instances_ListBySubscription"
+          "workbenches_ListBySubscription"
         ],
-        "operationId": "instances_ListBySubscription",
+        "description": "Lists Workbenches by subscription.",
+        "operationId": "workbenches_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -82,7 +83,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InstancePageableList"
+              "$ref": "#/definitions/WorkbenchPageableList"
             }
           },
           "default": {
@@ -97,8 +98,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Instances by Subscription": {
-            "$ref": "./examples/InstancesListBySubscription.json"
+          "List Workbenches by Subscription": {
+            "$ref": "./examples/WorkbenchesListBySubscription.json"
           }
         },
         "security": [
@@ -110,12 +111,13 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches": {
       "get": {
         "tags": [
-          "instances_ListByResourceGroup"
+          "workbenches_ListByResourceGroup"
         ],
-        "operationId": "instances_ListByResourceGroup",
+        "description": "Lists workbenches by resource group.",
+        "operationId": "workbenches_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -123,6 +125,7 @@
           {
             "in": "path",
             "name": "resourceGroup",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -134,7 +137,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/InstancePageableList"
+              "$ref": "#/definitions/WorkbenchPageableList"
             }
           },
           "default": {
@@ -149,8 +152,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List Instances by Resource Group": {
-            "$ref": "./examples/InstancesListByResourceGroup.json"
+          "List Workbenches by Resource Group": {
+            "$ref": "./examples/WorkbenchesListByResourceGroup.json"
           }
         },
         "security": [
@@ -162,12 +165,13 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{name}": {
       "get": {
         "tags": [
-          "instances_Get"
+          "workbenches_Get"
         ],
-        "operationId": "instances_Get",
+        "description": "Lists workbenches.",
+        "operationId": "workbenches_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -175,12 +179,14 @@
           {
             "in": "path",
             "name": "resourceGroup",
+            "description": "the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "name",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -192,7 +198,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Instance"
+              "$ref": "#/definitions/Workbench"
             }
           },
           "202": {
@@ -223,16 +229,17 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Instances Get": {
-            "$ref": "./examples/InstancesGet.json"
+          "Workbenches Get": {
+            "$ref": "./examples/WorkbenchesGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "instances_CreateOrUpdate"
+          "workbenches_CreateOrUpdate"
         ],
-        "operationId": "instances_CreateOrUpdate",
+        "description": "Create workbenches.",
+        "operationId": "workbenches_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -240,12 +247,14 @@
           {
             "in": "path",
             "name": "resourceGroup",
+            "description": "the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "name",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -255,8 +264,9 @@
           {
             "in": "body",
             "name": "body",
+            "description": "Parameters supplied to the create or update workbench operation.",
             "schema": {
-              "$ref": "#/definitions/Instance"
+              "$ref": "#/definitions/Workbench"
             }
           }
         ],
@@ -264,13 +274,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Instance"
+              "$ref": "#/definitions/Workbench"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting Instance resource.",
+            "description": "Create successful. The operation returns the resulting Workbench resource.",
             "schema": {
-              "$ref": "#/definitions/Instance"
+              "$ref": "#/definitions/Workbench"
             }
           },
           "default": {
@@ -286,8 +296,8 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Instances create or update": {
-            "$ref": "./examples/InstancesCreateOrUpdate.json"
+          "Workbenches create or update": {
+            "$ref": "./examples/WorkbenchesCreateOrUpdate.json"
           }
         },
         "security": [
@@ -300,9 +310,10 @@
       },
       "patch": {
         "tags": [
-          "instances_Patch"
+          "workbenches_Update"
         ],
-        "operationId": "instances_Patch",
+        "description": "Update workbenches.",
+        "operationId": "workbenches_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -313,20 +324,23 @@
           {
             "in": "path",
             "name": "resourceGroup",
+            "description": "the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "name",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "body",
+            "description": "Parameters supplied to the create or update chamber operation.",
             "schema": {
-              "$ref": "#/definitions/Instance"
+              "$ref": "#/definitions/Workbench"
             }
           }
         ],
@@ -334,13 +348,13 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Instance"
+              "$ref": "#/definitions/Workbench"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting Instance resource.",
+            "description": "Create successful. The operation returns the resulting Workbench resource.",
             "schema": {
-              "$ref": "#/definitions/Instance"
+              "$ref": "#/definitions/Workbench"
             }
           },
           "default": {
@@ -352,16 +366,17 @@
           }
         },
         "x-ms-examples": {
-          "Instances Update": {
-            "$ref": "./examples/InstancesPatch.json"
+          "Workbenches Update": {
+            "$ref": "./examples/WorkbenchesPatch.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "instances_Delete"
+          "workbenches_Delete"
         ],
-        "operationId": "instances_Delete",
+        "description": "Delete workbenches.",
+        "operationId": "workbenches_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -369,12 +384,14 @@
           {
             "in": "path",
             "name": "resourceGroup",
+            "description": "the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "name",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -386,7 +403,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/Instance"
+              "$ref": "#/definitions/Workbench"
             }
           },
           "204": {
@@ -413,8 +430,8 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Instances Update": {
-            "$ref": "./examples/InstancesDelete.json"
+          "Workbenches Update": {
+            "$ref": "./examples/WorkbenchesDelete.json"
           }
         }
       }
@@ -472,7 +489,7 @@
         }
       }
     },
-    "InstancePageableList": {
+    "WorkbenchPageableList": {
       "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
       "type": "object",
       "properties": {
@@ -484,7 +501,7 @@
           "description": "Gets or sets the values to emit from this list.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Instance"
+            "$ref": "#/definitions/Workbench"
           },
           "x-ms-identifiers": [
             "value"
@@ -583,6 +600,7 @@
       "type": "string"
     },
     "AppOidc": {
+      "description": "Workbench properties.",
       "type": "object",
       "properties": {
         "clientId": {
@@ -595,7 +613,7 @@
         }
       }
     },
-    "InstancePropertiesFormat": {
+    "WorkbenchPropertiesFormat": {
       "type": "object",
       "properties": {
         "addressSpace": {
@@ -605,25 +623,25 @@
           "$ref": "#/definitions/AppOidc"
         },
         "sku": {
-          "type": "string",
-          "description": "Name of SKU."
+          "description": "Name of SKU.",
+          "type": "string"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
-          "description": "Gets the status of the instance at the time the operation was called"
+          "description": "Gets the status of the workbench at the time the operation was called"
         }
       },
       "required": [
         "appOidc"
       ],
-      "description": "Instance properties."
+      "description": "Workbench properties."
     },
-    "Instance": {
+    "Workbench": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/InstancePropertiesFormat",
-          "description": "Instance properties",
+          "$ref": "#/definitions/WorkbenchPropertiesFormat",
+          "description": "Workbench properties",
           "type": "object"
         }
       },
@@ -632,7 +650,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Instance resource"
+      "description": "Workbench resource"
     }
   }
 }

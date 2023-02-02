@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2021-03-01-preview",
+    "subscriptionId": "d9f252e3-8046-4707-bfbd-e5b9e6011e07",
+    "resourceGroup": "rg1",
+    "workbenchName": "test-workbench",
+    "chamberName": "test-chamber",
+    "storageName": "test-storage",
+    "body": {
+      "location": "Central US",
+      "properties": {
+        "provisioningState": "Succeeded",
+        "capacityAllocated": 4,
+        "performanceTier": "Premium",
+        "localMountPath": "/mount/private",
+        "dataPipelineInboundPath": "/mount/private/datain",
+        "dataPipelineOutboundPath": "/mount/private/dataout",
+        "capacityUsed": 2
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-storage",
+        "id": "/subscriptions/d9f252e3-8046-4707-bfbd-e5b9e6011e07/resourceGroups/resourceGroup/providers/Microsoft.ModSimWorkbenchWorkbench/workbenches/test-workbench/chambers/test-chamber/storages/test-storage",
+        "type": "Microsoft.ModSimWorkbenchWorkbench/workbenches/chambers/storages",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "capacityAllocated": 4,
+          "performanceTier": "Premium",
+          "localMountPath": "/mount/private",
+          "dataPipelineInboundPath": "/mount/private/datain",
+          "dataPipelineOutboundPath": "/mount/private/dataout",
+          "capacityUsed": 2
+        }
+      }
+    }
+  }
+}

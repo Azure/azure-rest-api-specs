@@ -40,6 +40,7 @@ input-file:
   - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/connector.json
   - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/chambers.json
   - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/workload.json
+  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/storage.json
   - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/files.json
   - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/fileRequests.json
 ```
