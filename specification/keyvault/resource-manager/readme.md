@@ -226,10 +226,10 @@ directive:
 
 - suppress: DefinitionsPropertiesNamesCamelCase
   where: 
-    - $.definitions.ManagedHsmKeyReleasePolicy
+    - $.definitions.ManagedHsmKeyProperties.properties.release_policy
   from: keysManagedHsm.json
   reason: This is to keep compatibility with existing data plane property. The 'release_policy' property for KeyCreateParameters does not support camelCase.
-  
+
 ```
 
 ---
