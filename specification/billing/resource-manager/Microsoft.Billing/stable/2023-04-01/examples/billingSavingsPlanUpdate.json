@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "billingAccountName": "8791251",
+    "savingsPlanOrderId": "20000000-0000-0000-0000-000000000000",
+    "savingsPlanId": "30000000-0000-0000-0000-000000000000",
+    "api-version": "2023-04-01",
+    "body": {
+      "displayName": "TestDisplayName"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/8791251/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000",
+        "type": "Microsoft.Billing/billingAccounts/savingsPlanOrders/savingsPlans",
+        "name": "30000000-0000-0000-0000-000000000000",
+        "sku": {
+          "name": "Compute_Savings_Plan"
+        },
+        "properties": {
+          "displayName": "TestDisplayName",
+          "provisioningState": "Created",
+          "billingScopeId": "/subscriptions/10000000-0000-0000-0000-000000000000",
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/8791251",
+          "term": "P1Y",
+          "billingPlan": "P1M",
+          "expiryDate": "2022-07-29",
+          "appliedScopeType": "Single",
+          "appliedScopeProperties": {
+            "resourceGroupId": "/subscriptions/10000000-0000-0000-0000-000000000000/resourceGroups/testrg"
+          },
+          "commitment": {
+            "currencyCode": "USD",
+            "amount": 15.23,
+            "grain": "Hourly"
+          },
+          "effectiveDateTime": "2021-07-29T22:02:08.124Z"
+        }
+      }
+    }
+  }
+}

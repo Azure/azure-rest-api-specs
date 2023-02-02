@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "billingAccountName": "8791251",
+    "savingsPlanOrderId": "20000000-0000-0000-0000-000000000000",
+    "savingsPlanId": "30000000-0000-0000-0000-000000000000",
+    "api-version": "2023-04-01",
+    "body": {
+      "benefits": [
+        {
+          "appliedScopeProperties": {
+            "tenantId": "efc7c997-7700-4a74-b731-55aec16c15e9",
+            "managementGroupId": "/providers/Microsoft.Management/testManagementGroup"
+          }
+        },
+        {
+          "appliedScopeProperties": {
+            "tenantId": "0f3f77fc-6ca5-4167-9d1f-0591f61ce1a3",
+            "managementGroupId": "/providers/Microsoft.Management/testManagementGroup2"
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": false,
+            "reasonCode": "InvalidTenantId",
+            "reason": "The provided Tenant ID was invalid"
+          },
+          {
+            "valid": true
+          }
+        ]
+      }
+    }
+  }
+}

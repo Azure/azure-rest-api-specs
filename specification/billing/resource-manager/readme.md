@@ -45,6 +45,7 @@ input-file:
 - Microsoft.Billing/stable/2023-04-01/billingProperty.json
 - Microsoft.Billing/stable/2023-04-01/billingRoleAssignment.json
 - Microsoft.Billing/stable/2023-04-01/billingRoleDefinition.json
+- Microsoft.Billing/stable/2023-04-01/billingSavingsPlan.json
 - Microsoft.Billing/stable/2023-04-01/billingSubscription.json
 - Microsoft.Billing/stable/2023-04-01/customer.json
 - Microsoft.Billing/stable/2023-04-01/instruction.json
