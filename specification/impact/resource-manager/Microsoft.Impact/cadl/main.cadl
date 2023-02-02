@@ -1,24 +1,23 @@
 // First, import the common Microsoft.Voiceservice definition
 import "./impact.cadl";
-import "./subscriptionResource.cadl";
+//import "./subscriptionResource.cadl";
 
 // Then import the resource API definitions
 import "./workloadImpacts.cadl";
 import "./ImpactCategories.cadl";
 
+
+
 // Common elements:
 // Various tooling enforces (or at least suggests) that all models should have a provisioning State field, as this means something special to ARM.
 
-
 @doc("Provisioning state of the resource.")
-enum ProvisioningStateKV {
+enum ProvisioningState {
 	Succeeded,
 	Failed,
 	Canceled
 }
 
-@knownValues(ProvisioningStateKV )
-model ProvisioningState is string;
 
 @doc("General resource properties.")
 model ResourceProperties {
