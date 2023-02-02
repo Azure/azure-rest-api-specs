@@ -45,6 +45,8 @@ These settings apply only when `--tag=package-preview-2022-08` is specified on t
 ```yaml $(tag) == 'package-preview-2022-08'
 input-file:
   - Azure.Analytics.Purview.Catalog/preview/2022-08-01-preview/purviewcatalog.json
+```
+
 ### Tag: package-2022-12-01-preview
 
 These settings apply only when `--tag=package-2022-12-01-preview` is specified on the command line.
