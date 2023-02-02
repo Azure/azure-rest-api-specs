@@ -380,7 +380,7 @@
         "tags": [
           "Profiles"
         ],
-        "operationId": "Profiles_CheckTrafficManagerRelativeDnsNameAvailabilityV2",
+        "operationId": "Profiles_checkTrafficManagerNameAvailabilityV2",
         "description": "Checks the availability of a Traffic Manager Relative DNS name.",
         "parameters": [
           {
@@ -1667,6 +1667,24 @@
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
+      "x-ms-parameter-location":"client"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location":"client"
     }
   }
 }
