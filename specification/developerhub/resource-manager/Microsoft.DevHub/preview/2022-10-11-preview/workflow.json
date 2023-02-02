@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-10-11-preview",
+    "version": "2022-09-16-preview",
     "title": "DeveloperHubServiceClient",
     "description": "The AKS Developer Hub Service Client"
   },
@@ -499,6 +499,9 @@
           "description": "Profile of a github workflow.",
           "$ref": "#/definitions/GitHubWorkflowProfile",
           "x-ms-client-flatten": true
+        },
+        "artifactGenerationProperties": {
+          "$ref": "#/definitions/ArtifactGenerationProperties"
         }
       }
     },
@@ -580,9 +583,6 @@
         },
         "authStatus": {
           "$ref": "#/definitions/AuthorizationStatus"
-        },
-        "artifactGenerationProperties": {
-          "$ref": "#/definitions/ArtifactGenerationProperties"
         }
       }
     },
@@ -691,15 +691,6 @@
           "type": "string",
           "description": "The name of the app."
         },
-        "manifestType": {
-          "$ref": "#/definitions/ManifestType"
-        },
-        "dockerfileGenerationMode": {
-          "$ref": "#/definitions/DockerfileGenerationMode"
-        },
-        "manifestGenerationMode": {
-          "$ref": "#/definitions/ManifestGenerationMode"
-        },
         "dockerfileOutputDirectory": {
           "type": "string",
           "description": "The directory to output the generated Dockerfile to."
@@ -707,6 +698,23 @@
         "manifestOutputDirectory": {
           "type": "string",
           "description": "The directory to output the generated manifests to."
+        },
+        "dockerfileGenerationMode": {
+          "$ref": "#/definitions/DockerfileGenerationMode"
+        },
+        "manifestGenerationMode": {
+          "$ref": "#/definitions/ManifestGenerationMode"
+        },
+        "manifestType": {
+          "$ref": "#/definitions/GenerationManifestType"
+        },
+        "imageName": {
+          "type": "string",
+          "description": "The name of the image to be generated."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace to deploy the application to."
         }
       }
     },
@@ -723,15 +731,11 @@
         "values": [
           {
             "value": "helm",
-            "description": "Manifests using helm"
+            "description": "Repositories using helm"
           },
           {
             "value": "kube",
-            "description": "Standard Kubernetes manifests"
-          },
-          {
-            "value": "kustomize",
-            "description": "Manifests using kustomize"
+            "description": "Repositories using kubernetes manifests"
           }
         ]
       },
@@ -862,7 +866,7 @@
           }
         ]
       },
-      "description": "The mode of generation to be used for generating Dockerfiles."
+      "description": "The mode of generation to be used for generating Manifest."
     },
     "DockerfileGenerationMode": {
       "type": "string",
@@ -885,6 +889,28 @@
         ]
       },
       "description": "The mode of generation to be used for generating Dockerfiles."
+    },
+    "GenerationManifestType": {
+      "type": "string",
+      "enum": [
+        "helm",
+        "kube"
+      ],
+      "x-ms-enum": {
+        "name": "GenerationManifestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "helm",
+            "description": "Helm manifests"
+          },
+          {
+            "value": "kube",
+            "description": "Kubernetes manifests"
+          }
+        ]
+      },
+      "description": "Determines the type of manifests to be generated."
     },
     "WorkflowRun": {
       "type": "object",
