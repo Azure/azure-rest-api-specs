@@ -41,7 +41,7 @@ perform-load: false
 These settings apply only when `--tag=package-2022-10-preview --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2022-01-preview'
+``` yaml $(tag) == 'package-2022-10-preview'
 namespace: azure.mgmt.servicebus.v2022_10_01_preview
 output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus/v2022_10_01_preview
 ```
