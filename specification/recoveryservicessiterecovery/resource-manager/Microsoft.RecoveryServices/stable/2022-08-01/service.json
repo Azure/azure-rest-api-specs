@@ -12877,6 +12877,22 @@
       },
       "x-ms-discriminator-value": "HyperVReplicaAzure"
     },
+    "HyperVReplicaAzureContainerMappingInput": {
+      "description": "HyperVReplicaAzure container mapping input.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationProviderSpecificContainerMappingInput"
+        }
+      ],
+      "properties": {
+        "location": {
+          "description": "The Location.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "HyperVReplicaAzure"
+    },
     "HyperVReplicaAzureDiskInputDetails": {
       "description": "Disk input details.",
       "type": "object",
