@@ -37,7 +37,7 @@ license-header: MICROSOFT_MIT
 ```
 
 ``` yaml $(package-passivestamp)
-tag: package-passivestamp-2021-11-15
+tag: package-passivestamp-2023-01-15
 ```
 
 ``` yaml $(package-activestamp)
@@ -56,11 +56,11 @@ message-format: json
 ```
 
 
-### Tag: package-2023-01
+### Tag: package-passivestamp-2023-01-15
 
-These settings apply only when `--tag=package-2023-01` is specified on the command line.
+These settings apply only when `--tag=package-passivestamp-2023-01-15` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-01'
+```yaml $(tag) == 'package-passivestamp-2023-01-15'
 input-file:
   - Microsoft.RecoveryServices/stable/2023-01-15/bms.json
 ```

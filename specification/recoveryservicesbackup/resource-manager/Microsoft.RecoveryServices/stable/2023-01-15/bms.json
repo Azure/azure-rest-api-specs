@@ -2021,6 +2021,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
           }
+        },
+        "recoveryPointProperties": {
+          "description": "Properties of Recovery Point",
+          "$ref": "#/definitions/RecoveryPointProperties"
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRecoveryPoint"
@@ -2285,6 +2289,10 @@
         },
         "moveReadyRPOnly": {
           "description": "Whether the RP can be moved to another tier",
+          "type": "boolean"
+        },
+        "includeSoftDeletedRP": {
+          "description": "Flag to indicate whether Soft Deleted RPs should be included/excluded from result.",
           "type": "boolean"
         }
       }
@@ -3065,6 +3073,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
           }
+        },
+        "recoveryPointProperties": {
+          "description": "Properties of Recovery Point",
+          "$ref": "#/definitions/RecoveryPointProperties"
         }
       },
       "x-ms-discriminator-value": "IaasVMRecoveryPoint"
@@ -4443,6 +4455,24 @@
         },
         "additionalInfo": {
           "type": "string"
+        }
+      }
+    },
+    "RecoveryPointProperties": {
+      "description": "Properties of Recovery Point",
+      "type": "object",
+      "properties": {
+        "expiryTime": {
+          "description": "Expiry time of Recovery Point in UTC.",
+          "type": "string"
+        },
+        "ruleName": {
+          "description": "Rule name tagged on Recovery Point that governs life cycle",
+          "type": "string"
+        },
+        "isSoftDeleted": {
+          "description": "Bool to indicate whether RP is in soft delete state or not",
+          "type": "boolean"
         }
       }
     }
