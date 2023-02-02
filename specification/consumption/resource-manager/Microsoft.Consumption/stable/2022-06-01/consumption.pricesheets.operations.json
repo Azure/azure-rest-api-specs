@@ -75,10 +75,10 @@
             "maximum": 1000
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -141,10 +141,10 @@
             "maximum": 1000
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "$ref": "#/parameters/billingPeriodNameParameter"
@@ -180,7 +180,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -487,15 +487,6 @@
     }
   },
   "parameters": {
-    "billingPeriodNameParameter": {
-      "pattern": "[0-9]+",
-      "name": "billingPeriodName",
-      "in": "path",
-      "description": "Billing Period Name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
@@ -509,6 +500,15 @@
       "required": true,
       "type": "string",
       "description": "Version of the API to be used with the client request. The current version is 2021-10-01."
+    },
+    "billingPeriodNameParameter": {
+      "pattern": "[0-9]+",
+      "name": "billingPeriodName",
+      "in": "path",
+      "description": "Billing Period Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
