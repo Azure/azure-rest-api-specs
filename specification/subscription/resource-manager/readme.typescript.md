@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-subscriptions"
   output-folder: "$(typescript-sdks-folder)/sdk/subscription/arm-subscriptions"
-  clear-output-folder: true
   generate-metadata: true
 ```

@@ -92,16 +92,16 @@
           }
         ],
         "responses": {
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          },
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/OSOptionProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1823,14 +1823,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted"
-          },
           "200": {
             "description": "command finished with async pattern, tracking by location header. !!! this is for autorest only, you never get 200 from this api !!!",
             "schema": {
               "$ref": "#/definitions/RunCommandResult"
             }
+          },
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
@@ -1875,14 +1875,14 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "command running in progress"
-          },
           "200": {
             "description": "command finished",
             "schema": {
               "$ref": "#/definitions/RunCommandResult"
             }
+          },
+          "202": {
+            "description": "command running in progress"
           },
           "default": {
             "description": "Error response describing why the operation failed. If the cluster doesn't exist, 404 (Not found) is returned.",
@@ -2224,6 +2224,9 @@
           "items": {
             "$ref": "#/definitions/OperationValue"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of operations"
         }
       },
@@ -2367,6 +2370,14 @@
     },
     "ContainerServiceVnetSubnetID": {
       "type": "string",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      },
       "description": "specifies a subnet's resource id with subscription, resource group, vnet and subnet name"
     },
     "ContainerServiceVMSize": {
@@ -2649,11 +2660,27 @@
         },
         "vnetSubnetID": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
           "title": "The ID of the subnet which agent pool nodes and optionally pods will join on startup.",
           "description": "If this is not specified, a VNET and subnet will be generated and used. If no podSubnetID is specified, this applies to nodes and pods, otherwise it applies to just nodes. This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
         },
         "podSubnetID": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          },
           "title": "The ID of the subnet which pods will join when launched.",
           "description": "If omitted, pod IPs are statically assigned on the node subnet (see vnetSubnetID for more details). This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}"
         },
@@ -2731,6 +2758,14 @@
         },
         "nodePublicIPPrefixID": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/publicIPPrefixes"
+              }
+            ]
+          },
           "title": "The public IP prefix ID which VM nodes should use IPs from.",
           "description": "This is of the form: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/publicIPPrefixes/{publicIPPrefixName}"
         },
@@ -3293,6 +3328,7 @@
           "items": {
             "$ref": "#/definitions/TimeInWeek"
           },
+          "x-ms-identifiers": [],
           "title": "Time slots during the week when planned maintenance is allowed to proceed.",
           "description": "If two array entries specify the same day of the week, the applied configuration is the union of times in both entries."
         },
@@ -3301,6 +3337,7 @@
           "items": {
             "$ref": "#/definitions/TimeSpan"
           },
+          "x-ms-identifiers": [],
           "description": "Time slots on which upgrade is not allowed."
         }
       },
@@ -3556,6 +3593,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "The fully qualified Azure resource id."
         }
       },
@@ -3568,6 +3606,7 @@
           "items": {
             "$ref": "#/definitions/ContainerServiceSshPublicKey"
           },
+          "x-ms-identifiers": [],
           "description": "The list of SSH public keys used to authenticate with Linux-based VMs. A maximum of 1 key may be specified."
         }
       },
@@ -3715,6 +3754,9 @@
           "items": {
             "$ref": "#/definitions/ManagedClusterAgentPoolProfile"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The agent pool properties."
         },
         "linuxProfile": {
@@ -3889,6 +3931,14 @@
         },
         "diskEncryptionSetID": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/diskEncryptionSets"
+              }
+            ]
+          },
           "title": "The Resource ID of the disk encryption set to use for enabling encryption at rest.",
           "description": "This is of the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/diskEncryptionSets/{encryptionSetName}'"
         },
@@ -4060,6 +4110,14 @@
       "properties": {
         "resourceId": {
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          },
           "description": "The resource ID of the user assigned identity."
         },
         "clientId": {
@@ -4130,6 +4188,7 @@
               }
             }
           },
+          "x-ms-identifiers": [],
           "description": "List of orchestrator types and versions available for upgrade."
         }
       },
@@ -4150,6 +4209,9 @@
           "items": {
             "$ref": "#/definitions/ManagedClusterPoolUpgradeProfile"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of available upgrade versions for agent pools."
         }
       },
@@ -4346,6 +4408,10 @@
           "items": {
             "$ref": "#/definitions/ManagedClusterPodIdentityProvisioningErrorBody"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -4393,14 +4459,18 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedClusterPodIdentity"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "userAssignedIdentityExceptions": {
           "description": "The pod identity exceptions to allow.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedClusterPodIdentityException"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "title": "The pod identity profile of the Managed Cluster.",
@@ -4486,6 +4556,9 @@
               }
             }
           },
+          "x-ms-identifiers": [
+            "kubernetesVersion"
+          ],
           "description": "List of orchestrator types and versions available for upgrade."
         },
         "latestNodeImageVersion": {
@@ -4548,6 +4621,9 @@
               }
             }
           },
+          "x-ms-identifiers": [
+            "kubernetesVersion"
+          ],
           "description": "List of versions available for agent pool."
         }
       },
@@ -4665,6 +4741,14 @@
     },
     "ProximityPlacementGroupID": {
       "type": "string",
+      "format": "arm-id",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Compute/proximityPlacementGroups"
+          }
+        ]
+      },
       "description": "The ID for Proximity Placement Group."
     },
     "CredentialResults": {
@@ -4675,6 +4759,9 @@
           "items": {
             "$ref": "#/definitions/CredentialResult"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "Base64-encoded Kubernetes configuration file."
         }
       },
@@ -4727,6 +4814,10 @@
           "items": {
             "$ref": "#/definitions/CloudErrorBody"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "description": "A list of additional details about the error."
         }
       },
@@ -4926,6 +5017,7 @@
         "privateLinkServiceID": {
           "readOnly": true,
           "type": "string",
+          "format": "arm-id",
           "description": "The private link service ID of the resource, this field is exposed only to NRP internally."
         }
       }
@@ -5321,6 +5413,7 @@
           "items": {
             "$ref": "#/definitions/OSOptionProperty"
           },
+          "x-ms-identifiers": [],
           "description": "The list of OS options."
         }
       },
@@ -5370,7 +5463,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "ipAddress",
+            "port"
+          ]
         }
       }
     },
@@ -5410,7 +5507,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/EndpointDependency"
-          }
+          },
+          "x-ms-identifiers": [
+            "domainName"
+          ]
         }
       }
     },
@@ -5426,7 +5526,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Link to next page of resources.",
@@ -5454,7 +5555,15 @@
         },
         "logAnalyticsWorkspaceResourceId": {
           "type": "string",
-          "description": "Resource ID of the Log Analytics workspace to be associated with Azure Defender.  When Azure Defender is enabled, this field is required and must be a valid workspace resource ID. When Azure Defender is disabled, leave the field empty."
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.OperationalInsights/workspaces"
+              }
+            ]
+          },
+          "description": "Resource ID of the Log Analytics workspace to be associated with Azure Defender.  When Azure Defender is enabled, this field is required and must be a valid workspace resource ID. When Azure Defender is disabled, this field should not be exists."
         }
       },
       "description": "Azure Defender settings for the security profile."
@@ -5465,6 +5574,7 @@
       "properties": {
         "sourceResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "This is the ARM ID of the source object to be used to create the target object."
         }
       }

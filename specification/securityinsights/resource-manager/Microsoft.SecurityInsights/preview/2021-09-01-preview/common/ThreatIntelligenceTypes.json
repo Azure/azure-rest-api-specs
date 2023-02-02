@@ -1,0 +1,48 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-09-01-preview",
+    "title": "Common Relation types"
+  },
+  "paths": {},
+  "definitions": {
+    "ThreatIntelligence": {
+      "description": "ThreatIntelligence property bag.",
+      "properties": {
+        "confidence": {
+          "description": "Confidence (must be between 0 and 1)",
+          "format": "double",
+          "readOnly": true,
+          "type": "number"
+        },
+        "providerName": {
+          "description": "Name of the provider from whom this Threat Intelligence information was received",
+          "readOnly": true,
+          "type": "string"
+        },
+        "reportLink": {
+          "description": "Report link",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatDescription": {
+          "description": "Threat description (free text)",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatName": {
+          "description": "Threat name (e.g. \"Jedobot malware\")",
+          "readOnly": true,
+          "type": "string"
+        },
+        "threatType": {
+          "description": "Threat type (e.g. \"Botnet\")",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2022-03-01-preview",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "LanguageDetection",
+      "parameters": {
+        "modelVersion": "latest"
+      },
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "1",
+            "text": "Hello world"
+          },
+          {
+            "id": "2",
+            "text": "Bonjour tout le monde"
+          },
+          {
+            "id": "3",
+            "text": "Hola mundo"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "LanguageDetectionResults",
+        "results": {
+          "documents": [
+            {
+              "detectedLanguage": {
+                "confidenceScore": 1,
+                "iso6391Name": "en",
+                "name": "English"
+              },
+              "id": "1",
+              "warnings": []
+            },
+            {
+              "detectedLanguage": {
+                "confidenceScore": 1,
+                "iso6391Name": "fr",
+                "name": "French"
+              },
+              "id": "2",
+              "warnings": []
+            },
+            {
+              "detectedLanguage": {
+                "confidenceScore": 1,
+                "iso6391Name": "es",
+                "name": "Spanish"
+              },
+              "id": "3",
+              "warnings": []
+            }
+          ],
+          "errors": [],
+          "modelVersion": "2020-04-01"
+        }
+      }
+    }
+  }
+}

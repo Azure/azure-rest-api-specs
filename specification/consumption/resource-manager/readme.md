@@ -237,9 +237,8 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
@@ -248,6 +247,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_consumption']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -439,7 +439,10 @@ generate-interface: true
 directive:
   - suppress: R4009
     from: consumption.json
-    reason: SystemData properties does not fit into the consumption RP APIs as they dont really create any actual resources.  
+    reason: SystemData properties does not fit into the consumption RP APIs as they dont really create any actual resources.
+  - suppress: GuidUsage
+    from: consumption.json
+    reason: Usage of Guid in the consumption RP APIs is signed off from the ARM team.
 ```
 
 ## AzureResourceSchema

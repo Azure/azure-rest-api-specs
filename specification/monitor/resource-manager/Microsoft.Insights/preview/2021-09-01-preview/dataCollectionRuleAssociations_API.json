@@ -1,0 +1,506 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitor Data Collection Rule Associations API",
+    "description": "Provides operations for working with Azure Monitor data collection rule associations",
+    "version": "2021-09-01-preview",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/{resourceUri}/providers/Microsoft.Insights/dataCollectionRuleAssociations": {
+      "get": {
+        "tags": [
+          "DataCollectionRuleAssociations"
+        ],
+        "summary": "Lists associations for the specified resource.",
+        "operationId": "DataCollectionRuleAssociations_ListByResource",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleAssociationProxyOnlyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List associations for specified resource": {
+            "$ref": "./examples/DataCollectionRuleAssociationsListByResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionRules/{dataCollectionRuleName}/associations": {
+      "get": {
+        "tags": [
+          "DataCollectionRuleAssociations"
+        ],
+        "summary": "Lists associations for the specified data collection rule.",
+        "operationId": "DataCollectionRuleAssociations_ListByRule",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionRuleNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleAssociationProxyOnlyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List associations for specified data collection rule": {
+            "$ref": "./examples/DataCollectionRuleAssociationsListByRule.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/dataCollectionEndpoints/{dataCollectionEndpointName}/associations": {
+      "get": {
+        "tags": [
+          "DataCollectionRuleAssociations"
+        ],
+        "summary": "Lists associations for the specified data collection endpoint.",
+        "operationId": "DataCollectionRuleAssociations_ListByDataCollectionEndpoint",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DataCollectionEndpointNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleAssociationProxyOnlyResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List associations for specified data collection endpoint": {
+            "$ref": "./examples/DataCollectionRuleAssociationsListByDataCollectionEndpoint.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.Insights/dataCollectionRuleAssociations/{associationName}": {
+      "get": {
+        "tags": [
+          "DataCollectionRuleAssociations"
+        ],
+        "summary": "Returns the specified association.",
+        "operationId": "DataCollectionRuleAssociations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/AssociationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleAssociationProxyOnlyResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get association": {
+            "$ref": "./examples/DataCollectionRuleAssociationsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataCollectionRuleAssociations"
+        ],
+        "summary": "Creates or updates an association.",
+        "operationId": "DataCollectionRuleAssociations_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/AssociationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The payload",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleAssociationProxyOnlyResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Association was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleAssociationProxyOnlyResource"
+            }
+          },
+          "201": {
+            "description": "Association was successfully created",
+            "schema": {
+              "$ref": "#/definitions/DataCollectionRuleAssociationProxyOnlyResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update association": {
+            "$ref": "./examples/DataCollectionRuleAssociationsCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DataCollectionRuleAssociations"
+        ],
+        "summary": "Deletes an association.",
+        "operationId": "DataCollectionRuleAssociations_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/AssociationNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Association was successfully deleted"
+          },
+          "204": {
+            "description": "Association did not exist"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./dataCollectionRules_API.json#/definitions/ErrorResponseCommonV2"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete association": {
+            "$ref": "./examples/DataCollectionRuleAssociationsDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Metadata": {
+      "description": "Metadata about the resource",
+      "type": "object",
+      "properties": {
+        "provisionedBy": {
+          "description": "Azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "readOnly": true,
+          "example": "Azure Security Center",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "DataCollectionRuleAssociation": {
+      "description": "Definition of association of a data collection rule with a monitored Azure resource.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the association.",
+          "type": "string"
+        },
+        "dataCollectionRuleId": {
+          "description": "The resource ID of the data collection rule that is to be associated.",
+          "type": "string",
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule"
+        },
+        "dataCollectionEndpointId": {
+          "description": "The resource ID of the data collection endpoint that is to be associated.",
+          "type": "string",
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionEndpoints/myCollectionEndpoint"
+        },
+        "provisioningState": {
+          "description": "The resource provisioning state.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "example": "Creating",
+          "x-ms-enum": {
+            "name": "KnownDataCollectionRuleAssociationProvisioningState",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "metadata": {
+          "description": "Metadata about the resource",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Metadata"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "DataCollectionRuleAssociationProxyOnlyResource": {
+      "description": "Definition of generic ARM proxy resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Resource properties.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataCollectionRuleAssociation"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "Fully qualified ID of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "/subscriptions/703362b3-f278-4e4b-9179-c76eaf41ffc2/resourceGroups/myResourceGroup/providers/Microsoft.Insights/dataCollectionRules/myCollectionRule",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "myCollectionRule",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true,
+          "example": "Microsoft.Insights/dataCollectionRules",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "etag": {
+          "description": "Resource entity tag (ETag).",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "systemData": {
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DataCollectionRuleAssociationProxyOnlyResourceListResult": {
+      "description": "A pageable list of resources.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataCollectionRuleAssociationProxyOnlyResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AssociationNameParameter": {
+      "in": "path",
+      "name": "associationName",
+      "description": "The name of the association. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DataCollectionEndpointNameParameter": {
+      "in": "path",
+      "name": "dataCollectionEndpointName",
+      "description": "The name of the data collection endpoint. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DataCollectionRuleNameParameter": {
+      "in": "path",
+      "name": "dataCollectionRuleName",
+      "description": "The name of the data collection rule. The name is case insensitive.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceUriParameter": {
+      "in": "path",
+      "name": "resourceUri",
+      "description": "The identifier of the resource.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

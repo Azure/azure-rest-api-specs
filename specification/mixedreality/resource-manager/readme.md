@@ -34,7 +34,7 @@ openapi-type: arm
 tag: package-2021-03-01-preview
 ```
 
-## Suppression
+### Suppression
 ``` yaml
 directive:
   - suppress: SECRET_PROPERTY
@@ -161,12 +161,13 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

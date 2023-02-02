@@ -2,22 +2,24 @@
 
 These settings apply only when `--track2` is specified on the command line.
 
-``` yaml $(track2)
+``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-network
 no-namespace-folders: true
 package-version: 1.0.0b1
+combine-operation-files: true
 ```
 
 ### Python multi-api
 
 Generate all API versions currently shipped for this package
 
-```yaml $(multiapi)
+```yaml $(python)
+multiapi: true
 clear-output-folder: true
 batch:
-  - tag: package-2021-05
+  - tag: package-2022-07
   - tag: package-2021-02
   - tag: package-2021-02-preview-only
   - tag: package-2020-11
@@ -56,18 +58,17 @@ batch:
 
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/
-clear-output-folder: false
 perform-load: false
 ```
 
-### Tag: package-2021-05 and python
+### Tag: package-2022-07 and python
 
-These settings apply only when `--tag=package-2021-05 --python` is specified on the command line.
+These settings apply only when `--tag=package-2022-07 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2021-05'
-namespace: azure.mgmt.network.v2021_05_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2021_05_01
+``` yaml $(tag) == 'package-2022-07'
+namespace: azure.mgmt.network.v2022_07_01
+output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2022_07_01
 ```
 
 ### Tag: package-2021-02-preview-only and python
