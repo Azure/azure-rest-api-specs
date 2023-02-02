@@ -1,0 +1,410 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@azure-tools/cadl-autorest";
+import "@cadl-lang/versioning";
+
+using Cadl.Versioning;
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.ResourceManager;
+using Autorest;
+using OpenAPI;
+
+@armProviderNamespace()
+@service({ title: "Microsoft.NetworkAnalytics"})
+@versioned(Microsoft.NetworkAnalytics.Versions)
+@versionedDependency(
+  [
+    [Microsoft.NetworkAnalytics.Versions.v2022_11_15_preview, Azure.ResourceManager.Versions.v1_0_Preview_1],
+    [Microsoft.NetworkAnalytics.Versions.v2023_03_31, Azure.ResourceManager.Versions.v1_0_Preview_1],
+    [Microsoft.NetworkAnalytics.Versions.v2023_04_30, Azure.ResourceManager.Versions.v1_0_Preview_1]
+  ]
+)
+namespace Microsoft.NetworkAnalytics;
+
+interface Operations extends Azure.ResourceManager.Operations {}
+
+enum Versions {
+  v2022_11_15_preview: "2022-11-15-preview",
+  v2023_03_31: "2023-03-31",
+  v2023_04_30: "2023-04-30"
+}
+
+@doc("The data lake house resource")
+model DataLakeHouseResources is TrackedResource < StorageProperties > {
+    @doc("The data lake house resource name")
+    @key("storageName")
+    @segment("dataLakeHouses")
+    @path
+    name: string;
+}
+
+@doc("The network analytics product resource")
+@singleton
+model NetworkAnalyticsProducts is ProxyResource < NetworkAnalyticsProductsProperties > {
+    @doc("The network analytics product name")
+    @key("networkAnalyticsProductName")
+    @segment("networkAnalyticsProducts")
+    @path
+    name: string;
+}
+
+@doc("The data connector resource")
+model DataConnectors is TrackedResource <DataConnectorsProperties> {
+    @doc("The data connector name")
+    @key("dataConnectorName")
+    @segment("dataConnectors")
+    @path
+    name: string;
+}
+
+// Enable versioning of Model types once this is fixed https://github.com/Azure/cadl-azure/issues/2368
+//@added(Versions.v2023_04_30)
+@doc("An ingestion endpoint for metrics relating to the parent resource")
+@singleton
+model MetricsIngestionEndpointResources is ExtensionResource < MetricsIngestionEndpointProperties > {
+    @doc("Metrics Ingestion Endpoint Name")
+    @key("metricsIngestionEndpointName")
+    @segment("metricsIngestionEndpoints")
+    @path
+    name: string;
+  }
+
+@doc("Details of the NetworkAnalytics Storage.")
+model StorageProperties {
+    @doc("Storage properties")
+    @visibility("read")
+    provisioningState ?: ProvisioningState;
+    @doc("Managed Resource Group configuration.")
+    managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+    @doc("unique Identifier Name")
+    @visibility("create", "read")
+    uniqueIdentifierName: string;
+    @doc("Common Storage Account properties.")
+    @visibility("create", "read")
+    commonStorageAccountProperties?: CommonStorageAccountProperties;
+    @doc("Bronze Storage Account properties.")
+    @visibility("create", "read")
+    bronzeStorageAccountProperties?: BronzeStorageAccountProperties;
+    @doc("Azure DataExplorer Cluster properties.")
+    @visibility("create", "read")
+    azureDataExplorerProperties: AzureDataExplorerProperties;
+}
+
+@doc("Details of the network analytics product properties")
+model NetworkAnalyticsProductsProperties {
+    @doc("The network analytics product provisioning state")
+    @visibility("read")
+    provisioningState ?: ProvisioningState;
+    @doc("The network analytics product information")
+    @visibility("create", "read")
+    networkAnalyticsProductInformation: NetworkAnalyticsProductInformation;
+}
+
+@doc("Details of the Data Connector Properties. The product details are to be added from the supported values which can be fetched by making a GET call on the Network Analytics Product resource.")
+model DataConnectorsProperties {
+    @doc("The data connector provisioning state")
+    @visibility("read")
+    provisioningState ?: ProvisioningState;
+    @doc("Managed resource group configuration.")
+    managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+    @doc("The network analytics product to which this connector belongs to")
+    @visibility("create", "read")
+    productName: string;
+    @doc("The version of the corresponding product")
+    @visibility("create", "read")
+    productVersion: string;
+    @doc("The product connector")
+    @visibility("create", "read")
+    productConnector: string,
+    @doc("The product connector dataset")
+    @visibility("create", "read")
+    productConnectorDataset: string,
+    @doc("An array of the ARM IDs for the Data Lake House resources")
+    @visibility("create", "read")
+    dataLakeHouses: string[],
+    @doc("The data ingestion path")
+    @visibility("read")
+    dataIngestionPath ?: string,
+    @doc("The data connector configuration")
+    @visibility("create", "read")
+    dataConnectorConfiguration: DataConnectorConfiguration;
+}
+
+@doc("The status of the current operation.")
+enum ProvisioningState {
+    Succeeded,
+    Failed,
+    Canceled,
+    Provisioning,
+    Updating,
+    Deleting,
+    Accepted,
+}
+
+@doc("ManagedResourceGroup related properties")
+model ManagedResourceGroupConfiguration {
+    @doc("Name of managed resource group")
+    name: string;
+    @doc("Managed Resource Group location")
+    location: string;
+}
+
+@doc("The network analytics product information")
+model NetworkAnalyticsProductInformation {
+    @doc("Name of the network analytics product")
+    @minLength(3)
+    @maxLength(63)
+    productName: string;
+    @doc("The available versions for the product")
+    productVersions: string[];
+    @doc("The connectors supported by the product")
+    @extension("x-ms-identifiers", ["connectorName"])
+    productConnectors: NetworkAnalyticsProductConnectorInformation[];
+}
+
+@doc("Data Connector Information")
+model NetworkAnalyticsProductConnectorInformation {
+    @doc("The connector name")
+    @minLength(3)
+    @maxLength(63)
+    connectorName: string,
+    @doc("The datasets supported by the connector")
+    datasets: string[]
+}
+
+@doc("The data retention, dataset and compute configurations for the connector")
+model DataConnectorConfiguration {
+  @doc("The data retention configuration")
+  dataRetentionProperties: DataRetentionProperties,
+  @doc("The datasets configuration array ")
+  dataset: DatasetConfiguration,
+  @doc("The compute configuration")
+  compute: ComputeConfiguration
+}
+
+@doc("The data retention properties")
+model DataRetentionProperties {
+    @doc("The Azure data explorer retention properties")
+    dataExplorer: RetentionProperties,
+    @doc("The bronze storage account retention properties")
+    bronzeStorageAccount: RetentionProperties,
+    @doc("The silver storage account retention properties")
+    silverStorageAccount: RetentionProperties,
+    @doc("The gold storage account retention properties")
+    goldStorageAccount: RetentionProperties,
+}
+
+@doc("The retention properties model")
+model RetentionProperties {
+    @doc("The data retention period in days")
+    retentionDays: int32
+}
+
+@doc("The connector dataset information ")
+model DatasetConfiguration {
+    @doc("The name of the dataset")
+    datasetName: string,
+    @doc("The column key holding the timestamp data")
+    timestampKey?: zonedDateTime,
+    @doc("Columns to be masked")
+    columnsToMask?: string[]
+}
+
+@doc("The compute configuration")
+model ComputeConfiguration {
+    @doc("The alert email in case of a failure")
+    failureAlertEmail?: string;
+    @doc("The data throughput speed in mbps. The accepted values are: 10, 100, 300, 500, 1024")
+    throughput: int32;
+}
+
+@doc("Common Storage Account Properties.")
+model CommonStorageAccountProperties {
+    @visibility("create")
+    @doc("Allow or disallow public network access to Storage Account.")
+    publicNetworkAccess?: string;
+    @doc("Network rule set")
+    networkacls ?: NetworkAcls;
+    @visibility("create")
+    @doc("Blob Services")
+    blobServices?: BlobServices;
+    @doc("Private End Point")
+    privateEndPoint?: PrivateEndPoint;
+}
+
+@doc("Configuration for BronzeAccount")
+model BronzeStorageAccountProperties {
+    @doc("Enables Secure File Transfer Protocol, if set to true")
+    isSftpEnabled: boolean;
+}
+
+@doc("ADx Properties")
+model AzureDataExplorerProperties {
+    @visibility("create")
+    @doc("Virtual Network Configuration")
+    virtualNetworkConfiguration?: VirtualNetworkConfiguration;
+    @doc("Kusto Cluster Principal Assignments")
+    kustoClusterPrincipalAssignments: KustoClusterPrincipalAssignments;
+}
+
+enum KustoRole {
+  AllDatabasesAdmin,
+  AllDatabasesViewer
+}
+
+enum PrincipalType {
+    App,
+    Group,
+    User,
+}
+
+@doc("ADx Role assignments")
+model KustoClusterPrincipalAssignments {
+    @visibility("create")
+    @doc("system Identity Name")
+    systemIdentityName?: string;
+    @doc("Kusto roles")
+    role: KustoRole;
+    @doc("Principal type.")
+    principalType: PrincipalType;
+}
+
+@doc("Private End Point Resource")
+model PrivateEndPoint {
+    @doc("Resource ID of a subnet")
+    subnetId: string;
+    @doc("The private link resource service id")
+    privateLinkServiceId: string;
+    @doc("The private link resource group id.")
+    groupIds: string[];
+    @doc("The private link resource customDnsConfigs.")
+    customDnsConfigs: string;
+}
+
+@doc("Resource Location")
+scalar Location extends string
+
+@doc("Virtual Network Rule")
+model VirtualNetworkRule {
+    @doc("Resource ID of a subnet")
+    id: string;
+    @doc("The action of virtual network rule.")
+    action ?: string;
+    @doc("Gets the state of virtual network rule.")
+    state ?: string;
+}
+
+@doc("IP rule with specific IP or IP range in CIDR format.")
+model IPRules {
+    @doc("IP Rules Value")
+    value ? : string;
+    @doc("The action of virtual network rule.")
+    action: string;
+}
+
+@doc("Resource Access Rules.")
+model ResourceAccessRules {
+    @doc("The tenant ID of resource.")
+    tenantId: string;
+    @doc("Resource ID")
+    resourceId: string;
+}
+
+enum Bypass {
+   None,
+   Logging,
+   Metrics,
+   AzureServices
+}
+
+enum DefaultAction {
+  Allow,
+  Deny
+}
+
+@doc("Network rule set")
+model NetworkAcls {
+    @doc("Specifies whether traffic is bypassed for Logging/Metrics/AzureServices")
+    bypass: Bypass;
+    @doc("Virtual Network Rule")
+    virtualNetworkRule: VirtualNetworkRule[];
+    @doc("IP rule with specific IP or IP range in CIDR format.")
+    @extension("x-ms-identifiers", [])
+    ipRules: IPRules[];
+    @doc("Resource Access Rules.")
+     @extension("x-ms-identifiers", [])
+    resourceAccessRules: ResourceAccessRules[];
+    @doc("Default Action")
+    defaultActionType: DefaultAction;
+}
+
+@doc("Restore Policy")
+model RestorePolicy {
+    @doc("Restore Policy enabled or disabled boolean value")
+    enabled: boolean;
+    @doc("Restore Policy in days")
+    days: int32;
+}
+
+@doc("Configuration for creating Blob Service")
+model BlobServices {
+    @doc("Restore Policy")
+    restorePolicy: RestorePolicy;
+}
+
+@doc("Virtual Network Configuration")
+model VirtualNetworkConfiguration {
+    @doc("Resource ID of a subnet")
+    subnetId: string;
+    @doc("Engine Public IP ID")
+    enginePublicIpId: string;
+    @doc("Data Management Public Ip ID")
+    dataManagementPublicIpId: string;
+}
+
+// Enable versioning of Model types once this is fixed https://github.com/Azure/cadl-azure/issues/2368
+//@added(Versions.v2023_04_30)
+@doc("The resource-specific properties of a Metrics Ingestion Endpoint")
+model MetricsIngestionEndpointProperties {
+    @doc("Name of the External Metrics Ingress Gateway region where the compute should be deployed")
+    @visibility("create", "read")
+    ingressRegionName: string;
+
+    @visibility("read")
+    @doc("Event Hub URL to which the metrics should be sent for this resource")
+    eventHubUrl?: string;
+
+    @visibility("read")
+    @doc("Event Hub name to which the metrics should be sent for this resource")
+    eventHubName?: string;
+
+    @visibility("read")
+    @doc("Key Vault URL where the connection string exists for authentication")
+    keyVaultUrl?: string;
+
+    @doc("The status of the last operation")
+    @visibility("read")
+    provisioningState?: ProvisioningState;
+
+    @doc("Managed Resource Group Configuration")
+    @visibility("create", "read")
+    managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+  }
+
+@armResourceOperations
+interface Storage extends ResourceOperations<DataLakeHouseResources, StorageProperties> {}
+
+@added(Versions.v2023_03_31)
+@armResourceOperations(NetworkAnalyticsProducts)
+interface NetworkAnalyticsProduct extends ResourceOperations<NetworkAnalyticsProducts, NetworkAnalyticsProductsProperties> {}
+
+@added(Versions.v2023_03_31)
+@armResourceOperations(DataConnectors)
+interface DataConnector extends ResourceOperations<DataConnectors, DataConnectorsProperties> {}
+
+@added(Versions.v2023_04_30)
+@armResourceOperations(MetricsIngestionEndpointProperties)
+interface MetricsIngestionEndpoints extends ExtensionResourceOperations<MetricsIngestionEndpointResources, MetricsIngestionEndpointProperties> {}
