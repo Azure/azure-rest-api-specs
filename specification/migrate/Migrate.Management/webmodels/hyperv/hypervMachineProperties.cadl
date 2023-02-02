@@ -1,7 +1,7 @@
 import "../common/machinePropertiesInternal.cadl";
 import "../common/common.cadl";
 
-enum HyperVMachineHyperVMachinePropertiesHighAvailability {
+enum HighlyAvailable {
   "Unknown",
   "No",
   "Yes",
@@ -30,7 +30,7 @@ model HypervMachineProperties {
 
   @doc("Value indicating whether the VM is highly available.")
   @visibility("read")
-  highAvailability?: HyperVMachineHyperVMachinePropertiesHighAvailability;
+  highAvailability?: HighlyAvailable;
 
   @doc("Cluster FQDN/IPAddress.")
   @visibility("read")

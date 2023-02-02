@@ -431,7 +431,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "filter query",
             "type": "string"
           },
@@ -717,13 +717,6 @@
         "description": "List HyperVHost resources by HyperVSite",
         "parameters": [
           {
-            "name": "$filter",
-            "in": "query",
-            "required": true,
-            "description": "filter query",
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -731,6 +724,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "description": "filter query",
+            "type": "string"
           },
           {
             "name": "siteName",
@@ -1091,7 +1091,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "filter query",
             "type": "string"
           },
@@ -2494,7 +2494,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "filter query",
             "type": "string"
           },
@@ -4834,7 +4834,7 @@
           {
             "name": "$filter",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "filter query",
             "type": "string"
           },
@@ -6204,18 +6204,7 @@
           "description": "Gets or sets OtherDatabases of the AppsAndRoles."
         }
       },
-      "description": "Apps And Roles of the Server",
-      "required": [
-        "applications",
-        "webApplications",
-        "features",
-        "sqlServers",
-        "sharePointServers",
-        "systemCenters",
-        "bizTalkServers",
-        "exchangeServers",
-        "otherDatabases"
-      ]
+      "description": "Apps And Roles of the Server"
     },
     "AzureRestObject": {
       "type": "object",
@@ -6744,35 +6733,6 @@
       },
       "description": "Second level object.  Data related to a machine's operating system.             Serialized and stored as part of Machine Rest object. "
     },
-    "GuestOsDetails": {
-      "type": "object",
-      "properties": {
-        "osType": {
-          "type": "string",
-          "description": "The type of the operating system."
-        },
-        "osName": {
-          "type": "string",
-          "description": "The name of the operating system."
-        },
-        "osVersion": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The operating system version."
-        },
-        "osArchitecture": {
-          "type": "string",
-          "description": "The operating system architecture."
-        }
-      },
-      "description": "The properties of a server machine tracked resource",
-      "required": [
-        "osType",
-        "osName",
-        "osVersion",
-        "osArchitecture"
-      ]
-    },
     "HealthErrorDetails": {
       "type": "object",
       "properties": {
@@ -6875,6 +6835,18 @@
         "modelAsString": true
       }
     },
+    "HighlyAvailable": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "No",
+        "Yes"
+      ],
+      "x-ms-enum": {
+        "name": "HighlyAvailable",
+        "modelAsString": true
+      }
+    },
     "HyperVCluster": {
       "type": "object",
       "properties": {
@@ -6904,8 +6876,7 @@
             "$ref": "#/definitions/HyperVCluster"
           },
           "x-cadl-name": "HyperVCluster[]",
-          "description": "The HyperVCluster items on this page",
-          "readOnly": true
+          "description": "The HyperVCluster items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -6914,10 +6885,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a HyperVCluster list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a HyperVCluster list operation."
     },
     "HyperVClusterProperties": {
       "type": "object",
@@ -7042,8 +7010,7 @@
             "$ref": "#/definitions/HyperVHost"
           },
           "x-cadl-name": "HyperVHost[]",
-          "description": "The HyperVHost items on this page",
-          "readOnly": true
+          "description": "The HyperVHost items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -7052,10 +7019,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a HyperVHost list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a HyperVHost list operation."
     },
     "HyperVHostProperties": {
       "type": "object",
@@ -7098,18 +7062,6 @@
         }
       },
       "description": "The properties of Hyperv Host"
-    },
-    "HyperVMachineHyperVMachinePropertiesHighAvailability": {
-      "type": "string",
-      "enum": [
-        "Unknown",
-        "No",
-        "Yes"
-      ],
-      "x-ms-enum": {
-        "name": "HyperVMachineHyperVMachinePropertiesHighAvailability",
-        "modelAsString": true
-      }
     },
     "HyperVNetworkAdapter": {
       "type": "object",
@@ -7173,6 +7125,10 @@
             "read",
             "create"
           ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the eTag ."
         }
       },
       "description": "A HyperV SiteResource",
@@ -7234,8 +7190,7 @@
             "$ref": "#/definitions/HypervJobResource"
           },
           "x-cadl-name": "HypervJobResource[]",
-          "description": "The HypervJobResource items on this page",
-          "readOnly": true
+          "description": "The HypervJobResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -7244,10 +7199,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a HypervJobResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a HypervJobResource list operation."
     },
     "HypervMachineProperties": {
       "type": "object",
@@ -7279,7 +7231,7 @@
           "readOnly": true
         },
         "highAvailability": {
-          "$ref": "#/definitions/HyperVMachineHyperVMachinePropertiesHighAvailability",
+          "$ref": "#/definitions/HighlyAvailable",
           "description": "Value indicating whether the VM is highly available.",
           "readOnly": true
         },
@@ -7571,8 +7523,7 @@
             "$ref": "#/definitions/HypervMachineResource"
           },
           "x-cadl-name": "HypervMachineResource[]",
-          "description": "The HypervMachineResource items on this page",
-          "readOnly": true
+          "description": "The HypervMachineResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -7581,10 +7532,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a HypervMachineResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a HypervMachineResource list operation."
     },
     "HypervOperationsStatusResource": {
       "type": "object",
@@ -7635,8 +7583,7 @@
             "$ref": "#/definitions/HypervRunAsAccountResource"
           },
           "x-cadl-name": "HypervRunAsAccountResource[]",
-          "description": "The HypervRunAsAccountResource items on this page",
-          "readOnly": true
+          "description": "The HypervRunAsAccountResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -7645,10 +7592,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a HypervRunAsAccountResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a HypervRunAsAccountResource list operation."
     },
     "ImportDeleteImportMachinesJob": {
       "type": "object",
@@ -7774,8 +7718,7 @@
             "$ref": "#/definitions/ImportJobResource"
           },
           "x-cadl-name": "ImportJobResource[]",
-          "description": "The ImportJobResource items on this page",
-          "readOnly": true
+          "description": "The ImportJobResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -7784,10 +7727,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a ImportJobResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a ImportJobResource list operation."
     },
     "ImportMachineProperties": {
       "type": "object",
@@ -7924,7 +7864,7 @@
           "format": "int32",
           "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
         },
-        "allocatedMemoryInMb": {
+        "allocatedMemoryInMB": {
           "type": "number",
           "format": "double",
           "description": "Gets or sets the allocated Memory in MB."
@@ -7997,8 +7937,7 @@
             "$ref": "#/definitions/ImportMachineResource"
           },
           "x-cadl-name": "ImportMachineResource[]",
-          "description": "The ImportMachineResource items on this page",
-          "readOnly": true
+          "description": "The ImportMachineResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -8007,10 +7946,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a ImportMachineResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a ImportMachineResource list operation."
     },
     "ImportMachinesJobPropertiesJobErrorSummary": {
       "type": "object",
@@ -8259,8 +8195,7 @@
             "$ref": "#/definitions/MachineResource"
           },
           "x-cadl-name": "MachineResource[]",
-          "description": "The MachineResource items on this page",
-          "readOnly": true
+          "description": "The MachineResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -8269,10 +8204,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a MachineResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a MachineResource list operation."
     },
     "MachineSoftwareInventoryProperties": {
       "type": "object",
@@ -8471,25 +8403,23 @@
     "OtherDatabases": {
       "type": "object",
       "properties": {
-        "databaseTypes": {
+        "databaseType": {
           "type": "string",
-          "description": "Gets or sets DatabaseType of the OtherDatabase."
+          "description": "Gets or sets DatabaseType of the OtherDatabase.",
+          "readOnly": true
         },
         "instance": {
           "type": "string",
-          "description": "Gets or sets Instance of the OtherDatabase."
+          "description": "Gets or sets Instance of the OtherDatabase.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": "Gets or sets Version of the OtherDatabase."
+          "description": "Gets or sets Version of the OtherDatabase.",
+          "readOnly": true
         }
       },
-      "description": "OtherDatabase in the guest virtual machine.",
-      "required": [
-        "databaseTypes",
-        "instance",
-        "version"
-      ]
+      "description": "OtherDatabase in the guest virtual machine."
     },
     "ProcessorInfo": {
       "type": "object",
@@ -8699,8 +8629,7 @@
             "$ref": "#/definitions/ServerJobResource"
           },
           "x-cadl-name": "ServerJobResource[]",
-          "description": "The ServerJobResource items on this page",
-          "readOnly": true
+          "description": "The ServerJobResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -8709,10 +8638,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a ServerJobResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a ServerJobResource list operation."
     },
     "ServerProperties": {
       "type": "object",
@@ -8755,8 +8681,8 @@
           "type": "string",
           "description": "Gets or sets the firmware."
         },
-        "guestOsDetails": {
-          "$ref": "#/definitions/GuestOsDetails",
+        "guestOSDetails": {
+          "$ref": "#/definitions/GuestOSDetails",
           "description": " Operating System Details extracted from the guest"
         },
         "numberOfApplications": {
@@ -8844,7 +8770,7 @@
           "format": "int64",
           "description": "number of processor cores of the machine."
         },
-        "allocatedMemoryInMb": {
+        "allocatedMemoryInMB": {
           "type": "number",
           "format": "double",
           "description": "allocated memory in MB of the machine."
@@ -8894,7 +8820,7 @@
         "hydratedFqdn",
         "validationRequired",
         "firmware",
-        "guestOsDetails",
+        "guestOSDetails",
         "numberOfApplications",
         "guestDetailsDiscoveryTimestamp",
         "isGuestDetailsDiscoveryInProgress",
@@ -8913,7 +8839,7 @@
         "springBootDiscovery",
         "appsAndRoles",
         "numberofProcessorCores",
-        "allocatedMemoryInMb",
+        "allocatedMemoryInMB",
         "operatingSystemDetails",
         "biosSerialNumber",
         "biosGuid",
@@ -8990,8 +8916,7 @@
             "$ref": "#/definitions/ServerRunAsAccountResource"
           },
           "x-cadl-name": "ServerRunAsAccountResource[]",
-          "description": "The ServerRunAsAccountResource items on this page",
-          "readOnly": true
+          "description": "The ServerRunAsAccountResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -9000,10 +8925,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a ServerRunAsAccountResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a ServerRunAsAccountResource list operation."
     },
     "ServerSiteResource": {
       "type": "object",
@@ -9102,28 +9024,26 @@
       "properties": {
         "productName": {
           "type": "string",
-          "description": " Gets or sets ProductName of the SharePointServer."
+          "description": "Gets or sets ProductName of the SharePointServer.",
+          "readOnly": true
         },
         "isEnterprise": {
-          "type": "string",
-          "description": "Gets or sets a value indicating whether SharePointServer is Enterprise."
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the SharePointServer is Enterprise.",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "description": " Gets or sets Status of the SharePointServer."
+          "description": "Gets or sets Status of the SharePointServer.",
+          "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": " Gets or sets Version of the SharePointServer."
+          "description": "Gets or sets Version of the SharePointServer.",
+          "readOnly": true
         }
       },
-      "description": " SharePointServer in the guest virtual machine.",
-      "required": [
-        "productName",
-        "isEnterprise",
-        "status",
-        "version"
-      ]
+      "description": " SharePointServer in the guest virtual machine."
     },
     "SiteAgentProperties": {
       "type": "object",
@@ -9901,8 +9821,7 @@
             "$ref": "#/definitions/VCenter"
           },
           "x-cadl-name": "VCenter[]",
-          "description": "The VCenter items on this page",
-          "readOnly": true
+          "description": "The VCenter items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -9911,10 +9830,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a VCenter list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a VCenter list operation."
     },
     "VCenterProperties": {
       "type": "object",
@@ -10218,8 +10134,7 @@
             "$ref": "#/definitions/VmwareHostResource"
           },
           "x-cadl-name": "VmwareHostResource[]",
-          "description": "The VmwareHostResource items on this page",
-          "readOnly": true
+          "description": "The VmwareHostResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -10228,10 +10143,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a VmwareHostResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a VmwareHostResource list operation."
     },
     "VmwareJobResource": {
       "type": "object",
@@ -10262,8 +10174,7 @@
             "$ref": "#/definitions/VmwareJobResource"
           },
           "x-cadl-name": "VmwareJobResource[]",
-          "description": "The VmwareJobResource items on this page",
-          "readOnly": true
+          "description": "The VmwareJobResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -10272,10 +10183,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a VmwareJobResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a VmwareJobResource list operation."
     },
     "VmwareMachineProperties": {
       "type": "object",
@@ -10285,7 +10193,7 @@
           "description": "Gets the Information about Host Processor.",
           "readOnly": true
         },
-        "vCenterFqdn": {
+        "vCenterFQDN": {
           "type": "string",
           "description": "VCenter FQDN/IPAddress.",
           "readOnly": true
@@ -10411,8 +10319,8 @@
           "type": "string",
           "description": "Gets or sets the firmware."
         },
-        "guestOsDetails": {
-          "$ref": "#/definitions/GuestOsDetails",
+        "guestOSDetails": {
+          "$ref": "#/definitions/GuestOSDetails",
           "description": "Operating System Details extracted from the guest\n            bu executing\nscript inside the guest VM.",
           "readOnly": true
         },
@@ -10516,7 +10424,7 @@
           "format": "int32",
           "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
         },
-        "allocatedMemoryInMb": {
+        "allocatedMemoryInMB": {
           "type": "number",
           "format": "double",
           "description": "Gets or sets the allocated Memory in MB."
@@ -10655,8 +10563,7 @@
             "$ref": "#/definitions/VmwareRunAsAccountResource"
           },
           "x-cadl-name": "VmwareRunAsAccountResource[]",
-          "description": "The VmwareRunAsAccountResource items on this page",
-          "readOnly": true
+          "description": "The VmwareRunAsAccountResource items on this page"
         },
         "nextLink": {
           "type": "string",
@@ -10665,10 +10572,7 @@
           "x-cadl-name": "Rest.ResourceLocation"
         }
       },
-      "description": "The response of a VmwareRunAsAccountResource list operation.",
-      "required": [
-        "value"
-      ]
+      "description": "The response of a VmwareRunAsAccountResource list operation."
     },
     "WebAppDiscovery": {
       "type": "object",
@@ -10723,15 +10627,7 @@
           "description": "Gets or sets ApplicationPool of the WebApplication."
         }
       },
-      "description": " WebApplication in the guest virtual machine.",
-      "required": [
-        "name",
-        "status",
-        "platform",
-        "groupName",
-        "webServer",
-        "applicationPool"
-      ]
+      "description": " WebApplication in the guest virtual machine."
     },
     "WebRoleImportDisk": {
       "type": "object",

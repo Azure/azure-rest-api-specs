@@ -5,7 +5,6 @@ using Cadl.Versioning;
 @doc("Azure OffAzure Resource Provider management API.")
 namespace Microsoft.OffAzure;
 
-
 @doc("Second level object represented in responses as part of Machine REST resource.")
 model VmwareNetworkAdapter {
   @doc("Label of the NIC.")
@@ -135,9 +134,10 @@ model VmwareMachineProperties {
   @added(Versions.v2020_02_01)
   hostProcessorInfo?: ProcessorInfo;
 
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("VCenter FQDN/IPAddress.")
   @visibility("read")
-  vCenterFqdn?: string;
+  vCenterFQDN?: string;
 
   @doc("VCenter ARM ID.")
   @visibility("read")
@@ -228,13 +228,14 @@ model VmwareMachineProperties {
   @doc("Gets or sets the firmware.")
   firmware?: string;
 
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("""
 Operating System Details extracted from the guest
             bu executing
 script inside the guest VM.
 """)
   @visibility("read")
-  guestOsDetails?: GuestOsDetails;
+  guestOSDetails?: GuestOSDetails;
 
   @doc("Number of applications installed in the guest VM.")
   @visibility("read")
@@ -324,8 +325,9 @@ machine.
 """)
   numberOfProcessorCore?: int32;
 
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("Gets or sets the allocated Memory in MB.")
-  allocatedMemoryInMb?: float64;
+  allocatedMemoryInMB?: float64;
 
   @doc("Gets or sets the Operating System Details installed on the machine.")
   operatingSystemDetails?: OperatingSystem;

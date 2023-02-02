@@ -19,6 +19,7 @@ import "./webmodels/common/siteUsageResponse.cadl";
 import "./webmodels/common/machineMetadata.cadl";
 import "./webmodels/common/runAsAccountProperties.cadl";
 import "./webmodels/common/OperationStatusProperties.cadl";
+import "./webmodels/common/provisioningState.cadl";
 
 import "./webmodels/vmware/vmwareSiteProperties.cadl";
 import "./webmodels/vmware/vmwareMachineProperties.cadl";
@@ -126,9 +127,8 @@ interface HyperVClusterInt {
       ...ResourceGroupParameter;
       @doc("filter query")
       @query
-      $filter: string;
-    },
-    ArmResponse<Azure.Core.Page<TResource>>
+      $filter?: string;
+    }
   >;
 }
 
@@ -355,7 +355,7 @@ interface Machines {
       #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter: string;
+      $filter?: string;
 
       #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
@@ -527,6 +527,9 @@ model HyperVSite is TrackedResource<SiteProperties> {
   @path
  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Gets or sets the eTag .")
+  "eTag"?: string;
 }
 
 
@@ -780,12 +783,12 @@ interface HyperVHostInt {
   listByParent is ArmResourceListByParent<
     HyperVHost,
     {
-      @doc("filter query")
-      @query
-      $filter: string;
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
+      @doc("filter query")
+      @query
+      $filter?: string;
     }
   >;
 }
@@ -820,7 +823,7 @@ interface HypervMachines {
       #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter: string;
+      $filter?: string;
 
       #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
@@ -1078,7 +1081,7 @@ interface ImportMachines {
       #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter: string;
+      $filter?: string;
 
       @doc("page size  query")
       @query
@@ -1152,7 +1155,7 @@ interface ImportSites {
     @path
    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("DeleteJobs")
-    jobName: string
+    jobName: string;
   ): ArmResponse<V20200201DeleteImportMachinesJob>;
 
   @doc("Method to get all export import machines job for the given site.")

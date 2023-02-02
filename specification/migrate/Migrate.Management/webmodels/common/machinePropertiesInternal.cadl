@@ -41,21 +41,6 @@ model Disks {
 }
 
 @doc("The properties of a server machine tracked resource")
-model GuestOsDetails {
-  @doc("The type of the operating system.")
-  osType: string;
-
-  @doc("The name of the operating system.")
-  osName: string;
-
-  @doc("The operating system version.")
-  osVersion: int64;
-
-  @doc("The operating system architecture.")
-  osArchitecture: string;
-}
-
-@doc("The properties of a server machine tracked resource")
 model Errors {
   @doc("Gets the error message.")
   message: string;
@@ -127,22 +112,22 @@ model Applications {
 @doc(" WebApplication in the guest virtual machine.")
 model WebApplications {
   @doc(" Gets or sets Name of the WebApplication.")
-  name: string;
+  name?: string;
 
   @doc("Gets or sets Status of the WebApplication.")
-  status: string;
+  status?: string;
 
   @doc("Gets or sets Platform of the WebApplication.")
-  platform: string;
+  platform?: string;
 
   @doc("Gets or sets GroupName of the WebApplication.")
-  groupName: string;
+  groupName?: string;
 
   @doc("Gets or sets WebServer of the WebApplication.")
-  webServer: string;
+  webServer?: string;
 
   @doc("Gets or sets ApplicationPool of the WebApplication.")
-  applicationPool: string;
+  applicationPool?: string;
 }
 
 @doc("Feature in the guest virtual machine.")
@@ -204,17 +189,21 @@ model SqlServers {
 
 @doc(" SharePointServer in the guest virtual machine.")
 model SharePointServers {
-  @doc(" Gets or sets ProductName of the SharePointServer.")
-  productName: string;
+  @doc("Gets or sets ProductName of the SharePointServer.")
+  @visibility("read")
+  productName?: string;
 
-  @doc("Gets or sets a value indicating whether SharePointServer is Enterprise.")
-  isEnterprise: string;
+  @doc("Gets or sets a value indicating whether the SharePointServer is Enterprise.")
+  @visibility("read")
+  isEnterprise?: boolean;
 
-  @doc(" Gets or sets Status of the SharePointServer.")
-  status: string;
+  @doc("Gets or sets Status of the SharePointServer.")
+  @visibility("read")
+  status?: string;
 
-  @doc(" Gets or sets Version of the SharePointServer.")
-  version: string;
+  @doc("Gets or sets Version of the SharePointServer.")
+  @visibility("read")
+  version?: string;
 }
 
 @doc(" SystemCenter in the guest virtual machine.")
@@ -259,52 +248,55 @@ model ExchangeServers {
 @doc("OtherDatabase in the guest virtual machine.")
 model OtherDatabases {
   @doc("Gets or sets DatabaseType of the OtherDatabase.")
-  databaseTypes: string;
+  @visibility("read")
+  databaseType?: string;
 
   @doc("Gets or sets Instance of the OtherDatabase.")
-  instance: string;
+  @visibility("read")
+  instance?: string;
 
   @doc("Gets or sets Version of the OtherDatabase.")
-  version: string;
+  @visibility("read")
+  version?: string;
 }
 
 @doc("Apps And Roles of the Server")
 model AppsAndRoles {
   @doc("Gets or sets Applications of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  applications: Applications[];
+  applications?: Applications[];
 
   @doc(" Gets or sets WebApplications of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  webApplications: WebApplications[];
+  webApplications?: WebApplications[];
 
   @doc("Gets or sets Features of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  features: Features[];
+  features?: Features[];
 
   @doc("Gets or sets SQLServers of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  sqlServers: SqlServers[];
+  sqlServers?: SqlServers[];
 
   @doc("Gets or sets SharePointServers of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  sharePointServers: SharePointServers[];
+  sharePointServers?: SharePointServers[];
 
   @doc(" Gets or sets SystemCenters of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  systemCenters: SystemCenters[];
+  systemCenters?: SystemCenters[];
 
   @doc(" Gets or sets BizTalkServers of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  bizTalkServers: BizTalkServers[];
+  bizTalkServers?: BizTalkServers[];
 
   @doc("Gets or sets ExchangeServers of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  exchangeServers: ExchangeServers[];
+  exchangeServers?: ExchangeServers[];
 
   @doc("Gets or sets OtherDatabases of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  otherDatabases: OtherDatabases[];
+  otherDatabases?: OtherDatabases[];
 }
 
 @doc("Data related to a machine's operating system.")

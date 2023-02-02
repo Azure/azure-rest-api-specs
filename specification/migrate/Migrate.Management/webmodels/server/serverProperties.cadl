@@ -39,8 +39,9 @@ model ServerProperties {
   @doc("Gets or sets the firmware.")
   firmware: string;
 
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc(" Operating System Details extracted from the guest")
-  guestOsDetails: GuestOsDetails;
+  guestOSDetails: GuestOSDetails;
 
   @doc(" Number of applications installed in the guest VM.")
   numberOfApplications: int64;
@@ -96,8 +97,9 @@ model ServerProperties {
   @doc("number of processor cores of the machine.")
   numberofProcessorCores: int64;
 
+  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("allocated memory in MB of the machine.")
-  allocatedMemoryInMb: float64;
+  allocatedMemoryInMB: float64;
 
   @doc("Operating system details of the machine.")
   operatingSystemDetails: OperatingSystemDetails;
