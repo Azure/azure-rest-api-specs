@@ -68,6 +68,54 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ContainerService/managedClusters/locations/{location}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "ManagedClusters"
+        ],
+        "operationId": "ManagedClusters_GetOperationStatus",
+        "summary": "Gets the status of a long running operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the operation."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The operation ID."
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for this operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Cluster": {
+            "$ref": "./examples/ManagedClustersGetOperationStatus.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters": {
       "get": {
         "tags": [
@@ -973,6 +1021,39 @@
         }
       },
       "description": "Properties of the managed cluster."
+    },
+    "OperationStatus": {
+      "description": "The properties indicating the operation result of an operation on a service.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation result.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The status of the operation being performed.",
+          "enum": [
+            "Canceled",
+            "Succeeded",
+            "Failed",
+            "Requested",
+            "Running"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OperationResultStatus",
+            "modelAsString": true
+          }
+        },
+        "startTime": {
+          "description": "The time that the operation was started.",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "The time that the operation finished.",
+          "type": "string"
+        }
+      }
     },
     "OrchestratorProfile": {
       "properties": {
