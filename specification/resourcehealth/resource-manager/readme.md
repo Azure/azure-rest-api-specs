@@ -38,6 +38,7 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 input-file:
   - Microsoft.ResourceHealth/preview/2022-10-01-preview/ResourceHealth.json
 ```
+
 ### Tag: package-preview-2022-05-01
 
 These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
