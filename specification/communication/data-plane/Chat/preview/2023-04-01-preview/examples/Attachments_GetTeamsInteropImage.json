@@ -1,12 +1,15 @@
 {
   "parameters": {
-    "endpoint": "https://contoso.westus.communications.azure.com",
-    "api-version": "2023-03-01-preview",
+    "endpoint": "https://contoso.communications.azure.com/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}",
+    "api-version": "2023-04-01-preview",
     "chatThreadId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-    "chatMessageId": "1591768249318"
+    "chatMessageId": "1591768249318",
+    "imageId": "74732D7E-F40D-4E22-9BD0-E976EC320489"
   },
   "responses": {
-    "204": {},
+    "200": {
+      "body": "101010101"
+    },
     "401": {
       "body": {
         "error": {
@@ -20,6 +23,14 @@
         "error": {
           "code": "Forbidden",
           "message": "User is not allowed to perform specified action."
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "Not Found",
+          "message": "The image was not found."
         }
       }
     },
