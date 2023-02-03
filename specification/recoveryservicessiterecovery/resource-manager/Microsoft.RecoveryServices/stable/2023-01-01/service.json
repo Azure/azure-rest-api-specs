@@ -23727,7 +23727,7 @@
           "type": "string"
         },
         "targetVmSecurityProfile": {
-          "$ref": "#/definitions/VMwareCbtSecurityProfileInput",
+          "$ref": "#/definitions/VMwareCbtSecurityProfileProperties",
           "description": "The target VM security profile."
         },
         "targetBootDiagnosticsStorageAccountId": {
@@ -23905,7 +23905,7 @@
           "type": "string"
         },
         "targetVmSecurityProfile": {
-          "$ref": "#/definitions/VMwareCbtSecurityProfileDetails",
+          "$ref": "#/definitions/VMwareCbtSecurityProfileProperties",
           "description": "The target VM security profile."
         },
         "targetBootDiagnosticsStorageAccountId": {
@@ -24420,33 +24420,7 @@
       },
       "x-ms-discriminator-value": "VMwareCbt"
     },
-    "VMwareCbtSecurityProfileDetails": {
-      "description": "Security profile details.",
-      "type": "object",
-      "properties": {
-        "targetVmSecurityType": {
-          "description": "The target VM security type.",
-          "type": "string"
-        },
-        "isTargetVmSecureBootEnabled": {
-          "description": "A value indicating whether secure boot to be enabled.",
-          "type": "string"
-        },
-        "isTargetVmTpmEnabled": {
-          "description": "A value indicating whether trusted platform module to be enabled.",
-          "type": "string"
-        },
-        "isTargetVmIntegrityMonitoringEnabled": {
-          "description": "A value indicating whether integrity monitoring to be enabled.",
-          "type": "string"
-        },
-        "isTargetVmConfidentialEncryptionEnabled": {
-          "description": "A value indicating whether confidential compute encryption to be enabled.",
-          "type": "string"
-        }
-      }
-    },
-    "VMwareCbtSecurityProfileInput": {
+    "VMwareCbtSecurityProfileProperties": {
       "description": "VMwareCbt security profile input.",
       "type": "object",
       "properties": {
