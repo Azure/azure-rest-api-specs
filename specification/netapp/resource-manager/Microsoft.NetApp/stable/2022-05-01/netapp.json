@@ -4750,7 +4750,7 @@
         },
         "username": {
           "type": "string",
-          "description": "Username of Active Directory domain administrator"
+          "description": "A domain user account with permission to create machine accounts"
         },
         "password": {
           "type": "string",
@@ -5403,7 +5403,7 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 500 GiB. Upper limit is 100TiB, 500Tib for LargeVolume. Specified in bytes.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume. Specified in bytes.",
           "minimum": 107374182400,
           "maximum": 549755813888000,
           "default": 107374182400,
@@ -5447,6 +5447,7 @@
           "type": "string",
           "x-nullable": true,
           "x-ms-mutability": [
+            "read",
             "create"
           ],
           "description": "UUID v4 or resource identifier used to identify the Snapshot.",
@@ -5461,6 +5462,7 @@
           "type": "string",
           "x-nullable": true,
           "x-ms-mutability": [
+            "read",
             "create"
           ],
           "description": "UUID v4 or resource identifier used to identify the Backup.",
