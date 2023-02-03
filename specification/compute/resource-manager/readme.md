@@ -237,11 +237,6 @@ directive:
       - APIVersionPattern  
     from: 
       - Microsoft.Compute/common-types/v1/common.json
-  - where:
-      - $.definitions.VirtualMachineScaleSetExtension
-    suppress:
-      - RequiredPropertiesMissingInResourceModel
-
 ```
 
 ### Tag: package-2022-11-01
