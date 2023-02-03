@@ -48,7 +48,7 @@
             "description": "Message status was successfully retrieved.",
             "headers": {
               "retry-after": {
-                "description": "Minimum amount of time in seconds to wait before polling for operation status again.",
+                "description": "This header will only be present when the status is a non-terminal status. It indicates the minimum amount of time in seconds to wait before polling for operation status again.",
                 "type": "integer"
               }
             },
@@ -58,8 +58,14 @@
           }
         },
         "x-ms-examples": {
-          "Get Message Status": {
-            "$ref": "./examples/GetOperationStatus.json"
+          "Get Message Status FailedTerminalStatus": {
+            "$ref": "./examples/GetOperationStatusReturnsFailedTerminalStatus.json"
+          },
+          "Get Message Status NonTerminalStatus": {
+            "$ref": "./examples/GetOperationStatusReturnsNonTerminalStatus.json"
+          },
+          "Get Message Status SuccessTerminalStatus": {
+            "$ref": "./examples/GetOperationStatusReturnsSuccessTerminalStatus.json"
           }
         }
       }
@@ -130,12 +136,8 @@
                 "type": "string"
               },
               "retry-after": {
-                "description": "Minimum amount of time in seconds to wait before polling for operation status again.",
+                "description": "This header will only be present when the operation status is a non-terminal status. It indicates the minimum amount of time in seconds to wait before polling for operation status again.",
                 "type": "integer"
-              },
-              "x-ms-request-id": {
-                "description": "System generated GUID indicating the id of this specific message, to be used for tracking the message over its lifetime.",
-                "type": "string"
               }
             },
             "schema": {
