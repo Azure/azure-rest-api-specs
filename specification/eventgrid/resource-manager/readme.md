@@ -26,7 +26,16 @@ These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-12
+tag: package-2021-10-preview
+```
+
+### Tag: package-2021-10-preview
+
+These settings apply only when `--tag=package-2021-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-10-preview'
+input-file:
+- Microsoft.EventGrid/preview/2021-10-15-preview/EventGrid.json
 ```
 
 ### Tag: package-2021-12
@@ -211,6 +220,7 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_event_grid']
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#

@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.ConnectedVMwarevSphere
-  output-folder: $(csharp-sdks-folder)/ConnectedVMware/Microsoft.Azure.Management.ConnectedVMwarevSphere/src/Generated
+  namespace: Microsoft.Azure.Management.ConnectedVMwarevSphere
+  output-folder: $(csharp-sdks-folder)/connectedvmware/Microsoft.Azure.Management.ConnectedVMwarevSphere/src/Generated
 ```

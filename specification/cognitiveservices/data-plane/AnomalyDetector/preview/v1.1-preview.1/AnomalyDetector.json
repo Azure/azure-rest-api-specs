@@ -1,0 +1,597 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.1-preview.1",
+    "title": "Anomaly Detector Client",
+    "description": "The Anomaly Detector API detects anomalies automatically in time series data. It supports two kinds of mode, one is for stateless using, another is for stateful using. In stateless mode, there are three functionalities. Entire Detect is for detecting the whole series with model trained by the time series, Last Detect is detecting last point with model trained by points before. ChangePoint Detect is for detecting trend changes in time series. In stateful mode, user can store time series, the stored time series will be used for detection anomalies. Under this mode, user can still use the above three functionalities by only giving a time range without preparing time series in client side. Besides the above three functionalities, stateful model also provide group based detection and labeling service. By leveraging labeling service user can provide labels for each detection result, these labels will be used for retuning or regenerating detection models. Inconsistency detection is a kind of group based detection, this detection will find inconsistency ones in a set of time series. By using anomaly detector service, business customers can discover incidents and establish a logic flow for root cause analysis."
+  },
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/anomalydetector/{ApiVersion}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      },
+      {
+        "$ref": "#/parameters/ApiVersion"
+      }
+    ]
+  },
+  "paths": {
+    "/timeseries/entire/detect": {
+      "post": {
+        "summary": "Detect anomalies for the entire series in batch.",
+        "description": "This operation generates a model with an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
+        "operationId": "DetectEntireSeries",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Time series points and period if needed. Advanced model parameters can also be set in the request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/EntireDetectResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectorError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Find anomalies for the entire series in batch example": {
+            "$ref": "./examples/EntireDetect.json"
+          }
+        }
+      }
+    },
+    "/timeseries/last/detect": {
+      "post": {
+        "summary": "Detect anomaly status of the latest point in time series.",
+        "description": "This operation generates a model using points before the latest one. With this method, only historical points are used to determine whether the target point is an anomaly. The latest point detecting operation matches the scenario of real-time monitoring of business metrics.",
+        "operationId": "DetectLastPoint",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Time series points and period if needed. Advanced model parameters can also be set in the request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DetectRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/LastDetectResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectorError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/LastDetect.json"
+          }
+        }
+      }
+    },
+    "/timeseries/changepoint/detect": {
+      "post": {
+        "summary": "Detect change point for the entire series",
+        "description": "Evaluate change point score of every series point",
+        "operationId": "DetectChangePoint",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Time series points and granularity is needed. Advanced model parameters can also be set in the request if needed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectRequest"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/ChangePointDetectResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "error code"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AnomalyDetectorError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect change point example": {
+            "$ref": "./examples/ChangePointDetect.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AnomalyDetectorError": {
+      "type": "object",
+      "description": "Error information returned by the API.",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "enum": [
+            "InvalidCustomInterval",
+            "BadArgument",
+            "InvalidGranularity",
+            "InvalidPeriod",
+            "InvalidModelArgument",
+            "InvalidSeries",
+            "InvalidJsonFormat",
+            "RequiredGranularity",
+            "RequiredSeries",
+            "InvalidImputeMode",
+            "InvalidImputeFixedValue"
+          ],
+          "x-ms-enum": {
+            "name": "AnomalyDetectorErrorCodes",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        }
+      }
+    },
+    "TimeGranularity": {
+      "type": "string",
+      "description": "Optional argument, can be one of yearly, monthly, weekly, daily, hourly, minutely, secondly, microsecond or none. If granularity is not present, it will be none by default. If granularity is none, the timestamp property in time series point can be absent.",
+      "x-ms-enum": {
+        "name": "TimeGranularity",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "yearly"
+          },
+          {
+            "value": "monthly"
+          },
+          {
+            "value": "weekly"
+          },
+          {
+            "value": "daily"
+          },
+          {
+            "value": "hourly"
+          },
+          {
+            "name": "perMinute",
+            "value": "minutely"
+          },
+          {
+            "name": "perSecond",
+            "value": "secondly"
+          },
+          {
+            "value": "microsecond"
+          },
+          {
+            "value": "none"
+          }
+        ]
+      },
+      "enum": [
+        "yearly",
+        "monthly",
+        "weekly",
+        "daily",
+        "hourly",
+        "minutely",
+        "secondly",
+        "microsecond",
+        "none"
+      ]
+    },
+    "CustomInterval": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+    },
+    "ImputeMode": {
+      "type": "string",
+      "description": "Define the impute method, can be one of auto, previous, linear, fixed, zero, notFill.",
+      "x-ms-enum": {
+        "name": "ImputeMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "auto"
+          },
+          {
+            "value": "previous"
+          },
+          {
+            "value": "linear"
+          },
+          {
+            "value": "fixed"
+          },
+          {
+            "value": "zero"
+          },
+          {
+            "value": "notFill"
+          }
+        ]
+      },
+      "enum": [
+        "auto",
+        "previous",
+        "linear",
+        "fixed",
+        "zero",
+        "notFill"
+      ]
+    },
+    "ImputeFixedValue": {
+      "type": "number",
+      "format": "float",
+      "description": "Used when imputeMode set to \"fixed\", in this case, it will be used to impute the missing values."
+    },
+    "DetectRequest": {
+      "type": "object",
+      "description": "The request of entire or last anomaly detection.",
+      "required": [
+        "series"
+      ],
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the anomaly detection result. If the data is not sorted correctly or there is duplicated timestamp, the API will not work. In such case, an error message will be returned.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesPoint"
+          }
+        },
+        "granularity": {
+          "$ref": "#/definitions/TimeGranularity"
+        },
+        "customInterval": {
+          "$ref": "#/definitions/CustomInterval",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
+        },
+        "maxAnomalyRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series."
+        },
+        "sensitivity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
+        },
+        "imputeMode": {
+          "$ref": "#/definitions/ImputeMode",
+          "description": "Used to specify how to deal with missing values in the input series, it's used when granularity is not \"none\"."
+        },
+        "imputeFixedValue": {
+          "$ref": "#/definitions/ImputeFixedValue",
+          "description": "Used to specify the value to fill, it's used when granularity is not \"none\" and imputeMode is \"fixed\"."
+        }
+      }
+    },
+    "TimeSeriesPoint": {
+      "type": "object",
+      "description": "The definition of input timeseries points.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Optional argument, timestamp of a data point (ISO8601 format)."
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The measurement of that point, should be float."
+        }
+      }
+    },
+    "EntireDetectResponse": {
+      "type": "object",
+      "description": "The response of entire anomaly detection.",
+      "required": [
+        "expectedValues",
+        "isAnomaly",
+        "isNegativeAnomaly",
+        "isPositiveAnomaly",
+        "lowerMargins",
+        "period",
+        "upperMargins"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "expectedValues": {
+          "type": "array",
+          "description": "ExpectedValues contain expected value for each input point. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "upperMargins": {
+          "type": "array",
+          "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting marginScale value, less significant anomalies can be filtered in client side. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "lowerMargins": {
+          "type": "array",
+          "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. Points between the boundary can be marked as normal ones in client side. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "isAnomaly": {
+          "type": "array",
+          "description": "IsAnomaly contains anomaly properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "isNegativeAnomaly": {
+          "type": "array",
+          "description": "IsNegativeAnomaly contains anomaly status in negative direction for each input point. True means a negative anomaly has been detected. A negative anomaly means the point is detected as an anomaly and its real value is smaller than the expected one. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "isPositiveAnomaly": {
+          "type": "array",
+          "description": "IsPositiveAnomaly contain anomaly status in positive direction for each input point. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean"
+          }
+        },
+        "severity": {
+          "type": "array",
+          "description": "The severity score for each input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0.",
+          "items": {
+            "type": "number",
+            "format": "float"
+          }
+        }
+      }
+    },
+    "LastDetectResponse": {
+      "type": "object",
+      "description": "The response of last anomaly detection.",
+      "required": [
+        "expectedValue",
+        "isAnomaly",
+        "isNegativeAnomaly",
+        "isPositiveAnomaly",
+        "lowerMargin",
+        "period",
+        "upperMargin",
+        "suggestedWindow"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "suggestedWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Suggested input series points needed for detecting the latest point."
+        },
+        "expectedValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Expected value of the latest point."
+        },
+        "upperMargin": {
+          "type": "number",
+          "format": "float",
+          "description": "Upper margin of the latest point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. If the value of latest point is between upperBoundary and lowerBoundary, it should be treated as normal value. By adjusting marginScale value, anomaly status of latest point can be changed."
+        },
+        "lowerMargin": {
+          "type": "number",
+          "format": "float",
+          "description": "Lower margin of the latest point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. "
+        },
+        "isAnomaly": {
+          "type": "boolean",
+          "description": "Anomaly status of the latest point, true means the latest point is an anomaly either in negative direction or positive direction."
+        },
+        "isNegativeAnomaly": {
+          "type": "boolean",
+          "description": "Anomaly status in negative direction of the latest point. True means the latest point is an anomaly and its real value is smaller than the expected one."
+        },
+        "isPositiveAnomaly": {
+          "type": "boolean",
+          "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
+        },
+        "severity": {
+          "type": "number",
+          "format": "float",
+          "description": "The severity score for the last input point. The larger the value is, the more sever the anomaly is. For normal points, the \"severity\" is always 0."
+        }
+      }
+    },
+    "ChangePointDetectRequest": {
+      "type": "object",
+      "description": "The request of change point detection.",
+      "required": [
+        "granularity",
+        "series"
+      ],
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the change point detection result.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesPoint"
+          }
+        },
+        "granularity": {
+          "$ref": "#/definitions/TimeGranularity",
+          "description": "Can only be one of yearly, monthly, weekly, daily, hourly, minutely or secondly. Granularity is used for verify whether input series is valid."
+        },
+        "customInterval": {
+          "$ref": "#/definitions/CustomInterval",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
+        },
+        "stableTrendWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, a default stableTrendWindow will be used in detection."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional argument, advanced model parameter, between 0.0-1.0, the lower the value is, the larger the trend error will be which means less change point will be accepted."
+        }
+      }
+    },
+    "ChangePointDetectResponse": {
+      "type": "object",
+      "description": "The response of change point detection.",
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "isChangePoint": {
+          "type": "array",
+          "description": "isChangePoint contains change point properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "confidenceScores": {
+          "type": "array",
+          "description": "the change point confidence of each point",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "readOnly": true
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "ApiVersion": {
+      "name": "ApiVersion",
+      "description": "Anomaly Detector API version (for example, v1.0).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "v1.1-preview.1"
+      ],
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
+}

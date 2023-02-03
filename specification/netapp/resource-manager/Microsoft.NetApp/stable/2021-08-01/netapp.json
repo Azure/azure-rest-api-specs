@@ -63,6 +63,11 @@
           "default": {
             "description": "Error response describing why the operation failed."
           }
+        },
+        "x-ms-examples": {
+          "OperationList": {
+            "$ref": "examples/OperationList.json"
+          }
         }
       }
     },
@@ -2863,7 +2868,7 @@
           }
         ],
         "tags": [
-          "Volume Group"
+          "Volume Groups"
         ],
         "operationId": "VolumeGroups_ListByNetAppAccount",
         "x-ms-pageable": {
@@ -2892,7 +2897,7 @@
         "summary": "Describe a Volume Group",
         "description": "Get details of the specified volume group",
         "tags": [
-          "Volume Group"
+          "Volume Groups"
         ],
         "operationId": "VolumeGroups_Get",
         "parameters": [
@@ -2931,7 +2936,7 @@
       },
       "put": {
         "tags": [
-          "Volume Group"
+          "Volume Groups"
         ],
         "operationId": "VolumeGroups_Create",
         "summary": "Create the specified volume group and volumes. Creating volume group will create all the volumes specified in request body implicitly. Once volumes are created using volume group, those will be treated as regular volumes thereafter.",
@@ -2982,7 +2987,7 @@
       },
       "delete": {
         "tags": [
-          "Volume Group"
+          "Volume Groups"
         ],
         "operationId": "VolumeGroups_Delete",
         "summary": "Delete a volume group",
@@ -3036,6 +3041,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Storage operations supported by the Storage resource provider."
         }
       }
@@ -3097,14 +3105,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "logSpecifications": {
           "description": "Log specification of operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -3170,7 +3184,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "aggregationType": {
           "type": "string",
@@ -3501,7 +3518,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/activeDirectory"
-          }
+          },
+          "x-ms-identifiers": [
+            "activeDirectoryId"
+          ]
         },
         "encryption": {
           "description": "Encryption settings",
@@ -4079,7 +4099,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/exportPolicyRule"
-              }
+              },
+              "x-ms-identifiers": [
+                "ruleIndex"
+              ]
             }
           }
         },
@@ -4202,7 +4225,10 @@
           "description": "List of mount targets",
           "items": {
             "$ref": "#/definitions/mountTargetProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "fileSystemId"
+          ]
         },
         "volumeType": {
           "type": "string",
@@ -4395,7 +4421,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/placementKeyValuePairs"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         }
       }
     },
@@ -4673,7 +4702,10 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/exportPolicyRule"
-              }
+              },
+              "x-ms-identifiers": [
+                "ruleIndex"
+              ]
             }
           }
         },
@@ -5315,7 +5347,7 @@
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
         "creationDate": {
-          "title": "name",
+          "title": "creationDate",
           "type": "string",
           "format": "date-time",
           "readOnly": true,
@@ -5425,7 +5457,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/volumeBackups"
-          }
+          },
+          "x-ms-identifiers": [
+            "volumeName"
+          ]
         }
       }
     },
@@ -5949,7 +5984,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/placementKeyValuePairs"
-          }
+          },
+          "x-ms-identifiers": [
+            "key"
+          ]
         },
         "deploymentSpecId": {
           "type": "string",

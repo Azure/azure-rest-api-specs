@@ -1,0 +1,3350 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ComputeManagementClient",
+    "description": "The Compute Management Client.",
+    "version": "2022-03-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions/{vmExtensionName}": {
+      "put": {
+        "tags": [
+          "VirtualMachineExtensions"
+        ],
+        "operationId": "VirtualMachineExtensions_CreateOrUpdate",
+        "description": "The operation to create or update the extension.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine where the extension should be created or updated."
+          },
+          {
+            "name": "vmExtensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine extension."
+          },
+          {
+            "name": "extensionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineExtension"
+            },
+            "description": "Parameters supplied to the Create Virtual Machine Extension operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineExtension"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineExtension"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachineExtensions_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineExtensions_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "VirtualMachineExtensions_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineExtensions_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachineExtensions"
+        ],
+        "operationId": "VirtualMachineExtensions_Update",
+        "description": "The operation to update the extension.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine where the extension should be updated."
+          },
+          {
+            "name": "vmExtensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine extension."
+          },
+          {
+            "name": "extensionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineExtensionUpdate"
+            },
+            "description": "Parameters supplied to the Update Virtual Machine Extension operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineExtension"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update VM extension.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineExtensions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachineExtensions"
+        ],
+        "operationId": "VirtualMachineExtensions_Delete",
+        "description": "The operation to delete the extension.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine where the extension should be deleted."
+          },
+          {
+            "name": "vmExtensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine extension."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachineExtensions_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineExtensions_Delete_MaximumSet_Gen.json"
+          },
+          "VirtualMachineExtensions_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineExtensions_Delete_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualMachineExtensions"
+        ],
+        "operationId": "VirtualMachineExtensions_Get",
+        "description": "The operation to get the extension.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine containing the extension."
+          },
+          {
+            "name": "vmExtensionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine extension."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineExtension"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineExtensions_Get_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineExtensions_Get_MaximumSet_Gen.json"
+          },
+          "VirtualMachineExtensions_Get_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineExtensions_Get_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/extensions": {
+      "get": {
+        "tags": [
+          "VirtualMachineExtensions"
+        ],
+        "operationId": "VirtualMachineExtensions_List",
+        "description": "The operation to get all extensions of a Virtual Machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine containing the extension."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineExtensionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualMachineExtensions_List_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineExtensions_List_MaximumSet_Gen.json"
+          },
+          "VirtualMachineExtensions_List_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachineExtensions_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/virtualMachines": {
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_ListByLocation",
+        "description": "Gets all the virtual machines under the specified subscription for the specified location.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which virtual machines under the subscription are queried.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all the virtual machines under the specified subscription for the specified location.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_ListBySubscription_ByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/capture": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Capture",
+        "description": "Captures the VM by copying virtual hard disks of the VM and outputs a template that can be used to create similar VMs.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineCaptureParameters"
+            },
+            "description": "Parameters supplied to the Capture Virtual Machine operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineCaptureResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "VirtualMachines_Capture_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Capture_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_Capture_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Capture_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}": {
+      "put": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_CreateOrUpdate",
+        "description": "The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "description": "Parameters supplied to the Create Virtual Machine operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a vm with password authentication.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPasswordAuthentication.json"
+          },
+          "Create a vm with ssh authentication.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSshAuthentication.json"
+          },
+          "Create a vm with premium storage.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithPremiumStorage.json"
+          },
+          "Create a vm in a Virtual Machine Scale Set with customer assigned platformFaultDomain.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMacine_Create_InAVmssWithCustomerAssignedPlatformFaultDomain.json"
+          },
+          "Create a vm in an availability set.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_InAnAvailabilitySet.json"
+          },
+          "Create a vm with Scheduled Events Profile": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithScheduledEventsProfile.json"
+          },
+          "Create a vm with boot diagnostics.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMacine_Create_WithBootDiagnostics.json"
+          },
+          "Create a vm with managed boot diagnostics.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithManagedBootDiagnostics.json"
+          },
+          "Create a vm with empty data disks.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithEmptyDataDisks.json"
+          },
+          "Create a vm with a marketplace image plan.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithAMarketplaceImagePlan.json"
+          },
+          "Create a vm from a custom image.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_FromACustomImage.json"
+          },
+          "Create a platform-image vm with unmanaged os and data disks.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_PlatformImageVmWithUnmanagedOsAndDataDisks.json"
+          },
+          "Create a custom-image vm from an unmanaged generalized os image.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_CustomImageVmFromAnUnmanagedGeneralizedOsImage.json"
+          },
+          "Create a vm with ephemeral os disk.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithADiffOsDisk.json"
+          },
+          "Create a vm with DiskEncryptionSet resource id in the os disk and data disk.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithDiskEncryptionSetResource.json"
+          },
+          "Create a vm with ephemeral os disk provisioning in Resource disk using placement property.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithADiffOsDiskUsingDiffDiskPlacementAsResourceDisk.json"
+          },
+          "Create a vm with ephemeral os disk provisioning in Cache disk using placement property.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithADiffOsDiskUsingDiffDiskPlacementAsCacheDisk.json"
+          },
+          "Create a vm with Host Encryption using encryptionAtHost property.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithEncryptionAtHost.json"
+          },
+          "Create a Windows vm with a patch setting patchMode of AutomaticByOS.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithPatchSettingModeOfAutomaticByOS.json"
+          },
+          "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform and AutomaticByPlatformSettings.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithAutomaticByPlatformSettings.json"
+          },
+          "Create a Windows vm with patch settings patchMode and assessmentMode set to AutomaticByPlatform.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithPatchSettingModesOfAutomaticByPlatform.json"
+          },
+          "Create a Windows vm with a patch setting patchMode of Manual.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithPatchSettingModeOfManual.json"
+          },
+          "Create a Windows vm with a patch setting assessmentMode of ImageDefault.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithPatchSettingAssessmentModeOfImageDefault.json"
+          },
+          "Create a Windows vm with a patch setting patchMode of AutomaticByPlatform and enableHotpatching set to true.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WindowsVmWithPatchSettingModeOfAutomaticByPlatformAndEnableHotPatchingTrue.json"
+          },
+          "Create a Linux vm with a patch settings patchMode and assessmentMode set to AutomaticByPlatform.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_LinuxVmWithPatchSettingModesOfAutomaticByPlatform.json"
+          },
+          "Create a Linux vm with a patch setting patchMode of ImageDefault.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_LinuxVmWithPatchSettingModeOfImageDefault.json"
+          },
+          "Create a Linux vm with a patch setting patchMode of AutomaticByPlatform and AutomaticByPlatformSettings.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_LinuxVmWithAutomaticByPlatformSettings.json"
+          },
+          "Create a Linux vm with a patch setting assessmentMode of ImageDefault.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_LinuxVmWithPatchSettingAssessmentModeOfImageDefault.json"
+          },
+          "Create a vm with an extensions time budget.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithExtensionsTimeBudget.json"
+          },
+          "Create a VM with Uefi Settings of secureBoot and vTPM.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithUefiSettings.json"
+          },
+          "Create a vm from a generalized shared image.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_FromAGeneralizedSharedImage.json"
+          },
+          "Create a vm from a specialized shared image.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_FromASpecializedSharedImage.json"
+          },
+          "Create a VM with network interface configuration": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithNetworkInterfaceConfiguration.json"
+          },
+          "Create a VM with UserData": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithUserData.json"
+          },
+          "Create a vm with Application Profile.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithApplicationProfile.json"
+          },
+          "Create a VM with HibernationEnabled": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithHibernationEnabled.json"
+          },
+          "Create a VM with VM Size Properties": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_CreateWithVMSizeProperties.json"
+          },
+          "Create or update a VM with capacity reservation": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithCapacityReservation.json"
+          },
+          "Create a VM from a shared gallery image": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_FromASharedGalleryImage.json"
+          },
+          "Create a VM from a community gallery image": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_FromACommunityGalleryImage.json"
+          },
+          "Create a VM with securityType ConfidentialVM with Platform Managed Keys": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSecurityTypeConfidentialVM.json"
+          },
+          "Create a VM with securityType ConfidentialVM with Customer Managed Keys": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithSecurityTypeConfidentialVMWithCustomerManagedKeys.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Update",
+        "description": "The operation to update a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineUpdate"
+            },
+            "description": "Parameters supplied to the Update Virtual Machine operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a VM by detaching data disk": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_DetachDataDiskUsingToBeDetachedProperty.json"
+          },
+          "Update a VM by force-detaching data disk": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Update_ForceDetachDataDisk.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Delete",
+        "description": "The operation to delete a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "forceDeletion",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to force delete virtual machines."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Force delete a VM": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Delete_Force.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Get",
+        "description": "Retrieves information about the model view or the instance view of a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation. 'InstanceView' retrieves a snapshot of the runtime properties of the virtual machine that is managed by the platform and can change outside of control plane operations. 'UserData' retrieves the UserData property as part of the VM model view that was provided by the user during the VM Create/Update operation.",
+            "enum": [
+              "instanceView",
+              "userData"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Virtual Machine.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get.json"
+          },
+          "Get a virtual machine placed on a dedicated host group through automatic placement": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_AutoPlacedOnDedicatedHostGroup.json"
+          },
+          "Get a virtual machine with VM Size Properties": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_WithVMSizeProperties.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/instanceView": {
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_InstanceView",
+        "description": "Retrieves information about the run-time state of a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstanceView"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Virtual Machine Instance View.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_InstanceView.json"
+          },
+          "Get instance view of a virtual machine placed on a dedicated host group through automatic placement.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Get_InstanceViewAutoPlacedOnDedicatedHostGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/convertToManagedDisks": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_ConvertToManagedDisks",
+        "description": "Converts virtual machine disks from blob-based to managed disks. Virtual machine must be stop-deallocated before invoking this operation.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachines_ConvertToManagedDisks_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_ConvertToManagedDisks_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_ConvertToManagedDisks_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_ConvertToManagedDisks_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Deallocate",
+        "description": "Shuts down the virtual machine and releases the compute resources. You are not billed for the compute resources that this virtual machine uses.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "hibernate",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "description": "Optional parameter to hibernate a virtual machine. (Feature in Preview)"
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachines_Deallocate_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Deallocate_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_Deallocate_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Deallocate_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/generalize": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Generalize",
+        "description": "Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. <br>For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource).<br>For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/azure/virtual-machines/linux/capture-image).",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Generalize a Virtual Machine.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Generalize.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines": {
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_List",
+        "description": "Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'"
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VirtualMachines_List_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_List_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_List_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Compute/virtualMachines": {
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_ListAll",
+        "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
+        "parameters": [
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "statusOnly",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "statusOnly=true enables fetching run time status of all Virtual Machines in the subscription."
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The system query option to filter VMs returned in the response. Allowed value is 'virtualMachineScaleSet/id' eq /subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmssName}'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VirtualMachines_ListAll_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_ListAll_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_ListAll_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_ListAll_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/vmSizes": {
+      "get": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_ListAvailableSizes",
+        "description": "Lists all available virtual machine sizes to which the specified virtual machine can be resized.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./computeRPCommon.json#/definitions/VirtualMachineSizeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Lists all available virtual machine sizes to which the specified virtual machine can be resized": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_ListAvailableVmSizes.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/powerOff": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_PowerOff",
+        "description": "The operation to power off (stop) a virtual machine. The virtual machine can be restarted with the same provisioned resources. You are still charged for this virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "skipShutdown",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "default": false,
+            "description": "The parameter to request non-graceful VM shutdown. True value for this flag indicates non-graceful shutdown whereas false indicates otherwise. Default value for this flag is false if not specified"
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachines_PowerOff_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_PowerOff_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_PowerOff_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_PowerOff_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reapply": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Reapply",
+        "description": "The operation to reapply a virtual machine's state.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reapply the state of a virtual machine.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Reapply.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/restart": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Restart",
+        "description": "The operation to restart a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachines_Restart_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Restart_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_Restart_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Restart_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/start": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Start",
+        "description": "The operation to start a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachines_Start_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Start_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_Start_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Start_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/redeploy": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Redeploy",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachines_Redeploy_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Redeploy_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_Redeploy_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_Redeploy_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reimage": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Reimage",
+        "description": "Reimages the virtual machine which has an ephemeral OS disk back to its initial state.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineReimageParameters"
+            },
+            "description": "Parameters supplied to the Reimage Virtual Machine operation."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Reimage a Virtual Machine.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Reimage.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/retrieveBootDiagnosticsData": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_RetrieveBootDiagnosticsData",
+        "description": "The operation to retrieve SAS URIs for a virtual machine's boot diagnostic logs.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "sasUriExpirationTimeInMinutes",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. <br><br>NOTE: If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RetrieveBootDiagnosticsDataResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "RetrieveBootDiagnosticsData of a virtual machine.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_RetrieveBootDiagnosticsData.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/performMaintenance": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_PerformMaintenance",
+        "description": "The operation to perform maintenance on a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VirtualMachines_PerformMaintenance_MaximumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_PerformMaintenance_MaximumSet_Gen.json"
+          },
+          "VirtualMachines_PerformMaintenance_MinimumSet_Gen": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachines_PerformMaintenance_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/simulateEviction": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_SimulateEviction",
+        "description": "The operation to simulate the eviction of spot virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": false,
+        "x-ms-examples": {
+          "Simulate Eviction a virtual machine.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_SimulateEviction.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/assessPatches": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_AssessPatches",
+        "x-ms-examples": {
+          "Assess patch state of a virtual machine.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_AssessPatches.json"
+          }
+        },
+        "description": "Assess patches on the VM.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineAssessPatchesResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/installPatches": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_InstallPatches",
+        "description": "Installs patches on the VM.",
+        "x-ms-examples": {
+          "Install patch state of a virtual machine.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_InstallPatches.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "name": "installPatchesInput",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstallPatchesParameters"
+            },
+            "description": "Input for InstallPatches as directly received by the API"
+          },
+          {
+            "$ref": "../common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineInstallPatchesResult"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RetrieveBootDiagnosticsDataResult": {
+      "properties": {
+        "consoleScreenshotBlobUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The console screenshot blob URI"
+        },
+        "serialConsoleLogBlobUri": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The serial console log blob URI."
+        }
+      },
+      "description": "The SAS URIs of the console screenshot and serial log blobs."
+    },
+    "VirtualMachineExtensionInstanceView": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The virtual machine extension name."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "substatuses": {
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
+          },
+          "x-ms-identifiers": [],
+          "description": "The resource status information."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
+          },
+          "x-ms-identifiers": [],
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of a virtual machine extension."
+    },
+    "VirtualMachineExtensionProperties": {
+      "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/VirtualMachineExtensionInstanceView",
+          "description": "The virtual machine extension instance view."
+        },
+        "suppressFailures": {
+          "type": "boolean",
+          "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
+        },
+        "protectedSettingsFromKeyVault": {
+          "type": "object",
+          "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine Extension."
+    },
+    "VirtualMachineExtensionUpdateProperties": {
+      "properties": {
+        "forceUpdateTag": {
+          "type": "string",
+          "description": "How the extension handler should be forced to update even if the extension configuration has not changed."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The name of the extension handler publisher."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "autoUpgradeMinorVersion": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should use a newer minor version if one is available at deployment time. Once deployed, however, the extension will not upgrade minor versions unless redeployed, even with this property set to true."
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
+        },
+        "settings": {
+          "type": "object",
+          "description": "Json formatted public settings for the extension."
+        },
+        "protectedSettings": {
+          "type": "object",
+          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all."
+        },
+        "suppressFailures": {
+          "type": "boolean",
+          "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
+        },
+        "protectedSettingsFromKeyVault": {
+          "type": "object",
+          "description": "The extensions protected settings that are passed by reference, and consumed from key vault"
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine Extension."
+    },
+    "VirtualMachineExtension": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineExtensionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../common.json#/definitions/ResourceWithOptionalLocation"
+        }
+      ],
+      "description": "Describes a Virtual Machine Extension."
+    },
+    "VirtualMachineExtensionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineExtensionUpdateProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Describes a Virtual Machine Extension."
+    },
+    "VirtualMachineExtensionsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineExtension"
+          },
+          "description": "The list of extensions"
+        }
+      },
+      "description": "The List Extension operation response"
+    },
+    "VirtualMachineSoftwarePatchProperties": {
+      "properties": {
+        "patchId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique identifier for the patch."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The friendly name of the patch."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version number of the patch. This property applies only to Linux patches."
+        },
+        "kbId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The KBID of the patch. Only applies to Windows patches."
+        },
+        "classifications": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The classification(s) of the patch as provided by the patch publisher."
+        },
+        "rebootBehavior": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the reboot requirements of the patch.",
+          "enum": [
+            "Unknown",
+            "NeverReboots",
+            "AlwaysRequiresReboot",
+            "CanRequestReboot"
+          ],
+          "x-ms-enum": {
+            "name": "VMGuestPatchRebootBehavior",
+            "modelAsString": true
+          }
+        },
+        "activityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "publishedDate": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the repository published this patch."
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp of the last update to this patch record."
+        },
+        "assessmentState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Describes the availability of a given patch.",
+          "enum": [
+            "Unknown",
+            "Available"
+          ],
+          "x-ms-enum": {
+            "name": "PatchAssessmentState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine software patch."
+    },
+    "VirtualMachineAssessPatchesResult": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "assessmentActivityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "rebootPending": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
+        },
+        "criticalAndSecurityPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of critical or security patches that have been detected as available and not yet installed."
+        },
+        "otherPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches excluding critical and security."
+        },
+        "startDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "availablePatches": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/VirtualMachineSoftwarePatchProperties"
+          },
+          "x-ms-identifiers": [
+            "patchId"
+          ],
+          "description": "The list of patches that have been detected as available for installation."
+        },
+        "error": {
+          "$ref": "../common.json#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "Describes the properties of an AssessPatches result."
+    },
+    "VirtualMachineInstallPatchesParameters": {
+      "properties": {
+        "maximumDuration": {
+          "type": "string",
+          "description": "Specifies the maximum amount of time that the operation will run. It must be an ISO 8601-compliant duration string such as PT4H (4 hours)"
+        },
+        "rebootSetting": {
+          "type": "string",
+          "description": "Defines when it is acceptable to reboot a VM during a software update operation.",
+          "enum": [
+            "IfRequired",
+            "Never",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "VMGuestPatchRebootSetting",
+            "modelAsString": true
+          }
+        },
+        "windowsParameters": {
+          "$ref": "#/definitions/WindowsParameters",
+          "description": "Input for InstallPatches on a Windows VM, as directly received by the API"
+        },
+        "linuxParameters": {
+          "$ref": "#/definitions/LinuxParameters",
+          "description": "Input for InstallPatches on a Linux VM, as directly received by the API"
+        }
+      },
+      "required": [
+        "rebootSetting"
+      ],
+      "description": "Input for InstallPatches as directly received by the API"
+    },
+    "WindowsParameters": {
+      "properties": {
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "The update classifications to select when installing patches for Windows.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "Security",
+              "UpdateRollUp",
+              "FeaturePack",
+              "ServicePack",
+              "Definition",
+              "Tools",
+              "Updates"
+            ],
+            "x-ms-enum": {
+              "name": "VMGuestPatchClassification_Windows",
+              "modelAsString": true
+            }
+          }
+        },
+        "kbNumbersToInclude": {
+          "type": "array",
+          "description": "Kbs to include in the patch operation",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kbNumbersToExclude": {
+          "type": "array",
+          "description": "Kbs to exclude in the patch operation",
+          "items": {
+            "type": "string"
+          }
+        },
+        "excludeKbsRequiringReboot": {
+          "type": "boolean",
+          "description": "Filters out Kbs that don't have an InstallationRebootBehavior of 'NeverReboots' when this is set to true."
+        },
+        "maxPatchPublishDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is used to install patches that were published on or before this given max published date."
+        }
+      },
+      "description": "Input for InstallPatches on a Windows VM, as directly received by the API"
+    },
+    "LinuxParameters": {
+      "properties": {
+        "classificationsToInclude": {
+          "type": "array",
+          "description": "The update classifications to select when installing patches for Linux.",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Critical",
+              "Security",
+              "Other"
+            ],
+            "x-ms-enum": {
+              "name": "VMGuestPatchClassification_Linux",
+              "modelAsString": true
+            }
+          }
+        },
+        "packageNameMasksToInclude": {
+          "type": "array",
+          "description": "packages to include in the patch operation. Format: packageName_packageVersion",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packageNameMasksToExclude": {
+          "type": "array",
+          "description": "packages to exclude in the patch operation. Format: packageName_packageVersion",
+          "items": {
+            "type": "string"
+          }
+        },
+        "maintenanceRunId": {
+          "type": "string",
+          "description": "This is used as a maintenance run identifier for Auto VM Guest Patching in Linux."
+        }
+      },
+      "description": "Input for InstallPatches on a Linux VM, as directly received by the API"
+    },
+    "VirtualMachineInstallPatchesResult": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Failed\", \"Succeeded\", \"Unknown\" or \"CompletedWithWarnings.\"",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "installationActivityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "rebootStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The reboot state of the VM following completion of the operation.",
+          "enum": [
+            "Unknown",
+            "NotNeeded",
+            "Required",
+            "Started",
+            "Failed",
+            "Completed"
+          ],
+          "x-ms-enum": {
+            "name": "VMGuestPatchRebootStatus",
+            "modelAsString": true
+          }
+        },
+        "maintenanceWindowExceeded": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Whether the operation ran out of time before it completed all its intended actions."
+        },
+        "excludedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches that were not installed due to the user blocking their installation."
+        },
+        "notSelectedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches that were detected as available for install, but did not meet the operation's criteria."
+        },
+        "pendingPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches that were identified as meeting the installation criteria, but were not able to be installed. Typically this happens when maintenanceWindowExceeded == true."
+        },
+        "installedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches successfully installed."
+        },
+        "failedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of patches that could not be installed due to some issue. See errors for details."
+        },
+        "patches": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/PatchInstallationDetail"
+          },
+          "x-ms-identifiers": [
+            "patchId"
+          ],
+          "description": "The patches that were installed during the operation."
+        },
+        "startDateTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "error": {
+          "$ref": "../common.json#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "The result summary of an installation operation."
+    },
+    "PatchInstallationDetail": {
+      "properties": {
+        "patchId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique identifier for the patch."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The friendly name of the patch."
+        },
+        "version": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version string of the package. It may conform to Semantic Versioning. Only applies to Linux."
+        },
+        "kbId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The KBID of the patch. Only applies to Windows patches."
+        },
+        "classifications": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          },
+          "description": "The classification(s) of the patch as provided by the patch publisher."
+        },
+        "installationState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The state of the patch after the installation operation completed.",
+          "enum": [
+            "Unknown",
+            "Installed",
+            "Failed",
+            "Excluded",
+            "NotSelected",
+            "Pending"
+          ],
+          "x-ms-enum": {
+            "name": "PatchInstallationState",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Information about a specific patch that was encountered during an installation action."
+    },
+    "VirtualMachineReimageParameters": {
+      "properties": {
+        "tempDisk": {
+          "type": "boolean",
+          "description": "Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk."
+        }
+      },
+      "description": "Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged"
+    },
+    "VirtualMachineCaptureParameters": {
+      "properties": {
+        "vhdPrefix": {
+          "type": "string",
+          "description": "The captured virtual hard disk's name prefix."
+        },
+        "destinationContainerName": {
+          "type": "string",
+          "description": "The destination container name."
+        },
+        "overwriteVhds": {
+          "type": "boolean",
+          "description": "Specifies whether to overwrite the destination virtual hard disk, in case of conflict."
+        }
+      },
+      "required": [
+        "vhdPrefix",
+        "destinationContainerName",
+        "overwriteVhds"
+      ],
+      "description": "Capture Virtual Machine parameters."
+    },
+    "VirtualMachineCaptureResult": {
+      "properties": {
+        "$schema": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the schema of the captured virtual machine"
+        },
+        "contentVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "the version of the content"
+        },
+        "parameters": {
+          "readOnly": true,
+          "type": "object",
+          "description": "parameters of the captured virtual machine"
+        },
+        "resources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "resource item"
+          },
+          "x-ms-identifiers": [],
+          "description": "a list of resource items of the captured virtual machine"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../common.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Output of virtual machine capture operation."
+    },
+    "VirtualMachineIpTag": {
+      "properties": {
+        "ipTagType": {
+          "type": "string",
+          "description": "IP tag type. Example: FirstPartyUsage."
+        },
+        "tag": {
+          "type": "string",
+          "description": "IP tag associated with the public IP. Example: SQL, Storage etc."
+        }
+      },
+      "description": "Contains the IP tag associated with the public IP address."
+    },
+    "VirtualMachinePublicIPAddressDnsSettingsConfiguration": {
+      "properties": {
+        "domainNameLabel": {
+          "type": "string",
+          "description": "The Domain name label prefix of the PublicIPAddress resources that will be created. The generated name label is the concatenation of the domain name label and vm network profile unique ID."
+        }
+      },
+      "required": [
+        "domainNameLabel"
+      ],
+      "description": "Describes a virtual machines network configuration's DNS settings."
+    },
+    "VirtualMachinePublicIPAddressConfigurationProperties": {
+      "properties": {
+        "idleTimeoutInMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The idle timeout of the public IP address."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the public IP address when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/VirtualMachinePublicIPAddressDnsSettingsConfiguration",
+          "description": "The dns settings to be applied on the publicIP addresses ."
+        },
+        "ipTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineIpTag"
+          },
+          "x-ms-identifiers": [],
+          "description": "The list of IP tags associated with the public IP address."
+        },
+        "publicIPPrefix": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "The PublicIPPrefix from which to allocate publicIP addresses."
+        },
+        "publicIPAddressVersion": {
+          "type": "string",
+          "description": "Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersions",
+            "modelAsString": true
+          }
+        },
+        "publicIPAllocationMethod": {
+          "type": "string",
+          "description": "Specify the public IP allocation type",
+          "enum": [
+            "Dynamic",
+            "Static"
+          ],
+          "x-ms-enum": {
+            "name": "PublicIPAllocationMethod",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "Describes a virtual machines IP Configuration's PublicIPAddress configuration"
+    },
+    "VirtualMachinePublicIPAddressConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The publicIP address configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachinePublicIPAddressConfigurationProperties"
+        },
+        "sku": {
+          "$ref": "./computeRPCommon.json#/definitions/PublicIPAddressSku"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes a virtual machines IP Configuration's PublicIPAddress configuration"
+    },
+    "VirtualMachineNetworkInterfaceIPConfigurationProperties": {
+      "properties": {
+        "subnet": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "Specifies the identifier of the subnet."
+        },
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "publicIPAddressConfiguration": {
+          "$ref": "#/definitions/VirtualMachinePublicIPAddressConfiguration",
+          "description": "The publicIPAddressConfiguration."
+        },
+        "privateIPAddressVersion": {
+          "type": "string",
+          "description": "Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersions",
+            "modelAsString": true
+          }
+        },
+        "applicationSecurityGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to application security group."
+        },
+        "applicationGatewayBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of application gateways. A virtual machine can reference backend address pools of multiple application gateways. Multiple virtual machines cannot use the same application gateway."
+        },
+        "loadBalancerBackendAddressPools": {
+          "type": "array",
+          "items": {
+            "$ref": "../common.json#/definitions/SubResource"
+          },
+          "description": "Specifies an array of references to backend address pools of load balancers. A virtual machine can reference backend address pools of one public and one internal load balancer. [Multiple virtual machines cannot use the same basic sku load balancer]."
+        }
+      },
+      "description": "Describes a virtual machine network interface IP configuration properties."
+    },
+    "VirtualMachineNetworkInterfaceIPConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The IP configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineNetworkInterfaceIPConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes a virtual machine network profile's IP configuration."
+    },
+    "VirtualMachineNetworkInterfaceDnsSettingsConfiguration": {
+      "properties": {
+        "dnsServers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of DNS servers IP addresses"
+        }
+      },
+      "description": "Describes a virtual machines network configuration's DNS settings."
+    },
+    "VirtualMachineNetworkInterfaceConfigurationProperties": {
+      "properties": {
+        "primary": {
+          "type": "boolean",
+          "description": "Specifies the primary network interface in case the virtual machine has more than 1 network interface."
+        },
+        "deleteOption": {
+          "type": "string",
+          "description": "Specify what happens to the network interface when the VM is deleted",
+          "enum": [
+            "Delete",
+            "Detach"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteOptions",
+            "modelAsString": true
+          }
+        },
+        "enableAcceleratedNetworking": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is accelerated networking-enabled."
+        },
+        "enableFpga": {
+          "type": "boolean",
+          "description": "Specifies whether the network interface is FPGA networking-enabled."
+        },
+        "enableIPForwarding": {
+          "type": "boolean",
+          "description": "Whether IP forwarding enabled on this NIC."
+        },
+        "networkSecurityGroup": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "The network security group."
+        },
+        "dnsSettings": {
+          "$ref": "#/definitions/VirtualMachineNetworkInterfaceDnsSettingsConfiguration",
+          "description": "The dns settings to be applied on the network interfaces."
+        },
+        "ipConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineNetworkInterfaceIPConfiguration"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "Specifies the IP configurations of the network interface."
+        },
+        "dscpConfiguration": {
+          "$ref": "../common.json#/definitions/SubResource"
+        }
+      },
+      "required": [
+        "ipConfigurations"
+      ],
+      "description": "Describes a virtual machine network profile's IP configuration."
+    },
+    "VirtualMachineNetworkInterfaceConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The network interface configuration name."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineNetworkInterfaceConfigurationProperties"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes a virtual machine network interface configurations."
+    },
+    "VirtualMachineExtensionHandlerInstanceView": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Specifies the type of the extension; an example is \"CustomScriptExtension\"."
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler."
+        },
+        "status": {
+          "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus",
+          "description": "The extension handler status."
+        }
+      },
+      "description": "The instance view of a virtual machine extension handler."
+    },
+    "VirtualMachineAgentInstanceView": {
+      "properties": {
+        "vmAgentVersion": {
+          "type": "string",
+          "description": "The VM Agent full version."
+        },
+        "extensionHandlers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineExtensionHandlerInstanceView"
+          },
+          "x-ms-identifiers": [],
+          "description": "The virtual machine extension handler instance view."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
+          },
+          "x-ms-identifiers": [],
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of the VM Agent running on the virtual machine."
+    },
+    "VirtualMachineIdentity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal id of virtual machine identity. This property will only be provided for a system assigned identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "x-ms-client-name": "userAssignedIdentitiesValue",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the Virtual Machine. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "description": "Identity for the virtual machine."
+    },
+    "VirtualMachineInstanceView": {
+      "properties": {
+        "platformUpdateDomain": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the update domain of the virtual machine."
+        },
+        "platformFaultDomain": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the fault domain of the virtual machine."
+        },
+        "computerName": {
+          "type": "string",
+          "description": "The computer name assigned to the virtual machine."
+        },
+        "osName": {
+          "type": "string",
+          "description": "The Operating System running on the virtual machine."
+        },
+        "osVersion": {
+          "type": "string",
+          "description": "The version of Operating System running on the virtual machine."
+        },
+        "hyperVGeneration": {
+          "type": "string",
+          "description": "Specifies the HyperVGeneration Type associated with a resource",
+          "enum": [
+            "V1",
+            "V2"
+          ],
+          "x-ms-enum": {
+            "name": "HyperVGenerationType",
+            "modelAsString": true
+          }
+        },
+        "rdpThumbPrint": {
+          "type": "string",
+          "description": "The Remote desktop certificate thumbprint."
+        },
+        "vmAgent": {
+          "$ref": "#/definitions/VirtualMachineAgentInstanceView",
+          "description": "The VM Agent running on the virtual machine."
+        },
+        "maintenanceRedeployStatus": {
+          "$ref": "./computeRPCommon.json#/definitions/MaintenanceRedeployStatus",
+          "description": "The Maintenance Operation status on the virtual machine."
+        },
+        "disks": {
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/DiskInstanceView"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The virtual machine disk information."
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineExtensionInstanceView"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "type"
+          ],
+          "description": "The extensions information."
+        },
+        "vmHealth": {
+          "readOnly": true,
+          "$ref": "#/definitions/VirtualMachineHealthStatus",
+          "description": "The health status for the VM."
+        },
+        "bootDiagnostics": {
+          "$ref": "./computeRPCommon.json#/definitions/BootDiagnosticsInstanceView",
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
+        },
+        "assignedHost": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. <br><br>Minimum api-version: 2020-06-01."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
+          },
+          "x-ms-identifiers": [],
+          "description": "The resource status information."
+        },
+        "patchStatus": {
+          "$ref": "#/definitions/VirtualMachinePatchStatus",
+          "description": "[Preview Feature] The status of virtual machine patch operations."
+        }
+      },
+      "description": "The instance view of a virtual machine."
+    },
+    "VirtualMachineProperties": {
+      "properties": {
+        "hardwareProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/HardwareProfile",
+          "description": "Specifies the hardware settings for the virtual machine."
+        },
+        "storageProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/StorageProfile",
+          "description": "Specifies the storage settings for the virtual machine disks."
+        },
+        "additionalCapabilities": {
+          "$ref": "./computeRPCommon.json#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the virtual machine."
+        },
+        "osProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/OSProfile",
+          "description": "Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned."
+        },
+        "networkProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/NetworkProfile",
+          "description": "Specifies the network interfaces of the virtual machine."
+        },
+        "securityProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/SecurityProfile",
+          "description": "Specifies the Security related profile settings for the virtual machine."
+        },
+        "diagnosticsProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/DiagnosticsProfile",
+          "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+        },
+        "availabilitySet": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). <br><br> For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates) <br><br> Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
+        },
+        "virtualMachineScaleSet": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. <br><br>This property cannot exist along with a non-null properties.availabilitySet reference. <br><br>Minimum api‐version: 2019‐03‐01"
+        },
+        "proximityPlacementGroup": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
+        "priority": {
+          "$ref": "./computeRPCommon.json#/definitions/priority",
+          "description": "Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01"
+        },
+        "evictionPolicy": {
+          "$ref": "./computeRPCommon.json#/definitions/evictionPolicy",
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
+        },
+        "billingProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a Azure Spot virtual machine. <br><br>Minimum api-version: 2019-03-01."
+        },
+        "host": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "Specifies information about the dedicated host that the virtual machine resides in. <br><br>Minimum api-version: 2018-10-01."
+        },
+        "hostGroup": {
+          "$ref": "../common.json#/definitions/SubResource",
+          "description": "Specifies information about the dedicated host group that the virtual machine resides in. <br><br>Minimum api-version: 2020-06-01. <br><br>NOTE: User cannot specify both host and hostGroup properties."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/VirtualMachineInstanceView",
+          "readOnly": true,
+          "description": "The virtual machine instance view."
+        },
+        "licenseType": {
+          "type": "string",
+          "description": "Specifies that the image or disk that is being used was licensed on-premises. <br><br> Possible values for Windows Server operating system are: <br><br> Windows_Client <br><br> Windows_Server <br><br> Possible values for Linux Server operating system are: <br><br> RHEL_BYOS (for RHEL) <br><br> SLES_BYOS (for SUSE) <br><br> For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/windows/hybrid-use-benefit-licensing) <br><br> [Azure Hybrid Use Benefit for Linux Server](https://docs.microsoft.com/azure/virtual-machines/linux/azure-hybrid-benefit-linux) <br><br> Minimum api-version: 2015-06-15"
+        },
+        "vmId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands."
+        },
+        "extensionsTimeBudget": {
+          "type": "string",
+          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). <br><br> Minimum api-version: 2020-06-01"
+        },
+        "platformFaultDomain": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the scale set logical fault domain into which the Virtual Machine will be created. By default, the Virtual Machine will by automatically assigned to a fault domain that best maintains balance across available fault domains.<br><li>This is applicable only if the 'virtualMachineScaleSet' property of this Virtual Machine is set.<li>The Virtual Machine Scale Set that is referenced, must have 'platformFaultDomainCount' &gt; 1.<li>This property cannot be updated once the Virtual Machine is created.<li>Fault domain assignment can be viewed in the Virtual Machine Instance View.<br><br>Minimum api‐version: 2020‐12‐01"
+        },
+        "scheduledEventsProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
+        },
+        "userData": {
+          "type": "string",
+          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+        },
+        "capacityReservation": {
+          "$ref": "./computeRPCommon.json#/definitions/CapacityReservationProfile",
+          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. <br><br>Minimum api-version: 2021-04-01."
+        },
+        "applicationProfile": {
+          "$ref": "./computeRPCommon.json#/definitions/ApplicationProfile",
+          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+        },
+        "timeCreated": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "Specifies the time at which the Virtual Machine resource was created.<br><br>Minimum api-version: 2022-03-01."
+        }
+      },
+      "description": "Describes the properties of a Virtual Machine."
+    },
+    "VirtualMachine": {
+      "properties": {
+        "plan": {
+          "$ref": "./computeRPCommon.json#/definitions/Plan",
+          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineProperties"
+        },
+        "resources": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineExtension"
+          },
+          "description": "The virtual machine child extension resources."
+        },
+        "identity": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "The identity of the virtual machine, if configured."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine zones."
+        },
+        "extendedLocation": {
+          "$ref": "../common.json#/definitions/ExtendedLocation",
+          "description": "The extended location of the Virtual Machine."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../common.json#/definitions/Resource"
+        }
+      ],
+      "description": "Describes a Virtual Machine."
+    },
+    "VirtualMachineUpdate": {
+      "properties": {
+        "plan": {
+          "$ref": "./computeRPCommon.json#/definitions/Plan",
+          "description": "Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started ->**. Enter any required information and then click **Save**."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineProperties"
+        },
+        "identity": {
+          "$ref": "#/definitions/VirtualMachineIdentity",
+          "description": "The identity of the virtual machine, if configured."
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The virtual machine zones."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./computeRPCommon.json#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Describes a Virtual Machine Update."
+    },
+    "VirtualMachineListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          },
+          "description": "The list of virtual machines."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Virtual Machine operation response."
+    },
+    "VirtualMachineHealthStatus": {
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus",
+          "description": "The health status information for the VM."
+        }
+      },
+      "description": "The health status of the VM."
+    },
+    "VirtualMachinePatchStatus": {
+      "properties": {
+        "availablePatchSummary": {
+          "$ref": "#/definitions/AvailablePatchSummary",
+          "description": "The available patch summary of the latest assessment operation for the virtual machine."
+        },
+        "lastPatchInstallationSummary": {
+          "$ref": "#/definitions/LastPatchInstallationSummary",
+          "description": "The installation summary of the latest installation operation for the virtual machine."
+        },
+        "configurationStatuses": {
+          "description": "The enablement status of the specified patchMode",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./computeRPCommon.json#/definitions/InstanceViewStatus"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "description": "The status of virtual machine patch operations."
+    },
+    "AvailablePatchSummary": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "assessmentActivityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "rebootPending": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "The overall reboot status of the VM. It will be true when partially installed patches require a reboot to complete installation but the reboot has not yet occurred."
+        },
+        "criticalAndSecurityPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of critical or security patches that have been detected as available and not yet installed."
+        },
+        "otherPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches excluding critical and security."
+        },
+        "startTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "error": {
+          "$ref": "../common.json#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "Describes the properties of an virtual machine instance view for available patch summary."
+    },
+    "LastPatchInstallationSummary": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The overall success or failure status of the operation. It remains \"InProgress\" until the operation completes. At that point it will become \"Unknown\", \"Failed\", \"Succeeded\", or \"CompletedWithWarnings.\"",
+          "enum": [
+            "Unknown",
+            "InProgress",
+            "Failed",
+            "Succeeded",
+            "CompletedWithWarnings"
+          ],
+          "x-ms-enum": {
+            "name": "PatchOperationStatus",
+            "modelAsString": true
+          }
+        },
+        "installationActivityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The activity ID of the operation that produced this result. It is used to correlate across CRP and extension logs."
+        },
+        "maintenanceWindowExceeded": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Describes whether the operation ran out of time before it completed all its intended actions"
+        },
+        "notSelectedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches but not going to be installed because it didn't match a classification or inclusion list entry."
+        },
+        "excludedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches but excluded explicitly by a customer-specified exclusion list match."
+        },
+        "pendingPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The number of all available patches expected to be installed over the course of the patch installation operation."
+        },
+        "installedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The count of patches that successfully installed."
+        },
+        "failedPatchCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The count of patches that failed installation."
+        },
+        "startTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "lastModifiedTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The UTC timestamp when the operation began."
+        },
+        "error": {
+          "$ref": "../common.json#/definitions/ApiError",
+          "readOnly": true,
+          "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
+        }
+      },
+      "description": "Describes the properties of the last installed patch summary."
+    }
+  }
+}

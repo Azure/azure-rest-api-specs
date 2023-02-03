@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-timeseriesinsights"
   output-folder: "$(typescript-sdks-folder)/sdk/timeseriesinsights/arm-timeseriesinsights"
-  clear-output-folder: true
   generate-metadata: true
 ```

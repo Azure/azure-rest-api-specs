@@ -22,3 +22,7 @@ gosdk-folder: services/preview/vi/mgmt/2021-10-27-preview/vi
 ``` yaml $(tag) == 'package-2021-11-10-preview' && $(terraform)
 gosdk-folder: services/preview/vi/mgmt/2021-11-10-preview/vi
 ```
+
+``` yaml $(tag) == 'package-2022-04-13-preview' && $(terraform)
+gosdk-folder: services/preview/vi/mgmt/2022-04-13-preview/vi
+```

@@ -1163,7 +1163,10 @@
           "uniqueItems": false,
           "items": {
             "$ref": "#/definitions/OperationDetail"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "nextLink": {
           "description": "URL client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
@@ -1239,7 +1242,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MetricSpecification"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
@@ -1268,7 +1274,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Dimension"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "aggregationType": {
           "type": "string",
@@ -1392,6 +1401,7 @@
             "description": "Specifies a CORS rule for the Map Account.",
             "$ref": "#/definitions/CorsRule"
           },
+          "x-ms-identifiers": [],
           "description": "The list of CORS rules. You can include up to five CorsRule elements in the request. "
         }
       },

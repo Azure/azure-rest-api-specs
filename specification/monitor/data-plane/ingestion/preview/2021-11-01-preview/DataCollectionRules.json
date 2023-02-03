@@ -1,0 +1,136 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Ingestion Using Data Collection Rules",
+    "version": "2021-11-01-preview"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/dataCollectionRules/{ruleId}/streams/{stream}": {
+      "post": {
+        "tags": [
+          "Data Collection Rules"
+        ],
+        "summary": "Ingestion API used to directly ingest data using Data Collection Rules",
+        "description": "See error response code and error response message for more detail.",
+        "operationId": "DataCollectionRule_Ingest",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ruleId",
+            "description": "The immutable Id of the Data Collection Rule resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "stream",
+            "description": "The streamDeclaration name as defined in the Data Collection Rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for this operation."
+          },
+          {
+            "in": "header",
+            "name": "Content-Encoding",
+            "description": "gzip",
+            "type": "string"
+          },
+          {
+            "in": "header",
+            "name": "x-ms-client-request-id",
+            "description": "Client request Id",
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An array of objects matching the schema defined by the provided stream.",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "postIngestUsingDataCollectionRule": {
+            "$ref": "./examples/post_IngestUsingDataCollectionRule.json"
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Ingestion request accepted"
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "A value that indicates the ingestion service error code.",
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "The Data Collection Endpoint for the Data Collection Rule, for example https://dce-name.eastus-2.ingest.monitor.azure.com.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  }
+}

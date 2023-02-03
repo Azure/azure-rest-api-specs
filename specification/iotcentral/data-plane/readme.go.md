@@ -8,5 +8,5 @@ go:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: iotcentral
   clear-output-folder: true
-  output-folder: $(go-sdks-folder)/services/preview/$(namespace)/1.1-preview/$(namespace)
+  output-folder: $(go-sdks-folder)/services/preview/$(namespace)/1.2-preview/$(namespace)
 ```

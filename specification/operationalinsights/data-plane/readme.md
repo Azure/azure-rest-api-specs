@@ -43,6 +43,8 @@ directive:
     remove-operation: Query_Get
 ```
 
+### Tag: 20171001
+
 ``` yaml $(tag) == '20171001'
 input-file:
 - Microsoft.OperationalInsights/preview/2017-10-01/swagger.json
@@ -51,6 +53,8 @@ directive:
     where-operation: Query_Post
     transform: $.operationId = "Query"
 ```
+
+### Tag: 20210519
 
 ``` yaml $(tag) == '20210519'
 input-file:

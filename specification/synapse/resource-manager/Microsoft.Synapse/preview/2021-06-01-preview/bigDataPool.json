@@ -406,7 +406,8 @@
         "creationDate": {
           "type": "string",
           "format": "date-time",
-          "description": "The time when the Big Data pool was created."
+          "description": "The time when the Big Data pool was created.",
+          "readOnly": true
         },
         "autoPause": {
           "$ref": "#/definitions/AutoPauseProperties",
@@ -544,6 +545,16 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates whether Dynamic Executor Allocation is enabled or not."
+        },
+        "minExecutors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of executors alloted"
+        },
+        "maxExecutors": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of executors alloted"
         }
       }
     },

@@ -3013,10 +3013,6 @@
           "type": "string",
           "description": "Resource sku"
         },
-        "eTag": {
-          "type": "string",
-          "description": "Resource eTag."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
@@ -3398,11 +3394,6 @@
           "description": "Properties for modern reservation recommendation",
           "$ref": "#/definitions/ModernReservationRecommendationProperties",
           "x-ms-client-flatten": true
-        },
-        "eTag": {
-          "description": "Resource eTag.",
-          "type": "string",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -3628,7 +3619,6 @@
     "ModernReservationTransaction": {
       "description": "Modern Reservation transaction resource.",
       "type": "object",
-      "x-ms-discriminator-value": "Modern",
       "allOf": [
         {
           "$ref": "#/definitions/ReservationTransactionResource"

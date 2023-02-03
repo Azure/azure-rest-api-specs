@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "description": "Azure Application Insights workbook type.",
+    "description": "Azure workbook resource type.",
     "version": "2021-08-01"
   },
   "host": "management.azure.com",
@@ -36,7 +36,7 @@
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Insights/workbooks": {
       "get": {
-        "description": "Get all private workbooks defined within a specified subscription and category.",
+        "description": "Get all Workbooks defined within a specified subscription and category.",
         "operationId": "Workbooks_ListBySubscription",
         "parameters": [
           {
@@ -78,9 +78,6 @@
           },
           "WorkbooksList2": {
             "$ref": "./examples/WorkbooksList2.json"
-          },
-          "WorkbooksManagedList": {
-            "$ref": "./examples/WorkbooksManagedList.json"
           }
         }
       }
@@ -132,6 +129,9 @@
         "x-ms-examples": {
           "WorkbooksList": {
             "$ref": "./examples/WorkbooksList.json"
+          },
+          "WorkbooksManagedList": {
+            "$ref": "./examples/WorkbooksManagedList.json"
           }
         }
       }
@@ -152,6 +152,9 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/CanFetchWorkbookContentParameter"
           }
         ],
         "responses": {
@@ -434,7 +437,7 @@
         },
         "kind": {
           "type": "string",
-          "description": "The kind of workbook. Choices are user and shared.",
+          "description": "The kind of workbook. Only valid value is shared.",
           "enum": [
             "user",
             "shared"
@@ -562,7 +565,7 @@
       "properties": {
         "kind": {
           "type": "string",
-          "description": "The kind of workbook. Choices are user and shared.",
+          "description": "The kind of workbook. Only valid value is shared.",
           "enum": [
             "user",
             "shared"

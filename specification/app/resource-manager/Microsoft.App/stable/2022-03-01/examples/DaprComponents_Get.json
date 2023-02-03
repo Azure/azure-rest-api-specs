@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "subscriptionId": "8efdecc5-919e-44eb-b179-915dca89ebf9",
+    "resourceGroupName": "examplerg",
+    "environmentName": "myenvironment",
+    "name": "reddog",
+    "api-version": "2022-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/8efdecc5-919e-44eb-b179-915dca89ebf9/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/jlaw-demo1/daprcomponents/reddog",
+        "name": "reddog",
+        "type": "Microsoft.App/managedEnvironments/daprcomponents",
+        "properties": {
+          "componentType": "state.azure.cosmosdb",
+          "version": "v1",
+          "ignoreErrors": false,
+          "initTimeout": "50s",
+          "secrets": [
+            {
+              "name": "masterkey"
+            }
+          ],
+          "metadata": [
+            {
+              "name": "url",
+              "value": "<COSMOS-URL>"
+            },
+            {
+              "name": "database",
+              "value": "itemsDB"
+            },
+            {
+              "name": "collection",
+              "value": "items"
+            },
+            {
+              "name": "masterkey",
+              "secretRef": "masterkey"
+            }
+          ],
+          "scopes": [
+            "container-app-1",
+            "container-app-2"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -43,7 +43,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -79,7 +79,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -112,7 +112,7 @@
           "default": {
             "description": "Describes the error if the operation is not successful.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -134,10 +134,28 @@
         }
       }
     },
+    "ErrorResponseBody": {
+      "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The details of the error.",
+          "$ref": "#/definitions/ErrorResponse"
+        },
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
     "CanceledSubscriptionId": {
       "description": "The ID of the canceled subscription",
       "properties": {
-        "value": {
+        "subscriptionId": {
           "description": "The ID of the canceled subscription",
           "type": "string",
           "readOnly": true
@@ -147,7 +165,7 @@
     "RenamedSubscriptionId": {
       "description": "The ID of the subscriptions that is being renamed",
       "properties": {
-        "value": {
+        "subscriptionId": {
           "description": "The ID of the subscriptions that is being renamed",
           "type": "string",
           "readOnly": true
@@ -157,7 +175,7 @@
     "EnabledSubscriptionId": {
       "description": "The ID of the subscriptions that is being enabled",
       "properties": {
-        "value": {
+        "subscriptionId": {
           "description": "The ID of the subscriptions that is being enabled",
           "type": "string",
           "readOnly": true

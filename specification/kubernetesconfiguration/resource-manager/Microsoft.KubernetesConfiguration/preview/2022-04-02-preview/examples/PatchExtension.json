@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "subscriptionId": "subId1",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "extensionName": "ClusterMonitor",
+    "api-version": "2022-04-02-preview",
+    "clusterName": "clusterName1",
+    "patchExtension": {
+      "properties": {
+        "autoUpgradeMinorVersion": true,
+        "releaseTrain": "Preview",
+        "configurationSettings": {
+          "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
+          "omsagent.env.clusterName": "clusterName1"
+        },
+        "configurationProtectedSettings": {
+          "omsagent.secret.key": "secretKeyValue01"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/operationId",
+        "x-ms-async-operation-timeout": "PT48H",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/operationId?api-version=2022-04-01-preview"
+      },
+      "description": "Extension properties and details of the Patch operation, including AsyncOperation url.",
+      "body": {
+        "properties": {
+          "extensionType": "azuremonitor-containers",
+          "autoUpgradeMinorVersion": true,
+          "releaseTrain": "Preview",
+          "version": "0.1.4",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "configurationSettings": {
+            "omsagent.secret.wsid": "a38cef99-5a89-52ed-b6db-22095c23664b",
+            "omsagent.env.clusterName": "clusterName1"
+          },
+          "provisioningState": "Updating",
+          "statuses": []
+        }
+      }
+    }
+  }
+}

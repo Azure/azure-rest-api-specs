@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "organizationName": "myOrganization",
+    "body": {
+      "properties": {
+        "offerDetail": {
+          "publisherId": "string",
+          "id": "string",
+          "planId": "string",
+          "planName": "string",
+          "termUnit": "string"
+        },
+        "userDetail": {
+          "firstName": "string",
+          "lastName": "string",
+          "emailAddress": "contoso@microsoft.com"
+        }
+      },
+      "tags": {
+        "Environment": "Dev"
+      },
+      "location": "West US"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization",
+        "name": "myOrganization",
+        "type": "Microsoft.Confluent/organizations",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "User",
+          "createdAt": "2020-05-09T14:28:47.284Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-05-09T14:28:47.284Z"
+        },
+        "properties": {
+          "createdTime": "2020-05-09T14:28:47.284Z",
+          "provisioningState": "Succeeded",
+          "organizationId": "string",
+          "ssoUrl": "string",
+          "offerDetail": {
+            "publisherId": "string",
+            "id": "string",
+            "planId": "string",
+            "planName": "string",
+            "termUnit": "string",
+            "status": "Started"
+          },
+          "userDetail": {
+            "firstName": "string",
+            "lastName": "string",
+            "emailAddress": "contoso@microsoft.com"
+          }
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization",
+        "name": "myOrganization",
+        "type": "Microsoft.Confluent/organizations",
+        "properties": {
+          "createdTime": "2020-05-09T14:28:47.284Z",
+          "provisioningState": "Accepted",
+          "organizationId": "string",
+          "ssoUrl": "string",
+          "offerDetail": {
+            "publisherId": "string",
+            "id": "string",
+            "planId": "string",
+            "planName": "string",
+            "termUnit": "string",
+            "status": "Started"
+          },
+          "userDetail": {
+            "firstName": "string",
+            "lastName": "string",
+            "emailAddress": "contoso@microsoft.com"
+          }
+        },
+        "tags": {
+          "Environment": "Dev"
+        },
+        "location": "West US"
+      }
+    }
+  }
+}

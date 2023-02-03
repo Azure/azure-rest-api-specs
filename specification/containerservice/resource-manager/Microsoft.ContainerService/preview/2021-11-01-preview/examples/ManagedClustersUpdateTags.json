@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "parameters": {
+      "tags": {
+        "tier": "testing",
+        "archv3": ""
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "name": "clustername1",
+        "tags": {
+          "archv3": "",
+          "tier": "testing"
+        },
+        "type": "Microsoft.ContainerService/ManagedClusters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "kubernetesVersion": "1.9.6",
+          "dnsPrefix": "dnsprefix1",
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "count": 3,
+              "vmSize": "Standard_DS1_v2",
+              "maxPods": 110,
+              "osType": "Linux",
+              "provisioningState": "Succeeded",
+              "orchestratorVersion": "1.9.6"
+            }
+          ],
+          "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "keydata"
+                }
+              ]
+            }
+          },
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          },
+          "nodeResourceGroup": "MC_rg1_clustername1_location1",
+          "enableRBAC": false,
+          "diskEncryptionSetID": "/subscriptions/subid1/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+          "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
+          "networkProfile": {
+            "networkPlugin": "kubenet",
+            "podCidr": "10.244.0.0/16",
+            "serviceCidr": "10.0.0.0/16",
+            "dnsServiceIP": "10.0.0.10",
+            "dockerBridgeCidr": "172.17.0.1/16"
+          }
+        }
+      }
+    }
+  }
+}

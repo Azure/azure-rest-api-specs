@@ -9,11 +9,11 @@ go:
   namespace: confidentialledger
 ```
 
-### Tag: package-0.1-preview and go
+### Tag: package-2022-04-20-preview and go
 
-These settings apply only when `--tag=package-0.1-preview --go` is specified on the command line.
+These settings apply only when `--tag=package-2022-04-20-preview --go` is specified on the command line.
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-```yaml $(tag) == 'package-0.1-preview' && $(go)
+```yaml $(tag) == 'package-2022-20-04-preview' && $(go)
 output-folder: $(go-sdks-folder)/confidentialledger/Generated
 ```

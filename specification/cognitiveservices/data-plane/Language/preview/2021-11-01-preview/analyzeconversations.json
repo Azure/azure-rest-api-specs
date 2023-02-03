@@ -1,0 +1,560 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Cognitive Language Service - Analyze Conversations",
+    "description": "This API accepts a request and mediates among multiple language projects, such as LUIS Generally Available, Question Answering, Conversation, and then calls the best candidate service to handle the request. At last, it returns a response with the candidate service's response as a payload.\n\n In some cases, this API needs to forward requests and responses between the caller and an upstream service.",
+    "version": "2021-11-01-preview"
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "description": "An APIM subscription key.",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/language",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "common.json#/parameters/Endpoint"
+      }
+    ]
+  },
+  "paths": {
+    "/:analyze-conversations": {
+      "post": {
+        "operationId": "ConversationAnalysis_AnalyzeConversation",
+        "description": "Analyzes the input conversation utterance.",
+        "parameters": [
+          {
+            "$ref": "common.json#/parameters/ProjectNameQueryParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/DeploymentNameQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/ConversationAnalysisOptions"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The conversation analysis response.",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeConversationResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Arbitration result": {
+            "$ref": "./examples/conversations/Orchestrator_arbitration.json"
+          },
+          "Conversation project result": {
+            "$ref": "./examples/conversations/Conversation_project.json"
+          },
+          "Orchestrator direct target result": {
+            "$ref": "./examples/conversations/Orchestrator_direct_target.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConversationAnalysisOptions": {
+      "type": "object",
+      "description": "The request body.",
+      "required": [
+        "query"
+      ],
+      "properties": {
+        "query": {
+          "description": "The conversation utterance to be analyzed.",
+          "type": "string"
+        },
+        "directTarget": {
+          "type": "string",
+          "description": "The name of the target project this request is sending to directly."
+        },
+        "language": {
+          "type": "string",
+          "description": "The language to use in this request. This will be the language setting when communicating with all other target projects."
+        },
+        "verbose": {
+          "type": "boolean",
+          "description": "If true, the service will return more detailed information in the response."
+        },
+        "isLoggingEnabled": {
+          "description": "If true, the query will be kept by the service for customers to further review, to improve the model quality.",
+          "type": "boolean"
+        },
+        "parameters": {
+          "type": "object",
+          "description": "A dictionary representing the input for each target project.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AnalysisParameters"
+          }
+        }
+      }
+    },
+    "AnalysisParameters": {
+      "type": "object",
+      "description": "This is the parameter set of either the Orchestration project itself or one of the target services.",
+      "required": [
+        "targetKind"
+      ],
+      "discriminator": "targetKind",
+      "properties": {
+        "targetKind": {
+          "type": "string",
+          "description": "The type of a target service.",
+          "enum": [
+            "luis",
+            "conversation",
+            "question_answering",
+            "non_linked"
+          ],
+          "x-ms-enum": {
+            "name": "targetKind",
+            "modelAsString": true
+          }
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version to use when call a specific target service."
+        }
+      }
+    },
+    "NoneLinkedTargetIntentResult": {
+      "type": "object",
+      "description": "A wrap up of non-linked intent response.",
+      "x-ms-discriminator-value": "non_linked",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIntentResult"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "$ref": "#/definitions/ConversationResult",
+          "description": "The actual response from a Conversation project.",
+          "x-nullable": true
+        }
+      }
+    },
+    "LUISParameters": {
+      "description": "This is a set of request parameters for LUIS Generally Available projects.",
+      "x-ms-discriminator-value": "luis",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisParameters"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "The utterance to predict."
+        },
+        "callingOptions": {
+          "type": "object",
+          "description": "This customizes how the service calls LUIS Generally Available projects.",
+          "$ref": "#/definitions/LUISCallingOptions"
+        }
+      },
+      "additionalProperties": true
+    },
+    "LUISCallingOptions": {
+      "description": "This customizes how the service calls LUIS Generally Available projects.",
+      "type": "object",
+      "properties": {
+        "verbose": {
+          "description": "Enable verbose response.",
+          "type": "boolean"
+        },
+        "log": {
+          "description": "Save log to add in training utterances later.",
+          "type": "boolean"
+        },
+        "show-all-intents": {
+          "description": "Set true to show all intents.",
+          "type": "boolean"
+        },
+        "timezoneOffset": {
+          "type": "number",
+          "description": "The timezone offset for the location of the request."
+        },
+        "spellCheck": {
+          "type": "boolean",
+          "description": "Enable spell checking."
+        },
+        "bing-spell-check-subscription-key": {
+          "description": "The subscription key to use when enabling Bing spell check",
+          "type": "string"
+        }
+      }
+    },
+    "ConversationParameters": {
+      "type": "object",
+      "description": "This is a set of request parameters for Customized Conversation projects.",
+      "x-ms-discriminator-value": "conversation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisParameters"
+        }
+      ],
+      "properties": {
+        "callingOptions": {
+          "type": "object",
+          "$ref": "#/definitions/ConversationCallingOptions"
+        }
+      }
+    },
+    "ConversationCallingOptions": {
+      "type": "object",
+      "description": "The option to set to call a Conversation project.",
+      "properties": {
+        "language": {
+          "description": "The language of the query.",
+          "type": "string"
+        },
+        "verbose": {
+          "description": "If true, the service will return more detailed information.",
+          "type": "boolean"
+        },
+        "isLoggingEnabled": {
+          "description": "If true, the query will be saved for customers to further review in authoring, to improve the model quality.",
+          "type": "boolean"
+        }
+      }
+    },
+    "QuestionAnsweringParameters": {
+      "type": "object",
+      "description": "This is a set of request parameters for Question Answering knowledge bases.",
+      "x-ms-discriminator-value": "question_answering",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalysisParameters"
+        }
+      ],
+      "properties": {
+        "callingOptions": {
+          "type": "object",
+          "description": "The options sent to a Question Answering KB."
+        }
+      }
+    },
+    "AnalyzeConversationResult": {
+      "type": "object",
+      "description": "Represents a conversation analysis response.",
+      "required": [
+        "query",
+        "prediction"
+      ],
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "The conversation utterance given by the caller."
+        },
+        "detectedLanguage": {
+          "type": "string",
+          "description": "The system detected language for the query."
+        },
+        "prediction": {
+          "description": "The prediction result of a conversation project.",
+          "$ref": "#/definitions/BasePrediction"
+        }
+      }
+    },
+    "BasePrediction": {
+      "type": "object",
+      "description": "This is the base class of prediction",
+      "required": [
+        "projectKind"
+      ],
+      "discriminator": "projectKind",
+      "properties": {
+        "projectKind": {
+          "type": "string",
+          "description": "The type of the project.",
+          "enum": [
+            "conversation",
+            "workflow"
+          ],
+          "x-ms-enum": {
+            "name": "projectKind",
+            "modelAsString": true
+          }
+        },
+        "topIntent": {
+          "type": "string",
+          "description": "The intent with the highest score."
+        }
+      }
+    },
+    "OrchestratorPrediction": {
+      "type": "object",
+      "description": "This represents the prediction result of an Orchestrator project.",
+      "x-ms-discriminator-value": "workflow",
+      "required": [
+        "intents"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasePrediction"
+        }
+      ],
+      "properties": {
+        "intents": {
+          "description": "A dictionary that contains all intents. A key is an intent name and a value is its confidence score and target type. The top intent's value also contains the actual response from the target project.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/TargetIntentResult"
+          }
+        }
+      }
+    },
+    "TargetIntentResult": {
+      "type": "object",
+      "description": "This is the base class of an intent prediction",
+      "discriminator": "targetKind",
+      "required": [
+        "confidenceScore",
+        "targetKind"
+      ],
+      "properties": {
+        "targetKind": {
+          "type": "string",
+          "description": "This discriminator property specifies the type of the target project that returns the response.",
+          "enum": [
+            "luis",
+            "conversation",
+            "question_answering",
+            "non_linked"
+          ],
+          "x-ms-enum": {
+            "name": "targetKind",
+            "modelAsString": true
+          }
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version used to call a target service."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "float",
+          "x-ms-client-name": "confidence",
+          "description": "The prediction score and it ranges from 0.0 to 1.0.",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "ConversationTargetIntentResult": {
+      "type": "object",
+      "description": "A wrap up of Conversation project response.",
+      "x-ms-discriminator-value": "conversation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIntentResult"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "$ref": "#/definitions/ConversationResult",
+          "description": "The actual response from a Conversation project.",
+          "x-nullable": true
+        }
+      }
+    },
+    "ConversationResult": {
+      "type": "object",
+      "description": "The response returned by a Conversation project.",
+      "required": [
+        "query",
+        "prediction"
+      ],
+      "properties": {
+        "query": {
+          "description": "The same query given in request.",
+          "type": "string"
+        },
+        "detectedLanguage": {
+          "description": "The detected language from the query.",
+          "type": "string"
+        },
+        "prediction": {
+          "description": "The predicted result for the query.",
+          "$ref": "#/definitions/ConversationPrediction"
+        }
+      }
+    },
+    "ConversationPrediction": {
+      "type": "object",
+      "description": "Represents the prediction section of a Conversation project.",
+      "x-ms-discriminator-value": "conversation",
+      "required": [
+        "intents",
+        "entities"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BasePrediction"
+        }
+      ],
+      "properties": {
+        "intents": {
+          "description": "The intent classification results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationIntent"
+          }
+        },
+        "entities": {
+          "description": "The entity extraction results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConversationEntity"
+          }
+        }
+      }
+    },
+    "ConversationIntent": {
+      "type": "object",
+      "description": "The intent classification result of a Conversation project.",
+      "required": [
+        "category",
+        "confidenceScore"
+      ],
+      "properties": {
+        "category": {
+          "description": "A predicted class.",
+          "type": "string"
+        },
+        "confidenceScore": {
+          "format": "float",
+          "x-ms-client-name": "confidence",
+          "description": "The confidence score of the class from 0.0 to 1.0.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "ConversationEntity": {
+      "type": "object",
+      "description": "The entity extraction result of a Conversation project.",
+      "required": [
+        "category",
+        "text",
+        "offset",
+        "length",
+        "confidenceScore"
+      ],
+      "properties": {
+        "category": {
+          "description": "The entity category.",
+          "type": "string"
+        },
+        "text": {
+          "description": "The predicted entity text.",
+          "type": "string"
+        },
+        "offset": {
+          "format": "int32",
+          "description": "The starting index of this entity in the query.",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "description": "The length of the text.",
+          "type": "integer"
+        },
+        "confidenceScore": {
+          "format": "float",
+          "x-ms-client-name": "confidence",
+          "description": "The entity confidence score.",
+          "type": "number"
+        },
+        "listKeys": {
+          "type": "array",
+          "description": "List of keys.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LUISTargetIntentResult": {
+      "type": "object",
+      "description": "It is a wrap up of LUIS Generally Available response.",
+      "x-ms-discriminator-value": "luis",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIntentResult"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "description": "The actual response from a LUIS Generally Available application.",
+          "x-nullable": true
+        }
+      }
+    },
+    "QuestionAnsweringTargetIntentResult": {
+      "type": "object",
+      "description": "It is a wrap up a Question Answering KB response.",
+      "x-ms-discriminator-value": "question_answering",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TargetIntentResult"
+        }
+      ],
+      "properties": {
+        "result": {
+          "type": "object",
+          "$ref": "../2021-07-15-preview/questionanswering.json#/definitions/KnowledgeBaseAnswers",
+          "description": "The generated answer by a Question Answering KB.",
+          "x-nullable": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ConversationAnalysisOptions": {
+      "name": "ConversationAnalysisOptions",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/ConversationAnalysisOptions"
+      },
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

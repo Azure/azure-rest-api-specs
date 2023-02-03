@@ -1021,6 +1021,9 @@
           "items": {
             "$ref": "#/definitions/ShareCredentialDetails"
           },
+          "x-ms-identifiers": [
+            "shareName"
+          ],
           "readOnly": true
         }
       }
@@ -1097,6 +1100,7 @@
           "items": {
             "$ref": "#/definitions/ShippingAddress"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       },
@@ -1231,6 +1235,9 @@
           "items": {
             "$ref": "#/definitions/SkuInformation"
           },
+          "x-ms-identifiers": [
+            "sku"
+          ],
           "readOnly": true
         },
         "nextLink": {
@@ -1328,6 +1335,10 @@
           "items": {
             "$ref": "#/definitions/CloudError"
           },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
           "readOnly": true
         },
         "additionalInfo": {
@@ -1336,6 +1347,7 @@
           "items": {
             "$ref": "#/definitions/AdditionalErrorInfo"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       },
@@ -1378,7 +1390,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NotificationPreference"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1866,6 +1879,9 @@
           "items": {
             "$ref": "#/definitions/DataBoxDiskCopyProgress"
           },
+          "x-ms-identifiers": [
+            "serialNumber"
+          ],
           "readOnly": true
         },
         "disksAndSizeDetails": {
@@ -1899,6 +1915,9 @@
           "items": {
             "$ref": "#/definitions/DiskSecret"
           },
+          "x-ms-identifiers": [
+            "diskSerialNumber"
+          ],
           "readOnly": true
         },
         "passKey": {
@@ -1969,6 +1988,10 @@
           "items": {
             "$ref": "#/definitions/CopyProgress"
           },
+          "x-ms-identifiers": [
+            "dataAccountType",
+            "accountId"
+          ],
           "readOnly": true
         },
         "devicePassword": {
@@ -1993,6 +2016,9 @@
           "items": {
             "$ref": "#/definitions/DataBoxHeavySecret"
           },
+          "x-ms-identifiers": [
+            "deviceSerialNumber"
+          ],
           "readOnly": true
         }
       },
@@ -2018,6 +2044,9 @@
           "items": {
             "$ref": "#/definitions/ApplianceNetworkConfiguration"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "encodedValidationCertPubKey": {
@@ -2031,6 +2060,9 @@
           "items": {
             "$ref": "#/definitions/AccountCredentialDetails"
           },
+          "x-ms-identifiers": [
+            "accountName"
+          ],
           "readOnly": true
         }
       }
@@ -2054,6 +2086,10 @@
           "items": {
             "$ref": "#/definitions/CopyProgress"
           },
+          "x-ms-identifiers": [
+            "dataAccountType",
+            "accountId"
+          ],
           "readOnly": true
         },
         "devicePassword": {
@@ -2077,7 +2113,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataBoxSecret"
-          }
+          },
+          "x-ms-identifiers": [
+            "deviceSerialNumber"
+          ]
         }
       },
       "x-ms-discriminator-value": "DataBox"
@@ -2117,6 +2156,9 @@
           "items": {
             "$ref": "#/definitions/ApplianceNetworkConfiguration"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "encodedValidationCertPubKey": {
@@ -2130,6 +2172,9 @@
           "items": {
             "$ref": "#/definitions/AccountCredentialDetails"
           },
+          "x-ms-identifiers": [
+            "accountName"
+          ],
           "readOnly": true
         }
       }
@@ -2223,14 +2268,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataExportDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "dataImportDetails": {
           "description": "List of DataTransfer details to be used to import data to azure.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataImportDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "deviceType": {
           "description": "Device type.",
@@ -2440,7 +2487,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Details"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "target": {
           "type": "string"
@@ -2537,6 +2585,9 @@
           "items": {
             "$ref": "#/definitions/JobStages"
           },
+          "x-ms-identifiers": [
+            "stageName"
+          ],
           "readOnly": true
         },
         "contactDetails": {
@@ -2562,14 +2613,16 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataImportDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "dataExportDetails": {
           "description": "Details of the data to be exported from azure.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataExportDetails"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "jobDetailsType": {
           "description": "Indicates the type of job details.",
@@ -2608,6 +2661,7 @@
           "items": {
             "$ref": "#/definitions/CopyLogDetails"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         },
         "reverseShipmentLabelSasKey": {
@@ -3445,6 +3499,9 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "readOnly": true
         },
         "nextLink": {
@@ -4182,6 +4239,9 @@
           "items": {
             "$ref": "#/definitions/DataLocationToServiceLocationMap"
           },
+          "x-ms-identifiers": [
+            "dataLocation"
+          ],
           "readOnly": true
         },
         "capacity": {
@@ -4195,6 +4255,9 @@
           "items": {
             "$ref": "#/definitions/SkuCost"
           },
+          "x-ms-identifiers": [
+            "meterId"
+          ],
           "readOnly": true
         },
         "apiVersions": {
@@ -4509,7 +4572,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/FilterFileDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "filterFilePath"
+          ]
         }
       }
     },
@@ -4585,6 +4651,7 @@
           "items": {
             "$ref": "#/definitions/TransportAvailabilityDetails"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }
@@ -4645,7 +4712,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/UnencryptedCredentials"
-          }
+          },
+          "x-ms-identifiers": [
+            "jobName"
+          ]
         },
         "nextLink": {
           "description": "Link for the next set of unencrypted credentials.",
@@ -4898,7 +4968,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ValidationInputRequest"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "discriminator": "validationCategory"
@@ -4953,6 +5024,7 @@
           "items": {
             "$ref": "#/definitions/ValidationInputResponse"
           },
+          "x-ms-identifiers": [],
           "readOnly": true
         }
       }

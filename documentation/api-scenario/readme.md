@@ -6,9 +6,9 @@ _**Caution**: This project is in early preview phase, hence breaking changes sho
 
 ## Features
 
-- Simple to use: Intuitive step definition based on Swagger examples and raw REST call.
+- Simple to use: Intuitive step definition based on Swagger operations and examples.
 - ARM Template integration: Support creating external Azure resources with ARM Template and executing Azure Powershell or Azure CLI scripts with ARM Template deployment script.
-- Implementation independent: [oav](https://github.com/Azure/oav) is the default API scenario runner, and more runners will be supported, like SDKs in different languages.
+- Implementation independent: [oav](https://github.com/Azure/oav) is the default API scenario runner. More runners will be supported, like SDKs in different languages.
 
 ### Demo gif
 
