@@ -50,7 +50,7 @@
           "Create a replica server": {
             "$ref": "./examples/ServerCreateReplica.json"
           },
-          "Create a server with byok (Bring your own key)": {
+          "Create a server with byok": {
             "$ref": "./examples/ServerCreateWithBYOK.json"
           }
         },
@@ -118,7 +118,7 @@
           "Update server customer maintenance window": {
             "$ref": "./examples/ServerUpdateWithCustomerMaintenanceWindow.json"
           },
-          "Update server with byok (Bring your own key)": {
+          "Update server with byok": {
             "$ref": "./examples/ServerUpdateWithBYOK.json"
           }
         },
@@ -964,7 +964,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "Represents a server."
@@ -1123,6 +1123,17 @@
         }
       },
       "description": "Metadata of user assigned identity."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-z0-9][-a-z0-9]*(?<!-)$",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
