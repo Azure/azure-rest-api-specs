@@ -1194,7 +1194,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1832,7 +1832,6 @@
       "title": "Region Sku Details",
       "description": "List of details about all the available SKUs",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "value": {
           "type": "array",
@@ -1847,7 +1846,6 @@
     "LocationInfo": {
       "type": "object",
       "description": "Information about location (for example: features that it supports)",
-      "readOnly": true,
       "properties": {
         "location": {
           "type": "string",
@@ -1885,14 +1883,12 @@
             "modelAsString": true
           }
         }
-      },
-      "readOnly": true
+      }
     },
     "Capability": {
       "type": "object",
       "title": "Capability",
       "description": "Information about the features the location supports",
-      "readOnly": true,
       "properties": {
         "name": {
           "type": "string",
@@ -1908,7 +1904,6 @@
       "title": "Region Sku Detail",
       "description": "Details about the location requested and the available skus in the location",
       "type": "object",
-      "readOnly": true,
       "properties": {
         "resourceType": {
           "type": "string",
@@ -1957,14 +1952,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the database.",
-      "x-ms-parameter-location": "method"
-    },
-    "LocationParameter": {
-      "name": "location",
-      "in": "path",
-      "description": "The region the operation is in",
-      "required": true,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
