@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprResiliencyTimeoutPoliciesCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPoliciesCollection"
             }
           },
           "default": {
@@ -103,7 +103,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprResiliencyTimeoutPolicy"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPolicy"
             }
           },
           "default": {
@@ -155,7 +155,7 @@
             "description": "Configuration details of the Dapr Resiliency Timeout Policy.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DaprResiliencyTimeoutPolicy"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPolicy"
             }
           },
           {
@@ -166,13 +166,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprResiliencyTimeoutPolicy"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPolicy"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/DaprResiliencyTimeoutPolicy"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPolicy"
             }
           },
           "default": {
@@ -240,59 +240,6 @@
           "Delete Dapr Resiliency Timeout Policy": {
             "$ref": "./examples/DaprResiliencyTimeoutPolicies_Delete.json"
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "DaprResiliencyTimeoutPoliciesCollection": {
-      "description": "Dapr Resiliency Timeout Policy ARM resource.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DaprResiliencyTimeoutPolicy"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "DaprResiliencyTimeoutPolicy": {
-      "description": "Resiliency Policy Retries",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "DaprResiliencyTimeoutPolicy resource specific properties",
-          "type": "object",
-          "properties": {
-            "general": {
-              "description": "Timeout duration for general operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
-              "type": "string"
-            },
-            "important": {
-              "description": "Timeout duration for important operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
-              "type": "string"
-            },
-            "largeResponse": {
-              "description": "Timeout duration for large operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
         }
       }
     }
