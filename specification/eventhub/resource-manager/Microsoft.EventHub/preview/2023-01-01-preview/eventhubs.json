@@ -262,6 +262,10 @@
         "skipEmptyArchives": {
           "type": "boolean",
           "description": "A value that indicates whether to Skip Empty Archives"
+        },
+        "identity": {
+          "$ref": "#/definitions/CaptureIdentityProperties",
+          "description": "Properties describing the Azure Active Directory Identity to be used to to be used to capture events to Storage Accounts or Azure Data Lake. "
         }
       },
       "description": "Properties to configure capture description for eventhub"
@@ -429,6 +433,28 @@
         }
       },
       "description": "Capture storage details for capture description"
+    },
+    "CaptureIdentityProperties": {
+      "x-ms-client-flatten": true,
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of Azure Active Directory Managed Identity.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentity": {
+          "type": "string",
+          "description": "ARM ID of Managed User Identity. This property is required is the type is UserAssignedIdentity. If type is SystemAssigned, then the System Assigned Identity Associated with the namespace will be used."
+        }
+      }
     }
   },
   "parameters": {}
