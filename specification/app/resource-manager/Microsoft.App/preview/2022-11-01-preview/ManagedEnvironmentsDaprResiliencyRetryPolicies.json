@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DaprResiliencyRetryPoliciesCollection"
+              "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyRetryPoliciesCollection"
             }
           },
           "default": {
@@ -240,29 +240,6 @@
           "Delete Dapr Resiliency Retry Policy": {
             "$ref": "./examples/DaprResiliencyRetryPolicies_Delete.json"
           }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "DaprResiliencyRetryPoliciesCollection": {
-      "description": "Dapr Resiliency Retry Policy ARM resource.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyRetryPolicy"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }
