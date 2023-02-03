@@ -622,6 +622,9 @@
           },
           {
             "$ref": "#/parameters/AccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -4747,7 +4750,7 @@
         },
         "username": {
           "type": "string",
-          "description": "Username of Active Directory domain administrator"
+          "description": "A domain user account with permission to create machine accounts"
         },
         "password": {
           "type": "string",
@@ -5400,7 +5403,7 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 500 GiB. Upper limit is 100TiB, 500Tib for LargeVolume. Specified in bytes.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB, 500Tib for LargeVolume. Specified in bytes.",
           "minimum": 107374182400,
           "maximum": 549755813888000,
           "default": 107374182400,
@@ -5444,6 +5447,7 @@
           "type": "string",
           "x-nullable": true,
           "x-ms-mutability": [
+            "read",
             "create"
           ],
           "description": "UUID v4 or resource identifier used to identify the Snapshot.",
@@ -5458,6 +5462,7 @@
           "type": "string",
           "x-nullable": true,
           "x-ms-mutability": [
+            "read",
             "create"
           ],
           "description": "UUID v4 or resource identifier used to identify the Backup.",
@@ -7568,7 +7573,7 @@
         "deploymentSpecId": {
           "type": "string",
           "description": "Application specific identifier of deployment rules for the volume group",
-          "example": "12345678-1234-1234-1234-123456676765"
+          "example": "20542149-bfca-5618-1879-9863dc6767f1"
         },
         "volumesCount": {
           "type": "integer",

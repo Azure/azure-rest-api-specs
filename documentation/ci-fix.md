@@ -79,11 +79,11 @@ npm install -g autorest
 
 #### Given a swagger spec, run linter:
 ```
-autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec>
+autorest --v3 --spectral --validation --azure-validator --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec>
 ```
 #### Given a readme file, run linter:
 ```
-autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
+autorest --v3 --spectral --validation --azure-validator --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
 ```
 
 Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/main/README.md) for how to install or run tool in details.
@@ -129,41 +129,20 @@ Note: Currently only applicable to management plane APIs, and target ARM region 
 
 To fix the check, download the artifact `api_scenario_test_output` from Azure pipeline where you can find the report.html and auto generated API Scenario file as baseline, then refer to [API Scenario documentation](./api-scenario/readme.md) to run and debug it locally. After local debug, commit the API Scenario file and `readme.test.md` file into your working branch and then the CI check will use the committed API Scenario file to re-run the test.
 
-## SDK Track2 Validation
-
-This CI check is to run [autorest.modelerfour](https://github.com/Azure/autorest.modelerfour) for each changing tag in a PR.
-Since the code generators of track2 SDK are based on the autorest.modelerfour, it's recommended ensure this validation is passed without any error and warning.
-The `modelerfour` has several plugins. If a plugin report an error, you can refer to the following plugin documentations:
-- [PreChecker](https://github.com/Azure/autorest/blob/main/docs/openapi/prechecker.md)
-
-### Run locally:
-
-#### Prerequisites:
-
-```
-npm install -g autorest
-```
-#### Given a swagger spec, run the validator:
-```
-autorest --v3 --azure-validator --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec>
-```
-#### Given a readme file, run the validator:
-```
-autorest --v3 --azure-validator --semantic-validator=false --model-validator=false --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
-```
 
 ## Cadl Validation
 
 This validator is to ensure the cadl & swagger files in PR are consistent and the 'cadl' folder contains 'examples' and 'package.json'
 
 ### How to fix
-| Error Code | solution |
-|---| ---|
-|MissingPakcageJson| adding the package.json to the cadl folder|
-|MissingCadlFile| adding the related cadl files into 'cadl' folder, like [https://github.com/Azure/azure-rest-api-specs-pr/tree/RPSaaSMaster/specification/networkanalytics/resource-manager/Microsoft.NetworkAnalytics/cadl](https://github.com/Azure/azure-rest-api-specs-pr/tree/586cb177f1bab647da7ac60907fa3aa695b67ae1/specification/networkanalytics/resource-manager/Microsoft.NetworkAnalytics/cadl)|
-|MissingExamplesDirectory| the example files should be kept in the 'cadl/examples' folder, you should also check in it in PR. |
-|InConsistentSwagger| the generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from cadl, and check in it |
-|SwaggerNotExistInPR| the occurs when there is cadl file in the PR but the swagger is not present in the PR, so you need to add the swagger to the PR |
+| Error Code |Severity |Solution |
+|---|---|---|
+|MissingCadlFile| Error |Adding the related cadl project into {RP-Name} folder, like [Qumulo.Manaement](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/liftrqumulo/Qumulo.Management)|
+|MissingExamplesDirectory| Error |The example files should be kept in the 'examples' folder under the cadl project,the cadl-autorest emitter will copy them into the output folder and create corresponding 'x-ms-examples' in the swagger automatically when geneates the swagger, you should also check in it in PR. See [cadl-autorest](https://github.com/Azure/cadl-azure/blob/main/packages/cadl-autorest/README.md#examples-directory)|
+|InConsistentSwagger| Error |The generated swagger is inconsistent with the swagger in PR, so you need to re-generate swagger from cadl project and check in it. For how to generate swagger from cadl project, you can refer to [Complete Example and Generate OpenApi 2.0 spec](https://azure.github.io/cadl-azure/docs/getstarted/azure-resource-manager/step05)  |
+|SwaggerNotExistInPR| Error |It occurs when there is a cadl file in the PR but the generated swagger is not present in the PR, so you need to add the swagger to the PR. For how to generate swagger from cadl project, you can refer to [Complete Example and Generate OpenApi 2.0 spec](https://azure.github.io/cadl-azure/docs/getstarted/azure-resource-manager/step05) |
+|GeneratedSwaggerNotFound| Error | It occurs when there is a cadl file in the PR but there is no swagger produced by the cadl-autorest emitter, so you need to check the cadl-project.yaml to see if it has the wrong configuration,like 'output-dir' or 'azure-resource-provider-folder'. |
+|MissingCadlProjectConfig| Warning |The configuration of '@azure-tools/cadl-autorest' including 'output-file','azure-resource-provider-folder' are used to customize the generated swagger file name and folder structure, it's recommended to use them in the 'cadl-project.yaml', here is a [sample cadl-project](https://github.com/Azure/azure-rest-api-specs/blob/c91eca4e2081703002581da6f58f9d9332e1afd1/documentation/cadl-sample-project/specification/contosowidgetmanager/Contoso.WidgetManager/cadl-project.yaml#L15). |
 
 ## Traffic Validation
 
