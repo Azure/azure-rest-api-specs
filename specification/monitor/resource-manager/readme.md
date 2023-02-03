@@ -45,7 +45,7 @@ directive:
 
 These settings apply only when `--tag=package-2022-08-01-preview-only` is specified on the command line
 
-``` yaml $(tag) == 'Microsoft.Insights/preview/2022-08-01-preview/scheduledQueryRule_API.json'
+``` yaml $(tag) == 'package-2022-08-01-preview-only'
 input-file:
 - Microsoft.Insights/preview/2022-08-01-preview/scheduledQueryRule_API.json
 ```
