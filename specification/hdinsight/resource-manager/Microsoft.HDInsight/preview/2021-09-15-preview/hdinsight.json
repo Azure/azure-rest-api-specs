@@ -1839,11 +1839,42 @@
     "ComputeProfile": {
       "type": "object",
       "description": "The compute profile.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine SKU.",
+          "pattern": "^[a-zA-Z0-9_\\-]{0,256}$"
+        },
+        "count": {
+          "description": "The number of virtual machines.",
+          "type": "integer",
+          "format": "int32",
+          "maximum": 100.0,
+          "minimum": 1.0
+        },
+        "nodes": {
+          "type": "array",
+          "description": "The nodes definitions.",
+          "items": {
+            "$ref": "#/definitions/NodeProfile"
+          }
+        }
+      }
+    },
+    "NodeProfile": {
+      "type": "object",
+      "description": "The node profile.",
       "required": [
+        "type",
         "vmSize",
         "count"
       ],
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "The node type.",
+          "pattern": "^(head|Head|HEAD|worker|Worker|WORKER)$"
+        },
         "vmSize": {
           "type": "string",
           "description": "The virtual machine SKU.",
