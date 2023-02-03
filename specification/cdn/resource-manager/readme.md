@@ -31,6 +31,18 @@ openapi-type: arm
 tag: package-preview-2022-11
 ```
 
+
+### Tag: package-preview-2023-02
+
+These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-02'
+input-file:
+  - Microsoft.Cdn/preview/2023-02-01-preview/afdx.json
+  - Microsoft.Cdn/preview/2023-02-01-preview/cdn.json
+  - Microsoft.Cdn/preview/2023-02-01-preview/cdnwebapplicationfirewall.json
+```
+
 ### Tag: package-preview-2022-11
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
