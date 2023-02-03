@@ -87,7 +87,7 @@
         "tags": [
           "OracleSites"
         ],
-        "operationId": "OracleSites_Create",
+        "operationId": "OracleSites_CreateOrUpdate",
         "summary": "Implements OracleSites PUT method.",
         "description": "Puts the OracleSites resource.",
         "x-ms-examples": {
@@ -132,12 +132,22 @@
               "$ref": "#/definitions/OracleSite"
             }
           },
+          "201": {
+            "description": "Creates the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleSite"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
@@ -145,10 +155,6 @@
           "OracleSites"
         ],
         "operationId": "OracleSites_Delete",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "summary": "Implements OracleSites DELETE method.",
         "description": "Deletes the OracleSites resource.",
         "x-ms-examples": {
@@ -180,9 +186,6 @@
         "responses": {
           "200": {
             "description": "Deletes the OracleSites resource."
-          },
-          "202": {
-            "description": "Accepted"
           },
           "204": {
             "description": "The OracleSites resource is already deleted or not found"
@@ -239,7 +242,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the OracleSites resource.",
+            "description": "Updated the OracleSites resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleSite"
+            }
+          },
+          "201": {
+            "description": "Updates the OracleSites resource.",
             "schema": {
               "$ref": "#/definitions/OracleSite"
             }
@@ -250,6 +259,60 @@
               "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/Refresh": {
+      "post": {
+        "tags": [
+          "OracleSites"
+        ],
+        "operationId": "OracleSites_TriggerRefresh",
+        "summary": "Implements Refresh POST method.",
+        "description": "Trigger Refresh Refresh action",
+        "x-ms-examples": {
+          "OracleSites_TriggerRefresh": {
+            "$ref": "./examples/OracleSites_TriggerRefresh.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger refresh success"
+          },
+          "202": {
+            "description": "Trigger refresh success"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -435,7 +498,7 @@
         "tags": [
           "OracleServers"
         ],
-        "operationId": "OracleServers_Create",
+        "operationId": "OracleServers_CreateOrUpdate",
         "summary": "Implements OracleServers PUT method.",
         "description": "Puts the OracleServers resource.",
         "x-ms-examples": {
@@ -485,7 +548,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the OracleSites resource.",
+            "description": "Created the OracleServer resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleServer"
+            }
+          },
+          "201": {
+            "description": "Creates the OracleServer resource.",
             "schema": {
               "$ref": "#/definitions/OracleServer"
             }
@@ -503,10 +572,6 @@
           "OracleServers"
         ],
         "operationId": "OracleServers_Delete",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "summary": "Implements OracleServers DELETE method.",
         "description": "Deletes the OracleServers resource.",
         "x-ms-examples": {
@@ -548,9 +613,6 @@
         "responses": {
           "200": {
             "description": "Deletes the OracleSites resource."
-          },
-          "202": {
-            "description": "Accepted"
           },
           "204": {
             "description": "The OracleServer resource is already deleted or not found"
@@ -617,7 +679,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieves the OracleSites resource.",
+            "description": "Updated the OracleServers resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleServer"
+            }
+          },
+          "201": {
+            "description": "Updates the OracleServers resource.",
             "schema": {
               "$ref": "#/definitions/OracleServer"
             }
@@ -742,6 +810,204 @@
             }
           }
         }
+      },
+      "put": {
+        "tags": [
+          "OracleDatabases"
+        ],
+        "operationId": "OracleDatabases_CreateOrUpdate",
+        "summary": "Implements OracleDatabases PUT method.",
+        "description": "Puts the OracleDatabases resource.",
+        "x-ms-examples": {
+          "OracleDatabases_Create": {
+            "$ref": "./examples/OracleDatabases_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Database"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The discovered databases to be assessed",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabase"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created OracleDatabases resource",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "OracleDatabases"
+        ],
+        "operationId": "OracleDatabases_Delete",
+        "summary": "Implements OracleDatabases DELETE method.",
+        "description": "Deletes the OracleDatabases resource.",
+        "x-ms-examples": {
+          "OracleSites_Delete": {
+            "$ref": "./examples/OracleDatabases_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the OracleDatabases resource."
+          },
+          "204": {
+            "description": "The OracleDatabase resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "OracleDatabases"
+        ],
+        "operationId": "OracleDatabases_Update",
+        "summary": "Implements OracleDatabases PATCH method.",
+        "description": "Patch the OracleDatabases resource.",
+        "x-ms-examples": {
+          "OracleDatabases_Update": {
+            "$ref": "./examples/OracleDatabases_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OracleDatabaseResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the OracleDatabases resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabase"
+            }
+          },
+          "201": {
+            "description": "Updates the OracleDatabases resource.",
+            "schema": {
+              "$ref": "#/definitions/OracleDatabase"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/OracleDatabases": {
@@ -796,6 +1062,628 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/Summaries/{summaryName}": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_Get",
+        "summary": "Implements Summaries GET method.",
+        "description": "Gets the Summaries resource.",
+        "x-ms-examples": {
+          "Summaries_Get": {
+            "$ref": "./examples/Summaries_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "summaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of summary"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_CreateOrUpdate",
+        "summary": "Implements Summaries PUT method.",
+        "description": "Puts the Summaries resource.",
+        "x-ms-examples": {
+          "Summaries_Create": {
+            "$ref": "./examples/Summaries_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "summaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Summary"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The Summary of discovered OracleSite",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created Summaries resource",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_Delete",
+        "summary": "Implements Summaries DELETE method.",
+        "description": "Deletes the Summaries resource.",
+        "x-ms-examples": {
+          "Summaries_Delete": {
+            "$ref": "./examples/Summaries_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "summaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the Summaries resource."
+          },
+          "204": {
+            "description": "The Summaries resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_Update",
+        "summary": "Implements Summaries PATCH method.",
+        "description": "Patch the Summaries resource.",
+        "x-ms-examples": {
+          "Summaries_Update": {
+            "$ref": "./examples/Summaries_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "summaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummariesResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "201": {
+            "description": "Updates the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/Summaries": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_ListBySite",
+        "summary": "Implements Summaries GET method.",
+        "description": "Lists the Summaries resource in OracleSites.",
+        "x-ms-examples": {
+          "Summaries_ListBySite": {
+            "$ref": "./examples/Summaries_ListBySite.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/SummaryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/ErrorSummaries/{errorSummaryName}": {
+      "get": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_Get",
+        "summary": "Implements ErrorSummaries GET method.",
+        "description": "Gets the ErrorSummaries resource.",
+        "x-ms-examples": {
+          "ErrorSummaries_Get": {
+            "$ref": "./examples/ErrorSummaries_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "errorSummaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Database"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_CreateOrUpdate",
+        "summary": "Implements ErrorSummaries PUT method.",
+        "description": "Puts the ErrorSummaries resource.",
+        "x-ms-examples": {
+          "ErrorSummaries_Create": {
+            "$ref": "./examples/ErrorSummaries_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "errorSummaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Database"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The ErrorSummaries of discovered OracleSites",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created ErrorSummaries resource",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_Delete",
+        "summary": "Implements ErrorSummaries DELETE method.",
+        "description": "Deletes the ErrorSummaries resource.",
+        "x-ms-examples": {
+          "ErrorSummaries_Delete": {
+            "$ref": "./examples/ErrorSummaries_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "errorSummaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the ErrorSummaries resource."
+          },
+          "204": {
+            "description": "The ErrorSummaries resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_Update",
+        "summary": "Implements ErrorSummaries PATCH method.",
+        "description": "Patch the ErrorSummaries resource.",
+        "x-ms-examples": {
+          "ErrorSummaries_Update": {
+            "$ref": "./examples/ErrorSummaries_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "name": "errorSummaryName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Server"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorSummariesResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "201": {
+            "description": "Updates the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OracleDiscovery/OracleSites/{siteName}/ErrorSummaries": {
+      "get": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_ListBySite",
+        "summary": "Implements ErrorSummaries GET method.",
+        "description": "Lists the ErrorSummaries resource in OracleSites.",
+        "x-ms-examples": {
+          "ErrorSummaries_ListBySite": {
+            "$ref": "./examples/ErrorSummaries_ListBySite.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63,
+            "description": "The name of Site"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummaryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -822,6 +1710,40 @@
           "description": "List of Sites.",
           "items": {
             "$ref": "#/definitions/OracleSite"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "SummaryList": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/Summary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "ErrorSummaryList": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/ErrorSummary"
           }
         },
         "nextLink": {
@@ -916,8 +1838,7 @@
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
         }
       },
       "required": [
@@ -928,26 +1849,16 @@
     "OracleServer": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
           "$ref": "#/definitions/OracleServerProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
         },
         "tags": {
           "type": "object",
@@ -955,10 +1866,6 @@
             "type": "string"
           },
           "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system data."
         }
       },
       "required": [
@@ -969,26 +1876,16 @@
     "OracleDatabase": {
       "type": "object",
       "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
           "$ref": "#/definitions/OracleDatabaseProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
         },
         "tags": {
           "type": "object",
@@ -996,10 +1893,60 @@
             "type": "string"
           },
           "description": "Resource tags"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The samples resource definition."
+    },
+    "Summary": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/SummariesProperties"
         },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "The system data."
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The samples resource definition."
+    },
+    "ErrorSummary": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/ErrorSummariesProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
       "required": [
@@ -1013,41 +1960,34 @@
       "properties": {
         "type": {
           "type": "string",
-          "readOnly": true,
           "description": "The of Oracle server Standalone/PDB."
         },
         "statusCode": {
           "type": "string",
-          "readOnly": true,
           "description": "The discovery status code success/failure/in-progress."
         },
         "dataSize": {
           "type": "string",
-          "readOnly": true,
           "description": "The data size of database in GB."
         },
         "logSize": {
           "type": "string",
-          "readOnly": true,
           "description": "The log data size of database in GB."
         },
         "tempSize": {
           "type": "string",
-          "readOnly": true,
           "description": "The temp data size of database in GB."
         },
         "databaseStatus": {
           "type": "string",
-          "readOnly": true,
           "description": "The status of database online/offline."
         },
-        "oracleServes": {
+        "oracleServers": {
           "description": "List of the OracleServer ARM Id.",
           "type": "array",
           "items": {
             "description": "Oracle Server ARM Id",
-            "type": "string",
-            "readOnly": true
+            "type": "string"
           }
         },
         "dbConfig": {
@@ -1059,8 +1999,7 @@
           "type": "array",
           "items": {
             "description": "The error",
-            "$ref": "#/definitions/Error",
-            "readOnly": true
+            "$ref": "#/definitions/Error"
           }
         },
         "provisioningState": {
@@ -1078,8 +2017,85 @@
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
+        }
+      }
+    },
+    "SummariesProperties": {
+      "type": "object",
+      "description": "Summaries properties",
+      "properties": {
+        "discoveredServers": {
+          "type": "string",
+          "description": "The of number discovered OracleServers."
+        },
+        "discoveredDatabases": {
+          "type": "string",
+          "description": "The of number discovered OracleDatabases."
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorSummariesProperties": {
+      "type": "object",
+      "description": "Oracle Database properties",
+      "properties": {
+        "discoveryScopeErrorSummaries": {
+          "description": "The list of ErrorSummary.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/ErrorSummaryModel"
+          }
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Creating",
+            "Deleting",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -1089,17 +2105,14 @@
       "properties": {
         "type": {
           "type": "string",
-          "readOnly": true,
           "description": "The of Oracle server NON-CDB/CDB."
         },
         "clusterType": {
           "type": "string",
-          "readOnly": true,
           "description": "The of Oracle server Standalone/HA/RAC."
         },
         "pdbCount": {
           "type": "string",
-          "readOnly": true,
           "description": "The count of PDB in case type is CDB."
         },
         "hostName": {
@@ -1135,8 +2148,7 @@
           "type": "array",
           "items": {
             "description": "Oracle Server ARM Id",
-            "type": "string",
-            "readOnly": true
+            "type": "string"
           }
         },
         "versionInfo": {
@@ -1152,8 +2164,7 @@
           "type": "array",
           "items": {
             "description": "The error",
-            "$ref": "#/definitions/Error",
-            "readOnly": true
+            "$ref": "#/definitions/Error"
           }
         },
         "provisioningState": {
@@ -1171,8 +2182,7 @@
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
-          },
-          "readOnly": true
+          }
         }
       },
       "required": [
@@ -1188,6 +2198,20 @@
         "testProperties": {
           "type": "string",
           "description": "Description of this operation."
+        }
+      }
+    },
+    "ErrorSummaryModel": {
+      "type": "object",
+      "description": "ErrorSummary  model.",
+      "properties": {
+        "affectedResourceType": {
+          "type": "string",
+          "description": "The type of Object."
+        },
+        "affectedObjectsCount": {
+          "type": "string",
+          "description": "The count."
         }
       }
     },
@@ -1225,9 +2249,9 @@
           "type": "string",
           "description": "The DB edition."
         },
-        "instance": {
+        "version": {
           "type": "string",
-          "description": "The DB instance name."
+          "description": "The DB version name."
         }
       }
     },
@@ -1237,8 +2261,7 @@
       "properties": {
         "sampleProp": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -1251,6 +2274,11 @@
             "type": "string"
           },
           "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OracleServerProperties",
+          "description": "The OracleServer resource definition."
         }
       },
       "description": "Object containing tags updates for patch operations."
@@ -1264,6 +2292,65 @@
             "type": "string"
           },
           "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OracleSiteProperties",
+          "description": "The OracleSites resource definition."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    },
+    "OracleDatabaseResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OracleDatabaseProperties",
+          "description": "The OracleDatabases resource definition."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    },
+    "SummariesResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SummariesProperties",
+          "description": "The Summaries resource definition."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    },
+    "ErrorSummariesResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ErrorSummariesProperties",
+          "description": "The ErrorSummaries resource definition."
         }
       },
       "description": "Object containing tags updates for patch operations."
