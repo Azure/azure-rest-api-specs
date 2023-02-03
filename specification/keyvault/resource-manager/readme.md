@@ -43,6 +43,23 @@ input-file:
   - Microsoft.KeyVault/stable/2022-11-01/keysManagedHsm.json
   - Microsoft.KeyVault/stable/2022-11-01/providers.json
   - Microsoft.KeyVault/stable/2022-11-01/secrets.json
+
+```
+
+
+### Tag: package-preview-2022-02
+
+These settings apply only when `--tag=package-preview-2022-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-02'
+input-file:
+  - Microsoft.KeyVault/preview/2022-02-01-preview/common.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/keyvault.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/managedHsm.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/providers.json
+  - Microsoft.KeyVault/preview/2022-02-01-preview/secrets.json
+
 ```
 ### Tag: package-2022-07
 
@@ -213,7 +230,7 @@ input-file:
 - Microsoft.KeyVault/stable/2019-09-01/secrets.json
 ```
 
-### Supressions
+### Suppression
 
 ``` yaml
 directive:
@@ -230,6 +247,12 @@ directive:
   from: keysManagedHsm.json
   reason: This is to keep compatibility with existing data plane property. The 'release_policy' property for KeyCreateParameters does not support camelCase.
 
+- suppress: INVALID_REQUEST_PARAMETER
+  from: keyvault.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
+- suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+  from: keyvault.json
+  reason: The Vaults_List API endpoint only supports version 2015-11-01.
 ```
 
 ---

@@ -13,7 +13,7 @@ python:
   no-namespace-folders: true
   enable-xml: true
   vanilla: true
-  output-folder: "$(python-sdks-folder)/sdk/cosmos/azure-cosmos-table/azure/table/_generated"
+  output-folder: "$(python-sdks-folder)/sdk/tables/azure-data-tables/azure/data/tables/_generated"
   package-version: "2019-02-02"
 ```
 

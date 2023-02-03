@@ -2102,8 +2102,9 @@
           "type": "string"
         },
         "adxTableName": {
-          "description": "The name of the Azure Data Explorer table.",
+          "description": "The name of the Azure Data Explorer table. Defaults to AdtPropertyEvents.",
           "type": "string",
+          "default": "AdtPropertyEvents",
           "x-nullable": true
         },
         "eventHubEndpointUri": {
@@ -2121,6 +2122,7 @@
         "eventHubConsumerGroup": {
           "description": "The EventHub consumer group to use when ADX reads from EventHub. Defaults to $Default.",
           "type": "string",
+          "default": "$Default",
           "x-nullable": true
         }
       }
