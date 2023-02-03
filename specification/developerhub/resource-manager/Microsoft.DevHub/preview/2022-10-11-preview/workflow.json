@@ -471,6 +471,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscription_id}/providers/Microsoft.DevHub/locations/{location}/generatePreviewArtifacts":{
+      "post": 
+        {
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "GeneratePreviewArtifacts",
+        "summary": "Generate preview dockerfile and manifests.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "required": false,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ArtifactGenerationProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeneratePreviewArtifactsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifact Generation Properties": {
+            "$ref": "./examples/GeneratePreviewArtifacts.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -952,6 +1000,20 @@
         "acrRepositoryName": {
           "type": "string",
           "description": "ACR repository"
+        }
+      }
+    },
+    "GeneratePreviewArtifactsResponse": {
+      "type": "object",
+      "description": "Dockerfile and manifest artifacts generated as a preview are returned as a map<path string,content string>",
+      "properties": {
+        "path/to/file1.withExtension":{
+          "type": "string",
+          "description":"An example generated file"
+        },
+        "path/to/file2.withExtension": {
+          "type": "string",
+          "description": "A second example file"
         }
       }
     },

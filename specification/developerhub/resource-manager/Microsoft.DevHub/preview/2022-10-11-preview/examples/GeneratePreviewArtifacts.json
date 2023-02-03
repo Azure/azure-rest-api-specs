@@ -1,0 +1,32 @@
+{
+    "parameters": {
+      "api-version": "2022-10-11-preview",
+      "subscriptionId": "subscriptionId1",
+      "parameters": {
+        "location": "location1",
+        "properties": {
+            "generationLanguage":"javascript",
+            "languageVersion":"14",
+            "port":"80",
+            "appName":"my-app",
+            "dockerfileOutputDirectory": "./",
+            "manifestOutputDirectory":"./",
+            "manifestGenerationMode":"enabled",
+            "dockerfileGenerationMode":"enabled",
+            "manifestType":"kube",
+            "imageName":"myimage",
+            "namespace":"my-namespace"
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "body": {
+            "dockerfiles/example-dockerfile":"dockerfile-content \n including newlines",
+            "manifests/example-manifest-file-1": "manifest file 1 content \n including newlines",
+            "manifests/example-manifest-file-2": "manifest file 2 content \n including newlines"
+        } 
+      }
+    }
+  }
+  
