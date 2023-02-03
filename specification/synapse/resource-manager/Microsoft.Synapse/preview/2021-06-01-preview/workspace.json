@@ -1056,7 +1056,11 @@
       "properties": {
         "tenantId": {
           "description": "Tenant ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "login": {
           "description": "Login of the workspace active directory administrator",
@@ -1064,11 +1068,19 @@
         },
         "administratorType": {
           "description": "Workspace active directory administrator type",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sid": {
           "description": "Object ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1445,9 +1457,6 @@
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
-          "additionalProperties": {
-            "type": "object"
-          },
           "type": "object",
           "readOnly": true
         },
