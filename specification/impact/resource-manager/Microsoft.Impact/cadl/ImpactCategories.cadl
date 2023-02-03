@@ -15,7 +15,7 @@ using Azure.ResourceManager;
 
 @doc("ImpactCategory resource")
 model ImpactCategory is ProxyResource<ImpactCategoryProperties> {
-  @pattern("^.*$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9.]*[a-zA-Z0-9]{3,180}$")
   @key("impactCategoryName")
   @segment("impactCategories")
   @doc("Name of the impact category")
@@ -26,7 +26,7 @@ model ImpactCategory is ProxyResource<ImpactCategoryProperties> {
 
 
 @doc("Impact category properties.")
-model ImpactCategoryProperties  is ResourceProperties{
+model ImpactCategoryProperties is ResourceProperties{
 
   @doc("Unique ID of the category")
   @pattern("[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}")
@@ -53,40 +53,12 @@ allowedValues? : string[];
 }
 
 
-@doc("ResourceType parameter for filtering")
-model ResourceTypeParameter {
-  @query
-  @minLength(1)
-  @doc("Filter by resource type")
-  resourceType: string;
-}
 
-@doc("CategoryName parameter type")
-model CategoryNameParameter {
-  @query
-  @minLength(1)
-  @doc("Filter by category name ")
-  categoryName?: string;
-}
-
-
-@doc("Impact category subscription scope with query parameters")
-model ImpactCategorySubscriptionScopeWithQueryParameters{
-  ...SubscriptionScope<ImpactCategory>; 
-  ...CategoryNameParameter;
-  ...ResourceTypeParameter;
-
-}
 
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-interface-uses-templates" "Using subscription scope building blocks"
 @armResourceOperations
-interface ImpactCategories extends SubscriptionResourceRead<ImpactCategory>  {
-
-  @autoRoute
-  @doc("List {name} resources by subscription ID", ImpactCategory)
-  @list(ImpactCategory)
-  @segmentOf(ImpactCategory)
-  @armResourceList(ImpactCategory)
-  @get
-  listBySubscription(...ImpactCategorySubscriptionScopeWithQueryParameters): ArmResponse<ResourceListResult<ImpactCategory>> | ErrorResponse;
+interface ImpactCategories  {
+  get  is SubscriptionResourceRead<ImpactCategory>;
+  listBySubscription is ArmListBySubscriptionWithCustomQueryParams<ImpactCategory>;
 }
+

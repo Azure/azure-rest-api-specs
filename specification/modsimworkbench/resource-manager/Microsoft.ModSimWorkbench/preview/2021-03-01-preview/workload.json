@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads/{name}/start": {
       "post": {
         "tags": [
           "workloads_Start"
@@ -57,8 +57,8 @@
           },
           {
             "in": "path",
-            "name": "instanceName",
-            "description": "the instance name.",
+            "name": "workbenchName",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -108,7 +108,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads/{name}/stop": {
       "post": {
         "tags": [
           "workloads_Stop"
@@ -131,8 +131,8 @@
           },
           {
             "in": "path",
-            "name": "instanceName",
-            "description": "the instance name.",
+            "name": "workbenchName",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -182,7 +182,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{name}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads/{name}/restart": {
       "post": {
         "tags": [
           "workloads_Restart"
@@ -205,8 +205,8 @@
           },
           {
             "in": "path",
-            "name": "instanceName",
-            "description": "the instance name.",
+            "name": "workbenchName",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -256,7 +256,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads/{workloadName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads/{workloadName}": {
       "put": {
         "tags": [
           "workloads_CreateOrUpdate"
@@ -281,11 +281,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "instanceName",
+            "name": "workbenchName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the instance."
+            "description": "The name of the workbench."
           },
           {
             "name": "chamberName",
@@ -369,11 +369,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "instanceName",
+            "name": "workbenchName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the instance."
+            "description": "The name of the workbench."
           },
           {
             "name": "chamberName",
@@ -449,11 +449,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "instanceName",
+            "name": "workbenchName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the instance."
+            "description": "The name of the workbench."
           },
           {
             "name": "chamberName",
@@ -515,11 +515,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "instanceName",
+            "name": "workbenchName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the instance."
+            "description": "The name of the workbench."
           },
           {
             "name": "chamberName",
@@ -573,7 +573,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/workloads": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads": {
       "get": {
         "tags": [
           "workloads_List"
@@ -598,11 +598,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "instanceName",
+            "name": "workbenchName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the instance."
+            "description": "The name of the workbench."
           },
           {
             "name": "chamberName",

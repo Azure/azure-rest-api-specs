@@ -1,0 +1,38 @@
+{
+  "operationId": "SustainabilityService_CarbonEmissionReports",
+  "title": "SustainabilityService_CarbonEmissionReports",
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "queryParameters": {
+      "reportType": "OverallSummaryReport",
+      "subscriptionList": [
+        "00000000-0000-0000-0000-000000000000"
+      ],
+      "carbonScopeList": [
+        "Scope1"
+      ],
+      "dateRange": {
+        "start": "2023-06-01",
+        "end": "2023-06-15"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for overall summary report.",
+      "body": {
+        "value": [
+          {
+            "dataType": "OverallSummaryData",
+            "totalCarbonEmission": 0.0,
+            "totalCarbonEmissionLastMonth": 0.0,
+            "changeRatioForLastMonth": 0.0,
+            "totalCarbonEmission12MonthsAgo": 0.0,
+            "changeRatioFor12Months": 0.0,
+            "lastDataRefreshDate": "2023-06-01"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -18,7 +18,8 @@ using OpenAPI;
 @versionedDependency(
   [
     [Microsoft.NetworkAnalytics.Versions.v2022_11_15_preview, Azure.ResourceManager.Versions.v1_0_Preview_1],
-    [Microsoft.NetworkAnalytics.Versions.v2023_03_31, Azure.ResourceManager.Versions.v1_0_Preview_1]
+    [Microsoft.NetworkAnalytics.Versions.v2023_03_31, Azure.ResourceManager.Versions.v1_0_Preview_1],
+    [Microsoft.NetworkAnalytics.Versions.v2023_04_30, Azure.ResourceManager.Versions.v1_0_Preview_1]
   ]
 )
 namespace Microsoft.NetworkAnalytics;
@@ -27,7 +28,8 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 enum Versions {
   v2022_11_15_preview: "2022-11-15-preview",
-  v2023_03_31: "2023-03-31"
+  v2023_03_31: "2023-03-31",
+  v2023_04_30: "2023-04-30"
 }
 
 @doc("The data lake house resource")
@@ -57,6 +59,18 @@ model DataConnectors is TrackedResource <DataConnectorsProperties> {
     @path
     name: string;
 }
+
+// Enable versioning of Model types once this is fixed https://github.com/Azure/cadl-azure/issues/2368
+//@added(Versions.v2023_04_30)
+@doc("An ingestion endpoint for metrics relating to the parent resource")
+@singleton
+model MetricsIngestionEndpointResources is ExtensionResource < MetricsIngestionEndpointProperties > {
+    @doc("Metrics Ingestion Endpoint Name")
+    @key("metricsIngestionEndpointName")
+    @segment("metricsIngestionEndpoints")
+    @path
+    name: string;
+  }
 
 @doc("Details of the NetworkAnalytics Storage.")
 model StorageProperties {
@@ -351,6 +365,35 @@ model VirtualNetworkConfiguration {
     dataManagementPublicIpId: string;
 }
 
+// Enable versioning of Model types once this is fixed https://github.com/Azure/cadl-azure/issues/2368
+//@added(Versions.v2023_04_30)
+@doc("The resource-specific properties of a Metrics Ingestion Endpoint")
+model MetricsIngestionEndpointProperties {
+    @doc("Name of the External Metrics Ingress Gateway region where the compute should be deployed")
+    @visibility("create", "read")
+    ingressRegionName: string;
+
+    @visibility("read")
+    @doc("Event Hub URL to which the metrics should be sent for this resource")
+    eventHubUrl?: string;
+
+    @visibility("read")
+    @doc("Event Hub name to which the metrics should be sent for this resource")
+    eventHubName?: string;
+
+    @visibility("read")
+    @doc("Key Vault URL where the connection string exists for authentication")
+    keyVaultUrl?: string;
+
+    @doc("The status of the last operation")
+    @visibility("read")
+    provisioningState?: ProvisioningState;
+
+    @doc("Managed Resource Group Configuration")
+    @visibility("create", "read")
+    managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
+  }
+
 @armResourceOperations
 interface Storage extends ResourceOperations<DataLakeHouseResources, StorageProperties> {}
 
@@ -361,3 +404,7 @@ interface NetworkAnalyticsProduct extends ResourceOperations<NetworkAnalyticsPro
 @added(Versions.v2023_03_31)
 @armResourceOperations(DataConnectors)
 interface DataConnector extends ResourceOperations<DataConnectors, DataConnectorsProperties> {}
+
+@added(Versions.v2023_04_30)
+@armResourceOperations(MetricsIngestionEndpointProperties)
+interface MetricsIngestionEndpoints extends ExtensionResourceOperations<MetricsIngestionEndpointResources, MetricsIngestionEndpointProperties> {}

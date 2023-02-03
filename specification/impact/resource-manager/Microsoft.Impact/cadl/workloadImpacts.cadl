@@ -14,10 +14,12 @@ using Cadl.Http;
 using Cadl.Rest;
 using OpenAPI;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+
 
 @doc("Workload Impact properties")
 model WorkloadImpact is ProxyResource<WorkloadImpactProperties> {
-  @pattern("^[a-zA-Z0-9-:]{3,120}$")
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-:]*[a-zA-Z0-9]{3,120}$")
   @key("workloadImpactName")
   @segment("workloadImpacts")
   @doc("workloadImpact resource ")
@@ -48,8 +50,8 @@ model Connectivity {
   destination?: SourceOrDestination;
 }
 
-@doc("Additional fields related to impact, applicable fields per resource type are list under /impactCategories API")
-model AdditionalProperties {
+@doc("ARM error code and error message associated with the impact")
+model ErrorDetailProperties {
   @doc("ARM Error code associated with the impact.")
 	errorCode?: string;
 	@doc("ARM Error Message associated with the impact")
@@ -97,7 +99,10 @@ model WorkloadImpactProperties is ResourceProperties{
   impactedResourceId: string;
 
   @doc("Additional fields related to impact, applicable fields per resource type are list under /impactCategories API")
-  additionalProperties?: AdditionalProperties;
+  additionalProperties?: {};
+
+  @doc("ARM error code and error message associated with the impact")
+  errorDetails?:ErrorDetailProperties;
 
   @doc("Details about the connectivity issue. Applicable only for connectivity type of impacts.")
   connectivity?: Connectivity;
@@ -121,7 +126,7 @@ model WorkloadImpactProperties is ResourceProperties{
 }
 
 @doc("List of azure interfaces.")
-enum ToolsetValues {
+enum Toolset {
   Terraform,
   Puppet,
   Chef,
@@ -132,32 +137,26 @@ enum ToolsetValues {
   Shell,
   Other
 }
-@knownValues(ToolsetValues)
-model Toolset is string;
 
 
 @doc("System that is reporting the impact")
-enum ReportingSourceValues {
+enum ReportingSource {
   Other ,
   Manual,
   Automated,
   Azure_Monitor
 }
-@knownValues(ReportingSourceValues)
-model ReportingSource is string;
 
 @doc("Degree of confidence on the impact being a platform issue.")
-enum ConfidenceLevelValues {
+enum ConfidenceLevel {
   Low,
   Medium,
   High
 }
-@knownValues(ConfidenceLevelValues)
-model ConfidenceLevel is string;
 
 
 @doc("List of protocols")
-enum ProtocolValues {
+enum Protocol {
   TCP,
   UDP,
   HTTP,
@@ -167,8 +166,6 @@ enum ProtocolValues {
   SSH,
   Other
 }
-@knownValues(ProtocolValues)
-model Protocol is string;
 
 
 @doc("Resource details")
@@ -188,6 +185,7 @@ model SourceOrDestination {
 @doc("IP address details")
 model IPAddress {
   @doc("IP address family")
+  @extension("x-ms-client-name", "AddressType")
   type?: AddressFamily,
 
   @doc("IP address of server/host")
@@ -196,17 +194,18 @@ model IPAddress {
 }
 
 @doc("IP address family")
-enum AddressFamilyValues {
+enum AddressFamily {
  IPv4,
  IPv6
 }
 
-@knownValues(AddressFamilyValues)
-model AddressFamily is string;
-
+interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface WorkloadImpacts extends  SubscriptionResourceCreate<WorkloadImpact>, SubscriptionResourceRead<WorkloadImpact> , SubscriptionResourceDelete<WorkloadImpact>,
-ResourceListBySubscription<WorkloadImpact> {
+interface WorkloadImpacts {
+  create is SubscriptionResourceCreateOrUpdateSync<WorkloadImpact>;
+  get is SubscriptionResourceRead<WorkloadImpact>;
+  delete is SubscriptionResourceDeleteSync<WorkloadImpact>;
+  listBySubscription is ArmListBySubscription<WorkloadImpact>;
 
 }

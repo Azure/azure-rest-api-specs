@@ -2506,37 +2506,51 @@
               }
             },
             "ipv4Routes": {
-              "type": "object",
-              "description": "staticIpv4Route model.",
-              "properties": {
-                "prefix": {
-                  "type": "string",
-                  "description": "ip prefix of the staticIpv4Route."
-                },
-                "nextHop": {
-                  "type": "array",
-                  "description": "List of next hop ipv4 addresses.",
-                  "items": {
+              "type": "array",
+              "description": "List with object ipv4Routes.",
+              "x-ms-identifiers": [
+                "prefix"
+              ],
+              "items": {
+                "type": "object",
+                "description": "staticIpv4Route model.",
+                "properties": {
+                  "prefix": {
                     "type": "string",
-                    "description": "Next Hop IPv4 address."
+                    "description": "ip prefix of the staticIpv4Route."
+                  },
+                  "nextHop": {
+                    "type": "array",
+                    "description": "List of next hop ipv4 addresses.",
+                    "items": {
+                      "type": "string",
+                      "description": "Next Hop IPv4 address."
+                    }
                   }
                 }
               }
             },
             "ipv6Routes": {
-              "type": "object",
-              "description": "staticIpv6Route model.",
-              "properties": {
-                "prefix": {
-                  "type": "string",
-                  "description": "ip prefix of the staticIpv6Route."
-                },
-                "nextHop": {
-                  "type": "array",
-                  "description": "List of next hop ipv6 addresses.",
-                  "items": {
+              "type": "array",
+              "description": "List with object ipv6Routes.",
+              "x-ms-identifiers": [
+                "prefix"
+              ],
+              "items": {
+                "type": "object",
+                "description": "staticIpv6Route model.",
+                "properties": {
+                  "prefix": {
                     "type": "string",
-                    "description": "Next Hop IPv6 address."
+                    "description": "ip prefix of the staticIpv6Route."
+                  },
+                  "nextHop": {
+                    "type": "array",
+                    "description": "List of next hop ipv6 addresses.",
+                    "items": {
+                      "type": "string",
+                      "description": "Next Hop IPv6 address."
+                    }
                   }
                 }
               }

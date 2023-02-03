@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/files/{fileName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/files/{fileName}": {
       "get": {
         "tags": [
           "files_Get"
@@ -50,19 +50,22 @@
           },
           {
             "in": "path",
-            "name": "instanceName",
+            "name": "workbenchName",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "chamberName",
+            "description": "the chamber name.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "fileName",
+            "description": "the file name.",
             "required": true,
             "type": "string"
           },
@@ -99,7 +102,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/files/{fileName}/manage": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/files/{fileName}/manage": {
       "post": {
         "tags": [
           "fileChamber_manage"
@@ -118,8 +121,8 @@
           },
           {
             "in": "path",
-            "name": "instanceName",
-            "description": "the instance name.",
+            "name": "workbenchName",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
@@ -180,7 +183,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/files/{fileName}/downloadRequest": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/files/{fileName}/downloadRequest": {
       "post": {
         "tags": [
           "filesChamber_downloadRequest"
@@ -199,19 +202,22 @@
           },
           {
             "in": "path",
-            "name": "instanceName",
+            "name": "workbenchName",
+            "description": "the workbench name.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "chamberName",
+            "description": "the chamber name.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "fileName",
+            "description": "the file name.",
             "required": true,
             "type": "string"
           },
@@ -258,7 +264,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/instances/{instanceName}/chambers/{chamberName}/files": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/files": {
       "get": {
         "tags": [
           "files_List"
@@ -280,11 +286,11 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "instanceName",
+            "name": "workbenchName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the instance."
+            "description": "The name of the workbench."
           },
           {
             "name": "chamberName",
