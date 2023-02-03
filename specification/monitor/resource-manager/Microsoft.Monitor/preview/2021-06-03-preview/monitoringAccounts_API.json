@@ -1,0 +1,518 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Monitoring Accounts Control Plane API",
+    "description": "Provides operations for working with Azure Monitoring Accounts",
+    "version": "2021-06-03-preview",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "contact": {
+      "email": "obsaccounts@microsoft.com"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "tags": [
+    {
+      "name": "MonitoringAccounts",
+      "description": "A management operation for microsoft.monitor/accounts"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts": {
+      "get": {
+        "tags": [
+          "MonitoringAccounts"
+        ],
+        "description": "Lists all monitoring accounts in the specified resource group",
+        "operationId": "MonitoringAccounts_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/MonitoringAccountResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List monitoring accounts by resource group": {
+            "$ref": "./examples/MonitoringAccountsListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/accounts": {
+      "get": {
+        "tags": [
+          "MonitoringAccounts"
+        ],
+        "description": "Lists all monitoring accounts in the specified subscription",
+        "operationId": "MonitoringAccounts_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/MonitoringAccountResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List monitoring accounts by subscription": {
+            "$ref": "./examples/MonitoringAccountsListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{monitoringAccountName}": {
+      "get": {
+        "tags": [
+          "MonitoringAccounts"
+        ],
+        "description": "Returns the specific monitoring account",
+        "operationId": "MonitoringAccounts_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitoringAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request completed successfully",
+            "schema": {
+              "$ref": "#/definitions/MonitoringAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get monitoring account": {
+            "$ref": "./examples/MonitoringAccountsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MonitoringAccounts"
+        ],
+        "description": "Create or update a monitoring account",
+        "operationId": "MonitoringAccounts_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitoringAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "monitoringAccountProperties",
+            "description": "Properties that need to be specified to create a new monitoring account",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MonitoringAccountResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monitoring account was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/MonitoringAccountResource"
+            }
+          },
+          "201": {
+            "description": "Monitoring account was successfully created",
+            "schema": {
+              "$ref": "#/definitions/MonitoringAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update monitoring account": {
+            "$ref": "./examples/MonitoringAccountsCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MonitoringAccounts"
+        ],
+        "description": "Updates part of a monitoring account",
+        "operationId": "MonitoringAccounts_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitoringAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "monitoringAccountProperties",
+            "description": "The payload",
+            "schema": {
+              "$ref": "#/definitions/MonitoringAccountResourceForUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monitoring account was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/MonitoringAccountResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update monitoring account": {
+            "$ref": "./examples/MonitoringAccountsUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "MonitoringAccounts"
+        ],
+        "description": "Delete an monitoring account",
+        "operationId": "MonitoringAccounts_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitoringAccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Monitoring account was successfully deleted"
+          },
+          "204": {
+            "description": "Monitoring account did not exist"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete monitoring account": {
+            "$ref": "./examples/MonitoringAccountsDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Metrics": {
+      "description": "Information about metrics for the monitoring account",
+      "type": "object",
+      "properties": {
+        "prometheusQueryEndpoint": {
+          "description": "The Prometheus query endpoint for the monitoring account",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "internalId": {
+          "description": "An internal identifier for the metrics container. Only to be used by the system",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "IngestionSettings": {
+      "description": "Settings for data ingestion",
+      "type": "object",
+      "properties": {
+        "dataCollectionRuleResourceId": {
+          "description": "The Azure resource Id of the default data collection rule for this monitoring account.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "dataCollectionEndpointResourceId": {
+          "description": "The Azure resource Id of the default data collection endpoint for this monitoring account.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "MonitoringAccount": {
+      "description": "Properties of a monitoring account",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "description": "The immutable ID of the monitoring account. This property is read-only.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "metrics": {
+          "description": "Information about metrics for the monitoring account",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Metrics"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the monitoring account. Set to Succeeded if everything is healthy.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "defaultIngestionSettings": {
+          "description": "The Data Collection Rule and Endpoint used for ingestion by default.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IngestionSettings"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "MonitoringAccountResource": {
+      "description": "A Monitoring Account definition",
+      "required": [
+        "location"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Resource properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/MonitoringAccount"
+            }
+          ],
+          "x-ms-client-flatten": true
+        },
+        "etag": {
+          "description": "Resource entity tag (ETag)",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "MonitoringAccountResourceListResult": {
+      "description": "A pageable list of resources",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A list of resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoringAccountResource"
+          }
+        },
+        "nextLink": {
+          "description": "The URL to use for getting the next set of results",
+          "type": "string"
+        }
+      }
+    },
+    "MonitoringAccountResourceForUpdate": {
+      "description": "Definition of ARM tracked top level resource properties for update operation",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "MonitoringAccountNameParameter": {
+      "in": "path",
+      "name": "monitoringAccountName",
+      "description": "The name of the monitoring account.  The name is case insensitive",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

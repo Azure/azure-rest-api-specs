@@ -1432,7 +1432,7 @@
         "operationId": "Operations_List",
         "description": "Lists all of the available consumption REST API operations.",
         "x-ms-examples": {
-          "PriceSheetForBillingPeriod": {
+          "OperationList": {
             "$ref": "./examples/OperationList.json"
           }
         },
@@ -3250,15 +3250,15 @@
       }
     },
     "ReservationRecommendationDetailsCalculatedSavingsProperties": {
-      "description": "Details of estimated savings.",
+      "description": "Details of estimated savings. The costs and savings are estimated for the term.",
       "properties": {
         "onDemandCost": {
-          "description": "The cost without reservation.",
+          "description": "The cost without reservation. Includes hardware and software cost.",
           "type": "number",
           "readOnly": true
         },
         "overageCost": {
-          "description": "The difference between total reservation cost and reservation cost.",
+          "description": "Hardware and software cost of the resources not covered by the reservation.",
           "type": "number",
           "readOnly": true
         },
@@ -3268,12 +3268,12 @@
           "readOnly": true
         },
         "reservationCost": {
-          "description": "The exact cost of the estimated usage using reservation.",
+          "description": "Hardware cost of the resources covered by the reservation.",
           "type": "number",
           "readOnly": true
         },
         "totalReservationCost": {
-          "description": "The cost of the suggested quantity.",
+          "description": "Reservation cost + software cost of the resources covered by the reservation + overage cost.",
           "type": "number",
           "readOnly": true
         },
@@ -3282,7 +3282,7 @@
           "type": "number"
         },
         "savings": {
-          "description": "The amount saved by purchasing the recommended quantity of reservation.",
+          "description": "The amount saved by purchasing the recommended quantity of reservation. This is equal to onDemandCost - totalReservationCost.",
           "type": "number",
           "readOnly": true
         }
@@ -3300,7 +3300,7 @@
           "readOnly": true
         },
         "onDemandRate": {
-          "description": "On demand rate of the resource.",
+          "description": "Hourly on-demand rate of the resource. Includes only hardware rate i.e, software rate is not included.",
           "type": "number",
           "readOnly": true
         },
@@ -3315,7 +3315,7 @@
           "readOnly": true
         },
         "reservationRate": {
-          "description": "Reservation rate of the resource.",
+          "description": "Hourly reservation rate of the resource. Varies based on the term.",
           "type": "number",
           "readOnly": true
         },
@@ -3632,6 +3632,8 @@
     },
     "ModernReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
+      "type": "object",
+      "discriminator": "scope",
       "properties": {
         "location": {
           "type": "string",
@@ -3686,6 +3688,11 @@
           "format": "decimal",
           "readOnly": true
         },
+        "resourceType": {
+          "description": "Resource type.",
+          "type": "string",
+          "readOnly": true
+        },
         "totalCostWithReservedInstances": {
           "description": "The total amount of cost with reserved instances.",
           "$ref": "#/definitions/amount",
@@ -3704,8 +3711,7 @@
         },
         "scope": {
           "description": "Shared or single recommendation.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuProperties": {
           "description": "List of sku properties",
@@ -3723,7 +3729,38 @@
           "type": "string",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "scope"
+      ]
+    },
+    "ModernSingleScopeReservationRecommendationProperties": {
+      "description": "The properties of the modern reservation recommendation for single scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Single",
+      "properties": {
+        "subscriptionId": {
+          "description": "Subscription ID associated with single scoped recommendation.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModernReservationRecommendationProperties"
+        }
+      ]
+    },
+    "ModernSharedScopeReservationRecommendationProperties": {
+      "description": "The properties of the modern reservation recommendation for shared scope.",
+      "type": "object",
+      "x-ms-discriminator-value": "Shared",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModernReservationRecommendationProperties"
+        }
+      ]
     },
     "ModernReservationTransactionProperties": {
       "description": "The properties of a modern reservation transaction.",
@@ -4674,7 +4711,7 @@
       "discriminator": "kind",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -4746,7 +4783,7 @@
           "format": "decimal",
           "readOnly": true
         },
-        "marketplaceCharges": {
+        "azureMarketplaceCharges": {
           "description": "Marketplace Charges.",
           "type": "number",
           "format": "decimal",

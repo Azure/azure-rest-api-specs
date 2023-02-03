@@ -477,6 +477,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok."
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
@@ -2774,18 +2777,6 @@
           }
         },
         "errors": {
-          "readOnly": true,
-          "description": "List of validation errors",
-          "$ref": "#/definitions/MigrationErrorsListResponse"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "MigrationErrorsListResponse": {
-      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "errors": {
           "items": {
             "description": "List of migration errors",
             "$ref": "#/definitions/MigrationErrorType"
@@ -2793,7 +2784,8 @@
           "type": "array",
           "x-ms-identifiers": []
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "MigrationErrorType": {
       "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
@@ -2824,6 +2816,9 @@
     "CanMigrateParameters": {
       "type": "object",
       "description": "Request body for CanMigrate operation.",
+      "required": [
+        "classicResourceReference"
+      ],
       "properties": {
         "classicResourceReference": {
           "description": "Resource reference of the classic cdn profile or classic frontdoor that need to be migrated.",
@@ -2835,6 +2830,11 @@
     "MigrationParameters": {
       "type": "object",
       "description": "Request body for Migrate operation.",
+      "required": [
+        "classicResourceReference",
+        "sku",
+        "profileName"
+      ],
       "properties": {
         "sku": {
           "description": "Sku for the migration",
@@ -2884,9 +2884,12 @@
           "$ref": "#/definitions/ResourceReference"
         },
         "errors": {
-          "readOnly": true,
-          "description": "List of validation errors",
-          "$ref": "#/definitions/MigrationErrorsListResponse"
+          "items": {
+            "description": "List of migration errors",
+            "$ref": "#/definitions/MigrationErrorType"
+          },
+          "type": "array",
+          "x-ms-identifiers": []
         }
       },
       "x-ms-azure-resource": true

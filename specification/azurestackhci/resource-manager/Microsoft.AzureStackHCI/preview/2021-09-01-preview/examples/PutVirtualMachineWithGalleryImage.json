@@ -1,0 +1,118 @@
+{
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "test-rg",
+    "virtualmachinesName": "test-vm",
+    "api-version": "2021-09-01-preview",
+    "virtualmachines": {
+      "location": "West US2",
+      "extendedLocation": {
+        "type": "CustomLocation",
+        "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location"
+      },
+      "properties": {
+        "storageProfile": {
+          "imageReference": {
+            "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/galleryimages/test-gallery-image"
+          },
+          "vmConfigContainerName": "Default_Container"
+        },
+        "hardwareProfile": {
+          "vmSize": "Default"
+        },
+        "osProfile": {
+          "computerName": "luamaster",
+          "adminUsername": "localadmin",
+          "adminPassword": "password"
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "test-nic"
+            }
+          ]
+        },
+        "securityProfile": {
+          "enableTPM": true,
+          "uefiSettings": {
+            "secureBootEnabled": true
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualmachines/test-vm",
+        "location": "West US2",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location"
+        },
+        "properties": {
+          "storageProfile": {
+            "imageReference": {
+              "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/galleryimages/test-gallery-image"
+            },
+            "vmConfigContainerName": "Default_Container"
+          },
+          "hardwareProfile": {
+            "vmSize": "Default"
+          },
+          "osProfile": {
+            "computerName": "luamaster",
+            "adminUsername": "localadmin"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "test-nic"
+              }
+            ]
+          },
+          "securityProfile": {
+            "enableTPM": true,
+            "uefiSettings": {
+              "secureBootEnabled": true
+            }
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualmachines/test-vm",
+        "location": "West US2",
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location"
+        },
+        "properties": {
+          "storageProfile": {
+            "imageReference": {
+              "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/galleryimages/test-gallery-image"
+            },
+            "vmConfigContainerName": "Default_Container"
+          },
+          "hardwareProfile": {
+            "vmSize": "Default"
+          },
+          "osProfile": {
+            "computerName": "luamaster",
+            "adminUsername": "localadmin"
+          },
+          "networkProfile": {
+            "networkInterfaces": [
+              {
+                "id": "test-nic"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

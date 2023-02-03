@@ -1,0 +1,466 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Purview Distribution Service REST API Document",
+    "description": "Purview distribution service enables various Azure RPs to fetch the policies and attributes for data governance.",
+    "version": "2022-11-01-preview"
+  },
+  "paths": {
+    "/datasource-preferences": {
+      "get": {
+        "tags": [
+          "DatasourcePreferences"
+        ],
+        "description": "Get Datasource Preferences for a given scope.",
+        "operationId": "DatasourcePreferences_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "scope",
+            "description": "Scope.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "isProjectGondor",
+            "description": "Is call from a Gondor client.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DatasourcePreferencesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DatasourcePreferences_Get": {
+            "$ref": "./examples/DatasourcePreferences_Get.json"
+          }
+        }
+      }
+    },
+    "/policy-elements": {
+      "get": {
+        "tags": [
+          "PolicyElements"
+        ],
+        "description": "Get policies for given scope.",
+        "operationId": "PolicyElements_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "scope",
+            "description": "Scope.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The API Version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "Optional value to filter policies based on hierarchy of resources. It is of type enum with possible values: AtScope, ChildrenScope, None, All",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "elements"
+        },
+        "x-ms-examples": {
+          "PolicyElements_List": {
+            "$ref": "./examples/PolicyElements_List.json"
+          }
+        }
+      }
+    },
+    "/policy-events": {
+      "get": {
+        "tags": [
+          "PolicyEvents"
+        ],
+        "description": "Get policy events for given scope.",
+        "operationId": "PolicyEvents_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "scope",
+            "description": "Scope.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "syncToken",
+            "description": "The sync token.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsResponse"
+            }
+          },
+          "304": {
+            "description": "Not Modified"
+          },
+          "default": {
+            "description": "An unexpected error occurred",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseModel"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PolicyEvents_List": {
+            "$ref": "./examples/PolicyEvents_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AccountModelBase": {
+      "type": "object",
+      "description": "Represents a purview account.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the purview account."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the purview account."
+        },
+        "location": {
+          "type": "string",
+          "description": "Region where purview account is created."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant id of the purview account."
+        },
+        "gatewayEndpoint": {
+          "type": "string",
+          "description": "Purview account gateway endpoint."
+        }
+      }
+    },
+    "Consent": {
+      "type": "object",
+      "description": "Consent information related to a resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Properties"
+        },
+        "excludedScopes": {
+          "type": "array",
+          "description": "Child scopes that need to be excluded (optional).",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatasourcePreferencesResponse": {
+      "type": "object",
+      "description": "Provides the consent information for a data source.",
+      "properties": {
+        "consent": {
+          "$ref": "#/definitions/Consent"
+        },
+        "accountInfo": {
+          "$ref": "#/definitions/AccountModelBase"
+        },
+        "frequency": {
+          "format": "int32",
+          "type": "integer",
+          "description": "This represents the frequency at which the RPs will check for consent information."
+        }
+      }
+    },
+    "ErrorModel": {
+      "type": "object",
+      "description": "Represents the error model.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "target": {
+          "type": "string",
+          "description": "Detailed error message."
+        },
+        "details": {
+          "type": "array",
+          "description": "Granular errors (if any).",
+          "items": {
+            "$ref": "#/definitions/ErrorModel"
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ErrorResponseModel": {
+      "type": "object",
+      "description": "Represents the error response model.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorModel"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "PolicyElement": {
+      "type": "object",
+      "description": "Represents a policy element.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the policy element."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "List of scopes included in this policy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of policy element. Possible values: policy/policySet/attributeRule."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Time at which this policy element is last updated."
+        },
+        "version": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Current version of policy element. This is auto incremented with each change. Starts with 1."
+        },
+        "elementJson": {
+          "type": "string",
+          "description": "Policy element serialized json payload."
+        }
+      }
+    },
+    "PolicyElementEventModel": {
+      "type": "object",
+      "description": "Represents a policy element event model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Id of the policy element."
+        },
+        "scopes": {
+          "type": "array",
+          "description": "List of scopes included in this policy.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "kind": {
+          "type": "string",
+          "description": "Kind of policy element. Possible values: policy/policySet/attributeRule."
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Time at which this policy element is last updated."
+        },
+        "version": {
+          "format": "int64",
+          "type": "integer",
+          "description": "Current version of policy element. This is auto incremented with each change. Starts with 1."
+        },
+        "elementJson": {
+          "type": "string",
+          "description": "Policy element serialized json payload."
+        },
+        "eventType": {
+          "type": "string",
+          "description": "Type of event. Format: <RP-Name>/<Resource-Type>/<Action>. For Example: Microsoft.Purview/PolicyElements/Delete."
+        }
+      }
+    },
+    "PolicyEventsResponse": {
+      "type": "object",
+      "description": "Represents the response for policy events API.",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Count of elements in payload."
+        },
+        "syncToken": {
+          "type": "string",
+          "description": "Sync token represents the checkpoint upto which this policy elements list is updated. Client need to store this value and keep updating if PDS returns a new value. Call this API with the most recent value received."
+        },
+        "elements": {
+          "type": "array",
+          "description": "List of created/updated policy elements.",
+          "items": {
+            "$ref": "#/definitions/PolicyElementEventModel"
+          }
+        }
+      }
+    },
+    "PolicyResponse": {
+      "type": "object",
+      "description": "Represents the response for policy fetch API.",
+      "properties": {
+        "count": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Count of elements in payload."
+        },
+        "syncToken": {
+          "type": "string",
+          "description": "Sync token represents the checkpoint upto which this policy elements list is updated. Client need to pass this value while fetching records using policyEvents API."
+        },
+        "elements": {
+          "type": "array",
+          "description": "List of policy elements.",
+          "items": {
+            "$ref": "#/definitions/PolicyElement"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link with skip token to fetch next set of records. This is used in case of pagination."
+        }
+      }
+    },
+    "Properties": {
+      "type": "object",
+      "description": "Consent properties.",
+      "properties": {
+        "scanner": {
+          "$ref": "#/definitions/Scanner"
+        },
+        "dataUseGovernance": {
+          "type": "boolean",
+          "description": "Consent for data use governance."
+        }
+      }
+    },
+    "Scanner": {
+      "type": "object",
+      "description": "Represents the collection of consent information for scanning service.",
+      "properties": {
+        "metadata": {
+          "type": "boolean",
+          "description": "Consent for metadata discovery."
+        },
+        "classification": {
+          "type": "boolean",
+          "description": "Consent for classification discovery."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "The endpoint of your Purview account. Example: https://{accountName}.purview.azure.com.",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-parameter-location": "client",
+      "x-ms-skip-url-encoding": true
+    },
+    "api-version": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The api-version of the service.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  },
+  "basePath": "/pds",
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

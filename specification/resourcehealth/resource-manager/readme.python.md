@@ -18,6 +18,7 @@ Generate all API versions currently shipped for this package
 multiapi: true
 clear-output-folder: true
 batch:
+  - tag: package-2018-07-01
   - tag: package-2015-01
   - multiapiscript: true
 ```
@@ -26,6 +27,17 @@ batch:
 output-folder: $(python-sdks-folder)/resourcehealth/azure-mgmt-resourcehealth/azure/mgmt/resourcehealth/
 perform-load: false
 ```
+
+### Tag: package-2018-07-01 and python
+
+These settings apply only when `--tag=package-2018-07-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2018-07-01'
+namespace: azure.mgmt.resourcehealth.v2018_07_01
+output-folder: $(python-sdks-folder)/resourcehealth/azure-mgmt-resourcehealth/azure/mgmt/resourcehealth/v2018_07_01
+```
+
 ### Tag: package-2015-01 and python
 
 These settings apply only when `--tag=package-2015-01 --python` is specified on the command line.

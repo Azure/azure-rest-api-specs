@@ -2346,7 +2346,7 @@
       "properties": {
         "error": {
           "title": "Error",
-          "$ref": "./network.json#/definitions/ErrorDetails",
+          "$ref": "./network.json#/definitions/Error",
           "description": "The error details object."
         }
       }
@@ -2377,6 +2377,14 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the network watcher resource."
+        },
+        "runningOperationIds": {
+          "type": "array",
+          "description": "List of running operation IDs.",
+          "items": {
+            "type": "integer",
+            "format": "int32"
+          }
         }
       },
       "description": "The network watcher properties."

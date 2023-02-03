@@ -28,18 +28,27 @@ These are the global settings for the Peering API.
 title: PeeringManagementClient
 description: Peering Client
 openapi-type: arm
-tag: package-2022-06-01
+tag: package-2022-10-01
 ```
 
+### Tag: package-2022-10-01
+
+These settings apply only when `--tag=package-2022-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10-01'
+input-file:
+  - Microsoft.Peering/stable/2022-10-01/peering.json
+```
 
 ### Tag: package-2022-06-01
 
 These settings apply only when `--tag=package-2022-06-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-06-01'
+``` yaml $(tag) == 'package-2022-06-01'
 input-file:
   - Microsoft.Peering/stable/2022-06-01/peering.json
 ```
+
 ### Tag: package-2022-01-01
 
 These settings apply only when `--tag=package-2022-01-01` is specified on the command line.
@@ -124,7 +133,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby

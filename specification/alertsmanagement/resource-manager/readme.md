@@ -45,7 +45,6 @@ tag: package-2021-08
 ```
 
 
-
 ### Tag: package-2021-08
 
 These settings apply only when `--tag=package-2021-08` is specified on the command line.
@@ -53,6 +52,7 @@ These settings apply only when `--tag=package-2021-08` is specified on the comma
 ```yaml $(tag) == 'package-2021-08'
 input-file:
   - Microsoft.AlertsManagement/stable/2021-08-08/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2021-07-22-preview/PrometheusRuleGroups.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
 ```
@@ -66,6 +66,15 @@ input-file:
   - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
+```
+
+### Tag: package-preview-2021-07
+
+These settings apply only when `--tag=package-preview-2021-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-07'
+input-file:
+  - Microsoft.AlertsManagement/preview/2021-07-22-preview/PrometheusRuleGroups.json
 ```
 
 ### Tag: package-2021-04-only
@@ -159,7 +168,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go

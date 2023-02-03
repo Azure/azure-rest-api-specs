@@ -177,24 +177,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -267,24 +250,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -360,24 +326,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -641,24 +590,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -735,17 +667,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "name"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/LabelFields"
           }
         ],
         "responses": {
@@ -812,17 +734,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "name"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/LabelFields"
           }
         ],
         "responses": {
@@ -1049,24 +961,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -1139,24 +1034,7 @@
             "type": "string"
           },
           {
-            "name": "$Select",
-            "in": "query",
-            "description": "Used to select what fields are present in the returned resource(s).",
-            "type": "array",
-            "items": {
-              "type": "string",
-              "enum": [
-                "key",
-                "label",
-                "content_type",
-                "value",
-                "last_modified",
-                "tags",
-                "locked",
-                "etag"
-              ]
-            },
-            "collectionFormat": "csv"
+            "$ref": "#/parameters/KeyValueFields"
           }
         ],
         "responses": {
@@ -1333,6 +1211,49 @@
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "KeyValueFields": {
+      "name": "$Select",
+      "in": "query",
+      "description": "Used to select what fields are present in the returned resource(s).",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "key",
+          "label",
+          "content_type",
+          "value",
+          "last_modified",
+          "tags",
+          "locked",
+          "etag"
+        ],
+        "x-ms-enum": {
+          "name": "KeyValueFields",
+          "modelAsString": true
+        }
+      },
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
+    },
+    "LabelFields": {
+      "name": "$Select",
+      "in": "query",
+      "description": "Used to select what fields are present in the returned resource(s).",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "name"
+        ],
+        "x-ms-enum": {
+          "name": "LabelFields",
+          "modelAsString": true
+        }
+      },
+      "x-ms-parameter-location": "method",
+      "collectionFormat": "csv"
     }
   },
   "x-ms-parameterized-host": {

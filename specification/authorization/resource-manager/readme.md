@@ -157,6 +157,19 @@ input-file:
 - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
+### Tag: package-2022-04-01-only
+
+These settings apply only when `--tag=package-2022-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-04-01-only'
+input-file:
+- Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2022-04-01/common-types.json
+```
+
 ### Tag: package-2022-04-01-preview-only
 
 These settings apply only when `--tag=package-2022-04-01-preview-only` is specified on the command line.

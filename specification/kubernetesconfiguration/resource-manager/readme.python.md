@@ -22,6 +22,7 @@ Generate all API versions currently shipped for this package
 multiapi: true
 clear-output-folder: true
 batch: 
+  - tag: package-2022-11
   - tag: package-2022-07
   - tag: package-preview-2022-04-only
   - tag: package-2022-03
@@ -40,6 +41,15 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/
 perform-load: false
+```
+
+### Tag: package-2022-11 and python
+
+These settings apply only when `--tag=package-2022-11 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11'
+namespace: azure.mgmt.kubernetesconfiguration.v2022_11_01
+output-folder: $(python-sdks-folder)/kubernetesconfiguration/azure-mgmt-kubernetesconfiguration/azure/mgmt/kubernetesconfiguration/v2022_11_01
 ```
 
 ### Tag: package-2022-07 and python

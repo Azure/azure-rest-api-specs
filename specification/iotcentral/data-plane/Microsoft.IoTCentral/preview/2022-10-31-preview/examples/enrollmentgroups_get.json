@@ -1,0 +1,29 @@
+{
+  "title": "Get an enrollment group",
+  "description": "Get an enrollment group.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "enrollmentGroupId": "myEnrollmentGroupId",
+    "api-version": "2022-10-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "myEnrollmentGroupId",
+        "displayName": "My group",
+        "enabled": true,
+        "type": "iot",
+        "attestation": {
+          "type": "symmetricKey",
+          "symmetricKey": {
+            "primaryKey": "<primary-symmetric-key>",
+            "secondaryKey": "<secondary-symmetric-key>"
+          }
+        },
+        "etag": "IjA4MDUwMTJiLTAwMDAtMDcwMC0wMDAwLTYyODJhOWVjMDAwMCI=",
+        "idScope": "scope1"
+      }
+    }
+  }
+}

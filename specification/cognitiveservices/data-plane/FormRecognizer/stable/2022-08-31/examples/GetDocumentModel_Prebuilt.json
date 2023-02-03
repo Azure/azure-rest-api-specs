@@ -1,0 +1,134 @@
+{
+  "parameters": {
+    "endpoint": "{endpoint}",
+    "api-version": "{apiVersion}",
+    "modelId": "prebuilt-invoice"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "modelId": "prebuilt-invoice",
+        "description": "Prebuilt model to extract key information from English invoices, including customer, vendor, invoice ID, due date, total, and more.",
+        "createdDateTime": "2021-07-30T00:00:00Z",
+        "apiVersion": "{apiVersion}",
+        "docTypes": {
+          "prebuilt:invoice": {
+            "fieldSchema": {
+              "CustomerName": {
+                "type": "string"
+              },
+              "CustomerId": {
+                "type": "string"
+              },
+              "PurchaseOrder": {
+                "type": "string"
+              },
+              "InvoiceId": {
+                "type": "string"
+              },
+              "InvoiceDate": {
+                "type": "date"
+              },
+              "DueDate": {
+                "type": "date"
+              },
+              "VendorName": {
+                "type": "string"
+              },
+              "VendorAddress": {
+                "type": "string"
+              },
+              "VendorAddressRecipient": {
+                "type": "string"
+              },
+              "CustomerAddress": {
+                "type": "string"
+              },
+              "CustomerAddressRecipient": {
+                "type": "string"
+              },
+              "BillingAddress": {
+                "type": "string"
+              },
+              "BillingAddressRecipient": {
+                "type": "string"
+              },
+              "ShippingAddress": {
+                "type": "string"
+              },
+              "ShippingAddressRecipient": {
+                "type": "string"
+              },
+              "SubTotal": {
+                "type": "number"
+              },
+              "TotalTax": {
+                "type": "number"
+              },
+              "InvoiceTotal": {
+                "type": "number"
+              },
+              "AmountDue": {
+                "type": "number"
+              },
+              "PreviousUnpaidBalance": {
+                "type": "number"
+              },
+              "RemittanceAddress": {
+                "type": "string"
+              },
+              "RemittanceAddressRecipient": {
+                "type": "string"
+              },
+              "ServiceAddress": {
+                "type": "string"
+              },
+              "ServiceAddressRecipient": {
+                "type": "string"
+              },
+              "ServiceStartDate": {
+                "type": "date"
+              },
+              "ServiceEndDate": {
+                "type": "date"
+              },
+              "Items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "Amount": {
+                      "type": "number"
+                    },
+                    "Date": {
+                      "type": "date"
+                    },
+                    "Description": {
+                      "type": "string"
+                    },
+                    "Quantity": {
+                      "type": "number"
+                    },
+                    "ProductCode": {
+                      "type": "string"
+                    },
+                    "Tax": {
+                      "type": "number"
+                    },
+                    "Unit": {
+                      "type": "string"
+                    },
+                    "UnitPrice": {
+                      "type": "number"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": {}
+      }
+    }
+  }
+}

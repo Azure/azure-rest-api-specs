@@ -1063,6 +1063,42 @@
           "readOnly": true
         }
       }
+    },
+    "ContainerAppsJobTemplate": {
+      "description": "Container Apps Job versioned application definition. Defines the desired state of an immutable revision. Any changes to this section Will result in a new revision being created",
+      "type": "object",
+      "properties": {
+        "initContainers": {
+          "description": "List of specialized containers that run before app containers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InitContainer"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "containers": {
+          "description": "List of container definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "volumes": {
+          "description": "List of volume definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     }
   },
   "securityDefinitions": {

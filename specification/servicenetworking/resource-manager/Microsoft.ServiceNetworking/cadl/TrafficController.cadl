@@ -1,0 +1,153 @@
+import "@cadl-lang/openapi";
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-resource-manager";
+
+@armProviderNamespace
+@service({title:"TrafficController"})
+@service({version: "2022-10-01-preview"})
+@doc("Traffic Controller Provider management API.")
+@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
+namespace Microsoft.ServiceNetworking;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+
+
+//----------------------- Frontends -----------------------
+@doc("Frontend Subresource of Traffic Controller.")
+@parentResource(TrafficController)
+model Frontend is TrackedResource<FrontendProperties>{
+  @key("frontendName")
+  @doc("Frontends")
+  @visibility("read")
+  @path
+  @segment("frontends")
+  name : string;
+}
+
+@doc("Frontend Properties.")
+model FrontendProperties {
+  @doc("Frontend Mode (Optional).")
+  mode?: FrontendMode;
+  @doc("Frontend IP Address Version (Optional).")
+  ipAddressVersion?: FrontendIPAddressVersion;
+  @doc("Frontend Public IP Address (Optional).")
+  publicIPAddress?: FrontendPropertiesIPAddress;
+  @visibility("read")
+  @doc("test doc")
+  provisioningState?: ProvisioningState;
+}
+
+enum FrontendMode {
+  public
+}
+enum FrontendIPAddressVersion {
+  IPv4,
+  IPv6,
+}
+
+@doc("Frontend IP Address.")
+model FrontendPropertiesIPAddress {
+  @doc("IP Address.")
+  id: string;
+}
+
+//----------------------- Associations -----------------------
+@doc("Association Subresource of Traffic Controller")
+@parentResource(TrafficController)
+model Association is TrackedResource<AssociationProperties> {
+  @key("associationName")
+  @visibility("read")
+  @doc("Name of Association")
+  @path
+  @segment("associations")
+  name: string;
+}
+
+@doc("Association Properties.")
+model AssociationProperties { 
+  @doc("Association Type")
+  associationType: AssociationType;
+  @doc("Association Subnet")
+  subnet?: AssociationSubnet;
+  @visibility("read")
+  @doc("Provisioning State")
+  provisioningState?: ProvisioningState;
+
+}
+
+enum AssociationType {
+  "subnets",
+}
+
+@doc("Association Subnet.")
+model AssociationSubnet {
+  @doc("Association ID.")
+  id: string;
+}
+
+//----------------------- Traffic Controller -----------------------
+@resource("trafficControllers")
+model TrafficController is TrackedResource<TrafficControllerProperties> {
+  @key("trafficControllerName")
+  @path
+  @segment("trafficControllers")
+  @doc("traffic controller name for path")
+  name: string;
+}
+
+@doc("Traffic Controller Properties.")
+model TrafficControllerProperties {
+  @doc("Configuration Endpoints.")
+  @visibility("read")
+  configurationEndpoints?: string[];
+  @visibility("read")
+  @doc("Frontends References List")
+  frontends? : ResourceID[];
+  @visibility("read")
+  @doc("Associations References List")
+  associations? : ResourceID[];
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
+@knownValues(ProvisioningStateKV)
+model ProvisioningState is string;
+
+@lroStatus
+enum ProvisioningStateKV {
+  ...ResourceProvisioningStateKV,
+  Provisioning,
+  Updating,
+  Deleting,
+  Accepted,
+}
+@doc("Resource ID definition used by parent to reference child resources.")
+model ResourceID{
+  @doc("Resource ID of child resource.")
+  id : string;
+}
+
+//----------------------- Paths -----------------------
+@armResourceOperations
+interface AssociationsInterface extends ResourceInstanceOperations<Association, AssociationProperties>, ResourceListByParent<Association>{
+}
+
+@armResourceOperations
+interface FrontendsInterface extends ResourceInstanceOperations<Frontend, FrontendProperties>, ResourceListByParent<Frontend>{
+}
+
+@armResourceOperations
+interface TrafficControllerInterface extends ResourceOperations<TrafficController, TrafficControllerProperties>{
+}
+
+interface Operations extends Azure.ResourceManager.Operations {}

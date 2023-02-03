@@ -64,7 +64,7 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           }
         ],
-        "operationId": "Environments_ListByProject",
+        "operationId": "Environments_ListEnvironments",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -86,7 +86,7 @@
           }
         },
         "x-ms-examples": {
-          "Environments_ListByProject": {
+          "Environments_ListEnvironments": {
             "$ref": "./examples/Environments_ListByProject.json"
           }
         },
@@ -115,7 +115,7 @@
             "$ref": "devcenter.json#/parameters/UserIdParameterName"
           }
         ],
-        "operationId": "Environments_ListByProjectByUser",
+        "operationId": "Environments_ListEnvironmentsByUser",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -137,7 +137,7 @@
           }
         },
         "x-ms-examples": {
-          "Environments_ListByProject": {
+          "Environments_ListEnvironmentsByUser": {
             "$ref": "./examples/Environments_ListByProjectByUser.json"
           }
         },
@@ -168,7 +168,7 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
-        "operationId": "Environments_Get",
+        "operationId": "Environments_GetEnvironmentByUser",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -190,7 +190,7 @@
           }
         },
         "x-ms-examples": {
-          "Environments_Get": {
+          "Environments_GetEnvironmentByUser": {
             "$ref": "./examples/Environments_Get.json"
           }
         }
@@ -220,7 +220,7 @@
             }
           }
         ],
-        "operationId": "Environments_CreateOrUpdate",
+        "operationId": "Environments_CreateOrUpdateEnvironment",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
@@ -294,7 +294,7 @@
             }
           }
         ],
-        "operationId": "Environments_Update",
+        "operationId": "Environments_UpdateEnvironment",
         "responses": {
           "200": {
             "description": "Succeeded",
@@ -316,7 +316,7 @@
           }
         },
         "x-ms-examples": {
-          "Environments_Update": {
+          "Environments_UpdateEnvironment": {
             "$ref": "./examples/Environments_Patch.json"
           }
         }
@@ -337,7 +337,7 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
-        "operationId": "Environments_Delete",
+        "operationId": "Environments_DeleteEnvironment",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
@@ -372,7 +372,7 @@
           }
         },
         "x-ms-examples": {
-          "Environments_Delete": {
+          "Environments_DeleteEnvironment": {
             "$ref": "./examples/Environments_Delete.json"
           }
         }
@@ -407,7 +407,7 @@
             }
           }
         ],
-        "operationId": "Environments_DeployAction",
+        "operationId": "Environments_DeployEnvironmentAction",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
@@ -439,7 +439,7 @@
           }
         },
         "x-ms-examples": {
-          "Environments_DeployAction": {
+          "Environments_DeployEnvironmentAction": {
             "$ref": "./examples/Environments_DeployAction.json"
           }
         }
@@ -474,7 +474,7 @@
             }
           }
         ],
-        "operationId": "Environments_DeleteAction",
+        "operationId": "Environments_DeleteEnvironmentAction",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
@@ -506,7 +506,7 @@
           }
         },
         "x-ms-examples": {
-          "Environments_DeleteAction": {
+          "Environments_DeleteEnvironmentAction": {
             "$ref": "./examples/Environments_DeleteAction.json"
           }
         }
@@ -541,7 +541,7 @@
             }
           }
         ],
-        "operationId": "Environments_CustomAction",
+        "operationId": "Environments_CustomEnvironmentAction",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "original-uri"
@@ -573,7 +573,7 @@
           }
         },
         "x-ms-examples": {
-          "Environments_CustomAction": {
+          "Environments_CustomEnvironmentAction": {
             "$ref": "./examples/Environments_CustomAction.json"
           }
         }
@@ -601,7 +601,7 @@
             "$ref": "#/parameters/EnvironmentNameParameter"
           }
         ],
-        "operationId": "Artifacts_ListByEnvironment",
+        "operationId": "Environments_ListArtifactsByEnvironment",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -623,7 +623,7 @@
           }
         },
         "x-ms-examples": {
-          "Artifacts_ListByEnvironment": {
+          "Environments_ListArtifactsByEnvironment": {
             "$ref": "./examples/Artifacts_ListByEnvironment.json"
           }
         },
@@ -657,7 +657,7 @@
             "$ref": "#/parameters/ArtifactPathParameter"
           }
         ],
-        "operationId": "Artifacts_ListByPath",
+        "operationId": "Environments_ListArtifactsByEnvironmentAndPath",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -679,7 +679,7 @@
           }
         },
         "x-ms-examples": {
-          "Artifacts_Get": {
+          "Environments_ListArtifactsByEnvironmentAndPath": {
             "$ref": "./examples/Artifacts_ListByPath.json"
           }
         },
@@ -705,7 +705,7 @@
             "$ref": "devcenter.json#/parameters/TopParameter"
           }
         ],
-        "operationId": "CatalogItems_ListByProject",
+        "operationId": "Environments_ListCatalogItems",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -727,7 +727,7 @@
           }
         },
         "x-ms-examples": {
-          "CatalogItems_ListByProject": {
+          "Environments_ListCatalogItems": {
             "$ref": "./examples/CatalogItems_ListByProject.json"
           }
         },
@@ -750,13 +750,10 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "devcenter.json#/parameters/TopParameter"
-          },
-          {
             "$ref": "#/parameters/CatalogItemIdentifierParameter"
           }
         ],
-        "operationId": "CatalogItems_Get",
+        "operationId": "Environments_GetCatalogItem",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -778,7 +775,7 @@
           }
         },
         "x-ms-examples": {
-          "CatalogItems_Get": {
+          "Environments_GetCatalogItem": {
             "$ref": "./examples/CatalogItems_Get.json"
           }
         }
@@ -804,7 +801,7 @@
             "$ref": "#/parameters/CatalogItemIdentifierParameter"
           }
         ],
-        "operationId": "CatalogItemVersions_ListByProject",
+        "operationId": "Environments_ListCatalogItemVersions",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -826,7 +823,7 @@
           }
         },
         "x-ms-examples": {
-          "CatalogItemVersions_ListByProject": {
+          "Environments_ListCatalogItemVersions": {
             "$ref": "./examples/CatalogItemVersions_ListByProject.json"
           }
         },
@@ -849,16 +846,13 @@
             "$ref": "devcenter.json#/parameters/ProjectNameParameter"
           },
           {
-            "$ref": "devcenter.json#/parameters/TopParameter"
-          },
-          {
             "$ref": "#/parameters/CatalogItemIdentifierParameter"
           },
           {
             "$ref": "#/parameters/VersionParameter"
           }
         ],
-        "operationId": "CatalogItemVersions_Get",
+        "operationId": "Environments_GetCatalogItemVersion",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -880,7 +874,7 @@
           }
         },
         "x-ms-examples": {
-          "CatalogItemVersion_Get": {
+          "Environments_GetCatalogItemVersion": {
             "$ref": "./examples/CatalogItemVersions_Get.json"
           }
         }
@@ -903,7 +897,7 @@
             "$ref": "devcenter.json#/parameters/TopParameter"
           }
         ],
-        "operationId": "EnvironmentTypes_ListByProject",
+        "operationId": "Environments_ListEnvironmentTypes",
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
@@ -925,7 +919,7 @@
           }
         },
         "x-ms-examples": {
-          "EnvironmentType_ListByProject": {
+          "Environments_ListEnvironmentTypes": {
             "$ref": "./examples/EnvironmentTypes_ListByProject.json"
           }
         },

@@ -27,7 +27,7 @@ These are the global settings for the ResourceGraph API.
 ``` yaml
 title: ResourceGraphClient
 openapi-type: arm
-tag: package-preview-2021-06
+tag: package-2022-10
 ```
 
 ### Validations
@@ -42,15 +42,26 @@ message-format: json
 ```
 
 
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.ResourceGraph/stable/2022-10-01/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
+  - Microsoft.ResourceGraph/preview/2020-09-01-preview/resourcechanges.json
+```
 ### Tag: package-preview-2021-06
 
 These settings apply only when `--tag=package-preview-2021-06` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-06'
+``` yaml $(tag) == 'package-preview-2021-06'
 input-file:
   - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourcegraph.json
   - Microsoft.ResourceGraph/preview/2021-06-01-preview/resourceshistory.json
 ```
+
 ### Tag: package-preview-2021-03
 
 These settings apply only when `--tag=package-preview-2021-03` is specified on the command line.
@@ -121,7 +132,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

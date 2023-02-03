@@ -1,0 +1,52 @@
+{
+  "title": "Get a dashboard by Id",
+  "description": "Get a dashboard by Id",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "dashboardId": "urn:homepageView:uqxri3i7x",
+    "api-version": "2022-10-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "urn:homepageView:uqxri3i7x",
+        "displayName": "My Dashboard",
+        "personal": false,
+        "tiles": [
+          {
+            "displayName": "My Line Chart",
+            "configuration": {
+              "devices": [
+                "myDevice"
+              ],
+              "group": "myGroupId",
+              "type": "lineChart",
+              "format": {
+                "xAxisEnabled": true,
+                "yAxisEnabled": true,
+                "legendEnabled": true
+              },
+              "capabilities": [
+                {
+                  "capability": "componentName.telemetryName",
+                  "aggregateFunction": "avg"
+                }
+              ],
+              "queryRange": {
+                "type": "time",
+                "duration": "P1W",
+                "resolution": "PT12H"
+              }
+            },
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 3
+          }
+        ],
+        "favorite": false
+      }
+    }
+  }
+}

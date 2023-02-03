@@ -2,7 +2,7 @@
   "parameters": {
     "Endpoint": "{Endpoint}",
     "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2022-07-01-preview",
+    "api-version": "2023-05-01",
     "projectName": "EmailApp",
     "body": {
       "projectFileVersion": "2022-05-01",
@@ -30,6 +30,18 @@
         "entities": [
           {
             "category": "Sender"
+          },
+          {
+            "category": "Number",
+            "regex": {
+              "expressions": [
+                {
+                  "regexKey": "UK Phone numbers",
+                  "language": "en-us",
+                  "regexPattern": "/^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$/"
+                }
+              ]
+            }
           }
         ],
         "utterances": [
@@ -59,7 +71,7 @@
   "responses": {
     "202": {
       "headers": {
-        "operation-location": "{Endpoint}/language/authoring/analyze-conversations/projects/EmailApp/import/jobs/4d37982f-fded-4c2c-afe3-15953b5919b6_637858368000000000?api-version={api-version}"
+        "operation-location": "{Endpoint}/language/authoring/analyze-conversations/projects/EmailApp/import/jobs/4d37982f-fded-4c2c-afe3-15953b5919b6_637858368000000000?api-version=2023-05-01"
       }
     }
   }

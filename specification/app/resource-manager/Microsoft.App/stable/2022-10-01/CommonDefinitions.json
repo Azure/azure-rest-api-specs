@@ -317,7 +317,6 @@
           "x-ms-secret": true
         },
         "certificatePassword": {
-          "format": "byte",
           "description": "Certificate password",
           "type": "string",
           "x-ms-secret": true
@@ -687,7 +686,8 @@
             },
             "ignoreErrors": {
               "description": "Boolean describing if the component errors are ignores",
-              "type": "boolean"
+              "type": "boolean",
+              "default": false
             },
             "initTimeout": {
               "description": "Initialization timeout",
@@ -758,7 +758,7 @@
           "description": "Collection of secrets used by a Dapr component",
           "type": "array",
           "items": {
-            "$ref": "./CommonDefinitions.json#/definitions/Secret"
+            "$ref": "./CommonDefinitions.json#/definitions/DaprSecret"
           },
           "x-ms-identifiers": [
             "name"

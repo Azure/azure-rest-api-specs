@@ -27,7 +27,7 @@ These are the global settings for the vmware.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-01-10-preview
+tag: package-2022-07-15-preview
 ```
 
 ### Tag: package-2020-10-01-preview
@@ -46,6 +46,15 @@ These settings apply only when `--tag=package-2022-01-10-preview` is specified o
 ```yaml $(tag) == 'package-2022-01-10-preview'
 input-file:
   - Microsoft.ConnectedVMwarevSphere/preview/2022-01-10-preview/connectedvmware.json
+```
+
+### Tag: package-2022-07-15-preview
+
+These settings apply only when `--tag=package-2022-07-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-07-15-preview'
+input-file:
+  - Microsoft.ConnectedVMwarevSphere/preview/2022-07-15-preview/connectedvmware.json
 ```
 
 ---

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Security Center",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "version": "2022-01-01-preview"
   },
   "host": "management.azure.com",
@@ -37,14 +37,14 @@
     "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/governanceAssignments": {
       "get": {
         "x-ms-examples": {
-          "List security governanceAssignments": {
+          "List governance assignments": {
             "$ref": "./examples/GovernanceAssignments/ListGovernanceAssignments_example.json"
           }
         },
         "tags": [
           "GovernanceAssignments"
         ],
-        "description": "Get security governanceAssignments on all your resources inside a scope",
+        "description": "Get governance assignments on all of your resources inside a scope",
         "operationId": "GovernanceAssignments_List",
         "parameters": [
           {
@@ -79,7 +79,7 @@
     "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/governanceAssignments/{assignmentKey}": {
       "get": {
         "x-ms-examples": {
-          "Get security governanceAssignment by specific governanceAssignmentKey": {
+          "Get governanceAssignment by specific governanceAssignmentKey": {
             "$ref": "./examples/GovernanceAssignments/GetGovernanceAssignment_example.json"
           }
         },
@@ -126,7 +126,7 @@
         "tags": [
           "GovernanceAssignments"
         ],
-        "description": "Creates or update a security GovernanceAssignment on the given subscription.",
+        "description": "Creates or updates a governance assignment on the given subscription.",
         "operationId": "GovernanceAssignments_CreateOrUpdate",
         "parameters": [
           {
@@ -193,10 +193,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - GovernanceAssignment was deleted"
+            "description": "OK - Governance assignment was deleted"
           },
           "204": {
-            "description": "No Content - GovernanceAssignment does not exist"
+            "description": "No Content - Governance assignment does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed"
@@ -208,7 +208,7 @@
   "definitions": {
     "GovernanceAssignmentsList": {
       "type": "object",
-      "description": "Page of a security governance assignments list",
+      "description": "Page of a governance assignments list",
       "properties": {
         "value": {
           "description": "Collection of governance assignments in this page",
@@ -227,10 +227,10 @@
     },
     "GovernanceAssignment": {
       "type": "object",
-      "description": "Security GovernanceAssignment over a given scope",
+      "description": "Governance assignment over a given scope",
       "properties": {
         "properties": {
-          "description": "Properties of a security governanceAssignment",
+          "description": "The properties of a governance assignment",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/GovernanceAssignmentProperties"
         }
@@ -291,20 +291,20 @@
     },
     "GovernanceAssignmentAdditionalData": {
       "type": "object",
-      "description": "Describe the additional data of GovernanceAssignment - optional",
+      "description": "Describe the additional data of governance assignment - optional",
       "properties": {
         "ticketNumber": {
-          "description": "Ticket number associated with this GovernanceAssignment",
+          "description": "Ticket number associated with this governance assignment",
           "type": "integer",
           "format": "int32",
           "minimum": 0
         },
         "ticketLink": {
-          "description": "Ticket link associated with this GovernanceAssignment - for example: https://snow.com",
+          "description": "Ticket link associated with this governance assignment - for example: https://snow.com",
           "type": "string"
         },
         "ticketStatus": {
-          "description": "The ticket status associated with this GovernanceAssignment - for example: Active",
+          "description": "The ticket status associated with this governance assignment - for example: Active",
           "type": "string"
         }
       }
@@ -335,7 +335,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The security governance assignment key - the assessment key of the required governance assignment",
+      "description": "The governance assignment key - the assessment key of the required governance assignment",
       "x-ms-parameter-location": "method"
     },
     "AssessmentName": {
@@ -343,7 +343,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Assessment Key - Unique key for the assessment type",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "description": "The Assessment Key - A unique key for the assessment type",
       "x-ms-parameter-location": "method"
     },
     "GovernanceAssignmentBody": {
@@ -353,7 +354,7 @@
       "schema": {
         "$ref": "#/definitions/GovernanceAssignment"
       },
-      "description": "GovernanceAssignment over a subscription scope",
+      "description": "Governance assignment over a subscription scope",
       "x-ms-parameter-location": "method"
     }
   }

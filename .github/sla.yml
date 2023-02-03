@@ -28,6 +28,22 @@
         - ${AUTHOR}
         - ${ASSIGNEE}
 
+
+- scheduleTask:
+    action: sendEmail
+    scope: pull_request
+    name: "send email to Arc review board"
+    trigger:
+      - label
+    args:
+      booleanFilterExpression: "ArcReview"
+      message: "<p>Hi, Arc review board,</p><p>Please review the PR ${URL} . You receive the email because the PR is labeled with ArcReview. <br> One or more change(s) have been detected in your Arc enabled VM or Arc enabled Server RPs. Please review the changes and ensure that no gaps have been introduced with respect to the ARM API modeling consistency across Azure Arc and Azure Compute. For further details, see guidelines at Consistency in ARM Modeling. To approve the change(s), add the label ArcSignedOff.</p>"
+      subject: "Action Required ArcReview: Please review PR ${URL}"
+      to: arcboard@microsoft.com
+      cc:
+        - ${AUTHOR}
+        - ${ASSIGNEE}
+
 - scheduleTask:
     action: sendEmail
     scope: pull_request

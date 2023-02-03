@@ -4,10 +4,10 @@
 
 Configuration for generating AzureOpenAI SDK.
 
-The current release for the AzureOpenAI is `release_2022_06_01_preview`.
+The current release for the AzureOpenAI is `release_2022_12_01`.
 
 ``` yaml
-tag: release_2022_06_01_preview
+tag: release_2022_12_01
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -44,4 +44,24 @@ AutoRest-Linter Suppressions
 directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     reason: Existing external API uses property names like n_epochs, created_at, not following naming/casing guidelines from azure. 
+```
+
+## AzureOpenAI 2022-12-01
+These settings apply only when `--tag=release_2022_12_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2022_12_01'
+input-file: stable/2022-12-01/azureopenai.json
+```
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolved without breaking compatibility to existing openai api
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Existing external API uses property names like n_epochs, created_at, not following naming/casing guidelines from azure. 
+  - suppress: ValidFormats
+    reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
+  - suppress: IntegerTypeMustHaveFormat
+    reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
 ```

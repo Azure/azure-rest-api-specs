@@ -79,11 +79,11 @@ npm install -g autorest
 
 #### Given a swagger spec, run linter:
 ```
-autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec>
+autorest --v3 --spectral --validation --azure-validator --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec>
 ```
 #### Given a readme file, run linter:
 ```
-autorest --validation --azure-validator --use=@microsoft.azure/classic-openapi-validator@latest --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
+autorest --v3 --spectral --validation --azure-validator --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
 ```
 
 Please see [readme](https://github.com/Azure/azure-openapi-validator/blob/main/README.md) for how to install or run tool in details.
@@ -129,28 +129,6 @@ Note: Currently only applicable to management plane APIs, and target ARM region 
 
 To fix the check, download the artifact `api_scenario_test_output` from Azure pipeline where you can find the report.html and auto generated API Scenario file as baseline, then refer to [API Scenario documentation](./api-scenario/readme.md) to run and debug it locally. After local debug, commit the API Scenario file and `readme.test.md` file into your working branch and then the CI check will use the committed API Scenario file to re-run the test.
 
-## SDK Track2 Validation
-
-This CI check is to run [autorest.modelerfour](https://github.com/Azure/autorest.modelerfour) for each changing tag in a PR.
-Since the code generators of track2 SDK are based on the autorest.modelerfour, it's recommended ensure this validation is passed without any error and warning.
-The `modelerfour` has several plugins. If a plugin report an error, you can refer to the following plugin documentations:
-- [PreChecker](https://github.com/Azure/autorest/blob/main/docs/openapi/prechecker.md)
-
-### Run locally:
-
-#### Prerequisites:
-
-```
-npm install -g autorest
-```
-#### Given a swagger spec, run the validator:
-```
-autorest --v3 --azure-validator --use=@microsoft.azure/openapi-validator@latest --input-file=<path-to-spec>
-```
-#### Given a readme file, run the validator:
-```
-autorest --v3 --azure-validator --semantic-validator=false --model-validator=false --use=@microsoft.azure/openapi-validator@latest [--tag=<readme tag>] <path-to-readme>
-```
 
 ## Cadl Validation
 

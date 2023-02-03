@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2022-10-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "TC1",
+    "associationName": "associatedvnet-2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "associatedvnet-2",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/associations",
+        "id": "resourceUriAsString",
+        "location": "West US",
+        "properties": {
+          "associationType": "subnets",
+          "subnet": {
+            "id": "subnetFullRef"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

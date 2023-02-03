@@ -13,7 +13,7 @@ modelerfour:
 
 ``` yaml $(typescript)
 input-file:
-  - Microsoft.ContainerRegistry/preview/2022-02-01-preview/containerregistry.json
+  - Microsoft.ContainerRegistry/stable/2022-12-01/containerregistry.json
   - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 typescript:
   azure-arm: true

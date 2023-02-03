@@ -1,0 +1,68 @@
+name: 'Repo File Sync Action For Large GitHub Tree'
+description: 'GitHub Action to Sync Files like Workflows Between Repositories.'
+author: 'JackTn'
+inputs:
+  SOURCE:
+    description: |
+      source owner
+    required: true
+  DEST:
+    description: |
+      dest owner
+    required: true
+  FILE_PATH:
+    description: |
+      dest FILE_PATH
+    required: true
+  GITHUB_TOKEN:
+    description: |
+      GitHub Personal Access Token to use to get repos and write secrets
+    required: true
+  COMMIT_BODY:
+    description: |
+      Commit message body. Will be appended to commit message, separated by two line returns. Defaults to ''
+    required: false
+  COMMIT_PREFIX:
+    description: |
+      Prefix for commit message and pull request title. Defaults to 🔄
+    required: false
+  CREATE_TREE_LIMIT:
+    description: |
+      When create tree failed by large trees to build, try to down this limit
+    required: false
+  COMMIT_MESSAGE:
+    description: |
+      Use this commit message instead of the default from commit data.  Defaults to ''
+    required: false
+  PR_LABELS:
+    description: |
+      Labels which will be added to the pull request. Defaults to sync. Set to false to turn off
+    required: false
+  PR_BODY:
+    description: |
+      Additional content to add in the PR description. Defaults to ''
+    required: false
+  ASSIGNEES:
+    description: |
+      Users to assign to the pull request. Defaults to none
+    required: false
+  REVIEWERS:
+    description: |
+      Users to request a review of the pull request from. Defaults to none
+    required: false
+  TEAM_REVIEWERS:
+    description: |
+      Teams to request a review of the pull request from. Defaults to none
+    required: false
+  BRANCH_PREFIX:
+    description: |
+      Specify a different prefix for the new branch in the target repo. Defaults to repo-sync/SOURCE_REPO_NAME
+    required: false
+
+runs:
+  using: 'node16'
+  main: '.github/syncRepoFiles/index.js'
+
+branding:
+  icon: 'git-merge'
+  color: 'blue'

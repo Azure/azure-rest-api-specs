@@ -190,7 +190,13 @@
             "description": "Request successful. Resource does not exist."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "Delete successful."
@@ -524,7 +530,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted and the operation will complete asynchronously."
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URI to poll for completion status.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "The error response describing why the operation failed.",
@@ -873,7 +885,11 @@
                 "description": "Create a new managed HSM pool. This is the default option."
               }
             ]
-          }
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
         },
         "statusMessage": {
           "readOnly": true,
@@ -1177,7 +1193,8 @@
           "x-ms-enum": {
             "name": "NetworkRuleBypassOptions",
             "modelAsString": true
-          }
+          },
+          "default": "AzureServices"
         },
         "defaultAction": {
           "type": "string",
@@ -1189,7 +1206,8 @@
           "x-ms-enum": {
             "name": "NetworkRuleAction",
             "modelAsString": true
-          }
+          },
+          "default": "Allow"
         },
         "ipRules": {
           "type": "array",
