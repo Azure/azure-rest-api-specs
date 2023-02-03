@@ -619,7 +619,7 @@
           "WorkflowTasks"
         ],
         "description": "Update the status of a workflow task request.",
-        "operationId": "UpdateTaskRequest",
+        "operationId": "UpdateSimpleTask",
         "x-ms-examples": {
           "TaskRequest_Update": {
             "$ref": "./examples/UpdateTaskRequest.json"
@@ -1530,9 +1530,9 @@
           "type": "string",
           "description": "The response for an approval task.",
           "enum": [
-            "approved",
-            "rejected",
-            "pending"
+            "Approved",
+            "Rejected",
+            "Pending"
           ],
           "x-ms-enum": {
             "name": "ApprovalResponse",
@@ -1721,6 +1721,7 @@
         "type": {
           "type": "string",
           "enum": [
+            "CreateTask",
             "ApproveApproval",
             "RejectApproval",
             "Reassign",
