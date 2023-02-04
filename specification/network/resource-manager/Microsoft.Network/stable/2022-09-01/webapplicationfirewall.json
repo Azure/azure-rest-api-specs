@@ -504,6 +504,18 @@
           "description": "Priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.",
           "type": "integer"
         },
+        "state": {
+          "description": "Describes if the custom rule is in enabled or disabled state. Defaults to Enabled if not specified.",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "WebApplicationFirewallState",
+            "modelAsString": true
+          }
+        },
         "ruleType": {
           "description": "The rule type.",
           "type": "string",
