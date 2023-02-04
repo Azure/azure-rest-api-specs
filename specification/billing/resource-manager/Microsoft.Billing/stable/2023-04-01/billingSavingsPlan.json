@@ -28,7 +28,7 @@
             "$ref": "./examples/billingSavingsPlanOrderGet.json"
           },
           "SavingsPlanOrderWithExpandedPaymentsGet": {
-            "$ref": "./examples/billingSavingsPlanOrderExpandedGet.json"
+            "$ref": "./examples/billingSavingsPlanOrderExpandedSchedule.json"
           }
         },
         "parameters": [
@@ -218,6 +218,9 @@
         "x-ms-examples": {
           "SavingsPlanGet": {
             "$ref": "./examples/billingSavingsPlanGet.json"
+          },
+          "SavingsPlanGetExpandRenewProperties": {
+            "$ref": "./examples/billingSavingsPlanGetExpandRenewProperties.json"
           }
         },
         "parameters": [
@@ -232,6 +235,9 @@
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandParameter"
           }
         ],
         "responses": {
@@ -282,6 +288,14 @@
             "description": "The request is completed.",
             "schema": {
               "$ref": "#/definitions/SavingsPlanModel"
+            }
+          },
+          "202": {
+            "description": "The request is accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -604,6 +618,15 @@
         "renew": {
           "$ref": "#/definitions/Renew"
         },
+        "renewSource": {
+          "$ref": "#/definitions/RenewSource"
+        },
+        "renewDestination": {
+          "$ref": "#/definitions/RenewDestination"
+        },
+        "renewProperties": {
+          "$ref": "#/definitions/RenewProperties"
+        },
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
         },
@@ -846,6 +869,14 @@
         }
       }
     },
+    "RenewSource": {
+      "type": "string",
+      "description": "SavingsPlan Id of the SavingsPlan from which this SavingsPlan is renewed."
+    },
+    "RenewDestination": {
+      "type": "string",
+      "description": "SavingsPlan Id of the SavingsPlan which is purchased because of renew."
+    },
     "RenewProperties": {
       "type": "object",
       "properties": {
@@ -931,7 +962,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PaymentDetail"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1056,7 +1088,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SavingsPlanUpdateRequestProperties"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1067,7 +1100,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/SavingsPlanValidResponseProperty"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",

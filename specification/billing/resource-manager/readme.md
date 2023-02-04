@@ -29,6 +29,18 @@ openapi-type: arm
 tag: package-2023-04
 ```
 
+### Suppression
+``` yaml
+directive:
+  - suppress: ProvisioningStateValidation
+    from: billingSavingsPlan.json
+    where: $.definitions.ProvisioningState
+    reason: \'Cancelled\' state is used in the service which should be equivalent to in ARM's \'Canceled\' definition ProvisioningState property.
+  - suppress: PatchSkuProperty
+    from: billingSavingsPlan.json
+    reason: \'Sku\' is not a supported property in savings plan patch operation
+```
+
 ### Tag: package-2023-04
 
 These settings apply only when `--tag=package-2023-04` is specified on the command line.
