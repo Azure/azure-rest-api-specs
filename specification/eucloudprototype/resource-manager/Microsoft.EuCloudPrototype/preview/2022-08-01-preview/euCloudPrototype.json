@@ -1,0 +1,451 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.EuCloudPrototype",
+    "description": "Microsoft.EuCloudPrototype provider",
+    "version": "2022-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.Microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EuCloudPrototype/euCloudPrototypes": {
+      "get": {
+        "operationId": "euCloudPrototype_ListBySubscription",
+        "tags": [
+          "EuCloudPrototype",
+          "MixedReality"
+        ],
+        "description": "List EUCloud Accounts by Subscription",
+        "x-ms-examples": {
+          "List eucloudprototype accounts by subscription": {
+            "$ref": "./examples/euCloudPrototype/GetBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/euCloudPrototypeResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EuCloudPrototype/euCloudPrototypes": {
+      "get": {
+        "description": "Returns list of euCloudPrototypes.",
+        "operationId": "euCloudPrototype_ListByResourceGroup",
+        "x-ms-examples": {
+          "List eucloudprototype accounts by resource group": {
+            "$ref": "./examples/euCloudPrototype/GetByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "euCloudPrototype details.",
+            "schema": {
+              "$ref": "#/definitions/euCloudPrototypeResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EuCloudPrototype/euCloudPrototypes/{resourceName}": {
+      "delete": {
+        "description": "Deletes a euCloudPrototype resource for a given name.",
+        "operationId": "euCloudPrototype_Delete",
+        "x-ms-examples": {
+          "Delete eucloudprototype accounts by resource group": {
+            "$ref": "./examples/euCloudPrototype/Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/euCloudPrototypeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Returns euCloudPrototype resource for a given name.",
+        "operationId": "euCloudPrototype_Get",
+        "x-ms-examples": {
+          "List eucloudprototype accounts by resource name": {
+            "$ref": "./examples/euCloudPrototype/Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/euCloudPrototypeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "euCloudPrototype details.",
+            "schema": {
+              "$ref": "#/definitions/euCloudPrototypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Create or update euCloudPrototype resource.",
+        "operationId": "euCloudPrototype_CreateAndUpdate",
+        "x-ms-examples": {
+          "Create or Update eucloudprototype accounts by resource group": {
+            "$ref": "./examples/euCloudPrototype/Put.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/euCloudPrototypeNameParameter"
+          },
+          {
+            "name": "euCloudPrototypeAccount",
+            "description": "euCloudPrototypeAccount parameter.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/euCloudPrototypeResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/euCloudPrototypeResource"
+            }
+          },
+          "201": {
+            "description": "Resource create or update started.",
+            "schema": {
+              "$ref": "#/definitions/euCloudPrototypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Update euCloudPrototype details.",
+        "operationId": "euCloudPrototype_Update",
+        "x-ms-examples": {
+          "Update eucloudprototype accounts by resource group": {
+            "$ref": "./examples/euCloudPrototype/Patch.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/euCloudPrototypeNameParameter"
+          },
+          {
+            "name": "euCloudPrototypeAccount",
+            "description": "euCloudPrototypeAccount parameter.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/euCloudPrototypeResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful.",
+            "schema": {
+              "$ref": "#/definitions/euCloudPrototypeResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.EuCloudPrototype/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Returns list of operations.",
+        "operationId": "Operations_List",
+        "x-ms-examples": {
+          "List eucloudprototype operations": {
+            "$ref": "./examples/euCloudPrototype/ListOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "euCloudPrototypeResource": {
+      "type": "object",
+      "description": "euCloudPrototype details",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/euCloudPrototypeResourceProperties"
+        },
+        "identity": {
+          "description": "The identity associated with this account",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
+        }
+      }
+    },
+    "euCloudPrototypeResourcePatch": {
+      "type": "object",
+      "description": "euCloudPrototype details",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/euCloudPrototypeResourcePatchProperties"
+        }
+      }
+    },
+    "euCloudPrototypeResourcePatchProperties": {
+      "type": "object",
+      "description": "euCloudPrototype details",
+      "properties": {
+        "storageAccountName": {
+          "description": "The name of the storage account associated with this accountId",
+          "type": "string"
+        }
+      }
+    },
+    "euCloudPrototypeResourceProperties": {
+      "type": "object",
+      "description": "euCloudPrototype details",
+      "properties": {
+        "storageAccountName": {
+          "description": "The name of the storage account associated with this accountId",
+          "type": "string"
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/managedResourceGroupConfiguration",
+          "description": "The configuration of the managed resource group associated with the resource."
+        },
+        "accountId": {
+          "description": "unique id of certain account.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "accountDomain": {
+          "description": "Correspond domain name of certain EUCloud Account",
+          "readOnly": true,
+          "type": "string"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "euCloudPrototypeResourceList": {
+      "description": "The list of euCloudPrototype.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of euCloudPrototype list.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/euCloudPrototypeResource"
+          }
+        }
+      }
+    },
+    "managedResourceGroupConfiguration": {
+      "description": "Managed resource group configuration",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Managed resource group name"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "euCloudPrototypeNameParameter": {
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the euCloudPrototype resource.",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
