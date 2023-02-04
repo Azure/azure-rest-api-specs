@@ -820,11 +820,76 @@
       "type": "object",
       "description": "Savings plan patch request",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/SavingsPlanUpdateRequestProperties"
+        }
+      }
+    },
+    "SavingsPlanUpdateRequestProperties": {
+      "type": "object",
+      "description": "Savings plan patch request",
+      "properties": {
         "displayName": {
           "$ref": "#/definitions/DisplayName"
         },
         "appliedScopeType": {
           "$ref": "#/definitions/AppliedScopeType"
+        },
+        "appliedScopeProperties": {
+          "$ref": "#/definitions/AppliedScopeProperties"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
+        "renewProperties": {
+          "$ref": "#/definitions/RenewProperties"
+        }
+      }
+    },
+    "RenewProperties": {
+      "type": "object",
+      "properties": {
+        "purchaseProperties": {
+          "$ref": "#/definitions/PurchaseRequest"
+        }
+      }
+    },
+    "PurchaseRequest": {
+      "type": "object",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PurchaseRequestProperties"
+        }
+      }
+    },
+    "PurchaseRequestProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Friendly name of the savings plan"
+        },
+        "billingScopeId": {
+          "$ref": "#/definitions/BillingScopeId"
+        },
+        "term": {
+          "$ref": "#/definitions/BenefitTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/BillingPlan"
+        },
+        "appliedScopeType": {
+          "$ref": "#/definitions/AppliedScopeType"
+        },
+        "commitment": {
+          "$ref": "#/definitions/Commitment"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
         },
         "appliedScopeProperties": {
           "$ref": "#/definitions/AppliedScopeProperties"
@@ -990,12 +1055,8 @@
         "benefits": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SavingsPlanUpdateRequest"
+            "$ref": "#/definitions/SavingsPlanUpdateRequestProperties"
           }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Url to get the next page."
         }
       }
     },
