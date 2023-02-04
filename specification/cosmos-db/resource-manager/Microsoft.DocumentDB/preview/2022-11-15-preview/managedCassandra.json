@@ -3,7 +3,7 @@
   "info": {
     "title": "Cosmos DB - Managed Cassandra",
     "description": "Azure Cosmos DB Database Service Managed Cassandra REST API",
-    "version": "2022-11-15"
+    "version": "2022-11-15-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -693,10 +693,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairStatus": {
       "post": {
-        "tags": [
-          "ClusterRepairStatus"
-        ],
-        "operationId": "GetRepairClusterStatus",
+        "operationId": "CassandraRepair_GetClusterStatus",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -712,7 +710,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraReaperClusterStatus"
@@ -723,10 +727,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairTables": {
       "post": {
-        "tags": [
-          "ClusterRepairTableStatus"
-        ],
-        "operationId": "GetRepairTableStatus",
+        "operationId": "CassandraRepair_GetTableStatus",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -742,16 +744,16 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              }
+              "type": "string"
             }
           }
         }
@@ -759,10 +761,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns": {
       "post": {
-        "tags": [
-          "RepairRunCreate"
-        ],
-        "operationId": "CreateRepairRun",
+        "operationId": "CassandraRepair_Create",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -787,7 +787,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraReaperRunStatus"
@@ -796,12 +802,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/owner/{ownerName}": {
       "delete": {
-        "tags": [
-          "RepairRunDelete"
-        ],
-        "operationId": "DeleteRepairRun",
+        "operationId": "CassandraRepair_Delete",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -816,22 +820,29 @@
             "$ref": "#/parameters/repairRunId"
           },
           {
+            "$ref": "#/parameters/ownerName"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "202": {
+            "description": "Success. The async operation to delete repair run will begin as soon as possible."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/list": {
       "post": {
-        "tags": [
-          "RepairRunList"
-        ],
-        "operationId": "ListRepairRuns",
+        "operationId": "CassandraRepair_List",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -844,10 +855,25 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CassandraClusterRepairListFilter"
+            },
+            "description": "Optional filter parameters to list repairs."
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraReaperRunStatusFeedResponse"
@@ -858,10 +884,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/pause": {
       "post": {
-        "tags": [
-          "RepairRunPause"
-        ],
-        "operationId": "PauseRepairRun",
+        "operationId": "CassandraRepair_Pause",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -880,18 +904,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
+            "description": "Success. The async operation will begin as soon as possible."
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/resume": {
       "post": {
-        "tags": [
-          "RepairRunResume"
-        ],
-        "operationId": "ResumeRepairRun",
+        "operationId": "CassandraRepair_Resume",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -910,18 +938,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
+            "description": "Success. The async operation will begin as soon as possible."
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/segments": {
       "post": {
-        "tags": [
-          "RepairRunSegmentsList"
-        ],
-        "operationId": "ListRepairSegments",
+        "operationId": "CassandraRepair_ListSegments",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -940,7 +972,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraRepairSegmentResourceFeedResponse"
@@ -951,10 +989,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/show": {
       "post": {
-        "tags": [
-          "RepairRunShow"
-        ],
-        "operationId": "ShowRepairRun",
+        "operationId": "CassandraRepair_Show",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -973,7 +1009,13 @@
           }
         ],
         "responses": {
-          "200": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/CassandraReaperRunStatus"
@@ -984,10 +1026,8 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/segments/{segmentId}/abort": {
       "post": {
-        "tags": [
-          "RepairSegmentAbort"
-        ],
-        "operationId": "AbortSegment",
+        "operationId": "CassandraRepair_AbortSegment",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1009,18 +1049,22 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          },
+          "202": {
+            "description": "Success. The async operation will begin as soon as possible."
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/cassandraClusters/{clusterName}/repairRuns/{repairRunId}/intensity/{intensityValue}": {
       "post": {
-        "tags": [
-          "RepairUpdateIntensity"
-        ],
-        "operationId": "UpdateRepairIntensity",
+        "operationId": "CassandraRepair_Update",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
@@ -1042,8 +1086,14 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success"
+          "202": {
+            "description": "Success. The async operation will begin as soon as possible."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
           }
         }
       }
@@ -1091,17 +1141,29 @@
       "x-ms-parameter-location": "method",
       "description": "Id of repair run created to repair Cassandra cluster."
     },
+    "ownerName": {
+      "name": "ownerName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Owner Name that was used to create the Repair Run."
+    },
     "intensityValue": {
       "name": "intensityValue",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Floating point value representing intensity of the repair."
     },
     "segmentId": {
       "name": "segmentId",
       "in": "path",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Id of a segment of a repair run."
     }
   },
   "definitions": {
@@ -1950,6 +2012,40 @@
         }
       },
       "additionalProperties": false
+    },
+    "CassandraClusterRepairListFilter": {
+      "description": "Request object to filter list of repair runs.",
+      "type": "object",
+      "properties": {
+        "keyspace": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Keyspace name of the repair run."
+        },
+        "repairRunStates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CassandraRepairRunStateEnum"
+          }
+        }
+      }
+    },
+    "CassandraRepairRunStateEnum": {
+      "description": "Valid states of repair run.",
+      "type": "string",
+      "enum": [
+        "NOT_STARTED",
+        "RUNNING",
+        "ERROR",
+        "DONE",
+        "PAUSED",
+        "ABORTED",
+        "DELETED"
+      ],
+      "x-ms-enum": {
+        "name": "CassandraRepairRunStateEnum",
+        "modelAsString": true
+      }
     },
     "CassandraReaperScheduleStatus": {
       "type": "object",
