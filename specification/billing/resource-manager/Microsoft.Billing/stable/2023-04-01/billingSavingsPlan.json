@@ -85,6 +85,12 @@
           },
           {
             "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
           }
         ],
         "responses": {
@@ -169,13 +175,28 @@
           },
           {
             "$ref": "#/parameters/FilterParameter"
+          },
+          {
+            "$ref": "#/parameters/OrderParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/TakeParameter"
+          },
+          {
+            "$ref": "#/parameters/SelectedStateParameter"
+          },
+          {
+            "$ref": "#/parameters/RefreshSummaryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request is completed.",
             "schema": {
-              "$ref": "#/definitions/SavingsPlanModelList"
+              "$ref": "#/definitions/SavingsPlanModelListResult"
             }
           },
           "default": {
@@ -498,6 +519,25 @@
         }
       }
     },
+    "SavingsPlanModelListResult": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SavingsPlanModelList"
+        }
+      ],
+      "properties": {
+        "additionalProperties": {
+          "description": "The roll out count summary of the savings plans",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SavingsPlanSummary"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
     "SavingsPlanModel": {
       "type": "object",
       "description": "Savings plan",
@@ -608,6 +648,71 @@
         },
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
+        }
+      }
+    },
+    "SavingsPlanSummary": {
+      "type": "object",
+      "description": "Savings plans list summary",
+      "properties": {
+        "name": {
+          "description": "This property has value 'summary'",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "$ref": "#/definitions/SavingsPlanSummaryCount"
+        }
+      }
+    },
+    "SavingsPlanSummaryCount": {
+      "description": "The roll up count summary of savings plans in each state",
+      "type": "object",
+      "properties": {
+        "succeededCount": {
+          "description": "The number of savings plans in Succeeded state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "failedCount": {
+          "description": "The number of savings plans in Failed state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "expiringCount": {
+          "description": "The number of savings plans in Expiring state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "expiredCount": {
+          "description": "The number of savings plans in Expired state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "pendingCount": {
+          "description": "The number of savings plans in Pending state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "cancelledCount": {
+          "description": "The number of savings plans in Cancelled state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "processingCount": {
+          "description": "The number of savings plans in Processing state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "noBenefitCount": {
+          "description": "The number of savings plans in No Benefit state",
+          "readOnly": true,
+          "type": "number"
+        },
+        "warningCount": {
+          "description": "The number of savings plans in Warning state",
+          "readOnly": true,
+          "type": "number"
         }
       }
     },
@@ -948,6 +1053,41 @@
         "name": "QueryOptions"
       },
       "x-ms-client-name": "Filter"
+    },
+    "OrderParameter": {
+      "name": "$orderby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData order by expression."
+    },
+    "SkipTokenParameter": {
+      "name": "$skiptoken",
+      "description": "The number of savings plans to skip from the list before returning results",
+      "in": "query",
+      "required": false,
+      "type": "number"
+    },
+    "TakeParameter": {
+      "name": "take",
+      "description": "The number of savings plans to return",
+      "in": "query",
+      "required": false,
+      "type": "number"
+    },
+    "SelectedStateParameter": {
+      "name": "selectedState",
+      "description": "The selected provisioning state",
+      "in": "query",
+      "required": false,
+      "type": "string"
+    },
+    "RefreshSummaryParameter": {
+      "name": "refreshSummary",
+      "description": "To indicate whether to refresh the roll up counts of the savings plans group by provisioning states",
+      "in": "query",
+      "required": false,
+      "type": "string"
     },
     "SavingsPlanOrderIdParameter": {
       "name": "savingsPlanOrderId",
