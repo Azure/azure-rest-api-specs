@@ -1476,6 +1476,568 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}": {
+      "get": {
+        "tags": [
+          "FileWorkspaces"
+        ],
+        "description": "Gets details for a specific file workspace in an Azure subscription.",
+        "operationId": "FileWorkspaces_Get",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved file workspace.",
+            "schema": {
+              "$ref": "#/definitions/FileWorkspaceDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of a subscription file workspace": {
+            "$ref": "./examples/GetFileWorkspaceDetailsForSubscription.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileWorkspaces"
+        ],
+        "description": "Creates a new file workspace for the specified subscription.",
+        "operationId": "FileWorkspaces_Create",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File workspace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - File workspace created successfully",
+            "schema": {
+              "$ref": "#/definitions/FileWorkspaceDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a file workspace": {
+            "$ref": "./examples/CreateFileWorkspaceForSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}": {
+      "get": {
+        "tags": [
+          "FileWorkspaces"
+        ],
+        "description": "Gets details for a specific file workspace.",
+        "operationId": "FileWorkspacesNoSubscription_Get",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved file workspace.",
+            "schema": {
+              "$ref": "#/definitions/FileWorkspaceDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of a file workspace": {
+            "$ref": "./examples/GetFileWorkspaceDetails.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FileWorkspaces"
+        ],
+        "description": "Creates a new file workspace.",
+        "operationId": "FileWorkspaces_Create",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File workspace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - File workspace created successfully",
+            "schema": {
+              "$ref": "#/definitions/FileWorkspaceDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a file workspace": {
+            "$ref": "./examples/CreateFileWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}/files": {
+      "get": {
+        "tags": [
+          "FIles"
+        ],
+        "description": "Lists all the Files information under a worksapce for an Azure subscription.",
+        "operationId": "Files_List",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved files under a file workspace.",
+            "schema": {
+              "$ref": "#/definitions/FilesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List support tickets for a subscription": {
+            "$ref": "./examples/ListFilesForSubscriptionUnderFileWorkspace.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}/files": {
+      "get": {
+        "tags": [
+          "FIles"
+        ],
+        "description": "Lists all the Files information under a worksapce for an Azure subscription.",
+        "operationId": "Files_List",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved files under a file workspace.",
+            "schema": {
+              "$ref": "#/definitions/FilesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List support tickets for a subscription": {
+            "$ref": "./examples/ListFilesUnderFileWorkspace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}/files/{fileName}": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "description": "Returns details of a specific file in a work space.",
+        "operationId": "Files_Get",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "File Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved file details.",
+            "schema": {
+              "$ref": "#/definitions/FileDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of a subscription file": {
+            "$ref": "./examples/GetFileDetailsForSubscription.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Files"
+        ],
+        "description": "This API allows you to upload content to a file",
+        "operationId": "Files_Upload",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File WorkspaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "File Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "uploadFile",
+            "in": "body",
+            "description": "UploadFile object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadFile"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully uploaded file content.",
+            "schema": {
+              "$ref": "#/definitions/FileDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateSupportTicketForSubscription": {
+            "$ref": "./examples/UploadFileForSubscription.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Files"
+        ],
+        "description": "Creates a new file under a workspace for the specified subscription.",
+        "operationId": "Files_Create",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File workspace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "File name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - File created successfully",
+            "schema": {
+              "$ref": "#/definitions/FileDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a file workspace": {
+            "$ref": "./examples/CreateFileForSubscription.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}/files/{fileName}": {
+      "get": {
+        "tags": [
+          "Files"
+        ],
+        "description": "Returns details of a specific file in a work space.",
+        "operationId": "Files_Get",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File Workspace Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "File Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved file details.",
+            "schema": {
+              "$ref": "#/definitions/FileDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of a subscription file": {
+            "$ref": "./examples/GetFileDetails.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Files"
+        ],
+        "description": "This API allows you to upload content to a file",
+        "operationId": "Files_Upload",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File WorkspaceName",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "File Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "uploadFile",
+            "in": "body",
+            "description": "UploadFile object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UploadFile"
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully uploaded file content.",
+            "schema": {
+              "$ref": "#/definitions/FileDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateSupportTicketForSubscription": {
+            "$ref": "./examples/UploadFile.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Files"
+        ],
+        "description": "Creates a new file under a workspace.",
+        "operationId": "Files_Create",
+        "parameters": [
+          {
+            "name": "fileWorkspaceName",
+            "in": "path",
+            "description": "File workspace name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "description": "File name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - File created successfully",
+            "schema": {
+              "$ref": "#/definitions/FileDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ExceptionResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create a file workspace": {
+            "$ref": "./examples/CreateFile.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1940,6 +2502,11 @@
           "type": "string",
           "readOnly": true
         },
+        "fileWorkspaceName": {
+          "description": "File workspace friendly name.",
+          "type": "string",
+          "readOnly": true
+        },
         "technicalTicketDetails": {
           "$ref": "#/definitions/TechnicalTicketDetails",
           "description": "Additional ticket details associated with a technical support ticket request."
@@ -2341,6 +2908,98 @@
           "description": "Time in UTC (ISO 8601 format) when the communication was created.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "FileWorkspaceDetails": {
+      "x-ms-azure-resource": true,
+      "description": "Object that represents FileWorkspaceDetails resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the resource 'Microsoft.Support/fileWorkspaces'",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FileWorkspaceDetailsProperties",
+          "description": "Properties of the resource"
+        }
+      }
+    },
+    "FileWorkspaceDetailsProperties": {
+      "description": "Describes the properties of a file workspace.",
+      "required": [
+      ],
+      "type": "object",
+      "properties": {
+        "createdOn": {
+          "format": "date-time",
+          "description": "Time in UTC (ISO 8601 format) when support ticket was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationTime": {
+          "format": "date-time",
+          "description": "Time in UTC (ISO 8601 format) when support ticket was last modified.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FileDetails": {
+      "x-ms-azure-resource": true,
+      "description": "Object that represents File Details resource",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Type of the resource 'Microsoft.Support/files'",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FilesListResult": {
+      "description": "Object that represents a collection of File resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of File resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FileDetails"
+          }
+        }
+      }
+    },
+    "UploadFile": {
+      "description": "Contact information associated with the support ticket.",
+      "type": "object",
+      "properties": {
+        "fileContent": {
+          "description": "File Content in base64 encoded format",
+          "type": "string"
         }
       }
     }
