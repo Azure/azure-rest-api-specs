@@ -541,14 +541,9 @@
         }
       ],
       "properties": {
-        "additionalProperties": {
+        "summary": {
           "description": "The roll out count summary of the savings plans",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/SavingsPlanSummary"
-          },
-          "x-ms-identifiers": []
+          "$ref": "#/definitions/SavingsPlanSummaryCount"
         }
       }
     },
@@ -671,20 +666,6 @@
         },
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
-        }
-      }
-    },
-    "SavingsPlanSummary": {
-      "type": "object",
-      "description": "Savings plans list summary",
-      "properties": {
-        "name": {
-          "description": "This property has value 'summary'",
-          "readOnly": true,
-          "type": "string"
-        },
-        "value": {
-          "$ref": "#/definitions/SavingsPlanSummaryCount"
         }
       }
     },
