@@ -5761,6 +5761,1534 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets": {
+      "get": {
+        "tags": [
+          "FeaturesetContainer"
+        ],
+        "summary": "List featurestore entity containers.",
+        "operationId": "FeaturesetContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workspace Featureset Container.": {
+            "$ref": "./examples/Workspace/FeaturesetContainer/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}": {
+      "delete": {
+        "tags": [
+          "FeaturesetContainer"
+        ],
+        "summary": "Delete container.",
+        "operationId": "FeaturesetContainers_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workspace Featureset Container.": {
+            "$ref": "./examples/Workspace/FeaturesetContainer/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "FeaturesetContainer"
+        ],
+        "summary": "Get container.",
+        "operationId": "FeaturesetContainers_GetEntity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntity Workspace Featureset Container.": {
+            "$ref": "./examples/Workspace/FeaturesetContainer/getEntity.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FeaturesetContainer"
+        ],
+        "summary": "Create or update container.",
+        "operationId": "FeaturesetContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturesetContainerResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetContainerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetContainerResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Featureset Container.": {
+            "$ref": "./examples/Workspace/FeaturesetContainer/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions": {
+      "get": {
+        "tags": [
+          "FeaturesetVersion"
+        ],
+        "summary": "List versions.",
+        "operationId": "FeaturesetVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workspace Featureset Version.": {
+            "$ref": "./examples/Workspace/FeaturesetVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}": {
+      "delete": {
+        "tags": [
+          "FeaturesetVersion"
+        ],
+        "summary": "Delete version.",
+        "operationId": "FeaturesetVersions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workspace Featureset Version.": {
+            "$ref": "./examples/Workspace/FeaturesetVersion/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "FeaturesetVersion"
+        ],
+        "summary": "Get version.",
+        "operationId": "FeaturesetVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetVersionResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workspace Featureset Version.": {
+            "$ref": "./examples/Workspace/FeaturesetVersion/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FeaturesetVersion"
+        ],
+        "summary": "Create or update version.",
+        "operationId": "FeaturesetVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Version entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturesetVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetVersionResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetVersionResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Featureset Version.": {
+            "$ref": "./examples/Workspace/FeaturesetVersion/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/backfill": {
+      "post": {
+        "tags": [
+          "FeaturesetVersion"
+        ],
+        "summary": "Backfill.",
+        "operationId": "FeaturesetVersions_Backfill",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Feature set version backfill request entity.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturesetVersionBackfillRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetVersionBackfillResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Backfill Workspace Featureset Version.": {
+            "$ref": "./examples/Workspace/FeaturesetVersion/backfill.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/getFeature": {
+      "post": {
+        "tags": [
+          "FeaturesetVersion"
+        ],
+        "summary": "Get feature.",
+        "operationId": "FeaturesetVersions_GetFeature",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Feature set name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Feature set version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Feature Name request. This is case-sensitive.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetFeatureRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Feature"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetFeature Workspace Featureset Version.": {
+            "$ref": "./examples/Workspace/FeaturesetVersion/getFeature.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/listFeatures": {
+      "post": {
+        "tags": [
+          "FeaturesetVersion"
+        ],
+        "summary": "List Features.",
+        "operationId": "FeaturesetVersions_ListFeatures",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeatureArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListFeatures Workspace Featureset Version.": {
+            "$ref": "./examples/Workspace/FeaturesetVersion/listFeatures.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/listMaterializationJobs": {
+      "post": {
+        "tags": [
+          "FeaturesetVersion"
+        ],
+        "summary": "List materialization Jobs.",
+        "operationId": "FeaturesetVersions_ListMaterializationJobs",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "filters",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "featureWindowStart",
+            "description": "Start time of the feature window to filter materialization jobs.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "featureWindowEnd",
+            "description": "End time of the feature window to filter materialization jobs.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturesetJobArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListMaterializationJobs Workspace Featureset Version.": {
+            "$ref": "./examples/Workspace/FeaturesetVersion/listMaterializationJobs.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities": {
+      "get": {
+        "tags": [
+          "FeaturestoreEntityContainer"
+        ],
+        "summary": "List featurestore entity containers.",
+        "operationId": "FeaturestoreEntityContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workspace Featurestore Entity Container.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityContainer/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}": {
+      "delete": {
+        "tags": [
+          "FeaturestoreEntityContainer"
+        ],
+        "summary": "Delete container.",
+        "operationId": "FeaturestoreEntityContainers_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workspace Featurestore Entity Container.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityContainer/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "FeaturestoreEntityContainer"
+        ],
+        "summary": "Get container.",
+        "operationId": "FeaturestoreEntityContainers_GetEntity",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntity Workspace Featurestore Entity Container.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityContainer/getEntity.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FeaturestoreEntityContainer"
+        ],
+        "summary": "Create or update container.",
+        "operationId": "FeaturestoreEntityContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityContainerResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityContainerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityContainerResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Featurestore Entity Container.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityContainer/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions": {
+      "get": {
+        "tags": [
+          "FeaturestoreEntityVersion"
+        ],
+        "summary": "List versions.",
+        "operationId": "FeaturestoreEntityVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Workspace Featurestore Entity Version.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions/{version}": {
+      "delete": {
+        "tags": [
+          "FeaturestoreEntityVersion"
+        ],
+        "summary": "Delete version.",
+        "operationId": "FeaturestoreEntityVersions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Workspace Featurestore Entity Version.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityVersion/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "FeaturestoreEntityVersion"
+        ],
+        "summary": "Get version.",
+        "operationId": "FeaturestoreEntityVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityVersionResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Workspace Featurestore Entity Version.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityVersion/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FeaturestoreEntityVersion"
+        ],
+        "summary": "Create or update version.",
+        "operationId": "FeaturestoreEntityVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Version entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityVersionResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityVersionResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Featurestore Entity Version.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityVersion/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs": {
       "get": {
         "tags": [
@@ -5825,6 +7353,12 @@
                 }
               ]
             }
+          },
+          {
+            "in": "query",
+            "name": "assetName",
+            "description": "Asset name the job's named output is registered with",
+            "type": "string"
           },
           {
             "in": "query",
@@ -7189,6 +8723,98 @@
           "CreateOrUpdate Workspace Model Version.": {
             "$ref": "./examples/Workspace/ModelVersion/createOrUpdate.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/package": {
+      "post": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "Model Version Package operation.",
+        "operationId": "ModelVersions_Package",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Package operation request body.",
+            "required": true,
+            "schema": {
+              "description": "Model package operation request properties."
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PackageResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Package Workspace Model Version.": {
+            "$ref": "./examples/Workspace/ModelVersion/package.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -8930,6 +10556,15 @@
             "read"
           ]
         },
+        "schedulingSettings": {
+          "description": "Scheduling setting for the job",
+          "$ref": "#/definitions/SchedulingSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "taskDetails": {
           "description": "[Required] This represents scenario which can be one of Tables/NLP/Image",
           "$ref": "#/definitions/AutoMLVertical"
@@ -9285,6 +10920,42 @@
       "x-ms-discriminator-value": "AzureFile",
       "additionalProperties": false
     },
+    "AzureMLBatchInferencingServer": {
+      "description": "Azure ML batch inferencing server configurations.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InferencingServer"
+        }
+      ],
+      "properties": {
+        "codeConfiguration": {
+          "description": "Code configuration for AML batch inferencing server.",
+          "$ref": "#/definitions/CodeConfiguration",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "AzureMLBatch",
+      "additionalProperties": false
+    },
+    "AzureMLOnlineInferencingServer": {
+      "description": "Azure ML online inferencing configurations.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InferencingServer"
+        }
+      ],
+      "properties": {
+        "codeConfiguration": {
+          "description": "Code configuration for AML inferencing server.",
+          "$ref": "#/definitions/CodeConfiguration",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "AzureMLOnline",
+      "additionalProperties": false
+    },
     "BanditPolicy": {
       "description": "Defines an early termination policy based on slack criteria, and a frequency and delay interval for evaluation",
       "type": "object",
@@ -9310,6 +10981,57 @@
       "x-ms-discriminator-value": "Bandit",
       "additionalProperties": false
     },
+    "BaseEnvironmentId": {
+      "description": "Base environment type.",
+      "required": [
+        "resourceId"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseEnvironmentSource"
+        }
+      ],
+      "properties": {
+        "resourceId": {
+          "description": "[Required] Resource id accepting ArmId or AzureMlId.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "EnvironmentAsset",
+      "additionalProperties": false
+    },
+    "BaseEnvironmentSource": {
+      "required": [
+        "baseEnvironmentSourceType"
+      ],
+      "type": "object",
+      "properties": {
+        "baseEnvironmentSourceType": {
+          "description": "[Required] Base environment type.",
+          "$ref": "#/definitions/BaseEnvironmentSourceType"
+        }
+      },
+      "discriminator": "baseEnvironmentSourceType"
+    },
+    "BaseEnvironmentSourceType": {
+      "description": "Base environment type.",
+      "enum": [
+        "EnvironmentAsset"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "BaseEnvironmentSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "EnvironmentAsset"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "BatchDeployment": {
       "description": "Batch inference settings per deployment.",
       "type": "object",
@@ -9322,6 +11044,11 @@
         "compute": {
           "description": "Compute target for batch inference operation.",
           "type": "string",
+          "x-nullable": true
+        },
+        "deploymentProperties": {
+          "description": "Properties relevant to different deployment types.",
+          "$ref": "#/definitions/BatchDeploymentProperties",
           "x-nullable": true
         },
         "errorThreshold": {
@@ -9384,6 +11111,41 @@
       "x-ms-client-name": "BatchDeploymentProperties",
       "additionalProperties": false
     },
+    "BatchDeploymentProperties": {
+      "description": "Properties relevant to different deployment types.",
+      "required": [
+        "deploymentPropertyType"
+      ],
+      "type": "object",
+      "properties": {
+        "deploymentPropertyType": {
+          "description": "[Required] The type of the deployment",
+          "$ref": "#/definitions/BatchDeploymentPropertyType"
+        }
+      },
+      "discriminator": "deploymentPropertyType"
+    },
+    "BatchDeploymentPropertyType": {
+      "description": "The enumerated property types for batch deployments.",
+      "enum": [
+        "Model",
+        "PipelineComponent"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "BatchDeploymentPropertyType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Model"
+          },
+          {
+            "value": "PipelineComponent"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "BatchDeploymentTrackedResource": {
       "required": [
         "location",
@@ -9444,7 +11206,7 @@
       ],
       "properties": {
         "defaults": {
-          "description": "Default values for Batch Endpoint",
+          "description": "Default values for Batch Endpoint.",
           "$ref": "#/definitions/BatchEndpointDefaults",
           "x-nullable": true
         },
@@ -9566,6 +11328,47 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "BatchPipelineComponentDeploymentProperties": {
+      "description": "Properties for a Batch Pipeline Component Deployment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BatchDeploymentProperties"
+        }
+      ],
+      "properties": {
+        "componentId": {
+          "description": "The ARM id of the component to be run.",
+          "$ref": "#/definitions/IdAssetReference",
+          "x-nullable": true
+        },
+        "description": {
+          "description": "The description which will be applied to the job.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "settings": {
+          "description": "Run-time settings for the pipeline job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "tags": {
+          "description": "The tags which will be applied to the job.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "PipelineComponent",
       "additionalProperties": false
     },
     "BatchRetrySettings": {
@@ -9849,7 +11652,7 @@
           },
           {
             "value": "RandomForest",
-            "description": "Random forest is a supervised learning algorithm.\nThe \"forest\" it builds, is an ensemble of decision trees, usually trained with the “bagging” method.\nThe general idea of the bagging method is that a combination of learning models increases the overall result."
+            "description": "Random forest is a supervised learning algorithm.\nThe \"forest\" it builds, is an ensemble of decision trees, usually trained with the â€œbaggingâ€ method.\nThe general idea of the bagging method is that a combination of learning models increases the overall result."
           },
           {
             "value": "ExtremeRandomTrees",
@@ -10309,6 +12112,15 @@
             "create",
             "read"
           ]
+        },
+        "schedulingSettings": {
+          "description": "Scheduling setting for the job",
+          "$ref": "#/definitions/SchedulingSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Command",
@@ -10457,6 +12269,18 @@
           "items": {
             "$ref": "#/definitions/ComponentVersionResource"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ComputeResource": {
+      "description": "Dto object representing compute resource",
+      "type": "object",
+      "properties": {
+        "instanceType": {
+          "description": "Specifies the instance type",
+          "type": "string",
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -10637,6 +12461,24 @@
           "format": "int32",
           "description": "[Required] Forecast horizon value.",
           "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "Custom",
+      "additionalProperties": false
+    },
+    "CustomInferencingServer": {
+      "description": "Custom inference server configurations.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InferencingServer"
+        }
+      ],
+      "properties": {
+        "inferenceConfiguration": {
+          "description": "Inference configuration for custom inferencing.",
+          "$ref": "#/definitions/OnlineInferenceConfiguration",
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Custom",
@@ -11289,6 +13131,31 @@
       },
       "additionalProperties": false
     },
+    "EmailNotificationEnableType": {
+      "description": "Enum to determine the email notification type.",
+      "enum": [
+        "JobCompleted",
+        "JobFailed",
+        "JobCancelled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "EmailNotificationEnableType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "JobCompleted"
+          },
+          {
+            "value": "JobFailed"
+          },
+          {
+            "value": "JobCancelled"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "EndpointAuthKeys": {
       "description": "Keys for endpoint authentication.",
       "type": "object",
@@ -11837,6 +13704,96 @@
       },
       "discriminator": "format"
     },
+    "Feature": {
+      "description": "Dto object representing feature",
+      "type": "object",
+      "properties": {
+        "dataType": {
+          "description": "Specifies type",
+          "default": "String",
+          "$ref": "#/definitions/FeatureDataType"
+        },
+        "description": {
+          "description": "Specifies description",
+          "type": "string",
+          "x-nullable": true
+        },
+        "featureName": {
+          "description": "Specifies name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "tags": {
+          "description": "Specifies tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeatureArmPaginatedResult": {
+      "description": "A paginated list of Feature entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Feature objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type Feature.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feature"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeatureDataType": {
+      "enum": [
+        "String",
+        "Integer",
+        "Long",
+        "Float",
+        "Double",
+        "Binary",
+        "Datetime"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureDataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "String"
+          },
+          {
+            "value": "Integer"
+          },
+          {
+            "value": "Long"
+          },
+          {
+            "value": "Float"
+          },
+          {
+            "value": "Double"
+          },
+          {
+            "value": "Binary"
+          },
+          {
+            "value": "Datetime"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "FeatureLags": {
       "description": "Flag for generating lags for the numeric features.",
       "enum": [
@@ -11857,6 +13814,454 @@
             "description": "System auto-generates feature lags."
           }
         ]
+      },
+      "additionalProperties": false
+    },
+    "FeaturesetContainer": {
+      "description": "Dto object representing feature set",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetContainer"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state for the featureset container.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-client-name": "FeaturesetContainerProperties",
+      "additionalProperties": false
+    },
+    "FeaturesetContainerResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/FeaturesetContainer"
+        }
+      },
+      "x-ms-client-name": "FeaturesetContainer",
+      "additionalProperties": false
+    },
+    "FeaturesetContainerResourceArmPaginatedResult": {
+      "description": "A paginated list of FeaturesetContainer entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of FeaturesetContainer objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type FeaturesetContainer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeaturesetContainerResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturesetJob": {
+      "description": "Dto object representing the feature set job",
+      "type": "object",
+      "properties": {
+        "createdDate": {
+          "format": "date-time",
+          "description": "Specifies the created date",
+          "type": "string",
+          "x-nullable": true
+        },
+        "displayName": {
+          "description": "Specifies the display name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "duration": {
+          "format": "duration",
+          "description": "Specifies the duration",
+          "type": "string",
+          "x-nullable": true
+        },
+        "experimentId": {
+          "description": "Specifies the experiment id",
+          "type": "string",
+          "x-nullable": true
+        },
+        "featureWindow": {
+          "description": "Specifies the backfill feature window to be materialized",
+          "$ref": "#/definitions/FeatureWindow",
+          "x-nullable": true
+        },
+        "jobId": {
+          "description": "Specifies the job id",
+          "type": "string",
+          "x-nullable": true
+        },
+        "status": {
+          "description": "Specifies the job status",
+          "default": "Unknown",
+          "$ref": "#/definitions/JobStatus"
+        },
+        "tags": {
+          "description": "Specifies the tags if any",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "type": {
+          "description": "Specifies the feature store job type",
+          "default": "RecurrentMaterialization",
+          "$ref": "#/definitions/FeaturestoreJobType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturesetJobArmPaginatedResult": {
+      "description": "A paginated list of FeaturesetJob entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of FeaturesetJob objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type FeaturesetJob.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeaturesetJob"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturesetSpecification": {
+      "description": "Dto object representing specification",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "Specifies the spec path",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturesetVersion": {
+      "description": "Dto object representing feature set version",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetBase"
+        }
+      ],
+      "properties": {
+        "entities": {
+          "description": "Specifies list of entities",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "materializationSettings": {
+          "description": "Specifies the materialization settings",
+          "$ref": "#/definitions/MaterializationSettings",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the featureset version container.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "specification": {
+          "description": "Specifies the feature spec details",
+          "$ref": "#/definitions/FeaturesetSpecification",
+          "x-nullable": true
+        },
+        "stage": {
+          "description": "Specifies the asset stage",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "FeaturesetVersionProperties",
+      "additionalProperties": false
+    },
+    "FeaturesetVersionBackfillRequest": {
+      "description": "Request payload for creating a backfill request for a given feature set version",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Specifies description",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Specifies description",
+          "type": "string"
+        },
+        "featureWindow": {
+          "description": "Specifies the backfill feature window to be materialized",
+          "$ref": "#/definitions/FeatureWindow",
+          "x-nullable": true
+        },
+        "resource": {
+          "description": "Specifies the compute resource settings",
+          "$ref": "#/definitions/ComputeResource"
+        },
+        "sparkConfiguration": {
+          "description": "Specifies the spark compute settings",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
+        },
+        "tags": {
+          "description": "Specifies the tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturesetVersionBackfillResponse": {
+      "description": "Response payload for creating a backfill request for a given feature set version",
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Job id created as part of request",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturesetVersionResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/FeaturesetVersion"
+        }
+      },
+      "x-ms-client-name": "FeaturesetVersion",
+      "additionalProperties": false
+    },
+    "FeaturesetVersionResourceArmPaginatedResult": {
+      "description": "A paginated list of FeaturesetVersion entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of FeaturesetVersion objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type FeaturesetVersion.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeaturesetVersionResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturestoreEntityContainer": {
+      "description": "Dto object representing feature entity",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetContainer"
+        }
+      ],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state for the featurestore entity container.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-client-name": "FeaturestoreEntityContainerProperties",
+      "additionalProperties": false
+    },
+    "FeaturestoreEntityContainerResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/FeaturestoreEntityContainer"
+        }
+      },
+      "x-ms-client-name": "FeaturestoreEntityContainer",
+      "additionalProperties": false
+    },
+    "FeaturestoreEntityContainerResourceArmPaginatedResult": {
+      "description": "A paginated list of FeaturestoreEntityContainer entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of FeaturestoreEntityContainer objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type FeaturestoreEntityContainer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeaturestoreEntityContainerResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturestoreEntityVersion": {
+      "description": "Dto object representing feature entity version",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetBase"
+        }
+      ],
+      "properties": {
+        "indexColumns": {
+          "description": "Specifies index columns",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IndexColumn"
+          },
+          "x-nullable": true,
+          "x-ms-identifiers": []
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the featurestore entity version.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-client-name": "FeaturestoreEntityVersionProperties",
+      "additionalProperties": false
+    },
+    "FeaturestoreEntityVersionResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/FeaturestoreEntityVersion"
+        }
+      },
+      "x-ms-client-name": "FeaturestoreEntityVersion",
+      "additionalProperties": false
+    },
+    "FeaturestoreEntityVersionResourceArmPaginatedResult": {
+      "description": "A paginated list of FeaturestoreEntityVersion entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of FeaturestoreEntityVersion objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type FeaturestoreEntityVersion.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeaturestoreEntityVersionResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "FeaturestoreJobType": {
+      "enum": [
+        "RecurrentMaterialization",
+        "BackfillMaterialization"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeaturestoreJobType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "RecurrentMaterialization"
+          },
+          {
+            "value": "BackfillMaterialization"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "FeatureWindow": {
+      "description": "Specifies the feature window",
+      "type": "object",
+      "properties": {
+        "featureWindowEnd": {
+          "format": "date-time",
+          "description": "Specifies the feature window end time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "featureWindowStart": {
+          "format": "date-time",
+          "description": "Specifies the feature window start time",
+          "type": "string",
+          "x-nullable": true
+        }
       },
       "additionalProperties": false
     },
@@ -12077,7 +14482,7 @@
           },
           {
             "value": "RandomForest",
-            "description": "Random forest is a supervised learning algorithm.\nThe \"forest\" it builds, is an ensemble of decision trees, usually trained with the “bagging” method.\nThe general idea of the bagging method is that a combination of learning models increases the overall result."
+            "description": "Random forest is a supervised learning algorithm.\nThe \"forest\" it builds, is an ensemble of decision trees, usually trained with the â€œbaggingâ€ method.\nThe general idea of the bagging method is that a combination of learning models increases the overall result."
           },
           {
             "value": "ExtremeRandomTrees",
@@ -12227,6 +14632,18 @@
           "items": {
             "$ref": "#/definitions/ForecastingModels"
           },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "GetFeatureRequest": {
+      "description": "Request payload to retrieve feature information from a  given feature set version",
+      "type": "object",
+      "properties": {
+        "featureName": {
+          "description": "Specifies name of the feature.",
+          "type": "string",
           "x-nullable": true
         }
       },
@@ -13238,6 +15655,23 @@
       },
       "additionalProperties": false
     },
+    "IndexColumn": {
+      "description": "Dto object representing index column",
+      "type": "object",
+      "properties": {
+        "columnName": {
+          "description": "Specifies the column name",
+          "type": "string",
+          "x-nullable": true
+        },
+        "dataType": {
+          "description": "Specifies the data type",
+          "default": "String",
+          "$ref": "#/definitions/FeatureDataType"
+        }
+      },
+      "additionalProperties": false
+    },
     "InferenceContainerProperties": {
       "type": "object",
       "properties": {
@@ -13253,6 +15687,48 @@
           "description": "The port to send the scoring requests to, within the inference server container.",
           "$ref": "#/definitions/Route"
         }
+      },
+      "additionalProperties": false
+    },
+    "InferencingServer": {
+      "required": [
+        "serverType"
+      ],
+      "type": "object",
+      "properties": {
+        "serverType": {
+          "description": "[Required] Inferencing server type for various targets.",
+          "$ref": "#/definitions/InferencingServerType"
+        }
+      },
+      "discriminator": "serverType"
+    },
+    "InferencingServerType": {
+      "description": "Inferencing server type for various targets.",
+      "enum": [
+        "AzureMLOnline",
+        "AzureMLBatch",
+        "Triton",
+        "Custom"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "InferencingServerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AzureMLOnline"
+          },
+          {
+            "value": "AzureMLBatch"
+          },
+          {
+            "value": "Triton"
+          },
+          {
+            "value": "Custom"
+          }
+        ]
       },
       "additionalProperties": false
     },
@@ -13288,6 +15764,31 @@
           },
           {
             "value": "EvalDownload"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "InputPathType": {
+      "description": "Input path type for package inputs.",
+      "enum": [
+        "Url",
+        "PathId",
+        "PathVersion"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "InputPathType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Url"
+          },
+          {
+            "value": "PathId"
+          },
+          {
+            "value": "PathVersion"
           }
         ]
       },
@@ -13385,6 +15886,15 @@
             "create",
             "read"
           ]
+        },
+        "notificationSetting": {
+          "description": "Notification setting for the job",
+          "$ref": "#/definitions/NotificationSetting",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         },
         "services": {
           "description": "List of JobEndpoints.\r\nFor local jobs, a job endpoint will have an endpoint value of FileStreamObject.",
@@ -13850,6 +16360,35 @@
           {
             "value": "Scheduled",
             "description": "The job is in a scheduled state. Job is not in any active state."
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "JobTier": {
+      "description": "Enum to determine the job tier.",
+      "enum": [
+        "Spot",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Spot"
+          },
+          {
+            "value": "Basic"
+          },
+          {
+            "value": "Standard"
+          },
+          {
+            "value": "Premium"
           }
         ]
       },
@@ -14552,6 +17091,69 @@
       "x-ms-discriminator-value": "Managed",
       "additionalProperties": false
     },
+    "MaterializationSettings": {
+      "type": "object",
+      "properties": {
+        "notification": {
+          "description": "Specifies the notification details",
+          "$ref": "#/definitions/NotificationSetting",
+          "x-nullable": true
+        },
+        "resource": {
+          "description": "Specifies the compute resource settings",
+          "$ref": "#/definitions/ComputeResource",
+          "x-nullable": true
+        },
+        "schedule": {
+          "description": "Specifies the schedule details",
+          "$ref": "#/definitions/RecurrenceTrigger",
+          "x-nullable": true
+        },
+        "sparkConfiguration": {
+          "description": "Specifies the spark compute settings",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "storeType": {
+          "description": "Specifies the stores to which materialization should happen",
+          "default": "None",
+          "$ref": "#/definitions/MaterializationStoreType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "MaterializationStoreType": {
+      "enum": [
+        "None",
+        "Online",
+        "Offline",
+        "OnlineAndOffline"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "MaterializationStoreType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None"
+          },
+          {
+            "value": "Online"
+          },
+          {
+            "value": "Offline"
+          },
+          {
+            "value": "OnlineAndOffline"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
     "MedianStoppingPolicy": {
       "description": "Defines an early termination policy based on running averages of the primary metric of all runs",
       "type": "object",
@@ -14769,6 +17371,23 @@
       "x-ms-discriminator-value": "mltable",
       "additionalProperties": false
     },
+    "ModelConfiguration": {
+      "description": "Model configuration options.",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "Input delivery mode for the model.",
+          "default": "Download",
+          "$ref": "#/definitions/PackageInputDeliveryMode"
+        },
+        "mountPath": {
+          "description": "Relative mounting path of the model in the target image.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "ModelContainer": {
       "type": "object",
       "allOf": [
@@ -14823,6 +17442,35 @@
           "items": {
             "$ref": "#/definitions/ModelContainerResource"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModelPackageInput": {
+      "description": "Model package input options.",
+      "required": [
+        "inputType",
+        "path"
+      ],
+      "type": "object",
+      "properties": {
+        "inputType": {
+          "description": "[Required] Type of the input included in the target image.",
+          "$ref": "#/definitions/PackageInputType"
+        },
+        "mode": {
+          "description": "Input delivery mode of the input.",
+          "default": "ReadOnlyMount",
+          "$ref": "#/definitions/PackageInputDeliveryMode"
+        },
+        "mountPath": {
+          "description": "Relative mount path of the input in the target image.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "path": {
+          "description": "[Required] Location of the input.",
+          "$ref": "#/definitions/PackageInputPathBase"
         }
       },
       "additionalProperties": false
@@ -15356,6 +18004,37 @@
       "x-ms-discriminator-value": "None",
       "additionalProperties": false
     },
+    "NotificationSetting": {
+      "description": "Configuration for notification.",
+      "type": "object",
+      "properties": {
+        "emailOn": {
+          "description": "Send email notification to user on specified notfication type",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailNotificationEnableType"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "emails": {
+          "description": "This is the email recipient list which has a limitation of 499 characters in total concat with comma seperator",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "ObjectDetectionPrimaryMetrics": {
       "description": "Primary metrics for Image ObjectDetection task.",
       "enum": [
@@ -15619,6 +18298,42 @@
       },
       "additionalProperties": false
     },
+    "OnlineInferenceConfiguration": {
+      "description": "Online inference configuration options.",
+      "type": "object",
+      "properties": {
+        "configurations": {
+          "description": "Additional configurations",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-nullable": true
+        },
+        "entryScript": {
+          "description": "Entry script or command to invoke.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "livenessRoute": {
+          "description": "The route to check the liveness of the inference server container.",
+          "$ref": "#/definitions/Route",
+          "x-nullable": true
+        },
+        "readinessRoute": {
+          "description": "The route to check the readiness of the inference server container.",
+          "$ref": "#/definitions/Route",
+          "x-nullable": true
+        },
+        "scoringRoute": {
+          "description": "The port to send the scoring requests to, within the inference server container.",
+          "$ref": "#/definitions/Route",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "OnlineRequestSettings": {
       "description": "Online deployment scoring requests configuration.",
       "type": "object",
@@ -15753,6 +18468,290 @@
         }
       },
       "x-ms-discriminator-value": "OutputPath",
+      "additionalProperties": false
+    },
+    "PackageBuildState": {
+      "description": "Package build state returned in package response.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PackageBuildState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotStarted"
+          },
+          {
+            "value": "Running"
+          },
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Failed"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "PackageInputDeliveryMode": {
+      "description": "Mounting type of the model or the inputs",
+      "enum": [
+        "ReadOnlyMount",
+        "Download"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PackageInputDeliveryMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ReadOnlyMount"
+          },
+          {
+            "value": "Download"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "PackageInputPathBase": {
+      "required": [
+        "inputPathType"
+      ],
+      "type": "object",
+      "properties": {
+        "inputPathType": {
+          "description": "[Required] Input path type for package inputs.",
+          "$ref": "#/definitions/InputPathType"
+        }
+      },
+      "discriminator": "inputPathType"
+    },
+    "PackageInputPathId": {
+      "description": "Package input path specified with a resource id.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PackageInputPathBase"
+        }
+      ],
+      "properties": {
+        "resourceId": {
+          "description": "Input resource id.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "PathId",
+      "additionalProperties": false
+    },
+    "PackageInputPathUrl": {
+      "description": "Package input path specified as an url.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PackageInputPathBase"
+        }
+      ],
+      "properties": {
+        "url": {
+          "description": "Input path url.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Url",
+      "additionalProperties": false
+    },
+    "PackageInputPathVersion": {
+      "description": "Package input path specified with name and version.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PackageInputPathBase"
+        }
+      ],
+      "properties": {
+        "resourceName": {
+          "description": "Input resource name.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "resourceVersion": {
+          "description": "Input resource version.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "PathVersion",
+      "additionalProperties": false
+    },
+    "PackageInputType": {
+      "description": "Type of the inputs.",
+      "enum": [
+        "UriFile",
+        "UriFolder"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PackageInputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "UriFile"
+          },
+          {
+            "value": "UriFolder"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "PackageRequest": {
+      "description": "Model package operation request properties.",
+      "required": [
+        "inferencingServer",
+        "targetEnvironmentName"
+      ],
+      "type": "object",
+      "properties": {
+        "baseEnvironmentSource": {
+          "description": "Base environment to start with.",
+          "$ref": "#/definitions/BaseEnvironmentSource",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "environmentVariables": {
+          "description": "Collection of environment variables.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "inferencingServer": {
+          "description": "[Required] Inferencing server configurations.",
+          "$ref": "#/definitions/InferencingServer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "inputs": {
+          "description": "Collection of inputs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelPackageInput"
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true,
+          "x-ms-identifiers": []
+        },
+        "modelConfiguration": {
+          "description": "Model configuration including the mount mode.",
+          "$ref": "#/definitions/ModelConfiguration",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "tags": {
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "targetEnvironmentName": {
+          "description": "[Required] Target environment name to be generated by package.",
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "targetEnvironmentVersion": {
+          "description": "Target environment version to be generated by package.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "PackageResponse": {
+      "description": "Package response returned after async package operation completes successfully.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PackageRequest"
+        }
+      ],
+      "properties": {
+        "buildId": {
+          "description": "Build id of the image build operation.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "buildState": {
+          "description": "Build state of the image build operation.",
+          "$ref": "#/definitions/PackageBuildState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "logUrl": {
+          "description": "Log url of the image build operation.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "targetEnvironmentId": {
+          "description": "Asset ID of the target environment created by package operation.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
       "additionalProperties": false
     },
     "PartialBatchDeployment": {
@@ -16355,7 +19354,7 @@
           },
           {
             "value": "RandomForest",
-            "description": "Random forest is a supervised learning algorithm.\nThe \"forest\" it builds, is an ensemble of decision trees, usually trained with the “bagging” method.\nThe general idea of the bagging method is that a combination of learning models increases the overall result."
+            "description": "Random forest is a supervised learning algorithm.\nThe \"forest\" it builds, is an ensemble of decision trees, usually trained with the â€œbaggingâ€ method.\nThe general idea of the bagging method is that a combination of learning models increases the overall result."
           },
           {
             "value": "ExtremeRandomTrees",
@@ -16479,6 +19478,18 @@
         "instanceType": {
           "description": "Optional type of VM used as supported by the compute target.",
           "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "locations": {
+          "description": "Locations where the job can run.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "x-ms-mutability": [
             "create",
             "read"
@@ -16816,6 +19827,31 @@
           "items": {
             "$ref": "#/definitions/ScheduleResource"
           }
+        }
+      },
+      "additionalProperties": false
+    },
+    "SchedulingSettings": {
+      "type": "object",
+      "properties": {
+        "jobTier": {
+          "description": "Enum to determine the job tier.",
+          "default": "Standard",
+          "$ref": "#/definitions/JobTier",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Controls the priority of the job on a compute.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         }
       },
       "additionalProperties": false
@@ -17291,6 +20327,15 @@
             "read"
           ],
           "x-nullable": true
+        },
+        "schedulingSettings": {
+          "description": "Scheduling setting for the job",
+          "$ref": "#/definitions/SchedulingSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Spark",
@@ -17646,6 +20691,15 @@
         "samplingAlgorithm": {
           "description": "[Required] The hyperparameter sampling algorithm",
           "$ref": "#/definitions/SamplingAlgorithm"
+        },
+        "schedulingSettings": {
+          "description": "Scheduling setting for the job",
+          "$ref": "#/definitions/SchedulingSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
         },
         "searchSpace": {
           "description": "[Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
@@ -18652,6 +21706,24 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "TritonInferencingServer": {
+      "description": "Triton inferencing server configurations.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/InferencingServer"
+        }
+      ],
+      "properties": {
+        "inferenceConfiguration": {
+          "description": "Inference configuration for Triton.",
+          "$ref": "#/definitions/OnlineInferenceConfiguration",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Triton",
       "additionalProperties": false
     },
     "TritonModelJobInput": {
