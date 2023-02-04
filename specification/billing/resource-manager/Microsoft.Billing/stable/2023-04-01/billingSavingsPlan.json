@@ -33,13 +33,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "#/parameters/SavingsPlanOrderIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
             "$ref": "#/parameters/ExpandParameter"
@@ -55,7 +55,7 @@
           "default": {
             "description": "Unexpected error.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -78,10 +78,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -97,7 +97,7 @@
           "default": {
             "description": "Unexpected error.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -120,13 +120,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "#/parameters/SavingsPlanOrderIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -139,7 +139,7 @@
           "default": {
             "description": "Unexpected error.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -162,10 +162,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
             "$ref": "#/parameters/FilterParameter"
@@ -181,7 +181,7 @@
           "default": {
             "description": "Unexpected error.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -201,7 +201,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "#/parameters/SavingsPlanOrderIdParameter"
@@ -210,7 +210,7 @@
             "$ref": "#/parameters/SavingsPlanIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
@@ -223,7 +223,7 @@
           "default": {
             "description": "Unexpected error.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -241,7 +241,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "#/parameters/SavingsPlanOrderIdParameter"
@@ -250,7 +250,7 @@
             "$ref": "#/parameters/SavingsPlanIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
             "$ref": "#/parameters/SavingsPlanUpdateRequestParameter"
@@ -266,7 +266,7 @@
           "default": {
             "description": "Unexpected error.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -286,7 +286,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "#/parameters/SavingsPlanOrderIdParameter"
@@ -295,7 +295,7 @@
             "$ref": "#/parameters/SavingsPlanIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
             "$ref": "#/parameters/SavingsPlanUpdateValidateRequestParameter"
@@ -311,7 +311,7 @@
           "default": {
             "description": "Unexpected error.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -358,7 +358,9 @@
         "Creating",
         "Failed",
         "Created",
-        "Cancelled"
+        "Succeeded",
+        "Cancelled",
+        "Expired"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -375,6 +377,11 @@
         "name": "BillingPlan",
         "modelAsString": true
       }
+    },
+    "Renew": {
+      "type": "boolean",
+      "default": false,
+      "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
     },
     "BenefitTerm": {
       "type": "string",
@@ -420,6 +427,10 @@
         },
         "resourceGroupId": {
           "$ref": "#/definitions/ResourceGroupId"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name"
         }
       }
     },
@@ -495,7 +506,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -509,7 +520,7 @@
           "$ref": "#/definitions/SavingsPlanModelProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
           "description": "SystemData of Savings plan.",
           "readOnly": true
         }
@@ -525,6 +536,16 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState"
         },
+        "displayProvisioningState": {
+          "description": "The provisioning state of the savings plan for display, e.g. Succeeded",
+          "type": "string",
+          "readOnly": true
+        },
+        "userFriendlyAppliedScopeType": {
+          "description": "The applied scope type of the savings plan for display, e.g. Shared",
+          "type": "string",
+          "readOnly": true
+        },
         "billingScopeId": {
           "$ref": "#/definitions/BillingScopeId"
         },
@@ -539,6 +560,9 @@
         },
         "term": {
           "$ref": "#/definitions/BenefitTerm"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
         },
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
@@ -560,6 +584,27 @@
           "format": "date-time",
           "description": "DateTime of the savings plan starts providing benefit from.",
           "readOnly": true
+        },
+        "benefitStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the savings plan benefit started.",
+          "readOnly": true
+        },
+        "expiryDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the savings plan will expire.",
+          "readOnly": true
+        },
+        "purchaseDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date time when the savings plan was purchased.",
+          "readOnly": true
+        },
+        "utilization": {
+          "$ref": "#/definitions/Utilization"
         },
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
@@ -589,7 +634,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/Resource"
         }
       ],
       "properties": {
@@ -603,7 +648,7 @@
           "$ref": "#/definitions/SavingsPlanOrderModelProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/systemData",
           "description": "SystemData of Savings plan order.",
           "readOnly": true
         }
@@ -636,6 +681,18 @@
         },
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
+        },
+        "benefitStartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the DateTime when the savings plan benefit started.",
+          "readOnly": true
+        },
+        "expiryDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "This is the date-time when the savings plan will expire.",
+          "readOnly": true
         },
         "expiryDate": {
           "$ref": "#/definitions/ExpiryDate"
@@ -752,6 +809,52 @@
         "modelAsString": true
       }
     },
+    "Utilization": {
+      "readOnly": true,
+      "type": "object",
+      "description": "Savings plan utilization",
+      "properties": {
+        "trend": {
+          "description": "The number of days trend for a savings plan",
+          "readOnly": true,
+          "type": "string"
+        },
+        "aggregates": {
+          "description": "The array of aggregates of a savings plan's utilization",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UtilizationAggregates"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "UtilizationAggregates": {
+      "description": "The aggregate values of savings plan utilization",
+      "type": "object",
+      "properties": {
+        "grain": {
+          "description": "The grain of the aggregate",
+          "readOnly": true,
+          "type": "number"
+        },
+        "grainUnit": {
+          "description": "The grain unit of the aggregate",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The aggregate value",
+          "readOnly": true,
+          "type": "number"
+        },
+        "valueUnit": {
+          "description": "The aggregate value unit",
+          "readOnly": true,
+          "type": "string"
+        }
+      }
+    },
     "ExtendedStatusInfo": {
       "type": "object",
       "readOnly": true,
@@ -763,6 +866,16 @@
         "message": {
           "type": "string",
           "description": "The message giving detailed information about the status code."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties specific to credit line check failure",
+          "properties": {
+            "subscriptionId": {
+              "type": "string",
+              "description": "The subscription that has failed credit line check."
+            }
+          }
         }
       }
     },
@@ -816,14 +929,6 @@
     }
   },
   "parameters": {
-    "billingAccountNameParameter": {
-      "name": "billingAccountName",
-      "in": "path",
-      "description": "The ID that uniquely identifies a billing account.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "ExpandParameter": {
       "name": "$expand",
       "description": "May be used to expand the planInformation.",
