@@ -1,0 +1,68 @@
+{
+  "operationId": "IndexOperations_Update",
+  "title": "IndexOperations_Update",
+  "parameters": {
+    "name": "my-index",
+    "resourceGroupName": "my-rg",
+    "api-version": "2022-06-01-preview",
+    "subscriptionId": "my-subscription",
+    "properties": {
+      "tags": {
+        "tag1": "value1"
+      },
+      "properties": {
+        "queryCapacity": {
+          "minVCores": 0.5,
+          "maxVCores": 16,
+          "autoPause": {
+            "type": "Delay",
+            "duration": "PT5M"
+          }
+        },
+        "indexingCapacity": {
+          "minVCores": 16,
+          "maxVCores": 1,
+          "autoPause": {
+            "type": "None"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/my-subscription/resourceGroups/my-rg/providers/Microsoft.Search/searchIndexes/my-index",
+        "name": "my-index",
+        "location": "westus",
+        "type": "Microsoft.Search/searchIndexes",
+        "tags": {
+          "app-name": "My e-commerce app"
+        },
+        "properties": {
+          "endpoint": "https://my-index-a1b2c3d4.zo1.westus.search.azure.com",
+          "queryCapacity": {
+            "minVCores": 0.5,
+            "maxVCores": 16,
+            "autoPause": {
+              "type": "Delay",
+              "duration": "PT5M"
+            }
+          },
+          "indexingCapacity": {
+            "minVCores": 16,
+            "maxVCores": 1,
+            "autoPause": {
+              "type": "None"
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Search/operationResults/{operationId}"
+      }
+    }
+  }
+}

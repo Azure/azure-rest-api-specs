@@ -1,0 +1,585 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "IndexManagementClient",
+    "version": "2022-06-01-preview",
+    "description": "Microsoft.Search resource management API.",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "IndexOperations"
+    },
+    {
+      "name": "Operations"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Search/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/searchIndexes": {
+      "get": {
+        "tags": [
+          "IndexOperations"
+        ],
+        "operationId": "IndexOperations_ListBySubscription",
+        "description": "List Index resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IndexListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IndexOperations_ListBySubscription": {
+            "$ref": "./examples/IndexOperations_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchIndexes": {
+      "get": {
+        "tags": [
+          "IndexOperations"
+        ],
+        "operationId": "IndexOperations_ListByResourceGroup",
+        "description": "List Index resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IndexListResult"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IndexOperations_ListByResourceGroup": {
+            "$ref": "./examples/IndexOperations_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchIndexes/{name}": {
+      "get": {
+        "tags": [
+          "IndexOperations"
+        ],
+        "operationId": "IndexOperations_Get",
+        "description": "Get a Index",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Index.name"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IndexOperations_Get": {
+            "$ref": "./examples/IndexOperations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IndexOperations"
+        ],
+        "operationId": "IndexOperations_CreateOrUpdate",
+        "description": "Create a Index",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Index.name"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IndexOperations_CreateOrUpdate": {
+            "$ref": "./examples/IndexOperations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "IndexOperations"
+        ],
+        "operationId": "IndexOperations_Update",
+        "description": "Patch a search index",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Index.name"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/IndexUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Index"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IndexOperations_Update": {
+            "$ref": "./examples/IndexOperations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "IndexOperations"
+        ],
+        "operationId": "IndexOperations_Delete",
+        "description": "Delete a search index",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/Index.name"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource delete request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IndexOperations_Delete": {
+            "$ref": "./examples/IndexOperations_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "Capacity": {
+      "type": "object",
+      "properties": {
+        "minVCores": {
+          "type": "number",
+          "format": "float",
+          "description": "The minimum number of vCores that the index will consume. Represented with discrete values: 0.2, 0.5. 1, 2, 3, … to 16."
+        },
+        "maxVCores": {
+          "type": "number",
+          "format": "float",
+          "description": "The maximum number of vCores that the index can consume. Represented with discrete values: 0.2, 0.5. 1, 2, 3, … to 16."
+        },
+        "autoPause": {
+          "$ref": "#/definitions/Pause"
+        }
+      },
+      "description": "The capacity will autoscale between the minimum and maximum number of vCores based on the usage of your index.",
+      "required": [
+        "minVCores",
+        "maxVCores",
+        "autoPause"
+      ]
+    },
+    "DelayPause": {
+      "type": "object",
+      "properties": {
+        "duration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The interval after which an index is paused if not in use."
+        }
+      },
+      "description": "When the pause strategy is set to 'Delay', the index will enter a paused state after not being used for a fixed amount of time.",
+      "required": [
+        "duration"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Pause"
+        }
+      ],
+      "x-ms-discriminator-value": "Delay"
+    },
+    "Index": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IndexProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "An index resource.",
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "IndexListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Index"
+          },
+          "x-cadl-name": "Index[]",
+          "description": "The items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items"
+        }
+      },
+      "description": "The response of a Index list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "IndexProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The current provisioning state of the index.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint at which the index can be accessed.",
+          "readOnly": true
+        },
+        "queryCapacity": {
+          "$ref": "#/definitions/Capacity",
+          "description": "The capacity allocated to the index for querying."
+        },
+        "indexingCapacity": {
+          "$ref": "#/definitions/Capacity",
+          "description": "The capacity allocated to the index for indexing documents."
+        }
+      },
+      "description": "The properties of the index.",
+      "required": [
+        "queryCapacity",
+        "indexingCapacity"
+      ]
+    },
+    "IndexUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/IndexUpdateProperties"
+        }
+      },
+      "description": "The type used for update operations of the Index."
+    },
+    "IndexUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "queryCapacity": {
+          "$ref": "#/definitions/Capacity",
+          "description": "The capacity allocated to the index for querying."
+        },
+        "indexingCapacity": {
+          "$ref": "#/definitions/Capacity",
+          "description": "The capacity allocated to the index for indexing documents."
+        }
+      },
+      "description": "The updatable properties of the Index."
+    },
+    "NonePause": {
+      "type": "object",
+      "properties": {},
+      "description": "When the pause strategy is set to 'None', the index will remain always active.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Pause"
+        }
+      ],
+      "x-ms-discriminator-value": "None"
+    },
+    "Pause": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Discriminator property for Pause."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The current provisioning state of the index.",
+      "enum": [
+        "Accepted",
+        "Provisioning",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    }
+  },
+  "parameters": {
+    "Index.name": {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "description": "The name of the index resource.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
