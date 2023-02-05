@@ -195,31 +195,12 @@
           "description": "The recommendation alert rule type."
         },
         "displayInformation": {
-          "$ref": "#/definitions/DisplayInformationItem"
+          "description": "A dictionary that provides the display information for an alert rule recommendation.",
+          "additionalProperties": {
+            "type": "string"
         },
         "ruleArmTemplate": {
           "$ref": "#/definitions/ruleArmTemplate"
-        }
-      }
-    },
-    "DisplayInformationItem": {
-      "description": "Provides the display information for an alert rule recommendation recommendations.",
-      "type": "object",
-      "properties": {
-        "ruleInfo": {
-          "type": "string",
-          "description": "The alert rule information."
-        },
-        "infoBallonMessage": {
-          "type": "string",
-          "description": "The information to display inside an information balloon."
-        },
-        "infoBallonLink": {
-          "type": "string",
-          "description": "The documentation link to display inside an information balloon."
-        },
-        "metricAlertsDisplayInformation": {
-          "$ref": "#/definitions/MetricAlertsDisplayInformation"
         }
       }
     },
