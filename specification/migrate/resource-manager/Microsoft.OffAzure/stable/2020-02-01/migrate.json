@@ -1541,16 +1541,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "schema": {
-                  "$ref": "#/definitions/AzureRestObject"
-                }
-              },
-              "required": [
-                "schema"
-              ],
-              "x-cadl-name": "ResponseWithHypervSiteUsageSchema<200>"
+              "$ref": "#/definitions/HyperVSiteUsage"
             }
           },
           "202": {
@@ -4018,16 +4009,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "schema": {
-                  "$ref": "#/definitions/AzureRestObject"
-                }
-              },
-              "required": [
-                "schema"
-              ],
-              "x-cadl-name": "ResponseWithVmwareSiteUsageSchema<200>"
+              "$ref": "#/definitions/DependencyMapServiceMapExtensionsClientGroupMembersRequest"
             }
           },
           "202": {
@@ -4169,9 +4151,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
+              "$ref": "#/definitions/DependencyMapServiceMapExtensionsExportDependenciesRequest"
             }
           }
         ],
@@ -4180,15 +4160,8 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "type": "object",
-              "properties": {
-                "schema": {
-                  "$ref": "#/definitions/AzureRestObject"
-                }
-              },
-              "required": [
-                "schema"
-              ],
-              "x-cadl-name": "ResponseWithVmwareSiteUsageSchema<200>"
+              "properties": {},
+              "x-cadl-name": "{}"
             }
           },
           "202": {
@@ -4253,9 +4226,7 @@
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
+              "$ref": "#/definitions/VersionedV202001ExportMachineErrorsRequest"
             }
           }
         ],
@@ -4264,15 +4235,8 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "type": "object",
-              "properties": {
-                "schema": {
-                  "$ref": "#/definitions/AzureRestObject"
-                }
-              },
-              "required": [
-                "schema"
-              ],
-              "x-cadl-name": "ResponseWithVmwareSiteUsageSchema<200>"
+              "properties": {},
+              "x-cadl-name": "{}"
             }
           },
           "202": {
@@ -4348,15 +4312,8 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "type": "object",
-              "properties": {
-                "schema": {
-                  "$ref": "#/definitions/AzureRestObject"
-                }
-              },
-              "required": [
-                "schema"
-              ],
-              "x-cadl-name": "ResponseWithVmwareSiteUsageSchema<200>"
+              "properties": {},
+              "x-cadl-name": "{}"
             }
           },
           "default": {
@@ -4417,16 +4374,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "schema": {
-                  "$ref": "#/definitions/AzureRestObject"
-                }
-              },
-              "required": [
-                "schema"
-              ],
-              "x-cadl-name": "ResponseWithVmwareSiteUsageSchema<200>"
+              "$ref": "#/definitions/DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest"
             }
           },
           "202": {
@@ -4501,16 +4449,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "schema": {
-                  "$ref": "#/definitions/AzureRestObject"
-                }
-              },
-              "required": [
-                "schema"
-              ],
-              "x-cadl-name": "ResponseWithVmwareSiteUsageSchema<200>"
+              "$ref": "#/definitions/DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest"
             }
           },
           "202": {
@@ -5410,16 +5349,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "schema": {
-                  "$ref": "#/definitions/AzureRestObject"
-                }
-              },
-              "required": [
-                "schema"
-              ],
-              "x-cadl-name": "ResponseWithVmwareSiteUsageSchema<200>"
+              "$ref": "#/definitions/DependencyMapServiceMapExtensionsServerGroupMembersRequest"
             }
           },
           "202": {
@@ -5482,16 +5412,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "schema": {
-                  "$ref": "#/definitions/AzureRestObject"
-                }
-              },
-              "required": [
-                "schema"
-              ],
-              "x-cadl-name": "ResponseWithHypervSiteUsageSchema<200>"
+              "$ref": "#/definitions/VMwareSiteUsage"
             }
           },
           "202": {
@@ -5566,9 +5487,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
+              "$ref": "#/definitions/UpdateMachineDepMapStatus"
             }
           },
           "202": {
@@ -6202,29 +6121,6 @@
       },
       "description": "Apps And Roles of the Server"
     },
-    "AzureRestObject": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative URL to get this cluster."
-        },
-        "type": {
-          "type": "string",
-          "description": "Handled by resource provider. Type = Microsoft.OffAzure/hyperVSites/clusters."
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the Name of the cluster."
-        }
-      },
-      "description": "Azure rest Object",
-      "required": [
-        "id",
-        "type",
-        "name"
-      ]
-    },
     "BizTalkServers": {
       "type": "object",
       "properties": {
@@ -6367,6 +6263,118 @@
         "name": "DependencyMapDiscoveryScopeStatus",
         "modelAsString": true
       }
+    },
+    "DependencyMapServiceMapExtensionsClientGroupMembersRequest": {
+      "type": "object",
+      "properties": {
+        "machineId": {
+          "type": "string",
+          "description": "id of machine"
+        },
+        "processGroupName": {
+          "type": "string",
+          "description": "process group name "
+        },
+        "processName": {
+          "type": "string",
+          "description": "name of process"
+        }
+      },
+      "description": "DependencyMap ServiceMap Extensions Client GroupMembers Request",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DependencyMapServiceMapExtensionsScopeMapRequest"
+        }
+      ]
+    },
+    "DependencyMapServiceMapExtensionsDependencyMapRequestFilters": {
+      "type": "object",
+      "properties": {
+        "machineIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "array of machine ids"
+        },
+        "processIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "array of process Ids"
+        }
+      },
+      "description": "DependencyMap Service Map Extensions Dependency Map Request Filters"
+    },
+    "DependencyMapServiceMapExtensionsExportDependenciesRequest": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "end time"
+        }
+      },
+      "description": "DependencyMap ServiceMap Extensions ExportDependencies Request"
+    },
+    "DependencyMapServiceMapExtensionsScopeMapRequest": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "end time"
+        },
+        "filters": {
+          "$ref": "#/definitions/DependencyMapServiceMapExtensionsDependencyMapRequestFilters",
+          "description": "optional filters"
+        }
+      },
+      "description": "Dependency  Map ServiceMap Extensions Scope Map Request"
+    },
+    "DependencyMapServiceMapExtensionsServerGroupMembersRequest": {
+      "type": "object",
+      "properties": {
+        "serverPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "port of server"
+        }
+      },
+      "description": "DependencyMap ServiceMap Extensions ServerGroup Members Request",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DependencyMapServiceMapExtensionsScopeMapRequest"
+        }
+      ]
+    },
+    "DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest": {
+      "type": "object",
+      "properties": {
+        "machineId": {
+          "type": "string",
+          "description": "id of machine"
+        }
+      },
+      "description": "DependencyMap ServiceMap Extensions SingleMachine DetailedMap Request",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DependencyMapServiceMapExtensionsScopeMapRequest"
+        }
+      ]
     },
     "DiscoveryScopeErrorSummary": {
       "type": "object",
@@ -7116,28 +7124,31 @@
         }
       ]
     },
-    "HypervHost": {
+    "HyperVSiteUsage": {
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/HyperVHostProperties",
-          "description": "Gets or sets nested properties."
+        "machineCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of machines discovered in the site."
         },
-        "hosts": {
-          "$ref": "#/definitions/HyperVHostProperties",
-          "description": "Gets or sets nested properties."
+        "runAsAccountCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of run as accounts in the site."
+        },
+        "hostCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of hosts part of the site."
+        },
+        "clusterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of clusters part of the site."
         }
       },
-      "description": "Host REST Resource.",
-      "required": [
-        "properties",
-        "hosts"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureRestObject"
-        }
-      ]
+      "description": "Hyper-V site usage."
     },
     "HypervJobResource": {
       "type": "object",
@@ -8007,29 +8018,21 @@
     "ImportSiteResourceUpdateProperties": {
       "type": "object",
       "properties": {
-        "masterSiteId": {
-          "type": "string",
-          "description": "Gets the Master Site this site is linked to."
-        },
         "servicePrincipalIdentityDetails": {
           "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Service principal identity details used by agent for communication to the service."
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
           "$ref": "#/definitions/SiteAgentProperties",
-          "description": "On-premises agent details."
-        },
-        "serviceEndpoint": {
-          "type": "string",
-          "description": "Service endpoint."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "RM ID of migration hub solution for SDS."
+          "description": "Gets or sets the on-premises agent details."
         },
         "applianceName": {
           "type": "string",
-          "description": "Appliance Name."
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -8925,29 +8928,21 @@
     "ServerSiteResourceUpdateProperties": {
       "type": "object",
       "properties": {
-        "masterSiteId": {
-          "type": "string",
-          "description": "Gets the Master Site this site is linked to."
-        },
         "servicePrincipalIdentityDetails": {
           "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Service principal identity details used by agent for communication to the service."
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
           "$ref": "#/definitions/SiteAgentProperties",
-          "description": "On-premises agent details."
-        },
-        "serviceEndpoint": {
-          "type": "string",
-          "description": "Service endpoint."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "RM ID of migration hub solution for SDS."
+          "description": "Gets or sets the on-premises agent details."
         },
         "applianceName": {
           "type": "string",
-          "description": "Appliance Name."
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -9176,42 +9171,36 @@
       "properties": {
         "masterSiteId": {
           "type": "string",
-          "description": "Gets the Master Site this site is linked to."
+          "description": "Gets the Master Site this site is linked to.",
+          "readOnly": true
         },
         "servicePrincipalIdentityDetails": {
           "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Service principal identity details used by agent for communication to the service."
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
           "$ref": "#/definitions/SiteAgentProperties",
-          "description": "On-premises agent details."
-        },
-        "serviceEndpoint": {
-          "type": "string",
-          "description": "Service endpoint."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "RM ID of migration hub solution for SDS."
+          "description": "Gets or sets the on-premises agent details."
         },
         "applianceName": {
           "type": "string",
-          "description": "Appliance Name."
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Gets the service endpoint.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
         }
       },
-      "description": "The properties of VMwareSiteResource",
-      "required": [
-        "masterSiteId",
-        "servicePrincipalIdentityDetails",
-        "agentDetails",
-        "serviceEndpoint",
-        "discoverySolutionId",
-        "applianceName"
-      ]
+      "description": "The properties of VMwareSiteResource"
     },
     "SiteSpnProperties": {
       "type": "object",
@@ -9284,42 +9273,36 @@
       "properties": {
         "masterSiteId": {
           "type": "string",
-          "description": "Gets the Master Site this site is linked to."
+          "description": "Gets the Master Site this site is linked to.",
+          "readOnly": true
         },
         "servicePrincipalIdentityDetails": {
           "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Service principal identity details used by agent for communication to the service."
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
         },
         "agentDetails": {
           "$ref": "#/definitions/SiteAgentProperties",
-          "description": "On-premises agent details."
-        },
-        "serviceEndpoint": {
-          "type": "string",
-          "description": "Service endpoint."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "RM ID of migration hub solution for SDS."
+          "description": "Gets or sets the on-premises agent details."
         },
         "applianceName": {
           "type": "string",
-          "description": "Appliance Name."
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Gets the service endpoint.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation."
         }
       },
-      "description": "The properties of VMwareSiteResource",
-      "required": [
-        "masterSiteId",
-        "servicePrincipalIdentityDetails",
-        "agentDetails",
-        "serviceEndpoint",
-        "discoverySolutionId",
-        "applianceName"
-      ]
+      "description": "The properties of VMwareSiteResource"
     },
     "SpringBootDiscovery": {
       "type": "object",
@@ -9514,6 +9497,35 @@
         }
       },
       "description": " SystemCenter in the guest virtual machine."
+    },
+    "UpdateMachineDepMapStatus": {
+      "type": "object",
+      "properties": {
+        "machines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateMachineDepMapStatusDependencyMapMachineInput"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "UpdateMachineDepMapStatusDependencyMapMachineInput[]",
+          "description": "Gets or sets the machine collection."
+        }
+      },
+      "description": "Defines class that represents input to enable or disable DMP on machine\n      \n      for cosmos entity operation."
+    },
+    "UpdateMachineDepMapStatusDependencyMapMachineInput": {
+      "type": "object",
+      "properties": {
+        "machineId": {
+          "type": "string",
+          "description": "Gets or sets the ARM id of the machine."
+        },
+        "isDependencyMapToBeEnabled": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether\n            dependency mapping is to\nbe enabled or not."
+        }
+      },
+      "description": "Machine class."
     },
     "V20180501PreviewVmwareRunAsAccount": {
       "type": "object",
@@ -9859,6 +9871,60 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "VMwareSiteUsage": {
+      "type": "object",
+      "properties": {
+        "machineCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of machines discovered in the site."
+        },
+        "runAsAccountCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of run as accounts in the site."
+        },
+        "vCenterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of vCenters part of the site."
+        }
+      },
+      "description": "VMware site usage."
+    },
+    "VersionedV202001ExportMachineErrorsRequest": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VersionedV202001ExportMachineErrorsRequestExportMachineErrorsProperties",
+          "description": "Gets or sets the properties."
+        }
+      },
+      "description": "The body of export machine errors request."
+    },
+    "VersionedV202001ExportMachineErrorsRequestExportMachineErrorsProperties": {
+      "type": "object",
+      "properties": {
+        "discoveryScope": {
+          "$ref": "#/definitions/VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScope",
+          "description": "Gets or sets the discovery scope."
+        }
+      },
+      "description": "The Properties class for export machine errors request body."
+    },
+    "VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScope": {
+      "type": "string",
+      "enum": [
+        "AppsAndRoles",
+        "DependencyMap",
+        "StaticData",
+        "SQLServerConnectionInfo"
+      ],
+      "x-ms-enum": {
+        "name": "VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScope",
+        "modelAsString": true
+      }
     },
     "Versions": {
       "type": "string",
