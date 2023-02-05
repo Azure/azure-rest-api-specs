@@ -302,7 +302,8 @@
         "CustomEntityRecognition",
         "CustomSingleLabelClassification",
         "CustomMultiLabelClassification",
-        "AbstractiveSummarization"
+        "AbstractiveSummarization",
+        "CustomSentimentAnalysis"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROTaskKind",
@@ -341,7 +342,8 @@
         "CustomEntityRecognitionLROResults",
         "CustomSingleLabelClassificationLROResults",
         "CustomMultiLabelClassificationLROResults",
-        "AbstractiveSummarizationLROResults"
+        "AbstractiveSummarizationLROResults",
+        "CustomSentimentAnalysisLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -1650,6 +1652,62 @@
         }
       },
       "description": "Represents the confidence scores across all sentiment classes: positive and negative."
+    },
+    "CustomSentimentAnalysisTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a Custom Sentiment Analysis task.",
+      "properties": {
+        "stringIndexType": {
+          "$ref": "common.json#/definitions/StringIndexType"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomTaskParameters"
+        }
+      ]
+    },
+    "CustomSentimentAnalysisLROTask": {
+      "type": "object",
+      "description": "Use custom models to ease the process of sentiment analysis from documents like product reviews",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/CustomSentimentAnalysisTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomSentimentAnalysis"
+    },
+    "CustomSentimentAnalysisResult": {
+      "type": "object",
+      "properties": {
+        "documents": {
+          "type": "array",
+          "description": "Sentiment analysis per document.",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/SentimentDocumentResult"
+              },
+              {
+                "$ref": "#/definitions/DocumentDetectedLanguage"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
     },
     "EntitiesTaskParameters": {
       "type": "object",
@@ -3610,6 +3668,23 @@
         "results"
       ],
       "x-ms-discriminator-value": "SentimentAnalysisLROResults"
+    },
+    "CustomSentimentAnalysisLROResult": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomSentimentAnalysisResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomSentimentAnalysisLROResults"
     },
     "KeyPhraseExtractionLROResult": {
       "type": "object",
