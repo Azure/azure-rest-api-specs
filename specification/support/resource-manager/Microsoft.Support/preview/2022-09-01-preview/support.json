@@ -2941,13 +2941,13 @@
         "properties": {
           "createdOn": {
             "format": "date-time",
-            "description": "Time in UTC (ISO 8601 format) when support ticket was created.",
+            "description": "Time in UTC (ISO 8601 format) when file workspace was created.",
             "type": "string",
             "readOnly": true
           },
           "expirationTime": {
             "format": "date-time",
-            "description": "Time in UTC (ISO 8601 format) when support ticket was last modified.",
+            "description": "Time in UTC (ISO 8601 format) when file workspace is going to expire.",
             "type": "string",
             "readOnly": true
           }
@@ -2985,6 +2985,10 @@
             "items": {
               "$ref": "#/definitions/FileDetails"
             }
+          },
+          "nextLink": {
+            "description": "The URI to fetch the next page of Communication resources.",
+            "type": "string"
           }
         }
       },
