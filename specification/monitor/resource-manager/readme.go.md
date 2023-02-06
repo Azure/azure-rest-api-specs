@@ -20,7 +20,7 @@ directive:
     where: "$.definitions.Resource"
     transform: >
       $["x-ms-client-name"] = "TrackedEntityResource";
-  - rename-model:
+  - rename-operation:
       from: 'MonitorOperations_List'
       to: 'OperationsForMonitor_List'
 
