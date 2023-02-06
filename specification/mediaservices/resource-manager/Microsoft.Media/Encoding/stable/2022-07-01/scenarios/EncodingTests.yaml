@@ -1,9 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
-scope: ResourceGroup
+scope: ../../../../Accounts/stable/2021-11-01/scenarios/CreateAccount.yaml
 variables:
-  accountName:
-    type: string
-    prefix: accountn
   assetName:
     type: string
     prefix: assetnam
@@ -13,31 +10,9 @@ variables:
   jobName:
     type: string
     prefix: jobname
-  testStorageAccount:
-    type: string
-    prefix: teststorageaccount
-prepareSteps:
-  - step: CreateStorageAccount
-    operationId: StorageAccounts_Create
-    readmeTag: ../../../../../../../storage/resource-manager/readme.md
-    parameters:
-      accountName: $(testStorageAccount)
-      parameters:
-        kind: StorageV2
-        location: $(location)
-        sku:
-          name: Standard_LRS
-          tier: "Standard"
-  - step: CreateAccount
-    readmeTag: ../../../../../readme.md
-    operationId: Mediaservices_CreateOrUpdate
-    exampleFile: ../../../../Accounts/stable/2021-11-01/examples/async-accounts-create.json
-    requestUpdate:
-      - replace: /parameters/properties/storageAccounts/0/id
-        value: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Storage/storageAccounts/$(testStorageAccount)
-      
+
 scenarios:
-  - scenario: GeneratedScenario
+  - scenario: EncodingTests
     steps:
       - operationId: Transforms_CreateOrUpdate
         exampleFile: ../examples/transforms-create.json
@@ -48,21 +23,19 @@ scenarios:
       - operationId: Transforms_Update
         exampleFile: ../examples/transforms-update.json
       - operationId: Assets_CreateOrUpdate
-        readmeTag: ../../../../../readme.md
         exampleFile: ../../../../Metadata/stable/2022-08-01/examples/assets-create.json
         variables:
           assetName: job1-InputAsset
         requestUpdate:
-        - replace: /parameters/properties/storageAccountName
-          value: $(testStorageAccount)
+          - replace: /parameters/properties/storageAccountName
+            value: $(testStorageAccount)
       - operationId: Assets_CreateOrUpdate
-        readmeTag: ../../../../../readme.md
         exampleFile: ../../../../Metadata/stable/2022-08-01/examples/assets-create.json
         variables:
           assetName: job1-OutputAsset
         requestUpdate:
-        - replace: /parameters/properties/storageAccountName
-          value: $(testStorageAccount)
+          - replace: /parameters/properties/storageAccountName
+            value: $(testStorageAccount)
       - operationId: Jobs_Create
         exampleFile: ../examples/jobs-create.json
       - operationId: Jobs_List
