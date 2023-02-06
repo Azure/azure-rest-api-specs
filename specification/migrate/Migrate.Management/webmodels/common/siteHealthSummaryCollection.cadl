@@ -1,15 +1,26 @@
 using Azure.Core;
 
-@doc("Gets or sets the list of site health summary.")
-@pagedResult
-model SiteHealthSummaryCollection {
-  @OpenAPI.extension("x-ms-identifiers", ["applianceName"])
-  @doc("Gets or sets the list of machine meta data.")
-  siteHealthSummary?: SiteHealthSummary[];
+// @doc("Gets or sets the list of site health summary.")
+// @pagedResult
+// model SiteHealthSummaryCollection {
+//   @OpenAPI.extension("x-ms-identifiers", ["applianceName"])
+//   @doc("Gets or sets the list of machine meta data.")
+//   siteHealthSummary?: SiteHealthSummary[];
 
-  @doc("The link to fetch more models.")
-  @nextLink
-  nextLink?: string;
+//   @doc("The link to fetch more models.")
+//   @nextLink
+//   nextLink?: string;
+// }
+
+@doc("Collection of SiteHealthSummary.")
+model SiteHealthSummaryCollection {
+@doc("Gets the list of SiteHealthSummary.")
+@visibility("read")
+@OpenAPI.extension("x-ms-identifiers", ["applianceName"])
+"value"?: SiteHealthSummary[];
+@doc("Gets the value of next link.")
+@visibility("read")
+"nextLink"?: string;
 }
 
 enum LayoutUpdateSources {

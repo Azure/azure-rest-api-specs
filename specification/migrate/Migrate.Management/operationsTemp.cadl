@@ -33,6 +33,20 @@ op ArmResourceActionAsyncNoRequestBody<
 ): ArmResponse<TResponse>  |  ArmAcceptedResponse |ErrorResponse;
 
 @doc("The response of a {name} list operation.", TResource)
-@friendlyName("{name}ListResult", TResource)
-model ResourceListResultUpdated<TResource extends ArmResource> is Azure.Core.Page<TResource>;
+@friendlyName("{name}Collection", TResource)
+model ResourceListResultUpdated<TResource extends ArmResource> is Azure.Core.PageUpdated<TResource>;
 
+@get
+@autoRoute
+@list(TResource)
+@segmentOf(TResource)
+@armRenameListByOperation(TResource, TParentName, TParentFriendlyName) // This must come before @armResourceList!
+@armResourceList(TResource)
+op ArmResourceListByParentUpdated<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>,
+  TParentName = "",
+  TParentFriendlyName = ""
+>(
+  ...ResourceParentParameters<TResource, TBaseParameters>
+): ArmResponse<ResourceListResultUpdated<TResource>> | ErrorResponse;

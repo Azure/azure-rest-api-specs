@@ -38,16 +38,6 @@ model InnerError {
   innererror: InnerError;
 }
 
-model ResponseWithHypervSiteUsageSchema<T> {
-  @statusCode statusCode: T;
-  schema: AzureRestObject; //TODO required Schema
-}
-
-model ResponseWithVmwareSiteUsageSchema<T> {
-  @statusCode statusCode: T;
-  schema: AzureRestObject; //TODO required Schema
-}
-
 @doc("A wrapper for required parameter in the body. The intent of model is to add description to 'body' and make it requred.")
 model CustomRequiredBodyWrapper<T extends object> {
   @doc("Parameter of type '{name}' in the body.", T)
@@ -405,3 +395,237 @@ model GuestOSDetails {
   @doc("Gets or sets the Architecture of the operating system.")
   osArchitecture?: string;
 }
+
+@doc("Dependency  Map ServiceMap Extensions Scope Map Request")
+model DependencyMapServiceMapExtensionsScopeMapRequest {
+  @doc("start time")
+  startTime?: zonedDateTime;
+
+  @doc("end time")
+  endTime?: zonedDateTime;
+
+  @doc("optional filters")
+  filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
+}
+
+@doc("DependencyMap Service Map Extensions Dependency Map Request Filters")
+model DependencyMapServiceMapExtensionsDependencyMapRequestFilters {
+  @doc("array of machine ids")
+  machineIds?: string[];
+
+  @doc("array of process Ids")
+  processIds?: string[];
+}
+@doc("DependencyMap ServiceMap Extensions SingleMachine DetailedMap Request")
+model DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
+  extends DependencyMapServiceMapExtensionsScopeMapRequest {
+  @doc("id of machine")
+  machineId?: string;
+}
+
+@doc("DependencyMap ServiceMap Extensions Client GroupMembers Request")
+model DependencyMapServiceMapExtensionsClientGroupMembersRequest
+  extends DependencyMapServiceMapExtensionsScopeMapRequest {
+  @doc("id of machine")
+  machineId?: string;
+
+  @doc("process group name ")
+  processGroupName?: string;
+
+  @doc("name of process")
+  processName?: string;
+}
+
+@doc("DependencyMap ServiceMap Extensions ServerGroup Members Request")
+model DependencyMapServiceMapExtensionsServerGroupMembersRequest
+  extends DependencyMapServiceMapExtensionsScopeMapRequest {
+  @doc("port of server")
+  serverPort?: int32;
+}
+
+@doc("""
+Defines class that represents input to enable or disable DMP on machine
+      
+      for cosmos entity operation.
+""")
+model UpdateMachineDepMapStatus {
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @doc("Gets or sets the machine collection.")
+  machines?: UpdateMachineDepMapStatusDependencyMapMachineInput[];
+}
+
+@doc("Machine class.")
+model UpdateMachineDepMapStatusDependencyMapMachineInput {
+  @doc("Gets or sets the ARM id of the machine.")
+  machineId?: string;
+
+  @doc("""
+Gets or sets a value indicating whether
+            dependency mapping is to
+be enabled or not.
+""")
+  isDependencyMapToBeEnabled?: boolean;
+}
+
+@doc("DependencyMap ServiceMap Extensions ExportDependencies Request")
+model DependencyMapServiceMapExtensionsExportDependenciesRequest {
+  @doc("start time")
+  startTime?: zonedDateTime;
+
+  @doc("end time")
+  endTime?: zonedDateTime;
+}
+
+@doc("The body of export machine errors request.")
+model VersionedV202001ExportMachineErrorsRequest {
+  @doc("Gets or sets the properties.")
+  properties?: VersionedV202001ExportMachineErrorsRequestExportMachineErrorsProperties;
+}
+
+@doc("The Properties class for export machine errors request body.")
+model VersionedV202001ExportMachineErrorsRequestExportMachineErrorsProperties {
+  @doc("Gets or sets the discovery scope.")
+  discoveryScope?: VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScope;
+}
+
+enum VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScopeKnownValues {
+  "AppsAndRoles",
+  "DependencyMap",
+  "StaticData",
+  "SQLServerConnectionInfo",
+}
+
+@knownValues(
+  VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScopeKnownValues
+)
+scalar VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScope
+  extends string;
+
+enum MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues {
+  "Accepted",
+  "InProgress",
+  "Succeeded",
+  "Failed",
+}
+
+@knownValues(
+  MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues
+)
+scalar MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2ProvisioningState
+  extends string;
+
+enum MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusKnownValues {
+  "Approved",
+  "Pending",
+  "Rejected",
+  "Disconnected",
+}
+
+@knownValues(
+  MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusKnownValues
+)
+scalar MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus
+  extends string;
+
+@doc("Class for site properties.")
+model MasterSiteProperties {
+  @doc("Gets or sets the state of public network access.")
+  publicNetworkAccess?: V202007MasterSitePropertiesPublicNetworkAccess;
+
+  @doc("""
+Gets or sets a value indicating whether multiple sites per site type are
+allowed.
+""")
+  allowMultipleSites?: boolean;
+
+  @doc("""
+Gets or sets the sites that are a part of Master Site.
+            The key
+should contain the Site ARM name.
+""")
+  sites?: string[];
+
+  @doc("Gets or sets a value for customer storage account ARM id.")
+  customerStorageAccountArmId?: string;
+
+  @doc("Gets the private endpoint connections.")
+  @visibility("read")
+  privateEndpointConnections?: PendpointConnection[];
+
+  @doc("Gets the nested sites under Master Site.")
+  @visibility("read")
+  nestedSites?: string[];
+
+  @doc("provisioning state enum")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
+}
+
+@doc("REST model used to encapsulate the user visible state of a PrivateEndpoint.")
+model PendpointConnection {
+  @doc("Relative URL to get this Sites.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Gets the name of the resource.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Gets the resource type.")
+  @visibility("read")
+  type?: string;
+
+  @doc("Gets the tag for optimistic concurrency control.")
+  @visibility("read")
+  eTag?: string;
+
+  @doc("Gets the properties of the object.")
+  @visibility("read")
+  properties?: MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2;
+}
+
+@doc("PrivateEndpointConnectionPropertiesV2")
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2 {
+  @visibility("read")
+  @doc("array of group ids")
+  groupIds?: string[];
+  
+  @doc("provisioning state enum")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
+  @doc("private endpoints")
+  @visibility("read")
+  privateEndpoint?: MicrosoftAzureMigratePrivateEndpointModelsResourceId;
+
+  @doc("private endpoints connection state")
+  privateLinkServiceConnectionState?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState;
+}
+
+@doc("PrivateEndpointModelsResourceId")
+model MicrosoftAzureMigratePrivateEndpointModelsResourceId {
+  @doc("id name")
+  @visibility("read")
+  id?: string;
+}
+
+@doc("Service Connection State")
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState {
+  @doc("state status")
+  status?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus;
+  @doc("description string")
+  description?: string;
+  @doc("actions required")
+  actionsRequired?: string;
+}
+
+enum V202007MasterSitePropertiesPublicNetworkAccess {
+  "NotSpecified",
+  "Enabled",
+  "Disabled",
+}
+
+@knownValues(V202007MasterSitePropertiesPublicNetworkAccess)
+scalar MicrosoftAzureFDSWebRoleV202007MasterSitePropertiesPublicNetworkAccess
+  extends string;

@@ -1,22 +1,23 @@
 @doc("The properties of VMwareSiteResource")
 model SitesProperties {
   @doc("Gets the Master Site this site is linked to.")
-  masterSiteId: string;
-
-  @doc("Service principal identity details used by agent for communication to the service.")
-  servicePrincipalIdentityDetails: SiteSpnProperties;
-
-  @doc("On-premises agent details.")
-  agentDetails: SiteAgentProperties;
-
-  @doc("Service endpoint.")
-  serviceEndpoint: string;
-
-  @doc("RM ID of migration hub solution for SDS.")
-  discoverySolutionId: string;
-
-  @doc("Appliance Name.")
-  applianceName: string;
+@visibility("read")
+"masterSiteId"?: string;
+@doc("""
+Gets or sets the service principal identity details used by agent for
+communication
+            to the service.
+""")
+"servicePrincipalIdentityDetails"?: SiteSpnProperties;
+@doc("Gets or sets the on-premises agent details.")
+"agentDetails"?: SiteAgentProperties;
+@doc("Gets or sets the Appliance Name.")
+"applianceName"?: string;
+@doc("Gets or sets the ARM ID of migration hub solution for SDS.")
+"discoverySolutionId"?: string;
+@doc("Gets the service endpoint.")
+@visibility("read")
+"serviceEndpoint"?: string;
 
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
@@ -67,4 +68,15 @@ model OperationStatusError {
   @doc("Gets the error message.")
   @visibility("read")
   message?: string;
+}
+
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@doc("VMware site usage.")
+model VMwareSiteUsage {
+@doc("Gets or sets the number of machines discovered in the site.")
+"machineCount"?: int32;
+@doc("Gets or sets the number of run as accounts in the site.")
+"runAsAccountCount"?: int32;
+@doc("Gets or sets the number of vCenters part of the site.")
+"vCenterCount"?: int32;
 }
