@@ -175,6 +175,25 @@
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "AzureStorageAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Anonymous",
+            "AccountKey",
+            "SasUri",
+            "ServicePrincipal",
+            "Msi"
+          ],
+          "type": "string",
+          "description": "The type used for authentication. Type: string."
+        },
+        "containerUri": {
+          "type": "object",
+          "description": "Container uri of the Azure Blob Storage resource only support for anonymous access. Type: string (or Expression with resultType string)."
         }
       }
     },

@@ -1,3 +1,17 @@
+- [Repository Guidelines for Cadl Specs](#repository-guidelines-for-cadl-specs)
+  - [Purpose](#purpose)
+  - [Repository](#repository)
+  - [Structure Overview](#structure-overview)
+  - [Service Folders](#service-folders)
+    - [Packages](#packages)
+    - [Structure](#structure)
+  - [Service Family Libraries](#service-family-libraries)
+  - [Sample Project](#sample-project)
+- [Spec Versioning](#spec-versioning)
+    - [Service Folder](#service-folder)
+    - [Working in Feature Branches](#working-in-feature-branches)
+    - [Publishing Specs](#publishing-specs)
+
 # Repository Guidelines for Cadl Specs
 
 ## Purpose
@@ -83,7 +97,7 @@ Additionally, packages which wish to define custom linter rules or otherwise use
 
 To distinguish between folders which define a service, an SDK, or both, one can look to the `cadl-project.yaml` and/or the `package.json`.
 
-- SDKs will take dependencies on the `@azure-tools/cadl-dpg` library, as well as SDK-specific emitters such as `@azure-tools/cadl-python` and configure them within `cadl-project.yaml`.
+- SDKs will take dependencies on the `@azure-tools/cadl-dpg` library, as well as SDK-specific emitters such as `@azure-tools/cadl-python` and configure their options within `cadl-project.yaml` but the emitter version should not be configured within `cadl-project.yaml`, and it should be configured globally in SDK repo instead.
 - SDKs _may_ have a sidecar file to customize how the SDK is shaped. Folders that describe service definitions only will not have a sidecar file. _Note: the absence of a sidecar does not mean that a folder does not describe an SDK, but the presence of one means it is an SDK._
 - Services will take a dependency on `@azure-tools/autorest` and configure the emitter in `cadl-project.yaml`.
 
@@ -91,26 +105,22 @@ To distinguish between folders which define a service, an SDK, or both, one can 
 
 The service family library concept allows a family of services to share common models, linter rules, templates, etc.
 
-Service libraries can include unpublished service _family_ libraries via source dependency annotations in `package.json`:
+Service libraries can reference unpublished service _family_ libraries via relative path import in `*.cadl`:
 
-```json
-"peerDependencies": {
-  "@azure-tools/cadl-azure-core": "~x.x.x",
-  "@cadl-api-spec/azure-communication-common": "file: ../Communication.Shared"
-},
+```cadl
+import "../Contoso.WidgetManager.Shared";
 ```
 
 While this would permit services from importing any service library described in the specs repo, as a matter of policy we should probably avoid that and have tooling to detect this scenario. Service family libraries **should** use versioning decorators and spec packages should reference them as versioned dependencies. Tooling would need to ensure that changes to service family libraries does not result in unexpected changes to any service version. One way to do this would be to diff the projection of the service versions on the `main` branch against the projection of the service versions that result from the change.
 
-We treat the shared library as a sibling with other packages within the service family. This is similar to what we currently do for services that have a "Shared" package and would allow an arbitrary number of shared packages.
+We treat the shared library as a sibling with other packages within the service family. This is similar to what we currently do for services that have a "Shared" package and would allow an arbitrary number of shared packages. A shared library folder should not contain `cadl-project.yaml` and `package.json` as it's not requried to be released. See [Sample Project](#sample-project) for reference.
 
 ```
 -> specification
-   -> communication
-      -> Communication.Chat         (data-plane)
-      -> Communication.Calling      (data-plane)
-      -> Communication.Management   (management)
-      -> Communication.Shared       (shared)
+   -> contosowidgetmanager
+      -> Contoso.WidgetManager            (data-plane)
+      -> Contoso.WidgetManager.Management (management)
+      -> Contoso.WidgetManager.Shared     (shared)
 ```
 
 Here's an example of how Cognitive Services might use multiple shared libraries:
@@ -125,6 +135,9 @@ Here's an example of how Cognitive Services might use multiple shared libraries:
       -> Vision.CustomVision     (data-plane)
       -> Vision.Shared           (shared)
 ```
+## Sample Project
+
+Here's a [cadl-sample-project](./cadl-sample-project) to demonstrate the files and folders supposed to be included when check in to this `azure-rest-api-specs` repository.
 
 # Spec Versioning
 
