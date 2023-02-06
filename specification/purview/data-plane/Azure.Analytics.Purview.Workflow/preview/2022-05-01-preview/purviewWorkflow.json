@@ -1416,7 +1416,7 @@
         },
         "approvers": {
           "type": "object",
-          "items": {
+          "additionalProperties": {
             "$ref": "#/definitions/ApproverResponse"
           },
           "description": "The list of approvers with reply."
@@ -1604,8 +1604,8 @@
           "type": "string",
           "description": "The new status will be used to update the task.",
           "enum": [
-            "Not Started",
-            "In Progress",
+            "NotStarted",
+            "InProgress",
             "Completed",
             "Canceled"
           ],
