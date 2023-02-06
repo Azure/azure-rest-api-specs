@@ -25,12 +25,15 @@ scenarios:
       - operationId: Locations_CheckNameAvailability
         exampleFile: >-
           ../examples/accounts-check-name-availability.json
+        requestUpdate:
+          - replace: /parameters/name
+            value: $(accountName)
       - operationId: Mediaservices_CreateOrUpdate
         exampleFile: >-
           ../examples/async-accounts-create.json
         requestUpdate:
-        - replace: /parameters/properties/storageAccounts/0/id
-          value: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Storage/storageAccounts/$(testStorageAccount)
+          - replace: /parameters/properties/storageAccounts/0/id
+            value: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Storage/storageAccounts/$(testStorageAccount)
       - operationId: Mediaservices_ListBySubscription
         exampleFile: >-
           ../examples/accounts-subscription-list-all-accounts.json
@@ -47,8 +50,8 @@ scenarios:
         exampleFile: >-
           ../examples/accounts-sync-storage-keys.json
         requestUpdate:
-        - replace: /parameters/id
-          value: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Storage/storageAccounts/$(testStorageAccount)
+          - replace: /parameters/id
+            value: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Storage/storageAccounts/$(testStorageAccount)
       - operationId: Operations_List
         exampleFile: >-
           ../examples/operations-list-all.json

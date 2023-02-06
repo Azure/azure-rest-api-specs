@@ -62,13 +62,12 @@ prepareSteps:
           name: Standard_LRS
           tier: "Standard"
   - step: CreateAccount
-    readmeTag: ../../../../../readme.md
     operationId: Mediaservices_CreateOrUpdate
     exampleFile: ../../../../Accounts/stable/2021-11-01/examples/async-accounts-create.json
     requestUpdate:
       - replace: /parameters/properties/storageAccounts/0/id
         value: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso/providers/Microsoft.Storage/storageAccounts/$(testStorageAccount)
-      
+
 scenarios:
   - scenario: GeneratedScenario
     steps:
@@ -113,17 +112,16 @@ scenarios:
       #   exampleFile: >-
       #     ../examples/streamingendpoint-start.json
       - operationId: Assets_CreateOrUpdate
-        readmeTag: ../../../../../readme.md
         exampleFile: ../../../../Metadata/stable/2022-08-01/examples/assets-create.json
         requestUpdate:
-        - replace: /parameters/properties/storageAccountName
-          value: $(testStorageAccount)
+          - replace: /parameters/properties/storageAccountName
+            value: $(testStorageAccount)
       - operationId: LiveOutputs_Create
         exampleFile: >-
           ../examples/liveoutput-create.json
         requestUpdate:
-        - replace: /parameters/properties/assetName
-          value: $(assetName)
+          - replace: /parameters/properties/assetName
+            value: $(assetName)
       - operationId: LiveOutputs_List
         exampleFile: >-
           ../examples/liveoutput-list-all.json

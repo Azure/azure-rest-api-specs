@@ -59,21 +59,20 @@ prepareSteps:
           name: Standard_LRS
           tier: "Standard"
   - step: CreateAccount
-    readmeTag: ../../../../../readme.md
     operationId: Mediaservices_CreateOrUpdate
     exampleFile: ../../../../Accounts/stable/2021-11-01/examples/async-accounts-create.json
     requestUpdate:
       - replace: /parameters/properties/storageAccounts/0/id
         value: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosorg/providers/Microsoft.Storage/storageAccounts/$(testStorageAccount)
-      
+
 scenarios:
-  - scenario: GeneratedScenario
+  - scenario: MetadataTests
     steps:
       - operationId: Assets_CreateOrUpdate
         exampleFile: ../examples/assets-create.json
         requestUpdate:
-        - replace: /parameters/properties/storageAccountName
-          value: $(testStorageAccount)
+          - replace: /parameters/properties/storageAccountName
+            value: $(testStorageAccount)
       - operationId: Assets_List
         exampleFile: ../examples/assets-list-all.json
       - operationId: Assets_Get
@@ -116,8 +115,8 @@ scenarios:
         exampleFile: >-
           ../examples/streaming-locators-create-clear.json
         requestUpdate:
-        - replace: /parameters/properties/assetName
-          value: $(assetName)
+          - replace: /parameters/properties/assetName
+            value: $(assetName)
       - operationId: StreamingLocators_List
         exampleFile: >-
           ../examples/streaming-locators-list.json
