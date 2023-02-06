@@ -1642,7 +1642,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}/files": {
       "get": {
         "tags": [
-          "FIles"
+          "Files"
         ],
         "description": "Lists all the Files information under a worksapce for an Azure subscription.",
         "operationId": "Files_List",
@@ -1685,7 +1685,7 @@
     "/providers/Microsoft.Support/fileWorkspaces/{fileWorkspaceName}/files": {
       "get": {
         "tags": [
-          "FIles"
+          "Files"
         ],
         "description": "Lists all the Files information under a worksapce for an Azure subscription.",
         "operationId": "Files_List",
@@ -1813,10 +1813,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "Create a file workspace": {
             "$ref": "./examples/CreateFileForSubscription.json"
@@ -1908,10 +1904,6 @@
               "$ref": "#/definitions/ExceptionResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create a file workspace": {
@@ -2499,7 +2491,7 @@
             "readOnly": true
           },
           "fileWorkspaceName": {
-            "description": "File workspace friendly name.",
+            "description": "File workspace name.",
             "type": "string"
           },
           "technicalTicketDetails": {
@@ -2987,7 +2979,7 @@
             }
           },
           "nextLink": {
-            "description": "The URI to fetch the next page of Communication resources.",
+            "description": "The URI to fetch the next page of File resources.",
             "type": "string"
           }
         }
