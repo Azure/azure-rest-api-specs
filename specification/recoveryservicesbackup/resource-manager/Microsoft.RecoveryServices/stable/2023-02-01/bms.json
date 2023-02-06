@@ -7419,6 +7419,20 @@
       },
       "x-ms-discriminator-value": "IaasVMRecoveryPoint"
     },
+    "ExtendedLocation": {
+      "description": "The extended location of Recovery point where VM was present.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the extended location.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the extended location. Possible values include: 'EdgeZone'",
+          "type": "string"
+        }
+      }
+    },
     "IaasVMRestoreRequest": {
       "description": "IaaS VM workload-specific restore.",
       "type": "object",
@@ -7525,6 +7539,10 @@
         "identityBasedRestoreDetails": {
           "$ref": "#/definitions/IdentityBasedRestoreDetails",
           "description": "IaaS VM workload specific restore details for restores using managed identity."
+        },
+        "extendedLocation": {
+            "$ref": "#/definitions/ExtendedLocation",
+            "description": "Target extended location where the VM should be restored,\r\nshould be null if restore is to be done in public cloud"
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
