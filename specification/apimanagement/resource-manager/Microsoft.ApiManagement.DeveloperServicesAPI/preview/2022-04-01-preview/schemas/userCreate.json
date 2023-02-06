@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "description": "User registration or update request representation",
+  "x-apim-code-public": "true",
+  "properties": {
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address."
+    },
+    "password": {
+      "type": "string",
+      "description": "Password."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name."
+    },
+    "state": {
+      "allOf": [
+        {
+          "$ref": "userState.json"
+        },
+        {
+          "description": "User account state",
+          "x-apim-code-nillable": true
+        }
+      ]
+    },
+    "note": {
+      "type": "string",
+      "description": "Note about user"
+    },
+    "confirmation": {
+      "type": "string",
+      "description": "Confirmation type"
+    },
+    "identities": {
+      "description": "Collection of user identities.",
+      "type": "array",
+      "items": {
+        "$ref": "userIdentity.json"
+      }
+    }
+  }
+}

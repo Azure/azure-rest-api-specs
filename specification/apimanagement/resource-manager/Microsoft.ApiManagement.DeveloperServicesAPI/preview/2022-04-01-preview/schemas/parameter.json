@@ -1,0 +1,69 @@
+{
+  "type": "object",
+  "description": "HTTP request parameter",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Parameter name.",
+	  "x-apim-code-optional": true
+    },
+    "description": {
+      "type": "string",
+      "description": "Parameter description.",
+	  "x-apim-code-optional": true
+    },
+    "type": {
+      "type": "string",
+      "description": "Parameter type.",
+	  "x-apim-code-optional": true
+    },
+    "defaultValue": {
+      "type": "string",
+      "description": "Default parameter value.",
+	  "x-apim-code-optional": true
+    },
+    "required": {
+      "type": "boolean",
+      "description": "Specifies whether parameter is required or not.",
+	  "x-apim-code-optional": true
+    },
+    "values": {
+      "type": "array",
+      "description": "Parameter values.",
+	    "x-apim-code-optional": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "schemaId": {
+      "type": "string",
+      "description": "Schema identifier.",
+      "x-apim-code-optional": true
+    },
+    "typeName": {
+      "type": "string",
+      "description": "Type name defined by the schema.",
+      "x-apim-code-optional": true
+    },
+    "examples": {
+      "type": "object",
+      "description": "Parameter examples",
+      "properties": {
+        "default": {
+          "allOf": [
+            {
+              "$ref": "example.json"
+            },
+            {
+              "description": "Default parameter example"
+            }
+          ]
+        }
+      },
+      "additionalProperties": {
+        "$ref": "example.json"
+      },
+      "x-apim-code-optional": true
+    }
+  }
+}

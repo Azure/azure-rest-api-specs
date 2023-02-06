@@ -1,0 +1,21 @@
+﻿{
+  "type": "object",
+  "description": "Terms of service contract properties.",
+  "x-apim-code-public": "true",
+  "properties": {
+    "text": {
+      "type": "string",
+      "description": "A terms of service text. Is required to not be null or empty to enable Terms of Service"
+    },
+    "enabled": {
+      "type": "boolean",
+      "description": "Are Terms of Service enabled. Will be enabled, if text exists",
+      "default": false
+    },
+    "requireConsent": {
+      "type": "boolean",
+      "description": "Ask user for consent to the terms of service.",
+      "default": false
+    }
+  }
+}

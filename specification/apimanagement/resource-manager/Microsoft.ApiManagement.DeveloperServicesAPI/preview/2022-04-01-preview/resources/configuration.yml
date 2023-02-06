@@ -1,0 +1,40 @@
+openapi: '3.0.2'
+info:
+  title: Configuration
+  version: 2022-04-01-preview
+  description: Use these REST APIs for performing operations on developer portal configuration and their operations associated with your Azure API Management deployment.
+
+paths:
+  /configuration/content:
+    description: Content settings
+    get:
+      operationId: ContentSettings_Get
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-examples: 
+        ContentSettings_Get: 
+          $ref: "../examples/GetContentSettings.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/contentSettings.json
+                
+  /configuration/signup:
+    description: Sign up settings
+    get:
+      operationId: SignupSettings_Get
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-examples: 
+        SignupSettings_Get: 
+          $ref: "../examples/GetSignupSettings.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/signupConfiguration.json

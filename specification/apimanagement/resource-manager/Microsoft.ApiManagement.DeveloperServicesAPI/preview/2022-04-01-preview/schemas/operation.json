@@ -1,0 +1,55 @@
+{
+  "type": "object",
+  "description": "API operation details",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Operation identifier."
+    },
+    "name": {
+      "type": "string",
+      "description": "Operation name.  Must be 1 to 300 characters long."
+    },
+    "method": {
+      "$ref": "method.json",
+      "description": "Operation HTTP method.",
+      "x-apim-code-type": "string"
+    },
+    "urlTemplate": {
+      "type": "string",
+      "description": "Operation URI template. Cannot be more than 400 characters long."
+    },
+    "templateParameters": {
+      "description": "Collection of URL template parameters.",
+      "x-apim-code-optional": true,
+      "type": "array",
+      "items": {
+        "$ref": "parameter.json"
+      }
+    },
+    "description": {
+      "type": "string",
+      "description": "Operation description."
+    },
+    "request": {
+      "$ref": "request.json",
+      "description": "Operation request.",
+      "x-apim-code-optional": true
+    },
+    "responses": {
+      "description": "Array of Operation responses.",
+      "x-apim-code-optional": true,
+      "type": "array",
+      "items": {
+        "$ref": "response.json"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "tag.json"
+      },
+      "x-apim-code-optional": true
+    }
+  }
+}

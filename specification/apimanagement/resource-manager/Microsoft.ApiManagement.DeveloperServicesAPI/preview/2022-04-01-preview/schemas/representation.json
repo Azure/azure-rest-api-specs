@@ -1,0 +1,48 @@
+{
+  "type": "object",
+  "description": "HTTP request/response representation",
+  "properties": {
+    "contentType": {
+      "type": "string",
+	    "x-apim-code-optional": true
+    },
+    "examples": {
+      "type": "object",
+      "description": "Representation examples",
+      "properties": {
+        "default": {
+          "allOf": [
+            {
+              "$ref": "example.json"
+            },
+            {
+              "description": "Default representation example"
+            }
+          ]
+        }
+      },
+      "additionalProperties": {
+        "$ref": "example.json"
+      },
+      "x-apim-code-optional": true
+    },
+    "schemaId": {
+      "type": "string",
+      "description": "Schema identifier. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'.",
+      "x-apim-code-optional": true
+    },
+    "typeName": {
+      "type": "string",
+      "description": "Type name defined by the schema. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'.",
+      "x-apim-code-optional": true
+    },
+    "formParameters": {
+      "description": "Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'.",
+      "x-apim-code-optional": true,
+      "type": "array",
+      "items": {
+        "$ref": "parameter.json"
+      }
+    }
+  }
+}

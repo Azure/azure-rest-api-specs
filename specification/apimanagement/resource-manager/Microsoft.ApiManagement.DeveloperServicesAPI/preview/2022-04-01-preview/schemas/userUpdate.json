@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "description": "User registration or update request representation",
+  "properties": {
+    "password": {
+      "type": "string",
+      "description": "Password."
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name."
+    },
+    "state": {
+      "allOf": [
+        {
+          "$ref": "userState.json"
+        },
+        {
+          "description": "User account state"
+        }
+      ]
+    }
+  }
+}

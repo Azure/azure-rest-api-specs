@@ -1,0 +1,75 @@
+{
+  "type": "object",
+  "x-apim-code-ignore": true,
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "User-friendly description of authorization server."
+    },
+    "clientRegistrationEndpoint": {
+      "type": "string",
+      "description": "Client registration URI that will be shown for developers."
+    },
+    "authorizationEndpoint": {
+      "type": "string",
+      "description": "OAuth authorization endpoint <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.2\"/>."
+    },
+    "authorizationMethods": {
+      "description": "Supported methods of authorization",
+      "type": "array",
+      "items": {
+        "$ref": "method.json"
+      }
+    },
+    "clientAuthenticationMethod": {
+      "description": "Supported methods of authorization",
+      "type": "array",
+      "items": {
+        "$ref": "clientAuthenticationMethod.json"
+      }
+    },
+    "tokenBodyParameters": {
+      "description": "Token request body parameters",
+      "type": "array",
+      "items": {
+        "$ref": "tokenBodyParameter.json"
+      }
+    },
+    "tokenEndpoint": {
+      "type": "string",
+      "description": "OAuth token endpoint. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.1\"/>"
+    },
+    "useInTestConsole": {
+      "type": "boolean",
+      "description": "Authorization Server may be used in the test console",
+      "x-apim-code-nillable": true
+    },
+    "useInApiDocumentation": {
+      "type": "boolean",
+      "description": "Authorization Server may be used in API documentation",
+      "x-apim-code-nillable": true
+    },
+    "supportState": {
+      "type": "boolean",
+      "description": "Auhtorizatoin Server may support client credentials in body by spec. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.1\"/>"
+    },
+    "defaultScope": {
+      "type": "string",
+      "description": "Scope that is going to applied by default on the console page. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.3\"/>"
+    },
+    "grantTypes": {
+      "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>",
+      "type": "array",
+      "items": {
+        "$ref": "grantTypes.json"
+      }
+    },
+    "bearerTokenSendingMethods": {
+      "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>",
+      "type": "array",
+      "items": {
+        "$ref": "bearerTokenSendingMethods.json"
+      }
+    }
+  }
+}

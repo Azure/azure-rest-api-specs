@@ -1,0 +1,73 @@
+openapi: '3.0.0'
+info:
+  title: Confirmations
+  version: 2022-04-01-preview
+  description: Use these REST APIs for performing operations on user confirmations and their operations associated with your Azure API Management deployment.
+
+paths:
+  /confirmations/password:
+    description: Password reset confirmation
+    post:
+      operationId: PasswordConfirmation_Create
+      x-apim-auth-rules:
+        isPublic: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/confirmationRequest.json 
+      x-ms-examples: 
+        PasswordConfirmation_Create: 
+          $ref: "../examples/CreatePasswordConfirmation.json"
+      responses:
+        204:
+          description: OK
+                
+  /confirmations/identities/basic:
+    description: Basic identity (Email) confirmation
+    post:
+      operationId: BasicIdentityConfirmation_Create
+      x-apim-auth-rules:
+        isPublic: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/identityConfirmationRequest.json
+      x-ms-examples: 
+        BasicIdentityConfirmation_Create: 
+          $ref: "../examples/CreateBasicIdentityConfirmation.json"
+      responses:
+        204:
+          description: OK
+
+  /confirmations/users/{userId}/identities/basic:
+    description: Basic identity (Email) confirmation for a User
+    post:
+      operationId: UserBasicIdentityConfirmation_Create
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/identityConfirmationRequest.json
+      x-ms-examples: 
+        UserBasicIdentityConfirmation_Create: 
+          $ref: "../examples/CreateUserBasicIdentityConfirmation.json"
+      responses:
+        204:
+          description: OK
+
+components:
+  parameters:
+    userId:
+      name: userId
+      in: path
+      description: Id of user
+      required: true
+      schema:
+        type: string

@@ -1,0 +1,1226 @@
+openapi: '3.0.0'
+info:
+  title: Users
+  version: 2022-04-01-preview
+  description: Use these REST APIs for performing operations on everything that requires authentication and their operations associated with your Azure API Management deployment.
+
+paths:
+  /users: 
+    description: Users registered in API Management service
+    post:
+      operationId: User_Create
+      x-apim-auth-rules:
+        isPublic: true
+      description: Create new user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/userCreate.json
+      x-ms-examples: 
+        User_Create: 
+          $ref: "../examples/CreateUser.json"
+      responses:
+        201:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/user.json
+
+  /users/{userId}:
+    get:
+      operationId: User_Get
+      description: Get user profile
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      x-ms-examples: 
+        User_Get: 
+          $ref: "../examples/GetUser.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/user.json
+
+    patch:
+      description: Update existing user
+      operationId: User_CreateOrUpdate
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+          - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/ifMatch"          
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: ../schemas/userUpdate.json
+      x-ms-examples: 
+        User_CreateOrUpdate: 
+          $ref: "../examples/UpdateUser.json" 
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/user.json
+      
+    delete:
+      operationId: User_Delete
+      description: Delete user
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+          - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/ifMatch"
+      x-ms-examples: 
+        User_Delete: 
+          $ref: "../examples/DeleteUser.json" 
+      responses:
+        204:
+          description: OK
+  
+  /users/{userId}/identities:
+    description: User identities
+    get:
+      operationId: UserIdentities_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+          - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserIdentities_List: 
+          $ref: "../examples/ListUserIdentities.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/userIdentity.json
+  
+  /users/{userId}/identities/{provider}/{identity}:
+    description: User identity
+    put:
+      operationId: UserIdentityProvider_CreateOrUpdate
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+          identity: "{identity}"
+          identityProvider: "{provider}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/providerName"
+      - $ref: "#/components/parameters/identityName"
+      x-ms-examples: 
+        UserIdentityProvider_CreateOrUpdate: 
+          $ref: "../examples/CreateUserIdentityProvider.json"
+      responses:
+        204:
+          description: OK
+    
+  /users/{userId}/products:
+    description: User visible Products
+    get:
+      operationId: UserProducts_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserProducts_List: 
+          $ref: "../examples/ListUserProducts.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/product.json
+
+  /users/{userId}/products/{productId}:
+    description: User visible Product
+    get:
+      operationId: UserProduct_Get
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/productId"
+      x-ms-examples: 
+        UserProduct_Get: 
+          $ref: "../examples/GetUserProduct.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/product.json
+
+  /users/{userId}/products/{productId}/apis:
+    description: List of User visible APIs associated with User visible Product
+    get:
+      operationId: UserProductApis_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/productId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserProductApis_List: 
+          $ref: "../examples/ListUserProductApis.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/api.json
+
+  /users/{userId}/products/{productId}/tags:
+    description: List of Tags associated with User visible Product
+    get:
+      operationId: UserProductTags_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/productId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserProductTags_List: 
+          $ref: "../examples/ListUserProductTags.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/tag.json
+
+  /users/{userId}/apiVersionSets:
+    description: User visible API Version Sets
+    get:
+      operationId: UserApiVersionSets_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiVersionSets_List: 
+          $ref: "../examples/ListUserApiVersionSets.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/apiVersionSet.json
+
+  /users/{userId}/apiVersionSets/{versionSetId}:
+    description: User visible API Version Set
+    get:
+      operationId: UserApiVersionSet_Get
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/versionSetId"
+      x-ms-examples: 
+        UserApiVersionSet_Get: 
+          $ref: "../examples/GetUserApiVersionSet.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/apiVersionSet.json
+
+  /users/{userId}/apiVersionSets/{versionSetId}/apis:
+    description: List of User visible APIs associated with User visible API Version Set
+    get:
+      operationId: UserApiVersionSetApis_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/versionSetId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiVersionSetApis_List: 
+          $ref: "../examples/ListUserApiVersionSetApis.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/api.json
+
+  /users/{userId}/apis:
+    description: User visible APIs
+    get:
+      operationId: UserApis_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApis_List: 
+          $ref: "../examples/ListUserApis.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/api.json
+
+  /users/{userId}/apis/{apiId}:
+    description: User visible API
+    get:
+      operationId: UserApi_Get
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - name: Accept
+        in: "header"
+        x-apim-code-alias: "format"
+        description: "Media type"
+        required: true
+        schema:
+          type: string
+      - name: export
+        in: "query"
+        description: "Is export request"
+        required: false
+        schema:
+          type: boolean
+      x-ms-examples: 
+        UserApi_Get: 
+          $ref: "../examples/GetUserApi.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/api.json
+            application/vnd.sun.wadl+xml:
+              schema:
+                type: string
+            application/wsdl+xml:
+              schema:
+                type: string
+            application/vnd.swagger.doc+json:
+              schema:
+                type: string
+            application/vnd.oai.openapi:
+              schema:
+                type: string
+            application/vnd.oai.openapi+json:
+              schema:
+                type: string
+
+  /users/{userId}/apis/{apiId}/schemas:
+    description: Schemas of User visible API
+    get:
+      operationId: UserApiSchemas_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiSchemas_List: 
+          $ref: "../examples/ListUserApiSchemas.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  allOf:
+                    - $ref: ../schemas/collection.json
+                    - type: object
+                      properties:
+                        value:
+                          type: array
+                          items:
+                            $ref: ../schemas/apiSchema.json
+
+  /users/{userId}/apis/{apiId}/schemas/{schemaId}:
+    description: Schemas of User visible API
+    get:
+      operationId: UserApiSchema_Get
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/schemaId"
+      x-ms-examples: 
+        UserApiSchema_Get: 
+          $ref: "../examples/GetUserApiSchema.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/apiSchema.json
+
+  /users/{userId}/apis/{apiId}/authServers/oauth2:
+    description: List of OAuth 2.0 servers associated with public API
+    get:
+      operationId: UserApiOAuth2Providers_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiOAuth2Providers_List: 
+          $ref: "../examples/ListUserApiOauth2Providers.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/authorizationServer.json
+
+  /users/{userId}/apis/{apiId}/authServers/oauth2/{providerId}:
+    description: OAuth 2.0 server associated with User visible API
+    get:
+      operationId: UserApiOAuth2Provider_Get
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/providerId"
+      x-ms-examples: 
+        UserApiOAuth2Provider_Get: 
+          $ref: "../examples/GetUserApiOauth2Provider.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/authorizationServer.json
+
+  /users/{userId}/apis/{apiId}/authServers/openidconnect:
+    description: List of OpenID Connect server associated with public API
+    get:
+      operationId: UserApiOpenidConnectProviders_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiOpenidConnectProviders_List: 
+          $ref: "../examples/ListUserApiOpenidProviders.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/authorizationServer.json
+
+  /users/{userId}/apis/{apiId}/authServers/openidconnect/{providerId}:
+    description: OpenID Connect server associated with User visible API
+    get:
+      operationId: UserApiOpenidConnectProvider_Get
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/providerId"
+      x-ms-examples: 
+        UserApiOpenidConnectProvider_Get: 
+          $ref: "../examples/GetUserApiOpenidProvider.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/authorizationServer.json
+
+  /users/{userId}/apis/{apiId}/products:
+    description: List of User visible Products associated with User visible API
+    get:
+      operationId: UserApiProducts_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiProducts_List: 
+          $ref: "../examples/ListUserApiProducts.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/product.json
+
+  /users/{userId}/apis/{apiId}/releases:
+    description: List of releases for User visible API
+    get:
+      operationId: UserApiReleases_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiReleases_List: 
+          $ref: "../examples/ListUserApiReleases.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/apiRelease.json
+
+  /users/{userId}/apis/{apiId}/hostnames:
+    description: List of hostnames for User visible API
+    get:
+      operationId: UserApiHostnames_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiHostnames_List: 
+          $ref: "../examples/ListUserApiHostnames.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/apiHostname.json
+
+  /users/{userId}/apis/{apiId}/tags:
+    description: Tags of User visible API
+    get:
+      operationId: UserApiTags_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiTags_List: 
+          $ref: "../examples/ListUserApiTags.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/tag.json
+
+  /users/{userId}/apis/{apiId}/operations:
+    description: Operations of User visible API
+    get:
+      operationId: UserApiOperations_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiOperations_List: 
+          $ref: "../examples/ListUserApiOperations.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/operation.json
+
+  /users/{userId}/apis/{apiId}/operations/{operationId}:
+    description: Operation of User visible API
+    get:
+      operationId: UserApiOperation_Get
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/operationId"
+      x-ms-examples: 
+        UserApiOperation_Get: 
+          $ref: "../examples/GetUserApiOperation.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/operation.json
+
+  /users/{userId}/apis/{apiId}/operations/{operationId}/tags:
+    description: Tags of operation of User visible API
+    get:
+      operationId: UserApiOperationTags_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/operationId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserApiOperationTags_List: 
+          $ref: "../examples/ListUserApiOperationTags.json"
+      responses:
+        200: 
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/tag.json
+
+  /users/{userId}/tags:
+    description: Tags associated with User visible entities
+    get:
+      operationId: UserTags_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserTags_List: 
+          $ref: "../examples/ListUserTags.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/tag.json
+
+  /users/{userId}/subscriptions:
+    description: User subscriptions
+    get:
+      description: List user subscriptions
+      operationId: UserSubscriptions_List
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserSubscriptions_List: 
+          $ref: "../examples/ListUserSubscriptions.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/subscription.json
+  
+  /users/{userId}/subscriptions/{subscriptionId}:
+    description: User subscription
+    get:
+      description: Get user subscription
+      operationId: UserSubscription_Get
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/subscriptionId"
+      x-ms-examples: 
+        UserSubscription_Get: 
+          $ref: "../examples/GetUserSubscription.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/subscription.json
+
+    patch:
+      description: Update user subscription
+      operationId: UserSubscription_CreateOrUpdate
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/subscriptionId"
+      - $ref: "#/components/parameters/ifMatch"
+      requestBody:
+        content:
+          application/merge-patch+json:
+            schema:
+              $ref: ../schemas/userSubscriptionUpdate.json
+      x-ms-examples: 
+        UserSubscription_CreateOrUpdate: 
+          $ref: "../examples/UpdateUserSubscription.json"
+      responses:
+        204:    
+          description: OK
+
+    post:
+      description: Create user subscription
+      operationId: UserSubscription_Create
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/subscriptionId"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../schemas/userSubscriptionCreate.json
+      x-ms-examples: 
+        UserSubscription_Create: 
+          $ref: "../examples/CreateUserSubscription.json"
+      responses:
+        204:
+          description: OK
+
+  /users/{userId}/subscriptions/{subscriptionId}/regeneratePrimaryKey:
+    description: Regenerate Subscription primary key
+    x-apim-code-action: true
+    post:
+      operationId: UserSubscriptionPrimaryKey_Create
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/subscriptionId"
+      x-ms-examples: 
+        UserSubscriptionPrimaryKey_Create: 
+          $ref: "../examples/CreateUserSubscriptionPrimaryKey.json"
+      responses:
+        204: 
+          description: OK
+
+  /users/{userId}/subscriptions/{subscriptionId}/regenerateSecondaryKey:
+    description: Regenerate Subscription secondary key
+    x-apim-code-action: true
+    post:
+      operationId: UserSubscriptionSecondaryKey_Create
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - $ref: "#/components/parameters/subscriptionId"
+      x-ms-examples: 
+        UserSubscriptionSecondaryKey_Create: 
+          $ref: "../examples/CreateUserSubscriptionSecondaryKey.json"
+      responses:
+        204: 
+          description: OK
+
+  /users/{userId}/reports/{reportType}:
+    description: API usage reports
+    get:
+      operationId: UserReports_List
+      security:
+        - OAuth2Password: []
+      x-apim-odata-support: true
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      - name: reportType
+        in: "path"
+        description: "Type of report"
+        required: true
+        schema:
+          type: string
+      - name: interval
+        in: "query"
+        description: "Aggregation interval"
+        required: false
+        schema:
+          type: string
+          format: duration
+      - name: $orderby
+        in: "query"
+        description: "OData order by query option."
+        required: false
+        schema:
+          type: string
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        UserReports_List: 
+          $ref: "../examples/ListUserReports.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/reportRecord.json
+
+  /users/{userId}/token/revoke: 
+    description: Revoke user token
+    post:
+      operationId: UserToken_Update
+      security:
+        - OAuth2Password: []
+      x-apim-auth-rules:
+        allowRules:
+        - owner: "{userId}"
+      parameters:
+      - $ref: "#/components/parameters/userId"
+      x-ms-examples: 
+        UserToken_Update: 
+          $ref: "../examples/UpdateUserToken.json"
+      responses:
+        204:
+          description: OK
+
+components:
+  securitySchemes:
+    OAuth2Password:
+      type: oauth2
+      description: User authentication with email and password.
+      flows:
+        password:
+          tokenUrl: <api_management_arm_url>/users/<user_email>/token
+          scopes:
+            user_impersonation: Impersonate your user account
+  parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter query option.
+      schema:
+        type: string
+    skip:
+      name: $skip
+      in: query
+      description: Number of elements to skip
+      schema:
+        type: integer
+        default: 0
+    top:
+      name: $top
+      in: query
+      description: Number of element to take from the top
+      schema:
+        type: integer
+        maximum: 100
+    userId:
+      name: userId
+      in: path
+      description: Id of user
+      required: true
+      schema:
+        type: string
+    apiId:
+      name: apiId
+      description: Id of api
+      in: path
+      required: true
+      schema:
+        type: string
+    schemaId:
+      name: schemaId
+      description: Id of schema
+      in: path
+      required: true
+      schema:
+        type: string
+    operationId:
+      name: operationId
+      description: Id of an operation
+      in: path
+      required: true
+      schema:
+        type: string
+    providerId:
+      name: providerId
+      description: Id of provider
+      in: path
+      required: true
+      schema:
+        type: string
+    versionSetId:
+      name: versionSetId
+      description: Id of versionSet
+      in: path
+      required: true
+      schema:
+        type: string
+    productId:
+      name: productId
+      description: Id of product
+      in: path
+      required: true
+      schema:
+        type: string
+    subscriptionId:
+      name: subscriptionId
+      in: path
+      description: Id of subscription
+      required: true
+      schema:
+        type: string
+    providerName:
+      name: provider
+      in: path
+      description: Identity provider name
+      required: true
+      schema:
+        type: string
+    identityName:
+      name: identity
+      in: path
+      description: Identity name
+      required: true
+      schema:
+        type: string
+    ifMatch: 
+      name: If-Match
+      in: header
+      description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+      x-apim-code-alias: tag
+      required: true
+      schema:
+        type: string    

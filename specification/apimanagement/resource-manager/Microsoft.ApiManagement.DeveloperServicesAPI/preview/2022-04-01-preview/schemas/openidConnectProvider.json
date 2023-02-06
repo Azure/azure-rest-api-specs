@@ -1,0 +1,41 @@
+{
+    "type": "object",
+    "description": "OpenID Connect Provider settings",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "OpenID Connect Provider identifier",
+        "x-apim-code-resourceId": "/openidConnectProviders/{id}",
+        "x-apim-code-alias": "id"
+      },
+      "name": {
+        "type": "string",
+        "description": "User-friendly OpenID Connect Provider name."
+      },
+      "description": {
+        "type": "string",
+        "description": "User-friendly description of OpenID Connect Provider."
+      },
+      "metadataEndpoint": {
+        "type": "string",
+        "description": "Metadata endpoint URI."
+      },
+      "useInTestConsole": {
+        "type": "boolean",
+        "description": "Open Id Connect Provider may be used in the test console",
+        "x-apim-code-optional": true,
+        "x-apim-code-nillable": true
+      },
+      "useInApiDocumentation": {
+        "type": "boolean",
+        "description": "Open Id Connect Provider may be used in API documentation",
+        "x-apim-code-optional": true,
+        "x-apim-code-nillable": true
+      }
+    },
+    "allOf": [
+      {
+        "$ref": "clientCredentials.json"
+      }
+    ]
+  }

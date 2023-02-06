@@ -1,0 +1,35 @@
+{
+  "type": "object",
+  "description": "HTTP request",
+  "properties": {
+    "description": {
+      "type": "string",
+      "description": "Operation request description.",
+	  "x-apim-code-optional": true
+    },
+    "queryParameters": {
+      "description": "Collection of operation request query parameters.",
+      "type": "array",
+	  "x-apim-code-optional": true,
+      "items": {
+        "$ref": "parameter.json"
+      }
+    },
+    "headers": {
+      "description": "Collection of operation request headers.",
+      "type": "array",
+	  "x-apim-code-optional": true,
+      "items": {
+        "$ref": "parameter.json"
+      }
+    },
+    "representations": {
+      "description": "Collection of operation request representations.",
+      "type": "array",
+	  "x-apim-code-optional": true,
+      "items": {
+        "$ref": "representation.json"
+      }
+    }
+  }
+}

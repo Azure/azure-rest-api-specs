@@ -1,0 +1,25 @@
+{
+  "type": "string",
+  "description": "Supported methods of authorization",
+  "x-apim-public": "true",
+  "enum": [
+    "Basic",
+    "Body"
+  ],
+  "x-ms-enum": {
+    "modelAsString": true,
+    "name": "clientAuthenticationMethod",
+    "values": [
+      {
+        "value": "Basic",
+        "description": "Client authentication information will be transmitted in the Authorization header using Basic schema",
+        "x-apim-code-enumValue": 1
+      },
+      {
+        "value": "Body",
+        "description": "Client authentication information will be transmitted as www-url-form-encoded body parameter.",
+        "x-apim-code-enumValue": 2
+      }
+    ]
+  }
+}

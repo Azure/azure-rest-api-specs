@@ -1,0 +1,27 @@
+{
+    "type": "object",
+    "description": "Tag Resources",
+    "x-apim-code-public": "true",
+    "properties": {
+      "tag": {
+        "allOf": [
+          {
+            "$ref": "tag.json"
+          },
+          {
+            "description": "Tag Information for the related API"
+          }
+        ]
+      },
+      "operation": {
+        "allOf": [
+          {
+            "$ref": "operation.json"
+          },
+          {
+            "description": "Operation information to the related API"
+          }
+        ]
+      }
+    }
+  }

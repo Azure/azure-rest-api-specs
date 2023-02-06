@@ -1,0 +1,27 @@
+{
+  "type": "object",
+  "description": "OpenID Connect authentication settings",
+  "properties": {
+    "openidProviderId": {
+      "type": "string",
+      "description": "OpenID Connect Provider identifier"
+    },
+    "bearerTokenSendingMethods": {
+      "description": "How to send token to the server.",
+      "type": "array",
+      "items": {
+        "$ref": "bearerTokenSendingMethods.json"
+      }
+    },
+      "openidConnectProvider": {
+        "allOf": [
+          {
+            "$ref": "openidConnectProvider.json"
+          },
+          {
+            "description": "Open ID Connect provider"
+          }
+        ]
+    }
+  }
+}

@@ -1,0 +1,23 @@
+openapi: '3.0.0'
+info:
+  title: Identity
+  version: 2022-04-01-preview
+  description: Use these REST APIs for performing operations on identity and their operations associated with your Azure API Management deployment.
+
+paths:
+  /identity:
+    description: Identity of current user
+    get:
+      operationId: Identity_Get
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-examples: 
+        Identity_Get: 
+          $ref: "../examples/GetIdentity.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/identityResult.json

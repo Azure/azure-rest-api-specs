@@ -1,0 +1,45 @@
+{
+  "type": "object",
+  "description": "External OAuth authorization server settings",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Authorization server identifier"
+    },
+    "description": {
+      "type": "string",
+      "description": "User-friendly description of authorization server."
+    },
+    "authorizationEndpoint": {
+      "type": "string",
+      "description": "OAuth authorization endpoint <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.2\"/>."
+    },
+    "tokenEndpoint": {
+      "type": "string",
+      "description": "OAuth token endpoint. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.1\"/>"
+    },
+    "defaultScope": {
+      "type": "string",
+      "description": "Scope applied by default on the console page. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.3\"/>"
+    },
+    "grantTypes": {
+      "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>",
+      "type": "array",
+      "items": {
+        "$ref": "grantTypes.json"
+      }
+    },
+    "clientId": {
+      "type": "string",
+      "description": "Client ID of developer console which is the client application"
+    },
+    "useInTestConsole": {
+        "type": "boolean",
+        "description": "Authorization Server may be used in the test console"
+      },
+      "useInApiDocumentation": {
+        "type": "boolean",
+        "description": "Authorization Server may be used in API documentation",
+      }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "type": "string",
+  "description": "Possible subscription request states",
+  "x-apim-public": "true",
+  "enum": [
+    "suspended",
+    "active",
+    "expired",
+    "submitted",
+    "rejected",
+    "cancelled"
+  ],
+  "x-ms-enum": {
+    "modelAsString": true,
+    "name": "subscription-state",
+    "values": [
+      {
+        "value": "suspended",
+        "description": "Subscription is blocked. User whose subscription is blocked cannot call subscription's product APIs.",
+        "x-apim-code-enumValue": 0
+      },
+      {
+        "value": "active",
+        "description": "Subscription is active.",
+        "x-apim-code-enumValue": 1
+      },
+      {
+        "value": "expired",
+        "description": "Subscription has expired. User whose subscription is expired cannot call subscription's product APIs.",
+        "x-apim-code-enumValue": 2
+      },
+      {
+        "value": "submitted",
+        "description": "Subscription request has been submitted.",
+        "x-apim-code-enumValue": 3
+      },
+      {
+        "value": "rejected",
+        "description": "Subscription request has been rejected.",
+        "x-apim-code-enumValue": 4
+      },
+      {
+        "value": "cancelled",
+        "description": "Subscription request has been cancelled.",
+        "x-apim-code-enumValue": 5
+      }
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "description": "External OAuth authorization server settings",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Authorization server identifier",
+      "x-apim-code-resourceId": "/authorizationServers/{id}",
+      "readOnly": true,
+      "x-apim-code-alias": "id"
+    },
+    "name": {
+      "type": "string",
+      "description": "User-friendly authorization server name."
+    }
+  },
+  "allOf": [
+    {
+      "$ref": "authorizationServerCommonProperties.json"
+    },
+    {
+      "$ref": "clientCredentials.json"
+    },
+    {
+      "$ref": "resourceOwnerCredentials.json"
+    }
+  ]
+}

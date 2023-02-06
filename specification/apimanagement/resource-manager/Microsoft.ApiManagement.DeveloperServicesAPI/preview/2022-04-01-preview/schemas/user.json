@@ -1,0 +1,41 @@
+{
+  "type": "object",
+  "description": "User profile",
+  "x-apim-code-public": "true",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "User identifier.",
+      "x-apim-code-resourceId": "/users/{uid}",
+      "readOnly": true
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name."
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name."
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address."
+    },
+    "state": {
+      "allOf": [
+        {
+          "$ref": "userState.json"
+        },
+        {
+          "description": "User state."
+        }
+      ]
+    },
+    "registrationDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date of user registration."
+    }
+  }
+}

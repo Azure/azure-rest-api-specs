@@ -1,0 +1,38 @@
+{
+  "type": "object",
+  "description": "API Version Set",
+  "x-apim-code-public": "true",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "API Version Set identifier",
+      "x-apim-code-resourceId": "/apiVersionSets/{apiVersionSetId}"
+    },
+    "name": {
+      "type": "string",
+      "description": "API Version Set name. Must be 1 to 100 characters long."
+    },
+    "description": {
+      "type": "string",
+      "description": "API Version Set description"
+    },
+    "versioningScheme": {
+      "allOf": [
+        {
+          "$ref": "apiVersionSetScheme.json"
+        },
+        {
+          "description": "Versioning scheme"
+        }
+      ]
+    },
+    "versionQueryName": {
+      "type": "string",
+      "description": "Version query name. Must be 1 to 100 characters long."
+    },
+    "versionHeaderName": {
+      "type": "string",
+      "description": "Version header name. Must be 1 to 100 characters long."
+    }
+  }
+}

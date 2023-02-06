@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "description": "Authentication settings",
+  "properties": {
+    "oAuth2AuthenticationSettings": {
+      "description": "Collection of OAuth2 authentication settings included into this API.",
+      "type": "array",
+      "items": {
+        "$ref": "oAuth2AuthenticationSettings.json"
+      }
+    },
+    "openidAuthenticationSettings": {
+      "description": "Collection of OpenID Connect authentication settings included into this API.",
+      "type": "array",
+      "items": {
+        "$ref": "openidAuthenticationSettings.json"
+      }
+    },
+    "subscriptionKeyRequired": {
+      "type": "boolean",
+      "description": "Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products.",
+      "x-apim-code-optional": true,
+      "x-apim-code-nillable": true
+    }
+  }
+}

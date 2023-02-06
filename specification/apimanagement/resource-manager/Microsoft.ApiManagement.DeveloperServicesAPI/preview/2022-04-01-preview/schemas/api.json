@@ -1,0 +1,119 @@
+{
+  "type": "object",
+  "description": "API details",
+  "x-apim-code-public": "true",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "API identifier.",
+      "x-apim-code-resourceId": "/apis/{aid}"
+    },
+    "name": {
+      "type": "string",
+      "description": "API name. Must be 1 to 300 characters long."
+    },
+    "description": {
+      "type": "string",
+      "description": "API description."
+    },
+    "subscriptionRequired": {
+      "type": "boolean",
+      "description": "Specifies whether an API subscription is required for accessing the API.",
+      "x-apim-code-nillable": true,
+      "x-apim-code-optional": true
+    },
+    "path": {
+      "type": "string",
+      "description": "Path for API requests."
+    },
+    "protocols": {
+      "description": "Protocols over which API is made available.",
+      "type": "array",
+      "items": {
+        "$ref": "apiProtocol.json"
+      }
+    },
+    "tagDescriptions": {
+      "description": "Array of Tag Descriptions included into this API.",
+      "type": "array",
+      "items": {
+        "$ref": "tagDescription.json"
+      },
+      "x-apim-code-optional": true
+    },
+    "authenticationSettings": {
+      "allOf": [
+        {
+          "$ref": "authenticationSettings.json"
+        },
+        {
+          "description": "Collection of authentication settings included into this API."
+        }
+      ]
+    },
+    "subscriptionKeyParameterNames": {
+      "allOf": [
+        {
+          "$ref": "subscriptionKeyParameterNames.json"
+        },
+        {
+          "description": "Names of Subscription key parameters used by the API."
+        }
+      ]
+    },
+    "termsOfServiceUrl": {
+      "type": "string",
+      "maxLength": 128,
+      "description": "A URL to the Terms of Service for the API. MUST be in the format of a URL.",
+      "x-apim-code-optional": true
+    },
+    "contact": {
+      "allOf": [
+        {
+          "$ref": "apiContactInfo.json"
+        },
+        {
+          "description": "Contact information for the exposed API."
+        }
+      ],
+      "x-apim-code-optional": true
+    },
+    "license": {
+      "allOf": [
+        {
+          "$ref": "apiLicenseInfo.json"
+        },
+        {
+          "description": "License information for the exposed API."
+        }
+      ],
+      "x-apim-code-optional": true
+    },
+    "type": {
+      "allOf": [
+        {
+          "$ref": "apiType.json"
+        },
+        {
+          "description": "Type of API.",
+          "x-apim-code-optional": true
+        }
+      ]
+    },
+    "apiVersion": {
+      "type": "string",
+      "description": "API version name",
+      "x-apim-code-optional": true
+    },
+    "apiVersionDescription": {
+      "type": "string",
+      "description": "Version description",
+      "x-apim-code-optional": true
+    },
+    "apiVersionSetId": {
+      "type": "string",
+      "description": "Api Version Set Identifier",
+      "x-apim-code-resourceId": "/apiVersionSets/{id}"
+    }
+  }
+}

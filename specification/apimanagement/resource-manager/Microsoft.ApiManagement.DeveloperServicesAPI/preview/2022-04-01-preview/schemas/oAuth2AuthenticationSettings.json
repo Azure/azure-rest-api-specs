@@ -1,0 +1,25 @@
+{
+  "type": "object",
+  "description": "OAuth authentication settings",
+  "properties": {
+    "authorizationServerId": {
+      "type": "string",
+      "description": "OAuth authorization server identifier"
+    },
+    "scope": {
+      "type": "string",
+      "description": "Operations scope"
+    },
+    "authorizationServer": {
+      "allOf": [
+        {
+          "$ref": "oAuth2AuthorizationServer.json"
+        },
+        {
+          "description": "OAuth authorization server",
+          "x-apim-code-optional": true
+        }
+      ]
+    }
+  }
+}

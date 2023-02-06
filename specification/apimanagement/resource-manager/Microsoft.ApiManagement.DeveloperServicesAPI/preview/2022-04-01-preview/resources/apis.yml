@@ -1,0 +1,492 @@
+openapi: '3.0.0'
+info:
+  title: APIs
+  version: 2022-04-01-preview
+  description: Use these REST APIs for performing operations on API entity and their operations associated with your Azure API Management deployment.
+
+paths:
+  /apis:
+    description: Public APIs
+    get:
+      operationId: Apis_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        Apis_List: 
+          $ref: "../examples/ListApis.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  allOf:
+                    - $ref: ../schemas/collection.json
+                    - type: object
+                      properties:
+                        value:
+                          type: array
+                          items:
+                            $ref: ../schemas/api.json
+
+  /apis/{apiId}:
+    description: Public API
+    get:
+      operationId: Api_Get
+      x-apim-auth-rules:
+        isPublic: true
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - name: Accept
+        in: "header"
+        x-apim-code-alias: "format"
+        description: "Media type"
+        required: true
+        schema:
+          type: string
+      - name: export
+        in: "query"
+        description: "Is export request"
+        required: false
+        schema:
+          type: boolean
+      x-ms-examples: 
+        Api_Get: 
+          $ref: "../examples/GetApi.json"
+      responses:
+        200:
+          description: OK
+          content: 
+            application/json:
+              schema:
+                $ref: ../schemas/api.json
+            application/vnd.sun.wadl+xml:
+              schema:
+                type: string
+            application/wsdl+xml:
+              schema:
+                type: string
+            application/vnd.swagger.doc+json:
+              schema:
+                type: string
+            application/vnd.oai.openapi:
+              schema:
+                type: string
+            application/vnd.oai.openapi+json:
+              schema:
+                type: string
+
+  /apis/{apiId}/schemas:
+    description: Schemas of public API
+    get:
+      operationId: ApiSchemas_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiSchemas_List: 
+          $ref: "../examples/ListApiSchemas.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  allOf:
+                    - $ref: ../schemas/collection.json
+                    - type: object
+                      properties:
+                        value:
+                          type: array
+                          items:
+                            $ref: ../schemas/apiSchema.json
+
+  /apis/{apiId}/schemas/{schemaId}:
+    description: Schemas of public API
+    get:
+      operationId: ApiSchema_Get
+      x-apim-auth-rules:
+        isPublic: true
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/schemaId"
+      x-ms-examples: 
+        ApiSchema_Get: 
+          $ref: "../examples/GetApiSchema.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/apiSchema.json
+
+  /apis/{apiId}/authServers/oauth2:
+    description: List of OAuth 2.0 servers associated with public API
+    get:
+      operationId: ApiOAuth2Providers_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiOAuth2Providers_List: 
+          $ref: "../examples/ListApiOauth2Providers.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/authorizationServer.json
+
+  /apis/{apiId}/authServers/oauth2/{providerId}:
+    description: OAuth 2.0 server associated with public API
+    get:
+      operationId: ApiOAuth2Provider_Get
+      x-apim-auth-rules:
+        isPublic: true
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/providerId"
+      x-ms-examples: 
+        ApiOAuth2Provider_Get: 
+          $ref: "../examples/GetApiOauth2Provider.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/authorizationServer.json
+
+  /apis/{apiId}/authServers/openidconnect:
+    description: List of OpenID Connect servers associated with public API
+    get:
+      operationId: ApiOpenidProviders_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiOpenidProviders_List: 
+          $ref: "../examples/ListApiOpenidProviders.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/authorizationServer.json
+
+  /apis/{apiId}/authServers/openidconnect/{providerId}:
+    description: OpenID Connect server associated with public API
+    get:
+      operationId: ApiOpenidProvider_Get
+      x-apim-auth-rules:
+        isPublic: true
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/providerId"
+      x-ms-examples: 
+        ApiOpenidProvider_Get: 
+          $ref: "../examples/GetApiOpenidProvider.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/authorizationServer.json
+
+  /apis/{apiId}/products:
+    description: List of public Products associated with public API
+    get:
+      operationId: ApiProducts_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiProducts_List: 
+          $ref: "../examples/ListApiProducts.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/product.json
+
+  /apis/{apiId}/releases:
+    description: List of releases for public API
+    get:
+      operationId: ApiReleases_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiReleases_List: 
+          $ref: "../examples/ListApiReleases.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/apiRelease.json
+
+  /apis/{apiId}/tags:
+    description: Tags of public API
+    get:
+      operationId: ApiTags_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiTags_List: 
+          $ref: "../examples/ListApiTags.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/tag.json
+
+  /apis/{apiId}/hostnames:
+    description: Get hostnames of the specified api
+    get:
+      operationId: ApiHostnames_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiHostnames_List: 
+          $ref: "../examples/ListApiHostnames.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/apiHostname.json
+
+
+  /apis/{apiId}/operations:
+    description: Operations of public API
+    get:
+      operationId: ApiOperations_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiOperations_List: 
+          $ref: "../examples/ListApiOperations.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/operation.json
+
+  /apis/{apiId}/operations/{operationId}:
+    description: Operation of public API
+    get:
+      operationId: ApiOperation_Get
+      x-apim-auth-rules:
+        isPublic: true
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/operationId"
+      x-ms-examples: 
+        ApiOperation_Get: 
+          $ref: "../examples/GetApiOperation.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/operation.json
+
+  /apis/{apiId}/operations/{operationId}/tags:
+    description: Tags of operation of public API
+    get:
+      operationId: ApiOperationTags_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/apiId"
+      - $ref: "#/components/parameters/operationId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiOperationTags_List: 
+          $ref: "../examples/ListApiOperationTags.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/tag.json
+                
+components:
+  parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter query option.
+      schema:
+        type: string
+    skip:
+      name: $skip
+      in: query
+      description: Number of elements to skip
+      schema:
+        type: integer
+        default: 0
+    top:
+      name: $top
+      in: query
+      description: Number of element to take from the top
+      schema:
+        type: integer
+        maximum: 100
+    apiId:
+      name: apiId
+      description: Id of api
+      in: path
+      required: true
+      schema:
+        type: string
+    schemaId:
+      name: schemaId
+      description: Id of schema
+      in: path
+      required: true
+      schema:
+        type: string
+    operationId:
+      name: operationId
+      description: Id of an operation
+      in: path
+      required: true
+      schema:
+        type: string
+    providerId:
+      name: providerId
+      description: Id of provider
+      in: path
+      required: true
+      schema:
+        type: string

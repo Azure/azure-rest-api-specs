@@ -1,0 +1,59 @@
+openapi: '3.0.0'
+info:
+  title: Tags
+  version: 2022-04-01-preview
+  description: Use these REST APIs for performing operations on Tag entity and their operations associated with your Azure API Management deployment.
+
+paths:
+  /tags:
+    description: Tags associated with publicly available entities
+    get:
+      operationId: Tags_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        Tags_List: 
+          $ref: "../examples/ListTags.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/tag.json
+
+components:
+  parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter query option.
+      schema:
+        type: string
+    skip:
+      name: $skip
+      in: query
+      description: Number of elements to skip
+      schema:
+        type: integer
+        default: 0
+    top:
+      name: $top
+      in: query
+      description: Number of element to take from the top
+      schema:
+        type: integer
+        maximum: 100

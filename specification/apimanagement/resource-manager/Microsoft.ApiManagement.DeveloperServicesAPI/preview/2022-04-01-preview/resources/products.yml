@@ -1,0 +1,147 @@
+openapi: '3.0.0'
+info:
+  title: Products
+  version: 2022-04-01-preview
+  description: Use these REST APIs for performing operations on Product entity and their operations associated with your Azure API Management deployment.
+
+paths:
+  /products:
+    description: Public Products
+    get:
+      operationId: Products_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        Products_List: 
+          $ref: "../examples/ListProducts.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/product.json
+
+  /products/{productId}:
+    description: Public Product
+    get:
+      operationId: Product_Get
+      x-apim-auth-rules:
+        isPublic: true
+      parameters:
+      - $ref: "#/components/parameters/productId"
+      x-ms-examples: 
+        Product_Get: 
+          $ref: "../examples/GetProduct.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: ../schemas/product.json
+
+  /products/{productId}/tags:
+    description: List of Tags associated with public Product
+    get:
+      operationId: ProductTags_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      x-ms-examples: 
+        ProductTags_List: 
+          $ref: "../examples/ListProductTags.json"
+      parameters:
+      - $ref: "#/components/parameters/productId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/tag.json
+
+  /products/{productId}/apis:
+    description: List of Apis associated with public Product
+    get:
+      operationId: ProductApis_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/productId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ProductApis_List: 
+          $ref: "../examples/ListProductApis.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/api.json
+
+components:
+  parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter query option.
+      schema:
+        type: string
+    skip:
+      name: $skip
+      in: query
+      description: Number of elements to skip
+      schema:
+        type: integer
+        default: 0
+    top:
+      name: $top
+      in: query
+      description: Number of element to take from the top
+      schema:
+        type: integer
+        maximum: 100
+    productId:
+      name: productId
+      description: Id of product
+      in: path
+      required: true
+      schema:
+        type: string

@@ -1,0 +1,117 @@
+openapi: '3.0.0'
+info:
+  title: API Version Sets
+  version: 2022-04-01-preview
+  description: Use these REST APIs for performing operations on API Version Set entity and their operations associated with your Azure API Management deployment.
+
+paths:
+  /apiVersionSets:
+    description: Public Api Version Sets
+    get:
+      operationId: ApiVersionSets_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiVersionSets_List: 
+          $ref: "../examples/ListApiVersionSets.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  allOf:
+                    - $ref: ../schemas/collection.json
+                    - type: object
+                      properties:
+                        value:
+                          type: array
+                          items:
+                            $ref: ../schemas/apiVersionSet.json
+
+  /apiVersionSets/{versionSetId}:
+    description: Public Api Version Set
+    get:
+      operationId: ApiVersionSet_Get
+      x-apim-auth-rules:
+        isPublic: true
+      parameters:
+      - $ref: "#/components/parameters/versionSetId"
+      x-ms-examples: 
+        ApiVersionSet_Get: 
+          $ref: "../examples/GetApiVersionSet.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  $ref: ../schemas/apiVersionSet.json
+
+  /apiVersionSets/{versionSetId}/apis:
+    description: List of public Apis associated with public Api Version Set
+    get:
+      operationId: ApiVersionSetApis_List
+      x-apim-auth-rules:
+        isPublic: true
+      x-ms-pageable: 
+        nextLinkName: nextLink
+      parameters:
+      - $ref: "#/components/parameters/versionSetId"
+      - $ref: "#/components/parameters/filter"
+      - $ref: "#/components/parameters/skip"
+      - $ref: "#/components/parameters/top"
+      x-ms-examples: 
+        ApiVersionSetApis_List: 
+          $ref: "../examples/ListApiVersionSetApis.json"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                  allOf:
+                    - $ref: ../schemas/collection.json
+                    - type: object
+                      properties:
+                        value:
+                          type: array
+                          items:
+                            $ref: ../schemas/api.json
+
+
+components:
+  parameters:
+    filter:
+      name: $filter
+      in: query
+      description: OData filter query option.
+      schema:
+        type: string
+    skip:
+      name: $skip
+      in: query
+      description: Number of elements to skip
+      schema:
+        type: integer
+        default: 0
+    top:
+      name: $top
+      in: query
+      description: Number of element to take from the top
+      schema:
+        type: integer
+        maximum: 100
+    versionSetId:
+      name: versionSetId
+      description: Id of versionSet
+      in: path
+      required: true
+      schema:
+        type: string

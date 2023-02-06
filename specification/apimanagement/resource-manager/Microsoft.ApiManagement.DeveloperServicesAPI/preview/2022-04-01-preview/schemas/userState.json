@@ -1,0 +1,36 @@
+{
+  "type": "string",
+  "description": "Possible user account states",
+  "enum": [
+    "active",
+    "blocked",
+    "pending",
+    "deleted"
+  ],
+  "x-ms-enum": {
+    "modelAsString": true,
+    "name": "user-state",
+    "values": [
+      {
+        "value": "active",
+        "description": "User is active.",
+        "x-apim-code-enumValue": 1
+      },
+      {
+        "value": "blocked",
+        "description": "User is blocked. Blocked users cannot authenticate at developer portal or call API.",
+        "x-apim-code-enumValue": 2
+      },
+      {
+        "value": "pending",
+        "description": "User account is pending. Requires identity confirmation",
+        "x-apim-code-enumValue": 3
+      },
+      {
+        "value": "deleted",
+        "description": "User account is closed. All identities and related entities are removed.",
+        "x-apim-code-enumValue": 4
+      }
+    ]
+  }
+}

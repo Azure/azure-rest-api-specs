@@ -1,0 +1,142 @@
+{
+  "type": "object",
+  "description": "Report data available from all report endpoints",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Depending on report endpoint specifies product, API, operation or developer name.",
+      "x-apim-code-optional": true
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Start of aggregation period.",
+      "x-apim-code-optional": true
+    },
+    "interval": {
+      "type": "string",
+      "format": "duration",
+      "description": "Length of agregation period.",
+      "x-apim-code-optional": true
+    },
+    "country": {
+      "type": "string",
+      "description": "Country to which this record data is related.",
+      "x-apim-code-optional": true
+    },
+    "region": {
+      "type": "string",
+      "description": "Country region to which this record data is related.",
+      "x-apim-code-optional": true
+    },
+    "zip": {
+      "type": "string",
+      "description": "Zip code to which this record data is related.",
+      "x-apim-code-optional": true
+    },
+    "userId": {
+      "type": "string",
+      "description": "User identifier.",
+      "x-apim-code-resourceId": "/users/{userId}",
+      "readOnly": true
+    },
+    "productId": {
+      "type": "string",
+      "description": "Product identifier.",
+      "x-apim-code-resourceId": "/products/{productId}",
+      "readOnly": true
+    },
+    "apiId": {
+      "type": "string",
+      "description": "API identifier.",
+      "x-apim-code-resourceId": "/apis/{apiId}"
+    },
+    "operationId": {
+      "type": "string",
+      "description": "Operation identifier.",
+      "x-apim-code-resourceId": "/apis/{aid}/operations/{oid}",
+      "x-apim-code-resourceId-type": "OperationIdentityContract",
+      "x-apim-code-value-provider": "OperationIdValueProvider"
+    },
+    "apiRegion": {
+      "type": "string",
+      "description": "API region identifier.",
+      "x-apim-code-optional": true
+    },
+    "subscriptionId": {
+      "type": "string",
+      "description": "Subscription identifier.",
+      "x-apim-code-resourceId": "/subscriptions/{subscriptionId}"
+    },
+    "callCountSuccess": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of succesful calls."
+    },
+    "callCountBlocked": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of calls blocked due to invalid credentials."
+    },
+    "callCountFailed": {
+      "type": "integer",
+      "format": "int32",
+      "description": "number of calls failed due to proxy or backend errors."
+    },
+    "callCountOther": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of other calls."
+    },
+    "callCountTotal": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Total number of calls."
+    },
+    "bandwidth": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Bandwidth consumed."
+    },
+    "cacheHitCount": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of times when content was served from cache policy."
+    },
+    "cacheMissCount": {
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of times content was fetched from backend."
+    },
+    "apiTimeAvg": {
+      "type": "number",
+      "format": "double",
+      "description": "Average time it took to process request."
+    },
+    "apiTimeMin": {
+      "type": "number",
+      "format": "double",
+      "description": "Minimum time it took to process request."
+    },
+    "apiTimeMax": {
+      "type": "number",
+      "format": "double",
+      "description": "Maximum time it took to process request."
+    },
+    "serviceTimeAvg": {
+      "type": "number",
+      "format": "double",
+      "description": "Average time it took to process request on backend."
+    },
+    "serviceTimeMin": {
+      "type": "number",
+      "format": "double",
+      "description": "Minimum time it took to process request on backend."
+    },
+    "serviceTimeMax": {
+      "type": "number",
+      "format": "double",
+      "description": "Maximum time it took to process request on backend."
+    }
+  }
+}
