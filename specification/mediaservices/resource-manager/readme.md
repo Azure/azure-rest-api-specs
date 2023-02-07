@@ -68,6 +68,7 @@ directive:
 These settings apply only when `--tag=package-streaming-2022-11` is specified on the command line.
 
 ```yaml $(tag) == 'package-streaming-2022-11'
+input-file:
   - Microsoft.Media/Metadata/stable/2022-08-01/AccountFilters.json
   - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
   - Microsoft.Media/Metadata/stable/2022-08-01/AssetsAndAssetFilters.json
