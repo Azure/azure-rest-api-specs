@@ -12895,7 +12895,7 @@
         }
       }
     },
-    "/scenes/collections/:search": {
+    "/scenes/collections/{collectionId}:search": {
       "post": {
         "tags": [
           "Scenes"
@@ -12909,6 +12909,13 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "in": "path",
+            "name": "collectionId",
+            "description": "Collection Id to be searched. Available Values are: Sentinel_2_L2A, Sentinel_2_L1C.",
+            "required": true,
+            "type": "string"
+          },
           {
             "in": "query",
             "name": "api-version",
@@ -22455,15 +22462,11 @@
     "SearchFeaturesQuery": {
       "description": "Search stac Features parameters.",
       "required": [
-        "collectionId",
         "endDateTime",
         "startDateTime"
       ],
       "type": "object",
       "properties": {
-        "collectionId": {
-          "$ref": "#/definitions/Source"
-        },
         "startDateTime": {
           "format": "date-time",
           "description": "Start datetime of the time interval in which to search for Features.",
