@@ -12,6 +12,85 @@
   },
   "paths": {},
   "definitions": {
+    "AddressDetails": {
+      "description": "Address details.",
+      "properties": {
+        "addressLine1": {
+          "description": "Address line 1.",
+          "type": "string"
+        },
+        "addressLine2": {
+          "description": "Address line 2.",
+          "type": "string"
+        },
+        "addressLine3": {
+          "description": "Address line 3.",
+          "type": "string"
+        },
+        "city": {
+          "description": "Address city.",
+          "type": "string"
+        },
+        "companyName": {
+          "description": "Company name.",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country code uses ISO2, 2-digit format.",
+          "type": "string"
+        },
+        "district": {
+          "description": "Address district.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email address.",
+          "type": "string"
+        },
+        "firstName": {
+          "description": "First name.",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name.",
+          "type": "string"
+        },
+        "middleName": {
+          "description": "Middle name.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone number.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal code.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Address region.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "addressLine1",
+        "country"
+      ]
+    },
+    "Amount": {
+      "description": "The amount.",
+      "properties": {
+        "currency": {
+          "description": "The currency for the amount value.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "Amount value.",
+          "type": "number"
+        }
+      }
+    },
     "ArmError": {
       "description": "The error detail.",
       "type": "object",
