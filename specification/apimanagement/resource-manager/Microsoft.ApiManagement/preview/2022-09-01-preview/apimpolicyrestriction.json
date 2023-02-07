@@ -204,7 +204,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyRestrictionContract"
+              "$ref": "./definitions.json#/definitions/PolicyRestrictionContractInput"
             },
             "description": "The policy restriction to apply."
           },
@@ -264,25 +264,25 @@
         },
         "parameters": [
           {
+            "$ref": "./apimanagement.json#/parameters/PolicyRestrictionIdParameter"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/PolicyRestrictionIdParameter"
-          },
-          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyRestrictionContract"
+              "$ref": "./definitions.json#/definitions/PolicyRestrictionContractInput"
             },
             "description": "The policy restriction to apply."
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
