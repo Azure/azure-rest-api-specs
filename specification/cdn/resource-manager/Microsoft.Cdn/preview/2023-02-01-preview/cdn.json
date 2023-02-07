@@ -3329,7 +3329,8 @@
             "ClientPort",
             "ServerPort",
             "HostName",
-            "SslProtocol"
+            "SslProtocol",
+            "ResponseStatusCode"
           ],
           "x-ms-enum": {
             "name": "MatchVariable",
@@ -3682,6 +3683,25 @@
         "parameters": {
           "description": "Defines the parameters for the condition.",
           "$ref": "#/definitions/SslProtocolMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleResponseStatusCodeCondition": {
+      "description": "Defines the ResponseStatusCode condition for the delivery rule.",
+      "type": "object",
+      "x-ms-discriminator-value": "ResponseStatusCode",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/ResponseStatusCodeMatchConditionParameters"
         }
       }
     },
@@ -4663,6 +4683,52 @@
         }
       }
     },
+    "ResponseStatusCodeMatchConditionParameters": {
+      "description": "Defines the parameters for ResponseStatusCode match conditions",
+      "type": "object",
+      "required": [
+        "operator",
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleResponseStatusCodeConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Equal",
+            "Contains",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual"
+          ]
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
     "DeliveryRuleAction": {
       "description": "An action for the delivery rule.",
       "discriminator": "name",
@@ -4682,7 +4748,9 @@
             "UrlRewrite",
             "UrlSigning",
             "OriginGroupOverride",
-            "RouteConfigurationOverride"
+            "RouteConfigurationOverride",
+            "CustomErrorPage",
+            "OverrideResponseStatusCode"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -5159,6 +5227,83 @@
           "description": "The caching configuration associated with this rule. To disable caching, do not provide a cacheConfiguration object.",
           "type": "object",
           "$ref": "#/definitions/CacheConfiguration"
+        }
+      }
+    },
+    "DeliveryRuleCustomErrorPageAction": {
+      "description": "Defines the custom error page url action for the delivery rule. Only applicable to Frontdoor Standard/Premium Profiles.",
+      "type": "object",
+      "x-ms-discriminator-value": "CustomErrorPageUrl",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/CustomErrorPageActionParameters"
+        }
+      }
+    },
+    "CustomErrorPageActionParameters": {
+      "description": "Defines the parameters for the custom error page action.",
+      "type": "object",
+      "required": [
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleCustomErrorPageActionParameters"
+          ]
+        },
+        "CustomErrorPageUrl": {
+          "description": "Defines the url to redirect to as the custom error page",
+          "type": "string"
+        }
+      }
+    },
+
+    "DeliveryRuleOverrideResponseStatusCodeAction": {
+      "description": "Defines the override response status code action for the delivery rule. Only applicable to Frontdoor Standard/Premium Profiles.",
+      "type": "object",
+      "x-ms-discriminator-value": "OverrideResponseStatusCode",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/OverrideResponseStatusCodeActionParameters"
+        }
+      }
+    },
+    "OverrideResponseStatusCodeActionParameters": {
+      "description": "Defines the parameters for the override response status code action.",
+      "type": "object",
+      "required": [
+        "typeName"
+      ],
+      "properties": {
+        "typeName": {
+          "type": "string",
+          "enum": [
+            "DeliveryRuleOverrideResponseStatusCodeActionParameters"
+          ]
+        },
+        "CustomResponseStatusCode": {
+          "description": "Defines the status code to override with.",
+          "type": "integer"
         }
       }
     },
