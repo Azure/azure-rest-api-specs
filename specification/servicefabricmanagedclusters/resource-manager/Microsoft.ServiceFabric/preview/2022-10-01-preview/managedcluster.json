@@ -151,6 +151,12 @@
               "$ref": "#/definitions/ManagedCluster"
             }
           },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -215,6 +221,12 @@
               "$ref": "#/definitions/ManagedCluster"
             }
           },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -264,6 +276,12 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ManagedCluster"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
             }
           },
           "default": {
@@ -330,7 +348,7 @@
         ],
         "summary": "Action to get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.",
         "description": "Action to get Az Resiliency Status of all the Base resources constituting Service Fabric Managed Clusters.",
-        "operationId": "managedAzResiliencyStatus_get",
+        "operationId": "managedAzResiliencyStatus_Get",
         "parameters": [
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
@@ -347,7 +365,7 @@
         ],
         "x-ms-examples": {
           "Az Resiliency status of Base Resources": {
-            "$ref": "./examples/managedAzResiliencyStatusPost_example.json"
+            "$ref": "./examples/managedAzResiliencyStatusGet_example.json"
           }
         },
         "responses": {
@@ -355,6 +373,12 @@
             "description": "The operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ManagedAzResiliencyStatus"
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
             }
           },
           "default": {
@@ -399,6 +423,9 @@
             "schema": {
               "$ref": "#/definitions/ManagedClusterCodeVersionResult"
             }
+          },
+          "404": {
+            "description": "Not Found"
           },
           "default": {
             "description": "The detailed error response.",
@@ -615,6 +642,9 @@
               "$ref": "#/definitions/ManagedVMSize"
             }
           },
+          "404": {
+            "description": "Not Found"
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -661,6 +691,9 @@
               "$ref": "#/definitions/LongRunningOperationResult"
             }
           },
+          "400": {
+            "description": "Bad Request."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -706,6 +739,9 @@
           },
           "204": {
             "description": "No Content. For Delete operation results."
+          },
+          "400": {
+            "description": "Bad Request."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1055,7 +1091,10 @@
     },
     "ManagedCluster": {
       "type": "object",
-      "description": "The manged cluster resource\n",
+      "required": [
+        "sku"
+      ],
+      "description": "The managed cluster resource\n",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -1959,7 +1998,13 @@
       "x-ms-parameter-location": "method",
       "x-ms-enum": {
         "name": "ManagedClusterVersionEnvironment",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Windows",
+            "description": "Windows."
+          }
+        ]
       }
     },
     "locationForClusterCodeVersions": {

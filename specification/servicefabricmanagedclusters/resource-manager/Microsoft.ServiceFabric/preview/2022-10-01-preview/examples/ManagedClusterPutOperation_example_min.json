@@ -6,6 +6,9 @@
     "api-version": "2022-10-01-preview",
     "parameters": {
       "location": "eastus",
+      "sku": {
+        "name": "Basic"
+      },
       "properties": {
         "clusterUpgradeMode": "Automatic",
         "clusterUpgradeCadence": "Wave1",
@@ -112,6 +115,14 @@
               ]
             }
           ]
+        }
+      }
+    },
+    "404": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The Resource 'Microsoft.ServiceFabric/managedclusters/myCluster' under resource group 'resRg' was not found. For more details please go to https://aka.ms/ARMResourceNotFoundFix"
         }
       }
     }
