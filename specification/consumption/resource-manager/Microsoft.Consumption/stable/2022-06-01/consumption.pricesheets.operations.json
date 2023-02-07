@@ -85,7 +85,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PriceSheetResult"
+              "$ref": "#/definitions/PriceSheetResultV2"
             }
           },
           "default": {
@@ -154,7 +154,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PriceSheetResult"
+              "$ref": "#/definitions/PriceSheetResultV2"
             }
           },
           "default": {
@@ -187,7 +187,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResultV2"
             }
           },
           "default": {
@@ -204,7 +204,7 @@
     }
   },
   "definitions": {
-    "PriceSheetResult": {
+    "PriceSheetResultV2": {
       "description": "An pricesheet resource.",
       "type": "object",
       "allOf": [
@@ -215,12 +215,12 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PriceSheetModel",
+          "$ref": "#/definitions/PriceSheetModelV2",
           "title": "Price sheet properties"
         }
       }
     },
-    "PriceSheetModel": {
+    "PriceSheetModelV2": {
       "type": "object",
       "description": "price sheet result. It contains the pricesheet associated with billing period",
       "properties": {
@@ -229,7 +229,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/PriceSheetProperties"
+            "$ref": "#/definitions/PriceSheetPropertiesV2"
           },
           "x-ms-identifiers": [
             "meterId"
@@ -242,30 +242,12 @@
         },
         "download": {
           "description": "Pricesheet download details.",
-          "$ref": "#/definitions/MeterDetails",
+          "$ref": "#/definitions/MeterDetailsV2",
           "readOnly": true
         }
       }
     },
-    "DownloadProperties": {
-      "type": "object",
-      "description": "The properties of the price sheet download.",
-      "properties": {
-        "downloadUrl": {
-          "description": "The link (url) to download the pricesheet.",
-          "type": "string",
-          "format": "uri",
-          "readOnly": true,
-          "x-ms-secret": true
-        },
-        "validTill": {
-          "description": "Download link validity.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PriceSheetProperties": {
+    "PriceSheetPropertiesV2": {
       "type": "object",
       "description": "The properties of the price sheet.",
       "properties": {
@@ -282,7 +264,7 @@
         },
         "meterDetails": {
           "description": "The details about the meter. By default this is not populated, unless it's specified in $expand.",
-          "$ref": "#/definitions/MeterDetails",
+          "$ref": "#/definitions/MeterDetailsV2",
           "readOnly": true
         },
         "unitOfMeasure": {
@@ -317,7 +299,7 @@
         }
       }
     },
-    "MeterDetails": {
+    "MeterDetailsV2": {
       "type": "object",
       "description": "The properties of the meter detail.",
       "properties": {
@@ -394,7 +376,7 @@
         }
       }
     },
-    "Operation": {
+    "OperationV2": {
       "description": "A Consumption REST API operation.",
       "type": "object",
       "properties": {
@@ -444,7 +426,7 @@
         }
       }
     },
-    "OperationListResult": {
+    "OperationListResultV2": {
       "description": "Result of listing consumption operations. It contains a list of operations and a URL link to get the next set of results.",
       "type": "object",
       "properties": {
@@ -453,7 +435,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Operation"
+            "$ref": "#/definitions/OperationV2"
           }
         },
         "nextLink": {
