@@ -12895,6 +12895,65 @@
         }
       }
     },
+    "/scenes/collections/:search": {
+      "post": {
+        "tags": [
+          "Scenes"
+        ],
+        "description": "Search for STAC features by collection id, bbox, intersecting geometry, start and end datetime.",
+        "operationId": "Scenes_SearchFeatures",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "searchFeaturesQuery",
+            "description": "Query filters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchFeaturesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchFeaturesResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_SearchFeatures": {
+            "$ref": "./examples/Scenes_SearchFeatures.json"
+          }
+        }
+      }
+    },
     "/scenes/collections/{collectionId}/features/{featureId}": {
       "get": {
         "tags": [
@@ -12952,65 +13011,6 @@
         "x-ms-examples": {
           "Scenes_GetStacFeature": {
             "$ref": "./examples/Scenes_GetStacFeature.json"
-          }
-        }
-      }
-    },
-    "/scenes/collections/search": {
-      "post": {
-        "tags": [
-          "Scenes"
-        ],
-        "description": "Search for STAC features by collection id, bbox, intersecting geometry, start and end datetime.",
-        "operationId": "Scenes_SearchFeatures",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "searchFeaturesQuery",
-            "description": "Query filters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SearchFeaturesQuery"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SearchFeaturesResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
-              }
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Scenes_SearchFeatures": {
-            "$ref": "./examples/Scenes_SearchFeatures.json"
           }
         }
       }
