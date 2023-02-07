@@ -21879,12 +21879,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/workflowConfigurations/{configurationName}": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/workflowsConnections": {
+      "post": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Get workflow app's configurations connections information by its ID for web site, or a deployment slot.",
+        "summary": "Lists workflow app's configurations connections information for web site, or a deployment slot.",
         "operationId": "WebApps_ListInstanceWorkflowsConfigurationConnectionsSlot",
         "parameters": [
           {
@@ -21898,14 +21898,6 @@
           },
           {
             "$ref": "#/parameters/slotNameParameter"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "description": "Name of workflow configurations.",
-            "required": true,
-            "type": "string",
-            "pattern": "^connections$"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -22033,12 +22025,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflowConfigurations/{configurationName}": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflowsConnections": {
+      "post": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Get workflow app's configurations connections information by its ID for web site, or a deployment slot.",
+        "summary": "Lists workflow app's configurations connections information for web site, or a deployment slot.",
         "operationId": "WebApps_ListWorkflowsConfiguration",
         "parameters": [
           {
@@ -22049,14 +22041,6 @@
           },
           {
             "$ref": "#/parameters/siteNameParameter"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "description": "Name of workflow configurations.",
-            "required": true,
-            "type": "string",
-            "pattern": "^connections$"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
