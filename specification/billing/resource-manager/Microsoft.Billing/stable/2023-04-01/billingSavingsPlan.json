@@ -84,10 +84,10 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
+            "$ref": "./types.json#/parameters/filter"
           },
           {
-            "$ref": "#/parameters/OrderParameter"
+            "$ref": "./types.json#/parameters/orderBy"
           },
           {
             "$ref": "#/parameters/SkipTokenParameter"
@@ -174,10 +174,10 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
+            "$ref": "./types.json#/parameters/filter"
           },
           {
-            "$ref": "#/parameters/OrderParameter"
+            "$ref": "./types.json#/parameters/orderBy"
           },
           {
             "$ref": "#/parameters/SkipTokenParameter"
@@ -1111,34 +1111,15 @@
   },
   "parameters": {
     "ExpandParameter": {
-      "name": "$expand",
+      "name": "expand",
       "description": "May be used to expand the planInformation.",
       "in": "query",
       "x-ms-parameter-location": "client",
       "required": false,
       "type": "string"
     },
-    "FilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "OData filter expression.",
-      "x-ms-parameter-location": "method",
-      "x-ms-parameter-grouping": {
-        "name": "QueryOptions"
-      },
-      "x-ms-client-name": "Filter"
-    },
-    "OrderParameter": {
-      "name": "$orderby",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "OData order by expression."
-    },
     "SkipTokenParameter": {
-      "name": "$skiptoken",
+      "name": "skiptoken",
       "description": "The number of savings plans to skip from the list before returning results",
       "in": "query",
       "required": false,
