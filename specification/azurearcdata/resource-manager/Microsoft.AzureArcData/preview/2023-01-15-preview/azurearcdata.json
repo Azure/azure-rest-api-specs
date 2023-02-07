@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-06-15-preview",
+    "version": "2023-01-15-preview",
     "title": "AzureArcDataManagementClient",
     "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
   },
@@ -324,6 +324,205 @@
         "x-ms-examples": {
           "Updates a sql Instance tags.": {
             "$ref": "./examples/UpdateSqlManagedInstance.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}/failoverGroups": {
+      "get": {
+        "tags": [
+          "FailoverGroups"
+        ],
+        "operationId": "FailoverGroups_List",
+        "summary": "List the failover groups associated with the given sql managed instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlManagedInstanceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all failover groups associated with a sql managed instance.": {
+            "$ref": "./examples/ListBySqlManagedInstanceFailoverGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlManagedInstances/{sqlManagedInstanceName}/failoverGroups/{failoverGroupName}": {
+      "put": {
+        "tags": [
+          "FailoverGroups"
+        ],
+        "operationId": "FailoverGroups_Create",
+        "description": "Creates or replaces a failover group resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "failoverGroupResource",
+            "description": "desc",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/sqlManagedInstanceName"
+          },
+          {
+            "$ref": "#/parameters/failoverGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Create or update a failover group instance.": {
+            "$ref": "./examples/CreateOrUpdateFailoverGroup.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FailoverGroups"
+        ],
+        "operationId": "FailoverGroups_Delete",
+        "description": "Deletes a failover group resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlManagedInstanceName"
+          },
+          {
+            "$ref": "#/parameters/failoverGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the failover group."
+          },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified failover group does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Deletes a failover group instance.": {
+            "$ref": "./examples/DeleteFailoverGroup.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FailoverGroups"
+        ],
+        "operationId": "FailoverGroups_Get",
+        "description": "Retrieves a failover group resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlManagedInstanceName"
+          },
+          {
+            "$ref": "#/parameters/failoverGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./failoverGroups.json#/definitions/FailoverGroupResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves a failover group resource.": {
+            "$ref": "./examples/GetFailoverGroup.json"
           }
         }
       }
@@ -1417,6 +1616,14 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "failoverGroupName": {
+      "name": "failoverGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Failover Group",
       "x-ms-parameter-location": "method"
     },
     "sqlServerInstanceName": {
