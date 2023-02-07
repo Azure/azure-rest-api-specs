@@ -1,31 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
-    "resourceGroupName": "Default-NotificationRules",
-    "actionGroupName": "SampleActionGroup",
-    "api-version": "2022-06-01",
-    "actionGroupPatch": {
-      "tags": {
-        "key1": "value1",
-        "key2": "value2"
-      },
-      "properties": {
-        "enabled": false
-      }
-    }
+    "managementGroupId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+    "tenantActionGroupName": "testTenantActionGroup",
+    "api-version": "2023-03-01-preview",
+    "x-ms-client-tenant-id": "72f988bf-86f1-41af-91ab-2d7cd011db47"
   },
   "responses": {
     "200": {
       "headers": {},
       "body": {
-        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-NotificationRules/providers/microsoft.insights/actionGroups/SampleActionGroup",
-        "type": "Microsoft.Insights/ActionGroups",
-        "name": "SampleActionGroup",
+        "id": "/providers/Microsoft.Management/managementGroups/72f988bf-86f1-41af-91ab-2d7cd011db47/providers/Microsoft.Insights/tenantActionGroups/testTenantActionGroup",
+        "type": "Microsoft.Insights/TenantActionGroups",
+        "name": "testTenantActionGroup",
         "location": "Global",
-        "tags": {
-          "key1": "value1",
-          "key2": "value2"
-        },
+        "tags": {},
         "properties": {
           "groupShortName": "sample",
           "enabled": true,
@@ -34,7 +22,7 @@
               "name": "John Doe's email",
               "emailAddress": "johndoe@email.com",
               "status": "Enabled",
-              "useCommonAlertSchema": true
+              "useCommonAlertSchema": false
             },
             {
               "name": "Jane Smith's email",
@@ -47,7 +35,7 @@
             {
               "name": "John Doe's mobile",
               "countryCode": "1",
-              "phoneNumber": "1234567890",
+              "phoneNumber": "2062022299",
               "status": "Enabled"
             },
             {
@@ -59,9 +47,9 @@
           ],
           "webhookReceivers": [
             {
-              "name": "Sample webhook",
-              "serviceUri": "http://www.example.com/webhook",
-              "useCommonAlertSchema": false
+              "name": "Sample webhook 1",
+              "serviceUri": "http://www.example.com/webhook1",
+              "useCommonAlertSchema": true
             },
             {
               "name": "Sample webhook 2",
@@ -73,14 +61,13 @@
               "tenantId": "68a4459a-ccb8-493c-b9da-dd30457d1b84"
             }
           ],
-          "itsmReceivers": [],
-          "azureAppPushReceivers": [],
-          "automationRunbookReceivers": [],
-          "voiceReceivers": [],
-          "logicAppReceivers": [],
-          "azureFunctionReceivers": [],
-          "armRoleReceivers": [],
-          "eventHubReceivers": []
+          "voiceReceivers": [
+            {
+              "name": "Sample voice",
+              "countryCode": "1",
+              "phoneNumber": "2062022299"
+            }
+          ]
         }
       }
     }
