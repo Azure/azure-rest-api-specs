@@ -1144,6 +1144,34 @@
         }
       }
     },
+    "CrossSubscriptionRestoreSettings": {
+      "description": "Settings for Cross Subscription Restore Settings",
+      "type": "object",
+      "properties": {
+        "crossSubscriptionRestoreState": {
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "PermanentlyDisabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "crossSubscriptionRestoreState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "RestoreSettings": {
+      "description": "Restore Settings  of the vault",
+      "type": "object",
+      "properties": {
+        "crossSubscriptionRestoreSettings": {
+          "description": "Settings for CrossSubscriptionRestore",
+          "$ref": "#/definitions/CrossSubscriptionRestoreSettings"
+        }
+      }
+    },
     "ImmutabilitySettings": {
       "description": "Immutability Settings of vault",
       "type": "object",
@@ -1670,6 +1698,10 @@
         "monitoringSettings": {
           "description": "Monitoring Settings of the vault",
           "$ref": "#/definitions/MonitoringSettings"
+        },
+        "restoreSettings": {
+          "description": "Restore Settings of the vault",
+          "$ref": "#/definitions/RestoreSettings"
         },
         "redundancySettings": {
           "description": "The redundancy Settings of a Vault",
