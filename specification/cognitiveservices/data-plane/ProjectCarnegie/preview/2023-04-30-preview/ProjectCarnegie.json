@@ -1,0 +1,1248 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Project Carnegie Client",
+    "version": "2023-04-30-preview",
+    "description": "Analyze harmful content"
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "basePath": "/carnegie",
+  "paths": {
+    "/text:analyze": {
+      "post": {
+        "tags": [
+          "Text Analysis"
+        ],
+        "summary": "Analyze Text",
+        "description": "A sync API for harmful content analysis for text",
+        "operationId": "Text_Analyze",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The analysis request of the text",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextDetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/TextDetectResponse"
+            }
+          },
+          "default": {
+            "description": "error payload",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/text:batchAnalyze": {
+      "post": {
+        "tags": [
+          "Text Analysis"
+        ],
+        "summary": "Analyze Text In Batch",
+        "description": "An API for triggering harmful content analysis of text batch",
+        "operationId": "Text_BatchDetect",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/Language"
+          },
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The analysis request of the text batch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextBatchDetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request is queued successfully",
+            "headers": {
+              "Results-Location": {
+                "type": "string",
+                "description": "URL used to track the progress and obtain the result of the batch analyze operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/text/analyzeResults/{resultId}": {
+      "get": {
+        "tags": [
+          "Text Analysis"
+        ],
+        "summary": "Get Text Batch Analyze Results",
+        "description": "An API to get harmful content analysis results for text batch",
+        "operationId": "Text_BatchDetect_Results",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResultId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/TextBatchDetectResultsResponse"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/image:analyze": {
+      "post": {
+        "tags": [
+          "Image Analysis"
+        ],
+        "summary": "Analyze Image",
+        "description": "A sync API for harmful content analysis for image",
+        "operationId": "Image_Detect",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The analysis request of the image",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageDetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/ImageDetectResponse"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/image:batchAnalyze": {
+      "post": {
+        "tags": [
+          "Image Analysis"
+        ],
+        "summary": "Analyze Image In Batch",
+        "description": "An API to trigger harmful content analysis for image batch",
+        "operationId": "Image_BatchDetect",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "The analysis request of the image batch",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageBatchDetectRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request is queued successfully",
+            "headers": {
+              "Results-Location": {
+                "type": "string",
+                "description": "URL used to track the progress and obtain the result of the batch analyze operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/image/analyzeResults/{resultId}": {
+      "get": {
+        "tags": [
+          "Image Analysis"
+        ],
+        "summary": "Get Image Batch Analyze Results",
+        "description": "An API to get harmful content analysis results for image batch",
+        "operationId": "Image_BatchDetect_Results",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/QueryApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResultId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status 200",
+            "schema": {
+              "$ref": "#/definitions/ImageBatchDetectResultsResponse"
+            }
+          },
+          "default": {
+            "description": "Client error or server error (4xx or 5xx)",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/text/lists/{listId}": {
+      "get": {
+        "tags": [
+          "Text List Management"
+        ],
+        "operationId": "ListManagementTextLists_GetDetails",
+        "description": "Returns text list details of the Text List with list Id equal to list Id passed.",
+        "summary": "Get Text List By listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TextList"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Text List Management"
+        ],
+        "operationId": "ListManagementTextLists_Delete",
+        "description": "Deletes Text List with the list Id equal to list Id passed.",
+        "summary": "Delete Text List By listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Text List Management"
+        ],
+        "operationId": "ListManagementTextLists_Update",
+        "description": "Updates an Text List by listId, , if listId not exists, create a new Text List",
+        "summary": "Create Or Update Text List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Properties of the Text List.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextList"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Text List created successfully",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL used to get the created Text List."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/text/lists": {
+      "get": {
+        "tags": [
+          "Text List Management"
+        ],
+        "operationId": "ListManagementTextLists_GetAllTextLists",
+        "summary": "Get All Text Lists",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "values": {
+                  "type": "array",
+                  "items": {
+                  "$ref": "#/definitions/TextList"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/text/lists/{listId}/items": {
+      "get": {
+        "tags": [
+          "Text List Management"
+        ],
+        "operationId": "ListManagementTerm_GetAllTerms",
+        "summary": "Get All Items By listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "How many terms will be skipped.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "How many terms will be fetched.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "values": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TextListItem"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    },
+    "/text/lists/{listId}/items/{itemId}": {
+      "get": {
+        "tags": [
+          "Text List Management"
+        ],
+        "operationId": "ListManagementTerm_AddTerm",
+        "summary": "Get Item By itemId and listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "$ref": "#/parameters/ItemId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/TextListItem"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Text List Management"
+        ],
+        "operationId": "ListManagementTerm_DeleteTerm",
+        "summary": "Delete Item By itemId and listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "$ref": "#/parameters/ItemId"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      },
+      "patch": {
+        "tags": [
+          "Text List Management"
+        ],
+        "operationId": "ListManagementTerm_UpdateTerm",
+        "summary": "Create Item In Text List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ListId"
+          },
+          {
+            "$ref": "#/parameters/ItemId"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Schema of the term update body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextListItem"
+            },
+            "x-ms-parameter-location": "method"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Text List Item created successfully",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL used to get the created List Item."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "TextCategory": {
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "TextCategory",
+        "modelAsString": true
+      }
+    },
+    "TextDetectStrategy":{
+      "type": "boolean",
+      "x-nullable": false
+    },
+    "TextListMatchResult": {
+      "description": "The result of custom list match",
+      "type": "object",
+      "required": [
+        "listId",
+        "itemId",
+        "itemText"
+      ],
+      "properties": {
+        "listId": {
+          "description": "The id of matched custom list",
+          "type": "string"
+        },
+        "itemId": {
+          "description": "The id of matched item",
+          "type": "string"
+        },
+        "itemText": {
+          "description": "The content of matched item",
+          "type": "string"
+        },
+        "offset": {
+          "description": "The character offset of matched text in original input",
+          "type": "string"
+        },
+        "length": {
+          "description": "The length of matched text in original input",
+          "type": "string"
+        }
+      }
+    },
+    "RiskLevel": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "maximum": 7,
+      "default": 0
+    },
+    "TextDetectResult": {
+      "type": "object",
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/TextCategory"
+        },
+        "riskLevel": {
+          "$ref": "#/definitions/RiskLevel"
+        }
+      }
+    },
+    "TextDetectRequest": {
+      "description": "The analysis request of the text",
+      "type": "object",
+      "required": [
+        "text"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be scanned"
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned.",
+          "items": {
+            "$ref": "#/definitions/TextCategory"
+          }
+        },
+        "blockListIds": {
+          "type": "array",
+          "description": "The ids of blocklists",
+          "items": {
+            "type": "string",
+            "description": "listId"
+          }
+        },
+        "breakByBlocklists": {
+          "type": "boolean",
+          "description": "When set to true, other analysis will be skipped once any of configured blocklists was hit. When set to false, all the analysis will be done even when blocklists were hit.",
+          "default": false
+        }
+      }
+    },
+    "TextDetectResponse": {
+      "description": "The analysis response of the text",
+      "type": "object",
+      "properties": {
+        "blocklistMatchResults": {
+          "description": "The details of list match",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextListMatchResult"
+          }
+        },
+        "hateResult": {
+          "$ref": "#/definitions/TextDetectResult"
+        },
+        "selfHarmResult": {
+          "$ref": "#/definitions/TextDetectResult"
+        },
+        "sexualResult": {
+          "$ref": "#/definitions/TextDetectResult"
+        },
+        "violenceResult": {
+          "$ref": "#/definitions/TextDetectResult"
+        }
+      }
+    },
+    "TextBatchItem": {
+      "description": "One item of text batch",
+      "type": "object",
+      "required": [
+        "textId",
+        "url"
+      ],
+      "properties": {
+        "textId": {
+          "description": "Id of text batch item",
+          "type": "string"
+        },
+        "url": {
+          "description": "Url of text batch item, it should be a blob url of text file that contains content to analyze",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "TextBatchDetectRequest": {
+      "description": "The analysis request of the text batch",
+      "type": "object",
+      "required": [
+        "textBatch"
+      ],
+      "properties": {
+        "textBatch": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextBatchItem"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned.",
+          "items": {
+            "$ref": "#/definitions/TextCategory"
+          }
+        },
+        "blockListIds": {
+          "type": "array",
+          "description": "The ids of blocklists",
+          "items": {
+            "type": "string",
+            "description": "listId"
+          }
+        },
+        "breakByBlocklists": {
+          "$ref": "#/definitions/TextDetectStrategy",
+          "description": "When set to true, other analysis will be skipped once any of configured blocklists was hit. When set to false, all the analysis will be done even when blocklists were hit.",
+          "default": false
+        }
+      }
+    },
+    "TextBatchDetectResultsResponse": {
+      "description": "Status and result of the batch analysis.",
+      "type": "object",
+      "required": [
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime"
+      ],
+      "properties": {
+        "status": {
+          "description": "Batch analysis status.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "TextBatchDetectStatus",
+            "modelAsString": false
+          }
+        },
+        "createdDateTime": {
+          "description": "Date and time (UTC) when the batch analysis was submitted.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedDateTime": {
+          "description": "Date and time (UTC) when the status was last updated.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "results": {
+          "description": "Batch analysis results",
+          "type":"array",
+          "items": {
+            "type": "object",
+            "required": [
+              "textId"
+            ],
+            "properties": {
+              "textId": {
+                "description": "Id for text batch item",
+                "type": "string"
+              },
+              "blocklistMatchResults": {
+                "description": "The details of list match",
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/TextListMatchResult"
+                }
+              },
+              "hateResult": {
+                "$ref": "#/definitions/TextDetectResult"
+              },
+              "selfHarmResult": {
+                "$ref": "#/definitions/TextDetectResult"
+              },
+              "sexualResult": {
+                "$ref": "#/definitions/TextDetectResult"
+              },
+              "violenceResult": {
+                "$ref": "#/definitions/TextDetectResult"
+              },
+              "error": {
+                "description": "Error encountered when processing individual image",
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "error": {
+          "description": "Error encountered during batch analysis",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response object.",
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "Error": {
+      "description": "Error info.",
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Target of the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "List of detailed errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "InnerError": {
+      "description": "Detailed error.",
+      "type": "object",
+      "required": [
+        "code"
+      ],
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message.",
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        }
+      }
+    },
+    "ImageCategory": {
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "ImageCategory",
+        "modelAsString": false
+      }
+    },
+    "Image": {
+      "description": "The content or url of image",
+      "type":"object",
+      "properties": {
+        "content": {
+          "description": "Base64 encoding of image",
+          "type": "string"
+        },
+        "url": {
+          "description": "The blob url of image",
+          "type": "string",
+          "format": "url"
+        }
+      }
+    },
+    "ImageDetectRequest": {
+      "description": "The analysis request of the image",
+      "type": "object",
+      "required": [
+        "image"
+      ],
+      "properties": {
+        "image": {
+          "description": "The image needs to be scanned",
+          "$ref": "#/definitions/Image"
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed, if not assigned, default categories will be analyzed",
+          "items": {
+            "$ref": "#/definitions/ImageCategory"
+          }
+        }
+      }
+    },
+    "ImageDetectResult": {
+      "type": "object",
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageCategory"
+        },
+        "riskLevel": {
+          "type": "integer"
+        }
+      }
+    },
+    "ImageDetectResponse": {
+      "description": "The analysis response of the image",
+      "type": "object",
+      "properties": {
+        "hateResult": {
+          "$ref": "#/definitions/ImageDetectResult"
+        },
+        "selfHarmResult": {
+          "$ref": "#/definitions/ImageDetectResult"
+        },
+        "sexualResult": {
+          "$ref": "#/definitions/ImageDetectResult"
+        },
+        "violenceResult": {
+          "$ref": "#/definitions/ImageDetectResult"
+        }
+      }
+    },
+    "ImageBatchItem": {
+      "description": "One item of image batch",
+      "type": "object",
+      "required": [
+        "imageId",
+        "url"
+      ],
+      "properties": {
+        "imageId": {
+          "description": "Id of image batch item",
+          "type": "string"
+        },
+        "url": {
+          "description": "Url of image batch item, it should be a blob url of image file to analyze",
+          "type": "string",
+          "format": "url"
+        },
+        "format": {
+          "type": "string",
+          "default": "jpeg"
+        }
+      }
+    },
+    "ImageBatchDetectRequest": {
+      "description": "The analysis request of the image batch",
+      "type": "object",
+      "required": [
+        "imageBatch"
+      ],
+      "properties": {
+        "imageBatch": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageBatchItem"
+          }
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories will be analyzed, if not assigned, default categories will be analyzed",
+          "items": {
+            "$ref": "#/definitions/ImageCategory"
+          }
+        }
+      }
+    },
+    "ImageBatchDetectResultsResponse": {
+      "description": "Status and results of the batch analysis.",
+      "type": "object",
+      "required": [
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime"
+      ],
+      "properties": {
+        "status": {
+          "description": "Batch analysis status.",
+          "type": "string",
+          "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Succeeded"
+          ],
+          "x-ms-enum": {
+            "name": "ImageBatchDetectStatus",
+            "modelAsString": false
+          }
+        },
+        "createdDateTime": {
+          "description": "Date and time (UTC) when the batch analysis was submitted.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "lastUpdatedDateTime": {
+          "description": "Date and time (UTC) when the status was last updated.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "results": {
+          "description": "Batch analysis results",
+          "type":"array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "imageId": {
+                "description": "imageId of individual image in batch",
+                "type": "string"
+              },
+              "hateResult": {
+                "$ref": "#/definitions/ImageDetectResult"
+              },
+              "selfHarmResult": {
+                "$ref": "#/definitions/ImageDetectResult"
+              },
+              "sexualResult": {
+                "$ref": "#/definitions/ImageDetectResult"
+              },
+              "violenceResult": {
+                "$ref": "#/definitions/ImageDetectResult"
+              },
+              "error": {
+                "description": "Error encountered when processing individual image",
+                "$ref": "#/definitions/Error"
+              }
+            }
+          }
+        },
+        "error": {
+          "description": "Error encountered during batch analysis",
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "TextList": {
+      "description": "Text List.",
+      "required": [],
+      "properties": {
+        "listId": {
+          "description": "Text List Id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Text List name.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description for Text List.",
+          "type": "string"
+        }
+      }
+    },
+    "TextListItem": {
+      "description": "Text data",
+      "required": [],
+      "properties": {
+        "itemId": {
+          "description": "Item id",
+          "type": "string"
+        },
+        "description": {
+          "description": "Text data description",
+          "type": "string"
+        },
+        "text": {
+          "description": "Text list item content.",
+          "type": "string"
+        },
+        "language": {
+          "description": "Language of this item, Value may contain only the language code (ex. \"en\", \"fr\") of BCP 47. If not assigned, \"en\" will be used",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://<resource-name>.cognitiveservices.azure.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "Language": {
+      "name": "language",
+      "description": "Language hint for text analysis.  Value may contain only the language code (ex. \"en\", \"fr\") of BCP 47.",
+      "required": false,
+      "type": "string",
+      "in": "query",
+      "x-ms-parameter-location": "method"
+    },
+    "QueryApiVersion": {
+      "name": "api-version",
+      "description": "Requested API version.",
+      "required": true,
+      "type": "string",
+      "in": "query",
+      "enum": [
+        "2022-12-30-preview"
+      ],
+      "x-ms-enum": {
+        "name": "ApiVersion",
+        "modelAsString": true
+      },
+      "x-ms-parameter-location": "client"
+    },
+    "QueryStringIndexType": {
+      "name": "stringIndexType",
+      "description": "Method used to compute string offset and length.",
+      "required": false,
+      "in": "query",
+      "type": "string",
+      "enum": [
+        "textElements",
+        "unicodeCodePoint",
+        "utf16CodeUnit"
+      ],
+      "x-ms-enum": {
+        "name": "StringIndexType",
+        "modelAsString": true
+      },
+      "default": "textElements",
+      "x-ms-parameter-location": "method"
+    },
+    "ResultId": {
+      "name": "resultId",
+      "description": "Batch analyze operation result ID.",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method"
+    },
+    "ListId": {
+      "name": "listId",
+      "in": "path",
+      "description": "List Id of the list.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ItemId": {
+      "name": "itemId",
+      "in": "path",
+      "description": "Id of the item in list.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/carnegie",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  }
+}
