@@ -2,15 +2,15 @@
   "parameters": {
     "api-version": "2022-12-12-preview",
     "subscriptionId": "subscriptionId",
-    "clusterName": "clusterName"
+    "resourceGroupName": "resourceGroupName"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/clusters/clusterName/metricsConfigurations/default",
-            "name": "default",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/volumes/volumeName",
+            "name": "volumeName",
             "systemData": {
               "createdAt": "2021-01-22T13:27:03.008Z",
               "createdBy": "identityA",
@@ -19,7 +19,7 @@
               "lastModifiedBy": "identityB",
               "lastModifiedByType": "User"
             },
-            "type": "Microsoft.NetworkCloud/clusters/metricsConfigurations",
+            "type": "Microsoft.NetworkCloud/volumes",
             "location": "location",
             "tags": {
               "key1": "myvalue1",
@@ -30,18 +30,14 @@
               "name": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ExtendedLocation/customLocations/clusterExtendedLocationName"
             },
             "properties": {
-              "enabledMetrics": [
-                "metric1",
-                "metric2"
-              ],
-              "collectionInterval": 15,
+              "sizeMiB": 10000,
               "provisioningState": "Succeeded",
-              "disabledMetrics": [
-                "metric3",
-                "metric4"
+              "serialNumber": "XXXX-XXXX-XXXX-XXXX",
+              "attachedTo": [
+                "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.NetworkCloud/virtualMachines/virtualMachineName"
               ],
-              "detailedStatus": "Applied",
-              "detailedStatusMessage": "Metrics configuration has been successfully applied to all resources."
+              "detailedStatus": "Active",
+              "detailedStatusMessage": "Volume is available"
             }
           }
         ],

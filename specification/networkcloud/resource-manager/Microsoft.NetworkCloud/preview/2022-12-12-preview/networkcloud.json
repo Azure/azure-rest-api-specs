@@ -728,6 +728,43 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.NetworkCloud/volumes": {
+      "get": {
+        "description": "Get a list of volumes in the provided subscription.",
+        "summary": "List volumes in the subscription.",
+        "operationId": "Volumes_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VolumeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List volume for subscription": {
+            "$ref": "./examples/Volumes_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/bareMetalMachines": {
       "get": {
         "description": "Get a list of bare metal machines in the provided resource group.",
@@ -3028,7 +3065,7 @@
         }
       },
       "put": {
-        "description": "Update the metrics configuration of the provided cluster.\nAll customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
+        "description": "Update the metrics configuration of the provided cluster.",
         "summary": "Update the metrics configuration of the cluster.",
         "operationId": "MetricsConfigurations_CreateOrUpdate",
         "parameters": [
@@ -3093,7 +3130,7 @@
         }
       },
       "delete": {
-        "description": "Delete the metrics configuration of the provided cluster.\nAll customer initiated requests will be rejected as the life cycle of this resource is managed by the system.",
+        "description": "Delete the metrics configuration of the provided cluster.",
         "summary": "Delete the metrics configuration of the cluster.",
         "operationId": "MetricsConfigurations_Delete",
         "parameters": [
@@ -5512,6 +5549,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/attachVolume": {
+      "post": {
+        "description": "Attach volume to the provided virtual machine.",
+        "summary": "Attach volume to the virtual machine.",
+        "operationId": "VirtualMachines_AttachVolume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "virtualMachineAttachVolumeParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVolumeParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Attach volume to virtual machine": {
+            "$ref": "./examples/VirtualMachines_AttachVolume.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/consoles": {
       "get": {
         "description": "Get a list of virtual machine consoles in the provided resource group.",
@@ -5782,6 +5877,64 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/detachVolume": {
+      "post": {
+        "description": "Detach volume from the provided virtual machine.",
+        "summary": "Detach volume from the virtual machine.",
+        "operationId": "VirtualMachines_DetachVolume",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VirtualMachineNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "virtualMachineDetachVolumeParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVolumeParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detach volume from virtual machine": {
+            "$ref": "./examples/VirtualMachines_DetachVolume.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/virtualMachines/{virtualMachineName}/powerOff": {
       "post": {
         "description": "Power off the provided virtual machine.",
@@ -5987,6 +6140,245 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/volumes": {
+      "get": {
+        "description": "Get a list of volumes in the provided resource group.",
+        "summary": "List volumes in the resource group.",
+        "operationId": "Volumes_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VolumeList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List volumes for resource group": {
+            "$ref": "./examples/Volumes_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetworkCloud/volumes/{volumeName}": {
+      "get": {
+        "description": "Get properties of the provided volume.",
+        "summary": "Retrieve the volume.",
+        "operationId": "Volumes_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get volume": {
+            "$ref": "./examples/Volumes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create a new volume or update the properties of the existing one.",
+        "summary": "Create or update the volume.",
+        "operationId": "Volumes_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "volumeParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update volume": {
+            "$ref": "./examples/Volumes_Create.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "description": "Delete the provided volume.",
+        "summary": "Delete the volume.",
+        "operationId": "Volumes_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The URL to retrieve the status of the asynchronous operation."
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete volume": {
+            "$ref": "./examples/Volumes_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "description": "Update tags associated with the provided volume.",
+        "summary": "Patch the volume.",
+        "operationId": "Volumes_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeNameParameter"
+          },
+          {
+            "description": "The request body.",
+            "name": "volumeUpdateParameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VolumePatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch volume": {
+            "$ref": "./examples/Volumes_Patch.json"
+          }
         }
       }
     }
@@ -6960,8 +7352,7 @@
       "type": "object",
       "title": "CloudServicesNetwork represents additional egress information that will be used by associated virtual machines or hybrid AKS clusters.",
       "required": [
-        "extendedLocation",
-        "properties"
+        "extendedLocation"
       ],
       "properties": {
         "extendedLocation": {
@@ -7560,6 +7951,25 @@
           "maximum": 1440,
           "minimum": 1
         },
+        "detailedStatus": {
+          "description": "The more detailed status of the metrics configuration.",
+          "type": "string",
+          "enum": [
+            "Processing",
+            "Applied",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ClusterMetricsConfigurationDetailedStatus"
+          },
+          "readOnly": true
+        },
+        "detailedStatusMessage": {
+          "description": "The descriptive message about the current detailed status.",
+          "type": "string",
+          "readOnly": true
+        },
         "disabledMetrics": {
           "description": "The list of metrics that are available for the cluster but disabled at the moment.",
           "type": "array",
@@ -8034,11 +8444,23 @@
         "enabled"
       ],
       "properties": {
-        "duration": {
-          "description": "The duration this console access will be allowed for the user. The values are specified in ISO8601 duration format.",
+        "detailedStatus": {
+          "description": "The more detailed status of the console.",
           "type": "string",
-          "default": "P1D",
-          "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
+          "enum": [
+            "Ready",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ConsoleDetailedStatus"
+          },
+          "readOnly": true
+        },
+        "detailedStatusMessage": {
+          "description": "The descriptive message about the current detailed status.",
+          "type": "string",
+          "readOnly": true
         },
         "enabled": {
           "description": "The indicator of whether the console access is enabled.",
@@ -8053,9 +8475,9 @@
           }
         },
         "expiration": {
-          "description": "The calculated expiration time of this console access. This value is re-calculated using the duration when the console is enabled upon creation, the console was disabled and got re-enabled, or there is a change to the duration field.",
+          "description": "The date and time after which the key will be disallowed access.",
           "type": "string",
-          "readOnly": true
+          "format": "date-time"
         },
         "privateLinkServiceId": {
           "description": "The resource ID of the private link service that is used to provide virtual machine console access.",
@@ -8587,6 +9009,14 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "HybridAksClusterProvisioningState"
+          },
+          "readOnly": true
+        },
+        "volumes": {
+          "description": "The resource IDs of volumes that are attached to the Hybrid AKS cluster.",
+          "type": "array",
+          "items": {
+            "type": "string"
           },
           "readOnly": true
         },
@@ -10256,6 +10686,13 @@
       "properties": {
         "osDisk": {
           "$ref": "#/definitions/OsDisk"
+        },
+        "volumeAttachments": {
+          "description": "The resource IDs of volumes that are requested to be attached to the virtual machine.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -10857,10 +11294,10 @@
         "vmDeviceModel": {
           "description": "The type of the device model to use.",
           "type": "string",
-          "default": "V2",
+          "default": "T2",
           "enum": [
-            "V1",
-            "V2"
+            "T1",
+            "T2"
           ],
           "x-ms-enum": {
             "modelAsString": true,
@@ -10881,6 +11318,145 @@
         },
         "vmImageRepositoryCredentials": {
           "$ref": "#/definitions/ImageRepositoryCredentials"
+        },
+        "volumes": {
+          "description": "The resource IDs of volumes that are attached to the virtual machine.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineVolumeParameters": {
+      "type": "object",
+      "title": "VirtualMachineVolumeParameters represents the body of the request to handle attachment and detachment of volumes for the virtual machine.",
+      "required": [
+        "volumeId"
+      ],
+      "properties": {
+        "volumeId": {
+          "description": "The resource ID of the volume.",
+          "type": "string"
+        }
+      }
+    },
+    "Volume": {
+      "type": "object",
+      "title": "Volume represents storage made available for use by resources running on the cluster.",
+      "required": [
+        "extendedLocation",
+        "properties"
+      ],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The extended location of the cluster associated with the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/VolumeProperties",
+          "description": "The list of the resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
+    },
+    "VolumeList": {
+      "type": "object",
+      "title": "VolumeList represents a list of volumes.",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of volumes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        }
+      }
+    },
+    "VolumePatchParameters": {
+      "type": "object",
+      "title": "VolumePatchParameters represents the body of the request to patch the volume resource.",
+      "properties": {
+        "tags": {
+          "description": "The Azure resource tags that will replace the existing ones.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "VolumeProperties": {
+      "type": "object",
+      "title": "VolumeProperties represents properties of the volume resource.",
+      "required": [
+        "sizeMiB"
+      ],
+      "properties": {
+        "attachedTo": {
+          "description": "The list of resource IDs that attach the volume. It may include virtual machines and Hybrid AKS clusters.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "detailedStatus": {
+          "description": "The more detailed status of the volume.",
+          "type": "string",
+          "enum": [
+            "Error",
+            "Active",
+            "Provisioning"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VolumeDetailedStatus"
+          },
+          "readOnly": true
+        },
+        "detailedStatusMessage": {
+          "description": "The descriptive message about the current detailed status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the volume.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Provisioning",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "VolumeProvisioningState"
+          },
+          "readOnly": true
+        },
+        "serialNumber": {
+          "description": "The unique identifier of the volume.",
+          "type": "string",
+          "readOnly": true
+        },
+        "sizeMiB": {
+          "description": "The size of the allocation for this volume in Mebibytes.",
+          "type": "integer",
+          "format": "int64",
+          "minimum": 1
         }
       }
     }
@@ -11035,6 +11611,15 @@
       "x-ms-parameter-location": "method",
       "description": "The name of the virtual machine.",
       "name": "virtualMachineName",
+      "in": "path",
+      "required": true
+    },
+    "VolumeNameParameter": {
+      "pattern": "^([a-zA-Z0-9][a-zA-Z0-9]{0,28}[a-zA-Z0-9])$",
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the volume.",
+      "name": "volumeName",
       "in": "path",
       "required": true
     }
