@@ -12900,7 +12900,7 @@
         "tags": [
           "Scenes"
         ],
-        "description": "Get a feature(STAC Item) for given collection and feature id.",
+        "description": "Get a feature(SpatioTemporal Asset Catalog (STAC) Item) for given collection and feature id.",
         "operationId": "Scenes_GetStacFeature",
         "produces": [
           "application/json"
@@ -23852,7 +23852,8 @@
           "type": "string"
         },
         "geometry": {
-          "description": "Defines the full footprint of the asset represented by this item.\r\nIts a GeoJSON geometry."
+          "description": "Defines the full footprint of the asset represented by this item.\r\nIts a GeoJSON geometry.",
+          "type": "object"
         },
         "bbox": {
           "description": "Bounding box of the feature.",
@@ -23863,7 +23864,8 @@
           }
         },
         "properties": {
-          "description": "A dictionary of additional metadata for the item."
+          "description": "A dictionary of additional metadata for the item.",
+          "type": "object"
         },
         "links": {
           "description": "List of link objects to resources and related URLs.",
