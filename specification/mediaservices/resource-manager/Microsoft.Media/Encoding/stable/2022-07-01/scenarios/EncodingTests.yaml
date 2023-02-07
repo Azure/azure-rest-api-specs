@@ -68,8 +68,11 @@ scenarios:
         exampleFile: ../examples/jobs-get-by-name.json
       - operationId: Jobs_Update
         exampleFile: ../examples/jobs-update.json
-      - operationId: Jobs_CancelJob
-        exampleFile: ../examples/jobs-cancel.json
+      # disabling cancel job test as it is a best effort, it's possible that the job finish/error before cancel complete.
+      # this might conflict with the next steps of the test. This is not an async call as its
+      # example : delete might fails, as the job might go in to canceling state and stay in that state for a while.
+      # - operationId: Jobs_CancelJob
+      #   exampleFile: ../examples/jobs-cancel.json
       - operationId: Jobs_Delete
         exampleFile: ../examples/jobs-delete.json
       - operationId: Transforms_Delete
