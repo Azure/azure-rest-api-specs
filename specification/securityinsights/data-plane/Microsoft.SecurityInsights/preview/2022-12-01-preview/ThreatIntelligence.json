@@ -19,7 +19,7 @@
         },
         "summary": "Upload the indicators to the workspace",
         "description": "Upload the list of indicators to the workspace specified",
-        "operationId": "threatintelligence:upload-indicators",
+        "operationId": "ThreatIntelligence_UploadIndicators",
         "consumes": [
           "application/json"
         ],
@@ -43,7 +43,7 @@
             "description": "Body of the request with SourceSystem and array of indicators",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/uploadIndicatorsRequest"
+              "$ref": "#/definitions/UploadIndicatorsRequest"
             }
           }
         ],
@@ -51,7 +51,7 @@
           "200": {
             "description": "The API returns 200 when one or many indicators are successfully validated and published.",
             "schema": {
-              "$ref": "#/definitions/uploadIndicatorsResponse"
+              "$ref": "#/definitions/UploadIndicatorsResponse"
             }
           },
           "429": {
@@ -85,11 +85,11 @@
     }
   },
   "definitions": {
-    "jsonPropertyBag": {
+    "JsonPropertyBag": {
       "description": "An object that stores a list of JSON properties from a given JObject.",
       "type": "object"
     },
-    "uploadIndicatorsRequest": {
+    "UploadIndicatorsRequest": {
       "description": "Schema for request body.",
       "type": "object",
       "properties": {
@@ -101,12 +101,12 @@
           "description": "The value param is an array of STIX indictors. Indicators need to be in STIX format (STIX Indicator documentation). Indicators need to contain the “ID” field. We only support Stix 2.0 and 2.1 format.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/jsonPropertyBag"
+            "$ref": "#/definitions/JsonPropertyBag"
           }
         }
       }
     },
-    "uploadIndicatorsResponse": {
+    "UploadIndicatorsResponse": {
       "description": "Schema for API response.",
       "type": "object",
       "properties": {
@@ -114,12 +114,12 @@
           "description": "List of indicator validation errors",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/uploadIndicatorsValidationError"
+            "$ref": "#/definitions/UploadIndicatorsValidationError"
           }
         }
       }
     },
-    "uploadIndicatorsValidationError": {
+    "UploadIndicatorsValidationError": {
       "description": "Object that stores a list of errors encountered when executing the Upload Indicators operation.",
       "type": "object",
       "properties": {
