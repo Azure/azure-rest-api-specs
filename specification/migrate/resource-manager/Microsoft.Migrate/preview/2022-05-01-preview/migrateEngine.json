@@ -13,6 +13,9 @@
         ],
         "description": "Lists all the available API operations under this PR",
         "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -22,8 +25,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult",
-              "produces": [ "application/json" ]
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -1757,9 +1759,6 @@
         "summary": "Performs test migrate cleanup.",
         "description": "Performs the test migrate cleanup on the workload deployment.",
         "operationId": "WorkloadDeployment_TestMigrateCleanup",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -1788,14 +1787,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Test migrate cleanup model.",
-            "schema": {
-              "$ref": "#/definitions/TestMigrateCleanupModel"
-            }
           }
         ],
         "responses": {
@@ -1840,9 +1831,6 @@
         "summary": "Performs migrate.",
         "description": "Performs migrate on the workload deployment.",
         "operationId": "WorkloadDeployment_Migrate",
-        "consumes": [
-          "application/json"
-        ],
         "produces": [
           "application/json"
         ],
@@ -1871,14 +1859,6 @@
           },
           {
             "$ref": "#/parameters/api-version"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Migrate model.",
-            "schema": {
-              "$ref": "#/definitions/MigrateModel"
-            }
           }
         ],
         "responses": {
@@ -2772,45 +2752,6 @@
         "message": {
           "description": "Gets or sets error Message returned by the service.",
           "type": "string"
-        }
-      }
-    },
-    "AuthenticationProperties": {
-      "description": "Class for authentication properties.",
-      "type": "object",
-      "properties": {
-        "gmsaAccountName": {
-          "description": "Gets or sets the gmsaAccountName.",
-          "type": "string"
-        },
-        "aadAccountUserName": {
-          "description": "Gets or sets the aadAccountUserName.",
-          "type": "string"
-        },
-        "aadAccountPassword": {
-          "$ref": "#/definitions/SecureString"
-        },
-        "dnsServers": {
-          "description": "Gets or sets the dnsServers.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "domainFqdn": {
-          "description": "Gets or sets the domainFQDN.",
-          "type": "string"
-        },
-        "domainControllerAddress": {
-          "description": "Gets or sets the domainControllerAddress.",
-          "type": "string"
-        },
-        "domainAdminUserName": {
-          "description": "Gets or sets the domainAdminUserName.",
-          "type": "string"
-        },
-        "domainAdminPassword": {
-          "$ref": "#/definitions/SecureString"
         }
       }
     },
@@ -4022,34 +3963,6 @@
         }
       }
     },
-    "MigrateModel": {
-      "description": "Migrate model.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MigrateModelProperties"
-        }
-      }
-    },
-    "MigrateModelCustomProperties": {
-      "description": "Migrate model custom properties.",
-      "type": "object",
-      "properties": {
-        "instanceType": {
-          "description": "Gets or sets the instance type.",
-          "type": "string"
-        }
-      }
-    },
-    "MigrateModelProperties": {
-      "description": "Migrate model properties.",
-      "type": "object",
-      "properties": {
-        "customProperties": {
-          "$ref": "#/definitions/MigrateModelCustomProperties"
-        }
-      }
-    },
     "MigrateWorkflowModelCustomProperties": {
       "description": "Migrate workflow model custom properties.",
       "type": "object",
@@ -4383,15 +4296,6 @@
         }
       }
     },
-    "SecureString": {
-      "type": "object",
-      "properties": {
-        "length": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
     "SystemDataModel": {
       "description": "System data required to be defined for Azure resources.",
       "type": "object",
@@ -4534,26 +4438,6 @@
       "properties": {
         "instanceType": {
           "description": "Gets or sets the instance type.",
-          "type": "string"
-        }
-      }
-    },
-    "TestMigrateCleanupModel": {
-      "description": "Test migrate cleanup model.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TestMigrateCleanupModelProperties"
-        }
-      }
-    },
-    "TestMigrateCleanupModelProperties": {
-      "description": "Test migrate cleanup model properties.",
-      "type": "object",
-      "properties": {
-        "comments": {
-          "description": "Gets or sets the test migrate cleanup comments.",
-          "maxLength": 1024,
           "type": "string"
         }
       }
