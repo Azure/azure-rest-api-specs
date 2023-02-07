@@ -4585,7 +4585,7 @@
       "x-ms-client-flatten": true
     },
     "DatabaseConnection": {
-      "description": "Static Site Database Connection ARM resource.",
+      "description": "Static Site Database Connection resource.",
       "type": "object",
       "allOf": [
         {
@@ -4599,20 +4599,23 @@
           "properties": {
             "resourceId": {
               "description": "The resource id of the database.",
-              "type": "string"
+              "type": "string",
+              "required": true
             },
             "connectionIdentity": {
-              "description": "If present, the identity is used in conjunction with ConnectionString to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
+              "description": "If present, the identity is used in conjunction with connection string to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
               "type": "string"
             },
             "connectionString": {
               "description": "The connection string to use to connect to the database.",
               "type": "string",
+              "required": true,
               "x-ms-secret": true
             },
             "region": {
               "description": "The region of the database resource.",
-              "type": "string"
+              "type": "string",
+              "required": true
             },
             "configurationFiles": {
               "description": "A list of configuration files associated with this database connection.",
@@ -4657,7 +4660,7 @@
       }
     },
     "DatabaseConnectionPatchRequest": {
-      "description": "Static Site Database Connection Request Properties ARM resource when patching",
+      "description": "Static Site Database Connection Request Properties resource when patching",
       "type": "object",
       "properties": {
         "properties": {
@@ -4669,7 +4672,7 @@
               "type": "string"
             },
             "connectionIdentity": {
-              "description": "If present, the identity is used in conjunction with ConnectionString to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
+              "description": "If present, the identity is used in conjunction with connection string to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
               "type": "string"
             },
             "connectionString": {
