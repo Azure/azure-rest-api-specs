@@ -1523,41 +1523,7 @@
     },
     "TaskChangeEvent": {
       "type": "object",
-      "description": "History of changes made on task.",
-      "properties": {
-        "updatedBy": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "updatedTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "CreateTask",
-            "ApproveApproval",
-            "RejectApproval",
-            "Reassign",
-            "ChangeTaskStatus"
-          ],
-          "x-ms-enum": {
-            "name": "TaskChangeEventType",
-            "modelAsString": true
-          }
-        },
-        "change": {
-          "type": "object",
-          "description": "The changes made on this task."
-        }
-      },
-      "required": [
-        "updatedBy",
-        "updatedTime",
-        "type",
-        "change"
-      ]
+      "description": "History of changes made on task."
     },
     "ApprovalResponseComment": {
       "type": "object",
