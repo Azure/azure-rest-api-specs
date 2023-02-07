@@ -25,35 +25,13 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/BillingAccountName"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "description": "May be used to filter by reservation properties. The filter supports 'eq', 'or', and 'and'. It does not currently support 'ne', 'gt', 'le', 'ge', or 'not'.",
-            "in": "query",
-            "name": "$filter",
-            "required": false,
-            "type": "string"
+            "$ref": "./types.json#/parameters/filter"
           },
           {
-            "description": "May be used to sort order by reservation properties.",
-            "in": "query",
-            "name": "$orderby",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "The number of reservations to skip from the list before returning results",
-            "in": "query",
-            "name": "$skiptoken",
-            "required": false,
-            "type": "number"
-          },
-          {
-            "description": "To indicate whether to refresh the roll up counts of the reservations group by provisioning states",
-            "in": "query",
-            "name": "refreshSummary",
-            "required": false,
-            "type": "string"
+            "$ref": "./types.json#/parameters/orderBy"
           },
           {
             "description": "The selected provisioning state",
@@ -114,7 +92,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/BillingAccountName"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -163,7 +141,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/BillingAccountName"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -206,7 +184,7 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/BillingAccountName"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -252,7 +230,13 @@
             "$ref": "./types.json#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/BillingAccountName"
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
           }
         ],
         "tags": [
@@ -1123,7 +1107,7 @@
       "x-ms-parameter-location": "method"
     },
     "ExpandParameter": {
-      "name": "$expand",
+      "name": "$",
       "description": "May be used to expand the detail information of some properties.",
       "in": "query",
       "x-ms-parameter-location": "client",
