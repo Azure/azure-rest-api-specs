@@ -49,14 +49,14 @@ scenarios:
       - operationId: Assets_CreateOrUpdate
         exampleFile: ../../../../Metadata/stable/2022-08-01/examples/assets-create.json
         variables:
-          assetName: $(jobname)-InputAsset
+          assetName: $(jobName)-InputAsset
         requestUpdate:
           - replace: /parameters/properties/storageAccountName
             value: $(testStorageAccount)
       - operationId: Assets_CreateOrUpdate
         exampleFile: ../../../../Metadata/stable/2022-08-01/examples/assets-create.json
         variables:
-          assetName: $(jobname)-OutputAsset
+          assetName: $(jobName)-OutputAsset
         requestUpdate:
           - replace: /parameters/properties/storageAccountName
             value: $(testStorageAccount)
