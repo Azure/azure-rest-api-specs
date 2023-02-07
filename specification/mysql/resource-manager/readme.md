@@ -32,29 +32,13 @@ tag: package-2020-01-01
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2021-12-01-preview
+tag: package-flexibleserver-2022-09-30-preview
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-preview-2022-09
+tag: package-2020-01-01
 ```
 
-
-### Tag: package-preview-2022-09
-
-These settings apply only when `--tag=package-preview-2022-09` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2022-09'
-input-file:
-  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/AzureADAdministrator.json
-  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/Backups.json
-  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/Configurations.json
-  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/Databases.json
-  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/FirewallRules.json
-  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/FlexibleServers.json
-  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/LogFiles.json
-  - Microsoft.DBforMySQL/preview/2022-09-30-privatepreview/ServiceOperations.json
-```
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
@@ -174,6 +158,24 @@ input-file:
 - Microsoft.DBforMySQL/preview/2021-12-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/preview/2021-12-01-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/preview/2021-12-01-preview/AzureADAdministrator.json
+```
+
+### Tag: package-flexibleserver-2022-09-30-preview
+
+These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2022-09-30-preview'
+input-file:
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/PrivateEndpointConnections.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/PrivateLinkResources.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/Backups.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/Configurations.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/Databases.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/FirewallRules.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/FlexibleServers.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/LogFiles.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/ServiceOperations.json
+  - Microsoft.DBforMySQL/preview/2022-09-30-preview/AzureADAdministrator.json
 ```
 
 ## Suppression
