@@ -26,17 +26,33 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-10
+tag: package-2023-03
 azure-validator: false
 ```
 
 ---
 
+
+### Tag: package-2023-03
+
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-03'
+input-file:
+  - Microsoft.CostManagement/stable/2023-03-01/common-types.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.benefits.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.exports.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.generatecostdetailsreport.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.generatedetailedcostreport.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.json
+  - Microsoft.CostManagement/stable/2023-03-01/costmanagement.pricesheets.json
+  - Microsoft.CostManagement/stable/2023-03-01/scheduledActions.json
+```
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10'
+``` yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.CostManagement/stable/2022-10-01/common-types.json
   - Microsoft.CostManagement/stable/2022-10-01/costmanagement.json
@@ -52,7 +68,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-10-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-10-05'
+``` yaml $(tag) == 'package-preview-2022-10-05'
 input-file:
   - Microsoft.CostManagement/preview/2022-10-05-preview/costmanagement.json
   - Microsoft.CostManagement/preview/2022-10-05-preview/settings.json
