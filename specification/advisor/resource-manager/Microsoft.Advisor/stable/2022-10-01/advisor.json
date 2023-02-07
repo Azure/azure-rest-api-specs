@@ -1691,19 +1691,12 @@
     "advisorScoreEntity": {
       "description": "The details of Advisor score for a single category.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "The ID of the resource.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The category.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of resource.",
-          "type": "string"
-        },
         "properties": {
           "description": "The Advisor score data.",
           "type": "object",
