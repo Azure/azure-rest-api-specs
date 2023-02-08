@@ -90,7 +90,7 @@ interface HyperVClusterInt {
   @tag("HyperVClusterController")
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVCluster_PutCluster")
-  create is ArmResourceCreateOrUpdateAsync<HyperVCluster>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<HyperVCluster>;
 
   // @tag("HyperVClusterController")
   // delete is ArmResourceDeleteSync<HyperVCluster>;
@@ -142,7 +142,7 @@ interface VmwareSites {
 
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_PutSite")
-  create is ArmResourceCreateOrUpdateAsync<VMwareSite>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<VMwareSite>;
 
   @armResourceUpdate(InnerError)
   @patch
@@ -427,7 +427,7 @@ interface VmwareVcenters {
   @operationId("VCenter_GetVCenter")
   get is ArmResourceRead<VCenter>;
   @operationId("VCenter_PutVCenter")
-  create is ArmResourceCreateOrUpdateAsync<VCenter>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<VCenter>;
   @operationId("VCenter_DeleteVCenter")
   delete is ArmResourceDeleteSync<VCenter>;
   @operationId("VCenter_GetAllVCentersInSite")
@@ -540,7 +540,7 @@ interface HypervSites {
   @tag("HyperVSitesController")
   @operationId("HyperVSites_PutSite")
   @added(Versions.v2018_05_01_preview)
-  create is ArmResourceCreateOrUpdateAsync<HyperVSite>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<HyperVSite>;
 
   @armResourceUpdate(InnerError)
   @patch
@@ -763,7 +763,7 @@ interface HyperVHostInt {
   @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.HyperVHostController")
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVHost_PutHost")
-  create is ArmResourceCreateOrUpdateAsync<HyperVHost>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<HyperVHost>;
 
   @tag("HyperVHostController")
   @segment("hosts")
@@ -893,7 +893,7 @@ model ServerSiteResource is TrackedResource<SitesProperties> {
 @added(Versions.v2019_05_01_preview)
 interface ServerSitesInterface {
   get is ArmResourceRead<ServerSiteResource>;
-  create is ArmResourceCreateOrUpdateAsync<ServerSiteResource>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<ServerSiteResource>;
   update is ArmResourcePatchSync<ServerSiteResource, SitesProperties>;
   delete is ArmResourceDeleteSync<ServerSiteResource>;
 
@@ -1044,7 +1044,7 @@ model ServerResource is ProxyResource<ServerProperties> {
 @added(Versions.v2019_05_01_preview)
 interface ServerMachines {
   get is ArmResourceRead<ServerResource>;
-  create is ArmResourceCreateOrUpdateSync<ServerResource>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<ServerResource>;
   delete is ArmResourceDeleteSync<ServerResource>;
 }
 
@@ -1172,7 +1172,7 @@ interface ImportSites {
   get is ArmResourceRead<ImportSiteResource>;
 
   @added(Versions.v2019_05_01_preview)
-  create is ArmResourceCreateOrUpdateSync<ImportSiteResource>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<ImportSiteResource>;
 
   @added(Versions.v2019_05_01_preview)
   update is ArmResourcePatchSync<ImportSiteResource, SitesProperties>;

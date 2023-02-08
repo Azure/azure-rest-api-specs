@@ -259,7 +259,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -555,7 +555,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -849,7 +849,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -1251,9 +1251,7 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
+        "x-ms-long-running-operation-options": "azure-async-operation",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HyperVSites_RefreshSite_MaximumSet_Gen": {
@@ -1422,9 +1420,7 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
+        "x-ms-long-running-operation-options": "azure-async-operation",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HyperVSites_GetSiteUsage_MaximumSet_Gen": {
@@ -1621,7 +1617,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -1637,6 +1633,19 @@
               "$ref": "#/definitions/ImportSiteResource"
             }
           },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ImportSiteResource"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1644,6 +1653,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "ImportSites_Create_MaximumSet_Gen": {
             "$ref": "./examples/ImportSites_Create_MaximumSet_Gen.json"
@@ -2264,7 +2277,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -2743,7 +2756,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -2759,6 +2772,19 @@
               "$ref": "#/definitions/ServerResource"
             }
           },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ServerResource"
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -2766,6 +2792,10 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "ServerMachines_Create_MaximumSet_Gen": {
             "$ref": "./examples/ServerMachines_Create_MaximumSet_Gen.json"
@@ -3104,7 +3134,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -3402,6 +3432,7 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": "azure-async-operation",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MaximumSet_Gen": {
@@ -3947,9 +3978,7 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
+        "x-ms-long-running-operation-options": "azure-async-operation",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Machines_StartMachine_MaximumSet_Gen": {
@@ -4020,9 +4049,7 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
+        "x-ms-long-running-operation-options": "azure-async-operation",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Machines_StopMachine_MaximumSet_Gen": {
@@ -4136,9 +4163,7 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
+        "x-ms-long-running-operation-options": "azure-async-operation",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Sites_RefreshSite_MaximumSet_Gen": {
@@ -4307,9 +4332,7 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
+        "x-ms-long-running-operation-options": "azure-async-operation",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Sites_GetSiteUsage_MaximumSet_Gen": {
@@ -4377,6 +4400,7 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": "azure-async-operation",
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
@@ -4760,7 +4784,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",

@@ -82,3 +82,25 @@ op ArmResourceActionNoContentAsyncCustomMapRequest<
   mapRequest: TRequest
 ): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponse | ErrorResponse;
 
+@autoRoute
+@doc("Create a {name}", TResource)
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    "final-state-via": "azure-async-operation",
+  }
+)
+
+@armResourceCreateOrUpdate(TResource)
+@put
+op ArmResourceCreateOrUpdateAsyncCustom<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("Resource create parameters.")
+  @body
+  body: TResource
+): ArmResponse<TResource> | ArmCreatedResponse<TResource> | ErrorResponse;
