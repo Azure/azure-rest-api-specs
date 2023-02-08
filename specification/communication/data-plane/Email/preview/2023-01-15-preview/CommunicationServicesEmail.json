@@ -49,7 +49,8 @@
             "headers": {
               "retry-after": {
                 "description": "This header will only be present when the status is a non-terminal status. It indicates the minimum amount of time in seconds to wait before polling for operation status again.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             },
             "schema": {
@@ -137,7 +138,8 @@
               },
               "retry-after": {
                 "description": "This header will only be present when the operation status is a non-terminal status. It indicates the minimum amount of time in seconds to wait before polling for operation status again.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             },
             "schema": {
@@ -146,6 +148,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Send Email": {
             "$ref": "./examples/SendEmail.json"
@@ -346,10 +351,8 @@
       "name": "api-version",
       "description": "Version of API to invoke.",
       "required": true,
-      "enum": [
-        "2023-01-15-preview"
-      ],
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     }
   },
   "securityDefinitions": {
@@ -374,6 +377,7 @@
         "description": "The communication resource, for example https://my-resource.communication.azure.com",
         "required": true,
         "type": "string",
+        "format": "url",
         "in": "path",
         "x-ms-skip-url-encoding": true,
         "x-ms-parameter-location": "client"
