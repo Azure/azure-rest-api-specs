@@ -41,48 +41,39 @@ using Cadl.Rest;
 using Cadl.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
+
 @armProviderNamespace
 @service({
   title: "SingleSPNAttribute",
 })
-@versionedDependency(
-  [
-    [
-      Versions.v2018_05_01_preview,
-      Azure.ResourceManager.Versions.v1_0_Preview_1
-    ],
-    [
-      Versions.v2019_05_01_preview,
-      Azure.ResourceManager.Versions.v1_0_Preview_1
-    ],
-    [Versions.v2020_01_01, Azure.ResourceManager.Versions.v1_0_Preview_1],
-    [
-      Versions.v2020_01_01_preview,
-      Azure.ResourceManager.Versions.v1_0_Preview_1
-    ],
-    [Versions.v2020_02_01, Azure.ResourceManager.Versions.v1_0_Preview_1],
-    [Versions.v2020_07_07, Azure.ResourceManager.Versions.v1_0_Preview_1],
-    [Versions.v2020_07_10, Azure.ResourceManager.Versions.v1_0_Preview_1],
-    [
-      Versions.v2020_08_01_preview,
-      Azure.ResourceManager.Versions.v1_0_Preview_1
-    ]
-  ]
-)
 @versioned(Versions)
 @doc("Azure OffAzure Resource Provider management API.")
 namespace Microsoft.OffAzure;
 
 interface Operations extends Azure.ResourceManager.Operations {}
-
 enum Versions {
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1) 
   v2018_05_01_preview: "2018-05-01-preview",
+  
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1) 
   v2019_05_01_preview: "2019-05-01-preview",
+  
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2020_01_01: "2020-01-01",
+  
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1) 
   v2020_01_01_preview: "2020-01-01-preview",
+  
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1) 
   v2020_02_01: "2020-02-01",
+  
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1) 
   v2020_07_07: "2020-07-07",
+  
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1) 
   v2020_07_10: "2020-07-10",
+  
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1) 
   v2020_08_01_preview: "2020-08-01-preview",
 }
 
@@ -174,7 +165,7 @@ interface VmwareSites {
   @added(Versions.v2018_05_01_preview)
   @tag("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController")
   @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
-   @operationId("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController_ExportAppsAndRoles")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController_ExportAppsAndRoles")
   ExportApplications is ArmResourceActionNoContentNoBodyAsync<VMwareSite>;
 
   @doc("Method to refresh a site.")
@@ -794,7 +785,7 @@ interface HyperVHostInt {
 #suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("A machine resource belonging to a site resource.")
 @parentResource(HyperVSite)
-model HyperVMachine is ProxyResource<HypervMachineProperties> {
+model HyperVMachine is ProxyResource<HyperVMachineProperties> {
   @doc(" HypervMachine name")
   @key("machineName")
   @segment("machines")
@@ -1034,7 +1025,6 @@ interface ServerSitesInterface {
     ServerSiteResource,
     VersionedV202001ExportMachineErrorsRequest
   >;
-
 }
 
 //*** Server Machine Proxy Resource ***/

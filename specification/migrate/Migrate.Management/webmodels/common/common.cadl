@@ -256,20 +256,6 @@ enum OracleDiscoveryScopeStatus {
   "DiscoverySucceeded",
 }
 
-@doc("Application in the guest virtual machine.")
-model Application {
-  @doc("Gets or sets Name of the Application.")
-  @visibility("read")
-  name?: string;
-
-  @doc("Gets or sets Version of the Application.")
-  @visibility("read")
-  version?: string;
-
-  @doc("Gets or sets Provider of the Application.")
-  @visibility("read")
-  provider?: string;
-}
 
 @doc("Second level object returned as part of Machine REST resource.")
 model OperatingSystem {
@@ -909,7 +895,6 @@ the
   rawCertData?: string;
 }
 
-
 @doc("Hyper-V site usage.")
 model SiteUsageResponse {
   @doc("Gets or sets the number of machines discovered in the site.")
@@ -917,7 +902,7 @@ model SiteUsageResponse {
 
   @doc("Gets or sets the number of run as accounts in the site.")
   runAsAccountCount: int32; //TODO
-  
+
   @doc("Gets or sets the number of hosts part of the site.")
   hostCount: int32;
 
@@ -925,5 +910,5 @@ model SiteUsageResponse {
   clusterCount: int32;
 
   @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState; 
+  provisioningState?: ProvisioningState;
 }

@@ -9,11 +9,9 @@ using Autorest;
 using Azure.ResourceManager.Foundations;
 
 namespace Azure.ResourceManager;
-//namespace Azure.Core;
-//Tarun template
 @autoRoute
 @extension("x-ms-long-running-operation", true)
-//@asyncOperationOptions("azure-async-operation")
+@extension("x-ms-long-running-operation-options","azure-async-operation")
 @extension(
   "x-ms-long-running-operation-options",
   {
@@ -35,7 +33,7 @@ op ArmResourceActionAsyncNoRequestBody<
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)
-@asyncOperationOptions("azure-async-operation")
+@extension("x-ms-long-running-operation-options","azure-async-operation")
 @armResourceAction(TResource)
 @post
 op ArmResourceActionNoContentNoBodyAsync<
@@ -69,7 +67,7 @@ op ArmResourceListByParentUpdated<
 
 @autoRoute
 @extension("x-ms-long-running-operation", true)
-@asyncOperationOptions("azure-async-operation")
+@extension("x-ms-long-running-operation-options","azure-async-operation")
 @armResourceAction(TResource)
 @post
 op ArmResourceActionNoContentAsyncCustomMapRequest<

@@ -108,7 +108,7 @@ model DiscoveryState {
 }
 
 @doc("Application in the guest virtual machine.")
-model Applications {
+model Application {
   @doc("Gets or sets Name of the Application.")
   @visibility("read")
   name?: string;
@@ -123,7 +123,7 @@ model Applications {
 }
 
 @doc(" WebApplication in the guest virtual machine.")
-model WebApplications {
+model WebApplication {
   @doc(" Gets or sets Name of the WebApplication.")
   name?: string;
 
@@ -144,7 +144,7 @@ model WebApplications {
 }
 
 @doc("Feature in the guest virtual machine.")
-model Features {
+model Feature {
   @doc("Gets or sets Name of the Feature.")
   @visibility("read")
   name?: string;
@@ -163,7 +163,7 @@ model Features {
 }
 
 @doc("SQLServer in the guest virtual machine.")
-model SqlServers {
+model SqlServer {
   @doc("Gets or sets Name of the SQLServer.")
   @visibility("read")
   name?: string;
@@ -306,19 +306,19 @@ model OtherDatabases {
 model AppsAndRoles {
   @doc("Gets or sets Applications of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  applications?: Applications[];
+  applications?: Application[];
 
   @doc(" Gets or sets WebApplications of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  webApplications?: WebApplications[];
+  webApplications?: WebApplication[];
 
   @doc("Gets or sets Features of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  features?: Features[];
+  features?: Feature[];
 
   @doc("Gets or sets SQLServers of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])
-  sqlServers?: SqlServers[];
+  sqlServers?: SqlServer[];
 
   @doc("Gets or sets SharePointServers of the AppsAndRoles.")
   @OpenAPI.extension("x-ms-identifiers", [])

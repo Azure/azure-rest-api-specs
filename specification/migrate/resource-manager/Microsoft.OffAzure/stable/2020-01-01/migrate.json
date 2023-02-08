@@ -259,7 +259,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -337,7 +337,7 @@
             "required": true,
             "description": "Job body with updated properties.",
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HyperVSiteUpdate"
             }
           }
         ],
@@ -555,7 +555,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -849,7 +849,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -1621,7 +1621,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -1677,7 +1677,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "properties",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -2264,7 +2264,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -2337,7 +2337,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "properties",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -2743,7 +2743,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -2880,77 +2880,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/refreshSite": {
-      "post": {
-        "tags": [
-          "ServerSitesInterface"
-        ],
-        "operationId": "ServerSitesInterface_RefreshSite",
-        "description": "Operation to refresh a site",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "204": {
-            "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ServerSitesInterface_RefreshSite_MaximumSet_Gen": {
-            "$ref": "./examples/ServerSitesInterface_RefreshSite_MaximumSet_Gen.json"
-          },
-          "ServerSitesInterface_RefreshSite_MinimumSet_Gen": {
-            "$ref": "./examples/ServerSitesInterface_RefreshSite_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/runAsAccounts": {
       "get": {
         "tags": [
@@ -3055,75 +2984,6 @@
           },
           "ServerRunAsAccounts_Get_MinimumSet_Gen": {
             "$ref": "./examples/ServerRunAsAccounts_Get_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/updateProperties": {
-      "post": {
-        "tags": [
-          "ServerSitesInterface"
-        ],
-        "operationId": "ServerSitesInterface_UpdateProperties",
-        "description": "Operation to update custom properties for servers",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "$ref": "#/definitions/MachineMetadataList"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "204": {
-            "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "ServerSitesInterface_UpdateProperties_MaximumSet_Gen": {
-            "$ref": "./examples/ServerSitesInterface_UpdateProperties_MaximumSet_Gen.json"
-          },
-          "ServerSitesInterface_UpdateProperties_MinimumSet_Gen": {
-            "$ref": "./examples/ServerSitesInterface_UpdateProperties_MinimumSet_Gen.json"
           }
         }
       }
@@ -3244,7 +3104,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -3322,7 +3182,7 @@
             "required": true,
             "description": " body with updated properties.",
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VMwareSiteUpdate"
             }
           }
         ],
@@ -3541,9 +3401,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
@@ -4520,9 +4377,6 @@
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
@@ -4906,7 +4760,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -5010,30 +4864,150 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/serverSites/{siteName}/refreshSite/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/refreshSite": {
+      "post": {
+        "tags": [
+          "ServerSitesInterface"
+        ],
+        "operationId": "ServerSitesInterface_RefreshSite",
+        "description": "Operation to refresh a site",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-cadl-name": "{}"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ServerSitesInterface_RefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_RefreshSite_MaximumSet_Gen.json"
+          },
+          "ServerSitesInterface_RefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_RefreshSite_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/serverSites/{siteName}/updateProperties/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/updateProperties": {
+      "post": {
+        "tags": [
+          "ServerSitesInterface"
+        ],
+        "operationId": "ServerSitesInterface_UpdateProperties",
+        "description": "Operation to update custom properties for servers",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/MachineMetadataList"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ServerSitesInterface_UpdateProperties_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_UpdateProperties_MaximumSet_Gen.json"
+          },
+          "ServerSitesInterface_UpdateProperties_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_UpdateProperties_MinimumSet_Gen.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "ApplicationDiscovery": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HealthErrorDetails"
-          },
-          "x-cadl-name": "HealthErrorDetails[]",
-          "description": "Gets errors for discovery scope.",
-          "readOnly": true
-        },
-        "hydratedRunAsAccountId": {
-          "type": "string",
-          "description": "Gets the run as account ID with which feature worked successfully.\n           \nIt is discovered by the agent from the list of credentials.",
-          "readOnly": true
-        }
-      },
-      "description": "Contains data related application and roles discovery scope."
-    },
-    "Applications": {
+    "Application": {
       "type": "object",
       "properties": {
         "name": {
@@ -5054,43 +5028,63 @@
       },
       "description": "Application in the guest virtual machine."
     },
+    "ApplicationDiscovery": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets errors for discovery scope.",
+          "readOnly": true
+        },
+        "hydratedRunAsAccountId": {
+          "type": "string",
+          "description": "Gets the run as account ID with which feature worked successfully.\n           \nIt is discovered by the agent from the list of credentials.",
+          "readOnly": true
+        }
+      },
+      "description": "Contains data related application and roles discovery scope."
+    },
     "AppsAndRoles": {
       "type": "object",
       "properties": {
         "applications": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Applications"
+            "$ref": "#/definitions/Application"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Applications[]",
+          "x-cadl-name": "Application[]",
           "description": "Gets or sets Applications of the AppsAndRoles."
         },
         "webApplications": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WebApplications"
+            "$ref": "#/definitions/WebApplication"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "WebApplications[]",
+          "x-cadl-name": "WebApplication[]",
           "description": " Gets or sets WebApplications of the AppsAndRoles."
         },
         "features": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Features"
+            "$ref": "#/definitions/Feature"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Features[]",
+          "x-cadl-name": "Feature[]",
           "description": "Gets or sets Features of the AppsAndRoles."
         },
         "sqlServers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlServers"
+            "$ref": "#/definitions/SqlServer"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "SqlServers[]",
+          "x-cadl-name": "SqlServer[]",
           "description": "Gets or sets SQLServers of the AppsAndRoles."
         },
         "sharePointServers": {
@@ -5490,7 +5484,7 @@
       },
       "description": " ExchangeServer in the guest virtual machine."
     },
-    "Features": {
+    "Feature": {
       "type": "object",
       "properties": {
         "name": {
@@ -5915,7 +5909,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HypervMachineProperties",
+          "$ref": "#/definitions/HyperVMachineProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -5952,112 +5946,7 @@
       },
       "description": "The response of a HyperVMachine list operation."
     },
-    "HyperVNetworkAdapter": {
-      "type": "object",
-      "properties": {
-        "networkId": {
-          "type": "string",
-          "description": "Network Id.",
-          "readOnly": true
-        },
-        "subnetName": {
-          "type": "string",
-          "description": "Name of the VM subnet within the virtual network the NIC is attached to.",
-          "readOnly": true
-        },
-        "staticIpAddress": {
-          "type": "string",
-          "description": "Static IP address.",
-          "readOnly": true
-        },
-        "nicType": {
-          "type": "string",
-          "description": "Mac address of the NIC.",
-          "readOnly": true
-        },
-        "nicId": {
-          "type": "string",
-          "description": "Gets or sets the NIC Id."
-        },
-        "macAddress": {
-          "type": "string",
-          "description": "Gets or sets Mac address of the NIC."
-        },
-        "ipAddressList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "Gets IP addresses for the machine.",
-          "readOnly": true
-        },
-        "networkName": {
-          "type": "string",
-          "description": "Gets or sets Network Name."
-        },
-        "ipAddressType": {
-          "type": "string",
-          "description": "Gets or sets Type of the IP address."
-        }
-      },
-      "description": "Second level object represented in responses as part of Machine REST resource."
-    },
-    "HyperVSite": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SiteProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Gets or sets the eTag for concurrency control."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the Azure location in which Sites is created."
-        }
-      },
-      "description": "A HyperV SiteResource",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "HyperVSiteUsage": {
-      "type": "object",
-      "properties": {
-        "machineCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of machines discovered in the site."
-        },
-        "runAsAccountCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of run as accounts in the site."
-        },
-        "hostCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of hosts part of the site."
-        },
-        "clusterCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of clusters part of the site."
-        }
-      },
-      "description": "Hyper-V site usage."
-    },
-    "HypervMachineProperties": {
+    "HyperVMachineProperties": {
       "type": "object",
       "properties": {
         "instanceUuid": {
@@ -6349,6 +6238,130 @@
         }
       },
       "description": "The properties of AddressResource"
+    },
+    "HyperVNetworkAdapter": {
+      "type": "object",
+      "properties": {
+        "networkId": {
+          "type": "string",
+          "description": "Network Id.",
+          "readOnly": true
+        },
+        "subnetName": {
+          "type": "string",
+          "description": "Name of the VM subnet within the virtual network the NIC is attached to.",
+          "readOnly": true
+        },
+        "staticIpAddress": {
+          "type": "string",
+          "description": "Static IP address.",
+          "readOnly": true
+        },
+        "nicType": {
+          "type": "string",
+          "description": "Mac address of the NIC.",
+          "readOnly": true
+        },
+        "nicId": {
+          "type": "string",
+          "description": "Gets or sets the NIC Id."
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "Gets or sets Mac address of the NIC."
+        },
+        "ipAddressList": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets IP addresses for the machine.",
+          "readOnly": true
+        },
+        "networkName": {
+          "type": "string",
+          "description": "Gets or sets Network Name."
+        },
+        "ipAddressType": {
+          "type": "string",
+          "description": "Gets or sets Type of the IP address."
+        }
+      },
+      "description": "Second level object represented in responses as part of Machine REST resource."
+    },
+    "HyperVSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the eTag for concurrency control."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the Azure location in which Sites is created."
+        }
+      },
+      "description": "A HyperV SiteResource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HyperVSiteUpdate": {
+      "type": "object",
+      "properties": {
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the eTag for concurrency control."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the Azure location in which Sites is created."
+        }
+      },
+      "description": "A HyperV SiteResource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HyperVSiteUsage": {
+      "type": "object",
+      "properties": {
+        "machineCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of machines discovered in the site."
+        },
+        "runAsAccountCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of run as accounts in the site."
+        },
+        "hostCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of hosts part of the site."
+        },
+        "clusterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of clusters part of the site."
+        }
+      },
+      "description": "Hyper-V site usage."
     },
     "HypervOperationsStatusResource": {
       "type": "object",
@@ -8387,7 +8400,7 @@
         "discoveryScopeStatus"
       ]
     },
-    "SqlServers": {
+    "SqlServer": {
       "type": "object",
       "properties": {
         "name": {
@@ -8721,6 +8734,25 @@
             "create"
           ]
         },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the eTag for concurrency control."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the Azure location in which Sites is created."
+        }
+      },
+      "description": "A VMwareSite",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VMwareSiteUpdate": {
+      "type": "object",
+      "properties": {
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -9403,7 +9435,7 @@
         "discoveryScopeStatus"
       ]
     },
-    "WebApplications": {
+    "WebApplication": {
       "type": "object",
       "properties": {
         "name": {
