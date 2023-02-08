@@ -3,37 +3,35 @@
     "api-version": "2022-10-01-preview",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "trafficControllerName": "TC1",
+    "trafficControllerName": "tc1",
     "properties": {
-      "properties": {
-        "configurationEndpoints": [
-          "abc.eastus.trafficcontroller.azure.net"
-        ]
+      "tags": {
+        "key1": "value1"
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "atc",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficController/tc",
-        "type": "Microsoft.ServiceNetworking/TrafficController",
-        "location": "West US",
+        "name": "tc1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1",
+        "type": "Microsoft.ServiceNetworking/trafficControllers",
+        "location": "NorthCentralUS",
         "tags": {
           "key1": "value1"
         },
         "properties": {
           "configurationEndpoints": [
-            "abc.westus.trafficcontroller.azure.net"
+            "abc.trafficcontroller.azure.net"
           ],
           "frontends": [
             {
-              "id": "/sub1/rg2/tc/tcame/frontends/fe1"
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/frontends/fe1"
             }
           ],
           "associations": [
             {
-              "id": "/sub1/rg2/tc/tcame/association/as1"
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/association/as1"
             }
           ],
           "provisioningState": "Succeeded"
