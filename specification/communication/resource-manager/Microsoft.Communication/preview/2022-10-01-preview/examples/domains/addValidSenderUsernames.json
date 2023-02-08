@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "subscriptionId": "12345",
+    "resourceGroupName": "MyResourceGroup",
+    "emailServiceName": "MyEmailServiceResource",
+    "domainName": "mydomain.com",
+    "api-version": "2022-10-01-preview",
+    "validSenderCollection": {
+      "value": [
+        {
+          "name": "test",
+          "displayName": "Test"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {},
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The requested resource was not found"
+        }
+      }
+    }
+  }
+}
