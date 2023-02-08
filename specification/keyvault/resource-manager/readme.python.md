@@ -29,6 +29,7 @@ batch:
   - tag: package-preview-2021-06
   - tag: package-2021-10
   - tag: package-2022-07
+  - tag: package-2023-02
   - multiapiscript: true
 ```
 
@@ -36,6 +37,15 @@ batch:
 output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/
 clear-output-folder: false
 perform-load: false
+```
+
+### Tag: package-2023-02 and python
+
+These settings apply only when `--tag=package-2023-02 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-02'
+namespace: azure.mgmt.keyvault.v2023_02_01
+output-folder: $(python-sdks-folder)/keyvault/azure-mgmt-keyvault/azure/mgmt/keyvault/v2023_02_01
 ```
 
 ### Tag: package-2022-07 and python
