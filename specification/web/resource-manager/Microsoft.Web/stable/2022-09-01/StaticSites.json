@@ -4596,11 +4596,15 @@
         "properties": {
           "description": "DatabaseConnection resource specific properties",
           "type": "object",
+          "required": [
+            "resourceId",
+            "connectionString",
+            "region"
+          ],
           "properties": {
             "resourceId": {
               "description": "The resource id of the database.",
-              "type": "string",
-              "required": true
+              "type": "string"
             },
             "connectionIdentity": {
               "description": "If present, the identity is used in conjunction with connection string to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
@@ -4609,13 +4613,11 @@
             "connectionString": {
               "description": "The connection string to use to connect to the database.",
               "type": "string",
-              "required": true,
               "x-ms-secret": true
             },
             "region": {
               "description": "The region of the database resource.",
-              "type": "string",
-              "required": true
+              "type": "string"
             },
             "configurationFiles": {
               "description": "A list of configuration files associated with this database connection.",
