@@ -422,16 +422,16 @@
         "description": "List Certificate resources by Catalog",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/CustomTopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "$ref": "#/parameters/CustomSkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -702,16 +702,16 @@
         "description": "List Image resources by Catalog",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/CustomTopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "$ref": "#/parameters/CustomSkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -784,7 +784,7 @@
             "name": "imageName",
             "in": "path",
             "required": true,
-            "description": "Image name",
+            "description": "Image name. Use .default for image creation.",
             "type": "string"
           }
         ],
@@ -836,7 +836,7 @@
             "name": "imageName",
             "in": "path",
             "required": true,
-            "description": "Image name",
+            "description": "Image name. Use .default for image creation.",
             "type": "string"
           },
           {
@@ -914,7 +914,7 @@
             "name": "imageName",
             "in": "path",
             "required": true,
-            "description": "Image name",
+            "description": "Image name. Use .default for image creation.",
             "type": "string"
           }
         ],
@@ -953,6 +953,68 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeployments": {
+      "post": {
+        "tags": [
+          "Catalogs"
+        ],
+        "operationId": "Catalogs_ListDeployments",
+        "description": "Lists deployments for catalog.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "catalogName",
+            "in": "path",
+            "required": true,
+            "description": "Name of catalog",
+            "pattern": "^[A-Za-z0-9_-]{1,30}$",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/CustomFilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomTopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomSkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Catalogs_ListDeployments": {
+            "$ref": "./examples/PostListDevicesByCatalog.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/listDeviceGroups": {
       "post": {
         "tags": [
@@ -979,16 +1041,16 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/CustomTopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "$ref": "#/parameters/CustomSkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
           },
           {
             "name": "request",
@@ -1050,16 +1112,16 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/CustomTopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "$ref": "#/parameters/CustomSkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -1112,16 +1174,16 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/CustomTopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "$ref": "#/parameters/CustomSkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
           }
         ],
         "responses": {
@@ -1463,16 +1525,16 @@
         "description": "List DeviceGroup resources by Product",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/CustomTopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "$ref": "#/parameters/CustomSkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1891,16 +1953,16 @@
         "description": "List Deployment resources by DeviceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "$ref": "#/parameters/CustomFilterQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+            "$ref": "#/parameters/CustomTopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+            "$ref": "#/parameters/CustomSkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
+            "$ref": "#/parameters/CustomMaxPageSizeQueryParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2005,7 +2067,7 @@
             "name": "deploymentName",
             "in": "path",
             "required": true,
-            "description": "Deployment name",
+            "description": "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.",
             "type": "string"
           }
         ],
@@ -2073,7 +2135,7 @@
             "name": "deploymentName",
             "in": "path",
             "required": true,
-            "description": "Deployment name",
+            "description": "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.",
             "type": "string"
           },
           {
@@ -2167,7 +2229,7 @@
             "name": "deploymentName",
             "in": "path",
             "required": true,
-            "description": "Deployment name",
+            "description": "Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.",
             "type": "string"
           }
         ],
@@ -2750,64 +2812,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureSphere/catalogs/{catalogName}/products/{productName}/listDevices": {
-      "post": {
-        "tags": [
-          "Products"
-        ],
-        "operationId": "Products_ListDevices",
-        "description": "Lists devices in product.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "catalogName",
-            "in": "path",
-            "required": true,
-            "description": "Name of catalog",
-            "pattern": "^[A-Za-z0-9_-]{1,30}$",
-            "type": "string"
-          },
-          {
-            "name": "productName",
-            "in": "path",
-            "required": true,
-            "description": "Name of product. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific product.",
-            "pattern": "^[\\w][\\w\\s]{1,48}[\\w]|\\.default$",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeviceListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "Products_ListDevices": {
-            "$ref": "./examples/PostListDevicesProduct.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -2963,7 +2967,6 @@
         "certificate": {
           "type": "string",
           "description": "The certificate as a UTF-8 encoded base 64 string.",
-          "format": "byte",
           "readOnly": true
         },
         "provisioningState": {
@@ -3012,6 +3015,26 @@
       "required": [
         "value"
       ]
+    },
+    "CustomFilterQueryParameter": {
+      "type": "object",
+      "properties": {},
+      "description": "Provides the custom '$filter' query parameter for list operations"
+    },
+    "CustomMaxPageSizeQueryParameter": {
+      "type": "object",
+      "properties": {},
+      "description": "Provides the custom '$maxpagesize' query parameter for list operations."
+    },
+    "CustomSkipQueryParameter": {
+      "type": "object",
+      "properties": {},
+      "description": "Provides the custom '$skip' query parameter for list operations."
+    },
+    "CustomTopQueryParameter": {
+      "type": "object",
+      "properties": {},
+      "description": "Provides the custom '$top' query parameter for list operations."
     },
     "Deployment": {
       "type": "object",
@@ -3175,6 +3198,11 @@
         "regionalDataBoundary": {
           "$ref": "#/definitions/RegionalDataBoundary",
           "description": "Regional data boundary for the device group."
+        },
+        "hasDeployment": {
+          "type": "boolean",
+          "description": "Deployment status for the device group.",
+          "readOnly": true
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -3403,7 +3431,6 @@
         "image": {
           "type": "string",
           "description": "Image as a UTF-8 encoded base 64 string.",
-          "format": "byte",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3676,6 +3703,11 @@
       },
       "description": "Signed device capability image response"
     },
+    "StandardListQueryParametersWithCorrectNames": {
+      "type": "object",
+      "properties": {},
+      "description": "Provides the most common query parameters for list operations."
+    },
     "UpdatePolicy": {
       "type": "string",
       "description": "Update policy values.",
@@ -3690,37 +3722,41 @@
     }
   },
   "parameters": {
-    "Azure.Core.FilterQueryParameter": {
-      "name": "filter",
+    "CustomFilterQueryParameter": {
+      "name": "$filter",
       "in": "query",
       "required": false,
-      "description": "Filter the result list using the given expression.",
+      "description": "Filter the result list using the given expression",
+      "x-ms-client-name": "filter",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "Azure.Core.MaxPageSizeQueryParameter": {
-      "name": "maxpagesize",
+    "CustomMaxPageSizeQueryParameter": {
+      "name": "$maxpagesize",
       "in": "query",
       "required": false,
       "description": "The maximum number of result items per page.",
+      "x-ms-client-name": "maxpagesize",
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
-    "Azure.Core.SkipQueryParameter": {
-      "name": "skip",
+    "CustomSkipQueryParameter": {
+      "name": "$skip",
       "in": "query",
       "required": false,
       "description": "The number of result items to skip.",
+      "x-ms-client-name": "skip",
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
-    "Azure.Core.TopQueryParameter": {
-      "name": "top",
+    "CustomTopQueryParameter": {
+      "name": "$top",
       "in": "query",
       "required": false,
       "description": "The number of result items to return.",
+      "x-ms-client-name": "top",
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"

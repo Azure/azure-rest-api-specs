@@ -63,6 +63,10 @@ model DeviceGroupProperties {
   regionalDataBoundary?: RegionalDataBoundary;
 
   @visibility("read")
+  @doc("Deployment status for the device group.")
+  hasDeployment?: boolean;
+
+  @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
 }

@@ -37,6 +37,41 @@ enum AllowCrashDumpCollection {
   Disabled
 }
 
+@doc("Provides the custom '$filter' query parameter for list operations")
+model CustomFilterQueryParameter {
+    @query("$filter")
+    @doc("Filter the result list using the given expression")
+    filter?: string;
+}
+
+@doc("Provides the custom '$top' query parameter for list operations.")
+model CustomTopQueryParameter {
+  @query("$top")
+  @doc("The number of result items to return.")
+  top?: int32;
+}
+
+@doc("Provides the custom '$skip' query parameter for list operations.")
+model CustomSkipQueryParameter {
+  @query("$skip")
+  @doc("The number of result items to skip.")
+  skip?: int32;
+}
+
+@doc("Provides the custom '$maxpagesize' query parameter for list operations.")
+model CustomMaxPageSizeQueryParameter {
+  @query("$maxpagesize")
+  @doc("The maximum number of result items per page.")
+  maxpagesize?: int32;
+}
+
+@doc("Provides the most common query parameters for list operations.")
+model StandardListQueryParametersWithCorrectNames {
+  ...CustomTopQueryParameter;
+  ...CustomSkipQueryParameter;
+  ...CustomMaxPageSizeQueryParameter;
+}
+
 @doc("Response to the action call for count devices in a catalog.")
 model CountDeviceResponse extends CountElementsResponse {}
 
@@ -48,8 +83,8 @@ model CountElementsResponse {
 
 @doc("Parameters for paginated APIs")
 model ListQueryParameters {
-  ...FilterQueryParameter;
-  ...StandardListQueryParameters;
+  ...CustomFilterQueryParameter;
+  ...StandardListQueryParametersWithCorrectNames;
 }
 
 // Templates

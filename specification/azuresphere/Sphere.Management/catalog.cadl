@@ -95,6 +95,15 @@ interface Catalogs extends Azure.ResourceManager.ResourceOperations<Catalog, Cat
   ): ArmResponse<ResourceListResult<Device>> | ErrorResponse;
 
   @autoRoute
+  @doc("Lists deployments for catalog.")
+  @armResourceAction(Catalog)
+  @post
+  op listDeployments(
+    ...ResourceInstanceParameters<Catalog>,
+    ...ListQueryParameters
+  ): ArmResponse<ResourceListResult<Deployment>> | ErrorResponse;
+
+  @autoRoute
   @armResourceAction(Catalog)
   @doc("List the device groups for the catalog.")
   @post

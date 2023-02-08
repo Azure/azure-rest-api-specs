@@ -29,15 +29,6 @@ model Product is ProxyResource<ProductProperties> {
 interface Products extends ProxyResourceOperations<Product> {
 
   @autoRoute
-  @doc("Lists devices in product.")
-  @armResourceAction(Product)
-  @post
-  op listDevices(
-    ...ResourceInstanceParameters<Product>,
-  ): ArmResponse<ResourceListResult<Device>> | ErrorResponse;
-
-
-  @autoRoute
   @doc("Generates default device groups for the product.")
   @armResourceAction(Product)
   @post
@@ -53,7 +44,6 @@ interface Products extends ProxyResourceOperations<Product> {
     ...ResourceInstanceParameters<Product>,
   ): ArmResponse<CountDeviceResponse> | ErrorResponse;
 }
-
 
 @doc("The properties of product")
 model ProductProperties {

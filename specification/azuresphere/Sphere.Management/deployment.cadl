@@ -17,7 +17,7 @@ namespace Microsoft.AzureSphere;
 @doc("An deployment resource belonging to a device group resource.")
 @parentResource(DeviceGroup)
 model Deployment is ProxyResource<DeploymentProperties> {
-  @doc("Deployment name")
+  @doc("Deployment name. Use .default for deployment creation and to get the current deployment for the associated device group.")
   @key("deploymentName")
   @path
   @segment("deployments")

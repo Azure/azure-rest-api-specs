@@ -18,7 +18,7 @@ namespace Microsoft.AzureSphere;
 @doc("An image resource belonging to a catalog resource.")
 @parentResource(Catalog)
 model Image is ProxyResource<ImageProperties> {
-  @doc("Image name")
+  @doc("Image name. Use .default for image creation.")
   @key("imageName")
   @path
   @segment("images")
@@ -33,7 +33,6 @@ model ImageProperties {
 
   @doc("Image as a UTF-8 encoded base 64 string.")
   @visibility("create", "read")
-  @format("byte")
   image?: string,
 
   @doc("Image ID")
