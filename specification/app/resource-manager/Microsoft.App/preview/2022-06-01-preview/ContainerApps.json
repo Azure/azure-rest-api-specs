@@ -293,6 +293,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
+          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -854,8 +860,7 @@
       "description": "Custom Domain of a Container App",
       "type": "object",
       "required": [
-        "name",
-        "certificateId"
+        "name"
       ],
       "properties": {
         "name": {
@@ -875,7 +880,7 @@
           }
         },
         "certificateId": {
-          "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
+          "description": "Resource Id of the Certificate to be bound to this hostname.",
           "type": "string"
         }
       }

@@ -3766,7 +3766,10 @@
           "$ref": "#/definitions/SnowflakeExportCopyCommand",
           "description": "Snowflake export settings."
         }
-      }
+      },
+      "required": [
+        "exportSettings"
+      ]
     },
     "ExportSettings": {
       "description": "Export command settings.",
@@ -7504,6 +7507,10 @@
       "description": "Script activity properties.",
       "type": "object",
       "properties": {
+        "scriptBlockExecutionTimeout": {
+          "type": "object",
+          "description": "ScriptBlock execution timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
         "scripts": {
           "type": "array",
           "description": "Array of script blocks. Type: array.",
@@ -7924,14 +7931,37 @@
           "type": "object",
           "description": "The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
+        "scanFolder": {
+          "type": "object",
+          "description": "Scanning subfolders from the root folder of the main definition file, these files will be added as reference files. The folders named 'jars', 'pyFiles', 'files' or 'archives' will be scanned, and the folders name are case sensitive. Type: boolean (or Expression with resultType boolean)."
+        },
         "className": {
           "type": "object",
           "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "files": {
-          "description": "Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
+          "description": "(Deprecated. Please use pythonCodeReference and filesV2) Additional files used for reference in the main definition file, which will override the 'files' of the spark job definition you provide.",
           "type": "array",
           "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
+        },
+        "pythonCodeReference": {
+          "description": "Additional python code files used for reference in the main definition file, which will override the 'pyFiles' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "x-ms-identifiers": []
+        },
+        "filesV2": {
+          "description": "Additional files used for reference in the main definition file, which will override the 'jars' and 'files' of the spark job definition you provide.",
+          "type": "array",
+          "items": {
+            "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7953,9 +7983,33 @@
           "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "numExecutors": {
-          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.",
-          "type": "integer",
-          "format": "int32"
+          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        },
+        "configurationType": {
+          "enum": [
+            "Default",
+            "Customized",
+            "Artifact"
+          ],
+          "type": "string",
+          "description": "The type of the spark config.",
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
+        },
+        "targetSparkConfiguration": {
+          "description": "The spark configuration of the spark job.",
+          "$ref": "#/definitions/SparkConfigurationParametrizationReference"
+        },
+        "sparkConfig": {
+          "description": "Spark configuration property.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
         }
       },
       "required": [
@@ -7978,8 +8032,33 @@
           }
         },
         "referenceName": {
+          "type": "object",
+          "description": "Reference spark job name. Expression with resultType string."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "SparkConfigurationParametrizationReference": {
+      "description": "Spark configuration reference.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Spark configuration reference type.",
           "type": "string",
-          "description": "Reference spark job name."
+          "enum": [
+            "SparkConfigurationReference"
+          ],
+          "x-ms-enum": {
+            "name": "SparkConfigurationReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "description": "Reference spark configuration name. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       },
       "required": [

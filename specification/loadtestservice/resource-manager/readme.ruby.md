@@ -3,7 +3,7 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
-package-name: azure_mgmt_loadtestservice
+package-name: azure_mgmt_loadtesting
 package-version: 2022-12-01
 azure-arm: true
 ```
