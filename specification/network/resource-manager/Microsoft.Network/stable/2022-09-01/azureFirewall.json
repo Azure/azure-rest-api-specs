@@ -479,6 +479,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The packet capture request was successful.",
+            "schema": {
+              "$ref": "#/definitions/FirewallPacketCaptureResponse"
+            }
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "headers": {
@@ -486,9 +492,6 @@
                 "type": "string"
               }
             }
-          },
-          "200": {
-            "description": "The packet capture request was successful."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1339,6 +1342,10 @@
         }
       ],
       "description": "Azure Firewall Packet Capture Parameters resource."
+    },
+    "FirewallPacketCaptureResponse": {
+      "type": "string",
+      "description": "Provides a string response for packet capture"
     }
   }
 }
