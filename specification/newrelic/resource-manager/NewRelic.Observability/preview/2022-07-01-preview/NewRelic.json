@@ -507,14 +507,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "$ref": "#/parameters/UserEmailParameter"
+          },
+          {
             "name": "monitorName",
             "in": "path",
             "required": true,
             "description": "Name of the Monitors resource",
             "type": "string"
-          },
-          {
-            "$ref": "#/parameters/UserEmailParameter"
           }
         ],
         "responses": {
@@ -1264,30 +1264,6 @@
         ]
       }
     },
-    "AccountCreationSourceValues": {
-      "type": "string",
-      "description": "Source of Account creation",
-      "enum": [
-        "LIFTR",
-        "NEWRELIC"
-      ],
-      "x-ms-enum": {
-        "name": "AccountCreationSourceValues",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "LIFTR",
-            "value": "LIFTR",
-            "description": "Account is created from LIFTR"
-          },
-          {
-            "name": "NEWRELIC",
-            "value": "NEWRELIC",
-            "description": "Account is created from NEWRELIC"
-          }
-        ]
-      }
-    },
     "AccountIdParameter": {
       "type": "object",
       "properties": {},
@@ -1346,9 +1322,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<AccountResource>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "Response of get all accounts Operation.",
@@ -1482,9 +1458,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<AppServiceInfo>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "Response of a list app services Operation.",
@@ -1522,36 +1498,6 @@
         ]
       }
     },
-    "BillingCycleValues": {
-      "type": "string",
-      "description": "Different usage type like YEARLY/MONTHLY",
-      "enum": [
-        "YEARLY",
-        "MONTHLY",
-        "WEEKLY"
-      ],
-      "x-ms-enum": {
-        "name": "BillingCycleValues",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "YEARLY",
-            "value": "YEARLY",
-            "description": "Billing cycle is YEARLY"
-          },
-          {
-            "name": "MONTHLY",
-            "value": "MONTHLY",
-            "description": "Billing cycle is MONTHLY"
-          },
-          {
-            "name": "WEEKLY",
-            "value": "WEEKLY",
-            "description": "Billing cycle is WEEKLY"
-          }
-        ]
-      }
-    },
     "BillingSource": {
       "type": "string",
       "description": "Billing source",
@@ -1562,29 +1508,6 @@
       "x-ms-enum": {
         "name": "BillingSource",
         "modelAsString": true,
-        "values": [
-          {
-            "name": "AZURE",
-            "value": "AZURE",
-            "description": "Billing source is Azure"
-          },
-          {
-            "name": "NEWRELIC",
-            "value": "NEWRELIC"
-          }
-        ]
-      }
-    },
-    "BillingSourceValues": {
-      "type": "string",
-      "description": "Billing source",
-      "enum": [
-        "AZURE",
-        "NEWRELIC"
-      ],
-      "x-ms-enum": {
-        "name": "BillingSourceValues",
-        "modelAsString": false,
         "values": [
           {
             "name": "AZURE",
@@ -1662,18 +1585,6 @@
         "modelAsString": true
       }
     },
-    "LiftrResourceCategoriesValues": {
-      "type": "string",
-      "description": "Liftr Resource category.",
-      "enum": [
-        "Unknown",
-        "MonitorLogs"
-      ],
-      "x-ms-enum": {
-        "name": "LiftrResourceCategoriesValues",
-        "modelAsString": false
-      }
-    },
     "LocationParameter": {
       "type": "object",
       "properties": {},
@@ -1716,30 +1627,6 @@
       "x-ms-enum": {
         "name": "MarketplaceSubscriptionStatus",
         "modelAsString": true,
-        "values": [
-          {
-            "name": "Active",
-            "value": "Active",
-            "description": "monitoring is enabled"
-          },
-          {
-            "name": "Suspended",
-            "value": "Suspended",
-            "description": "monitoring is disabled"
-          }
-        ]
-      }
-    },
-    "MarketplaceSubscriptionStatusValues": {
-      "type": "string",
-      "description": "Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.",
-      "enum": [
-        "Active",
-        "Suspended"
-      ],
-      "x-ms-enum": {
-        "name": "MarketplaceSubscriptionStatusValues",
-        "modelAsString": false,
         "values": [
           {
             "name": "Active",
@@ -1947,9 +1834,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<MonitoredResource>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "List of all the resources being monitored by NewRelic monitor resource",
@@ -1967,30 +1854,6 @@
       "x-ms-enum": {
         "name": "MonitoringStatus",
         "modelAsString": true,
-        "values": [
-          {
-            "name": "Enabled",
-            "value": "Enabled",
-            "description": "monitoring is enabled"
-          },
-          {
-            "name": "Disabled",
-            "value": "Disabled",
-            "description": "monitoring is disabled"
-          }
-        ]
-      }
-    },
-    "MonitoringStatusValues": {
-      "type": "string",
-      "description": "Flag specifying if the resource monitoring is enabled or disabled.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "MonitoringStatusValues",
-        "modelAsString": false,
         "values": [
           {
             "name": "Enabled",
@@ -2086,9 +1949,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<NewRelicMonitorResource>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "The response of a NewRelicMonitorResource list operation.",
@@ -2112,7 +1975,8 @@
           "description": "Resource tags."
         },
         "properties": {
-          "$ref": "#/definitions/NewRelicMonitorResourceUpdateProperties"
+          "$ref": "#/definitions/NewRelicMonitorResourceUpdateProperties",
+          "x-ms-client-flatten": true
         }
       },
       "description": "The type used for update operations of the NewRelicMonitorResource."
@@ -2189,30 +2053,6 @@
         ]
       }
     },
-    "OrgCreationSourceValues": {
-      "type": "string",
-      "description": "Source of Org creation",
-      "enum": [
-        "LIFTR",
-        "NEWRELIC"
-      ],
-      "x-ms-enum": {
-        "name": "OrgCreationSourceValues",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "LIFTR",
-            "value": "LIFTR",
-            "description": "Org is created from LIFTR"
-          },
-          {
-            "name": "NEWRELIC",
-            "value": "NEWRELIC",
-            "description": "Org is created from NEWRELIC"
-          }
-        ]
-      }
-    },
     "OrganizationIdParameter": {
       "type": "object",
       "properties": {},
@@ -2259,9 +2099,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<OrganizationResource>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "Response of get all organizations Operation.",
@@ -2345,9 +2185,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<PlanDataResource>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "Response of get all plan data Operation.",
@@ -2439,72 +2279,6 @@
         ]
       }
     },
-    "ProvisioningStateValues": {
-      "type": "string",
-      "description": "Provisioning State of the Monitor resource",
-      "enum": [
-        "Accepted",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleted",
-        "NotSpecified"
-      ],
-      "x-ms-enum": {
-        "name": "ProvisioningStateValues",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "Monitor resource creation request accepted"
-          },
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "Monitor resource creation started"
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "Monitor resource is being updated"
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "Monitor resource deletion started"
-          },
-          {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Monitor resource creation successful"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Monitor resource creation failed"
-          },
-          {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Monitor resource creation canceled"
-          },
-          {
-            "name": "Deleted",
-            "value": "Deleted",
-            "description": "Monitor resource is deleted"
-          },
-          {
-            "name": "NotSpecified",
-            "value": "NotSpecified",
-            "description": "Monitor resource state is unknown"
-          }
-        ]
-      }
-    },
     "SecureString": {
       "type": "string",
       "description": "Credential string.",
@@ -2547,18 +2321,6 @@
         "modelAsString": true
       }
     },
-    "SendActivityLogsStatusValues": {
-      "type": "string",
-      "description": "Indicates whether activity logs are being sent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SendActivityLogsStatusValues",
-        "modelAsString": false
-      }
-    },
     "SendMetricsStatus": {
       "type": "string",
       "description": "Indicates whether metrics are being sent.",
@@ -2569,18 +2331,6 @@
       "x-ms-enum": {
         "name": "SendMetricsStatus",
         "modelAsString": true
-      }
-    },
-    "SendMetricsStatusValues": {
-      "type": "string",
-      "description": "Indicates whether metrics are being sent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SendMetricsStatusValues",
-        "modelAsString": false
       }
     },
     "SendSubscriptionLogsStatus": {
@@ -2595,18 +2345,6 @@
         "modelAsString": true
       }
     },
-    "SendSubscriptionLogsStatusValues": {
-      "type": "string",
-      "description": "Indicates whether subscription logs are being sent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SendSubscriptionLogsStatusValues",
-        "modelAsString": false
-      }
-    },
     "SendingLogsStatus": {
       "type": "string",
       "description": "Indicates whether logs are being sent.",
@@ -2619,18 +2357,6 @@
         "modelAsString": true
       }
     },
-    "SendingLogsStatusValues": {
-      "type": "string",
-      "description": "Indicates whether logs are being sent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SendingLogsStatusValues",
-        "modelAsString": false
-      }
-    },
     "SendingMetricsStatus": {
       "type": "string",
       "description": "Indicates whether metrics are being sent.",
@@ -2641,18 +2367,6 @@
       "x-ms-enum": {
         "name": "SendingMetricsStatus",
         "modelAsString": true
-      }
-    },
-    "SendingMetricsStatusValues": {
-      "type": "string",
-      "description": "Indicates whether metrics are being sent.",
-      "enum": [
-        "Enabled",
-        "Disabled"
-      ],
-      "x-ms-enum": {
-        "name": "SendingMetricsStatusValues",
-        "modelAsString": false
       }
     },
     "SingleSignOnStates": {
@@ -2669,20 +2383,6 @@
         "modelAsString": true
       }
     },
-    "SingleSignOnStatesValues": {
-      "type": "string",
-      "description": "Various states of the SSO resource",
-      "enum": [
-        "Initial",
-        "Enable",
-        "Disable",
-        "Existing"
-      ],
-      "x-ms-enum": {
-        "name": "SingleSignOnStatesValues",
-        "modelAsString": false
-      }
-    },
     "TagAction": {
       "type": "string",
       "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
@@ -2693,18 +2393,6 @@
       "x-ms-enum": {
         "name": "TagAction",
         "modelAsString": true
-      }
-    },
-    "TagActionValues": {
-      "type": "string",
-      "description": "Valid actions for a filtering tag. Exclusion takes priority over inclusion.",
-      "enum": [
-        "Include",
-        "Exclude"
-      ],
-      "x-ms-enum": {
-        "name": "TagActionValues",
-        "modelAsString": false
       }
     },
     "TagRule": {
@@ -2743,9 +2431,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<TagRule>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "The response of a TagRule list operation.",
@@ -2757,7 +2445,8 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/TagRuleUpdateProperties"
+          "$ref": "#/definitions/TagRuleUpdateProperties",
+          "x-ms-client-flatten": true
         }
       },
       "description": "The type used for update operations of the TagRule."
@@ -2786,30 +2475,6 @@
       "x-ms-enum": {
         "name": "UsageType",
         "modelAsString": true,
-        "values": [
-          {
-            "name": "PAYG",
-            "value": "PAYG",
-            "description": "Usage type is PAYG"
-          },
-          {
-            "name": "COMMITTED",
-            "value": "COMMITTED",
-            "description": "Usage type is COMMITTED"
-          }
-        ]
-      }
-    },
-    "UsageTypeValues": {
-      "type": "string",
-      "description": "Different usage type like PAYG/COMMITTED",
-      "enum": [
-        "PAYG",
-        "COMMITTED"
-      ],
-      "x-ms-enum": {
-        "name": "UsageTypeValues",
-        "modelAsString": false,
         "values": [
           {
             "name": "PAYG",
@@ -2882,9 +2547,9 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The link to the next page of items",
           "format": "uri",
-          "x-cadl-name": "Rest.ResourceLocation<VMInfo>"
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
         }
       },
       "description": "Response of a list VM Host Operation.",
