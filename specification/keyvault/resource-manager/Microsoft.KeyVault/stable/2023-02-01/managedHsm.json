@@ -793,6 +793,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/managedHSMs/{name}/regions": {
+      "get": {
+        "tags": [
+          "MHSMListRegions"
+        ],
+        "operationId": "MHSMRegions_ListByResource",
+        "description": "The List operation gets information about the regions associated with the managed HSM Pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedHsmResourceGroupName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the managed HSM Pool"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get information about all managed HSM Pools in the specified subscription.",
+            "schema": {
+              "$ref": "#/definitions/MHSMRegionsListResult"
+            }
+          },
+          "default": {
+            "description": "The error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedHsmError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed HSM Pools in a subscription": {
+            "$ref": "./examples/ManagedHsm_ListRegionsByResource.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.KeyVault/checkMhsmNameAvailability": {
       "post": {
         "tags": [
@@ -1000,6 +1049,16 @@
           "$ref": "#/definitions/MHSMNetworkRuleSet",
           "description": "Rules governing the accessibility of the key vault from specific network locations."
         },
+        "regions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MHSMGeoReplicatedRegion"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "List of all regions associated with the managed hsm pool."
+        },
         "privateEndpointConnections": {
           "readOnly": true,
           "type": "array",
@@ -1128,6 +1187,26 @@
       "description": "List of private endpoint connections associated with a managed HSM Pools",
       "type": "object"
     },
+    "MHSMRegionsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MHSMGeoReplicatedRegion"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The region associated with a managed HSM Pools."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of managed HSM Pools."
+        }
+      },
+      "description": "List of regions associated with a managed HSM Pools"
+    },
     "ManagedHsmError": {
       "properties": {
         "error": {
@@ -1242,6 +1321,20 @@
       },
       "description": "List of deleted managed HSM Pools",
       "type": "object"
+    },
+    "MHSMGeoReplicatedRegion": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the geo replicated region."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/MHSMGeoReplicationRegionProvisioningState",
+          "description": "Provisioning state of the geo replicated region."
+        }
+      },
+      "description": "A region that this managed HSM Pool has been extended to."
     },
     "MHSMNetworkRuleSet": {
       "properties": {
@@ -1495,6 +1588,23 @@
       },
       "description": "Properties of a private link resource.",
       "type": "object"
+    },
+    "MHSMGeoReplicationRegionProvisioningState": {
+      "type": "string",
+      "readOnly": true,
+      "description": "The current provisioning state.",
+      "enum": [
+        "Preprovisioning",
+        "Provisioning",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Cleanup"
+      ],
+      "x-ms-enum": {
+        "name": "GeoReplicationRegionProvisioningState",
+        "modelAsString": true
+      }
     },
     "CheckMhsmNameAvailabilityParameters": {
       "type": "object",
