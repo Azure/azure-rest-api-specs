@@ -1,33 +1,4 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-azure-resource-manager";
-import "@cadl-lang/compiler";
-
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-autorest";
-
-using Autorest;
-
 using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
-using Azure.Core;
-using Azure.ResourceManager;
-using OpenAPI;
-
-@doc("Azure rest Object")
-model AzureRestObject {
-  @doc("Gets the relative URL to get this cluster.")
-  id: string;
-
-  @doc("Handled by resource provider. Type = Microsoft.OffAzure/hyperVSites/clusters.")
-  type: string;
-
-  @doc("Gets or sets the Name of the cluster.")
-  name: string;
-}
 
 @doc("inner error")
 model InnerError {
@@ -36,13 +7,6 @@ model InnerError {
 
   @doc("inner error")
   innererror: InnerError;
-}
-
-@doc("A wrapper for required parameter in the body. The intent of model is to add description to 'body' and make it requred.")
-model CustomRequiredBodyWrapper<T extends object> {
-  @doc("Parameter of type '{name}' in the body.", T)
-  @body
-  body: T;
 }
 
 @doc("Class for site agent properties.")
@@ -559,7 +523,6 @@ should contain the Site ARM name.
   @doc("provisioning state enum")
   @visibility("read")
   provisioningState?: ProvisioningState;
-
 }
 
 @doc("REST model used to encapsulate the user visible state of a PrivateEndpoint.")
@@ -590,7 +553,7 @@ model MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropert
   @visibility("read")
   @doc("array of group ids")
   groupIds?: string[];
-  
+
   @doc("provisioning state enum")
   @visibility("read")
   provisioningState?: ProvisioningState;
@@ -614,8 +577,10 @@ model MicrosoftAzureMigratePrivateEndpointModelsResourceId {
 model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState {
   @doc("state status")
   status?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus;
+
   @doc("description string")
   description?: string;
+
   @doc("actions required")
   actionsRequired?: string;
 }
@@ -629,3 +594,336 @@ enum V202007MasterSitePropertiesPublicNetworkAccess {
 @knownValues(V202007MasterSitePropertiesPublicNetworkAccess)
 scalar MicrosoftAzureFDSWebRoleV202007MasterSitePropertiesPublicNetworkAccess
   extends string;
+
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+#suppress "@azure-tools/cadl-azure-core/documentation-required"
+model MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody {
+  remotePrivateEndpoint?: MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails;
+}
+
+#suppress "@azure-tools/cadl-azure-core/documentation-required"
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@doc("ARM async operation status response model.")
+model IArmAsyncOperationStatus {
+  @doc("""
+  Gets the status of the operation. ARM expects the terminal status to be one
+  of
+              Succeeded/ Failed/ Canceled. All other values imply that the
+  operation is still running.
+  """)
+  @visibility("read")
+  status?: string;
+}
+#suppress "@azure-tools/cadl-azure-core/documentation-required"
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails {
+  id?: string;
+
+  @OpenAPI.extension("x-ms-identifiers", [])
+  manualPrivateLinkServiceConnections?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[];
+
+  @OpenAPI.extension("x-ms-identifiers", [])
+  privateLinkServiceConnections?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[];
+  privateLinkServiceProxies?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy[];
+  connectionDetails?: MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration[];
+}
+#suppress "@azure-tools/cadl-azure-core/documentation-required"
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection {
+  name?: string;
+  groupIds?: string[];
+  requestMessage?: string;
+}
+
+#suppress "@azure-tools/cadl-azure-core/documentation-required"
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy {
+  id?: string;
+
+  @OpenAPI.extension("x-ms-identifiers", [])
+  groupConnectivityInformation?: MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation[];
+  remotePrivateEndpointConnection?: MicrosoftAzureMigratePrivateEndpointModelsResourceId;
+  remotePrivateLinkServiceConnectionState?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState;
+}
+
+#suppress "@azure-tools/cadl-azure-core/documentation-required"
+model MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration {
+  id?: string;
+  privateIpAddress?: string;
+  linkIdentifier?: string;
+  groupId?: string;
+  memberName?: string;
+}
+#suppress "@azure-tools/cadl-azure-core/documentation-required"
+model MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation {
+  groupId?: string;
+  memberName?: string;
+  customerVisibleFqdns?: string[];
+  internalFqdn?: string;
+  redirectMapId?: string;
+  privateLinkServiceArmRegion?: string;
+}
+#suppress "@azure-tools/cadl-azure-core/documentation-required"
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkResourceProperties {
+  requiredMembers?: string[];
+  requiredZoneNames?: string[];
+  groupId?: string;
+
+  @doc("provisioning state enum")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Discovery Scope.")
+enum DiscoveryScopeStatus {
+  "DiscoverySucceededAtleastOnce",
+  "DiscoveryFailed",
+  "RunAsAccountNotAssociated",
+  "DiscoveryNotStarted",
+  "DiscoveryInProgress",
+  "Disabled",
+  "DiscoveryPartiallySucceded",
+  "DiscoverySucceeded",
+}
+
+@doc("Error contract returned when some exception occurs in Rest API.")
+model ErrorDetails {
+  @doc("Gets the error code.")
+  @visibility("read")
+  code?: string;
+
+  @doc("Gets the error message.")
+  @visibility("read")
+  message?: string;
+
+  @doc("Gets the possible causes of error.")
+  @visibility("read")
+  possibleCauses?: string;
+
+  @doc("Gets the recommended action to resolve error.")
+  @visibility("read")
+  recommendedAction?: string;
+
+  @doc("Gets the error severity.")
+  @visibility("read")
+  severity?: string;
+
+  @doc("Gets a value indicating whether the error originated from a agent or not.")
+  @visibility("read")
+  isAgentReportedError?: boolean;
+
+  @doc("Gets the agent error code.")
+  @visibility("read")
+  agentErrorCode?: string;
+
+  @doc("Gets the error message from the agent.")
+  @visibility("read")
+  agentErrorMessage?: string;
+
+  @doc("Gets possible causes for the agent error.")
+  @visibility("read")
+  agentErrorPossibleCauses?: string;
+
+  @doc("Gets the recommended action for the agent error.")
+  @visibility("read")
+  agentErrorRecommendedAction?: string;
+}
+
+@doc("The list of Machine MetaData.")
+model MachineMetadataList {
+  @doc("The list of Machine MetaData.")
+  value: MachineMetadata[];
+}
+
+@doc("The properties of Machine MetaData")
+model MachineMetadata { //TODO
+  @doc("arm id of the machine.")
+  id: string;
+
+  @doc("value representing state of dependency mapping (enabled/disabled).")
+  dependencyMapping: string;
+
+  @doc("machine tags")
+  tags: Record<string>;
+}
+
+@doc("The status of the current operation.")
+enum ProvisioningState {
+  Succeeded,
+  Failed,
+  Canceled,
+  Provisioning,
+  Updating,
+  Deleting,
+  Accepted,
+}
+
+@doc("Error contract returned when some exception occurs in Rest API.")
+model SiteHealthErrorDetails {
+  @doc("Gets the error message.")
+  @visibility("read")
+  message?: string;
+
+  @doc("Gets the message parameters.")
+  @visibility("read")
+  messageParameters?: Record<string>;
+
+  @doc("Gets the appliance name.")
+  @visibility("read")
+  applianceName?: string;
+
+  @doc("Gets the error ID.")
+  @visibility("read")
+  id?: int32;
+
+  @doc("Gets the error name.")
+  @visibility("read")
+  code?: string;
+
+  @doc("Gets the possible causes of error.")
+  @visibility("read")
+  possibleCauses?: string;
+
+  @doc("Gets the recommended action to resolve error.")
+  @visibility("read")
+  recommendedAction?: string;
+
+  @doc("Gets the error severity.")
+  @visibility("read")
+  severity?: string;
+
+  @doc("Gets the error summary message.")
+  @visibility("read")
+  summaryMessage?: string;
+
+  @doc("Gets the error source.")
+  @visibility("read")
+  source?: HealthErrorDetailsSource;
+
+  @doc("Gets the time stamp when the error was updated.")
+  @visibility("read")
+  updatedTimeStamp?: zonedDateTime;
+
+  @doc("Gets run as account id used while performing discovery             of entity.")
+  @visibility("read")
+  runAsAccountId?: string;
+
+  @doc("Gets discovery scope for which             error is encountered.")
+  @visibility("read")
+  discoveryScope?: HealthErrorDetailsDiscoveryScope;
+}
+
+@doc("Collection of SiteHealthSummary.")
+model SiteHealthSummaryCollection {
+  @doc("Gets the list of SiteHealthSummary.")
+  @visibility("read")
+  @OpenAPI.extension("x-ms-identifiers", ["applianceName"])
+  value?: SiteHealthSummary[];
+
+  @doc("Gets the value of next link.")
+  @visibility("read")
+  nextLink?: string;
+}
+
+enum LayoutUpdateSources {
+  "RefreshFabricLayout",
+  "RefreshFabricLayoutGuest",
+  "RefreshFabricLayoutDependencyMap",
+}
+
+@doc("The properties of ServerSiteResource.")
+model SiteHealthSummary {
+  @doc("Appliance Name.")
+  applianceName: string;
+
+  @doc("Gets the error message.")
+  errorMessage: string;
+
+  @doc("Gets the summary message.")
+  summaryMessage: string;
+
+  @doc("Gets the error Id.")
+  errorId: int64;
+
+  @doc("Gets the error code.")
+  errorCode: string;
+
+  @doc("Gets or sets the count of affected objects.")
+  affectedObjectsCount: int64;
+
+  @doc("Gets or sets the hit count of the error.")
+  hitCount: int64;
+
+  @doc("Gets the severity of error..")
+  severity: string;
+
+  @doc("Gets the remediation guidance.")
+  remediationGuidance: string;
+
+  @doc("Gets the affected resource type.")
+  affectedResourceType: string;
+
+  @doc("Gets or sets the affected resources.")
+  affectedResources: string[];
+
+  @doc("RM ID of migration hub solution for SDS.")
+  fabricLayoutUpdateSources: LayoutUpdateSources[];
+}
+
+@doc("Class for site properties.")
+model SiteSpnProperties {
+  @doc("""
+Gets or sets the tenant Id for the service principal with which the
+on-premise
+            management/data plane components would communicate with
+our Azure services.
+""")
+  tenantId?: string;
+
+  @doc("""
+Gets or sets the application/client Id for the service principal with which
+the
+            on-premise management/data plane components would communicate
+with our Azure 
+            services.
+""")
+  applicationId?: string;
+
+  @doc("""
+Gets or sets the object Id of the service principal with which the on-premise
+
+           management/data plane components would communicate with our Azure
+services.
+""")
+  objectId?: string;
+
+  @doc("Gets or sets the intended audience for the service principal.")
+  audience?: string;
+
+  @doc("""
+Gets or sets the AAD Authority URL which was used to request the token for
+the
+            service principal.
+""")
+  aadAuthority?: string;
+
+  @doc("Gets or sets the raw certificate data for building certificate expiry flows.")
+  rawCertData?: string;
+}
+
+
+@doc("Hyper-V site usage.")
+model SiteUsageResponse {
+  @doc("Gets or sets the number of machines discovered in the site.")
+  machineCount: int32; //TODO
+
+  @doc("Gets or sets the number of run as accounts in the site.")
+  runAsAccountCount: int32; //TODO
+  
+  @doc("Gets or sets the number of hosts part of the site.")
+  hostCount: int32;
+
+  @doc("Gets or sets the number of clusters part of the site.")
+  clusterCount: int32;
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState; 
+}

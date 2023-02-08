@@ -9,20 +9,11 @@ import "@azure-tools/cadl-azure-resource-manager";
 import "./operationsTemp.cadl";
 import "./operationsCore.cadl";
 
-import "./webmodels/common/agentDetails.cadl";
-import "./webmodels/common/siteSpnProperties.cadl";
-import "./webmodels/common/hypervSiteUsage.cadl";
 import "./webmodels/common/common.cadl";
 import "./webmodels/common/jobProperties.cadl";
-import "./webmodels/common/highAvailability.cadl";
-import "./webmodels/common/siteHealthSummaryCollection.cadl";
-import "./webmodels/common/siteHealthErrorDetails.cadl";
 import "./webmodels/common/siteErrorSummaryCollection.cadl";
-import "./webmodels/common/siteUsageResponse.cadl";
-import "./webmodels/common/machineMetadata.cadl";
 import "./webmodels/common/runAsAccountProperties.cadl";
 import "./webmodels/common/operationStatusProperties.cadl";
-import "./webmodels/common/provisioningState.cadl";
 
 import "./webmodels/vmware/vmwareSiteProperties.cadl";
 import "./webmodels/vmware/vmwareMachineProperties.cadl";
@@ -31,10 +22,8 @@ import "./webmodels/vmware/vmwareHostProperties.cadl";
 
 import "./webmodels/hyperv/hyperVSiteProperties.cadl";
 import "./webmodels/hyperv/hypervClusterProperties.cadl";
-import "./webmodels/hyperv/hyperv.cadl";
 import "./webmodels/hyperv/hypervHostProperties.cadl";
 import "./webmodels/hyperv/hypervMachineProperties.cadl";
-import "./webmodels/hyperv/machineMetaDataProperties.cadl";
 
 import "./webmodels/server/serverSiteProperties.cadl";
 import "./webmodels/server/serverSiteUsageResponse.cadl";
@@ -50,10 +39,8 @@ using Autorest;
 using Cadl.Http;
 using Cadl.Rest;
 using Cadl.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
-using Azure.ResourceManager.Foundations;
 @armProviderNamespace
 @service({
   title: "SingleSPNAttribute",
@@ -166,10 +153,6 @@ interface VmwareSites {
   @operationId("Sites_PutSite")
   create is ArmResourceCreateOrUpdateAsync<VMwareSite>;
 
-  // @added(Versions.v2018_05_01_preview)
-  // @operationId("Sites_PatchSite")
-  // update is ArmResourcePatchSync<VMwareSite, SitesProperties>;
-
   @armResourceUpdate(InnerError)
   @patch
   @added(Versions.v2018_05_01_preview)
@@ -188,10 +171,11 @@ interface VmwareSites {
   @operationId("Sites_DeleteSite")
   delete is ArmResourceDeleteSync<VMwareSite>;
 
-  @tag("SitesController")
-  @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
   @added(Versions.v2018_05_01_preview)
-  ExportApplications is ArmResourceActionAsync<VMwareSite, {}, {}>;
+  @tag("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController")
+  @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
+   @operationId("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController_ExportAppsAndRoles")
+  ExportApplications is ArmResourceActionNoContentNoBodyAsync<VMwareSite>;
 
   @doc("Method to refresh a site.")
   @tag("SitesController")
@@ -209,7 +193,6 @@ interface VmwareSites {
 
     @doc("Operation status  Arm Name.")
     @path
-    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("operationsStatus")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
@@ -252,11 +235,15 @@ interface VmwareSites {
   ): ArmResponse<SiteUsageResponse>;
 
   @added(Versions.v2019_05_01_preview)
-  @tag("VMwarePropertiesController")
-  @doc("Method to get site error summary.")
-  UpdateDependencyMapStatus is ArmResourceActionAsync<
+  @tag("Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.VMwarePropertiesController")
+  @doc("""
+Method to enable disable dependency map status for machines
+            in a
+site.
+""")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.VMwarePropertiesController_UpdateMachineDependencyMapStatus")
+  UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomMapRequest<
     VMwareSite,
-    {},
     UpdateMachineDepMapStatus
   >;
 
@@ -270,7 +257,6 @@ interface VmwareSites {
   @doc("Method to associate Run as account to machine\r\n            in a site.")
   UpdateTags is ArmResourceActionAsync<VMwareSite, {}, {}>;
 
-  //TODO {subscriptionId}" delete
   @added(Versions.v2019_05_01_preview)
   @doc("Method to update properties for machines   in a site.")
   @tag("VMwarePropertiesController")
@@ -290,57 +276,57 @@ interface VmwareSites {
   ExportMachines is ArmResourceActionSync<VMwareSite, {}, {}>;
 
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
-  @tag("SitesController")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController_ExportMachineErrors")
   @added(Versions.v2020_01_01)
-  ExportMachineErrors is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController_ExportMachineErrors")
+  ExportMachineErrors is ArmResourceActionNoContentAsync<
     VMwareSite,
-    VersionedV202001ExportMachineErrorsRequest,
-    {}
+    VersionedV202001ExportMachineErrorsRequest
   >;
 
   @doc("API to generate coarse map for the list of machines.")
-  @tag("DependencyMapController")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController")
   @added(Versions.v2020_01_01_preview)
-  generateCoarseMap is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController_GenerateCoarseMapAsync")
+  generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
     VMwareSite,
-    {},
     DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
   >;
 
   @doc("API to generate detailed map for a selected machine.")
-  @tag("DependencyMapController")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.DependencyMapController_GenerateDetailedMapAsync")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.DependencyMapController")
   @added(Versions.v2020_01_01_preview)
-  generateDetailedMap is ArmResourceActionAsync<
+  generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
     VMwareSite,
-    {},
     DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
   >;
 
   @doc("API to list client group members for the selected client group.")
-  @tag("DependencyMapController")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController")
   @added(Versions.v2020_01_01_preview)
-  clientGroupsMembers is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController_ClientGroupsMembersAsync")
+  clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
     VMwareSite,
-    {},
     DependencyMapServiceMapExtensionsClientGroupMembersRequest
   >;
 
   @doc("API to list server group members for the selected server group.")
-  @tag("DependencyMapController")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController_ServerGroupsMembersAsync")
   @added(Versions.v2020_01_01_preview)
-  serverGroupMembers is ArmResourceActionAsync<
+  serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
     VMwareSite,
-    {},
     DependencyMapServiceMapExtensionsServerGroupMembersRequest
   >;
 
   @doc("API to generate report containing agentless dependencies.")
-  @tag("DependencyMapController")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController")
   @added(Versions.v2020_01_01_preview)
-  exportDependencies is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController_ExportDependencies")
+  exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
     VMwareSite,
-    DependencyMapServiceMapExtensionsExportDependenciesRequest,
-    {}
+    DependencyMapServiceMapExtensionsExportDependenciesRequest
   >;
 }
 
@@ -565,11 +551,6 @@ interface HypervSites {
   @added(Versions.v2018_05_01_preview)
   create is ArmResourceCreateOrUpdateAsync<HyperVSite>;
 
-  // @tag("HyperVSitesController")
-  // @added(Versions.v2018_05_01_preview)
-  // @operationId("HyperVSites_PatchSite")
-  // update is ArmResourcePatchSync<HyperVSite, SitesProperties>;
-
   @armResourceUpdate(InnerError)
   @patch
   @added(Versions.v2018_05_01_preview)
@@ -648,69 +629,77 @@ interface HypervSites {
   @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
   @doc("API to generate coarse map for the list of machines.")
   @added(Versions.v2020_08_01_preview)
-  generateCoarseMap is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_GenerateCoarseMapAsync")
+  generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
     HyperVSite,
-    {},
     DependencyMapServiceMapExtensionsScopeMapRequest
   >;
 
   @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
   @doc("API to generate detailed map for a selected machine.")
   @added(Versions.v2020_08_01_preview)
-  generateDetailedMap is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_GenerateDetailedMapAsync")
+  generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
     HyperVSite,
-    {},
     DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
   >;
 
   @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
   @doc("API to list client group members for the selected client group.")
   @added(Versions.v2020_08_01_preview)
-  clientGroupMembers is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_ClientGroupsMembersAsync")
+  clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
     HyperVSite,
-    {},
     DependencyMapServiceMapExtensionsClientGroupMembersRequest
   >;
 
   @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
   @doc("API to list server group members for the selected server group.")
   @added(Versions.v2020_08_01_preview)
-  serverGroupMembers is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_ServerGroupsMembersAsync")
+  serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
     HyperVSite,
-    {},
     DependencyMapServiceMapExtensionsServerGroupMembersRequest
   >;
 
   @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
   @doc("API to generate report containing agentless dependencies.")
   @added(Versions.v2020_08_01_preview)
-  exportDependencies is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_ExportDependencies")
+  exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
     HyperVSite,
-    DependencyMapServiceMapExtensionsExportDependenciesRequest,
-    {}
+    DependencyMapServiceMapExtensionsExportDependenciesRequest
   >;
 
   @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
   @doc("Method to enable disable dependency map status for machines\r\n            in a site.")
   @added(Versions.v2020_08_01_preview)
-  UpdateDependencyMapStatus is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVMachinesController_UpdateMachineDependencyMapStatus")
+  UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomMapRequest<
     HyperVSite,
-    {},
     UpdateMachineDepMapStatus
   >;
 
   @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
   @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
   @added(Versions.v2020_08_01_preview)
-  ExportApplications is ArmResourceActionAsync<HyperVSite, {}, {}>;
+  @operationId("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController_ExportAppsAndRoles")
+  ExportApplications is ArmResourceActionNoContentNoBodyAsync<HyperVSite>;
 
   @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
   @added(Versions.v2020_08_01_preview)
-  ExportMachineErrors is ArmResourceActionAsync<
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVSitesController_ExportMachineErrors")
+  ExportMachineErrors is ArmResourceActionNoContentAsync<
     HyperVSite,
-    VersionedV202001ExportMachineErrorsRequest,
-    {}
+    VersionedV202001ExportMachineErrorsRequest
+  >;
+
+  @added(Versions.v2018_05_01_preview)
+  @doc("Method to update custom properties for HYPERV machines\r\n            in a site.")
+  UpdateProperties is ArmResourceActionNoContentAsync<
+    HyperVSite,
+    MachineMetadataList
   >;
 }
 
@@ -785,9 +774,6 @@ interface HyperVHostInt {
   @operationId("HyperVHost_PutHost")
   create is ArmResourceCreateOrUpdateAsync<HyperVHost>;
 
-  // @tag("HyperVHostController")
-  // delete is ArmResourceDeleteSync<HyperVHost>;
-
   @tag("HyperVHostController")
   @segment("hosts")
   @added(Versions.v2018_05_01_preview)
@@ -853,12 +839,16 @@ interface HypervMachines {
     }
   >;
 
-  @added(Versions.v2018_05_01_preview)
-  @doc("Method to update custom properties for HYPERV machines\r\n            in a site.")
-  UpdateProperties is ArmResourceActionNoContentAsync<
-    HyperVSite,
-    MachineMetadataList
-  >;
+  @doc("Method to get machine with application and roles present in it.")
+  @segment("applications")
+  @armResourceRead(InnerError)
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVMachinesController")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVMachinesController_GetHyperVMachineApplications")
+  @get
+  applications(
+    ...ResourceInstanceParameters<HyperVMachine>
+  ): ArmResponse<HyperVMachine>;
 }
 
 @doc("A machine resource belonging to a site resource.")
@@ -975,6 +965,76 @@ interface ServerSitesInterface {
   machines(
     ...ResourceInstanceParameters<ServerSiteResource>
   ): ArmResponse<ServerResource>;
+
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
+  @doc("API to list client group members for the selected client group.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_ClientGroupsMembersAsync")
+  clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsClientGroupMembersRequest
+  >;
+
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
+  @doc("API to list server group members for the selected server group.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_ServerGroupsMembersAsync")
+  serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsServerGroupMembersRequest
+  >;
+
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController")
+  @doc("API to generate coarse map for the list of machines.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_GenerateCoarseMapAsync")
+  generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsScopeMapRequest
+  >;
+
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController")
+  @doc("API to generate detailed map for a selected machine.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_GenerateDetailedMapAsync")
+  generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
+  >;
+
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
+  @doc("API to generate report containing agentless dependencies.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_ExportDependencies")
+  exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsExportDependenciesRequest
+  >;
+
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServersController")
+  @doc("Method to enable disable dependency map status for machines\r\n            in a site.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServersController_UpdateMachineDependencyMapStatus")
+  UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    UpdateMachineDepMapStatus
+  >;
+
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerSitesController")
+  @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerSitesController_ExportAppsAndRoles")
+  ExportApplications is ArmResourceActionNoContentNoBodyAsync<ServerSiteResource>;
+
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerSitesController")
+  @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerSitesController_ExportMachineErrors")
+  ExportMachineErrors is ArmResourceActionNoContentAsync<
+    ServerSiteResource,
+    VersionedV202001ExportMachineErrorsRequest
+  >;
+
 }
 
 //*** Server Machine Proxy Resource ***/
@@ -1309,7 +1369,7 @@ interface MasterSites {
   ): ArmResponse<SiteErrorSummary>;
 }
 
-@doc("A vcenter resource belonging to a site resource.")
+@doc("REST model used to encapsulate Private Link properties for tracked resources.")
 @parentResource(MasterSite)
 model PrivateEndpointConnection
   is ProxyResource<MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2> {
@@ -1317,7 +1377,6 @@ model PrivateEndpointConnection
   @key("peConnectionName")
   @segment("privateEndpointConnections")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -1326,12 +1385,113 @@ interface PrivateEndpointConnectionController {
   @summary("Gets the private link resource.")
   @doc("Gets the private link resource.")
   @added(Versions.v2020_07_07)
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController_GetPrivateEndpointConnection")
   get is ArmResourceRead<PrivateEndpointConnection>;
+
+  @summary("Deletes the private link resource.")
+  @doc("Deletes the private link resource.")
+  @added(Versions.v2020_07_07)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController_DeletePrivateEndpointConnection")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController")
+  delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
+
+  @summary("Gets the private link resource.")
+  @doc("Gets the private link resource.")
+  @added(Versions.v2020_07_07)
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController_PutPrivateEndpointConnection")
+  create is ArmResourceCreateOrUpdateSync<PrivateEndpointConnection>;
 
   @added(Versions.v2020_07_07)
   @summary("Gets the private link resource.")
   @doc("Gets the private link resource.")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController_GetPrivateEndpointConnections")
   listByParent is ArmResourceListByParentUpdated<PrivateEndpointConnection>;
+}
+
+@doc("A vcenter resource belonging to a site resource.")
+@parentResource(MasterSite)
+model PrivateEndpointConnectionProxy
+  is ProxyResource<MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2> {
+  @doc(" Private endpoint connection proxy name.")
+  @key("pecProxyName")
+  @segment("privateEndpointConnectionProxies")
+  @path
+  name: string;
+}
+
+@armResourceOperations
+interface PrivateEndpointConnectionProxyController {
+  @summary("Gets the private endpoint connection proxy.")
+  @doc("Gets the private endpoint connection proxy.")
+  @added(Versions.v2020_07_07)
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy")
+  get is ArmResourceRead<PrivateEndpointConnectionProxy>;
+
+  @summary("Deletes the private endpoint connection proxy.")
+  @doc("Deletes the private endpoint connection proxy.")
+  @added(Versions.v2020_07_07)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
+  delete is ArmResourceDeleteAsync<PrivateEndpointConnectionProxy>;
+
+  @summary("Gets the private endpoint connection proxy.")
+  @doc("Gets the private endpoint connection proxy.")
+  @added(Versions.v2020_07_07)
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy")
+  create is ArmResourceCreateOrUpdateSync<PrivateEndpointConnectionProxy>;
+
+  @doc("Gets the private endpoint connection proxy.")
+  @armResourceRead(InnerError)
+  @get
+  @added(Versions.v2020_07_07)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_GetPecProxyStatus")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
+  @segment("operationsStatus")
+  PecOperationStatus(
+    ...ResourceInstanceParameters<PrivateEndpointConnectionProxy>
+  ): ArmResponse<IArmAsyncOperationStatus>;
+
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-missing-api-version"
+  @summary("Gets the private endpoint connection proxy.")
+  @doc("Gets the private endpoint connection proxy.")
+  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
+  @added(Versions.v2020_07_07)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy")
+  Validate is ArmResourceActionAsyncNoRequestBody<
+    PrivateEndpointConnectionProxy,
+    PrivateEndpointConnectionProxy,
+    MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody
+  >;
+}
+
+@doc("REST model used to encapsulate Private Link properties for tracked resources.")
+@parentResource(MasterSite)
+model PrivateLinkResource
+  is ProxyResource<MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkResourceProperties> {
+  @doc("Private link resource name.")
+  @key("privateLinkResourceName")
+  @segment("privateLinkResources")
+  @path
+  name: string;
+}
+
+@armResourceOperations
+@tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateLinkResourcesController")
+interface PrivateLinkResourcesController {
+  @summary("Gets the private link resource.")
+  @doc("Gets the private link resource.")
+  @added(Versions.v2020_07_07)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateLinkResourcesController_GetPrivateLinkResource")
+  get is ArmResourceRead<PrivateLinkResource>;
+
+  @added(Versions.v2020_07_07)
+  @summary("Gets the private link resource.")
+  @doc("Gets the private link resource.")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateLinkResourcesController_GetPrivateLinkResources")
+  listByParent is ArmResourceListByParentUpdated<PrivateLinkResource>;
 }

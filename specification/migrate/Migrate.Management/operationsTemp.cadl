@@ -32,6 +32,21 @@ op ArmResourceActionAsyncNoRequestBody<
 
 ): ArmResponse<TResponse>  |  ArmAcceptedResponse |ErrorResponse;
 
+
+@autoRoute
+@extension("x-ms-long-running-operation", true)
+@asyncOperationOptions("azure-async-operation")
+@armResourceAction(TResource)
+@post
+op ArmResourceActionNoContentNoBodyAsync<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponse | ErrorResponse;
+
+
 @doc("The response of a {name} list operation.", TResource)
 @friendlyName("{name}Collection", TResource)
 model ResourceListResultUpdated<TResource extends ArmResource> is Azure.Core.PageUpdated<TResource>;
@@ -50,3 +65,22 @@ op ArmResourceListByParentUpdated<
 >(
   ...ResourceParentParameters<TResource, TBaseParameters>
 ): ArmResponse<ResourceListResultUpdated<TResource>> | ErrorResponse;
+
+
+@autoRoute
+@extension("x-ms-long-running-operation", true)
+@asyncOperationOptions("azure-async-operation")
+@armResourceAction(TResource)
+@post
+op ArmResourceActionNoContentAsyncCustomMapRequest<
+  TResource extends ArmResource,
+  TRequest extends object,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("The content of the action request")
+  @body
+  mapRequest: TRequest
+): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponse | ErrorResponse;
+

@@ -55,7 +55,16 @@
       "name": "SitesController"
     },
     {
+      "name": "Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController"
+    },
+    {
+      "name": "Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.VMwarePropertiesController"
+    },
+    {
       "name": "VMwarePropertiesController"
+    },
+    {
+      "name": "Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController_ExportMachineErrors"
     },
     {
       "name": "Machines"
@@ -1430,10 +1439,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/updateProperties": {
       "post": {
         "tags": [
-          "Microsoft.Azure.FDS.WebRole.V2022_10_27.HyperVMachinesController",
-          "HypervMachines"
+          "HypervSites"
         ],
-        "operationId": "HypervMachines_UpdateProperties",
+        "operationId": "HypervSites_UpdateProperties",
         "description": "Method to update custom properties for HYPERV machines\r\n            in a site.",
         "parameters": [
           {
@@ -1488,11 +1496,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "HypervMachines_UpdateProperties_MaximumSet_Gen": {
-            "$ref": "./examples/HypervMachines_UpdateProperties_MaximumSet_Gen.json"
+          "HypervSites_UpdateProperties_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSites_UpdateProperties_MaximumSet_Gen.json"
           },
-          "HypervMachines_UpdateProperties_MinimumSet_Gen": {
-            "$ref": "./examples/HypervMachines_UpdateProperties_MinimumSet_Gen.json"
+          "HypervSites_UpdateProperties_MinimumSet_Gen": {
+            "$ref": "./examples/HypervSites_UpdateProperties_MinimumSet_Gen.json"
           }
         }
       }
@@ -3491,10 +3499,10 @@
       "post": {
         "tags": [
           "VmwareSites",
-          "SitesController"
+          "Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController"
         ],
-        "operationId": "VmwareSites_ExportApplications",
-        "description": "Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.",
+        "operationId": "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles",
+        "description": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3511,28 +3519,9 @@
             "required": true,
             "description": "Site name",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3542,6 +3531,9 @@
                 "format": "int32"
               }
             }
+          },
+          "204": {
+            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3555,11 +3547,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VmwareSites_ExportApplications_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ExportApplications_MaximumSet_Gen.json"
+          "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MaximumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MaximumSet_Gen.json"
           },
-          "VmwareSites_ExportApplications_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ExportApplications_MinimumSet_Gen.json"
+          "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MinimumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MinimumSet_Gen.json"
           }
         }
       }
@@ -3568,9 +3560,9 @@
       "post": {
         "tags": [
           "VmwareSites",
-          "SitesController"
+          "Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController_ExportMachineErrors"
         ],
-        "operationId": "VmwareSites_ExportMachineErrors",
+        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
         "parameters": [
           {
@@ -3600,14 +3592,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3617,6 +3601,9 @@
                 "format": "int32"
               }
             }
+          },
+          "204": {
+            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3630,11 +3617,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VmwareSites_ExportMachineErrors_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ExportMachineErrors_MaximumSet_Gen.json"
+          "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MaximumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MaximumSet_Gen.json"
           },
-          "VmwareSites_ExportMachineErrors_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_ExportMachineErrors_MinimumSet_Gen.json"
+          "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MinimumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MinimumSet_Gen.json"
           }
         }
       }
@@ -4481,10 +4468,10 @@
       "post": {
         "tags": [
           "VmwareSites",
-          "VMwarePropertiesController"
+          "Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.VMwarePropertiesController"
         ],
-        "operationId": "VmwareSites_UpdateDependencyMapStatus",
-        "description": "Method to get site error summary.",
+        "operationId": "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus",
+        "description": "Method to enable disable dependency map status for machines\n            in a\nsite.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4503,24 +4490,16 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "mapRequest",
             "in": "body",
             "required": true,
             "description": "The content of the action request",
             "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
+              "$ref": "#/definitions/UpdateMachineDepMapStatus"
             }
           }
         ],
         "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UpdateMachineDepMapStatus"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -4530,6 +4509,9 @@
                 "format": "int32"
               }
             }
+          },
+          "204": {
+            "description": "Action completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4543,11 +4525,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VmwareSites_UpdateDependencyMapStatus_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareSites_UpdateDependencyMapStatus_MaximumSet_Gen.json"
+          "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen.json"
           },
-          "VmwareSites_UpdateDependencyMapStatus_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareSites_UpdateDependencyMapStatus_MinimumSet_Gen.json"
+          "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -7042,9 +7024,9 @@
         "privateEndpointConnections": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/PendpointConnection"
           },
-          "x-cadl-name": "PrivateEndpointConnection[]",
+          "x-cadl-name": "PendpointConnection[]",
           "description": "Gets the private endpoint connections.",
           "readOnly": true
         },
@@ -7090,7 +7072,7 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2ProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "provisioning state enum",
           "readOnly": true
         },
@@ -7106,17 +7088,31 @@
       },
       "description": "PrivateEndpointConnectionPropertiesV2"
     },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2ProvisioningState": {
-      "type": "string",
-      "enum": [
-        "Accepted",
-        "InProgress",
-        "Succeeded",
-        "Failed"
-      ],
-      "x-ms-enum": {
-        "name": "MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2ProvisioningState",
-        "modelAsString": true
+    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
       }
     },
     "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState": {
@@ -7365,27 +7361,7 @@
       },
       "description": "OtherDatabase in the guest virtual machine."
     },
-    "Pe": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "A vcenter resource belonging to a site resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "PrivateEndpointConnection": {
+    "PendpointConnection": {
       "type": "object",
       "properties": {
         "id": {
@@ -7415,6 +7391,66 @@
         }
       },
       "description": "REST model used to encapsulate the user visible state of a PrivateEndpoint."
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "REST model used to encapsulate Private Link properties for tracked resources.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionProxy": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A vcenter resource belonging to a site resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "REST model used to encapsulate Private Link properties for tracked resources.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ProcessorInfo": {
       "type": "object",
