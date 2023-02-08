@@ -1,0 +1,53 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+import "../shared/provisioningstate.cadl";
+import "../community/community.cadl";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+@doc("Enclave Virtual Network Properties")
+model EnclaveVirtualNetwork {
+  @doc("Network Size.")
+  networkSize: string;
+}
+
+@doc("Virtual Enclave Default Settings")
+model EnclaveDefaultSettings
+{
+  @doc("Key Vault Resource Id.")
+  keyVaultResourceId?: string;
+  
+  @doc("Log Analytics Resource Id.")
+  logAnalyticsResourceId?: string;
+  
+  @doc("Storage Account Resource Id.")
+  storageAccountResourceId?: string;
+}
+
+@doc("Virtual Enclave Resource properties")
+model VirtualEnclaveProperties {
+
+  @doc("Provisioning State.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+
+  @doc("Virtual Network.")
+  enclaveVirtualNetwork: EnclaveVirtualNetwork;
+
+  @doc("Community Resource Id.")
+  communityResourceId: string;
+
+  @doc("Default Settings")
+  enclaveDefaultSettings?: EnclaveDefaultSettings;
+
+  @doc("List of resource ids created by Virtual Enclave.")
+  resourceCollection?: string [];
+}

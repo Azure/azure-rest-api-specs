@@ -1,0 +1,30 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+
+import "../shared/provisioningstate.cadl";
+import "../virtualEnclave/virtualenclave.cadl";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+@doc("Workload Resource properties")
+model WorkloadProperties{
+  @doc("Workload Description.")
+  workloadDescription?: string;
+
+  @doc("Virtual Enclave Resource Id.")
+  enclaveResourceId?: string;
+
+  @doc("Managed Resource Groups.")
+  managedResourceGroups?: string[];
+
+  @doc("Provisioning State.")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
