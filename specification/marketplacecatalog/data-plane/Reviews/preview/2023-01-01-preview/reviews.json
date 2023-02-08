@@ -71,7 +71,7 @@
           "Reviews Public API"
         ],
         "summary": "Get the comments of a given review",
-        "operationId": "ReviewComment_GetComments",
+        "operationId": "ReviewComment_ListComments",
         "x-ms-examples": {
           "Facets_Get": {
             "$ref": "./examples/GetReviewComments.json"
@@ -132,6 +132,7 @@
     "ErrorResponse": {
       "description": "The Rating and Reviews error response object",
       "type": "object",
+      "required": ["error"],
       "properties": {
         "error": {
           "description": "The search error response details",
@@ -142,6 +143,7 @@
     "ErrorResponseDetails": {
       "description": "The Rating and Reviews error response details object",
       "type": "object",
+      "required": ["code", "message"],
       "properties": {
         "code": {
           "description": "The error code description. Such as code=InternalError",
