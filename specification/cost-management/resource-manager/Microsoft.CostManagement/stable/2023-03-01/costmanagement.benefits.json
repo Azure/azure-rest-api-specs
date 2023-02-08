@@ -314,6 +314,636 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "GenerateBenefitUtilizationSummariesReportAsync_BillingAccountScope",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided billing account. This API supports only enrollment accounts.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportByBillingAccount": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportByBillingAccount.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "GenerateBenefitUtilizationSummariesReportAsync_BillingProfileScope",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided billing account and billing profile.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportByBillingProfile": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportByBillingProfile.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "GenerateBenefitUtilizationSummariesReportAsync_ReservationOrderScope",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided reservation order.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportByReservationOrder": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportByReservationOrder.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "GenerateBenefitUtilizationSummariesReportAsync_ReservationScope",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided reservation.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportByReservation": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportByReservation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "GenerateBenefitUtilizationSummariesReportAsync_SavingsPlanOrderScope",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided savings plan order.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportBySavingsPlanOrder": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportBySavingsPlanOrder.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/generateBenefitUtilizationSummariesReport": {
+      "post": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "GenerateBenefitUtilizationSummariesReportAsync_SavingsPlanScope",
+        "description": "Triggers generation of a benefit utilization summaries report for the provided savings plan.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "GenerateUtilizationSummariesReportBySavingsPlan": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/GenerateBenefitUtilizationSummariesReportBySavingsPlan.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "benefitUtilizationSummariesRequest",
+            "description": "Async Benefit Utilization Summary report to be created.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Request will be processed. Use the location header to check the status.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/benefitUtilizationSummariesOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "BenefitUtilizationSummariesAsync_GetOperationStatusBillingAccountScope",
+        "description": "Gets status of benefit utilization summaries report.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "BenefitUtilizationSummariesOperationResultsByBillingAccount": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/BenefitUtilizationSummariesOperationResultsByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the generation of the benefit utilization summaries report. This could be in progress, failed, or completed.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.CostManagement/benefitUtilizationSummariesOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "BenefitUtilizationSummariesAsync_GetOperationStatusBillingProfileScope",
+        "description": "Gets status of benefit utilization summaries report.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "BenefitUtilizationSummariesOperationResultsByBillingProfile": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/BenefitUtilizationSummariesOperationResultsByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "common-types.json#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "common-types.json#/parameters/billingProfileIdParameter"
+          },
+          {
+            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the generation of the benefit utilization summaries report. This could be in progress, failed, or completed.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.CostManagement/benefitUtilizationSummariesOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "BenefitUtilizationSummariesAsync_GetOperationStatusReservationOrderScope",
+        "description": "Gets status of benefit utilization summaries report.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "BenefitUtilizationSummariesOperationResultsByReservationOrder": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/BenefitUtilizationSummariesOperationResultsByReservationOrder.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the generation of the benefit utilization summaries report. This could be in progress, failed, or completed.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/reservations/{reservationId}/providers/Microsoft.CostManagement/benefitUtilizationSummariesOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "BenefitUtilizationSummariesAsync_GetOperationStatusReservationScope",
+        "description": "Gets status of benefit utilization summaries report.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "BenefitUtilizationSummariesOperationResultsByReservation": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/BenefitUtilizationSummariesOperationResultsByReservation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/reservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/reservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the generation of the benefit utilization summaries report. This could be in progress, failed, or completed.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/providers/Microsoft.CostManagement/benefitUtilizationSummariesOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "BenefitUtilizationSummariesAsync_GetOperationStatusSavingsPlanOrderScope",
+        "description": "Gets status of benefit utilization summaries report.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "BenefitUtilizationSummariesOperationResultsBySavingsPlanOrder": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/BenefitUtilizationSummariesOperationResultsBySavingsPlanOrder.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the generation of the benefit utilization summaries report. This could be in progress, failed, or completed.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/providers/Microsoft.CostManagement/benefitUtilizationSummariesOperationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "BenefitUtilizationSummariesAsync"
+        ],
+        "operationId": "BenefitUtilizationSummariesAsync_GetOperationStatusSavingsPlanScope",
+        "description": "Gets status of benefit utilization summaries report.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "BenefitUtilizationSummariesOperationResultsBySavingsPlan": {
+            "$ref": "./examples/BenefitUtilizationSummaries/Async/BenefitUtilizationSummariesOperationResultsBySavingsPlan.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/savingsPlanOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/savingsPlanIdParameter"
+          },
+          {
+            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The status of the generation of the benefit utilization summaries report.",
+            "schema": {
+              "$ref": "#/definitions/BenefitUtilizationSummariesOperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -863,6 +1493,97 @@
           "readOnly": true
         }
       }
+    },
+    "BenefitUtilizationSummariesOperationStatus": {
+      "type": "object",
+      "description": "Status of a benefit utilization summaries report. Provides Async Benefit Utilization Summaries Request input, status, and report sas url.",
+      "properties": {
+        "input": {
+          "$ref": "#/definitions/BenefitUtilizationSummariesRequest",
+          "description": "Input given to create the benefit utilization summaries report."
+        },
+        "status": {
+          "description": "The status of the creation of the benefit utilization summaries report.",
+          "$ref": "#/definitions/AsyncOperationStatusEnum"
+        },
+        "properties": {
+          "description": "Contains sas url to the async benefit utilization summaries report and a date that the url is valid until. These values will be empty if the report is in a Running or Failed state",
+          "$ref": "#/definitions/AsyncOperationStatusProperties"
+        }
+      }
+    },
+    "AsyncOperationStatusEnum": {
+      "description": "Enum representing the status of an async operation.",
+      "type": "string",
+      "enum": [
+        "Running",
+        "Complete",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true
+      }
+    },
+    "AsyncOperationStatusProperties": {
+      "description": "Object representing the report url and valid until date of the async report generated.",
+      "type": "object",
+      "properties": {
+        "reportUrl": {
+          "description": "Sas url to the async benefit utilization summaries report. Will be empty if the report is in Running or Failed state.",
+          "type": "string"
+        },
+        "validUntil": {
+          "description": "The date that the sas url provided in reportUrl expires.",
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "BenefitUtilizationSummariesRequest": {
+      "description": "Properties of an async benefit utilization summaries request.",
+      "type": "object",
+      "required": [
+        "startDate",
+        "endDate",
+        "grain"
+      ],
+      "properties": {
+        "billingAccountId": {
+          "description": "Billing account the benefit utilization summaries report is for. Required for billing account and billing profile scopes. Not supported for any benefit scopes.",
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "Billing profile id the benefit utilization summaries report is for. Required for billing profile scope. Not supported for billing account or any benefit scopes.",
+          "type": "string"
+        },
+        "benefitOrderId": {
+          "description": "Benefit order id the benefit utilization summaries report is for. Required for benefit order and benefit id scopes. Not supported for any billing scopes.",
+          "type": "string"
+        },
+        "benefitId": {
+          "description": "Benefit id the benefit utilization summaries report is for. Required for benefit id scope. Not supported for benefit order or any billing scopes.",
+          "type": "string"
+        },
+        "grain": {
+          "description": "The grain the summaries data is served at in the report. Accepted values are 'Daily' or 'Monthly'.",
+          "$ref": "#/definitions/Grain"
+        },
+        "startDate": {
+          "description": "The start date of the summaries data that will be served in the report.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The end date of the summaries data that will be served in the report.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "benefitKind": {
+          "description": "The type of benefit data requested. Required for billing account and billing profile scopes. Implied and not to be passed at benefit scopes. Supported values are Reservation and SavingsPlan",
+          "$ref": "#/definitions/BenefitKind"
+        }
+      }
     }
   },
   "parameters": {
@@ -894,6 +1615,22 @@
       "description": "Savings plan ID.",
       "in": "path",
       "name": "savingsPlanId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reservationOrderIdParameter": {
+      "description": "Reservation Order ID",
+      "in": "path",
+      "name": "reservationOrderId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reservationIdParameter": {
+      "description": "Reservation ID",
+      "in": "path",
+      "name": "reservationId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -931,6 +1668,14 @@
           }
         ]
       }
+    },
+    "benefitsAsyncOperationIdParameter": {
+      "description": "Operation id of the report being generated",
+      "in": "path",
+      "name": "operationId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
