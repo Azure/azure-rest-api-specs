@@ -463,14 +463,14 @@
       }
     },
     "ParticipantsCollection": {
-      "description": "A paginated collection of participants in a room.",
+      "description": "A collection of participants in a room.",
       "required": [
-        "participants"
+        "value"
       ],
       "type": "object",
       "properties": {
-        "participants": {
-          "description": "Current page of participants",
+        "value": {
+          "description": "A collection of participants",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
@@ -478,7 +478,7 @@
           "x-ms-identifiers": []
         },
         "nextLink": {
-          "description": "Url to retrieve the next page of participants",
+          "description": "If there are more participants that can be retrieved, the next link will be populated.",
           "type": "string"
         }
       }
