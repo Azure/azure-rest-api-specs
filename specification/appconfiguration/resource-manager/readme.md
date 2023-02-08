@@ -186,6 +186,14 @@ directive:
     from: appconfiguration.json
     where: $.definitions.OperationDefinition.properties.isDataAction
     reason: This is a standardized ARM API.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: appconfiguration.json
+    where: $.definitions.KeyValue
+    resource: Listing is not supported in ARM templates.
+  - suppress: TrackedResourceListByImmediateParent
+    from: appconfiguration.json
+    where: $.definitions.KeyValue
+    reason: Listing is not supported in ARM templates.
 ```
 
 
