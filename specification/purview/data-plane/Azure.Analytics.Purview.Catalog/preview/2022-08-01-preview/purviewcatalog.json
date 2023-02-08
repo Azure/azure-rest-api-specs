@@ -2804,9 +2804,6 @@
         "responses": {
           "202": {
             "description": "Accepted. A job to import glossary terms via csv has been accepted.",
-            "schema": {
-              "$ref": "#/definitions/ImportCSVOperation"
-            },
             "headers": {
               "Operation-Location": {
                 "description": "Response header for long running operation",
@@ -2866,9 +2863,6 @@
         "responses": {
           "202": {
             "description": "Accepted. A job to import glossary terms via csv has been accepted.",
-            "schema": {
-              "$ref": "#/definitions/ImportCSVOperation"
-            },
             "headers": {
               "Operation-Location": {
                 "description": "Response header for long running operation",
@@ -3074,8 +3068,8 @@
         }
       }
     },
-    "/glossary/terms": {
-      "delete": {
+    "/glossary/terms:delete": {
+      "POST": {
         "tags": [
           "Glossary"
         ],
@@ -3113,9 +3107,6 @@
         "responses": {
           "202": {
             "description": "Accepted. A job to delete glossary terms has been accepted.",
-            "schema": {
-              "$ref": "#/definitions/BulkDeleteOperation"
-            },
             "headers": {
               "Operation-Location": {
                 "description": "Response header for long running operation",
@@ -7735,7 +7726,7 @@
         },
         "error": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ImportCSVOperationError"
+          "$ref": "#/definitions/AsyncOperationError"
         }
       }
     },
@@ -7749,20 +7740,6 @@
         "totalTermsDetected": {
           "type": "string",
           "description": "Total term numbers that detected in csv"
-        }
-      }
-    },
-    "ImportCSVOperationError": {
-      "type": "object",
-      "properties": {
-        "errorCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Error code from async import job if fail"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error message from async import job if fail"
         }
       }
     },
@@ -7807,7 +7784,7 @@
         },
         "error": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BulkDeleteOperationError"
+          "$ref": "#/definitions/AsyncOperationError"
         }
       }
     },
@@ -7824,17 +7801,16 @@
         }
       }
     },
-    "BulkDeleteOperationError": {
+    "AsyncOperationError": {
       "type": "object",
       "properties": {
-        "errorCode": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Error code from async bulk delete job if fail"
-        },
-        "errorMessage": {
+        "code": {
           "type": "string",
-          "description": "Error message from async bulk delete job if fail"
+          "description": "Code from async bulk delete job if fail"
+        },
+        "message": {
+          "type": "string",
+          "description": "Message from async bulk delete job if fail"
         }
       }
     },
