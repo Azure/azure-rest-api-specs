@@ -4260,7 +4260,7 @@
           "description": "Database connections for the static site",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DatabaseConnection"
+            "$ref": "#/definitions/DatabaseConnectionOverview"
           },
           "readOnly": true
         }
@@ -4629,16 +4629,49 @@
                 "fileName"
               ],
               "readOnly": true
-            },
-            "name": {
-              "description": "If present, the name of this database connection resource.",
-              "type": "string",
-              "readOnly": true
             }
           },
           "x-ms-client-flatten": true
         }
       }
+    },
+    "DatabaseConnectionOverview": {
+      "description": "Static Site Database Connection overview.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource id of the database.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionIdentity": {
+          "description": "If present, the identity is used in conjunction with connection string to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "region": {
+          "description": "The region of the database resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "configurationFiles": {
+          "description": "A list of configuration files associated with this database connection.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteDatabaseConnectionConfigurationFileOverview"
+          },
+          "x-ms-identifiers": [
+            "fileName"
+          ],
+          "readOnly": true
+        },
+        "name": {
+          "description": "If present, the name of this database connection resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-client-flatten": true
     },
     "DatabaseConnectionCollection": {
       "description": "Collection of static site database connections.",
