@@ -469,29 +469,29 @@
         "type": "object",
         "properties": {
           "role": {
-            "$ref":"#/definitions/RoleType"
+            "$ref": "#/definitions/RoleType"
           }
         }
       },
       "example": {
-          "rawId1": {
-            "role": "Presenter"
-          },
-          "rawId2": {
-            "role": "Attendee"
-          },
-          "rawId3": null
+        "rawId1": {
+          "role": "Presenter"
+        },
+        "rawId2": {
+          "role": "Attendee"
+        },
+        "rawId3": null
       }
     },
     "ParticipantsCollection": {
-      "description": "A paginated collection of participants in a room.",
+      "description": "A collection of participants in a room.",
       "required": [
-        "participants"
+        "value"
       ],
       "type": "object",
       "properties": {
-        "participants": {
-          "description": "Current page of participants",
+        "value": {
+          "description": "A collection of participants",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RoomParticipant"
@@ -499,7 +499,7 @@
           "x-ms-identifiers": []
         },
         "nextLink": {
-          "description": "Url to retrieve the next page of participants",
+          "description": "If there are more participants that can be retrieved, the next link will be populated.",
           "type": "string"
         }
       }
