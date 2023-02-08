@@ -786,7 +786,7 @@
               "type": "string"
             },
             "duration": {
-              "description": "Time interval between retries. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "description": "Time interval between retries. Valid values are of the form 200ms, 15s, 2m, 1h30m, etc.",
               "type": "string"
             },
             "maxRetries": {
@@ -795,7 +795,7 @@
               "format": "int32"
             },
             "maxInterval": {
-              "description": "Determines the maximum interval between retries. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "description": "Determines the maximum interval between retries. Valid values are of the form 200ms, 15s, 2m, 1h30m, etc.",
               "type": "string"
             }
           },
@@ -843,11 +843,11 @@
               "format": "int32"
             },
             "interval": {
-              "description": "Cyclical period of time used by the CB to clear its internal counts. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "description": "Cyclical period of time used by the CB to clear its internal counts. Valid values are of the form 200ms, 15s, 2m, 1h30m, etc.",
               "type": "string"
             },
             "timeout": {
-              "description": "The period of the open state until the CB switches to half-open. Valid values are of the form 15s, 2m, 1h30m, etc.",
+              "description": "The period of the open state until the CB switches to half-open. Valid values are of the form 200ms, 15s, 2m, 1h30m, etc.",
               "type": "string"
             },
             "trip": {
@@ -902,16 +902,8 @@
           "description": "DaprResiliencyTimeoutPolicy resource specific properties",
           "type": "object",
           "properties": {
-            "general": {
-              "description": "Timeout duration for general operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
-              "type": "string"
-            },
-            "important": {
-              "description": "Timeout duration for important operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
-              "type": "string"
-            },
-            "largeResponse": {
-              "description": "Timeout duration for large operations. Valid values are of the form 15s, 2m, 1h30m, etc.",
+            "timeout": {
+              "description": "Timeout duration for the operation. Valid values are of the form 200ms, 15s, 2m, 1h30m, etc.",
               "type": "string"
             }
           },
