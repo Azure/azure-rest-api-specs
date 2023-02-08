@@ -1032,6 +1032,532 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/Summaries/{summaryName}": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_Get",
+        "summary": "Implements Summaries GET method.",
+        "description": "Gets the Summaries resource.",
+        "x-ms-examples": {
+          "Summaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MaximumSet_Gen.json"
+          },
+          "Summaries_Get_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_Get_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/summaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_CreateOrUpdate",
+        "summary": "Implements Summaries PUT method.",
+        "description": "Puts the Summaries resource.",
+        "x-ms-examples": {
+          "Summaries_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "Summaries_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/summaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The Summary of discovered springbootsites",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created Summaries resource",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_Delete",
+        "summary": "Implements Summaries DELETE method.",
+        "description": "Deletes the Summaries resource.",
+        "x-ms-examples": {
+          "Summaries_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_Delete_MaximumSet_Gen.json"
+          },
+          "Summaries_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/summaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the Summaries resource."
+          },
+          "204": {
+            "description": "The Summaries resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_Update",
+        "summary": "Implements Summaries PATCH method.",
+        "description": "Patch the Summaries resource.",
+        "x-ms-examples": {
+          "Summaries_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_Update_MaximumSet_Gen.json"
+          },
+          "Summaries_Update_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_Update_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/summaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SummariesResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "201": {
+            "description": "Updates the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/Summary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/Summaries": {
+      "get": {
+        "tags": [
+          "Summaries"
+        ],
+        "operationId": "Summaries_ListBySite",
+        "summary": "Implements Summaries GET method.",
+        "description": "Lists the Summaries resource in springbootsites.",
+        "x-ms-examples": {
+          "Summaries_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/Summaries_ListBySite_MaximumSet_Gen.json"
+          },
+          "Summaries_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/Summaries_ListBySite_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the Summaries resource.",
+            "schema": {
+              "$ref": "#/definitions/SummaryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/ErrorSummaries/{errorSummaryName}": {
+      "get": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_Get",
+        "summary": "Implements ErrorSummaries GET method.",
+        "description": "Gets the ErrorSummaries resource.",
+        "x-ms-examples": {
+          "ErrorSummaries_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Get_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Get_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/errorSummaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_CreateOrUpdate",
+        "summary": "Implements ErrorSummaries PUT method.",
+        "description": "Puts the ErrorSummaries resource.",
+        "x-ms-examples": {
+          "ErrorSummaries_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/errorSummaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The ErrorSummaries of discovered springbootsites",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created ErrorSummaries resource",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_Delete",
+        "summary": "Implements ErrorSummaries DELETE method.",
+        "description": "Deletes the ErrorSummaries resource.",
+        "x-ms-examples": {
+          "ErrorSummaries_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Delete_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/errorSummaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the ErrorSummaries resource."
+          },
+          "204": {
+            "description": "The ErrorSummaries resource is already deleted or not found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_Update",
+        "summary": "Implements ErrorSummaries PATCH method.",
+        "description": "Patch the ErrorSummaries resource.",
+        "x-ms-examples": {
+          "ErrorSummaries_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Update_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_Update_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_Update_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "#/parameters/errorSummaryNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "description": "Clouds patch payload.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ErrorSummariesResourcePatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "201": {
+            "description": "Updates the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzureSpringBoot/springbootsites/{siteName}/ErrorSummaries": {
+      "get": {
+        "tags": [
+          "ErrorSummaries"
+        ],
+        "operationId": "ErrorSummaries_ListBySite",
+        "summary": "Implements ErrorSummaries GET method.",
+        "description": "Lists the ErrorSummaries resource in springbootsites.",
+        "x-ms-examples": {
+          "ErrorSummaries_ListBySite_MaximumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_ListBySite_MaximumSet_Gen.json"
+          },
+          "ErrorSummaries_ListBySite_MinimumSet_Gen": {
+            "$ref": "./examples/ErrorSummaries_ListBySite_MinimumSet_Gen.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SiteNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the ErrorSummaries resource.",
+            "schema": {
+              "$ref": "#/definitions/ErrorSummaryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -1048,10 +1574,10 @@
           "description": "The migrate project ID from Azure Migrate."
         },
         "provisioningState": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource provisioning state.",
           "enum": [
+            "Unknown",
             "Succeeded",
             "Failed",
             "Canceled",
@@ -1220,11 +1746,19 @@
           "format": "int32",
           "description": "The total number of spring boot apps been discovered"
         },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
         "provisioningState": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource provisioning state.",
           "enum": [
+            "Unknown",
             "Succeeded",
             "Failed",
             "Canceled",
@@ -1455,10 +1989,10 @@
           "format": "date-time"
         },
         "provisioningState": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource provisioning state.",
           "enum": [
+            "Unknown",
             "Succeeded",
             "Failed",
             "Canceled",
@@ -1469,6 +2003,14 @@
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
+          }
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
           }
         }
       },
@@ -1528,6 +2070,238 @@
         }
       },
       "description": "The springbootapps list resource definition."
+    },
+    "ErrorSummaryModel": {
+      "type": "object",
+      "description": "ErrorSummary model.",
+      "properties": {
+        "affectedResourceType": {
+          "type": "string",
+          "description": "The type of Object."
+        },
+        "affectedObjectsCount": {
+          "type": "integer",
+          "description": "The count."
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "description": "Defines the error.",
+      "properties": {
+        "id": {
+          "description": "The error ID.",
+          "type": "integer"
+        },
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "possibleCause": {
+          "description": "The error possible cause.",
+          "type": "string"
+        },
+        "recommendedAction": {
+          "description": "The error recommended action",
+          "type": "string"
+        },
+        "severity": {
+          "description": "The error severity",
+          "type": "string"
+        }
+      }
+    },
+    "SummaryList": {
+      "type": "object",
+      "description": "List of Sites.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Sites.",
+          "items": {
+            "$ref": "#/definitions/Summary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "ErrorSummaryList": {
+      "type": "object",
+      "description": "The list of ErrorSummary.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of ErrorSummary.",
+          "items": {
+            "$ref": "#/definitions/ErrorSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Url to follow for getting next page of resources."
+        }
+      }
+    },
+    "SummariesProperties": {
+      "type": "object",
+      "description": "Summaries properties",
+      "properties": {
+        "discoveredServers": {
+          "type": "integer",
+          "description": "The of number discovered spring boot servers."
+        },
+        "discoveredApps": {
+          "type": "integer",
+          "description": "The of number discovered spring boot apps."
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The resource provisioning state.",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ErrorSummariesProperties": {
+      "type": "object",
+      "description": "Error summary properties",
+      "properties": {
+        "discoveryScopeErrorSummaries": {
+          "description": "The list of ErrorSummary.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/ErrorSummaryModel"
+          }
+        },
+        "errors": {
+          "description": "The list of errors.",
+          "type": "array",
+          "items": {
+            "description": "The error",
+            "$ref": "#/definitions/Error"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The resource provisioning state.",
+          "enum": [
+            "Unknown",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Summary": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Resource properties.",
+          "$ref": "#/definitions/SummariesProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The summary resource definition."
+    },
+    "ErrorSummary": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Resource properties.",
+          "$ref": "#/definitions/ErrorSummariesProperties"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The error summary resource definition."
+    },
+    "SummariesResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/SummariesProperties",
+          "description": "The Summaries resource definition."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
+    },
+    "ErrorSummariesResourcePatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/ErrorSummariesProperties",
+          "description": "The ErrorSummaries resource definition."
+        }
+      },
+      "description": "Object containing tags updates for patch operations."
     }
   },
   "parameters": {
@@ -1550,6 +2324,26 @@
       "maxLength": 64,
       "minLength": 3,
       "description": "The springbootsites name."
+    },
+    "summaryNameParameter": {
+      "name": "summaryName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of summary"
+    },
+    "errorSummaryNameParameter": {
+      "name": "errorSummaryName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[A-Za-z][A-Za-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63,
+      "description": "The name of error summary"
     },
     "springbootserversNameParameter": {
       "x-ms-parameter-location": "client",
