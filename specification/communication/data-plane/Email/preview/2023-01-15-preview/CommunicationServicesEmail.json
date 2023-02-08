@@ -16,9 +16,6 @@
         "produces": [
           "application/json"
         ],
-        "consumes": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "path",
@@ -130,7 +127,7 @@
             }
           },
           "202": {
-            "description": "The service has accepted the request and will start processing the message later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation/message status using the URL specified in 'Operation-Location' header.",
+            "description": "The service has accepted the request and will start processing the message later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation/message status using the URL specified in 'Operation-Location' header. Once the send operation has succeeded, you can get additional status about email delivery through event grid events (for events reference, please refer to: https://learn.microsoft.com/en-us/azure/event-grid/communication-services-email-events)",
             "headers": {
               "Operation-Location": {
                 "description": "Location url of where to poll the status of this operation from.",
@@ -176,11 +173,11 @@
         "status": {
           "description": "Status of operation.",
           "enum": [
-            "notStarted",
-            "running",
-            "succeeded",
-            "failed",
-            "canceled"
+            "NotStarted",
+            "Running",
+            "Succeeded",
+            "Failed",
+            "Canceled"
           ],
           "type": "string",
           "x-ms-enum": {
