@@ -355,9 +355,6 @@
           "type": "string",
           "example": "2020-09-08T15:55:41Z"
         },
-        "roomJoinPolicy": {
-          "$ref": "#/definitions/RoomJoinPolicy"
-        },
         "participants": {
           "description": "(Optional) Collection of participants invited to the room.",
           "type": "array",
@@ -380,11 +377,11 @@
           "type": "string"
         },
         "role": {
-          "$ref": "#/definitions/RoleType"
+          "$ref": "#/definitions/Role"
         }
       }
     },
-    "RoleType": {
+    "Role": {
       "description": "The Role of a room participant.",
       "enum": [
         "Presenter",
@@ -393,19 +390,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "RoleType",
-        "modelAsString": true
-      }
-    },
-    "RoomJoinPolicy": {
-      "description": "The Policy based on which Participants can join a room.",
-      "enum": [
-        "InviteOnly",
-        "CommunicationServiceUsers"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RoomJoinPolicy",
+        "name": "Role",
         "modelAsString": true
       }
     },
@@ -435,9 +420,6 @@
           "description": "The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2021-09-08T15:55:41Z"
-        },
-        "roomJoinPolicy": {
-          "$ref": "#/definitions/RoomJoinPolicy"
         }
       }
     },
@@ -456,9 +438,6 @@
           "description": "(Optional) The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-09-08T15:55:41Z"
-        },
-        "roomJoinPolicy": {
-          "$ref": "#/definitions/RoomJoinPolicy"
         }
       }
     },
@@ -469,7 +448,7 @@
         "type": "object",
         "properties": {
           "role": {
-            "$ref": "#/definitions/RoleType"
+            "$ref": "#/definitions/Role"
           }
         }
       },
