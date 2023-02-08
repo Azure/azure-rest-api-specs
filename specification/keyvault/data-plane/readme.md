@@ -193,6 +193,22 @@ input-file:
 
 # Code Generation
 
+## General
+
+These transforms apply to any generator.
+
+``` yaml
+directive:
+# Rename models back to what they were before 7.4 for autorest-based code generators.
+# Generated names were disambiguated for generators not using autorest but still processing x-ms-enum.name.
+- from: certificates.json
+  where: $.definitions.Action
+  transform: $.properties.action_type["x-ms-enum"].name = "ActionType";
+- from: keys.json
+  where: $.definitions.LifetimeActionsType
+  transform: $.properties.type["x-ms-enum"].name = "ActionType";
+```
+
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
