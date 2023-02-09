@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-oep"
-  output-folder: "$(typescript-sdks-folder)/sdk/oep/arm-oep"
+  package-name: "@azure/arm-meds"
+  output-folder: "$(typescript-sdks-folder)/sdk/meds/arm-meds"
   payload-flattening-threshold: 1
   clear-output-folder: true
   generate-metadata: true

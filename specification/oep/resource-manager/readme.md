@@ -1,8 +1,8 @@
-# oep
+# MEDS
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for oep.
+This is the AutoRest configuration file for MEDS.
 
 ## Getting Started
 
@@ -22,12 +22,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the oep.
+These are the global settings for the MEDS.
 
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-07-21-preview
+tag: package-2022-12-01-preview
 ```
 
 ### Tag: package-2021-06-01-preview
@@ -57,19 +57,28 @@ input-file:
   - Microsoft.OpenEnergyPlatform/preview/2022-07-21-preview/oep.json
 ```
 
+### Tag: package-2022-12-01-preview
+
+These settings apply only when `--tag=package-2022-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12-01-preview'
+input-file:
+  - Microsoft.OpenEnergyPlatform/preview/2022-12-01-preview/meds.json
+```
+
 ## Suppression
 ``` yaml
 directive:
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: oep.json
+    from: meds.json
     where: $.definitions.DataPartitionsList
     reason: DataPartitionsList is a proxy resource
   - suppress: BodyTopLevelProperties
-    from: oep.json
+    from: meds.json
     where: $.definitions.DataPartitionsList.properties
     reason: DataPartitionsList is a proxy resource
   - suppress: BodyTopLevelProperties
-    from: oep.json
+    from: meds.json
     where: $.definitions.PrivateEndpointConnectionProxy.properties
     reason: Internal NRP resource, all properties are top level properties
 ```    
