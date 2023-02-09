@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Database Migration Service Resource Provider",
+    "title": "Azure Database Migration Service (classic) Resource Provider",
     "version": "2022-03-30-preview"
   },
   "securityDefinitions": {
@@ -388,7 +388,7 @@
         },
         "azureApp": {
           "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp",
-          "description": "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
+          "description": "Azure Active Directory Application the DMS (classic) instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
         }
       },
       "required": [
@@ -1259,7 +1259,7 @@
       "properties": {
         "ssisStoreType": {
           "$ref": "#/definitions/SsisStoreType",
-          "description": "The SSIS store type of source, only SSIS catalog is supported now in DMS"
+          "description": "The SSIS store type of source, only SSIS catalog is supported now in DMS (classic)"
         },
         "projectOverwriteOption": {
           "$ref": "#/definitions/SsisMigrationOverwriteOption",
@@ -1273,7 +1273,7 @@
     },
     "SsisStoreType": {
       "type": "string",
-      "description": "An enumeration of supported source SSIS store type in DMS",
+      "description": "An enumeration of supported source SSIS store type in DMS (classic)",
       "enum": [
         "SsisCatalog"
       ],
@@ -1284,7 +1284,7 @@
     },
     "SsisMigrationOverwriteOption": {
       "type": "string",
-      "description": "The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS now and future may add Reuse option for container object",
+      "description": "The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS (classic) now and future may add Reuse option for container object",
       "enum": [
         "Ignore",
         "Overwrite"
