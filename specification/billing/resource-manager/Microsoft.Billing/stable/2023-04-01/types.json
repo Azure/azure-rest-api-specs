@@ -12,85 +12,6 @@
   },
   "paths": {},
   "definitions": {
-    "AddressDetails": {
-      "description": "Address details.",
-      "properties": {
-        "addressLine1": {
-          "description": "Address line 1.",
-          "type": "string"
-        },
-        "addressLine2": {
-          "description": "Address line 2.",
-          "type": "string"
-        },
-        "addressLine3": {
-          "description": "Address line 3.",
-          "type": "string"
-        },
-        "city": {
-          "description": "Address city.",
-          "type": "string"
-        },
-        "companyName": {
-          "description": "Company name.",
-          "type": "string"
-        },
-        "country": {
-          "description": "Country code uses ISO2, 2-digit format.",
-          "type": "string"
-        },
-        "district": {
-          "description": "Address district.",
-          "type": "string"
-        },
-        "email": {
-          "description": "Email address.",
-          "type": "string"
-        },
-        "firstName": {
-          "description": "First name.",
-          "type": "string"
-        },
-        "lastName": {
-          "description": "Last name.",
-          "type": "string"
-        },
-        "middleName": {
-          "description": "Middle name.",
-          "type": "string"
-        },
-        "phoneNumber": {
-          "description": "Phone number.",
-          "type": "string"
-        },
-        "postalCode": {
-          "description": "Postal code.",
-          "type": "string"
-        },
-        "region": {
-          "description": "Address region.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "addressLine1",
-        "country"
-      ]
-    },
-    "Amount": {
-      "description": "The amount.",
-      "properties": {
-        "currency": {
-          "description": "The currency for the amount value.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "value": {
-          "description": "Amount value.",
-          "type": "number"
-        }
-      }
-    },
     "ArmError": {
       "description": "The error detail.",
       "type": "object",
@@ -180,6 +101,94 @@
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "Amount": {
+      "description": "The amount.",
+      "type": "object",
+      "properties": {
+        "currency": {
+          "description": "The currency for the amount value.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "format": "double",
+          "description": "Amount value.",
+          "type": "number"
+        }
+      }
+    },
+    "AddressDetails": {
+      "description": "Address details.",
+      "required": [
+        "addressLine1",
+        "country"
+      ],
+      "type": "object",
+      "properties": {
+        "addressLine1": {
+          "description": "Address line 1.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "addressLine2": {
+          "description": "Address line 2.",
+          "type": "string"
+        },
+        "addressLine3": {
+          "description": "Address line 3.",
+          "type": "string"
+        },
+        "city": {
+          "description": "Address city.",
+          "type": "string"
+        },
+        "companyName": {
+          "description": "Company name.",
+          "type": "string"
+        },
+        "country": {
+          "description": "Country code uses IS02, 2-digit format.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "district": {
+          "description": "Address district.",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email address.",
+          "type": "string"
+        },
+        "firstName": {
+          "description": "First name.",
+          "type": "string"
+        },
+        "lastName": {
+          "description": "Last name.",
+          "type": "string"
+        },
+        "middleName": {
+          "description": "Middle name.",
+          "type": "string"
+        },
+        "phoneNumber": {
+          "description": "Phone number.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "Postal code.",
+          "type": "string"
+        },
+        "region": {
+          "description": "Address region.",
+          "type": "string"
+        },
+        "isValidAddress": {
+          "description": "Indicates if the address is incomplete.",
+          "type": "boolean"
         }
       }
     },
@@ -361,6 +370,15 @@
       "required": true,
       "type": "string",
       "pattern": "^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The ID that uniquely identifies a billing subscription.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
       "x-ms-parameter-location": "method"
     }
   },

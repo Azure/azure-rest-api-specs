@@ -107,7 +107,12 @@
         ],
         "responses": {
           "202": {
-            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation."
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -218,6 +223,17 @@
             "description": "An associated tenant.",
             "schema": {
               "$ref": "#/definitions/AssociatedTenant"
+            }
+          },
+          "201": {
+            "description": "An associated tenant.",
+            "schema": {
+              "$ref": "#/definitions/AssociatedTenant"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "202": {
