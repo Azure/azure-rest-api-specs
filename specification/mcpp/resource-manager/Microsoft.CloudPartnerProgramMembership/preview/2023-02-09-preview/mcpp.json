@@ -26,25 +26,62 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/CloudPartnerProgramMemberships": {
+    "/providers/Microsoft.CloudPartnerProgramMembership/operations": {
+      "get": {
+          "tags": [
+              "Operations"
+          ],
+          "description": "Lists all of the available RP operations.",
+          "operationId": "Operations_List",
+          "x-ms-examples": {
+            "getOperations": {
+              "$ref": "./examples/getOperations.json"
+            }
+          },
+          "parameters": [{
+              "$ref": "#/parameters/apiVersionParameter"
+          }],
+          "responses": {
+              "200": {
+                  "description": "OK. The request has succeeded.",
+                  "schema": {
+                      "$ref": "#/definitions/OperationListResult"
+                  }
+              },
+              "default": {
+                  "description": "Resource Provider error response describing why the operation failed.",
+                  "schema": {
+                      "$ref": "#/definitions/ErrorResponse"
+                  }
+              }
+          },
+          "x-ms-pageable": {
+              "nextLinkName": "nextLink"
+          }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships": {
       "get": {
         "tags": ["CloudPartnerProgramMemberships"],
         "operationId": "CloudPartnerProgramMemberships_List",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/GetMcppPurchaseDetailsList.json" }
+          "BatchAccountDelete": { "$ref": "./examples/getMcppPurchaseDetailsList.json" }
         },
-        "description": "The operation to fetch a resource",
+        "description": "Fetch list of CloudPartnerProgramMembership purchase details",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Purchase details of the CloudPartnerProgramMembership resource.",
+            "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/CloudPartnerProgramMembershipPurchaseDetailsList"
             }
@@ -58,14 +95,14 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/CloudPartnerProgramMemberships/{ResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships/{ResourceName}": {
       "get": {
         "tags": ["CloudPartnerProgramMemberships"],
         "operationId": "CloudPartnerProgramMemberships_GetPurchaseDetails",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/GetMcppPurchaseDetails.json" }
+          "BatchAccountDelete": { "$ref": "./examples/getMcppPurchaseDetails.json" }
         },
-        "description": "The operation to fetch purchase details of a resource",
+        "description": "The operation to fetch purchase details of a CloudPartnerProgramMembership offer",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -75,6 +112,9 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -96,7 +136,7 @@
         "tags": ["CloudPartnerProgramMemberships"],
         "operationId": "CloudPartnerProgramMemberships_CreatePurchase",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/CreateMcppPurchase.json" }
+          "BatchAccountDelete": { "$ref": "./examples/createMcppPurchase.json" }
         },
         "description": "Create a CloudPartnerProgramMembership purchase",
         "parameters": [
@@ -108,6 +148,9 @@
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ProductCodeParameter"
@@ -153,15 +196,66 @@
       }
     },
     "CloudPartnerProgramMembershipPurchaseDetailsList": {
-      "CloudPartnerProgramMembershipPurchaseDetailsList": {
-        "description": "Get purchase details of a resource",
-        "properties": {
-          "value": {
-            "description": "The list of McppPurchaseDetails.",
-            "type": "array",
-            "readOnly": true,
-            "items": {
-              "$ref": "#/definitions/McppPurchaseDetails"
+      "description": "Get purchase details of a resource",
+      "properties": {
+        "value": {
+          "description": "The list of McppPurchaseDetails.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/McppPurchaseDetails"
+          }
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of operations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "description": "Service provider: Microsoft.Subscription",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            },
+            "description": {
+              "description": "Friendly description for the operation",
+              "type": "string"
             }
           }
         }
