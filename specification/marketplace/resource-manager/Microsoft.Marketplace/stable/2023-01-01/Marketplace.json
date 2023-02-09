@@ -2220,7 +2220,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CollectionOffersByAllContextsProperties",
-          "description": "Subscriptions ids list"
+          "description": "Subscriptions ids list",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -2273,10 +2274,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/Offer"
-              },
-              "x-ms-identifiers": [
-                "uniqueOfferId"
-              ]
+              }
             }
           }
         }
