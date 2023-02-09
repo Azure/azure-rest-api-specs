@@ -7791,6 +7791,7 @@
         },
         "executorSize": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the session, which will be used for overriding 'executorCores' and 'executorMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
         },
         "conf": {
@@ -7799,12 +7800,13 @@
         },
         "driverSize": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the session, which will be used for overriding 'driverCores' and 'driverMemory' of the notebook you provide. Type: string (or Expression with resultType string)."
         },
         "numExecutors": {
-          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide.",
-          "type": "integer",
-          "format": "int32"
+          "description": "Number of executors to launch for this session, which will override the 'numExecutors' of the notebook you provide. Type: integer (or Expression with resultType integer).",
+          "type": "object",
+          "x-ms-format": "dfe-int"
         }
       },
       "required": [
@@ -7828,6 +7830,7 @@
         },
         "referenceName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Reference notebook name. Type: string (or Expression with resultType string)."
         }
       },
@@ -7853,6 +7856,7 @@
         },
         "referenceName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Reference big data pool name. Type: string (or Expression with resultType string)."
         }
       },
@@ -7867,6 +7871,7 @@
       "properties": {
         "value": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Notebook parameter value. Type: string (or Expression with resultType string).",
           "x-nullable": true
         },
@@ -7923,20 +7928,25 @@
           "description": "User specified arguments to SynapseSparkJobDefinitionActivity.",
           "type": "array",
           "items": {
+            "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
         },
         "file": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "scanFolder": {
           "type": "object",
+          "x-ms-format": "dfe-bool",
           "description": "Scanning subfolders from the root folder of the main definition file, these files will be added as reference files. The folders named 'jars', 'pyFiles', 'files' or 'archives' will be scanned, and the folders name are case sensitive. Type: boolean (or Expression with resultType boolean)."
         },
         "className": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "files": {
@@ -7944,6 +7954,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7953,6 +7964,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7962,6 +7974,7 @@
           "type": "array",
           "items": {
             "type": "object",
+            "x-ms-format": "dfe-string",
             "description": "Type: string (or Expression with resultType string)."
           },
           "x-ms-identifiers": []
@@ -7972,6 +7985,7 @@
         },
         "executorSize": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Number of core and memory to be used for executors allocated in the specified Spark pool for the job, which will be used for overriding 'executorCores' and 'executorMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "conf": {
@@ -7980,11 +7994,13 @@
         },
         "driverSize": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "numExecutors": {
           "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide. Type: integer (or Expression with resultType integer).",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-int"
         },
         "configurationType": {
           "enum": [
@@ -8008,6 +8024,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "object",
+            "x-ms-format": "dfe-key-value-pairs",
             "description": "Type: string (or Expression with resultType string)."
           }
         }
@@ -8033,6 +8050,7 @@
         },
         "referenceName": {
           "type": "object",
+          "x-ms-format": "dfe-string",
           "description": "Reference spark job name. Expression with resultType string."
         }
       },
@@ -8058,7 +8076,8 @@
         },
         "referenceName": {
           "description": "Reference spark configuration name. Type: string (or Expression with resultType string).",
-          "type": "object"
+          "type": "object",
+          "x-ms-format": "dfe-string"
         }
       },
       "required": [
