@@ -657,6 +657,15 @@
       "maximum": 7,
       "default": 0
     },
+    "Action": {
+      "type": "string",
+      "x-nullable": false,
+      "enum": [
+        "Pass",
+        "Review",
+        "Block"
+      ]
+    },
     "TextDetectResult": {
       "type": "object",
       "required": [
@@ -668,6 +677,37 @@
         },
         "riskLevel": {
           "$ref": "#/definitions/RiskLevel"
+        },
+        "action": {
+          "$ref": "#/definitions/Action"
+        }
+      }
+    },
+    "ActionThreshold": {
+      "type": "object",
+      "required": [
+        "passThreshold",
+        "reviewThreshold",
+        "blockThreshold"
+      ],
+      "properties": {
+        "passThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -1,
+          "maximum": 0
+        },
+        "reviewThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -1,
+          "maximum": 7
+        },
+        "blockThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": -1,
+          "maximum": 7
         }
       }
     },
@@ -701,6 +741,12 @@
           "type": "boolean",
           "description": "When set to true, other analysis will be skipped once any of configured blocklists was hit. When set to false, all the analysis will be done even when blocklists were hit.",
           "default": false
+        },
+        "actionConfiguration": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ActionThreshold"
+          }
         }
       }
     },
@@ -726,6 +772,9 @@
         },
         "violenceResult": {
           "$ref": "#/definitions/TextDetectResult"
+        },
+        "suggestedAction": {
+          "$ref": "#/definitions/Action"
         }
       }
     },
@@ -971,6 +1020,12 @@
           "items": {
             "$ref": "#/definitions/ImageCategory"
           }
+        },
+        "actionConfiguration": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ActionThreshold"
+          }
         }
       }
     },
@@ -985,6 +1040,9 @@
         },
         "riskLevel": {
           "type": "integer"
+        },
+        "action": {
+          "$ref": "#/definitions/Action"
         }
       }
     },
@@ -1003,6 +1061,9 @@
         },
         "violenceResult": {
           "$ref": "#/definitions/ImageDetectResult"
+        },
+        "suggestedAction": {
+          "$ref": "#definitions/Action"
         }
       }
     },
