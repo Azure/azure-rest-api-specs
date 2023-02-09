@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Database Migration Service Resource Provider",
+    "title": "Azure Database Migration Service (classic) Resource Provider",
     "version": "2022-03-30-preview",
-    "description": "The Database Migration Service helps people migrate their data from on-premise database servers to Azure, or from older database software to newer software. The service manages one or more workers that are joined to a customer's virtual network, which is assumed to provide connectivity to their databases. To avoid frequent updates to the resource provider, data migration tasks are implemented by the resource provider in a generic way as task resources, each of which has a task type (which identifies the type of work to run), input, and output. The client is responsible for providing appropriate task type and inputs, which will be passed through unexamined to the machines that implement the functionality, and for understanding the output, which is passed back unexamined to the client.",
+    "description": "The Database Migration Service (classic) helps people migrate their data from on-premise database servers to Azure, or from older database software to newer software. The service manages one or more workers that are joined to a customer's virtual network, which is assumed to provide connectivity to their databases. To avoid frequent updates to the resource provider, data migration tasks are implemented by the resource provider in a generic way as task resources, each of which has a task type (which identifies the type of work to run), input, and output. The client is responsible for providing appropriate task type and inputs, which will be passed through unexamined to the machines that implement the functionality, and for understanding the output, which is passed back unexamined to the client.",
     "x-ms-code-generation-settings": {
       "name": "DataMigrationServiceClient",
       "useDateTimeOffset": true
@@ -41,7 +41,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataMigration/skus": {
       "get": {
         "summary": "Get supported SKUs",
-        "description": "The skus action returns the list of SKUs that DMS supports.",
+        "description": "The skus action returns the list of SKUs that DMS (classic) supports.",
         "tags": [
           "Standard operation",
           "GET"
@@ -95,8 +95,8 @@
         }
       ],
       "put": {
-        "summary": "Create or update DMS Instance",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. The PUT method creates a new service or updates an existing one. When a service is updated, existing child resources (i.e. tasks) are unaffected. Services currently support a single kind, \"vm\", which refers to a VM-based service, although other kinds may be added in the future. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request (\"ServiceIsBusy\"). The provider will reply when successful with 200 OK or 201 Created. Long-running operations use the provisioningState property.",
+        "summary": "Create or update DMS (classic) Instance",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). The PUT method creates a new service or updates an existing one. When a service is updated, existing child resources (i.e. tasks) are unaffected. Services currently support a single kind, \"vm\", which refers to a VM-based service, although other kinds may be added in the future. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request (\"ServiceIsBusy\"). The provider will reply when successful with 200 OK or 201 Created. Long-running operations use the provisioningState property.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -139,8 +139,8 @@
         }
       },
       "get": {
-        "summary": "Get DMS Service Instance",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. The GET method retrieves information about a service instance.",
+        "summary": "Get DMS (classic) Service Instance",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). The GET method retrieves information about a service instance.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -168,8 +168,8 @@
         }
       },
       "delete": {
-        "summary": "Delete DMS Service Instance",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. The DELETE method deletes a service. Any running tasks will be canceled.",
+        "summary": "Delete DMS (classic) Service Instance",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). The DELETE method deletes a service. Any running tasks will be canceled.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -206,8 +206,8 @@
         }
       },
       "patch": {
-        "summary": "Create or update DMS Service Instance",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. The PATCH method updates an existing service. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request (\"ServiceIsBusy\").",
+        "summary": "Create or update DMS (classic) Service Instance",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). The PATCH method updates an existing service. This method can change the kind, SKU, and network of the service, but if tasks are currently running (i.e. the service is busy), this will fail with 400 Bad Request (\"ServiceIsBusy\").",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -247,7 +247,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/checkStatus": {
       "post": {
         "summary": "Check service health status",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. This action performs a health check and returns the status of the service and virtual machine size.",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). This action performs a health check and returns the status of the service and virtual machine size.",
         "tags": [
           "Service resource",
           "Custom operation",
@@ -292,7 +292,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/start": {
       "post": {
         "summary": "Start service",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. This action starts the service and the service can be used for data migration.",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). This action starts the service and the service can be used for data migration.",
         "tags": [
           "Service resource",
           "Custom operation",
@@ -338,7 +338,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/stop": {
       "post": {
         "summary": "Stop service",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. This action stops the service and the service cannot be used for data migration. The service owner won't be billed when the service is stopped.",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). This action stops the service and the service cannot be used for data migration. The service owner won't be billed when the service is stopped.",
         "tags": [
           "Service resource",
           "Custom operation",
@@ -384,7 +384,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/skus": {
       "get": {
         "summary": "Get compatible SKUs",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. The skus action returns the list of SKUs that a service resource can be updated to.",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service (classic). The skus action returns the list of SKUs that a service resource can be updated to.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -432,7 +432,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks": {
       "get": {
         "summary": "Get tasks in a service",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. This method returns a list of tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). This method returns a list of tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -486,7 +486,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks": {
       "get": {
         "summary": "Get service level tasks for a service",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. This method returns a list of service level tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). This method returns a list of service level tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -584,7 +584,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services": {
       "get": {
         "summary": "Get services in resource group",
-        "description": "The Services resource is the top-level resource that represents the Database Migration Service. This method returns a list of service resources in a resource group.",
+        "description": "The Services resource is the top-level resource that represents the Azure Database Migration Service (classic). This method returns a list of service resources in a resource group.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -629,7 +629,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataMigration/services": {
       "get": {
         "summary": "Get services in subscription",
-        "description": "The services resource is the top-level resource that represents the Database Migration Service. This method returns a list of service resources in a subscription.",
+        "description": "The services resource is the top-level resource that represents the Azure Database Migration Service (classic). This method returns a list of service resources in a subscription.",
         "tags": [
           "Service resource",
           "Standard operation",
@@ -691,7 +691,7 @@
       ],
       "put": {
         "summary": "Create or update task",
-        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PUT method creates a new task or updates an existing one, although since tasks have no mutable custom properties, there is little reason to update an existing one.",
+        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The PUT method creates a new task or updates an existing one, although since tasks have no mutable custom properties, there is little reason to update an existing one.",
         "tags": [
           "Task resource",
           "Standard operation",
@@ -731,7 +731,7 @@
       },
       "get": {
         "summary": "Get task information",
-        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The GET method retrieves information about a task.",
+        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The GET method retrieves information about a task.",
         "tags": [
           "Task resource",
           "Standard operation",
@@ -769,7 +769,7 @@
       },
       "delete": {
         "summary": "Delete task",
-        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The DELETE method deletes a task, canceling it first if it's running.",
+        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The DELETE method deletes a task, canceling it first if it's running.",
         "tags": [
           "Task resource",
           "Standard operation",
@@ -803,7 +803,7 @@
       },
       "patch": {
         "summary": "Create or update task",
-        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PATCH method updates an existing task, but since tasks have no mutable custom properties, there is little reason to do so.",
+        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The PATCH method updates an existing task, but since tasks have no mutable custom properties, there is little reason to do so.",
         "tags": [
           "Task resource",
           "Standard operation",
@@ -856,7 +856,7 @@
       ],
       "put": {
         "summary": "Create or update service task",
-        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PUT method creates a new service task or updates an existing one, although since service tasks have no mutable custom properties, there is little reason to update an existing one.",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The PUT method creates a new service task or updates an existing one, although since service tasks have no mutable custom properties, there is little reason to update an existing one.",
         "tags": [
           "Service Task resource",
           "Standard operation",
@@ -896,7 +896,7 @@
       },
       "get": {
         "summary": "Get service task information",
-        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The GET method retrieves information about a service task.",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The GET method retrieves information about a service task.",
         "tags": [
           "Service Task resource",
           "Standard operation",
@@ -934,7 +934,7 @@
       },
       "delete": {
         "summary": "Delete service task",
-        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The DELETE method deletes a service task, canceling it first if it's running.",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The DELETE method deletes a service task, canceling it first if it's running.",
         "tags": [
           "Service Task resource",
           "Standard operation",
@@ -968,7 +968,7 @@
       },
       "patch": {
         "summary": "Create or update service task",
-        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PATCH method updates an existing service task, but since service tasks have no mutable custom properties, there is little reason to do so.",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. The PATCH method updates an existing service task, but since service tasks have no mutable custom properties, there is little reason to do so.",
         "tags": [
           "Service Task resource",
           "Standard operation",
@@ -1004,7 +1004,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks/{taskName}/cancel": {
       "post": {
         "summary": "Cancel a task",
-        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. This method cancels a task if it's currently queued or running.",
+        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. This method cancels a task if it's currently queued or running.",
         "tags": [
           "Task resource",
           "Custom operation",
@@ -1055,7 +1055,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks/{taskName}/cancel": {
       "post": {
         "summary": "Cancel a service task",
-        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. This method cancels a service task if it's currently queued or running.",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. This method cancels a service task if it's currently queued or running.",
         "tags": [
           "Service Task resource",
           "Custom operation",
@@ -1103,7 +1103,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks/{taskName}/command": {
       "post": {
         "summary": "Execute a command on a task",
-        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. This method executes a command on a running task.",
+        "description": "The tasks resource is a nested, proxy-only resource representing work performed by a DMS (classic) instance. This method executes a command on a running task.",
         "tags": [
           "Task resource",
           "Custom operation",
@@ -1405,7 +1405,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataMigration/locations/{location}/usages": {
       "get": {
         "summary": "Get resource quotas and usage information",
-        "description": "This method returns region-specific quotas and resource usage information for the Database Migration Service.",
+        "description": "This method returns region-specific quotas and resource usage information for the Azure Database Migration Service (classic).",
         "tags": [
           "Standard operation",
           "GET"
