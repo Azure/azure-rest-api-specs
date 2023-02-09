@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01",
+    "billingRequestName": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "properties": {
+        "additionalInformation": {
+          "RoleId": "40000000-aaaa-bbbb-cccc-200000000006"
+        },
+        "decisionReason": "New team member",
+        "scope": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx",
+        "status": "Pending",
+        "type": "RoleAssignment"
+      },
+      "type": "Microsoft.Billing/permissionRequests"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingRequests/00000000-0000-0000-0000-000000000000",
+        "name": "00000000-0000-0000-0000-000000000000",
+        "properties": {
+          "additionalInformation": {
+            "RoleId": "40000000-aaaa-bbbb-cccc-200000000006"
+          },
+          "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+          "billingAccountName": "00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31",
+          "billingAccountDisplayName": "Contoso",
+          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx",
+          "billingProfileName": "xxxx-xxxx-xxx-xxx",
+          "billingProfileDisplayName": "Contoso Operations Billing",
+          "createdBy": "foo@contoso.com",
+          "creationDate": "2023-04-01T00:00:00-06:00",
+          "expirationDate": "2023-04-15T00:00:00-06:00",
+          "scope": "/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/billingProfiles/xxxx-xxxx-xxx-xxx",
+          "status": "Pending",
+          "type": "RoleAssignment",
+          "lastUpdatedBy": "admin@contoso.com",
+          "lastUpdatedDate": "2023-04-01T00:00:00-06:00"
+        },
+        "type": "Microsoft.Billing/permissionRequests"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/00000000-0000-0000-0000-000000000000:00000000-0000-0000-0000-000000000000_2019-05-31/operationResults/putBillingRequest_00000000-0000-0000-0000-000000000000?api-version=2023-04-01",
+        "retry-after": "10"
+      }
+    }
+  }
+}

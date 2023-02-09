@@ -1,0 +1,361 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "BillingManagementClient",
+    "description": "Documentation for Microsoft.Billing.",
+    "contact": {
+      "name": "Microsoft.Billing",
+      "url": "https://learn.microsoft.com/en-us/rest/api/billing/",
+      "email": "cabbpt@microsoft.com"
+    },
+    "version": "2023-04-01"
+  },
+  "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/associatedTenants": {
+      "get": {
+        "tags": [
+          "AssociatedTenant"
+        ],
+        "description": "Lists the tenants that can collaborate with the billing account on commerce activities like viewing and downloading invoices, managing payments, making purchases, and managing licenses.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "AssociatedTenants_ListByBillingAccount",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "in": "query",
+            "name": "includeRevoked",
+            "description": "Can be used to get revoked associated tenants.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "./types.json#/parameters/filter"
+          },
+          {
+            "$ref": "./types.json#/parameters/orderBy"
+          },
+          {
+            "$ref": "./types.json#/parameters/top"
+          },
+          {
+            "$ref": "./types.json#/parameters/skip"
+          },
+          {
+            "$ref": "./types.json#/parameters/count"
+          },
+          {
+            "$ref": "./types.json#/parameters/search"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of associated tenants.",
+            "schema": {
+              "$ref": "#/definitions/AssociatedTenantListResult"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssociatedTenantsListByBillingAccount": {
+            "$ref": "./examples/associatedTenantsListByBillingAccount.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/associatedTenants/{associatedTenantName}": {
+      "delete": {
+        "tags": [
+          "AssociatedTenant"
+        ],
+        "description": "Deletes an associated tenant.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "AssociatedTenants_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/associatedTenantName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation."
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "AssociatedTenantsDelete": {
+            "$ref": "./examples/associatedTenantsDelete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AssociatedTenant"
+        ],
+        "description": "Gets an associated tenant by ID.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "AssociatedTenants_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/associatedTenantName"
+          },
+          {
+            "in": "query",
+            "name": "includeRevoked",
+            "description": "Can be used to get revoked associated tenants.",
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An associated tenant.",
+            "schema": {
+              "$ref": "#/definitions/AssociatedTenant"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AssociatedTenantsGet": {
+            "$ref": "./examples/associatedTenantsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AssociatedTenant"
+        ],
+        "description": "Create or update an associated tenant for the billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "AssociatedTenants_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/associatedTenantName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An associated tenant.",
+            "schema": {
+              "$ref": "#/definitions/AssociatedTenant"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An associated tenant.",
+            "schema": {
+              "$ref": "#/definitions/AssociatedTenant"
+            }
+          },
+          "202": {
+            "description": "An operation accepted result that returns a 'Location' header that the client can poll to view the result of the operation."
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "AssociatedTenantsCreateOrUpdate": {
+            "$ref": "./examples/associatedTenantsCreateOrUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AssociatedTenant": {
+      "description": "An associated tenant.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of a(n) AssociatedTenant",
+          "allOf": [
+            {
+              "$ref": "#/definitions/AssociatedTenantProperties"
+            }
+          ],
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AssociatedTenantListResult": {
+      "description": "A container for a list of resources",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The list of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AssociatedTenant"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      }
+    },
+    "AssociatedTenantProperties": {
+      "description": "An associated tenant.",
+      "type": "object",
+      "properties": {
+        "friendlyName": {
+          "description": "The friendly name assigned to the associated tenant.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The ID that uniquely identifies a tenant.",
+          "type": "string"
+        },
+        "billingManagementState": {
+          "description": "The state determines whether users from the associated tenant can be assigned roles for commerce activities like viewing and downloading invoices, managing payments, and making purchases.",
+          "enum": [
+            "Unknown",
+            "NotAllowed",
+            "Active",
+            "Revoked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BillingManagementTenantState",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "description": "The state determines whether subscriptions and licenses can be provisioned in the associated tenant. It can be set as 'Pending' from null, null from 'Pending', or null from 'Active'",
+          "enum": [
+            "Unknown",
+            "NotRequested",
+            "Active",
+            "Pending",
+            "PermissionRequestExpired",
+            "BillingRequestDeclined",
+            "Revoked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProvisioningTenantState",
+            "modelAsString": true
+          }
+        },
+        "provisioningBillingRequestId": {
+          "description": "The unique identifier for the billing request that is created when enabling provisioning for an associated tenant.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ]
+}

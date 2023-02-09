@@ -38,11 +38,13 @@ title: BillingManagementClient
 description: Billing Client
 input-file:
 - Microsoft.Billing/stable/2023-04-01/agreement.json
+- Microsoft.Billing/stable/2023-04-01/associatedTenant.json
 - Microsoft.Billing/stable/2023-04-01/availableBalance.json
 - Microsoft.Billing/stable/2023-04-01/billingAccount.json
 - Microsoft.Billing/stable/2023-04-01/billingPermission.json
 - Microsoft.Billing/stable/2023-04-01/billingProfile.json
 - Microsoft.Billing/stable/2023-04-01/billingProperty.json
+- Microsoft.Billing/stable/2023-04-01/billingRequest.json
 - Microsoft.Billing/stable/2023-04-01/billingRoleAssignment.json
 - Microsoft.Billing/stable/2023-04-01/billingRoleDefinition.json
 - Microsoft.Billing/stable/2023-04-01/billingSubscription.json
