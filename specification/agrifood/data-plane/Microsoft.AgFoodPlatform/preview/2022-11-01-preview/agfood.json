@@ -17367,6 +17367,16 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/WeatherDataProviderResponse"
+            },
+            "headers": {
+              "x-ms-cache-hit": {
+                "description": "Indicate whether the request was cache hit or cache miss.",
+                "type": "string"
+              },
+              "x-ms-response-latency": {
+                "description": "Time taken for processing the request at server side.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -20612,32 +20622,6 @@
         }
       }
     },
-    "Locations": {
-      "description": "Schema of Locations data.",
-      "type": "object",
-      "properties": {
-        "location": {
-          "$ref": "#/definitions/WeatherLocation"
-        },
-        "requestCompletionTime": {
-          "description": "Request Completion Time in Utc of the location.",
-          "type": "string"
-        },
-        "lastRefreshedDateTime": {
-          "format": "date-time",
-          "description": "Date-time when resource was last requested, sample format: yyyy-MM-ddTHH:mm:ssZ.",
-          "type": "string",
-          "example": "2020-12-31T11:10:21Z"
-        },
-        "data": {
-          "description": "List of Weather Data returned by the provider.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WeatherDataForPassthrough"
-          }
-        }
-      }
-    },
     "ManagementZone": {
       "description": "Api Model for ManagementZone object.",
       "type": "object",
@@ -20772,6 +20756,23 @@
           "format": "double",
           "description": "Data value.",
           "type": "number"
+        }
+      }
+    },
+    "Measures": {
+      "description": "Schema for storing measurement readings and unit.",
+      "type": "object",
+      "properties": {
+        "unit": {
+          "description": "Data unit.",
+          "maxLength": 50,
+          "minLength": 1,
+          "type": "string"
+        },
+        "value": {
+          "description": "Data values.",
+          "type": "array",
+          "items": {}
         }
       }
     },
@@ -24206,91 +24207,127 @@
       "type": "object",
       "properties": {
         "wetBulbTemperature": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "cloudCover": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "dayOfWeek": {
           "description": "Day of week.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "dayOrNight": {
           "description": "This data field indicates whether it is daytime or nighttime based on the Local Apparent Time of the location.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "expirationTime": {
           "description": "Expiration time in Utc format.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "iconCode": {
           "description": "This number is the key to the weather icon lookup. The data field shows the icon number that is matched to represent the observed weather conditions.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "iconCodeExtend": {
           "description": "Code representing full set sensible weather.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "hasPrecipitation": {
           "description": "Indicates whether there is precipitation or not.",
-          "type": "boolean"
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
         },
         "pressureMeanSeaLevel": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "relativeHumidity": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperature": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperatureDewPoint": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperatureFeelsLike": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperatureHeatIndex": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "temperatureWindChill": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "uvDescription": {
           "description": "The UV Index Description which complements the UV Index value by providing an associated level of risk of skin damage due to exposure (-2 = Not Available, -1 = No Report, 0 to 2 = Low, 3 to 5 = Moderate, 6 to 7 = High, 8 to 10 = Very High, 11 to 16 = Extreme).",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "uvIndex": {
           "description": "Hourly maximum UV index.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "validTimeLocal": {
           "description": "Time forecast is valid in local apparent time.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "validTime": {
           "description": "Time forecast is valid in Utc format.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "visibility": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "windDirection": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "windGust": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "windSpeed": {
-          "$ref": "#/definitions/Measure"
+          "$ref": "#/definitions/Measures"
         },
         "wxPhraseLong": {
           "description": "Hourly sensible weather phrase containing longer description.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "wxPhraseShort": {
           "description": "Hourly sensible weather phrase containing short description.",
-          "type": "string"
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "additionalAttributes": {
           "description": "A collection of key value pairs that belongs to the resource. Each pair must not have a key greater than 50 characters and must not have a value greater than 250 characters. Note: A maximum of 100 key value pairs can be provided for a resource and only string and numeral values are supported.",
@@ -24688,10 +24725,10 @@
           }
         },
         "locations": {
-          "description": "List of locations along with corresponding weather data.",
+          "description": "List of weather data for all the weather locations.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Locations"
+            "$ref": "#/definitions/WeatherLocationData"
           }
         },
         "errors": {
@@ -24728,6 +24765,28 @@
           "description": "Location Value eg. \"10,-25\" for LocationType Type \"LatLong\".",
           "minLength": 1,
           "type": "string"
+        }
+      }
+    },
+    "WeatherLocationData": {
+      "description": "Schema of WeatherLocationData data.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/WeatherLocation"
+        },
+        "requestCompletionTime": {
+          "description": "Request Completion Time in Utc of the location.",
+          "type": "string"
+        },
+        "lastRefreshedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last requested, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string",
+          "example": "2020-12-31T11:10:21Z."
+        },
+        "data": {
+          "$ref": "#/definitions/WeatherDataForPassthrough"
         }
       }
     },
