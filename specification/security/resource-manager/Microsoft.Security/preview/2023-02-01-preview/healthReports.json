@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Security/healthReport/{scope}/{component}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/healthReports/{component}": {
       "get": {
         "x-ms-examples": {
           "List health reports by component": {
@@ -48,7 +48,13 @@
         "operationId": "HealthReports_List",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/Component"
@@ -73,7 +79,7 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/healthReport/{component}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/healthReports/{resourceId}/{component}": {
       "get": {
         "x-ms-examples": {
           "Get health report of resource by component": {
@@ -86,6 +92,15 @@
         "description": "Get health report of resource by component",
         "operationId": "HealthReport_Get",
         "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
           },
