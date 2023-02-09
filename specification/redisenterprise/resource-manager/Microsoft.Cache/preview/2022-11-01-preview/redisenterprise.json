@@ -721,7 +721,7 @@
         "operationId": "Databases_RegenerateKey",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "RedisEnterpriseDatabasesRegenerateKey": {
@@ -1577,7 +1577,8 @@
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-identifiers": [ "name" ]
         },
         "geoReplication": {
           "type": "object",
