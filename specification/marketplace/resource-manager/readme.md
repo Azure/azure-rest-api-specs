@@ -26,12 +26,21 @@ These are the global settings for the Marketplace API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-09
+tag: package-2023-01-01
 ```
 
 ### Composite packages
 
 The following packages may be composed from multiple api-versions.
+
+### Tag: package-2023-01-01
+
+These settings apply only when `--tag=package-2023-01-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01-01'
+input-file:
+  - Microsoft.Marketplace/stable/2023-01-01/Marketplace.json
+```
 
 ### Tag: package-2022-09
 
