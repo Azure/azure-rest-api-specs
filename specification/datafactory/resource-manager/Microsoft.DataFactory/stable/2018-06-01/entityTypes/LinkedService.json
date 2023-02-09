@@ -191,6 +191,25 @@
         "credential": {
           "$ref": "../datafactory.json#/definitions/CredentialReference",
           "description": "The credential reference containing authentication information."
+        },
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "AzureStorageAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Anonymous",
+            "AccountKey",
+            "SasUri",
+            "ServicePrincipal",
+            "Msi"
+          ],
+          "type": "string",
+          "description": "The type used for authentication. Type: string."
+        },
+        "containerUri": {
+          "type": "object",
+          "description": "Container uri of the Azure Blob Storage resource only support for anonymous access. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2604,7 +2623,7 @@
           "type": "object"
         },
         "sasToken": {
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "The Azure key vault secret reference of sasToken in sas uri."
         }
       }
