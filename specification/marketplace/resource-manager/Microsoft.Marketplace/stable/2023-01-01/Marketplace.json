@@ -862,6 +862,47 @@
             "$ref": "./examples/GetPrivateStoreOffers.json"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "PrivateStores"
+        ],
+        "operationId": "PrivateStoreCollectionOffer_ListByContexts",
+        "description": "Get a list of all offers in the given private store and collection according to the required contexts. An empty GUID context describes public plans.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "payload",
+            "schema": {
+              "$ref": "#/definitions/CollectionOffersByAllContextsPayload"
+            }
+          },
+          {
+            "$ref": "#/parameters/PrivateStoreIdParameter"
+          },
+          {
+            "$ref": "#/parameters/CollectionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CollectionOffersByContextList"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateStoreOffersWithSubscriptions": {
+            "$ref": "./examples/GetPrivateStoreOffersWithSubscriptions.json"
+          }
+        }
       }
     },
     "/providers/Microsoft.Marketplace/privateStores/{privateStoreId}/collections/{collectionId}/setRules": {
@@ -2170,6 +2211,74 @@
         "nextLink": {
           "description": "URL to get the next set of offer list results if there are any.",
           "type": "string"
+        }
+      }
+    },
+    "CollectionOffersByAllContextsPayload": {
+      "description": "The subscriptions list to filter products' private plans. Empty list will return all public and tenant level plans.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CollectionOffersByAllContextsProperties",
+          "description": "Subscriptions ids list"
+        }
+      }
+    },
+    "CollectionOffersByAllContextsProperties": {
+      "description": "The subscriptions list to filter products' private plans",
+      "type": "object",
+      "properties": {
+        "subscriptionIds": {
+          "description": "Subscriptions ids list",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CollectionOffersByContextList": {
+      "description": "List of objects which describes offers per context. An empty GUID is a public context.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/CollectionOffersByContext"
+          },
+          "x-ms-identifiers": [
+            "context"
+          ]
+        },
+        "nextLink": {
+          "description": "URL to get the next set of offer list per context results if there are any.",
+          "type": "string"
+        }
+      }
+    },
+    "CollectionOffersByContext": {
+      "description": "List of offers and plans that restricted to the context",
+      "type": "object",
+      "properties": {
+        "context": {
+          "description": "Offer's context, e.g. subscription ID, tenant ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "offers": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Offer"
+              },
+              "x-ms-identifiers": [
+                "uniqueOfferId"
+              ]
+            }
+          }
         }
       }
     },
