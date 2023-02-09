@@ -534,7 +534,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AutomationRuleAction"
-        },
+          },
           "x-ms-identifiers": [],
           "maxItems": 20
         },
@@ -1180,7 +1180,7 @@
           "maxItems": 50,
           "items": {
             "$ref": "#/definitions/AutomationRuleCondition"
-        },
+          },
           "x-ms-identifiers": [
             "conditionType"
           ]
@@ -1289,7 +1289,7 @@
           ],
           "items": {
             "$ref": "./common/IncidentTypes.json#/definitions/IncidentLabel"
-      }
+          }
         }
       }
     },
@@ -1310,6 +1310,9 @@
     },
     "PlaybookActionProperties": {
       "type": "object",
+      "required": [
+        "logicAppResourceId"
+      ],
       "properties": {
         "logicAppResourceId": {
           "description": "The resource id of the playbook resource.",
