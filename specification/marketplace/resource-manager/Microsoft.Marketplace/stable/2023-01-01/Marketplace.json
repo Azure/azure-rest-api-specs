@@ -868,7 +868,7 @@
           "PrivateStores"
         ],
         "operationId": "PrivateStoreCollectionOffer_ListByContexts",
-        "description": "Get a list of all offers in the given private store and collection according to the required contexts. An empty GUID context describes public plans.",
+        "description": "Get a list of all offers in the given collection according to the required contexts.",
         "parameters": [
           {
             "in": "body",
@@ -899,8 +899,8 @@
           }
         },
         "x-ms-examples": {
-          "GetPrivateStoreOffersWithSubscriptions": {
-            "$ref": "./examples/GetPrivateStoreOffersWithSubscriptions.json"
+          "GetPrivateStoreCollectionOffersWithFullContext": {
+            "$ref": "./examples/GetPrivateStoreCollectionOffersWithFullContext.json"
           }
         }
       }
@@ -2215,7 +2215,7 @@
       }
     },
     "CollectionOffersByAllContextsPayload": {
-      "description": "The subscriptions list to filter products' private plans. Empty list will return all public and tenant level plans.",
+      "description": "Suggested subscription list",
       "type": "object",
       "properties": {
         "properties": {
@@ -2226,11 +2226,11 @@
       }
     },
     "CollectionOffersByAllContextsProperties": {
-      "description": "The subscriptions list to filter products' private plans",
+      "description": "Suggested subscription list",
       "type": "object",
       "properties": {
         "subscriptionIds": {
-          "description": "Subscriptions ids list",
+          "description": "Subscription ids list",
           "type": "array",
           "items": {
             "type": "string"
