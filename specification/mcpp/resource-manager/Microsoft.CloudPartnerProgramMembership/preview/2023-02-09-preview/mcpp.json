@@ -95,7 +95,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships/{ResourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships/{resourceName}": {
       "get": {
         "tags": ["CloudPartnerProgramMemberships"],
         "operationId": "CloudPartnerProgramMemberships_GetPurchaseDetails",
@@ -176,27 +176,33 @@
   "definitions": {
     "McppPurchaseDetails": {
       "description": "Get purchase details of a resource",
+      "type": "object",
       "properties": {
         "orderNo": {
           "type": "string",
-          "description": "order number for the purchase"
+          "description": "order number for the purchase",
+          "readOnly": true
         },
         "orderDateTime": {
           "type": "string",
-          "description": "date time at which the order was placed"
+          "description": "date time at which the order was placed",
+          "readOnly": true
         },
         "status": {
           "type": "string",
-          "description": "purchase status or the order"
+          "description": "purchase status or the order",
+          "readOnly": true
         },
         "operationDetails":{
           "type": "object",
-          "description": "operation details related to the purchase"
+          "description": "operation details related to the purchase",
+          "readOnly": true
         }
       }
     },
     "CloudPartnerProgramMembershipPurchaseDetailsList": {
       "description": "Get purchase details of a resource",
+      "type":"object",
       "properties": {
         "value": {
           "description": "The list of McppPurchaseDetails.",
@@ -309,7 +315,7 @@
     },
     "ResourceNameParameter": {
       "name": "resourceName",
-      "in": "query",
+      "in": "path",
       "required": true,
       "type": "string",
       "description": "The name of the resource."
