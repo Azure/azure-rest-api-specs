@@ -447,33 +447,6 @@
         }
       }
     },
-    "AclResource": {
-      "description": "An Azure resource.",
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the Resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Fully qualified resource Id for the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "description": "Metadata pertaining to creation and last modification of the resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "readOnly": true
-        }
-      }
-    },
     "ResourceProviderOperationList": {
       "description": "List containing this Resource Provider's available operations.",
       "type": "object",
@@ -683,7 +656,7 @@
       "description": "Confidential Ledger. Contains the properties of Confidential Ledger Resource.",
       "allOf": [
         {
-          "$ref": "#/definitions/AclResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         },
         {
           "$ref": "#/definitions/ResourceLocation"
