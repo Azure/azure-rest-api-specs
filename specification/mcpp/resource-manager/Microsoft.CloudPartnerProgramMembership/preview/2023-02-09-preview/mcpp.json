@@ -65,7 +65,7 @@
         "tags": ["CloudPartnerProgramMemberships"],
         "operationId": "CloudPartnerProgramMemberships_List",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/getMcppPurchaseDetailsList.json" }
+          "BatchAccountDelete": { "$ref": "./examples/getMcppPurchaseDetailsResponseList.json" }
         },
         "description": "Fetch list of CloudPartnerProgramMembership purchase details",
         "parameters": [
@@ -83,7 +83,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CloudPartnerProgramMembershipPurchaseDetailsList"
+              "$ref": "#/definitions/CloudPartnerProgramMembershipPurchaseDetailsListResponse"
             }
           },
           "default": {
@@ -100,7 +100,7 @@
         "tags": ["CloudPartnerProgramMemberships"],
         "operationId": "CloudPartnerProgramMemberships_GetPurchaseDetails",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/getMcppPurchaseDetails.json" }
+          "BatchAccountDelete": { "$ref": "./examples/getMcppPurchaseDetailsResponse.json" }
         },
         "description": "The operation to fetch purchase details of a CloudPartnerProgramMembership offer",
         "parameters": [
@@ -121,7 +121,7 @@
           "200": {
             "description": "Purchase details of the CloudPartnerProgramMembership resource.",
             "schema": {
-              "$ref": "#/definitions/McppPurchaseDetails"
+              "$ref": "#/definitions/McppPurchaseDetailsResponse"
             }
           },
           "default": {
@@ -160,7 +160,7 @@
           "200": {
             "description": "List the CloudPartnerProgramMembership purchase details .",
             "schema": {
-              "$ref": "#/definitions/McppPurchaseDetails"
+              "$ref": "#/definitions/McppPurchaseDetailsResponse"
             }
           },
           "default": {
@@ -174,11 +174,18 @@
     }
   },
   "definitions": {
-    "McppPurchaseDetails": {
+    "McppPurchaseDetailsResponse":{
+      "properties": {
+        "$ref": "#/definitions/McppPurchaseDetailsResponseProperties",
+        "description": "MCPP Purchase details response properties."
+      }
+    },
+    "McppPurchaseDetailsResponseProperties": {
       "description": "Get purchase details of a resource",
       "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
-        "orderNo": {
+        "id": {
           "type": "string",
           "description": "order number for the purchase",
           "readOnly": true
@@ -200,16 +207,16 @@
         }
       }
     },
-    "CloudPartnerProgramMembershipPurchaseDetailsList": {
+    "CloudPartnerProgramMembershipPurchaseDetailsListResponse": {
       "description": "Get purchase details of a resource",
       "type":"object",
       "properties": {
         "value": {
-          "description": "The list of McppPurchaseDetails.",
+          "description": "The list of McppPurchaseDetailsResponse.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/McppPurchaseDetails"
+            "$ref": "#/definitions/McppPurchaseDetailsResponse"
           }
         }
       }
@@ -278,6 +285,7 @@
     },
     "ErrorDefinition": {
       "description": "Error definition.",
+      "type":"object",
       "properties": {
         "code": {
           "description": "Error code",
@@ -311,14 +319,18 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "description": "The API version to be used with the HTTP request.",
+      "x-ms-parameter-location":"method"
     },
     "ResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the resource."
+      "description": "The name of the resource.",
+      "pattern": "^[a-z][a-z0-9]*$",
+      "minLength": 3,
+      "maxLength": 63
     },
     "ProductCodeParameter": {
       "name": "productCode",
