@@ -290,14 +290,14 @@
           "Create Infrastructure only for Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_SingleServer.json"
           },
-          "Create Infrastructure without SAP Trans Fileshare": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_SkipTransMount.json"
+          "Create Infrastructure without a SAP Transport Directory Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_SkipTransport.json"
           },
-          "Create Infrastructure with a new SAP Trans Fileshare": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_CreateTrans.json"
+          "Create Infrastructure with a new SAP Transport Directory Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_CreateTransport.json"
           },
-          "Create Infrastructure with an existing SAP Trans Fileshare": {
-            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_MountTrans.json"
+          "Create Infrastructure with an existing SAP Transport Directory Fileshare": {
+            "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_Create_Distributed_MountTransport.json"
           },
           "Detect SAP Software Installation on a Single Server System": {
             "$ref": "./examples/sapvirtualinstances/SAPVirtualInstances_DetectInstallation_SingleServer.json"
@@ -1971,7 +1971,7 @@
       ]
     },
     "HighAvailabilityType": {
-      "description": "The high availability Type. AvailabilitySet guarantees 99.95% availability. Availability Zone guarantees 99.99% availability.",
+      "description": "The high availability type (AvailabilitySet or AvailabilityZone).",
       "enum": [
         "AvailabilitySet",
         "AvailabilityZone"
@@ -2729,7 +2729,7 @@
       }
     },
     "DiskSku": {
-      "description": "The disk sku.",
+      "description": "The type of disk sku. For example, Standard_LRS, Standard_ZRS, Premium_LRS, Premium_ZRS.",
       "type": "object",
       "properties": {
         "name": {
@@ -2795,7 +2795,7 @@
     },
     "SingleServerConfiguration": {
       "x-ms-discriminator-value": "SingleServer",
-      "description": "Gets or sets the single server configuration.",
+      "description": "Gets or sets the single server configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)",
       "type": "object",
       "allOf": [
         {
@@ -2945,7 +2945,7 @@
     },
     "SkipFileShareConfiguration": {
       "x-ms-discriminator-value": "Skip",
-      "description": "Gets or sets the skip file share configuration",
+      "description": "Gets or sets the file share configuration for scenarios where transport directory fileshare is not created or required.",
       "type": "object",
       "allOf": [
         {
@@ -2955,7 +2955,7 @@
     },
     "CreateAndMountFileShareConfiguration": {
       "x-ms-discriminator-value": "CreateAndMount",
-      "description": "Gets or sets the file share configuration for file share created with the VIS case.",
+      "description": "Gets or sets the file share configuration where the transport directory fileshare is created and mounted as a part of the create infra flow. Please pre-create the resource group you intend to place the transport directory in. The storage account and fileshare will be auto-created by the ACSS and doesn’t need to pre-created.",
       "type": "object",
       "allOf": [
         {
@@ -2965,7 +2965,7 @@
       "properties": {
         "resourceGroup": {
           "type": "string",
-          "description": "The name of file share resource group. The app rg is used in case of missing input."
+          "description": "The name of transport file share resource group. This should be pre created by the customer. The app rg is used in case of missing input."
         },
         "storageAccountName": {
           "type": "string",
@@ -2975,7 +2975,7 @@
     },
     "MountFileShareConfiguration": {
       "x-ms-discriminator-value": "Mount",
-      "description": "Gets or sets the file share configuration for externally mounted cases.",
+      "description": "Gets or sets the file share configuration where the transport directory fileshare already exists, and user wishes to mount the fileshare as a part of the create infra flow.",
       "type": "object",
       "allOf": [
         {
@@ -3023,7 +3023,7 @@
     "ThreeTierConfiguration": {
       "x-ms-discriminator-value": "ThreeTier",
       "x-ms-client-flatten": true,
-      "description": "Gets or sets the three tier SAP configuration.",
+      "description": "Gets or sets the three tier SAP configuration. For prerequisites for creating the infrastructure, please see [here](https://go.microsoft.com/fwlink/?linkid=2212611&clcid=0x409)",
       "type": "object",
       "allOf": [
         {
