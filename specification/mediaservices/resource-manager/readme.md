@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-encoding-2022-07
+tag: package-2023-01
 opt-in-extensible-enums: true
 ```
 
@@ -63,6 +63,17 @@ directive:
 ```
 
 
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.Media/Metadata/stable/2023-01-01/AccountFilters.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/ContentKeyPolicies.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/StreamingPoliciesAndStreamingLocators.json
+```
 ### Tag: package-encoding-2022-05-preview
 
 These settings apply only when `--tag=package-encoding-2022-05-preview` is specified on the command line.
