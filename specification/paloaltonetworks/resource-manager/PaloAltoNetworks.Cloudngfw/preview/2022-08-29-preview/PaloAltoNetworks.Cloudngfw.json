@@ -2455,6 +2455,58 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/getSupportInfo": {
+      "post": {
+        "tags": [
+          "Firewalls"
+        ],
+        "operationId": "Firewalls_getSupportInfo",
+        "description": "support info for firewall.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/FirewallResource.firewallName"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "description": "email address on behalf of which this API called",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupportInfo"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Firewalls_getSupportInfo_MaximumSet_Gen": {
+            "$ref": "./examples/Firewalls_getSupportInfo_MaximumSet_Gen.json"
+          },
+          "Firewalls_getSupportInfo_MinimumSet_Gen": {
+            "$ref": "./examples/Firewalls_getSupportInfo_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/saveLogProfile": {
       "post": {
         "tags": [
@@ -2501,58 +2553,6 @@
           },
           "Firewalls_saveLogProfile_MinimumSet_Gen": {
             "$ref": "./examples/Firewalls_saveLogProfile_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls/{firewallName}/supportInfo": {
-      "post": {
-        "tags": [
-          "Firewalls"
-        ],
-        "operationId": "Firewalls_supportInfo",
-        "description": "support info for firewall.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FirewallResource.firewallName"
-          },
-          {
-            "name": "email",
-            "in": "query",
-            "required": false,
-            "description": "email address on behalf of which this API called",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/FirewallSupportInfo"
-            }
-          },
-          "default": {
-            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Firewalls_supportInfo_MaximumSet_Gen": {
-            "$ref": "./examples/Firewalls_supportInfo_MaximumSet_Gen.json"
-          },
-          "Firewalls_supportInfo_MinimumSet_Gen": {
-            "$ref": "./examples/Firewalls_supportInfo_MinimumSet_Gen.json"
           }
         }
       }
@@ -3326,6 +3326,58 @@
           },
           "LocalRulestacks_getChangeLog_MinimumSet_Gen": {
             "$ref": "./examples/LocalRulestacks_getChangeLog_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/localRulestacks/{localRulestackName}/getSupportInfo": {
+      "post": {
+        "tags": [
+          "LocalRulestacks"
+        ],
+        "operationId": "LocalRulestacks_getSupportInfo",
+        "description": "support info for rulestack.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/LocalRulestackResource.localRulestackName"
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "required": false,
+            "description": "email address on behalf of which this API called",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupportInfo"
+            }
+          },
+          "default": {
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LocalRulestacks_getSupportInfo_MaximumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_getSupportInfo_MaximumSet_Gen.json"
+          },
+          "LocalRulestacks_getSupportInfo_MinimumSet_Gen": {
+            "$ref": "./examples/LocalRulestacks_getSupportInfo_MinimumSet_Gen.json"
           }
         }
       }
@@ -5105,62 +5157,6 @@
       },
       "description": "The updatable properties of the FirewallResource."
     },
-    "FirewallSupportInfo": {
-      "type": "object",
-      "properties": {
-        "productSku": {
-          "type": "string",
-          "description": "product SKU associated with given resource"
-        },
-        "productSerial": {
-          "type": "string",
-          "description": "product Serial associated with given resource"
-        },
-        "accountRegistered": {
-          "$ref": "#/definitions/BooleanEnum",
-          "description": "account registered in Customer Support Portal"
-        },
-        "accountId": {
-          "type": "string",
-          "description": "Support account associated with given resource"
-        },
-        "userDomainSupported": {
-          "$ref": "#/definitions/BooleanEnum",
-          "description": "user domain is supported in Customer Support Portal"
-        },
-        "userRegistered": {
-          "$ref": "#/definitions/BooleanEnum",
-          "description": "user registered in Customer Support Portal"
-        },
-        "freeTrial": {
-          "$ref": "#/definitions/BooleanEnum",
-          "description": "Product usage is in free trial period"
-        },
-        "freeTrialDaysLeft": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Free trial days remaining"
-        },
-        "freeTrialCreditLeft": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Free trial credit remaining"
-        },
-        "helpURL": {
-          "type": "string",
-          "description": "URL for paloaltonetworks live community"
-        },
-        "supportURL": {
-          "type": "string",
-          "description": "URL for paloaltonetworks Customer Service Portal"
-        },
-        "registerURL": {
-          "type": "string",
-          "description": "URL for registering product in paloaltonetworks Customer Service Portal"
-        }
-      },
-      "description": "Firewall Support Information"
-    },
     "FqdnListGlobalRulestackResource": {
       "type": "object",
       "properties": {
@@ -6580,6 +6576,62 @@
         }
       },
       "description": "Storage Account configurations"
+    },
+    "SupportInfo": {
+      "type": "object",
+      "properties": {
+        "productSku": {
+          "type": "string",
+          "description": "product SKU associated with given resource"
+        },
+        "productSerial": {
+          "type": "string",
+          "description": "product Serial associated with given resource"
+        },
+        "accountRegistered": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "account registered in Customer Support Portal"
+        },
+        "accountId": {
+          "type": "string",
+          "description": "Support account associated with given resource"
+        },
+        "userDomainSupported": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "user domain is supported in Customer Support Portal"
+        },
+        "userRegistered": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "user registered in Customer Support Portal"
+        },
+        "freeTrial": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "Product usage is in free trial period"
+        },
+        "freeTrialDaysLeft": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Free trial days remaining"
+        },
+        "freeTrialCreditLeft": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Free trial credit remaining"
+        },
+        "helpURL": {
+          "type": "string",
+          "description": "URL for paloaltonetworks live community"
+        },
+        "supportURL": {
+          "type": "string",
+          "description": "URL for paloaltonetworks Customer Service Portal"
+        },
+        "registerURL": {
+          "type": "string",
+          "description": "URL for registering product in paloaltonetworks Customer Service Portal"
+        }
+      },
+      "description": "Support information for the resource"
     },
     "TagInfo": {
       "type": "object",
