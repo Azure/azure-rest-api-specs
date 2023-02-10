@@ -179,16 +179,32 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
-        "$ref": "#/definitions/McppPurchaseDetailsResponseProperties",
-        "description": "MCPP Purchase details response properties."
+        "id": {
+          "type": "string",
+          "description": "id for the purchase resource",
+          "readOnly": true
+        },
+        "name": {
+          "description": "purchase resource name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type, CloudPartnerProgramMembership.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "properties": { 
+          "$ref": "#/definitions/McppPurchaseDetailsResponseProperties",
+          "description": "MCPP Purchase details response properties."
+        }
       }
     },
     "McppPurchaseDetailsResponseProperties": {
       "description": "MCPP Purchase details response properties",
       "type": "object",
-      "x-ms-azure-resource": true,
       "properties": {
-        "id": {
+        "orderNo": {
           "type": "string",
           "description": "order number for the purchase",
           "readOnly": true
@@ -234,6 +250,7 @@
           "items": {
             "$ref": "#/definitions/Operation"
           },
+          "x-ms-identifiers":[],
           "description": "List of operations."
         },
         "nextLink": {
