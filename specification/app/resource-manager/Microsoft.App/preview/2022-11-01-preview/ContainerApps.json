@@ -712,6 +712,42 @@
         "enableApiLogging": {
           "description": "Enables API logging for the Dapr sidecar",
           "type": "boolean"
+        },
+        "resiliencyTargets":{
+          "description": "Dapr targets for for applied resiliency policies",
+          "type": "object",
+          "properties": {
+            "apps": {
+              "description": "List of application targets their applied policies",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DaprAppResiliencyTarget"
+              },
+              "x-ms-identifiers": [
+                "target"
+              ]
+            },
+            "components": {
+              "description": "List of component targets their applied policies",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DaprComponentResiliencyTarget"
+              },
+              "x-ms-identifiers": [
+                "target"
+              ]
+            },
+            "actors": {
+              "description": "List of actor targets their applied policies",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DaprActorResiliencyTarget"
+              },
+              "x-ms-identifiers": [
+                "target"
+              ]
+            }
+          }
         }
       }
     },
@@ -1150,6 +1186,117 @@
         }
       },
       "x-ms-client-flatten": true
+    },
+    "DaprAppResiliencyTarget": {
+      "description": "Dapr Application for applied policies",
+      "type": "object",
+      "required": [
+        "target"
+      ],
+      "properties": {
+        "target": {
+          "description": "Name of the dapr application to apply policies to.",
+          "type": "string"
+        },
+        "retry": {
+          "description": "Name of Retry Policy to apply.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Name of Timeout Policy to apply.",
+          "type": "string"
+        },
+        "circuitBreaker": {
+          "description": "Name of Circuit Breaker Policy to apply.",
+          "type": "string"
+        },
+        "circuitBreakerCacheSize": {
+          "description": "Size of policy lru cache",
+          "type": "int32"
+        }
+      }
+    },
+    "DaprActorResiliencyTarget": {
+      "description": "Dapr Actor for applied policies",
+      "type": "object",
+      "required": [
+        "target"
+      ],
+      "properties": {
+        "target": {
+          "description": "Name of the dapr actor type to apply policies to.",
+          "type": "string"
+        },
+        "retry": {
+          "description": "Name of Retry Policy to apply.",
+          "type": "string"
+        },
+        "timeout": {
+          "description": "Name of Timeout Policy to apply.",
+          "type": "string"
+        },
+        "circuitBreaker": {
+          "description": "Name of Circuit Breaker Policy to apply.",
+          "type": "string"
+        },
+        "circuitBreakerCacheSize": {
+          "description": "Size of policy lru cache",
+          "type": "int32"
+        },
+        "circuitBreakerScope": {
+          "description": "Circuit breakers for actors are scoped by 'id', 'type' or 'both'.",
+          "type": "string"
+        }
+      }
+    },
+    "DaprComponentResiliencyTarget": {
+      "description": "Dapr Component for applied policies",
+      "type": "object",
+      "required": [
+        "target"
+      ],
+      "properties": {
+        "target": {
+          "description": "Name of the dapr component to apply policies to.",
+          "type": "string"
+        },
+        "outbound": {
+          "description": "Outbound operations are calls from the dapr sidecar to a component",
+          "type": "object",
+          "properties": {
+            "retry": {
+              "description": "Name of Retry Policy to apply.",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "Name of Timeout Policy to apply.",
+              "type": "string"
+            },
+            "circuitBreaker": {
+              "description": "Name of Circuit Breaker Policy to apply.",
+              "type": "string"
+            }
+          }
+        },
+        "inbound": {
+          "description": "Inbound operations are calls from the dapr sidecar to your application",
+          "type": "object",
+          "properties": {
+            "retry": {
+              "description": "Name of Retry Policy to apply.",
+              "type": "string"
+            },
+            "timeout": {
+              "description": "Name of Timeout Policy to apply.",
+              "type": "string"
+            },
+            "circuitBreaker": {
+              "description": "Name of Circuit Breaker Policy to apply.",
+              "type": "string"
+            }
+          }
+        }
+      }
     },
     "ContainerAppAuthToken": {
       "description": "Container App Auth Token.",

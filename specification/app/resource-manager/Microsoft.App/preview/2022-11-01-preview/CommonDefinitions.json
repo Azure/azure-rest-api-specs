@@ -919,6 +919,30 @@
         }
       }
     },
+    "DaprResiliencyDefaults": {
+      "description": "Default Resiliency Policy",
+      "type": "object",
+      "properties": {
+        "retries": {
+          "description": "retry policies",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyRetryPolicy"
+          }
+        },
+        "timeouts": {
+          "description": "timeout policy",
+          "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyTimeoutPolicy"
+        },
+        "circuitBreakers": {
+          "description": "circuit breaker policies",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/DaprResiliencyCircuitBreakerPolicy"
+          }
+        }
+      }
+    },
     "DaprSecretsCollection": {
       "description": "Dapr component Secrets Collection for ListSecrets Action.",
       "required": [
