@@ -43,6 +43,9 @@ input-file:
   - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironments.json
   - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsCertificates.json
   - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsDaprResiliencyCircuitBreakerPolicies.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsDaprResiliencyTimeoutPolicies.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsDaprResiliencyRetryPolicies.json
   - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsStorages.json
   - Microsoft.App/preview/2022-11-01-preview/ContainerApps.json
   - Microsoft.App/preview/2022-11-01-preview/ContainerAppsRevisions.json
