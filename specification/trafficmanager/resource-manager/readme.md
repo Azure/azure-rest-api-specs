@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for TrafficManager.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for TrafficManager, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,22 @@ To build the SDK for TrafficManager, simply [Install AutoRest](https://aka.ms/au
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the TrafficManager API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-08
+tag: package-preview-2022-04
 ```
 
 ### Suppression
+
 ``` yaml
 directive:
   - suppress: OperationsAPIImplementation
@@ -57,6 +59,15 @@ directive:
     where: $.definitions.UserMetricsModel
 ```
 
+
+### Tag: package-preview-2022-04
+
+These settings apply only when `--tag=package-preview-2022-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-04'
+input-file:
+  - Microsoft.Network/preview/2022-04-01-preview/trafficmanager.json
+```
 ### Tag: package-2018-08
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
@@ -117,6 +128,7 @@ directive:
     approved-by: "@fearthecowboy"
 
 ```
+
 ### Tag: package-2017-09-preview
 
 These settings apply only when `--tag=package-2017-09-preview` is specified on the command line.
@@ -140,7 +152,6 @@ input-file:
 - Microsoft.Network/preview/2017-09-01-preview/trafficmanageranalytics.json
 ```
 
-
 ### Tag: package-2017-05
 
 These settings apply only when `--tag=package-2017-05` is specified on the command line.
@@ -149,7 +160,6 @@ These settings apply only when `--tag=package-2017-05` is specified on the comma
 input-file:
 - Microsoft.Network/stable/2017-05-01/trafficmanager.json
 ```
-
 
 ### Tag: package-2017-03
 
@@ -169,10 +179,9 @@ input-file:
 - Microsoft.Network/stable/2015-11-01/trafficmanager.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -181,10 +190,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-libraries-for-java
-  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
@@ -193,7 +202,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
 
 ## C#
 
@@ -233,6 +241,3 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-trafficmanager
 ```
-
-
-

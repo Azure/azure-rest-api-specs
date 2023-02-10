@@ -51,6 +51,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python-track2
+  - repo: azure-sdk-for-js
 ```
 
 ## Python
@@ -64,3 +65,7 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Java
 
 See configuration in [readme.java.md](./readme.java.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
