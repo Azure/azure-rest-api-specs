@@ -8437,6 +8437,11 @@
         "enableBurstCapacity": {
           "description": "Flag to indicate enabling/disabling of Burst Capacity Preview feature on the account",
           "type": "boolean"
+        },
+        "minimalTlsVersion": {
+          "description": "Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.",
+          "type": "string",
+          "$ref": "#/definitions/MinimalTlsVersion"
         }
       }
     },
@@ -8595,6 +8600,11 @@
         "enableBurstCapacity": {
           "description": "Flag to indicate enabling/disabling of Burst Capacity Preview feature on the account",
           "type": "boolean"
+        },
+        "minimalTlsVersion": {
+          "description": "Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.",
+          "type": "string",
+          "$ref": "#/definitions/MinimalTlsVersion"
         }
       },
       "required": [
@@ -8777,6 +8787,11 @@
         "enableBurstCapacity": {
           "description": "Flag to indicate enabling/disabling of Burst Capacity Preview feature on the account",
           "type": "boolean"
+        },
+        "minimalTlsVersion": {
+          "description": "Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.",
+          "type": "string",
+          "$ref": "#/definitions/MinimalTlsVersion"
         }
       }
     },
@@ -11695,6 +11710,19 @@
       ],
       "x-ms-enum": {
         "name": "ContinuousTier",
+        "modelAsString": true
+      }
+    },
+    "MinimalTlsVersion": {
+      "description": "Indicates the minimum allowed Tls version. The default is Tls 1.0, except for Cassandra and Mongo API's, which only work with Tls 1.2.",
+      "type": "string",
+      "enum": [
+        "Tls",
+        "Tls11",
+        "Tls12"
+      ],
+      "x-ms-enum": {
+        "name": "MinimalTlsVersion",
         "modelAsString": true
       }
     }
