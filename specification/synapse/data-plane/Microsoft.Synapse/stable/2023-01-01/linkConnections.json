@@ -841,21 +841,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Link connection status, please refer to this [articles](https://learn.microsoft.com/azure/synapse-analytics/synapse-link/sql-database-synapse-link#monitoring) for details.",
-          "enum": [
-            "Initial",
-            "Starting",
-            "Running",
-            "Stopping",
-            "Stopped",
-            "Pausing",
-            "Paused",
-            "Resuming"
-          ],
-          "x-ms-enum": {
-            "name": "LinkConnectionStatusEnum",
-            "modelAsString": true
-          }
+          "description": "Link connection status, please refer to this [articles](https://learn.microsoft.com/azure/synapse-analytics/synapse-link/sql-database-synapse-link#monitoring) for details."
         },
         "continuousRunId": {
           "type": "string",
@@ -969,13 +955,11 @@
       "properties": {
         "refreshStatus": {
           "type": "string",
-          "description": "Link connection refresh status",
-          "readOnly": true
+          "description": "Link connection refresh status"
         },
         "errorMessage": {
           "type": "string",
-          "description": "Link connection refresh error message",
-          "readOnly": true
+          "description": "Link connection refresh error message"
         }
       }
     }
