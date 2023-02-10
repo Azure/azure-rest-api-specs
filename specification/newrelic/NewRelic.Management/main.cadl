@@ -1,30 +1,32 @@
 import "@cadl-lang/rest";
 import "@cadl-lang/versioning";
 import "@azure-tools/cadl-providerhub";
-import "@azure-tools/cadl-providerhub-controller";
 import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-azure-resource-manager";
 
-@armNamespace
-@serviceTitle("NewRelic.Observability") 
-@serviceVersion("2022-07-01-preview")
-@versionedDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@versionedDependency(Azure.Core.Versions.v1_0_Preview_1)
 
+@armProviderNamespace
+@service({
+  title: "NewRelic.Observability",
+  version: "2022-07-01-preview",
+})
+@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 namespace NewRelic.Observability;
 
 using Azure.ResourceManager;
 using Cadl.Rest;
 using Cadl.Http;
 using Cadl.Versioning;
+using Azure.Core;
 
 @doc("Reusable representation of an email address")
 @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
-model email is string;
+scalar email extends string;
 
 @doc("Credential string.")
 @secret
-model SecureString is string;
+scalar SecureString extends string;
 
 @doc("A Monitor Resource by NewRelic")
 model NewRelicMonitorResource is TrackedResource<MonitorProperties> {
@@ -40,12 +42,32 @@ model NewRelicMonitorResource is TrackedResource<MonitorProperties> {
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @armResourceOperations
-interface Monitors extends ResourceOperations<NewRelicMonitorResource,MonitorProperties> {
+interface Monitors {
+  op Get is
+   ArmResourceRead<NewRelicMonitorResource,
+   {...ApiVersionParameter,...SubscriptionIdParameter,...ResourceGroupParameter}>;
+  
+  op CreateOrUpdate is
+   ArmResourceCreateOrUpdateAsync<NewRelicMonitorResource,
+   {...ApiVersionParameter,...SubscriptionIdParameter,...ResourceGroupParameter}>;
+  
+  op Update is
+   ArmResourcePatchSync<NewRelicMonitorResource, MonitorProperties,
+   {...ApiVersionParameter,...SubscriptionIdParameter,...ResourceGroupParameter}>;
+  
+  op Delete is
+   ArmResourceDeleteAsync<NewRelicMonitorResource,
+   {...ApiVersionParameter,...SubscriptionIdParameter,...ResourceGroupParameter,...UserEmailParameter}>;
+   
+  op ListBySubscription is ArmListBySubscription<NewRelicMonitorResource>;
+  
+  op LIstByRG is ArmResourceListByParent<NewRelicMonitorResource>;
+
   @post
   @doc("List the resources currently being monitored by the NewRelic monitor resource.")
-  @segment("monitoredResources")
   @armResourceAction(NewRelicMonitorResource)
-  ListMonitoredResources(
+  @segment("monitoredResources")
+  op ListMonitoredResources(
     ...ResourceInstanceParameters<NewRelicMonitorResource>
   ): ArmResponse<MonitoredResourceListResponse> | ErrorResponse;
   
@@ -277,7 +299,7 @@ model UserInfo{
 }
 
 @doc("Provisioning State of the Monitor resource")
-enum ProvisioningStateValues {
+enum ProvisioningState {
   @doc("Monitor resource creation request accepted")
   "Accepted",
   @doc("Monitor resource creation started")
@@ -298,54 +320,34 @@ enum ProvisioningStateValues {
   "NotSpecified"
 }
 
-@knownValues(ProvisioningStateValues)
-model ProvisioningState is string {
-}
-
 @doc("Flag specifying if the resource monitoring is enabled or disabled.")
-enum MonitoringStatusValues {
+enum MonitoringStatus {
   @doc("monitoring is enabled")
   "Enabled",
   @doc("monitoring is disabled")
   "Disabled"
 }
 
-@knownValues(MonitoringStatusValues)
-model MonitoringStatus is string {
-}
-
 @doc("Flag specifying the Marketplace Subscription Status of the resource. If payment is not made in time, the resource will go in Suspended state.")
-enum MarketplaceSubscriptionStatusValues {
+enum MarketplaceSubscriptionStatus {
   @doc("monitoring is enabled")
   "Active",
   @doc("monitoring is disabled")
   "Suspended"
 }
 
-@knownValues(MarketplaceSubscriptionStatusValues)
-model MarketplaceSubscriptionStatus is string {
-}
-
 @doc("Liftr Resource category.")
-enum LiftrResourceCategoriesValues {
+enum LiftrResourceCategories {
   "Unknown",
   "MonitorLogs"
 }
 
-@knownValues(LiftrResourceCategoriesValues)
-model LiftrResourceCategories is string {
-}
-
 @doc("Various states of the SSO resource")
-enum SingleSignOnStatesValues {
+enum SingleSignOnStates {
   "Initial",
   "Enable",
   "Disable",
   "Existing"
-}
-
-@knownValues(SingleSignOnStatesValues)
-model SingleSignOnStates is string {
 }
 
 @doc("The resource-specific properties for this resource.")
@@ -389,43 +391,27 @@ model MetricRules {
 }
 
 @doc("Indicates whether AAD logs are being sent.")
-enum SendAadLogsStatusValues {
+enum SendAadLogsStatus {
   "Enabled",
   "Disabled"
-}
-
-@knownValues(SendAadLogsStatusValues)
-model SendAadLogsStatus is string {
 }
 
 @doc("Indicates whether metrics are being sent.")
-enum SendMetricsStatusValues {
+enum SendMetricsStatus {
   "Enabled",
   "Disabled"
-}
-
-@knownValues(SendMetricsStatusValues)
-model SendMetricsStatus is string {
 }
 
 @doc("Indicates whether subscription logs are being sent.")
-enum SendSubscriptionLogsStatusValues {
+enum SendSubscriptionLogsStatus {
   "Enabled",
   "Disabled"
-}
-
-@knownValues(SendSubscriptionLogsStatusValues)
-model SendSubscriptionLogsStatus is string {
 }
 
 @doc("Indicates whether activity logs are being sent.")
-enum SendActivityLogsStatusValues {
+enum SendActivityLogsStatus {
   "Enabled",
   "Disabled"
-}
-
-@knownValues(SendActivityLogsStatusValues)
-model SendActivityLogsStatus is string {
 }
 
 @doc("The definition of a filtering tag. Filtering tags are used for capturing resources and include/exclude them from being monitored.")
@@ -442,13 +428,9 @@ model FilteringTag{
 }
 
 @doc("Valid actions for a filtering tag. Exclusion takes priority over inclusion.")
-enum TagActionValues {
+enum TagAction {
   "Include",
   "Exclude"
-}
-
-@knownValues(TagActionValues)
-model TagAction is string {
 }
 
 @doc("Details of resource being monitored by NewRelic monitor resource")
@@ -470,23 +452,15 @@ model MonitoredResource {
 }
 
 @doc("Indicates whether metrics are being sent.")
-enum SendingMetricsStatusValues {
+enum SendingMetricsStatus {
   "Enabled",
   "Disabled"
-}
-
-@knownValues(SendingMetricsStatusValues)
-model SendingMetricsStatus is string {
 }
 
 @doc("Indicates whether logs are being sent.")
-enum SendingLogsStatusValues {
+enum SendingLogsStatus {
   "Enabled",
   "Disabled"
-}
-
-@knownValues(SendingLogsStatusValues)
-model SendingLogsStatus is string {
 }
 
 @doc("List of all the resources being monitored by NewRelic monitor resource")
@@ -725,18 +699,14 @@ model PlanDataProperties {
 }
 
 @doc("Billing source")
-enum BillingSourceValues {
+enum BillingSource {
   @doc("Billing source is Azure")
   "AZURE",
   "NEWRELIC"
 }
 
-@knownValues(BillingSourceValues)
-model BillingSource is string {
-}
-
 @doc("Source of Org creation")
-enum OrgCreationSourceValues {
+enum OrgCreationSource {
   @doc("Org is created from LIFTR")
   "LIFTR",
 
@@ -744,12 +714,8 @@ enum OrgCreationSourceValues {
   "NEWRELIC"
 }
 
-@knownValues(OrgCreationSourceValues)
-model OrgCreationSource is string {
-}
-
 @doc("Source of Account creation")
-enum AccountCreationSourceValues {
+enum AccountCreationSource {
   @doc("Account is created from LIFTR")
   "LIFTR",
 
@@ -757,32 +723,20 @@ enum AccountCreationSourceValues {
   "NEWRELIC"
 }
 
-@knownValues(AccountCreationSourceValues)
-model AccountCreationSource is string {
-}
-
 @doc("Different usage type like PAYG/COMMITTED")
-enum UsageTypeValues {
+enum UsageType {
   @doc("Usage type is PAYG")
   "PAYG",
   @doc("Usage type is COMMITTED")
   "COMMITTED"
 }
 
-@knownValues(UsageTypeValues)
-model UsageType is string {
-}
-
 @doc("Different usage type like YEARLY/MONTHLY")
-enum BillingCycleValues {
+enum BillingCycle {
   @doc("Billing cycle is YEARLY")
   "YEARLY",
   @doc("Billing cycle is MONTHLY")
   "MONTHLY",
   @doc("Billing cycle is WEEKLY")
   "WEEKLY"
-}
-
-@knownValues(BillingCycleValues)
-model BillingCycle is string {
 }
