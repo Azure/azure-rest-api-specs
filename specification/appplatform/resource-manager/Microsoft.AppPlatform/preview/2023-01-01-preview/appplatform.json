@@ -9597,6 +9597,16 @@
         "ingressSettings": {
           "description": "App ingress settings payload.",
           "$ref": "#/definitions/IngressSettings"
+        },
+        "secrets": {
+          "description": "Collection of auth secrets",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Secret"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
