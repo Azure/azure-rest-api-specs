@@ -1,0 +1,93 @@
+{
+  "parameters": {
+    "api-version": "2022-11-01-preview",
+    "weatherDataProviderRequest": {
+      "extensionId": "IBM.TWC",
+      "extensionApiName": "currents-on-demand",
+      "locations": [
+        {
+          "type": "LatLong",
+          "value": "33,-97"
+        }
+      ],
+      "language": "en-US",
+      "units": "e",
+      "providerAppId": "string",
+      "providerApiKey": "key"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "weatherMetadata": {
+          "extensionVersion": "1.0",
+          "weatherDataType": "current",
+          "extensionId": "IBM.TWC",
+          "extensionApiName": "currents-on-demand",
+          "units": "e"
+        },
+        "status": "Succeeded",
+        "locations": [
+          {
+            "location": {
+              "type": "LatLong",
+              "value": "33,-97"
+            },
+            "data": [
+              {
+                "dayOfWeek": "Wednesday",
+                "dayOrNight": "N",
+                "pressureMeanSeaLevel": {
+                  "unit": "hg",
+                  "value": 1021.1
+                },
+                "relativeHumidity": {
+                  "unit": "%",
+                  "value": 84
+                },
+                "temperature": {
+                  "unit": "f",
+                  "value": 49
+                },
+                "temperatureDewPoint": {
+                  "unit": "f",
+                  "value": 44
+                },
+                "temperatureFeelsLike": {
+                  "unit": "f",
+                  "value": 47
+                },
+                "temperatureHeatIndex": {
+                  "unit": "f",
+                  "value": 49
+                },
+                "temperatureWindChill": {
+                  "unit": "f",
+                  "value": 47
+                },
+                "uvDescription": "Low",
+                "uvIndex": "0",
+                "visibility": {
+                  "unit": "mi",
+                  "value": 10
+                },
+                "windDirection": {
+                  "unit": "deg",
+                  "value": 150
+                },
+                "windGust": {
+                  "unit": "mph",
+                  "value": 0
+                },
+                "windSpeed": {
+                  "unit": "mph",
+                  "value": 4
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

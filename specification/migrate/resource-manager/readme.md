@@ -10,18 +10,20 @@ This is the AutoRest configuration file for Azure Migrate.
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-02
-  - tag: package-2020-01
-  - tag: package-2020-05
-  - tag: package-2020-07
+  - tag: package-migrate-2018-02
+  - tag: package-migrate-2020-01
+  - tag: package-migrate-2020-05
+  - tag: package-migrate-2020-07
+  - tag: package-hubmigrate-2020-05
+  - tag: package-migrateengine-2022-05
 ```
 
-### Tag: package-2018-02 and java
+### Tag: package-migrate-2018-02 and java
 
 These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-migrate-2018-02' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2018_02_02
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2018_02_02
@@ -29,12 +31,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2020-01 and java
+### Tag: package-migrate-2020-01 and java
 
-These settings apply only when `--tag=package-2020-01 --java` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2020-01 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-01' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-migrate-2020-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2020_01_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_01_01
@@ -42,12 +44,12 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2020-05 and java
+### Tag: package-migrate-2020-05 and java
 
-These settings apply only when `--tag=package-2020-05 --java` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2020-05 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-05' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-migrate-2020-05' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2020_05_01
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_05_01
@@ -55,15 +57,41 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2020-07 and java
+### Tag: package-migrate-2020-07 and java
 
-These settings apply only when `--tag=package-2020-07 --java` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2020-07 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2020-07' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-migrate-2020-07' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.azuremigrate.v2020_07_07
   output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_07_07
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-hubmigrate-2020-05 and java
+
+These settings apply only when `--tag=package-hubmigrate-2020-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-hubmigrate-2020-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2020_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2020_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-migrateengine-2022-05 and java
+
+These settings apply only when `--tag=package-migrateengine-2022-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-migrateengine-2022-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2022_05_01
+  output-folder: $(azure-libraries-for-java-folder)/sdk/azuremigrate/mgmt-v2022_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -88,52 +116,61 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-10
+tag: package-migrate-2019-10
 ```
 
-### Tag: package-2018-02
+### Tag: package-migrate-2018-02
 
-These settings apply only when `--tag=package-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2018-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-02'
+``` yaml $(tag) == 'package-migrate-2018-02'
 input-file:
 - Microsoft.Migrate/stable/2018-02-02/migrate.json
 ```
 
-### Tag: package-2019-10
+### Tag: package-migrate-2019-10
 
-These settings apply only when `--tag=package-2019-10` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2019-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-10'
+``` yaml $(tag) == 'package-migrate-2019-10'
 input-file:
 - Microsoft.Migrate/stable/2019-10-01/migrate.json
 ```
 
-### Tag: package-2020-01
+### Tag: package-migrate-2020-01
 
-These settings apply only when `--tag=package-2020-01` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01'
+``` yaml $(tag) == 'package-migrate-2020-01'
 input-file:
 - Microsoft.OffAzure/stable/2020-01-01/migrate.json
 ```
 
-### Tag: package-2020-05
+### Tag: package-hubmigrate-2020-05
 
-These settings apply only when `--tag=package-2020-05` is specified on the command line.
+These settings apply only when `--tag=package-hubmigrate-2020-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-05'
+``` yaml $(tag) == 'package-hubmigrate-2020-05'
 input-file:
 - Microsoft.Migrate/stable/2020-05-01/hubmigrate.json
 ```
 
-### Tag: package-2020-07
+### Tag: package-migrate-2020-07
 
-These settings apply only when `--tag=package-2020-07` is specified on the command line.
+These settings apply only when `--tag=package-migrate-2020-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-07'
+``` yaml $(tag) == 'package-migrate-2020-07'
 input-file:
 - Microsoft.OffAzure/stable/2020-07-07/migrate.json
+```
+
+### Tag: package-migrateengine-2022-05
+
+These settings apply only when `--tag=package-migrateengine-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-migrateengine-2022-05'
+input-file:
+- Microsoft.Migrate/preview/2022-05-01-preview/migrateEngine.json
 ```
 
 ## Suppression
