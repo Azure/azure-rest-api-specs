@@ -49,6 +49,7 @@ input-file:
   - preview/2023-03-01-preview/style.json
   - preview/2023-03-01-preview/tileset.json
   - preview/2023-03-01-preview/wayfind.json
+  - preview/2023-03-01-preview/features.json
 ```
 ### Tag: package-preview-2022-09
 
