@@ -1501,6 +1501,92 @@
         }
       }
     },
+    "/entity/import": {
+      "post": {
+        "tags": [
+          "Entity"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Import Entity from local csv file",
+        "operationId": "Entity_ImportEntityViaCsv",
+        "x-ms-examples": {
+          "Entity_ImportEntityViaCsv": {
+            "$ref": "./examples/Entity_GetImportCSVOperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "file",
+            "description": "The csv file to import entities from csv.",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. A job to import entities via csv has been accepted.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/entity/operation/{operationGuid}": {
+      "get": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Get the status of import csv operation",
+        "operationId": "Entity_GetImportCsvOperationStatus",
+        "x-ms-examples": {
+          "Entity_GetImportCsvOperationStatus": {
+            "$ref": "./examples/Entity_GetImportCSVOperationStatusByOperationguid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the status of import csv operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityImportCSVOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -7727,6 +7813,53 @@
         "error": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AsyncOperationError"
+        }
+      }
+    },
+    "EntityImportCSVOperation": {
+      "type": "object",
+      "title": "Status of import csv operation",
+      "description": "The status of import csv operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "guid string"
+        },
+        "status": {
+          "$ref": "#/definitions/ImportCSVOperationStatus"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The created time of the record."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The last updated time of the record."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EntityImportCSVOperationProperties"
+        },
+        "error": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AsyncOperationError"
+        }
+      }
+    },
+    "EntityImportCSVOperationProperties": {
+      "type": "object",
+      "properties": {
+        "processing": {
+          "type": "string",
+          "description": "Entity numbers being imported"
+        },
+        "failed": {
+          "type": "string",
+          "description": "Entity numbers failed"
+        },
+        "succeeded": {
+          "type": "string",
+          "description": "Entity numbers that already imported successfully"
         }
       }
     },
