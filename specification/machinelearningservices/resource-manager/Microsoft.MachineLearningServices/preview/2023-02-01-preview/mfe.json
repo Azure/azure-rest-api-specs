@@ -1203,6 +1203,663 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/data": {
+      "get": {
+        "tags": [
+          "DataContainerRegistry"
+        ],
+        "summary": "List containers.",
+        "operationId": "RegistryDataContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryList Registry Data Container.": {
+            "$ref": "./examples/Registry/DataContainer/registryList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/data/{name}": {
+      "delete": {
+        "tags": [
+          "DataContainerRegistry"
+        ],
+        "summary": "Delete container.",
+        "operationId": "RegistryDataContainers_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Data Container.": {
+            "$ref": "./examples/Registry/DataContainer/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "DataContainerRegistry"
+        ],
+        "summary": "Get container.",
+        "operationId": "RegistryDataContainers_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Data Container.": {
+            "$ref": "./examples/Registry/DataContainer/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataContainerRegistry"
+        ],
+        "summary": "Create or update container.",
+        "operationId": "RegistryDataContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataContainerResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataContainerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataContainerResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Data Container.": {
+            "$ref": "./examples/Registry/DataContainer/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions": {
+      "get": {
+        "tags": [
+          "DataVersionRegistry"
+        ],
+        "summary": "List data versions in the data container",
+        "operationId": "RegistryDataVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Data container's name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "Please choose OrderBy value from ['createdtime', 'modifiedtime']",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Top count of results, top count cannot be greater than the page size.\r\n                              If topCount > page size, results with be default page size count will be returned",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "$tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "[ListViewType.ActiveOnly, ListViewType.ArchivedOnly, ListViewType.All]View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataVersionBaseResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RegistryList Registry Data Version Base.": {
+            "$ref": "./examples/Registry/DataVersionBase/registryList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}": {
+      "delete": {
+        "tags": [
+          "DataVersionRegistry"
+        ],
+        "summary": "Delete version.",
+        "operationId": "RegistryDataVersions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Data Version Base.": {
+            "$ref": "./examples/Registry/DataVersionBase/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "DataVersionRegistry"
+        ],
+        "summary": "Get version.",
+        "operationId": "RegistryDataVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataVersionBaseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Data Version Base.": {
+            "$ref": "./examples/Registry/DataVersionBase/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DataVersionRegistry"
+        ],
+        "summary": "Create or update version.",
+        "operationId": "RegistryDataVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Version entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataVersionBaseResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DataVersionBaseResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/DataVersionBaseResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Data Version Base.": {
+            "$ref": "./examples/Registry/DataVersionBase/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/environments": {
       "get": {
         "tags": [
@@ -5969,10 +6626,6 @@
           "GetEntity Workspace Featureset Container.": {
             "$ref": "./examples/Workspace/FeaturesetContainer/getEntity.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "put": {
@@ -6080,7 +6733,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Container name. This is case-sensitive.",
+            "description": "Featureset name. This is case-sensitive.",
             "required": true,
             "type": "string"
           },
@@ -6142,10 +6795,6 @@
           "List Workspace Featureset Version.": {
             "$ref": "./examples/Workspace/FeaturesetVersion/list.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -6287,10 +6936,6 @@
           "Get Workspace Featureset Version.": {
             "$ref": "./examples/Workspace/FeaturesetVersion/get.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "put": {
@@ -6567,14 +7212,14 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Container name. This is case-sensitive.",
+            "description": "Featureset name. This is case-sensitive.",
             "required": true,
             "type": "string"
           },
           {
             "in": "path",
             "name": "version",
-            "description": "Version identifier. This is case-sensitive.",
+            "description": "Featureset Version identifier. This is case-sensitive.",
             "required": true,
             "type": "string"
           },
@@ -6586,7 +7231,7 @@
           },
           {
             "in": "query",
-            "name": "tags",
+            "name": "$tags",
             "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
             "type": "string"
           }
@@ -6777,10 +7422,6 @@
             "$ref": "./examples/Workspace/FeaturestoreEntityContainer/list.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6907,10 +7548,6 @@
           "GetEntity Workspace Featurestore Entity Container.": {
             "$ref": "./examples/Workspace/FeaturestoreEntityContainer/getEntity.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "put": {
@@ -7018,7 +7655,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "Container name. This is case-sensitive.",
+            "description": "Feature entity name. This is case-sensitive.",
             "required": true,
             "type": "string"
           },
@@ -7080,10 +7717,6 @@
           "List Workspace Featurestore Entity Version.": {
             "$ref": "./examples/Workspace/FeaturestoreEntityVersion/list.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -7225,10 +7858,6 @@
           "Get Workspace Featurestore Entity Version.": {
             "$ref": "./examples/Workspace/FeaturestoreEntityVersion/get.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "put": {
@@ -10578,6 +11207,15 @@
           ],
           "x-nullable": true
         },
+        "queueSettings": {
+          "description": "Queue settings for the job",
+          "$ref": "#/definitions/QueueSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "resources": {
           "description": "Compute Resource configuration for the job.",
           "default": "{}",
@@ -10586,15 +11224,6 @@
             "create",
             "read"
           ]
-        },
-        "schedulingSettings": {
-          "description": "Scheduling setting for the job",
-          "$ref": "#/definitions/SchedulingSettings",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
         },
         "taskDetails": {
           "description": "[Required] This represents scenario which can be one of Tables/NLP/Image",
@@ -12135,6 +12764,15 @@
           ],
           "x-nullable": true
         },
+        "queueSettings": {
+          "description": "Queue settings for the job",
+          "$ref": "#/definitions/QueueSettings",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
         "resources": {
           "description": "Compute Resource configuration for the job.",
           "default": "{}",
@@ -12143,15 +12781,6 @@
             "create",
             "read"
           ]
-        },
-        "schedulingSettings": {
-          "description": "Scheduling setting for the job",
-          "$ref": "#/definitions/SchedulingSettings",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
         }
       },
       "x-ms-discriminator-value": "Command",
@@ -19109,6 +19738,31 @@
       "x-ms-discriminator-value": "PyTorch",
       "additionalProperties": false
     },
+    "QueueSettings": {
+      "type": "object",
+      "properties": {
+        "jobTier": {
+          "description": "Enum to determine the job tier.",
+          "default": "Standard",
+          "$ref": "#/definitions/JobTier",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "priority": {
+          "format": "int32",
+          "description": "Controls the priority of the job on a compute.",
+          "type": "integer",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "RandomSamplingAlgorithm": {
       "description": "Defines a Sampling Algorithm that generates values randomly",
       "type": "object",
@@ -19862,31 +20516,6 @@
       },
       "additionalProperties": false
     },
-    "SchedulingSettings": {
-      "type": "object",
-      "properties": {
-        "jobTier": {
-          "description": "Enum to determine the job tier.",
-          "default": "Standard",
-          "$ref": "#/definitions/JobTier",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "priority": {
-          "format": "int32",
-          "description": "Controls the priority of the job on a compute.",
-          "type": "integer",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
     "Seasonality": {
       "description": "Forecasting seasonality.",
       "required": [
@@ -20350,18 +20979,18 @@
           ],
           "x-nullable": true
         },
-        "resources": {
-          "description": "Compute Resource configuration for the job.",
-          "$ref": "#/definitions/SparkResourceConfiguration",
+        "queueSettings": {
+          "description": "Queue settings for the job",
+          "$ref": "#/definitions/QueueSettings",
           "x-ms-mutability": [
             "create",
             "read"
           ],
           "x-nullable": true
         },
-        "schedulingSettings": {
-          "description": "Scheduling setting for the job",
-          "$ref": "#/definitions/SchedulingSettings",
+        "resources": {
+          "description": "Compute Resource configuration for the job.",
+          "$ref": "#/definitions/SparkResourceConfiguration",
           "x-ms-mutability": [
             "create",
             "read"
@@ -20719,18 +21348,18 @@
           ],
           "x-nullable": true
         },
-        "samplingAlgorithm": {
-          "description": "[Required] The hyperparameter sampling algorithm",
-          "$ref": "#/definitions/SamplingAlgorithm"
-        },
-        "schedulingSettings": {
-          "description": "Scheduling setting for the job",
-          "$ref": "#/definitions/SchedulingSettings",
+        "queueSettings": {
+          "description": "Queue settings for the job",
+          "$ref": "#/definitions/QueueSettings",
           "x-ms-mutability": [
             "create",
             "read"
           ],
           "x-nullable": true
+        },
+        "samplingAlgorithm": {
+          "description": "[Required] The hyperparameter sampling algorithm",
+          "$ref": "#/definitions/SamplingAlgorithm"
         },
         "searchSpace": {
           "description": "[Required] A dictionary containing each parameter and its distribution. The dictionary key is the name of the parameter",
