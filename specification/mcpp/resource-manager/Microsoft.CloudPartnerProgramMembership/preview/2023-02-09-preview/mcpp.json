@@ -175,13 +175,16 @@
   },
   "definitions": {
     "McppPurchaseDetailsResponse":{
+      "description": "MCPP Purchase details response",
+      "type": "object",
+      "x-ms-azure-resource": true,
       "properties": {
         "$ref": "#/definitions/McppPurchaseDetailsResponseProperties",
         "description": "MCPP Purchase details response properties."
       }
     },
     "McppPurchaseDetailsResponseProperties": {
-      "description": "Get purchase details of a resource",
+      "description": "MCPP Purchase details response properties",
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -217,7 +220,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/McppPurchaseDetailsResponse"
-          }
+          },
+          "x-ms-identifiers":[]
         }
       }
     },
@@ -276,6 +280,7 @@
     },
     "ErrorResponse": {
       "description": "Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message.",
+      "type":"object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorDefinition",
@@ -304,7 +309,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
+      "x-ms-parameter-location": "method"
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -330,7 +336,8 @@
       "description": "The name of the resource.",
       "pattern": "^[a-z][a-z0-9]*$",
       "minLength": 3,
-      "maxLength": 63
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
     },
     "ProductCodeParameter": {
       "name": "productCode",
