@@ -26,17 +26,45 @@ These are the global settings for the SecurityInsights API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-02
+tag: package-preview-2023-03
 ```
 
 ---
 
 
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/AlertRules.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/AutomationRules.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/Enrichment.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/Entities.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/EntityQueries.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/EntityQueryTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/FileImports.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/Metadata.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/OfficeConsents.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/OnboardingStates.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/Recommendations.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/SecurityMLAnalyticsSettings.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/Settings.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/SourceControls.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/ThreatIntelligence.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/TriggeredAnalyticsRuleRuns.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/dataConnectors.json
+  - Microsoft.SecurityInsights/preview/2023-03-05-preview/operations.json
+```
 ### Tag: package-preview-2023-02
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-02'
+``` yaml $(tag) == 'package-preview-2023-02'
 input-file:
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/TriggeredAnalyticsRuleRuns.json
@@ -60,6 +88,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/dataConnectors.json
   - Microsoft.SecurityInsights/preview/2023-02-01-preview/operations.json
 ```
+
 ### Tag: package-preview-2022-12
 
 These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
