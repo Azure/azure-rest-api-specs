@@ -713,7 +713,7 @@
           "description": "Enables API logging for the Dapr sidecar",
           "type": "boolean"
         },
-        "resiliencyTargets":{
+        "resiliencyTargets": {
           "description": "Dapr targets for for applied resiliency policies",
           "type": "object",
           "properties": {
@@ -1212,7 +1212,8 @@
         },
         "circuitBreakerCacheSize": {
           "description": "Size of policy lru cache",
-          "type": "int32"
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -1241,7 +1242,8 @@
         },
         "circuitBreakerCacheSize": {
           "description": "Size of policy lru cache",
-          "type": "int32"
+          "format": "int32",
+          "type": "integer"
         },
         "circuitBreakerScope": {
           "description": "Circuit breakers for actors are scoped by 'id', 'type' or 'both'.",
