@@ -204,7 +204,7 @@
       "description": "MCPP Purchase details response properties",
       "type": "object",
       "properties": {
-        "orderNo": {
+        "orderId": {
           "type": "string",
           "description": "order number for the purchase",
           "readOnly": true
@@ -236,8 +236,12 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/McppPurchaseDetailsResponse"
-          },
-          "x-ms-identifiers":[]
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
