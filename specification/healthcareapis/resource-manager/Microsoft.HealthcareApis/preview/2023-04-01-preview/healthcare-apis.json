@@ -4440,7 +4440,8 @@
           "type": "string",
           "description": "Type of data source.",
           "enum": [
-            "fhirservice"
+            "fhirservice",
+            "dicomservice"
           ],
           "x-ms-enum": {
             "name": "analyticsConnectorDataSourceType",
@@ -4485,6 +4486,30 @@
       "required": [
         "url",
         "kind"
+      ]
+    },
+    "AnalyticsConnectorDicomServiceDataSource": {
+      "type": "object",
+      "description": "The DICOM service data source for Analytics Connector.",
+      "x-ms-discriminator-value": "dicomservice",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyticsConnectorDataSource"
+        }
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL of DICOM service."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "The API version of DICOM service."
+        }
+      },
+      "required": [
+        "url",
+        "apiVersion"
       ]
     },
     "AnalyticsConnectorMapping": {
