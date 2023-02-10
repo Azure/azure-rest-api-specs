@@ -12867,133 +12867,6 @@
         }
       }
     },
-    "/scenes/collections/{collectionId}:search": {
-      "post": {
-        "tags": [
-          "Scenes"
-        ],
-        "description": "Search for STAC features by collection id, bbox, intersecting geometry, start and end datetime.",
-        "operationId": "Scenes_SearchFeatures",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "collectionId",
-            "description": "Collection Id to be searched. Available Values are: Sentinel_2_L2A, Sentinel_2_L1C.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "body",
-            "name": "searchFeaturesQuery",
-            "description": "Query filters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SearchFeaturesQuery"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/SearchFeaturesResponse"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
-              }
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Scenes_SearchFeatures": {
-            "$ref": "./examples/Scenes_SearchFeatures.json"
-          }
-        }
-      }
-    },
-    "/scenes/collections/{collectionId}/features/{featureId}": {
-      "get": {
-        "tags": [
-          "Scenes"
-        ],
-        "description": "Get a feature(SpatioTemporal Asset Catalog (STAC) Item) for given collection and feature id.",
-        "operationId": "Scenes_GetStacFeature",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "collectionId",
-            "description": "Collection Id to be fetched. Available Values are: Sentinel_2_L2A, Sentinel_2_L1C.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "featureId",
-            "description": "Feature Id to be fetched.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "api-version",
-            "description": "The requested API version",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/StacFeature"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "x-ms-client-name": "ErrorCode"
-              }
-            },
-            "x-ms-error-response": true
-          }
-        },
-        "x-ms-examples": {
-          "Scenes_GetStacFeature": {
-            "$ref": "./examples/Scenes_GetStacFeature.json"
-          }
-        }
-      }
-    },
     "/scenes/downloadFiles": {
       "get": {
         "tags": [
@@ -13168,6 +13041,152 @@
         "x-ms-examples": {
           "Scenes_GetSatelliteDataIngestionJobDetails": {
             "$ref": "./examples/Scenes_GetSatelliteDataIngestionJobDetails.json"
+          }
+        }
+      }
+    },
+    "/scenes/stac-collections/{collectionId}:search": {
+      "post": {
+        "tags": [
+          "Scenes"
+        ],
+        "description": "Search for STAC features by collection id, bbox, intersecting geometry, start and end datetime.",
+        "operationId": "Scenes_SearchFeatures",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "collectionId",
+            "description": "Collection Id to be searched. Available Values are: Sentinel_2_L2A, Sentinel_2_L1C.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "maxpagesize",
+            "description": "Maximum number of features needed (inclusive). Minimum = 1, Maximum = 100, Default value = 10.",
+            "type": "integer",
+            "format": "int32",
+            "default": 10,
+            "maximum": 100,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Skip token for getting next set of results.",
+            "type": "integer",
+            "format": "int32",
+            "maximum": 2147483647,
+            "minimum": 1
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "searchFeaturesQuery",
+            "description": "Query filters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SearchFeaturesQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchFeaturesResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_SearchFeatures": {
+            "$ref": "./examples/Scenes_SearchFeatures.json"
+          }
+        }
+      }
+    },
+    "/scenes/stac-collections/{collectionId}/features/{featureId}": {
+      "get": {
+        "tags": [
+          "Scenes"
+        ],
+        "description": "Get a feature(SpatioTemporal Asset Catalog (STAC) Item) for given collection and feature id.",
+        "operationId": "Scenes_GetStacFeature",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "collectionId",
+            "description": "Collection Id to be fetched. Available Values are: Sentinel_2_L2A, Sentinel_2_L1C.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "featureId",
+            "description": "Feature Id to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "api-version",
+            "description": "The requested API version",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/StacFeature"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "x-ms-client-name": "ErrorCode"
+              }
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-examples": {
+          "Scenes_GetStacFeature": {
+            "$ref": "./examples/Scenes_GetStacFeature.json"
           }
         }
       }
@@ -22467,30 +22486,13 @@
           "items": {
             "type": "string"
           }
-        },
-        "limit": {
-          "format": "int32",
-          "description": "Maximum number of features needed (inclusive).\r\nMinimum = 1, Maximum = 100, Default value = 10.",
-          "default": 10,
-          "maximum": 100,
-          "minimum": 1,
-          "type": "integer"
-        },
-        "next": {
-          "format": "int32",
-          "description": "Skip token for getting next set of results.",
-          "default": null,
-          "maximum": 2147483647,
-          "minimum": 1,
-          "type": "integer"
         }
       }
     },
     "SearchFeaturesResponse": {
       "description": "Paged response contains list of features and next property to get the next set of results.",
       "required": [
-        "features",
-        "returned"
+        "features"
       ],
       "type": "object",
       "properties": {
@@ -22501,15 +22503,10 @@
             "$ref": "#/definitions/StacFeature"
           }
         },
-        "next": {
-          "format": "int32",
-          "description": "Merge this next property in next search request\r\nto get next set of results.",
-          "type": "integer"
-        },
-        "returned": {
-          "format": "int32",
-          "description": "No of features returned.",
-          "type": "integer"
+        "nextLink": {
+          "description": "URL to do the POST request with same filters,\r\nto get next set of features.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },

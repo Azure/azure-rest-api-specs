@@ -1,6 +1,8 @@
 {
   "parameters": {
     "collectionId": "Sentinel_2_L2A",
+    "maxpagesize": 2,
+    "skip": 15,
     "api-version": "2022-11-01-preview",
     "searchFeaturesQuery": {
       "startDateTime": "2022-01-26T14:53:23.825Z",
@@ -31,9 +33,7 @@
             ]
           ]
         ]
-      },
-      "limit": 2,
-      "next": 15
+      }
     }
   },
   "responses": {
@@ -433,8 +433,7 @@
             }
           }
         ],
-        "next": 17,
-        "returned": 2
+        "nextLink": "https://{{resourceName}}.farmbeats.azure.net//scenes/stac-collections/{collectionId}:search?api-version={{apiVersion}}&collectionId=Sentinel_2_L2A&maxpagesize=2&skip=17"
       }
     }
   }
