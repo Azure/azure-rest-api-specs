@@ -350,6 +350,15 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
+            "name": "JobEnvelope",
+            "in": "body",
+            "description": "Properties used to create a container apps job",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobExecutionContainer"
+            }
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -375,6 +384,70 @@
         "x-ms-examples": {
           "Run a Container Apps Job": {
             "$ref": "./examples/Job_Start.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/executions/{jobExecutionName}/stop": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "summary": "Terminates execution of a running container apps job",
+        "operationId": "Job_terminate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Name of the Container Apps Job.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "jobExecutionName",
+            "in": "path",
+            "description": "Name of the Container Apps Job's Execution.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Container Apps Jobs terminated successfully."
+          },
+          "202": {
+            "description": "OK",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Terminate a Container Apps Job": {
+            "$ref": "./examples/Job_Execution_Stop.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -758,6 +831,44 @@
       "description": "Number of parallel replicas of a job that can run at a given time.",
       "format": "int32",
       "type": "integer"
+    },
+    "JobExecutionContainer":{
+      "description": "Container App base container definition.",
+      "type": "object",
+      "properties": {
+        "image": {
+          "description": "Container image tag.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Custom container name.",
+          "type": "string"
+        },
+        "command": {
+          "description": "Container start command.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "args": {
+          "description": "Container start command arguments.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "description": "Container environment variables.",
+          "type": "array",
+          "items": {
+            "$ref": "./CommonDefinitions.json#/definitions/EnvironmentVar"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
     }
   },
   "securityDefinitions": {
