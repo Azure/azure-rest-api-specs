@@ -28,22 +28,64 @@ These are the global settings for the PostgreSQL API.
 title: PostgreSQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2021-06
+tag: package-flexibleserver-2022-12-01
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2021-06
+tag: package-flexibleserver-2022-12-01
 ```
 
 ``` yaml $(package-singleservers)
 tag: package-2020-01-01
 ```
 
+
+### Tag: package-flexibleserver-2022-12-01
+
+These settings apply only when `--tag=package-flexibleserver-2022-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2022-12-01'
+input-file:
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Administrators.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Backups.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Capabilities.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Configuration.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Databases.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Operations.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Replicas.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/VirtualNetwork.json
+```
+### Tag: package-flexibleserver-2022-03-preview
+
+These settings apply only when `--tag=package-flexibleserver-2022-03-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2022-03-preview'
+input-file:
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Administrators.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Backups.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Capabilities.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Configuration.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Operations.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/Replicas.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/VirtualNetwork.json
+  - Microsoft.DBforPostgreSQL/preview/2022-03-08-preview/ServerStartStopRestart.json
+```
+
 ### Tag: package-flexibleserver-2022-03-privatepreview
 
 These settings apply only when `--tag=package-flexibleserver-2022-03-privatepreview` is specified on the command line.
 
-``` yaml $(tag) == 'flexibleserver-2022-03-privatepreview'
+``` yaml $(tag) == 'package-flexibleserver-2022-03-privatepreview'
 input-file:
 - Microsoft.DBforPostgreSQL/preview/2022-03-08-privatepreview/getCachedServerName.json
 - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
@@ -55,7 +97,7 @@ input-file:
 
 These settings apply only when `--tag=package-flexibleserver-2022-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-flexibleserver-2022-01-preview'
+``` yaml $(tag) == 'package-flexibleserver-2022-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/Databases.json
   - Microsoft.DBforPostgreSQL/preview/2022-01-20-preview/PrivateDnsZone.json
@@ -231,6 +273,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

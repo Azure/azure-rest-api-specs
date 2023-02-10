@@ -1252,12 +1252,44 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "../../preview/2022-05-15-preview/cosmos-db.json#/definitions/DatabaseRestoreResource"
+            "$ref": "#/definitions/RestorableSqlResourcesGetResult"
           },
           "description": "List of restorable SQL resources, including the database and collection names."
         }
       },
       "description": "The List operation response, that contains the restorable SQL resources."
+    },
+    "RestorableSqlResourcesGetResult": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database available for restore."
+        },
+        "collectionNames": {
+          "type": "array",
+          "description": "The names of the collections available for restore.",
+          "items": {
+            "$ref": "cosmos-db.json#/definitions/CollectionName"
+          }
+        }
+      }
     },
     "RestorableMongodbDatabasesListResult": {
       "type": "object",
@@ -1424,12 +1456,44 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "../../preview/2022-05-15-preview/cosmos-db.json#/definitions/DatabaseRestoreResource"
+            "$ref": "#/definitions/RestorableMongodbResourcesGetResult"
           },
           "description": "List of restorable MongoDB resources, including the database and collection names."
         }
       },
       "description": "The List operation response, that contains the restorable MongoDB resources."
+    },
+    "RestorableMongodbResourcesGetResult": {
+      "type": "object",
+      "description": "Specific Databases to restore.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database available for restore."
+        },
+        "collectionNames": {
+          "type": "array",
+          "description": "The names of the collections available for restore.",
+          "items": {
+            "$ref": "cosmos-db.json#/definitions/CollectionName"
+          }
+        }
+      }
     },
     "RestorableGremlinDatabasesListResult": {
       "type": "object",

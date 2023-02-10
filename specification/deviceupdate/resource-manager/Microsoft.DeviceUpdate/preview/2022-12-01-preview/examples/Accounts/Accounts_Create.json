@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "test-rg",
+    "accountName": "contoso",
+    "api-version": "2022-12-01-preview",
+    "Account": {
+      "location": "westus2",
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      },
+      "properties": {
+        "encryption": {
+          "keyVaultKeyUri": "https://contoso.vault.azure.net/keys/contoso",
+          "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "contoso",
+        "location": "westus2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.DeviceUpdate/accounts/contoso",
+        "type": "Microsoft.DeviceUpdate/accounts",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "12345678-1234-4321-1234-123456789012",
+              "clientId": "12345678-4321-1234-1234-123456789012"
+            }
+          }
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "hostName": "contoso.api.adu.microsoft.com",
+          "sku": "Free",
+          "encryption": {
+            "keyVaultKeyUri": "https://contoso.vault.azure.net/keys/contoso",
+            "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/test-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+          },
+          "locations": [
+            {
+              "name": "westus2",
+              "role": "Primary"
+            },
+            {
+              "name": "westcentralus",
+              "role": "Failover"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

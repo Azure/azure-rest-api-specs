@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ResourceHealth.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ResourceHealth, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,37 @@ To build the SDK for ResourceHealth, simply [Install AutoRest](https://aka.ms/au
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05-01
+tag: package-2022-05
 ```
 
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.ResourceHealth/stable/2022-05-01/ResourceHealth.json
+```
+### Tag: package-preview-2022-05-01
+
+These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-05-01'
+input-file:
+  - Microsoft.ResourceHealth/preview/2022-05-01-preview/ResourceHealth.json
+```
 
 ### Tag: package-2017-07
 
@@ -38,7 +55,6 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 input-file:
 - Microsoft.ResourceHealth/stable/2017-07-01/resourcehealth.json
 ```
-
 
 ### Tag: package-2015-01
 
@@ -86,8 +102,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -169,6 +185,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2018-08-preview and java
 
 These settings apply only when `--tag=package-2018-08-preview --java` is specified on the command line.
@@ -181,6 +198,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2020-05-01-preview and java
 
 These settings apply only when `--tag=package-2020-05-01-preview --java` is specified on the command line.
@@ -193,6 +211,7 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 ### Tag: package-2018-07-01 and java
 
 These settings apply only when `--tag=package-2018-07-01 --java` is specified on the command line.
@@ -218,6 +237,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-

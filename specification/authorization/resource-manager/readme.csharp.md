@@ -133,3 +133,15 @@ output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/$(cs
 batch:
  - tag: package-2020-10-01-preview
  ```
+
+### Profile: profile_2022_04_01
+
+These settings apply only when `--csharp-profile=profile_2022_04_01` is specified on the command line.
+
+ ``` yaml $(csharp-profile)=='profile_2022_04_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Authorization
+output-folder: $(csharp-sdks-folder)/Authorization/Management.Authorization/$(csharp-profile)/Generated
+
+batch:
+ - tag: package-2022-04-01
+ ```

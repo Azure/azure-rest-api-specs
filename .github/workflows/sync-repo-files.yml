@@ -1,0 +1,54 @@
+ name: sync-common-types-files
+ on: 
+   schedule:
+       - cron: '0 8 * * *'
+   workflow_dispatch:
+ jobs:
+   sync-files-RPSaaSMaster:
+     name: sync-common-types-files
+     if: ${{ github.repository == 'Azure/azure-rest-api-specs-pr' }}
+     runs-on: ubuntu-latest
+     steps:
+       - name: checkoutV3 
+         uses: actions/checkout@v3
+       - name: sync-common-types-files
+         uses: ./
+         with:
+            SOURCE: azure/azure-rest-api-specs-pr@main
+            DEST: azure/azure-rest-api-specs-pr@RPSaaSMaster
+            FILE_PATH: specification/common-types
+            GITHUB_TOKEN: ${{ secrets.AutoSync_GH_PAT }}
+            ASSIGNEES: |
+              raych1
+   sync-files-RPSaaSDev:
+     name: sync-common-types-files
+     if: ${{ github.repository == 'Azure/azure-rest-api-specs-pr' }}
+     runs-on: ubuntu-latest
+     steps:
+       - name: checkoutV3 
+         uses: actions/checkout@v3
+       - name: sync-common-types-files
+         uses: ./
+         with:
+            SOURCE: azure/azure-rest-api-specs-pr@main
+            DEST: azure/azure-rest-api-specs-pr@RPSaaSDev
+            FILE_PATH: specification/common-types
+            GITHUB_TOKEN: ${{ secrets.AutoSync_GH_PAT }}
+            ASSIGNEES: |
+              raych1
+   sync-files-ARMCoreRPDev:
+     name: sync-common-types-files
+     if: ${{ github.repository == 'Azure/azure-rest-api-specs-pr' }}
+     runs-on: ubuntu-latest
+     steps:
+       - name: checkoutV3 
+         uses: actions/checkout@v3
+       - name: sync-common-types-files
+         uses: ./
+         with:
+            SOURCE: azure/azure-rest-api-specs-pr@main
+            DEST: azure/azure-rest-api-specs-pr@ARMCoreRPDev
+            FILE_PATH: specification/common-types
+            GITHUB_TOKEN: ${{ secrets.AutoSync_GH_PAT }}
+            ASSIGNEES: |
+              raych1
