@@ -16,6 +16,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
+default-api-version: 2015-06-01-preview
 clear-output-folder: true
 batch:
   - tag: package-2015-06-preview
