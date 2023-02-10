@@ -520,7 +520,7 @@
         },
         "status": {
           "description": "The status of the email",
-          "type": "string"
+          "$ref": "#/definitions/AcsEmailStatus"
         },
         "deliveryAttemptTimestamp": {
           "description": "The time at which the email delivery report received timestamp",
@@ -808,6 +808,20 @@
       ],
       "x-ms-enum": {
         "name": "UserEngagement",
+        "modelAsString": true
+      }
+    },
+    "AcsEmailStatus": {
+      "description": "The email status enum",
+      "type": "string",
+      "enum": [
+        "Failed",
+        "Delivered",
+        "FilteredSpam",
+        "Quarantined"
+      ],
+      "x-ms-enum": {
+        "name": "Status",
         "modelAsString": true
       }
     }
