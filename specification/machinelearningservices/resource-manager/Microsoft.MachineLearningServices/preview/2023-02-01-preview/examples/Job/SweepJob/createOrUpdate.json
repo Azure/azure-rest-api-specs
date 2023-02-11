@@ -23,52 +23,79 @@
             "endpoint": "string",
             "properties": {
               "string": "string"
+            },
+            "nodes": {
+              "nodesValueType": "All"
             }
           }
         },
         "computeId": "string",
-        "jobType": "Sweep",
-        "samplingAlgorithm": {
-          "samplingAlgorithmType": "Grid"
+        "isArchived": false,
+        "identity": {
+          "identityType": "AMLToken"
         },
-        "limits": {
-          "jobLimitsType": "Sweep",
-          "maxTotalTrials": 1,
-          "maxConcurrentTrials": 1,
-          "trialTimeout": "PT1S"
+        "componentId": "string",
+        "notificationSetting": {
+          "emails": [
+            "string"
+          ],
+          "emailOn": [
+            "JobCompleted"
+          ]
         },
-        "earlyTermination": {
-          "evaluationInterval": 1,
-          "delayEvaluation": 1,
-          "policyType": "MedianStopping"
-        },
-        "objective": {
-          "primaryMetric": "string",
-          "goal": "Minimize"
-        },
-        "trial": {
-          "codeId": "string",
-          "command": "string",
-          "environmentId": "string",
-          "environmentVariables": {
-            "string": "string"
-          },
-          "distribution": {
-            "distributionType": "Mpi",
-            "processCountPerInstance": 1
-          },
-          "resources": {
-            "instanceCount": 1,
-            "instanceType": "string",
-            "properties": {
-              "string": {
-                "e6b6493e-7d5e-4db3-be1e-306ec641327e": null
-              }
+        "jobType": "Command",
+        "resources": {
+          "instanceCount": 1,
+          "instanceType": "string",
+          "locations": [
+            "string"
+          ],
+          "properties": {
+            "string": {
+              "5fc1f627-491e-45a0-a6a2-f5b4be884911": null
             }
+          },
+          "shmSize": "string",
+          "dockerArgs": "string"
+        },
+        "codeId": "string",
+        "command": "string",
+        "environmentId": "string",
+        "inputs": {
+          "string": {
+            "description": "string",
+            "jobInputType": "literal",
+            "value": "string"
           }
         },
-        "searchSpace": {
-          "string": {}
+        "outputs": {
+          "string": {
+            "description": "string",
+            "uri": "string",
+            "assetName": "string",
+            "assetVersion": "string",
+            "mode": "ReadWriteMount",
+            "jobOutputType": "uri_file"
+          }
+        },
+        "distribution": {
+          "distributionType": "TensorFlow",
+          "workerCount": 1,
+          "parameterServerCount": 1
+        },
+        "autologgerSettings": {
+          "mlflowAutologger": "Disabled"
+        },
+        "limits": {
+          "timeout": "PT5M",
+          "jobLimitsType": "Command"
+        },
+        "environmentVariables": {
+          "string": "string"
+        },
+        "queueSettings": {
+          "jobTier": "Basic",
+          "priority": 1
         }
       }
     }
@@ -89,7 +116,7 @@
             "string": "string"
           },
           "displayName": "string",
-          "status": "NotStarted",
+          "status": "Starting",
           "experimentName": "string",
           "services": {
             "string": {
@@ -100,61 +127,91 @@
               "errorMessage": "string",
               "properties": {
                 "string": "string"
+              },
+              "nodes": {
+                "nodesValueType": "All"
               }
             }
           },
           "computeId": "string",
-          "jobType": "Sweep",
-          "samplingAlgorithm": {
-            "samplingAlgorithmType": "Grid"
+          "isArchived": false,
+          "identity": {
+            "identityType": "AMLToken"
           },
-          "limits": {
-            "jobLimitsType": "Sweep",
-            "maxTotalTrials": 1,
-            "maxConcurrentTrials": 1,
-            "trialTimeout": "PT1S"
+          "componentId": "string",
+          "notificationSetting": {
+            "emails": [
+              "string"
+            ],
+            "emailOn": [
+              "JobCompleted"
+            ]
           },
-          "earlyTermination": {
-            "evaluationInterval": 1,
-            "delayEvaluation": 1,
-            "policyType": "MedianStopping"
-          },
-          "objective": {
-            "primaryMetric": "string",
-            "goal": "Minimize"
-          },
-          "trial": {
-            "codeId": "string",
-            "command": "string",
-            "environmentId": "string",
-            "environmentVariables": {
-              "string": "string"
-            },
-            "distribution": {
-              "distributionType": "Mpi",
-              "processCountPerInstance": 1
-            },
-            "resources": {
-              "instanceCount": 1,
-              "instanceType": "string",
-              "properties": {
-                "string": {
-                  "e6b6493e-7d5e-4db3-be1e-306ec641327e": null
-                }
+          "jobType": "Command",
+          "resources": {
+            "instanceCount": 1,
+            "instanceType": "string",
+            "locations": [
+              "string"
+            ],
+            "properties": {
+              "string": {
+                "b2de23ac-268c-459c-bbf3-0d8ece77d247": null
               }
+            },
+            "shmSize": "string",
+            "dockerArgs": "string"
+          },
+          "codeId": "string",
+          "command": "string",
+          "environmentId": "string",
+          "inputs": {
+            "string": {
+              "description": "string",
+              "jobInputType": "literal",
+              "value": "string"
             }
           },
-          "searchSpace": {
-            "string": {}
+          "outputs": {
+            "string": {
+              "description": "string",
+              "uri": "string",
+              "assetName": "string",
+              "assetVersion": "string",
+              "mode": "Upload",
+              "jobOutputType": "uri_file"
+            }
+          },
+          "distribution": {
+            "distributionType": "TensorFlow",
+            "workerCount": 1,
+            "parameterServerCount": 1
+          },
+          "autologgerSettings": {
+            "mlflowAutologger": "Disabled"
+          },
+          "limits": {
+            "timeout": "PT5M",
+            "jobLimitsType": "Command"
+          },
+          "environmentVariables": {
+            "string": "string"
+          },
+          "parameters": {
+            "5489ee88-92db-4266-b321-ed47823d52b8": null
+          },
+          "queueSettings": {
+            "jobTier": "Standard",
+            "priority": 1
           }
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdAt": "2020-01-01T12:34:56.999+00:25",
           "createdBy": "string",
           "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:25",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "Key"
         }
       }
     },
@@ -173,7 +230,7 @@
             "string": "string"
           },
           "displayName": "string",
-          "status": "NotStarted",
+          "status": "Starting",
           "experimentName": "string",
           "services": {
             "string": {
@@ -184,59 +241,89 @@
               "errorMessage": "string",
               "properties": {
                 "string": "string"
+              },
+              "nodes": {
+                "nodesValueType": "All"
               }
             }
           },
           "computeId": "string",
-          "jobType": "Sweep",
-          "samplingAlgorithm": {
-            "samplingAlgorithmType": "Grid"
+          "isArchived": false,
+          "identity": {
+            "identityType": "AMLToken"
           },
-          "limits": {
-            "jobLimitsType": "Sweep",
-            "maxTotalTrials": 1,
-            "maxConcurrentTrials": 1,
-            "trialTimeout": "PT1S"
+          "componentId": "string",
+          "notificationSetting": {
+            "emails": [
+              "string"
+            ],
+            "emailOn": [
+              "JobFailed"
+            ]
           },
-          "earlyTermination": {
-            "evaluationInterval": 1,
-            "delayEvaluation": 1,
-            "policyType": "MedianStopping"
-          },
-          "objective": {
-            "primaryMetric": "string",
-            "goal": "Minimize"
-          },
-          "trial": {
-            "codeId": "string",
-            "command": "string",
-            "environmentId": "string",
-            "environmentVariables": {
-              "string": "string"
-            },
-            "distribution": {
-              "distributionType": "Mpi",
-              "processCountPerInstance": 1
-            },
-            "resources": {
-              "instanceCount": 1,
-              "instanceType": "string",
-              "properties": {
-                "string": {
-                  "e6b6493e-7d5e-4db3-be1e-306ec641327e": null
-                }
+          "jobType": "Command",
+          "resources": {
+            "instanceCount": 1,
+            "instanceType": "string",
+            "locations": [
+              "string"
+            ],
+            "properties": {
+              "string": {
+                "64db9b4b-db26-4473-9eb8-49e5e5cbeb3f": null
               }
+            },
+            "shmSize": "string",
+            "dockerArgs": "string"
+          },
+          "codeId": "string",
+          "command": "string",
+          "environmentId": "string",
+          "inputs": {
+            "string": {
+              "description": "string",
+              "jobInputType": "literal",
+              "value": "string"
             }
           },
-          "searchSpace": {
-            "string": {}
+          "outputs": {
+            "string": {
+              "description": "string",
+              "uri": "string",
+              "assetName": "string",
+              "assetVersion": "string",
+              "mode": "Upload",
+              "jobOutputType": "uri_file"
+            }
+          },
+          "distribution": {
+            "distributionType": "TensorFlow",
+            "workerCount": 1,
+            "parameterServerCount": 1
+          },
+          "autologgerSettings": {
+            "mlflowAutologger": "Disabled"
+          },
+          "limits": {
+            "timeout": "PT5M",
+            "jobLimitsType": "Command"
+          },
+          "environmentVariables": {
+            "string": "string"
+          },
+          "parameters": {
+            "307f11f6-ff8d-450d-b8a3-4c9d0f7d883f": null
+          },
+          "queueSettings": {
+            "jobTier": "Standard",
+            "priority": 1
           }
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdAt": "2020-01-01T12:34:56.999+00:25",
           "createdBy": "string",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:25",
           "lastModifiedBy": "string",
           "lastModifiedByType": "User"
         }

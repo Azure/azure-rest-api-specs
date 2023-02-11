@@ -6,7 +6,11 @@
     "api-version": "2023-02-01-preview",
     "$skipToken": "string",
     "jobType": "string",
-    "tag": "string"
+    "tag": "string",
+    "listViewType": "ActiveOnly",
+    "assetName": "string",
+    "scheduled": false,
+    "scheduleId": "string"
   },
   "responses": {
     "200": {
@@ -26,7 +30,7 @@
                 "string": "string"
               },
               "displayName": "string",
-              "status": "NotStarted",
+              "status": "Failed",
               "experimentName": "string",
               "services": {
                 "string": {
@@ -37,19 +41,40 @@
                   "errorMessage": "string",
                   "properties": {
                     "string": "string"
+                  },
+                  "nodes": {
+                    "nodesValueType": "All"
                   }
                 }
               },
               "computeId": "string",
+              "isArchived": false,
+              "identity": {
+                "identityType": "AMLToken"
+              },
+              "componentId": "string",
+              "notificationSetting": {
+                "emails": [
+                  "string"
+                ],
+                "emailOn": [
+                  "JobCancelled"
+                ]
+              },
               "jobType": "Command",
               "resources": {
                 "instanceCount": 1,
                 "instanceType": "string",
+                "locations": [
+                  "string"
+                ],
                 "properties": {
                   "string": {
-                    "7aad5998-6c83-4ca9-b50a-b44dfc43f420": null
+                    "47f85ca1-a889-4417-a451-2ebca543e605": null
                   }
-                }
+                },
+                "shmSize": "string",
+                "dockerArgs": "string"
               },
               "codeId": "string",
               "command": "string",
@@ -64,15 +89,20 @@
               "outputs": {
                 "string": {
                   "description": "string",
-                  "jobOutputType": "uri_file",
+                  "uri": "string",
+                  "assetName": "string",
+                  "assetVersion": "string",
                   "mode": "ReadWriteMount",
-                  "uri": "string"
+                  "jobOutputType": "uri_file"
                 }
               },
               "distribution": {
                 "distributionType": "TensorFlow",
                 "workerCount": 1,
                 "parameterServerCount": 1
+              },
+              "autologgerSettings": {
+                "mlflowAutologger": "Disabled"
               },
               "limits": {
                 "timeout": "PT5M",
@@ -81,20 +111,21 @@
               "environmentVariables": {
                 "string": "string"
               },
-              "identity": {
-                "identityType": "AMLToken"
-              },
               "parameters": {
-                "string": "string"
+                "13a3c675-c28b-4143-807e-fde07ad06a01": null
+              },
+              "queueSettings": {
+                "jobTier": "Basic",
+                "priority": 1
               }
             },
             "systemData": {
-              "createdAt": "2020-01-01T12:34:56.999Z",
+              "createdAt": "2020-01-01T12:34:56.999+00:23",
               "createdBy": "string",
-              "createdByType": "User",
-              "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+              "createdByType": "ManagedIdentity",
+              "lastModifiedAt": "2020-01-01T12:34:56.999+00:23",
               "lastModifiedBy": "string",
-              "lastModifiedByType": "User"
+              "lastModifiedByType": "Application"
             }
           }
         ],

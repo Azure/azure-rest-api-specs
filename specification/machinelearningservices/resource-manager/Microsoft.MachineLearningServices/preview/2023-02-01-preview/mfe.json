@@ -1225,7 +1225,8 @@
             "name": "registryName",
             "description": "Name of Azure Machine Learning registry.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1307,7 +1308,8 @@
             "name": "registryName",
             "description": "Name of Azure Machine Learning registry.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "in": "path",
@@ -1530,7 +1532,8 @@
             "name": "registryName",
             "description": "Name of Azure Machine Learning registry.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "in": "path",
@@ -1638,7 +1641,8 @@
             "name": "registryName",
             "description": "Name of Azure Machine Learning registry.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
           },
           {
             "in": "path",
@@ -1856,7 +1860,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -7032,7 +7036,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "azure-async-operation"
         }
       }
     },
@@ -7643,8 +7647,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-          }
+          "final-state-via": "azure-async-operation"
+        }
         }
       },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions": {
@@ -7966,7 +7970,7 @@
           },
           "x-ms-long-running-operation": true,
           "x-ms-long-running-operation-options": {
-            "final-state-via": "original-uri"
+            "final-state-via": "azure-async-operation"
           }
         }
       },
