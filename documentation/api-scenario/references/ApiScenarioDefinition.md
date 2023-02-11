@@ -72,7 +72,7 @@ scenarios:
 
 ## Scenario
 
-See [Scenario Schema](./v1.2/schema.json#L249).
+See [Scenario Schema](./v1.2/schema.json#L353).
 
 It defines one API scenario that could go through on its own.
 
@@ -109,7 +109,7 @@ variables:
 
 ## Step
 
-See [Step Schema](./v1.2/schema.json#L280).
+See [Step Schema](./v1.2/schema.json#L383).
 
 Defines one step in API scenario.
 
@@ -120,6 +120,7 @@ Should be one of the following:
   - [REST Example](#rest-example)
 - [Step ARM Template](#step-arm-template)
 - [Step ARM Deployment Script](#step-arm-deployment-script)
+- [Step Role Assignment](#step-role-assignment)
 
 All of the above definitions share the following fields:
 
@@ -146,7 +147,7 @@ REST call step could be defined either by an operation, or by an example file. R
 
 #### Operation based step
 
-See [Step Operation Schema](./v1.2/schema.json#L339)
+See [Step Operation Schema](./v1.2/schema.json#L450)
 
 **Example:**
 ```yaml
@@ -183,7 +184,7 @@ See [Step Operation Schema](./v1.2/schema.json#L339)
 
 #### ExampleFile based step
 
-See [Step Example Schema](./v1.2/schema.json#L389)
+See [Step Example Schema](./v1.2/schema.json#L520)
 
 **Example:**
 
@@ -238,7 +239,7 @@ if (scope is 'ResourceGroup' && operation.verb in ('PUT', 'PATCH')) {
 
 ### Step ARM Template
 
-See [Step ARM Template Schema](./v1.2/schema.json#L427).
+See [Step ARM Template Schema](./v1.2/schema.json#L566).
 
 Step to deploy ARM template to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -257,7 +258,7 @@ Step to deploy ARM template to the scope. Template parameters and outputs will a
 
 ### Step ARM Deployment Script
 
-See [Step ARM Deployment Script Schema](./v1.2/schema.json#L448).
+See [Step ARM Deployment Script Schema](./v1.2/schema.json#L587).
 
 Step to deploy ARM deployment script to the scope. Template parameters and outputs will also interact with variables automatically, see [Variables](./Variables.md).
 
@@ -289,6 +290,42 @@ Step to deploy ARM deployment script to the scope. Template parameters and outpu
   - **Type:** Optional, Array of [EnvironmentVariable](#EnvironmentVariable)
   - Specify the environment variables to pass over to the script.
 
+### Step Role Assignment
+
+See [Step Role Assignment Schema](./v1.2/schema.json#L629).
+
+Step to assign an Azure role to the scope.
+
+**Example:**
+
+```yaml
+- step: AssignDataOwnerRole
+  roleAssignment:
+    scope: $(configStoreId)
+    principalId: a0b840b5-a7b4-4bb4-b125-ae0acf68cf16
+    roleName: App Configuration Data Owner
+```
+
+**Fields:**
+
+- **scope**
+  - **Type:** Required, String
+  - The scope of the operation or resource. Valid scopes are: subscription (format: '/subscriptions/{subscriptionId}'), resource group (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}', or resource (format: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/[{parentResourcePath}/]{resourceType}/{resourceName}'.
+- **principalId**
+  - **Type:** Required, String, GUID
+  - The principal ID.
+- **principalType**
+  - **Type:** Optional, Enum
+  - **Enum:** User, Group, ServicePrincipal, ForeignGroup, Device
+  - **Default:** ServicePrincipal
+- **OneOf**:
+  - **roleName**
+    - **Type:** Required, String
+    - The built-in role name. [Azure built-in roles](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles)
+  - **roleDefinitionId**
+    - **Type:** Required, String, GUID
+    - The role definition ID. For example: 5ae67dd6-50cb-40e7-96ff-dc2bfa4b606b
+
 #### EnvironmentVariable
 
 **Example:**
@@ -313,7 +350,7 @@ Step to deploy ARM deployment script to the scope. Template parameters and outpu
 
 ### JsonPatchOp
 
-See [Json Patch Operation Schema](./v1.2/schema.json#L490)
+See [Json Patch Operation Schema](./v1.2/schema.json#L674)
 
 JsonPatchOp is used to define the update operation on json. You could add, remove, replace, copy, and move on json path.
 All the json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
@@ -514,7 +551,7 @@ result:
 
 ### JsonTestOp
 
-See [Json Test Operation schema](./v1.2/schema.json#L619)
+See [Json Test Operation schema](./v1.2/schema.json#L767)
 
 JsonTestOp is used to define the test operation on json. You could test if the json path is expected.
 The json path used in JsonPatchOp is in format of [JsonPointer](https://datatracker.ietf.org/doc/html/rfc6901).
