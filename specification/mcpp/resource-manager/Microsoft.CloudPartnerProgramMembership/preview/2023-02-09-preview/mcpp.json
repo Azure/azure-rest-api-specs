@@ -60,14 +60,49 @@
           }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships": {
       "get": {
         "tags": ["CloudPartnerProgramMemberships"],
         "operationId": "CloudPartnerProgramMemberships_List",
         "x-ms-examples": {
           "getOperations": { "$ref": "./examples/getMcppPurchaseDetailsList.json" }
         },
-        "description": "Fetch list of CloudPartnerProgramMembership purchase details",
+        "description": "Fetch list of CloudPartnerProgramMembership purchase details for a resource group under a given subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CloudPartnerProgramMembershipPurchaseDetailsListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships": {
+      "get": {
+        "tags": ["CloudPartnerProgramMemberships"],
+        "operationId": "CloudPartnerProgramMemberships_List",
+        "x-ms-examples": {
+          "getOperations": { "$ref": "./examples/getMcppPurchaseDetailsForSubscription.json" }
+        },
+        "description": "Fetch list of CloudPartnerProgramMembership purchase details for a given subscription",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -192,6 +227,9 @@
         "responses": {
           "200": {
             "description": "Canceled the purchase"
+          },
+          "204": {
+            "description": "purchase record does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
