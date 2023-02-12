@@ -60,7 +60,7 @@
           }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships": {
       "get": {
         "tags": ["CloudPartnerProgramMemberships"],
         "operationId": "CloudPartnerProgramMemberships_List",
@@ -71,9 +71,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -162,6 +159,39 @@
             "schema": {
               "$ref": "#/definitions/McppPurchaseDetailsResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["CloudPartnerProgramMemberships"],
+        "operationId": "CloudPartnerProgramMemberships_CancelMcppPuchase",
+        "x-ms-examples": {
+          "deleteOperations": { "$ref": "./examples/cancelMcppPurchase.json" }
+        },
+        "description": "The operation to cancel a CloudPartnerProgramMembership offer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Canceled the purchase"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
