@@ -36,11 +36,11 @@ These settings apply only when `--tag=package-2021-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/modsimworkbench.json
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/connector.json
+  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/modsimworkbenches.json
+  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/connectors.json
   - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/chambers.json
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/workload.json
-  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/storage.json
+  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/workloads.json
+  - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/storages.json
   - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/files.json
   - Microsoft.ModSimWorkbench/preview/2021-03-01-preview/fileRequests.json
 ```

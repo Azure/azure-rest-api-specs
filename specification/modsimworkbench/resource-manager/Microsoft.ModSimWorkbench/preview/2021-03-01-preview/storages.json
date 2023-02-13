@@ -115,7 +115,7 @@
         },
         "x-ms-examples": {
           "Create storage": {
-            "$ref": "./examples/StorageCreateOrUpdate.json"
+            "$ref": "./examples/StoragesCreateOrUpdate.json"
           }
         }
       },
@@ -193,7 +193,7 @@
         },
         "x-ms-examples": {
           "Update storage": {
-            "$ref": "./examples/StoragePatch.json"
+            "$ref": "./examples/StoragesPatch.json"
           }
         }
       },
@@ -259,7 +259,7 @@
         },
         "x-ms-examples": {
           "Get Storage": {
-            "$ref": "./examples/StorageGet.json"
+            "$ref": "./examples/StoragesGet.json"
           }
         }
       },
@@ -335,7 +335,71 @@
         },
         "x-ms-examples": {
           "Delete Storage": {
-            "$ref": "./examples/StorageDelete.json"
+            "$ref": "./examples/StoragesDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/storages": {
+      "get": {
+        "tags": [
+          "storages_List"
+        ],
+        "operationId": "storages_List",
+        "description": "Lists all storages.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "workbenchName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workbench."
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request is successful. The operation returns the list of all storages",
+            "schema": {
+              "$ref": "#/definitions/StoragePageableList"
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all storages": {
+            "$ref": "./examples/StoragesList.json"
           }
         }
       }
@@ -364,7 +428,7 @@
       "type": "object",
       "properties": {
         "provisioningState": {
-          "$ref": "./modsimworkbench.json#/definitions/ProvisioningState",
+          "$ref": "./modsimworkbenches.json#/definitions/ProvisioningState",
           "description": "Gets the status of the storage at the time the operation was called"
         },
         "capacityAllocated": {
@@ -388,20 +452,24 @@
         },
         "localMountPath": {
           "description": "Directory where the SDW Private Storage volume mounted.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "dataPipelineInboundPath": {
           "description": "Directory for the ModSim Workbench chamber data pipeline inbound.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "dataPipelineOutboundPath": {
           "description": "Directory for the ModSim Workbench chamber data pipeline outbound.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "capacityUsed": {
           "description": "Capacity used in the SDW Private Storage volume in gigabytes.",
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
@@ -418,7 +486,7 @@
       },
       "allOf": [
         {
-          "$ref": "./modsimworkbench.json#/definitions/Resource"
+          "$ref": "./modsimworkbenches.json#/definitions/Resource"
         }
       ]
     }

@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads/{name}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/connectors/{name}/start": {
       "post": {
         "tags": [
-          "workloads_Start"
+          "connectors_Start"
         ],
         "summary": "Perform Start operation.",
-        "operationId": "workloads_Start",
+        "operationId": "connectors_Start",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -51,16 +51,16 @@
           {
             "in": "path",
             "name": "resourceGroup",
-            "description": "the resource group.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Name of the resource group"
           },
           {
             "in": "path",
             "name": "workbenchName",
-            "description": "the workbench name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Name of the workbench"
           },
           {
             "in": "path",
@@ -72,9 +72,9 @@
           {
             "in": "path",
             "name": "name",
-            "description": "the workload name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Name of the connector"
           }
         ],
         "responses": {
@@ -92,7 +92,7 @@
           "default": {
             "description": "",
             "schema": {
-              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
@@ -102,19 +102,19 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Workloads Start": {
-            "$ref": "./examples/WorkloadsStart.json"
+          "Connectors Start": {
+            "$ref": "./examples/ConnectorsStart.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads/{name}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/connectors/{name}/stop": {
       "post": {
         "tags": [
-          "workloads_Stop"
+          "connectors_Stop"
         ],
         "summary": "Perform Stop operation.",
-        "operationId": "workloads_Stop",
+        "operationId": "connectors_Stop",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -146,7 +146,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "the workload name.",
+            "description": "the connector name.",
             "required": true,
             "type": "string"
           }
@@ -166,7 +166,7 @@
           "default": {
             "description": "",
             "schema": {
-              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
@@ -176,19 +176,19 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Workloads Stop": {
-            "$ref": "./examples/WorkloadsStop.json"
+          "Connectors stop": {
+            "$ref": "./examples/ConnectorsStop.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads/{name}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/connectors/{name}/restart": {
       "post": {
         "tags": [
-          "workloads_Restart"
+          "connectors_Restart"
         ],
         "summary": "Perform Restart operation.",
-        "operationId": "workloads_Restart",
+        "operationId": "connectors_Restart",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -220,7 +220,7 @@
           {
             "in": "path",
             "name": "name",
-            "description": "the workload name.",
+            "description": "the connector name.",
             "required": true,
             "type": "string"
           }
@@ -240,7 +240,7 @@
           "default": {
             "description": "",
             "schema": {
-              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
@@ -250,22 +250,19 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Workloads Restart": {
-            "$ref": "./examples/WorkloadsRestart.json"
+          "Connectors Restart": {
+            "$ref": "./examples/ConnectorsRestart.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads/{workloadName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/connectors/{connectorName}": {
       "put": {
         "tags": [
-          "workloads_CreateOrUpdate"
+          "connectors_CreateOrUpdate"
         ],
-        "operationId": "workloads_CreateOrUpdate",
-        "description": "Creates or updates the specified workload.",
-        "consumes": [
-          "application/json"
-        ],
+        "operationId": "connectors_CreateOrUpdate",
+        "description": "Creates or updates the specified connector.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -295,38 +292,38 @@
             "description": "The name of the chamber."
           },
           {
-            "name": "workloadName",
+            "name": "connectorName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the workload."
+            "description": "The name of the connector."
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to the create or update workload operation.",
+            "description": "Parameters supplied to the create or update connector operation.",
             "schema": {
-              "$ref": "#/definitions/Workload"
+              "$ref": "#/definitions/Connector"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting workload resource.",
+            "description": "Update successful. The operation returns the resulting Connector resource.",
             "schema": {
-              "$ref": "#/definitions/Workload"
+              "$ref": "#/definitions/Connector"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting workload resource.",
+            "description": "Create successful. The operation returns the resulting Connector resource.",
             "schema": {
-              "$ref": "#/definitions/Workload"
+              "$ref": "#/definitions/Connector"
             }
           },
           "default": {
             "description": "Default Error Response",
             "schema": {
-              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
@@ -336,24 +333,17 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create Workload": {
-            "$ref": "./examples/WorkloadCreateOrUpdate.json"
+          "Create Connector": {
+            "$ref": "./examples/ConnectorsCreateOrUpdate.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "workloads_Update"
+          "connectors_Update"
         ],
-        "operationId": "workloads_Update",
-        "description": "Updates the specified workload.",
-        "consumes": [
-          "application/merge-patch+json",
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "connectors_Update",
+        "description": "Updates the specified connectors.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -383,57 +373,54 @@
             "description": "The name of the chamber."
           },
           {
-            "name": "workloadName",
+            "name": "connectorName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the workload."
+            "description": "The name of the connector."
           },
           {
             "name": "parameters",
             "in": "body",
-            "description": "Parameters supplied to the create or update workload operation.",
+            "description": "Parameters supplied to the create or update connector operation.",
             "schema": {
-              "$ref": "#/definitions/Workload"
+              "$ref": "#/definitions/Connector"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting workload resource.",
+            "description": "Update successful. The operation returns the resulting Connector resource.",
             "schema": {
-              "$ref": "#/definitions/Workload"
+              "$ref": "#/definitions/Connector"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting Workload resource.",
+            "description": "Create successful. The operation returns the resulting Connector resource.",
             "schema": {
-              "$ref": "#/definitions/Workload"
+              "$ref": "#/definitions/Connector"
             }
           },
           "default": {
             "description": "Default Error Response",
             "schema": {
-              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Update workload": {
-            "$ref": "./examples/WorkloadPatch.json"
+          "Update Connector": {
+            "$ref": "./examples/ConnectorsPatch.json"
           }
         }
       },
       "get": {
         "tags": [
-          "workloads_Get"
+          "connectors_Get"
         ],
-        "operationId": "workloads_Get",
-        "description": "Gets information about the specified workload.",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "connectors_Get",
+        "description": "Gets information about the specified connector.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -463,43 +450,40 @@
             "description": "The name of the chamber."
           },
           {
-            "name": "workloadName",
+            "name": "connectorName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the workload."
+            "description": "The name of the connector."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns the specified workload.",
+            "description": "Request is successful. The operation returns the specified connector.",
             "schema": {
-              "$ref": "#/definitions/Workload"
+              "$ref": "#/definitions/Connector"
             }
           },
           "default": {
-            "description": "Default Error Response",
+            "description": "",
             "schema": {
-              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
         },
         "x-ms-examples": {
-          "Get Workload": {
-            "$ref": "./examples/WorkloadGet.json"
+          "Get Connector": {
+            "$ref": "./examples/ConnectorsGet.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "workloads_Delete"
+          "connectors_Delete"
         ],
-        "operationId": "workloads_Delete",
-        "description": "Deletes the specified workload.",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "connectors_Delete",
+        "description": "Deletes the specified connector.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -529,18 +513,18 @@
             "description": "The name of the chamber."
           },
           {
-            "name": "workloadName",
+            "name": "connectorName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the workload."
+            "description": "The name of the connector."
           }
         ],
         "responses": {
           "200": {
             "description": "The operation is completed successfully",
             "schema": {
-              "$ref": "#/definitions/Workload"
+              "$ref": "#/definitions/Connector"
             }
           },
           "204": {
@@ -555,9 +539,9 @@
             }
           },
           "default": {
-            "description": "Default Error Response",
+            "description": "",
             "schema": {
-              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
@@ -567,22 +551,19 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Delete Workload": {
-            "$ref": "./examples/WorkloadDelete.json"
+          "Delete Connector": {
+            "$ref": "./examples/ConnectorsDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/workloads": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/connectors": {
       "get": {
         "tags": [
-          "workloads_List"
+          "connectors_List"
         ],
-        "operationId": "workloads_List",
-        "description": "Lists all workloads.",
-        "produces": [
-          "application/json"
-        ],
+        "operationId": "connectors_List",
+        "description": "Lists all connectors.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -614,15 +595,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Request is successful. The operation returns the list of all workloads",
+            "description": "Request is successful. The operation returns the list of all connectors",
             "schema": {
-              "$ref": "#/definitions/WorkloadPageableList"
+              "$ref": "#/definitions/ConnectorPageableList"
             }
           },
           "default": {
-            "description": "Default Error Response",
+            "description": "",
             "schema": {
-              "$ref": "./modsimworkbench.json#/definitions/ErrorResponse"
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
@@ -631,15 +612,221 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List all workloads": {
-            "$ref": "./examples/WorkloadList.json"
+          "List all connectors": {
+            "$ref": "./examples/ConnectorsList.json"
           }
         }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.ModSimWorkbench/workbenches/{workbenchName}/chambers/{chamberName}/connectors/{name}/licenseAdd": {
+      "post": {
+        "tags": [
+          "connectors_LicenseAdd"
+        ],
+        "description": "Add license to an ModSim Workbench connector.",
+        "operationId": "connectors_LicenseAdd",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "in": "path",
+            "name": "resourceGroup",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group"
+          },
+          {
+            "in": "path",
+            "name": "workbenchName",
+            "required": true,
+            "type": "string",
+            "description": "The name of the workbench"
+          },
+          {
+            "name": "chamberName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the chamber."
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string",
+            "description": "The name of the connector."
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "description": "License key parameters",
+            "schema": {
+              "$ref": "#/definitions/LicenseKeyParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Default Error Response",
+            "schema": {
+              "$ref": "./modsimworkbenches.json#/definitions/ErrorResponse"
+            },
+            "x-ms-error-response": true
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Connectors License Add": {
+            "$ref": "./examples/ConnectorsLicenseAdd.json"
+          }
+        },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     }
   },
   "definitions": {
-    "WorkloadPageableList": {
+    "RemoteDesktop": {
+      "type": "object",
+      "description": "Remote Desktop properties.",
+      "properties": {
+        "etx": {
+          "$ref": "#/definitions/Etx",
+          "description": "The etx object."
+        }
+      }
+    },
+    "Etx": {
+      "type": "object",
+      "properties": {
+        "connectionNodeCount": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int32",
+          "description": "The connection node count."
+        },
+        "licenseActivated": {
+          "description": "The license activated.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "licenseActivated",
+            "modelAsString": true
+          }
+        },
+        "replyUrlEtx": {
+          "description": "The reply URL of ETX Server for Azure AD app.",
+          "type": "string",
+          "readOnly": true
+        },
+        "replyUrlOtds": {
+          "description": "The reply URL of OTDS for Azure AD app.",
+          "type": "string",
+          "readOnly": true
+        },
+        "licenseKeyUri": {
+          "description": "The license key uri.",
+          "type": "string"
+        }
+      },
+      "description": "Etx properties."
+    },
+    "AccessConfiguration": {
+      "type": "object",
+      "description": "Access configuration properties.",
+      "properties": {
+        "accessType": {
+          "description": "Gets or sets the AccessType.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "GUI"
+          ],
+          "x-ms-enum": {
+            "name": "AccessType",
+            "modelAsString": true
+          }
+        },
+        "gatewayType": {
+          "description": "Gets or sets the GatewayType.",
+          "type": "string",
+          "enum": [
+            "ExpressRoute",
+            "None",
+            "Vpn"
+          ],
+          "x-ms-enum": {
+            "name": "GatewayType",
+            "modelAsString": true
+          }
+        },
+        "gatewayVnetId": {
+          "type": "string",
+          "description": "Gets or sets the GatewayVnetId."
+        },
+        "accessUrl": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets or sets the AccessUrl."
+        },
+        "ipAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets or sets the IpAddress."
+        }
+      }
+    },
+    "NetworkAcls": {
+      "type": "object",
+      "description": "Access configuration properties.",
+      "properties": {
+        "allowedAddressSpaces": {
+          "type": "array",
+          "description": "Gets or sets the AllowedAddressSpaces.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "allowedAddressSpaces"
+          ]
+        }
+      }
+    },
+    "ConnectorPageableList": {
       "description": "Microsoft.Sdw.Core.ResourceMetadata.PageableList implementation specific to pageable lists of Microsoft.Sdw.Core.ResourceMetadata.AzureResource`1.",
       "type": "object",
       "properties": {
@@ -651,7 +838,7 @@
           "description": "Gets or sets the values to emit from this list.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Workload"
+            "$ref": "#/definitions/Connector"
           },
           "x-ms-identifiers": [
             "value"
@@ -659,62 +846,64 @@
         }
       }
     },
-    "WorkloadPropertiesFormat": {
-      "description": "Workload properties.",
+    "ConnectorPropertiesFormat": {
       "type": "object",
       "properties": {
+        "accessConfigurations": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/AccessConfiguration"
+          },
+          "description": "Gets or sets the Access Configuration."
+        },
+        "remoteDesktop": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/RemoteDesktop"
+          },
+          "description": "Gets or sets the Remote Desktop."
+        },
+        "networkAcls": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/NetworkAcls"
+          },
+          "description": "Specifies set of source IP address ranges to allow access the ModSim Workbench workbench."
+        },
         "provisioningState": {
-          "$ref": "./modsimworkbench.json#/definitions/ProvisioningState",
-          "description": "Gets the status of the workload at the time the operation was called"
-        },
-        "vmSize": {
-          "description": "Gets or sets the VmSize.",
-          "type": "string"
-        },
-        "edaType": {
-          "description": "Gets or sets the edaType.",
-          "type": "string",
-          "enum": [
-            "Cadence",
-            "Siemens",
-            "Synopsys",
-            "Ansys",
-            "Common"
-          ],
-          "default": "Common",
-          "x-ms-enum": {
-            "name": "EdaType",
-            "modelAsString": true
-          }
-        },
-        "status": {
-          "description": "Gets or sets the status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "privateIP": {
-          "description": "Gets or sets the private IpAddress of workload.",
-          "type": "string",
-          "readOnly": true
+          "$ref": "./modsimworkbenches.json#/definitions/ProvisioningState",
+          "description": "Gets the status of the connector at the time the operation was called"
         }
-      }
+      },
+      "description": "Connector properties."
     },
-    "Workload": {
-      "description": "Workload resource",
+    "Connector": {
+      "description": "Connector resource",
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WorkloadPropertiesFormat",
-          "description": "Workload properties.",
+          "$ref": "#/definitions/ConnectorPropertiesFormat",
+          "description": "Connector properties.",
           "type": "object"
         }
       },
       "allOf": [
         {
-          "$ref": "./modsimworkbench.json#/definitions/Resource"
+          "$ref": "./modsimworkbenches.json#/definitions/Resource"
         }
       ]
+    },
+    "LicenseKeyParameters": {
+      "type": "object",
+      "description": "License Key Parameters",
+      "properties": {
+        "licenseKey": {
+          "x-ms-secret": true,
+          "description": "Value of License Key",
+          "type": "string"
+        }
+      }
     }
   }
 }
