@@ -373,9 +373,7 @@
         },
         "scopes": {
           "$ref": "#/definitions/StringArray",
-          "description": "Target Azure Monitor workspaces resource ids. Only one scope currently supported.",
-          "minItems": 1,
-          "maxItems": 1
+          "description": "Target Azure Monitor workspaces resource ids. Only one scope currently supported."
         },
         "interval": {
           "type": "string",
@@ -388,9 +386,7 @@
             "$ref": "#/definitions/PrometheusRule"
           },
           "description": "Defines the rules in the Prometheus rule group.",
-          "x-ms-identifiers": [],
-          "minItems": 1,
-          "maxItems": 20
+          "x-ms-identifiers": []
         }
       }
     },
@@ -419,15 +415,12 @@
         },
         "labels": {
           "$ref": "#/definitions/StringDictionary",
-          "description": "Labels to add or overwrite before storing the result.",
-          "maxProperties": 10
+          "description": "Labels to add or overwrite before storing the result."
         },
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The severity of the alerts fired by the rule.",
-          "minimum": 1,
-          "maximum": 4
+          "description": "The severity of the alerts fired by the rule."
         },
         "for": {
           "type": "string",
