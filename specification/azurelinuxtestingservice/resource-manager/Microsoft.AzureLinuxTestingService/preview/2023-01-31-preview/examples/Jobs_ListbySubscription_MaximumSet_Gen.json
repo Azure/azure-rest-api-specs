@@ -1,0 +1,108 @@
+{
+  "title": "Jobs_ListbySubscription",
+  "operationId": "Jobs_ListbySubscription",
+  "parameters": {
+    "api-version": "2023-01-31-preview",
+    "subscriptionId": "BC7AE30F-7480-4B55-86CA-F243AF924107"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "provisioningState": "Succeeded",
+              "jobTemplateInstance": {
+                "provisioningState": "Succeeded",
+                "templateTags": [
+                  "functional-tests"
+                ],
+                "region": [
+                  "westus3"
+                ],
+                "vmSize": [
+                  "Standard_D32pds_v5"
+                ],
+                "selections": [
+                  {
+                    "caseName": [
+                      "hot_add_disk_serial_premium_ssd"
+                    ],
+                    "caseArea": [
+                      "storage"
+                    ],
+                    "caseCategory": [
+                      "functional"
+                    ],
+                    "casePriority": [
+                      3
+                    ],
+                    "caseTags": [
+                      "functional-storage"
+                    ],
+                    "action": "Include",
+                    "testIterations": 22,
+                    "retryCount": 5,
+                    "useNewEnvironment": true,
+                    "ignoreFailure": true
+                  }
+                ],
+                "concurrency": 2
+              },
+              "resourceGroupNamePrefix": "alts-rg-",
+              "repos": [
+                "test-repo"
+              ],
+              "image": {
+                "type": "vhd",
+                "vhdUrl": "www.azure.com/vhd-url",
+                "vhdGeneration": 1,
+                "vhdArchitecture": "x64"
+              },
+              "keepFailedEnvironment": true,
+              "results": [
+                {
+                  "provisioningState": "Succeeded",
+                  "jobName": "functional-tests-2301-release",
+                  "caseName": "cpu_count_check",
+                  "status": "Succeeded",
+                  "message": "Test succeeded as expected",
+                  "logUrl": "www.azure.com/log-url",
+                  "image": "kernel-lts-22.04",
+                  "vmSize": "Standard_D32pds_v5",
+                  "location": "westus3",
+                  "kernelVersion": "5.4.155-200_ol001.el7.aarch64",
+                  "distroVersion": "CentOS Linux release 7.9.2009 (AltArch)",
+                  "vhdGeneration": "1",
+                  "walaVersion": "WALinuxAgent-2.2.20",
+                  "extraFields": {},
+                  "duration": "30 minutes",
+                  "startTime": "2023-01-31T17:32:28Z",
+                  "endTime": "2023-01-31T18:02:28Z"
+                }
+              ],
+              "duration": "30 minutes",
+              "logUrl": "www.azure.com/log-url"
+            },
+            "tags": {
+              "test-type": "functional"
+            },
+            "location": "westus3",
+            "id": "nddfdglrsnasnmbnxkmyrhrt",
+            "name": "Job_Five",
+            "type": "Microsoft.AzureLinuxTestingService/jobTemplates",
+            "systemData": {
+              "createdBy": "oqxy",
+              "createdByType": "User",
+              "createdAt": "2023-01-31T21:52:10.285Z",
+              "lastModifiedBy": "qhlfaiiouwppdvipxhlcn",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-01-31T21:52:10.286Z"
+            }
+          }
+        ],
+        "nextLink": "https://microsoft.com/a"
+      }
+    }
+  }
+}

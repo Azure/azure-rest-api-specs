@@ -1,0 +1,228 @@
+{
+  "title": "Jobs_CreateOrUpdate",
+  "operationId": "Jobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2023-01-31-preview",
+    "subscriptionId": "BC7AE30F-7480-4B55-86CA-F243AF924107",
+    "resourceGroupName": "rgazurelinuxtestingservice",
+    "jobName": "Job_One",
+    "resource": {
+      "properties": {
+        "provisioningState": "Succeeded",
+        "jobTemplateInstance": {
+          "provisioningState": "Succeeded",
+          "templateTags": [
+            "kernel-test"
+          ],
+          "region": [
+            "westus"
+          ],
+          "vmSize": [
+            "Standard_D4_V4"
+          ],
+          "selections": [
+            {
+              "caseName": [
+                "perf_tcp_iperf_sriov"
+              ],
+              "caseArea": [],
+              "caseCategory": [],
+              "casePriority": [],
+              "caseTags": [],
+              "action": "Include",
+              "testIterations": 1,
+              "retryCount": 0,
+              "useNewEnvironment": true,
+              "ignoreFailure": false
+            }
+          ],
+          "concurrency": 2
+        },
+        "resourceGroupNamePrefix": "alts-rg-",
+        "repos": [],
+        "image": {
+          "type": "vhd",
+          "vhdUrl": "www.azure.com/vhd-download",
+          "vhdGeneration": 1,
+          "vhdArchitecture": "x64"
+        },
+        "keepFailedEnvironment": true
+      },
+      "tags": {
+        "test-types": "kernel"
+      },
+      "location": "westus3"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "jobTemplateInstance": {
+            "provisioningState": "Succeeded",
+            "templateTags": [
+              "kernel-test"
+            ],
+            "region": [
+              "westus"
+            ],
+            "vmSize": [
+              "Standard_D4_V4"
+            ],
+            "selections": [
+              {
+                "caseName": [
+                  "perf_tcp_iperf_sriov"
+                ],
+                "caseArea": [],
+                "caseCategory": [],
+                "casePriority": [],
+                "caseTags": [],
+                "action": "Include",
+                "testIterations": 1,
+                "retryCount": 0,
+                "useNewEnvironment": true,
+                "ignoreFailure": false
+              }
+            ],
+            "concurrency": 2
+          },
+          "resourceGroupNamePrefix": "alts-rg-",
+          "repos": [],
+          "image": {
+            "type": "vhd",
+            "vhdUrl": "www.azure.com/vhd-download",
+            "vhdGeneration": 1,
+            "vhdArchitecture": "x64"
+          },
+          "keepFailedEnvironment": true,
+          "results": [
+            {
+              "provisioningState": "Succeeded",
+              "jobName": "Job_One",
+              "caseName": "perf_tcp_iperf_sriov",
+              "status": "Completed",
+              "message": "",
+              "logUrl": "www.azure.com/Job_One_logs",
+              "image": "kernel-lts-22.04",
+              "vmSize": "Standard_D4_V4",
+              "location": "westus3",
+              "kernelVersion": "22.04",
+              "distroVersion": "7.10",
+              "vhdGeneration": "1",
+              "walaVersion": "WALinuxAgent-2.2.20",
+              "extraFields": {},
+              "duration": "1hr",
+              "startTime": "2023-01-23T17:32:28Z",
+              "endTime": "2023-01-23T18:32:28Z"
+            }
+          ],
+          "duration": "1hr",
+          "logUrl": "www.azure.com/Job_One_logs"
+        },
+        "tags": {
+          "test-types": "kernel"
+        },
+        "location": "westus3",
+        "id": "nddfdglrsnasnmbnxkmyrhrt",
+        "name": "Job_One",
+        "type": "vhd",
+        "systemData": {
+          "createdBy": "oqxy",
+          "createdByType": "User",
+          "createdAt": "2023-01-31T21:52:10.285Z",
+          "lastModifiedBy": "qhlfaiiouwppdvipxhlcn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-01-31T21:52:10.286Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "jobTemplateInstance": {
+            "provisioningState": "Succeeded",
+            "templateTags": [
+              "kernel-test"
+            ],
+            "region": [
+              "westus3"
+            ],
+            "vmSize": [
+              "Standard_D4_v4"
+            ],
+            "selections": [
+              {
+                "caseName": [
+                  "perf_tcp_iperf_sriov"
+                ],
+                "caseArea": [],
+                "caseCategory": [],
+                "casePriority": [],
+                "caseTags": [],
+                "action": "Include",
+                "testIterations": 1,
+                "retryCount": 0,
+                "useNewEnvironment": true,
+                "ignoreFailure": false
+              }
+            ],
+            "concurrency": 2
+          },
+          "resourceGroupNamePrefix": "alts-rg-",
+          "repos": [],
+          "image": {
+            "type": "vhd",
+            "vhdUrl": "www.azure.com/vhd-download",
+            "vhdGeneration": 1,
+            "vhdArchitecture": "x64"
+          },
+          "keepFailedEnvironment": true,
+          "results": [
+            {
+              "provisioningState": "Succeeded",
+              "jobName": "Job_One",
+              "caseName": "perf_tcp_iperf_sriov",
+              "status": "Completed",
+              "message": "",
+              "logUrl": "www.azure.com/Job_One_logs",
+              "image": "kernel-lts-22.04",
+              "vmSize": "Standard_D4_V4",
+              "location": "westus3",
+              "kernelVersion": "22.04",
+              "distroVersion": "7.10",
+              "vhdGeneration": "1",
+              "walaVersion": "WALinuxAgent-2.2.20",
+              "extraFields": {},
+              "duration": "1 hour",
+              "startTime": "2023-01-23T17:32:28Z",
+              "endTime": "2023-01-23T18:32:28Z"
+            }
+          ],
+          "duration": "1hr",
+          "logUrl": "www.azure.com/Job_One_logs"
+        },
+        "tags": {
+          "test-types": "kernel"
+        },
+        "location": "z",
+        "id": "nddfdglrsnasnmbnxkmyrhrt",
+        "name": "vhsjderu",
+        "type": "Microsoft.AzureLinuxTestingService/jobTemplates",
+        "systemData": {
+          "createdBy": "oqxy",
+          "createdByType": "User",
+          "createdAt": "2023-01-31T21:52:10.285Z",
+          "lastModifiedBy": "qhlfaiiouwppdvipxhlcn",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-01-31T21:52:10.286Z"
+        }
+      }
+    }
+  }
+}

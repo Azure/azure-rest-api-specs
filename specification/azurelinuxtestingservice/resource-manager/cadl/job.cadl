@@ -1,0 +1,122 @@
+namespace Microsoft.AzureLinuxTestingService;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using Autorest;
+using Azure.Core;
+using Azure.Core.Foundations;
+using OpenAPI;
+
+@doc("A job is an instance of LISA running the specified test parameters")
+model Job is TrackedResource<JobResourceProperties> {
+    @doc("Job name")
+    @pattern("^[a-zA-Z0-9-_]+{3,60}$")
+    @key("jobName")
+    @segment("jobs")
+    @visibility("read")
+    @path()
+    name: string; 
+}
+
+@doc("The job properties")
+model JobResourceProperties is ResourceProperties {
+    @doc("Job Template to execute")
+    jobTemplateInstance: JobTemplateResourceProperties;
+
+    @doc("Prefix to use for resource groups that are created during LISA validation.")
+    resourceGroupNamePrefix?: string;
+
+    @doc("An array of strings that define different package repos to use in tests.")
+    repos?: string[];
+
+    @doc("Image used during job")
+    image: Image;
+
+    @doc("Default false")
+    keepFailedEnvironment?: boolean = false;
+
+    @doc("Test results once job is completed.")
+    @visibility("read")
+    results?: TestResultProperties[];
+
+    @doc("Test duration in format 5h 10m 2s")
+    @visibility("read")
+    duration?: string;
+
+    @doc("URL to see test logs")
+    @visibility("read")
+    logUrl?: string;
+}
+
+enum ImageType {
+    vhd,
+    marketplace_image,
+    shared_image_gallery
+}
+
+enum VhdArchitecture {
+    x64,
+    arm64
+}
+
+@minValue(1)
+@maxValue(2)
+scalar VhdGeneration extends int32;
+
+@doc("This object collects the image information used for testing. The associated properties of each image type must be populated.s")
+model Image {
+    @doc("Must be vhd, marketplace_image, or shared_image_gallery")
+    type?: ImageType;
+
+    @doc("VHD property. SAS URL of VHD")
+    vhdUrl?: string;
+
+    @doc("VHD Generation. Default 1. Choice is 1 or 2")
+    vhdGeneration?: VhdGeneration;
+
+    @doc("VHD property. Default x64. One of x64 or arm64")
+    vhdArchitecture?: VhdArchitecture = VhdArchitecture.x64;
+
+    @doc("Marketplace Image Publisher")
+    marketplaceImagePublisher?: string;
+
+    @doc("Marketplace Image Offer")
+    marketplaceImageOffer?: string;
+
+    @doc("Marketplace Image SKU")
+    marketplaceImageSku?: string;
+
+    @doc("Marketplace Image Version")
+    marketplaceImageVersion?: string;
+
+    @doc("Shared Image Gallery Subscription - Optional. The default is the current subscription")
+    imageGallerySubscription?: string;
+
+    @doc("Shared Image Gallery resource group name - Optional")
+    imageGalleryResourceGroupName?: string;
+
+    @doc("Shared Image gallery")
+    imageGallery?: string;
+
+    @doc("Shared Image Gallery image definition")
+    imageGalleryImageDef?: string;
+
+    @doc("Shared Image Gallery image version")
+    imageGalleryImageVersion?: string; 
+}
+@doc("Job Operations")
+@armResourceOperations(Job)
+interface Jobs {
+    listByResourceGroup is ArmResourceListByParent<Job>;
+    listbySubscription is ArmListBySubscription<Job>;
+    get is ArmResourceRead<Job>;
+    createOrUpdate is ArmResourceCreateOrUpdateAsync<Job>;
+
+    update is ArmResourcePatchSync<Job, JobResourceProperties>;
+    
+    @asyncOperationOptions("location")
+    delete is ArmResourceDeleteAsync<Job>;
+}

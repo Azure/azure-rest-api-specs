@@ -1,0 +1,1760 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Linux Testing Service",
+    "version": "2023-01-31-preview",
+    "description": "This is the Azure Linux Validation Service",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "TestCases"
+    },
+    {
+      "name": "JobTemplates"
+    },
+    {
+      "name": "Jobs"
+    },
+    {
+      "name": "TestResults"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.AzureLinuxTestingService/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLinuxTestingService/jobs": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_ListbySubscription",
+        "description": "List Job resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Jobs_ListbySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_ListbySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLinuxTestingService/jobs/{jobName}/testResults": {
+      "get": {
+        "tags": [
+          "TestResults"
+        ],
+        "operationId": "TestResults_ListbySubscription",
+        "description": "List TestResult resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "Job name",
+            "pattern": "^[a-zA-Z0-9-_]+$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestResultListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestResults_ListbySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/TestResults_ListbySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLinuxTestingService/jobTemplates": {
+      "get": {
+        "tags": [
+          "JobTemplates"
+        ],
+        "operationId": "JobTemplates_ListbySubscription",
+        "description": "List JobTemplate resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobTemplates_ListbySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/JobTemplates_ListbySubscription_MaximumSet_Gen.json"
+          },
+          "JobTemplates_ListbySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/JobTemplates_ListbySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureLinuxTestingService/testCases": {
+      "get": {
+        "tags": [
+          "TestCases"
+        ],
+        "operationId": "TestCases_ListBySubscription",
+        "description": "List TestCase resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestCaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestCases_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/TestCases_ListBySubscription_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLinuxTestingService/jobs": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_ListByResourceGroup",
+        "description": "List Job resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Jobs_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLinuxTestingService/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_Get",
+        "description": "Get a Job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "Job name",
+            "pattern": "^[a-zA-Z0-9-_]+$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_CreateOrUpdate",
+        "description": "Create a Job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "Job name",
+            "pattern": "^[a-zA-Z0-9-_]+$",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Jobs_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_Update",
+        "description": "Update a Job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "Job name",
+            "pattern": "^[a-zA-Z0-9-_]+$",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/JobUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Job"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_Update_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_Update_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Jobs"
+        ],
+        "operationId": "Jobs_Delete",
+        "description": "Delete a Job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "Job name",
+            "pattern": "^[a-zA-Z0-9-_]+$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "location": {
+                "description": "Location response header",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Jobs_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_Delete_MaximumSet_Gen.json"
+          },
+          "Jobs_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/Jobs_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLinuxTestingService/jobs/{jobName}/testResults": {
+      "get": {
+        "tags": [
+          "TestResults"
+        ],
+        "operationId": "TestResults_ListByJob",
+        "description": "List TestResult resources by Job",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "Job name",
+            "pattern": "^[a-zA-Z0-9-_]+$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestResultListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestResults_ListByJob_MaximumSet_Gen": {
+            "$ref": "./examples/TestResults_ListByJob_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLinuxTestingService/jobs/{jobName}/testResults/{testResult}": {
+      "get": {
+        "tags": [
+          "TestResults"
+        ],
+        "operationId": "TestResults_Get",
+        "description": "Get a TestResult",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "required": true,
+            "description": "Job name",
+            "pattern": "^[a-zA-Z0-9-_]+$",
+            "type": "string"
+          },
+          {
+            "name": "testResult",
+            "in": "path",
+            "required": true,
+            "description": "Test results from a job",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestResults_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TestResults_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLinuxTestingService/jobTemplates": {
+      "get": {
+        "tags": [
+          "JobTemplates"
+        ],
+        "operationId": "JobTemplates_ListByResourceGroup",
+        "description": "List JobTemplate resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobTemplateListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "JobTemplates_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/JobTemplates_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "JobTemplates_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/JobTemplates_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLinuxTestingService/jobTemplates/{jobTemplateName}": {
+      "get": {
+        "tags": [
+          "JobTemplates"
+        ],
+        "operationId": "JobTemplates_Get",
+        "description": "Get a JobTemplate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobTemplateName",
+            "in": "path",
+            "required": true,
+            "description": "Job template name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobTemplates_Get_MaximumSet_Gen": {
+            "$ref": "./examples/JobTemplates_Get_MaximumSet_Gen.json"
+          },
+          "JobTemplates_Get_MinimumSet_Gen": {
+            "$ref": "./examples/JobTemplates_Get_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "JobTemplates"
+        ],
+        "operationId": "JobTemplates_CreateOrUpdate",
+        "description": "Create a JobTemplate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobTemplateName",
+            "in": "path",
+            "required": true,
+            "description": "Job template name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/JobTemplate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobTemplates_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/JobTemplates_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "JobTemplates_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/JobTemplates_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "JobTemplates"
+        ],
+        "operationId": "JobTemplates_Update",
+        "description": "Update a JobTemplate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobTemplateName",
+            "in": "path",
+            "required": true,
+            "description": "Job template name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/JobTemplateUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobTemplate"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobTemplates_Update_MaximumSet_Gen": {
+            "$ref": "./examples/JobTemplates_Update_MaximumSet_Gen.json"
+          },
+          "JobTemplates_Update_MinimumSet_Gen": {
+            "$ref": "./examples/JobTemplates_Update_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "JobTemplates"
+        ],
+        "operationId": "JobTemplates_Delete",
+        "description": "Delete a JobTemplate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "jobTemplateName",
+            "in": "path",
+            "required": true,
+            "description": "Job template name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "JobTemplates_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/JobTemplates_Delete_MaximumSet_Gen.json"
+          },
+          "JobTemplates_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/JobTemplates_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLinuxTestingService/testCases": {
+      "get": {
+        "tags": [
+          "TestCases"
+        ],
+        "operationId": "TestCases_ListByResourceGroup",
+        "description": "List TestCase resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestCaseListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TestCases_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/TestCases_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureLinuxTestingService/testCases/{testCaseName}": {
+      "get": {
+        "tags": [
+          "TestCases"
+        ],
+        "operationId": "TestCases_Get",
+        "description": "Get a TestCase",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "testCaseName",
+            "in": "path",
+            "required": true,
+            "description": "a LISA test case",
+            "pattern": "^[a-zA-Z0-9-_]+$",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TestCase"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "TestCases_Get_MaximumSet_Gen": {
+            "$ref": "./examples/TestCases_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CasePriorityLevel": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "maximum": 4
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ImageType",
+          "description": "Must be vhd, marketplace_image, or shared_image_gallery"
+        },
+        "vhdUrl": {
+          "type": "string",
+          "description": "VHD property. SAS URL of VHD"
+        },
+        "vhdGeneration": {
+          "$ref": "#/definitions/VhdGeneration",
+          "description": "VHD Generation. Default 1. Choice is 1 or 2"
+        },
+        "vhdArchitecture": {
+          "$ref": "#/definitions/VhdArchitecture",
+          "description": "VHD property. Default x64. One of x64 or arm64",
+          "default": "x64"
+        },
+        "marketplaceImagePublisher": {
+          "type": "string",
+          "description": "Marketplace Image Publisher"
+        },
+        "marketplaceImageOffer": {
+          "type": "string",
+          "description": "Marketplace Image Offer"
+        },
+        "marketplaceImageSku": {
+          "type": "string",
+          "description": "Marketplace Image SKU"
+        },
+        "marketplaceImageVersion": {
+          "type": "string",
+          "description": "Marketplace Image Version"
+        },
+        "imageGallerySubscription": {
+          "type": "string",
+          "description": "Shared Image Gallery Subscription - Optional. The default is the current subscription"
+        },
+        "imageGalleryResourceGroupName": {
+          "type": "string",
+          "description": "Shared Image Gallery resource group name - Optional"
+        },
+        "imageGallery": {
+          "type": "string",
+          "description": "Shared Image gallery"
+        },
+        "imageGalleryImageDef": {
+          "type": "string",
+          "description": "Shared Image Gallery image definition"
+        },
+        "imageGalleryImageVersion": {
+          "type": "string",
+          "description": "Shared Image Gallery image version"
+        }
+      },
+      "description": "This object collects the image information used for testing. The associated properties of each image type must be populated.s"
+    },
+    "ImageType": {
+      "type": "string",
+      "enum": [
+        "vhd",
+        "marketplace_image",
+        "shared_image_gallery"
+      ],
+      "x-ms-enum": {
+        "name": "ImageType",
+        "modelAsString": true
+      }
+    },
+    "Job": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A job is an instance of LISA running the specified test parameters",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "JobListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Job"
+          },
+          "x-cadl-name": "Job[]",
+          "description": "The Job items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a Job list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "JobResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "jobTemplateInstance": {
+          "$ref": "#/definitions/JobTemplateResourceProperties",
+          "description": "Job Template to execute"
+        },
+        "resourceGroupNamePrefix": {
+          "type": "string",
+          "description": "Prefix to use for resource groups that are created during LISA validation."
+        },
+        "repos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "An array of strings that define different package repos to use in tests."
+        },
+        "image": {
+          "$ref": "#/definitions/Image",
+          "description": "Image used during job"
+        },
+        "keepFailedEnvironment": {
+          "type": "boolean",
+          "description": "Default false",
+          "default": false
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestResultProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "TestResultProperties[]",
+          "description": "Test results once job is completed.",
+          "readOnly": true
+        },
+        "duration": {
+          "type": "string",
+          "description": "Test duration in format 5h 10m 2s",
+          "readOnly": true
+        },
+        "logUrl": {
+          "type": "string",
+          "description": "URL to see test logs",
+          "readOnly": true
+        }
+      },
+      "description": "The job properties",
+      "required": [
+        "jobTemplateInstance",
+        "image"
+      ]
+    },
+    "JobTemplate": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/JobTemplateResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A template defining the parameters for a test job.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "JobTemplateListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobTemplate"
+          },
+          "x-cadl-name": "JobTemplate[]",
+          "description": "The JobTemplate items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a JobTemplate list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "JobTemplateResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "templateTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Tags used to organized templates."
+        },
+        "region": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Azure region to run test in."
+        },
+        "vmSize": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "VM sizes to run test on."
+        },
+        "selections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Selections"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Selections[]",
+          "description": "Test Selections. Default is to run the smoke_test case"
+        },
+        "concurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of concurrent environments. Default is 4.",
+          "default": 4
+        }
+      },
+      "description": "The job template properties",
+      "required": [
+        "templateTags",
+        "region",
+        "vmSize"
+      ]
+    },
+    "JobTemplateUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobTemplateUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the JobTemplate."
+    },
+    "JobTemplateUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "templateTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Tags used to organized templates."
+        },
+        "region": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Azure region to run test in."
+        },
+        "vmSize": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "VM sizes to run test on."
+        },
+        "selections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Selections"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "Selections[]",
+          "description": "Test Selections. Default is to run the smoke_test case"
+        },
+        "concurrency": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of concurrent environments. Default is 4.",
+          "default": 4
+        }
+      },
+      "description": "The updatable properties of the JobTemplate."
+    },
+    "JobUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/JobUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the Job."
+    },
+    "JobUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "jobTemplateInstance": {
+          "$ref": "#/definitions/JobTemplateResourceProperties",
+          "description": "Job Template to execute"
+        },
+        "resourceGroupNamePrefix": {
+          "type": "string",
+          "description": "Prefix to use for resource groups that are created during LISA validation."
+        },
+        "repos": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "An array of strings that define different package repos to use in tests."
+        },
+        "image": {
+          "$ref": "#/definitions/Image",
+          "description": "Image used during job"
+        },
+        "keepFailedEnvironment": {
+          "type": "boolean",
+          "description": "Default false",
+          "default": false
+        }
+      },
+      "description": "The updatable properties of the Job."
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Queued",
+        "Provisioning",
+        "Running",
+        "Cancelling"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "ResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        }
+      },
+      "description": "General resource properties."
+    },
+    "Selections": {
+      "type": "object",
+      "properties": {
+        "caseName": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Test case name. Default is empty.",
+          "default": []
+        },
+        "caseArea": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Test case area. Default is empty.",
+          "default": []
+        },
+        "caseCategory": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Test case category. Default is empty.",
+          "default": []
+        },
+        "casePriority": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CasePriorityLevel"
+          },
+          "x-cadl-name": "CasePriorityLevel[]",
+          "description": "Test case priority. Default is empty and represents all priorities. Valid values are from 0-4",
+          "default": []
+        },
+        "caseTags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Test case tags. Default empty",
+          "default": []
+        },
+        "action": {
+          "$ref": "#/definitions/TestCaseAction",
+          "description": "Action to take. Default is include",
+          "default": "Include"
+        },
+        "testIterations": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Test iterations to run. Default 1",
+          "default": 1
+        },
+        "retryCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Retry on failure. Default 0",
+          "default": 0
+        },
+        "useNewEnvironment": {
+          "type": "boolean",
+          "description": "Use new environment for each test case. Default false",
+          "default": false
+        },
+        "ignoreFailure": {
+          "type": "boolean",
+          "description": "Ignore failed test cases. Default false",
+          "default": false
+        }
+      },
+      "description": "Details test case criteria"
+    },
+    "TestCase": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestCaseResourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A LISA test case",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TestCaseAction": {
+      "type": "string",
+      "enum": [
+        "Include",
+        "Exclude",
+        "ForceInclude",
+        "ForceExclude"
+      ],
+      "x-ms-enum": {
+        "name": "TestCaseAction",
+        "modelAsString": true
+      }
+    },
+    "TestCaseListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestCase"
+          },
+          "x-cadl-name": "TestCase[]",
+          "description": "The TestCase items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a TestCase list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "TestCaseResourceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "area": {
+          "type": "string",
+          "description": "Test case area"
+        },
+        "category": {
+          "type": "string",
+          "description": "Test case category"
+        },
+        "tags": {
+          "type": "string",
+          "description": "Applied test tags"
+        },
+        "priority": {
+          "description": "Priority level to run"
+        },
+        "estimation": {
+          "description": "Time to complete in minutes"
+        },
+        "description": {
+          "type": "string",
+          "description": "Test case description"
+        },
+        "testSuiteName": {
+          "type": "string",
+          "description": "LISA test suite name"
+        },
+        "testSuiteDescription": {
+          "type": "string",
+          "description": "LISA test suite description"
+        }
+      },
+      "description": "Test case properties",
+      "required": [
+        "area",
+        "category",
+        "tags",
+        "priority",
+        "estimation",
+        "description",
+        "testSuiteName",
+        "testSuiteDescription"
+      ]
+    },
+    "TestResult": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TestResultProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The test results for a job",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TestResultListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TestResult"
+          },
+          "x-cadl-name": "TestResult[]",
+          "description": "The TestResult items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a TestResult list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "TestResultProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Resource provisioning state.",
+          "readOnly": true
+        },
+        "jobName": {
+          "type": "string",
+          "description": "The job name"
+        },
+        "caseName": {
+          "type": "string",
+          "description": "The test case"
+        },
+        "status": {
+          "type": "string",
+          "description": "The test status"
+        },
+        "message": {
+          "type": "string",
+          "description": "Test result information"
+        },
+        "logUrl": {
+          "type": "string",
+          "description": "Log URL"
+        },
+        "image": {
+          "type": "string",
+          "description": "Image name source string"
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "VM Size used"
+        },
+        "location": {
+          "type": "string",
+          "description": "Region test ran"
+        },
+        "kernelVersion": {
+          "type": "string",
+          "description": "Kernel version used"
+        },
+        "distroVersion": {
+          "type": "string",
+          "description": "Distro version used"
+        },
+        "vhdGeneration": {
+          "type": "string",
+          "description": "VHD Generation"
+        },
+        "walaVersion": {
+          "type": "string",
+          "description": "Wala Version"
+        },
+        "extraFields": {
+          "$ref": "#/definitions/object",
+          "description": "Extra fields"
+        },
+        "duration": {
+          "type": "string",
+          "description": "Test duration"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time"
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time"
+        }
+      },
+      "description": "Test results for a particular test case",
+      "required": [
+        "jobName",
+        "caseName",
+        "status",
+        "message",
+        "logUrl",
+        "image",
+        "vmSize",
+        "location",
+        "kernelVersion",
+        "distroVersion",
+        "vhdGeneration",
+        "walaVersion",
+        "extraFields",
+        "duration",
+        "startTime",
+        "endTime"
+      ]
+    },
+    "VhdArchitecture": {
+      "type": "string",
+      "enum": [
+        "x64",
+        "arm64"
+      ],
+      "x-ms-enum": {
+        "name": "VhdArchitecture",
+        "modelAsString": true
+      }
+    },
+    "VhdGeneration": {
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 2
+    },
+    "object": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  "parameters": {}
+}
