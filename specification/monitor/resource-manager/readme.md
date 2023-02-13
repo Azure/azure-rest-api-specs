@@ -35,12 +35,21 @@ title: MonitorManagementClient
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
-tag: package-preview-2022-08
+tag: package-preview-2023-01
 directive:
   - suppress: Example Validations
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
 ```
 
+
+### Tag: package-preview-2023-01
+
+These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-01'
+input-file:
+  - Microsoft.Insights/preview/2023-01-01-preview/activityLogAlerts_API.json
+```
 ### Tag: package-2022-08-01-preview-only
 
 These settings apply only when `--tag=package-2022-08-01-preview-only` is specified on the command line
@@ -54,7 +63,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-08'
+``` yaml $(tag) == 'package-preview-2022-08'
 input-file:
 - Microsoft.Insights/stable/2022-10-01/autoscale_API.json
 - Microsoft.Insights/stable/2015-04-01/operations_API.json
@@ -82,6 +91,7 @@ input-file:
 - Microsoft.Monitor/preview/2021-06-03-preview/monitoringAccounts_API.json
 - Microsoft.Monitor/preview/2021-06-03-preview/operations_API.json
 ```
+
 ### Tag: package-composite-v1
 
 These settings apply only when `--tag=package-composite-v1` is specified on the command line.
