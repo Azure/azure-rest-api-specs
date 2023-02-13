@@ -1,3 +1,21 @@
+parameters:
+- name: image
+  displayName: Pool Image
+  type: string
+  default: Ubuntu-22.04
+  values:
+  - windows-latest
+  - Ubuntu-22.04
+
+- name: PathToDockefile
+  displayName: Path To Docker File
+  type: string
+  default: scripts/datacontainer/Dockerfile
+  values:
+  - scripts/datacontainer-windows/Dockerfile
+  - scripts/datacontainer/Dockerfile
+
+
 schedules:
 - cron: "0 0 * * *"
   displayName: Daily build
@@ -7,7 +25,7 @@ schedules:
   always: true
 
 pool:
-  vmImage: 'Ubuntu-20.04'
+  vmImage: ${{ parameters.image }}
 
 variables:
   IMAGE_TAG_PREFIX: $[format('1.0.{0:HHm}', pipeline.startTime)]
@@ -35,7 +53,7 @@ steps:
   displayName: Build and Push
   inputs:
     command: buildAndPush
-    Dockerfile: scripts/datacontainer/Dockerfile
+    Dockerfile: ${{ parameters.PathToDockerfile }}
     repository: $(CONTAINER_REGISTRY_REPOSITORY_NAME)
     tags: |
       latest
