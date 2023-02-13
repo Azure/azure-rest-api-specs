@@ -154,17 +154,19 @@
             "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ContentTypeContract"
+            },
+            "description": "Create or update parameters."
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/ContentTypeContract"
-            }
           }
         ],
         "responses": {
@@ -420,6 +422,15 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ContentItemIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ContentItemContract"
+            },
+            "description": "Create or update parameters."
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"

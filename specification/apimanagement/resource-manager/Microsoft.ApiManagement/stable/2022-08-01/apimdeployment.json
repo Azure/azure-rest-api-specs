@@ -162,7 +162,12 @@
             }
           },
           "202": {
-            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -226,7 +231,12 @@
             }
           },
           "202": {
-            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -512,7 +522,12 @@
             }
           },
           "202": {
-            "description": "Migration request submitted."
+            "description": "Migration request submitted.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -775,7 +790,12 @@
             }
           },
           "202": {
-            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked."
+            "description": "Accepted: Location header contains the URL where the status of the long running operation can be checked.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -793,6 +813,7 @@
   },
   "definitions": {
     "ResourceSkuResults": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -816,6 +837,7 @@
       "description": "The API Management service SKUs operation response."
     },
     "ResourceSkuResult": {
+      "type": "object",
       "properties": {
         "resourceType": {
           "readOnly": true,
@@ -836,6 +858,7 @@
       "description": "Describes an available API Management service SKU."
     },
     "ResourceSkuCapacity": {
+      "type": "object",
       "properties": {
         "minimum": {
           "type": "integer",
@@ -887,6 +910,7 @@
       "description": "Describes scaling information of a SKU."
     },
     "ResourceSku": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -937,6 +961,7 @@
       "description": "Describes an available API Management SKU."
     },
     "CertificateInformation": {
+      "type": "object",
       "properties": {
         "expiry": {
           "type": "string",
@@ -960,6 +985,7 @@
       "description": "SSL certificate information."
     },
     "CertificateConfiguration": {
+      "type": "object",
       "properties": {
         "encodedCertificate": {
           "type": "string",
@@ -988,6 +1014,7 @@
       "description": "Certificate configuration which consist of non-trusted intermediates and root certificates."
     },
     "HostnameConfiguration": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
@@ -1073,6 +1100,7 @@
       "description": "Custom hostname configuration."
     },
     "VirtualNetworkConfiguration": {
+      "type": "object",
       "properties": {
         "vnetid": {
           "readOnly": true,
@@ -1093,6 +1121,7 @@
       "description": "Configuration of a virtual network to which API Management service is deployed."
     },
     "AdditionalLocation": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -1215,6 +1244,7 @@
       "description": "Description of an additional API Management resource location."
     },
     "ApiManagementServiceBackupRestoreParameters": {
+      "type": "object",
       "properties": {
         "storageAccount": {
           "type": "string",
@@ -1273,6 +1303,7 @@
       "description": "Parameters supplied to the Backup/Restore of an API Management service operation."
     },
     "ApiManagementServiceProperties": {
+      "type": "object",
       "properties": {
         "publisherEmail": {
           "type": "string",
@@ -1297,6 +1328,7 @@
       "description": "Properties of an API Management service resource description."
     },
     "ApiManagementServiceUpdateProperties": {
+      "type": "object",
       "properties": {
         "publisherEmail": {
           "type": "string",
@@ -1317,6 +1349,7 @@
       "description": "Properties of an API Management service resource description."
     },
     "ApiManagementServiceBaseProperties": {
+      "type": "object",
       "properties": {
         "notificationSenderEmail": {
           "type": "string",
@@ -1432,7 +1465,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Custom properties of the API Management service.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168` will disable the cipher TLS_RSA_WITH_3DES_EDE_CBC_SHA for all TLS(1.0, 1.1 and 1.2).</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11` can be used to disable just TLS 1.1.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10` can be used to disable TLS 1.0 on an API Management service.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11` can be used to disable just TLS 1.1 for communications with backends.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10` can be used to disable TLS 1.0 for communications with backends.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2` can be used to enable HTTP2 protocol on an API Management service.</br>Not specifying any of these properties on PATCH operation will reset omitted properties' values to their defaults. For all the settings except Http2 the default value is `True` if the service was created on or before April 1st 2018 and `False` otherwise. Http2 setting's default value is `False`.</br></br>You can disable any of next ciphers by using settings `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.[cipher_name]`: TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA. For example, `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_RSA_WITH_AES_128_CBC_SHA256`:`false`. The default value is `true` for them.  Note: next ciphers can't be disabled since they are required by Azure CloudService internal components: TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_256_GCM_SHA384"
+          "description": "Custom properties of the API Management service.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168` will disable the cipher TLS_RSA_WITH_3DES_EDE_CBC_SHA for all TLS(1.0, 1.1 and 1.2).</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11` can be used to disable just TLS 1.1.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10` can be used to disable TLS 1.0 on an API Management service.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11` can be used to disable just TLS 1.1 for communications with backends.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10` can be used to disable TLS 1.0 for communications with backends.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2` can be used to enable HTTP2 protocol on an API Management service.</br>Not specifying any of these properties on PATCH operation will reset omitted properties' values to their defaults. For all the settings except Http2 the default value is `True` if the service was created on or before April 1, 2018 and `False` otherwise. Http2 setting's default value is `False`.</br></br>You can disable any of the following ciphers by using settings `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.[cipher_name]`: TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA. For example, `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_RSA_WITH_AES_128_CBC_SHA256`:`false`. The default value is `true` for them.</br> Note: The following ciphers can't be disabled since they are required by internal platform components: TLS_AES_256_GCM_SHA384,TLS_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256"
         },
         "certificates": {
           "type": "array",
@@ -1566,6 +1599,7 @@
       "description": "Base Properties of an API Management service resource description."
     },
     "ApiVersionConstraint": {
+      "type": "object",
       "properties": {
         "minApiVersion": {
           "type": "string",
@@ -1576,6 +1610,7 @@
       "description": "Control Plane Apis version constraint for the API Management service."
     },
     "ApiManagementServiceSkuProperties": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1635,6 +1670,7 @@
       "description": "API Management service resource SKU properties."
     },
     "ApiManagementServiceResource": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1688,6 +1724,7 @@
       "description": "A single API Management service resource in List or Get response."
     },
     "ApimResource": {
+      "type": "object",
       "description": "The Resource definition.",
       "properties": {
         "id": {
@@ -1716,6 +1753,7 @@
       "x-ms-azure-resource": true
     },
     "ApiManagementServiceUpdateParameters": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1751,6 +1789,7 @@
       "description": "Parameter supplied to Update Api Management Service."
     },
     "ApiManagementServiceListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1770,6 +1809,7 @@
       "description": "The response of the List API Management services operation."
     },
     "ApiManagementServiceGetSsoTokenResult": {
+      "type": "object",
       "properties": {
         "redirectUri": {
           "type": "string",
@@ -1779,6 +1819,7 @@
       "description": "The response of the GetSsoToken operation."
     },
     "ApiManagementServiceCheckNameAvailabilityParameters": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -1791,6 +1832,7 @@
       "description": "Parameters supplied to the CheckNameAvailability operation."
     },
     "ApiManagementServiceNameAvailabilityResult": {
+      "type": "object",
       "properties": {
         "nameAvailable": {
           "type": "boolean",
@@ -1819,6 +1861,7 @@
       "description": "Response of the CheckNameAvailability operation."
     },
     "ApiManagementServiceGetDomainOwnershipIdentifierResult": {
+      "type": "object",
       "properties": {
         "domainOwnershipIdentifier": {
           "type": "string",
@@ -1829,6 +1872,7 @@
       "description": "Response of the GetDomainOwnershipIdentifier operation."
     },
     "ApiManagementServiceApplyNetworkConfigurationParameters": {
+      "type": "object",
       "properties": {
         "location": {
           "type": "string",
@@ -1838,6 +1882,7 @@
       "description": "Parameter supplied to the Apply Network configuration operation."
     },
     "ApiManagementServiceIdentity": {
+      "type": "object",
       "description": "Identity properties of the Api Management service resource.",
       "properties": {
         "type": {
@@ -1932,6 +1977,7 @@
       }
     },
     "OperationListResult": {
+      "type": "object",
       "description": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
       "properties": {
         "value": {
