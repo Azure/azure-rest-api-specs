@@ -1,3 +1,12 @@
+parameters:
+- name: image
+  displayName: Pool Image
+  type: string
+  default: Ubuntu-20.04
+  values:
+  - windows-latest
+  - Ubuntu-20.04
+
 schedules:
 - cron: "0 0 * * *"
   displayName: Daily build
@@ -7,7 +16,7 @@ schedules:
   always: true
 
 pool:
-  vmImage: 'Ubuntu-20.04'
+  vmImage: ${{ parameters.image }}
 
 variables:
   IMAGE_TAG_PREFIX: $[format('1.0.{0:HHm}', pipeline.startTime)]
