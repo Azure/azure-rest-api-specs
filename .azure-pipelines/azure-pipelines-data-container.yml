@@ -7,6 +7,15 @@ parameters:
   - windows-latest
   - Ubuntu-20.04
 
+- name: PathToDockefile
+  displayName: Path To Docker File
+  type: string
+  default: scripts/datacontainer/Dockerfile
+  values:
+  - scripts/datacontainer-windows/Dockerfile
+  - scripts/datacontainer/Dockerfile
+
+
 schedules:
 - cron: "0 0 * * *"
   displayName: Daily build
@@ -44,7 +53,7 @@ steps:
   displayName: Build and Push
   inputs:
     command: buildAndPush
-    Dockerfile: scripts/datacontainer/Dockerfile
+    Dockerfile: ${{ parameters.PathToDockerfile }}
     repository: $(CONTAINER_REGISTRY_REPOSITORY_NAME)
     tags: |
       latest
