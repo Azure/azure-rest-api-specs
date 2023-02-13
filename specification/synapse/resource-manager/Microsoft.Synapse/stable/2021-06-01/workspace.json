@@ -99,7 +99,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "description": ""
           }
@@ -440,9 +440,9 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
-            "description": ""
+            "description": "Error response"
           }
         },
         "consumes": [
@@ -605,7 +605,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorDetail"
             },
             "description": ""
           }
@@ -1559,6 +1559,69 @@
         "value"
       ],
       "description": "The response to a list restorable dropped Sql pools request"
+    },
+    "ErrorResponse": {
+      "title": "Error response",
+      "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.).",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "The error object.",
+          "$ref": "#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "severity": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The severity"
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "x-ms-identifiers": [
+            "message",
+            "target"
+          ],
+          "description": "The error details."
+        },
+        "innererror": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "x-ms-identifiers": [],
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "Array"
+
     }
   }
 }

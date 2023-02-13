@@ -915,10 +915,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/TrustedServiceByPassConfiguration"
-              }
+              "$ref": "#/definitions/TrustedServiceByPassConfiguration"
             },
             "description": "OK"
           },
@@ -975,10 +972,7 @@
         "responses": {
           "200": {
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
-              }
+              "$ref": "#/definitions/CheckDefaultStorageAccountStatus"
             },
             "description": "OK"
           },
@@ -1365,7 +1359,11 @@
       "properties": {
         "initialWorkspaceAdminObjectId": {
           "description": "AAD object ID of initial workspace admin",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
