@@ -370,6 +370,10 @@
       "description": "An Azure Activity Log Alert rule.",
       "type": "object",
       "properties": {
+        "tenantScope": {
+          "description": "The tenant GUID. Must be provided for tenant-level and management group events rules.",
+          "type": "string"
+        },
         "scopes": {
           "description": "A list of resource IDs that will be used as prefixes. The alert will only apply to Activity Log events with resource IDs that fall under one of these prefixes. This list must include at least one item.",
           "type": "array",
@@ -396,7 +400,6 @@
         }
       },
       "required": [
-        "scopes",
         "condition",
         "actions"
       ]
