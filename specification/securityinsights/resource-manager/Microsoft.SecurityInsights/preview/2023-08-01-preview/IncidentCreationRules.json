@@ -1,0 +1,440 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2023-08-01-preview"
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidentCreationRules": {
+      "get": {
+        "tags": [
+          "incidentCreationRules"
+        ],
+        "description": "Gets all incident creation rule.",
+        "operationId": "IncidentCreationRules_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/IncidentCreationRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "IncidentCreationRules_List": {
+            "$ref": "./examples/incidentCreationRules/IncidentCreationRules_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidentCreationRules/{incidentCreationRuleId}": {
+      "get": {
+        "tags": [
+          "incidentCreationRules"
+        ],
+        "description": "Gets the incident creation rule.",
+        "operationId": "IncidentCreationRules_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentCreationRuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/IncidentCreationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncidentCreationRules_Get": {
+            "$ref": "./examples/incidentCreationRules/IncidentCreationRules_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "incidentCreationRules"
+        ],
+        "description": "Creates or updates the incident creation rule.",
+        "operationId": "IncidentCreationRules_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentCreationRuleId"
+          },
+          {
+            "in": "body",
+            "name": "incidentCreationRuleToUpsert",
+            "schema": {
+              "$ref": "#/definitions/IncidentCreationRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/IncidentCreationRule"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IncidentCreationRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncidentCreationRules_CreateOrUpdate": {
+            "$ref": "./examples/incidentCreationRules/IncidentCreationRules_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "incidentCreationRules"
+        ],
+        "description": "Delete the incident creation rule.",
+        "operationId": "IncidentCreationRules_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/IncidentCreationRuleId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IncidentCreationRules_Delete": {
+            "$ref": "./examples/incidentCreationRules/IncidentCreationRules_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GroupingKind": {
+      "enum": [
+        "PropertyBased"
+      ],
+      "type": "string",
+      "example": "PropertyBased",
+      "x-ms-enum": {
+        "name": "GroupingKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "PropertyBased"
+          }
+        ]
+      }
+    },
+    "IncidentCreationRule": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "type": "object",
+          "$ref": "#/definitions/IncidentCreationRuleProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IncidentCreationRuleCondition": {
+      "description": "Describes a incident creation rule condition.",
+      "type": "object",
+      "properties": {
+        "conditionType": {
+          "$ref": "#/definitions/IncidentCreationRuleConditionType"
+        }
+      }
+    },
+    "IncidentCreationRuleConditionType": {
+      "enum": [
+        "Property"
+      ],
+      "type": "string",
+      "example": "Property",
+      "x-ms-enum": {
+        "name": "IncidentCreationRuleConditionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Property",
+            "description": "Evaluate an object property value."
+          }
+        ]
+      }
+    },
+    "IncidentCreationRuleGroupingConfiguration": {
+      "description": "Describes incident creation rule grouping configuration.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Determines whether the grouping configuration is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lookbackDuration": {
+          "format": "date-span",
+          "description": "Determines the lookback time frame for which grouping will be applied.",
+          "type": "string"
+        },
+        "groupingKind": {
+          "$ref": "#/definitions/GroupingKind"
+        },
+        "reopenClosedIncident": {
+          "description": "Determines if a closed incident should be reopened in case the grouping properties are matched.",
+          "type": "boolean"
+        }
+      }
+    },
+    "IncidentCreationRuleProperties": {
+      "description": "Incident creation rule properties.",
+      "required": [
+        "createIncident",
+        "displayName",
+        "enabled",
+        "order"
+      ],
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the incident creation rule.",
+          "minLength": 1,
+          "type": "string",
+		  "maxLength": 500
+        },
+        "description": {
+          "description": "The description of the incident creation rule.",
+          "type": "string",
+		  "maxLength": 1500
+        },
+        "order": {
+          "format": "int32",
+          "description": "The order of evaluation of the incident creation rule",
+          "type": "integer",
+		  "minimum": 1,
+          "maximum": 1000
+        },
+        "conditions": {
+          "description": "The conditions to evaluate to determine if the incident creation rule should be applied.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentCreationRuleCondition"
+          }
+        },
+        "createIncident": {
+          "description": "Determines whether to create an incident based on this rule or not.",
+          "type": "boolean"
+        },
+        "groupingConfiguration": {
+          "$ref": "#/definitions/IncidentCreationRuleGroupingConfiguration"
+        },
+        "enabled": {
+          "description": "Determines whether the incident creation rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedTimeUtc": {
+          "format": "date-time",
+          "description": "The last time the incident creation rule was updated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "createdTimeUtc": {
+          "format": "date-time",
+          "description": "The time the incident creation rule was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastModifiedBy": {
+          "type": "object",
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
+        },
+        "createdBy": {
+          "type": "object",
+          "$ref": "../../../common/2.0/types.json#/definitions/ClientInfo"
+        }
+      }
+    },
+    "IncidentCreationRulesList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentCreationRule"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "IncidentCreationRule": {
+      "name": "incidentCreationRule",
+      "description": "The incident creation rule",
+      "required": true,
+      "in": "body",
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/IncidentCreationRule"
+      }
+    },
+    "IncidentCreationRuleId": {
+      "in": "path",
+      "name": "incidentCreationRuleId",
+      "description": "Incident creation rule ID",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ]
+}

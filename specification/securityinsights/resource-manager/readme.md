@@ -47,6 +47,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/EntityQueryTemplates.json
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/FileImports.json
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/Incidents.json
+  - Microsoft.SecurityInsights/preview/2023-08-01-preview/IncidentCreationRules.json
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/Metadata.json
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/OfficeConsents.json
   - Microsoft.SecurityInsights/preview/2023-08-01-preview/OnboardingStates.json
