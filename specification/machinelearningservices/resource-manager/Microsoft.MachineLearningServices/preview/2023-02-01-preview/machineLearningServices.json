@@ -2100,7 +2100,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "Location": {
+              "description": "URI to poll for asynchronous operation result.",
+              "type": "string"
+            }
           },
           "default": {
             "description": "Error",
@@ -2146,7 +2150,7 @@
             "schema": {
               "type": "object",
               "additionalProperties": {
-                  "$ref": "#/definitions/OutboundRule"
+                "$ref": "#/definitions/OutboundRule"
               }
             }
           },
@@ -2187,6 +2191,7 @@
             "in": "path",
             "name": "ruleName",
             "required": true,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$",
             "type": "string"
           },
           {
@@ -2195,7 +2200,11 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "Location": {
+              "description": "URI to poll for asynchronous operation result.",
+              "type": "string"
+            }
           },
           "default": {
             "description": "Error",
@@ -2233,6 +2242,7 @@
             "in": "path",
             "name": "ruleName",
             "required": true,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$",
             "type": "string"
           },
           {
@@ -6545,7 +6555,7 @@
         "outboundRules": {
           "type": "object",
           "additionalProperties": {
-              "$ref": "#/definitions/OutboundRule"
+            "$ref": "#/definitions/OutboundRule"
           },
           "x-nullable": true
         }
@@ -6569,7 +6579,7 @@
         "outboundRules": {
           "type": "object",
           "additionalProperties": {
-              "$ref": "#/definitions/OutboundRule"
+            "$ref": "#/definitions/OutboundRule"
           },
           "x-nullable": true
         }
