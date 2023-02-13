@@ -1056,7 +1056,11 @@
       "properties": {
         "tenantId": {
           "description": "Tenant ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "login": {
           "description": "Login of the workspace active directory administrator",
@@ -1064,11 +1068,19 @@
         },
         "administratorType": {
           "description": "Workspace active directory administrator type",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "sid": {
           "description": "Object ID of the workspace active directory administrator",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       }
     },
@@ -1261,7 +1273,12 @@
         },
         "linkedAccessCheckOnTargetResource": {
           "description": "Linked Access Check On Target Resource",
-          "type": "boolean"
+          "type": "boolean",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "allowedAadTenantIdsForLinking": {
           "description": "Allowed Aad Tenant Ids For Linking",
@@ -1440,9 +1457,6 @@
         },
         "extraProperties": {
           "description": "Workspace level configs and feature flags",
-          "additionalProperties": {
-            "type": "object"
-          },
           "type": "object",
           "readOnly": true
         },
@@ -1490,11 +1504,7 @@
         },
         "azureADOnlyAuthentication": {
           "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
+          "type": "boolean"
         },
         "trustedServiceBypassEnabled": {
           "description": "Is trustedServiceBypassEnabled for the workspace",

@@ -14,6 +14,8 @@ This enables customers to download one EventGrid data plane library instead of h
 
 ### Guidelines for defining a new event 
 
+> **_NOTE:_** New events must not be delivered to Event Grid production endpoints until the events have been reviewed with the Azure SDK Architecture board and the PR is merged into main.
+
 In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
 - The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
 - The description of the new event should include the event type. This is the `eventType` name in an `EventGridEvent` or `type` name in `CloudEvent`. For e.g. `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.` Here `Microsoft.Communication.ChatMessageReceived` is the event name.
@@ -120,6 +122,7 @@ input-file:
 - Microsoft.EventHub/stable/2018-01-01/EventHub.json
 - Microsoft.Resources/stable/2018-01-01/Resources.json
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+- Microsoft.DataBox/stable/2018-01-01/DataBox.json
 - Microsoft.Devices/stable/2018-01-01/IotHub.json
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
 - Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
@@ -212,6 +215,7 @@ input-file:
   - $(this-folder)/Microsoft.EventHub/stable/2018-01-01/EventHub.json
   - $(this-folder)/Microsoft.Resources/stable/2018-01-01/Resources.json
   - $(this-folder)/Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
+  - $(this-folder)/Microsoft.DataBox/stable/2018-01-01/DataBox.json
   - $(this-folder)/Microsoft.Devices/stable/2018-01-01/IotHub.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
   - $(this-folder)/Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json

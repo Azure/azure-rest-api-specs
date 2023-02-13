@@ -7,6 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-devhub"
-  output-folder: "$(typescript-sdks-folder)/sdk/developerhub/arm-devhub"
+  output-folder: "$(typescript-sdks-folder)/sdk/devhub/arm-devhub"
   generate-metadata: true
 ```

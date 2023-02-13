@@ -37,6 +37,8 @@ Generate all API versions currently shipped for this package
 multiapi: true
 clear-output-folder: true
 batch:
+  - tag: package-2022-11-01-only
+  - tag: package-2022-09-04-only
   - tag: package-2022-08-01-only
   - tag: package-2022-07-02-only
   - tag: package-2022-04-04-only
@@ -78,6 +80,26 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/
 perform-load: false
+```
+
+### Tag: package-2022-11-01-only
+
+These settings apply only when `--tag=package-2022-11-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-11-01-only'
+namespace: azure.mgmt.compute.v2022_11_01
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_11_01
+```
+
+### Tag: package-2022-09-04-only
+
+These settings apply only when `--tag=package-2022-09-04-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-09-04-only'
+namespace: azure.mgmt.compute.v2022_09_04
+output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2022_09_04
 ```
 
 ### Tag: package-2022-08-01-only
