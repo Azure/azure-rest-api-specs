@@ -54,15 +54,6 @@ directive:
     reason: list by immediate parent operations are defined
 ```
 
-### Tag: package-2020-06-30-preview
-
-These settings apply only when `--tag=package-2020-06-30-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2020-06-30-preview'
-input-file:
-- Microsoft.Automanage/preview/2020-06-30-preview/automanage.json
-```
-
 ## Suppression
 
 ``` yaml
