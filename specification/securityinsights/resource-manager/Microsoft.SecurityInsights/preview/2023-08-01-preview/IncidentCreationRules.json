@@ -197,16 +197,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Ok",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Ok"
           },
           "204": {
-            "description": "No Content",
-            "schema": {
-              "type": "object"
-            }
+            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -293,7 +287,7 @@
           "type": "boolean"
         },
         "lookbackDuration": {
-          "format": "date-span",
+          "format": "duration",
           "description": "Determines the lookback time frame for which grouping will be applied.",
           "type": "string"
         },
@@ -381,7 +375,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IncidentCreationRule"
-          }
+          },
+		  "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string"
