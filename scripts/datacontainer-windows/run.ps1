@@ -11,7 +11,7 @@ Copy-Item -Path "C:\\usr\\data\\specrepo\\.git" -Destination "C:\\usr\\data\\ope
 cd "C:\\usr\\data\\openapispecs\\"
 $timestamp= Get-Date -UFormat "%A %m/%d/%Y %R %Z"
 echo "[$timestamp]  Running 'git checkout [$specRetrievalGitBranch] -f'"
-git checkout master -f
+git checkout $specRetrievalGitBranch -f
 
 $timestamp= Get-Date -UFormat "%A %m/%d/%Y %R %Z"
 echo "[$timestamp] Deleting directory /usr/data/specrepo/"
