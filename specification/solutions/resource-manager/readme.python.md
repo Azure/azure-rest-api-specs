@@ -19,6 +19,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
+default-api-version: "2021-07-01"
 clear-output-folder: true
 batch:
   - tag: package-managedapplications-2021-07
