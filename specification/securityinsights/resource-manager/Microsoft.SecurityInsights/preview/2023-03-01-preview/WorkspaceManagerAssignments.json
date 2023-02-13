@@ -310,9 +310,6 @@
           },
           {
             "$ref": "#/parameters/WorkspaceManagerAssignmentName"
-          },
-          {
-            "$ref": "#/parameters/Job"
           }
         ],
         "responses": {
@@ -449,6 +446,45 @@
         "targetResourceName": {
           "description": "The name of the workspace manager group targeted by the workspace manager assignment",
           "type": "string"
+        },
+        "lastJobEndTime": {
+          "description": "The time the last job associated to this assignment ended at",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastJobProvisioningState": {
+          "description": "State of the last job associated to this assignment",
+          "enum": [
+            "Succeeded",
+            "InProgress",
+            "Canceled",
+            "Failed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "provisioningState",
+            "values": [
+              {
+                "description": "The job succeeded",
+                "value": "Succeeded"
+              },
+              {
+                "description": "The job was canceled",
+                "value": "Canceled"
+              },
+              {
+                "description": "The job is in progress",
+                "value": "InProgress"
+              },
+              {
+                "description": "The job failed",
+                "value": "Failed"
+              }
+            ]
+          }
         },
         "items": {
           "description": "List of resources included in this workspace manager assignment",
@@ -692,13 +728,6 @@
       "name": "jobName",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Job": {
-      "description": "The job body",
-      "in": "body",
-      "name": "job",
-      "required": false,
       "x-ms-parameter-location": "method"
     }
   }
