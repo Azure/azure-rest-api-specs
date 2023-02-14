@@ -3321,6 +3321,7 @@
             "in": "path",
             "description": "Name of the free trial static web app.",
             "required": true,
+            "pattern": "^[a-zA-Z0-9]+$",
             "type": "string"
           },
           {
@@ -3359,6 +3360,7 @@
             "in": "path",
             "description": "Name of the free trial static web app.",
             "required": true,
+            "pattern": "^[a-zA-Z0-9]+$",
             "type": "string"
           },
           {
@@ -3405,6 +3407,7 @@
             "in": "path",
             "description": "Name of the free trial static web app.",
             "required": true,
+            "pattern": "^[a-zA-Z0-9]+$",
             "type": "string"
           },
           {
@@ -3445,6 +3448,7 @@
             "in": "path",
             "description": "Name of the free trial static web app.",
             "required": true,
+            "pattern": "^[a-zA-Z0-9]+$",
             "type": "string"
           },
           {
@@ -4544,7 +4548,7 @@
       }
     },
     "FreeTrialStaticWebAppsProxyEntity": {
-      "type": "object",
+      "type": "string",
       "properties": {
         "location": {
           "type": "string"
@@ -4629,17 +4633,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
-    },
-    "freeTrialStaticWebAppName": {
-      "name": "freeTrialStaticWebAppName",
-      "in": "path",
-      "description": "Name of the free trial static web app.",
-      "required": true,
-      "type": "string",
-      "maxLength": 90,
-      "minLength": 1,
-      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
-      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
