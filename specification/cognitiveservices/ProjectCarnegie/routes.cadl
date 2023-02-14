@@ -1,0 +1,236 @@
+import "@azure-tools/cadl-azure-core";
+import "@cadl-lang/rest";
+import "./models.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+
+namespace ProjectCarnegie;
+
+interface TextOperations {
+  @summary("Analyze Text")
+  @doc("A sync API for harmful content analysis for text")
+  @route("/text:analyze")
+  @post
+  Analyze is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+Language hint for text analysis.  Value may contain only the language code (ex.
+\"en\", \"fr\") of BCP 47.
+""")
+      @query
+      language: string;
+
+      @doc("The analysis request of the text")
+      @body
+      request: TextDetectRequest;
+    },
+    TextDetectResponse
+  >;
+
+  @summary("Analyze Text In Batch")
+  @doc("An API for triggering harmful content analysis of text batch")
+  @route("/text:batchAnalyze")
+  @post
+  BatchDetect is Azure.Core.Foundations.Operation<
+    {
+      @doc("""
+Language hint for text analysis.  Value may contain only the language code (ex.
+\"en\", \"fr\") of BCP 47.
+""")
+      @query
+      language: string;
+
+      @doc("The analysis request of the text batch")
+      @body
+      request: TextBatchDetectRequest;
+    },
+    void
+  >;
+
+  @summary("Get Text Batch Analyze Results")
+  @doc("An API to get harmful content analysis results for text batch")
+  @route("/text/analyzeResults/{resultId}")
+  @get
+  BatchDetectResults is Azure.Core.Foundations.Operation<
+    {
+      @doc("Batch analyze operation result ID.")
+      @path
+      resultId: string;
+    },
+    TextBatchDetectResultsResponse
+  >;
+}
+
+interface ImageOperations {
+  @summary("Analyze Image")
+  @doc("A sync API for harmful content analysis for image")
+  @route("/image:analyze")
+  @post
+  Detect is Azure.Core.Foundations.Operation<
+    {
+      @doc("The analysis request of the image")
+      @body
+      request: ImageDetectRequest;
+    },
+    ImageDetectResponse
+  >;
+
+  @summary("Analyze Image In Batch")
+  @doc("An API to trigger harmful content analysis for image batch")
+  @route("/image:batchAnalyze")
+  @post
+  BatchDetect is Azure.Core.Foundations.Operation<
+    {
+      @doc("The analysis request of the image batch")
+      @body
+      request: ImageBatchDetectRequest;
+    },
+    void
+  >;
+
+  @summary("Get Image Batch Analyze Results")
+  @doc("An API to get harmful content analysis results for image batch")
+  @route("/image/analyzeResults/{resultId}")
+  @get
+  BatchDetectResults is Azure.Core.Foundations.Operation<
+    {
+      @doc("Batch analyze operation result ID.")
+      @path
+      resultId: string;
+    },
+    ImageBatchDetectResultsResponse
+  >;
+}
+
+interface ListManagementTextListsOperations {
+  @summary("Get Text List By listId")
+  @doc("Returns text list details of the Text List with list Id equal to list Id passed.")
+  @route("/text/lists/{listId}")
+  @get
+  GetDetails is Azure.Core.Foundations.Operation<
+    {
+      @doc("List Id of the list.")
+      @path
+      listId: string;
+    },
+    TextList
+  >;
+
+  @summary("Delete Text List By listId")
+  @doc("Deletes Text List with the list Id equal to list Id passed.")
+  @route("/text/lists/{listId}")
+  @delete
+  Delete is Azure.Core.Foundations.Operation<
+    {
+      @doc("List Id of the list.")
+      @path
+      listId: string;
+    },
+    void
+  >;
+
+  @summary("Create Or Update Text List")
+  @doc("Updates an Text List by listId, , if listId not exists, create a new Text List")
+  @route("/text/lists/{listId}")
+  @patch
+  Update is Azure.Core.Foundations.Operation<
+    {
+      @doc("List Id of the list.")
+      @path
+      listId: string;
+
+      @doc("Properties of the Text List.")
+      @body
+      request: TextList;
+    },
+    void
+  >;
+
+  @summary("Get All Text Lists")
+  @doc("Get All Text Lists")
+  @route("/text/lists")
+  @get
+  GetAllTextLists is Azure.Core.Foundations.Operation<
+    {},
+    Paths1E17OmdTextListsGetResponses200ContentApplicationJsonSchema
+  >;
+}
+
+interface ListManagementTermOperations {
+  @summary("Get All Items By listId")
+  @doc("Get All Items By listId")
+  @route("/text/lists/{listId}/items")
+  @get
+  GetAllTerms is Azure.Core.Foundations.Operation<
+    {
+      @doc("List Id of the list.")
+      @path
+      listId: string;
+
+      @doc("How many terms will be skipped.")
+      @query
+      skip: int32;
+
+      @doc("How many terms will be fetched.")
+      @query
+      top: int32;
+    },
+    PathsG4WtohTextListsListidItemsGetResponses200ContentApplicationJsonSchema
+  >;
+
+  @summary("Get Item By itemId and listId")
+  @doc("Get Item By itemId and listId")
+  @route("/text/lists/{listId}/items/{itemId}")
+  @get
+  AddTerm is Azure.Core.Foundations.Operation<
+    {
+      @doc("List Id of the list.")
+      @path
+      listId: string;
+
+      @doc("Id of the item in list.")
+      @path
+      itemId: string;
+    },
+    TextListItem
+  >;
+
+  @summary("Delete Item By itemId and listId")
+  @doc("Delete Item By itemId and listId")
+  @route("/text/lists/{listId}/items/{itemId}")
+  @delete
+  DeleteTerm is Azure.Core.Foundations.Operation<
+    {
+      @doc("List Id of the list.")
+      @path
+      listId: string;
+
+      @doc("Id of the item in list.")
+      @path
+      itemId: string;
+    },
+    void
+  >;
+
+  @summary("Create Item In Text List")
+  @doc("Create Item In Text List")
+  @route("/text/lists/{listId}/items/{itemId}")
+  @patch
+  UpdateTerm is Azure.Core.Foundations.Operation<
+    {
+      @doc("List Id of the list.")
+      @path
+      listId: string;
+
+      @doc("Id of the item in list.")
+      @path
+      itemId: string;
+
+      @doc("Schema of the term update body.")
+      @body
+      request: TextListItem;
+    },
+    void
+  >;
+}

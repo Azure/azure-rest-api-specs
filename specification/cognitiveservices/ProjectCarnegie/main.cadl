@@ -1,0 +1,31 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-azure-core";
+import "./routes.cadl";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+
+@service({
+  title: "ProjectCarnegie service",
+})
+@versioned(ProjectCarnegie.Versions)
+@server(
+  "{endpoint}/carnegie/carnegie",
+  "Analyze harmful content",
+  {
+    @doc("""
+Supported Cognitive Services endpoints (protocol and hostname, for example:
+https://<resource-name>.cognitiveservices.azure.com).
+""")
+    endpoint: string,
+  }
+)
+@doc("Analyze harmful content")
+namespace ProjectCarnegie;
+
+enum Versions {
+  v2023_04_30_Preview: "2023-04-30-preview",
+}

@@ -1,0 +1,320 @@
+import "@cadl-lang/rest";
+
+using Cadl.Rest;
+
+namespace ProjectCarnegie;
+
+enum TextCategory {
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
+}
+
+enum TextBatchDetectStatus {
+  "NotStarted",
+  "Running",
+  "Failed",
+  "Succeeded",
+}
+
+enum ImageCategory {
+  "Hate",
+  "SelfHarm",
+  "Sexual",
+  "Violence",
+}
+
+enum ImageBatchDetectStatus {
+  "NotStarted",
+  "Running",
+  "Failed",
+  "Succeeded",
+}
+
+@doc("The analysis request of the text")
+model TextDetectRequest {
+  @doc("The text needs to be scanned")
+  text: string;
+
+  @doc("""
+The categories will be analyzed, if not assigned, a default set of categories'
+analysis results will be returned.
+""")
+  categories?: TextCategory[];
+
+  @doc("The ids of blocklists")
+  blockListIds?: string[];
+
+  @doc("""
+When set to true, other analysis will be skipped once any of configured
+blocklists was hit. When set to false, all the analysis will be done even when
+blocklists were hit.
+""")
+  breakByBlocklists?: boolean;
+}
+
+@doc("The analysis response of the text")
+model TextDetectResponse {
+  @doc("The details of list match")
+  blocklistMatchResults?: TextListMatchResult[];
+  hateResult?: TextDetectResult;
+  selfHarmResult?: TextDetectResult;
+  sexualResult?: TextDetectResult;
+  violenceResult?: TextDetectResult;
+}
+
+@doc("The result of custom list match")
+model TextListMatchResult {
+  @doc("The id of matched custom list")
+  listId: string;
+
+  @doc("The id of matched item")
+  itemId: string;
+
+  @doc("The content of matched item")
+  itemText: string;
+
+  @doc("The character offset of matched text in original input")
+  offset?: string;
+
+  @doc("The length of matched text in original input")
+  length?: string;
+}
+
+model TextDetectResult {
+  category: TextCategory;
+  riskLevel?: int32;
+}
+
+@doc("Error response object.")
+@error
+model ErrorResponse {
+  @doc("Error info.")
+  error: Error;
+}
+
+@doc("Error info.")
+model Error {
+  @doc("Error code.")
+  code: string;
+
+  @doc("Error message.")
+  message: string;
+
+  @doc("Target of the error.")
+  target?: string;
+
+  @doc("List of detailed errors.")
+  details?: Error[];
+
+  @doc("Detailed error.")
+  innererror?: InnerError;
+}
+
+@doc("Detailed error.")
+model InnerError {
+  @doc("Error code.")
+  code: string;
+
+  @doc("Error message.")
+  message?: string;
+
+  @doc("Detailed error.")
+  innererror?: InnerError;
+}
+
+@doc("The analysis request of the text batch")
+model TextBatchDetectRequest {
+  textBatch: TextBatchItem[];
+
+  @doc("""
+The categories will be analyzed, if not assigned, a default set of categories'
+analysis results will be returned.
+""")
+  categories?: TextCategory[];
+
+  @doc("The ids of blocklists")
+  blockListIds?: string[];
+
+  @doc("""
+When set to true, other analysis will be skipped once any of configured
+blocklists was hit. When set to false, all the analysis will be done even when
+blocklists were hit.
+""")
+  breakByBlocklists?: boolean;
+}
+
+@doc("One item of text batch")
+model TextBatchItem {
+  @doc("Id of text batch item")
+  textId: string;
+
+  @doc("""
+Url of text batch item, it should be a blob url of text file that contains
+content to analyze
+""")
+  url: string;
+}
+
+@doc("Status and result of the batch analysis.")
+model TextBatchDetectResultsResponse {
+  @doc("Batch analysis status.")
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @key
+  @visibility("read")
+  status: TextBatchDetectStatus;
+
+  @doc("Date and time (UTC) when the batch analysis was submitted.")
+  createdDateTime: zonedDateTime;
+
+  @doc("Date and time (UTC) when the status was last updated.")
+  lastUpdatedDateTime: zonedDateTime;
+
+  @doc("Batch analysis results")
+  results?: TextBatchDetectResultsResponseResultsItem[];
+
+  @doc("Error encountered during batch analysis")
+  error?: Error;
+}
+
+model TextBatchDetectResultsResponseResultsItem {
+  @doc("Id for text batch item")
+  textId: string;
+
+  @doc("The details of list match")
+  blocklistMatchResults?: TextListMatchResult[];
+  hateResult?: TextDetectResult;
+  selfHarmResult?: TextDetectResult;
+  sexualResult?: TextDetectResult;
+  violenceResult?: TextDetectResult;
+
+  @doc("Error encountered when processing individual image")
+  error?: Error;
+}
+
+@doc("The analysis request of the image")
+model ImageDetectRequest {
+  @doc("The image needs to be scanned")
+  image: Image;
+
+  @doc("""
+The categories will be analyzed, if not assigned, default categories will be
+analyzed
+""")
+  categories?: ImageCategory[];
+}
+
+@doc("The content or url of image")
+model Image {
+  @doc("Base64 encoding of image")
+  content?: string;
+
+  @doc("The blob url of image")
+  url?: string;
+}
+
+@doc("The analysis response of the image")
+model ImageDetectResponse {
+  hateResult?: ImageDetectResult;
+  selfHarmResult?: ImageDetectResult;
+  sexualResult?: ImageDetectResult;
+  violenceResult?: ImageDetectResult;
+}
+
+model ImageDetectResult {
+  category: ImageCategory;
+  riskLevel?: int32;
+}
+
+@doc("The analysis request of the image batch")
+model ImageBatchDetectRequest {
+  imageBatch: ImageBatchItem[];
+
+  @doc("""
+The categories will be analyzed, if not assigned, default categories will be
+analyzed
+""")
+  categories?: ImageCategory[];
+}
+
+@doc("One item of image batch")
+model ImageBatchItem {
+  @doc("Id of image batch item")
+  imageId: string;
+
+  @doc("Url of image batch item, it should be a blob url of image file to analyze")
+  url: string;
+  format?: string;
+}
+
+@doc("Status and results of the batch analysis.")
+model ImageBatchDetectResultsResponse {
+  @doc("Batch analysis status.")
+  // FIXME: (resource-key-guessing) - Verify that this property is the resource key, if not please update the model with the right one
+  @key
+  @visibility("read")
+  status: ImageBatchDetectStatus;
+
+  @doc("Date and time (UTC) when the batch analysis was submitted.")
+  createdDateTime: zonedDateTime;
+
+  @doc("Date and time (UTC) when the status was last updated.")
+  lastUpdatedDateTime: zonedDateTime;
+
+  @doc("Batch analysis results")
+  results?: ImageBatchDetectResultsResponseResultsItem[];
+
+  @doc("Error encountered during batch analysis")
+  error?: Error;
+}
+
+model ImageBatchDetectResultsResponseResultsItem {
+  @doc("imageId of individual image in batch")
+  imageId?: string;
+  hateResult?: ImageDetectResult;
+  selfHarmResult?: ImageDetectResult;
+  sexualResult?: ImageDetectResult;
+  violenceResult?: ImageDetectResult;
+
+  @doc("Error encountered when processing individual image")
+  error?: Error;
+}
+
+@doc("Text List.")
+model TextList {
+  @doc("Text List Id.")
+  listId?: string;
+
+  @doc("Text List name.")
+  name?: string;
+
+  @doc("Description for Text List.")
+  description?: string;
+}
+
+model Paths1E17OmdTextListsGetResponses200ContentApplicationJsonSchema {
+  values?: TextList[];
+}
+
+model PathsG4WtohTextListsListidItemsGetResponses200ContentApplicationJsonSchema {
+  values?: TextListItem[];
+}
+
+@doc("Text data")
+model TextListItem {
+  @doc("Item id")
+  itemId?: string;
+
+  @doc("Text data description")
+  description?: string;
+
+  @doc("Text list item content.")
+  text?: string;
+
+  @doc("""
+Language of this item, Value may contain only the language code (ex. \"en\",
+\"fr\") of BCP 47. If not assigned, \"en\" will be used
+""")
+  language?: string;
+}
