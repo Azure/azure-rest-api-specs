@@ -2267,23 +2267,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "type": "object"
-            }
-          },
           "202": {
-            "description": "Asynchronous operation in progress.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "Asynchronous operation in progress."
           },
           "204": {
-            "description": "No content.",
-            "schema": {
-              "type": "object"
-            }
+            "description": "No content."
           },
           "default": {
             "description": "App Service error response.",
@@ -3303,7 +3291,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntityCollection"
             }
           },
           "default": {
@@ -3343,7 +3331,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntity"
             }
           },
           "default": {
@@ -3386,10 +3374,10 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content",
+          "200": {
+            "description": "OK",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntity"
             }
           },
           "default": {
@@ -4555,7 +4543,7 @@
         }
       }
     },
-       "FreeTrialStaticWebAppsProxyEntity": {
+    "FreeTrialStaticWebAppsProxyEntity": {
       "type": "object",
       "properties": {
         "location": {
@@ -4576,6 +4564,27 @@
         },
         "trialExpirationTimeUtc": {
           "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FreeTrialStaticWebAppsProxyEntityCollection": {
+      "description": "Collection of free trial static web apps.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntity"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
         }
