@@ -1134,14 +1134,13 @@
         "utilization": {
           "$ref": "#/definitions/Utilization"
         },
-        "renewSource": {
-          "$ref": "#/definitions/RenewSource"
-        },
-        "renewDestination": {
-          "$ref": "#/definitions/RenewDestination"
-        },
         "renewProperties": {
-          "$ref": "#/definitions/RenewProperties"
+          "type": "object",
+          "properties": {
+            "purchaseProperties": {
+              "$ref": "#/definitions/PurchaseRequest"
+            }
+          }
         }
       }
     },

@@ -2367,7 +2367,8 @@
           "type": "integer",
           "description": "The provisioned throughput for the backing database.",
           "readOnly": false,
-          "minimum": 400
+          "minimum": 400,
+          "maximum": 10000
         },
         "keyVaultKeyUri": {
           "type": "string",
@@ -3284,6 +3285,7 @@
           "x-ms-client-flatten": false,
           "type": "object",
           "description": "Workspaces resource specific properties.",
+          "x-ms-azure-resource": true,
           "properties": {
             "provisioningState": {
               "description": "The provisioning state.",

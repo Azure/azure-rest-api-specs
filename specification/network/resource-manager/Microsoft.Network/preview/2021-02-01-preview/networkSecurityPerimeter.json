@@ -1528,20 +1528,6 @@
             "$ref": "#/definitions/PerimeterBasedAccessRule"
           },
           "description": "Inbound rule specified by the perimeter id."
-        },
-        "emailAddresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Outbound rules email address format."
-        },
-        "phoneNumbers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Outbound rules phone number format."
         }
       },
       "description": "Properties of NSP access rule."
@@ -1750,24 +1736,6 @@
         "modelAsString": true
       }
     },
-    "NSPLinkProvisioningState": {
-      "type": "string",
-      "readOnly": true,
-      "description": "The current provisioning state of NSP Link/LinkReference.",
-      "enum": [
-        "Succeeded",
-        "Creating",
-        "Updating",
-        "Deleting",
-        "Accepted",
-        "Failed",
-        "WaitForRemoteCompletion"
-      ],
-      "x-ms-enum": {
-        "name": "nspLinkProvisioningState",
-        "modelAsString": true
-      }
-    },
     "NspAccessRuleReconcile": {
       "type": "object",
       "properties": {},
@@ -1811,7 +1779,7 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "$ref": "#/definitions/NSPLinkProvisioningState",
+          "$ref": "#/definitions/NSPProvisioningState",
           "description": "The provisioning state of the NSP Link resource."
         },
         "autoApprovedRemotePerimeterResourceId": {
@@ -1826,11 +1794,6 @@
           "readOnly": true,
           "type": "string",
           "description": "Remote NSP Guid with which the link gets created."
-        },
-        "remotePerimeterLocation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Remote NSP location with which the link gets created."
         },
         "localInboundProfiles": {
           "type": "array",
@@ -1926,7 +1889,7 @@
       "properties": {
         "provisioningState": {
           "readOnly": true,
-          "$ref": "#/definitions/NSPLinkProvisioningState",
+          "$ref": "#/definitions/NSPProvisioningState",
           "description": "The provisioning state of the NSP LinkReference resource."
         },
         "remotePerimeterResourceId": {
@@ -1938,11 +1901,6 @@
           "readOnly": true,
           "type": "string",
           "description": "Remote NSP Guid with which the link is created."
-        },
-        "remotePerimeterLocation": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Remote NSP location with which the link gets created."
         },
         "localInboundProfiles": {
           "type": "array",

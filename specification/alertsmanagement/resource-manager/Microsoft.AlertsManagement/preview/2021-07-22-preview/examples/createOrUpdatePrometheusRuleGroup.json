@@ -9,15 +9,12 @@
       "properties": {
         "description": "This is the description of the first rule group",
         "scopes": [
-          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/microsoft.monitor/accounts/myMonitoringAccount"
+          "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/Microsoft.Observability/monitoringAcount/myMonitoringAccount"
         ],
         "rules": [
           {
             "record": "job_type:billing_jobs_duration_seconds:99p5m",
-            "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))",
-            "labels": {
-              "team": "prod"
-            }
+            "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))"
           },
           {
             "alert": "Billing_Processing_Very_Slow",
@@ -58,16 +55,13 @@
         "properties": {
           "description": "This is the description of the first rule group",
           "scopes": [
-            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/microsoft.monitor/accounts/myMonitoringAccount"
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/Microsoft.Observability/monitoringAcount/myMonitoringAccount"
           ],
           "interval": "PT5M",
           "rules": [
             {
               "record": "job_type:billing_jobs_duration_seconds:99p5m",
-              "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))",
-              "labels": {
-                "team": "prod"
-              }
+              "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))"
             },
             {
               "alert": "Billing_Processing_Very_Slow",
@@ -115,16 +109,13 @@
         "properties": {
           "description": "This is the description of the first rule group",
           "scopes": [
-            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/microsoft.monitor/accounts/myMonitoringAccount"
+            "/subscriptions/14ddf0c5-77c5-4b53-84f6-e1fa43ad68f7/resourceGroups/giladstest/providers/Microsoft.Observability/monitoringAcount/myMonitoringAccount"
           ],
           "interval": "PT5M",
           "rules": [
             {
               "record": "job_type:billing_jobs_duration_seconds:99p5m",
-              "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))",
-              "labels": {
-                "team": "prod"
-              }
+              "expression": "histogram_quantile(0.99, sum(rate(jobs_duration_seconds_bucket{service=\"billing-processing\"}[5m])) by (job_type))"
             },
             {
               "alert": "Billing_Processing_Very_Slow",

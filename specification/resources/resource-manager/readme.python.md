@@ -19,7 +19,6 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2022-09-01"
 clear-output-folder: true
 batch:
   - tag: package-privatelinks-2020-05

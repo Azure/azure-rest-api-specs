@@ -55,7 +55,6 @@ These settings apply only when `--tag=package-preview-2022-10-05` is specified o
 ```yaml $(tag) == 'package-preview-2022-10-05'
 input-file:
   - Microsoft.CostManagement/preview/2022-10-05-preview/costmanagement.json
-  - Microsoft.CostManagement/preview/2022-10-05-preview/settings.json
 ```
 
 ### Tag: package-preview-2022-10
@@ -65,7 +64,6 @@ These settings apply only when `--tag=package-preview-2022-10` is specified on t
 ``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
   - Microsoft.CostManagement/preview/2022-10-01-preview/costmanagement.json
-  - Microsoft.CostManagement/preview/2022-10-01-preview/settings.json
 ```
 
 ### Tag: package-preview-2022-08

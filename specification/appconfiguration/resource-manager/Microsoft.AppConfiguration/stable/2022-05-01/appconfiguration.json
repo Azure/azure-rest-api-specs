@@ -504,11 +504,7 @@
             }
           }
         },
-        "x-ms-examples": {
-          "Operations_List": {
-            "$ref": "./examples/OperationsList.json"
-          }
-        },
+        "x-ms-examples": {},
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -612,7 +608,7 @@
           "PrivateEndpointConnections"
         ],
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
-        "description": "Update the state of the specified private endpoint connection associated with the configuration store. This operation cannot be used to create a private endpoint connection. Private endpoint connections must be created with the Network resource provider.",
+        "description": "Update the state of the specified private endpoint connection associated with the configuration store.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -664,8 +660,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateEndpointConnection_Update": {
-            "$ref": "./examples/ConfigurationStoresUpdatePrivateEndpointConnection.json"
+          "PrivateEndpointConnection_CreateOrUpdate": {
+            "$ref": "./examples/ConfigurationStoresCreatePrivateEndpointConnection.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -813,6 +809,58 @@
           "PrivateLinkResources_Get": {
             "$ref": "./examples/PrivateLinkResourceGet.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AppConfiguration/configurationStores/{configStoreName}/keyValues": {
+      "get": {
+        "tags": [
+          "KeyValues"
+        ],
+        "description": "Lists the key-values for a given configuration store.",
+        "operationId": "KeyValues_ListByConfigurationStore",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ConfigStoreNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "A skip token is used to continue retrieving items after an operation returns a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skipToken parameter that specifies a starting point to use for subsequent calls.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/KeyValueListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "KeyValues_ListByConfigurationStore": {
+            "$ref": "./examples/ConfigurationStoresListKeyValues.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1852,7 +1900,6 @@
       "description": "Describes a configuration store SKU."
     },
     "ErrorDetails": {
-      "type": "object",
       "description": "The details of the error.",
       "properties": {
         "code": {
@@ -1887,7 +1934,6 @@
       }
     },
     "ErrorAdditionalInfo": {
-      "type": "object",
       "properties": {
         "type": {
           "readOnly": true,

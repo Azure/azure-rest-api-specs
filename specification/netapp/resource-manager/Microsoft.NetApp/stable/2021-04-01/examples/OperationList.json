@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2021-04-01"
+    "api-version": "2022-01-01"
   },
   "responses": {
     "200": {
@@ -47,6 +47,54 @@
             "origin": "user,system"
           },
           {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/Revert/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Revert volume resource",
+              "description": "Revert volume to specific snapshot"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/BreakReplication/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Break volume replication resource",
+              "description": "Break volume replication relations"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/ReplicationStatus/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Read Volume Replication Status.",
+              "description": "Reads the statuses of the Volume Replication."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/ListReplications/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/ReInitializeReplication/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Re-Initialize replication",
+              "description": "Attempts to re-initialize an uninitialized replication"
+            },
+            "origin": "user,system"
+          },
+          {
             "properties": {
               "serviceSpecification": {
                 "metricSpecifications": [
@@ -56,7 +104,24 @@
                     "displayDescription": "Average read latency in milliseconds per operation",
                     "unit": "MilliSeconds",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "AverageReadLatency",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -65,7 +130,24 @@
                     "displayDescription": "Average write latency in milliseconds per operation",
                     "unit": "MilliSeconds",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "AverageWriteLatency",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -74,7 +156,24 @@
                     "displayDescription": "Logical size of the volume (used bytes)",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumeLogicalSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -83,7 +182,24 @@
                     "displayDescription": "Size of all snapshots in volume",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumeSnapshotSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -92,7 +208,24 @@
                     "displayDescription": "Read In/out operations per second",
                     "unit": "CountPerSecond",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "ReadIops",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -101,7 +234,24 @@
                     "displayDescription": "Write In/out operations per second",
                     "unit": "CountPerSecond",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "WriteIops",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -110,7 +260,24 @@
                     "displayDescription": "The provisioned size of a volume",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumeAllocatedSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -119,7 +286,24 @@
                     "displayDescription": "Volume Footprint for Cool Tier",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumeCoolTierSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -128,7 +312,24 @@
                     "displayDescription": "Data read in using GET per volume",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumeCoolTierDataReadSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -137,7 +338,24 @@
                     "displayDescription": "Data tiered out using PUT per volume",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumeCoolTierDataWriteSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -146,7 +364,24 @@
                     "displayDescription": "The amount of time in seconds it took for the last transfer to complete.",
                     "unit": "Seconds",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "XregionReplicationLastTransferDuration",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -155,7 +390,24 @@
                     "displayDescription": "The total number of bytes transferred as part of the last transfer.",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "XregionReplicationLastTransferSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -164,7 +416,24 @@
                     "displayDescription": "Condition of the relationship, 1 or 0.",
                     "unit": "Count",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "XregionReplicationHealthy",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -173,7 +442,24 @@
                     "displayDescription": "The amount of time in seconds by which the data on the mirror lags behind the source.",
                     "unit": "Seconds",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "XregionReplicationLagTime",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -182,7 +468,24 @@
                     "displayDescription": "Cumulative bytes transferred for the relationship.",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "XregionReplicationTotalTransferBytes",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -191,7 +494,24 @@
                     "displayDescription": "Total amount of data transferred for the current transfer operation.",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "XregionReplicationRelationshipProgress",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -200,7 +520,24 @@
                     "displayDescription": "Whether the status of the Volume Replication is 'transferring'.",
                     "unit": "Count",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "XregionReplicationRelationshipTransferring",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -209,7 +546,24 @@
                     "displayDescription": "Total bytes backed up for this Volume.",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "CbsVolumeLogicalBackupBytes",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -218,7 +572,24 @@
                     "displayDescription": "Is backup enabled for the volume? 1 if yes, 0 if no.",
                     "unit": "Count",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "CbsVolumeProtected",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -227,7 +598,24 @@
                     "displayDescription": "Is the backup policy suspended for the volume? 0 if yes, 1 if no.",
                     "unit": "Count",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "CbsVolumeBackupActive",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -236,7 +624,24 @@
                     "displayDescription": "Total bytes transferred for last backup or restore operation.",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "CbsVolumeOperationTransferredBytes",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -245,25 +650,24 @@
                     "displayDescription": "Did the last volume backup or restore operation complete successfully? 1 if yes, 0 if no.",
                     "unit": "Count",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "CbsVolumeOperationComplete",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
-                    "dimensions": []
-                  },
-                  {
-                    "name": "CbsVolumeOperationBackupTransferredBytes",
-                    "displayName": "Volume Backup Operation Last Transferred Bytes",
-                    "displayDescription": "Total bytes transferred for last backup operation.",
-                    "unit": "Bytes",
-                    "aggregationType": "Average",
-                    "fillGapWithZero": false,
-                    "dimensions": []
-                  },
-                  {
-                    "name": "CbsVolumeOperationRestoreTransferredBytes",
-                    "displayName": "Volume Backup Restore Operation Last Transferred Bytes",
-                    "displayDescription": "Total bytes transferred for last backup restore operation.",
-                    "unit": "Bytes",
-                    "aggregationType": "Average",
-                    "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -272,7 +676,24 @@
                     "displayDescription": "The percentage of the volume consumed including snapshots.",
                     "unit": "Percent",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumeConsumedSizePercentage",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -281,7 +702,24 @@
                     "displayDescription": "Other throughput (that is not read or write) in bytes per second",
                     "unit": "BytesPerSecond",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "OtherThroughput",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -290,7 +728,24 @@
                     "displayDescription": "Read throughput in bytes per second",
                     "unit": "BytesPerSecond",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "ReadThroughput",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -299,7 +754,24 @@
                     "displayDescription": "Sum of all throughput in bytes per second",
                     "unit": "BytesPerSecond",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "TotalThroughput",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -308,7 +780,24 @@
                     "displayDescription": "Write throughput in bytes per second",
                     "unit": "BytesPerSecond",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "WriteThroughput",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   }
                 ]
@@ -322,76 +811,6 @@
               "description": "Gets the available metrics for Volume resource."
             },
             "origin": "system"
-          },
-          {
-            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/revert/action",
-            "display": {
-              "provider": "Microsoft.NetApp Resource Provider",
-              "resource": "Volumes resource type",
-              "operation": "Revert volume resource",
-              "description": "Revert volume to specific snapshot"
-            },
-            "origin": "user,system"
-          },
-          {
-            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/breakReplication/action",
-            "display": {
-              "provider": "Microsoft.NetApp Resource Provider",
-              "resource": "Volumes resource type",
-              "operation": "Break volume replication resource",
-              "description": "Break volume replication relations"
-            },
-            "origin": "user,system"
-          },
-          {
-            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/replicationStatus/read",
-            "display": {
-              "provider": "Microsoft.NetApp Resource Provider",
-              "resource": "Volumes resource type",
-              "operation": "Read Volume Replication Status.",
-              "description": "Reads the statuses of the Volume Replication."
-            },
-            "origin": "user,system"
-          },
-          {
-            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/authorizeReplication/action",
-            "display": {
-              "provider": "Microsoft.NetApp Resource Provider",
-              "resource": "Volumes resource type",
-              "operation": "Authorize Replication",
-              "description": "Authorize the source volume replication"
-            },
-            "origin": "user,system"
-          },
-          {
-            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/resyncReplication/action",
-            "display": {
-              "provider": "Microsoft.NetApp Resource Provider",
-              "resource": "Volumes resource type",
-              "operation": "Resync Replication",
-              "description": "Resync the replication on the destination volume"
-            },
-            "origin": "user,system"
-          },
-          {
-            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/deleteReplication/action",
-            "display": {
-              "provider": "Microsoft.NetApp Resource Provider",
-              "resource": "Volumes resource type",
-              "operation": "Delete Replication",
-              "description": "Delete the replication on the destination volume"
-            },
-            "origin": "user,system"
-          },
-          {
-            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/mountTargets/read",
-            "display": {
-              "provider": "Microsoft.NetApp Resource Provider",
-              "resource": "Volumes resource type",
-              "operation": "Read mount target resource",
-              "description": "Reads a mount target resource."
-            },
-            "origin": "user,system"
           },
           {
             "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/providers/Microsoft.Insights/diagnosticSettings/read",
@@ -412,6 +831,112 @@
               "description": "Creates or updates the diagnostic setting for the resource."
             },
             "origin": "system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/AuthorizeReplication/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Authorize Replication",
+              "description": "Authorize the source volume replication"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/ResyncReplication/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Resync Replication",
+              "description": "Resync the replication on the destination volume"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/DeleteReplication/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Delete Replication",
+              "description": "Delete the replication on the destination volume"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/ReplicationStatus/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Read Volume Replication Status.",
+              "description": "Reads the statuses of the Volume Replication."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/MountTargets/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Read mount target resource",
+              "description": "Reads a mount target resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/BackupStatus/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/RestoreStatus/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/PoolChange/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Change pool for volume",
+              "description": "Moves volume to another pool."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/RelocateVolume/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Relocate volume to a new stamp.",
+              "description": "Relocate volume to a new stamp."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/FinalizeRelocation/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Finalize relocation of volume.",
+              "description": "Finalize relocation by cleaning up the old volume."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/RevertRelocation/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volumes resource type",
+              "operation": "Revert the relocation of volume.",
+              "description": "Revert the relocation and revert back to the old volume."
+            },
+            "origin": "user,system"
           },
           {
             "name": "Microsoft.NetApp/netAppAccounts/read",
@@ -440,6 +965,16 @@
               "resource": "Accounts resource type",
               "operation": "Delete account resource",
               "description": "Deletes a account resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/RenewCredentials/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Accounts resource type",
+              "operation": "Renew MSI credentials, if possible.",
+              "description": "Renews MSI credentials of account, if account has MSI credentials that are due for renewal."
             },
             "origin": "user,system"
           },
@@ -483,7 +1018,24 @@
                     "displayDescription": "Allocated used size of the pool",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumePoolAllocatedUsed",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -492,7 +1044,25 @@
                     "displayDescription": "Sum of the logical size of all the volumes belonging to the pool",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average",
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumePoolTotalLogicalSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -501,7 +1071,25 @@
                     "displayDescription": "Provisioned size of this pool",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average",
+                      "Total"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumePoolAllocatedSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -510,7 +1098,24 @@
                     "displayDescription": "Sum of snapshot size of all volumes in this pool",
                     "unit": "Bytes",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumePoolTotalSnapshotSize",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -519,7 +1124,24 @@
                     "displayDescription": "Provisioned throughput of this pool",
                     "unit": "BytesPerSecond",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumePoolProvisionedThroughput",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   },
                   {
@@ -528,7 +1150,24 @@
                     "displayDescription": "Sum of the throughput of all the volumes belonging to the pool",
                     "unit": "BytesPerSecond",
                     "aggregationType": "Average",
+                    "supportedAggregationTypes": [
+                      "Average"
+                    ],
+                    "supportedTimeGrainTypes": [
+                      "PT5M",
+                      "PT15M",
+                      "PT30M",
+                      "PT1H",
+                      "PT6H",
+                      "PT12H",
+                      "P1D"
+                    ],
+                    "internalMetricName": "VolumePoolAllocatedToVolumeThroughput",
+                    "enableRegionalMdmAccount": true,
+                    "sourceMdmAccount": "MicrosoftNetAppShoebox2",
+                    "sourceMdmNamespace": "NetAppUsageAndMetrics",
                     "fillGapWithZero": false,
+                    "isInternal": false,
                     "dimensions": []
                   }
                 ]
@@ -545,7 +1184,14 @@
           },
           {
             "properties": {
-              "serviceSpecification": {}
+              "serviceSpecification": {
+                "logSpecifications": [
+                  {
+                    "name": "Autoscale",
+                    "displayName": "Capacity Pool Autoscaled"
+                  }
+                ]
+              }
             },
             "name": "Microsoft.NetApp/netAppAccounts/capacityPools/providers/Microsoft.Insights/logDefinitions/read",
             "display": {
@@ -607,6 +1253,52 @@
             "origin": "user,system"
           },
           {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots/RestoreFiles/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Snapshots resource type",
+              "operation": "Single File Snapshot Restore",
+              "description": "Restores files from a snapshot resource"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Subvolume resource type."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/write",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Subvolume resource type.",
+              "operation": "Write subvolume Resource",
+              "description": "Write a subvolume resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/delete",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Subvolume resource type."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes/GetMetadata/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Subvolume resource type.",
+              "operation": "Subvolume Metadata resource.",
+              "description": "Read subvolume metadata resource."
+            },
+            "origin": "user,system"
+          },
+          {
             "name": "Microsoft.NetApp/netAppAccounts/snapshotPolicies/read",
             "display": {
               "provider": "Microsoft.NetApp Resource Provider",
@@ -633,6 +1325,194 @@
               "resource": "Snapshot Policies resource type",
               "operation": "Delete snapshot policy resource",
               "description": "Deletes a snapshot policy resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/snapshotPolicies/Volumes/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Snapshot Policies resource type",
+              "operation": "List connected volumes",
+              "description": "List volumes connected to snapshot policy"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/snapshotPolicies/ListVolumes/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Snapshot Policies resource type",
+              "operation": "List connected volumes",
+              "description": "List volumes connected to snapshot policy"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Backup resource type",
+              "operation": "Read backup resource.",
+              "description": "Reads a backup resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups/write",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Backup resource type",
+              "operation": "Write backup resource.",
+              "description": "Writes a backup resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/backups/delete",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Backup resource type",
+              "operation": "Delete backup resource",
+              "description": "Deletes a backup resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppIPSecPolicies/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppIPSecPolicies/write",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppIPSecPolicies/delete",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppIPSecPolicies/Apply/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/backupPolicies/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Backup Policy resource type",
+              "operation": "Read backup policy resource.",
+              "description": "Reads a backup policy resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/backupPolicies/write",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Backup Policy resource type",
+              "operation": "Write backup policy resource.",
+              "description": "Writes a backup policy resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/backupPolicies/delete",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Backup Policy resource type",
+              "operation": "Delete backup policy resource",
+              "description": "Deletes a backup policy resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/vaults/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Vault resource type",
+              "operation": "Read vault resource.",
+              "description": "Reads a vault resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/accountBackups/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Account backup resource type",
+              "operation": "Read an account backup resource.",
+              "description": "Reads an account backup resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/accountBackups/write",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Account backup resource type",
+              "operation": "Write an account backup resource.",
+              "description": "Writes an account backup resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/accountBackups/delete",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Account backup resource type",
+              "operation": "Delete an account backup resource.",
+              "description": "Deletes an account backup resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/volumeGroups/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volume Group resource type",
+              "operation": "Read volume group resource",
+              "description": "Reads a volume group resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/volumeGroups/write",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volume Group resource type",
+              "operation": "Write volume group resource",
+              "description": "Writes a volume group resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/netAppAccounts/volumeGroups/delete",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "Volume Group resource type",
+              "operation": "Delete volume group resource",
+              "description": "Deletes a volume group resource."
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/locations/quotaLimits/read",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "QuotaLimit resource type",
+              "operation": "Read QuotaLimit resource type",
+              "description": "Reads a Quotalimit resource type."
             },
             "origin": "user,system"
           },
@@ -693,6 +1573,16 @@
               "resource": "Subscription",
               "operation": "Unregister Subscription for Azure NetApp Files",
               "description": "Unregisters Subscription with Microsoft.NetApp resource provider"
+            },
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.NetApp/locations/checkinventory/action",
+            "display": {
+              "provider": "Microsoft.NetApp Resource Provider",
+              "resource": "ReservedCapacity reservation resource.",
+              "operation": "Checks ReservedCapacity inventory.",
+              "description": "Checks ReservedCapacity inventory."
             },
             "origin": "user,system"
           }

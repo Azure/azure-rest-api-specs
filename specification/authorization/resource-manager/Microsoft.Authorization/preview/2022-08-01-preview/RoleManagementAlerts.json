@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alerts/{alertId}": {
       "get": {
         "tags": [
           "Alerts"
@@ -119,8 +119,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent - Successfully updated the alert."
+          "200": {
+            "description": "OK - Returns information about the updated alert.",
+            "schema": {
+              "$ref": "#/definitions/Alert"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -136,7 +139,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alerts": {
       "get": {
         "tags": [
           "Alerts"
@@ -180,7 +183,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}/refresh": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alerts/{alertId}/refresh": {
       "post": {
         "tags": [
           "Alerts"
@@ -238,7 +241,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/refresh": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alerts/refresh": {
       "post": {
         "tags": [
           "Alerts"
@@ -288,7 +291,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertConfigurations/{alertId}": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alertConfigurations/{alertId}": {
       "get": {
         "tags": [
           "AlertConfigurations"
@@ -373,8 +376,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NoContent - Successfully updated the alert."
+          "200": {
+            "description": "OK - Returns information about the updated alert configuration.",
+            "schema": {
+              "$ref": "#/definitions/AlertConfiguration"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -390,7 +396,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertConfigurations": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alertConfigurations": {
       "get": {
         "tags": [
           "AlertConfigurations"
@@ -434,7 +440,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertDefinitions/{alertDefinitionId}": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alertDefinitions/{alertDefinitionId}": {
       "get": {
         "tags": [
           "AlertDefinitions"
@@ -483,7 +489,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertDefinitions": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alertDefinitions": {
       "get": {
         "tags": [
           "AlertDefinitions"
@@ -527,7 +533,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}/alertIncidents/{alertIncidentId}": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alerts/{alertId}/alertIncidents/{alertIncidentId}": {
       "get": {
         "tags": [
           "AlertIncidents"
@@ -584,7 +590,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}/alertIncidents": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alerts/{alertId}/alertIncidents": {
       "get": {
         "tags": [
           "AlertIncidents"
@@ -636,7 +642,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/{alertId}/alertIncidents/{alertIncidentId}/remediate": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/alerts/{alertId}/alertIncidents/{alertIncidentId}/remediate": {
       "post": {
         "tags": [
           "AlertIncidents"
@@ -690,7 +696,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertOperations/{operationId}": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/operations/{operationId}": {
       "get": {
         "tags": [
           "AlertOperations"
@@ -739,7 +745,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Authorization/roleManagementAlertOperations": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementAlerts/operations": {
       "get": {
         "tags": [
           "AlertOperations"

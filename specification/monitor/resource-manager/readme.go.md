@@ -20,10 +20,7 @@ directive:
     where: "$.definitions.Resource"
     transform: >
       $["x-ms-client-name"] = "TrackedEntityResource";
-  - rename-operation:
-      from: 'MonitorOperations_List'
-      to: 'OperationsForMonitor_List'
-
+      
 modelerfour:
   lenient-model-deduplication: true
 ```

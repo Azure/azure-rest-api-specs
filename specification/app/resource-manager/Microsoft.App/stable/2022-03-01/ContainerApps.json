@@ -741,7 +741,8 @@
       "description": "Custom Domain of a Container App",
       "type": "object",
       "required": [
-        "name"
+        "name",
+        "certificateId"
       ],
       "properties": {
         "name": {
@@ -761,7 +762,7 @@
           }
         },
         "certificateId": {
-          "description": "Resource Id of the Certificate to be bound to this hostname.",
+          "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
           "type": "string"
         }
       }

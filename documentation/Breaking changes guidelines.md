@@ -1,4 +1,4 @@
-< Deprecated. For internal contributor, please refer to https://aka.ms/AzBreakingChangesPolicy for the topic. For external contributor, please refer to [Azure's Versioning Breaking Change Policy](https://github.com/Azure/azure-rest-api-specs/files/10553821/Azure.s.Versioning.Policy.pdf) >
+<deprecated. For internal contributor, please refer to https://aka.ms/AzBreakingChangesPolicy for the topic>
 
 # Azure REST API version change guide
 
