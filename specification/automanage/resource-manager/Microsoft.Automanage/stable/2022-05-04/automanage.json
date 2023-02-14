@@ -2212,17 +2212,28 @@
           "type": "string",
           "description": "The Automanage configurationProfile ARM Resource URI."
         },
-        "targetId": {
+        "mode": {
           "type": "string",
-          "description": "The target VM resource URI",
-          "readOnly": true
+          "enum": [
+            "AuditOnly",
+            "Remediate"
+          ],
+          "description": "The mode in which to apply the assigned configuration profile."
         },
         "status": {
           "type": "string",
           "readOnly": true,
           "description": "The status of onboarding, which only appears in the response."
+        },
+        "targetId": {
+          "type": "string",
+          "description": "The target VM resource URI",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "configurationProfile"
+      ]
     },
     "UpdateResource": {
       "description": "Represents an update resource",
