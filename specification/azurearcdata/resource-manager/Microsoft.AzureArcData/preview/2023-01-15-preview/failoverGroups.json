@@ -51,6 +51,16 @@
       "properties": {
         "provisioningState": {
           "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
           "description": "The provisioning state of the failover group resource.",
           "readOnly": true
         },
@@ -164,7 +174,10 @@
             "$ref": "#/definitions/AGReplicas",
             "description": "null",
             "x-ms-client-flatten": false
-          }
+          },
+          "x-ms-identifiers": [
+            "replicaName"
+          ]
         }
       },
       "additionalProperties": {}
