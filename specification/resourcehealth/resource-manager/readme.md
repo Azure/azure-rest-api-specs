@@ -26,15 +26,23 @@ These are the global settings for the ResourceHealth API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-05-01
+tag: package-2022-05
 ```
 
 
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.ResourceHealth/stable/2022-05-01/ResourceHealth.json
+```
 ### Tag: package-preview-2022-05-01
 
 These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-05-01'
+``` yaml $(tag) == 'package-preview-2022-05-01'
 input-file:
   - Microsoft.ResourceHealth/preview/2022-05-01-preview/ResourceHealth.json
 ```
