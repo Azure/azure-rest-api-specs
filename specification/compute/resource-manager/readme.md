@@ -239,6 +239,8 @@ directive:
       - APIVersionPattern
   - where:
       - $.definitions.VirtualMachineScaleSetExtension.properties
+    from:
+      - virtualMachineScaleSet.json
     suppress:
       - R2062
 ```
