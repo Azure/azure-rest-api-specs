@@ -28,11 +28,11 @@ These are the global settings for the PostgreSQL API.
 title: PostgreSQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.
 openapi-type: arm
-tag: package-flexibleserver-2021-06
+tag: package-flexibleserver-2022-12-01
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2021-06
+tag: package-flexibleserver-2022-12-01
 ```
 
 ``` yaml $(package-singleservers)
@@ -40,6 +40,26 @@ tag: package-2020-01-01
 ```
 
 
+### Tag: package-flexibleserver-2022-12-01
+
+These settings apply only when `--tag=package-flexibleserver-2022-12-01` is specified on the command line.
+
+```yaml $(tag) == 'package-flexibleserver-2022-12-01'
+input-file:
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Administrators.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Backups.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Capabilities.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/CheckNameAvailability.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Configuration.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Databases.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/FlexibleServers.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Operations.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/PrivateDnsZone.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/Replicas.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/ServerStartStopRestart.json
+  - Microsoft.DBforPostgreSQL/stable/2022-12-01/VirtualNetwork.json
+```
 ### Tag: package-flexibleserver-2022-03-preview
 
 These settings apply only when `--tag=package-flexibleserver-2022-03-preview` is specified on the command line.

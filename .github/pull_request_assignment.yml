@@ -87,7 +87,7 @@
    
       
 - rule:
-    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker|imagebuilder|throttling|secretmanagementtestsvc)/**"
+    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker|imagebuilder|throttling|secretmanagementtestsvc|containerservice|azure-kusto)/**"
     reviewers:
       - raych1
       - xiaoxuqi-ms
@@ -96,6 +96,12 @@
     paths: "specification/voiceservices/**"
     reviewers:
       - raych1
+      - xiaoxuqi-ms
+
+- rule:
+    paths: "specification/@(financialdataservices|standbypool)/**"
+    reviewers:
+      - jianyexi
       - xiaoxuqi-ms
     branches:
       - RPSaaSDev
@@ -221,7 +227,6 @@
 
 - rule:
     paths:
-      - "**/package.json"	
       - ".github/**"	
       - "**/azure-pipelines.yml"	
       - ".azure-pipelines/**"	
@@ -252,3 +257,4 @@
       - tianxchen-ms
       - xiaoxuqi-ms
       - live1206
+      - tadelesh

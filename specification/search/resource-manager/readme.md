@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for SearchManagementClient.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for SearchManagementClient, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,23 +15,33 @@ To build the SDK for SearchManagementClient, simply [Install AutoRest](https://a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the SearchManagementClient API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-08
+tag: package-2022-09
 ```
 
+
+### Tag: package-2022-09
+
+These settings apply only when `--tag=package-2022-09` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-09'
+input-file:
+  - Microsoft.Search/stable/2022-09-01/search.json
+```
 ### Tag: package-2020-08
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
+
 ``` yaml $(tag) == 'package-2020-08'
 input-file:
 - Microsoft.Search/stable/2020-08-01/search.json
@@ -40,6 +50,7 @@ input-file:
 ### Tag: package-2020-03
 
 These settings apply only when `--tag=package-2020-03` is specified on the command line.
+
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
 - Microsoft.Search/stable/2020-03-13/search.json
@@ -90,10 +101,9 @@ input-file:
 - Microsoft.Search/preview/2019-10-01-preview/search.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -114,7 +124,6 @@ swagger-to-sdk:
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
-
 
 ## C#
 
