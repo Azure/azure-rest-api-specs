@@ -22,6 +22,15 @@
         "name": "cache1",
         "type": "Microsoft.Cache/redisEnterprise",
         "tags": {},
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity": {
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "clientId": "00000000-0000-0000-0000-000000000000"
+            }
+          }
+        },
         "properties": {
           "hostName": "cache1.westus.something.azure.com",
           "provisioningState": "Succeeded",
@@ -42,7 +51,16 @@
                 }
               }
             }
-          ]
+          ],
+          "encryption": {
+            "customerManagedKeyEncryption": {
+              "keyEncryptionKeyIdentity": {
+                "userAssignedIdentityResourceId": "/subscriptions/your-subscription/resourceGroups/your-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/your-identity",
+                "identityType": "userAssignedIdentity"
+              },
+              "keyEncryptionKeyUrl": "https://your-kv.vault.azure.net/keys/your-key/your-key-version"
+            }
+          }
         }
       }
     }
