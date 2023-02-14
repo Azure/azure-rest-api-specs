@@ -2106,10 +2106,10 @@
     "ConversationSummarizationTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an conversational summarization task.",
-      "required": [
-        "summaryAspects"
-      ],
       "properties": {
+        "chapteringParameters": {
+          "$ref": "#/definitions/ChapteringParameters"
+        },
         "summaryAspects": {
           "type": "array",
           "items": {
@@ -2199,8 +2199,16 @@
       "properties": {
         "summaries": {
           "type": "array",
+          "description": "Conversation level summaries.",
           "items": {
             "$ref": "#/definitions/SummaryResultItem"
+          }
+        },
+        "chapters": {
+          "type": "array",
+          "description": "Chapters describe the tree-like semantic structure of the conversation.",
+          "items": {
+            "$ref": "#/definitions/Chapter"
           }
         }
       },
@@ -2209,6 +2217,91 @@
           "$ref": "#/definitions/ConversationResultBase"
         }
       ]
+    },
+    "ChapteringParameters": {
+      "type": "object",
+      "description": "The parameters to control the chaptering.",
+      "properties": {
+        "levels": {
+          "type": "integer",
+          "format": "int32",
+          "description": " The supported values are 0, 1, 2 and 3. If not specified, the value is determined automatically by the service. 0 level means only 1 summary is generated for the whole input and no chaptering is performed. 1 level means flat chapters. 2 levels means each high level chapter can have child low level sub chapters. The 3rd level is the raw segmentation result without any post processing."
+        },
+        "parametersOnEachLevel": {
+          "description": "The parameters on each level. The array length must be the same as levels.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChapteringParametersOnOneLevel"
+          }
+        }
+      }
+    },
+    "ChapteringParametersOnOneLevel": {
+      "type": "object",
+      "description": "The parameters to control the chaptering on specific level.",
+      "properties": {
+        "minChapterCount": {
+          "description": "The minimum number of chapters under the parent node. If not specified, the service will determine automatically.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxChapterCount": {
+          "description": "The maximum number of chapters under the parent node. If not specified, the service will determine automatically.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "minCharacters": {
+          "description": "The requested minimum of characters of each chapter in this level. Note this is just a hint to the model.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "maxCharacters": {
+          "description": "The requested maximum of characters of each chapter in this level. Note this is just a hint to the model.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "summaryAspects": {
+          "description": "The summary aspects to enable on current level",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Chapter": {
+      "type": "object",
+      "description": "A predicted chapter of the conversation. It is guaranteed the chapters is a partition - which means the conversation item ids are consecutive, no overlap with other chapter, and no missing",
+      "properties": {
+        "firstConversationItemId": {
+          "description": "Reference the first conversation item of the chapter.",
+          "type": "string"
+        },
+        "startTimeTicks": {
+          "description": "Chapter start time offset from start of speech audio, in ticks. 1 tick = 100 ns. This field is only available if the input transcript has conversation item level audio timing.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "durationTicks": {
+          "description": "Chapter duration in ticks. 1 tick = 100 ns. This field is only available if the input transcript has conversation item level audio timing.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "summaries": {
+          "type": "array",
+          "description": "A list of summaries, 0 or multiple for each requested aspect.",
+          "items": {
+            "$ref": "#/definitions/SummaryResultItem"
+          }
+        },
+        "subChapters": {
+          "type": "array",
+          "description": "A list of sub chapters.",
+          "items": {
+            "$ref": "#/definitions/Chapter"
+          }
+        }
+      }
     },
     "SummaryResultItem": {
       "type": "object",
@@ -2221,7 +2314,7 @@
         },
         "contexts": {
           "type": "array",
-          "description": "The context list of the summary.",
+          "description": "The context list of the summary. Comparing the parent chapter scope, the summary context can be more precise.",
           "items": {
             "$ref": "#/definitions/ItemizedSummaryContext"
           }
