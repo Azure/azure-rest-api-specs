@@ -36,6 +36,7 @@
   "paths": {},
   "definitions": {
     "ErrorFieldContract": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -53,6 +54,7 @@
       "description": "Error Field contract."
     },
     "ErrorResponse": {
+      "type": "object",
       "properties": {
         "error": {
           "x-ms-client-flatten": true,
@@ -63,6 +65,7 @@
       "description": "Error Response."
     },
     "ErrorResponseBody": {
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -87,6 +90,7 @@
       "description": "Error Body contract."
     },
     "RegionContract": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -105,6 +109,7 @@
       "description": "Region profile."
     },
     "RegionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -533,6 +538,16 @@
       "maxLength": 80,
       "x-ms-parameter-location": "method"
     },
+    "ResolverIdParameter": {
+      "name": "resolverId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resolver identifier within a GraphQL API. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
     "PolicyExportFormat": {
       "name": "format",
       "in": "query",
@@ -829,6 +844,17 @@
       "description": "Portal configuration identifier.",
       "minLength": 1,
       "maxLength": 80,
+      "x-ms-parameter-location": "method"
+    },
+    "DocumentationIdParameter": {
+      "name": "documentationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Documentation identifier. Must be unique in the current API Management service instance.",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     }
   }

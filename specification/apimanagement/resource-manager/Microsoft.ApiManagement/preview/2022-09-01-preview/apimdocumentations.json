@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApiManagementClient",
-    "description": "REST API for performing operations on policy fragments in an Azure API Management deployment.",
+    "description": "Use these REST APIs for performing operations on Documentation entity.",
     "version": "2022-09-01-preview"
   },
   "host": "management.azure.com",
@@ -34,16 +34,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policyFragments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/documentations": {
       "get": {
         "tags": [
-          "PolicyFragment"
+          "Documentation"
         ],
-        "operationId": "PolicyFragment_ListByService",
-        "description": "Gets all policy fragments.",
+        "operationId": "Documentation_ListByService",
+        "description": "Lists all Documentations of the API Management service instance.",
         "x-ms-examples": {
-          "ApiManagementListPolicyFragments": {
-            "$ref": "./examples/ApiManagementListPolicyFragments.json"
+          "ApiManagementListApis": {
+            "$ref": "./examples/ApiManagementListDocumentations.json"
           }
         },
         "parameters": [
@@ -58,33 +58,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| name | filter, orderBy | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| description | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>| value | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "OData order by query option."
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully returned an array of policy fragments.",
+            "description": "Paged Result response of Documentations.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyFragmentCollection"
+              "$ref": "./definitions.json#/definitions/DocumentationCollection"
             }
           },
           "default": {
@@ -93,19 +73,23 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./definitions.json#/definitions/DocumentationContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policyFragments/{id}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/documentations/{documentationId}": {
       "head": {
         "tags": [
-          "PolicyFragment"
+          "Documentation"
         ],
-        "operationId": "PolicyFragment_GetEntityTag",
-        "description": "Gets the entity state (Etag) version of a policy fragment.",
+        "operationId": "Documentation_GetEntityTag",
+        "description": "Gets the entity state (Etag) version of the Documentation by its identifier.",
         "x-ms-examples": {
-          "ApiManagementHeadPolicyFragment": {
-            "$ref": "./examples/ApiManagementHeadPolicyFragment.json"
+          "ApiManagementHeadDocumentation": {
+            "$ref": "./examples/ApiManagementHeadDocumentation.json"
           }
         },
         "parameters": [
@@ -116,7 +100,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IdParameter"
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -127,7 +111,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The specified policy fragment exists and the current entity state version is present in the ETag header.",
+            "description": "Operation completed successfully.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -145,16 +129,13 @@
       },
       "get": {
         "tags": [
-          "PolicyFragment"
+          "Documentation"
         ],
-        "operationId": "PolicyFragment_Get",
-        "description": "Gets a policy fragment.",
+        "operationId": "Documentation_Get",
+        "description": "Gets the details of the Documentation specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementGetPolicyFragment": {
-            "$ref": "./examples/ApiManagementGetPolicyFragment.json"
-          },
-          "ApiManagementGetPolicyFragmentFormat": {
-            "$ref": "./examples/ApiManagementGetPolicyFragmentFormat.json"
+          "ApiManagementGetDocumentation": {
+            "$ref": "./examples/ApiManagementGetDocumentation.json"
           }
         },
         "parameters": [
@@ -165,23 +146,20 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IdParameter"
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/PolicyFragmentContentFormat"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully returned a policy fragment.",
+            "description": "The response body contains the specified Documentation entity.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyFragmentContract"
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
             },
             "headers": {
               "ETag": {
@@ -200,13 +178,13 @@
       },
       "put": {
         "tags": [
-          "PolicyFragment"
+          "Documentation"
         ],
-        "operationId": "PolicyFragment_CreateOrUpdate",
-        "description": "Creates or updates a policy fragment.",
+        "operationId": "Documentation_CreateOrUpdate",
+        "description": "Creates a new Documentation or updates an existing one.",
         "x-ms-examples": {
-          "ApiManagementCreatePolicy": {
-            "$ref": "./examples/ApiManagementCreatePolicyFragment.json"
+          "ApiManagementCreateDocumentation": {
+            "$ref": "./examples/ApiManagementCreateDocumentation.json"
           }
         },
         "parameters": [
@@ -217,16 +195,16 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IdParameter"
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyFragmentContract"
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
             },
-            "description": "The policy fragment contents to apply."
+            "description": "Create parameters."
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchOptionalParameter"
@@ -239,22 +217,10 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The policy fragment was successfully updated.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyFragmentContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version",
-                "type": "string"
-              }
-            }
-          },
           "201": {
-            "description": "The policy fragment was successfully created.",
+            "description": "Documentation was successfully created.",
             "schema": {
-              "$ref": "./definitions.json#/definitions/PolicyFragmentContract"
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
             },
             "headers": {
               "ETag": {
@@ -263,10 +229,14 @@
               }
             }
           },
-          "202": {
-            "description": "Request to create or update the policy fragment was accepted. Location header contains the URL where the status of the long running operation can be checked.",
+          "200": {
+            "description": "Documentation was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
+            },
             "headers": {
-              "location": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
             }
@@ -277,21 +247,17 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
-      "delete": {
+      "patch": {
         "tags": [
-          "PolicyFragment"
+          "Documentation"
         ],
-        "operationId": "PolicyFragment_Delete",
-        "description": "Deletes a policy fragment.",
+        "operationId": "Documentation_Update",
+        "description": "Updates the details of the Documentation for an API specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementDeletePolicy": {
-            "$ref": "./examples/ApiManagementDeletePolicyFragment.json"
+          "ApiManagementUpdateDocumentation": {
+            "$ref": "./examples/ApiManagementUpdateDocumentation.json"
           }
         },
         "parameters": [
@@ -302,7 +268,16 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IdParameter"
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationUpdateContract"
+            },
+            "description": "Documentation Update parameters."
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -316,10 +291,16 @@
         ],
         "responses": {
           "200": {
-            "description": "The policy fragment was successfully removed."
-          },
-          "204": {
-            "description": "The policy fragment successfully removed by previous request or does not exist."
+            "description": "Documentation was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DocumentationContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -328,18 +309,16 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/policyFragments/{id}/listReferences": {
-      "post": {
+      },
+      "delete": {
         "tags": [
-          "PolicyFragment"
+          "Documentation"
         ],
-        "operationId": "PolicyFragment_ListReferences",
-        "description": "Lists policy resources that reference the policy fragment.",
+        "operationId": "Documentation_Delete",
+        "description": "Deletes the specified Documentation from an API.",
         "x-ms-examples": {
-          "ApiManagementListPolicyFragmentReferences": {
-            "$ref": "./examples/ApiManagementListPolicyFragmentReferences.json"
+          "ApiManagementDeleteDocumentation": {
+            "$ref": "./examples/ApiManagementDeleteDocumentation.json"
           }
         },
         "parameters": [
@@ -350,27 +329,24 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/IdParameter"
+            "$ref": "./apimanagement.json#/parameters/DocumentationIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully returned an array of references to policy resources that include the policy fragment in their definitions.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/ResourceCollection"
-            }
+            "description": "Documentation successfully removed"
+          },
+          "204": {
+            "description": "Documentation successfully removed by previous request or does not exist"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
