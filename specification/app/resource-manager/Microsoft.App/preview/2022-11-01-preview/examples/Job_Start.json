@@ -3,6 +3,24 @@
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
     "jobName": "testcontainerAppsJob0",
+    "JobExecution": {
+      "JobExecutionContainer":
+       {
+        "image": "repo/testcontainerAppsJob0:v1",
+        "name": "testcontainerAppsJob0",
+        "resources": {
+          "cpu": 0.2,
+          "memory": "100Mi"
+        },
+        "command": [
+          "/bin/sh"
+        ],
+        "args": [
+          "-c",
+          "while true; do echo hello;done"
+        ]
+      }
+    },
     "api-version": "2022-11-01-preview"
   },
   "responses": {
