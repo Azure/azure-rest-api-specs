@@ -48,6 +48,7 @@ batch:
   - tag: package-2021-05-metrics
   - tag: package-2021-08-scheduledqueryrules
   - tag: package-2022-02-01-preview-only
+  - tag: package-2023-02-01-only
 ```
 
 ### Tag: package-2017-09 and go
