@@ -38,6 +38,15 @@ input-file:
   - Microsoft.ElasticSan/stable/2023-01-01/elasticsan.json
 ```
 
+### Tag: package-2021-11-20-preview
+
+These settings apply only when `--tag=package-2021-11-20-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2021-11-20-preview'
+input-file:
+  - Microsoft.ElasticSan/preview/2021-11-20-preview/elasticsan.json
+```
+
 ---
 
 # Code Generation
