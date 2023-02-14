@@ -373,7 +373,8 @@
     "RoomParticipant": {
       "description": "A participant of the room.",
       "required": [
-        "rawId"
+        "rawId",
+        "role"
       ],
       "type": "object",
       "properties": {
@@ -382,8 +383,7 @@
           "type": "string"
         },
         "role": {
-          "$ref": "#/definitions/Role",
-          "required": true
+          "$ref": "#/definitions/Role"
         }
       }
     },
@@ -403,6 +403,12 @@
     "RoomModel": {
       "description": "The meeting room.",
       "type": "object",
+      "required": [
+        "id",
+        "createdDateTime",
+        "validFrom",
+        "validUntil"
+      ],
       "properties": {
         "id": {
           "description": "Unique identifier of a room. This id is server generated.",
