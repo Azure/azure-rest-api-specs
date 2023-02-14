@@ -239,6 +239,8 @@ directive:
   - suppress: R2062
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}"].put
+    from:
+      - virtualMachineScaleSet.json
 ```
 
 ### Tag: package-2022-11-01
