@@ -73,7 +73,7 @@ input-file:
   - Microsoft.Media/Accounts/stable/2021-11-01/Accounts.json
   - Microsoft.Media/Metadata/stable/2023-01-01/AssetsAndAssetFilters.json
   - Microsoft.Media/Metadata/stable/2023-01-01/ContentKeyPolicies.json
-  - Microsoft.Media/Encoding/preview/2022-07-01/Encoding.json
+  - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
   - Microsoft.Media/Metadata/stable/2023-01-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
 ```
