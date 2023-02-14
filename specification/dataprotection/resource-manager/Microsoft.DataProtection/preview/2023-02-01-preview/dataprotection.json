@@ -5425,6 +5425,19 @@
       "description": "Customer Managed Key details of the resource.",
       "type": "object",
       "properties": {
+        "state": {
+          "description": "Encryption state of the Backup Vault. 'Disabled' & 'Inconsistent' states are not user controllable. Also 'Inconsistent' state indicates that user needs to retry the encryption settings operation.",
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Inconsistent"
+          ],
+          "x-ms-enum": {
+            "name": "EncryptionState",
+            "modelAsString": true
+          }
+        },
         "keyVaultProperties": {
           "$ref": "#/definitions/CmkKeyVaultProperties"
         },
