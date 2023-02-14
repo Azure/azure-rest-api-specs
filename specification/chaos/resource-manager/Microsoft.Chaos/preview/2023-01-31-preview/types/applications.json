@@ -123,12 +123,12 @@
           "description": "Containing function which includes the call to faultable function"
         },
         "faultableFunction": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": ""
+          "$ref": "#/definitions/faultableFunctionProperties",
+          "description": "function in which fault is injected"
         },
         "source": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": ""
+          "$ref": "#/definitions/sourceProperties",
+          "description": "defines the location of the code in the class"
         }
       }
     },
@@ -176,7 +176,7 @@
       "properties": {
         "signature": {
           "$ref": "#/definitions/signatureProperties",
-          "description": ""
+          "description": "Method signature of the containing function"
         }
       },
       "description": "",
@@ -189,49 +189,126 @@
       "properties": {
         "signature": {
           "$ref": "#/definitions/signatureProperties",
-          "description": ""
+          "description": "Method Signature of the faultable function"
         },
         "category": {
-
+          "type": "string",
+          "description": "SDK or Custom library in which fault is injected"
         },
         "faultCapabilities": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/faultCapabilityProperties",
+            "$ref": "#/definitions/faultCapabilityProperties"
+          },
+          "description": "faults supported by torch for the function"
+        }
+      }
+    },
+    "description": "Application function in which fault can be injected",
+    "required": [
+      "signature"
+    ]
+  },
+  "sourceProperties": {
+    "type": "object",
+    "properties": {
+      "codePath": {
+        "type": "string",
+        "description": "code path where function is defined"
+      },
+      "startLine": {
+        "type": "int",
+        "description": "line in the code where function starts"
+      },
+      "startColumn": {
+        "type": "int",
+        "description": "column in the code where function starts"
+      },
+      "endLine": {
+        "type": "int",
+        "description": "line in the code where function ends"
+      },
+      "endColumn": {
+        "type": "int",
+        "description": "column in the code where function ends"
+      }
+    },
+    "description": "defines the function code path and location in the class"
+  },
+  "functionArguments": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "Type of a function argument"
+      },
+      "name": {
+        "type": "string",
+        "description": "Name of a function argument"
+      }
+    }
+  },
+  "signatureProperties": {
+    "type": "object",
+    "properties": {
+      "functionNamespace": {
+        "type": "string",
+        "description": "Namespace in which the function is defined"
+      },
+      "type": {
+        "type": "string",
+        "description": "ClassName in which the function is defined"
+      },
+      "name": {
+        "type": "string",
+        "description": "Name of a function"
+      },
+      "genericTypes": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Types defined if Class is a generic class"
+      },
+      "genericCount": {
+        "type": "int",
+        "description": "Number of types defined in a generic"
+      },
+      "arguments": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/functionArguments"
+        },
+        "description": "List of arguments of a function"
+      },
+      "archive": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name of an archive which defines the function"
+          },
+          "version": {
+            "type": "string",
+            "description": "version of an archive"
+          },
+          "culture": {
+            "type": "string",
+            "description": "culture of an archive"
+          },
+          "publicKeyToken": {
+            "type": "string",
+            "description": "public key token of an archive"
           }
         }
       }
     },
-      "description": "Application function in which fault can be injected",
-      "required": [
-        "signature"
-      ]
-    },
-    "sourceProperties": {
-      "type": "object",
-      "properties": {
-        "signature": {
-          "$ref": "#/definitions/signatureProperties",
-          "description": ""
-        }
-      },
-      "description": "",
-      "required": [
-        "signature"
-      ]
-    },
-    "signatureProperties": {
-      "type": "object",
-      "properties": {
-        "signature": {
-          "$ref": "#/definitions/signatureProperties",
-          "description": ""
-        }
-      },
-      "description": "",
-      "required": [
-        "signature"
-      ]
-    }
+    "description": "",
+    "required": [
+      "functionNamespace",
+      "type",
+      "name"
+    ]
   }
+}
 }
