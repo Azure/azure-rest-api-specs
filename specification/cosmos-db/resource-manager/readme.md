@@ -28,7 +28,6 @@ These are the global settings for the Cosmos-DB API.
 title: CosmosDBManagementClient
 openapi-type: arm
 
-tag: package-preview-2022-11
 ```
 ### Tag: package-preview-2022-11
 
@@ -47,7 +46,6 @@ input-file:
   - Microsoft.DocumentDB/preview/2022-11-15-preview/restorable.json
   - Microsoft.DocumentDB/preview/2022-11-15-preview/services.json
 
-tag: package-2022-11
 ```
 ### Tag: package-2022-11
 
