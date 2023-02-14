@@ -16,6 +16,7 @@ no-namespace-folders: true
 Generate all API versions currently shipped for this package
 
 ```yaml $(python)
+default-api-version: "2022-09-02-preview"
 multiapi: true
 batch:
   - tag: package-2022-09-preview
