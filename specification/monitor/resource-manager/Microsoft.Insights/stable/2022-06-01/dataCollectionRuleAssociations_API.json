@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Monitor Data Collection Rule Associations API",
     "description": "Provides operations for working with Azure Monitor data collection rule associations",
-    "version": "2021-09-01-preview",
+    "version": "2022-06-01",
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
     }
@@ -307,6 +307,15 @@
           "type": "string",
           "readOnly": true,
           "example": "Azure Security Center",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "provisionedByResourceId": {
+          "description": "Resource Id of azure offering managing this resource on-behalf-of customer.",
+          "type": "string",
+          "readOnly": true,
+          "example": "/subscriptions/da58aca0-2082-4f5a-85ba-27344286c17c/resourceGroups/ws-rg/providers/Microsoft.OperationalInsights/workspaces/ws-name1",
           "x-ms-mutability": [
             "read"
           ]
