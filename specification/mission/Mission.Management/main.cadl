@@ -9,6 +9,7 @@ import "@azure-tools/cadl-azure-resource-manager";
 import "./cadl/community/community.cadl";
 import "./cadl/virtualEnclave/virtualenclave.cadl";
 import "./cadl/workload/workload.cadl";
+import "./cadl/catalog/catalog.cadl";
 
 @armProviderNamespace
 @service({title: "Microsoft Mission", version: "2023-02-01-preview"})
@@ -52,6 +53,15 @@ model WorkloadResource is TrackedResource<WorkloadProperties> {
   name: string;
 }
 
+@doc("Catalog Model Resource")
+model CatalogResource is TrackedResource<CatalogProperties> {
+  @key("catalogName")
+  @segment("catalogs")
+  @doc("The name of the catalogResource Resource")
+  @path
+  name: string;
+}
+
 @doc("Workload Interface")
 @armResourceOperations
 interface Workload extends ResourceOperations<WorkloadResource, WorkloadProperties> {
@@ -83,4 +93,15 @@ interface Community extends ResourceOperations<CommunityResource, CommunityPrope
   delete is ArmResourceDeleteSync<CommunityResource>;
   listByResourceGroup is ArmResourceListByParent<CommunityResource>;
   listBySubscription is ArmListBySubscription<CommunityResource>;
+}
+
+@doc("Catalog Interface")
+@armResourceOperations
+interface Catalog extends ResourceOperations<CatalogResource, CatalogProperties> {
+  get is ArmResourceRead<CatalogResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<CatalogResource>;
+  update is ArmResourcePatchAsync<CatalogResource, CatalogProperties>;
+  delete is ArmResourceDeleteSync<CatalogResource>;
+  listByResourceGroup is ArmResourceListByParent<CatalogResource>;
+  listBySubscription is ArmListBySubscription<CatalogResource>
 }
