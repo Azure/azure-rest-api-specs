@@ -1018,7 +1018,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "List Snapshots in a VolumeGroup.",
+        "description": "List Snapshots in a VolumeGroup or List Snapshots by Volume (name) in a VolumeGroup using filter",
         "operationId": "Snapshots_ListByVolumeGroup",
         "parameters": [
           {
@@ -1189,7 +1189,7 @@
             }
           },
           "default": {
-            "description": "Error from the RP.",
+            "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
@@ -1212,7 +1212,7 @@
         "tags": [
           "Snapshots"
         ],
-        "description": "Delete an Volume Snapshot.",
+        "description": "Delete a Volume Snapshot.",
         "operationId": "Snapshots_Delete",
         "parameters": [
           {
@@ -2322,14 +2322,14 @@
       "description": "Properties for Snapshot.",
       "properties": {
         "creationData": {
-          "description": "Data used when creating a disk",
+          "description": "Data used when creating a volume snapshot.",
           "$ref": "#/definitions/SnapshotCreationData"
         },
         "provisioningState": {
           "description": "State of the operation on the resource.",
           "$ref": "#/definitions/ProvisioningState"
         },
-        "sourceVolumeSize": {
+        "sourceVolumeSizeGiB": {
           "description": "Size of Source Volume",
           "type": "integer",
           "format": "int64",
@@ -2339,7 +2339,7 @@
     },
     "SnapshotCreationData": {
       "type": "object",
-      "description": "Data used when creating a disk.",
+      "description": "Data used when creating a volume snapshot.",
       "properties": {
         "sourceUri": {
           "type": "string",
