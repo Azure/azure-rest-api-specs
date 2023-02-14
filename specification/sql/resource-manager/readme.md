@@ -733,7 +733,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/EncryptionProtectors.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FailoverGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/FirewallRules.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/InstanceFailoverGroups.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/InstancePools.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobAgents.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/JobCredentials.json
@@ -780,7 +779,7 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAutomaticTuning.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAzureADAdministrators.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerAzureADOnlyAuthentications.json
-- ./Microsoft.Sql/preview/2020-11-01-preview/ServerDevOpsAudit.json
+- ./Microsoft.Sql/preview/2022-02-01-preview/ServerDevOpsAudit.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerDnsAliases.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerKeys.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ServerOperations.json
@@ -829,8 +828,6 @@ input-file:
 - ./Microsoft.Sql/preview/2022-02-01-preview/DatabaseSqlVulnerabilityAssessmentsSettings.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseAdvancedThreatProtectionSettings.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabaseRestoreDetails.json
-- ./Microsoft.Sql/preview/2022-02-01-preview/ManagedDatabases.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ManagedInstanceAdvancedThreatProtectionSettings.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/ReplicationLinks.json
 - ./Microsoft.Sql/preview/2022-02-01-preview/SqlVulnerabilityAssessmentBaseline.json
@@ -843,6 +840,9 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedInstanceDtcs.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/SynapseLinkWorkspaces.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
+- ./Microsoft.Sql/preview/2022-05-01-preview/InstanceFailoverGroups.json
+- ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseRestoreDetails.json
+- ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabases.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevalidate.json
@@ -851,6 +851,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-08-01-preview/RecoverableDatabases.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/StartStopManagedInstanceSchedules.json
+
 
 # Needed when there is more than one input file
 override-info:
