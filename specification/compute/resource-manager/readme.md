@@ -238,9 +238,7 @@ directive:
       - common.json
   - suppress: R2062
     where:
-      - $.definitions.VirtualMachineScaleSetExtension.properties
-    from:
-      - virtualMachineScaleSet.json
+      - $.path["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/extensions/{vmssExtensionName}"].put
 ```
 
 ### Tag: package-2022-11-01
