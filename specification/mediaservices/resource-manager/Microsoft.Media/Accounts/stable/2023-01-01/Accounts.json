@@ -509,6 +509,38 @@
           "description": "The Private Endpoint Connections created for the Media Service account.",
           "type": "array",
           "readOnly": true
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "Tls10",
+            "Tls11",
+            "Tls12",
+            "Tls13"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "values": [
+              {
+                "value": "Tls10",
+                "description": "Minimum TLS version is TLS 1.0."
+              },
+              {
+                "value": "Tls11",
+                "description": "Minimum TLS version is TLS 1.1."
+              },
+              {
+                "value": "Tls12",
+                "description": "Minimum TLS version is TLS 1.2."
+              },
+              {
+                "value": "Tls13",
+                "description": "Minimum TLS version is TLS 1.3."
+              }
+            ],
+            "modelAsString": true
+          },
+          "description": "The minimum TLS version allowed for this account's requests. This is an optional property. If unspecified, a secure default value will be used."
         }
       },
       "type": "object",
