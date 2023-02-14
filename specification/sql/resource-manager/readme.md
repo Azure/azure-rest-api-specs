@@ -710,6 +710,7 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
+- Microsoft.Sql/stable/2014-04-01-legacy/backups_legacy.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
@@ -848,7 +849,6 @@ input-file:
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevert.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ManagedLedgerDigestUploads.json
-- ./Microsoft.Sql/preview/2022-08-01-preview/RecoverableDatabases.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/StartStopManagedInstanceSchedules.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/InstanceFailoverGroups.json
