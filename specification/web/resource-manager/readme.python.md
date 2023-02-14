@@ -44,7 +44,6 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/
 perform-load: false
-
 ```
 ### Tag: package-2022-03-only and python
 
@@ -56,7 +55,6 @@ namespace: azure.mgmt.web.v2022_03_01
 output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2022_03_01
 ```
 
-```
 ### Tag: package-2021-03-only and python
 
 These settings apply only when `--tag=package-2021-03-only --python` is specified on the command line.
