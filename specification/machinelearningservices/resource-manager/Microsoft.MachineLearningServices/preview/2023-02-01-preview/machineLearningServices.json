@@ -2049,7 +2049,13 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Success",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error",
@@ -2063,7 +2069,10 @@
             "$ref": "./examples/ManagedNetwork/patch.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "put": {
         "tags": [
@@ -2101,9 +2110,11 @@
         "responses": {
           "202": {
             "description": "Success",
-            "Location": {
-              "description": "URI to poll for asynchronous operation result.",
-              "type": "string"
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2118,7 +2129,10 @@
             "$ref": "./examples/ManagedNetwork/put.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetwork/outboundRules": {
@@ -2201,9 +2215,11 @@
         "responses": {
           "202": {
             "description": "Success",
-            "Location": {
-              "description": "URI to poll for asynchronous operation result.",
-              "type": "string"
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2218,7 +2234,10 @@
             "$ref": "./examples/ManagedNetwork/deleteRule.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -6565,12 +6584,7 @@
       "type": "object",
       "properties": {
         "isolationMode": {
-          "type": "string",
-          "allOf": [
-            {
-              "$ref": "#/definitions/IsolationMode"
-            }
-          ]
+          "$ref": "#/definitions/IsolationMode"
         },
         "networkId": {
           "format": "uuid",
@@ -6604,20 +6618,10 @@
       "type": "object",
       "properties": {
         "type": {
-          "type": "string",
-          "allOf": [
-            {
-              "$ref": "#/definitions/RuleType"
-            }
-          ]
+          "$ref": "#/definitions/RuleType"
         },
         "category": {
-          "type": "string",
-          "allOf": [
-            {
-              "$ref": "#/definitions/RuleCategory"
-            }
-          ]
+          "$ref": "#/definitions/RuleCategory"
         }
       },
       "discriminator": "type"
@@ -6655,8 +6659,7 @@
       ],
       "properties": {
         "destination": {
-          "type": "string",
-          "x-nullable": true
+          "type": "string"
         }
       },
       "x-ms-discriminator-value": "FQDN"
@@ -6670,12 +6673,7 @@
       ],
       "properties": {
         "destination": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/PrivateEndpointDestination"
-            }
-          ],
-          "x-nullable": true
+          "$ref": "#/definitions/PrivateEndpointDestination"
         }
       },
       "x-ms-discriminator-value": "PrivateEndpoint"
@@ -6705,12 +6703,7 @@
       ],
       "properties": {
         "destination": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/ServiceTagDestination"
-            }
-          ],
-          "x-nullable": true
+          "$ref": "#/definitions/ServiceTagDestination"
         }
       },
       "x-ms-discriminator-value": "ServiceTag"
