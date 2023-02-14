@@ -7,13 +7,13 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 title: LoadTestMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-loadtestservice
-namespace: azure.mgmt.loadtestservice
+package-name: azure-mgmt-loadtesting
+namespace: azure.mgmt.loadtesting
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/loadtestservice/azure-mgmt-loadtestservice/azure/mgmt/loadtestservice
+output-folder: $(python-sdks-folder)/loadtestservice/azure-mgmt-loadtesting/azure/mgmt/loadtesting
 ```
