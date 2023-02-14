@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-01-01'
 input-file:
-  - Microsoft.ElasticSan/preview/2023-01-01/elasticsan.json
+  - Microsoft.ElasticSan/stable/2023-01-01/elasticsan.json
 ```
 
 ---
