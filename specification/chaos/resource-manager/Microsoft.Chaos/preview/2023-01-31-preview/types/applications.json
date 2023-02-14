@@ -6,11 +6,11 @@
   },
   "paths": {},
   "definitions": {
-    "Application": {
+    "application": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ApplicationProperties",
+          "$ref": "#/definitions/applicationProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -26,7 +26,7 @@
         }
       ]
     },
-    "ApplicationProperties": {
+    "applicationProperties": {
       "type": "object",
       "properties": {
         "identities": {
@@ -39,8 +39,19 @@
           "description": "list of User assigned managed identities used by application"
         },
         "deployedPlatform": {
-          "$ref": "#/definitions/PlatformProperties",
+          "$ref": "#/definitions/platformProperties",
           "description": "Platform on which application will be deployed"
+        },
+        "profileId": {
+          "type": "string",
+          "description": "Chaos Studio profile id of an application resource."
+        },
+        "faultMetadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadata"
+          },
+          "description": "List of fault metadata of an application resource"
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -52,6 +63,26 @@
       "required": [
         "identities"
       ]
+    },
+    "applicationListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Application resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/application"
+          },
+          "description": "List of Application resources.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Application resources.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
     },
     "NotificationDetails": {
       "type": "object",
@@ -71,7 +102,7 @@
         "urgent"
       ]
     },
-    "PlatformProperties": {
+    "platformProperties": {
       "type": "object",
       "properties": {
         "resourceId": {
@@ -83,6 +114,23 @@
       "required": [
         "resourceId"
       ]
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "containingFunction": {
+          "$ref": "#/definitions/containingFunctionProperties",
+          "description": "Containing function which includes the call to faultable function"
+        },
+        "faultableFunction": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": ""
+        },
+        "source": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": ""
+        }
+      }
     },
     "ProvisioningState": {
       "type": "string",
@@ -121,6 +169,68 @@
         "clientId",
         "tenantId",
         "type"
+      ]
+    },
+    "containingFunctionProperties": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "$ref": "#/definitions/signatureProperties",
+          "description": ""
+        }
+      },
+      "description": "",
+      "required": [
+        "signature"
+      ]
+    },
+    "faultableFunctionProperties": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "$ref": "#/definitions/signatureProperties",
+          "description": ""
+        },
+        "category": {
+
+        },
+        "faultCapabilities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/faultCapabilityProperties",
+          }
+        }
+      }
+    },
+      "description": "Application function in which fault can be injected",
+      "required": [
+        "signature"
+      ]
+    },
+    "sourceProperties": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "$ref": "#/definitions/signatureProperties",
+          "description": ""
+        }
+      },
+      "description": "",
+      "required": [
+        "signature"
+      ]
+    },
+    "signatureProperties": {
+      "type": "object",
+      "properties": {
+        "signature": {
+          "$ref": "#/definitions/signatureProperties",
+          "description": ""
+        }
+      },
+      "description": "",
+      "required": [
+        "signature"
       ]
     }
   }
