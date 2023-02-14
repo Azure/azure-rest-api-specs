@@ -11,60 +11,72 @@
   ],
   "paths": {
     "/products/{uniqueProductId}/reviews": {
-      "get": {
-        "tags": [
-          "Reviews Public API"
-        ],
-        "summary": "Get reviews by unique product id",
-        "operationId": "Reviews_GetByOfferId",
+			"get": {
+				"tags": [
+					"Rating and Reviews Public API"
+				],
+				"summary": "Get a list of reviews by unique product id",
+				"operationId": "Reviews_GetByOfferId",
         "x-ms-examples": {
           "Facets_Get": {
             "$ref": "./examples/GetProductReviews.json"
           }
         },
-        "produces": [
+				"produces": [
           "application/json"
-        ],
-        "parameters": [
-          {
-            "type": "string",
-            "name": "uniqueProductId",
-            "in": "path",
-            "required": true,
+				],
+				"parameters": [
+					{
+						"type": "string",
+						"name": "uniqueProductId",
+						"in": "path",
+						"required": true,
             "description": "Unique Product Id"
-          },
-          {
-            "type": "integer",
-            "name": "maxpagesize",
-            "in": "query",
-            "description": "Maximum number of reviews to return",
-            "format": "int32",
+					},
+					{
+						"type": "integer",
+						"name": "maxpagesize",
+						"in": "query",
+						"description": "Maximum number of reviews to return",
+						"format": "int32",
             "default": 50
-          },
-          {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a list of reviews for the given unique product",
-            "schema": {
-              "$ref": "#/definitions/PageResultOfReviewDto"
-            }
-          },
+					},
+					{
+						"type": "string",
+						"name": "api-version",
+						"in": "query",
+						"required": true,
+						"description": "Version of the REST API used for the request."
+					},
+					{
+						"type": "string",
+						"name": "X-API-Key",
+						"in": "header",
+						"description": "Api Key parameter from header"
+					},
+					{
+						"type": "string",
+						"name": "api_key",
+						"in": "query",
+						"description": "Api Key parameter from query string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Returns a list of reviews for the given unique product",
+						"schema": {
+							"$ref": "#/definitions/PageResultOfReviewDto"
+						}
+					},
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
-            "schema": {
+						"schema": {
               "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
+						}
+					}
+				}
+			}
+		},
     "/products/{uniqueProductId}/reviews/{reviewId}/comments": {
       "get": {
         "tags": [
@@ -109,7 +121,19 @@
             "in": "query",
             "required": true,
             "description": "Version of the REST API used for the request."
-          }
+          },
+					{
+						"type": "string",
+						"name": "X-API-Key",
+						"in": "header",
+						"description": "Api Key parameter from header"
+					},
+					{
+						"type": "string",
+						"name": "api_key",
+						"in": "query",
+						"description": "Api Key parameter from query string"
+					}
         ],
         "responses": {
           "200": {
