@@ -5,17 +5,19 @@
     "freeTrialStaticWebApp": {
       "location": "West US 2",
       "properties": {
-        "repositoryUrl": "https://github.com/username/RepoName",
-        "branch": "master",
-        "repositoryToken": "repoToken123",
-        "buildProperties": {
-          "appLocation": "app",
-          "apiLocation": "api",
-          "appArtifactLocation": "build"
+        "staticSite": {
+          "repositoryUrl": "https://github.com/username/RepoName",
+          "branch": "master",
+          "repositoryToken": "repoToken123",
+          "buildProperties": {
+            "appLocation": "app",
+            "apiLocation": "api",
+            "appArtifactLocation": "build"
+          }
+        },
+        "user": {
+          "emailAddress": "testuser@outlook.com"
         }
-      },
-      "user": {
-        "emailAddress": "testuser@outlook.com"
       }
     }
   },
@@ -28,16 +30,18 @@
         "type": "Microsoft.Web/freeTrialStaticWebApps",
         "location": "West US 2",
         "properties": {
-          "defaultHostname": "mango-pebble-15afae3e.azurestaticwebsites.net",
-          "repositoryUrl": "https://github.com/username/RepoName",
-          "branch": "master",
-          "contentDistributionEndpoint": "",
-          "stagingEnvironmentPolicy": "Enabled",
-          "allowConfigFileUpdates": true
-        },
-        "user": {
-          "emailAddress": null,
-          "inviteRedeemUrl": "https://inviteRedeemUrl@testuser@outlook.com"
+          "staticSite": {
+            "defaultHostname": "mango-pebble-15afae3e.azurestaticwebsites.net",
+            "repositoryUrl": "https://github.com/username/RepoName",
+            "branch": "master",
+            "contentDistributionEndpoint": "",
+            "stagingEnvironmentPolicy": "Enabled",
+            "allowConfigFileUpdates": true
+          },
+          "user": {
+            "emailAddress": null,
+            "inviteRedeemUrl": "https://inviteRedeemUrl@testuser@outlook.com"
+          }
         }
       }
     }
