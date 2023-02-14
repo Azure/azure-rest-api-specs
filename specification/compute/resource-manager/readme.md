@@ -233,16 +233,14 @@ directive:
       - $.definitions.SubResourceWithColocationStatus
     suppress:
       - RequiredPropertiesMissingInResourceModel
-  - where:
+  - suppress: APIVersionPattern
+    from:
       - common.json
-    suppress:
-      - APIVersionPattern
-  - where:
+  - suppress: R2062
+    where:
       - $.definitions.VirtualMachineScaleSetExtension.properties
     from:
       - virtualMachineScaleSet.json
-    suppress:
-      - R2062
 ```
 
 ### Tag: package-2022-11-01
