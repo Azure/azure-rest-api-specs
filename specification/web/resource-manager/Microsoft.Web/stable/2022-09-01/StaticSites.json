@@ -2267,17 +2267,26 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "type": "object"
+            }
+          },
           "202": {
-            "description": "Asynchronous operation in progress."
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "type": "object"
+            }
           },
           "204": {
-            "description": "No content."
+            "description": "No content.",
+            "schema": {
+              "type": "object"
+            }
           },
           "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
+            "description": "App Service error response."
           }
         },
         "x-ms-examples": {
@@ -3436,7 +3445,7 @@
       }
     },
     "/providers/Microsoft.Web/freeTrialStaticWebApps/{freeTrialStaticWebAppName}/upgrade": {
-      "put": {
+      "post": {
         "tags": [
           "StaticSites"
         ],
@@ -3515,6 +3524,11 @@
     "RemotePrivateEndpointConnection": {
       "description": "A remote private endpoint connection",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
       "properties": {
         "properties": {
           "description": "RemotePrivateEndpointConnection resource specific properties",
@@ -4543,8 +4557,12 @@
       }
     },
     "FreeTrialStaticWebAppsProxyEntity": {
-      "type": "string",
-      
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ], 
       "properties": {
         "location": {
           "type": "string"
