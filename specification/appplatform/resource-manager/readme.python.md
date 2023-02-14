@@ -49,7 +49,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-preview-2023-01' && $(python)
 namespace: azure.mgmt.appplatform.v2023_01_01_preview
-output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/ap
+output-folder: $(python-sdks-folder)/appplatform/azure-mgmt-appplatform/azure/mgmt/appplatform/v2023_01_01_preview
+```
 
 ### Tag: package-2022-12 and python
 
