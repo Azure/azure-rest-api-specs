@@ -2333,7 +2333,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResources"
+              "$ref": "#/definitions/PrivateLinkResources_Get"
             }
           },
           "default": {
@@ -3512,6 +3512,10 @@
         "languageExtensionName": {
           "$ref": "#/definitions/LanguageExtensionName",
           "description": "The language extension name."
+        },
+        "languageExtensionImageName": {
+          "type": "string",
+          "description": "languageExtensionImageName"
         }
       }
     },
@@ -4053,6 +4057,72 @@
           "x-ms-client-flatten": true
         }
       }
+    },
+    "PrivateLinkResources_Get": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KustoPoolPrivateLinkResources_Get"
+          },
+          "description": "The list of Kusto Private Link Resources."
+        }
+      },
+      "description": "The list Kusto Private Link Resources operation response."
+    },
+    "KustoPoolPrivateLinkResources_Get": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateLinkResourcesProperties_Get",
+          "description": "The Private Link Resources."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Class representing a Private Link Resources."
+    },
+    "PrivateLinkResourcesProperties_Get": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Private link resources GroupId"
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource required zone names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "description": "Private Link Resources Properties."
     }
   },
   "parameters": {
