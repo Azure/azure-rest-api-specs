@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Elastic",
-    "version": "2022-09-01-preview"
+    "version": "2023-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -103,6 +103,51 @@
         "x-ms-examples": {
           "Monitors_List": {
             "$ref": "./examples/Monitors_List.json"
+          }
+        }
+      }
+    },
+	  "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/monitors/getOrganizationApiKey": {
+      "post": {
+        "tags": [
+          "DeploymentInfo"
+        ],
+        "summary": "Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor resource.",
+        "operationId": "Organizations_GetApiKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeploymentInfoResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentInfo_List": {
+            "$ref": "./examples/DeploymentInfo_List.json"
           }
         }
       }
