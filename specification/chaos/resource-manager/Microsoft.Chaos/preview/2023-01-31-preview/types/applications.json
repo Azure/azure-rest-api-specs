@@ -221,6 +221,32 @@
         "signature"
       ]
     },
+    "faultCapabilityProperties": {
+      "type": "object",
+      "properties": {
+        "faultUrn": {
+          "type": "string",
+          "description": "URN for fault capability"
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/faultParameter"
+          },
+          "description": "Input Parameters supported by a fault"
+        }
+      },
+      "description": "Capabilities supported by the faults"
+    },
+    "faultParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "name of a fault parameter"
+        }
+      }
+    },
     "sourceProperties": {
       "type": "object",
       "properties": {
