@@ -236,6 +236,9 @@ directive:
   - suppress: APIVersionPattern
     from:
       - common.json
+  - suppress: XmsResourceInPutResponse
+    from: virtualMachineScaleSet.json
+    reason: x-ms-azure-resource tag makes 'ID' property required. However, VmssExtension is part of the VMSS property, not necessary a reousrce. So it does not always have ID.
 ```
 
 ### Tag: package-2022-11-01
