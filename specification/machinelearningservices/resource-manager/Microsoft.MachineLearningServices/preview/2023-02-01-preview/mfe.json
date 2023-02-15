@@ -7649,8 +7649,8 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
-        }
-      },
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions": {
       "get": {
         "tags": [
@@ -7823,157 +7823,157 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "FeaturestoreEntityVersion"
+        ],
+        "summary": "Get version.",
+        "operationId": "FeaturestoreEntityVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
-        },
-        "get": {
-          "tags": [
-            "FeaturestoreEntityVersion"
-          ],
-          "summary": "Get version.",
-          "operationId": "FeaturestoreEntityVersions_Get",
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-            },
-            {
-              "in": "path",
-              "name": "name",
-              "description": "Container name. This is case-sensitive.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "in": "path",
-              "name": "version",
-              "description": "Version identifier. This is case-sensitive.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            },
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/FeaturestoreEntityVersionResource"
-              }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
-          "x-ms-examples": {
-            "Get Workspace Featurestore Entity Version.": {
-              "$ref": "./examples/Workspace/FeaturestoreEntityVersion/get.json"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityVersionResource"
             }
           }
         },
-        "put": {
-          "tags": [
-            "FeaturestoreEntityVersion"
-          ],
-          "summary": "Create or update version.",
-          "operationId": "FeaturestoreEntityVersions_CreateOrUpdate",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-            },
-            {
-              "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-            },
-            {
-              "in": "path",
-              "name": "name",
-              "description": "Container name. This is case-sensitive.",
-              "required": true,
-              "type": "string",
-              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-            },
-            {
-              "in": "path",
-              "name": "version",
-              "description": "Version identifier. This is case-sensitive.",
-              "required": true,
-              "type": "string"
-            },
-            {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-            },
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Version entity to create or update.",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/FeaturestoreEntityVersionResource"
-              }
-            }
-          ],
-          "responses": {
-            "default": {
-              "description": "Error",
-              "schema": {
-                "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-              }
-            },
-            "200": {
-              "description": "Success",
-              "schema": {
-                "$ref": "#/definitions/FeaturestoreEntityVersionResource"
-              }
-            },
-            "201": {
-              "description": "Created",
-              "schema": {
-                "$ref": "#/definitions/FeaturestoreEntityVersionResource"
-              },
-              "headers": {
-                "x-ms-async-operation-timeout": {
-                  "description": "Timeout for the client to use when polling the asynchronous operation.",
-                  "type": "string",
-                  "format": "duration"
-                },
-                "Azure-AsyncOperation": {
-                  "description": "URI to poll for asynchronous operation status.",
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "x-ms-examples": {
-            "CreateOrUpdate Workspace Featurestore Entity Version.": {
-              "$ref": "./examples/Workspace/FeaturestoreEntityVersion/createOrUpdate.json"
-            }
-          },
-          "x-ms-long-running-operation": true,
-          "x-ms-long-running-operation-options": {
-            "final-state-via": "azure-async-operation"
+        "x-ms-examples": {
+          "Get Workspace Featurestore Entity Version.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityVersion/get.json"
           }
         }
       },
+      "put": {
+        "tags": [
+          "FeaturestoreEntityVersion"
+        ],
+        "summary": "Create or update version.",
+        "operationId": "FeaturestoreEntityVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Version entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityVersionResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/FeaturestoreEntityVersionResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Workspace Featurestore Entity Version.": {
+            "$ref": "./examples/Workspace/FeaturestoreEntityVersion/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs": {
       "get": {
         "tags": [
@@ -11793,7 +11793,7 @@
           "x-nullable": true
         }
       },
-      "x-ms-client-name": "BatchDeploymentProperties",
+      "x-ms-client-name": "BatchDeployment",
       "additionalProperties": false
     },
     "BatchDeploymentProperties": {
