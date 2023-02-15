@@ -14,7 +14,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/carnegie/carnegie",
+    "hostTemplate": "{endpoint}/carnegie",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -89,7 +89,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Paths1E17OmdTextListsGetResponses200ContentApplicationJsonSchema"
+              "$ref": "#/definitions/TextLists"
             }
           },
           "default": {
@@ -260,7 +260,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PathsG4WtohTextListsListidItemsGetResponses200ContentApplicationJsonSchema"
+              "$ref": "#/definitions/TextListItems"
             }
           },
           "default": {
@@ -681,32 +681,6 @@
         "code"
       ]
     },
-    "Paths1E17OmdTextListsGetResponses200ContentApplicationJsonSchema": {
-      "type": "object",
-      "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextList"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "TextList[]"
-        }
-      }
-    },
-    "PathsG4WtohTextListsListidItemsGetResponses200ContentApplicationJsonSchema": {
-      "type": "object",
-      "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextListItem"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "TextListItem[]"
-        }
-      }
-    },
     "TextBatchDetectStatus": {
       "type": "string",
       "enum": [
@@ -848,6 +822,19 @@
       },
       "description": "Text data"
     },
+    "TextListItems": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextListItem"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "TextListItem[]"
+        }
+      }
+    },
     "TextListMatchResult": {
       "type": "object",
       "properties": {
@@ -878,6 +865,19 @@
         "itemId",
         "itemText"
       ]
+    },
+    "TextLists": {
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextList"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "TextList[]"
+        }
+      }
     },
     "Versions": {
       "type": "string",
