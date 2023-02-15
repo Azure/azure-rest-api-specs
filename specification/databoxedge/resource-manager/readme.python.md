@@ -22,6 +22,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
+default-api-version: "2022-03-01"
 batch:
   - tag: package-2022-03-01
   - tag: package-2021-02-01
@@ -75,7 +76,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2020-12-01' && $(python)
 namespace: azure.mgmt.databoxedge.v2020_12_01
-output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/datab
+output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge/v2020_12_01
 ```
 
 ### Tag: package-2020-09-01-preview and python
