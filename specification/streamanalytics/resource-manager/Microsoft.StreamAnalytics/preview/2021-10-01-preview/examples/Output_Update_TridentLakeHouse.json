@@ -17,7 +17,7 @@
         "serialization": {
           "type": "Delta",
           "properties": {
-            "tableName": "someTable",
+            "deltaTablePath": "someTable",
             "partitionColumns": ["column1", "column2"]
           }
         }
@@ -35,7 +35,7 @@
         "type": "Microsoft.StreamAnalytics/streamingjobs/outputs",
         "properties": {
           "datasource": {
-            "type": "TridentLakeHouse",
+            "type": "LakeHouse",
             "properties": {
               "workspaceId": "state",
               "artifactId": "{date}/{time}"
@@ -44,7 +44,7 @@
           "serialization": {
             "type": "Delta",
             "properties": {
-              "tableName": "someTable",
+              "deltaTablePath": "someTable",
               "partitionColumns": ["column1", "column2"]
             }
           }

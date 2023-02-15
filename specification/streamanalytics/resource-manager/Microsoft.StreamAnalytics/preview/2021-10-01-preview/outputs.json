@@ -1225,6 +1225,37 @@
         }
       ]
     },
+    "LakeHouseOutputDataSource": {
+      "type": "object",
+      "description": "Describes a LakeHouse source.",
+      "x-ms-discriminator-value": "LakeHouse",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputDataSource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LakeHouseOutputDataSourceProperties",
+          "description": "The properties that are associated with a LakeHouse output. Required on PUT (CreateOrReplace) requests.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LakeHouseOutputDataSourceProperties": {
+      "type": "object",
+      "description": "The properties that are associated with a LakeHouse output.",
+      "properties": {
+        "workspaceId": {
+          "type": "string",
+          "description": "Workspace Name"
+        },
+        "artifactId": {
+          "type": "string",
+          "description": "artifact name"
+        }
+      }
+    },
     "OutputListResult": {
       "type": "object",
       "properties": {
