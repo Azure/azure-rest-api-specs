@@ -129,14 +129,14 @@ directive:
       - $.definitions.FarmBeatsProperties.properties.sensorIntegration
       - $.definitions.FarmBeatsProperties.properties.publicNetworkAccess
       - $.definitions.FarmBeatsProperties.properties.privateEndpointConnections
-      - $.definitions.FarmBeatsPropertiesUpdateProperties.properties.sensorIntegration
-      - $.definitions.FarmBeatsPropertiesUpdateProperties.properties.publicNetworkAccess
+      - $.definitions.FarmBeatsUpdateProperties.properties.sensorIntegration
+      - $.definitions.FarmBeatsUpdateProperties.properties.publicNetworkAccess
       - $.definitions.Error.properties.innererror
       - $.definitions.ErrorResponse.properties.error
       - $.definitions.Extension.properties.properties
       - $.definitions.Extension.properties.systemData
-      - $.definitions.FarmBeatsProperties.properties.properties
-      - $.definitions.FarmBeatsProperties.properties.systemData
+      - $.definitions.FarmBeats.properties.properties
+      - $.definitions.FarmBeats.properties.systemData
       - $.definitions.InnerError.properties.innererror
       - $.definitions.Operation.properties.display
     reason: Model has description added in it's schema.
