@@ -43,6 +43,21 @@
 
 - rule:
     type: label
+    label: CI-NewRPNamespaceWithoutRPaaS
+    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for introducing a new RP namespace that is not being onboarded with [RPaaS](https://armwiki.azurewebsites.net/rpaas/overview.html). Merging this PR to the main branch will be blocked as RPaaS is required for new RPs. To resolve this and allow the PR to be merged into the main branch, please [use RPaaS to onboard the new RP](https://armwiki.azurewebsites.net/rpaas/gettingstarted.html)."
+
+- rule:
+    type: label
+    label: CI-RpaaSRPNotInPrivateRepo
+    onLabeledComments: "Hi @${PRAuthor} This PR was flagged for attempting to introduce a new RP namespace to the main branch without first merging the new RP to the RPSaaSMaster branch. Please add the new RP in a merge to RPSaaSMaster before continuing the merge to main."
+
+- rule:
+    type: label
+    label: ArcReview
+    onLabeledComments: "Hi @${PRAuthor} and @arcboard, one or more change(s) have been detected in your Arc enabled VM's or Arc enabled Server's RPs. Please review the changes and ensure that no gaps have been introduced with respect to the ARM API modeling consistency across Azure Arc and Azure Compute. For further details, see guidelines at [Consistency in ARM Modeling](https://msazure.visualstudio.com/One/_wiki/wikis/One.wiki/377428/Consistency-in-ARM-Modeling?anchor=general-design-guidance). To approve the change(s), set the label to ArcSignedOff. If you have any questions, please mail to arcboard@microsoft.com."
+
+- rule:
+    type: label
     label: CI-FixRequiredOnFailure
     onLabeledComments: >- 
       Hi @${PRAuthor}, Your PR has some issues. Please fix the CI sequentially by following the order of `Avocado, semantic validation, model validation, breaking change, lintDiff`. If you have any questions, please post your questions in this channel https://aka.ms/swaggersupport. 
@@ -52,6 +67,11 @@
       <tr><td>Model validation</td><td>[Fix-ModelValidation-Error](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#model-validation)</td><td>High</td></tr>
       <tr><td>LintDiff</td><td>[Fix-LintDiff](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/ci-fix.md#linter-validation)</td><td>high</td></tr></table> 
       If you need further help, please feedback via [swagger feedback](https://aka.ms/swaggerfeedback).
+
+- rule:
+    type: label
+    label: new-rp-namespace
+    onLabeledComments: "Hi, @{PRAuthor}, our workflow has detected that there is no management SDK ever released for your RP, to further process SDK onboard for your RP, you should have the SDK client library name of your RP reviewed and approved. </br> <b>Action Required</b>: <li> Follow this guidance [Naming for new initial management or client libraries (new SDKs) - Overview (azure.com)](https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/821/Naming-for-new-initial-management-or-client-libraries-(new-SDKs)) to create an issue for management client library name arch board review. </li> <li>Paste the issue link that you created in step 1 in this PR</li> </br> <b> Impact</b>: SDK release owner will take the approved management client library name to release SDK. No client library name approval will leads to SDK release delayed."
 
 - rule:
     type: PROpen
