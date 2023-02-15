@@ -362,7 +362,7 @@
           "description": "(Optional) Collection of participants invited to the room.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RoomParticipant"
+            "$ref": "#/definitions/InvitedRoomParticipant"
           },
           "x-ms-identifiers": []
         }
@@ -377,7 +377,23 @@
       "type": "object",
       "properties": {
         "rawId": {
-          "description": "Raw id of the identifier. Optional in requests, required in responses.",
+          "description": "Raw id of the identifier.",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/Role"
+        }
+      }
+    },
+    "InvitedRoomParticipant": {
+      "description": "A participant invited to the room.",
+      "required": [
+        "rawId"
+      ],
+      "type": "object",
+      "properties": {
+        "rawId": {
+          "description": "Raw id of the identifier.",
           "type": "string"
         },
         "role": {
@@ -386,7 +402,7 @@
       }
     },
     "Role": {
-      "description": "The Role of a room participant.",
+      "description": "The role of a room participant. The default value is Attendee.",
       "enum": [
         "Presenter",
         "Attendee",
