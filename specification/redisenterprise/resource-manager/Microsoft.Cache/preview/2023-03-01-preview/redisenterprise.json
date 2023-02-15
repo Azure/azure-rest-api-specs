@@ -1191,7 +1191,7 @@
         "operationId": "Databases_Flush",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "How to flush all the keys in the database": {
@@ -1230,7 +1230,17 @@
             "description": "Flush operation succeeded. All the keys are cleared in this and all its linked databases."
           },
           "202": {
-            "description": "Flush operation successfully enqueued; follow the Azure-AsyncOperation header to poll for final outcome."
+            "description": "Flush operation successfully enqueued; follow the Azure-AsyncOperation header to poll for final outcome.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2021,7 +2031,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]((-|[a-zA-Z0-9])*[a-zA-Z0-9])?$",
       "description": "The name of the RedisEnterprise cluster.",
       "x-ms-parameter-location": "method"
     },
@@ -2030,7 +2039,6 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9]*$",
       "description": "The name of the database.",
       "x-ms-parameter-location": "method"
     }
