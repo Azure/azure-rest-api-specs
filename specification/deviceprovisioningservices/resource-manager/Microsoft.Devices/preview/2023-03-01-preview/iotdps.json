@@ -1802,6 +1802,10 @@
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
+        },
+        "identity": {
+          "description": "The managed identities for a provisioning service.",
+          "$ref": "#/definitions/ArmIdentity"
         }
       },
       "allOf": [
@@ -2516,6 +2520,59 @@
         "certificate": {
           "description": "base-64 representation of X509 certificate .cer file or just .pem file content.",
           "type": "string"
+        }
+      }
+    },
+    "ArmIdentity": {
+      "type": "object",
+      "description": "The managed identity for the provisioning service.",
+      "properties": {
+        "principalId": {
+          "description": "The object id of the Managed Identity Resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The tenant id of the Managed Identity Resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.",
+          "type": "string",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned,UserAssigned",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user assigned identites associated with the provisioning service.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArmUserIdentity"
+          }
+        }
+      }
+    },
+    "ArmUserIdentity": {
+      "type": "object",
+      "description": "The information about the user assigned identity.",
+      "properties": {
+        "principalId": {
+          "description": "The object id of the User Assigned Identity Resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "The client id of the User Assigned Identity Resource.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
