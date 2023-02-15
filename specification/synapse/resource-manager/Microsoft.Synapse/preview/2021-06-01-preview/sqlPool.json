@@ -689,13 +689,13 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPool_Get"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPool_Get"
             },
             "description": "Accepted"
           },
@@ -5348,7 +5348,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/DataWarehouseQueriesStepsList"
+              "$ref": "#/definitions/DataWarehouseQueriesStepsList_Get"
             },
             "description": "OK"
           },
@@ -7820,7 +7820,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataWarehouseQueries"
+            "$ref": "#/definitions/DataWarehouseQueries_Get"
           },
           "description": "The response to a list datawarehouse queries."
         }
@@ -8102,6 +8102,333 @@
           "description": "Number of rows count",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "DataWarehouseQueries_Get": {
+      "description": "The response to a list datawarehouse queries.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataWareHouseQueriesProperties",
+          "description": "Resource properties."
+        }
+      }
+    },
+    "DataWarehouseQueriesStepsList_Get": {
+      "type": "object",
+      "title": "SQL pool collection",
+      "description": "The response to a list datawarehouse queries.steps",
+      "properties": {
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results"
+        },
+        "value": {
+          "type": "array",
+          "description": "Resource properties.",
+          "items": {
+            "$ref": "#/definitions/DataWarehouseQueriesSteps_Get"
+          }
+        }
+      }
+    },
+    "DataWarehouseQueriesSteps_Get": {
+      "description": "The response to a list datawarehouse queries.steps",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DataWarehouseQueriesStepsProperties_Get",
+          "description": "Resource properties."
+        }
+      }
+    },
+    "DataWarehouseQueriesStepsProperties_Get": {
+      "description": "Properties of a datawarehousequeries.",
+      "type": "object",
+      "properties": {
+        "queryId": {
+          "description": "Requested QueryId. of datawarehousequeries steps",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "The start time of dataWarehouseQueries Steps.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "The end time of dataWarehouseQueries Steps.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "duration": {
+          "description": "The duration of requested dataWarehouseQueries Steps.",
+          "type": "number",
+          "format": "int32",
+          "readOnly": true
+        },
+        "status": {
+          "description": " Status of dataWarehouseQueries Steps",
+          "type": "string",
+          "readOnly": true
+        },
+        "queryText": {
+          "description": " QueryText Message",
+          "type": "string",
+          "readOnly": true
+        },
+        "stepIndex": {
+          "description": "dataWarehouseQueries step index",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationType": {
+          "description": "Type of operation",
+          "type": "string",
+          "enum": [
+            "BackupAzureDatabaseOperation",
+            "BroadcastMoveOperation",
+            "CheckEncryptionStatusOperation",
+            "CopyOperation",
+            "CreateDiagnosticsOperation",
+            "DSQLCallBackOperation",
+            "DbccShowStatisticsOperation",
+            "DistributedExchangeOperation",
+            "DistributeReplicatedTableMoveOperation",
+            "DropDiagnosticsNotifyOperation",
+            "DropDiagnosticsSynchronizeOperation",
+            "ExternalBroadcastMove",
+            "ExternalExportControlMove",
+            "ExternalExportControlOperation",
+            "ExternalExportDistributedMove",
+            "ExternalExportDistributedOperation",
+            "ExternalExportReplicatedMove",
+            "ExternalExportReplicatedOperation",
+            "ExternalShuffleOperation",
+            "ExternalStatisticsOperation",
+            "HadoopBroadcastOperation",
+            "HadoopRoundRobinOperation",
+            "HadoopShuffleOperation",
+            "InsertBulkOperation",
+            "MetaDataCreateOperation",
+            "MoveOperation",
+            "OnOperation",
+            "PartitionMoveOperation",
+            "RandomIDOperation",
+            "ReconfigureOperation",
+            "ReturnOperation",
+            "RoundRobinMoveOperation",
+            "SetIdentityInsertOperation",
+            "SetOptionsOperation",
+            "ShuffleMoveOperation",
+            "SingleSourceRoundRobinMoveOperation",
+            "TempTablePropertiesOperation",
+            "TrimMoveOperation"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StepsOperationType"
+          }
+        },
+        "distributionType": {
+          "description": "Type of distribution",
+          "type": "string",
+          "enum": [
+            "AllAzureEndpoints",
+            "AllComputeNodes",
+            "AllDistributions",
+            "AllNodes",
+            "ComputeNode",
+            "Distribution",
+            "SubsetDistributions",
+            "SubsetNodes",
+            "Unspecified"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StepsDistributionType"
+          }
+        },
+        "locationType": {
+          "description": "Type of location",
+          "type": "string",
+          "enum": [
+            "Compute",
+            "Control",
+            "DMS"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StepsLocationType"
+          }
+        },
+        "rowCount": {
+          "description": "Number of rows count",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlPool_Get": {
+      "type": "object",
+      "title": "SQL pool",
+      "description": "A SQL Analytics pool",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/Sku_Get",
+          "description": "SQL pool SKU"
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlPoolResourceProperties_Get",
+          "description": "SQL pool properties",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "kind"
+        }
+      }
+    },
+    "Sku_Get": {
+      "type": "object",
+      "title": "Sku",
+      "description": "SQL pool SKU",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "description": "The service tier"
+        },
+        "name": {
+          "type": "string",
+          "description": "The SKU name"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted."
+        }
+      }
+    },
+    "SqlPoolResourceProperties_Get": {
+      "type": "object",
+      "title": "SQL pool properties",
+      "description": "Properties of a SQL Analytics pool",
+      "properties": {
+        "maxSizeBytes": {
+          "type": "integer",
+          "description": "Maximum size in bytes",
+          "format": "int64"
+        },
+        "collation": {
+          "type": "string",
+          "description": "Collation mode",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sourceDatabaseId": {
+          "type": "string",
+          "description": "Source database to create from",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "recoverableDatabaseId": {
+          "type": "string",
+          "description": "Backup database to restore from"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Resource state"
+        },
+        "status": {
+          "type": "string",
+          "description": "Resource status",
+          "readOnly": true
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "description": "Snapshot time to restore",
+          "format": "date-time",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "createMode": {
+          "type": "string",
+          "description": "Specifies the mode of sql pool creation.\n\nDefault: regular sql pool creation.\n\nPointInTimeRestore: Creates a sql pool by restoring a point in time backup of an existing sql pool. sourceDatabaseId must be specified as the resource ID of the existing sql pool, and restorePointInTime must be specified.\n\nRecovery: Creates a sql pool by a geo-replicated backup. sourceDatabaseId  must be specified as the recoverableDatabaseId to restore.\n\nRestore: Creates a sql pool by restoring a backup of a deleted sql  pool. SourceDatabaseId should be the sql pool's original resource ID. SourceDatabaseId and sourceDatabaseDeletionDate must be specified.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore",
+            "Recovery",
+            "Restore"
+          ],
+          "x-ms-enum": {
+            "name": "createMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "creationDate": {
+          "type": "string",
+          "description": "Date the SQL pool was created",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "storageAccountType": {
+          "description": "The storage account type used to store backups for this sql pool.",
+          "enum": [
+            "GRS",
+            "LRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          }
+        },
+        "sourceDatabaseDeletionDate": {
+          "type": "string",
+          "description": "Specifies the time that the sql pool was deleted",
+          "format": "date-time"
+        },
+        "defaultSecondaryLocation": {
+          "type": "string",
+          "description": "defaultSecondaryLocation"
+        },
+        "currentServiceObjectiveName": {
+          "type": "string",
+          "description": "currentServiceObjectiveName"
+        },
+        "databaseId": {
+          "type": "string",
+          "description": "databaseId"
         }
       }
     }

@@ -689,19 +689,19 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPool_Get"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPool_Get"
             },
             "description": "Accepted"
           },
           "201": {
             "schema": {
-              "$ref": "#/definitions/SqlPool"
+              "$ref": "#/definitions/SqlPool_Get"
             },
             "description": "Created"
           },
@@ -7797,6 +7797,169 @@
     "ErrorAdditionalInfo": {
       "type": "object",
       "description": "Array"
+    },
+    "SqlPool_Get": {
+      "type": "object",
+      "title": "SQL pool",
+      "description": "A SQL Analytics pool",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "kind"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku_Get",
+          "description": "SQL pool SKU"
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlPoolResourceProperties_Get",
+          "description": "SQL pool properties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Sku_Get": {
+      "type": "object",
+      "title": "Sku",
+      "description": "SQL pool SKU",
+      "properties": {
+        "tier": {
+          "type": "string",
+          "description": "The service tier",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The SKU name"
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
+        }
+      }
+    },
+    "SqlPoolResourceProperties_Get": {
+      "type": "object",
+      "title": "SQL pool properties",
+      "description": "Properties of a SQL Analytics pool",
+      "properties": {
+        "maxSizeBytes": {
+          "type": "integer",
+          "description": "Maximum size in bytes",
+          "format": "int64"
+        },
+        "collation": {
+          "type": "string",
+          "description": "Collation mode",
+          "default": "",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "sourceDatabaseId": {
+          "type": "string",
+          "description": "Source database to create from",
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "recoverableDatabaseId": {
+          "type": "string",
+          "description": "Backup database to restore from"
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Resource state"
+        },
+        "status": {
+          "type": "string",
+          "description": "Resource status",
+          "readOnly": true
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "description": "Snapshot time to restore",
+          "format": "date-time",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "createMode": {
+          "type": "string",
+          "description": "Specifies the mode of sql pool creation.\n\nDefault: regular sql pool creation.\n\nPointInTimeRestore: Creates a sql pool by restoring a point in time backup of an existing sql pool. sourceDatabaseId must be specified as the resource ID of the existing sql pool, and restorePointInTime must be specified.\n\nRecovery: Creates a sql pool by a geo-replicated backup. sourceDatabaseId  must be specified as the recoverableDatabaseId to restore.\n\nRestore: Creates a sql pool by restoring a backup of a deleted sql  pool. SourceDatabaseId should be the sql pool's original resource ID. SourceDatabaseId and sourceDatabaseDeletionDate must be specified.",
+          "enum": [
+            "Default",
+            "PointInTimeRestore",
+            "Recovery",
+            "Restore"
+          ],
+          "x-ms-enum": {
+            "name": "createMode",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "update"
+          ]
+        },
+        "creationDate": {
+          "type": "string",
+          "description": "Date the SQL pool was created",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "storageAccountType": {
+          "description": "The storage account type used to store backups for this sql pool.",
+          "enum": [
+            "GRS",
+            "LRS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageAccountType",
+            "modelAsString": true
+          },
+          "default": "GRS"
+        },
+        "sourceDatabaseDeletionDate": {
+          "type": "string",
+          "description": "Specifies the time that the sql pool was deleted",
+          "format": "date-time",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "currentServiceObjectiveName": {
+          "type": "string",
+          "description": "currentServiceObjectiveName"
+        },
+        "defaultSecondaryLocation": {
+          "type": "string",
+          "description": "defaultSecondaryLocation"
+        },
+        "catalogCollation": {
+          "type": "string",
+          "description": "catalogCollation"
+        }
+      }
     }
   },
   "parameters": {

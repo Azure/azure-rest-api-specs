@@ -36,7 +36,7 @@
           "200": {
             "description": "The operation was successful. The response contains the list of available operations.",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult_Get"
             }
           },
           "default": {
@@ -3992,6 +3992,67 @@
         }
       },
       "description": "Private Link Resources Properties."
+    },
+    "OperationListResult_Get": {
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation_Get"
+          },
+          "title": "The list of operations supported by the resource provider."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "title": "The URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "Operation_Get": {
+      "title": "A REST API operation",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "title": "The operation name.",
+          "description": "This is of the format {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "Display": {
+          "title": "The object that describes the operation.",
+          "type": "object",
+          "properties": {
+            "provider": {
+              "title": "Friendly name of the resource provider.",
+              "type": "string"
+            },
+            "operation": {
+              "title": "The operation type.",
+              "description": "For example: read, write, delete.",
+              "type": "string"
+            },
+            "resource": {
+              "title": "The resource type on which the operation is performed.",
+              "type": "string"
+            },
+            "description": {
+              "title": "The friendly name of the operation.",
+              "type": "string"
+            }
+          }
+        },
+        "Origin": {
+          "title": "The intended executor of the operation.",
+          "type": "string"
+        },
+        "properties": {
+          "title": "Properties of the operation.",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
     }
   },
   "parameters": {
