@@ -4562,24 +4562,22 @@
         {
           "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
         }
-      ], 
+      ],
       "properties": {
-        "location": {
-          "type": "string"
-        },
-        "sku": {
-          "$ref": "./CommonDefinitions.json#/definitions/SkuDescription"
-        },
         "properties": {
-          "staticSite": {
-            "$ref": "#/definitions/StaticSite"
-          },
-          "user": {
-            "$ref": "#/definitions/FreeTrialStaticWebAppsUser"
-          },
-          "staticSiteResourceId": {
-            "type": "string",
-            "readOnly": true
+          "description": "FreeTrialStaticWebAppsProxyEntity resource specific properties",
+          "type": "object",
+          "properties": {
+            "staticSite": {
+              "$ref": "#/definitions/StaticSite"
+            },
+            "user": {
+              "$ref": "#/definitions/FreeTrialStaticWebAppsUser"
+            },
+            "staticSiteResourceId": {
+              "type": "string",
+              "readOnly": true
+            }
           }
         }
       }
