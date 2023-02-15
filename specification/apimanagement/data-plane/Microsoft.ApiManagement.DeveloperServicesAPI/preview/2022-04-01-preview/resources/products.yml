@@ -1,4 +1,4 @@
-openapi: '3.0.0'
+openapi: "3.0.0"
 info:
   title: Products
   version: 2022-04-01-preview
@@ -11,14 +11,14 @@ paths:
       operationId: Products_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        Products_List: 
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        Products_List:
           $ref: "../examples/ListProducts.json"
       responses:
         200:
@@ -42,9 +42,9 @@ paths:
       x-apim-auth-rules:
         isPublic: true
       parameters:
-      - $ref: "#/components/parameters/productId"
-      x-ms-examples: 
-        Product_Get: 
+        - $ref: "#/components/parameters/productId"
+      x-ms-examples:
+        Product_Get:
           $ref: "../examples/GetProduct.json"
       responses:
         200:
@@ -60,16 +60,16 @@ paths:
       operationId: ProductTags_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
-      x-ms-examples: 
-        ProductTags_List: 
+      x-ms-examples:
+        ProductTags_List:
           $ref: "../examples/ListProductTags.json"
       parameters:
-      - $ref: "#/components/parameters/productId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
+        - $ref: "#/components/parameters/productId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
       responses:
         200:
           description: OK
@@ -91,15 +91,15 @@ paths:
       operationId: ProductApis_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/productId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ProductApis_List: 
+        - $ref: "#/components/parameters/productId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ProductApis_List:
           $ref: "../examples/ListProductApis.json"
       responses:
         200:

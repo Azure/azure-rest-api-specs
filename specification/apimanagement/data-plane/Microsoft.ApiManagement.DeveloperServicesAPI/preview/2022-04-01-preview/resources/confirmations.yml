@@ -1,4 +1,4 @@
-openapi: '3.0.0'
+openapi: "3.0.0"
 info:
   title: Confirmations
   version: 2022-04-01-preview
@@ -15,14 +15,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../schemas/confirmationRequest.json 
-      x-ms-examples: 
-        PasswordConfirmation_Create: 
+              $ref: ../schemas/confirmationRequest.json
+      x-ms-examples:
+        PasswordConfirmation_Create:
           $ref: "../examples/CreatePasswordConfirmation.json"
       responses:
         204:
           description: OK
-                
+
   /confirmations/identities/basic:
     description: Basic identity (Email) confirmation
     post:
@@ -34,8 +34,8 @@ paths:
           application/json:
             schema:
               $ref: ../schemas/identityConfirmationRequest.json
-      x-ms-examples: 
-        BasicIdentityConfirmation_Create: 
+      x-ms-examples:
+        BasicIdentityConfirmation_Create:
           $ref: "../examples/CreateBasicIdentityConfirmation.json"
       responses:
         204:
@@ -47,16 +47,16 @@ paths:
       operationId: UserBasicIdentityConfirmation_Create
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/userId"
       requestBody:
         content:
           application/json:
             schema:
               $ref: ../schemas/identityConfirmationRequest.json
-      x-ms-examples: 
-        UserBasicIdentityConfirmation_Create: 
+      x-ms-examples:
+        UserBasicIdentityConfirmation_Create:
           $ref: "../examples/CreateUserBasicIdentityConfirmation.json"
       responses:
         204:

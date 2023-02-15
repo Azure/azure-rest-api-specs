@@ -1,4 +1,4 @@
-openapi: '3.0.2'
+openapi: "3.0.2"
 info:
   title: Delegation
   version: 2022-04-01-preview
@@ -11,8 +11,8 @@ paths:
       operationId: DelegationSettings_Get
       x-apim-auth-rules:
         isPublic: true
-      x-ms-examples: 
-        DelegationSettings_Get: 
+      x-ms-examples:
+        DelegationSettings_Get:
           $ref: "../examples/GetDelegationSettings.json"
       responses:
         200:
@@ -29,14 +29,14 @@ paths:
       x-apim-auth-rules:
         isPublic: true
       parameters:
-      - $ref: "#/components/parameters/action"
+        - $ref: "#/components/parameters/action"
       requestBody:
         content:
           application/json:
             schema:
               $ref: ../schemas/delegationOperationRequest.json
-      x-ms-examples: 
-        DelegationSigninUrl_Create: 
+      x-ms-examples:
+        DelegationSigninUrl_Create:
           $ref: "../examples/CreateDelegationSigninUrl.json"
       responses:
         200:
@@ -44,7 +44,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/delegationOperationResponse.json 
+                $ref: ../schemas/delegationOperationResponse.json
 
   /delegation/urls/users/{userId}/{action}:
     description: User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout)
@@ -52,17 +52,17 @@ paths:
       operationId: UserDelegationUrl_Create
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/action"
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/action"
       requestBody:
         content:
           application/json:
             schema:
               $ref: ../schemas/userDelegationOperationRequest.json
-      x-ms-examples: 
-        UserDelegationUrl_Create: 
+      x-ms-examples:
+        UserDelegationUrl_Create:
           $ref: "../examples/CreateUserDelegationUrl.json"
       responses:
         200:
@@ -70,7 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/userDelegationOperationResponse.json 
+                $ref: ../schemas/userDelegationOperationResponse.json
 
 components:
   parameters:

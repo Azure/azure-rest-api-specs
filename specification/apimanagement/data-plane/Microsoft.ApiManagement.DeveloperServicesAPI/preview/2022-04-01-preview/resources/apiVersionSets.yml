@@ -1,4 +1,4 @@
-openapi: '3.0.0'
+openapi: "3.0.0"
 info:
   title: API Version Sets
   version: 2022-04-01-preview
@@ -11,14 +11,14 @@ paths:
       operationId: ApiVersionSets_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiVersionSets_List: 
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiVersionSets_List:
           $ref: "../examples/ListApiVersionSets.json"
       responses:
         200:
@@ -26,14 +26,14 @@ paths:
           content:
             application/json:
               schema:
-                  allOf:
-                    - $ref: ../schemas/collection.json
-                    - type: object
-                      properties:
-                        value:
-                          type: array
-                          items:
-                            $ref: ../schemas/apiVersionSet.json
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/apiVersionSet.json
 
   /apiVersionSets/{versionSetId}:
     description: Public Api Version Set
@@ -42,9 +42,9 @@ paths:
       x-apim-auth-rules:
         isPublic: true
       parameters:
-      - $ref: "#/components/parameters/versionSetId"
-      x-ms-examples: 
-        ApiVersionSet_Get: 
+        - $ref: "#/components/parameters/versionSetId"
+      x-ms-examples:
+        ApiVersionSet_Get:
           $ref: "../examples/GetApiVersionSet.json"
       responses:
         200:
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                  $ref: ../schemas/apiVersionSet.json
+                $ref: ../schemas/apiVersionSet.json
 
   /apiVersionSets/{versionSetId}/apis:
     description: List of public Apis associated with public Api Version Set
@@ -60,15 +60,15 @@ paths:
       operationId: ApiVersionSetApis_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/versionSetId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiVersionSetApis_List: 
+        - $ref: "#/components/parameters/versionSetId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiVersionSetApis_List:
           $ref: "../examples/ListApiVersionSetApis.json"
       responses:
         200:
@@ -76,15 +76,14 @@ paths:
           content:
             application/json:
               schema:
-                  allOf:
-                    - $ref: ../schemas/collection.json
-                    - type: object
-                      properties:
-                        value:
-                          type: array
-                          items:
-                            $ref: ../schemas/api.json
-
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/api.json
 
 components:
   parameters:

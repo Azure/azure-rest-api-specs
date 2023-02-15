@@ -1,11 +1,11 @@
-openapi: '3.0.0'
+openapi: "3.0.0"
 info:
   title: Users
   version: 2022-04-01-preview
   description: Use these REST APIs for performing operations on everything that requires authentication and their operations associated with your Azure API Management deployment.
 
 paths:
-  /users: 
+  /users:
     description: Users registered in API Management service
     post:
       operationId: User_Create
@@ -17,8 +17,8 @@ paths:
           application/json:
             schema:
               $ref: ../schemas/userCreate.json
-      x-ms-examples: 
-        User_Create: 
+      x-ms-examples:
+        User_Create:
           $ref: "../examples/CreateUser.json"
       responses:
         201:
@@ -36,11 +36,11 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      x-ms-examples: 
-        User_Get: 
+        - $ref: "#/components/parameters/userId"
+      x-ms-examples:
+        User_Get:
           $ref: "../examples/GetUser.json"
       responses:
         200:
@@ -59,16 +59,16 @@ paths:
         allowRules:
           - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/ifMatch"          
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/ifMatch"
       requestBody:
         content:
           application/merge-patch+json:
             schema:
               $ref: ../schemas/userUpdate.json
-      x-ms-examples: 
-        User_CreateOrUpdate: 
-          $ref: "../examples/UpdateUser.json" 
+      x-ms-examples:
+        User_CreateOrUpdate:
+          $ref: "../examples/UpdateUser.json"
       responses:
         200:
           description: OK
@@ -76,7 +76,7 @@ paths:
             application/json:
               schema:
                 $ref: ../schemas/user.json
-      
+
     delete:
       operationId: User_Delete
       description: Delete user
@@ -86,15 +86,15 @@ paths:
         allowRules:
           - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/ifMatch"
-      x-ms-examples: 
-        User_Delete: 
-          $ref: "../examples/DeleteUser.json" 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/ifMatch"
+      x-ms-examples:
+        User_Delete:
+          $ref: "../examples/DeleteUser.json"
       responses:
         204:
           description: OK
-  
+
   /users/{userId}/identities:
     description: User identities
     get:
@@ -104,14 +104,14 @@ paths:
       x-apim-auth-rules:
         allowRules:
           - owner: "{userId}"
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserIdentities_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserIdentities_List:
           $ref: "../examples/ListUserIdentities.json"
       responses:
         200:
@@ -127,7 +127,7 @@ paths:
                         type: array
                         items:
                           $ref: ../schemas/userIdentity.json
-  
+
   /users/{userId}/identities/{provider}/{identity}:
     description: User identity
     put:
@@ -136,20 +136,20 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-          identity: "{identity}"
-          identityProvider: "{provider}"
+          - owner: "{userId}"
+            identity: "{identity}"
+            identityProvider: "{provider}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/providerName"
-      - $ref: "#/components/parameters/identityName"
-      x-ms-examples: 
-        UserIdentityProvider_CreateOrUpdate: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/providerName"
+        - $ref: "#/components/parameters/identityName"
+      x-ms-examples:
+        UserIdentityProvider_CreateOrUpdate:
           $ref: "../examples/CreateUserIdentityProvider.json"
       responses:
         204:
           description: OK
-    
+
   /users/{userId}/products:
     description: User visible Products
     get:
@@ -158,16 +158,16 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserProducts_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserProducts_List:
           $ref: "../examples/ListUserProducts.json"
       responses:
         200:
@@ -192,12 +192,12 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/productId"
-      x-ms-examples: 
-        UserProduct_Get: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/productId"
+      x-ms-examples:
+        UserProduct_Get:
           $ref: "../examples/GetUserProduct.json"
       responses:
         200:
@@ -215,17 +215,17 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/productId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserProductApis_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/productId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserProductApis_List:
           $ref: "../examples/ListUserProductApis.json"
       responses:
         200:
@@ -250,17 +250,17 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/productId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserProductTags_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/productId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserProductTags_List:
           $ref: "../examples/ListUserProductTags.json"
       responses:
         200:
@@ -285,16 +285,16 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiVersionSets_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiVersionSets_List:
           $ref: "../examples/ListUserApiVersionSets.json"
       responses:
         200:
@@ -319,12 +319,12 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/versionSetId"
-      x-ms-examples: 
-        UserApiVersionSet_Get: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/versionSetId"
+      x-ms-examples:
+        UserApiVersionSet_Get:
           $ref: "../examples/GetUserApiVersionSet.json"
       responses:
         200:
@@ -342,17 +342,17 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/versionSetId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiVersionSetApis_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/versionSetId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiVersionSetApis_List:
           $ref: "../examples/ListUserApiVersionSetApis.json"
       responses:
         200:
@@ -377,16 +377,16 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApis_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApis_List:
           $ref: "../examples/ListUserApis.json"
       responses:
         200:
@@ -411,25 +411,25 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - name: Accept
-        in: "header"
-        x-apim-code-alias: "format"
-        description: "Media type"
-        required: true
-        schema:
-          type: string
-      - name: export
-        in: "query"
-        description: "Is export request"
-        required: false
-        schema:
-          type: boolean
-      x-ms-examples: 
-        UserApi_Get: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - name: Accept
+          in: "header"
+          x-apim-code-alias: "format"
+          description: "Media type"
+          required: true
+          schema:
+            type: string
+        - name: export
+          in: "query"
+          description: "Is export request"
+          required: false
+          schema:
+            type: boolean
+      x-ms-examples:
+        UserApi_Get:
           $ref: "../examples/GetUserApi.json"
       responses:
         200:
@@ -462,17 +462,17 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiSchemas_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiSchemas_List:
           $ref: "../examples/ListUserApiSchemas.json"
       responses:
         200:
@@ -480,14 +480,14 @@ paths:
           content:
             application/json:
               schema:
-                  allOf:
-                    - $ref: ../schemas/collection.json
-                    - type: object
-                      properties:
-                        value:
-                          type: array
-                          items:
-                            $ref: ../schemas/apiSchema.json
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/apiSchema.json
 
   /users/{userId}/apis/{apiId}/schemas/{schemaId}:
     description: Schemas of User visible API
@@ -497,13 +497,13 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/schemaId"
-      x-ms-examples: 
-        UserApiSchema_Get: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/schemaId"
+      x-ms-examples:
+        UserApiSchema_Get:
           $ref: "../examples/GetUserApiSchema.json"
       responses:
         200:
@@ -521,16 +521,16 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiOAuth2Providers_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiOAuth2Providers_List:
           $ref: "../examples/ListUserApiOauth2Providers.json"
       responses:
         200:
@@ -555,13 +555,13 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/providerId"
-      x-ms-examples: 
-        UserApiOAuth2Provider_Get: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/providerId"
+      x-ms-examples:
+        UserApiOAuth2Provider_Get:
           $ref: "../examples/GetUserApiOauth2Provider.json"
       responses:
         200:
@@ -579,16 +579,16 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiOpenidConnectProviders_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiOpenidConnectProviders_List:
           $ref: "../examples/ListUserApiOpenidProviders.json"
       responses:
         200:
@@ -613,13 +613,13 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/providerId"
-      x-ms-examples: 
-        UserApiOpenidConnectProvider_Get: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/providerId"
+      x-ms-examples:
+        UserApiOpenidConnectProvider_Get:
           $ref: "../examples/GetUserApiOpenidProvider.json"
       responses:
         200:
@@ -637,17 +637,17 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiProducts_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiProducts_List:
           $ref: "../examples/ListUserApiProducts.json"
       responses:
         200:
@@ -672,17 +672,17 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiReleases_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiReleases_List:
           $ref: "../examples/ListUserApiReleases.json"
       responses:
         200:
@@ -707,16 +707,16 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiHostnames_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiHostnames_List:
           $ref: "../examples/ListUserApiHostnames.json"
       responses:
         200:
@@ -741,17 +741,17 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiTags_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiTags_List:
           $ref: "../examples/ListUserApiTags.json"
       responses:
         200:
@@ -776,17 +776,17 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiOperations_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiOperations_List:
           $ref: "../examples/ListUserApiOperations.json"
       responses:
         200:
@@ -811,13 +811,13 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/operationId"
-      x-ms-examples: 
-        UserApiOperation_Get: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/operationId"
+      x-ms-examples:
+        UserApiOperation_Get:
           $ref: "../examples/GetUserApiOperation.json"
       responses:
         200:
@@ -835,21 +835,21 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/operationId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserApiOperationTags_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/operationId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserApiOperationTags_List:
           $ref: "../examples/ListUserApiOperationTags.json"
       responses:
-        200: 
+        200:
           description: OK
           content:
             application/json:
@@ -871,16 +871,16 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserTags_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserTags_List:
           $ref: "../examples/ListUserTags.json"
       responses:
         200:
@@ -906,16 +906,16 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserSubscriptions_List: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserSubscriptions_List:
           $ref: "../examples/ListUserSubscriptions.json"
       responses:
         200:
@@ -931,7 +931,7 @@ paths:
                         type: array
                         items:
                           $ref: ../schemas/subscription.json
-  
+
   /users/{userId}/subscriptions/{subscriptionId}:
     description: User subscription
     get:
@@ -941,12 +941,12 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/subscriptionId"
-      x-ms-examples: 
-        UserSubscription_Get: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/subscriptionId"
+      x-ms-examples:
+        UserSubscription_Get:
           $ref: "../examples/GetUserSubscription.json"
       responses:
         200:
@@ -963,21 +963,21 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/subscriptionId"
-      - $ref: "#/components/parameters/ifMatch"
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/subscriptionId"
+        - $ref: "#/components/parameters/ifMatch"
       requestBody:
         content:
           application/merge-patch+json:
             schema:
               $ref: ../schemas/userSubscriptionUpdate.json
-      x-ms-examples: 
-        UserSubscription_CreateOrUpdate: 
+      x-ms-examples:
+        UserSubscription_CreateOrUpdate:
           $ref: "../examples/UpdateUserSubscription.json"
       responses:
-        204:    
+        204:
           description: OK
 
     post:
@@ -987,17 +987,17 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/subscriptionId"
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/subscriptionId"
       requestBody:
         content:
           application/json:
             schema:
               $ref: ../schemas/userSubscriptionCreate.json
-      x-ms-examples: 
-        UserSubscription_Create: 
+      x-ms-examples:
+        UserSubscription_Create:
           $ref: "../examples/CreateUserSubscription.json"
       responses:
         204:
@@ -1012,15 +1012,15 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/subscriptionId"
-      x-ms-examples: 
-        UserSubscriptionPrimaryKey_Create: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/subscriptionId"
+      x-ms-examples:
+        UserSubscriptionPrimaryKey_Create:
           $ref: "../examples/CreateUserSubscriptionPrimaryKey.json"
       responses:
-        204: 
+        204:
           description: OK
 
   /users/{userId}/subscriptions/{subscriptionId}/regenerateSecondaryKey:
@@ -1032,15 +1032,15 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - $ref: "#/components/parameters/subscriptionId"
-      x-ms-examples: 
-        UserSubscriptionSecondaryKey_Create: 
+        - $ref: "#/components/parameters/userId"
+        - $ref: "#/components/parameters/subscriptionId"
+      x-ms-examples:
+        UserSubscriptionSecondaryKey_Create:
           $ref: "../examples/CreateUserSubscriptionSecondaryKey.json"
       responses:
-        204: 
+        204:
           description: OK
 
   /users/{userId}/reports/{reportType}:
@@ -1052,35 +1052,35 @@ paths:
       x-apim-odata-support: true
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
-      x-ms-pageable: 
+          - owner: "{userId}"
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/userId"
-      - name: reportType
-        in: "path"
-        description: "Type of report"
-        required: true
-        schema:
-          type: string
-      - name: interval
-        in: "query"
-        description: "Aggregation interval"
-        required: false
-        schema:
-          type: string
-          format: duration
-      - name: $orderby
-        in: "query"
-        description: "OData order by query option."
-        required: false
-        schema:
-          type: string
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        UserReports_List: 
+        - $ref: "#/components/parameters/userId"
+        - name: reportType
+          in: "path"
+          description: "Type of report"
+          required: true
+          schema:
+            type: string
+        - name: interval
+          in: "query"
+          description: "Aggregation interval"
+          required: false
+          schema:
+            type: string
+            format: duration
+        - name: $orderby
+          in: "query"
+          description: "OData order by query option."
+          required: false
+          schema:
+            type: string
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        UserReports_List:
           $ref: "../examples/ListUserReports.json"
       responses:
         200:
@@ -1097,7 +1097,7 @@ paths:
                         items:
                           $ref: ../schemas/reportRecord.json
 
-  /users/{userId}/token/revoke: 
+  /users/{userId}/token/revoke:
     description: Revoke user token
     post:
       operationId: UserToken_Update
@@ -1105,11 +1105,11 @@ paths:
         - OAuth2Password: []
       x-apim-auth-rules:
         allowRules:
-        - owner: "{userId}"
+          - owner: "{userId}"
       parameters:
-      - $ref: "#/components/parameters/userId"
-      x-ms-examples: 
-        UserToken_Update: 
+        - $ref: "#/components/parameters/userId"
+      x-ms-examples:
+        UserToken_Update:
           $ref: "../examples/UpdateUserToken.json"
       responses:
         204:
@@ -1216,11 +1216,11 @@ components:
       required: true
       schema:
         type: string
-    ifMatch: 
+    ifMatch:
       name: If-Match
       in: header
       description: Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
       x-apim-code-alias: tag
       required: true
       schema:
-        type: string    
+        type: string

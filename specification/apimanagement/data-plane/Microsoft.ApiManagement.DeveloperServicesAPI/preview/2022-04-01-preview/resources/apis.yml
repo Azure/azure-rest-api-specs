@@ -1,4 +1,4 @@
-openapi: '3.0.0'
+openapi: "3.0.0"
 info:
   title: APIs
   version: 2022-04-01-preview
@@ -11,14 +11,14 @@ paths:
       operationId: Apis_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        Apis_List: 
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        Apis_List:
           $ref: "../examples/ListApis.json"
       responses:
         200:
@@ -26,14 +26,14 @@ paths:
           content:
             application/json:
               schema:
-                  allOf:
-                    - $ref: ../schemas/collection.json
-                    - type: object
-                      properties:
-                        value:
-                          type: array
-                          items:
-                            $ref: ../schemas/api.json
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/api.json
 
   /apis/{apiId}:
     description: Public API
@@ -42,27 +42,27 @@ paths:
       x-apim-auth-rules:
         isPublic: true
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - name: Accept
-        in: "header"
-        x-apim-code-alias: "format"
-        description: "Media type"
-        required: true
-        schema:
-          type: string
-      - name: export
-        in: "query"
-        description: "Is export request"
-        required: false
-        schema:
-          type: boolean
-      x-ms-examples: 
-        Api_Get: 
+        - $ref: "#/components/parameters/apiId"
+        - name: Accept
+          in: "header"
+          x-apim-code-alias: "format"
+          description: "Media type"
+          required: true
+          schema:
+            type: string
+        - name: export
+          in: "query"
+          description: "Is export request"
+          required: false
+          schema:
+            type: boolean
+      x-ms-examples:
+        Api_Get:
           $ref: "../examples/GetApi.json"
       responses:
         200:
           description: OK
-          content: 
+          content:
             application/json:
               schema:
                 $ref: ../schemas/api.json
@@ -88,15 +88,15 @@ paths:
       operationId: ApiSchemas_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiSchemas_List: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiSchemas_List:
           $ref: "../examples/ListApiSchemas.json"
       responses:
         200:
@@ -104,14 +104,14 @@ paths:
           content:
             application/json:
               schema:
-                  allOf:
-                    - $ref: ../schemas/collection.json
-                    - type: object
-                      properties:
-                        value:
-                          type: array
-                          items:
-                            $ref: ../schemas/apiSchema.json
+                allOf:
+                  - $ref: ../schemas/collection.json
+                  - type: object
+                    properties:
+                      value:
+                        type: array
+                        items:
+                          $ref: ../schemas/apiSchema.json
 
   /apis/{apiId}/schemas/{schemaId}:
     description: Schemas of public API
@@ -120,10 +120,10 @@ paths:
       x-apim-auth-rules:
         isPublic: true
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/schemaId"
-      x-ms-examples: 
-        ApiSchema_Get: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/schemaId"
+      x-ms-examples:
+        ApiSchema_Get:
           $ref: "../examples/GetApiSchema.json"
       responses:
         200:
@@ -139,14 +139,14 @@ paths:
       operationId: ApiOAuth2Providers_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiOAuth2Providers_List: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiOAuth2Providers_List:
           $ref: "../examples/ListApiOauth2Providers.json"
       responses:
         200:
@@ -170,10 +170,10 @@ paths:
       x-apim-auth-rules:
         isPublic: true
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/providerId"
-      x-ms-examples: 
-        ApiOAuth2Provider_Get: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/providerId"
+      x-ms-examples:
+        ApiOAuth2Provider_Get:
           $ref: "../examples/GetApiOauth2Provider.json"
       responses:
         200:
@@ -189,14 +189,14 @@ paths:
       operationId: ApiOpenidProviders_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiOpenidProviders_List: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiOpenidProviders_List:
           $ref: "../examples/ListApiOpenidProviders.json"
       responses:
         200:
@@ -220,10 +220,10 @@ paths:
       x-apim-auth-rules:
         isPublic: true
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/providerId"
-      x-ms-examples: 
-        ApiOpenidProvider_Get: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/providerId"
+      x-ms-examples:
+        ApiOpenidProvider_Get:
           $ref: "../examples/GetApiOpenidProvider.json"
       responses:
         200:
@@ -239,15 +239,15 @@ paths:
       operationId: ApiProducts_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiProducts_List: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiProducts_List:
           $ref: "../examples/ListApiProducts.json"
       responses:
         200:
@@ -270,15 +270,15 @@ paths:
       operationId: ApiReleases_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiReleases_List: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiReleases_List:
           $ref: "../examples/ListApiReleases.json"
       responses:
         200:
@@ -301,15 +301,15 @@ paths:
       operationId: ApiTags_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiTags_List: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiTags_List:
           $ref: "../examples/ListApiTags.json"
       responses:
         200:
@@ -332,14 +332,14 @@ paths:
       operationId: ApiHostnames_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiHostnames_List: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiHostnames_List:
           $ref: "../examples/ListApiHostnames.json"
       responses:
         200:
@@ -356,22 +356,21 @@ paths:
                         items:
                           $ref: ../schemas/apiHostname.json
 
-
   /apis/{apiId}/operations:
     description: Operations of public API
     get:
       operationId: ApiOperations_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiOperations_List: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiOperations_List:
           $ref: "../examples/ListApiOperations.json"
       responses:
         200:
@@ -395,10 +394,10 @@ paths:
       x-apim-auth-rules:
         isPublic: true
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/operationId"
-      x-ms-examples: 
-        ApiOperation_Get: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/operationId"
+      x-ms-examples:
+        ApiOperation_Get:
           $ref: "../examples/GetApiOperation.json"
       responses:
         200:
@@ -414,16 +413,16 @@ paths:
       operationId: ApiOperationTags_List
       x-apim-auth-rules:
         isPublic: true
-      x-ms-pageable: 
+      x-ms-pageable:
         nextLinkName: nextLink
       parameters:
-      - $ref: "#/components/parameters/apiId"
-      - $ref: "#/components/parameters/operationId"
-      - $ref: "#/components/parameters/filter"
-      - $ref: "#/components/parameters/skip"
-      - $ref: "#/components/parameters/top"
-      x-ms-examples: 
-        ApiOperationTags_List: 
+        - $ref: "#/components/parameters/apiId"
+        - $ref: "#/components/parameters/operationId"
+        - $ref: "#/components/parameters/filter"
+        - $ref: "#/components/parameters/skip"
+        - $ref: "#/components/parameters/top"
+      x-ms-examples:
+        ApiOperationTags_List:
           $ref: "../examples/ListApiOperationTags.json"
       responses:
         200:
@@ -439,7 +438,7 @@ paths:
                         type: array
                         items:
                           $ref: ../schemas/tag.json
-                
+
 components:
   parameters:
     filter:
