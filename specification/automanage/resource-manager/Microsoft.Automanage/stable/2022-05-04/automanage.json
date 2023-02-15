@@ -2218,7 +2218,19 @@
             "AuditOnly",
             "Remediate"
           ],
-          "description": "The mode in which to apply the assigned configuration profile."
+          "description": "The mode in which to apply the assigned configuration profile.",
+          "x-ms-enum": {
+            "name": "AssignmentMode",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "AuditOnly"
+              },
+              {
+                "value": "Remediate"
+              }
+            ]
+          }
         },
         "status": {
           "type": "string",
@@ -2230,10 +2242,7 @@
           "description": "The target VM resource URI",
           "readOnly": true
         }
-      },
-      "required": [
-        "configurationProfile"
-      ]
+      }
     },
     "UpdateResource": {
       "description": "Represents an update resource",
