@@ -88,6 +88,12 @@
               "$ref": "#/definitions/UsageAggregationListResult"
             }
           },
+          "202": {
+            "description": "Response indicating that a request has been accepted for processing. However, the processing has not been completed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -135,6 +141,12 @@
             "description": "Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
             "schema": {
               "$ref": "#/definitions/ResourceRateCardInfo"
+            }
+          },
+          "202": {
+            "description": "Response indicating that a request has been accepted for processing. However, the processing has not been completed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           },
           "default": {
@@ -470,14 +482,16 @@
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
+        "error": {
+          "code": {
+            "description": "Error code",
+            "type": "string"
+          },
+          "message": {
+            "description": "Error message indicating why the operation failed.",
+            "type": "string"
+          }
+        }        
       }
     }
   },
