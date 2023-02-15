@@ -160,7 +160,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "./types/applications.json#/definitions/Application"
+              "$ref": "./types/applications.json#/definitions/application"
             }
           },
           "default": {
@@ -176,68 +176,22 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "Applications"
         ],
-        "operationId": "Applications_Create",
-        "description": "Create a Application",
+        "operationId": "Applications_Update",
+        "description": "Updates an application instance.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "applicationName",
-            "in": "path",
-            "required": true,
-            "description": "name of an application resource",
-            "pattern": "^[^<>%&:?#/\\\\]+$",
-            "minLength": 1,
-            "type": "string"
-          },
-          {
-            "name": "application",
-            "description": "application resource to be created or updated.",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./types/applications.json#/definitions/application"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "./types/applications.json#/definitions/Application"
-            }
+              "$ref": "#/definitions/ApplicationUpdate"
+            },
+            "description": "The update to the application instance."
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create or Update an Application resource": {
-            "$ref": "./examples/CreateOrUpdateAnApplication.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Applications"
-        ],
-        "operationId": "Applications_Delete",
-        "description": "Delete a Application",
-        "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
@@ -259,25 +213,126 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource deleted successfully."
+            "description": "Successfully updated an application instance",
+            "schema": {
+              "$ref": "./types/applications.json#/definitions/application"
+            }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Delete an Application resource": {
-            "$ref": "./examples/DeleteAnApplication.json"
+          "Update a chaos application instance": {
+            "$ref": "./examples/ApplicationPatchUpdate.json"
+         }
+       }
+     },
+    "put": {
+      "tags": [
+        "Applications"
+      ],
+      "operationId": "Applications_CreateOrUpdate",
+      "description": "Create a Application",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "applicationName",
+          "in": "path",
+          "required": true,
+          "description": "name of an application resource",
+          "pattern": "^[^<>%&:?#/\\\\]+$",
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "name": "application",
+          "description": "application resource to be created or updated.",
+          "in": "body",
+          "required": true,
+          "schema": {
+            "$ref": "./types/applications.json#/definitions/application"
           }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "ARM operation completed successfully.",
+          "schema": {
+            "$ref": "./types/applications.json#/definitions/Application"
+          }
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Create or Update an Application resource": {
+          "$ref": "./examples/CreateOrUpdateAnApplication.json"
+        }
+      }
+    },
+    "delete": {
+      "tags": [
+        "Applications"
+      ],
+      "operationId": "Applications_Delete",
+      "description": "Delete a Application",
+      "parameters": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "name": "applicationName",
+          "in": "path",
+          "required": true,
+          "description": "name of an application resource",
+          "pattern": "^[^<>%&:?#/\\\\]+$",
+          "minLength": 1,
+          "type": "string"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Resource deleted successfully."
+        },
+        "204": {
+          "description": "Resource deleted successfully."
+        },
+        "default": {
+          "description": "An unexpected error response.",
+          "schema": {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-examples": {
+        "Delete an Application resource": {
+          "$ref": "./examples/DeleteAnApplication.json"
         }
       }
     }
+  }
   },
   "parameters": {}
 }
