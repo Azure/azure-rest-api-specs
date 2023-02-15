@@ -1182,6 +1182,65 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/flush": {
+      "post": {
+        "tags": [
+          "RedisEnterprise",
+          "Databases"
+        ],
+        "operationId": "Databases_Flush",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "How to flush all the keys in the database": {
+            "$ref": "./examples/RedisEnterpriseDatabasesFlush.json"
+          }
+        },
+        "description": "flushes all the keys in this database and also from its linked databases.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FlushParameters"
+            },
+            "description": "Information identifying the database to be flushed"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Flush operation succeeded. All the keys are cleared in this and all its linked databases."
+          },
+          "202": {
+            "description": "Flush operation successfully enqueued; follow the Azure-AsyncOperation header to poll for final outcome."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/locations/{location}/skus": {
       "get": {
         "tags": [
@@ -1920,6 +1979,23 @@
           "description": "Details about available skus"
         }
       }
+    },
+    "FlushParameters": {
+      "title": "Flush the keys from the current and all its linked databases.",
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The resource IDs of the database resources to be flushed."
+        }
+      },
+      "required": [
+        "ids"
+      ],
+      "description": "Parameters for a Redis Enterprise Active Geo Replication FLush operation."
     },
     "ForceUnlinkParameters": {
       "title": "Forcibly unlink another database from this database.",
