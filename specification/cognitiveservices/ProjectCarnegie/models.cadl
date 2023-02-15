@@ -11,13 +11,6 @@ enum TextCategory {
   "Violence",
 }
 
-enum TextBatchDetectStatus {
-  "NotStarted",
-  "Running",
-  "Failed",
-  "Succeeded",
-}
-
 enum ImageCategory {
   "Hate",
   "SelfHarm",
@@ -157,12 +150,15 @@ model TextList {
   @doc("Text List Id.")
   @key("listId")
   @visibility("read","create","query")
+  @maxLength(64)
   listId: string;
 
   @doc("Text List name.")
+  @maxLength(256)
   name?: string;
 
   @doc("Description for Text List.")
+  @maxLength(1024)
   description?: string;
 }
 
@@ -173,12 +169,15 @@ model TextListItem {
   @doc("Item id")
   @key("itemId")
   @visibility("read","create","query")
+  @maxLength(64)
   itemId: string;
 
   @doc("Text data description")
+  @maxLength(1024)
   description?: string;
 
   @doc("Text list item content.")
+  @maxLength(128)
   text?: string;
 
   @doc("""

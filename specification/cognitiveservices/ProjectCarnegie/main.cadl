@@ -12,6 +12,7 @@ using Azure.Core;
   title: "ProjectCarnegie service",
 })
 @versioned(ProjectCarnegie.Versions)
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
   "{endpoint}/carnegie",
   "Analyze harmful content",

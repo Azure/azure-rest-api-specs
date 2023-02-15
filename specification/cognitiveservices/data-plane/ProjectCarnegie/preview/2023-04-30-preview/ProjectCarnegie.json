@@ -32,6 +32,18 @@
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Ocp-Apim-Subscription-Key"
+    }
+  },
   "tags": [],
   "paths": {
     "/image:analyze": {
@@ -146,6 +158,7 @@
             "in": "path",
             "required": true,
             "description": "Text List Id.",
+            "maxLength": 64,
             "type": "string"
           }
         ],
@@ -183,6 +196,7 @@
             "in": "path",
             "required": true,
             "description": "Text List Id.",
+            "maxLength": 64,
             "type": "string"
           },
           {
@@ -238,6 +252,7 @@
             "in": "path",
             "required": true,
             "description": "Text List Id.",
+            "maxLength": 64,
             "type": "string"
           }
         ],
@@ -274,6 +289,7 @@
             "in": "path",
             "required": true,
             "description": "Text List Id.",
+            "maxLength": 64,
             "type": "string"
           }
         ],
@@ -338,6 +354,7 @@
             "in": "path",
             "required": true,
             "description": "Text List Id.",
+            "maxLength": 64,
             "type": "string"
           },
           {
@@ -345,6 +362,7 @@
             "in": "path",
             "required": true,
             "description": "Item id",
+            "maxLength": 64,
             "type": "string"
           }
         ],
@@ -382,6 +400,7 @@
             "in": "path",
             "required": true,
             "description": "Text List Id.",
+            "maxLength": 64,
             "type": "string"
           },
           {
@@ -389,6 +408,7 @@
             "in": "path",
             "required": true,
             "description": "Item id",
+            "maxLength": 64,
             "type": "string"
           },
           {
@@ -444,6 +464,7 @@
             "in": "path",
             "required": true,
             "description": "Text List Id.",
+            "maxLength": 64,
             "type": "string"
           },
           {
@@ -451,6 +472,7 @@
             "in": "path",
             "required": true,
             "description": "Item id",
+            "maxLength": 64,
             "type": "string"
           }
         ],
@@ -739,19 +761,6 @@
         "code"
       ]
     },
-    "TextBatchDetectStatus": {
-      "type": "string",
-      "enum": [
-        "NotStarted",
-        "Running",
-        "Failed",
-        "Succeeded"
-      ],
-      "x-ms-enum": {
-        "name": "TextBatchDetectStatus",
-        "modelAsString": true
-      }
-    },
     "TextCategory": {
       "type": "string",
       "enum": [
@@ -846,6 +855,7 @@
         "listId": {
           "type": "string",
           "description": "Text List Id.",
+          "maxLength": 64,
           "x-ms-mutability": [
             "read",
             "create"
@@ -853,11 +863,13 @@
         },
         "name": {
           "type": "string",
-          "description": "Text List name."
+          "description": "Text List name.",
+          "maxLength": 256
         },
         "description": {
           "type": "string",
-          "description": "Description for Text List."
+          "description": "Description for Text List.",
+          "maxLength": 1024
         }
       },
       "description": "Text List.",
@@ -871,6 +883,7 @@
         "itemId": {
           "type": "string",
           "description": "Item id",
+          "maxLength": 64,
           "x-ms-mutability": [
             "read",
             "create"
@@ -878,11 +891,13 @@
         },
         "description": {
           "type": "string",
-          "description": "Text data description"
+          "description": "Text data description",
+          "maxLength": 1024
         },
         "text": {
           "type": "string",
-          "description": "Text list item content."
+          "description": "Text list item content.",
+          "maxLength": 128
         },
         "language": {
           "type": "string",
@@ -899,11 +914,13 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Text data description"
+          "description": "Text data description",
+          "maxLength": 1024
         },
         "text": {
           "type": "string",
-          "description": "Text list item content."
+          "description": "Text list item content.",
+          "maxLength": 128
         },
         "language": {
           "type": "string",
@@ -948,11 +965,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Text List name."
+          "description": "Text List name.",
+          "maxLength": 256
         },
         "description": {
           "type": "string",
-          "description": "Description for Text List."
+          "description": "Description for Text List.",
+          "maxLength": 1024
         }
       },
       "description": "Text List."
