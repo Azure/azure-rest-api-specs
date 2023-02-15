@@ -236,7 +236,6 @@ directive:
   - suppress: APIVersionPattern
     from:
       - common.json
-  - suppress: R2062
 ```
 
 ### Tag: package-2022-11-01
