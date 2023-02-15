@@ -24,7 +24,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the digitaltwins.
 
-``` yaml
+```yaml
 openapi-type: arm
 tag: package-2023-01-31
 ```
@@ -107,9 +107,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_digitaltwins']
   - repo: azure-resource-manager-schemas
   - repo: azure-powershell
 ```
