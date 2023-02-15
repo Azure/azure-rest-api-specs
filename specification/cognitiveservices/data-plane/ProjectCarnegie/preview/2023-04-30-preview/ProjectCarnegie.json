@@ -77,7 +77,7 @@
     },
     "/text/lists": {
       "get": {
-        "operationId": "ListManagementTextListsOperations_GetAllTextLists",
+        "operationId": "TextLists_ListTextLists",
         "summary": "Get All Text Lists",
         "description": "Get All Text Lists",
         "parameters": [
@@ -89,7 +89,29 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextLists"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TextList"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-cadl-name": "TextList[]",
+                  "description": "The TextList items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-cadl-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of TextList items",
+              "required": [
+                "value"
+              ],
+              "x-cadl-name": "Azure.Core.Foundations.CustomPage<TextList, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
@@ -104,12 +126,15 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/text/lists/{listId}": {
       "get": {
-        "operationId": "ListManagementTextListsOperations_GetDetails",
+        "operationId": "TextLists_GetTextList",
         "summary": "Get Text List By listId",
         "description": "Returns text list details of the Text List with list Id equal to list Id passed.",
         "parameters": [
@@ -120,7 +145,7 @@
             "name": "listId",
             "in": "path",
             "required": true,
-            "description": "List Id of the list.",
+            "description": "Text List Id.",
             "type": "string"
           }
         ],
@@ -130,40 +155,6 @@
             "schema": {
               "$ref": "#/definitions/TextList"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "ListManagementTextListsOperations_Delete",
-        "summary": "Delete Text List By listId",
-        "description": "Deletes Text List with the list Id equal to list Id passed.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "listId",
-            "in": "path",
-            "required": true,
-            "description": "List Id of the list.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -180,7 +171,7 @@
         }
       },
       "patch": {
-        "operationId": "ListManagementTextListsOperations_Update",
+        "operationId": "TextLists_CreateOrUpdateList",
         "summary": "Create Or Update Text List",
         "description": "Updates an Text List by listId, , if listId not exists, create a new Text List",
         "parameters": [
@@ -191,17 +182,63 @@
             "name": "listId",
             "in": "path",
             "required": true,
-            "description": "List Id of the list.",
+            "description": "Text List Id.",
             "type": "string"
           },
           {
-            "name": "request",
+            "name": "resource",
             "in": "body",
             "required": true,
-            "description": "Properties of the Text List.",
+            "description": "The resource instance.",
+            "schema": {
+              "$ref": "#/definitions/TextListUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/TextList"
             }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TextList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/merge-patch+json"
+        ]
+      },
+      "delete": {
+        "operationId": "TextLists_DeleteTextList",
+        "summary": "Delete Text List By listId",
+        "description": "Deletes Text List with the list Id equal to list Id passed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "listId",
+            "in": "path",
+            "required": true,
+            "description": "Text List Id.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -225,7 +262,7 @@
     },
     "/text/lists/{listId}/items": {
       "get": {
-        "operationId": "ListManagementTermOperations_GetAllTerms",
+        "operationId": "TextListItems_ListTextListItems",
         "summary": "Get All Items By listId",
         "description": "Get All Items By listId",
         "parameters": [
@@ -236,31 +273,37 @@
             "name": "listId",
             "in": "path",
             "required": true,
-            "description": "List Id of the list.",
+            "description": "Text List Id.",
             "type": "string"
-          },
-          {
-            "name": "skip",
-            "in": "query",
-            "required": true,
-            "description": "How many terms will be skipped.",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "top",
-            "in": "query",
-            "required": true,
-            "description": "How many terms will be fetched.",
-            "type": "integer",
-            "format": "int32"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextListItems"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/TextListItem"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-cadl-name": "TextListItem[]",
+                  "description": "The TextListItem items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-cadl-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of TextListItem items",
+              "required": [
+                "value"
+              ],
+              "x-cadl-name": "Azure.Core.Foundations.CustomPage<TextListItem, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
@@ -275,12 +318,15 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/text/lists/{listId}/items/{itemId}": {
       "get": {
-        "operationId": "ListManagementTermOperations_AddTerm",
+        "operationId": "TextListItems_GetTextListItem",
         "summary": "Get Item By itemId and listId",
         "description": "Get Item By itemId and listId",
         "parameters": [
@@ -291,14 +337,14 @@
             "name": "listId",
             "in": "path",
             "required": true,
-            "description": "List Id of the list.",
+            "description": "Text List Id.",
             "type": "string"
           },
           {
             "name": "itemId",
             "in": "path",
             "required": true,
-            "description": "Id of the item in list.",
+            "description": "Item id",
             "type": "string"
           }
         ],
@@ -308,47 +354,6 @@
             "schema": {
               "$ref": "#/definitions/TextListItem"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "ListManagementTermOperations_DeleteTerm",
-        "summary": "Delete Item By itemId and listId",
-        "description": "Delete Item By itemId and listId",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "listId",
-            "in": "path",
-            "required": true,
-            "description": "List Id of the list.",
-            "type": "string"
-          },
-          {
-            "name": "itemId",
-            "in": "path",
-            "required": true,
-            "description": "Id of the item in list.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -365,7 +370,7 @@
         }
       },
       "patch": {
-        "operationId": "ListManagementTermOperations_UpdateTerm",
+        "operationId": "TextListItems_CreateOrUpdateListItem",
         "summary": "Create Item In Text List",
         "description": "Create Item In Text List",
         "parameters": [
@@ -376,24 +381,77 @@
             "name": "listId",
             "in": "path",
             "required": true,
-            "description": "List Id of the list.",
+            "description": "Text List Id.",
             "type": "string"
           },
           {
             "name": "itemId",
             "in": "path",
             "required": true,
-            "description": "Id of the item in list.",
+            "description": "Item id",
             "type": "string"
           },
           {
-            "name": "request",
+            "name": "resource",
             "in": "body",
             "required": true,
-            "description": "Schema of the term update body.",
+            "description": "The resource instance.",
+            "schema": {
+              "$ref": "#/definitions/TextListItemUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/TextListItem"
             }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/TextListItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "consumes": [
+          "application/merge-patch+json"
+        ]
+      },
+      "delete": {
+        "operationId": "TextListItems_DeleteTextListItem",
+        "summary": "Delete Item By itemId and listId",
+        "description": "Delete Item By itemId and listId",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "listId",
+            "in": "path",
+            "required": true,
+            "description": "Text List Id.",
+            "type": "string"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "required": true,
+            "description": "Item id",
+            "type": "string"
           }
         ],
         "responses": {
@@ -787,7 +845,11 @@
       "properties": {
         "listId": {
           "type": "string",
-          "description": "Text List Id."
+          "description": "Text List Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "name": {
           "type": "string",
@@ -798,14 +860,21 @@
           "description": "Description for Text List."
         }
       },
-      "description": "Text List."
+      "description": "Text List.",
+      "required": [
+        "listId"
+      ]
     },
     "TextListItem": {
       "type": "object",
       "properties": {
         "itemId": {
           "type": "string",
-          "description": "Item id"
+          "description": "Item id",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "description": {
           "type": "string",
@@ -820,20 +889,28 @@
           "description": "Language of this item, Value may contain only the language code (ex. \"en\",\n\"fr\") of BCP 47. If not assigned, \"en\" will be used"
         }
       },
-      "description": "Text data"
+      "description": "Item in Text List",
+      "required": [
+        "itemId"
+      ]
     },
-    "TextListItems": {
+    "TextListItemUpdate": {
       "type": "object",
       "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextListItem"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "TextListItem[]"
+        "description": {
+          "type": "string",
+          "description": "Text data description"
+        },
+        "text": {
+          "type": "string",
+          "description": "Text list item content."
+        },
+        "language": {
+          "type": "string",
+          "description": "Language of this item, Value may contain only the language code (ex. \"en\",\n\"fr\") of BCP 47. If not assigned, \"en\" will be used"
         }
-      }
+      },
+      "description": "Item in Text List"
     },
     "TextListMatchResult": {
       "type": "object",
@@ -866,18 +943,19 @@
         "itemText"
       ]
     },
-    "TextLists": {
+    "TextListUpdate": {
       "type": "object",
       "properties": {
-        "values": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextList"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "TextList[]"
+        "name": {
+          "type": "string",
+          "description": "Text List name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for Text List."
         }
-      }
+      },
+      "description": "Text List."
     },
     "Versions": {
       "type": "string",

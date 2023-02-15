@@ -44,134 +44,117 @@ interface ImageOperations {
   >;
 }
 
-interface ListManagementTextListsOperations {
-  @summary("Get Text List By listId")
-  @doc("Returns text list details of the Text List with list Id equal to list Id passed.")
-  @route("/text/lists/{listId}")
-  @get
-  GetDetails is Azure.Core.Foundations.Operation<
-    {
-      @doc("List Id of the list.")
-      @path
-      listId: string;
-    },
-    TextList
-  >;
+interface TextLists{
+    @summary("Get Text List By listId")
+    @doc("Returns text list details of the Text List with list Id equal to list Id passed.")
+    getTextList is Azure.Core.ResourceRead<TextList>;
 
-  @summary("Delete Text List By listId")
-  @doc("Deletes Text List with the list Id equal to list Id passed.")
-  @route("/text/lists/{listId}")
-  @delete
-  Delete is Azure.Core.Foundations.Operation<
-    {
-      @doc("List Id of the list.")
-      @path
-      listId: string;
-    },
-    void
-  >;
+    @summary("Create Or Update Text List")
+    @doc("Updates an Text List by listId, , if listId not exists, create a new Text List")
+    createOrUpdateList is Azure.Core.ResourceCreateOrUpdate<TextList>;
 
-  @summary("Create Or Update Text List")
-  @doc("Updates an Text List by listId, , if listId not exists, create a new Text List")
-  @route("/text/lists/{listId}")
-  @patch
-  Update is Azure.Core.Foundations.Operation<
-    {
-      @doc("List Id of the list.")
-      @path
-      listId: string;
+    @summary("Delete Text List By listId")
+    @doc("Deletes Text List with the list Id equal to list Id passed.")  
+    deleteTextList is Azure.Core.ResourceDelete<TextList>;
 
-      @doc("Properties of the Text List.")
-      @body
-      request: TextList;
-    },
-    void
-  >;
+    @summary("Get All Text Lists")
+    @doc("Get All Text Lists")
+    listTextLists is Azure.Core.ResourceList<TextList>;
 
-  @summary("Get All Text Lists")
-  @doc("Get All Text Lists")
-  @route("/text/lists")
-  @get
-  GetAllTextLists is Azure.Core.Foundations.Operation<
-    {},
-    TextLists
-  >;
 }
 
-interface ListManagementTermOperations {
-  @summary("Get All Items By listId")
-  @doc("Get All Items By listId")
-  @route("/text/lists/{listId}/items")
-  @get
-  GetAllTerms is Azure.Core.Foundations.Operation<
-    {
-      @doc("List Id of the list.")
-      @path
-      listId: string;
+interface TextListItems {
+    @summary("Get Item By itemId and listId")
+    @doc("Get Item By itemId and listId")
+    getTextListItem is Azure.Core.ResourceRead<TextListItem>;
 
-      @doc("How many terms will be skipped.")
-      @query
-      skip: int32;
+    @summary("Create Item In Text List")
+    @doc("Create Item In Text List")
+    createOrUpdateListItem is Azure.Core.ResourceCreateOrUpdate<TextListItem>;
+  
+    @summary("Delete Item By itemId and listId")
+    @doc("Delete Item By itemId and listId")
+    deleteTextListItem is Azure.Core.ResourceDelete<TextListItem>;
 
-      @doc("How many terms will be fetched.")
-      @query
-      top: int32;
-    },
-    TextListItems
-  >;
-
-  @summary("Get Item By itemId and listId")
-  @doc("Get Item By itemId and listId")
-  @route("/text/lists/{listId}/items/{itemId}")
-  @get
-  AddTerm is Azure.Core.Foundations.Operation<
-    {
-      @doc("List Id of the list.")
-      @path
-      listId: string;
-
-      @doc("Id of the item in list.")
-      @path
-      itemId: string;
-    },
-    TextListItem
-  >;
-
-  @summary("Delete Item By itemId and listId")
-  @doc("Delete Item By itemId and listId")
-  @route("/text/lists/{listId}/items/{itemId}")
-  @delete
-  DeleteTerm is Azure.Core.Foundations.Operation<
-    {
-      @doc("List Id of the list.")
-      @path
-      listId: string;
-
-      @doc("Id of the item in list.")
-      @path
-      itemId: string;
-    },
-    void
-  >;
-
-  @summary("Create Item In Text List")
-  @doc("Create Item In Text List")
-  @route("/text/lists/{listId}/items/{itemId}")
-  @patch
-  UpdateTerm is Azure.Core.Foundations.Operation<
-    {
-      @doc("List Id of the list.")
-      @path
-      listId: string;
-
-      @doc("Id of the item in list.")
-      @path
-      itemId: string;
-
-      @doc("Schema of the term update body.")
-      @body
-      request: TextListItem;
-    },
-    void
-  >;
+    @summary("Get All Items By listId")
+    @doc("Get All Items By listId")
+    listTextListItems is Azure.Core.ResourceList<TextListItem>;
 }
+
+// interface ListManagementTermOperations {
+//   @summary("Get All Items By listId")
+//   @doc("Get All Items By listId")
+//   @route("/text/lists/{listId}/items")
+//   @get
+//   GetAllTerms is Azure.Core.Foundations.Operation<
+//     {
+//       @doc("List Id of the list.")
+//       @path
+//       listId: string;
+
+//       @doc("How many terms will be skipped.")
+//       @query
+//       skip: int32;
+
+//       @doc("How many terms will be fetched.")
+//       @query
+//       top: int32;
+//     },
+//     TextListItems
+//   >;
+
+//   @summary("Get Item By itemId and listId")
+//   @doc("Get Item By itemId and listId")
+//   @route("/text/lists/{listId}/items/{itemId}")
+//   @get
+//   AddTerm is Azure.Core.Foundations.Operation<
+//     {
+//       @doc("List Id of the list.")
+//       @path
+//       listId: string;
+
+//       @doc("Id of the item in list.")
+//       @path
+//       itemId: string;
+//     },
+//     TextListItem
+//   >;
+
+//   @summary("Delete Item By itemId and listId")
+//   @doc("Delete Item By itemId and listId")
+//   @route("/text/lists/{listId}/items/{itemId}")
+//   @delete
+//   DeleteTerm is Azure.Core.Foundations.Operation<
+//     {
+//       @doc("List Id of the list.")
+//       @path
+//       listId: string;
+
+//       @doc("Id of the item in list.")
+//       @path
+//       itemId: string;
+//     },
+//     void
+//   >;
+
+//   @summary("Create Item In Text List")
+//   @doc("Create Item In Text List")
+//   @route("/text/lists/{listId}/items/{itemId}")
+//   @patch
+//   UpdateTerm is Azure.Core.Foundations.Operation<
+//     {
+//       @doc("List Id of the list.")
+//       @path
+//       listId: string;
+
+//       @doc("Id of the item in list.")
+//       @path
+//       itemId: string;
+
+//       @doc("Schema of the term update body.")
+//       @body
+//       request: TextListItem;
+//     },
+//     void
+//   >;
+// }

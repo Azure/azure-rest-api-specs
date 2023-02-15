@@ -152,9 +152,12 @@ model ImageDetectResult {
 }
 
 @doc("Text List.")
+@resource("text/lists")
 model TextList {
   @doc("Text List Id.")
-  listId?: string;
+  @key("listId")
+  @visibility("read","create","query")
+  listId: string;
 
   @doc("Text List name.")
   name?: string;
@@ -163,18 +166,14 @@ model TextList {
   description?: string;
 }
 
-model TextLists {
-  values?: TextList[];
-}
-
-model TextListItems {
-  values?: TextListItem[];
-}
-
-@doc("Text data")
+@doc("Item in Text List")
+@resource("items")
+@parentResource(TextList)
 model TextListItem {
   @doc("Item id")
-  itemId?: string;
+  @key("itemId")
+  @visibility("read","create","query")
+  itemId: string;
 
   @doc("Text data description")
   description?: string;
