@@ -27,39 +27,6 @@ Language hint for text analysis.  Value may contain only the language code (ex.
     },
     TextDetectResponse
   >;
-
-  @summary("Analyze Text In Batch")
-  @doc("An API for triggering harmful content analysis of text batch")
-  @route("/text:batchAnalyze")
-  @post
-  BatchDetect is Azure.Core.Foundations.Operation<
-    {
-      @doc("""
-Language hint for text analysis.  Value may contain only the language code (ex.
-\"en\", \"fr\") of BCP 47.
-""")
-      @query
-      language: string;
-
-      @doc("The analysis request of the text batch")
-      @body
-      request: TextBatchDetectRequest;
-    },
-    void
-  >;
-
-  @summary("Get Text Batch Analyze Results")
-  @doc("An API to get harmful content analysis results for text batch")
-  @route("/text/analyzeResults/{resultId}")
-  @get
-  BatchDetectResults is Azure.Core.Foundations.Operation<
-    {
-      @doc("Batch analyze operation result ID.")
-      @path
-      resultId: string;
-    },
-    TextBatchDetectResultsResponse
-  >;
 }
 
 interface ImageOperations {
@@ -74,32 +41,6 @@ interface ImageOperations {
       request: ImageDetectRequest;
     },
     ImageDetectResponse
-  >;
-
-  @summary("Analyze Image In Batch")
-  @doc("An API to trigger harmful content analysis for image batch")
-  @route("/image:batchAnalyze")
-  @post
-  BatchDetect is Azure.Core.Foundations.Operation<
-    {
-      @doc("The analysis request of the image batch")
-      @body
-      request: ImageBatchDetectRequest;
-    },
-    void
-  >;
-
-  @summary("Get Image Batch Analyze Results")
-  @doc("An API to get harmful content analysis results for image batch")
-  @route("/image/analyzeResults/{resultId}")
-  @get
-  BatchDetectResults is Azure.Core.Foundations.Operation<
-    {
-      @doc("Batch analyze operation result ID.")
-      @path
-      resultId: string;
-    },
-    ImageBatchDetectResultsResponse
   >;
 }
 
