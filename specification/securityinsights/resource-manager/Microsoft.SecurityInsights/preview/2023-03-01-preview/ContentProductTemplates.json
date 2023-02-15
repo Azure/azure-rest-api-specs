@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2022-11-01-preview"
+    "version": "2023-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,11 +34,11 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/productTemplates": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentproducttemplates": {
       "get": {
         "x-ms-examples": {
           "Get all installed templates.": {
-            "$ref": "./examples/ContentTemplates/GetProductTemplates.json"
+            "$ref": "./examples/contentTemplates/GetProductTemplates.json"
           }
         },
         "tags": [
@@ -91,11 +91,11 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/productTemplates/{templateId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentproducttemplates/{templateId}": {
       "get": {
         "x-ms-examples": {
           "Get a template.": {
-            "$ref": "./examples/ContentTemplates/GetProductTemplateById.json"
+            "$ref": "./examples/contentTemplates/GetProductTemplateById.json"
           }
         },
         "tags": [
@@ -124,199 +124,16 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/templateModel"
+              "allOf": [
+                {
+                  "$ref": "#/definitions/templateModel"
+                },
+                {
+                  "$ref": "#/definitions/packagedContent"
+                }
+              ]
+
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentTemplates": {
-      "get": {
-        "x-ms-examples": {
-          "Get all installed templates.": {
-            "$ref": "./examples/ContentTemplates/GetTemplates.json"
-          }
-        },
-        "tags": [
-          "ContentTemplates"
-        ],
-        "description": "Gets all installed templates.",
-        "operationId": "ContentTemplates_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/templateList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentTemplates/{templateId}": {
-      "put": {
-        "x-ms-examples": {
-          "Get a template.": {
-            "$ref": "./examples/ContentTemplates/InstallTemplate.json"
-          }
-        },
-        "tags": [
-          "ContentTemplates"
-        ],
-        "description": "Install a template.",
-        "operationId": "ContentTemplate_Install",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/templateIdParameter"
-          },
-          {
-            "$ref": "#/parameters/templateInstallationProperties"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/templateModel"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "x-ms-examples": {
-          "Get a template.": {
-            "$ref": "./examples/ContentTemplates/GetTemplateById.json"
-          }
-        },
-        "tags": [
-          "ContentTemplates"
-        ],
-        "description": "Gets a template byt its identifier.",
-        "operationId": "ContentTemplate_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/templateIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/templateModel"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "delete": {
-        "x-ms-examples": {
-          "Delete metadata.": {
-            "$ref": "./examples/ContentTemplates/DeleteTemplate.json"
-          }
-        },
-        "tags": [
-          "ContentTemplates"
-        ],
-        "description": "Delete an installed template.",
-        "operationId": "ContentTemplate_Delete",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/templateIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "204": {
-            "description": "No Content"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -415,7 +232,11 @@
         },
         "categories": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataCategories",
-          "description": "Categories for the  item"
+          "description": "Categories for the item"
+        },
+        "tags": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTags",
+          "description": "The tags of the content item"
         },
         "providers": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataProviders",
@@ -457,27 +278,28 @@
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPreviewImagesDark",
           "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support"
         },
-        "mainTemplate": {
-          "description": "The JSON string of the template",
-          "type": "string"
+        "packageId" : {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
+          "description": "the package Id contains this template"
+        },
+        "packageKind" : {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind",
+          "description": "the packageKind of the package contains this template"
+        },
+        "packageName" : {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDisplayName",
+          "description": "the name of the package contains this template"
         }
       }
     },
-    "TemplateInstallationProperties": {
-      "type": "object",
-      "description": "template installation properties.",
+    "packagedContent" : {
+      "type" : "object",
       "properties": {
-        "displayName": {
-          "type": "string",
-          "example": "Anomalous Azure Active Directory apps based on authentication location"
-        },
-        "contentKind": {
-          "type": "string",
-          "example": "HuntingQuery"
-        },
-        "mainTemplate": {
-          "type": "object"
-        }
+          "packagedContent": {
+            "type" : "object",
+            "description": "the json to deploy"
+          }
+
       }
     }
   },
@@ -488,16 +310,6 @@
       "name": "templateId",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "templateInstallationProperties": {
-      "description": "Template installation properties",
-      "in": "body",
-      "name": "templateInstallationProperties",
-      "required": true,
-      "schema": {
-        "$ref": "#/definitions/TemplateInstallationProperties"
-      },
       "x-ms-parameter-location": "method"
     }
   }

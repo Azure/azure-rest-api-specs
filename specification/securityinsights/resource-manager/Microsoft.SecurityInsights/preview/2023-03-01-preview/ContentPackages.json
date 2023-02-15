@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2022-11-01-preview"
+    "version": "2023-03-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,113 +34,11 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/productPackages": {
-      "get": {
-        "x-ms-examples": {
-          "Get all available packages.": {
-            "$ref": "./examples/ContentPackages/GetProductPackages.json"
-          }
-        },
-        "tags": [
-          "ContentProductPackages"
-        ],
-        "description": "Gets all packages from the catalog.",
-        "operationId": "ProductPackages_List",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataFilter"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataOrderBy"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataTop"
-          },
-          {
-            "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/packageList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/productPackages/{packageId}": {
-      "get": {
-        "x-ms-examples": {
-          "Get a package.": {
-            "$ref": "./examples/ContentPackages/GetProductPackageById.json"
-          }
-        },
-        "tags": [
-          "ContentProductPackages"
-        ],
-        "description": "Gets a package by its identifier from the catalog.",
-        "operationId": "ProductPackage_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../common/1.0/types.json#/parameters/WorkspaceName"
-          },
-          {
-            "$ref": "#/parameters/PackageIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/packageModel"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentPackages": {
       "get": {
         "x-ms-examples": {
           "Get all available packages.": {
-            "$ref": "./examples/ContentPackages/GetPackages.json"
+            "$ref": "./examples/contentPackages/GetPackages.json"
           }
         },
         "tags": [
@@ -197,7 +95,7 @@
       "get": {
         "x-ms-examples": {
           "Get all available packages.": {
-            "$ref": "./examples/ContentPackages/GetPackageById.json"
+            "$ref": "./examples/contentPackages/GetPackageById.json"
           }
         },
         "tags": [
@@ -229,6 +127,9 @@
           },
           {
             "$ref": "../../../common/2.0/types.json#/parameters/ODataSkipToken"
+          },
+          {
+            "$ref": "#/parameters/PackageIdParameter"
           }
         ],
         "responses": {
@@ -252,7 +153,7 @@
       "put": {
         "x-ms-examples": {
           "Install a package to the workspace.": {
-            "$ref": "./examples/ContentPackages/InstallPackage.json"
+            "$ref": "./examples/contentPackages/InstallPackage.json"
           }
         },
         "tags": [
@@ -298,7 +199,7 @@
       "delete": {
         "x-ms-examples": {
           "Uninstall a package from the workspace.": {
-            "$ref": "./examples/ContentPackages/UninstallPackage.json"
+            "$ref": "./examples/contentPackages/UninstallPackage.json"
           }
         },
         "tags": [
@@ -338,7 +239,7 @@
     }
   },
   "definitions": {
-    "packageConent" : {
+    "packageContent" : {
       "properties": {
         "id": {
           "type": "string",
@@ -402,17 +303,9 @@
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind",
           "description": "The package kind"
         },
-        "installedVersion": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
-          "description": "The version of the installed package, null or absent means not installed."
-        },
         "contentSchemaVersion": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion",
           "description": "The version of the content schema."
-        },
-        "resourceId": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
-          "description": "The metadata resource id."
         },
         "isNew": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTrueFalseFlag",
@@ -474,6 +367,10 @@
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataCategories",
           "description": "The categories of the package"
         },
+        "tags": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataTags",
+          "description": "The tags of the package"
+        },
         "threatAnalysisTactics": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataThreatAnalysisTactics",
           "description": "the tactics the resource covers"
@@ -485,10 +382,6 @@
         "icon": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataIcon",
           "description": "the icon identifier. this id can later be fetched from the content metadata"
-        },
-        "packageItems": {
-          "description": "The JSON string of the package.",
-          "type": "string"
         }
       },
       "required": [
@@ -582,7 +475,7 @@
           "type": "string",
           "example": "2021-06-01"
         },
-        "lastPublishDate": { 
+        "lastPublishDate": {
           "type": "string",
           "example": "2022-06-01"
         },
@@ -591,24 +484,39 @@
           "properties": {
             "domains": {
               "type": "array",
+              "items": {
+                "type": "string"
+              },
               "example": "[\"Security - Threat Protection\", \"Security -  (SOAR)\"]"
             },
             "vertical": {
               "type": "array",
+              "items": {
+                "type": "string"
+              },
               "example": [ "something", "something2"]
             }
           }
         },
         "threatAnalysisTactics": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "example": ["testAT1","testAT2"]
         },
         "threatAnalyticsTechniques": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "example": ["T1078.004"]
         },
         "tags": {
           "type": "array",
+          "items": {
+            "type": "string"
+          },
           "example": ["testTagPackage"]
         },
         "dependencies": {
@@ -620,6 +528,9 @@
             },
             "criteria": {
               "type": "array",
+              "items": {
+                "$ref": "#/definitions/dependencyInfo"
+              },
               "example": [{
                 "kind": "DataConnector",
                 "contentId": "68b1de8a-b635-430d-b208-01ba3dda5877",
@@ -635,10 +546,26 @@
         },
         "activeContentDependency": {
           "type": "array",
-          "example": [{"kind": "DataConnector",
-            "contentId": "68b1de8a-b635-430d-b208-01ba3dda5877",
-            "version": "1.0.0"
-          }]
+          "items": {
+            "$ref": "#/definitions/dependencyInfo"
+          }
+        }
+      }
+    },
+    "dependencyInfo" : {
+      "type" : "object",
+      "properties": {
+        "kind" : {
+          "type" : "string",
+          "example" : "DataConnector"
+        },
+        "contentId" : {
+          "type" : "string",
+          "example" : "68b1de8a-b635-430d-b208-01ba3dda5877"
+        },
+        "version" : {
+          "type" :"string",
+          "example" : "1.0.0"
         }
       }
     }
