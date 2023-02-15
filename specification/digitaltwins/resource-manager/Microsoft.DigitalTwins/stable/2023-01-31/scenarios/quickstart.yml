@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  resourceName:
+    type: string
+    prefix: adt
+
+scenarios:
+  - scenario: quickStart
+    description: Quick start with Digital Twins
+    steps:
+      - step: DigitalTwins_CheckNameAvailability
+        operationId: DigitalTwins_CheckNameAvailability
+        parameters:
+          digitalTwinsInstanceCheckName:
+            name: $(resourceName)
+            type: Microsoft.DigitalTwins/digitalTwinsInstances
+      - step: DigitalTwins_CreateOrUpdate
+        operationId: DigitalTwins_CreateOrUpdate
+        parameters:
+          digitalTwinsCreate:
+            location: $(location)
+      - step: DigitalTwins_Get
+        operationId: DigitalTwins_Get
