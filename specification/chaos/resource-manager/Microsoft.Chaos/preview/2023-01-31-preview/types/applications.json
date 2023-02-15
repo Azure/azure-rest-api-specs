@@ -26,6 +26,19 @@
         }
       ]
     },
+    "applicationUpdate": {
+      "description": "An update to a application.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "applicationProperties": {
       "type": "object",
       "properties": {
@@ -207,11 +220,11 @@
       "required": [
         "signature"
       ]
-  },
+    },
     "sourceProperties": {
       "type": "object",
       "properties": {
-          "codePath": {
+        "codePath": {
           "type": "string",
           "description": "code path where function is defined"
         },
