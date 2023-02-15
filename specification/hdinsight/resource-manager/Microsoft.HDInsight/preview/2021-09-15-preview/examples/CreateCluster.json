@@ -30,6 +30,59 @@
           "sshProfile": {
             "count": 2,
             "podPrefix": "pod"
+          },
+          "autoscaleProfile": {
+            "enabled": true,
+            "autoscaleType": "ScheduleBased",
+            "gracefulDecommissionTimeout": 3600,
+            "scheduleBasedConfig": {
+              "defaultCount": 10,
+              "timeZone": "Cen. Australia Standard Time",
+              "schedule": [
+                {
+                  "days": [
+                    "Monday"
+                  ],
+                  "startTime": "00:00",
+                  "endTime": "12:00",
+                  "count": 20
+                },
+                {
+                  "days": [
+                    "Sunday"
+                  ],
+                  "startTime": "00:00",
+                  "endTime": "12:00",
+                  "count": 25
+                }
+              ]
+            },
+            "loadBasedConfig": {
+              "minNodes": 10,
+              "maxNodes": 20,
+              "pollInterval": 60,
+              "cooldownPeriod": 300,
+              "scalingRules": [
+                {
+                  "actionType": "scaleup",
+                  "evaluationCount": 3,
+                  "scalingMetric": "cpu",
+                  "comparisonRule": {
+                    "operator": "greaterThan",
+                    "threshold": 90
+                  }
+                },
+                {
+                  "actionType": "scaledown",
+                  "evaluationCount": 3,
+                  "scalingMetric": "cpu",
+                  "comparisonRule": {
+                    "operator": "lessThan",
+                    "threshold": 20
+                  }
+                }
+              ]
+            }
           }
         }
       }
@@ -79,6 +132,59 @@
             "sshProfile": {
               "count": 2,
               "podPrefix": "pod"
+            },
+            "autoscaleProfile": {
+              "enabled": true,
+              "autoscaleType": "ScheduleBased",
+              "gracefulDecommissionTimeout": 3600,
+              "scheduleBasedConfig": {
+                "defaultCount": 10,
+                "timeZone": "Cen. Australia Standard Time",
+                "schedule": [
+                  {
+                    "days": [
+                      "Monday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 20
+                  },
+                  {
+                    "days": [
+                      "Sunday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 25
+                  }
+                ]
+              },
+              "loadBasedConfig": {
+                "minNodes": 10,
+                "maxNodes": 20,
+                "pollInterval": 60,
+                "cooldownPeriod": 300,
+                "scalingRules": [
+                  {
+                    "actionType": "scaleup",
+                    "evaluationCount": 3,
+                    "scalingMetric": "cpu",
+                    "comparisonRule": {
+                      "operator": "greaterThan",
+                      "threshold": 90
+                    }
+                  },
+                  {
+                    "actionType": "scaledown",
+                    "evaluationCount": 3,
+                    "scalingMetric": "cpu",
+                    "comparisonRule": {
+                      "operator": "lessThan",
+                      "threshold": 20
+                    }
+                  }
+                ]
+              }
             }
           }
         },
@@ -135,6 +241,59 @@
             "sshProfile": {
               "count": 2,
               "podPrefix": "pod"
+            },
+            "autoscaleProfile": {
+              "enabled": true,
+              "autoscaleType": "ScheduleBased",
+              "gracefulDecommissionTimeout": 3600,
+              "scheduleBasedConfig": {
+                "defaultCount": 10,
+                "timeZone": "Cen. Australia Standard Time",
+                "schedule": [
+                  {
+                    "days": [
+                      "Monday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 20
+                  },
+                  {
+                    "days": [
+                      "Sunday"
+                    ],
+                    "startTime": "00:00",
+                    "endTime": "12:00",
+                    "count": 25
+                  }
+                ]
+              },
+              "loadBasedConfig": {
+                "minNodes": 10,
+                "maxNodes": 20,
+                "pollInterval": 60,
+                "cooldownPeriod": 300,
+                "scalingRules": [
+                  {
+                    "actionType": "scaleup",
+                    "evaluationCount": 3,
+                    "scalingMetric": "cpu",
+                    "comparisonRule": {
+                      "operator": "greaterThan",
+                      "threshold": 90
+                    }
+                  },
+                  {
+                    "actionType": "scaledown",
+                    "evaluationCount": 3,
+                    "scalingMetric": "cpu",
+                    "comparisonRule": {
+                      "operator": "lessThan",
+                      "threshold": 20
+                    }
+                  }
+                ]
+              }
             }
           }
         },
