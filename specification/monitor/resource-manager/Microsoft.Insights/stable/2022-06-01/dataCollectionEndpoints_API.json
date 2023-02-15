@@ -404,6 +404,7 @@
             "Updating",
             "Deleting",
             "Succeeded",
+            "Canceled",
             "Failed"
           ],
           "type": "string",
@@ -421,11 +422,7 @@
         "activeLocation": {
           "description": "Active location where data flow will occur.",
           "type": "string",
-          "readOnly": true,
-          "example": "East US",
-          "x-ms-mutability": [
-            "read"
-          ]
+          "example": "East US"
         },
         "locations": {
           "description": "Locations that are configured for failover.",
@@ -433,9 +430,8 @@
           "items": {
             "$ref": "#/definitions/LocationSpec"
           },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
+          "x-ms-identifiers": [
+            "location"
           ]
         }
       }
@@ -516,6 +512,7 @@
             "Updating",
             "Deleting",
             "Succeeded",
+            "Canceled",
             "Failed"
           ],
           "type": "string",
@@ -538,7 +535,8 @@
           "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-ms-identifiers": []
         },
         "failoverConfiguration": {
           "description": "Failover configuration on this endpoint. This property is READ-ONLY.",
@@ -609,14 +607,6 @@
             "name": "KnownDataCollectionEndpointResourceKind",
             "modelAsString": true
           }
-        },
-        "sku": {
-          "description": "The SKU of the resource.",
-          "allOf": [
-            {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Sku"
-            }
-          ]
         },
         "identity": {
           "description": "Managed service identity of the resource.",
