@@ -698,7 +698,7 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/InstanceFailoverGroups.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseRestoreDetails.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabases.json
-- ./Microsoft.Sql/preview/2022-05-01-preview/RecoverableDatabases.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/RecoverableDatabases.json
 
 
 # Needed when there is more than one input file
