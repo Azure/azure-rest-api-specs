@@ -1231,11 +1231,6 @@ directive:
   reason: Incompatible values (2020-10-01)
 ```
 
-``` yaml
-modelerfour:
-  lenient-model-deduplication: true
-```
-
 ### Tag: profile-hybrid-2019-03-01
 
 These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.

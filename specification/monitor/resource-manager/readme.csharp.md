@@ -22,7 +22,7 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml
+``` yaml yaml $(csharp) && $(track2)
 modelerfour:
   lenient-model-deduplication: true
 ```
