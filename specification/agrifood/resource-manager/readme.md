@@ -92,7 +92,7 @@ directive:
     reason: Have an api already.
   - from: agfood.json
     suppress: R3006 # BodyTopLevelProperties
-    where: $.definitions.DataMangerForAgriculture.properties
+    where: $.definitions.DataManagerForAgriculture.properties
     reason: Currently systemData is not allowed.
   - from: agfood.json
     suppress: R3006 # BodyTopLevelProperties
@@ -100,11 +100,11 @@ directive:
     reason: Currently systemData is not allowed.
   - from: agfood.json
     suppress: R3006 # BodyTopLevelProperties
-    where: $.definitions.DataMangerForAgricultureExtension.properties
+    where: $.definitions.DataManagerForAgricultureExtension.properties
     reason: Currently systemData is not allowed.
   - from: agfood.json
     suppress: R2003 # ValidFormats
-    where: $.definitions.DataMangerForAgricultureProperties.properties.instanceUri.format
+    where: $.definitions.DataManagerForAgricultureProperties.properties.instanceUri.format
     reason: Currently systemData is not allowed.
   - from: agfood.json
     suppress: R3018 # EnumInsteadOfBoolean
@@ -121,22 +121,22 @@ directive:
   - from: agfood.json
     suppress: R4000 # DescriptionAndTitleMissing
     where:
-      - $.definitions.DataMangerForAgricultureExtension.properties.systemData
-      - $.definitions.DataMangerForAgricultureExtension.properties.properties
+      - $.definitions.DataManagerForAgricultureExtension.properties.systemData
+      - $.definitions.DataManagerForAgricultureExtension.properties.properties
       - $.definitions.DetailedInformation.properties.unitsSupported
       - $.definitions.SensorIntegration.properties.provisioningInfo
-      - $.definitions.DataMangerForAgricultureProperties.properties.publicNetworkAccess
-      - $.definitions.DataMangerForAgricultureProperties.properties.sensorIntegration
-      - $.definitions.DataMangerForAgricultureProperties.properties.publicNetworkAccess
-      - $.definitions.DataMangerForAgricultureProperties.properties.privateEndpointConnections
-      - $.definitions.DataMangerForAgriculturePropertiesUpdateProperties.properties.sensorIntegration
-      - $.definitions.DataMangerForAgriculturePropertiesUpdateProperties.properties.publicNetworkAccess
+      - $.definitions.DataManagerForAgricultureProperties.properties.publicNetworkAccess
+      - $.definitions.DataManagerForAgricultureProperties.properties.sensorIntegration
+      - $.definitions.DataManagerForAgricultureProperties.properties.publicNetworkAccess
+      - $.definitions.DataManagerForAgricultureProperties.properties.privateEndpointConnections
+      - $.definitions.DataManagerForAgriculturePropertiesUpdateProperties.properties.sensorIntegration
+      - $.definitions.DataManagerForAgriculturePropertiesUpdateProperties.properties.publicNetworkAccess
       - $.definitions.Error.properties.innererror
       - $.definitions.ErrorResponse.properties.error
       - $.definitions.Extension.properties.properties
       - $.definitions.Extension.properties.systemData
-      - $.definitions.DataMangerForAgricultureProperties.properties.properties
-      - $.definitions.DataMangerForAgricultureProperties.properties.systemData
+      - $.definitions.DataManagerForAgricultureProperties.properties.properties
+      - $.definitions.DataManagerForAgricultureProperties.properties.systemData
       - $.definitions.InnerError.properties.innererror
       - $.definitions.Operation.properties.display
     reason: Model has description added in it's schema.
