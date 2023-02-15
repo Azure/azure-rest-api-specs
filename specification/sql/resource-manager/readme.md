@@ -710,7 +710,6 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-composite-v5'
 input-file:
-- Microsoft.Sql/stable/2014-04-01-legacy/backups_legacy.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
 - Microsoft.Sql/stable/2014-04-01/geoBackupPolicies.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
@@ -797,7 +796,6 @@ input-file:
 - ./Microsoft.Sql/preview/2020-11-01-preview/VirtualNetworkRules.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadClassifiers.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/WorkloadGroups.json
-- ./Microsoft.Sql/preview/2022-08-01-preview/TransparentDataEncryptions.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/BackupShortTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseExtensions.json
 - ./Microsoft.Sql/preview/2021-02-01-preview/DatabaseOperations.json
@@ -807,12 +805,10 @@ input-file:
 - ./Microsoft.Sql/preview/2021-02-01-preview/Usages.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionBackups.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/LongTermRetentionManagedInstanceBackups.json
-- ./Microsoft.Sql/preview/2022-08-01-preview/RestorableDroppedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/RestorableDroppedManagedDatabases.json
 - ./Microsoft.Sql/preview/2021-05-01-preview/ServerConnectionPolicies.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/DistributedAvailabilityGroups.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/ServerTrustCertificates.json
-- ./Microsoft.Sql/preview/2021-08-01-preview/ElasticPools.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/IPv6FirewallRules.json
 - ./Microsoft.Sql/preview/2021-11-01-preview/EndpointCertificates.json
 - ./Microsoft.Sql/preview/2020-11-01-preview/ManagedDatabaseSensitivityLabels.json
@@ -843,17 +839,19 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/InstanceFailoverGroups.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseRestoreDetails.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabases.json
-- ./Microsoft.Sql/preview/2022-08-01-preview/ManagedInstances.json
-- ./Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevalidate.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevert.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/Databases.json
+- ./Microsoft.Sql/preview/2021-08-01-preview/ElasticPools.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ManagedLedgerDigestUploads.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/RecoverableDatabases.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/RestorableDroppedDatabases.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/ServerConfigurationOptions.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/Servers.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/StartStopManagedInstanceSchedules.json
-- ./Microsoft.Sql/preview/2022-05-01-preview/InstanceFailoverGroups.json
-- ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseRestoreDetails.json
-- ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabases.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/TransparentDataEncryptions.json
+
 
 # Needed when there is more than one input file
 override-info:
