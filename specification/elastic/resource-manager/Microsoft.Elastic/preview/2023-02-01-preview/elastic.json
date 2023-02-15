@@ -110,9 +110,9 @@
 	  "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/monitors/getOrganizationApiKey": {
       "post": {
         "tags": [
-          "DeploymentInfo"
+          "ApiKey"
         ],
-        "summary": "Fetch information regarding Elastic cloud deployment corresponding to the Elastic monitor resource.",
+        "summary": "Fetch User API Key if generated while creating the Elasticsearch Organization.",
         "operationId": "Organizations_GetApiKey",
         "produces": [
           "application/json"
@@ -122,20 +122,14 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
+            "$ref": "#/parameters/UserEmailIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/DeploymentInfoResponse"
+              "$ref": "#/definitions/UserApiKeyResponse"
             }
           },
           "default": {
@@ -146,8 +140,8 @@
           }
         },
         "x-ms-examples": {
-          "DeploymentInfo_List": {
-            "$ref": "./examples/DeploymentInfo_List.json"
+          "ApiKey_Get": {
+            "$ref": "./examples/ApiKey_Get.json"
           }
         }
       }
@@ -2307,6 +2301,16 @@
           "description": "Version to which the elastic monitor should be upgraded to"
         }
       }
+    },
+    "UserApiKeyResponse": {
+      "description": "The User Api Key created for the Organization associated with the User Email Id that was passed in the request",
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "type": "string",
+          "description": "Api Key associated with the User Organization"
+        }
+      }
     }
   },
   "parameters": {
@@ -2345,6 +2349,14 @@
       "in": "path",
       "name": "ruleSetName",
       "description": "Tag Rule Set resource name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UserEmailIdParameter": {
+      "in": "path",
+      "name": "emailId",
+      "description": "Email Id of the User Organization",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
