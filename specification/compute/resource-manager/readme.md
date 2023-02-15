@@ -237,7 +237,6 @@ directive:
     from:
       - common.json
   - suppress: R2062
-    from: virtualMachineScaleSet.json
 ```
 
 ### Tag: package-2022-11-01
