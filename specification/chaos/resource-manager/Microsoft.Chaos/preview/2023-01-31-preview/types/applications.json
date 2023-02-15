@@ -202,113 +202,112 @@
           },
           "description": "faults supported by torch for the function"
         }
-      }
-    },
-    "description": "Application function in which fault can be injected",
-    "required": [
-      "signature"
-    ]
+      },
+      "description": "Application function in which fault can be injected",
+      "required": [
+        "signature"
+      ]
   },
-  "sourceProperties": {
-    "type": "object",
-    "properties": {
-      "codePath": {
-        "type": "string",
-        "description": "code path where function is defined"
-      },
-      "startLine": {
-        "type": "int",
-        "description": "line in the code where function starts"
-      },
-      "startColumn": {
-        "type": "int",
-        "description": "column in the code where function starts"
-      },
-      "endLine": {
-        "type": "int",
-        "description": "line in the code where function ends"
-      },
-      "endColumn": {
-        "type": "int",
-        "description": "column in the code where function ends"
-      }
-    },
-    "description": "defines the function code path and location in the class"
-  },
-  "functionArguments": {
-    "type": "object",
-    "properties": {
-      "type": {
-        "type": "string",
-        "description": "Type of a function argument"
-      },
-      "name": {
-        "type": "string",
-        "description": "Name of a function argument"
-      }
-    }
-  },
-  "signatureProperties": {
-    "type": "object",
-    "properties": {
-      "functionNamespace": {
-        "type": "string",
-        "description": "Namespace in which the function is defined"
-      },
-      "type": {
-        "type": "string",
-        "description": "ClassName in which the function is defined"
-      },
-      "name": {
-        "type": "string",
-        "description": "Name of a function"
-      },
-      "genericTypes": {
-        "type": "array",
-        "items": {
-          "type": "string"
+    "sourceProperties": {
+      "type": "object",
+      "properties": {
+          "codePath": {
+          "type": "string",
+          "description": "code path where function is defined"
         },
-        "description": "Types defined if Class is a generic class"
-      },
-      "genericCount": {
-        "type": "int",
-        "description": "Number of types defined in a generic"
-      },
-      "arguments": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/functionArguments"
+        "startLine": {
+          "type": "int",
+          "description": "line in the code where function starts"
         },
-        "description": "List of arguments of a function"
+        "startColumn": {
+          "type": "int",
+          "description": "column in the code where function starts"
+        },
+        "endLine": {
+          "type": "int",
+          "description": "line in the code where function ends"
+        },
+        "endColumn": {
+          "type": "int",
+          "description": "column in the code where function ends"
+        }
       },
-      "archive": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "name of an archive which defines the function"
-          },
-          "version": {
-            "type": "string",
-            "description": "version of an archive"
-          },
-          "culture": {
-            "type": "string",
-            "description": "culture of an archive"
-          },
-          "publicKeyToken": {
-            "type": "string",
-            "description": "public key token of an archive"
-          }
+      "description": "defines the function code path and location in the class"
+    },
+    "functionArguments": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of a function argument"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of a function argument"
         }
       }
     },
-    "description": "",
-    "required": [
-      "functionNamespace",
-      "type",
-      "name"
-    ]
+    "signatureProperties": {
+      "type": "object",
+      "properties": {
+        "functionNamespace": {
+          "type": "string",
+          "description": "Namespace in which the function is defined"
+        },
+        "type": {
+          "type": "string",
+          "description": "ClassName in which the function is defined"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of a function"
+        },
+        "genericTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Types defined if Class is a generic class"
+        },
+        "genericCount": {
+          "type": "int",
+          "description": "Number of types defined in a generic"
+        },
+        "arguments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/functionArguments"
+          },
+          "description": "List of arguments of a function"
+        },
+        "archive": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "name of an archive which defines the function"
+            },
+            "version": {
+              "type": "string",
+              "description": "version of an archive"
+            },
+            "culture": {
+              "type": "string",
+              "description": "culture of an archive"
+            },
+            "publicKeyToken": {
+              "type": "string",
+              "description": "public key token of an archive"
+            }
+          }
+        }
+      },
+      "description": "",
+      "required": [
+        "functionNamespace",
+        "type",
+        "name"
+      ]
+    }
   }
-}
 }
