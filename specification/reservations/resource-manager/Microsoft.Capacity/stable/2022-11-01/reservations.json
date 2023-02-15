@@ -2798,6 +2798,10 @@
             }
           }
         },
+        "instanceFlexibility": {
+          "description": "Allows reservation discount to be applied across skus within the same auto fit group. Not all skus support instance size flexibility.",
+          "$ref": "#/definitions/InstanceFlexibility"
+        },
         "reviewDateTime": {
           "type": "string",
           "format": "date-time",
@@ -3264,7 +3268,7 @@
     },
     "AppliedScopes": {
       "type": "array",
-      "description": "List of the subscriptions that the benefit will be applied. Do not specify if AppliedScopeType is Shared.",
+      "description": "List of the subscriptions that the benefit will be applied. Do not specify if AppliedScopeType is Shared. This property will be deprecated and replaced by appliedScopeProperties instead for Sinlge AppliedScopeType.",
       "items": {
         "type": "string",
         "minItems": 1,
