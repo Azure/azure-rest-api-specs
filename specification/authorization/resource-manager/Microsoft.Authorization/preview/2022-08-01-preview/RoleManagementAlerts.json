@@ -537,7 +537,7 @@
         "parameters": [
           {
             "name": "scope",
-            "in": "path",
+            "in": "path"
             "required": true,
             "type": "string",
             "description": "The scope of the alert incident. The scope can be any REST resource instance. For example, use '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/' for a subscription, '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}' for a resource group, and '/providers/Microsoft.Subscription/subscriptions/{subscription-id}/resourceGroups/{resource-group-name}/providers/{resource-provider}/{resource-type}/{resource-name}' for a resource.",
@@ -1304,7 +1304,12 @@
           "format": "date-time",
           "readOnly": true,
           "description": "The last action date of the alert operation."
-        },        
+        },
+        "resourceLocation": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the alert associated with the operation."
+        }
       },
       "type": "object",
       "description": "Alert operation result"
