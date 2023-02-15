@@ -520,7 +520,17 @@
         },
         "status": {
           "description": "The status of the email",
-          "$ref": "#/definitions/AcsEmailStatus"
+          "type": "string",
+          "enum": [
+            "Failed",
+            "Delivered",
+            "FilteredSpam",
+            "Quarantined"
+          ],
+          "x-ms-enum": {
+            "name": "AcsEmailStatus",
+            "modelAsString": true
+          }
         },
         "deliveryAttemptTimestamp": {
           "description": "The time at which the email delivery report received timestamp",
@@ -556,7 +566,15 @@
         },
         "engagementType": {
           "description": "The type of engagement user have with email",
-          "$ref": "#/definitions/AcsUserEngagement"
+          "type": "string",
+          "enum": [
+            "view",
+            "click"
+          ],
+          "x-ms-enum": {
+            "name": "AcsUserEngagement",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -797,32 +815,6 @@
           "description": "The location to delete all chunk storage",
           "type": "string"
         }
-      }
-    },
-    "AcsUserEngagement": {
-      "description": "The email user engagement type enum",
-      "type": "string",
-      "enum": [
-        "view",
-        "click"
-      ],
-      "x-ms-enum": {
-        "name": "UserEngagement",
-        "modelAsString": true
-      }
-    },
-    "AcsEmailStatus": {
-      "description": "The email status enum",
-      "type": "string",
-      "enum": [
-        "Failed",
-        "Delivered",
-        "FilteredSpam",
-        "Quarantined"
-      ],
-      "x-ms-enum": {
-        "name": "Status",
-        "modelAsString": true
       }
     }
   }
