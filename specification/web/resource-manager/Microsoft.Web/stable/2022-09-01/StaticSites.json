@@ -3726,6 +3726,10 @@
         "publicNetworkAccess": {
           "description": "State indicating whether public traffic are allowed or not for a static web app. Allowed Values: 'Enabled', 'Disabled' or an empty string.",
           "type": "string"
+        },
+        "targetResourceGroupResourceId": {
+          "description": "Target resource group id for trial migration.",
+          "type": "string"
         }
       }
     },
@@ -4560,7 +4564,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
         }
       ],
       "properties": {
