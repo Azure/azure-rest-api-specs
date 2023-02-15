@@ -5426,7 +5426,7 @@
       "type": "object",
       "properties": {
         "state": {
-          "description": "Encryption state of the Backup Vault. 'Disabled' & 'Inconsistent' states are not user controllable. Also 'Inconsistent' state indicates that user needs to retry the encryption settings operation.",
+          "description": "Encryption state of the Backup Vault.",
           "type": "string",
           "enum": [
             "Enabled",
@@ -5435,7 +5435,21 @@
           ],
           "x-ms-enum": {
             "name": "EncryptionState",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "description": "CMK encryption is enabled on the Backup Vault",
+                "value": "Enabled"
+              },
+              {
+                "description": "CMK encryption is disabled on the Backup Vault. User can not set this state once Encryption State is 'Enabled'.",
+                "value": "Disabled"
+              },
+              {
+                "description": "CMK encryption is in inconsistent state on the Backup Vault. This state indicates that user needs to retry the encryption settings operation immediately to correct the state.",
+                "value": "Inconsistent"
+              }
+            ]
           }
         },
         "keyVaultProperties": {
