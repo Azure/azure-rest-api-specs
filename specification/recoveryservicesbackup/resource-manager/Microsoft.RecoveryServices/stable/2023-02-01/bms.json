@@ -7415,6 +7415,10 @@
         "recoveryPointProperties": {
           "description": "Properties of Recovery Point",
           "$ref": "#/definitions/RecoveryPointProperties"
+        },
+        "isPrivateAccessEnabledOnAnyDisk": {
+          "description": "This flag denotes if any of the disks in the VM are using Private access network setting",
+          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "IaasVMRecoveryPoint"
@@ -7429,6 +7433,25 @@
         },
         "type": {
           "description": "Type of the extended location. Possible values include: 'EdgeZone'",
+          "type": "string"
+        }
+      }
+    },
+    "TargetDiskNetworkAccessSettings": {
+      "description": "Specifies target network access settings for disks of VM to be restored.",
+      "type": "object",
+      "properties": {
+        "targetDiskNetworkAccessOption": {
+          "description": "Network access settings to be used for restored disks",
+          "type": "enum",
+          "enum": [
+            "SameAsOnSourceDisks",
+            "EnablePrivateAccessForAllDisks",
+            "EnablePublicAccessForAllDisks"
+          ]
+        },
+        "targetDiskAccessId": {
+          "description": "Gets or sets the ARM resource ID of the target disk access to be used when TargetDiskNetworkAccessOption is set to TargetDiskNetworkAccessOption.UseNew",
           "type": "string"
         }
       }
@@ -7543,6 +7566,10 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Target extended location where the VM should be restored,\r\nshould be null if restore is to be done in public cloud"
+        },
+        "targetDiskNetworkAccessSettings": {
+          "$ref": "#/definitions/TargetDiskNetworkAccessSettings",
+          "description": "Specifies target network access settings for disks of VM to be restored"
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
