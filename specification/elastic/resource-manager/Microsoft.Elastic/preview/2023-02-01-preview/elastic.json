@@ -2041,6 +2041,30 @@
         }
       }
     },
+    "MarketplaceSaaSInfo": {
+      "description": "Marketplace SAAS Info of the resource.",
+      "type": "object",
+      "properties": {
+        "marketplacesubscription": {
+          "description": "Marketplace Subscription Id",
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "Marketplace Subscription Id. This is a GUID-formatted string.",
+              "type": "string"
+            }
+          }
+        },
+        "marketplacename": {
+          "description": "Subscription Details: Marketplace SAAS Name",
+          "type": "string"
+        },
+        "marketplaceresourceid": {
+          "description": "Subscription Details: Marketplace Resource URI",
+          "type": "string"
+        }
+      }
+    },
     "ElasticDeploymentStatus": {
       "description": "Flag specifying if the Elastic deployment status is healthy or not.",
       "enum": [
@@ -2080,6 +2104,11 @@
         "deploymentUrl": {
           "description": "Deployment URL of the elasticsearch in Elastic cloud deployment.",
           "type": "string",
+          "readOnly": true
+        },
+        "marketplaceSaaSInfo": {
+          "description": "Marketplace SaaS Info of the resource.",
+          "$ref": "#/definitions/MarketplaceSaaSInfo",
           "readOnly": true
         }
       }
