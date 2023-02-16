@@ -100,6 +100,18 @@
               }
             }
           },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ReceivedShare"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Default error response.",
             "schema": {
@@ -149,10 +161,6 @@
             "description": "Accepted",
             "headers": {
               "Operation-Location": {
-                "description": "The URL to track the status of the long running operation.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
                 "description": "The URL to track the status of the long running operation.",
                 "type": "string"
               }
@@ -406,7 +414,7 @@
           "SentShare"
         ],
         "summary": "Create or replace a sent share.",
-        "description": "Create a sent share",
+        "description": "Create or replace a sent share",
         "operationId": "SentShares_Create",
         "consumes": [
           "application/json"
@@ -433,6 +441,18 @@
         ],
         "responses": {
           "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SentShare"
+            },
+            "headers": {
+              "Operation-Location": {
+                "description": "The URL to track the status of the long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/SentShare"
@@ -493,10 +513,6 @@
             "description": "Accepted",
             "headers": {
               "Operation-Location": {
-                "description": "The URL to track the status of the long running operation.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
                 "description": "The URL to track the status of the long running operation.",
                 "type": "string"
               }
@@ -728,10 +744,6 @@
               "Operation-Location": {
                 "description": "The URL to track the status of the long running operation.",
                 "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "The URL to track the status of the long running operation.",
-                "type": "string"
               }
             }
           },
@@ -938,8 +950,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AdlsGen2AccountSinkProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AdlsGen2AccountSinkProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen2Account"
@@ -986,8 +997,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AdlsGen2ArtifactProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AdlsGen2ArtifactProperties"
         }
       },
       "x-ms-discriminator-value": "AdlsGen2Account"
@@ -1045,8 +1055,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BlobAccountSinkProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/BlobAccountSinkProperties"
         }
       },
       "x-ms-discriminator-value": "BlobAccount"
@@ -1093,8 +1102,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/BlobStorageArtifactProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/BlobStorageArtifactProperties"
         }
       },
       "x-ms-discriminator-value": "BlobAccount"
@@ -1134,8 +1142,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/InPlaceReceivedShareProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/InPlaceReceivedShareProperties"
         }
       },
       "x-ms-discriminator-value": "InPlace"
@@ -1235,8 +1242,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/InPlaceSentShareProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/InPlaceSentShareProperties"
         }
       },
       "x-ms-discriminator-value": "InPlace"
@@ -1571,8 +1577,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ServiceInvitationProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ServiceInvitationProperties"
         }
       },
       "x-ms-discriminator-value": "Service"
@@ -1757,8 +1762,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/TenantEmailRegistrationProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/TenantEmailRegistrationProperties"
         }
       }
     },
@@ -1843,8 +1847,7 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/UserInvitationProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/UserInvitationProperties"
         }
       },
       "x-ms-discriminator-value": "User"
