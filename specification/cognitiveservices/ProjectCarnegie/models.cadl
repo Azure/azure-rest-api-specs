@@ -18,6 +18,25 @@ enum ImageCategory {
   "Violence",
 }
 
+@doc ("Suggested action, the severity of the action is: Block > Review > Pass")
+enum Action {
+  "Pass",
+  "Review",
+  "Block"
+}
+
+model ActionThreshold {
+  @doc("Threshold of Pass action on riskLevel, when set to -1 means exclude this action")
+  @minValue(-1)
+  passThreshold: int32,
+  @doc("Threshold of Review action on riskLevel, when set to -1 means exclude this action")
+  @minValue(-1)
+  reviewThreshold: int32,
+  @doc("Threshold of Block action on riskLevel, when set to -1 means exclude this action")
+  @minValue(-1)
+  blockThreshold: int32
+}
+
 @doc("The analysis request of the text")
 model TextDetectRequest {
   @doc("The text needs to be scanned")
@@ -39,10 +58,15 @@ blocklists was hit. When set to false, all the analysis will be done even when
 blocklists were hit.
 """)
   breakByBlocklists?: boolean;
+
+  @doc("Action thresholds for categories, if not set or set to null or empty, no actions will be output in response")
+  actionConfiguration? : Record<ActionThreshold>;
 }
 
 @doc("The analysis response of the text")
 model TextDetectResponse {
+  @doc("Suggested action by input thresholds")
+  suggestedAction?: Action;
   @doc("The details of list match")
   blocklistMatchResults?: TextListMatchResult[];
   hateResult?: TextDetectMultiSeverityResult;
@@ -76,6 +100,8 @@ model TextDetectMultiSeverityResult {
   category: TextCategory;
   @doc("riskLevel represent the severity of the input, currently its value could be: 0,2,4,6")
   riskLevel: int32;
+  @doc("Action by input threshold, no action will be output if no threshold was set for this category")
+  ation?: Action;
 }
 
 @doc("The analysis request of the image")
@@ -88,6 +114,9 @@ The categories will be analyzed, if not assigned, default categories will be
 analyzed
 """)
   categories?: ImageCategory[];
+
+  @doc("Action thresholds for categories, if not set or set to null or empty, no actions will be output in response")
+  actionConfiguration? : Record<ActionThreshold>;
 }
 
 @doc("The content or url of image, if both given, the content field will be used. The maxinum size of image is 4MB, and the image should not be smaller than 50*50.")
@@ -101,6 +130,8 @@ model Image {
 
 @doc("The analysis response of the image")
 model ImageDetectResponse {
+  @doc("Suggested action by input thresholds")
+  suggestedAction?: Action;
   hateResult?: ImageDetectMultiSeverityResult;
   selfHarmResult?: ImageDetectMultiSeverityResult;
   sexualResult?: ImageDetectMultiSeverityResult;
@@ -111,6 +142,8 @@ model ImageDetectMultiSeverityResult {
   category: ImageCategory;
   @doc("riskLevel represent the severity of the input, currently its value could be: 0,2,4,6")
   riskLevel: int32;
+  @doc("Action by input threshold, no action will be output if no threshold was set for this category")
+  ation?: Action;
 }
 
 @doc("Text List.")
