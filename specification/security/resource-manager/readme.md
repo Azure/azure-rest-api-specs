@@ -92,9 +92,7 @@ These settings apply only when `--tag=package-preview-2023-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-02'
 input-file:
-  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-  - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 ```
 ### Tag: package-preview-2022-11
 
