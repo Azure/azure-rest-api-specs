@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentproductpackages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentProductPackages": {
       "get": {
         "x-ms-examples": {
           "Get all available packages.": {
@@ -91,7 +91,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentproductpackages/{packageId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/contentProductPackages/{packageId}": {
       "get": {
         "x-ms-examples": {
           "Get a package.": {
@@ -124,7 +124,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/packageModelWithContent"
+              "$ref": "#/definitions/packageModel"
             }
           },
           "default": {
@@ -170,29 +170,6 @@
         "properties": {
           "description": "package properties",
           "$ref": "#/definitions/packageProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
-    "packageModelWithContent": {
-      "allOf": [
-        {
-          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
-        }
-      ],
-      "description": "Represents a Package in Azure Security Insights.",
-      "properties": {
-        "properties": {
-          "description": "package properties",
-          "allOf" :[
-            {
-              "$ref": "#/definitions/packageProperties"
-            },
-            {
-              "$ref": "#/definitions/packagedContent"
-            }
-          ],
           "x-ms-client-flatten": true
         }
       },
@@ -296,6 +273,10 @@
         "icon": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataIcon",
           "description": "the icon identifier. this id can later be fetched from the content metadata"
+        },
+        "packagedContent": {
+          "type": "object",
+          "description": "the json to deploy"
         }
       },
       "required": [
@@ -305,16 +286,6 @@
         "displayName"
       ],
       "type": "object"
-    },
-    "packagedContent" : {
-      "type" : "object",
-      "properties": {
-          "packagedContent": {
-            "type" : "object",
-            "description": "the json to deploy"
-          }
-
-      }
     }
   },
   "parameters": {

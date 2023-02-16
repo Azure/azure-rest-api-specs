@@ -45,7 +45,7 @@
           "ContentProductTemplates"
         ],
         "description": "Gets all templates in the catalog.",
-        "operationId": "ContentTemplates_List",
+        "operationId": "ProductTemplates_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -124,7 +124,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/templateModelWithContent"
+              "$ref": "#/definitions/templateModel"
             }
           },
           "default": {
@@ -170,29 +170,6 @@
         "properties": {
           "description": "template properties",
           "$ref": "#/definitions/templateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
-    "templateModelWithContent": {
-      "allOf": [
-        {
-          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
-        }
-      ],
-      "description": "Template resource definition.",
-      "properties": {
-        "properties": {
-          "description": "template properties",
-          "allOf": [
-            {
-              "$ref": "#/definitions/templateProperties"
-            },
-            {
-              "$ref": "#/definitions/packagedContent"
-            }
-          ],
           "x-ms-client-flatten": true
         }
       },
@@ -293,28 +270,22 @@
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPreviewImagesDark",
           "description": "preview image file names. These will be taken from the solution artifacts. used for dark theme support"
         },
-        "packageId" : {
+        "packageId": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
           "description": "the package Id contains this template"
         },
-        "packageKind" : {
+        "packageKind": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind",
           "description": "the packageKind of the package contains this template"
         },
-        "packageName" : {
+        "packageName": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataDisplayName",
           "description": "the name of the package contains this template"
+        },
+        "packagedContent": {
+          "type": "object",
+          "description": "the json to deploy"
         }
-      }
-    },
-    "packagedContent" : {
-      "type" : "object",
-      "properties": {
-          "packagedContent": {
-            "type" : "object",
-            "description": "the json to deploy"
-          }
-
       }
     }
   },

@@ -145,9 +145,6 @@
               "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "put": {
@@ -392,16 +389,16 @@
           "description": "version of the package to be installed."
         },
         "id": {
-          "type" : "string",
-          "example": "azuresentinel.azure-sentinel-solution-crowdstrikefalconep"
+          "type": "string",
+          "example": "str.azure-sentinel-solution-str"
         },
         "release": {
-          "type":"string",
+          "type": "string",
           "example": "1674005537"
         },
         "displayName": {
           "type": "string",
-          "example":"CrowdStrike Falcon Endpoint Protection"
+          "example": "CrowdStrike Falcon Endpoint Protection"
         },
         "description": {
           "type": "string",
@@ -415,12 +412,12 @@
               "example": "Solution"
             },
             "name": {
-            "type": "string",
-            "example": "CrowdStrike Falcon Endpoint Protection"
+              "type": "string",
+              "example": "CrowdStrike Falcon Endpoint Protection"
             },
             "sourceId": {
-              "type":"string",
-              "example":"azuresentinel.azure-sentinel-solution-crowdstrikefalconep"
+              "type": "string",
+              "example": "str.azure-sentinel-solution-str"
             }
           }
         },
@@ -440,22 +437,22 @@
         "support": {
           "type": "object",
           "properties": {
-             "name": {
+            "name": {
               "type": "string",
               "example": "Microsoft Corporation"
-             },
-             "email": {
+            },
+            "email": {
               "type": "string",
               "example": "support@microsoft.com"
-             },
-             "tier": {
+            },
+            "tier": {
               "type": "string",
               "example": "Microsoft"
-             },
-             "link": {
+            },
+            "link": {
               "type": "string",
               "example": "https://support.microsoft.com"
-             }
+            }
           }
         },
         "firstPublishDate": {
@@ -481,7 +478,10 @@
               "items": {
                 "type": "string"
               },
-              "example": [ "something", "something2"]
+              "example": [
+                "something",
+                "something2"
+              ]
             }
           }
         },
@@ -490,69 +490,95 @@
           "items": {
             "type": "string"
           },
-          "example": ["testAT1","testAT2"]
+          "example": [
+            "testAT1",
+            "testAT2"
+          ]
         },
         "threatAnalyticsTechniques": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "example": ["T1078.004"]
+          "example": [
+            "T1078.004"
+          ]
         },
         "tags": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "example": ["testTagPackage"]
+          "example": [
+            "testTagPackage"
+          ]
         },
         "dependencies": {
           "type": "object",
-          "properties": {
-            "operator": {
-              "type": "string",
-              "example": "AND"
-            },
-            "criteria": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/dependencyInfo"
-              },
-              "example": [{
-                "kind": "DataConnector",
-                "contentId": "68b1de8a-b635-430d-b208-01ba3dda5877",
-                "version": "1.0.0"
-              },
-              {
-                "kind": "Workbook",
-                "contentId": "ad903b46-9905-4504-9825-3bcce796da8e",
-                "version": "1.0.0"
-              }]
-            }
-          }
-        },
-        "activeContentDependency": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/dependencyInfo"
-          }
+          "$ref": "#/definitions/metadataDependencies"
         }
       }
     },
-    "dependencyInfo" : {
-      "type" : "object",
+    "metadataDependencies": {
+      "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
+      "type": "object",
       "properties": {
-        "kind" : {
-          "type" : "string",
-          "example" : "DataConnector"
+        "contentId": {
+          "description": "Id of the content item we depend on",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId"
         },
-        "contentId" : {
-          "type" : "string",
-          "example" : "68b1de8a-b635-430d-b208-01ba3dda5877"
+        "kind": {
+          "description": "Type of the content item we depend on",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataKind"
         },
-        "version" : {
-          "type" :"string",
-          "example" : "1.0.0"
+        "version": {
+          "description": "Version of the the content item we depend on.  Can be blank, * or missing to indicate any version fulfills the dependency.  If version does not match our defined numeric format then an exact match is required.",
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataVersion"
+        },
+        "name": {
+          "description": "Name of the content item",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Operator used for list of dependencies in criteria array.",
+          "type": "string",
+          "enum": [
+            "AND",
+            "OR"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "operator",
+            "values": [
+              {
+                "value": "AND"
+              },
+              {
+                "value": "OR"
+              }
+            ]
+          }
+        },
+        "criteria": {
+          "description": "This is the list of dependencies we must fulfill, according to the AND/OR operator",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/metadataDependencies",
+            "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex formats."
+          },
+          "x-ms-identifiers": [],
+          "example": [
+            {
+              "kind": "DataConnector",
+              "contentId": "68b1de8a-b635-430d-b208-01ba3dda5877",
+              "version": "1.0.0"
+            },
+            {
+              "kind": "Workbook",
+              "contentId": "ad903b46-9905-4504-9825-3bcce796da8e",
+              "version": "1.0.0"
+            }
+          ]
         }
       }
     }
