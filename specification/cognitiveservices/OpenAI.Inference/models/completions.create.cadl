@@ -150,12 +150,14 @@ model Choice {
     finish_reason?: string;
 }
 
+alias NullableFloat = float32 | null;
+
 @doc("LogProbs model within completion choice")
 model CompletionsLogProbs {
     @doc("Tokens")
     tokens?: string[];
     @doc("LogProbs of Tokens")
-    token_logprobs?: float32[];
+    token_logprobs?: NullableFloat[];
     @doc("Top LogProbs")
     top_logprobs?: Record<float32>[];
     @doc("Text offset")
