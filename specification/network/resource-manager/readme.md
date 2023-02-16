@@ -2733,7 +2733,7 @@ directive:
 
 ## Go
 
-See configuration in [readme.go.md](./readme.go.md)
+See configuration in test [readme.go.md](./readme.go.md)
 
 ## Java
 
