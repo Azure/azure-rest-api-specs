@@ -4550,7 +4550,8 @@
           "type": "string",
           "description": "Type of data mapping.",
           "enum": [
-            "fhirToParquet"
+            "fhirToParquet",
+            "dicomToParquet"
           ],
           "x-ms-enum": {
             "name": "analyticsConnectorMappingType",
@@ -4579,6 +4580,22 @@
           "type": "string",
           "description": "Artifact reference for filter configurations."
         },
+        "extensionSchemaReference": {
+          "type": "string",
+          "description": "Artifact reference for extension schema."
+        }
+      }
+    },
+    "AnalyticsConnectorDicomToParquetMapping": {
+      "type": "object",
+      "description": "DICOM Service data mapping configuration for Analytics Connector.",
+      "x-ms-discriminator-value": "dicomToParquet",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyticsConnectorMapping"
+        }
+      ],
+      "properties": {
         "extensionSchemaReference": {
           "type": "string",
           "description": "Artifact reference for extension schema."
