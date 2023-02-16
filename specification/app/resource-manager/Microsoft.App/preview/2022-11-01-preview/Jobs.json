@@ -350,12 +350,12 @@
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
-            "name": "JobExecution",
+            "name": "template",
             "in": "body",
             "description": "Properties used to create a container apps job",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobExecutionContainer"
+              "$ref": "#/definitions/JobExecutionTemplate"
             }
           },
           {
@@ -364,7 +364,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Container Apps Jobs started successfully."
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobExecutionBase"
+            }
           },
           "202": {
             "description": "OK",
@@ -462,7 +465,7 @@
           "Jobs"
         ],
         "summary": "Terminates execution of a running container apps job",
-        "operationId": "Job_terminate",
+        "operationId": "Job_terminate_multiple_executions",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -486,8 +489,11 @@
             "in": "body",
             "description": "List of all job executions that should be stopped.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/JobExecutionName"
+            "type": "array",
+            "items": {
+              "description": "Name of the job execution.",
+              "name": "jobExecutionName",
+              "type": "string"
             }
           }
         ],
@@ -551,7 +557,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/JobExecutions"
+              "$ref": "#/definitions/ContainerAppJobExecutions"
             }
           },
           "202": {
@@ -903,34 +909,111 @@
       "format": "int32",
       "type": "integer"
     },
-    "JobExecutionName": {
+    "JobExecutionBase": {
       "description": "Container App's Job execution name.",
-      "type": "string"
+      "type": "string",
+      "properties": {
+        "name": {
+          "description": "Job execution name.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Job execution Id.",
+          "type": "string"
+        }
+      }
     },
-    "JobExecutions": {
-      "description": "Container Apps Jobs executions.",
+    "JobExecution": {
+      "description": "Container Apps Jobs execution.",
       "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/JobExecutionName"
         },
-        "status": {
-          "description": "Job execution status.",
+        "id": {
+          "description": "Job execution Id.",
           "type": "string"
+        },
+        "Type": {
+          "description": "Job Type.",
+          "type": "string"
+        },
+        "Status": {
+          "description": "Current running State of the job",
+          "enum": [
+            "Running",
+            "Processing",
+            "Stopped",
+            "Degraded",
+            "Failed",
+            "Unknown"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobExecutionRunningState",
+            "modelAsString": true
+          }
         },
         "startTime": {
           "description": "Job execution start time.",
           "format": "date-time",
           "type": "string"
         },
-        "jobExecutionContainer": {
+        "JobExecutionTemplate": {
           "description": "Job's execution container.",
           "$ref": "#/definitions/JobExecutionContainer"
+        }
+      }
+    },
+    "ContainerAppJobExecutions": {
+      "description": "Container App executions collection ARM resource.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobExecution"
+          },
+          "jobName": {
+            "description": "Container Apps Job name.",
+            "type": "string"
+          }
         },
         "nextLink": {
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "JobExecutionTemplate": {
+      "description": "Job's execution template, containing container configuration for a job's execution",
+      "type": "object",
+      "properties": {
+        "containers": {
+          "description": "List of container definitions for the Container Apps Job.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobExecutionContainer"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "initContainers": {
+          "description": "List of specialized containers that run before job containers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobExecutionContainer"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
