@@ -593,18 +593,6 @@
               "$ref": "#/definitions/CommunicationServiceKeys"
             }
           },
-          "201": {
-            "description": "Regenerate key request was accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "URL to query for status of the operation.",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/CommunicationServiceKeys"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -701,9 +689,6 @@
           "$ref": "#/definitions/CommunicationServiceProperties",
           "description": "The properties of the service.",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       }
     },
@@ -864,7 +849,7 @@
       "name": "communicationServiceName",
       "in": "path",
       "description": "The name of the CommunicationService resource.",
-      "pattern": "^[a-zA-Z0-9-]+$",
+      "pattern": "^[-\\w]+$",
       "minLength": 1,
       "maxLength": 63,
       "required": true,
