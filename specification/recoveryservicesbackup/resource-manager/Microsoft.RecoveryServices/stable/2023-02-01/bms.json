@@ -7443,12 +7443,12 @@
       "properties": {
         "targetDiskNetworkAccessOption": {
           "description": "Network access settings to be used for restored disks",
-          "type": "enum",
           "enum": [
             "SameAsOnSourceDisks",
             "EnablePrivateAccessForAllDisks",
             "EnablePublicAccessForAllDisks"
-          ]
+          ],
+          "type": "string"
         },
         "targetDiskAccessId": {
           "description": "Gets or sets the ARM resource ID of the target disk access to be used when TargetDiskNetworkAccessOption is set to TargetDiskNetworkAccessOption.UseNew",
@@ -7569,7 +7569,7 @@
         },
         "targetDiskNetworkAccessSettings": {
           "$ref": "#/definitions/TargetDiskNetworkAccessSettings",
-          "description": "Specifies target network access settings for disks of VM to be restored"
+          "description": "Specifies target network access settings for disks of VM to be restored,"
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
