@@ -11769,7 +11769,7 @@
         },
         "deploymentProperties": {
           "description": "Properties relevant to different deployment types.",
-          "$ref": "#/definitions/BatchDeploymentProperties",
+          "$ref": "#/definitions/BatchDeploymentConfiguration",
           "x-nullable": true
         },
         "errorThreshold": {
@@ -11832,7 +11832,7 @@
       "x-ms-client-name": "BatchDeploymentProperties",
       "additionalProperties": false
     },
-    "BatchDeploymentProperties": {
+    "BatchDeploymentConfiguration": {
       "description": "Properties relevant to different deployment types.",
       "required": [
         "deploymentPropertyType"
@@ -11841,12 +11841,12 @@
       "properties": {
         "deploymentPropertyType": {
           "description": "[Required] The type of the deployment",
-          "$ref": "#/definitions/BatchDeploymentPropertyType"
+          "$ref": "#/definitions/BatchDeploymentConfigurationType"
         }
       },
       "discriminator": "deploymentPropertyType"
     },
-    "BatchDeploymentPropertyType": {
+    "BatchDeploymentConfigurationType": {
       "description": "The enumerated property types for batch deployments.",
       "enum": [
         "Model",
@@ -11854,7 +11854,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "BatchDeploymentPropertyType",
+        "name": "BatchDeploymentConfigurationType",
         "modelAsString": true,
         "values": [
           {
@@ -12051,12 +12051,12 @@
       },
       "additionalProperties": false
     },
-    "BatchPipelineComponentDeploymentProperties": {
+    "BatchPipelineComponentDeploymentConfiguration": {
       "description": "Properties for a Batch Pipeline Component Deployment.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/BatchDeploymentProperties"
+          "$ref": "#/definitions/BatchDeploymentConfiguration"
         }
       ],
       "properties": {
