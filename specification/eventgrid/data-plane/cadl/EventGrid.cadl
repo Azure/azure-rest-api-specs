@@ -1,27 +1,29 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi";
+// import "@cadl-lang/rest";
+// import "@cadl-lang/openapi";
 import "@cadl-lang/versioning";
-import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+// import "@azure-tools/cadl-providerhub";
 
 @service({
   title: "EventGridClient",
   version: "2018-01-01",
 })
 @server(
-  "{topicHostname}",
+  "{endpoint}",
   "The host name of the topic",
   {
     @doc("The host name of the topic, e.g. topic1.westus2-1.eventgrid.azure.net")
-    topicHostname: string,
+    endpoint: url,
   }
 )
 @doc("Azure EventGrid Client")
 namespace EventGrid {
 
   using Cadl.Http;
-  using Cadl.Rest;
+  using Azure.Core.Foundations;
+  // using Cadl.Rest;
   using Cadl.Versioning;
-  using OpenAPI;
+  // using OpenAPI;
 
   @doc("Properties of an event published to an Event Grid topic using the EventGrid Schema.")
   model EventGridEvent {
@@ -111,11 +113,11 @@ namespace EventGrid {
     eventSubscriptionId?: string;
   }
 
-  model ApiVersionParameter {
-    @doc("Version of the API to be used with the client request.")
-    @query
-    "api-version": string;
-  }
+  // model ApiVersionParameter {
+  //   @doc("Version of the API to be used with the client request.")
+  //   @query
+  //   "api-version"?: string;
+  // }
 
   model ChannelNameParameter {
     @doc("Required only when publishing to partner namespaces with partner topic routing mode ChannelNameHeader.")
@@ -153,7 +155,7 @@ namespace EventGrid {
   @tag("Events")
   @doc("Publishes a batch of events to an Azure Event Grid topic.")
   op PublishCustomEventEvents(
-    @extension("x-ms-identifiers", [])
+    // @extension("x-ms-identifiers", [])
     @doc("An array of events to be published to Event Grid.")
     @body
     events: CustomEventEvent[],
