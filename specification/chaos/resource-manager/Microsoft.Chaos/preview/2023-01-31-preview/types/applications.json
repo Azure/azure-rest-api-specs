@@ -8,6 +8,12 @@
   "definitions": {
     "application": {
       "type": "object",
+      "description": "Application tracked resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "systemData": {
           "description": "The system metadata of the application resource.",
@@ -18,16 +24,10 @@
           "$ref": "#/definitions/applicationProperties",
           "x-ms-client-flatten": true,
           "description": "The resource-specific properties for this resource."
-        },
-        "required": [
-          "properties"
-        ]
-      },
-      "description": "Model that represents an Application tracked resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
+      },
+      "required": [
+        "properties"
       ]
     },
     "applicationUpdate": {
