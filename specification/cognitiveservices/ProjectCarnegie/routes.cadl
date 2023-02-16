@@ -18,10 +18,10 @@ interface TextOperations {
     {
       @doc("""
 Language hint for text analysis.  Value may contain only the language code (ex.
-\"en\", \"fr\") of BCP 47.
+\"en\", \"fr\") of BCP 47. If no language given, the service will detact language.
 """)
       @query
-      language: string;
+      language?: string;
 
       @doc("The analysis request of the text")
       @body
@@ -52,7 +52,7 @@ interface TextLists{
     GetTextList is Azure.Core.ResourceRead<TextList>;
 
     @summary("Create Or Update Text List")
-    @doc("Updates an Text List by listId, , if listId not exists, create a new Text List")
+    @doc("Updates an Text List by listId, if listId not exists, create a new Text List")
     CreateOrUpdateList is Azure.Core.ResourceCreateOrUpdate<TextList>;
 
     @summary("Delete Text List By listId")
@@ -70,8 +70,8 @@ interface TextListItems {
     @doc("Get Item By itemId and listId")
     GetTextListItem is Azure.Core.ResourceRead<TextListItem>;
 
-    @summary("Create Item In Text List")
-    @doc("Create Item In Text List")
+    @summary("Create Or Update Item In Text List")
+    @doc("Create Or Update Item In Text List")
     CreateOrUpdateListItem is Azure.Core.ResourceCreateOrUpdate<TextListItem>;
   
     @summary("Delete Item By itemId and listId")

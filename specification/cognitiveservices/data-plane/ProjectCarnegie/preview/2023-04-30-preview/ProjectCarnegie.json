@@ -186,7 +186,7 @@
       "patch": {
         "operationId": "TextLists_CreateOrUpdateList",
         "summary": "Create Or Update Text List",
-        "description": "Updates an Text List by listId, , if listId not exists, create a new Text List",
+        "description": "Updates an Text List by listId, if listId not exists, create a new Text List",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -389,8 +389,8 @@
       },
       "patch": {
         "operationId": "TextListItems_CreateOrUpdateListItem",
-        "summary": "Create Item In Text List",
-        "description": "Create Item In Text List",
+        "summary": "Create Or Update Item In Text List",
+        "description": "Create Or Update Item In Text List",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -507,8 +507,8 @@
           {
             "name": "language",
             "in": "query",
-            "required": true,
-            "description": "Language hint for text analysis.  Value may contain only the language code (ex.\n\"en\", \"fr\") of BCP 47.",
+            "required": false,
+            "description": "Language hint for text analysis.  Value may contain only the language code (ex.\n\"en\", \"fr\") of BCP 47. If no language given, the service will detact language.",
             "type": "string"
           },
           {
@@ -611,54 +611,6 @@
         "code"
       ]
     },
-    "Error": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "target": {
-          "type": "string",
-          "description": "Target of the error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "Error[]",
-          "description": "List of detailed errors."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "Detailed error."
-        }
-      },
-      "description": "Error info.",
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/Error",
-          "description": "Error info."
-        }
-      },
-      "description": "Error response object.",
-      "required": [
-        "error"
-      ]
-    },
     "Image": {
       "type": "object",
       "properties": {
@@ -671,7 +623,7 @@
           "description": "The blob url of image"
         }
       },
-      "description": "The content or url of image"
+      "description": "The content or url of image, if both given, the content field will be used. The maxinum size of image is 4MB, and the image should not be smaller than 50*50."
     },
     "ImageCategory": {
       "type": "string",
@@ -685,6 +637,23 @@
         "name": "ImageCategory",
         "modelAsString": true
       }
+    },
+    "ImageDetectMultiSeverityResult": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/ImageCategory"
+        },
+        "riskLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "riskLevel represent the severity of the input, currently its value could be: 0,2,4,6"
+        }
+      },
+      "required": [
+        "category",
+        "riskLevel"
+      ]
     },
     "ImageDetectRequest": {
       "type": "object",
@@ -711,55 +680,19 @@
       "type": "object",
       "properties": {
         "hateResult": {
-          "$ref": "#/definitions/ImageDetectResult"
+          "$ref": "#/definitions/ImageDetectMultiSeverityResult"
         },
         "selfHarmResult": {
-          "$ref": "#/definitions/ImageDetectResult"
+          "$ref": "#/definitions/ImageDetectMultiSeverityResult"
         },
         "sexualResult": {
-          "$ref": "#/definitions/ImageDetectResult"
+          "$ref": "#/definitions/ImageDetectMultiSeverityResult"
         },
         "violenceResult": {
-          "$ref": "#/definitions/ImageDetectResult"
+          "$ref": "#/definitions/ImageDetectMultiSeverityResult"
         }
       },
       "description": "The analysis response of the image"
-    },
-    "ImageDetectResult": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/ImageCategory"
-        },
-        "riskLevel": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "required": [
-        "category"
-      ]
-    },
-    "InnerError": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "innererror": {
-          "$ref": "#/definitions/InnerError",
-          "description": "Detailed error."
-        }
-      },
-      "description": "Detailed error.",
-      "required": [
-        "code"
-      ]
     },
     "TextCategory": {
       "type": "string",
@@ -774,12 +707,30 @@
         "modelAsString": true
       }
     },
+    "TextDetectMultiSeverityResult": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "$ref": "#/definitions/TextCategory"
+        },
+        "riskLevel": {
+          "type": "integer",
+          "format": "int32",
+          "description": "riskLevel represent the severity of the input, currently its value could be: 0,2,4,6"
+        }
+      },
+      "required": [
+        "category",
+        "riskLevel"
+      ]
+    },
     "TextDetectRequest": {
       "type": "object",
       "properties": {
         "text": {
           "type": "string",
-          "description": "The text needs to be scanned"
+          "description": "The text needs to be scanned",
+          "maxLength": 7000
         },
         "categories": {
           "type": "array",
@@ -820,34 +771,19 @@
           "description": "The details of list match"
         },
         "hateResult": {
-          "$ref": "#/definitions/TextDetectResult"
+          "$ref": "#/definitions/TextDetectMultiSeverityResult"
         },
         "selfHarmResult": {
-          "$ref": "#/definitions/TextDetectResult"
+          "$ref": "#/definitions/TextDetectMultiSeverityResult"
         },
         "sexualResult": {
-          "$ref": "#/definitions/TextDetectResult"
+          "$ref": "#/definitions/TextDetectMultiSeverityResult"
         },
         "violenceResult": {
-          "$ref": "#/definitions/TextDetectResult"
+          "$ref": "#/definitions/TextDetectMultiSeverityResult"
         }
       },
       "description": "The analysis response of the text"
-    },
-    "TextDetectResult": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/TextCategory"
-        },
-        "riskLevel": {
-          "type": "integer",
-          "format": "int32"
-        }
-      },
-      "required": [
-        "category"
-      ]
     },
     "TextList": {
       "type": "object",
@@ -934,22 +870,27 @@
       "properties": {
         "listId": {
           "type": "string",
-          "description": "The id of matched custom list"
+          "description": "The id of matched custom list",
+          "maxLength": 64
         },
         "itemId": {
           "type": "string",
-          "description": "The id of matched item"
+          "description": "The id of matched item",
+          "maxLength": 64
         },
         "itemText": {
           "type": "string",
-          "description": "The content of matched item"
+          "description": "The content of matched item",
+          "maxLength": 128
         },
         "offset": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "The character offset of matched text in original input"
         },
         "length": {
-          "type": "string",
+          "type": "integer",
+          "format": "int32",
           "description": "The length of matched text in original input"
         }
       },

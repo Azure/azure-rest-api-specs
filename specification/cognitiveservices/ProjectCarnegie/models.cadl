@@ -21,6 +21,7 @@ enum ImageCategory {
 @doc("The analysis request of the text")
 model TextDetectRequest {
   @doc("The text needs to be scanned")
+  @maxLength(7000)
   text: string;
 
   @doc("""
@@ -44,70 +45,37 @@ blocklists were hit.
 model TextDetectResponse {
   @doc("The details of list match")
   blocklistMatchResults?: TextListMatchResult[];
-  hateResult?: TextDetectResult;
-  selfHarmResult?: TextDetectResult;
-  sexualResult?: TextDetectResult;
-  violenceResult?: TextDetectResult;
+  hateResult?: TextDetectMultiSeverityResult;
+  selfHarmResult?: TextDetectMultiSeverityResult;
+  sexualResult?: TextDetectMultiSeverityResult;
+  violenceResult?: TextDetectMultiSeverityResult;
 }
 
 @doc("The result of custom list match")
 model TextListMatchResult {
   @doc("The id of matched custom list")
+  @maxLength(64)
   listId: string;
 
   @doc("The id of matched item")
+  @maxLength(64)
   itemId: string;
 
   @doc("The content of matched item")
+  @maxLength(128)
   itemText: string;
 
   @doc("The character offset of matched text in original input")
-  offset?: string;
+  offset?: int32;
 
   @doc("The length of matched text in original input")
-  length?: string;
+  length?: int32;
 }
 
-model TextDetectResult {
+model TextDetectMultiSeverityResult {
   category: TextCategory;
-  riskLevel?: int32;
-}
-
-@doc("Error response object.")
-@error
-model ErrorResponse {
-  @doc("Error info.")
-  error: Error;
-}
-
-@doc("Error info.")
-model Error {
-  @doc("Error code.")
-  code: string;
-
-  @doc("Error message.")
-  message: string;
-
-  @doc("Target of the error.")
-  target?: string;
-
-  @doc("List of detailed errors.")
-  details?: Error[];
-
-  @doc("Detailed error.")
-  innererror?: InnerError;
-}
-
-@doc("Detailed error.")
-model InnerError {
-  @doc("Error code.")
-  code: string;
-
-  @doc("Error message.")
-  message?: string;
-
-  @doc("Detailed error.")
-  innererror?: InnerError;
+  @doc("riskLevel represent the severity of the input, currently its value could be: 0,2,4,6")
+  riskLevel: int32;
 }
 
 @doc("The analysis request of the image")
@@ -122,7 +90,7 @@ analyzed
   categories?: ImageCategory[];
 }
 
-@doc("The content or url of image")
+@doc("The content or url of image, if both given, the content field will be used. The maxinum size of image is 4MB, and the image should not be smaller than 50*50.")
 model Image {
   @doc("Base64 encoding of image")
   content?: string;
@@ -133,15 +101,16 @@ model Image {
 
 @doc("The analysis response of the image")
 model ImageDetectResponse {
-  hateResult?: ImageDetectResult;
-  selfHarmResult?: ImageDetectResult;
-  sexualResult?: ImageDetectResult;
-  violenceResult?: ImageDetectResult;
+  hateResult?: ImageDetectMultiSeverityResult;
+  selfHarmResult?: ImageDetectMultiSeverityResult;
+  sexualResult?: ImageDetectMultiSeverityResult;
+  violenceResult?: ImageDetectMultiSeverityResult;
 }
 
-model ImageDetectResult {
+model ImageDetectMultiSeverityResult {
   category: ImageCategory;
-  riskLevel?: int32;
+  @doc("riskLevel represent the severity of the input, currently its value could be: 0,2,4,6")
+  riskLevel: int32;
 }
 
 @doc("Text List.")
