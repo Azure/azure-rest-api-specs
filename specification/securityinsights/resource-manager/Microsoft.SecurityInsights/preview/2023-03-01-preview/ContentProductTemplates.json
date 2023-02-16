@@ -124,15 +124,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/templateModel"
-                },
-                {
-                  "$ref": "#/definitions/packagedContent"
-                }
-              ]
-
+              "$ref": "#/definitions/templateModelWithContent"
             }
           },
           "default": {
@@ -178,6 +170,29 @@
         "properties": {
           "description": "template properties",
           "$ref": "#/definitions/templateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "templateModelWithContent": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Template resource definition.",
+      "properties": {
+        "properties": {
+          "description": "template properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/templateProperties"
+            },
+            {
+              "$ref": "#/definitions/packagedContent"
+            }
+          ],
           "x-ms-client-flatten": true
         }
       },

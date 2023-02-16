@@ -124,15 +124,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/definitions/packageModel"
-                },
-                {
-                  "$ref": "#/definitions/packagedContent"
-                }
-              ]
-
+              "$ref": "#/definitions/packageModelWithContent"
             }
           },
           "default": {
@@ -178,6 +170,29 @@
         "properties": {
           "description": "package properties",
           "$ref": "#/definitions/packageProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "packageModelWithContent": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Represents a Package in Azure Security Insights.",
+      "properties": {
+        "properties": {
+          "description": "package properties",
+          "allOf" :[
+            {
+              "$ref": "#/definitions/packageProperties"
+            },
+            {
+              "$ref": "#/definitions/packagedContent"
+            }
+          ],
           "x-ms-client-flatten": true
         }
       },
