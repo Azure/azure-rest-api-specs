@@ -205,13 +205,13 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -531,7 +531,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obselete entries will be auto deleted from Additional Api Properties.",
+        "description": "Install or Update extension. Additional Api Properties are merged patch and if the extension is updated to a new version then the obsolete entries will be auto deleted from Additional Api Properties.",
         "operationId": "Extensions_CreateOrUpdate",
         "consumes": [
           "application/json"
@@ -2516,7 +2516,10 @@
       "description": "DataManagerForAgriculture resource name.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$",
+      "minLength": 1,
+      "maxLength": 63
     },
     "ExtensionIdParameter": {
       "in": "path",
