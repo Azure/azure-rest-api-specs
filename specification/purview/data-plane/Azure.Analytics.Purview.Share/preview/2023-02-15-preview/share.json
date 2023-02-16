@@ -63,7 +63,7 @@
         ],
         "summary": "Create or replace a received share.",
         "description": "Update changes to a received share",
-        "operationId": "ReceivedShares_Create",
+        "operationId": "ReceivedShares_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -126,14 +126,14 @@
           }
         },
         "x-ms-examples": {
-          "ReceivedShares_Create": {
-            "$ref": "./examples/ReceivedShares_Create.json"
+          "ReceivedShares_CreateOrUpdate": {
+            "$ref": "./examples/ReceivedShares_CreateOrUpdate.json"
           },
-          "ReceivedShares_UpdateAdlsGen2Account": {
-            "$ref": "./examples/ReceivedShares_UpdateAdlsGen2Account.json"
+          "ReceivedShares_CreateOrUpdateAdlsGen2Account": {
+            "$ref": "./examples/ReceivedShares_CreateOrUpdateAdlsGen2Account.json"
           },
-          "ReceivedShares_UpdateBlobAccount": {
-            "$ref": "./examples/ReceivedShares_UpdateBlobAccount.json"
+          "ReceivedShares_CreateOrUpdateBlobAccount": {
+            "$ref": "./examples/ReceivedShares_CreateOrUpdateBlobAccount.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -415,7 +415,7 @@
         ],
         "summary": "Create or replace a sent share.",
         "description": "Create or replace a sent share",
-        "operationId": "SentShares_Create",
+        "operationId": "SentShares_CreateOrUpdate",
         "consumes": [
           "application/json"
         ],
@@ -478,14 +478,14 @@
           }
         },
         "x-ms-examples": {
-          "SentShares_Create": {
-            "$ref": "./examples/SentShares_Create.json"
+          "SentShares_CreateOrUpdate": {
+            "$ref": "./examples/SentShares_CreateOrUpdate.json"
           },
-          "SentShares_CreateAdlsGen2Account": {
-            "$ref": "./examples/SentShares_CreateAdlsGen2Account.json"
+          "SentShares_CreateOrUpdateAdlsGen2Account": {
+            "$ref": "./examples/SentShares_CreateOrUpdateAdlsGen2Account.json"
           },
-          "SentShares_CreateBlobAccount": {
-            "$ref": "./examples/SentShares_CreateBlobAccount.json"
+          "SentShares_CreateOrUpdateBlobAccount": {
+            "$ref": "./examples/SentShares_CreateOrUpdateBlobAccount.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1910,9 +1910,8 @@
       "description": "The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com/share",
       "required": true,
       "type": "string",
-      "format": "url",
       "x-ms-parameter-location": "client",
-      "x-ms-skip-encoding": true
+      "x-ms-skip-url-encoding": true
     },
     "api-version": {
       "in": "query",
