@@ -120,7 +120,7 @@
       "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
       "x-ms-parameter-location": "client",
       "schema": {
-        "$ref": "#/definitions/Feature"
+        "$ref": "#/definitions/FeatureRequestBody"
       }
     },
     "FeatureAttributesBody": {
@@ -1023,10 +1023,18 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/FeatureType"
+          "$ref": "#/definitions/FeatureId"
         },
         {
-          "$ref": "#/definitions/FeatureId"
+          "$ref": "#/definitions/FeatureRequestBody"
+        }
+      ]
+    },
+    "FeatureRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeatureType"
         },
         {
           "$ref": "#/definitions/FeatureAttributes"
