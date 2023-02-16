@@ -133,6 +133,16 @@ input-file:
 - Microsoft.OperationalInsights/stable/2021-06-01/Clusters.json
 ```
 
+### Tag: package-2023-01-01-preview
+
+These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-01-01-preview'
+input-file:
+- Microsoft.OperationalInsights/preview/2023-01-01-preview/Operations.json
+- Microsoft.OperationalInsights/preview/2023-01-01-preview/Workspaces.json
+```
+
 ### Tag: package-2020-08
 
 These settings apply only when `--tag=package-2020-08` is specified on the command line.
