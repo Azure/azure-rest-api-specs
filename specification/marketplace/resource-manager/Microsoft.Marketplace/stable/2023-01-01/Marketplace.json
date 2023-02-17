@@ -2271,13 +2271,18 @@
           "readOnly": true
         },
         "offers": {
+          "description": "List of offers",
           "type": "object",
+          "x-ms-client-flatten": true,
           "properties": {
             "value": {
               "type": "array",
               "items": {
                 "$ref": "#/definitions/OfferProperties"
-              }
+              },
+              "x-ms-identifiers": [
+                "uniqueOfferId"
+              ]
             }
           }
         }
