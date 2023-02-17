@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Migrate Assessment Service",
-    "version": "2020-01-01",
+    "version": "2022-02-02-preview",
     "description": "Azure Migrate Resource Provider management API.",
     "x-cadl-generated": [
       {
@@ -74,6 +74,15 @@
     },
     {
       "name": "PrivateLinkResourceOperations"
+    },
+    {
+      "name": "AvsAssessmentsOperations"
+    },
+    {
+      "name": "AvsAssessmentOptionsOperations"
+    },
+    {
+      "name": "SqlAssessmentV2SummaryOperations"
     }
   ],
   "paths": {
@@ -114,7 +123,7 @@
           "AssessmentProjectsOperations"
         ],
         "operationId": "AssessmentProjectsOperations_Get",
-        "description": "Get a AssessmentProject",
+        "description": "Get a Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -137,7 +146,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AssessmentProject"
+              "$ref": "#/definitions/Project"
             }
           },
           "default": {
@@ -153,7 +162,7 @@
           "AssessmentProjectsOperations"
         ],
         "operationId": "AssessmentProjectsOperations_Create",
-        "description": "Create a AssessmentProject",
+        "description": "Create a Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -177,7 +186,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/AssessmentProject"
+              "$ref": "#/definitions/Project"
             }
           }
         ],
@@ -185,7 +194,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AssessmentProject"
+              "$ref": "#/definitions/Project"
             }
           },
           "201": {
@@ -198,7 +207,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/AssessmentProject"
+              "$ref": "#/definitions/Project"
             }
           },
           "default": {
@@ -218,7 +227,7 @@
           "AssessmentProjectsOperations"
         ],
         "operationId": "AssessmentProjectsOperations_Update",
-        "description": "Update a AssessmentProject",
+        "description": "Update a Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -242,7 +251,7 @@
             "required": true,
             "description": "The resource properties to be updated.",
             "schema": {
-              "$ref": "#/definitions/AssessmentProjectUpdate"
+              "$ref": "#/definitions/ProjectUpdate"
             }
           }
         ],
@@ -250,7 +259,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/AssessmentProject"
+              "$ref": "#/definitions/Project"
             }
           },
           "202": {
@@ -280,7 +289,7 @@
           "AssessmentProjectsOperations"
         ],
         "operationId": "AssessmentProjectsOperations_Delete",
-        "description": "Delete a AssessmentProject",
+        "description": "Delete a Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -334,8 +343,8 @@
         "tags": [
           "AssessmentOptionsOperations"
         ],
-        "operationId": "AssessmentOptionsOperations_ListByAssessmentProject",
-        "description": "List AssessmentOptions resources by AssessmentProject",
+        "operationId": "AssessmentOptionsOperations_ListByProject",
+        "description": "List AssessmentOptions resources by Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -421,13 +430,105 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/avsAssessmentOptions": {
+      "get": {
+        "tags": [
+          "AvsAssessmentOptionsOperations"
+        ],
+        "operationId": "AvsAssessmentOptionsOperations_ListByProject",
+        "description": "List AvsAssessmentOptions resources by Project",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "description": "Assessment Project Name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsAssessmentOptionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/avsAssessmentOptions/{avsAssessmentOptionsName}": {
+      "get": {
+        "tags": [
+          "AvsAssessmentOptionsOperations"
+        ],
+        "operationId": "AvsAssessmentOptionsOperations_Get",
+        "description": "Get a AvsAssessmentOptions",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "description": "Assessment Project Name",
+            "type": "string"
+          },
+          {
+            "name": "avsAssessmentOptionsName",
+            "in": "path",
+            "required": true,
+            "description": "AVS Assessment options ARM name. Accepted value is 'default'",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsAssessmentOptions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups": {
       "get": {
         "tags": [
           "GroupsOperations"
         ],
-        "operationId": "GroupsOperations_ListByAssessmentProject",
-        "description": "List Group resources by AssessmentProject",
+        "operationId": "GroupsOperations_ListByProject",
+        "description": "List Group resources by Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1098,6 +1199,401 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/assessments/{assessmentName}/summaries/{summaryName}": {
+      "get": {
+        "tags": [
+          "SqlAssessmentV2SummaryOperations"
+        ],
+        "operationId": "SqlAssessmentV2SummaryOperations_Get",
+        "description": "Get a SqlAssessmentV2Summary",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "description": "Assessment Project Name",
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "description": "Group ARM name",
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "description": "Machine Assessment ARM name",
+            "type": "string"
+          },
+          {
+            "name": "summaryName",
+            "in": "path",
+            "required": true,
+            "description": "Gets the Name of the SQL Summary.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlAssessmentV2Summary"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/avsAssessments": {
+      "get": {
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
+        "operationId": "AvsAssessmentsOperations_ListByGroup",
+        "description": "List AvsAssessment resources by Group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "description": "Assessment Project Name",
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "description": "Group ARM name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsAssessmentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/avsAssessments/{assessmentName}": {
+      "get": {
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
+        "operationId": "AvsAssessmentsOperations_Get",
+        "description": "Get a AvsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "description": "Assessment Project Name",
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "description": "Group ARM name",
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "description": "AVS Assessment ARM name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsAssessment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
+        "operationId": "AvsAssessmentsOperations_Create",
+        "description": "Create a AvsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "description": "Assessment Project Name",
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "description": "Group ARM name",
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "description": "AVS Assessment ARM name",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/AvsAssessment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvsAssessment"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AvsAssessment"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
+        "operationId": "AvsAssessmentsOperations_Delete",
+        "description": "Delete a AvsAssessment",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "description": "Assessment Project Name",
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "description": "Group ARM name",
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "description": "AVS Assessment ARM name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/avsAssessments/{assessmentName}/getReportDownloadUrl": {
+      "post": {
+        "tags": [
+          "AvsAssessmentsOperations"
+        ],
+        "operationId": "AvsAssessmentsOperations_GetReportDownloadUrl",
+        "summary": "Get download URL for the assessment report.",
+        "description": "Get the URL for downloading the assessment in a report format.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "required": true,
+            "description": "Assessment Project Name",
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "required": true,
+            "description": "Group ARM name",
+            "type": "string"
+          },
+          {
+            "name": "assessmentName",
+            "in": "path",
+            "required": true,
+            "description": "AVS Assessment ARM name",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-cadl-name": "{}"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DownloadUrl"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/updateMachines": {
       "post": {
         "tags": [
@@ -1175,8 +1671,8 @@
         "tags": [
           "HypervCollectorsOperations"
         ],
-        "operationId": "HypervCollectorsOperations_ListByAssessmentProject",
-        "description": "List HypervCollector resources by AssessmentProject",
+        "operationId": "HypervCollectorsOperations_ListByProject",
+        "description": "List HypervCollector resources by Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1399,8 +1895,8 @@
         "tags": [
           "MachinesOperations"
         ],
-        "operationId": "MachinesOperations_ListByAssessmentProject",
-        "description": "List Machine resources by AssessmentProject",
+        "operationId": "MachinesOperations_ListByProject",
+        "description": "List Machine resources by Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1491,8 +1987,8 @@
         "tags": [
           "PrivateEndpointConnectionOperations"
         ],
-        "operationId": "PrivateEndpointConnectionOperations_ListByAssessmentProject",
-        "description": "List PrivateEndpointConnection resources by AssessmentProject",
+        "operationId": "PrivateEndpointConnectionOperations_ListByProject",
+        "description": "List PrivateEndpointConnection resources by Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1715,8 +2211,8 @@
         "tags": [
           "PrivateLinkResourceOperations"
         ],
-        "operationId": "PrivateLinkResourceOperations_ListByAssessmentProject",
-        "description": "List PrivateLinkResource resources by AssessmentProject",
+        "operationId": "PrivateLinkResourceOperations_ListByProject",
+        "description": "List PrivateLinkResource resources by Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1807,8 +2303,8 @@
         "tags": [
           "ServerCollectorsOperations"
         ],
-        "operationId": "ServerCollectorsOperations_ListByAssessmentProject",
-        "description": "List ServerCollector resources by AssessmentProject",
+        "operationId": "ServerCollectorsOperations_ListByProject",
+        "description": "List ServerCollector resources by Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2031,8 +2527,8 @@
         "tags": [
           "VmwareCollectorsOperations"
         ],
-        "operationId": "VmwareCollectorsOperations_ListByAssessmentProject",
-        "description": "List VmwareCollector resources by AssessmentProject",
+        "operationId": "VmwareCollectorsOperations_ListByProject",
+        "description": "List VmwareCollector resources by Project",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -3821,82 +4317,6 @@
       },
       "description": "Assessment options properties."
     },
-    "AssessmentProject": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ProjectProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "An Assessment project site resource.",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "AssessmentProjectUpdate": {
-      "type": "object",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/AssessmentProjectUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the AssessmentProject."
-    },
-    "AssessmentProjectUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "assessmentSolutionId": {
-          "type": "string",
-          "description": "Assessment solution ARM id tracked by Microsoft.Migrate/migrateProjects."
-        },
-        "projectStatus": {
-          "type": "string",
-          "description": "Assessment project status.",
-          "enum": [
-            "Active",
-            "Inactive"
-          ],
-          "x-ms-enum": {
-            "name": "string",
-            "modelAsString": true
-          }
-        },
-        "customerWorkspaceId": {
-          "type": "string",
-          "description": "The ARM id of service map workspace created by customer."
-        },
-        "customerWorkspaceLocation": {
-          "type": "string",
-          "description": "Location of service map workspace created by customer."
-        },
-        "publicNetworkAccess": {
-          "type": "string",
-          "description": "This value can be set to 'enabled' to avoid breaking changes on existing\ncustomer resources and templates. If set to 'disabled', traffic over public\ninterface is not allowed, and private endpoint connections would be the\nexclusive access method."
-        },
-        "customerStorageAccountArmId": {
-          "type": "string",
-          "description": "The ARM id of the storage account used for interactions when public access is\ndisabled."
-        }
-      },
-      "description": "The updatable properties of the AssessmentProject."
-    },
     "AvsAssessment": {
       "type": "object",
       "properties": {
@@ -3916,6 +4336,127 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
+    },
+    "AvsAssessmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvsAssessment"
+          },
+          "x-cadl-name": "AvsAssessment[]",
+          "description": "The AvsAssessment items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a AvsAssessment list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "AvsAssessmentOptions": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AvsAssessmentOptionsProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "AVS Assessment options resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AvsAssessmentOptionsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvsAssessmentOptions"
+          },
+          "x-cadl-name": "AvsAssessmentOptions[]",
+          "description": "The AvsAssessmentOptions items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a AvsAssessmentOptions list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "AvsAssessmentOptionsProperties": {
+      "type": "object",
+      "properties": {
+        "avsNodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvsSkuOptions"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "AvsSkuOptions[]",
+          "description": "AVS SKU Nodes."
+        },
+        "failuresToTolerateAndRaidLevelValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FttAndRaidLevel"
+          },
+          "x-cadl-name": "FttAndRaidLevel[]",
+          "description": "FTT and Raid level values."
+        },
+        "reservedInstanceAvsNodes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureAvsNodeType"
+          },
+          "x-cadl-name": "AzureAvsNodeType[]",
+          "description": "List of AVS nodes for RI."
+        },
+        "reservedInstanceSupportedLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureLocation"
+          },
+          "x-cadl-name": "AzureLocation[]",
+          "description": "List of supported Azure regions for reserved instances."
+        },
+        "reservedInstanceSupportedCurrencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Currency"
+          },
+          "x-cadl-name": "Currency[]",
+          "description": "List of supported currencies for reserved instances."
+        },
+        "reservedInstanceSupportedOffers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "List of supported Azure offer codes for reserved instances."
+        }
+      },
+      "description": "AVS Assessment options properties."
     },
     "AvsAssessmentProperties": {
       "type": "object",
@@ -4213,6 +4754,35 @@
         "timeRange"
       ]
     },
+    "AvsSkuOptions": {
+      "type": "object",
+      "properties": {
+        "nodeType": {
+          "$ref": "#/definitions/AzureAvsNodeType",
+          "description": "AVS Node type."
+        },
+        "targetLocations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureLocation"
+          },
+          "x-cadl-name": "AzureLocation[]",
+          "description": "List of locations where this node type is available."
+        }
+      },
+      "description": "AVS SKU specific options."
+    },
+    "AzureAvsNodeType": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "AV36"
+      ],
+      "x-ms-enum": {
+        "name": "AzureAvsNodeType",
+        "modelAsString": true
+      }
+    },
     "AzureAvsNodeTypeKnownValues": {
       "type": "string",
       "enum": [
@@ -4233,6 +4803,52 @@
       ],
       "x-ms-enum": {
         "name": "AzureAvsSuitabilityExplanationKnownValues",
+        "modelAsString": true
+      }
+    },
+    "AzureLocation": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "EastAsia",
+        "SoutheastAsia",
+        "AustraliaEast",
+        "AustraliaSoutheast",
+        "BrazilSouth",
+        "CanadaCentral",
+        "CanadaEast",
+        "WestEurope",
+        "NorthEurope",
+        "CentralIndia",
+        "SouthIndia",
+        "WestIndia",
+        "JapanEast",
+        "JapanWest",
+        "KoreaCentral",
+        "KoreaSouth",
+        "UkWest",
+        "UkSouth",
+        "NorthCentralUs",
+        "EastUs",
+        "WestUs2",
+        "SouthCentralUs",
+        "CentralUs",
+        "EastUs2",
+        "WestUs",
+        "WestCentralUs",
+        "GermanyCentral",
+        "GermanyNortheast",
+        "ChinaNorth",
+        "ChinaEast",
+        "USGovArizona",
+        "USGovTexas",
+        "USGovIowa",
+        "USGovVirginia",
+        "USDoDCentral",
+        "USDoDEast"
+      ],
+      "x-ms-enum": {
+        "name": "AzureLocation",
         "modelAsString": true
       }
     },
@@ -4543,6 +5159,41 @@
       },
       "description": "Class to represent the component of the cost."
     },
+    "Currency": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "USD",
+        "DKK",
+        "CAD",
+        "IDR",
+        "JPY",
+        "KRW",
+        "NZD",
+        "NOK",
+        "RUB",
+        "SAR",
+        "ZAR",
+        "SEK",
+        "TRY",
+        "GBP",
+        "MXN",
+        "MYR",
+        "INR",
+        "HKD",
+        "BRL",
+        "TWD",
+        "EUR",
+        "CHF",
+        "ARS",
+        "AUD",
+        "CNY"
+      ],
+      "x-ms-enum": {
+        "name": "Currency",
+        "modelAsString": true
+      }
+    },
     "CurrencyKnownValues": {
       "type": "string",
       "enum": [
@@ -4611,6 +5262,21 @@
         }
       },
       "description": "Download URL for assessment report."
+    },
+    "FttAndRaidLevel": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Ftt1Raid1",
+        "Ftt1Raid5",
+        "Ftt2Raid1",
+        "Ftt2Raid6",
+        "Ftt3Raid1"
+      ],
+      "x-ms-enum": {
+        "name": "FttAndRaidLevel",
+        "modelAsString": true
+      }
     },
     "FttAndRaidLevelKnownValues": {
       "type": "string",
@@ -5759,6 +6425,26 @@
       },
       "description": "State of a private endpoint connection."
     },
+    "Project": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProjectProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "An Assessment project site resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
     "ProjectProperties": {
       "type": "object",
       "properties": {
@@ -5875,6 +6561,62 @@
         "modelAsString": true
       }
     },
+    "ProjectUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/ProjectUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the Project."
+    },
+    "ProjectUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "assessmentSolutionId": {
+          "type": "string",
+          "description": "Assessment solution ARM id tracked by Microsoft.Migrate/migrateProjects."
+        },
+        "projectStatus": {
+          "type": "string",
+          "description": "Assessment project status.",
+          "enum": [
+            "Active",
+            "Inactive"
+          ],
+          "x-ms-enum": {
+            "name": "string",
+            "modelAsString": true
+          }
+        },
+        "customerWorkspaceId": {
+          "type": "string",
+          "description": "The ARM id of service map workspace created by customer."
+        },
+        "customerWorkspaceLocation": {
+          "type": "string",
+          "description": "Location of service map workspace created by customer."
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "This value can be set to 'enabled' to avoid breaking changes on existing\ncustomer resources and templates. If set to 'disabled', traffic over public\ninterface is not allowed, and private endpoint connections would be the\nexclusive access method."
+        },
+        "customerStorageAccountArmId": {
+          "type": "string",
+          "description": "The ARM id of the storage account used for interactions when public access is\ndisabled."
+        }
+      },
+      "description": "The updatable properties of the Project."
+    },
     "ProvisioningStateKnownValues": {
       "type": "string",
       "enum": [
@@ -5942,6 +6684,102 @@
       "required": [
         "value"
       ]
+    },
+    "SqlAssessmentV2Summary": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlAssessmentV2SummaryProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "SQL Assessment REST resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SqlAssessmentV2SummaryData": {
+      "type": "object",
+      "properties": {
+        "suitabilitySummary": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "x-cadl-name": "Record<int32>",
+          "description": "Dictionary of <integer>",
+          "readOnly": true
+        },
+        "monthlyComputeCost": {
+          "type": "number",
+          "format": "float"
+        },
+        "monthlyStorageCost": {
+          "type": "number",
+          "format": "float"
+        },
+        "monthlyLicenseCost": {
+          "type": "number",
+          "format": "float"
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "float"
+        }
+      }
+    },
+    "SqlAssessmentV2SummaryProperties": {
+      "type": "object",
+      "properties": {
+        "assessmentSummary": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/SqlAssessmentV2SummaryData"
+          },
+          "x-cadl-name": "Record<SqlAssessmentV2SummaryData>",
+          "description": "Gets or sets the Assessment summary.",
+          "readOnly": true
+        },
+        "numberOfMachines": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of machines part of the assessment.",
+          "readOnly": true
+        },
+        "numberOfSqlInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of sql instances part of the assessment.",
+          "readOnly": true
+        },
+        "numberOfSqlDatabases": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of sql databases part of the assessment.",
+          "readOnly": true
+        },
+        "numberOfFciInstances": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of sql failover cluster instances part of the assessment.",
+          "readOnly": true
+        },
+        "numberOfSqlAvailabilityGroups": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of sql availability groups part of the assessment.",
+          "readOnly": true
+        }
+      },
+      "description": "SQL Assessment V2 summary properties."
     },
     "UltraDiskAssessmentOptions": {
       "type": "object",
