@@ -465,7 +465,7 @@
           "Jobs"
         ],
         "summary": "Terminates execution of a running container apps job",
-        "operationId": "Job_terminate_multiple_executions",
+        "operationId": "Job_terminateMultipleExecutions",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -489,11 +489,8 @@
             "in": "body",
             "description": "List of all job executions that should be stopped.",
             "required": true,
-            "type": "array",
-            "items": {
-              "description": "Name of the job execution.",
-              "name": "jobExecutionName",
-              "type": "string"
+            "schema": {
+              "$ref": "#/definitions/JobExecutionNamesCollection"
             }
           }
         ],
@@ -911,7 +908,7 @@
     },
     "JobExecutionBase": {
       "description": "Container App's Job execution name.",
-      "type": "string",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Job execution name.",
@@ -935,11 +932,11 @@
           "description": "Job execution Id.",
           "type": "string"
         },
-        "Type": {
+        "type": {
           "description": "Job Type.",
           "type": "string"
         },
-        "Status": {
+        "status": {
           "description": "Current running State of the job",
           "enum": [
             "Running",
@@ -969,6 +966,26 @@
     },
     "ContainerAppJobExecutions": {
       "description": "Container App executions collection ARM resource.",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JobExecution"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "JobExecutionNamesCollection": {
+      "description": "Container App executions names list.",
       "required": [
         "value"
       ],
@@ -978,17 +995,8 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/JobExecution"
-          },
-          "jobName": {
-            "description": "Container Apps Job name.",
-            "type": "string"
+            "$ref": "#/definitions/JobExecutionBase"
           }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -1053,6 +1061,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "resources": {
+          "$ref": "./CommonDefinitions.json#/definitions/ContainerResources",
+          "description": "Container resource requirements."
         }
       }
     }
