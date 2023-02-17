@@ -1,148 +1,89 @@
 {
   "parameters": {
-    "id": "Microsoft.ResourceGroup",
     "language": "en",
-    "api-version": "2022-09-01-preview",
-    "market": "US",
-    "x-ms-app": "testapp",
-    "$select": "uniqueProductId"
+    "api-version": "2023-01-01-preview",
+    "market": "US"
   },
   "responses": {
     "200": {
       "body": {
         "items": [
           {
-            "displayName": "string",
-            "popularity": 0,
+            "displayName": "productDisplayName",
+            "popularity": 1.0,
             "categoryIds": [
-              "string"
+              "monitoring-and-diagnostics",
+              "virtualMachine"
             ],
-            "publisherId": "string",
+            "industryIds": [
+              "consumer-goods",
+              "retailers"
+            ],
+            "publisherId": "Microsoft",
             "azureBenefit": "Eligible",
             "badges": [
-              "PreferredSolution"
+              "ExternalPurchase"
             ],
             "publisherType": "Microsoft",
-            "publishingStage": "Preview",
-            "uniqueProductId": "string",
-            "productType": "None",
+            "publishingStage": "Public",
+            "uniqueProductId": "uniqueProductId",
+            "productType": "VirtualMachine",
             "operatingSystems": [
-              "string"
+              "windows.others"
             ],
             "pricingTypes": [
-              "Free"
+              "Payg"
             ],
-            "publisherDisplayName": "string",
-            "summary": "string",
-            "privacyPolicyUri": "string",
-            "version": "string",
-            "cspLegalTermsUri": "string",
-            "vmImageGenerations": [
-              "Gen1"
-            ],
-            "vmArchitectureTypes": [
-              "X64Gen1"
-            ],
-            "vmSecurityTypes": [
-              "None"
-            ],
-            "smallIconUri": "string",
-            "mediumIconUri": "string",
-            "largeIconUri": "string",
-            "wideIconUri": "string",
-            "description": "string",
+            "publisherDisplayName": "Microsoft",
+            "longSummary": "longSummary",
+            "summary": "summary",
+            "smallIconUri": "SomeIconUri",
+            "description": "productDescription",
             "ratingBuckets": [
               "AboveOne"
             ],
-            "ratingAverage": 0,
+            "ratingAverage": 0.0,
             "ratingCount": 0,
-            "startingPrice": {
-              "market": "string",
-              "termUnits": "string",
-              "meterUnits": "string",
-              "minTermPrice": 0,
-              "minMeterPrice": 0,
-              "currency": "string"
-            },
-            "linkedAddIns": [
-              "string"
-            ],
             "plans": [
               {
-                "planId": "string",
-                "cspState": "OptIn",
-                "uniquePlanId": "string",
-                "displayName": "string",
-                "vmArchitectureType": "string",
+                "planId": "plan1Id",
+                "uniquePlanId": "uniquePlan1Id",
+                "displayName": "displayName",
+                "vmArchitectureType": "X64Gen1",
+                "cspState": "SelectiveOptIn",
                 "metadata": {
-                  "generation": "string",
-                  "altStackReference": "string",
-                  "relatedSkus": [
-                    {
-                      "sku": {
-                        "name": "string",
-                        "generation": "string",
-                        "identity": "string"
-                      },
-                      "relationType": "string"
-                    }
-                  ]
+                  "generation": null,
+                  "altStackReference": null
                 },
-                "uiDefinitionUri": "string",
+                "altStackReference": "altStackReference",
+                "stackType": "Classic",
+                "altArchitectureReference": "altArchitectureReference",
+                "categoryIds": [],
+                "hasProtectedArtifacts" : false,
                 "pricingTypes": [
-                  "Free"
+                  "Payg"
                 ],
-                "isQuantifiable": true,
                 "vmSecuritytypes": [
                   "None"
                 ],
-                "artifacts": [
-                  {
-                    "name": "string",
-                    "uri": "string",
-                    "artifactType": "Template"
-                  }
-                ],
-                "summary": "string",
-                "description": "string",
-                "skuId": "string",
-                "productType": "None",
-                "displayRank": "string",
-                "purchaseDurationDiscounts": [
-                  {
-                    "duration": "string",
-                    "discountPercentage": 0
-                  }
-                ],
-                "leadGeneration": {
-                  "productId": "string",
-                  "leadGenEnabled": true
-                },
-                "isPrivate": false,
-                "hasProtectedArtifacts": false,
-                "isStopSell": false
-              }
-            ],
-            "legalTermsUri": "string",
-            "legalTermsType": "string",
-            "supportUri": "string",
-            "links": [
-              {
-                "id": "string",
-                "displayName": "string",
-                "uri": "string"
+                "summary": "PlanSummary",
+                "description": "plan description",
+                "skuId": "0001",
+                "productType": "VirtualMachine",
+                "displayRank": "2147483647",
+                "isPrivate": false
               }
             ],
             "supportedProducts": [
-              "string"
+              "suportedProduct1"
             ],
             "applicableProducts": [
-              "string"
+              "applicableProduct1"
             ],
-            "lastModifiedDateTime": "0001-01-01T00:00:00"
+            "lastModifiedDateTime": "2022-02-14T23:31:25.5733368+00:00"
           }
         ],
-        "nextPageLink": "https://catalogapi.azure.com/products?api-version=2022-09-01-preview&$skiptoken=W3sidG9rZW4iOiIrUklEOn4yVk53QU9LeFJIQWNBZ0FBQUFBQURnPT0jUlQ6MSNUUkM6MTU0I0lTVjoyI0lFTzo2NTU1MSNRQ0Y6OCIsInJhbmdlIjp7Im1pbiI6IjA1QzFFNzMzOTlDRDVFIiwibWF4IjoiMDVDMUU5NDk2NTMxMTIifX1d"
+        "nextPageLink": "https://catalogapi.azure.com/products?api-version=2023-01-01-preview&$skiptoken=W3sidG9rZW4iOiIrUklEOn4yVk53QU9LeFJIQWNBZ0FBQUFBQURnPT0jUlQ6MSNUUkM6MTU0I0lTVjoyI0lFTzo2NTU1MSNRQ0Y6OCIsInJhbmdlIjp7Im1pbiI6IjA1QzFFNzMzOTlDRDVFIiwibWF4IjoiMDVDMUU5NDk2NTMxMTIifX1d"
       }
     }
   }
