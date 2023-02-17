@@ -38,7 +38,7 @@
               }
             },
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
@@ -123,7 +123,7 @@
               }
             },
             "schema": {
-              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
             }
           },
           "202": {
@@ -140,7 +140,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/OperationStatus"
+              "$ref": "#/definitions/EmailSendResult"
             }
           }
         },
@@ -157,7 +157,7 @@
     }
   },
   "definitions": {
-    "OperationStatus": {
+    "EmailSendResult": {
       "description": "Status of the long running operation",
       "required": [
         "id",
@@ -166,7 +166,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "The unique id of the operation",
+          "description": "The unique id of the operation. Use a UUID.",
           "type": "string",
           "example": "8540c0de-899f-5cce-acb5-3ec493af3800"
         },
@@ -181,20 +181,20 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "EmailSendOperationStatus",
+            "name": "EmailSendStatus",
             "modelAsString": true
           }
         },
         "error": {
           "description": "Error details when status is a non-success terminal state.",
-          "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationError"
+          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
         }
       }
     },
     "EmailMessage": {
       "description": "Message payload for sending an email",
       "required": [
-        "senderEmail",
+        "senderAddress",
         "content",
         "recipients"
       ],
@@ -207,7 +207,7 @@
             "type": "string"
           }
         },
-        "senderEmail": {
+        "senderAddress": {
           "description": "Sender email address from a verified domain.",
           "type": "string",
           "example": "info@contoso.com"
@@ -244,10 +244,10 @@
       "description": "An object representing the email address and its display name",
       "type": "object",
       "required": [
-        "email"
+        "address"
       ],
       "properties": {
-        "email": {
+        "address": {
           "description": "Email address.",
           "type": "string",
           "example": "abc@contoso.com"
@@ -288,7 +288,7 @@
       "type": "object",
       "required": [
         "name",
-        "type",
+        "contentType",
         "contentBytesBase64"
       ],
       "properties": {
@@ -297,7 +297,7 @@
           "type": "string",
           "example": "attachment.pdf"
         },
-        "type": {
+        "contentType": {
           "description": "MIME type of the content being attached.",
           "type": "string",
           "example": "text/plain"
