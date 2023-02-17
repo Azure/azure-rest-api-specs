@@ -40,9 +40,6 @@ namespace EventGrid {
   using Cadl.Versioning;
   // using OpenAPI;
 
-
-
-
   @doc("Properties of an event published to an Event Grid topic using the EventGrid Schema.")
   model EventGridEvent {
     @doc("An unique identifier for the event.")
@@ -131,11 +128,6 @@ namespace EventGrid {
     eventSubscriptionId?: string;
   }
 
-  // model ApiVersionParameter {
-  //   @doc("Version of the API to be used with the client request.")
-  //   @query
-  //   "api-version"?: string;
-  // }
 
   model ChannelNameParameter {
     @doc("Required only when publishing to partner namespaces with partner topic routing mode ChannelNameHeader.")
@@ -143,43 +135,94 @@ namespace EventGrid {
     "aeg-channel-name"?: string;
   }
 
-  @post
-  @route("?overload=EventGridEvent")
-  @tag("Events")
-  @doc("Publishes a batch of events to an Azure Event Grid topic.")
-  op PublishEventGridEvents(
-    @doc("An array of events to be published to Event Grid.")
-    @body
-    events: EventGridEvent[],
-    ...ApiVersionParameter,
-  ): OkResponse;
-  // missing default response
+  // @post
+  // // @route("?overload=EventGridEvent")
+  // // @tag("Events")
+  // @doc("Publishes a batch of events to an Azure Event Grid topic.")
+  // op PublishEvents(
+  //   @doc("An array of events to be published to Event Grid.")
+  //   @body
+  //   events: Event,
+  //   ...ApiVersionParameter,
+  // ): OkResponse;
 
-  @post
-  @route("?overload=cloudEvent")
-  @tag("Events")
-  @doc("Publishes a batch of events to an Azure Event Grid topic.")
-  op PublishCloudEventEvents(
-    @doc("An array of events to be published to Event Grid.")
-    @body
-    events: CloudEventEvent[],
-    ...ApiVersionParameter,
-    ...ChannelNameParameter,
-  ): OkResponse;
-  // missing default response
+  model CloudEventRequest{
+    @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
+    @body _: CloudEventEvent
+  };
+  model EventEventRequest{
+    @header("content-type") contentType:  "application/json",
+    @body _: EventGridEvent
+  };
+  
+  alias InputType = CloudEventRequest |  EventEventRequest;
 
-  @post
-  @route("?overload=customEvent")
-  @tag("Events")
-  @doc("Publishes a batch of events to an Azure Event Grid topic.")
-  op PublishCustomEventEvents(
-    // @extension("x-ms-identifiers", [])
-    @doc("An array of events to be published to Event Grid.")
+
+  // op PublishEvent(...ApiVersionParameter, requests:InputType):OkResponse;
+
+
+  op PublishEvent(
+    ...ApiVersionParameter, 
     @body
-    events: CustomEventEvent[],
-    ...ApiVersionParameter,
-  ): OkResponse;
-  // missing default response
+    requests: InputType
+  ):OkResponse;
+
+
+    // {
+    // ...CloudEventRequest,
+    // ...ApiVersionParameter,
+    // }|
+    // {
+    //   ...EventEventRequest,
+    //   ...ApiVersionParameter,
+    // }
+
+
+  // @overload(PublishEvent)
+  // @post
+  // op PublishEventCloud(
+  //   ...ApiVersionParameter,
+  //   @body
+  //   @doc("Cloud")
+  //   requests:CloudEventRequest, 
+  // ):OkResponse;
+
+  // @overload(PublishEvent)
+  // @post
+  // op PublishEventEventGrid(
+  //   ...ApiVersionParameter,
+  //   @body
+  //   @doc("Event")
+  //   requests: EventEventRequest, 
+  // ):OkResponse;
+
+
+
+
+//   @post
+//   @route()
+//   // @route("?overload=cloudEvent")
+//   @tag("Events")
+//   @doc("Publishes a batch of events to an Azure Event Grid topic.")
+//   op PublishCloudEventEvents(
+//     @doc("An array of events to be published to Event Grid.")
+//     @body
+//     events: CloudEventEvent[],
+//     ...ApiVersionParameter,
+//     ...ChannelNameParameter,
+//   ): OkResponse;
+
+//   @post
+//   // @route("?overload=customEvent")
+//   @tag("Events")
+//   @doc("Publishes a batch of events to an Azure Event Grid topic.")
+//   op PublishCustomEventEvents(
+//     // @extension("x-ms-identifiers", [])
+//     @doc("An array of events to be published to Event Grid.")
+//     @body
+//     events: CustomEventEvent[],
+//     ...ApiVersionParameter,
+//   ): OkResponse;
   
 }
 
