@@ -135,52 +135,50 @@ namespace EventGrid {
 
 // General Event Function -- manually write overload
 
-  @post
-  op PublishEvent(
-    ...ApiVersionParameter, 
-    @body
-    events: GeneralEvent,
-  ):OkResponse;
-
-
-// Overloaded Function -- when that becomes available
-
-  // model CloudEventRequest{
-  //   @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
-  //   @body _: CloudEventEvent
-  // };
-  // model EventEventRequest{
-  //   @header("content-type") contentType:  "application/json",
-  //   @body _: EventGridEvent
-  // };
-
-  // alias InputType = CloudEventRequest |  EventEventRequest;
-
   // @post
   // op PublishEvent(
   //   ...ApiVersionParameter, 
   //   @body
-  //   events: InputType,
+  //   events: EventType,
   // ):OkResponse;
 
 
-  @overload(PublishEvent)
-  @post
-  op PublishCloudEvent(
+// Overloaded Function -- when that becomes available
+
+  alias CloudEventRequest = {
     @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
+    ...CloudEventEvent
+  };
+
+  alias InputType = CloudEventRequest |  EventGridEvent;
+
+  @post
+  @route("foo")
+  op PublishEvent(
     @body
-    events: CloudEventEvent,
-    ...ApiVersionParameter,
+    events: InputType,
+    ...ApiVersionParameter, 
+
   ):OkResponse;
 
-  @overload(PublishEvent)
-  @post
-  op PublishEventGridEvent(
-    @header("content-type") contentType:  "application/json",
-    @body
-    events: EventGridEvent,
-    ...ApiVersionParameter,
-  ):OkResponse;
+
+  // @overload(PublishEvent)
+  // @post
+  // op PublishCloudEvent(
+  //   @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
+  //   @body
+  //   events: CloudEventEvent,
+  //   ...ApiVersionParameter,
+  // ):OkResponse;
+
+  // @overload(PublishEvent)
+  // @post
+  // op PublishEventGridEvent(
+  //   @header("content-type") contentType:  "application/json",
+  //   @body
+  //   events: EventGridEvent,
+  //   ...ApiVersionParameter,
+  // ):OkResponse;
 
 }
 
