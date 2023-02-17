@@ -3746,10 +3746,18 @@
       "properties": {
         "statusCode": {
           "type": "string",
-          "description": "Status code of the application gateway customer error.",
+          "description": "Status code of the application gateway custom error.",
           "enum": [
+            "HttpStatus400",
             "HttpStatus403",
-            "HttpStatus502"
+            "HttpStatus404",
+            "HttpStatus405",
+            "HttpStatus408",
+            "HttpStatus499",
+            "HttpStatus500",
+            "HttpStatus502",
+            "HttpStatus503",
+            "HttpStatus504"
           ],
           "x-ms-enum": {
             "name": "ApplicationGatewayCustomErrorStatusCode",
@@ -3758,10 +3766,10 @@
         },
         "customErrorPageUrl": {
           "type": "string",
-          "description": "Error page URL of the application gateway customer error."
+          "description": "Error page URL of the application gateway custom error."
         }
       },
-      "description": "Customer error of an application gateway."
+      "description": "Custom error of an application gateway."
     },
     "PolicyNameEnum": {
       "type": "string",
