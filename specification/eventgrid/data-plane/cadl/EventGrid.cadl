@@ -129,56 +129,74 @@ namespace EventGrid {
   }
 
 
-  // alias EventType = EventGridEvent | CloudEventEvent;
+  alias EventType = EventGridEvent | CloudEventEvent;
 
-  // model GeneralEvent {}
+  model GeneralEvent {}
 
 // General Event Function -- manually write overload
 
-  // @post
-  // op PublishEvent(
-  //   ...ApiVersionParameter, 
-  //   @body
-  //   events: EventType,
-  // ):OkResponse;
+  @post
+  op PublishEvent(
+    ...ApiVersionParameter, 
+    @body
+    events: GeneralEvent,
+  ):OkResponse;
+
+
+    @overload(PublishEvent)
+    @post
+    op PublishCloudEvent(
+      @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
+      @body
+      events: CloudEventEvent,
+      ...ApiVersionParameter,
+    ):OkResponse;
+
+    @overload(PublishEvent)
+    @post
+    op PublishEventGridEvent(
+      @body
+      events: EventGridEvent,
+      ...ApiVersionParameter,
+    ):OkResponse;
 
 
 // Overloaded Function -- when that becomes available
 
-  alias CloudEventRequest = {
-    @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
-    ...CloudEventEvent
-  };
-
-  alias InputType = CloudEventRequest |  EventGridEvent;
-
-  @post
-  @route("foo")
-  op PublishEvent(
-    @body
-    events: InputType,
-    ...ApiVersionParameter, 
-
-  ):OkResponse;
-
-
-  // @overload(PublishEvent)
-  // @post
-  // op PublishCloudEvent(
+  // alias CloudEventRequest = {
   //   @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
+  //   ...CloudEventEvent
+  // };
+
+  // alias InputType = CloudEventRequest |  EventGridEvent;
+
+  // @post
+  // @route("foo")
+  // op PublishEvent(
   //   @body
-  //   events: CloudEventEvent,
-  //   ...ApiVersionParameter,
+  //   events: InputType,
+  //   ...ApiVersionParameter, 
+
   // ):OkResponse;
 
-  // @overload(PublishEvent)
-  // @post
-  // op PublishEventGridEvent(
-  //   @header("content-type") contentType:  "application/json",
-  //   @body
-  //   events: EventGridEvent,
-  //   ...ApiVersionParameter,
-  // ):OkResponse;
+
+//   @overload(PublishEvent)
+//   @post
+//   op PublishCloudEvent(
+//     @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
+//     @body
+//     events: CloudEventEvent,
+//     ...ApiVersionParameter,
+//   ):OkResponse;
+
+//   @overload(PublishEvent)
+//   @post
+//   op PublishEventGridEvent(
+//     @header("content-type") contentType:  "application/json",
+//     @body
+//     events: EventGridEvent,
+//     ...ApiVersionParameter,
+//   ):OkResponse;
 
 }
 
