@@ -129,9 +129,9 @@ namespace EventGrid {
   }
 
 
-
   alias EventType = EventGridEvent | CloudEventEvent;
 
+  model GeneralEvent {}
 
 // General Event Function -- manually write overload
 
@@ -139,7 +139,7 @@ namespace EventGrid {
   op PublishEvent(
     ...ApiVersionParameter, 
     @body
-    events: EventType,
+    events: GeneralEvent,
   ):OkResponse;
 
 
@@ -164,19 +164,23 @@ namespace EventGrid {
   // ):OkResponse;
 
 
-  // @overload(PublishEvent)
-  // @post
-  // op PublishEventCloud(
-  //   events: CloudEventRequest,
-  //   ...ApiVersionParameter,
-  // ):OkResponse;
+  @overload(PublishEvent)
+  @post
+  op PublishCloudEvent(
+    @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
+    @body
+    events: CloudEventEvent,
+    ...ApiVersionParameter,
+  ):OkResponse;
 
-  // @overload(PublishEvent)
-  // @post
-  // op PublishEventEventGrid(
-  //   events: EventEventRequest,
-  //   ...ApiVersionParameter,
-  // ):OkResponse;
+  @overload(PublishEvent)
+  @post
+  op PublishEventGridEvent(
+    @header("content-type") contentType:  "application/json",
+    @body
+    events: EventGridEvent,
+    ...ApiVersionParameter,
+  ):OkResponse;
 
 }
 
