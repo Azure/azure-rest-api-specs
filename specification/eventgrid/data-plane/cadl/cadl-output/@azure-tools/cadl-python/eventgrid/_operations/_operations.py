@@ -62,12 +62,12 @@ def build_event_grid_publish_event_request(**kwargs: Any) -> HttpRequest:
 class EventGridClientOperationsMixin(EventGridClientMixinABC):
     @overload
     def publish_event(  # pylint: disable=inconsistent-return-statements
-        self, requests: _models.CloudEventRequest, *, content_type: str = "application/json", **kwargs: Any
+        self, events: _models.EventGridEvent, *, content_type: str = "application/json", **kwargs: Any
     ) -> None:
         """publish_event.
 
-        :param requests: Required.
-        :type requests: ~eventgrid.models.CloudEventRequest
+        :param events: Required.
+        :type events: ~eventgrid.models.EventGridEvent
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -78,12 +78,12 @@ class EventGridClientOperationsMixin(EventGridClientMixinABC):
 
     @overload
     def publish_event(  # pylint: disable=inconsistent-return-statements
-        self, requests: _models.EventEventRequest, *, content_type: str = "application/json", **kwargs: Any
+        self, events: _models.CloudEventEvent, *, content_type: str = "application/json", **kwargs: Any
     ) -> None:
         """publish_event.
 
-        :param requests: Required.
-        :type requests: ~eventgrid.models.EventEventRequest
+        :param events: Required.
+        :type events: ~eventgrid.models.CloudEventEvent
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -94,12 +94,12 @@ class EventGridClientOperationsMixin(EventGridClientMixinABC):
 
     @distributed_trace
     def publish_event(  # pylint: disable=inconsistent-return-statements
-        self, requests: Union[_models.CloudEventRequest, _models.EventEventRequest], **kwargs: Any
+        self, events: Union[_models.EventGridEvent, _models.CloudEventEvent], **kwargs: Any
     ) -> None:
         """publish_event.
 
-        :param requests: Is either a CloudEventRequest type or a EventEventRequest type. Required.
-        :type requests: ~eventgrid.models.CloudEventRequest or ~eventgrid.models.EventEventRequest
+        :param events: Is either a EventGridEvent type or a CloudEventEvent type. Required.
+        :type events: ~eventgrid.models.EventGridEvent or ~eventgrid.models.CloudEventEvent
         :keyword content_type: Body parameter Content-Type. Known values are: application/json. Default
          value is None.
         :paramtype content_type: str
@@ -123,10 +123,10 @@ class EventGridClientOperationsMixin(EventGridClientMixinABC):
 
         content_type = content_type or "application/json"
         _content = None
-        if isinstance(requests, _model_base.Model):
-            _content = json.dumps(requests, cls=AzureJSONEncoder)  # type: ignore
-        elif isinstance(requests, _model_base.Model):
-            _content = json.dumps(requests, cls=AzureJSONEncoder)  # type: ignore
+        if isinstance(events, _model_base.Model):
+            _content = json.dumps(events, cls=AzureJSONEncoder)  # type: ignore
+        elif isinstance(events, _model_base.Model):
+            _content = json.dumps(events, cls=AzureJSONEncoder)  # type: ignore
 
         request = build_event_grid_publish_event_request(
             content_type=content_type,

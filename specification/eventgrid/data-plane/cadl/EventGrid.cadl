@@ -158,42 +158,34 @@ namespace EventGrid {
   alias InputType = CloudEventRequest |  EventEventRequest;
 
 
+  alias EventType = EventGridEvent | CloudEventEvent;
+
+
   // op PublishEvent(...ApiVersionParameter, requests:InputType):OkResponse;
 
-
+  @post
   op PublishEvent(
     ...ApiVersionParameter, 
     @body
-    requests: InputType
+    events: EventType,
   ):OkResponse;
-
-
-    // {
-    // ...CloudEventRequest,
-    // ...ApiVersionParameter,
-    // }|
-    // {
-    //   ...EventEventRequest,
-    //   ...ApiVersionParameter,
-    // }
 
 
   // @overload(PublishEvent)
   // @post
   // op PublishEventCloud(
+  //   events: CloudEventEvent,
   //   ...ApiVersionParameter,
-  //   @body
-  //   @doc("Cloud")
-  //   requests:CloudEventRequest, 
+  //   @header("content-type") 
+  //   contentType: "application/cloudevents-batch+json; charset=utf-8",
   // ):OkResponse;
 
   // @overload(PublishEvent)
   // @post
   // op PublishEventEventGrid(
+  //   events: EventGridEvent,
   //   ...ApiVersionParameter,
-  //   @body
-  //   @doc("Event")
-  //   requests: EventEventRequest, 
+  //   @header("content-type") contentType:  "application/json",
   // ):OkResponse;
 
 
