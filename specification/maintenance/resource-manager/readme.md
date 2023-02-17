@@ -187,5 +187,8 @@ directive:
   - suppress: RequestSchemaForTrackedResourcesMustHaveTags
     from: maintenance.json
     reason: False positive. ConfigurationAssignments is proxy resource at subscription/resourceGroup level.
+  - suppress: ResourceNameRestriction
+    from: maintenance.json
+    reason: Maintenance RP accept any string, no special restriction required.
 ```
 
