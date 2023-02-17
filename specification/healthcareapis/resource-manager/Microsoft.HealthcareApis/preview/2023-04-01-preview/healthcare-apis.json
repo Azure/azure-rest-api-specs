@@ -2400,6 +2400,11 @@
           },
           "202": {
             "description": "Accepted - Patch request accepted and an existing resource is being updated asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AnalyticsConnector"
             }
@@ -2449,7 +2454,12 @@
             "description": "Resource deleted."
           },
           "202": {
-            "description": "Delete request accepted; the operation will complete asynchronously."
+            "description": "Delete request accepted; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "The resource does not exist."
