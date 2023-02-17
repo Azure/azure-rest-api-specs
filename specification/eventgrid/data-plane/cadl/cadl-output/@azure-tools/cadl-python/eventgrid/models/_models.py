@@ -10,9 +10,9 @@
 from .. import _model_base
 
 
-class CloudEventRequest(_model_base.Model):
-    """ """
+class CloudEventEvent(_model_base.Model):
+    """Properties of an event published to an Event Grid topic using the CloudEvent 1.0 Schema"""
 
 
-class EventEventRequest(_model_base.Model):
-    """ """
+class EventGridEvent(_model_base.Model):
+    """Properties of an event published to an Event Grid topic using the EventGrid Schema."""
