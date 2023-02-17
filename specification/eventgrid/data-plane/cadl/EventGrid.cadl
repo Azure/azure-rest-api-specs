@@ -1,14 +1,9 @@
-// import "@cadl-lang/rest";
-// import "@cadl-lang/openapi";
 import "@cadl-lang/versioning";
 import "@azure-tools/cadl-azure-core";
-// import "@azure-tools/cadl-providerhub";
-
 
 enum ServiceApiVersions {
   v2018_01_01: "2018-01-01",
 }
-
 
 @useAuth(
     ApiKeyAuth<ApiKeyLocation.header, "aeg-sas-key"> |
@@ -36,9 +31,7 @@ namespace EventGrid {
 
   using Cadl.Http;
   using Azure.Core.Foundations;
-  // using Cadl.Rest;
   using Cadl.Versioning;
-  // using OpenAPI;
 
   @doc("Properties of an event published to an Event Grid topic using the EventGrid Schema.")
   model EventGridEvent {
@@ -135,33 +128,12 @@ namespace EventGrid {
     "aeg-channel-name"?: string;
   }
 
-  // @post
-  // // @route("?overload=EventGridEvent")
-  // // @tag("Events")
-  // @doc("Publishes a batch of events to an Azure Event Grid topic.")
-  // op PublishEvents(
-  //   @doc("An array of events to be published to Event Grid.")
-  //   @body
-  //   events: Event,
-  //   ...ApiVersionParameter,
-  // ): OkResponse;
-
-  model CloudEventRequest{
-    @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
-    @body _: CloudEventEvent
-  };
-  model EventEventRequest{
-    @header("content-type") contentType:  "application/json",
-    @body _: EventGridEvent
-  };
-  
-  alias InputType = CloudEventRequest |  EventEventRequest;
 
 
   alias EventType = EventGridEvent | CloudEventEvent;
 
 
-  // op PublishEvent(...ApiVersionParameter, requests:InputType):OkResponse;
+// General Event Function -- manually write overload
 
   @post
   op PublishEvent(
@@ -171,51 +143,41 @@ namespace EventGrid {
   ):OkResponse;
 
 
+// Overloaded Function -- when that becomes available
+
+  // model CloudEventRequest{
+  //   @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
+  //   @body _: CloudEventEvent
+  // };
+  // model EventEventRequest{
+  //   @header("content-type") contentType:  "application/json",
+  //   @body _: EventGridEvent
+  // };
+
+  // alias InputType = CloudEventRequest |  EventEventRequest;
+
+  // @post
+  // op PublishEvent(
+  //   ...ApiVersionParameter, 
+  //   @body
+  //   events: InputType,
+  // ):OkResponse;
+
+
   // @overload(PublishEvent)
   // @post
   // op PublishEventCloud(
-  //   events: CloudEventEvent,
+  //   events: CloudEventRequest,
   //   ...ApiVersionParameter,
-  //   @header("content-type") 
-  //   contentType: "application/cloudevents-batch+json; charset=utf-8",
   // ):OkResponse;
 
   // @overload(PublishEvent)
   // @post
   // op PublishEventEventGrid(
-  //   events: EventGridEvent,
+  //   events: EventEventRequest,
   //   ...ApiVersionParameter,
-  //   @header("content-type") contentType:  "application/json",
   // ):OkResponse;
 
-
-
-
-//   @post
-//   @route()
-//   // @route("?overload=cloudEvent")
-//   @tag("Events")
-//   @doc("Publishes a batch of events to an Azure Event Grid topic.")
-//   op PublishCloudEventEvents(
-//     @doc("An array of events to be published to Event Grid.")
-//     @body
-//     events: CloudEventEvent[],
-//     ...ApiVersionParameter,
-//     ...ChannelNameParameter,
-//   ): OkResponse;
-
-//   @post
-//   // @route("?overload=customEvent")
-//   @tag("Events")
-//   @doc("Publishes a batch of events to an Azure Event Grid topic.")
-//   op PublishCustomEventEvents(
-//     // @extension("x-ms-identifiers", [])
-//     @doc("An array of events to be published to Event Grid.")
-//     @body
-//     events: CustomEventEvent[],
-//     ...ApiVersionParameter,
-//   ): OkResponse;
-  
 }
 
 
