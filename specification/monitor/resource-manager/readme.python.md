@@ -20,7 +20,36 @@ clear-output-folder: true
 default-api-version: "2022-10-01"
 multiapi: true
 batch:
+  - tag: package-2022-08-01-preview-only
+  - tag: package-2022-10-01-only
+  - tag: package-2022-06-01-only
+  - tag: package-2022-04-01-only
+  - tag: package-2022-02-01-preview-only
+  - tag: package-2021-09-01-only
   - tag: package-2021-06-03-preview-only
+  - tag: package-2021-05-01-preview-only
+  - tag: package-2021-04-only
+  - tag: package-2020-10-only
+  - tag: package-2020-05-preview-only
+  - tag: package-2020-01-01-preview-only
+  - tag: package-2019-11-01-preview-only
+  - tag: package-2019-10-17-preview-only
+  - tag: package-2019-06-01-only
+  - tag: package-2019-03-01-only
+  - tag: package-2018-11-27-preview-only
+  - tag: package-2018-09-01-python-only
+  - tag: package-2018-06-01-preview-only
+  - tag: package-2018-04-16-only
+  - tag: package-2018-03-01-only
+  - tag: package-2018-01-01-only
+  - tag: package-2017-12-01-preview-only
+  - tag: package-2017-05-01-preview-only
+  - tag: package-2017-04-01-only
+  - tag: package-2017-03-01-preview-only
+  - tag: package-2016-09-01-only
+  - tag: package-2016-03-01-only
+  - tag: package-2015-07-01-only
+  - tag: package-2015-04-01-only
   - multiapiscript: true
 ```
 
@@ -97,6 +126,14 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2021-07-01-preview-only'
 namespace: $(python-base-namespace).v2021_07_01_preview
 output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_07_01_preview
+```
+
+### Tag: package-2021-06-03-preview-only and python
+These settings apply only when `--tag=package-2021-06-03-preview-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+``` yaml $(tag) == 'package-2021-06-03-preview-only'
+namespace: $(python-base-namespace).v2021_06_03_preview
+output-folder: $(python-sdks-folder)/$(python-base-folder)/v2021_06_03_preview
 ```
 
 ### Tag: package-2021-05-01-preview-only and python
