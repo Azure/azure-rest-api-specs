@@ -532,12 +532,12 @@
             "modelAsString": true
           }
         },
-        "deliveryAttemptTimestamp": {
+        "deliveryAttemptTimeStamp": {
           "description": "The time at which the email delivery report received timestamp",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "deliveryAttemptTimestamp"
         }
-      }
     },
     "AcsEmailEngagementTrackingReportReceivedEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.EmailEngagementTrackingReportReceived event.",
@@ -551,10 +551,11 @@
           "description": "The Id of the email that has been sent",
           "type": "string"
         },
-        "userActionTimestamp": {
+        "userActionTimeStamp": {
           "description": "The time at which the user interacted with the email",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-ms-client-name": "userActionTimestamp"
         },
         "engagementContext": {
           "description": "The context of the type of engagement user had with email",
@@ -567,6 +568,7 @@
         "engagementType": {
           "description": "The type of engagement user have with email",
           "type": "string",
+          "x-ms-client-name": "engagement",
           "enum": [
             "view",
             "click"
