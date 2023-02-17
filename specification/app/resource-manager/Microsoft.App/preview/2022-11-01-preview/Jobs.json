@@ -352,7 +352,7 @@
           {
             "name": "template",
             "in": "body",
-            "description": "Properties used to create a container apps job",
+            "description": "Properties used to start a job instance.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/JobExecutionTemplate"
@@ -423,7 +423,7 @@
           {
             "name": "jobExecutionName",
             "in": "path",
-            "description": "Name of the Container Apps Job's Execution.",
+            "description": "Job execution name.",
             "required": true,
             "type": "string",
             "pattern": "^[-\\w\\._\\(\\)]+$"
@@ -496,7 +496,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Container Apps Jobs terminated successfully."
+            "description": "List of all the job executions that were requested to be stopped",
+            "schema": {
+              "$ref": "#/definitions/ContainerAppJobExecutions"
+            }
           },
           "202": {
             "description": "OK",
@@ -954,6 +957,11 @@
           }
         },
         "startTime": {
+          "description": "Job execution start time.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
           "description": "Job execution start time.",
           "format": "date-time",
           "type": "string"
