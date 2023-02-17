@@ -834,6 +834,332 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/databaseConnections": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns overviews of database connections for a static site build",
+        "operationId": "StaticSites_GetBuildDatabaseConnections",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/environmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List overviews of database connections for the static site build.": {
+            "$ref": "./examples/GetStaticSiteBuildDatabaseConnections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/databaseConnections/{databaseConnectionName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns overview of a database connection for a static site build by name",
+        "operationId": "StaticSites_GetBuildDatabaseConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/environmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get overview of database connections for the static site build.": {
+            "$ref": "./examples/GetStaticSiteBuildDatabaseConnection.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Create or update a database connection for a static site build",
+        "description": "Description for Create or update a database connection for a static site build",
+        "operationId": "StaticSites_CreateOrUpdateBuildDatabaseConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/environmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "name": "databaseConnectionRequestEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the database connection request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a database connection for a static site build": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteBuildDatabaseConnection.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Delete a database connection for a static site build",
+        "operationId": "StaticSites_DeleteBuildDatabaseConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/environmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a database connection from a static site build.": {
+            "$ref": "./examples/DeleteStaticSiteBuildDatabaseConnection.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Create or update a database connection for a static site build",
+        "description": "Description for Create or update a database connection for a static site build",
+        "operationId": "StaticSites_UpdateBuildDatabaseConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/environmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "name": "databaseConnectionRequestEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the database connection request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionPatchRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a database connection for a static site build": {
+            "$ref": "./examples/PatchStaticSiteBuildDatabaseConnection.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/databaseConnections/{databaseConnectionName}/show": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns details of a database connection for a static site build by name",
+        "operationId": "StaticSites_GetBuildDatabaseConnectionWithDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/environmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of database connections for the static site build.": {
+            "$ref": "./examples/GetStaticSiteBuildDatabaseConnectionWithDetails.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/functions": {
       "get": {
         "tags": [
@@ -996,6 +1322,58 @@
           "Get function app settings of a static site build": {
             "$ref": "./examples/ListStaticSiteBuildFunctionAppSettings.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/builds/{environmentName}/showDatabaseConnections": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns details of database connections for a static site build",
+        "operationId": "StaticSites_GetBuildDatabaseConnectionsWithDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/environmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List full details of database connections for the static site build.": {
+            "$ref": "./examples/GetStaticSiteBuildDatabaseConnectionsWithDetails.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1777,6 +2155,314 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/databaseConnections": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns overviews of database connections for a static site",
+        "operationId": "StaticSites_GetDatabaseConnections",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List overviews of database connections for the static site.": {
+            "$ref": "./examples/GetStaticSiteDatabaseConnections.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/databaseConnections/{databaseConnectionName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns overview of a database connection for a static site by name",
+        "operationId": "StaticSites_GetDatabaseConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get overview of database connections for the static site.": {
+            "$ref": "./examples/GetStaticSiteDatabaseConnection.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Create or update a database connection for a static site",
+        "description": "Description for Create or update a database connection for a static site",
+        "operationId": "StaticSites_CreateOrUpdateDatabaseConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "name": "databaseConnectionRequestEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the database connection request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a database connection for a static site": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteDatabaseConnection.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Delete a database connection for a static site",
+        "operationId": "StaticSites_DeleteDatabaseConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a database connection from a static site.": {
+            "$ref": "./examples/DeleteStaticSiteDatabaseConnection.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Create or update a database connection for a static site",
+        "description": "Description for Create or update a database connection for a static site",
+        "operationId": "StaticSites_UpdateDatabaseConnection",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "name": "databaseConnectionRequestEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the database connection request properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionPatchRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a database connection for a static site": {
+            "$ref": "./examples/PatchStaticSiteDatabaseConnection.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/databaseConnections/{databaseConnectionName}/show": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns details of a database connection for a static site by name",
+        "operationId": "StaticSites_GetDatabaseConnectionWithDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/databaseConnectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get details of database connections for the static site.": {
+            "$ref": "./examples/GetStaticSiteDatabaseConnectionWithDetails.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/detach": {
       "post": {
         "tags": [
@@ -2396,6 +3082,55 @@
           "Reset the api key for a static site": {
             "$ref": "./examples/ResetStaticSiteApiKey.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/showDatabaseConnections": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Returns details of database connections for a static site",
+        "operationId": "StaticSites_GetDatabaseConnectionsWithDetails",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseConnectionCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List full details of database connections for the static site.": {
+            "$ref": "./examples/GetStaticSiteDatabaseConnectionsWithDetails.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3520,6 +4255,17 @@
         "publicNetworkAccess": {
           "description": "State indicating whether public traffic are allowed or not for a static web app. Allowed Values: 'Enabled', 'Disabled' or an empty string.",
           "type": "string"
+        },
+        "databaseConnections": {
+          "description": "Database connections for the static site",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseConnectionOverview"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "readOnly": true
         }
       }
     },
@@ -3624,6 +4370,17 @@
                 "$ref": "#/definitions/StaticSiteLinkedBackend"
               },
               "x-ms-identifiers": [],
+              "readOnly": true
+            },
+            "databaseConnections": {
+              "description": "Database connections for the static site build",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DatabaseConnectionOverview"
+              },
+              "x-ms-identifiers": [
+                "name"
+              ],
               "readOnly": true
             }
           },
@@ -3804,6 +4561,167 @@
             "validationMethod": {
               "description": "Validation method for adding a custom domain",
               "default": "cname-delegation",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteDatabaseConnectionConfigurationFileOverview": {
+      "description": "A database connection configuration file",
+      "type": "object",
+      "properties": {
+        "fileName": {
+          "description": "The name of the configuration file.",
+          "type": "string",
+          "readOnly": true
+        },
+        "contents": {
+          "description": "The Base64 encoding of the file contents.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of configuration file.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "DatabaseConnection": {
+      "description": "Static Site Database Connection resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DatabaseConnection resource specific properties",
+          "type": "object",
+          "required": [
+            "resourceId",
+            "region"
+          ],
+          "properties": {
+            "resourceId": {
+              "description": "The resource id of the database.",
+              "type": "string"
+            },
+            "connectionIdentity": {
+              "description": "If present, the identity is used in conjunction with connection string to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
+              "type": "string"
+            },
+            "connectionString": {
+              "description": "The connection string to use to connect to the database.",
+              "type": "string",
+              "x-ms-secret": true
+            },
+            "region": {
+              "description": "The region of the database resource.",
+              "type": "string"
+            },
+            "configurationFiles": {
+              "description": "A list of configuration files associated with this database connection.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StaticSiteDatabaseConnectionConfigurationFileOverview"
+              },
+              "x-ms-identifiers": [
+                "fileName"
+              ],
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DatabaseConnectionOverview": {
+      "description": "Static Site Database Connection overview.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "The resource id of the database.",
+          "type": "string",
+          "readOnly": true
+        },
+        "connectionIdentity": {
+          "description": "If present, the identity is used in conjunction with connection string to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "region": {
+          "description": "The region of the database resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "configurationFiles": {
+          "description": "A list of configuration files associated with this database connection.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteDatabaseConnectionConfigurationFileOverview"
+          },
+          "x-ms-identifiers": [
+            "fileName"
+          ],
+          "readOnly": true
+        },
+        "name": {
+          "description": "If present, the name of this database connection resource.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-client-flatten": true
+    },
+    "DatabaseConnectionCollection": {
+      "description": "Collection of static site database connections.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseConnection"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DatabaseConnectionPatchRequest": {
+      "description": "Static Site Database Connection Request Properties resource when patching",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "DatabaseConnectionPatchRequest resource specific properties",
+          "type": "object",
+          "properties": {
+            "resourceId": {
+              "description": "The resource id of the database.",
+              "type": "string"
+            },
+            "connectionIdentity": {
+              "description": "If present, the identity is used in conjunction with connection string to connect to the database. Use of the system-assigned managed identity is indicated with the string 'SystemAssigned', while use of a user-assigned managed identity is indicated with the resource id of the managed identity resource.",
+              "type": "string"
+            },
+            "connectionString": {
+              "description": "The connection string to use to connect to the database.",
+              "type": "string",
+              "x-ms-secret": true
+            },
+            "region": {
+              "description": "The region of the database resource.",
               "type": "string"
             }
           },
@@ -4378,6 +5296,24 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
+    },
+    "environmentNameParameter": {
+      "name": "environmentName",
+      "in": "path",
+      "description": "The stage site identifier.",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9]+$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "databaseConnectionNameParameter": {
+      "name": "databaseConnectionName",
+      "in": "path",
+      "description": "Name of the database connection.",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9]+$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
