@@ -14,19 +14,33 @@
             "name": "testcontainerApp0-pjxhsye",
             "status": "running",
             "startTime": "2023-02-13T20:37:30+00:00",
-            "jobExecutionContainer": {
-              "image": "repo/testcontainerAppsJob0:v1",
-              "name": "testcontainerAppsJob0",
-              "resources": {
-                "cpu": 0.2,
-                "memory": "100Mi"
-              },
-              "command": [
-                "/bin/sh"
+            "template": {
+              "containers": [
+                {
+                  "image": "repo/testcontainerAppsJob0:v4",
+                  "name": "testcontainerAppsJob0",
+                  "resources": {
+                    "cpu": 0.2,
+                    "memory": "100Mi"
+                  }
+                }
               ],
-              "args": [
-                "-c",
-                "while true; do echo hello;done"
+              "initContainers": [
+                {
+                  "image": "repo/testcontainerAppsJob0:v4",
+                  "name": "testinitcontainerAppsJob0",
+                  "resources": {
+                    "cpu": 0.2,
+                    "memory": "100Mi"
+                  },
+                  "command": [
+                    "/bin/sh"
+                  ],
+                  "args": [
+                    "-c",
+                    "while true; do echo hello; sleep 10;done"
+                  ]
+                }
               ]
             }
           }
