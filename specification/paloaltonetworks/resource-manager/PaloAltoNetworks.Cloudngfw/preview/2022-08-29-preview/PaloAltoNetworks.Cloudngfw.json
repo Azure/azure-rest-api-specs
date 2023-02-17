@@ -5006,6 +5006,14 @@
           "$ref": "#/definitions/NetworkProfile",
           "description": "Network settings"
         },
+        "isPanoramaManaged": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "Panorama Managed: Default is False. Default will be CloudSec managed"
+        },
+        "panoramaConfig": {
+          "$ref": "#/definitions/PanoramaConfig",
+          "description": "Panorama Configuration"
+        },
         "associatedRulestack": {
           "$ref": "#/definitions/RulestackDetails",
           "description": "Associated Rulestack"
@@ -5128,6 +5136,14 @@
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "Network settings"
+        },
+        "isPanoramaManaged": {
+          "$ref": "#/definitions/BooleanEnum",
+          "description": "Panorama Managed: Default is False. Default will be CloudSec managed"
+        },
+        "panoramaConfig": {
+          "$ref": "#/definitions/PanoramaConfig",
+          "description": "Panorama Configuration"
         },
         "associatedRulestack": {
           "$ref": "#/definitions/RulestackDetails",
@@ -5902,6 +5918,54 @@
         "name": "NetworkType",
         "modelAsString": true
       }
+    },
+    "PanoramaConfig": {
+      "type": "object",
+      "properties": {
+        "configString": {
+          "type": "string",
+          "description": "Base64 encoded string representing Panorama parameters to be used by Firewall to connect to Panorama. This string is generated via azure plugin in Panorama"
+        },
+        "vmAuthKey": {
+          "type": "string",
+          "description": "VM auth key for panorama connectivity",
+          "readOnly": true
+        },
+        "panoramaServer": {
+          "type": "string",
+          "description": "Primary Panorama Server IP address value in dotted format for IPv4",
+          "readOnly": true
+        },
+        "panoramaServer2": {
+          "type": "string",
+          "description": "Secondary Panorama Server IP address value in dotted format for IPv4",
+          "readOnly": true
+        },
+        "dgName": {
+          "type": "string",
+          "description": "Panorama Device Group to join",
+          "readOnly": true
+        },
+        "tplName": {
+          "type": "string",
+          "description": "Panorama Template Stack to join - (Once configured we can not edit the value)",
+          "readOnly": true
+        },
+        "cgName": {
+          "type": "string",
+          "description": "Panorama Collector Group to join - (Once configured we can not edit the value)",
+          "readOnly": true
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Resource name(may be unique) for PN admin",
+          "readOnly": true
+        }
+      },
+      "description": "Panorama Config",
+      "required": [
+        "configString"
+      ]
     },
     "PlanData": {
       "type": "object",
