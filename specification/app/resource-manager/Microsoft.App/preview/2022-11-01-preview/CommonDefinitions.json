@@ -614,7 +614,8 @@
           "description": "Storage type for the volume. If not provided, use EmptyDir.",
           "enum": [
             "AzureFile",
-            "EmptyDir"
+            "EmptyDir",
+            "Secret"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -623,8 +624,22 @@
           }
         },
         "storageName": {
-          "description": "Name of storage resource. No need to provide for EmptyDir.",
+          "description": "Name of storage resource. No need to provide for EmptyDir and Secret.",
           "type": "string"
+        },
+        "secrets": {
+          "description": "Secrets to be added in volume. If no secrets are provided, all secrets in collection will be added to volume.",
+          "type": "object",
+          "properties": {
+            "secretRef": {
+              "description": "Name of the Container App secret from which to pull the secret value.",
+              "type": "string"
+            },
+            "path": {
+              "description": "Path to project secret to. If no path is provided, path default to name of secret in secretRef.",
+              "type": "string"
+            }
+          }
         }
       }
     },
