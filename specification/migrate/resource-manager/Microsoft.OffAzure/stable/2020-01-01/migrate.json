@@ -109,9 +109,6 @@
       "name": "Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.HyperVHostController"
     },
     {
-      "name": "Microsoft.Azure.FDS.WebRole.V2022_10_27.HyperVMachinesController"
-    },
-    {
       "name": "HypervMachines"
     },
     {
@@ -164,16 +161,18 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List_MaximumSet_Gen": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_MinimumSet_Gen": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -209,12 +208,14 @@
             "schema": {
               "$ref": "#/definitions/HyperVSite"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HyperVSites_GetSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSite_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "HyperVSites_GetSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSite_MinimumSet_Gen.json"
           }
         }
       },
@@ -271,18 +272,20 @@
             "schema": {
               "$ref": "#/definitions/HyperVSite"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "HyperVSites_PutSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_PutSite_MaximumSet_Gen.json"
+          },
+          "HyperVSites_PutSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_PutSite_MinimumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -324,6 +327,14 @@
               "$ref": "#/definitions/HyperVSite"
             }
           }
+        },
+        "x-ms-examples": {
+          "HyperVSites_PatchSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_PatchSite_MaximumSet_Gen.json"
+          },
+          "HyperVSites_PatchSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_PatchSite_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -357,12 +368,14 @@
           },
           "204": {
             "description": "Resource deleted successfully."
+          }
+        },
+        "x-ms-examples": {
+          "HyperVSites_DeleteSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_DeleteSite_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "HyperVSites_DeleteSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_DeleteSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -406,16 +419,18 @@
             "schema": {
               "$ref": "#/definitions/HyperVClusterCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HyperVCluster_GetAllClustersInSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVCluster_GetAllClustersInSite_MaximumSet_Gen.json"
+          },
+          "HyperVCluster_GetAllClustersInSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVCluster_GetAllClustersInSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -458,12 +473,14 @@
             "schema": {
               "$ref": "#/definitions/HyperVCluster"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HyperVCluster_GetCluster_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVCluster_GetCluster_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "HyperVCluster_GetCluster_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVCluster_GetCluster_MinimumSet_Gen.json"
           }
         }
       },
@@ -527,18 +544,20 @@
             "schema": {
               "$ref": "#/definitions/HyperVCluster"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "HyperVCluster_PutCluster_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVCluster_PutCluster_MaximumSet_Gen.json"
+          },
+          "HyperVCluster_PutCluster_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVCluster_PutCluster_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/errorSummary": {
@@ -583,6 +602,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HypervSites_ErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSites_ErrorSummary_MaximumSet_Gen.json"
+          },
+          "HypervSites_ErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/HypervSites_ErrorSummary_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -617,6 +644,14 @@
             "schema": {
               "$ref": "#/definitions/SiteHealthSummaryCollection"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HyperVSites_GetSiteHealthSummary_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSiteHealthSummary_MaximumSet_Gen.json"
+          },
+          "HyperVSites_GetSiteHealthSummary_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSiteHealthSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -660,16 +695,18 @@
             "schema": {
               "$ref": "#/definitions/HyperVHostCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HyperVHost_GetAllHostsInSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVHost_GetAllHostsInSite_MaximumSet_Gen.json"
+          },
+          "HyperVHost_GetAllHostsInSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVHost_GetAllHostsInSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -712,12 +749,14 @@
             "schema": {
               "$ref": "#/definitions/HyperVHost"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HyperVHost_GetHost_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVHost_GetHost_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "HyperVHost_GetHost_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVHost_GetHost_MinimumSet_Gen.json"
           }
         }
       },
@@ -781,18 +820,20 @@
             "schema": {
               "$ref": "#/definitions/HyperVHost"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "HyperVHost_PutHost_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVHost_PutHost_MaximumSet_Gen.json"
+          },
+          "HyperVHost_PutHost_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVHost_PutHost_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/jobs": {
@@ -827,16 +868,18 @@
             "schema": {
               "$ref": "#/definitions/HyperVJobCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HyperVJobs_GetAllJobsInSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVJobs_GetAllJobsInSite_MaximumSet_Gen.json"
+          },
+          "HyperVJobs_GetAllJobsInSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVJobs_GetAllJobsInSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -879,12 +922,14 @@
             "schema": {
               "$ref": "#/definitions/HyperVJob"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HyperVJobs_GetJob_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVJobs_GetJob_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "HyperVJobs_GetJob_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVJobs_GetJob_MinimumSet_Gen.json"
           }
         }
       }
@@ -892,7 +937,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/machines": {
       "get": {
         "tags": [
-          "Microsoft.Azure.FDS.WebRole.V2022_10_27.HyperVMachinesController",
           "HypervMachines"
         ],
         "operationId": "HyperVMachines_GetAllMachinesInSite",
@@ -951,23 +995,24 @@
             "schema": {
               "$ref": "#/definitions/HyperVMachineCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HyperVMachines_GetAllMachinesInSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVMachines_GetAllMachinesInSite_MaximumSet_Gen.json"
+          },
+          "HyperVMachines_GetAllMachinesInSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVMachines_GetAllMachinesInSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/machines/{machineName}": {
       "get": {
         "tags": [
-          "Microsoft.Azure.FDS.WebRole.V2022_10_27.HyperVMachinesController",
           "HypervMachines"
         ],
         "operationId": "HyperVMachines_GetMachine",
@@ -1003,12 +1048,14 @@
             "schema": {
               "$ref": "#/definitions/HyperVMachine"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HyperVMachines_GetMachine_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVMachines_GetMachine_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "HyperVMachines_GetMachine_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVMachines_GetMachine_MinimumSet_Gen.json"
           }
         }
       }
@@ -1051,6 +1098,14 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HyperVOperationsStatus_GetOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVOperationsStatus_GetOperationStatus_MaximumSet_Gen.json"
+          },
+          "HyperVOperationsStatus_GetOperationStatus_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVOperationsStatus_GetOperationStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -1099,18 +1154,20 @@
                 "format": "int32"
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "HyperVSites_RefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_RefreshSite_MaximumSet_Gen.json"
+          },
+          "HyperVSites_RefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_RefreshSite_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/runAsAccounts": {
@@ -1144,16 +1201,18 @@
             "schema": {
               "$ref": "#/definitions/HypervRunAsAccountResourceCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HyperVRunAsAccounts_GetAllRunAsAccountsInSite_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVRunAsAccounts_GetAllRunAsAccountsInSite_MaximumSet_Gen.json"
+          },
+          "HyperVRunAsAccounts_GetAllRunAsAccountsInSite_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVRunAsAccounts_GetAllRunAsAccountsInSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1195,12 +1254,14 @@
             "schema": {
               "$ref": "#/definitions/HypervRunAsAccountResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HyperVRunAsAccounts_GetRunAsAccount_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVRunAsAccounts_GetRunAsAccount_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "HyperVRunAsAccounts_GetRunAsAccount_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVRunAsAccounts_GetRunAsAccount_MinimumSet_Gen.json"
           }
         }
       }
@@ -1246,18 +1307,20 @@
                 "format": "int32"
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "HyperVSites_GetSiteUsage_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSiteUsage_MaximumSet_Gen.json"
+          },
+          "HyperVSites_GetSiteUsage_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_GetSiteUsage_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/updateProperties": {
@@ -1307,18 +1370,20 @@
           },
           "204": {
             "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "HypervSites_UpdateProperties_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSites_UpdateProperties_MaximumSet_Gen.json"
+          },
+          "HypervSites_UpdateProperties_MinimumSet_Gen": {
+            "$ref": "./examples/HypervSites_UpdateProperties_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/usage": {
@@ -1352,6 +1417,14 @@
             "schema": {
               "$ref": "#/definitions/SiteUsageResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "HypervSites_Usage_MaximumSet_Gen": {
+            "$ref": "./examples/HypervSites_Usage_MaximumSet_Gen.json"
+          },
+          "HypervSites_Usage_MinimumSet_Gen": {
+            "$ref": "./examples/HypervSites_Usage_MinimumSet_Gen.json"
           }
         }
       }
@@ -1388,12 +1461,14 @@
             "schema": {
               "$ref": "#/definitions/ImportSiteResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ImportSites_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ImportSites_Get_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ImportSites_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ImportSites_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -1449,18 +1524,20 @@
             "schema": {
               "$ref": "#/definitions/ImportSiteResource"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ImportSites_Create_MaximumSet_Gen": {
+            "$ref": "./examples/ImportSites_Create_MaximumSet_Gen.json"
+          },
+          "ImportSites_Create_MinimumSet_Gen": {
+            "$ref": "./examples/ImportSites_Create_MinimumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -1501,12 +1578,14 @@
             "schema": {
               "$ref": "#/definitions/ImportSiteResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ImportSites_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ImportSites_Update_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ImportSites_Update_MinimumSet_Gen": {
+            "$ref": "./examples/ImportSites_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -1541,12 +1620,14 @@
           },
           "204": {
             "description": "Resource deleted successfully."
+          }
+        },
+        "x-ms-examples": {
+          "ImportSites_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ImportSites_Delete_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ImportSites_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ImportSites_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -1592,12 +1673,14 @@
             "schema": {
               "$ref": "#/definitions/SasUriResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ImportSites_ExportUri_MaximumSet_Gen": {
+            "$ref": "./examples/ImportSites_ExportUri_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ImportSites_ExportUri_MinimumSet_Gen": {
+            "$ref": "./examples/ImportSites_ExportUri_MinimumSet_Gen.json"
           }
         }
       }
@@ -1653,18 +1736,20 @@
                 "format": "int32"
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ImportSites_ImportUri_MaximumSet_Gen": {
+            "$ref": "./examples/ImportSites_ImportUri_MaximumSet_Gen.json"
+          },
+          "ImportSites_ImportUri_MinimumSet_Gen": {
+            "$ref": "./examples/ImportSites_ImportUri_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/importSites/{siteName}/jobs": {
@@ -1698,16 +1783,18 @@
             "schema": {
               "$ref": "#/definitions/ImportJobResourceCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ImportJobs_ListByImportSiteResource_MaximumSet_Gen": {
+            "$ref": "./examples/ImportJobs_ListByImportSiteResource_MaximumSet_Gen.json"
+          },
+          "ImportJobs_ListByImportSiteResource_MinimumSet_Gen": {
+            "$ref": "./examples/ImportJobs_ListByImportSiteResource_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1749,12 +1836,14 @@
             "schema": {
               "$ref": "#/definitions/ImportJobResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ImportJobs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ImportJobs_Get_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ImportJobs_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ImportJobs_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -1787,7 +1876,7 @@
           {
             "name": "pagesize",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "page size  query",
             "type": "string"
           },
@@ -1820,16 +1909,18 @@
             "schema": {
               "$ref": "#/definitions/ImportMachineResourceCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ImportMachines_ListByImportSiteResource_MaximumSet_Gen": {
+            "$ref": "./examples/ImportMachines_ListByImportSiteResource_MaximumSet_Gen.json"
+          },
+          "ImportMachines_ListByImportSiteResource_MinimumSet_Gen": {
+            "$ref": "./examples/ImportMachines_ListByImportSiteResource_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -1872,12 +1963,14 @@
             "schema": {
               "$ref": "#/definitions/ImportMachineResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ImportMachines_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ImportMachines_Get_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ImportMachines_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ImportMachines_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -1919,12 +2012,14 @@
           },
           "204": {
             "description": "Resource deleted successfully."
+          }
+        },
+        "x-ms-examples": {
+          "ImportMachines_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ImportMachines_Delete_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ImportMachines_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ImportMachines_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -1960,12 +2055,14 @@
             "schema": {
               "$ref": "#/definitions/ServerSiteResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSitesInterface_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Get_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ServerSitesInterface_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -2021,18 +2118,20 @@
             "schema": {
               "$ref": "#/definitions/ServerSiteResource"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ServerSitesInterface_Create_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Create_MaximumSet_Gen.json"
+          },
+          "ServerSitesInterface_Create_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Create_MinimumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -2073,12 +2172,14 @@
             "schema": {
               "$ref": "#/definitions/ServerSiteResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSitesInterface_Update_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Update_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ServerSitesInterface_Update_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Update_MinimumSet_Gen.json"
           }
         }
       },
@@ -2112,12 +2213,14 @@
           },
           "204": {
             "description": "Resource deleted successfully."
+          }
+        },
+        "x-ms-examples": {
+          "ServerSitesInterface_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Delete_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ServerSitesInterface_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -2157,6 +2260,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ServerSitesInterface_ErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_ErrorSummary_MaximumSet_Gen.json"
+          },
+          "ServerSitesInterface_ErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_ErrorSummary_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2192,6 +2303,14 @@
               "$ref": "#/definitions/SiteHealthSummaryCollection"
             }
           }
+        },
+        "x-ms-examples": {
+          "ServerSitesInterface_HealthSummary_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_HealthSummary_MaximumSet_Gen.json"
+          },
+          "ServerSitesInterface_HealthSummary_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_HealthSummary_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2226,16 +2345,18 @@
             "schema": {
               "$ref": "#/definitions/ServerJobResourceCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ServerJobs_ListByServerSiteResource_MaximumSet_Gen": {
+            "$ref": "./examples/ServerJobs_ListByServerSiteResource_MaximumSet_Gen.json"
+          },
+          "ServerJobs_ListByServerSiteResource_MinimumSet_Gen": {
+            "$ref": "./examples/ServerJobs_ListByServerSiteResource_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2277,12 +2398,14 @@
             "schema": {
               "$ref": "#/definitions/ServerJobResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServerJobs_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ServerJobs_Get_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ServerJobs_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ServerJobs_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -2318,6 +2441,14 @@
             "schema": {
               "$ref": "#/definitions/ServerResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServerSitesInterface_Machines_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Machines_MaximumSet_Gen.json"
+          },
+          "ServerSitesInterface_Machines_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Machines_MinimumSet_Gen.json"
           }
         }
       }
@@ -2360,12 +2491,14 @@
             "schema": {
               "$ref": "#/definitions/ServerResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServerMachines_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ServerMachines_Get_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ServerMachines_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ServerMachines_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -2428,18 +2561,20 @@
             "schema": {
               "$ref": "#/definitions/ServerResource"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ServerMachines_Create_MaximumSet_Gen": {
+            "$ref": "./examples/ServerMachines_Create_MaximumSet_Gen.json"
+          },
+          "ServerMachines_Create_MinimumSet_Gen": {
+            "$ref": "./examples/ServerMachines_Create_MinimumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -2478,12 +2613,14 @@
           },
           "204": {
             "description": "Resource deleted successfully."
+          }
+        },
+        "x-ms-examples": {
+          "ServerMachines_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/ServerMachines_Delete_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ServerMachines_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/ServerMachines_Delete_MinimumSet_Gen.json"
           }
         }
       }
@@ -2527,6 +2664,79 @@
               "$ref": "#/definitions/OperationStatus"
             }
           }
+        },
+        "x-ms-examples": {
+          "ServerSiteOperationsStatus_GetOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSiteOperationsStatus_GetOperationStatus_MaximumSet_Gen.json"
+          },
+          "ServerSiteOperationsStatus_GetOperationStatus_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSiteOperationsStatus_GetOperationStatus_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/refreshSite": {
+      "post": {
+        "tags": [
+          "ServerSitesInterface"
+        ],
+        "operationId": "ServerSitesInterface_RefreshSite",
+        "description": "Operation to refresh a site",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-cadl-name": "{}"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Action completed successfully."
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ServerSitesInterface_RefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_RefreshSite_MaximumSet_Gen.json"
+          },
+          "ServerSitesInterface_RefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_RefreshSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2561,16 +2771,18 @@
             "schema": {
               "$ref": "#/definitions/ServerRunAsAccountResourceCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ServerRunAsAccounts_ListByServerSiteResource_MaximumSet_Gen": {
+            "$ref": "./examples/ServerRunAsAccounts_ListByServerSiteResource_MaximumSet_Gen.json"
+          },
+          "ServerRunAsAccounts_ListByServerSiteResource_MinimumSet_Gen": {
+            "$ref": "./examples/ServerRunAsAccounts_ListByServerSiteResource_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2612,12 +2824,14 @@
             "schema": {
               "$ref": "#/definitions/ServerRunAsAccountResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ServerRunAsAccounts_Get_MaximumSet_Gen": {
+            "$ref": "./examples/ServerRunAsAccounts_Get_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "ServerRunAsAccounts_Get_MinimumSet_Gen": {
+            "$ref": "./examples/ServerRunAsAccounts_Get_MinimumSet_Gen.json"
           }
         }
       }
@@ -2654,6 +2868,14 @@
               "$ref": "#/definitions/ServerSiteUsageResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "ServerSitesInterface_Usage_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Usage_MaximumSet_Gen.json"
+          },
+          "ServerSitesInterface_Usage_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_Usage_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2689,12 +2911,14 @@
             "schema": {
               "$ref": "#/definitions/VMwareSite"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Sites_GetSite_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_GetSite_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "Sites_GetSite_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_GetSite_MinimumSet_Gen.json"
           }
         }
       },
@@ -2750,18 +2974,20 @@
             "schema": {
               "$ref": "#/definitions/VMwareSite"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Sites_PutSite_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_PutSite_MaximumSet_Gen.json"
+          },
+          "Sites_PutSite_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_PutSite_MinimumSet_Gen.json"
+          }
+        }
       },
       "patch": {
         "tags": [
@@ -2803,6 +3029,14 @@
               "$ref": "#/definitions/VMwareSite"
             }
           }
+        },
+        "x-ms-examples": {
+          "Sites_PatchSite_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_PatchSite_MaximumSet_Gen.json"
+          },
+          "Sites_PatchSite_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_PatchSite_MinimumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -2836,12 +3070,14 @@
           },
           "204": {
             "description": "Resource deleted successfully."
+          }
+        },
+        "x-ms-examples": {
+          "Sites_DeleteSite_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_DeleteSite_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "Sites_DeleteSite_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_DeleteSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -2888,6 +3124,14 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VmwareSites_ErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSites_ErrorSummary_MaximumSet_Gen.json"
+          },
+          "VmwareSites_ErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareSites_ErrorSummary_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -2929,6 +3173,14 @@
             "schema": {
               "$ref": "#/definitions/SiteUsageResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareSites_Usage_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSites_Usage_MaximumSet_Gen.json"
+          },
+          "VmwareSites_Usage_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareSites_Usage_MinimumSet_Gen.json"
           }
         }
       }
@@ -2972,18 +3224,20 @@
           },
           "204": {
             "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MaximumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MaximumSet_Gen.json"
+          },
+          "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MinimumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/exportMachineErrors": {
@@ -3034,18 +3288,20 @@
           },
           "204": {
             "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MaximumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MaximumSet_Gen.json"
+          },
+          "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MinimumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/exportMachines": {
@@ -3093,12 +3349,14 @@
               "properties": {},
               "x-cadl-name": "{}"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VmwareSites_ExportMachines_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSites_ExportMachines_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "VmwareSites_ExportMachines_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareSites_ExportMachines_MinimumSet_Gen.json"
           }
         }
       }
@@ -3135,6 +3393,14 @@
               "$ref": "#/definitions/SiteHealthSummaryCollection"
             }
           }
+        },
+        "x-ms-examples": {
+          "Sites_GetSiteHealthSummary_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteHealthSummary_MaximumSet_Gen.json"
+          },
+          "Sites_GetSiteHealthSummary_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteHealthSummary_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -3169,16 +3435,18 @@
             "schema": {
               "$ref": "#/definitions/VmwareJobResourceCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Jobs_GetAllJobsInSite_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_GetAllJobsInSite_MaximumSet_Gen.json"
+          },
+          "Jobs_GetAllJobsInSite_MinimumSet_Gen": {
+            "$ref": "./examples/Jobs_GetAllJobsInSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -3220,12 +3488,14 @@
             "schema": {
               "$ref": "#/definitions/VmwareJobResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Jobs_GetJob_MaximumSet_Gen": {
+            "$ref": "./examples/Jobs_GetJob_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "Jobs_GetJob_MinimumSet_Gen": {
+            "$ref": "./examples/Jobs_GetJob_MinimumSet_Gen.json"
           }
         }
       }
@@ -3292,16 +3562,18 @@
             "schema": {
               "$ref": "#/definitions/MachineResourceCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Machines_GetAllMachinesInSite_MaximumSet_Gen": {
+            "$ref": "./examples/Machines_GetAllMachinesInSite_MaximumSet_Gen.json"
+          },
+          "Machines_GetAllMachinesInSite_MinimumSet_Gen": {
+            "$ref": "./examples/Machines_GetAllMachinesInSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -3344,12 +3616,14 @@
             "schema": {
               "$ref": "#/definitions/MachineResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Machines_GetMachine_MaximumSet_Gen": {
+            "$ref": "./examples/Machines_GetMachine_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "Machines_GetMachine_MinimumSet_Gen": {
+            "$ref": "./examples/Machines_GetMachine_MinimumSet_Gen.json"
           }
         }
       }
@@ -3393,6 +3667,14 @@
             "schema": {
               "$ref": "#/definitions/MachineResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Machines_Applications_MaximumSet_Gen": {
+            "$ref": "./examples/Machines_Applications_MaximumSet_Gen.json"
+          },
+          "Machines_Applications_MinimumSet_Gen": {
+            "$ref": "./examples/Machines_Applications_MinimumSet_Gen.json"
           }
         }
       }
@@ -3448,18 +3730,20 @@
                 "format": "int32"
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Machines_StartMachine_MaximumSet_Gen": {
+            "$ref": "./examples/Machines_StartMachine_MaximumSet_Gen.json"
+          },
+          "Machines_StartMachine_MinimumSet_Gen": {
+            "$ref": "./examples/Machines_StartMachine_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/machines/{machineName}/stop": {
@@ -3513,18 +3797,20 @@
                 "format": "int32"
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Machines_StopMachine_MaximumSet_Gen": {
+            "$ref": "./examples/Machines_StopMachine_MaximumSet_Gen.json"
+          },
+          "Machines_StopMachine_MinimumSet_Gen": {
+            "$ref": "./examples/Machines_StopMachine_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/operationsStatus/{operationStatusName}": {
@@ -3565,6 +3851,14 @@
             "schema": {
               "$ref": "#/definitions/OperationStatus"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VMwareOperationsStatus_GetOperationStatus_MaximumSet_Gen": {
+            "$ref": "./examples/VMwareOperationsStatus_GetOperationStatus_MaximumSet_Gen.json"
+          },
+          "VMwareOperationsStatus_GetOperationStatus_MinimumSet_Gen": {
+            "$ref": "./examples/VMwareOperationsStatus_GetOperationStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -3613,18 +3907,20 @@
                 "format": "int32"
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Sites_RefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_RefreshSite_MaximumSet_Gen.json"
+          },
+          "Sites_RefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_RefreshSite_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/runAsAccounts": {
@@ -3658,16 +3954,18 @@
             "schema": {
               "$ref": "#/definitions/VmwareRunAsAccountResourceCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RunAsAccounts_GetAllRunAsAccountsInSite_MaximumSet_Gen": {
+            "$ref": "./examples/RunAsAccounts_GetAllRunAsAccountsInSite_MaximumSet_Gen.json"
+          },
+          "RunAsAccounts_GetAllRunAsAccountsInSite_MinimumSet_Gen": {
+            "$ref": "./examples/RunAsAccounts_GetAllRunAsAccountsInSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -3709,12 +4007,14 @@
             "schema": {
               "$ref": "#/definitions/VmwareRunAsAccountResource"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RunAsAccounts_GetRunAsAccount_MaximumSet_Gen": {
+            "$ref": "./examples/RunAsAccounts_GetRunAsAccount_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "RunAsAccounts_GetRunAsAccount_MinimumSet_Gen": {
+            "$ref": "./examples/RunAsAccounts_GetRunAsAccount_MinimumSet_Gen.json"
           }
         }
       }
@@ -3760,18 +4060,20 @@
                 "format": "int32"
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Sites_GetSiteUsage_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteUsage_MaximumSet_Gen.json"
+          },
+          "Sites_GetSiteUsage_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteUsage_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/updateDependencyMapStatus": {
@@ -3822,18 +4124,20 @@
           },
           "204": {
             "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen.json"
+          },
+          "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/updateProperties": {
@@ -3884,18 +4188,20 @@
           },
           "204": {
             "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VmwareSites_UpdateProperties_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSites_UpdateProperties_MaximumSet_Gen.json"
+          },
+          "VmwareSites_UpdateProperties_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareSites_UpdateProperties_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/updateRunAsAccount": {
@@ -3953,18 +4259,20 @@
                 "format": "int32"
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VmwareSites_UpdateRunAsAccount_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSites_UpdateRunAsAccount_MaximumSet_Gen.json"
+          },
+          "VmwareSites_UpdateRunAsAccount_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareSites_UpdateRunAsAccount_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/updateTags": {
@@ -4022,18 +4330,20 @@
                 "format": "int32"
               }
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VmwareSites_UpdateTags_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareSites_UpdateTags_MaximumSet_Gen.json"
+          },
+          "VmwareSites_UpdateTags_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareSites_UpdateTags_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/vCenters": {
@@ -4075,16 +4385,18 @@
             "schema": {
               "$ref": "#/definitions/VCenterCollection"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VCenter_GetAllVCentersInSite_MaximumSet_Gen": {
+            "$ref": "./examples/VCenter_GetAllVCentersInSite_MaximumSet_Gen.json"
+          },
+          "VCenter_GetAllVCentersInSite_MinimumSet_Gen": {
+            "$ref": "./examples/VCenter_GetAllVCentersInSite_MinimumSet_Gen.json"
+          }
         }
       }
     },
@@ -4127,12 +4439,14 @@
             "schema": {
               "$ref": "#/definitions/VCenter"
             }
+          }
+        },
+        "x-ms-examples": {
+          "VCenter_GetVCenter_MaximumSet_Gen": {
+            "$ref": "./examples/VCenter_GetVCenter_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "VCenter_GetVCenter_MinimumSet_Gen": {
+            "$ref": "./examples/VCenter_GetVCenter_MinimumSet_Gen.json"
           }
         }
       },
@@ -4196,18 +4510,20 @@
             "schema": {
               "$ref": "#/definitions/VCenter"
             }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "VCenter_PutVCenter_MaximumSet_Gen": {
+            "$ref": "./examples/VCenter_PutVCenter_MaximumSet_Gen.json"
+          },
+          "VCenter_PutVCenter_MinimumSet_Gen": {
+            "$ref": "./examples/VCenter_PutVCenter_MinimumSet_Gen.json"
+          }
+        }
       },
       "delete": {
         "tags": [
@@ -4247,77 +4563,16 @@
           },
           "204": {
             "description": "Resource deleted successfully."
+          }
+        },
+        "x-ms-examples": {
+          "VCenter_DeleteVCenter_MaximumSet_Gen": {
+            "$ref": "./examples/VCenter_DeleteVCenter_MaximumSet_Gen.json"
           },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
+          "VCenter_DeleteVCenter_MinimumSet_Gen": {
+            "$ref": "./examples/VCenter_DeleteVCenter_MinimumSet_Gen.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/serverSites/{siteName}/refreshSite/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/refreshSite": {
-      "post": {
-        "tags": [
-          "ServerSitesInterface"
-        ],
-        "operationId": "ServerSitesInterface_RefreshSite",
-        "description": "Operation to refresh a site",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "The content of the action request",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          },
-          "204": {
-            "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/serverSites/{siteName}/updateProperties/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serverSites/{siteName}/updateProperties": {
@@ -4367,18 +4622,20 @@
           },
           "204": {
             "description": "Action completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "ServerSitesInterface_UpdateProperties_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_UpdateProperties_MaximumSet_Gen.json"
+          },
+          "ServerSitesInterface_UpdateProperties_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesInterface_UpdateProperties_MinimumSet_Gen.json"
+          }
+        }
       }
     }
   },
@@ -4527,6 +4784,21 @@
       },
       "description": "BizTalkServer in the guest virtual machine."
     },
+    "ConnectorUnit": {
+      "type": "object",
+      "properties": {
+        "bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FrontEndBinding"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "FrontEndBinding[]",
+          "description": "Gets or sets the bindings for the connector."
+        }
+      },
+      "description": "The connectors of the web server."
+    },
     "DependencyMapDiscovery": {
       "type": "object",
       "properties": {
@@ -4568,6 +4840,20 @@
         "name": "DependencyMapDiscoveryScopeStatus",
         "modelAsString": true
       }
+    },
+    "DirectoryPath": {
+      "type": "object",
+      "properties": {
+        "virtual": {
+          "type": "string",
+          "description": "Gets or sets the virtual path for the directory."
+        },
+        "physical": {
+          "type": "string",
+          "description": "Gets or sets the physical path of the directory on the web server."
+        }
+      },
+      "description": "Second level entity for virtual directories."
     },
     "DiscoveryScopeErrorSummary": {
       "type": "object",
@@ -4623,6 +4909,41 @@
         "name": "DiscoveryScopes",
         "modelAsString": true
       }
+    },
+    "DiscoverySiteDataSource": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DiscoverySiteDataSourceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Web app data source web model.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DiscoverySiteDataSourceProperties": {
+      "type": "object",
+      "properties": {
+        "discoverySiteId": {
+          "type": "string",
+          "description": "Gets or sets the discovery site Id."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Discovery site data source properties class."
     },
     "DiscoveryState": {
       "type": "object",
@@ -4886,6 +5207,28 @@
       },
       "description": "Feature in the guest virtual machine."
     },
+    "FrontEndBinding": {
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "type": "string",
+          "description": "Gets or sets the Binding protocol."
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Gets or sets the Host name."
+        },
+        "port": {
+          "type": "string",
+          "description": "Gets or sets the Port number."
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "Gets or sets the IP Address."
+        }
+      },
+      "description": "Frontend bindings for a web application."
+    },
     "GuestOSDetails": {
       "type": "object",
       "properties": {
@@ -5019,6 +5362,18 @@
       ],
       "x-ms-enum": {
         "name": "HighlyAvailable",
+        "modelAsString": true
+      }
+    },
+    "HighlyAvailableKnownValues": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "No",
+        "Yes"
+      ],
+      "x-ms-enum": {
+        "name": "HighlyAvailableKnownValues",
         "modelAsString": true
       }
     },
@@ -5799,6 +6154,350 @@
         }
       },
       "description": "The response of a HypervRunAsAccountResource list operation."
+    },
+    "IISApplicationUnit": {
+      "type": "object",
+      "properties": {
+        "applicationPoolName": {
+          "type": "string",
+          "description": "Gets or sets the path of the directory."
+        },
+        "managedPipelineMode": {
+          "type": "string",
+          "description": "Gets or sets the managed pipeline mode."
+        },
+        "runtimeVersion": {
+          "type": "string",
+          "description": "Gets or sets the runtime version."
+        },
+        "enable32BitApiOnWin64": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether 32 bit applications are allowed to run\non 64 bit."
+        },
+        "path": {
+          "$ref": "#/definitions/DirectoryPath",
+          "description": "Gets or sets the path of the directory."
+        },
+        "directories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DirectoryPath"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "DirectoryPath[]",
+          "description": "Gets or sets the list of directories."
+        }
+      },
+      "description": "Second-level object for identification of application units in a web site\nhosted on IIS."
+    },
+    "IISVirtualApplicationUnit": {
+      "type": "object",
+      "properties": {
+        "isVirtualDirectory": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the application corresponds to a directory.",
+          "readOnly": true
+        },
+        "path": {
+          "$ref": "#/definitions/DirectoryPath",
+          "description": "Gets or sets the path of the directory."
+        },
+        "directories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DirectoryPath"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "DirectoryPath[]",
+          "description": "Gets or sets the list of directories."
+        }
+      },
+      "description": "Second-level object for identification of virtual applications in a web site\nhosted on IIS."
+    },
+    "IISWebApplicationProperties": {
+      "type": "object",
+      "properties": {
+        "applications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IISApplicationUnit"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "IISApplicationUnit[]",
+          "description": "Gets the list of application units for the web site.",
+          "readOnly": true
+        },
+        "virtualApplications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IISVirtualApplicationUnit"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "IISVirtualApplicationUnit[]",
+          "description": "Gets the list of application units for the web site.",
+          "readOnly": true
+        },
+        "webServerId": {
+          "type": "string",
+          "description": "Gets the web server id.",
+          "readOnly": true
+        },
+        "webServerName": {
+          "type": "string",
+          "description": "Gets the web server name.",
+          "readOnly": true
+        },
+        "virtualPath": {
+          "type": "string",
+          "description": "Gets the virtual path of the application.",
+          "readOnly": true
+        },
+        "physicalPath": {
+          "type": "string",
+          "description": "Gets the physical path of the application.",
+          "readOnly": true
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FrontEndBinding"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "FrontEndBinding[]",
+          "description": "Gets the front end bindings for the application.",
+          "readOnly": true
+        },
+        "frameworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationFramework"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "WebApplicationFramework[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationConfigurationUnit"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "WebApplicationConfigurationUnit[]",
+          "description": "Gets the configuration.",
+          "readOnly": true
+        },
+        "directories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationDirectoryUnit"
+          },
+          "x-cadl-name": "WebApplicationDirectoryUnit[]",
+          "description": "Gets the directories.",
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets the display name.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets tags that can be used with ODATA.",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether application is deleted.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking creation of the entity.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking last update operation.",
+          "readOnly": true
+        },
+        "serverType": {
+          "type": "string",
+          "description": "Gets the server type.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "applianceNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the appliance names.",
+          "readOnly": true
+        },
+        "hasErrors": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the WebApp has errors or not.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for web application properties."
+    },
+    "IISWebApplications": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IISWebApplicationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Web application REST Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "IISWebServerProperties": {
+      "type": "object",
+      "properties": {
+        "configurationLocation": {
+          "type": "string",
+          "description": "Gets the configuration location.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets the configuration location.",
+          "readOnly": true
+        },
+        "machineIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the list of machines.",
+          "readOnly": true
+        },
+        "webApplications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the list of web applications.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets the display name.",
+          "readOnly": true
+        },
+        "serverFqdn": {
+          "type": "string",
+          "description": "Gets the server FQDN.",
+          "readOnly": true
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "Gets the run as account id.",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether application is deleted.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking creation of the entity.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking last update operation.",
+          "readOnly": true
+        },
+        "serverType": {
+          "type": "string",
+          "description": "Gets the server type.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "applianceNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the appliance names.",
+          "readOnly": true
+        },
+        "hasErrors": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the WebApp has errors or not.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for web server properties."
+    },
+    "IISWebServers": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IISWebServerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Web server REST Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "ImportJobProperties": {
       "type": "object",
@@ -6878,6 +7577,42 @@
         "modelAsString": true
       }
     },
+    "RunAsAccountProperties": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the run as account.",
+          "readOnly": true
+        },
+        "credentialType": {
+          "type": "string",
+          "description": "Gets the credential type of the run as account.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Timestamp marking run as account creation.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Timestamp marking last updated on the run as account.",
+          "readOnly": true
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets the appliance name of the run as account.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for run as account properties."
+    },
     "RunAsAccountRunAsAccountProperties": {
       "type": "object",
       "properties": {
@@ -7437,6 +8172,24 @@
       },
       "description": "Class for site agent properties."
     },
+    "SiteApplianceProperties": {
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": " Gets or sets the service principal identity details used by agent for  communication              to the service.  "
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        }
+      },
+      "description": "Class for site appliance properties."
+    },
     "SiteErrorSummary": {
       "type": "object",
       "properties": {
@@ -7741,6 +8494,226 @@
         "discoveryScopeStatus"
       ]
     },
+    "SqlAvailabilityGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlAvailabilityGroupProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Class representing the web model of SQL Availability Group.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SqlAvailabilityGroupProperties": {
+      "type": "object",
+      "properties": {
+        "availabilityGroupName": {
+          "type": "string",
+          "description": "Gets or sets the SQL Availability Group Name."
+        },
+        "availabilityGroupType": {
+          "$ref": "#/definitions/SqlAvailabilityGroupPropertiesAvailabilityGroupType",
+          "description": "Gets or sets the type of availability group.             Currently there are two types of AGs Traditional and Distributed. "
+        },
+        "isMultiSubNet": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether AG is multi subnet or not."
+        },
+        "clusterName": {
+          "type": "string",
+          "description": "Gets or sets the Cluster name where AG is hosted."
+        },
+        "availabilityReplicas": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlAvailabilityGroupSqlAvailabilityReplicaProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "SqlAvailabilityGroupSqlAvailabilityReplicaProperties[]",
+          "description": "Gets the list of availability replica properties which together forms this availability group.",
+          "readOnly": true
+        },
+        "parentReplicaOverviewList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlAvailabilityReplicaOverview"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "SqlAvailabilityReplicaOverview[]",
+          "description": "Gets the parent availability replica overview if any.\n            This would be\nset with details of parent AG and AR for cases where this availability group is\na part of a distributed AG.\n            Currently, we do not populate this\nsince discovery and linking of DAG(Distributed Availability Group) is not\nimplemented.",
+          "readOnly": true
+        },
+        "isPartOfDistributedAvailabilityGroup": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether this Availability group is part of a\ndistributed AG."
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the entity is deleted."
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets or sets the marking machine creation."
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets or sets the timestamp marking last updated on the machine."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for SQL Server availability group properties."
+    },
+    "SqlAvailabilityGroupPropertiesAvailabilityGroupType": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Traditional",
+        "Distributed"
+      ],
+      "x-ms-enum": {
+        "name": "SqlAvailabilityGroupPropertiesAvailabilityGroupType",
+        "modelAsString": true
+      }
+    },
+    "SqlAvailabilityGroupReplicaInfo": {
+      "type": "object",
+      "properties": {
+        "clusterName": {
+          "type": "string",
+          "description": "Gets or sets the name of the cluster on which this replica is hosted."
+        },
+        "availabilityGroupName": {
+          "type": "string",
+          "description": "Gets or sets the name of the availability replica."
+        },
+        "availabilityGroupArmId": {
+          "type": "string",
+          "description": "Gets or sets the AG ARM ID which are part of this Replica."
+        }
+      },
+      "description": "Class which represents the SQL availability replica properties of type AG."
+    },
+    "SqlAvailabilityGroupSqlAvailabilityReplicaProperties": {
+      "type": "object",
+      "properties": {
+        "availabilityReplicaName": {
+          "type": "string",
+          "description": "Gets or sets the SQL Availability Replica Name."
+        },
+        "availabilityReplicaId": {
+          "type": "string",
+          "description": "Gets or sets the SQL Availability Replica Id."
+        },
+        "replicaType": {
+          "$ref": "#/definitions/SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaType",
+          "description": "Gets or sets the replica type of the availability group."
+        },
+        "replicaState": {
+          "$ref": "#/definitions/SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaState",
+          "description": "Gets or sets the state of the availability replica."
+        },
+        "replicaSyncStatus": {
+          "$ref": "#/definitions/SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSyncStatus",
+          "description": "Gets or sets the synchronization status of the replica."
+        },
+        "replicaCommitMode": {
+          "$ref": "#/definitions/SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaCommitMode",
+          "description": "Gets or sets the commit mode of the replica."
+        },
+        "replicaReadMode": {
+          "$ref": "#/definitions/SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaReadMode",
+          "description": "Gets or sets the read mode of the replica."
+        },
+        "replicaSeedMode": {
+          "$ref": "#/definitions/SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSeedMode",
+          "description": "Gets or sets the seed mode of the replica."
+        },
+        "sqlDatabaseReplicaInfo": {
+          "$ref": "#/definitions/SqlAvailabilityGroupSqlDatabaseReplicaInfo",
+          "description": "Gets or sets the Availability Replica object if Replica is of type database.\nThis is null in case Replica is\n            of type AG. This is to be populated\nin case of normal AG."
+        },
+        "sqlAvailabilityGroupReplicaInfo": {
+          "$ref": "#/definitions/SqlAvailabilityGroupReplicaInfo",
+          "description": "Gets or sets the Availability Replica object if Replica is of type AG. This is\nnull in case Replica is\n            of type database. This is to be populated\nin case AG is of type DAG."
+        }
+      },
+      "description": "Class for SQL Server availability replica properties."
+    },
+    "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaCommitMode": {
+      "type": "string"
+    },
+    "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaReadMode": {
+      "type": "string"
+    },
+    "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSeedMode": {
+      "type": "string"
+    },
+    "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaState": {
+      "type": "string"
+    },
+    "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSyncStatus": {
+      "type": "string"
+    },
+    "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaType": {
+      "type": "string"
+    },
+    "SqlAvailabilityGroupSqlDatabaseReplicaInfo": {
+      "type": "object",
+      "properties": {
+        "hostName": {
+          "type": "string",
+          "description": "Gets or sets the host name of the availability replica."
+        },
+        "sqlServerName": {
+          "type": "string",
+          "description": "Gets or sets the SQL Server name of the availability replica."
+        },
+        "sqlServerArmId": {
+          "type": "string",
+          "description": "Gets or sets the SQL Server name of the availability replica."
+        }
+      },
+      "description": "Class which represents the SQL availability replica properties of type\ndatabases."
+    },
+    "SqlAvailabilityReplicaOverview": {
+      "type": "object",
+      "properties": {
+        "replicaState": {
+          "$ref": "#/definitions/SqlAvailabilityReplicaOverviewReplicaState",
+          "description": "Gets or sets the state of the availability replica."
+        },
+        "availabilityReplicaId": {
+          "type": "string",
+          "description": "Gets or sets the SQL Availability Replica Id within the Availability Group this\ndatabase is a part of."
+        },
+        "availabilityGroupArmId": {
+          "type": "string",
+          "description": "Gets or sets the Availability Group Id in which this database participates if\nany. It would be set if the database has\n{Microsoft.Azure.FDS.CosmosDB.SqlDatabaseEntity.IsDatabaseHighlyAvailable} has\na value \"true\"."
+        },
+        "availabilityGroupName": {
+          "type": "string",
+          "description": "Gets or sets the SQL Availability group name."
+        }
+      },
+      "description": "Web model for SQL replica overview."
+    },
+    "SqlAvailabilityReplicaOverviewReplicaState": {
+      "type": "string"
+    },
     "SqlDiscovery": {
       "type": "object",
       "properties": {
@@ -7847,6 +8820,58 @@
       },
       "description": "SQLServer in the guest virtual machine."
     },
+    "SqlSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlSiteProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "SQL site web model.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SqlSiteProperties": {
+      "type": "object",
+      "properties": {
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "SiteApplianceProperties[]",
+          "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance."
+        },
+        "discoveryScenario": {
+          "$ref": "#/definitions/SqlSitePropertiesDiscoveryScenario",
+          "description": "Gets or sets the discovery scenario."
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Gets the service endpoint.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for SQL site properties."
+    },
+    "SqlSitePropertiesDiscoveryScenario": {
+      "type": "string"
+    },
     "StaticDiscovery": {
       "type": "object",
       "properties": {
@@ -7909,6 +8934,339 @@
         }
       },
       "description": " SystemCenter in the guest virtual machine."
+    },
+    "TomcatEngineUnit": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the engine."
+        },
+        "hosts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TomcatHostUnit"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "TomcatHostUnit[]",
+          "description": "Gets or sets the hosts defined for the engine."
+        }
+      },
+      "description": "Tomcat engine data."
+    },
+    "TomcatHostUnit": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the host."
+        },
+        "appBasePath": {
+          "type": "string",
+          "description": "Gets or sets the app base path for the host."
+        },
+        "appBase": {
+          "type": "string",
+          "description": "Gets or sets the app base value configured for the host."
+        }
+      },
+      "description": "Tomcat host data."
+    },
+    "TomcatServiceUnit": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the name of the service."
+        },
+        "connectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectorUnit"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "ConnectorUnit[]",
+          "description": "Gets or sets the connectors defined for the service component."
+        },
+        "engine": {
+          "$ref": "#/definitions/TomcatEngineUnit",
+          "description": "Gets or sets the engine defined for the service component."
+        }
+      },
+      "description": "Tomcat service data."
+    },
+    "TomcatWebApplicationProperties": {
+      "type": "object",
+      "properties": {
+        "webServerId": {
+          "type": "string",
+          "description": "Gets the web server id.",
+          "readOnly": true
+        },
+        "webServerName": {
+          "type": "string",
+          "description": "Gets the web server name.",
+          "readOnly": true
+        },
+        "virtualPath": {
+          "type": "string",
+          "description": "Gets the virtual path of the application.",
+          "readOnly": true
+        },
+        "physicalPath": {
+          "type": "string",
+          "description": "Gets the physical path of the application.",
+          "readOnly": true
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FrontEndBinding"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "FrontEndBinding[]",
+          "description": "Gets the front end bindings for the application.",
+          "readOnly": true
+        },
+        "frameworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationFramework"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "WebApplicationFramework[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationConfigurationUnit"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "WebApplicationConfigurationUnit[]",
+          "description": "Gets the configuration.",
+          "readOnly": true
+        },
+        "directories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationDirectoryUnit"
+          },
+          "x-cadl-name": "WebApplicationDirectoryUnit[]",
+          "description": "Gets the directories.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets the display name.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets tags that can be used with ODATA.",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether application is deleted.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking creation of the entity.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking last update operation.",
+          "readOnly": true
+        },
+        "serverType": {
+          "type": "string",
+          "description": "Gets the server type.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "applianceNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the appliance names.",
+          "readOnly": true
+        },
+        "hasErrors": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the WebApp has errors or not.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for web application properties."
+    },
+    "TomcatWebApplications": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TomcatWebApplicationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Web application REST Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "TomcatWebServerProperties": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TomcatServiceUnit"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "TomcatServiceUnit[]",
+          "description": "Gets or sets the services defined in the server."
+        },
+        "configurationLocation": {
+          "type": "string",
+          "description": "Gets the configuration location.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets the configuration location.",
+          "readOnly": true
+        },
+        "machineIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the list of machines.",
+          "readOnly": true
+        },
+        "webApplications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the list of web applications.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets the display name.",
+          "readOnly": true
+        },
+        "serverFqdn": {
+          "type": "string",
+          "description": "Gets the server FQDN.",
+          "readOnly": true
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "Gets the run as account id.",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether application is deleted.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking creation of the entity.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking last update operation.",
+          "readOnly": true
+        },
+        "serverType": {
+          "type": "string",
+          "description": "Gets the server type.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "applianceNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the appliance names.",
+          "readOnly": true
+        },
+        "hasErrors": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the WebApp has errors or not.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for web server properties."
+    },
+    "TomcatWebServers": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TomcatWebServerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Web server REST Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
     },
     "UpdateMachineDepMapStatus": {
       "type": "object",
@@ -8210,7 +9568,8 @@
         "2020-07-07",
         "2020-07-10",
         "2020-08-01-preview",
-        "2020-11-11-preview"
+        "2020-11-11-preview",
+        "2022-10-27"
       ],
       "x-ms-enum": {
         "name": "Versions",
@@ -8251,6 +9610,10 @@
           {
             "name": "v2020_11_11_preview",
             "value": "2020-11-11-preview"
+          },
+          {
+            "name": "v2022_10_27",
+            "value": "2022-10-27"
           }
         ]
       }
@@ -8816,6 +10179,158 @@
         "discoveryScopeStatus"
       ]
     },
+    "WebAppExtendedMachine": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebAppExtendedMachineProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Web app extended machine REST Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebAppExtendedMachineProperties": {
+      "type": "object",
+      "properties": {
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether application is deleted.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking creation of the entity.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking last update operation.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "hostName": {
+          "type": "string",
+          "description": "Gets the hydrated host name.",
+          "readOnly": true
+        },
+        "machineDisplayName": {
+          "type": "string",
+          "description": "Gets the Name of the extended machine.",
+          "readOnly": true
+        },
+        "machineId": {
+          "type": "string",
+          "description": "Gets the machine ARM id.",
+          "readOnly": true
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "Gets the run as account ID of the machine used for web app discovery.",
+          "readOnly": true
+        },
+        "hydratedRunAsAccountId": {
+          "type": "string",
+          "description": "Gets the agent hydrated run as account.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for web extended machine properties."
+    },
+    "WebAppRunAsAccount": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RunAsAccountProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Run as account REST Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebAppSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebAppSiteProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "WebApp site web model.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebAppSiteProperties": {
+      "type": "object",
+      "properties": {
+        "siteAppliancePropertiesCollection": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SiteApplianceProperties"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "SiteApplianceProperties[]",
+          "description": "Gets or sets the appliance details used by service to communicate\n           \nto the appliance."
+        },
+        "discoveryScenario": {
+          "$ref": "#/definitions/WebAppSitePropertiesDiscoveryScenario",
+          "description": "Gets or sets the discovery scenario."
+        },
+        "serviceEndpoint": {
+          "type": "string",
+          "description": "Gets the service endpoint.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for Web app site properties."
+    },
+    "WebAppSitePropertiesDiscoveryScenario": {
+      "type": "string"
+    },
     "WebApplication": {
       "type": "object",
       "properties": {
@@ -8845,6 +10360,92 @@
         }
       },
       "description": " WebApplication in the guest virtual machine."
+    },
+    "WebApplicationConfigurationUnit": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets the configuration name."
+        },
+        "filePath": {
+          "type": "string",
+          "description": "Gets or sets the configuration file path."
+        },
+        "localFilePath": {
+          "type": "string",
+          "description": "Gets or sets the configuration local file path."
+        },
+        "targetFilePath": {
+          "type": "string",
+          "description": "Gets or sets the configuration target file path."
+        },
+        "section": {
+          "type": "string",
+          "description": "Gets or sets the configuration section in the file."
+        },
+        "type": {
+          "type": "string",
+          "description": "Gets or sets the configuration type."
+        },
+        "isDeploymentTimeEditable": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the configuration is edited or not by\nthe user."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "Gets or sets the identifier for the configuration."
+        }
+      },
+      "description": "Web Application configuration unit."
+    },
+    "WebApplicationDirectoryUnit": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets or sets the unique id corresponding to the application directory."
+        },
+        "isEditable": {
+          "type": "boolean",
+          "description": "Gets or sets a value indicating whether the directory object is editable.\n     \n      True when the directory is added as an optional directory, false when\ndiscovery is done\n            manually."
+        },
+        "sourcePaths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets or sets the paths of the directory on the source machine."
+        },
+        "localScratchPath": {
+          "type": "string",
+          "description": "Gets or sets the local scratch path at which the directories has been copied."
+        },
+        "mountPath": {
+          "type": "string",
+          "description": "Gets or sets the mount path of the application directory."
+        },
+        "sourceSize": {
+          "type": "string",
+          "description": "Gets or sets the size of the directory on the source machine."
+        }
+      },
+      "description": "Web Application directory unit."
+    },
+    "WebApplicationFramework": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Gets or sets Name of the framework."
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets or sets Version of the framework."
+        }
+      },
+      "description": "Framework specific data for a web application."
     },
     "WebRoleImportDisk": {
       "type": "object",
@@ -8919,6 +10520,275 @@
         }
       },
       "description": "Second level object returned as part of Machine REST resource."
+    },
+    "WebRoleV202011PreviewWebApplication": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebRoleV202011PreviewWebApplicationProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Web application REST Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebRoleV202011PreviewWebApplicationProperties": {
+      "type": "object",
+      "properties": {
+        "webServerId": {
+          "type": "string",
+          "description": "Gets the web server id.",
+          "readOnly": true
+        },
+        "webServerName": {
+          "type": "string",
+          "description": "Gets the web server name.",
+          "readOnly": true
+        },
+        "virtualPath": {
+          "type": "string",
+          "description": "Gets the virtual path of the application.",
+          "readOnly": true
+        },
+        "physicalPath": {
+          "type": "string",
+          "description": "Gets the physical path of the application.",
+          "readOnly": true
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FrontEndBinding"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "FrontEndBinding[]",
+          "description": "Gets the front end bindings for the application.",
+          "readOnly": true
+        },
+        "frameworks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationFramework"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "WebApplicationFramework[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "configurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationConfigurationUnit"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "WebApplicationConfigurationUnit[]",
+          "description": "Gets the configuration.",
+          "readOnly": true
+        },
+        "directories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebApplicationDirectoryUnit"
+          },
+          "x-cadl-name": "WebApplicationDirectoryUnit[]",
+          "description": "Gets the directories.",
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets the display name.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/object"
+          },
+          "x-cadl-name": "Record<object>",
+          "description": "Gets tags that can be used with ODATA.",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether application is deleted.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking creation of the entity.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking last update operation.",
+          "readOnly": true
+        },
+        "serverType": {
+          "type": "string",
+          "description": "Gets the server type.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "applianceNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the appliance names.",
+          "readOnly": true
+        },
+        "hasErrors": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the WebApp has errors or not.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for web application properties."
+    },
+    "WebServer": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WebServerProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Web application REST Resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WebServerProperties": {
+      "type": "object",
+      "properties": {
+        "configurationLocation": {
+          "type": "string",
+          "description": "Gets the configuration location.",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "Gets the configuration location.",
+          "readOnly": true
+        },
+        "machineIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the list of machines.",
+          "readOnly": true
+        },
+        "webApplications": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the list of web applications.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Gets the display name.",
+          "readOnly": true
+        },
+        "serverFqdn": {
+          "type": "string",
+          "description": "Gets the server FQDN.",
+          "readOnly": true
+        },
+        "runAsAccountId": {
+          "type": "string",
+          "description": "Gets the run as account id.",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether application is deleted.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking creation of the entity.",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "type": "string",
+          "description": "Gets the timestamp marking last update operation.",
+          "readOnly": true
+        },
+        "serverType": {
+          "type": "string",
+          "description": "Gets the server type.",
+          "readOnly": true
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "x-cadl-name": "HealthErrorDetails[]",
+          "description": "Gets the Error details.",
+          "readOnly": true
+        },
+        "applianceNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Gets the appliance names.",
+          "readOnly": true
+        },
+        "hasErrors": {
+          "type": "boolean",
+          "description": "Gets a value indicating whether the WebApp has errors or not.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      },
+      "description": "Class for web server properties."
+    },
+    "object": {
+      "type": "object",
+      "properties": {}
     }
   },
   "parameters": {}
