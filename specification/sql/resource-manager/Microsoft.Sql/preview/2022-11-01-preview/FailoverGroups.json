@@ -377,7 +377,7 @@
             "description": "The forced failover of a failover group parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FailoverGroupForcedFailover"
+              "$ref": "#/definitions/FailoverGroupForceFailover"
             }
           },
           {
@@ -405,6 +405,9 @@
         "x-ms-examples": {
           "Forced failover of a failover group allowing data loss": {
             "$ref": "./examples/FailoverGroupForceFailoverAllowDataLoss.json"
+          },
+          "Try planned before forced failover of a failover group": {
+            "$ref": "./examples/FailoverGroupTryPlannedBeforeForcedFailover.json"
           }
         }
       }
@@ -439,19 +442,24 @@
         }
       }
     },
-    "FailoverGroupForcedFailover": {
-      "description": "A failover group forced failover request.",
+    "FailoverGroupForceFailover": {
+      "description": "A failover group force failover request.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/FailoverGroupForcedFailoverProperties",
+          "$ref": "#/definitions/FailoverGroupForceFailoverProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "FailoverGroupForcedFailoverProperties": {
-      "description": "Properties of a failover group forced failover.",
+    "FailoverGroupForceFailoverProperties": {
+      "description": "Properties of a failover group force failover.",
       "type": "object",
       "properties": {
         "tryPlannedBeforeForcedFailover": {
