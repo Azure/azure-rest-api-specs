@@ -312,7 +312,6 @@
       "type": "object",
       "properties": {
         "value": {
-          "x-ms-identifiers": [],
           "type": "array",
           "items": {
             "$ref": "#/definitions/ActionGroupResource"
@@ -340,7 +339,7 @@
           "description": "Indicates whether this tenant action group is enabled. If a tenant action group is not enabled, then none of its receivers will receive communications."
         },
         "emailReceivers": {
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": ["emailAddress"],
           "type": "array",
           "items": {
             "$ref": "#/definitions/EmailReceiver"
@@ -348,7 +347,7 @@
           "description": "The list of email receivers that are part of this tenant action group."
         },
         "smsReceivers": {
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": ["phoneNumber"],
           "type": "array",
           "items": {
             "$ref": "#/definitions/SmsReceiver"
@@ -356,7 +355,7 @@
           "description": "The list of SMS receivers that are part of this tenant action group."
         },
         "webhookReceivers": {
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": ["name"],
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebhookReceiver"
@@ -364,7 +363,7 @@
           "description": "The list of webhook receivers that are part of this tenant action group."
         },
         "azureAppPushReceivers": {
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": ["emailAddress"],
           "type": "array",
           "items": {
             "$ref": "#/definitions/AzureAppPushReceiver"
@@ -372,7 +371,7 @@
           "description": "The list of AzureAppPush receivers that are part of this tenant action group."
         },
         "voiceReceivers": {
-          "x-ms-identifiers": [],
+          "x-ms-identifiers": ["phoneNumber"],
           "type": "array",
           "items": {
             "$ref": "#/definitions/VoiceReceiver"
