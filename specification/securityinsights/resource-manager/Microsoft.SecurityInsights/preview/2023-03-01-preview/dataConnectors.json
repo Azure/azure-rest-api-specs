@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Insights",
     "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
-    "version": "2023-03-01-preview"
+    "version": "2023-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -97,7 +97,7 @@
           "Get a ASC data connector": {
             "$ref": "./examples/dataConnectors/GetAzureSecurityCenterById.json"
           },
-          "Get an AADIP (Azure Active Directory Identity Protection) data connector": {
+          "Get an AAD data connector": {
             "$ref": "./examples/dataConnectors/GetAzureActiveDirectoryById.json"
           },
           "Get an AwsCloudTrail data connector": {
@@ -420,13 +420,13 @@
           "Check requirements for TI Taxii.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsThreatIntelligenceTaxii.json"
           },
-          "Check requirements for AADIP (Azure Active Directory Identity Protection).": {
+          "Check requirements for AAD.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectory.json"
           },
-          "Check requirements for AADIP (Azure Active Directory Identity Protection) - no license.": {
+          "Check requirements for AAD - no license.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectoryNoLicense.json"
           },
-          "Check requirements for AADIP (Azure Active Directory Identity Protection) - no authorization.": {
+          "Check requirements for AAD - no authorization.": {
             "$ref": "./examples/dataConnectors/CheckRequirementsAzureActiveDirectoryNoAuthorization.json"
           },
           "Check requirements for ASC.": {
@@ -512,11 +512,11 @@
           "$ref": "#/definitions/DataConnectorsCheckRequirements"
         }
       ],
-      "description": "Represents AADIP (Azure Active Directory Identity Protection) requirements check request.",
+      "description": "Represents AAD (Azure Active Directory) requirements check request.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AADCheckRequirementsProperties",
-          "description": "AADIP (Azure Active Directory Identity Protection) requirements check properties.",
+          "description": "AAD (Azure Active Directory) requirements check properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -529,7 +529,7 @@
           "$ref": "#/definitions/DataConnectorTenantId"
         }
       ],
-      "description": "AADIP (Azure Active Directory Identity Protection) requirements check properties.",
+      "description": "AAD (Azure Active Directory) requirements check properties.",
       "type": "object"
     },
     "AATPCheckRequirements": {
@@ -1024,11 +1024,11 @@
           "$ref": "#/definitions/DataConnector"
         }
       ],
-      "description": "Represents AADIP (Azure Active Directory Identity Protection) data connector.",
+      "description": "Represents AAD (Azure Active Directory) data connector.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AADDataConnectorProperties",
-          "description": "AADIP (Azure Active Directory Identity Protection) data connector properties.",
+          "description": "AAD (Azure Active Directory) data connector properties.",
           "x-ms-client-flatten": true
         }
       },
@@ -1044,7 +1044,7 @@
           "$ref": "#/definitions/DataConnectorWithAlertsProperties"
         }
       ],
-      "description": "AADIP (Azure Active Directory Identity Protection) data connector properties.",
+      "description": "AAD (Azure Active Directory) data connector properties.",
       "type": "object"
     },
     "AlertsDataTypeOfDataConnector": {
@@ -1081,24 +1081,6 @@
     "MSTIDataConnectorDataTypes": {
       "description": "The available data types for Microsoft Threat Intelligence Platforms data connector.",
       "properties": {
-        "bingSafetyPhishingURL": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataConnectorDataTypeCommon"
-            }
-          ],
-          "properties": {
-            "lookbackPeriod": {
-              "description": "lookback period",
-              "type": "string"
-            }
-          },
-          "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
-          "type": "object",
-          "required": [
-            "lookbackPeriod"
-          ]
-        },
         "microsoftEmergingThreatFeed": {
           "allOf": [
             {
@@ -1107,8 +1089,10 @@
           ],
           "properties": {
             "lookbackPeriod": {
-              "description": "lookback period",
-              "type": "string"
+              "description": "The lookback period for the feed to be imported.",
+              "format": "date-time",
+              "type": "string",
+              "x-nullable": true
             }
           },
           "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
@@ -1120,7 +1104,6 @@
       },
       "type": "object",
       "required": [
-        "bingSafetyPhishingURL",
         "microsoftEmergingThreatFeed"
       ]
     },
