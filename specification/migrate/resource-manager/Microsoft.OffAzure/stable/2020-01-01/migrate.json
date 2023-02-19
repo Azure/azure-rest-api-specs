@@ -254,21 +254,13 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HyperVSite"
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "HyperVSites_PutSite_MaximumSet_Gen": {
             "$ref": "./examples/HyperVSites_PutSite_MaximumSet_Gen.json"
@@ -1110,14 +1102,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -2888,21 +2872,13 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMwareSite"
             }
           }
         },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Sites_PutSite_MaximumSet_Gen": {
             "$ref": "./examples/Sites_PutSite_MaximumSet_Gen.json"
@@ -3636,14 +3612,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3703,14 +3671,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -3813,14 +3773,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-cadl-name": "{}"
-            }
-          },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
@@ -5184,7 +5136,7 @@
         },
         "id": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets the error ID.",
           "readOnly": true
         },
@@ -5262,19 +5214,10 @@
         "modelAsString": true
       }
     },
-    "HighlyAvailable": {
-      "type": "string",
-      "enum": [
-        "Unknown",
-        "No",
-        "Yes"
-      ],
-      "x-ms-enum": {
-        "name": "HighlyAvailable",
-        "modelAsString": true
-      }
+    "HighAvailability": {
+      "type": "string"
     },
-    "HighlyAvailableKnownValues": {
+    "HighAvailabilityKnownValues": {
       "type": "string",
       "enum": [
         "Unknown",
@@ -5282,7 +5225,7 @@
         "Yes"
       ],
       "x-ms-enum": {
-        "name": "HighlyAvailableKnownValues",
+        "name": "HighAvailabilityKnownValues",
         "modelAsString": true
       }
     },
@@ -5397,7 +5340,7 @@
         },
         "maxSizeInBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets or sets Bytes allocated for the disk."
         },
         "name": {
@@ -5612,7 +5555,7 @@
           "readOnly": true
         },
         "highAvailability": {
-          "$ref": "#/definitions/HighlyAvailable",
+          "$ref": "#/definitions/HighAvailability",
           "description": "Value indicating whether the VM is highly available.",
           "readOnly": true
         },
@@ -6851,18 +6794,6 @@
         }
       },
       "description": "Job REST Resource."
-    },
-    "LayoutUpdateSources": {
-      "type": "string",
-      "enum": [
-        "RefreshFabricLayout",
-        "RefreshFabricLayoutGuest",
-        "RefreshFabricLayoutDependencyMap"
-      ],
-      "x-ms-enum": {
-        "name": "LayoutUpdateSources",
-        "modelAsString": true
-      }
     },
     "MachineMetadata": {
       "type": "object",
@@ -8133,46 +8064,54 @@
       "properties": {
         "applianceName": {
           "type": "string",
-          "description": "Appliance Name."
+          "description": "Gets the appliance name.",
+          "readOnly": true
         },
         "errorMessage": {
           "type": "string",
-          "description": "Gets the error message."
+          "description": "Gets the error message.",
+          "readOnly": true
         },
         "summaryMessage": {
           "type": "string",
-          "description": "Gets the summary message."
+          "description": "Gets the summary message.",
+          "readOnly": true
         },
         "errorId": {
           "type": "integer",
-          "format": "int64",
-          "description": "Gets the error Id."
+          "format": "int32",
+          "description": "Gets the error Id.",
+          "readOnly": true
         },
         "errorCode": {
           "type": "string",
-          "description": "Gets the error code."
+          "description": "Gets the error code.",
+          "readOnly": true
         },
         "affectedObjectsCount": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Gets or sets the count of affected objects."
         },
         "hitCount": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "Gets or sets the hit count of the error."
         },
         "severity": {
           "type": "string",
-          "description": "Gets the severity of error.."
+          "description": "Gets the severity of error.",
+          "readOnly": true
         },
         "remediationGuidance": {
           "type": "string",
-          "description": "Gets the remediation guidance."
+          "description": "Gets the remediation guidance.",
+          "readOnly": true
         },
         "affectedResourceType": {
           "type": "string",
-          "description": "Gets the affected resource type."
+          "description": "Gets the affected resource type.",
+          "readOnly": true
         },
         "affectedResources": {
           "type": "array",
@@ -8185,27 +8124,13 @@
         "fabricLayoutUpdateSources": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/LayoutUpdateSources"
+            "$ref": "#/definitions/SiteHealthSummaryFabricLayoutUpdateSourcesItem"
           },
-          "x-cadl-name": "LayoutUpdateSources[]",
-          "description": "RM ID of migration hub solution for SDS."
+          "x-cadl-name": "SiteHealthSummaryFabricLayoutUpdateSourcesItem[]",
+          "description": "Gets or sets sources of the exception."
         }
       },
-      "description": "The properties of ServerSiteResource.",
-      "required": [
-        "applianceName",
-        "errorMessage",
-        "summaryMessage",
-        "errorId",
-        "errorCode",
-        "affectedObjectsCount",
-        "hitCount",
-        "severity",
-        "remediationGuidance",
-        "affectedResourceType",
-        "affectedResources",
-        "fabricLayoutUpdateSources"
-      ]
+      "description": "The properties of ServerSiteResource."
     },
     "SiteHealthSummaryCollection": {
       "type": "object",
@@ -8229,6 +8154,9 @@
         }
       },
       "description": "Collection of SiteHealthSummary."
+    },
+    "SiteHealthSummaryFabricLayoutUpdateSourcesItem": {
+      "type": "string"
     },
     "SiteProperties": {
       "type": "object",
@@ -9551,7 +9479,7 @@
         },
         "maxSizeInBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets or sets Bytes allocated for the disk."
         },
         "name": {
@@ -10378,7 +10306,7 @@
         },
         "maxSizeInBytes": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets or sets Bytes allocated for the disk."
         },
         "name": {
