@@ -1,142 +1,130 @@
 {
   "parameters": {
-    "id": "Microsoft.ResourceGroup",
+    "id": "uniqueProductId",
     "language": "en",
-    "api-version": "2022-09-01-preview",
-    "market": "US",
-    "x-ms-app": "testapp"
+    "api-version": "2023-01-01-preview",
+    "market": "US"
   },
   "responses": {
     "200": {
       "body": {
-        "displayName": "string",
-        "popularity": 0,
-        "categoryIds": [
-          "string"
+        "language": "en",
+        "hasStandardContractAmendments": false,
+        "offerId": "offerId",
+        "standardContractAmendmentsRevisionId": "00000000-0000-0000-0000-000000000000",
+        "isPrivate": false,
+        "isStopSell": false,
+        "legalTermsUri": "legalTermsUri",
+        "cspLegalTermsUri": "cspLegalTermsUri",
+        "legalTermsType": "None",
+        "privacyPolicyUri": "privacyPolicyUri",
+        "supportUri": "supportUri",
+        "links": [
+          {
+            "id": "linkId",
+            "displayName": "linkDisplayName",
+            "uri": "linkUri"
+          }
         ],
-        "publisherId": "string",
-        "azureBenefit": "Eligible",
-        "badges": [
-          "PreferredSolution"
-        ],
-        "publisherType": "Microsoft",
-        "publishingStage": "Preview",
-        "uniqueProductId": "string",
-        "productType": "None",
-        "operatingSystems": [
-          "string"
-        ],
-        "pricingTypes": [
-          "Free"
-        ],
-        "publisherDisplayName": "string",
-        "summary": "string",
-        "privacyPolicyUri": "string",
-        "version": "string",
-        "cspLegalTermsUri": "string",
-        "vmImageGenerations": [
-          "Gen1"
-        ],
-        "vmArchitectureTypes": [
-          "X64Gen1"
-        ],
-        "vmSecurityTypes": [
-          "None"
-        ],
-        "smallIconUri": "string",
-        "mediumIconUri": "string",
-        "largeIconUri": "string",
-        "wideIconUri": "string",
-        "description": "string",
-        "ratingBuckets": [
-          "AboveOne"
-        ],
-        "ratingAverage": 0,
-        "ratingCount": 0,
-        "startingPrice": {
-          "market": "string",
-          "termUnits": "string",
-          "meterUnits": "string",
-          "minTermPrice": 0,
-          "minMeterPrice": 0,
-          "currency": "string"
-        },
         "linkedAddIns": [
-          "string"
+          "assetId:someId"
+        ],
+        "mediumIconUri": "mediumIconUri",
+        "largeIconUri": "largeIconUri",
+        "wideIconUri": "wideIconUri",
+        "images": [
+          {
+            "context": "ibiza",
+            "items": [
+              {
+                "id": "small",
+                "uri": "imageUrl",
+                "type": "icon"
+              }
+            ]
+          }
+        ],
+        "videos": [
+          {
+            "caption": "caption",
+            "uri": "videoUri",
+            "videoPurpose": "trailer",
+            "previewImage": {
+              "caption": "previewImageCaption",
+              "uri": "imageUri",
+              "imagePurpose": "trailer"
+            }
+          }
         ],
         "plans": [
           {
-            "planId": "string",
-            "cspState": "OptIn",
-            "uniquePlanId": "string",
-            "displayName": "string",
-            "vmArchitectureType": "string",
-            "metadata": {
-              "generation": "string",
-              "altStackReference": "string",
-              "relatedSkus": [
-                {
-                  "sku": {
-                    "name": "string",
-                    "generation": "string",
-                    "identity": "string"
-                  },
-                  "relationType": "string"
-                }
-              ]
-            },
-            "uiDefinitionUri": "string",
-            "pricingTypes": [
-              "Free"
-            ],
-            "isQuantifiable": true,
-            "vmSecuritytypes": [
-              "None"
-            ],
-            "artifacts": [
+            "id": "0001",
+            "legacyPlanId": "legacyPlanId",
+            "type": "SaaS",
+            "availabilities": [
               {
-                "name": "string",
-                "uri": "string",
-                "artifactType": "Template"
+                "id": "availabilityId",
+                "actions": [
+                  "Browse"
+                ],
+                "meter": null,
+                "pricingAudience": "DirectCommercial",
+                "terms": null,
+                "hasFreeTrials": false,
+                "displayRank": 0
               }
             ],
-            "summary": "string",
-            "description": "string",
-            "skuId": "string",
-            "productType": "None",
-            "displayRank": "string",
+            "uiDefinitionUri": "uiDefUri",
+            "isHidden": false,
+            "isStopSell": false,
+            "isQuantifiable": false,
             "purchaseDurationDiscounts": [
               {
-                "duration": "string",
-                "discountPercentage": 0
+                "duration": "duration",
+                "discountPercentage": "discountPercentage"
               }
             ],
-            "leadGeneration": {
-              "productId": "string",
-              "leadGenEnabled": true
+            "planId": "plan1Id",
+            "uniquePlanId": "uniquePlan1Id",
+            "displayName": "planDisplayName",
+            "metadata": {
+              "generation": null,
+              "altStackReference": null
             },
-            "isPrivate": true,
-            "hasProtectedArtifacts": false,
-            "isStopSell": false
+            "categoryIds": [],
+            "pricingTypes": [],
+            "description": "planDescription",
+            "skuId": "0001",
+            "productType": "SaaS",
+            "isPrivate": false
           }
         ],
-        "legalTermsUri": "string",
-        "legalTermsType": "string",
-        "supportUri": "string",
-        "links": [
-          {
-            "id": "string",
-            "displayName": "string",
-            "uri": "string"
-          }
+        "isReseller": false,
+        "productOwnershipSellingMotion": "3PPAgency",
+        "disableSendEmailOnPurchase": false,
+        "displayName": "planDisplayName",
+        "popularity": 1.0,
+        "categoryIds": [
+          "Productivity"
         ],
-        "supportedProducts": [
-          "string"
+        "industryIds": [
+          "Education"
         ],
-        "applicableProducts": [
-          "string"
-        ],
-        "lastModifiedDateTime": "0001-01-01T00:00:00"
+        "publisherId": "publisherId",
+        "azureBenefit": "NotEligible",
+        "publisherType": "Microsoft",
+        "publishingStage": "Public",
+        "uniqueProductId": "uniqueProductId",
+        "productType": "SaaS",
+        "pricingTypes": [],
+        "publisherDisplayName": "publisherDisplayName",
+        "longSummary": "longSummary",
+        "linkedAddInsTypes": {},
+        "smallIconUri": "smallIconUri",
+        "description": "description",
+        "ratingAverage": 0.0,
+        "ratingCount": 0,
+        "lastModifiedDateTime": "2022-09-10T17:09:22.5659785+00:00"
       }
     }
   }
