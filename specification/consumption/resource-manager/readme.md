@@ -26,7 +26,17 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10
+tag: package-2022-06
+```
+
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-06'
+input-file:
+  - Microsoft.Consumption/stable/2021-10-01/consumption.json
+  - Microsoft.Consumption/stable/2022-06-01/consumption.pricesheets.operations.json
 ```
 
 
@@ -439,7 +449,10 @@ generate-interface: true
 directive:
   - suppress: R4009
     from: consumption.json
-    reason: SystemData properties does not fit into the consumption RP APIs as they dont really create any actual resources.  
+    reason: SystemData properties does not fit into the consumption RP APIs as they dont really create any actual resources.
+  - suppress: GuidUsage
+    from: consumption.json
+    reason: Usage of Guid in the consumption RP APIs is signed off from the ARM team.
 ```
 
 ## AzureResourceSchema

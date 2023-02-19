@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Monitoring Accounts Control Plane API",
-    "description": "Provides operations for working with Azure Monitoring Accounts",
+    "title": "Azure Monitor Workspaces Control Plane API",
+    "description": "Provides operations for working with Azure Monitor Workspaces",
     "version": "2021-06-03-preview",
     "x-ms-code-generation-settings": {
       "name": "MonitorManagementClient"
@@ -41,7 +41,7 @@
   },
   "tags": [
     {
-      "name": "MonitoringAccounts",
+      "name": "AzureMonitorWorkspaces",
       "description": "A management operation for microsoft.monitor/accounts"
     }
   ],
@@ -49,10 +49,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts": {
       "get": {
         "tags": [
-          "MonitoringAccounts"
+          "AzureMonitorWorkspaces"
         ],
-        "description": "Lists all monitoring accounts in the specified resource group",
-        "operationId": "MonitoringAccounts_ListByResourceGroup",
+        "description": "Lists all workspaces in the specified resource group",
+        "operationId": "AzureMonitorWorkspaces_ListByResourceGroup",
         "produces": [
           "application/json"
         ],
@@ -71,7 +71,7 @@
           "200": {
             "description": "Request completed successfully",
             "schema": {
-              "$ref": "#/definitions/MonitoringAccountResourceListResult"
+              "$ref": "#/definitions/AzureMonitorWorkspaceResourceListResult"
             }
           },
           "default": {
@@ -85,8 +85,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List monitoring accounts by resource group": {
-            "$ref": "./examples/MonitoringAccountsListByResourceGroup.json"
+          "List monitor workspaces by resource group": {
+            "$ref": "./examples/AzureMonitorWorkspacesListByResourceGroup.json"
           }
         }
       }
@@ -94,10 +94,10 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/accounts": {
       "get": {
         "tags": [
-          "MonitoringAccounts"
+          "AzureMonitorWorkspaces"
         ],
-        "description": "Lists all monitoring accounts in the specified subscription",
-        "operationId": "MonitoringAccounts_ListBySubscription",
+        "description": "Lists all workspaces in the specified subscription",
+        "operationId": "AzureMonitorWorkspaces_ListBySubscription",
         "produces": [
           "application/json"
         ],
@@ -113,7 +113,7 @@
           "200": {
             "description": "Request completed successfully",
             "schema": {
-              "$ref": "#/definitions/MonitoringAccountResourceListResult"
+              "$ref": "#/definitions/AzureMonitorWorkspaceResourceListResult"
             }
           },
           "default": {
@@ -127,19 +127,19 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List monitoring accounts by subscription": {
-            "$ref": "./examples/MonitoringAccountsListBySubscription.json"
+          "List workspaces by subscription": {
+            "$ref": "./examples/AzureMonitorWorkspacesListBySubscription.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{monitoringAccountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}": {
       "get": {
         "tags": [
-          "MonitoringAccounts"
+          "AzureMonitorWorkspaces"
         ],
-        "description": "Returns the specific monitoring account",
-        "operationId": "MonitoringAccounts_Get",
+        "description": "Returns the specific Azure Monitor workspace",
+        "operationId": "AzureMonitorWorkspaces_Get",
         "produces": [
           "application/json"
         ],
@@ -151,7 +151,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/MonitoringAccountNameParameter"
+            "$ref": "#/parameters/AzureMonitorWorkspaceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -161,7 +161,7 @@
           "200": {
             "description": "Request completed successfully",
             "schema": {
-              "$ref": "#/definitions/MonitoringAccountResource"
+              "$ref": "#/definitions/AzureMonitorWorkspaceResource"
             }
           },
           "default": {
@@ -172,17 +172,17 @@
           }
         },
         "x-ms-examples": {
-          "Get monitoring account": {
-            "$ref": "./examples/MonitoringAccountsGet.json"
+          "Get workspace": {
+            "$ref": "./examples/AzureMonitorWorkspacesGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "MonitoringAccounts"
+          "AzureMonitorWorkspaces"
         ],
-        "description": "Create or update a monitoring account",
-        "operationId": "MonitoringAccounts_Create",
+        "description": "Create or update a workspace",
+        "operationId": "AzureMonitorWorkspaces_Create",
         "consumes": [
           "application/json"
         ],
@@ -197,32 +197,32 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/MonitoringAccountNameParameter"
+            "$ref": "#/parameters/AzureMonitorWorkspaceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
-            "name": "monitoringAccountProperties",
-            "description": "Properties that need to be specified to create a new monitoring account",
+            "name": "azureMonitorWorkspaceProperties",
+            "description": "Properties that need to be specified to create a new workspace",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/MonitoringAccountResource"
+              "$ref": "#/definitions/AzureMonitorWorkspaceResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Monitoring account was successfully updated",
+            "description": "Azure Monitor workspace was successfully updated",
             "schema": {
-              "$ref": "#/definitions/MonitoringAccountResource"
+              "$ref": "#/definitions/AzureMonitorWorkspaceResource"
             }
           },
           "201": {
-            "description": "Monitoring account was successfully created",
+            "description": "Azure Monitor workspace was successfully created",
             "schema": {
-              "$ref": "#/definitions/MonitoringAccountResource"
+              "$ref": "#/definitions/AzureMonitorWorkspaceResource"
             }
           },
           "default": {
@@ -233,17 +233,17 @@
           }
         },
         "x-ms-examples": {
-          "Create or update monitoring account": {
-            "$ref": "./examples/MonitoringAccountsCreate.json"
+          "Create or update workspace": {
+            "$ref": "./examples/AzureMonitorWorkspacesCreate.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "MonitoringAccounts"
+          "AzureMonitorWorkspaces"
         ],
-        "description": "Updates part of a monitoring account",
-        "operationId": "MonitoringAccounts_Update",
+        "description": "Updates part of a workspace",
+        "operationId": "AzureMonitorWorkspaces_Update",
         "consumes": [
           "application/json"
         ],
@@ -258,25 +258,25 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/MonitoringAccountNameParameter"
+            "$ref": "#/parameters/AzureMonitorWorkspaceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
-            "name": "monitoringAccountProperties",
+            "name": "azureMonitorWorkspaceProperties",
             "description": "The payload",
             "schema": {
-              "$ref": "#/definitions/MonitoringAccountResourceForUpdate"
+              "$ref": "#/definitions/AzureMonitorWorkspaceResourceForUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Monitoring account was successfully updated",
+            "description": "Monitor workspace was successfully updated",
             "schema": {
-              "$ref": "#/definitions/MonitoringAccountResource"
+              "$ref": "#/definitions/AzureMonitorWorkspaceResource"
             }
           },
           "default": {
@@ -287,17 +287,17 @@
           }
         },
         "x-ms-examples": {
-          "Update monitoring account": {
-            "$ref": "./examples/MonitoringAccountsUpdate.json"
+          "Update workspace": {
+            "$ref": "./examples/AzureMonitorWorkspacesUpdate.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "MonitoringAccounts"
+          "AzureMonitorWorkspaces"
         ],
-        "description": "Delete an monitoring account",
-        "operationId": "MonitoringAccounts_Delete",
+        "description": "Delete a workspace",
+        "operationId": "AzureMonitorWorkspaces_Delete",
         "produces": [
           "application/json"
         ],
@@ -309,7 +309,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/MonitoringAccountNameParameter"
+            "$ref": "#/parameters/AzureMonitorWorkspaceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -317,10 +317,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Monitoring account was successfully deleted"
+            "description": "Workspace was successfully deleted"
           },
           "204": {
-            "description": "Monitoring account did not exist"
+            "description": "Workspace did not exist"
           },
           "default": {
             "description": "Error",
@@ -330,8 +330,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete monitoring account": {
-            "$ref": "./examples/MonitoringAccountsDelete.json"
+          "Delete workspace": {
+            "$ref": "./examples/AzureMonitorWorkspacesDelete.json"
           }
         }
       }
@@ -339,11 +339,11 @@
   },
   "definitions": {
     "Metrics": {
-      "description": "Information about metrics for the monitoring account",
+      "description": "Information about metrics for the workspace",
       "type": "object",
       "properties": {
         "prometheusQueryEndpoint": {
-          "description": "The Prometheus query endpoint for the monitoring account",
+          "description": "The Prometheus query endpoint for the workspace",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -365,7 +365,7 @@
       "type": "object",
       "properties": {
         "dataCollectionRuleResourceId": {
-          "description": "The Azure resource Id of the default data collection rule for this monitoring account.",
+          "description": "The Azure resource Id of the default data collection rule for this workspace.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -373,7 +373,7 @@
           ]
         },
         "dataCollectionEndpointResourceId": {
-          "description": "The Azure resource Id of the default data collection endpoint for this monitoring account.",
+          "description": "The Azure resource Id of the default data collection endpoint for this workspace.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -382,12 +382,12 @@
         }
       }
     },
-    "MonitoringAccount": {
-      "description": "Properties of a monitoring account",
+    "AzureMonitorWorkspace": {
+      "description": "Properties of an Azure Monitor workspace",
       "type": "object",
       "properties": {
         "accountId": {
-          "description": "The immutable ID of the monitoring account. This property is read-only.",
+          "description": "The immutable ID of the Azure Monitor workspace. This property is read-only.",
           "type": "string",
           "readOnly": true,
           "x-ms-mutability": [
@@ -395,7 +395,7 @@
           ]
         },
         "metrics": {
-          "description": "Information about metrics for the monitoring account",
+          "description": "Information about metrics for the Azure Monitor workspace",
           "allOf": [
             {
               "$ref": "#/definitions/Metrics"
@@ -407,7 +407,7 @@
           ]
         },
         "provisioningState": {
-          "description": "The provisioning state of the monitoring account. Set to Succeeded if everything is healthy.",
+          "description": "The provisioning state of the Azure Monitor workspace. Set to Succeeded if everything is healthy.",
           "enum": [
             "Creating",
             "Succeeded",
@@ -439,8 +439,8 @@
         }
       }
     },
-    "MonitoringAccountResource": {
-      "description": "A Monitoring Account definition",
+    "AzureMonitorWorkspaceResource": {
+      "description": "An Azure Monitor Workspace definition",
       "required": [
         "location"
       ],
@@ -450,7 +450,7 @@
           "description": "Resource properties",
           "allOf": [
             {
-              "$ref": "#/definitions/MonitoringAccount"
+              "$ref": "#/definitions/AzureMonitorWorkspace"
             }
           ],
           "x-ms-client-flatten": true
@@ -471,7 +471,7 @@
       ],
       "x-ms-azure-resource": true
     },
-    "MonitoringAccountResourceListResult": {
+    "AzureMonitorWorkspaceResourceListResult": {
       "description": "A pageable list of resources",
       "required": [
         "value"
@@ -482,7 +482,7 @@
           "description": "A list of resources",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MonitoringAccountResource"
+            "$ref": "#/definitions/AzureMonitorWorkspaceResource"
           }
         },
         "nextLink": {
@@ -491,7 +491,7 @@
         }
       }
     },
-    "MonitoringAccountResourceForUpdate": {
+    "AzureMonitorWorkspaceResourceForUpdate": {
       "description": "Definition of ARM tracked top level resource properties for update operation",
       "type": "object",
       "properties": {
@@ -506,12 +506,13 @@
     }
   },
   "parameters": {
-    "MonitoringAccountNameParameter": {
+    "AzureMonitorWorkspaceNameParameter": {
       "in": "path",
-      "name": "monitoringAccountName",
-      "description": "The name of the monitoring account.  The name is case insensitive",
+      "name": "azureMonitorWorkspaceName",
+      "description": "The name of the Azure Monitor workspace.  The name is case insensitive",
       "required": true,
       "type": "string",
+      "pattern": "^(?!-)[a-zA-Z0-9-]+[^-]$",
       "x-ms-parameter-location": "method"
     }
   }
