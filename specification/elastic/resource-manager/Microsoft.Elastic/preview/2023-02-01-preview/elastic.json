@@ -1370,60 +1370,60 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/getOrganizationApiKey": {
-    "post": {
-      "tags": [
-        "ApiKey"
-      ],
-      "summary": "Fetch User API Key from internal database, if generated and stored while creating the Elasticsearch Organization.",
-      "operationId": "Organizations_GetApiKey",
-      "consumes": [
-        "application/json"
-      ],
-      "produces": [
-        "application/json"
-      ],
-      "parameters": [
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/MonitorNameParameter"
-        },
-        {
-          "in": "body",
-          "name": "body",
-          "description": "Email Id parameter of the User Organization, of which the API Key must be returned",
-          "schema": {
-            "$ref": "#/definitions/UserEmailId"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/getOrganizationApiKey": {
+      "post": {
+        "tags": [
+          "ApiKey"
+        ],
+        "summary": "Fetch User API Key from internal database, if generated and stored while creating the Elasticsearch Organization.",
+        "operationId": "Organizations_GetApiKey",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Email Id parameter of the User Organization, of which the API Key must be returned",
+            "schema": {
+              "$ref": "#/definitions/UserEmailId"
+            }
           }
-        }
-      ],
-      "responses": {
-        "200": {
-          "description": "Success",
-          "schema": {
-            "$ref": "#/definitions/UserApiKeyResponse"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserApiKeyResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
           }
         },
-        "default": {
-          "description": "Default error response.",
-          "schema": {
-            "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+        "x-ms-examples": {
+          "Organizations_GetApiKey": {
+            "$ref": "./examples/Organizations_GetApiKey.json"
           }
-        }
-      },
-      "x-ms-examples": {
-        "Organizations_GetApiKey": {
-          "$ref": "./examples/Organizations_GetApiKey.json"
         }
       }
     }
