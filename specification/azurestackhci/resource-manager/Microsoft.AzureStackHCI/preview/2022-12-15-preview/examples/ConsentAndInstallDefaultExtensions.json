@@ -4,13 +4,6 @@
     "resourceGroupName": "test-rg",
     "clusterName": "myCluster",
     "arcSettingName": "default",
-    "arcSetting": {
-      "properties": {
-        "connectivityProperties": {
-          "enabled": true
-        }
-      }
-    },
     "api-version": "2022-12-15-preview"
   },
   "responses": {
@@ -30,9 +23,6 @@
           "provisioningState": "Succeeded",
           "arcInstanceResourceGroup": "ArcInstance-rg",
           "aggregateState": "Creating",
-          "connectivityProperties": {
-            "enabled": true
-          },
           "perNodeDetails": [
             {
               "name": "Node-1",
@@ -45,14 +35,13 @@
               "state": "Creating"
             }
           ],
+          "connectivityProperties": {
+            "enabled": false
+          },
           "defaultExtensions": [
             {
               "category": "Telemetry",
               "consentTime": "2023-01-01T17:18:19.1234567Z"
-            },
-            {
-              "category": "Supportability",
-              "consentTime": null
             }
           ]
         }
