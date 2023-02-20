@@ -56,11 +56,11 @@
             "$ref": "#/parameters/TenantIdParameter"
           },
           {
-            "name": "actionGroup",
+            "name": "tenantActionGroup",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ActionGroupResource"
+              "$ref": "#/definitions/TenantActionGroupResource"
             },
             "description": "The tenant action group to create or use for the update."
           },
@@ -72,13 +72,13 @@
           "200": {
             "description": "An existing tenant action group was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/ActionGroupResource"
+              "$ref": "#/definitions/TenantActionGroupResource"
             }
           },
           "201": {
             "description": "A new tenant action group was successfully created.",
             "schema": {
-              "$ref": "#/definitions/ActionGroupResource"
+              "$ref": "#/definitions/TenantActionGroupResource"
             }
           },
           "default": {
@@ -115,7 +115,7 @@
           "200": {
             "description": "The request succeeded.",
             "schema": {
-              "$ref": "#/definitions/ActionGroupResource"
+              "$ref": "#/definitions/TenantActionGroupResource"
             }
           },
           "default": {
@@ -199,7 +199,7 @@
           "200": {
             "description": "An existing tenant action group was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/ActionGroupResource"
+              "$ref": "#/definitions/TenantActionGroupResource"
             }
           }
         },
@@ -237,7 +237,7 @@
           "200": {
             "description": "The request succeeded.",
             "schema": {
-              "$ref": "#/definitions/ActionGroupList"
+              "$ref": "#/definitions/TenantActionGroupList"
             }
           },
           "default": {
@@ -291,7 +291,7 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "ActionGroupResource": {
+    "TenantActionGroupResource": {
       "description": "A tenant action group resource.",
       "type": "object",
       "allOf": [
@@ -302,19 +302,19 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ActionGroup",
+          "$ref": "#/definitions/TenantActionGroup",
           "description": "The tenant action groups properties of the resource."
         }
       }
     },
-    "ActionGroupList": {
+    "TenantActionGroupList": {
       "description": "A list of tenant action groups.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ActionGroupResource"
+            "$ref": "#/definitions/TenantActionGroupResource"
           },
           "description": "The list of tenant action groups."
         },
@@ -324,7 +324,7 @@
         }
       }
     },
-    "ActionGroup": {
+    "TenantActionGroup": {
       "description": "A tenant  action group.",
       "type": "object",
       "properties": {
@@ -543,19 +543,6 @@
         "modelAsString": false
       },
       "description": "Indicates the status of the receiver. Receivers that are not Enabled will not receive any communications."
-    },
-    "EnableRequest": {
-      "description": "Describes a receiver that should be resubscribed.",
-      "type": "object",
-      "properties": {
-        "receiverName": {
-          "type": "string",
-          "description": "The name of the receiver to resubscribe."
-        }
-      },
-      "required": [
-        "receiverName"
-      ]
     },
     "ErrorResponse": {
       "description": "Describes the format of Error response.",
