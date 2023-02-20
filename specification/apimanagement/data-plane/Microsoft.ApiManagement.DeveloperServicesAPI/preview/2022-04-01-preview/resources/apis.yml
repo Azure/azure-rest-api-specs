@@ -33,7 +33,7 @@ paths:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/api.json
+                          $ref: ../schemas/api.json#/definitions/Api
 
   /apis/{apiId}:
     description: Public API
@@ -65,7 +65,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/api.json
+                $ref: ../schemas/api.json#/definitions/Api
             application/vnd.sun.wadl+xml:
               schema:
                 type: string

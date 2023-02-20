@@ -240,7 +240,7 @@ paths:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/api.json
+                          $ref: ../schemas/api.json#/definitions/Api
 
   /users/{userId}/products/{productId}/tags:
     description: List of Tags associated with User visible Product
@@ -367,7 +367,7 @@ paths:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/api.json
+                          $ref: ../schemas/api.json#/definitions/Api
 
   /users/{userId}/apis:
     description: User visible APIs
@@ -401,7 +401,7 @@ paths:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/api.json
+                          $ref: ../schemas/api.json#/definitions/Api
 
   /users/{userId}/apis/{apiId}:
     description: User visible API
@@ -437,7 +437,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/api.json
+                $ref: ../schemas/api.json#/definitions/Api
             application/vnd.sun.wadl+xml:
               schema:
                 type: string
