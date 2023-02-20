@@ -107,7 +107,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/monitors/getOrganizationApiKey/{emailId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/getOrganizationApiKey": {
       "post": {
         "tags": [
           "ApiKey"
@@ -125,7 +125,18 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/UserEmailIdParameter"
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Email Id parameter of the User Organization, of which the API Key must be returned",
+            "schema": {
+              "$ref": "#/definitions/UserEmailId"
+            }
           }
         ],
         "responses": {
@@ -2339,6 +2350,16 @@
         }
       }
     },
+    "UserEmailId": {
+      "description": "Email Id of the User Organization, of which the API Key must be returned",
+      "type": "object",
+      "properties": {
+        "emailId": {
+          "type": "string",
+          "description": "The User email Id"
+        }
+      }
+    },
     "UserApiKeyResponse": {
       "description": "The User Api Key created for the Organization associated with the User Email Id that was passed in the request",
       "type": "object",
@@ -2387,14 +2408,6 @@
       "in": "path",
       "name": "ruleSetName",
       "description": "Tag Rule Set resource name",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "UserEmailIdParameter": {
-      "in": "path",
-      "name": "emailId",
-      "description": "Email Id of the User Organization",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
