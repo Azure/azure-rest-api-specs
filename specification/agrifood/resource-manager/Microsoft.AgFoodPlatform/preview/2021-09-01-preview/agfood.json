@@ -868,13 +868,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "privateEndpointConnectionName",
-            "description": "Private endpoint connection name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -882,6 +875,13 @@
           },
           {
             "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "privateEndpointConnectionName",
+            "description": "Private endpoint connection name.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -942,14 +942,14 @@
             "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "path",
             "name": "privateEndpointConnectionName",
             "description": "Private endpoint connection name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -998,14 +998,14 @@
             "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "in": "path",
             "name": "privateEndpointConnectionName",
             "description": "Private endpoint connection name.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1143,13 +1143,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "subResourceName",
-            "description": "Sub resource name.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1157,6 +1150,13 @@
           },
           {
             "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "subResourceName",
+            "description": "Sub resource name.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1204,14 +1204,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "solutionId",
-            "description": "SolutionId.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1219,6 +1211,14 @@
           },
           {
             "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "solutionId",
+            "description": "SolutionId.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1269,14 +1269,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "solutionId",
-            "description": "SolutionId.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1284,6 +1276,14 @@
           },
           {
             "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "solutionId",
+            "description": "SolutionId.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1320,14 +1320,6 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "solutionId",
-            "description": "SolutionId.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -1335,6 +1327,14 @@
           },
           {
             "$ref": "#/parameters/DataManagerForAgricultureResourceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "solutionId",
+            "description": "SolutionId.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z]{3,50}[.][a-zA-Z]{3,100}$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1952,6 +1952,20 @@
           "format": "uuid",
           "description": "Application id of the multi tenant application to be used by partner to access Data Manager For Agriculture data.",
           "type": "string",
+          "readOnly": true
+        },
+        "saaSApplicationId": {
+          "format": "uuid",
+          "description": "Application id of the SaaS multi tenant application.",
+          "type": "string",
+          "readOnly": true
+        },
+        "actionIds": {
+          "description": "List of ActionIds needed to make the SaaS multi tenant application access relevant fb data.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "roleId": {
