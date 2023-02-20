@@ -415,20 +415,6 @@
     }
   },
   "definitions": {
-    "ResourceLocation": {
-      "description": "Location of the ARM Resource",
-      "type": "object",
-      "properties": {
-        "location": {
-          "description": "The Azure location where the Confidential Ledger is running.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      }
-    },
     "Tags": {
       "description": "Tags for Confidential Ledger Resource",
       "type": "object",
@@ -657,9 +643,6 @@
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        },
-        {
-          "$ref": "#/definitions/ResourceLocation"
         },
         {
           "$ref": "#/definitions/Tags"
