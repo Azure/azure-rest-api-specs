@@ -777,7 +777,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}/notify": {
+    "/sentShares/{sentShareId}/sentShareInvitations/{sentShareInvitationId}:notify": {
       "post": {
         "tags": [
           "SentShareInvitation"
@@ -832,7 +832,7 @@
         }
       }
     },
-    "/activateEmail": {
+    "/emails:activate": {
       "post": {
         "tags": [
           "TenantEmailRegistration"
@@ -893,7 +893,7 @@
         }
       }
     },
-    "/registerEmail": {
+    "/emails:register": {
       "post": {
         "tags": [
           "TenantEmailRegistration"
@@ -1170,7 +1170,7 @@
         },
         "createdAt": {
           "format": "date-time",
-          "description": "Time at which the received share was created.",
+          "description": "Time at which the received share was created. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string",
           "readOnly": true
         },
@@ -1180,12 +1180,8 @@
         },
         "expirationDate": {
           "format": "date-time",
-          "description": "The expiration date of the received share.",
+          "description": "The expiration date of the received share. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
           "readOnly": true
         },
         "receiverEmail": {
@@ -1225,7 +1221,7 @@
         },
         "sharedAt": {
           "format": "date-time",
-          "description": "Time at which the sent share was shared.",
+          "description": "Time at which the sent share was shared. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string",
           "readOnly": true
         },
@@ -1234,6 +1230,10 @@
         },
         "sink": {
           "$ref": "#/definitions/Sink"
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "readOnly": true
         }
       }
     },
@@ -1269,7 +1269,7 @@
         },
         "createdAt": {
           "format": "date-time",
-          "description": "Time at which the sent share was created.",
+          "description": "Time at which the sent share was created. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string",
           "readOnly": true
         },
@@ -1290,10 +1290,6 @@
           "description": "The name of the sent share",
           "type": "string"
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "readOnly": true
-        },
         "senderEmail": {
           "description": "Email of the sender who created the sent share.",
           "type": "string",
@@ -1307,6 +1303,10 @@
         "senderTenantName": {
           "description": "Tenant name of the sender who created the sent share.",
           "type": "string",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/State",
           "readOnly": true
         }
       }
@@ -1344,7 +1344,7 @@
       "properties": {
         "endTime": {
           "format": "date-time",
-          "description": "End time of the long running operation.",
+          "description": "End time of the long running operation. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string"
         },
         "error": {
@@ -1356,7 +1356,7 @@
         },
         "startTime": {
           "format": "date-time",
-          "description": "Start time of the long running operation.",
+          "description": "Start time of the long running operation. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string"
         },
         "status": {
@@ -1402,54 +1402,6 @@
             "value": "NotStarted",
             "description": "The long running operation has not started",
             "name": "Long running operation state is 'NotStarted'"
-          }
-        ]
-      }
-    },
-    "ProvisioningState": {
-      "description": "Provisioning status of the resource",
-      "enum": [
-        "Unknown",
-        "Succeeded",
-        "Creating",
-        "Deleting",
-        "Moving",
-        "Failed"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Unknown",
-            "description": "The provisioning state of the resource is in 'Unknown' state",
-            "name": "Unknown provisioning state"
-          },
-          {
-            "value": "Succeeded",
-            "description": "The provisioning state of the resource is in 'Succeeded' state",
-            "name": "Succeeded provisioning state"
-          },
-          {
-            "value": "Creating",
-            "description": "The provisioning state of the resource is in 'Creating' state",
-            "name": "Creating provisioning state"
-          },
-          {
-            "value": "Deleting",
-            "description": "The provisioning state of the resource is in 'Deleting' state",
-            "name": "Deleting provisioning state"
-          },
-          {
-            "value": "Moving",
-            "description": "The provisioning state of the resource is in 'Moving' state",
-            "name": "Moving provisioning state"
-          },
-          {
-            "value": "Failed",
-            "description": "The provisioning state of the resource is in 'Failed' state",
-            "name": "Failed provisioning state"
           }
         ]
       }
@@ -1672,12 +1624,8 @@
       "properties": {
         "expirationDate": {
           "format": "date-time",
-          "description": "The time at which the invitation will expire.",
+          "description": "The time at which the invitation will expire. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "readOnly": true
         },
         "senderEmail": {
           "description": "Email address of the sender.",
@@ -1696,12 +1644,16 @@
         },
         "sentAt": {
           "format": "date-time",
-          "description": "Gets the time at which the invitation was sent.",
+          "description": "Gets the time at which the invitation was sent. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string",
           "readOnly": true
         },
         "shareStatus": {
           "$ref": "#/definitions/ShareStatus"
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "readOnly": true
         },
         "targetActiveDirectoryId": {
           "format": "uuid",
@@ -1773,6 +1725,54 @@
         }
       },
       "discriminator": "storeKind"
+    },
+    "State": {
+      "description": "State of the resource",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Creating",
+        "Deleting",
+        "Moving",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "description": "The state of the resource is in 'Unknown' state",
+            "name": "Unknown state"
+          },
+          {
+            "value": "Succeeded",
+            "description": "The state of the resource is in 'Succeeded' state",
+            "name": "Succeeded state"
+          },
+          {
+            "value": "Creating",
+            "description": "The state of the resource is in 'Creating' state",
+            "name": "Creating state"
+          },
+          {
+            "value": "Deleting",
+            "description": "The state of the resource is in 'Deleting' state",
+            "name": "Deleting state"
+          },
+          {
+            "value": "Moving",
+            "description": "The state of the resource is in 'Moving' state",
+            "name": "Moving state"
+          },
+          {
+            "value": "Failed",
+            "description": "The state of the resource is in 'Failed' state",
+            "name": "Failed state"
+          }
+        ]
+      }
     },
     "StorageAccountPath": {
       "description": "Defines a single StorageAccountPath path",
@@ -1859,7 +1859,7 @@
         },
         "activationExpiration": {
           "format": "date-time",
-          "description": "Date of the activation expiration.",
+          "description": "Date of the activation expiration. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string",
           "readOnly": true
         },
@@ -1868,12 +1868,12 @@
           "type": "string",
           "readOnly": true
         },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "readOnly": true
-        },
         "registrationStatus": {
           "$ref": "#/definitions/TenantEmailRegistrationStatus",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/State",
           "readOnly": true
         },
         "tenantId": {
@@ -1941,16 +1941,12 @@
       "properties": {
         "expirationDate": {
           "format": "date-time",
-          "description": "The time at which the invitation will expire.",
+          "description": "The time at which the invitation will expire. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string"
         },
         "notify": {
           "description": "Whether or not the recipient was notified via email.",
           "type": "boolean"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "readOnly": true
         },
         "senderEmail": {
           "description": "Email address of the sender.",
@@ -1969,12 +1965,16 @@
         },
         "sentAt": {
           "format": "date-time",
-          "description": "Gets the time at which the invitation was sent.",
+          "description": "Gets the time at which the invitation was sent. Represented in the standard date-time format as defined by [RFC 3339](https://www.rfc-editor.org/rfc/rfc3339)",
           "type": "string",
           "readOnly": true
         },
         "shareStatus": {
           "$ref": "#/definitions/ShareStatus"
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "readOnly": true
         },
         "targetEmail": {
           "description": "The receiver email for the invitation is being sent.",
@@ -1987,7 +1987,7 @@
     "endpoint": {
       "in": "path",
       "name": "endpoint",
-      "description": "The scanning endpoint of your purview account. Example: https://{accountName}.purview.azure.com/share",
+      "description": "The sharing endpoint of your purview account. Example: https://{accountName}.purview.azure.com/share",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client",
@@ -2038,7 +2038,7 @@
       "required": true,
       "type": "string",
       "maxLength": 36,
-      "pattern": "^(?:\\{{0,1}(?:[0-9a-fA-F]){8}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){12}\\}{0,1})$",
+      "pattern": "^(?:\\{{0,1}(?:[0-9a-fA-F]){8}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){4}-(?:[0-9a-fA-F]){12}\\}{0,1})$|^(?:[0-9a-fA-F]+)$",
       "x-ms-parameter-location": "method"
     },
     "referenceName": {
