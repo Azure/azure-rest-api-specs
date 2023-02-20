@@ -15,12 +15,12 @@ namespace Azure.OpenAI;
 @doc("Return the embeddings for a given prompt.")
 @Cadl.Rest.actionSeparator("/")
 @action("embeddings")
-@convenienceAPI
+@convenientAPI(true)
 op getEmbeddings is Azure.Core.ResourceAction<Deployment, Embeddings.EmbeddingsOptions, Embeddings.Embeddings>;
 
 
 @doc("Return the completions for a given prompt.")
 @Cadl.Rest.actionSeparator("/")
 @action("completions")
-@convenienceAPI
+@convenientAPI(true)
 op getCompletions is Azure.Core.ResourceAction<Deployment, Completions.CompletionsOptions, Completions.Completions>;
