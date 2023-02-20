@@ -1624,7 +1624,6 @@
         },
         "keyVaultBaseUri": {
           "description": "Base uri of the KeyVault that stores certificate.",
-          "minLength": 1,
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -1633,7 +1632,6 @@
         },
         "keyVaultSecretName": {
           "description": "Certificate secret name.",
-          "minLength": 1,
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -1930,12 +1928,10 @@
       "properties": {
         "type": {
           "description": "The resource type. Can be \"Microsoft.SignalRService/SignalR\" or \"Microsoft.SignalRService/webPubSub\"",
-          "minLength": 1,
           "type": "string"
         },
         "name": {
           "description": "The resource name to validate. e.g.\"my-resource-name\"",
-          "minLength": 1,
           "type": "string"
         }
       }
@@ -2062,7 +2058,6 @@
       "properties": {
         "name": {
           "description": "Name of the private endpoint connection",
-          "minLength": 1,
           "type": "string"
         }
       }
@@ -2335,7 +2330,6 @@
       "properties": {
         "name": {
           "description": "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1, Premium_P1",
-          "minLength": 1,
           "type": "string"
         },
         "tier": {
@@ -2516,12 +2510,10 @@
       "properties": {
         "groupId": {
           "description": "The group id from the provider of resource the shared private link resource is for",
-          "minLength": 1,
           "type": "string"
         },
         "privateLinkResourceId": {
           "description": "The resource id of the resource the shared private link resource is for",
-          "minLength": 1,
           "type": "string"
         },
         "provisioningState": {
@@ -2581,7 +2573,6 @@
         "value": {
           "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/azure/azure-signalr/ for allowed values.",
           "maxLength": 128,
-          "minLength": 1,
           "type": "string"
         },
         "properties": {
@@ -3045,7 +3036,6 @@
         },
         "urlTemplate": {
           "description": "Gets or sets the Upstream URL template. You can use 3 predefined parameters {hub}, {category} {event} inside the template, the value of the Upstream URL is dynamically calculated when the client request comes in.\r\nFor example, if the urlTemplate is `http://example.com/{hub}/api/{event}`, with a client request from hub `chat` connects, it will first POST to this URL: `http://example.com/chat/api/connect`.",
-          "minLength": 1,
           "type": "string"
         },
         "auth": {
