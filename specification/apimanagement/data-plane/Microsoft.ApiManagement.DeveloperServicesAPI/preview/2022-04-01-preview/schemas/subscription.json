@@ -1,84 +1,159 @@
 {
-  "type": "object",
-  "description": "Product subscription",
-  "x-apim-code-public": "true",
-  "properties": {
-    "id": {
-      "type": "string",
-      "description": "Subscription identifier.",
-      "x-apim-code-resourceId": "/subscriptions/{sid}",
-      "readOnly": true
-    },
-    "ownerId": {
-      "type": "string",
-      "description": "Owner of the subscription",
-      "x-apim-code-resourceId": "/users/{uid}",
-      "x-apim-code-nillable": true
-    },
-    "scope": {
-      "type": "string",
-      "x-apim-code-resourceId": "{scope}",
-      "description": "Scope like /products/{productId} or /apis or /apis/{apiId} or /."
-    },
-    "name": {
-      "type": "string",
-      "description": "Subscription name."
-    },
-    "state": {
-      "allOf": [
-        {
-          "$ref": "subscriptionState.json"
+  "swagger": "2.0",
+  "info": {
+    "title": "Subscription definition",
+    "version": "2022-04-01-preview",
+    "description": "A spec file containing subscription definition"
+  },
+  "paths": {},
+  "definitions": {
+    "Subscription": {
+      "type": "object",
+      "description": "Product subscription",
+      "x-apim-code-public": "true",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Subscription identifier.",
+          "x-apim-code-resourceId": "/subscriptions/{sid}",
+          "readOnly": true
         },
-        {
-          "description": "Subscription state."
+        "ownerId": {
+          "type": "string",
+          "description": "Owner of the subscription",
+          "x-apim-code-resourceId": "/users/{uid}",
+          "x-apim-code-nillable": true
+        },
+        "scope": {
+          "type": "string",
+          "x-apim-code-resourceId": "{scope}",
+          "description": "Scope like /products/{productId} or /apis or /apis/{apiId} or /."
+        },
+        "name": {
+          "type": "string",
+          "description": "Subscription name."
+        },
+        "state": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/SubscriptionState"
+            },
+            {
+              "description": "Subscription state."
+            }
+          ]
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription creation date."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription activation date.",
+          "x-apim-code-nillable": true
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription expiration date.",
+          "x-apim-code-nillable": true
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when subscription was cancelled or expired.",
+          "x-apim-code-nillable": true
+        },
+        "notificationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Upcoming subscription expiration notification date.",
+          "x-apim-code-nillable": true
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "Subscription primary key.",
+          "x-apim-code-secret": true,
+          "x-apim-code-optional": true
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Subscription secondary key.",
+          "x-apim-code-secret": true,
+          "x-apim-code-optional": true
+        },
+        "stateComment": {
+          "type": "string",
+          "description": "Subscription State Comment.",
+          "x-apim-code-nillable": true
         }
-      ]
+      }
     },
-    "createdDate": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Subscription creation date."
+    "SubscriptionKeyParameterNames": {
+      "type": "object",
+      "description": "API details",
+      "x-apim-code-public": "true",
+      "properties": {
+        "header": {
+          "type": "string",
+          "description": "Subscription key header name"
+        },
+        "query": {
+          "type": "string",
+          "description": "Subscription key query string parameter name"
+        }
+      }
     },
-    "startDate": {
+    "SubscriptionState": {
       "type": "string",
-      "format": "date-time",
-      "description": "Subscription activation date.",
-      "x-apim-code-nillable": true
-    },
-    "expirationDate": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Subscription expiration date.",
-      "x-apim-code-nillable": true
-    },
-    "endDate": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Date when subscription was cancelled or expired.",
-      "x-apim-code-nillable": true
-    },
-    "notificationDate": {
-      "type": "string",
-      "format": "date-time",
-      "description": "Upcoming subscription expiration notification date.",
-      "x-apim-code-nillable": true
-    },
-    "primaryKey": {
-      "type": "string",
-      "description": "Subscription primary key.",
-      "x-apim-code-secret": true,
-      "x-apim-code-optional": true
-    },
-    "secondaryKey": {
-      "type": "string",
-      "description": "Subscription secondary key.",
-      "x-apim-code-secret": true,
-      "x-apim-code-optional": true
-    },
-    "stateComment": {
-      "type": "string",
-      "description": "Subscription State Comment.",
-      "x-apim-code-nillable": true
+      "description": "Possible subscription request states",
+      "x-apim-public": "true",
+      "enum": [
+        "suspended",
+        "active",
+        "expired",
+        "submitted",
+        "rejected",
+        "cancelled"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "subscription-state",
+        "values": [
+          {
+            "value": "suspended",
+            "description": "Subscription is blocked. User whose subscription is blocked cannot call subscription's product APIs.",
+            "x-apim-code-enumValue": 0
+          },
+          {
+            "value": "active",
+            "description": "Subscription is active.",
+            "x-apim-code-enumValue": 1
+          },
+          {
+            "value": "expired",
+            "description": "Subscription has expired. User whose subscription is expired cannot call subscription's product APIs.",
+            "x-apim-code-enumValue": 2
+          },
+          {
+            "value": "submitted",
+            "description": "Subscription request has been submitted.",
+            "x-apim-code-enumValue": 3
+          },
+          {
+            "value": "rejected",
+            "description": "Subscription request has been rejected.",
+            "x-apim-code-enumValue": 4
+          },
+          {
+            "value": "cancelled",
+            "description": "Subscription request has been cancelled.",
+            "x-apim-code-enumValue": 5
+          }
+        ]
+      }
     }
   }
 }

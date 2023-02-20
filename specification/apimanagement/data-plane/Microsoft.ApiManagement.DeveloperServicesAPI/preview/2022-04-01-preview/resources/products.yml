@@ -27,13 +27,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/product.json
+                          $ref: ../schemas/product.json#/definitions/Product
 
   /products/{productId}:
     description: Public Product
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/product.json
+                $ref: ../schemas/product.json#/definitions/Product
 
   /products/{productId}/tags:
     description: List of Tags associated with public Product
@@ -77,13 +77,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/tag.json
+                          $ref: ../schemas/tag.json#/definitions/Tag
 
   /products/{productId}/apis:
     description: List of Apis associated with public Product
@@ -108,7 +108,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:

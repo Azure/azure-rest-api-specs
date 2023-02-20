@@ -1,0 +1,71 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Delegation operations definition",
+    "version": "2022-04-01-preview",
+    "description": "A spec file containing delegation operations definition"
+  },
+  "paths": {},
+  "definitions": {
+    "DelegationOperationRequest": {
+      "type": "object",
+      "description": "Delegation Operation Request",
+      "properties": {
+        "returnUrl": {
+          "type": "string",
+          "description": "The URL user gets redirected to after successful authentication."
+        }
+      }
+    },
+    "DelegationOperationResponse": {
+      "type": "object",
+      "description": "Delegation Operation Response",
+      "properties": {
+        "ssoUri": {
+          "type": "string",
+          "description": "Signed SSO Sign-in/Sign-up Uri"
+        }
+      }
+    },
+    "UserDelegationOperationRequest": {
+      "type": "object",
+      "description": "Delegation operation parameters container",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Id of product. Is not required for all operations"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Id of subscription. Is not required for all operations"
+        }
+      }
+    },
+    "UserDelegationOperationResponse": {
+      "type": "object",
+      "description": "Delegation operation response",
+      "properties": {
+        "redirectUrl": {
+          "type": "string",
+          "description": "Redirect url"
+        }
+      }
+    },
+    "DelegationSettings": {
+      "type": "object",
+      "description": "Generic string value container",
+      "properties": {
+        "signin": {
+          "type": "boolean",
+          "description": "Specifies whether signin is delegated to external system.",
+          "x-apim-code-optional": true
+        },
+        "subscribe": {
+          "type": "boolean",
+          "description": "Specifies whether Product subscribe is delegated to external system.",
+          "x-apim-code-optional": true
+        }
+      }
+    }
+  }
+}

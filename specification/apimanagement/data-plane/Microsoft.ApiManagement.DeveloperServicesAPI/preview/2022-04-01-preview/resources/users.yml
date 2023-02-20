@@ -16,7 +16,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../schemas/userCreate.json
+              $ref: ../schemas/user.json#/definitions/UserCreate
       x-ms-examples:
         User_Create:
           $ref: "../examples/CreateUser.json"
@@ -26,7 +26,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/user.json
+                $ref: ../schemas/user.json#/definitions/User
 
   /users/{userId}:
     get:
@@ -48,7 +48,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/user.json
+                $ref: ../schemas/user.json#/definitions/User
 
     patch:
       description: Update existing user
@@ -65,7 +65,7 @@ paths:
         content:
           application/merge-patch+json:
             schema:
-              $ref: ../schemas/userUpdate.json
+              $ref: ../schemas/user.json#/definitions/UserUpdate
       x-ms-examples:
         User_CreateOrUpdate:
           $ref: "../examples/UpdateUser.json"
@@ -75,7 +75,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/user.json
+                $ref: ../schemas/user.json#/definitions/User
 
     delete:
       operationId: User_Delete
@@ -120,13 +120,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/userIdentity.json
+                          $ref: ../schemas/identityOperations.json#/definitions/IdentityResult
 
   /users/{userId}/identities/{provider}/{identity}:
     description: User identity
@@ -176,13 +176,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/product.json
+                          $ref: ../schemas/product.json#/definitions/Product
 
   /users/{userId}/products/{productId}:
     description: User visible Product
@@ -205,7 +205,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/product.json
+                $ref: ../schemas/product.json#/definitions/Product
 
   /users/{userId}/products/{productId}/apis:
     description: List of User visible APIs associated with User visible Product
@@ -234,7 +234,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
@@ -269,13 +269,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/tag.json
+                          $ref: ../schemas/tag.json#/definitions/Tag
 
   /users/{userId}/apiVersionSets:
     description: User visible API Version Sets
@@ -303,13 +303,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/apiVersionSet.json
+                          $ref: ../schemas/apiVersionSet.json#/definitions/ApiVersionSet
 
   /users/{userId}/apiVersionSets/{versionSetId}:
     description: User visible API Version Set
@@ -332,7 +332,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/apiVersionSet.json
+                $ref: ../schemas/apiVersionSet.json#/definitions/ApiVersionSet
 
   /users/{userId}/apiVersionSets/{versionSetId}/apis:
     description: List of User visible APIs associated with User visible API Version Set
@@ -361,7 +361,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
@@ -395,7 +395,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
@@ -481,13 +481,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/apiSchema.json
+                          $ref: ../schemas/api.json#/definitions/ApiSchema
 
   /users/{userId}/apis/{apiId}/schemas/{schemaId}:
     description: Schemas of User visible API
@@ -511,7 +511,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/apiSchema.json
+                $ref: ../schemas/api.json#/definitions/ApiSchema
 
   /users/{userId}/apis/{apiId}/authServers/oauth2:
     description: List of OAuth 2.0 servers associated with public API
@@ -539,13 +539,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/authorizationServer.json
+                          $ref: ../schemas/authorizationServer.json#/definitions/AuthorizationServer
 
   /users/{userId}/apis/{apiId}/authServers/oauth2/{providerId}:
     description: OAuth 2.0 server associated with User visible API
@@ -569,7 +569,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/authorizationServer.json
+                $ref: ../schemas/authorizationServer.json#/definitions/AuthorizationServer
 
   /users/{userId}/apis/{apiId}/authServers/openidconnect:
     description: List of OpenID Connect server associated with public API
@@ -597,13 +597,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/authorizationServer.json
+                          $ref: ../schemas/authorizationServer.json#/definitions/AuthorizationServer
 
   /users/{userId}/apis/{apiId}/authServers/openidconnect/{providerId}:
     description: OpenID Connect server associated with User visible API
@@ -627,7 +627,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/authorizationServer.json
+                $ref: ../schemas/authorizationServer.json#/definitions/AuthorizationServer
 
   /users/{userId}/apis/{apiId}/products:
     description: List of User visible Products associated with User visible API
@@ -656,13 +656,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/product.json
+                          $ref: ../schemas/product.json#/definitions/Product
 
   /users/{userId}/apis/{apiId}/releases:
     description: List of releases for User visible API
@@ -691,13 +691,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/apiRelease.json
+                          $ref: ../schemas/api.json#/definitions/ApiRelease
 
   /users/{userId}/apis/{apiId}/hostnames:
     description: List of hostnames for User visible API
@@ -725,13 +725,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/apiHostname.json
+                          $ref: ../schemas/api.json#/definitions/ApiHostname
 
   /users/{userId}/apis/{apiId}/tags:
     description: Tags of User visible API
@@ -760,13 +760,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/tag.json
+                          $ref: ../schemas/tag.json#/definitions/Tag
 
   /users/{userId}/apis/{apiId}/operations:
     description: Operations of User visible API
@@ -795,13 +795,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/operation.json
+                          $ref: ../schemas/operation.json#/definitions/Operation
 
   /users/{userId}/apis/{apiId}/operations/{operationId}:
     description: Operation of User visible API
@@ -825,7 +825,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/operation.json
+                $ref: ../schemas/operation.json#/definitions/Operation
 
   /users/{userId}/apis/{apiId}/operations/{operationId}/tags:
     description: Tags of operation of User visible API
@@ -855,13 +855,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/tag.json
+                          $ref: ../schemas/tag.json#/definitions/Tag
 
   /users/{userId}/tags:
     description: Tags associated with User visible entities
@@ -889,13 +889,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/tag.json
+                          $ref: ../schemas/tag.json#/definitions/Tag
 
   /users/{userId}/subscriptions:
     description: User subscriptions
@@ -924,13 +924,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/subscription.json
+                          $ref: ../schemas/subscription.json#/definitions/Subscription
 
   /users/{userId}/subscriptions/{subscriptionId}:
     description: User subscription
@@ -954,7 +954,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/subscription.json
+                $ref: ../schemas/subscription.json#/definitions/Subscription
 
     patch:
       description: Update user subscription
@@ -972,7 +972,7 @@ paths:
         content:
           application/merge-patch+json:
             schema:
-              $ref: ../schemas/userSubscriptionUpdate.json
+              $ref: ../schemas/user.json#/definitions/UserSubscriptionUpdate
       x-ms-examples:
         UserSubscription_CreateOrUpdate:
           $ref: "../examples/UpdateUserSubscription.json"
@@ -995,7 +995,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../schemas/userSubscriptionCreate.json
+              $ref: ../schemas/user.json#/definitions/UserSubscriptionCreate
       x-ms-examples:
         UserSubscription_Create:
           $ref: "../examples/CreateUserSubscription.json"
@@ -1089,13 +1089,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/reportRecord.json
+                          $ref: ../schemas/reportRecord.json#/definitions/ReportRecord
 
   /users/{userId}/token/revoke:
     description: Revoke user token

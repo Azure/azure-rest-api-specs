@@ -1,0 +1,41 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Identity operations definition",
+    "version": "2022-04-01-preview",
+    "description": "A spec file containing identity operations definition"
+  },
+  "paths": {},
+  "definitions": {
+    "IdentityConfirmationRequest": {
+      "type": "object",
+      "description": "API Management Notification Request",
+      "x-apim-code-public": "false",
+      "properties": {
+        "to": {
+          "type": "string",
+          "description": "Recipient"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Confirmation reason"
+        }
+      }
+    },
+    "IdentityResult": {
+      "type": "object",
+      "description": "UserId associate with credentials provided in request",
+      "x-apim-code-public": "false",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "User ID"
+        },
+        "provider": {
+          "type": "string",
+          "description": "Identity provider name"
+        }
+      }
+    }
+  }
+}

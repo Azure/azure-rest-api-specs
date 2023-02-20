@@ -1,27 +1,38 @@
 {
-  "type": "object",
-  "description": "Payload or parameter example",
-  "properties": {
-    "summary": {
-      "type": "string",
-      "description": "Short description for the example.",
-      "x-apim-code-optional": true
-    },
-    "description": {
-      "type": "string",
-      "description": "Long description for the example.",
-      "x-apim-code-optional": true
-    },
-    "value": {
+  "swagger": "2.0",
+  "info": {
+    "title": "Example definition",
+    "version": "2022-04-01-preview",
+    "description": "A spec file containing example definition"
+  },
+  "paths": {},
+  "definitions": {
+    "Example": {
       "type": "object",
-      "description": "Embedded literal example. The value field and externalValue field are mutually exclusive. To represent examples of media types that cannot naturally represented in JSON or YAML, use a string value to contain the example, escaping where necessary.",
-      "x-apim-code-optional": true,
-      "x-apim-code-type": "JToken"
-    },
-    "externalValue": {
-      "type": "string",
-      "description": "A URL that points to the literal example.",
-      "x-apim-code-optional": true
+      "description": "Payload or parameter example",
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "Short description for the example.",
+          "x-apim-code-optional": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Long description for the example.",
+          "x-apim-code-optional": true
+        },
+        "value": {
+          "type": "object",
+          "description": "Embedded literal example. The value field and externalValue field are mutually exclusive. To represent examples of media types that cannot naturally represented in JSON or YAML, use a string value to contain the example, escaping where necessary.",
+          "x-apim-code-optional": true,
+          "x-apim-code-type": "JToken"
+        },
+        "externalValue": {
+          "type": "string",
+          "description": "A URL that points to the literal example.",
+          "x-apim-code-optional": true
+        }
+      }
     }
   }
 }

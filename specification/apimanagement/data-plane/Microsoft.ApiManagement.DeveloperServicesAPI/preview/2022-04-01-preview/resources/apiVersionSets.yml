@@ -27,13 +27,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/apiVersionSet.json
+                          $ref: ../schemas/apiVersionSet.json#/definitions/ApiVersionSet
 
   /apiVersionSets/{versionSetId}:
     description: Public Api Version Set
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/apiVersionSet.json
+                $ref: ../schemas/apiVersionSet.json#/definitions/ApiVersionSet
 
   /apiVersionSets/{versionSetId}/apis:
     description: List of public Apis associated with public Api Version Set
@@ -77,7 +77,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:

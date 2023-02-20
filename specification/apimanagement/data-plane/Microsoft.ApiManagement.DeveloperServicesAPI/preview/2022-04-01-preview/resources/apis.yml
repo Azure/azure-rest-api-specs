@@ -27,7 +27,7 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
@@ -105,13 +105,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/apiSchema.json
+                          $ref: ../schemas/api.json#/definitions/ApiSchema
 
   /apis/{apiId}/schemas/{schemaId}:
     description: Schemas of public API
@@ -131,7 +131,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/apiSchema.json
+                $ref: ../schemas/api.json#/definitions/ApiSchema
 
   /apis/{apiId}/authServers/oauth2:
     description: List of OAuth 2.0 servers associated with public API
@@ -155,13 +155,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/authorizationServer.json
+                          $ref: ../schemas/authorizationServer.json#/definitions/AuthorizationServer
 
   /apis/{apiId}/authServers/oauth2/{providerId}:
     description: OAuth 2.0 server associated with public API
@@ -181,7 +181,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/authorizationServer.json
+                $ref: ../schemas/authorizationServer.json#/definitions/AuthorizationServer
 
   /apis/{apiId}/authServers/openidconnect:
     description: List of OpenID Connect servers associated with public API
@@ -205,13 +205,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/authorizationServer.json
+                          $ref: ../schemas/authorizationServer.json#/definitions/AuthorizationServer
 
   /apis/{apiId}/authServers/openidconnect/{providerId}:
     description: OpenID Connect server associated with public API
@@ -231,7 +231,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/authorizationServer.json
+                $ref: ../schemas/authorizationServer.json#/definitions/AuthorizationServer
 
   /apis/{apiId}/products:
     description: List of public Products associated with public API
@@ -256,13 +256,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/product.json
+                          $ref: ../schemas/product.json#/definitions/Product
 
   /apis/{apiId}/releases:
     description: List of releases for public API
@@ -287,13 +287,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/apiRelease.json
+                          $ref: ../schemas/api.json#/definitions/ApiRelease
 
   /apis/{apiId}/tags:
     description: Tags of public API
@@ -318,13 +318,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/tag.json
+                          $ref: ../schemas/tag.json#/definitions/Tag
 
   /apis/{apiId}/hostnames:
     description: Get hostnames of the specified api
@@ -348,13 +348,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/apiHostname.json
+                          $ref: ../schemas/api.json#/definitions/ApiHostname
 
   /apis/{apiId}/operations:
     description: Operations of public API
@@ -379,13 +379,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/operation.json
+                          $ref: ../schemas/operation.json#/definitions/Operation
 
   /apis/{apiId}/operations/{operationId}:
     description: Operation of public API
@@ -405,7 +405,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/operation.json
+                $ref: ../schemas/operation.json#/definitions/Operation
 
   /apis/{apiId}/operations/{operationId}/tags:
     description: Tags of operation of public API
@@ -431,13 +431,13 @@ paths:
             application/json:
               schema:
                 allOf:
-                  - $ref: ../schemas/collection.json
+                  - $ref: ../schemas/collection.json#/definitions/Collection
                   - type: object
                     properties:
                       value:
                         type: array
                         items:
-                          $ref: ../schemas/tag.json
+                          $ref: ../schemas/tag.json#/definitions/Tag
 
 components:
   parameters:

@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Api Definition",
+    "title": "Api definition",
     "version": "2022-04-01-preview",
     "description": "A spec file containing api definition"
   },
@@ -39,21 +39,21 @@
           "description": "Protocols over which API is made available.",
           "type": "array",
           "items": {
-            "$ref": "apiProtocol.json"
+            "$ref": "#/definitions/ApiProtocol"
           }
         },
         "tagDescriptions": {
           "description": "Array of Tag Descriptions included into this API.",
           "type": "array",
           "items": {
-            "$ref": "tagDescription.json"
+            "$ref": "tag.json#/definitions/TagDescription"
           },
           "x-apim-code-optional": true
         },
         "authenticationSettings": {
           "allOf": [
             {
-              "$ref": "authenticationSettings.json"
+              "$ref": "authenticationSettings.json#/definitions/AuthenticationSettings"
             },
             {
               "description": "Collection of authentication settings included into this API."
@@ -63,7 +63,7 @@
         "subscriptionKeyParameterNames": {
           "allOf": [
             {
-              "$ref": "subscriptionKeyParameterNames.json"
+              "$ref": "subscription.json#/definitions/SubscriptionKeyParameterNames"
             },
             {
               "description": "Names of Subscription key parameters used by the API."
@@ -79,7 +79,7 @@
         "contact": {
           "allOf": [
             {
-              "$ref": "apiContactInfo.json"
+              "$ref": "#/definitions/ApiContactInfo"
             },
             {
               "description": "Contact information for the exposed API."
@@ -90,7 +90,7 @@
         "license": {
           "allOf": [
             {
-              "$ref": "apiLicenseInfo.json"
+              "$ref": "#/definitions/ApiLicenseInfo"
             },
             {
               "description": "License information for the exposed API."
@@ -101,7 +101,7 @@
         "type": {
           "allOf": [
             {
-              "$ref": "apiType.json"
+              "$ref": "#/definitions/ApiType"
             },
             {
               "description": "Type of API.",
@@ -124,6 +124,195 @@
           "description": "Api Version Set Identifier",
           "x-apim-code-resourceId": "/apiVersionSets/{id}"
         }
+      }
+    },
+    "ApiContactInfo": {
+      "type": "object",
+      "description": "API contact information",
+      "x-apim-code-public": "true",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "The identifying name of the contact person/organization"
+        },
+        "url": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "The URL pointing to the contact information. MUST be in the format of a URL"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "The email address of the contact person/organization. MUST be in the format of an email address"
+        }
+      }
+    },
+    "ApiHostname": {
+      "type": "object",
+      "description": "Api hostname",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Api hostname identifier."
+        },
+        "value": {
+          "type": "string",
+          "description": "Api hostname value."
+        }
+      }
+    },
+    "ApiLicenseInfo": {
+      "type": "object",
+      "description": "API license information",
+      "x-apim-code-public": "true",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "The license name used for the API"
+        },
+        "url": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "A URL to the license used for the API. MUST be in the format of a URL"
+        }
+      }
+    },
+    "ApiProtocol": {
+      "type": "string",
+      "description": "API Protocol",
+      "x-apim-public": "true",
+      "x-apim-code-flags": true,
+      "enum": [
+        "http",
+        "https",
+        "ws",
+        "wss"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "apiProtocol",
+        "values": [
+          {
+            "value": "http",
+            "description": "HTTP scheme will be supported for API",
+            "x-apim-code-enumValue": 1
+          },
+          {
+            "value": "https",
+            "description": "HTTPS scheme will be supported for API",
+            "x-apim-code-enumValue": 2
+          },
+          {
+            "value": "ws",
+            "description": "WebSocket scheme will be supported for API",
+            "x-apim-code-enumValue": 4
+          },
+          {
+            "value": "wss",
+            "description": "WebSocket Secure scheme will be supported for API",
+            "x-apim-code-enumValue": 8
+          }
+        ]
+      }
+    },
+    "ApiRelease": {
+      "type": "object",
+      "x-apim-code-public": "true",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Release identifier.",
+          "x-apim-code-resourceId": "/apis/{aid}/releases/{rid}",
+          "x-apim-code-type": "ApiReleaseIdentityContract",
+          "readOnly": true,
+          "x-apim-code-alias": "identity"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Release creation date and time."
+        },
+        "updatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated date and time."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Release Note"
+        }
+      }
+    },
+    "ApiReleaseIdentity": {
+      "type": "object",
+      "properties": {
+        "releaseId": {
+          "type": "string",
+          "description": "Release ID"
+        },
+        "apiId": {
+          "type": "string",
+          "description": "API ID"
+        }
+      }
+    },
+    "ApiSchema": {
+      "type": "object",
+      "description": "A Schema used by an API",
+      "x-apim-code-public": "true",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of the schema"
+        },
+        "contentType": {
+          "type": "string",
+          "description": "Media type of the schema document (e.g. application/json, application/xml)."
+        },
+        "document": {
+          "type": "object",
+          "description": "The document representing the Schema",
+          "x-apim-code-optional": true
+        }
+      }
+    },
+    "ApiType": {
+      "type": "string",
+      "description": "Type of API",
+      "x-apim-public": "true",
+      "enum": [
+        "http",
+        "soap",
+        "websocket",
+        "graphql"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "apiType",
+        "values": [
+          {
+            "value": "http",
+            "description": "HTTP",
+            "x-apim-code-enumValue": 0
+          },
+          {
+            "value": "soap",
+            "description": "SOAP",
+            "x-apim-code-enumValue": 1
+          },
+          {
+            "value": "websocket",
+            "description": "WEBSOCKET",
+            "x-apim-code-enumValue": 2
+          },
+          {
+            "value": "graphql",
+            "description": "GRAPHQL",
+            "x-apim-code-enumValue": 3
+          }
+        ]
       }
     }
   }

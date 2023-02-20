@@ -1,26 +1,182 @@
 {
-  "type": "object",
-  "description": "Authentication settings",
-  "properties": {
-    "oAuth2AuthenticationSettings": {
-      "description": "Collection of OAuth2 authentication settings included into this API.",
-      "type": "array",
-      "items": {
-        "$ref": "oAuth2AuthenticationSettings.json"
+  "swagger": "2.0",
+  "info": {
+    "title": "Authentication settings definition",
+    "version": "2022-04-01-preview",
+    "description": "A spec file containing authentication settings definition"
+  },
+  "paths": {},
+  "definitions": {
+    "AuthenticationSettings": {
+      "type": "object",
+      "description": "Authentication settings",
+      "properties": {
+        "oAuth2AuthenticationSettings": {
+          "description": "Collection of OAuth2 authentication settings included into this API.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OAuth2AuthenticationSettings"
+          }
+        },
+        "openidAuthenticationSettings": {
+          "description": "Collection of OpenID Connect authentication settings included into this API.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OpenidAuthenticationSettings"
+          }
+        },
+        "subscriptionKeyRequired": {
+          "type": "boolean",
+          "description": "Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products.",
+          "x-apim-code-optional": true,
+          "x-apim-code-nillable": true
+        }
       }
     },
-    "openidAuthenticationSettings": {
-      "description": "Collection of OpenID Connect authentication settings included into this API.",
-      "type": "array",
-      "items": {
-        "$ref": "openidAuthenticationSettings.json"
+    "OAuth2AuthenticationSettings": {
+      "type": "object",
+      "description": "OAuth authentication settings",
+      "properties": {
+        "authorizationServerId": {
+          "type": "string",
+          "description": "OAuth authorization server identifier"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Operations scope"
+        },
+        "authorizationServer": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OAuth2AuthorizationServer"
+            },
+            {
+              "description": "OAuth authorization server",
+              "x-apim-code-optional": true
+            }
+          ]
+        }
       }
     },
-    "subscriptionKeyRequired": {
-      "type": "boolean",
-      "description": "Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products.",
-      "x-apim-code-optional": true,
-      "x-apim-code-nillable": true
+    "OAuth2AuthorizationServer": {
+      "type": "object",
+      "description": "External OAuth authorization server settings",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Authorization server identifier",
+          "x-apim-code-resourceId": "/authorizationServers/{id}",
+          "readOnly": true,
+          "x-apim-code-alias": "id"
+        },
+        "name": {
+          "type": "string",
+          "description": "User-friendly authorization server name."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "authorizationServerCommonProperties.json#/definitions/AuthorizationServerCommonProperties"
+        },
+        {
+          "$ref": "#/definitions/ClientCredentials"
+        },
+        {
+          "$ref": "#/definitions/ResourceOwnerCredentials"
+        }
+      ]
+    },
+    "OpenidAuthenticationSettings": {
+      "type": "object",
+      "description": "OpenID Connect authentication settings",
+      "properties": {
+        "openidProviderId": {
+          "type": "string",
+          "description": "OpenID Connect Provider identifier"
+        },
+        "bearerTokenSendingMethods": {
+          "description": "How to send token to the server.",
+          "type": "array",
+          "items": {
+            "$ref": "bearerTokenSendingMethods.json#/definitions/BearerTokenSendingMethods"
+          }
+        },
+        "openidConnectProvider": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/OpenidConnectProvider"
+            },
+            {
+              "description": "Open ID Connect provider"
+            }
+          ]
+        }
+      }
+    },
+    "OpenidConnectProvider": {
+      "type": "object",
+      "description": "OpenID Connect Provider settings",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "OpenID Connect Provider identifier",
+          "x-apim-code-resourceId": "/openidConnectProviders/{id}",
+          "x-apim-code-alias": "id"
+        },
+        "name": {
+          "type": "string",
+          "description": "User-friendly OpenID Connect Provider name."
+        },
+        "description": {
+          "type": "string",
+          "description": "User-friendly description of OpenID Connect Provider."
+        },
+        "metadataEndpoint": {
+          "type": "string",
+          "description": "Metadata endpoint URI."
+        },
+        "useInTestConsole": {
+          "type": "boolean",
+          "description": "Open Id Connect Provider may be used in the test console",
+          "x-apim-code-optional": true,
+          "x-apim-code-nillable": true
+        },
+        "useInApiDocumentation": {
+          "type": "boolean",
+          "description": "Open Id Connect Provider may be used in API documentation",
+          "x-apim-code-optional": true,
+          "x-apim-code-nillable": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientCredentials"
+        }
+      ]
+    },
+    "ResourceOwnerCredentials": {
+      "type": "object",
+      "x-apim-code-ignore": true,
+      "properties": {
+        "resourceOwnerUsername": {
+          "type": "string",
+          "description": "Username of the resource owner on behalf of whom developer console will make requests"
+        },
+        "resourceOwnerPassword": {
+          "type": "string",
+          "description": "Password of the resource owner on behalf of whom developer console will make requests"
+        }
+      }
+    },
+    "ClientCredentials": {
+      "type": "object",
+      "x-apim-code-ignore": true,
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application"
+        }
+      }
     }
   }
 }

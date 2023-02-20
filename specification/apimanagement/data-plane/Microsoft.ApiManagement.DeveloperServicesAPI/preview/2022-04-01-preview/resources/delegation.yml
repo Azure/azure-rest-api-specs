@@ -20,7 +20,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/delegationSettings.json
+                $ref: ../schemas/delegationOperations.json#/definitions/DelegationSettings
 
   /delegation/urls/{action}:
     description: Unauthorized delegation URLs (Signin, Signup)
@@ -34,7 +34,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../schemas/delegationOperationRequest.json
+              $ref: ../schemas/delegationOperations.json#/definitions/DelegationOperationRequest
       x-ms-examples:
         DelegationSigninUrl_Create:
           $ref: "../examples/CreateDelegationSigninUrl.json"
@@ -44,7 +44,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/delegationOperationResponse.json
+                $ref: ../schemas/delegationOperations.json#/definitions/DelegationOperationResponse
 
   /delegation/urls/users/{userId}/{action}:
     description: User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout)
@@ -60,7 +60,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: ../schemas/userDelegationOperationRequest.json
+              $ref: ../schemas/delegationOperations.json#/definitions/UserDelegationOperationRequest
       x-ms-examples:
         UserDelegationUrl_Create:
           $ref: "../examples/CreateUserDelegationUrl.json"
@@ -70,7 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: ../schemas/userDelegationOperationResponse.json
+                $ref: ../schemas/delegationOperations.json#/definitions/UserDelegationOperationResponse
 
 components:
   parameters:

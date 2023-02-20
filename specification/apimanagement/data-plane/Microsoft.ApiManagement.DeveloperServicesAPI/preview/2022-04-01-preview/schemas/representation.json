@@ -1,47 +1,126 @@
 {
-  "type": "object",
-  "description": "HTTP request/response representation",
-  "properties": {
-    "contentType": {
-      "type": "string",
-      "x-apim-code-optional": true
-    },
-    "examples": {
+  "swagger": "2.0",
+  "info": {
+    "title": "Representation definition",
+    "version": "2022-04-01-preview",
+    "description": "A spec file containing representation definition"
+  },
+  "paths": {},
+  "definitions": {
+    "Representation": {
       "type": "object",
-      "description": "Representation examples",
+      "description": "HTTP request/response representation",
       "properties": {
-        "default": {
-          "allOf": [
-            {
-              "$ref": "example.json"
-            },
-            {
-              "description": "Default representation example"
+        "contentType": {
+          "type": "string",
+          "x-apim-code-optional": true
+        },
+        "examples": {
+          "type": "object",
+          "description": "Representation examples",
+          "properties": {
+            "default": {
+              "allOf": [
+                {
+                  "$ref": "example.json#/definitions/Example"
+                },
+                {
+                  "description": "Default representation example"
+                }
+              ]
             }
-          ]
+          },
+          "additionalProperties": {
+            "$ref": "example.json#/definitions/Example"
+          },
+          "x-apim-code-optional": true
+        },
+        "schemaId": {
+          "type": "string",
+          "description": "Schema identifier. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'.",
+          "x-apim-code-optional": true
+        },
+        "typeName": {
+          "type": "string",
+          "description": "Type name defined by the schema. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'.",
+          "x-apim-code-optional": true
+        },
+        "formParameters": {
+          "description": "Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'.",
+          "x-apim-code-optional": true,
+          "type": "array",
+          "items": {
+            "$ref": "parameter.json#/definitions/Parameter"
+          }
         }
-      },
-      "additionalProperties": {
-        "$ref": "example.json"
-      },
-      "x-apim-code-optional": true
+      }
     },
-    "schemaId": {
-      "type": "string",
-      "description": "Schema identifier. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'.",
-      "x-apim-code-optional": true
+    "Request": {
+      "type": "object",
+      "description": "HTTP request",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Operation request description.",
+          "x-apim-code-optional": true
+        },
+        "queryParameters": {
+          "description": "Collection of operation request query parameters.",
+          "type": "array",
+          "x-apim-code-optional": true,
+          "items": {
+            "$ref": "parameter.json#/definitions/Parameter"
+          }
+        },
+        "headers": {
+          "description": "Collection of operation request headers.",
+          "type": "array",
+          "x-apim-code-optional": true,
+          "items": {
+            "$ref": "parameter.json#/definitions/Parameter"
+          }
+        },
+        "representations": {
+          "description": "Collection of operation request representations.",
+          "type": "array",
+          "x-apim-code-optional": true,
+          "items": {
+            "$ref": "representation.json#/definitions/Representation"
+          }
+        }
+      }
     },
-    "typeName": {
-      "type": "string",
-      "description": "Type name defined by the schema. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'.",
-      "x-apim-code-optional": true
-    },
-    "formParameters": {
-      "description": "Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'.",
-      "x-apim-code-optional": true,
-      "type": "array",
-      "items": {
-        "$ref": "parameter.json"
+    "Response": {
+      "type": "object",
+      "description": "HTTP response",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Operation response status code.",
+          "x-apim-code-optional": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation response description.",
+          "x-apim-code-optional": true
+        },
+        "representations": {
+          "description": "Collection of operation response representations.",
+          "type": "array",
+          "x-apim-code-optional": true,
+          "items": {
+            "$ref": "representation.json#/definitions/Representation"
+          }
+        },
+        "headers": {
+          "description": "Collection of operation response headers.",
+          "type": "array",
+          "x-apim-code-optional": true,
+          "items": {
+            "$ref": "parameter.json#/definitions/Parameter"
+          }
+        }
       }
     }
   }

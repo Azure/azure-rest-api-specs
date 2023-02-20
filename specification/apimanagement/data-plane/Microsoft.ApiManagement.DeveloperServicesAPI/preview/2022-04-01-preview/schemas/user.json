@@ -1,41 +1,201 @@
 {
-  "type": "object",
-  "description": "User profile",
-  "x-apim-code-public": "true",
-  "properties": {
-    "id": {
-      "type": "string",
-      "description": "User identifier.",
-      "x-apim-code-resourceId": "/users/{uid}",
-      "readOnly": true
-    },
-    "firstName": {
-      "type": "string",
-      "description": "First name."
-    },
-    "lastName": {
-      "type": "string",
-      "description": "Last name."
-    },
-    "email": {
-      "type": "string",
-      "format": "email",
-      "description": "Email address."
-    },
-    "state": {
-      "allOf": [
-        {
-          "$ref": "userState.json"
+  "swagger": "2.0",
+  "info": {
+    "title": "User definition",
+    "version": "2022-04-01-preview",
+    "description": "A spec file containing user definition"
+  },
+  "paths": {},
+  "definitions": {
+    "User": {
+      "type": "object",
+      "description": "User profile",
+      "x-apim-code-public": "true",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "User identifier.",
+          "x-apim-code-resourceId": "/users/{uid}",
+          "readOnly": true
         },
-        {
-          "description": "User state."
+        "firstName": {
+          "type": "string",
+          "description": "First name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address."
+        },
+        "state": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserState"
+            },
+            {
+              "description": "User state."
+            }
+          ]
+        },
+        "registrationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of user registration."
         }
-      ]
+      }
     },
-    "registrationDate": {
+    "UserCreate": {
+      "type": "object",
+      "description": "User registration or update request representation",
+      "x-apim-code-public": "true",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address."
+        },
+        "password": {
+          "type": "string",
+          "description": "Password."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name."
+        },
+        "state": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserState"
+            },
+            {
+              "description": "User account state",
+              "x-apim-code-nillable": true
+            }
+          ]
+        },
+        "note": {
+          "type": "string",
+          "description": "Note about user"
+        },
+        "confirmation": {
+          "type": "string",
+          "description": "Confirmation type"
+        },
+        "identities": {
+          "description": "Collection of user identities.",
+          "type": "array",
+          "items": {
+            "$ref": "identityOperations.json#/definitions/IdentityResult"
+          }
+        }
+      }
+    },
+    "UserState": {
       "type": "string",
-      "format": "date-time",
-      "description": "Date of user registration."
+      "description": "Possible user account states",
+      "enum": [
+        "active",
+        "blocked",
+        "pending",
+        "deleted"
+      ],
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "user-state",
+        "values": [
+          {
+            "value": "active",
+            "description": "User is active.",
+            "x-apim-code-enumValue": 1
+          },
+          {
+            "value": "blocked",
+            "description": "User is blocked. Blocked users cannot authenticate at developer portal or call API.",
+            "x-apim-code-enumValue": 2
+          },
+          {
+            "value": "pending",
+            "description": "User account is pending. Requires identity confirmation",
+            "x-apim-code-enumValue": 3
+          },
+          {
+            "value": "deleted",
+            "description": "User account is closed. All identities and related entities are removed.",
+            "x-apim-code-enumValue": 4
+          }
+        ]
+      }
+    },
+    "UserSubscriptionCreate": {
+      "type": "object",
+      "description": "Create user subscription request.",
+      "x-apim-code-public": "true",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "x-apim-code-resourceId": "{scope}",
+          "description": "Scope like /products/{productId} or /apis or /apis/{apiId}."
+        },
+        "name": {
+          "type": "string",
+          "description": "Subscription name."
+        }
+      }
+    },
+    "UserSubscriptionUpdate": {
+      "type": "object",
+      "description": "",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "x-apim-code-resourceId": "{scope}",
+          "description": "Scope like /products/{productId} or /apis or /apis/{apiId}."
+        },
+        "state": {
+          "description": "Subscription state.",
+          "$ref": "subscription.json#/definitions/SubscriptionState"
+        },
+        "name": {
+          "type": "string",
+          "description": "Subscription name."
+        }
+      }
+    },
+    "UserUpdate": {
+      "type": "object",
+      "description": "User registration or update request representation",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "Password."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "First name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name."
+        },
+        "state": {
+          "allOf": [
+            {
+              "$ref": "#/definitions/UserState"
+            },
+            {
+              "description": "User account state"
+            }
+          ]
+        }
+      }
     }
   }
 }

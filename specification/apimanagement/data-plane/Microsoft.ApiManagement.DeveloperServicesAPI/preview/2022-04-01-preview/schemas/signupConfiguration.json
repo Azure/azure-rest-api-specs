@@ -1,17 +1,28 @@
 ﻿{
-  "type": "object",
-  "description": "The developer portal sign-up settings.",
-  "x-apim-code-public": "true",
-  "properties": {
-    "termsOfService": {
-      "allOf": [
-        {
-          "$ref": "termsOfServiceConfiguration.json"
-        },
-        {
-          "description": "Terms of service settings."
+  "swagger": "2.0",
+  "info": {
+    "title": "Signup configuration definition",
+    "version": "2022-04-01-preview",
+    "description": "A spec file containing signup configuration definition"
+  },
+  "paths": {},
+  "definitions": {
+    "SignupConfiguration": {
+      "type": "object",
+      "description": "The developer portal sign-up settings.",
+      "x-apim-code-public": "true",
+      "properties": {
+        "termsOfService": {
+          "allOf": [
+            {
+              "$ref": "termsOfServiceConfiguration.json#/definitions/TermsOfServiceConfiguration"
+            },
+            {
+              "description": "Terms of service settings."
+            }
+          ]
         }
-      ]
+      }
     }
   }
 }
