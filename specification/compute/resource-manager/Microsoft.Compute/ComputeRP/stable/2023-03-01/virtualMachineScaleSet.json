@@ -1377,11 +1377,7 @@
         "description": "Reapplies the Virtual Machine Scale Set Virtual Machine Profile to the Virtual Machine Instances",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
+            "$ref": "../../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "vmScaleSetName",
@@ -1402,7 +1398,12 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1412,6 +1413,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "VirtualMachineScaleSets_Reapply_MaximumSet_Gen": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSets_Reapply_MaximumSet_Gen.json"
