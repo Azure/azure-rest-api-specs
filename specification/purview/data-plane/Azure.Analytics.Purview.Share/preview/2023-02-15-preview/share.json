@@ -159,6 +159,9 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            },
             "headers": {
               "Operation-Location": {
                 "description": "The URL to track the status of the long running operation.",
@@ -511,6 +514,9 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            },
             "headers": {
               "Operation-Location": {
                 "description": "The URL to track the status of the long running operation.",
@@ -740,6 +746,9 @@
         "responses": {
           "202": {
             "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
+            },
             "headers": {
               "Operation-Location": {
                 "description": "The URL to track the status of the long running operation.",
@@ -1322,6 +1331,77 @@
             "value": "Service",
             "description": "The invitation is sent to a service",
             "name": "Service invitation"
+          }
+        ]
+      }
+    },
+    "OperationResponse": {
+      "description": "Response for long running operation.",
+      "required": [
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "endTime": {
+          "format": "date-time",
+          "description": "End time of the long running operation.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/PurviewShareErrorInfo"
+        },
+        "id": {
+          "description": "Job id of the long running operation",
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "description": "Start time of the long running operation.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus"
+        }
+      }
+    },
+    "OperationStatus": {
+      "description": "States for long running operations.",
+      "enum": [
+        "Running",
+        "TransientFailure",
+        "Succeeded",
+        "Failed",
+        "NotStarted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Running",
+            "description": "The long running operation is in 'Running' state",
+            "name": "Long running operation state is 'Running'"
+          },
+          {
+            "value": "TransientFailure",
+            "description": "The long running operation hit a transient failure",
+            "name": "Long running operation state is 'TransientFailure'"
+          },
+          {
+            "value": "Succeeded",
+            "description": "The long running operation is in 'Succeeded' state",
+            "name": "Long running operation state is 'Succeeded'"
+          },
+          {
+            "value": "Failed",
+            "description": "The long running operation is in 'Failed' state",
+            "name": "Long running operation state is 'Failed'"
+          },
+          {
+            "value": "NotStarted",
+            "description": "The long running operation has not started",
+            "name": "Long running operation state is 'NotStarted'"
           }
         ]
       }
