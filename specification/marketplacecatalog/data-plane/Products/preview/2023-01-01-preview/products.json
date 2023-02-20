@@ -318,10 +318,10 @@
         },
         "uniqueProductId": {
           "type": "string",
-          "description": "Product unique identifier"
+          "description": "Unique product identifier"
         },
         "productType": {
-          "description": "Offer type",
+          "description": "The delivery method or deployment model",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -371,7 +371,7 @@
         },
         "ratingBuckets": {
           "type": "array",
-          "description": "Rating buckets, Above1, Above2, Above3, Above4. Above5",
+          "description": "Rating buckets, Above1, Above2, Above3, Above4",
           "items": {
             "$ref": "#/definitions/RatingBucket"
           }
@@ -403,7 +403,7 @@
         },
         "supportedProducts": {
           "type": "array",
-          "description": "It maps to the list of products the publisher provides with which their offer works",
+          "description": "Maps to the list of compatable products that the publisher provides",
           "items": {
             "type": "string"
           }
@@ -626,7 +626,7 @@
     },
     "ProductType": {
       "type": "string",
-      "description": "The delivery method, deployment model",
+      "description": "The delivery method or deployment model",
       "enum": [
         "None",
         "DevService",
@@ -694,27 +694,29 @@
       "properties": {
         "market": {
           "type": "string",
-          "description": "The market for which the starting price is calculated."
+          "description": "The market for which the starting price is calculated"
         },
         "termUnits": {
           "type": "string",
-          "description": "The terms pricing model units."
+          "description": "The terms pricing model units"
         },
         "meterUnits": {
           "type": "string",
-          "description": "The meters pricing model units."
+          "description": "The meters pricing model units"
         },
         "minTermPrice": {
           "type": "number",
-          "description": "Starting (minimal) terms price."
+          "description": "Starting (minimal) terms price",
+          "format": "decimal"
         },
         "minMeterPrice": {
           "type": "number",
-          "description": "Starting (minimal) meters price."
+          "description": "Starting (minimal) meters price",
+          "format": "decimal"
         },
         "currency": {
           "type": "string",
-          "description": "Currency for price."
+          "description": "Currency for price"
         }
       }
     },
@@ -770,7 +772,8 @@
           "description": "Stack type : Classic, Gen1, Gen2"
         },
         "altArchitectureReference": {
-          "type": "string"
+          "type": "string",
+          "description": "The alternative architecture reference"
         },
         "categoryIds": {
           "type": "array",
@@ -1010,6 +1013,7 @@
     },
     "ImageGroup": {
       "type": "object",
+      "description": "Image Group",
       "properties": {
         "context": {
           "type": "string",
@@ -1026,6 +1030,7 @@
     },
     "Image": {
       "type": "object",
+      "description": "Image item",
       "properties": {
         "id": {
           "type": "string",
@@ -1082,6 +1087,7 @@
     },
     "ProductVideo": {
       "type": "object",
+      "description": "Product Video",
       "properties": {
         "caption": {
           "type": "string",
@@ -1108,6 +1114,7 @@
     },
     "PreviewImage": {
       "type": "object",
+      "description": "Video preview image",
       "properties": {
         "caption": {
           "type": "string",
@@ -1179,7 +1186,8 @@
           "description": "Stack type : Classic, Gen1, Gen2"
         },
         "altArchitectureReference": {
-          "type": "string"
+          "type": "string",
+          "description": "The alternative architecture reference"
         },
         "categoryIds": {
           "type": "array",
@@ -1243,7 +1251,7 @@
           "description": "Legacy plan Id which is obtained by combining Offer->LegacyId and PlanId with no separator in between"
         },
         "type": {
-          "description": "Offer type",
+          "description": "The delivery method or deployment model",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -1259,7 +1267,7 @@
         },
         "uiDefinitionUri": {
           "type": "string",
-          "description": "What blade to open when someone wants to create a marketplace item"
+          "description": "What blade to opne when someone wants to create a marketplace item"
         },
         "artifacts": {
           "type": "array",
@@ -1343,7 +1351,8 @@
       ],
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "The document id"
         },
         "actions": {
           "type": "array",
@@ -1655,7 +1664,7 @@
         },
         "nextPageLink": {
           "type": "string",
-          "description": "Link to the next page",
+          "description": "Link to the next page where request returns more than a single page of results",
           "format": "uri"
         }
       }
@@ -1727,10 +1736,10 @@
         },
         "uniqueProductId": {
           "type": "string",
-          "description": "Product unique identifier"
+          "description": "Unique product identifier"
         },
         "productType": {
-          "description": "Offer type",
+          "description": "The delivery method or deployment model",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -1780,7 +1789,7 @@
         },
         "ratingBuckets": {
           "type": "array",
-          "description": "Rating buckets, Above1, Above2, Above3, Above4. Above5",
+          "description": "Rating buckets, Above1, Above2, Above3, Above4",
           "items": {
             "$ref": "#/definitions/RatingBucket"
           }
@@ -1812,7 +1821,7 @@
         },
         "supportedProducts": {
           "type": "array",
-          "description": "It maps to the list of products the publisher provides with which their offer works",
+          "description": "Maps to the list of compatable products that the publisher provides",
           "items": {
             "type": "string"
           }
