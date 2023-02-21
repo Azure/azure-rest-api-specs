@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-01-30-preview",
+    "version": "2021-09-03-preview",
     "title": "Desktop Virtualization API Client"
   },
   "schemes": [
@@ -4094,14 +4094,6 @@
         "maintenanceWindowTimeZone": {
           "type": "string",
           "description": "Time zone for maintenance as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0. Must be set if useLocalTime is true."
-        },
-        "maintenanceWindows": {
-          "type": "array",
-          "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
-          "items": {
-            "$ref": "#/definitions/MaintenanceWindowProperties"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -4166,14 +4158,6 @@
         "maintenanceWindowTimeZone": {
           "type": "string",
           "description": "Time zone for maintenance as defined in https://docs.microsoft.com/en-us/dotnet/api/system.timezoneinfo.findsystemtimezonebyid?view=net-5.0. Must be set if useLocalTime is true."
-        },
-        "maintenanceWindows": {
-          "type": "array",
-          "description": "List of maintenance windows. Maintenance windows are 2 hours long.",
-          "items": {
-            "$ref": "#/definitions/MaintenanceWindowPatchProperties"
-          },
-          "x-ms-identifiers": []
         }
       }
     },
@@ -5949,8 +5933,7 @@
         "peakActionOnDisconnect": {
           "enum": [
             "None",
-            "Deallocate",
-            "Hibernate"
+            "Deallocate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -5968,8 +5951,7 @@
         "peakActionOnLogoff": {
           "enum": [
             "None",
-            "Deallocate",
-            "Hibernate"
+            "Deallocate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -5991,8 +5973,7 @@
         "rampDownActionOnDisconnect": {
           "enum": [
             "None",
-            "Deallocate",
-            "Hibernate"
+            "Deallocate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -6010,8 +5991,7 @@
         "rampDownActionOnLogoff": {
           "enum": [
             "None",
-            "Deallocate",
-            "Hibernate"
+            "Deallocate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -6033,8 +6013,7 @@
         "offPeakActionOnDisconnect": {
           "enum": [
             "None",
-            "Deallocate",
-            "Hibernate"
+            "Deallocate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -6052,8 +6031,7 @@
         "offPeakActionOnLogoff": {
           "enum": [
             "None",
-            "Deallocate",
-            "Hibernate"
+            "Deallocate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
