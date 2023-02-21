@@ -595,45 +595,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/transferSupportedAccounts": {
-      "get": {
-        "tags": [
-          "Transfers"
-        ],
-        "description": "Gets list of supported accounts for customer.",
-        "operationId": "TransferSupportedAccounts_Get",
-        "x-ms-examples": {
-          "TransferGet": {
-            "$ref": "./examples/GetTransferSupportedAccounts.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/customerNameParameter"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Details of supported accounts.",
-            "schema": {
-              "$ref": "#/definitions/SupportedAccountsDetails"
-            }
-          },
-          "default": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "./types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1177,26 +1138,6 @@
         "name": "supportedAccountType",
         "modelAsString": true
       }
-    },
-    "SupportedAccountsDetails": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SupportedAccountType"
-          },
-          "description": "The list of transfer supported accounts for the customer."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of supported accounts."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The list transfer supported accounts operation response."
     },
     "TransferItemQueryParameter": {
       "description": "Query parameter to enumerate transfer requests.",
