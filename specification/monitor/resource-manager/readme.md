@@ -50,6 +50,15 @@ input-file:
 - Microsoft.Insights/preview/2023-03-01-preview/tenantActionGroups_API.json
 ```
 
+### Tag: package-2023-01-only
+
+These settings apply only when `--tag=package-2023-01-only` is specified on the command line
+
+``` yaml $(tag) == 'package-2023-01-only'
+input-file:
+  - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json
+```
+
 ### Tag: package-2022-08-01-preview-only
 
 These settings apply only when `--tag=package-2022-08-01-preview-only` is specified on the command line
