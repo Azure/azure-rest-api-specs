@@ -545,47 +545,6 @@
     }
   },
   "definitions": {
-    "Action": {
-      "type": "string",
-      "description": "Suggested action, the severity of the action is: Block > Review > Pass",
-      "enum": [
-        "Pass",
-        "Review",
-        "Block"
-      ],
-      "x-ms-enum": {
-        "name": "Action",
-        "modelAsString": true
-      }
-    },
-    "ActionThreshold": {
-      "type": "object",
-      "properties": {
-        "passThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Threshold of Pass action on riskLevel, when set to -1 means exclude this action",
-          "minimum": -1
-        },
-        "reviewThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Threshold of Review action on riskLevel, when set to -1 means exclude this action",
-          "minimum": -1
-        },
-        "blockThreshold": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Threshold of Block action on riskLevel, when set to -1 means exclude this action",
-          "minimum": -1
-        }
-      },
-      "required": [
-        "passThreshold",
-        "reviewThreshold",
-        "blockThreshold"
-      ]
-    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "properties": {
@@ -690,10 +649,6 @@
           "type": "integer",
           "format": "int32",
           "description": "riskLevel represent the severity of the input, currently its value could be: 0,2,4,6"
-        },
-        "ation": {
-          "$ref": "#/definitions/Action",
-          "description": "Action by input threshold, no action will be output if no threshold was set for this category"
         }
       },
       "required": [
@@ -715,14 +670,6 @@
           },
           "x-cadl-name": "ImageCategory[]",
           "description": "The categories will be analyzed, if not assigned, default categories will be\nanalyzed"
-        },
-        "actionConfiguration": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ActionThreshold"
-          },
-          "x-cadl-name": "Record<ActionThreshold>",
-          "description": "Action thresholds for categories, if not set or set to null or empty, no actions will be output in response"
         }
       },
       "description": "The analysis request of the image",
@@ -733,10 +680,6 @@
     "ImageDetectResponse": {
       "type": "object",
       "properties": {
-        "suggestedAction": {
-          "$ref": "#/definitions/Action",
-          "description": "Suggested action by input thresholds"
-        },
         "hateResult": {
           "$ref": "#/definitions/ImageDetectMultiSeverityResult"
         },
@@ -775,10 +718,6 @@
           "type": "integer",
           "format": "int32",
           "description": "riskLevel represent the severity of the input, currently its value could be: 0,2,4,6"
-        },
-        "ation": {
-          "$ref": "#/definitions/Action",
-          "description": "Action by input threshold, no action will be output if no threshold was set for this category"
         }
       },
       "required": [
@@ -813,14 +752,6 @@
         "breakByBlocklists": {
           "type": "boolean",
           "description": "When set to true, other analysis will be skipped once any of configured\nblocklists was hit. When set to false, all the analysis will be done even when\nblocklists were hit."
-        },
-        "actionConfiguration": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ActionThreshold"
-          },
-          "x-cadl-name": "Record<ActionThreshold>",
-          "description": "Action thresholds for categories, if not set or set to null or empty, no actions will be output in response"
         }
       },
       "description": "The analysis request of the text",
@@ -831,10 +762,6 @@
     "TextDetectResponse": {
       "type": "object",
       "properties": {
-        "suggestedAction": {
-          "$ref": "#/definitions/Action",
-          "description": "Suggested action by input thresholds"
-        },
         "blocklistMatchResults": {
           "type": "array",
           "items": {
