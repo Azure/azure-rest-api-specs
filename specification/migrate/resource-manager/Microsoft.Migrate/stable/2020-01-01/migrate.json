@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Migrate Assessment Service",
-    "version": "2022-02-02-preview",
+    "version": "2023-03-03",
     "description": "Azure Migrate Resource Provider management API.",
     "x-cadl-generated": [
       {
@@ -1541,7 +1541,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           }
         ],
@@ -1594,7 +1594,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           },
           {
@@ -1673,7 +1673,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           }
         ],
@@ -1742,7 +1742,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           }
         ],
@@ -1800,7 +1800,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           },
           {
@@ -1862,7 +1862,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           }
         ],
@@ -1920,7 +1920,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           },
           {
@@ -1982,7 +1982,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           }
         ],
@@ -2040,7 +2040,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           },
           {
@@ -2103,7 +2103,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           },
           {
@@ -2183,7 +2183,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           }
         ],
@@ -2241,7 +2241,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           },
           {
@@ -2303,7 +2303,7 @@
             "name": "assessmentName",
             "in": "path",
             "required": true,
-            "description": "SQL Assessment REST resource.",
+            "description": "SQL Assessment arm name.",
             "type": "string"
           },
           {
@@ -3582,7 +3582,8 @@
         "2019-10-01",
         "2020-01-01",
         "2020-05-01-preview",
-        "2022-02-02-preview"
+        "2022-02-02-preview",
+        "2023-03-03"
       ],
       "x-ms-enum": {
         "name": "ApiVersions",
@@ -3603,6 +3604,10 @@
           {
             "name": "v2022_02_02_preview",
             "value": "2022-02-02-preview"
+          },
+          {
+            "name": "v2023_03_03",
+            "value": "2023-03-03"
           }
         ]
       }
@@ -3964,63 +3969,80 @@
       "type": "object",
       "properties": {
         "suitability": {
-          "$ref": "#/definitions/CloudSuitabilityKnownValues"
+          "$ref": "#/definitions/CloudSuitabilityKnownValues",
+          "description": "Gets the suitability."
         },
         "suitabilityExplanation": {
-          "$ref": "#/definitions/AzureDiskSuitabilityExplanationKnownValues"
+          "$ref": "#/definitions/AzureDiskSuitabilityExplanationKnownValues",
+          "description": "Gets the suitability explanation."
         },
         "suitabilityDetail": {
-          "$ref": "#/definitions/AzureDiskSuitabilityDetailKnownValues"
+          "$ref": "#/definitions/AzureDiskSuitabilityDetailKnownValues",
+          "description": "Gets the suitability detail."
         },
         "recommendedDiskSize": {
-          "$ref": "#/definitions/AzureDiskSizeKnownValues"
+          "$ref": "#/definitions/AzureDiskSizeKnownValues",
+          "description": "Gets the recommended disk size."
         },
         "recommendedDiskType": {
-          "$ref": "#/definitions/AzureDiskTypeKnownValues"
+          "$ref": "#/definitions/AzureDiskTypeKnownValues",
+          "description": "Gets the recommended disk type."
         },
         "recommendedDiskSizeGigabytes": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the recommended disk size."
         },
         "recommendDiskThroughputInMbps": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the recommended disk throughput."
         },
         "recommendedDiskIops": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the recommended disk iops."
         },
         "monthlyStorageCost": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the monthly storage cost."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the name."
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the machine display name."
         },
         "gigabytesProvisioned": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the gigabytes provisioned."
         },
         "megabytesPerSecondOfRead": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the megabytes per second of read."
         },
         "megabytesPerSecondOfWrite": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the megabytes per second of write."
         },
         "numberOfReadOperationsPerSecond": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the number of read operations per second."
         },
         "numberOfWriteOperationsPerSecond": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the number of write operations per second."
         }
-      }
+      },
+      "description": "Assessed Disk Data."
     },
     "AssessedMachine": {
       "type": "object",
@@ -6897,30 +6919,38 @@
       "type": "object",
       "properties": {
         "suitability": {
-          "$ref": "#/definitions/CloudSuitabilityKnownValues"
+          "$ref": "#/definitions/CloudSuitabilityKnownValues",
+          "description": "Gets the suitability."
         },
         "suitabilityDetail": {
-          "$ref": "#/definitions/AzureNetworkAdapterSuitabilityDetailKnownValues"
+          "$ref": "#/definitions/AzureNetworkAdapterSuitabilityDetailKnownValues",
+          "description": "Gets the suitability detail."
         },
         "suitabilityExplanation": {
-          "$ref": "#/definitions/AssessedNetworkAdapterDataSuitabilityExplanation"
+          "$ref": "#/definitions/AssessedNetworkAdapterDataSuitabilityExplanation",
+          "description": "Gets the suitability explanation."
         },
         "monthlyBandwidthCosts": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the monthly bandwidth costs."
         },
         "netGigabytesTransmittedPerMonth": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the net gigabytes transmitted per month."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the name."
         },
         "displayName": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the display name."
         },
         "macAddress": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the mac address."
         },
         "ipAddresses": {
           "type": "array",
@@ -6928,17 +6958,21 @@
             "type": "string"
           },
           "x-cadl-name": "string[]",
+          "description": "Gets the ip addresses.",
           "readOnly": true
         },
         "megabytesPerSecondReceived": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the megabytes per second received."
         },
         "megabytesPerSecondTransmitted": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the megabytes per second transmitted."
         }
-      }
+      },
+      "description": "Assessed Network Adapter Data."
     },
     "AssessedNetworkAdapterDataSuitabilityExplanation": {
       "type": "string",
@@ -7129,49 +7163,61 @@
       "properties": {
         "numberOfUserDatabases": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the number of user databases."
         },
         "totalDatabaseSizeInMB": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the total database size in MB."
         },
         "largestDatabaseSizeInMB": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the largest database size in MB."
         },
         "totalDiscoveredUserDatabases": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the total discovered user databases."
         }
-      }
+      },
+      "description": "Assessed Sql Instance Database Summary."
     },
     "AssessedSqlInstanceDiskDetails": {
       "type": "object",
       "properties": {
         "diskId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the disk id."
         },
         "diskSizeInMB": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the disk size in mb."
         },
         "megabytesPerSecondOfRead": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the megabytes per second of read."
         },
         "megabytesPerSecondOfWrite": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the megabytes per second of write."
         },
         "numberOfReadOperationsPerSecond": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the number of read operations per second."
         },
         "numberOfWriteOperationsPerSecond": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the number of write operations per second."
         }
-      }
+      },
+      "description": "Assessed Sql Instance Disk Details."
     },
     "AssessedSqlInstanceStorageDetails": {
       "type": "object",
@@ -7181,57 +7227,73 @@
         },
         "diskSizeInMB": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the disk size in mb."
         },
         "megabytesPerSecondOfRead": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the megabytes per second of read."
         },
         "megabytesPerSecondOfWrite": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the megabytes per second of read."
         },
         "numberOfReadOperationsPerSecond": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the number of read operations per second."
         },
         "numberOfWriteOperationsPerSecond": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Gets the number of write operations per second."
         }
-      }
+      },
+      "description": "Assessed Sql Instance Storage Details."
     },
     "AssessedSqlInstanceSummary": {
       "type": "object",
       "properties": {
         "instanceId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the instance id."
         },
         "instanceName": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the instance name."
         },
         "sqlInstanceSDSArmId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the instance arm id."
         },
         "sqlInstanceEntityId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the instance entity id."
         },
         "sqlEdition": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the Sql edition."
         },
         "sqlVersion": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the Sql version."
         },
         "isClustered": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Gets wheter Sql is clustered."
         },
         "isHighAvailabilityEnabled": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Gets wheter Sql is highly available."
         },
         "sqlFCIState": {
-          "$ref": "#/definitions/SqlFCIState"
+          "$ref": "#/definitions/SqlFCIState",
+          "description": "Gets the Sql Fci state."
         }
-      }
+      },
+      "description": "Assessed Sql Instance Summary."
     },
     "AssessedSqlInstanceV2": {
       "type": "object",
@@ -12410,13 +12472,16 @@
       "properties": {
         "daysPerMonth": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the days per month."
         },
         "hoursPerDay": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the hours per day."
         }
-      }
+      },
+      "description": "Entity Uptime."
     },
     "EnvironmentType": {
       "type": "string",
@@ -13476,12 +13541,15 @@
       "type": "object",
       "properties": {
         "contextKey": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the reasoning context key."
         },
         "contextValue": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the reasoning context value."
         }
-      }
+      },
+      "description": "Migration Guideline Context."
     },
     "MultiSubnetIntent": {
       "type": "string",
@@ -14648,21 +14716,26 @@
         },
         "monthlyComputeCost": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Monthly compute cost"
         },
         "monthlyStorageCost": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Monthly storage cost"
         },
         "monthlyLicenseCost": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Monthly license cost"
         },
         "confidenceScore": {
           "type": "number",
-          "format": "float"
+          "format": "float",
+          "description": "Confidence Rating"
         }
-      }
+      },
+      "description": "SQL Assessment V2 summary data."
     },
     "SqlAssessmentV2SummaryProperties": {
       "type": "object",
@@ -14713,46 +14786,58 @@
       "type": "object",
       "properties": {
         "availabilityGroupId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the availability group id."
         },
         "availabilityGroupName": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the availability group name."
         },
         "sqlAvailabilityGroupSDSArmId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the availability group arm id."
         },
         "sqlAvailabilityGroupEntityId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the availability group entity id."
         },
         "sqlAvailabilityReplicaId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the availability replica id."
         }
-      }
+      },
+      "description": "Assessed Sql Availability Group Data Overview."
     },
     "SqlAvailabilityReplicaSummary": {
       "type": "object",
       "properties": {
         "numberOfSynchronousReadReplicas": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the number Of synchronous read replicas."
         },
         "numberOfSynchronousNonReadReplicas": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the number Of synchronous non read replicas."
         },
         "numberOfAsynchronousReadReplicas": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the number Of asynchronous read replicas."
         },
         "numberOfAsynchronousNonReadReplicas": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the number Of asynchronous non read replicas."
         },
         "numberOfPrimaryReplicas": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the number Of primary replicas."
         }
-      }
+      },
+      "description": "Assessed Sql Availability Replica Summary."
     },
     "SqlDbSettings": {
       "type": "object",
@@ -14780,16 +14865,20 @@
       "type": "object",
       "properties": {
         "state": {
-          "$ref": "#/definitions/SqlFCIMetadataState"
+          "$ref": "#/definitions/SqlFCIMetadataState",
+          "description": "Gets the Sql FCI meta data state."
         },
         "isMultiSubnet": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Gets whether fci is multi subnet."
         },
         "fciSharedDiskCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Gets the fci shared disk count."
         }
-      }
+      },
+      "description": "Sql FCI Meta data."
     },
     "SqlFCIMetadataState": {
       "type": "string",
@@ -14840,10 +14929,12 @@
       "type": "object",
       "properties": {
         "guidelineId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the guideline id."
         },
         "migrationGuidelineCategory": {
-          "$ref": "#/definitions/SqlMigrationGuidelineCategory"
+          "$ref": "#/definitions/SqlMigrationGuidelineCategory",
+          "description": "Gets the migration guideline category."
         },
         "migrationGuidelineContext": {
           "type": "array",
@@ -14852,9 +14943,11 @@
           },
           "x-ms-identifiers": [],
           "x-cadl-name": "MigrationGuidelineContext[]",
+          "description": "Gets the migration guideline context.",
           "readOnly": true
         }
-      }
+      },
+      "description": "Sql Migration Guideline."
     },
     "SqlMigrationGuidelineCategory": {
       "type": "string",
@@ -14903,13 +14996,16 @@
       "type": "object",
       "properties": {
         "reasoningId": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the reasoning id."
         },
         "reasoningString": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the reasoning status."
         },
         "reasoningCategory": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the reasoning category."
         },
         "contextParameters": {
           "type": "array",
@@ -14918,6 +15014,7 @@
           },
           "x-ms-identifiers": [],
           "x-cadl-name": "SqlRecommendationReasoningContext[]",
+          "description": "Gets the Sql recommended reasoning parameters.",
           "readOnly": true
         }
       }
@@ -14926,10 +15023,12 @@
       "type": "object",
       "properties": {
         "contextKey": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the reasoning context key."
         },
         "contextValue": {
-          "type": "string"
+          "type": "string",
+          "description": "Gets the reasoning context value."
         }
       }
     },
