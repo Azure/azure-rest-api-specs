@@ -154,7 +154,7 @@
       "description": "Describes properties of the health report",
       "properties": {
         "resourceDetails": {
-          "$ref": "../../../common/v1/types.json#/definitions/ResourceDetails"
+          "$ref": "#/definitions/resourceDetails"
         },
         "environmentDetails": {
           "$ref": "#/definitions/environmentDetails"
@@ -181,10 +181,7 @@
           },
           "x-ms-identifiers": []
         }
-      },
-      "required": [
-        "azureResourceId"
-      ]
+      }
     },
     "issue": {
       "type": "object",
@@ -314,6 +311,35 @@
           "description": "The date of when the resource of the health report was scanned in the first time"
         }
       }
+    },
+    "resourceDetails": {
+      "type": "object",
+      "description": "The resource details of the health report",
+      "properties": {
+        "source": {
+          "type": "string",
+          "description": "The status of the health report",
+          "enum": [
+            "Aws",
+            "Gcp",
+            "Azure"
+          ],
+          "x-ms-enum": {
+            "name": "source",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The azure id of the resource"
+        },
+        "connectorId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The id of the connector"
+        }
+      }
     }
   },
   "parameters": {
@@ -322,6 +348,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
       "description": "The health report Key - Unique key for the health report type",
       "x-ms-parameter-location": "method"
     }
