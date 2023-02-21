@@ -1,0 +1,834 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Marketplace Rating And Reviews API",
+    "description": "Microsoft Marketplace Rating And Reviews API",
+    "version": "2023-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/usermetadata": {
+      "get": {
+        "tags": [
+          "Rating and Reviews Authenticated API"
+        ],
+        "summary": "Get user metadata by unique product id",
+        "operationId": "ArmReviews_GetUserMetadata",
+        "x-ms-examples": {
+          "GetUserMetadata": {
+            "$ref": "./examples/GetUserMetadata.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the user's review, a list of review IDs the user marked as helpful, a list of review IDs the user commented on, and whether the user is eligible to review, for the given unique product",
+            "schema": {
+              "$ref": "#/definitions/UserMetadataDto"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews": {
+      "post": {
+        "tags": [
+          "Rating and Reviews Authenticated API"
+        ],
+        "summary": "Add a new review for a product",
+        "operationId": "ArmReviews_CreateReview",
+        "x-ms-examples": {
+          "GetUserMetadata": {
+            "$ref": "./examples/CreateReview.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "name": "createReviewRequest",
+            "in": "body",
+            "required": true,
+            "description": "New review request object",
+            "schema": {
+              "$ref": "#/definitions/UpsertReviewRequest"
+            }
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the new review object",
+            "schema": {
+              "$ref": "#/definitions/ReviewDto"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/{reviewId}": {
+      "patch": {
+        "tags": [
+          "Rating and Reviews Authenticated API"
+        ],
+        "summary": "Update a review for a product",
+        "operationId": "ArmReviews_UpdateReview",
+        "x-ms-examples": {
+          "GetUserMetadata": {
+            "$ref": "./examples/UpdateReview.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "type": "string",
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "description": "Review Id"
+          },
+          {
+            "name": "updateReviewRequest",
+            "in": "body",
+            "required": true,
+            "description": "Review to update request object",
+            "schema": {
+              "$ref": "#/definitions/UpsertReviewRequest"
+            }
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the updated review object",
+            "schema": {
+              "$ref": "#/definitions/ReviewDto"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rating and Reviews Authenticated API"
+        ],
+        "summary": "Delete a review for a product",
+        "operationId": "ArmReviews_DeleteReviewByUserId",
+        "x-ms-examples": {
+          "GetUserMetadata": {
+            "$ref": "./examples/DeleteReview.json"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "type": "string",
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "description": "Review Id"
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns a response whether deletion succeeded",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/{reviewId}/comments": {
+      "post": {
+        "tags": [
+          "Rating and Reviews Authenticated API"
+        ],
+        "summary": "Add a comment to an existing review",
+        "operationId": "ArmReviewComment_CreateComment",
+        "x-ms-examples": {
+          "GetUserMetadata": {
+            "$ref": "./examples/CreateComment.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "type": "string",
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "description": "Review Id"
+          },
+          {
+            "name": "commentRequest",
+            "in": "body",
+            "required": true,
+            "description": "A comment request including the content of the comment",
+            "schema": {
+              "$ref": "#/definitions/UpsertCommentRequest"
+            }
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the new comment object",
+            "schema": {
+              "$ref": "#/definitions/ReviewCommentDto"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/{reviewId}/comments/{commentId}": {
+      "patch": {
+        "tags": [
+          "Rating and Reviews Authenticated API"
+        ],
+        "summary": "Update a comment",
+        "operationId": "ArmReviewComment_UpdateComment",
+        "x-ms-examples": {
+          "GetUserMetadata": {
+            "$ref": "./examples/UpdateComment.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "type": "string",
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "description": "Review Id"
+          },
+          {
+            "type": "string",
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "description": "Comment Id"
+          },
+          {
+            "name": "commentRequest",
+            "in": "body",
+            "required": true,
+            "description": "A comment update request including the new content of the comment",
+            "schema": {
+              "$ref": "#/definitions/UpsertCommentRequest"
+            }
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the new comment object",
+            "schema": {
+              "$ref": "#/definitions/ReviewCommentDto"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Rating and Reviews Authenticated API"
+        ],
+        "summary": "Delete a comment",
+        "operationId": "ArmReviewComment_DeleteComment",
+        "x-ms-examples": {
+          "GetUserMetadata": {
+            "$ref": "./examples/DeleteComment.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "type": "string",
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "description": "Review Id"
+          },
+          {
+            "type": "string",
+            "name": "commentId",
+            "in": "path",
+            "required": true,
+            "description": "Comment Id"
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the deleted comment object",
+            "schema": {
+              "$ref": "#/definitions/ReviewCommentDto"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/{reviewId}/helpful": {
+      "post": {
+        "tags": [
+          "Rating and Reviews Authenticated API"
+        ],
+        "summary": "Add or remove a mark as helpful vote of a review",
+        "operationId": "ArmMarkAsHelpful_MarkReviewAsHelpful",
+        "x-ms-examples": {
+          "GetUserMetadata": {
+            "$ref": "./examples/SetMarkAsHelpful.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "name": "uniqueProductId",
+            "in": "path",
+            "required": true,
+            "description": "Unique Product Id"
+          },
+          {
+            "type": "string",
+            "name": "reviewId",
+            "in": "path",
+            "required": true,
+            "description": "Review Id"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "description": "Mark As Helpful Request",
+            "schema": {
+              "$ref": "#/definitions/SetMarkAsHelpfulRequest"
+            }
+          },
+          {
+            "type": "string",
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "Version of the REST API used for the request."
+          },
+          {
+            "type": "string",
+            "name": "X-API-Key",
+            "in": "header",
+            "required": true,
+            "description": "Api Key parameter from header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "States that the request was successful",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "The Rating and Reviews error response object",
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "description": "The search error response details",
+          "$ref": "#/definitions/ErrorResponseDetails"
+        }
+      }
+    },
+    "ErrorResponseDetails": {
+      "description": "The Rating and Reviews error response details object",
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "The error code description. Such as code=InternalError",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message. Such as message=Internal server error",
+          "type": "string"
+        }
+      }
+    },
+    "UserMetadataDto": {
+      "type": "object",
+      "required": [
+        "isEligible"
+      ],
+      "properties": {
+        "review": {
+          "description": "The user review for this product",
+          "$ref": "#/definitions/ReviewDto"
+        },
+        "helpfulReviewIds": {
+          "type": "array",
+          "description": "List of reviews ids that the user marked as helpful for this product",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commentReviewIds": {
+          "type": "array",
+          "description": "List of comments ids that the user wrote for this product",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isEligible": {
+          "type": "string",
+          "description": "Is this user eligible to write a review for this product",
+          "x-ms-enum": {
+            "name": "source",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Eligible",
+                "description": "Eligible"
+              },
+              {
+                "value": "NotEligible",
+                "description": "Not Eligible"
+              },
+              {
+                "value": "PendingCheck",
+                "description": "Pending Check"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ReviewDto": {
+      "type": "object",
+      "required": [
+        "rating",
+        "createdDateTime",
+        "lastModifiedDateTime",
+        "commentsCount",
+        "helpfulCount"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Review Id"
+        },
+        "uniqueProductId": {
+          "type": "string",
+          "description": "Unique Product Id"
+        },
+        "rating": {
+          "type": "number",
+          "description": "Review Rating"
+        },
+        "title": {
+          "type": "string",
+          "description": "Review Title"
+        },
+        "content": {
+          "type": "string",
+          "description": "Review Content"
+        },
+        "source": {
+          "type": "string",
+          "description": "Review Source (possible values: AppSource, Ibiza, G2, ect.)",
+          "x-ms-enum": {
+            "name": "source",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "AppSource",
+                "description": "AppSource"
+              },
+              {
+                "value": "Amp",
+                "description": "Azure MarketPlace"
+              },
+              {
+                "value": "Ibiza",
+                "description": "Azure Portal"
+              }
+            ]
+          }
+        },
+        "reviewerName": {
+          "type": "string",
+          "description": "Reviewer Full Name. Empty if it is an anonymous review"
+        },
+        "externalReviewUrl": {
+          "type": "string",
+          "description": "External Review Url (only for external review, i.e. G2 review)"
+        },
+        "isvReply": {
+          "description": "ISV Reply for this review",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IsvReplyDto"
+            }
+          ]
+        },
+        "createdDateTime": {
+          "type": "string",
+          "description": "Created Date",
+          "format": "date-time"
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Last Updated Date",
+          "format": "date-time"
+        },
+        "commentsCount": {
+          "type": "integer",
+          "description": "Number of comments for this review",
+          "format": "int32"
+        },
+        "helpfulCount": {
+          "type": "integer",
+          "description": "Number of marked as helpful for this review",
+          "format": "int32"
+        }
+      }
+    },
+    "IsvReplyDto": {
+      "type": "object",
+      "required": [
+        "repliedDateTime"
+      ],
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "ISV Reply Content"
+        },
+        "repliedDateTime": {
+          "type": "string",
+          "description": "Reply Date",
+          "format": "date-time"
+        }
+      }
+    },
+    "UpsertReviewRequest": {
+      "type": "object",
+      "description": "Create or update review request object for a product",
+      "required": [
+        "rating"
+      ],
+      "properties": {
+        "rating": {
+          "type": "number",
+          "description": "Review Rating"
+        },
+        "title": {
+          "type": "string",
+          "description": "Review Title"
+        },
+        "content": {
+          "type": "string",
+          "description": "Review Content"
+        },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "Publish review as anonymous"
+        },
+        "sendEmailConsent": {
+          "type": "boolean",
+          "description": "Consent to use email"
+        }
+      }
+    },
+    "ReviewCommentDto": {
+      "type": "object",
+      "required": [
+        "createdDateTime",
+        "lastModifiedDateTime",
+        "deleted"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Comment Id"
+        },
+        "content": {
+          "type": "string",
+          "description": "Comment Content"
+        },
+        "createdDateTime": {
+          "type": "string",
+          "description": "Created Date",
+          "format": "date-time"
+        },
+        "lastModifiedDateTime": {
+          "type": "string",
+          "description": "Last Updated Date",
+          "format": "date-time"
+        },
+        "commenterName": {
+          "type": "string",
+          "description": "Commenter Full Name"
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "Is Deleted. If true all other properties will be empty"
+        }
+      }
+    },
+    "UpsertCommentRequest": {
+      "type": "object",
+      "required": [
+        "content"
+      ],
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Content of this comment"
+        }
+      }
+    },
+    "SetMarkAsHelpfulRequest": {
+      "type": "object",
+      "required": [
+        "helpful"
+      ],
+      "properties": {
+        "helpful": {
+          "type": "boolean",
+          "description": "Mark as Helpful"
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Rating and Reviews Authenticated API"
+    }
+  ]
+}
