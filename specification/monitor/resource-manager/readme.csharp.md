@@ -22,11 +22,6 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml yaml $(csharp) && $(track2)
-modelerfour:
-  lenient-model-deduplication: true
-```
-
 ### Profile: hybrid_2019_03_01
 
 These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
