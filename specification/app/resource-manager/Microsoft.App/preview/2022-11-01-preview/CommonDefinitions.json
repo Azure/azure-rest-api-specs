@@ -607,6 +607,16 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "serviceBinds": {
+          "description": "Configuration to bind a ContainerApp to a dev ContainerApp Service.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceBind"
+          },
+          "x-ms-identifier": [
+            "name"
+          ]
         }
       }
     },
@@ -1105,6 +1115,20 @@
           "x-ms-identifiers": [
             "name"
           ]
+        }
+      }
+    },
+    "ServiceBind": {
+      "definition": "List of services bound to the app",
+      "type": "object",
+      "properties": {
+        "serviceId": {
+          "description": "Id of the service",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the service bind",
+          "type": "string"
         }
       }
     }

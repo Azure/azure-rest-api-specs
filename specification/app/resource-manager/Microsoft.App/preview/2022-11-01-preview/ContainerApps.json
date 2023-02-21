@@ -519,6 +519,10 @@
           "format": "int32",
           "description": "Optional. Max inactive revisions a Container App can have.",
           "type": "integer"
+        },
+        "service": {
+          "$ref": "#/definitions/Service",
+          "description": "Container App to be a dev Container App Service"
         }
       }
     },
@@ -1187,6 +1191,19 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Service": {
+      "description": "Container App to be a dev service",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Dev ContainerApp service type",
+          "type": "string"
         }
       }
     }
