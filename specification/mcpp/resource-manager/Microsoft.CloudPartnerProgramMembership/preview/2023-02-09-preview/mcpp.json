@@ -26,7 +26,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.CloudPartnerProgramMembership/operations": {
+    "/providers/Microsoft.CloudPartnerProgram/operations": {
       "get": {
           "tags": [
               "Operations"
@@ -60,10 +60,10 @@
           }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgram/membership": {
       "get": {
-        "tags": ["CloudPartnerProgramMemberships"],
-        "operationId": "CloudPartnerProgramMembershipsByResourceGroup_List",
+        "tags": ["CloudPartnerProgramMembership"],
+        "operationId": "membershipByResourceGroup_List",
         "x-ms-examples": {
           "getOperations": { "$ref": "./examples/getMcppPurchaseDetailsList.json" }
         },
@@ -95,10 +95,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CloudPartnerProgram/membership": {
       "get": {
-        "tags": ["CloudPartnerProgramMemberships"],
-        "operationId": "CloudPartnerProgramMembershipsBySubscription_List",
+        "tags": ["CloudPartnerProgramMembership"],
+        "operationId": "membershipBySubscription_List",
         "x-ms-examples": {
           "getOperations": { "$ref": "./examples/getMcppPurchaseDetailsForSubscription.json" }
         },
@@ -115,7 +115,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/CloudPartnerProgramMembershipPurchaseDetailsListResponse"
+              "$ref": "#/definitions/MembershipDetailsListResponse"
             }
           },
           "default": {
@@ -127,10 +127,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgramMembership/cloudPartnerProgramMemberships/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CloudPartnerProgram/membership/{resourceName}": {
       "get": {
-        "tags": ["CloudPartnerProgramMemberships"],
-        "operationId": "CloudPartnerProgramMemberships_GetPurchaseDetails",
+        "tags": ["CloudPartnerProgramMembership"],
+        "operationId": "membership_GetPurchaseDetails",
         "x-ms-examples": {
           "getOperations": { "$ref": "./examples/getMcppPurchaseDetails.json" }
         },
@@ -153,7 +153,7 @@
           "200": {
             "description": "Purchase details of the CloudPartnerProgramMembership resource.",
             "schema": {
-              "$ref": "#/definitions/McppPurchaseDetailsResponse"
+              "$ref": "#/definitions/MembershipDetailsResponse"
             }
           },
           "default": {
@@ -165,8 +165,8 @@
         }
       },
       "put": {
-        "tags": ["CloudPartnerProgramMemberships"],
-        "operationId": "CloudPartnerProgramMemberships_CreatePurchase",
+        "tags": ["CloudPartnerProgramMembership"],
+        "operationId": "membership_CreatePurchase",
         "x-ms-examples": {
           "putOperations": { "$ref": "./examples/createMcppPurchase.json" }
         },
@@ -204,8 +204,8 @@
         }
       },
       "delete": {
-        "tags": ["CloudPartnerProgramMemberships"],
-        "operationId": "CloudPartnerProgramMemberships_CancelMcppPuchase",
+        "tags": ["CloudPartnerProgramMembership"],
+        "operationId": "membership_CancelMcppPuchase",
         "x-ms-examples": {
           "deleteOperations": { "$ref": "./examples/cancelMcppPurchase.json" }
         },
@@ -242,7 +242,7 @@
     }
   },
   "definitions": {
-    "McppPurchaseDetailsResponse":{
+    "MembershipDetailsResponse":{
       "description": "MCPP Purchase details response",
       "type": "object",
       "x-ms-azure-resource": true,
@@ -268,11 +268,11 @@
         }
       }
     },
-    "McppPurchaseDetailsResponseProperties": {
+    "MembershipDetailsResponseProperties": {
       "description": "MCPP Purchase details response properties",
       "type": "object",
       "properties": {
-        "orderNo": {
+        "orderId": {
           "type": "string",
           "description": "order number for the purchase",
           "readOnly": true
