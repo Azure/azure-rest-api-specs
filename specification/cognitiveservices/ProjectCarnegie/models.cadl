@@ -30,6 +30,12 @@ analysis results will be returned.
 """)
   categories?: TextCategory[];
 
+  @doc("""
+Language hints for text analysis.  Values can contain only the language code (ex.
+\"en\", \"fr\") of BCP 47. If no languages given, the service will detact languages.
+""")
+  languages?: string[];
+
   @doc("The ids of blocklists")
   blockListIds?: string[];
 

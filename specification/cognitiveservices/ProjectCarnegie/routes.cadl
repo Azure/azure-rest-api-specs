@@ -16,13 +16,6 @@ interface TextOperations {
   @post
   Analyze is Azure.Core.Foundations.Operation<
     {
-      @doc("""
-Language hint for text analysis.  Value may contain only the language code (ex.
-\"en\", \"fr\") of BCP 47. If no language given, the service will detact language.
-""")
-      @query
-      language?: string;
-
       @doc("The analysis request of the text")
       @body
       request: TextDetectRequest;

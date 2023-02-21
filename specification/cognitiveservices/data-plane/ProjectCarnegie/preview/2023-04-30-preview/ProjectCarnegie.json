@@ -505,13 +505,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "language",
-            "in": "query",
-            "required": false,
-            "description": "Language hint for text analysis.  Value may contain only the language code (ex.\n\"en\", \"fr\") of BCP 47. If no language given, the service will detact language.",
-            "type": "string"
-          },
-          {
             "name": "request",
             "in": "body",
             "required": true,
@@ -740,6 +733,14 @@
           },
           "x-cadl-name": "TextCategory[]",
           "description": "The categories will be analyzed, if not assigned, a default set of categories'\nanalysis results will be returned."
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Language hints for text analysis.  Values can contain only the language code (ex.\n\"en\", \"fr\") of BCP 47. If no languages given, the service will detact languages."
         },
         "blockListIds": {
           "type": "array",
