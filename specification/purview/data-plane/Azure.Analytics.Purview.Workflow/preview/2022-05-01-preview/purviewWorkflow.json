@@ -278,9 +278,6 @@
             "$ref": "#/parameters/runStatuses"
           },
           {
-            "$ref": "#/parameters/userRequestIds"
-          },
-          {
             "$ref": "#/parameters/workflowIds"
           },
           {
@@ -419,7 +416,9 @@
             "type": "string",
             "enum": [
               "createdTime desc",
-              "createdTime asc"
+              "createdTime asc",
+              "requestor desc",
+              "requestor asc"
             ],
             "x-ms-enum": {
               "name": "orderby",
@@ -619,7 +618,7 @@
           "WorkflowTasks"
         ],
         "description": "Update the status of a workflow task request.",
-        "operationId": "UpdateTaskRequest",
+        "operationId": "UpdateTaskStatus",
         "x-ms-examples": {
           "TaskRequest_Update": {
             "$ref": "./examples/UpdateTaskRequest.json"
@@ -636,90 +635,6 @@
             "description": "Request body of updating workflow task request.",
             "schema": {
               "$ref": "#/definitions/TaskUpdateCommand"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/workflowtasks/{taskId}/claim-task": {
-      "post": {
-        "tags": [
-          "WorkflowTasks"
-        ],
-        "description": "Claim a DSAR task request.",
-        "operationId": "ClaimDSARTaskRequest",
-        "x-ms-examples": {
-          "DSARTaskRequest_Claim": {
-            "$ref": "./examples/ClaimDSARTaskRequest.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/taskId"
-          },
-          {
-            "name": "dsarTaskClaimCommand",
-            "in": "body",
-            "required": true,
-            "description": "Request body of claiming DSAR task request.",
-            "schema": {
-              "$ref": "#/definitions/DSARTaskClaimCommand"
-            }
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/workflowtasks/{taskId}/release-task": {
-      "post": {
-        "tags": [
-          "WorkflowTasks"
-        ],
-        "description": "Release a DSAR task request.",
-        "operationId": "ReleaseDSARTaskRequest",
-        "x-ms-examples": {
-          "DSARTaskRequest_Release": {
-            "$ref": "./examples/ReleaseDSARTaskRequest.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/taskId"
-          },
-          {
-            "name": "dsarTaskReleaseCommand",
-            "in": "body",
-            "required": true,
-            "description": "Request body of releasing DSAR task request.",
-            "schema": {
-              "$ref": "#/definitions/DSARTaskReleaseCommand"
             }
           },
           {
@@ -807,10 +722,6 @@
       "required": [
         "id",
         "triggers",
-        "createdTime",
-        "createdBy",
-        "lastUpdateTime",
-        "updatedBy",
         "name",
         "isEnabled",
         "description"
@@ -835,9 +746,7 @@
             "when_term_update_is_requested",
             "when_terms_import_is_requested",
             "when_data_access_grant_is_requested",
-            "when_asset_update_is_requested",
-            "when_dsar_deletion_is_requested",
-            "when_dsar_export_is_requested"
+            "when_asset_update_is_requested"
           ],
           "x-ms-enum": {
             "name": "TriggerType",
@@ -1132,9 +1041,7 @@
         "DeleteTerm",
         "ImportTerms",
         "UpdateAsset",
-        "GrantDataAccess",
-        "DSARDelete",
-        "DSARExport"
+        "GrantDataAccess"
       ],
       "x-ms-enum": {
         "name": "WorkflowRunPayloadType",
@@ -1271,8 +1178,7 @@
           "description": "The workflow task type.",
           "enum": [
             "Approval",
-            "SimpleTask",
-            "DsarTask"
+            "SimpleTask"
           ],
           "x-ms-enum": {
             "name": "TaskType",
@@ -1418,9 +1324,7 @@
         "DeleteTerm",
         "ImportTerms",
         "UpdateAsset",
-        "GrantDataAccess",
-        "DSARDelete",
-        "DSARExport"
+        "GrantDataAccess"
       ],
       "x-ms-enum": {
         "name": "TaskPayloadType",
@@ -1436,9 +1340,7 @@
         "DeleteTerm",
         "ImportTerms",
         "UpdateAsset",
-        "GrantDataAccess",
-        "DSARDelete",
-        "DSARExport"
+        "GrantDataAccess"
       ],
       "x-ms-enum": {
         "name": "OperationType",
@@ -1510,7 +1412,7 @@
         },
         "approvers": {
           "type": "object",
-          "items": {
+          "additionalProperties": {
             "$ref": "#/definitions/ApproverResponse"
           },
           "description": "The list of approvers with reply."
@@ -1530,9 +1432,9 @@
           "type": "string",
           "description": "The response for an approval task.",
           "enum": [
-            "approved",
-            "rejected",
-            "pending"
+            "Approved",
+            "Rejected",
+            "Pending"
           ],
           "x-ms-enum": {
             "name": "ApprovalResponse",
@@ -1615,135 +1517,9 @@
         "changeHistory"
       ]
     },
-    "DsarTask": {
-      "x-ms-discriminator-value": "DsarTask",
-      "description": "The workflow dsar task properties.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/WorkflowTask"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "taskDetail": {
-              "$ref": "#/definitions/DSARTaskDetail"
-            }
-          }
-        }
-      ]
-    },
-    "DSARTaskDetail": {
-      "type": "object",
-      "description": "Workflow dsar task details.",
-      "properties": {
-        "taskBody": {
-          "type": "string",
-          "description": "The dsar task body."
-        },
-        "assignedTo": {
-          "type": "array",
-          "description": "The users or groups were assigned the dsar task.",
-          "items": {
-            "type": "string",
-            "format": "uuid"
-          }
-        },
-        "claimedBy": {
-          "type": "string",
-          "description": "The user who claimed the dsar task.",
-          "format": "uuid"
-        },
-        "approvers": {
-          "type": "array",
-          "description": "The list of approvers.",
-          "items": {
-            "type": "string",
-            "description": "The approver of Dsar task.",
-            "format": "uuid"
-          }
-        },
-        "dsarId": {
-          "type": "string",
-          "description": "The dsar id.",
-          "format": "uuid"
-        },
-        "dsarTaskId": {
-          "type": "string",
-          "description": "The dsar task id.",
-          "format": "uuid"
-        },
-        "status": {
-          "type": "string",
-          "description": "The dsar task status.",
-          "enum": [
-            "NotStarted",
-            "InProgress",
-            "Completed",
-            "NotApplicable",
-            "Approved",
-            "Reopened"
-          ],
-          "x-ms-enum": {
-            "name": "DSARTaskStatus",
-            "modelAsString": true
-          }
-        },
-        "changeHistory": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TaskChangeEvent"
-          }
-        }
-      },
-      "required": [
-        "taskBody",
-        "assignedTo",
-        "approvers",
-        "dsarId",
-        "dsarTaskId",
-        "status",
-        "changeHistory"
-      ]
-    },
     "TaskChangeEvent": {
       "type": "object",
-      "description": "History of changes made on task.",
-      "properties": {
-        "updatedBy": {
-          "type": "string",
-          "format": "uuid"
-        },
-        "updatedTime": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "ApproveApproval",
-            "RejectApproval",
-            "Reassign",
-            "ChangeTaskStatus",
-            "ClaimTask",
-            "ReleaseTask"
-          ],
-          "x-ms-enum": {
-            "name": "TaskChangeEventType",
-            "modelAsString": true
-          }
-        },
-        "change": {
-          "type": "object",
-          "description": "The changes made on this task."
-        }
-      },
-      "required": [
-        "updatedBy",
-        "updatedTime",
-        "type",
-        "change"
-      ]
+      "description": "History of changes made on task."
     },
     "ApprovalResponseComment": {
       "type": "object",
@@ -1790,8 +1566,8 @@
           "type": "string",
           "description": "The new status will be used to update the task.",
           "enum": [
-            "Not Started",
-            "In Progress",
+            "NotStarted",
+            "InProgress",
             "Completed",
             "Canceled"
           ],
@@ -1808,24 +1584,6 @@
       "required": [
         "newStatus"
       ]
-    },
-    "DSARTaskClaimCommand": {
-      "type": "object",
-      "properties": {
-        "comment": {
-          "type": "string",
-          "description": "The comment when claiming a DSAR task."
-        }
-      }
-    },
-    "DSARTaskReleaseCommand": {
-      "type": "object",
-      "properties": {
-        "comment": {
-          "type": "string",
-          "description": "The comment when releasing a DSAR task."
-        }
-      }
     },
     "ErrorResponse": {
       "description": "Default error response model",
@@ -1964,8 +1722,7 @@
         "type": "string",
         "enum": [
           "approval",
-          "simpleTask",
-          "dsarTask"
+          "simpleTask"
         ],
         "x-ms-enum": {
           "name": "TaskType",
@@ -1984,17 +1741,6 @@
         "type": "string"
       },
       "description": "Filter items by workflow id list.",
-      "x-ms-parameter-location": "method"
-    },
-    "userRequestIds": {
-      "name": "userRequestIds",
-      "in": "query",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "Filter items by user request id list.",
       "x-ms-parameter-location": "method"
     },
     "runStatuses": {

@@ -15,6 +15,7 @@ package-version: 1.0.0b1
 Generate all API versions currently shipped for this package
 
 ```yaml $(python)
+default-api-version: "2022-04-01"
 multiapi: true
 clear-output-folder: true
 batch:

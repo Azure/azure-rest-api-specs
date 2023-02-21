@@ -28,10 +28,6 @@ These are the global settings for the MonitorClient API.
 title: MonitorClient
 ```
 
-``` yaml $(python)
-title: MonitorManagementClient
-```
-
 ``` yaml
 description: Monitor Management Client
 openapi-type: arm
@@ -40,7 +36,6 @@ directive:
   - suppress: Example Validations
     reason: 'There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.'
 ```
-
 ### Tag: package-2023-03-01-preview-only
 
 These settings apply only when `--tag=package-2023-03-01-preview-only` is specified on the command line
@@ -49,7 +44,6 @@ These settings apply only when `--tag=package-2023-03-01-preview-only` is specif
 input-file:
 - Microsoft.Insights/preview/2023-03-01-preview/tenantActionGroups_API.json
 ```
-
 ### Tag: package-2023-01-only
 
 These settings apply only when `--tag=package-2023-01-only` is specified on the command line
