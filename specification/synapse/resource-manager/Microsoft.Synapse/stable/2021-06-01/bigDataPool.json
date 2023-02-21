@@ -433,7 +433,8 @@
         "cacheSize": {
           "type": "integer",
           "format": "int32",
-          "description": "The cache size"
+          "description": "The cache size",
+          "readOnly": true
         },
         "dynamicExecutorAllocation": {
           "$ref": "#/definitions/DynamicExecutorAllocation",
@@ -441,7 +442,12 @@
         },
         "sparkEventsFolder": {
           "type": "string",
-          "description": "The Spark events folder"
+          "description": "The Spark events folder",
+          "x-ms-mutability": [
+            "create",
+            "read",
+            "update"
+          ]
         },
         "nodeCount": {
           "type": "integer",
@@ -449,8 +455,7 @@
           "description": "The number of nodes in the Big Data pool.",
           "x-ms-mutability": [
             "create",
-            "read",
-            "update"
+            "read"
           ]
         },
         "libraryRequirements": {
@@ -572,20 +577,12 @@
         "minExecutors": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of executors alloted",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+          "description": "The minimum number of executors alloted"
         },
         "maxExecutors": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of executors alloted",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+          "description": "The maximum number of executors alloted"
         }
       }
     },
