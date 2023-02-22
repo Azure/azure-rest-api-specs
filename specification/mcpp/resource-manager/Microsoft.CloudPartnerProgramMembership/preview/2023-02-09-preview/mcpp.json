@@ -189,10 +189,10 @@
           }
         ],
         "responses": {
-          "200": {
+          "202": {
             "description": "List the CloudPartnerProgramMembership purchase details .",
             "schema": {
-              "$ref": "#/definitions/McppPurchaseDetailsResponse"
+              "$ref": "#/definitions/MembershipDetailsResponse"
             }
           },
           "default": {
@@ -263,7 +263,7 @@
           "type": "string"
         },
         "properties": { 
-          "$ref": "#/definitions/McppPurchaseDetailsResponseProperties",
+          "$ref": "#/definitions/MembershipDetailsResponseProperties",
           "description": "MCPP Purchase details response properties."
         }
       }
@@ -287,7 +287,7 @@
           "description": "purchase status or the order",
           "readOnly": true
         },
-        "operationDetails":{
+        "provisioningState":{
           "type": "object",
           "description": "operation details related to the purchase",
           "readOnly": true
@@ -299,11 +299,11 @@
       "type":"object",
       "properties": {
         "value": {
-          "description": "The list of McppPurchaseDetailsResponse.",
+          "description": "The list of MembershipDetailsResponse.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/McppPurchaseDetailsResponse"
+            "$ref": "#/definitions/MembershipDetailsResponse"
           }
         }
       }
