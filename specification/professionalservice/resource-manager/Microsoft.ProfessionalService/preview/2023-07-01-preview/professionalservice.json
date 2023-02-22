@@ -2,10 +2,10 @@
   "swagger": "2.0",
   "info": {
     "version": "2023-07-01-preview",
-    "title": "professionalservice",
-    "description": "Description of the new service",
+    "title": "ProfessionalService",
+    "description": "REST APIs for Marketplace Professional Service Offers",
     "x-ms-code-generation-settings": {
-      "name": "professionalserviceClient"
+      "name": "ProfessionalServiceClient"
     }
   },
   "host": "management.azure.com",
@@ -29,78 +29,963 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/operations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProfessionalService/resources": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
-        "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
+        "tags": [
+          "SubscriptionLevelProfessionalServiceResources"
+        ],
+        "operationId": "ProfessionalServiceSubscriptionLevel_ListByAzureSubscription",
+        "description": "Gets information about all the Subscription Level ProfessionalService in a certain Azure subscription.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The request returns the resulting ProfessionalService resources.",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResourceResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get subscription level ProfessionalService resources in Azure subscription": {
+            "$ref": "./examples/ProfessionalService/ProfessionalServiceGetAllInAzureSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources": {
+      "get": {
+        "tags": [
+          "SubscriptionLevelProfessionalServiceResources"
+        ],
+        "operationId": "ProfessionalServiceSubscriptionLevel_ListByResourceGroup",
+        "description": "Gets information about all the Subscription Level ProfessionalService in a certain resource group.",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "Request successful. The request returns the resulting ProfessionalService resources.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/ProfessionalServiceResourceResponseWithContinuation"
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "A response indicating an error.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get subscription level ProfessionalService resources in resource group": {
+            "$ref": "./examples/ProfessionalService/ProfessionalServiceGetAllInResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/{resourceName}": {
+      "get": {
+        "tags": [
+          "SubscriptionLevelProfessionalServiceResources"
+        ],
+        "operationId": "ProfessionalServiceSubscriptionLevel_Get",
+        "description": "Gets information about the specified Subscription Level ProfessionalService.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The request returns the resulting ProfessionalService resource.",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResource"
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get subscription level ProfessionalService resource": {
+            "$ref": "./examples/ProfessionalService/ProfessionalServiceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SubscriptionLevelProfessionalServiceResources"
+        ],
+        "operationId": "ProfessionalServiceSubscriptionLevel_CreateOrUpdate",
+        "description": "Creates or updates a ProfessionalService resource.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResourceCreation"
+            },
+            "description": "Parameters supplied to the create or update subscription level ProfessionalService operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource creation has completed.",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResource"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "Operation completed successfully."
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create subscription level ProfessionalService resource": {
+            "$ref": "./examples/ProfessionalService/ProfessionalServicePut.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "delete": {
+        "tags": [
+          "SubscriptionLevelProfessionalServiceResources"
+        ],
+        "operationId": "ProfessionalServiceSubscriptionLevel_Delete",
+        "description": "Deletes the specified ProfessionalService.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete Operation completed successfully."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "Delete operation completed successfully."
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Subscription Level ProfessionalService resource": {
+            "$ref": "./examples/ProfessionalService/ProfessionalServiceDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProfessionalService/resources/{resourceName}/unsubscribe": {
+      "post": {
+        "tags": [
+          "SubscriptionLevelProfessionalServiceResources"
+        ],
+        "operationId": "ProfessionalServiceSubscriptionLevel_UpdateToUnsubscribed",
+        "description": "Unsubscribe from a specified Subscription Level ProfessionalService.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/deleteOptions"
+            },
+            "description": "Parameters supplied to unsubscribe ProfessionalService operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Unsubscribe operation completed successfully."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "Unsubscribe operation completed successfully."
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Unsubscribe Subscription Level ProfessionalService resource": {
+            "$ref": "./examples/ProfessionalService/ProfessionalServiceUnsubscribe.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources": {
+      "post": {
+        "tags": [
+          "SubscriptionLevelProfessionalServiceResources"
+        ],
+        "operationId": "ProfessionalServiceSubscriptionLevel_ValidateMoveResources",
+        "description": "Validate whether a specified Subscription Level ProfessionalService can be moved.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "moveResourceParameter",
+            "in": "body",
+            "description": "Object that represents the resources to move.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/moveResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validation was successful and resources can be moved"
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate move of a subscription Level ProfessionalService resource": {
+            "$ref": "./examples/ProfessionalService/ValidateResourceMove.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
+      "post": {
+        "tags": [
+          "SubscriptionLevelProfessionalServiceResources"
+        ],
+        "operationId": "ProfessionalServiceSubscriptionLevel_MoveResources",
+        "description": "Move a specified Subscription Level ProfessionalService.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "moveResourceParameter",
+            "in": "body",
+            "description": "Object that represents the resources to move.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/moveResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Move operation completed successfully."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Move of a subscription Level ProfessionalService resource": {
+            "$ref": "./examples/ProfessionalService/ResourceMove.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/providers/Microsoft.ProfessionalService/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "ProfessionalServiceOperations"
+        ],
+        "operationId": "ProfessionalServiceOperation_Get",
+        "description": "Gets information about the specified operation progress.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation ended successfully. The request returns the updated ProfessionalService resource.",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceResource"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL to check the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get operation status": {
+            "$ref": "./examples/Operation/GetOperation.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/providers/Microsoft.ProfessionalService/operations": {
+      "get": {
+        "tags": [
+          "ProfessionalServiceResources"
+        ],
+        "operationId": "operations_List",
+        "description": "Gets all ProfessionalService app operations.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProfessionalServiceAppOperationsResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "A response indicating an error.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ProfessionalService operations": {
+            "$ref": "./examples/Operation/GetRpOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "ProfessionalServiceAppOperationsResponseWithContinuation": {
+      "description": "professionalService app operation response with continuation.",
+      "type": "object",
       "properties": {
-        "sampleProperty": {
-          "type": "string",
-          "description": "Sample property of type string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
+        "nextLink": {
+          "description": "the next link to query to get the remaining results.",
+          "type": "string"
         },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
+        "value": {
+          "description": "the value of response.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
+            "$ref": "#/definitions/ProfessionalServiceAppOperation"
+          }
+        }
+      }
+    },
+    "ProfessionalServiceAppOperation": {
+      "description": "professionalService app operations",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "the operation name",
+          "type": "string"
+        },
+        "display": {
+          "description": "the operation display",
+          "$ref": "#/definitions/ProfessionalServiceAppOperationDisplay"
+        },
+        "origin": {
+          "description": "the operation origin",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "whether the operation is a data action or not.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ProfessionalServiceAppOperationDisplay": {
+      "description": "ProfessionalService app operation display",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Name of the provider for display purposes",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type for display purposes",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation for display purposes",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the operation for display purposes",
+          "type": "string"
+        }
+      }
+    },
+    "ProfessionalServiceResource": {
+      "description": "ProfessionalService REST API resource definition.",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "description": "professionalService properties",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ProfessionalServiceProperties"
+            },
+            {
+              "$ref": "#/definitions/ProfessionalServiceCreationProperties"
+            }
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
           "readOnly": true
+        },
+        "id": {
+          "description": "The resource uri",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "description": "the resource tags.",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "ProfessionalServiceResourceCreation": {
+      "description": "ProfessionalService REST API resource definition for creation.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The resource uri",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The resource name",
+          "type": "string"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "tags": {
+          "description": "the resource tags.",
+          "$ref": "#/definitions/Tags"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location. Only value allowed for ProfessionalService is 'global'"
+        },
+        "properties": {
+          "$ref": "#/definitions/ProfessionalServiceCreationProperties",
+          "description": "Properties of the ProfessionalService resource that are relevant for creation."
+        }
+      }
+    },
+    "ProfessionalServiceProperties": {
+      "type": "object",
+      "description": "professionalService resource properties",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "The ProfessionalService Subscription Status.",
+          "enum": [
+            "NotStarted",
+            "PendingFulfillmentStart",
+            "Subscribed",
+            "Unsubscribed",
+            "Suspended"
+          ],
+          "x-ms-enum": {
+            "name": "ProfessionalServiceResourceStatus",
+            "modelAsString": true
+          }
+        },
+        "term": {
+          "type": "object",
+          "description": "The current Term object.",
+          "properties": {
+            "termUnit": {
+              "type": "string",
+              "description": "The unit indicating Monthly / Yearly"
+            },
+            "startDate": {
+              "type": "string",
+              "description": "The start date of the current term"
+            },
+            "endDate": {
+              "type": "string",
+              "description": "The end date of the current term"
+            }
+          }
+        },
+        "isFreeTrial": {
+          "type": "boolean",
+          "description": "Whether the current term is a Free Trial term"
+        },
+        "created": {
+          "type": "string",
+          "description": "The created date of this resource.",
+          "readOnly": true
+        },
+        "lastModified": {
+          "type": "string",
+          "description": "The last modifier date if this resource."
+        }
+      }
+    },
+    "ProfessionalServiceCreationProperties": {
+      "type": "object",
+      "description": "properties for creation professionalService",
+      "properties": {
+        "offerId": {
+          "type": "string",
+          "description": "The offer id."
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "The publisher id."
+        },
+        "quantity": {
+          "type": "number",
+          "description": "The seat count."
+        },
+        "skuId": {
+          "type": "string",
+          "description": "The plan id."
+        },
+        "paymentChannelType": {
+          "type": "string",
+          "description": "The Payment channel for the ProfessionalServiceSubscription.",
+          "enum": [
+            "SubscriptionDelegated",
+            "CustomerDelegated"
+          ],
+          "x-ms-enum": {
+            "name": "paymentChannelType",
+            "modelAsString": true
+          }
+        },
+        "paymentChannelMetadata": {
+          "type": "object",
+          "description": "The metadata about the ProfessionalService subscription such as the AzureSubscriptionId and ResourceUri.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "professionalServiceResourceName": {
+          "type": "string",
+          "description": "The ProfessionalService resource name."
+        },
+        "termId": {
+          "type": "string",
+          "description": "The current Term id."
+        },
+        "autoRenew": {
+          "type": "boolean",
+          "description": "Whether the ProfessionalService subscription will auto renew upon term end."
+        },
+        "publisherTestEnvironment": {
+          "type": "string",
+          "description": "The environment in the publisher side for this resource."
+        },
+        "professionalServiceSubscriptionId": {
+          "type": "string",
+          "description": "The professionalService subscription id used for tenant to subscription level migration request."
+        },
+        "professionalServiceSessionId": {
+          "type": "string",
+          "description": "The professionalService session id used for dev service migration request."
+        }
+      }
+    },
+    "AccessTokenResult": {
+      "description": "the ISV access token result response.",
+      "type": "object",
+      "properties": {
+        "publisherOfferBaseUri": {
+          "description": "The Publisher Offer Base Uri",
+          "type": "string"
+        },
+        "token": {
+          "description": "The generated token",
+          "type": "string"
+        }
+      }
+    },
+    "ProfessionalServiceAppResponseWithContinuation": {
+      "description": "professionalService app response with continuation.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "the next link to query to get the remaining results.",
+          "type": "string"
+        },
+        "value": {
+          "description": "the value of response.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProfessionalServiceApp"
+          }
+        }
+      }
+    },
+    "ProfessionalServiceResourceResponseWithContinuation": {
+      "description": "professionalService resources response with continuation.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "the next link to query to get the remaining results.",
+          "type": "string"
+        },
+        "value": {
+          "description": "the value of response.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProfessionalServiceResource"
+          }
+        }
+      }
+    },
+    "ProfessionalServiceApp": {
+      "description": "the professionalServiceApp resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "the resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "the resource location.",
+          "type": "string"
+        },
+        "name": {
+          "description": "the resource name.",
+          "type": "string"
+        },
+        "type": {
+          "description": "the resource type.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "the resource properties.",
+          "$ref": "#/definitions/ProfessionalServiceAppProperties"
+        },
+        "tags": {
+          "description": "the resource tags.",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "ProfessionalServiceAppProperties": {
+      "description": "ProfessionalService resource properties.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "the ProfessionalService resource status.",
+          "enum": [
+            "Pending",
+            "Subscribed",
+            "Unsubscribed",
+            "Suspended",
+            "Deactivated"
+          ],
+          "x-ms-enum": {
+            "name": "ProfessionalServiceAppStatus",
+            "modelAsString": true
+          }
+        },
+        "professionalServiceAppPlan": {
+          "description": "the resource plan details.",
+          "$ref": "#/definitions/ProfessionalServiceAppPlan"
+        }
+      }
+    },
+    "ProfessionalServiceAppPlan": {
+      "description": "ProfessionalService resource plan.",
+      "type": "object",
+      "properties": {
+        "publisher": {
+          "description": "the publisher id.",
+          "type": "string"
+        },
+        "product": {
+          "description": "the offer id.",
+          "type": "string"
+        },
+        "name": {
+          "description": "the plan id.",
+          "type": "string"
+        }
+      }
+    },
+    "Tags": {
+      "type": "object",
+      "description": "the resource tags.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "deleteOptions": {
+      "description": "delete Options",
+      "type": "object",
+      "properties": {
+        "unsubscribeOnly": {
+          "type": "boolean",
+          "description": "whether it is unsubscribeOnly"
+        },
+        "reasonCode": {
+          "type": "number",
+          "description": "The reasonCode"
+        },
+        "feedback": {
+          "type": "string",
+          "description": "the feedback"
+        }
+      }
+    },
+    "moveResource": {
+      "description": "Resource Move Options",
+      "type": "object",
+      "properties": {
+        "targetResourceGroup": {
+          "type": "string",
+          "description": "The target resource group uri for the move"
+        },
+        "resources": {
+          "description": "The resource uris to move",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A resources uri to move"
+          }
         }
       }
     }
@@ -126,7 +1011,25 @@
       "in": "query",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "client",
       "description": "The API version to be used with the HTTP request."
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "the operation Id parameter.",
+      "x-ms-parameter-location": "method"
+    },
+    "ResourceNameParameter": {
+        "name": "resourceName",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "pattern": "^[a-zA-Z0-9-_.()]{0,63}[a-zA-Z0-9-_()]$",
+        "description": "The name of the resource.",
+        "x-ms-parameter-location": "method"
     }
   }
 }
