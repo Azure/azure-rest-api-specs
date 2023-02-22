@@ -1,0 +1,38 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@cadl-lang/compiler";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-autorest";
+import "@azure-tools/cadl-azure-resource-manager";
+
+import "./ApiVersions.cadl";
+import "./routes.cadl";
+
+using Autorest;
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using OpenAPI;
+
+@armProviderNamespace
+@service({
+  title: "Azure Migrate Assessment Service",
+})
+
+@versionedDependency([
+  // [ApiVersions.v2018_06_30_preview,Azure.ResourceManager.Versions.v1_0_Preview_1],
+  // [ApiVersions.v2019_05_01, Azure.ResourceManager.Versions.v1_0_Preview_1],
+  [ApiVersions.v2019_10_01, Azure.ResourceManager.Versions.v1_0_Preview_1],
+  [ApiVersions.v2020_01_01, Azure.ResourceManager.Versions.v1_0_Preview_1],
+  [ApiVersions.v2020_05_01_preview, Azure.ResourceManager.Versions.v1_0_Preview_1],
+  [ApiVersions.v2022_02_02_preview, Azure.ResourceManager.Versions.v1_0_Preview_1],
+  [ApiVersions.v2023_03_03, Azure.ResourceManager.Versions.v1_0_Preview_1]])
+
+@versioned(ApiVersions)
+@doc("Azure Migrate Resource Provider management API.")
+namespace Microsoft.Migrate;
+
+interface Operations extends Azure.ResourceManager.Operations {}

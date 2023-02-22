@@ -1,0 +1,53 @@
+model CollectorProperties {
+    @doc("The ARM id of the discovery service site.")
+    discoverySiteId?: string;
+  
+    @doc("Time when this collector was created. Date-Time represented in ISO-8601 format.")
+    @visibility("read")
+    createdTimestamp?: string;
+  
+    @doc("Time when this collector was updated. Date-Time represented in ISO-8601 format.")
+    @visibility("read")
+    updatedTimestamp?: string;
+    agentProperties?: CollectorAgentProperties;
+  }
+  
+  model CollectorAgentProperties {
+    @visibility("read")
+    id?: string;
+  
+    @visibility("read")
+    version?: string;
+  
+    @visibility("read")
+    lastHeartbeatUtc?: zonedDateTime;
+    spnDetails?: CollectorBodyAgentSpnProperties;
+  }
+  
+  model CollectorBodyAgentSpnProperties {
+    @doc("AAD Authority URL which was used to request the token for the service principal.")
+    authority?: string;
+  
+    @doc("""
+  Application/client Id for the service principal with which the on-premise
+  management/data plane components would communicate with our Azure services.
+  """)
+    applicationId?: string;
+  
+    @doc("Intended audience for the service principal.")
+    audience?: string;
+  
+    @doc("""
+  Object Id of the service principal with which the on-premise management/data
+  plane components would communicate with our Azure services.
+  """)
+    objectId?: string;
+  
+    @doc("""
+  Tenant Id for the service principal with which the on-premise management/data
+  plane components would communicate with our Azure services.
+  """)
+    tenantId?: string;
+  }
+  
+  

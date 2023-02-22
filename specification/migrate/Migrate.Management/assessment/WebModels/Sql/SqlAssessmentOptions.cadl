@@ -1,0 +1,64 @@
+import "../Common/SqlEnums.cadl";
+import "./CommonModels.cadl";
+
+using Autorest;
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using OpenAPI;
+
+namespace Microsoft.Migrate;
+
+@doc("SQL Assessment options web model object.")
+@parentResource(Project)
+model SqlAssessmentOptions is ProxyResource<SqlAssessmentOptionsProperties> {
+    @doc("Sql assessment options ARM name. Accepted values is 'default'")
+    @key("assessmentOptionsName")
+    @segment("sqlAssessmentOptions")
+    @path
+    name: string;
+}
+
+@doc("SQL Assessment options properties Web model object.")
+model SqlAssessmentOptionsProperties {
+  @doc("Gets the list of VM families.")
+  @visibility("read")
+  vmFamilies?: VmFamily[];
+
+  @doc("Gets the Reserved Instance VM Families list.")
+  @visibility("read")
+  reservedInstanceVmFamilies?: AzureVmFamilyKnownValues[];
+
+  @doc("Gets the Premium disk VM Families list.")
+  @visibility("read")
+  premiumDiskVmFamilies?: AzureVmFamilyKnownValues[];
+
+  @doc("Gets or sets the Premium disk VM Families list.")
+  savingsPlanVmFamilies?: AzureVmFamilyKnownValues[];
+
+  @doc("Gets or sets the list of Azure locations supporting Reserved Instances.")
+  savingsPlanSupportedLocations?: AzureLocationKnownValues[];
+
+  @doc("Gets or sets the list of Azure locations supporting Reserved Instances.")
+  savingsPlanSupportedOffers?: AzureOfferCodeKnownValues[];
+
+  @doc("Gets or sets the list of SQL target SKU properties for dropdowns.")
+  sqlSkus?: SqlPaaSTargetOptions[];
+
+  @doc("Gets or sets the Reserved Instance SQL target types.")
+  reservedInstanceSqlTargets?: TargetType[];
+
+  @doc("Gets or sets the list of Azure locations supporting Reserved Instances.")
+  reservedInstanceSupportedLocations?: AzureLocationKnownValues[];
+
+  @doc("Gets or sets the list of currencies supported for Reserved Instances.")
+  reservedInstanceSupportedCurrencies?: CurrencyKnownValues[];
+
+  @doc("Gets or sets the list of offers supported for Reserved Instances.")
+  reservedInstanceSupportedOffers?: AzureOfferCodeKnownValues[];
+
+  @doc("Gets or sets the list of offers supported for SQL assessments.")
+  supportedOffers?: AzureOfferCodeKnownValues[];
+}

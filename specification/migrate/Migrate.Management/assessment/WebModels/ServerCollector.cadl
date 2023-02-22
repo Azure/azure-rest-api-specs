@@ -1,0 +1,21 @@
+import "./Common/CollectorProperties.cadl";
+
+using Autorest;
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using OpenAPI;
+
+namespace Microsoft.Migrate;
+
+@doc("Physical server collector resource.")
+@parentResource(Project)
+model ServerCollector is ProxyResource<CollectorProperties> {
+    @doc("Physical server collector ARM name")
+    @key("serverCollectorName")
+    @segment("servercollectors")
+    @path
+    name: string;
+}

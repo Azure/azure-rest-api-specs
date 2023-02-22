@@ -1,0 +1,21 @@
+import "./Common/CollectorProperties.cadl";
+
+using Autorest;
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using OpenAPI;
+
+namespace Microsoft.Migrate;
+
+@doc("Hyper-V collector resource.")
+@parentResource(Project)
+model HypervCollector is ProxyResource<CollectorProperties> {
+    @doc("Hyper-V collector ARM name")
+    @key("hyperCollectorName")
+    @segment("hypervcollectors")
+    @path
+    name: string;
+}
