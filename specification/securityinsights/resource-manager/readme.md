@@ -28,9 +28,9 @@ These are the global settings for the SecurityInsights API.
 openapi-type: arm
 tag: package-preview-2023-03
 ```
-
 ---
 
+### Tag: package-2023-02
 
 ### Tag: package-preview-2023-03
 
