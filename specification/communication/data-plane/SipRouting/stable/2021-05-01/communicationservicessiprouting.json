@@ -15,7 +15,7 @@
           "SipConfiguration"
         ],
         "summary": "Gets SIP configuration for resource.",
-        "operationId": "GetSipConfiguration",
+        "operationId": "SipRouting_Get",
         "produces": [
           "application/json"
         ],
@@ -34,9 +34,14 @@
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
             },
-            "x-ms-error-response": true
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -50,7 +55,7 @@
           "SipConfiguration"
         ],
         "summary": "Patches SIP configuration for resource.",
-        "operationId": "PatchSipConfiguration",
+        "operationId": "SipRouting_Patch",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -64,7 +69,7 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Configuration patch.",
+            "description": "Sip configuration patch object.",
             "schema": {
               "$ref": "#/definitions/SipConfigurationPatch"
             }
@@ -77,33 +82,17 @@
               "$ref": "#/definitions/SipConfiguration"
             }
           },
-          "415": {
-            "description": "Unsupported media type of the patch.",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "422": {
-            "description": "If the request is empty, unprocessable or inconsistent with the stored data.",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
-          "500": {
-            "description": "All other api errors.",
-            "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Failure",
             "schema": {
-              "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+              "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
             },
-            "x-ms-error-response": true
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code"
+              }
+            }
           }
         },
         "x-ms-examples": {
@@ -165,7 +154,7 @@
         },
         "trunks": {
           "description": "Gets or sets list of SIP trunks for routing calls. Trunks are represented as FQDN.",
-          "maxLength": 250,
+          "maxItems": 250,
           "type": "array",
           "items": {
             "type": "string"
@@ -179,7 +168,7 @@
       "properties": {
         "trunks": {
           "description": "SIP trunks for routing calls.\r\nMap key is trunk's FQDN (1-249 characters).",
-          "maxLength": 250,
+          "maxProperties": 250,
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/Trunk"
@@ -187,7 +176,7 @@
         },
         "routes": {
           "description": "Trunk routes for routing calls.",
-          "maxLength": 250,
+          "maxItems": 250,
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrunkRoute"
@@ -201,7 +190,7 @@
       "properties": {
         "trunks": {
           "description": "SIP trunks for routing calls.\r\nMap key is trunk's FQDN (1-249 characters).",
-          "maxLength": 250,
+          "maxProperties": 250,
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/TrunkPatch"
@@ -209,7 +198,7 @@
         },
         "routes": {
           "description": "Trunk routes for routing calls.",
-          "maxLength": 250,
+          "maxItems": 250,
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrunkRoute"
