@@ -714,7 +714,8 @@
               "x-ms-enum": {
                 "name": "TlsVersion",
                 "modelAsString": true
-              }
+              },
+              "default": "1.2"
             },
             "provisioningState": {
               "readOnly": true,
@@ -781,7 +782,8 @@
             },
             "zoneRedundant": {
               "type": "boolean",
-              "description": "Enabling this property creates a Standard Event Hubs Namespace in regions supported availability zones."
+              "description": "Enabling this property creates a Standard Event Hubs Namespace in regions supported availability zones.",
+              "default": false
             },
             "encryption": {
               "$ref": "#/definitions/Encryption",
@@ -792,11 +794,13 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/PrivateEndpointConnection"
-              }
+              },
+              "readonly": true
             },
             "disableLocalAuth": {
               "type": "boolean",
-              "description": "This property disables SAS authentication for the Event Hubs namespace."
+              "description": "This property disables SAS authentication for the Event Hubs namespace.",
+              "default": false
             },
             "alternateName": {
               "type": "string",
@@ -993,6 +997,10 @@
           "$ref": "#/definitions/ConnectionState",
           "description": "Details about the state of the connection."
         },
+        "groupIds": {
+          "$ref": "#/definitions/GroupIdsProperty",
+          "description": "Gets the groupIds."
+        },
         "provisioningState": {
           "description": "Provisioning state of the Private Endpoint Connection.",
           "enum": [
@@ -1019,6 +1027,13 @@
           "type": "string"
         }
       }
+    },
+    "GroupIdsProperty": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Gets the groupIds."
     },
     "ConnectionState": {
       "description": "ConnectionState information.",
