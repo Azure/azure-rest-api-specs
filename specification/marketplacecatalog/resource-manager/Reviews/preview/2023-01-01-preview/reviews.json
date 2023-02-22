@@ -147,8 +147,8 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/{reviewId}/action": {
-      "post": {
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/{reviewId}": {
+      "patch": {
         "tags": [
           "Rating and Reviews Authenticated API"
         ],
@@ -326,7 +326,7 @@
       }
     },
     "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/{reviewId}/comments/{commentId}": {
-      "put": {
+      "patch": {
         "tags": [
           "Rating and Reviews Authenticated API"
         ],
@@ -703,6 +703,14 @@
           "type": "integer",
           "description": "Number of marked as helpful for this review",
           "format": "int32"
+        },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "Publish review as anonymous"
+        },
+        "sendEmailConsent": {
+          "type": "boolean",
+          "description": "Consent to use email"
         }
       }
     },
