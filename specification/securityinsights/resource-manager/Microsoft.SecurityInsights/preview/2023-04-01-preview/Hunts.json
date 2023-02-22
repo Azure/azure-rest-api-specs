@@ -753,55 +753,7 @@
           "type": "array"
         },
         "owner": {
-          "description": "Describes a user that the hunt is assigned to",
-          "type": "object",
-          "properties": {
-            "email": {
-              "description": "The email of the user the hunt is assigned to.",
-              "type": "string"
-            },
-            "assignedTo": {
-              "description": "The name of the user the hunt is assigned to.",
-              "type": "string"
-            },
-            "objectId": {
-              "description": "The object id of the user the hunt is assigned to.",
-              "format": "uuid",
-              "type": "string",
-              "x-nullable": true
-            },
-            "userPrincipalName": {
-              "description": "The user principal name of the user the hunt is assigned to.",
-              "type": "string"
-            },
-            "ownerType": {
-              "description": "The type of the owner the hunt is assigned to.",
-              "type": "string",
-              "enum": [
-                "Unknown",
-                "User",
-                "Group"
-              ],
-              "x-ms-enum": {
-                "modelAsString": true,
-                "name": "OwnerType",
-                "values": [
-                  {
-                    "description": "The hunt owner type is unknown",
-                    "value": "Unknown"
-                  },
-                  {
-                    "description": "The hunt owner type is an AAD user",
-                    "value": "User"
-                  },
-                  {
-                    "description": "The hunt owner type is an AAD group",
-                    "value": "Group"
-                  }
-                ]
-              }
-            }
-          }
+          "$ref": "#/definitions/HuntOwner"
         }
       },
       "required": [
@@ -940,6 +892,57 @@
         "message"
       ],
       "type": "object"
+    },
+    "HuntOwner": {
+      "description": "Describes a user that the hunt is assigned to",
+      "type": "object",
+      "properties": {
+        "email": {
+          "description": "The email of the user the hunt is assigned to.",
+          "type": "string"
+        },
+        "assignedTo": {
+          "description": "The name of the user the hunt is assigned to.",
+          "type": "string"
+        },
+        "objectId": {
+          "description": "The object id of the user the hunt is assigned to.",
+          "format": "uuid",
+          "type": "string",
+          "x-nullable": true
+        },
+        "userPrincipalName": {
+          "description": "The user principal name of the user the hunt is assigned to.",
+          "type": "string"
+        },
+        "ownerType": {
+          "description": "The type of the owner the hunt is assigned to.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "User",
+            "Group"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "OwnerType",
+            "values": [
+              {
+                "description": "The hunt owner type is unknown",
+                "value": "Unknown"
+              },
+              {
+                "description": "The hunt owner type is an AAD user",
+                "value": "User"
+              },
+              {
+                "description": "The hunt owner type is an AAD group",
+                "value": "Group"
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "parameters": {
