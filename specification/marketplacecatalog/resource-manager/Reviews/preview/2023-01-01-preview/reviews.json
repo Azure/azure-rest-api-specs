@@ -43,7 +43,7 @@
         }
       }
     },
-    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/usermetadata": {
+    "/providers/Microsoft.Marketplace/products/{uniqueProductId}/usermetadata": {
       "get": {
         "tags": [
           "Rating and Reviews Authenticated API"
@@ -148,7 +148,7 @@
       }
     },
     "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/{reviewId}": {
-      "patch": {
+      "post": {
         "tags": [
           "Rating and Reviews Authenticated API"
         ],
@@ -247,6 +247,9 @@
         "responses": {
           "200": {
             "description": "Returns a response whether deletion succeeded"
+          },
+          "204": {
+            "description": "No Content"
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
@@ -385,6 +388,9 @@
               "$ref": "#/definitions/ReviewCommentDto"
             }
           },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
             "schema": {
@@ -518,6 +524,7 @@
       "in": "query",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location":"client",
       "description": "The API version to use for the request"
     },
     "ApiKeyParameter": {
@@ -525,6 +532,7 @@
       "in": "header",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location":"client",
       "description": "Api Key parameter from header"
     }
   },
