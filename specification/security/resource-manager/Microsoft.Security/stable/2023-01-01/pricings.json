@@ -48,10 +48,10 @@
         "operationId": "Pricings_List",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../common/v4/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../common/v4/types.json#/parameters/SubscriptionId"
           }
         ],
         "responses": {
@@ -264,9 +264,9 @@
       "type": "object",
       "description": "A plan's extension properties",
       "properties": {
-        "type": {
+        "name": {
           "type": "string",
-          "description": "The extension type name.",
+          "description": "The extension name.",
           "enum": [
             "AgentlessVmScanning",
             "AgentlessDiscoveryForKubernetes",
@@ -275,7 +275,7 @@
             "ContainerRegistriesVulnerabilityAssessments"
           ],
           "x-ms-enum": {
-            "name": "type",
+            "name": "name",
             "modelAsString": true,
             "values": [
               {
@@ -302,8 +302,26 @@
           }
         },
         "isEnabled": {
-          "type": "boolean",
-          "description": "Indicates whether the extension is enabled."
+          "type": "string",
+          "description": "Indicates whether the extension is enabled.",
+          "enum": [
+            "True",
+            "False"
+          ],
+          "x-ms-enum": {
+            "name": "isEnabled",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "True",
+                "description": "Indicates the extension is enabled"
+              },
+              {
+                "value": "False",
+                "description": "Indicates the extension is disabled"
+              }
+            ]
+          }
         },
         "additionalExtensionProperties": {
           "type": "object",
@@ -318,11 +336,11 @@
         }
       },
       "required": [
-        "type",
+        "name",
         "isEnabled"
       ]
     },
-    "OperationStatus": {      
+    "OperationStatus": {
       "type": "object",
       "description": "A status describing the success/failure of the extension's enablement/disablement operation.",
       "properties": {
@@ -334,7 +352,7 @@
             "Failed"
           ],
           "x-ms-enum": {
-            "name": "type",
+            "name": "code",
             "modelAsString": true,
             "values": [
               {
@@ -349,7 +367,7 @@
           }
         },
         "message": {
-          "type": "boolean",
+          "type": "string",
           "description": "Additional information regarding the success/failure of the operation."
         }
       }
