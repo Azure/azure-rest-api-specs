@@ -743,7 +743,8 @@
           "x-ms-mutability": [
             "create",
             "read"
-          ]
+          ],
+          "default": false
         },
         "encryption": {
           "$ref": "#/definitions/Encryption",
@@ -754,11 +755,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "readOnly": true
         },
         "disableLocalAuth": {
           "type": "boolean",
-          "description": "This property disables SAS authentication for the Service Bus namespace."
+          "description": "This property disables SAS authentication for the Service Bus namespace.",
+          "default": false
         },
         "alternateName": {
           "type": "string",
@@ -825,7 +828,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
-          }
+          },
+          "readOnly": true
         },
         "disableLocalAuth": {
           "type": "boolean",
@@ -1019,6 +1023,10 @@
           "$ref": "#/definitions/ConnectionState",
           "description": "Details about the state of the connection."
         },
+        "groupIds": {
+          "$ref": "#/definitions/GroupIdsProperty",
+          "description": "Gets the groupIds."
+        },
         "provisioningState": {
           "description": "Provisioning state of the Private Endpoint Connection.",
           "enum": [
@@ -1046,6 +1054,13 @@
           "type": "string"
         }
       }
+    },
+    "GroupIdsProperty": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Gets the groupIds."
     },
     "ConnectionState": {
       "type": "object",
