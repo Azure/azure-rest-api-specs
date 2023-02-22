@@ -1836,6 +1836,10 @@
           "type": "string",
           "description": "The name of SpringBootApp."
         },
+        "artifactName": {
+          "type": "string",
+          "description": "The artifact name of SpringBootApp."
+        },
         "appPort": {
           "type": "integer",
           "format": "int32",
@@ -1983,8 +1987,13 @@
           },
           "description": "The connection string list."
         },
+        "lastModifiedTime": {
+          "description": "Time when this springbootapps jar file was last modified.",
+          "type": "string",
+          "format": "date-time"
+        },
         "lastUpdatedTime": {
-          "description": "Time when this springbootapps instance was last updated.",
+          "description": "Time when this springbootapps instance was last refreshed.",
           "type": "string",
           "format": "date-time"
         },
@@ -2097,6 +2106,18 @@
           "description": "The error code.",
           "type": "string"
         },
+        "summaryMessage": {
+          "description": "The summarized error message.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "The account ID used to login.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The detailed error message.",
+          "type": "string"
+        },
         "possibleCause": {
           "description": "The error possible cause.",
           "type": "string"
@@ -2108,6 +2129,11 @@
         "severity": {
           "description": "The error severity",
           "type": "string"
+        },
+        "updatedTimeStamp": {
+          "description": "Time when this error was last updated.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
