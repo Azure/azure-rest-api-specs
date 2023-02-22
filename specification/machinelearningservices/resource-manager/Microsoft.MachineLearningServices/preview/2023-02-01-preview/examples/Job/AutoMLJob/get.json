@@ -33,6 +33,9 @@
               "errorMessage": "string",
               "properties": {
                 "string": "string"
+              },
+              "nodes": {
+                "nodesValueType": "All"
               }
             }
           },
@@ -41,55 +44,80 @@
           "identity": {
             "identityType": "AMLToken"
           },
-          "jobType": "AutoML",
+          "componentId": "string",
+          "notificationSetting": {
+            "emails": [
+              "string"
+            ],
+            "emailOn": [
+              "JobFailed"
+            ]
+          },
+          "jobType": "Command",
           "resources": {
             "instanceCount": 1,
             "instanceType": "string",
+            "locations": [
+              "string"
+            ],
             "properties": {
               "string": {
-                "9bec0ab0-c62f-4fa9-a97c-7b24bbcc90ad": null
+                "9c4f5d89-ed21-42e3-9263-246633ca4a50": null
               }
-            }
+            },
+            "shmSize": "string",
+            "dockerArgs": "string"
           },
+          "codeId": "string",
+          "command": "string",
           "environmentId": "string",
-          "environmentVariables": {
-            "string": "string"
-          },
-          "taskDetails": {
-            "taskType": "ImageClassification",
-            "limitSettings": {
-              "maxTrials": 2
-            },
-            "targetColumnName": "string",
-            "trainingData": {
-              "jobInputType": "mltable",
-              "uri": "string"
-            },
-            "modelSettings": {
-              "validationCropSize": 2
-            },
-            "searchSpace": [
-              {
-                "validationCropSize": "choice(2, 360)"
-              }
-            ]
+          "inputs": {
+            "string": {
+              "description": "string",
+              "jobInputType": "literal",
+              "value": "string"
+            }
           },
           "outputs": {
             "string": {
               "description": "string",
               "uri": "string",
-              "mode": "ReadWriteMount",
+              "assetName": "string",
+              "assetVersion": "string",
+              "mode": "Upload",
               "jobOutputType": "uri_file"
             }
+          },
+          "distribution": {
+            "distributionType": "TensorFlow",
+            "workerCount": 1,
+            "parameterServerCount": 1
+          },
+          "autologgerSettings": {
+            "mlflowAutologger": "Enabled"
+          },
+          "limits": {
+            "timeout": "PT5M",
+            "jobLimitsType": "Command"
+          },
+          "environmentVariables": {
+            "string": "string"
+          },
+          "parameters": {
+            "30a01c8b-9d69-4924-8a14-63a1fbd78f3a": null
+          },
+          "queueSettings": {
+            "jobTier": "Basic",
+            "priority": 1
           }
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdAt": "2020-01-01T12:34:56.999+00:19",
           "createdBy": "string",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "createdByType": "Application",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:19",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "ManagedIdentity"
+          "lastModifiedByType": "Key"
         }
       }
     }
