@@ -224,8 +224,11 @@
           }
         },
         "x-ms-examples": {
-          "Create subscription level ProfessionalService resource": {
-            "$ref": "./examples/ProfessionalService/ProfessionalServicePut.json"
+          "Create subscription level ProfessionalService resource (indefinite term)": {
+            "$ref": "./examples/ProfessionalService/ProfessionalServicePutIndefiniteTerm.json"
+          },
+          "Create subscription level ProfessionalService resource (with term)": {
+            "$ref": "./examples/ProfessionalService/ProfessionalServicePutWithTerm.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -744,9 +747,32 @@
             }
           }
         },
+        "billingPeriod": {
+          "type": "string",
+          "description": "The billing period eg P1M,P1Y for monthly,yearly respectively"
+        },
         "isFreeTrial": {
           "type": "boolean",
           "description": "Whether the current term is a Free Trial term"
+        },
+        "paymentChannelType": {
+          "type": "string",
+          "description": "The Payment channel for the ProfessionalServiceSubscription.",
+          "enum": [
+            "SubscriptionDelegated",
+            "CustomerDelegated"
+          ],
+          "x-ms-enum": {
+            "name": "paymentChannelType",
+            "modelAsString": true
+          }
+        },
+        "paymentChannelMetadata": {
+          "type": "object",
+          "description": "The metadata about the ProfessionalService subscription such as the AzureSubscriptionId and ResourceUri.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "created": {
           "type": "string",
@@ -793,7 +819,7 @@
         },
         "billingPeriod": {
             "type": "string",
-            "description": "The billing period, eg P1M,P1Y for monthly,yearly respectively"
+            "description": "The billing period eg P1M,P1Y for monthly,yearly respectively"
         }
       }
     },
