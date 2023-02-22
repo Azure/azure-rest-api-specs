@@ -19,14 +19,14 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -67,7 +67,7 @@
             "description": "Unique Product Id"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ApiKeyParameter"
@@ -97,7 +97,7 @@
         "summary": "Add a new review for a product",
         "operationId": "ArmReviews_CreateReview",
         "x-ms-examples": {
-          "GetUserMetadata": {
+          "CreateReview": {
             "$ref": "./examples/CreateReview.json"
           }
         },
@@ -125,7 +125,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ApiKeyParameter"
@@ -155,7 +155,7 @@
         "summary": "Update a review for a product",
         "operationId": "ArmReviews_UpdateReview",
         "x-ms-examples": {
-          "GetUserMetadata": {
+          "UpdateReview": {
             "$ref": "./examples/UpdateReview.json"
           }
         },
@@ -190,7 +190,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ApiKeyParameter"
@@ -218,7 +218,7 @@
         "summary": "Delete a review for a product",
         "operationId": "ArmReviews_DeleteReview",
         "x-ms-examples": {
-          "GetUserMetadata": {
+          "DeleteReview": {
             "$ref": "./examples/DeleteReview.json"
           }
         },
@@ -238,7 +238,7 @@
             "description": "Review Id"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ApiKeyParameter"
@@ -268,7 +268,7 @@
         "summary": "Add a comment to an existing review",
         "operationId": "ArmReviewComment_CreateComment",
         "x-ms-examples": {
-          "GetUserMetadata": {
+          "CreateComment": {
             "$ref": "./examples/CreateComment.json"
           }
         },
@@ -303,7 +303,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ApiKeyParameter"
@@ -333,7 +333,7 @@
         "summary": "Update a comment",
         "operationId": "ArmReviewComment_UpdateComment",
         "x-ms-examples": {
-          "GetUserMetadata": {
+          "UpdateComment": {
             "$ref": "./examples/UpdateComment.json"
           }
         },
@@ -375,7 +375,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ApiKeyParameter"
@@ -403,7 +403,7 @@
         "summary": "Delete a comment",
         "operationId": "ArmReviewComment_DeleteComment",
         "x-ms-examples": {
-          "GetUserMetadata": {
+          "DeleteComment": {
             "$ref": "./examples/DeleteComment.json"
           }
         },
@@ -433,7 +433,7 @@
             "description": "Comment Id"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ApiKeyParameter"
@@ -463,7 +463,7 @@
         "summary": "Add or remove a mark as helpful vote of a review",
         "operationId": "ArmMarkAsHelpful_MarkReviewAsHelpful",
         "x-ms-examples": {
-          "GetUserMetadata": {
+          "SetMarkAsHelpful": {
             "$ref": "./examples/SetMarkAsHelpful.json"
           }
         },
@@ -495,7 +495,7 @@
             }
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ApiKeyParameter"
@@ -519,14 +519,6 @@
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "client",
-      "description": "The API version to use for the request"
-    },
     "ApiKeyParameter": {
       "name": "X-API-Key",
       "in": "header",
