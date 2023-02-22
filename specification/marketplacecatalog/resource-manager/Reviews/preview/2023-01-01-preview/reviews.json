@@ -10,6 +10,39 @@
     "https"
   ],
   "paths": {
+    "/providers/Microsoft.Marketplace/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available Microsoft.Marketplace REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Microsoft.Marketplace error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_Get": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Marketplace/products/{uniqueProductId}/reviews/usermetadata": {
       "get": {
         "tags": [
@@ -34,18 +67,10 @@
             "description": "Unique Product Id"
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "type": "string",
-            "name": "X-API-Key",
-            "in": "header",
-            "required": true,
-            "description": "Api Key parameter from header"
+            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
@@ -96,22 +121,14 @@
             "required": true,
             "description": "New review request object",
             "schema": {
-              "$ref": "#/definitions/UpsertReviewRequest"
+              "$ref": "#/definitions/CreateReviewRequest"
             }
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "type": "string",
-            "name": "X-API-Key",
-            "in": "header",
-            "required": true,
-            "description": "Api Key parameter from header"
+            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
@@ -169,22 +186,14 @@
             "required": true,
             "description": "Review to update request object",
             "schema": {
-              "$ref": "#/definitions/UpsertReviewRequest"
+              "$ref": "#/definitions/UpdateReviewRequest"
             }
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "type": "string",
-            "name": "X-API-Key",
-            "in": "header",
-            "required": true,
-            "description": "Api Key parameter from header"
+            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
@@ -229,26 +238,15 @@
             "description": "Review Id"
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "type": "string",
-            "name": "X-API-Key",
-            "in": "header",
-            "required": true,
-            "description": "Api Key parameter from header"
+            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns a response whether deletion succeeded",
-            "schema": {
-              "type": "string"
-            }
+            "description": "Returns a response whether deletion succeeded"
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
@@ -302,18 +300,10 @@
             }
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "type": "string",
-            "name": "X-API-Key",
-            "in": "header",
-            "required": true,
-            "description": "Api Key parameter from header"
+            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
@@ -382,18 +372,10 @@
             }
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "type": "string",
-            "name": "X-API-Key",
-            "in": "header",
-            "required": true,
-            "description": "Api Key parameter from header"
+            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
@@ -448,26 +430,15 @@
             "description": "Comment Id"
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "type": "string",
-            "name": "X-API-Key",
-            "in": "header",
-            "required": true,
-            "description": "Api Key parameter from header"
+            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Returns the deleted comment object",
-            "schema": {
-              "$ref": "#/definitions/ReviewCommentDto"
-            }
+            "description": "Returns the deleted comment object"
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
@@ -518,18 +489,10 @@
             }
           },
           {
-            "type": "string",
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "Version of the REST API used for the request."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "type": "string",
-            "name": "X-API-Key",
-            "in": "header",
-            "required": true,
-            "description": "Api Key parameter from header"
+            "$ref": "#/parameters/ApiKeyParameter"
           }
         ],
         "responses": {
@@ -547,6 +510,22 @@
           }
         }
       }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for the request"
+    },
+    "ApiKeyParameter": {
+      "name": "X-API-Key",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "description": "Api Key parameter from header"
     }
   },
   "definitions": {
@@ -736,16 +715,16 @@
         }
       }
     },
-    "UpsertReviewRequest": {
+    "CreateReviewRequest": {
       "type": "object",
-      "description": "Create or update review request object for a product",
+      "description": "Create review request object for a product",
       "required": [
         "rating"
       ],
       "properties": {
         "rating": {
           "type": "number",
-          "description": "Review Rating"
+          "description": "Rating for this review. Possible values between 1 to 5"
         },
         "title": {
           "type": "string",
@@ -765,6 +744,32 @@
         }
       }
     },
+		"UpdateReviewRequest": {
+			"type": "object",
+			"description": "Update review request object for a product",
+			"properties": {
+				"rating": {
+					"type": "number",
+					"description": "Rating for this review. Possible values between 1 to 5"
+				},
+				"title": {
+					"type": "string",
+					"description": "Title for this review"
+				},
+				"content": {
+					"type": "string",
+					"description": "Content for this review"
+				},
+				"isAnonymous": {
+					"type": "boolean",
+					"description": "Publish review as anonymous"
+				},
+				"sendEmailConsent": {
+					"type": "boolean",
+					"description": "Consent to use email"
+				}
+			}
+		},
     "ReviewCommentDto": {
       "type": "object",
       "required": [
