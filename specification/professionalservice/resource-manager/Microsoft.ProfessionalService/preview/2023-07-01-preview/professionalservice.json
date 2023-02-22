@@ -732,7 +732,7 @@
           "properties": {
             "termUnit": {
               "type": "string",
-              "description": "The unit indicating Monthly / Yearly"
+              "description": "The unit term eg P1M,P1Y,P2Y,P3Y meaning month,1year,2year,3year respectively"
             },
             "startDate": {
               "type": "string",
@@ -771,56 +771,29 @@
           "type": "string",
           "description": "The publisher id."
         },
-        "quantity": {
-          "type": "number",
-          "description": "The seat count."
-        },
         "skuId": {
           "type": "string",
           "description": "The plan id."
-        },
-        "paymentChannelType": {
-          "type": "string",
-          "description": "The Payment channel for the ProfessionalServiceSubscription.",
-          "enum": [
-            "SubscriptionDelegated",
-            "CustomerDelegated"
-          ],
-          "x-ms-enum": {
-            "name": "paymentChannelType",
-            "modelAsString": true
-          }
-        },
-        "paymentChannelMetadata": {
-          "type": "object",
-          "description": "The metadata about the ProfessionalService subscription such as the AzureSubscriptionId and ResourceUri.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "professionalServiceResourceName": {
-          "type": "string",
-          "description": "The ProfessionalService resource name."
-        },
-        "termId": {
-          "type": "string",
-          "description": "The current Term id."
         },
         "autoRenew": {
           "type": "boolean",
           "description": "Whether the ProfessionalService subscription will auto renew upon term end."
         },
-        "publisherTestEnvironment": {
-          "type": "string",
-          "description": "The environment in the publisher side for this resource."
+        "quoteId": {
+            "type": "string",
+            "description": "The quote id which the ProfessionalService will be purchase with."
         },
-        "professionalServiceSubscriptionId": {
-          "type": "string",
-          "description": "The professionalService subscription id used for tenant to subscription level migration request."
+        "storeFront": {
+            "type": "string",
+            "description": "The store front which initiates the purchase."
         },
-        "professionalServiceSessionId": {
-          "type": "string",
-          "description": "The professionalService session id used for dev service migration request."
+        "termUnit": {
+            "type": "string",
+            "description": "The unit term eg P1M,P1Y,P2Y,P3Y meaning month,1year,2year,3year respectively"
+        },
+        "billingPeriod": {
+            "type": "string",
+            "description": "The billing period, eg P1M,P1Y for monthly,yearly respectively"
         }
       }
     },
