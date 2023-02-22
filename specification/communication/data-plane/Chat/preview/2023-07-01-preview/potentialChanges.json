@@ -1424,7 +1424,8 @@
       "required": [
         "strategy"
       ]
-    },  
+    },
+    
     "DeleteBasedOnCreationStrategy": {
       "allOf": [
         {
@@ -1436,11 +1437,30 @@
             "daysAfterCreation":{
               "type": "integer",
               "format": "int32",
-              "description": "Only 90 is accepted for now"
             }
           },
           "required": [
             "daysAfterCreation"
+          ]
+        }
+      ]
+    },
+    
+    "DeleteBasedOnLastActivityStrategy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeletionStrategy"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "daysAfterLastActivity":{
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "required": [
+            "daysAfterLastActivity"
           ]
         }
       ]
