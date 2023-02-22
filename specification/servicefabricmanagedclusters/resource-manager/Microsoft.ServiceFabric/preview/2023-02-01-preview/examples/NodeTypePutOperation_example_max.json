@@ -4,7 +4,7 @@
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
     "nodeTypeName": "BE",
-    "api-version": "2022-10-01-preview",
+    "api-version": "2023-02-01-preview",
     "parameters": {
       "properties": {
         "isPrimary": false,
@@ -33,6 +33,8 @@
         "evictionPolicy": "Deallocate",
         "enableOverProvisioning": false,
         "multiplePlacementGroups": true,
+        "securityType": "TrustedLaunch",
+        "secureBootEnabled": true,
         "vmSecrets": [
           {
             "sourceVault": {
@@ -100,8 +102,8 @@
   "responses": {
     "202": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-10-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-10-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-02-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-02-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
@@ -136,6 +138,8 @@
           "evictionPolicy": "Deallocate",
           "enableOverProvisioning": false,
           "multiplePlacementGroups": true,
+          "securityType": "TrustedLaunch",
+          "secureBootEnabled": true,
           "vmSecrets": [
             {
               "sourceVault": {
@@ -207,8 +211,8 @@
     },
     "200": {
       "headers": {
-        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-10-01-preview",
-        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2022-10-01-preview"
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-02-01-preview",
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2023-02-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
@@ -243,6 +247,8 @@
           "evictionPolicy": "Deallocate",
           "enableOverProvisioning": false,
           "multiplePlacementGroups": true,
+          "securityType": "TrustedLaunch",
+          "secureBootEnabled": true,
           "vmSecrets": [
             {
               "sourceVault": {
@@ -311,6 +317,7 @@
           ]
         }
       }
-    }
+    },
+    "404": {}
   }
 }
