@@ -3,7 +3,7 @@
   "info": {
     "title": "ServiceFabricManagementClient",
     "description": "Azure Service Fabric Resource Provider API Client",
-    "version": "2022-10-01-preview"
+    "version": "2023-02-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -71,6 +71,9 @@
               "$ref": "#/definitions/NodeTypeListResult"
             }
           },
+          "404": {
+            "description": "Not Found"
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -130,6 +133,10 @@
           },
           "200": {
             "description": "The operation completed successfully."
+          },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "The detailed error response.",
@@ -194,6 +201,10 @@
           "200": {
             "description": "The operation completed successfully."
           },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -254,6 +265,10 @@
           "200": {
             "description": "The operation completed successfully."
           },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -303,6 +318,10 @@
               "$ref": "#/definitions/NodeTypeListSkuResult"
             }
           },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -348,6 +367,10 @@
             "schema": {
               "$ref": "#/definitions/NodeType"
             }
+          },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "The detailed error response.",
@@ -409,6 +432,9 @@
           },
           "Put node type with custom vm image": {
             "$ref": "./examples/NodeTypePutOperationCustomImage_example.json"
+          },
+          "Put node type with shared galleries custom vm image": {
+            "$ref": "./examples/NodeTypePutOperationCustomSharedGalleriesImage_example.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -427,6 +453,10 @@
             "schema": {
               "$ref": "#/definitions/NodeType"
             }
+          },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "The detailed error response.",
@@ -485,6 +515,10 @@
               "$ref": "#/definitions/NodeType"
             }
           },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true
+          },
           "default": {
             "description": "The detailed error response.",
             "schema": {
@@ -535,6 +569,10 @@
           },
           "200": {
             "description": "The operation completed successfully."
+          },
+          "404": {
+            "description": "Not Found",
+            "x-ms-error-response": true
           },
           "default": {
             "description": "The detailed error response.",
@@ -973,6 +1011,42 @@
             "$ref": "#/definitions/VmSetupAction"
           },
           "description": "Specifies the actions to be performed on the vms before bootstrapping the service fabric runtime."
+        },
+        "securityType": {
+          "type": "string",
+          "description": "Specifies the security type of the nodeType. Only TrustedLaunch is currently supported",
+          "enum": [
+            "TrustedLaunch"
+          ],
+          "x-ms-enum": {
+            "name": "securityType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "TrustedLaunch",
+                "description": "Trusted Launch is a security type that secures generation 2 virtual machines."
+              }
+            ]
+          }
+        },
+        "secureBootEnabled": {
+          "type": "boolean",
+          "description": "Specifies whether secure boot should be enabled on the nodeType. Can only be used with TrustedLaunch SecurityType"
+        },
+        "VmSharedGalleryImageId": {
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Compute/sharedGalleries/images"
+              },
+              {
+                "type": "Microsoft.Compute/sharedGalleries/images/versions"
+              }
+            ]
+          },
+          "description": "Indicates the resource id of the vm shared galleries image. This parameter is used for custom vm image."
         }
       },
       "description": "Describes a node type in the cluster, each node type represents sub set of nodes in the cluster."
@@ -1604,7 +1678,7 @@
     "api-version": {
       "name": "api-version",
       "in": "query",
-      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2022-10-01-preview\" for this specification.",
+      "description": "The version of the Service Fabric resource provider API. This is a required parameter and it's value must be \"2023-02-01-preview\" for this specification.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "client"
