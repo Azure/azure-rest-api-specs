@@ -1377,13 +1377,63 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/getBasicAuthState": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/basicAuth": {
+      "get": {
         "tags": [
           "StaticSites"
         ],
-        "summary": "Gets the basic auth state of a static site.",
-        "description": "Description for Gets the basic auth state of a static site.",
+        "summary": "Gets the basic auth properties for a static site as a collection.",
+        "description": "Description for Gets the basic auth properties for a static site as a collection.",
+        "operationId": "StaticSites_ListBasicAuth",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteBasicAuthPropertiesCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the basic auth properties for a static site.": {
+            "$ref": "./examples/ListStaticSiteBasicAuth.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/basicAuth/{basicAuthName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the basic auth properties for a static site.",
+        "description": "Description for Gets the basic auth properties for a static site.",
         "operationId": "StaticSites_GetBasicAuth",
         "parameters": [
           {
@@ -1395,6 +1445,16 @@
             "description": "Name of the static site.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "basicAuthName",
+            "in": "path",
+            "description": "name of the basic auth entry.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ]
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1418,14 +1478,12 @@
           }
         },
         "x-ms-examples": {
-          "Get the basic auth state of a static site": {
-            "$ref": "./examples/GetStaticSiteBasicAuthState.json"
+          "Gets the basic auth properties for a static site.": {
+            "$ref": "./examples/GetStaticSiteBasicAuth.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/createOrUpdateBasicAuth": {
-      "post": {
+      },
+      "put": {
         "tags": [
           "StaticSites"
         ],
@@ -1442,6 +1500,16 @@
             "description": "Name of the static site.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "basicAuthName",
+            "in": "path",
+            "description": "name of the basic auth entry.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ]
           },
           {
             "name": "basicAuthEnvelope",
@@ -3692,6 +3760,27 @@
             }
           },
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "StaticSiteBasicAuthPropertiesCollection": {
+      "description": "Collection of static site basic auth.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteBasicAuthPropertiesARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
