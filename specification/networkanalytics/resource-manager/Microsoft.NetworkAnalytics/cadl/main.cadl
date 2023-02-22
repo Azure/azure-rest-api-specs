@@ -18,8 +18,7 @@ using OpenAPI;
 @versionedDependency(
   [
     [Microsoft.NetworkAnalytics.Versions.v2022_11_15_preview, Azure.ResourceManager.Versions.v1_0_Preview_1],
-    [Microsoft.NetworkAnalytics.Versions.v2023_03_31, Azure.ResourceManager.Versions.v1_0_Preview_1],
-    [Microsoft.NetworkAnalytics.Versions.v2023_04_30, Azure.ResourceManager.Versions.v1_0_Preview_1]
+    [Microsoft.NetworkAnalytics.Versions.v2023_03_31_preview, Azure.ResourceManager.Versions.v1_0_Preview_1]
   ]
 )
 namespace Microsoft.NetworkAnalytics;
@@ -28,8 +27,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 enum Versions {
   v2022_11_15_preview: "2022-11-15-preview",
-  v2023_03_31: "2023-03-31",
-  v2023_04_30: "2023-04-30"
+  v2023_03_31_preview: "2023-03-31-preview"
 }
 
 @doc("The data lake house resource")
@@ -60,18 +58,6 @@ model DataConnectors is TrackedResource <DataConnectorsProperties> {
     name: string;
 }
 
-// Enable versioning of Model types once this is fixed https://github.com/Azure/cadl-azure/issues/2368
-//@added(Versions.v2023_04_30)
-@doc("An ingestion endpoint for metrics relating to the parent resource")
-@singleton
-model MetricsIngestionEndpointResources is ExtensionResource < MetricsIngestionEndpointProperties > {
-    @doc("Metrics Ingestion Endpoint Name")
-    @key("metricsIngestionEndpointName")
-    @segment("metricsIngestionEndpoints")
-    @path
-    name: string;
-  }
-
 @doc("Details of the NetworkAnalytics Storage.")
 model StorageProperties {
     @doc("Storage properties")
@@ -79,9 +65,6 @@ model StorageProperties {
     provisioningState ?: ProvisioningState;
     @doc("Managed Resource Group configuration.")
     managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
-    @doc("unique Identifier Name")
-    @visibility("create", "read")
-    uniqueIdentifierName: string;
     @doc("Common Storage Account properties.")
     @visibility("create", "read")
     commonStorageAccountProperties?: CommonStorageAccountProperties;
@@ -99,8 +82,9 @@ model NetworkAnalyticsProductsProperties {
     @visibility("read")
     provisioningState ?: ProvisioningState;
     @doc("The network analytics product information")
+    @extension("x-ms-identifiers", ["productName"])
     @visibility("create", "read")
-    networkAnalyticsProductInformation: NetworkAnalyticsProductInformation;
+    networkAnalyticsProductInformation: NetworkAnalyticsProductInformation[];
 }
 
 @doc("Details of the Data Connector Properties. The product details are to be added from the supported values which can be fetched by making a GET call on the Network Analytics Product resource.")
@@ -178,9 +162,9 @@ model NetworkAnalyticsProductConnectorInformation {
 @doc("The data retention, dataset and compute configurations for the connector")
 model DataConnectorConfiguration {
   @doc("The data retention configuration")
-  dataRetentionProperties: DataRetentionProperties,
+  dataRetentionProperties?: DataRetentionProperties,
   @doc("The datasets configuration array ")
-  dataset: DatasetConfiguration,
+  dataset?: DatasetConfiguration,
   @doc("The compute configuration")
   compute: ComputeConfiguration
 }
@@ -188,13 +172,13 @@ model DataConnectorConfiguration {
 @doc("The data retention properties")
 model DataRetentionProperties {
     @doc("The Azure data explorer retention properties")
-    dataExplorer: RetentionProperties,
+    dataExplorer?: RetentionProperties,
     @doc("The bronze storage account retention properties")
-    bronzeStorageAccount: RetentionProperties,
+    bronzeStorageAccount?: RetentionProperties,
     @doc("The silver storage account retention properties")
-    silverStorageAccount: RetentionProperties,
+    silverStorageAccount?: RetentionProperties,
     @doc("The gold storage account retention properties")
-    goldStorageAccount: RetentionProperties,
+    goldStorageAccount?: RetentionProperties,
 }
 
 @doc("The retention properties model")
@@ -206,7 +190,7 @@ model RetentionProperties {
 @doc("The connector dataset information ")
 model DatasetConfiguration {
     @doc("The name of the dataset")
-    datasetName: string,
+    datasetName?: string,
     @doc("The column key holding the timestamp data")
     timestampKey?: zonedDateTime,
     @doc("Columns to be masked")
@@ -215,14 +199,27 @@ model DatasetConfiguration {
 
 @doc("The compute configuration")
 model ComputeConfiguration {
-    @doc("The alert email in case of a failure")
-    failureAlertEmail?: string;
-    @doc("The data throughput speed in mbps. The accepted values are: 10, 100, 300, 500, 1024")
-    throughput: int32;
+    @doc("The data connector throughput configuration.")
+    throughput: Throughput;
+}
+
+@doc("The data connector throughput configuration")
+model Throughput {
+    @doc("The data connector throughput tier.")
+    tier: throughputTier;
+}
+
+enum throughputTier{
+    Basic,
+    Standard,
+    Premium
 }
 
 @doc("Common Storage Account Properties.")
 model CommonStorageAccountProperties {
+    @visibility("create", "read")
+    @doc("The SKU of the storage account.")
+    sku : Sku;
     @visibility("create")
     @doc("Allow or disallow public network access to Storage Account.")
     publicNetworkAccess?: string;
@@ -233,6 +230,19 @@ model CommonStorageAccountProperties {
     blobServices?: BlobServices;
     @doc("Private End Point")
     privateEndPoint?: PrivateEndPoint;
+}
+
+@doc("The SKU of the storage account.")
+model Sku {
+    @doc("The name of the SKU.")
+	name: SkuName;
+}
+
+enum SkuName {
+    Standard_LRS,
+	Standard_GRS,
+	Standard_ZRS,
+	Standard_GZRS
 }
 
 @doc("Configuration for BronzeAccount")
@@ -248,6 +258,94 @@ model AzureDataExplorerProperties {
     virtualNetworkConfiguration?: VirtualNetworkConfiguration;
     @doc("Kusto Cluster Principal Assignments")
     kustoClusterPrincipalAssignments: KustoClusterPrincipalAssignments;
+    @visibility("create", "read")
+    @doc("The ADX SKU details")
+    adxSku: AdxSku;
+    @doc("An array represents the availability zones of the cluster.")
+    @visibility("create", "read")
+    zones ?: string[];
+}
+
+@doc("The ADX SKU details")
+model AdxSku {
+	@doc("SKU name.")
+	name: AdxSkuName;
+	@doc("SKU tier.")
+	tier: SkuTier;
+	@doc("The number of instances of the cluster.")
+	capacity?: int32;
+}
+
+enum SkuTier {
+    Basic,
+    Premium
+}
+
+enum AdxSkuName {
+    Dev_No_SLA_Standard_D11_v2: "Dev(No SLA)_Standard_D11_v2",
+    Dev_No_SLA_Standard_E2a_v4: "Dev(No SLA)_Standard_E2a_v4",
+    Standard_D11_v2: "Standard_D11_v2",
+    Standard_D12_v2: "Standard_D12_v2",
+    Standard_D13_v2: "Standard_D13_v2",
+    Standard_D14_v2: "Standard_D14_v2",
+    Standard_D32d_v4: "Standard_D32d_v4",
+    Standard_D16d_v5: "Standard_D16d_v5",
+    Standard_D32d_v5: "Standard_D32d_v5",
+    Standard_DS13_v2_1TB_PS: "Standard_DS13_v2+1TB_PS",
+    Standard_DS13_v2_2TB_PS: "Standard_DS13_v2+2TB_PS",
+    Standard_DS14_v2_3TB_PS: "Standard_DS14_v2+3TB_PS",
+    Standard_DS14_v2_4TB_PS: "Standard_DS14_v2+4TB_PS",
+    Standard_L4s: "Standard_L4s",
+    Standard_L8s: "Standard_L8s",
+    Standard_L16s: "Standard_L16s",
+    Standard_L8s_v2: "Standard_L8s_v2",
+    Standard_L16s_v2: "Standard_L16s_v2",
+    Standard_L8s_v3: "Standard_L8s_v3",
+    Standard_L16s_v3: "Standard_L16s_v3",
+    Standard_L32s_v3: "Standard_L32s_v3",
+    Standard_L8as_v3: "Standard_L8as_v3",
+    Standard_L16as_v3: "Standard_L16as_v3",
+    Standard_L32as_v3: "Standard_L32as_v3",
+    Standard_E64i_v3: "Standard_E64i_v3",
+    Standard_E80ids_v4: "Standard_E80ids_v4",
+    Standard_E2a_v4: "Standard_E2a_v4",
+    Standard_E4a_v4: "Standard_E4a_v4",
+    Standard_E8a_v4: "Standard_E8a_v4",
+    Standard_E16a_v4: "Standard_E16a_v4",
+    Standard_E8as_v4_1TB_PS: "Standard_E8as_v4+1TB_PS",
+    Standard_E8as_v4_2TB_PS: "Standard_E8as_v4+2TB_PS",
+    Standard_E16as_v4_3TB_PS: "Standard_E16as_v4+3TB_PS",
+    Standard_E16as_v4_4TB_PS :"Standard_E16as_v4+4TB_PS",
+    Standard_E8as_v5_1TB_PS: "Standard_E8as_v5+1TB_PS",
+    Standard_E8as_v5_2TB_PS: "Standard_E8as_v5+2TB_PS",
+    Standard_E16as_v5_3TB_PS: "Standard_E16as_v5+3TB_PS",
+    Standard_E16as_v5_4TB_PS: "Standard_E16as_v5+4TB_PS",
+    Standard_E2ads_v5: "Standard_E2ads_v5",
+    Standard_E4ads_v5: "Standard_E4ads_v5",
+    Standard_E8ads_v5: "Standard_E8ads_v5",
+    Standard_E16ads_v5: "Standard_E16ads_v5",
+    Standard_EC8as_v5_1TB_PS: "Standard_EC8as_v5+1TB_PS",
+    Standard_EC8as_v5_2TB_PS: "Standard_EC8as_v5+2TB_PS",
+    Standard_EC16as_v5_3TB_PS: "Standard_EC16as_v5+3TB_PS",
+    Standard_EC16as_v5_4TB_PS: "Standard_EC16as_v5+4TB_PS",
+    Standard_EC8ads_v5: "Standard_EC8ads_v5",
+    Standard_EC16ads_v5: "Standard_EC16ads_v5",
+    Standard_E8s_v4_1TB_PS: "Standard_E8s_v4+1TB_PS",
+    Standard_E8s_v4_2TB_PS: "Standard_E8s_v4+2TB_PS",
+    Standard_E16s_v4_3TB_PS: "Standard_E16s_v4+3TB_PS",
+    Standard_E16s_v4_4TB_PS: "Standard_E16s_v4+4TB_PS",
+    Standard_E8s_v5_1TB_PS: "Standard_E8s_v5+1TB_PS",
+    Standard_E8s_v5_2TB_PS: "Standard_E8s_v5+2TB_PS",
+    Standard_E16s_v5_3TB_PS: "Standard_E16s_v5+3TB_PS",
+    Standard_E16s_v5_4TB_PS: "Standard_E16s_v5+4TB_PS",
+    Standard_E2d_v4: "Standard_E2d_v4",
+    Standard_E4d_v4: "Standard_E4d_v4",
+    Standard_E8d_v4: "Standard_E8d_v4",
+    Standard_E16d_v4: "Standard_E16d_v4",
+    Standard_E2d_v5: "Standard_E2d_v5",
+    Standard_E4d_v5: "Standard_E4d_v5",
+    Standard_E8d_v5: "Standard_E8d_v5",
+    Standard_E16d_v5: "Standard_E16d_v5"
 }
 
 enum KustoRole {
@@ -365,46 +463,13 @@ model VirtualNetworkConfiguration {
     dataManagementPublicIpId: string;
 }
 
-// Enable versioning of Model types once this is fixed https://github.com/Azure/cadl-azure/issues/2368
-//@added(Versions.v2023_04_30)
-@doc("The resource-specific properties of a Metrics Ingestion Endpoint")
-model MetricsIngestionEndpointProperties {
-    @doc("Name of the External Metrics Ingress Gateway region where the compute should be deployed")
-    @visibility("create", "read")
-    ingressRegionName: string;
-
-    @visibility("read")
-    @doc("Event Hub URL to which the metrics should be sent for this resource")
-    eventHubUrl?: string;
-
-    @visibility("read")
-    @doc("Event Hub name to which the metrics should be sent for this resource")
-    eventHubName?: string;
-
-    @visibility("read")
-    @doc("Key Vault URL where the connection string exists for authentication")
-    keyVaultUrl?: string;
-
-    @doc("The status of the last operation")
-    @visibility("read")
-    provisioningState?: ProvisioningState;
-
-    @doc("Managed Resource Group Configuration")
-    @visibility("create", "read")
-    managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
-  }
-
 @armResourceOperations
 interface Storage extends ResourceOperations<DataLakeHouseResources, StorageProperties> {}
 
-@added(Versions.v2023_03_31)
+@added(Versions.v2023_03_31_preview)
 @armResourceOperations(NetworkAnalyticsProducts)
 interface NetworkAnalyticsProduct extends ResourceOperations<NetworkAnalyticsProducts, NetworkAnalyticsProductsProperties> {}
 
-@added(Versions.v2023_03_31)
+@added(Versions.v2023_03_31_preview)
 @armResourceOperations(DataConnectors)
 interface DataConnector extends ResourceOperations<DataConnectors, DataConnectorsProperties> {}
-
-@added(Versions.v2023_04_30)
-@armResourceOperations(MetricsIngestionEndpointProperties)
-interface MetricsIngestionEndpoints extends ExtensionResourceOperations<MetricsIngestionEndpointResources, MetricsIngestionEndpointProperties> {}
