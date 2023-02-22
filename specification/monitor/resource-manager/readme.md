@@ -43,9 +43,9 @@ These settings apply only when `--tag=package-2023-02-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2023-02-01-only'
 input-file:
-- Microsoft.Insights/stable/2022-06-01/dataCollectionEndpoints_API.json
-- Microsoft.Insights/stable/2022-06-01/dataCollectionRuleAssociations_API.json
-- Microsoft.Insights/stable/2022-06-01/dataCollectionRules_API.json
+- Microsoft.Insights/stable/2022-06-02/dataCollectionEndpoints_API.json
+- Microsoft.Insights/stable/2022-06-02/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/stable/2022-06-02/dataCollectionRules_API.json
 ```
 
 ### Tag: package-2023-02
@@ -74,9 +74,9 @@ input-file:
 - Microsoft.Insights/preview/2018-11-27-preview/vmInsightsOnboarding_API.json
 - Microsoft.Insights/preview/2021-07-01-preview/privateLinkScopes_API.json
 - Microsoft.Insights/stable/2020-10-01/activityLogAlerts_API.json
-- Microsoft.Insights/stable/2022-06-01/dataCollectionEndpoints_API.json
-- Microsoft.Insights/stable/2022-06-01/dataCollectionRuleAssociations_API.json
-- Microsoft.Insights/stable/2022-06-01/dataCollectionRules_API.json
+- Microsoft.Insights/stable/2022-06-02/dataCollectionEndpoints_API.json
+- Microsoft.Insights/stable/2022-06-02/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/stable/2022-06-02/dataCollectionRules_API.json
 - Microsoft.Monitor/preview/2021-06-03-preview/monitoringAccounts_API.json
 - Microsoft.Monitor/preview/2021-06-03-preview/operations_API.json
 ```
