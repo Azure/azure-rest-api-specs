@@ -4,14 +4,17 @@ using Cadl.Versioning;
 @doc("Azure OffAzure Resource Provider management API.")
 namespace Microsoft.OffAzure;
 
-//@knownValues(HighlyAvailableKnownValues)
-scalar HighAvailability extends string;
 
-enum HighAvailabilityKnownValues {
+
+@doc("Value indicating whether the VM is highly available")
+@knownValues(HighAvailabilityValues)
+scalar HighAvailability extends string;
+enum HighAvailabilityValues {
   Unknown,
   No,
-  Yes,
-}
+  Yes,}
+
+
 #suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("The properties of AddressResource")
 model HyperVMachineProperties {

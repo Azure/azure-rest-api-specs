@@ -93,20 +93,20 @@ model SpringBootDiscovery {
   discoveryScopeStatus: DiscoveryScopeStatus;
 }
 
-@doc("hyperv cluster")
-model HypervCluster {
-  @doc("Gets or sets the type of the operating system.")
-  osType?: string;
+// @doc("hyperv cluster")
+// model HypervCluster {
+//   @doc("Gets or sets the type of the operating system.")
+//   osType?: string;
 
-  @doc("Gets or sets the Name of the operating system.")
-  osName?: string;
+//   @doc("Gets or sets the Name of the operating system.")
+//   osName?: string;
 
-  @doc("Gets or sets the Version of the operating system.")
-  osVersion?: string;
+//   @doc("Gets or sets the Version of the operating system.")
+//   osVersion?: string;
 
-  @doc("Gets or sets the Architecture of the operating system.")
-  osArchitecture?: string;
-}
+//   @doc("Gets or sets the Architecture of the operating system.")
+//   osArchitecture?: string;
+// }
 
 enum DependencyMapDiscoveryScopeStatus {
   "DiscoverySucceededAtleastOnce",
@@ -119,7 +119,17 @@ enum DependencyMapDiscoveryScopeStatus {
   "DiscoverySucceeded",
 }
 
-enum HealthErrorDetailsDiscoveryScope {
+// enum HealthErrorDetailsDiscoveryScope {
+//   "AppsAndRoles",
+//   "DependencyMap",
+//   "StaticData",
+//   "SQLServerConnectionInfo",
+// }
+
+@doc("Gets discovery scope for which             error is encountered.")
+@knownValues(HealthErrorDetailsDiscoveryScopeValues)
+scalar HealthErrorDetailsDiscoveryScope extends string;
+enum HealthErrorDetailsDiscoveryScopeValues {
   "AppsAndRoles",
   "DependencyMap",
   "StaticData",
@@ -570,9 +580,9 @@ enum V202007MasterSitePropertiesPublicNetworkAccess {
   "Disabled",
 }
 
-@knownValues(V202007MasterSitePropertiesPublicNetworkAccess)
-scalar MicrosoftAzureFDSWebRoleV202007MasterSitePropertiesPublicNetworkAccess
-  extends string;
+//@knownValues(V202007MasterSitePropertiesPublicNetworkAccess)
+// scalar MicrosoftAzureFDSWebRoleV202007MasterSitePropertiesPublicNetworkAccess
+ // extends string;
 
 #suppress "@azure-tools/cadl-azure-core/casing-style"
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
@@ -2239,3 +2249,4 @@ model OtherDatabase {
   @visibility("read")
   version?: string;
 }
+

@@ -15,7 +15,7 @@ namespace Azure.ResourceManager;
 @get
 op ArmListBySubscriptionNoError<TResource extends ArmResource>(
   ...SubscriptionScope<TResource>
-): ArmResponse<ResourceListResult<TResource>> ;
+): ArmResponse<ResourceListResultUpdated<TResource>> ;
 
 @get
 @autoRoute
@@ -30,7 +30,7 @@ op ArmResourceListByParentNoError<
   TParentFriendlyName = ""
 >(
   ...ResourceParentParameters<TResource, TBaseParameters>
-): ArmResponse<ResourceListResult<TResource>> ;
+): ArmResponse<ResourceListResultUpdated<TResource>> ;
 
 @get
 @autoRoute
@@ -43,7 +43,7 @@ op ArmResourceListAtScopeNoError<
   TBaseParameters = BaseParameters<TResource>
 >(
   ...ResourceParentParameters<TResource, TBaseParameters>
-): ArmResponse<ResourceListResult<TResource>> ;
+): ArmResponse<ResourceListResultUpdated<TResource>> ;
 
 @autoRoute
 @doc("Get a {name}", TResource)

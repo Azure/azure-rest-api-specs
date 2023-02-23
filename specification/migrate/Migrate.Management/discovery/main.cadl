@@ -567,6 +567,13 @@ interface HypervSites {
   @added(Versions.v2018_05_01_preview)
   create is ArmResourceCreateOrUpdateSyncCustom<HyperVSite>;
 
+  @added(Versions.v2022_10_27)
+  @summary("Get all hyperv  sites.")
+  @doc("Get all the hyperv  sites in the subscription.")
+  @operationId("HyperVSites_ListBySubscription")
+  listBySubscription is ArmListBySubscriptionNoError<HyperVSite>;
+
+
  
   @armResourceUpdate(InnerError)
   @patch
@@ -908,14 +915,6 @@ interface HypervRunAsAccounts {
 
   @operationId("HyperVRunAsAccounts_GetAllRunAsAccountsInSite")
   listByParent is ArmResourceListByParentUpdated<HypervRunAsAccountResource>;
-}
-
-model List<T> {
-  @doc("List of elements")
-  value: T[];
-
-  @doc("A link to the next page of results if present.")
-  nextLink?: url;
 }
 
 model Patch<T> {
@@ -1363,27 +1362,27 @@ model MasterSite is TrackedResource<MasterSiteProperties> {
 @armResourceOperations
 interface MasterSites {
   @added(Versions.v2020_07_07)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController")
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController_GetSite")
+  @tag("MasterSites")
+  @operationId("MasterSites_GetSite")
   @summary("Method to get a master site.")
   get is ArmResourceReadNoError<MasterSite>;
 
   @added(Versions.v2020_07_07)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController_PutSite")
+  @operationId("MasterSites_PutSite")
   @summary("Method to create or update a site.")
   @doc("Method to create or update a site.")
   create is ArmResourceCreateOrUpdateAsyncNoError<MasterSite>;
 
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController")
+  @tag("MasterSites")
   @added(Versions.v2020_07_07)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController_DeleteSite")
+  @operationId("MasterSites_DeleteSite")
   @summary("Method to delete a site.")
   @doc("Method to delete a site.")
   delete is ArmResourceDeleteSyncNoError<MasterSite>;
 
   @added(Versions.v2020_07_07)
   @summary("Get all the sites in the subscription.")
-  @doc("Get all the sites in the subscription.")
+  @doc("Get all the sites in the subscription.")  
   @tag("MasterSites")
   @operationId("MasterSites_ListBySubscription")
   listBySubscription is ArmListBySubscriptionNoError<MasterSite>;
@@ -1399,17 +1398,30 @@ interface MasterSites {
   @added(Versions.v2020_07_07)
   @summary("Method to update an existing site.")
   @doc("Method to update an existing site.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController")
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController_PatchSite")
+  @tag("MasterSites")
+  @operationId("MasterSites_PatchSite")
   update is ArmResourcePatchAsyncNoError<MasterSite, MasterSiteProperties>;
+
+  // @armResourceUpdate(InnerError)
+  // @patch
+  // @added(Versions.v2020_07_07)
+  // @operationId("MasterSites_PatchSite")
+  // @doc("Method to patch an existing site")
+  // updateMasterSite(
+  //   ...ResourceInstanceParameters<MasterSite>,
+
+  //   @doc(" Body with site details.")
+  //   @body
+  //   body: MasterSite
+  // ): ArmResponse<MasterSite>;
 
   @summary("Method to get error summary from master site for an appliance.")
   @doc("Method to get error summary from master site for an appliance.")
   @armResourceAction(InnerError)
   @added(Versions.v2020_07_07)
   @post
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController_GetErrorSummary")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController")
+  @operationId("MasterSites_GetErrorSummary")
+  @tag("MasterSites")
   errorSummary(
     ...ResourceInstanceParameters<MasterSite>,
 

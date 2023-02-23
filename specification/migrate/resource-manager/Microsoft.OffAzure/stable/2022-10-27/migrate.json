@@ -175,9 +175,6 @@
       "name": "MasterSites"
     },
     {
-      "name": "Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController"
-    },
-    {
       "name": "Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.ApplianceNonceController"
     },
     {
@@ -362,6 +359,43 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/HyperVSites": {
+      "get": {
+        "tags": [
+          "HypervSites"
+        ],
+        "operationId": "HyperVSites_ListBySubscription",
+        "summary": "Get all hyperv  sites.",
+        "description": "Get all the hyperv  sites in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HyperVSiteCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HyperVSites_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "HyperVSites_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/MasterSites": {
       "get": {
         "tags": [
@@ -382,7 +416,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MasterSiteListResult"
+              "$ref": "#/definitions/MasterSiteCollection"
             }
           }
         },
@@ -420,7 +454,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteListResult"
+              "$ref": "#/definitions/VMwareSiteCollection"
             }
           }
         },
@@ -3295,10 +3329,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}": {
       "get": {
         "tags": [
-          "MasterSites",
-          "Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController"
+          "MasterSites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetSite",
+        "operationId": "MasterSites_GetSite",
         "summary": "Method to get a master site.",
         "description": "Get a MasterSite",
         "parameters": [
@@ -3328,11 +3361,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetSite_MaximumSet_Gen.json"
+          "MasterSites_GetSite_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSites_GetSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetSite_MinimumSet_Gen.json"
+          "MasterSites_GetSite_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSites_GetSite_MinimumSet_Gen.json"
           }
         }
       },
@@ -3340,7 +3373,7 @@
         "tags": [
           "MasterSites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PutSite",
+        "operationId": "MasterSites_PutSite",
         "summary": "Method to create or update a site.",
         "description": "Method to create or update a site.",
         "parameters": [
@@ -3387,20 +3420,19 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PutSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PutSite_MaximumSet_Gen.json"
+          "MasterSites_PutSite_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSites_PutSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PutSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PutSite_MinimumSet_Gen.json"
+          "MasterSites_PutSite_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSites_PutSite_MinimumSet_Gen.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "MasterSites",
-          "Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController"
+          "MasterSites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_DeleteSite",
+        "operationId": "MasterSites_DeleteSite",
         "summary": "Method to delete a site.",
         "description": "Method to delete a site.",
         "parameters": [
@@ -3430,20 +3462,19 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_DeleteSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_DeleteSite_MaximumSet_Gen.json"
+          "MasterSites_DeleteSite_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSites_DeleteSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_DeleteSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_DeleteSite_MinimumSet_Gen.json"
+          "MasterSites_DeleteSite_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSites_DeleteSite_MinimumSet_Gen.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "MasterSites",
-          "Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController"
+          "MasterSites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PatchSite",
+        "operationId": "MasterSites_PatchSite",
         "summary": "Method to update an existing site.",
         "description": "Method to update an existing site.",
         "parameters": [
@@ -3496,11 +3527,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PatchSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PatchSite_MaximumSet_Gen.json"
+          "MasterSites_PatchSite_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSites_PatchSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PatchSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_PatchSite_MinimumSet_Gen.json"
+          "MasterSites_PatchSite_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSites_PatchSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -3562,10 +3593,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/errorSummary": {
       "post": {
         "tags": [
-          "MasterSites",
-          "Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController"
+          "MasterSites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetErrorSummary",
+        "operationId": "MasterSites_GetErrorSummary",
         "summary": "Method to get error summary from master site for an appliance.",
         "description": "Method to get error summary from master site for an appliance.",
         "parameters": [
@@ -3602,11 +3632,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetErrorSummary_MaximumSet_Gen.json"
+          "MasterSites_GetErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSites_GetErrorSummary_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07MasterSitesController_GetErrorSummary_MinimumSet_Gen.json"
+          "MasterSites_GetErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSites_GetErrorSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -11915,9 +11945,6 @@
       }
     },
     "HighAvailability": {
-      "type": "string"
-    },
-    "HighAvailabilityKnownValues": {
       "type": "string",
       "enum": [
         "Unknown",
@@ -11925,7 +11952,19 @@
         "Yes"
       ],
       "x-ms-enum": {
-        "name": "HighAvailabilityKnownValues",
+        "name": "HighAvailability",
+        "modelAsString": true
+      }
+    },
+    "HighAvailabilityValues": {
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "No",
+        "Yes"
+      ],
+      "x-ms-enum": {
+        "name": "HighAvailabilityValues",
         "modelAsString": true
       }
     },
@@ -13826,29 +13865,6 @@
         }
       },
       "description": "The response of a MasterSite list operation."
-    },
-    "MasterSiteListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MasterSite"
-          },
-          "x-cadl-name": "MasterSite[]",
-          "description": "The MasterSite items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "The response of a MasterSite list operation.",
-      "required": [
-        "value"
-      ]
     },
     "MasterSiteProperties": {
       "type": "object",
@@ -17226,29 +17242,6 @@
         }
       },
       "description": "The response of a VMwareSite list operation."
-    },
-    "VMwareSiteListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VMwareSite"
-          },
-          "x-cadl-name": "VMwareSite[]",
-          "description": "The VMwareSite items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "The response of a VMwareSite list operation.",
-      "required": [
-        "value"
-      ]
     },
     "VMwareSiteUpdate": {
       "type": "object",
