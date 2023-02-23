@@ -15,6 +15,607 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives": {
+      "get": {
+        "tags": [
+          "Archives"
+        ],
+        "description": "Lists all archives for the specified container registry and repository type.",
+        "operationId": "ArchiList",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The archive repository type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ArchiveListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveList": {
+            "$ref": "./examples/ArchiveList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives/{archiveName}": {
+      "get": {
+        "tags": [
+          "Archives"
+        ],
+        "description": "Gets the properties of the archive.",
+        "operationId": "ArchiGet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The archive repository type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The archive name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveGet": {
+            "$ref": "./examples/ArchiveGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Archives"
+        ],
+        "description": "Creates a archive for a container registry with the specified parameters.",
+        "operationId": "ArchiCreate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The archive repository type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The archive name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveCreateParameters",
+            "in": "body",
+            "description": "The parameters for creating a archive.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveCreate": {
+            "$ref": "./examples/ArchiveCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "Archives"
+        ],
+        "description": "Deletes a archive from a container registry.",
+        "operationId": "ArchiDelete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The archive repository type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The archive name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The archive does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveDelete": {
+            "$ref": "./examples/ArchiveDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "patch": {
+        "tags": [
+          "Archives"
+        ],
+        "description": "Updates a archive for a container registry with the specified parameters.",
+        "operationId": "ArchiUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "packageType",
+            "in": "path",
+            "description": "The archive repository type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The archive name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveUpdateParameters",
+            "in": "body",
+            "description": "The parameters for updating a archive.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArchiveUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Archive"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveUpdate": {
+            "$ref": "./examples/ArchiveUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{repositoryType}/archives/{archiveName}/versions": {
+      "get": {
+        "tags": [
+          "ArchiveVersions"
+        ],
+        "description": "Lists all archive versions for the specified container registry, repository type and archive name.",
+        "operationId": "ArchiList",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "repositoryType",
+            "in": "path",
+            "description": "The archive repository type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The archive name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ArchiveVersionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveVersionList": {
+            "$ref": "./examples/ArchiveVersionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{repositoryType}/archives/{archiveName}/versions/{archiveVersionName}": {
+      "get": {
+        "tags": [
+          "ArchiveVersions"
+        ],
+        "description": "Gets the properties of the archive version.",
+        "operationId": "ArchiGet",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "repositoryType",
+            "in": "path",
+            "description": "The archive repository type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The archive name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveVersionName",
+            "in": "path",
+            "description": "The archive version name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ArchiveVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the resource does not exist, 404 (Not found) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveVersionGet": {
+            "$ref": "./examples/ArchiveVersionGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ArchiveVersions"
+        ],
+        "description": "Creates a archive for a container registry with the specified parameters.",
+        "operationId": "ArchiCreate",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "repositoryType",
+            "in": "path",
+            "description": "The archive repository type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The archive name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveVersionName",
+            "in": "path",
+            "description": "The archive version name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the operation has completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArchiveVersion"
+            }
+          },
+          "201": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ArchiveVersion"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If any of the input parameters are invalid, 400 (Bad Request) is returned. If the request cannot be processed due to a conflict in the request, 409 (Conflict) is returned.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveVersionCreate": {
+            "$ref": "./examples/ArchiveVersionCreate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "ArchiveVersions"
+        ],
+        "description": "Deletes a archive version from a container registry.",
+        "operationId": "ArchiDelete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "name": "repositoryType",
+            "in": "path",
+            "description": "The archive repository type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveName",
+            "in": "path",
+            "description": "The archive name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "archiveVersionName",
+            "in": "path",
+            "description": "The archive version name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successful; the operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "The archive does not exist in the subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ArchiveVersionDelete": {
+            "$ref": "./examples/ArchiveVersionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/cacheRules": {
       "get": {
         "tags": [
@@ -3583,6 +4184,190 @@
     }
   },
   "definitions": {
+    "ArchiveListResult": {
+      "description": "The result of a request to list archives for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of archives. Since this list may be incomplete, the nextLink field should be used to request the next list of distributions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Archive"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of archives.",
+          "type": "string"
+        }
+      }
+    },
+    "Archive": {
+      "description": "An object that represents a archive for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArchiveProperties",
+          "description": "The properties of the archive.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "InnerErrorDescription": {
+      "description": "inner error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "description": "error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "target of the particular error.",
+          "type": "string"
+        }
+      }
+    },
+    "ArchiveProperties": {
+      "description": "The properties of a archive.",
+      "type": "object",
+      "properties": {
+        "packageSource": {
+          "$ref": "#/definitions/ArchivePackageSourceProperties",
+          "description": "The package source of the archive."
+        },
+        "publishedVersion": {
+          "description": "The published version of the archive.",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning state of the archive at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ArchivePackageSourceProperties": {
+      "description": "The properties of the archive package source.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type of package source for a archive.",
+          "type": "string"
+        },
+        "url": {
+          "description": "The external repository url.",
+          "type": "string"
+        },
+        "distributionName": {
+          "description": "Upstream Debian/RPM distribution Name.",
+          "type": "string"
+        }
+      }
+    },
+    "ArchiveUpdateParameters": {
+      "description": "The parameters for updating a archive.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArchiveUpdateProperties",
+          "description": "The properties of the connected registry update parameters.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArchiveUpdateProperties": {
+      "description": "The properties of a archive.",
+      "type": "object",
+      "properties": {
+        "publishedVersion": {
+          "description": "The published version of the archive.",
+          "type": "string"
+        }
+      }
+    },
+    "ArchiveVersionListResult": {
+      "description": "The result of a request to list export pipelines for a container registry.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of export pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of export pipelines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArchiveVersion"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next list of pipeline runs.",
+          "type": "string"
+        }
+      }
+    },
+    "ArchiveVersion": {
+      "description": "An object that represents an export pipeline for a container registry.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ArchiveVersionProperties",
+          "description": "The properties of the archive.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArchiveVersionProperties": {
+      "description": "The properties of an export pipeline.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "The provisioning state of the archive at the time the operation was called.",
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "archiveVersionErrorMessage": {
+          "description": "The detailed error message for the archive version in the case of failure.",
+          "type": "string"
+        }
+      }
+    },
     "CacheRulesListResult": {
       "description": "The result of a request to list cache rules for a container registry.",
       "type": "object",
@@ -3613,27 +4398,6 @@
           "$ref": "#/definitions/CacheRuleProperties",
           "description": "The properties of the cache rule.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "InnerErrorDescription": {
-      "description": "inner error.",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "description": "error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "target of the particular error.",
-          "type": "string"
         }
       }
     },
