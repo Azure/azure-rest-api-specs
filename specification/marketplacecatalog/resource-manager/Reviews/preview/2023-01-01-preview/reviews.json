@@ -186,7 +186,7 @@
             "required": true,
             "description": "Review to update request object",
             "schema": {
-              "$ref": "#/definitions/PatchReview"
+              "$ref": "#/definitions/ArmProxyResourceOfUpdateReviewRequest"
             }
           },
           {
@@ -200,7 +200,7 @@
           "200": {
             "description": "Returns the updated review object",
             "schema": {
-              "$ref": "#/definitions/PatchReview"
+              "$ref": "#/definitions/ArmPatchReviewDto"
             }
           },
           "default": {
@@ -371,7 +371,7 @@
             "required": true,
             "description": "A comment update request including the new content of the comment",
             "schema": {
-              "$ref": "#/definitions/UpsertCommentRequest"
+              "$ref": "#/definitions/ArmProxyResourceOfUpsertCommentRequest"
             }
           },
           {
@@ -385,7 +385,7 @@
           "200": {
             "description": "Returns the new comment object",
             "schema": {
-              "$ref": "#/definitions/ReviewCommentDto"
+              "$ref": "#/definitions/ArmProxyResourceOfReviewCommentDto"
             }
           },
           "default": {
@@ -608,25 +608,14 @@
         }
       }
     },
-    "PatchReview": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties":{
-        "properties": {
-          "$ref": "#/definitions/ReviewDto"
-        }
-      }
-    },
     "ReviewDto": {
       "type": "object",
       "required": [
         "rating",
         "createdDateTime",
         "lastModifiedDateTime",
+        "isAnonymous",
+        "sendEmailConsent",
         "commentsCount",
         "helpfulCount"
       ],
@@ -699,6 +688,14 @@
           "description": "Last Updated Date",
           "format": "date-time"
         },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "Publish review as anonymous"
+        },
+        "sendEmailConsent": {
+          "type": "boolean",
+          "description": "Consent to use email"
+        },
         "commentsCount": {
           "type": "integer",
           "description": "Number of comments for this review",
@@ -708,14 +705,37 @@
           "type": "integer",
           "description": "Number of marked as helpful for this review",
           "format": "int32"
-        },
-        "isAnonymous": {
-          "type": "boolean",
-          "description": "Publish review as anonymous"
-        },
-        "sendEmailConsent": {
-          "type": "boolean",
-          "description": "Consent to use email"
+        }
+      }
+    },
+    "ArmProxyResourceOfUpdateReviewRequest": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Update review request object for a product",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UpdateReviewRequest"
+            }
+          ]
+        }
+      }
+    },
+    "ArmPatchReviewDto": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReviewDto"
         }
       }
     },
@@ -829,13 +849,36 @@
     },
     "UpsertCommentRequest": {
       "type": "object",
-      "required": [
-        "content"
-      ],
       "properties": {
         "content": {
           "type": "string",
           "description": "Content of this comment"
+        }
+      }
+    },
+    "ArmProxyResourceOfReviewCommentDto": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReviewCommentDto"
+        }
+      }
+    },
+    "ArmProxyResourceOfUpsertCommentRequest": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/UpsertCommentRequest"
         }
       }
     },
