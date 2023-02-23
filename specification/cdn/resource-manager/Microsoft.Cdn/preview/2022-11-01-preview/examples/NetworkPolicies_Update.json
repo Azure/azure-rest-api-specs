@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2022-01-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "policyName": "policy1",
+    "policyUpdateProperties": {
+      "properties": {
+        "policyVersion": "1",
+        "policyData": "{test}"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "policy1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/networkpolicies/policy1",
+        "type": "Microsoft.Cdn/profiles/networkpolicies",
+        "properties": {
+          "serviceType": "string",
+          "policyVersion": "1",
+          "provisioningState": "string"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2022-01-01-preview"
+      },
+      "body": {
+        "name": "policy1",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/networkpolicies/policy1",
+        "type": "Microsoft.Cdn/profiles/networkpolicies",
+        "properties": {
+          "serviceType": "string",
+          "policyVersion": "1",
+          "provisioningState": "string"
+        }
+      }
+    }
+  }
+}

@@ -4202,6 +4202,257 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/networkpolicies/{policyName}": {
+    "get": {
+      "tags": [
+        "NetworkPolicies"
+      ],
+      "description": "Gets an existing Policy under the specified subscription, resource group and profile.",
+      "operationId": "NetworkPolicies_Get",
+      "x-ms-examples": {
+        "NetworkPolicies_Get": {
+          "$ref": "./examples/NetworkPolicies_Get.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/resourceGroupNameParameter"
+        },
+        {
+          "name": "profileName",
+          "in": "path",
+          "description": "Name of the profile which is unique within the resource group.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "policyName",
+          "in": "path",
+          "description": "Name of the policy under the profile which is unique globally.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "$ref": "#/parameters/subscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/apiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK.  The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/NetworkPolicyGetParameters"
+          }
+        },
+        "default": {
+          "description": "CDN error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/AfdErrorResponse"
+          }
+        }
+      }
+    },
+    "put": {
+      "tags": [
+        "NetworkPolicies"
+      ],
+      "description": "Creates a policy within the specified profile.",
+      "operationId": "NetworkPolicies_Create",
+      "x-ms-examples": {
+        "NetworkPolicies_Create": {
+          "$ref": "./examples/NetworkPolicies_Create.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/resourceGroupNameParameter"
+        },
+        {
+          "name": "profileName",
+          "in": "path",
+          "description": "Name of the profile which is unique within the resource group.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "policyName",
+          "in": "path",
+          "description": "Name of the policy under the profile which is unique globally",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "policyProperties",
+          "in": "body",
+          "description": "Properties required to create a new policy.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/NetworkPolicy"
+          }
+        },
+        {
+          "$ref": "#/parameters/subscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/apiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK. The request has succeeded.",
+          "schema": {
+            "$ref": "#/definitions/NetworkPolicyGetParameters"
+          }
+        },
+        "201": {
+          "description": "Created. The request has been fulfilled and a policy has been created.",
+          "schema": {
+            "$ref": "#/definitions/NetworkPolicyGetParameters"
+          }
+        },
+        "default": {
+          "description": "CDN error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/AfdErrorResponse"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+      }
+    },
+    "delete": {
+      "tags": [
+        "NetworkPolicies"
+      ],
+      "description": "Deletes an existing policy under the specified subscription, resource group and profile.",
+      "operationId": "NetworkPolicies_Delete",
+      "x-ms-examples": {
+        "NetworkPolicies_Delete": {
+          "$ref": "./examples/NetworkPolicies_Delete.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/resourceGroupNameParameter"
+        },
+        {
+          "name": "profileName",
+          "in": "path",
+          "description": "Name of the profile which is unique within the resource group.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "policyName",
+          "in": "path",
+          "description": "Name of the policy under the profile which is unique globally.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "$ref": "#/parameters/subscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/apiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Delete successful."
+        },
+        "202": {
+          "description": "Accepted"
+        },
+        "204": {
+          "description": "No Content. The request has been accepted but the policy was not found."
+        },
+        "default": {
+          "description": "CDN error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/AfdErrorResponse"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+      }
+    },
+    "patch": {
+      "tags": [
+        "NetworkPolicies"
+      ],
+      "description": "Updates an existing policy within a profile.",
+      "operationId": "NetworkPolicies_Update",
+      "x-ms-examples": {
+        "NetworkPolicies_Update": {
+          "$ref": "./examples/NetworkPolicies_Update.json"
+        }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/resourceGroupNameParameter"
+        },
+        {
+          "name": "profileName",
+          "in": "path",
+          "description": "Name of the profile which is unique within the resource group.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "policyName",
+          "in": "path",
+          "description": "Name of the policy under the profile which is unique globally.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "policyUpdateProperties",
+          "in": "body",
+          "description": "Policy properties",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/NetworkPolicyUpdateParameters"
+          }
+        },
+        {
+          "$ref": "#/parameters/subscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/apiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/NetworkPolicyGetParameters"
+          }
+        },
+        "202": {
+          "description": "Accepted",
+          "schema": {
+            "$ref": "#/definitions/NetworkPolicyGetParameters"
+          }
+        },
+        "default": {
+          "description": "CDN error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/AfdErrorResponse"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true,
+      "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+      }
+    }
     }
   },
   "definitions": {
@@ -6221,6 +6472,134 @@
       "description": "Reference to another resource along with its state.",
       "type": "object",
       "x-ms-azure-resource": true
+    },
+    "NetworkPolicy": {
+      "description": "A policy is a logical grouping of policies",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkPolicyProperties"
+        }
+      }
+    },
+    "NetworkPolicyProperties": {
+      "description": "The JSON object that contains the properties of the NetworkPolicy to create.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "required": [
+        "policyData",
+        "serviceType",
+        "policyType",
+        "policyVersion"
+      ],
+      "properties": {
+        "policyData": {
+          "description": "NetworkPolicy to be applied",
+          "type": "string"
+        },
+        "policyVersion": {
+          "description": "Schema version of the policy",
+          "type": "string"
+        },
+        "serviceType": {
+          "description": "Service type of the policy",
+          "type": "string"
+        },
+        "policyType": {
+          "description": "Policy type of the policy",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkPolicyGetParameters": {
+      "description": "The JSON object that contains the properties of the Policy to get.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./cdn.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkPolicyGetParametersData"
+        }
+      }
+    },
+    "NetworkPolicyGetParametersData": {
+      "description": "The JSON object that contains the properties of the NetworkPolicy to update.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ],
+      "properties": {
+        "policyVersion": {
+          "description": "Schema version of the policy",
+          "type": "string"
+        },
+        "serviceType": {
+          "description": "Service type of the policy",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkPolicyUpdateParameters": {
+      "description": "The JSON object that contains the properties of the NetworkPolicy to update.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkPolicyUpdatePropertiesParameters"
+        }
+      }
+    },
+    "NetworkPolicyUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the NetworkPolicy to update.",
+      "type": "object",
+      "required": [
+        "policyData",
+        "policyVersion"
+      ],
+      "properties": {
+        "policyVersion": {
+          "description": "Schema version of the policy",
+          "type": "string"
+        },
+        "policyData": {
+          "description": "NetworkPolicy to be applied",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkPolicyListResult": {
+      "description": "Result of the request to list policies. It contains a list of policy objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/NetworkPolicyGetParameters"
+          },
+          "description": "List of policies within a profile."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of route objects if there are any."
+        }
+      }
     }
   },
   "parameters": {
