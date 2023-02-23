@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Communication Chat Service",
     "description": "Azure Communication Chat Service",
-    "version": "2021-09-07"
+    "version": "2023-07-01-preview"
   },
   "paths": {
     "/chat/threads/{chatThreadId}/readReceipts": {
@@ -1556,6 +1556,9 @@
           "items": {
             "$ref": "#/definitions/ChatParticipant"
           }
+        },
+        "deletionStrategy": {
+          "$ref": "#/definitions/DeletionStrategy"
         }
       }
     },
@@ -1593,6 +1596,9 @@
           "description": "The timestamp when the chat thread was deleted. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
+        },
+        "deletionStrategy": {
+          "$ref": "#/definitions/DeletionStrategy"
         }
       }
     },
@@ -1643,6 +1649,9 @@
           "type": "string",
           "readOnly": true,
           "example": "2020-10-30T10:50:50Z"
+        },
+        "deletionStrategy": {
+          "$ref": "#/definitions/DeletionStrategy"
         }
       }
     },
@@ -1675,6 +1684,9 @@
           "description": "Chat thread topic.",
           "type": "string",
           "example": "Lunch Thread"
+        },
+        "deletionStrategy": {
+          "$ref": "#/definitions/DeletionStrategy"
         }
       }
     },
@@ -1688,6 +1700,38 @@
           "example": "Bob Admin"
         }
       }
+    },
+    "DeletionStrategy": {
+      "type": "object",
+      "discriminator": "strategy",
+       "properties": {
+        "strategy": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "strategy"
+      ]
+    },  
+    "DeleteBasedOnCreationStrategy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeletionStrategy"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "daysAfterCreation":{
+              "type": "integer",
+              "format": "int32",
+              "description": "Only 90 is accepted for now"
+            }
+          },
+          "required": [
+            "daysAfterCreation"
+          ]
+        }
+      ]
     }
   },
   "parameters": {
