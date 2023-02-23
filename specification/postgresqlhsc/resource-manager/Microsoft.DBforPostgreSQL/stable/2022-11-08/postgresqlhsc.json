@@ -1884,10 +1884,18 @@
           "type": "boolean",
           "description": "If high availability is enabled or not for the server."
         },
-        "enablePublicIp": {
+        "enablePublicIpAccess": {
           "type": "boolean",
           "description": "If public IP is requested or not for a server.",
           "readOnly": true
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "description": "If server database is set to read-only by system maintenance depending on high disk space usage."
+        },
+        "administratorLogin": {
+          "type": "string",
+          "description": "The administrator's login name of the servers in the cluster."
         }
       }
     },
