@@ -613,12 +613,11 @@
             "type": "string"
           },
           {
-            "name": "addParticipantsRequest",
+            "name": "addParticipantRequest",
             "in": "body",
-            "description": "The add participants request.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AddParticipantsRequest"
+              "$ref": "#/definitions/AddParticipantRequest"
             }
           },
           {
@@ -648,7 +647,7 @@
           "202": {
             "description": "Returns the add participant response.",
             "schema": {
-              "$ref": "#/definitions/AddParticipantsResponse"
+              "$ref": "#/definitions/AddParticipantResponse"
             }
           }
         },
@@ -666,7 +665,7 @@
         ],
         "summary": "Remove participant from the call using identifier.",
         "description": "Remove participant from the call using identifier.",
-        "operationId": "CallConnection_RemoveParticipants",
+        "operationId": "CallConnection_RemoveParticipant",
         "parameters": [
           {
             "name": "callConnectionId",
@@ -676,12 +675,12 @@
             "type": "string"
           },
           {
-            "name": "removeParticipantsRequest",
+            "name": "removeParticipantRequest",
             "in": "body",
-            "description": "The participants to be removed from the call.",
+            "description": "The participant to be removed from the call.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RemoveParticipantsRequest"
+              "$ref": "#/definitions/RemoveParticipantRequest"
             }
           },
           {
@@ -711,13 +710,13 @@
           "202": {
             "description": "Returns the remove participant response.",
             "schema": {
-              "$ref": "#/definitions/RemoveParticipantsResponse"
+              "$ref": "#/definitions/RemoveParticipantResponse"
             }
           }
         },
         "x-ms-examples": {
           "Remove participant from the call using identifier.": {
-            "$ref": "./examples/CallConnection_RemoveParticipants.json"
+            "$ref": "./examples/CallConnection_RemoveParticipant.json"
           }
         }
       }
@@ -1106,7 +1105,6 @@
       "description": "The request payload for creating the call.",
       "required": [
         "targets",
-        "source",
         "callbackUri"
       ],
       "type": "object",
@@ -1118,9 +1116,17 @@
             "$ref": "#/definitions/CommunicationIdentifierModel"
           }
         },
-        "source": {
-          "$ref": "#/definitions/CallSource",
-          "description": "The source of the call."
+        "sourceCallerIdNumber": {
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when calling a PSTN callee."
+        },
+        "sourceDisplayName": {
+          "description": "Display name of the call if dialing out to a pstn number",
+          "type": "string"
+        },
+        "sourceIdentity": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The identifier of the source of the call"
         },
         "operationContext": {
           "description": "A customer set value used to track the answering of a call.",
@@ -1178,24 +1184,14 @@
         }
       }
     },
-    "CallSource": {
-      "description": "The caller.",
+    "PhoneNumberIdentifierModel": {
       "required": [
-        "identifier"
+        "value"
       ],
       "type": "object",
       "properties": {
-        "callerId": {
-          "$ref": "#/definitions/PhoneNumberIdentifierModel",
-          "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when calling a PSTN callee."
-        },
-        "displayName": {
-          "description": "Display name of the call if dialing out to a pstn number",
+        "value": {
           "type": "string"
-        },
-        "identifier": {
-          "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "The identifier of the source of the call"
         }
       }
     },
@@ -1265,17 +1261,6 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
-        }
-      }
-    },
-    "PhoneNumberIdentifierModel": {
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
           "type": "string"
         }
       }
@@ -1373,10 +1358,6 @@
           "description": "The server call id.",
           "type": "string"
         },
-        "source": {
-          "$ref": "#/definitions/CallSource",
-          "description": "The source of the call, which is the caller."
-        },
         "targets": {
           "description": "The targets of the call.",
           "type": "array",
@@ -1394,6 +1375,18 @@
         "mediaSubscriptionId": {
           "description": "SubscriptionId for media streaming",
           "type": "string"
+        },
+        "sourceCallerIdNumber": {
+          "$ref": "#/definitions/PhoneNumberIdentifierModel",
+          "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when calling a PSTN callee."
+        },
+        "sourceDisplayName": {
+          "description": "Display name of the call if dialing out to a pstn number.",
+          "type": "string"
+        },
+        "sourceIdentity": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Source identity."
         }
       }
     },
@@ -1420,6 +1413,10 @@
         "azureCognitiveServicesEndpointUrl": {
           "description": "The endpoint URL of the Azure Cognitive Services resource attached",
           "type": "string"
+        },
+        "answeredByIdentifier": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The identifier of the contoso app which answers the call"
         }
       }
     },
@@ -1488,6 +1485,23 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
+        }
+      }
+    },
+    "CustomContext": {
+      "type": "object",
+      "properties": {
+        "voipHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sipHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1804,14 +1818,14 @@
         }
       }
     },
-    "AddParticipantsRequest": {
-      "description": "The request payload for adding participants to the call.",
+    "AddParticipantRequest": {
+      "description": "The request payload for adding participant to the call.",
       "required": [
-        "participantsToAdd"
+        "participantToAdd"
       ],
       "type": "object",
       "properties": {
-        "sourceCallerId": {
+        "sourceCallerIdNumber": {
           "$ref": "#/definitions/PhoneNumberIdentifierModel",
           "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when inviting a PSTN participant."
         },
@@ -1819,16 +1833,9 @@
           "description": "(Optional) The display name of the source that is associated with this invite operation when\r\nadding a PSTN participant or teams user.  Note: Will not update the display name in the roster.",
           "type": "string"
         },
-        "sourceIdentifier": {
+        "participantToAdd": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
-          "description": "(Optional) The identifier of the source of the call for this invite operation. If SourceDisplayName\r\nis not set, the display name of the source will be used by default when adding a PSTN participant or teams user."
-        },
-        "participantsToAdd": {
-          "description": "The participants to invite.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
+          "description": "The participant to invite."
         },
         "invitationTimeoutInSeconds": {
           "format": "int32",
@@ -1847,33 +1854,13 @@
         }
       }
     },
-    "CustomContext": {
-      "type": "object",
-      "properties": {
-        "voipHeaders": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sipHeaders": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "AddParticipantsResponse": {
+    "AddParticipantResponse": {
       "description": "The response payload for adding participants to the call.",
       "type": "object",
       "properties": {
-        "participants": {
-          "description": "List of current participants in the call.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CallParticipant"
-          }
+        "participant": {
+          "$ref": "#/definitions/CallParticipant",
+          "description": "List of current participants in the call."
         },
         "operationContext": {
           "description": "The operation context provided by client.",
@@ -1881,19 +1868,16 @@
         }
       }
     },
-    "RemoveParticipantsRequest": {
+    "RemoveParticipantRequest": {
       "description": "The remove participant by identifier request.",
       "required": [
-        "participantsToRemove"
+        "participantToRemove"
       ],
       "type": "object",
       "properties": {
-        "participantsToRemove": {
-          "description": "The participants to be removed from the call.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
+        "participantToRemove": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "The participants to be removed from the call."
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
@@ -1901,7 +1885,7 @@
         }
       }
     },
-    "RemoveParticipantsResponse": {
+    "RemoveParticipantResponse": {
       "description": "The response payload for removing participants of the call.",
       "type": "object",
       "properties": {
@@ -2111,7 +2095,7 @@
         }
       }
     },
-    "AddParticipantsFailed": {
+    "AddParticipantFailed": {
       "description": "The failed to add participants event.",
       "type": "object",
       "properties": {
@@ -2135,12 +2119,9 @@
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code/sub-code and message from NGC services."
         },
-        "participants": {
-          "description": "The list of participants in the call.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant"
         }
       }
     },
@@ -2160,7 +2141,7 @@
         }
       }
     },
-    "AddParticipantsSucceeded": {
+    "AddParticipantSucceeded": {
       "description": "The participants successfully added event.",
       "type": "object",
       "properties": {
@@ -2184,12 +2165,9 @@
           "$ref": "#/definitions/ResultInformation",
           "description": "Contains the resulting SIP code/sub-code and message from NGC services."
         },
-        "participants": {
-          "description": "The list of participants in the call.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant"
         }
       }
     },
