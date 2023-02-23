@@ -72,7 +72,7 @@ op ArmResourceCreateOrUpdateAsyncNoError<
 
   @doc("Resource create parameters.")
   @body
-  resource: TResource
+  body: TResource
 ): ArmAcceptedResponse<"Accepted."> ;
 
 @autoRoute
@@ -87,7 +87,7 @@ op ArmResourceCreateOrUpdateSyncNoError<
 
   @doc("Resource create parameters.")
   @body
-  resource: TResource
+  body: TResource
 ): ArmResponse<TResource> ;
 
 alias ArmTagsPatchAsyncNoError<
@@ -122,7 +122,7 @@ op ArmCustomPatchAsyncNoError<
 
   @doc("The resource properties to be updated.")
   @body
-  properties: TPatchModel
+  body: TPatchModel
 ): ArmResponse<TResource> | ArmAcceptedResponse<"Resource update request accepted."> ;
 
 alias ArmTagsPatchSyncNoError<
@@ -149,7 +149,7 @@ op ArmCustomPatchSyncNoError<
 
   @doc("The resource properties to be updated.")
   @body
-  properties: TPatchModel
+  body: TPatchModel
 ): ArmResponse<TResource> ;
 
 @autoRoute

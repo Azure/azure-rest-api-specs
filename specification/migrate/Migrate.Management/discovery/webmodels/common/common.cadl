@@ -444,7 +444,7 @@ enum VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDisc
 scalar VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScope
   extends string;
 
-enum MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues {
+enum PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues {
   "Accepted",
   "InProgress",
   "Succeeded",
@@ -452,12 +452,12 @@ enum MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionProperti
 }
 
 @knownValues(
-  MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues
+  PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues
 )
-scalar MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2ProvisioningState
+scalar PrivateEndpointConnectionPropertiesV2ProvisioningState
   extends string;
 
-enum MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusKnownValues {
+enum PrivateLinkServiceConnectionStateStatusKnownValues {
   "Approved",
   "Pending",
   "Rejected",
@@ -465,9 +465,9 @@ enum MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState
 }
 
 @knownValues(
-  MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusKnownValues
+  PrivateLinkServiceConnectionStateStatusKnownValues
 )
-scalar MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus
+scalar PrivateLinkServiceConnectionStateStatus
   extends string;
 
 @doc("Class for site properties.")
@@ -524,11 +524,11 @@ model PendpointConnection {
 
   @doc("Gets the properties of the object.")
   @visibility("read")
-  properties?: MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2;
+  properties?: PrivateEndpointConnectionPropertiesV2;
 }
 
-@doc("PrivateEndpointConnectionPropertiesV2")
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2 {
+@doc("PrivateEndpointConnectionProperties V2")
+model PrivateEndpointConnectionPropertiesV2 {
   @visibility("read")
   @doc("array of group ids")
   groupIds?: string[];
@@ -539,23 +539,23 @@ model MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropert
 
   @doc("private endpoints")
   @visibility("read")
-  privateEndpoint?: MicrosoftAzureMigratePrivateEndpointModelsResourceId;
+  privateEndpoint?: ResourceId;
 
   @doc("private endpoints connection state")
-  privateLinkServiceConnectionState?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState;
+  privateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 }
 
 @doc("PrivateEndpointModelsResourceId")
-model MicrosoftAzureMigratePrivateEndpointModelsResourceId {
+model ResourceId {
   @doc("id name")
   @visibility("read")
   id?: string;
 }
 
 @doc("Service Connection State")
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState {
+model PrivateLinkServiceConnectionState {
   @doc("state status")
-  status?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus;
+  status?: PrivateLinkServiceConnectionStateStatus;
 
   @doc("description string")
   description?: string;
@@ -577,7 +577,7 @@ scalar MicrosoftAzureFDSWebRoleV202007MasterSitePropertiesPublicNetworkAccess
 #suppress "@azure-tools/cadl-azure-core/casing-style"
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
 model MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody {
-  remotePrivateEndpoint?: MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails;
+  remotePrivateEndpoint?: PrivateEndpointDetails;
 }
 
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
@@ -594,19 +594,19 @@ model IArmAsyncOperationStatus {
   status?: string;
 }
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails {
+model PrivateEndpointDetails {
   id?: string;
 
   @OpenAPI.extension("x-ms-identifiers", [])
-  manualPrivateLinkServiceConnections?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[];
+  manualPrivateLinkServiceConnections?: PrivateLinkServiceConnection[];
 
   @OpenAPI.extension("x-ms-identifiers", [])
-  privateLinkServiceConnections?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[];
-  privateLinkServiceProxies?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy[];
-  connectionDetails?: MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration[];
+  privateLinkServiceConnections?: PrivateLinkServiceConnection[];
+  privateLinkServiceProxies?: PrivateLinkServiceProxy[];
+  connectionDetails?: IpConfiguration[];
 }
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection {
+model PrivateLinkServiceConnection {
   name?: string;
   groupIds?: string[];
   requestMessage?: string;
@@ -614,17 +614,17 @@ model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection {
 
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
 #suppress "@azure-tools/cadl-azure-core/casing-style"
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy {
+model PrivateLinkServiceProxy {
   id?: string;
 
   @OpenAPI.extension("x-ms-identifiers", [])
-  groupConnectivityInformation?: MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation[];
-  remotePrivateEndpointConnection?: MicrosoftAzureMigratePrivateEndpointModelsResourceId;
-  remotePrivateLinkServiceConnectionState?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState;
+  groupConnectivityInformation?: GroupConnectivityInformation[];
+  remotePrivateEndpointConnection?: ResourceId;
+  remotePrivateLinkServiceConnectionState?: PrivateLinkServiceConnectionState;
 }
 
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
-model MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration {
+model IpConfiguration {
   id?: string;
   privateIpAddress?: string;
   linkIdentifier?: string;
@@ -632,7 +632,7 @@ model MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration {
   memberName?: string;
 }
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
-model MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation {
+model GroupConnectivityInformation {
   groupId?: string;
   memberName?: string;
   customerVisibleFqdns?: string[];
@@ -641,7 +641,7 @@ model MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation {
   privateLinkServiceArmRegion?: string;
 }
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
-model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkResourceProperties {
+model PrivateLinkResourceProperties {
   requiredMembers?: string[];
   requiredZoneNames?: string[];
   groupId?: string;
@@ -733,6 +733,7 @@ enum ProvisioningState {
   Updating,
   Deleting,
   Accepted,
+  InProgress
 }
 
 @doc("Error contract returned when some exception occurs in Rest API.")
@@ -824,17 +825,17 @@ model SiteHealthSummary {
 
   @doc("Gets the error Id.")
   @visibility("read")
-  errorId?: int32;
+  errorId?: int64;
 
   @doc("Gets the error code.")
   @visibility("read")
   errorCode?: string;
 
   @doc("Gets or sets the count of affected objects.")
-  affectedObjectsCount?: int32;
+  affectedObjectsCount?: int64;
 
   @doc("Gets or sets the hit count of the error.")
-  hitCount?: int32;
+  hitCount?: int64;
 
   @doc("Gets the severity of error.")
   @visibility("read")

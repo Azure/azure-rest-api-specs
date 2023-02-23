@@ -55,6 +55,9 @@
       "name": "SitesController"
     },
     {
+      "name": "VMwareSites"
+    },
+    {
       "name": "Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController"
     },
     {
@@ -337,11 +340,7 @@
         ],
         "operationId": "Operations_List",
         "description": "List the operations for the provider",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
@@ -359,6 +358,121 @@
           },
           "Operations_List_MinimumSet_Gen": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/MasterSites": {
+      "get": {
+        "tags": [
+          "MasterSites"
+        ],
+        "operationId": "MasterSites_ListBySubscription",
+        "summary": "Get all the sites in the subscription.",
+        "description": "Get all the sites in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MasterSiteListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MasterSites_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSites_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "MasterSites_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSites_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.OffAzure/VMwareSites": {
+      "get": {
+        "tags": [
+          "VmwareSites",
+          "VMwareSites"
+        ],
+        "operationId": "VMwareSites_ListBySubscription",
+        "summary": "Get all vmware sites.",
+        "description": "Get all the vmware sites in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMwareSiteListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VMwareSites_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/VMwareSites_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "VMwareSites_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/VMwareSites_ListBySubscription_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites": {
+      "get": {
+        "tags": [
+          "HypervSites"
+        ],
+        "operationId": "HyperVSites_List",
+        "summary": "Get all hyperv sites.",
+        "description": "Get all the hyperv sites in the subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HyperVSiteCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "HyperVSites_List_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSites_List_MaximumSet_Gen.json"
+          },
+          "HyperVSites_List_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSites_List_MinimumSet_Gen.json"
           }
         }
       }
@@ -2286,7 +2400,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -3138,6 +3252,46 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites": {
+      "get": {
+        "tags": [
+          "MasterSites"
+        ],
+        "operationId": "MasterSites_List",
+        "summary": "Get all sites.",
+        "description": "Get all the sites in the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MasterSiteCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MasterSites_List_MaximumSet_Gen": {
+            "$ref": "./examples/MasterSites_List_MaximumSet_Gen.json"
+          },
+          "MasterSites_List_MinimumSet_Gen": {
+            "$ref": "./examples/MasterSites_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}": {
       "get": {
         "tags": [
@@ -3207,7 +3361,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -3310,7 +3464,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -3605,7 +3759,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -3879,7 +4033,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -4194,7 +4348,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -4253,7 +4407,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -5470,7 +5624,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -5526,7 +5680,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -7269,7 +7423,7 @@
             "type": "string"
           },
           {
-            "name": "properties",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource properties to be updated.",
@@ -8481,6 +8635,47 @@
           },
           "ServerSitesInterface_Usage_MinimumSet_Gen": {
             "$ref": "./examples/ServerSitesInterface_Usage_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites": {
+      "get": {
+        "tags": [
+          "VmwareSites",
+          "VMwareSites"
+        ],
+        "operationId": "VMwareSites_List",
+        "summary": "Get all vmware sites.",
+        "description": "Get all the vmware sites in the resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMwareSiteCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VMwareSites_List_MaximumSet_Gen": {
+            "$ref": "./examples/VMwareSites_List_MaximumSet_Gen.json"
+          },
+          "VMwareSites_List_MinimumSet_Gen": {
+            "$ref": "./examples/VMwareSites_List_MinimumSet_Gen.json"
           }
         }
       }
@@ -11101,7 +11296,7 @@
         },
         "affectedObjectsCount": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Count of affected objects."
         },
         "discoveryScope": {
@@ -11567,6 +11762,33 @@
         }
       },
       "description": "Frontend bindings for a web application."
+    },
+    "GroupConnectivityInformation": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string"
+        },
+        "memberName": {
+          "type": "string"
+        },
+        "customerVisibleFqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "internalFqdn": {
+          "type": "string"
+        },
+        "redirectMapId": {
+          "type": "string"
+        },
+        "privateLinkServiceArmRegion": {
+          "type": "string"
+        }
+      }
     },
     "GuestOSDetails": {
       "type": "object",
@@ -12379,6 +12601,26 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "HyperVSiteCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HyperVSite"
+          },
+          "x-cadl-name": "HyperVSite[]",
+          "description": "The HyperVSite items on this page",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "description": "The response of a HyperVSite list operation."
     },
     "HyperVSiteUpdate": {
       "type": "object",
@@ -13363,6 +13605,26 @@
       },
       "description": "The updatable properties of the ImportSiteResource."
     },
+    "IpConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "privateIpAddress": {
+          "type": "string"
+        },
+        "linkIdentifier": {
+          "type": "string"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "memberName": {
+          "type": "string"
+        }
+      }
+    },
     "JobProperties": {
       "type": "object",
       "properties": {
@@ -13545,6 +13807,49 @@
         }
       ]
     },
+    "MasterSiteCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MasterSite"
+          },
+          "x-cadl-name": "MasterSite[]",
+          "description": "The MasterSite items on this page",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "description": "The response of a MasterSite list operation."
+    },
+    "MasterSiteListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MasterSite"
+          },
+          "x-cadl-name": "MasterSite[]",
+          "description": "The MasterSite items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a MasterSite list operation.",
+      "required": [
+        "value"
+      ]
+    },
     "MasterSiteProperties": {
       "type": "object",
       "properties": {
@@ -13662,232 +13967,9 @@
       "type": "object",
       "properties": {
         "remotePrivateEndpoint": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails"
+          "$ref": "#/definitions/PrivateEndpointDetails"
         }
       }
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation": {
-      "type": "object",
-      "properties": {
-        "groupId": {
-          "type": "string"
-        },
-        "memberName": {
-          "type": "string"
-        },
-        "customerVisibleFqdns": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]"
-        },
-        "internalFqdn": {
-          "type": "string"
-        },
-        "redirectMapId": {
-          "type": "string"
-        },
-        "privateLinkServiceArmRegion": {
-          "type": "string"
-        }
-      }
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "privateIpAddress": {
-          "type": "string"
-        },
-        "linkIdentifier": {
-          "type": "string"
-        },
-        "groupId": {
-          "type": "string"
-        },
-        "memberName": {
-          "type": "string"
-        }
-      }
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2": {
-      "type": "object",
-      "properties": {
-        "groupIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]",
-          "description": "array of group ids",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "provisioning state enum",
-          "readOnly": true
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsResourceId",
-          "description": "private endpoints",
-          "readOnly": true
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState",
-          "description": "private endpoints connection state"
-        }
-      },
-      "description": "PrivateEndpointConnectionPropertiesV2"
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "manualPrivateLinkServiceConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[]"
-        },
-        "privateLinkServiceConnections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[]"
-        },
-        "privateLinkServiceProxies": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy"
-          },
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy[]"
-        },
-        "connectionDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration"
-          },
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration[]"
-        }
-      }
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkResourceProperties": {
-      "type": "object",
-      "properties": {
-        "requiredMembers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]"
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]"
-        },
-        "groupId": {
-          "type": "string"
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "provisioning state enum",
-          "readOnly": true
-        }
-      }
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "groupIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-cadl-name": "string[]"
-        },
-        "requestMessage": {
-          "type": "string"
-        }
-      }
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus",
-          "description": "state status"
-        },
-        "description": {
-          "type": "string",
-          "description": "description string"
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "actions required"
-        }
-      },
-      "description": "Service Connection State"
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus": {
-      "type": "string",
-      "enum": [
-        "Approved",
-        "Pending",
-        "Rejected",
-        "Disconnected"
-      ],
-      "x-ms-enum": {
-        "name": "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus",
-        "modelAsString": true
-      }
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "groupConnectivityInformation": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation[]"
-        },
-        "remotePrivateEndpointConnection": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsResourceId"
-        },
-        "remotePrivateLinkServiceConnectionState": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState"
-        }
-      }
-    },
-    "MicrosoftAzureMigratePrivateEndpointModelsResourceId": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "id name",
-          "readOnly": true
-        }
-      },
-      "description": "PrivateEndpointModelsResourceId"
     },
     "NetworkAdapters": {
       "type": "object",
@@ -14127,7 +14209,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2",
+          "$ref": "#/definitions/PrivateEndpointConnectionPropertiesV2",
           "description": "Gets the properties of the object.",
           "readOnly": true
         }
@@ -14138,7 +14220,7 @@
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2",
+          "$ref": "#/definitions/PrivateEndpointConnectionPropertiesV2",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -14174,11 +14256,40 @@
       },
       "description": "The response of a PrivateEndpointConnection list operation."
     },
+    "PrivateEndpointConnectionPropertiesV2": {
+      "type": "object",
+      "properties": {
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "array of group ids",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/ResourceId",
+          "description": "private endpoints",
+          "readOnly": true
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
+          "description": "private endpoints connection state"
+        }
+      },
+      "description": "PrivateEndpointConnectionProperties V2"
+    },
     "PrivateEndpointConnectionProxy": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2",
+          "$ref": "#/definitions/PrivateEndpointConnectionPropertiesV2",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -14194,11 +14305,49 @@
         }
       ]
     },
+    "PrivateEndpointDetails": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "manualPrivateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "PrivateLinkServiceConnection[]"
+        },
+        "privateLinkServiceConnections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceConnection"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "PrivateLinkServiceConnection[]"
+        },
+        "privateLinkServiceProxies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkServiceProxy"
+          },
+          "x-cadl-name": "PrivateLinkServiceProxy[]"
+        },
+        "connectionDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpConfiguration"
+          },
+          "x-cadl-name": "IpConfiguration[]"
+        }
+      }
+    },
     "PrivateLinkResource": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkResourceProperties",
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -14234,6 +14383,104 @@
       },
       "description": "The response of a PrivateLinkResource list operation."
     },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "properties": {
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "groupId": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "provisioning state enum",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkServiceConnection": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "groupIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]"
+        },
+        "requestMessage": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStateStatus",
+          "description": "state status"
+        },
+        "description": {
+          "type": "string",
+          "description": "description string"
+        },
+        "actionsRequired": {
+          "type": "string",
+          "description": "actions required"
+        }
+      },
+      "description": "Service Connection State"
+    },
+    "PrivateLinkServiceConnectionStateStatus": {
+      "type": "string",
+      "enum": [
+        "Approved",
+        "Pending",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateLinkServiceConnectionStateStatus",
+        "modelAsString": true
+      }
+    },
+    "PrivateLinkServiceProxy": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "groupConnectivityInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupConnectivityInformation"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "GroupConnectivityInformation[]"
+        },
+        "remotePrivateEndpointConnection": {
+          "$ref": "#/definitions/ResourceId"
+        },
+        "remotePrivateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
     "ProcessorInfo": {
       "type": "object",
       "properties": {
@@ -14264,7 +14511,8 @@
         "Provisioning",
         "Updating",
         "Deleting",
-        "Accepted"
+        "Accepted",
+        "InProgress"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -14280,6 +14528,17 @@
         }
       },
       "description": "Request body for Proxy site refresh action."
+    },
+    "ResourceId": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id name",
+          "readOnly": true
+        }
+      },
+      "description": "PrivateEndpointModelsResourceId"
     },
     "RunAsAccountProperties": {
       "type": "object",
@@ -14951,7 +15210,7 @@
         },
         "errorId": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets the error Id.",
           "readOnly": true
         },
@@ -14962,12 +15221,12 @@
         },
         "affectedObjectsCount": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets or sets the count of affected objects."
         },
         "hitCount": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "Gets or sets the hit count of the error."
         },
         "severity": {
@@ -16946,6 +17205,49 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "VMwareSiteCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareSite"
+          },
+          "x-cadl-name": "VMwareSite[]",
+          "description": "The VMwareSite items on this page",
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "description": "The response of a VMwareSite list operation."
+    },
+    "VMwareSiteListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VMwareSite"
+          },
+          "x-cadl-name": "VMwareSite[]",
+          "description": "The VMwareSite items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a VMwareSite list operation.",
+      "required": [
+        "value"
       ]
     },
     "VMwareSiteUpdate": {

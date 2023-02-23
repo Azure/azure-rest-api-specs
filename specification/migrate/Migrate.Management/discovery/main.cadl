@@ -53,6 +53,7 @@ using OpenAPI;
 @doc("Azure OffAzure Resource Provider management API.")
 namespace Microsoft.OffAzure;
 
+
 interface Operations extends Azure.ResourceManager.OperationsCustom {}
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -171,6 +172,20 @@ interface VmwareSites {
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_DeleteSite")
   delete is ArmResourceDeleteSyncNoError<VMwareSite>;
+
+  @added(Versions.v2022_10_27)
+  @summary("Get all vmware sites.")
+  @doc("Get all the vmware sites in the subscription.")
+  @tag("VMwareSites")
+  @operationId("VMwareSites_ListBySubscription")
+  listBySubscription is ArmListBySubscriptionNoError<VMwareSite>;
+
+  @added(Versions.v2020_01_01)
+  @summary("Get all vmware sites.")
+  @doc("Get all the vmware sites in the resource group.")
+  @tag("VMwareSites")
+  @operationId("VMwareSites_List")
+  listByParent is ArmResourceListByParentUpdated<VMwareSite>;
 
   @added(Versions.v2018_05_01_preview)
   @tag("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController")
@@ -570,6 +585,13 @@ interface HypervSites {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_DeleteSite")
   delete is ArmResourceDeleteSyncNoError<HyperVSite>;
+
+  @added(Versions.v2022_10_27)
+  @summary("Get all hyperv sites.")
+  @doc("Get all the hyperv sites in the subscription.")
+  @tag("HypervSites")
+  @operationId("HyperVSites_List")
+  listByParent is ArmResourceListByParentUpdated<HyperVSite>;
 
   @doc("A operation status resource belonging to a site resource.")
   @armResourceRead(InnerError)
@@ -1360,6 +1382,21 @@ interface MasterSites {
   delete is ArmResourceDeleteSyncNoError<MasterSite>;
 
   @added(Versions.v2020_07_07)
+  @summary("Get all the sites in the subscription.")
+  @doc("Get all the sites in the subscription.")
+  @tag("MasterSites")
+  @operationId("MasterSites_ListBySubscription")
+  listBySubscription is ArmListBySubscriptionNoError<MasterSite>;
+
+  @added(Versions.v2020_07_07)
+  @summary("Get all sites.")
+  @doc("Get all the sites in the resource group.")
+  @tag("MasterSites")
+  @operationId("MasterSites_List")
+  listByParent is ArmResourceListByParentUpdated<MasterSite>;
+
+
+  @added(Versions.v2020_07_07)
   @summary("Method to update an existing site.")
   @doc("Method to update an existing site.")
   @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.MasterSitesController")
@@ -1396,7 +1433,7 @@ interface MasterSites {
 @doc("REST model used to encapsulate Private Link properties for tracked resources.")
 @parentResource(MasterSite)
 model PrivateEndpointConnection
-  is ProxyResource<MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2> {
+  is ProxyResource<PrivateEndpointConnectionPropertiesV2> {
   @doc(" Private link resource name.")
   @key("peConnectionName")
   @segment("privateEndpointConnections")
@@ -1438,7 +1475,7 @@ interface PrivateEndpointConnectionController {
 @doc("A vcenter resource belonging to a site resource.")
 @parentResource(MasterSite)
 model PrivateEndpointConnectionProxy
-  is ProxyResource<MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointConnectionPropertiesV2> {
+  is ProxyResource<PrivateEndpointConnectionPropertiesV2> {
   @doc(" Private endpoint connection proxy name.")
   @key("pecProxyName")
   @segment("privateEndpointConnectionProxies")
@@ -1496,7 +1533,7 @@ interface PrivateEndpointConnectionProxyController {
 @doc("REST model used to encapsulate Private Link properties for tracked resources.")
 @parentResource(MasterSite)
 model PrivateLinkResource
-  is ProxyResource<MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkResourceProperties> {
+  is ProxyResource<PrivateLinkResourceProperties> {
   @doc("Private link resource name.")
   @key("privateLinkResourceName")
   @segment("privateLinkResources")
