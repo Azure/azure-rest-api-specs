@@ -27,16 +27,16 @@ These are the global settings for the dataaccelerator.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2021-11-15
+tag: package-2023-01-01-preview
 ```
 
-### Tag: package-2021-11-15
+### Tag: package-2023-01-01-preview
 
-These settings apply only when `--tag=package-2021-11-15` is specified on the command line.
+These settings apply only when `--tag=package-2023-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-11-15'
+```yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
-  - Microsoft.DataAccelerator/preview/2021-11-15-privatepreview/dataaccelerator.json
+  - Microsoft.DataAccelerator/preview/2023-01-01-preview/dataaccelerator.json
 ```
 
 ---
