@@ -1231,7 +1231,7 @@
           {
             "in": "query",
             "name": "size",
-            "description": "The size of the image to download. Default is the original size",
+            "description": "The size of the image to download. Default is the original size.",
             "required": false,
             "type": "string"
           },
@@ -1480,7 +1480,7 @@
           "$ref": "#/definitions/AttachmentType"
         },
         "contentType": {
-          "description": "The type of content of the attachment as mime type, if available",
+          "description": "The type of content of the attachment, if available",
           "type": "string",
           "example": "png"
         },
@@ -1492,11 +1492,13 @@
         "url": {
           "description": "The URL where the attachment can be downloaded",
           "type": "string",
+          "format": "uri",
           "example": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/original"
         },
         "previewUrl": {
           "description": "The URL where the preview of attachment can be downloaded",
           "type": "string",
+          "format": "uri",
           "example": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/small"
         }
       }
