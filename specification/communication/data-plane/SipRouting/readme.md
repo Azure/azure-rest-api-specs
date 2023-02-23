@@ -26,17 +26,17 @@ These are the global settings for the communicationservices.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2021-05
+tag: package-2023-03
 ```
 
 
-### Tag: package-2021-05
+### Tag: package-2023-03
 
-These settings apply only when `--tag=package-2021-05` is specified on the command line.
+These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-05'
+```yaml $(tag) == 'package-2023-03'
 input-file:
-  - stable/2021-05-01/communicationservicessiprouting.json
+  - stable/2023-03-01/communicationservicessiprouting.json
 ```
 ### Tag: package-2023-01-01-preview
 
