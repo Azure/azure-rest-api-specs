@@ -1,0 +1,29 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-providerhub-controller";
+import "./baseTarget.cadl";
+
+namespace Microsoft.DatabaseWatcher;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.ResourceManager;
+using OpenAPI;
+
+@doc("Properties specific to Azure SQL VM targets")
+model SqlVmTargetProperties extends TargetProperties {
+  @doc("Azure SQL VM target")
+  targetType: "SqlVm";
+
+  @doc("ARM ResourceId of an Azure SQL VM target")
+  sqlVmResourceId: string;
+
+  @doc("The TCP port number to optionally use in the connection string when connecting to an Azure SQL VM target")
+  connectionTcpPort?: int32 = 1433;
+
+  @doc("The SQL instance name to optionally use in the connection string when connecting to an Azure SQL VM target")
+  sqlNamedInstanceName?: string;
+}
