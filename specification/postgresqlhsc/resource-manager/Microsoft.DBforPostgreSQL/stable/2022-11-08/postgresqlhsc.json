@@ -394,7 +394,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterServerListResult"
+              "$ref": "#/definitions/ServerListResult"
             }
           },
           "default": {
@@ -442,7 +442,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ClusterServer"
+              "$ref": "#/definitions/Server"
             }
           },
           "default": {
@@ -1884,37 +1884,16 @@
           "type": "boolean",
           "description": "If high availability is enabled or not for the server."
         },
-        "enablePublicIp": {
+        "enablePublicIpAccess": {
           "type": "boolean",
           "description": "If public IP is requested or not for a server.",
           "readOnly": true
-        }
-      }
-    },
-    "ServerNameItem": {
-      "description": "The name object for a server.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of a server."
         },
-        "fullyQualifiedDomainName": {
+        "administratorLogin": {
           "type": "string",
-          "description": "The fully qualified domain name of a server.",
+          "description": "The administrator's login name of the servers in the cluster.",
           "readOnly": true
-        }
-      }
-    },
-    "ClusterServerProperties": {
-      "description": "The properties of a server in cluster.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServerProperties"
-        }
-      ],
-      "properties": {
+        },
         "fullyQualifiedDomainName": {
           "type": "string",
           "description": "The fully qualified domain name of a server.",
@@ -1945,10 +1924,29 @@
         "citusVersion": {
           "type": "string",
           "description": "The Citus version of server."
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "description": "If server is set to read-only."
         }
       }
     },
-    "ClusterServer": {
+    "ServerNameItem": {
+      "description": "The name object for a server.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of a server."
+        },
+        "fullyQualifiedDomainName": {
+          "type": "string",
+          "description": "The fully qualified domain name of a server.",
+          "readOnly": true
+        }
+      }
+    },
+    "Server": {
       "description": "Represents a server in a cluster.",
       "type": "object",
       "allOf": [
@@ -1958,13 +1956,13 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ClusterServerProperties",
+          "$ref": "#/definitions/ServerProperties",
           "description": "The properties of a server in a cluster.",
           "x-ms-client-flatten": true
         }
       }
     },
-    "ClusterServerListResult": {
+    "ServerListResult": {
       "description": "A list of servers in a cluster.",
       "type": "object",
       "properties": {
@@ -1972,7 +1970,7 @@
           "type": "array",
           "description": "The list of servers in a cluster.",
           "items": {
-            "$ref": "#/definitions/ClusterServer"
+            "$ref": "#/definitions/Server"
           }
         }
       }
