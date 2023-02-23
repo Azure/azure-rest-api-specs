@@ -8,11 +8,11 @@
   "paths": {},
   "definitions": {
     "FailoverGroupListResult": {
-      "description": "A list of failover groups",
+      "description": "A list of failover groups.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of results.",
+          "description": "Array of failover group results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FailoverGroupResource"
@@ -28,7 +28,7 @@
     },
     "FailoverGroupResource": {
       "type": "object",
-      "description": "Failover group resource",
+      "description": "A failover group resource.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -188,14 +188,14 @@
             "name": "instanceFailoverGroupRole",
             "modelAsString": true
           },
-          "description": "The role of the managed instance."
+          "description": "The role of the managed instance in the failover group."
         },
         "replicas": {
           "type": "array",
           "description": "A list of failover group replicas.",
           "items": {
             "$ref": "#/definitions/AGReplicas",
-            "description": "null",
+            "description": "The availability group replicas.",
             "x-ms-client-flatten": false
           },
           "x-ms-identifiers": [
@@ -225,7 +225,7 @@
         },
         "connectedState": {
           "type": "string",
-          "description": "The connected state."
+          "description": "The connected state of the replica."
         },
         "synchronizationState": {
           "type": "string",
@@ -233,7 +233,7 @@
         },
         "availabilityMode": {
           "type": "string",
-          "description": "The availability mode."
+          "description": "The availability mode of the replica."
         },
         "secondaryRoleAllowConnections": {
           "type": "string",
