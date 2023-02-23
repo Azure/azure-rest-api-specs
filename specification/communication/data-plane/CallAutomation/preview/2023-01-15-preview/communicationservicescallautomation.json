@@ -1481,13 +1481,9 @@
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The identity of the target where call should be transferred to."
         },
-        "transfereeCallerId": {
-          "$ref": "#/definitions/PhoneNumberIdentifierModel",
-          "description": "The caller ID of the transferee when transferring to PSTN."
-        },
-        "userToUserInformation": {
-          "description": "The user to user information.",
-          "type": "string"
+        "customContext": {
+          "$ref": "#/definitions/CustomContext",
+          "description": "Used by customer to send custom context to targets"
         },
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
@@ -2601,15 +2597,8 @@
       "useSchemePrefix": false,
       "parameters": [
         {
-              "name": "endpoint",
-              "description": "The endpoint of the Azure Communication resource.",
-              "required": true,
-              "type": "string",
-              "format": "url",
-              "in": "path",
-              "x-ms-skip-url-encoding": true,
-              "x-ms-parameter-location": "client"
-          }
+          "$ref": "#/parameters/Endpoint"
+        }
       ]
     }
   }
