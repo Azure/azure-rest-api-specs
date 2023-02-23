@@ -236,16 +236,31 @@
           "type": "boolean",
           "readOnly": true
         },
-        "phaseCode": {
-          "format": "int32",
-          "description": "The operation phase code.",
-          "type": "integer",
+        "operationPhaseDetails": {
+          "$ref": "#/definitions/PhaseDetails",
+          "description": "The operation phase details.",
           "readOnly": true
-        },
-        "phaseDescription": {
-          "description": "The operation phase description.",
+        }
+      }
+    },
+    "PhaseDetails": {
+      "description": "The phase details properties of a database operation.",
+      "type": "object",
+      "properties": {
+        "phase": {
+          "description": "The operation phase.",
+          "enum": [
+            "Copying",
+            "Catchup",
+            "WaitingForCutover",
+            "CutoverInProgress"
+          ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Phase",
+            "modelAsString": true
+          }
         },
         "phaseInformation": {
           "description": "The operation phase information.",

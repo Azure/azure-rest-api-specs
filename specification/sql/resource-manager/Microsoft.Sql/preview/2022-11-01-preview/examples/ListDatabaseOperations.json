@@ -22,12 +22,7 @@
               "serverName": "testsvr",
               "startTime": "2023-02-13T06:25:23.67Z",
               "state": "Succeeded",
-              "errorCode": 40640,
-              "errorDescription": "The server encountered an unexpected exception.",
-              "errorSeverity": 20,
-              "isUserError": true,
               "estimatedCompletionTime": "2023-02-17T14:30:30.71Z",
-              "description": "'UpdateLogicalDatabase' on database 'testdb', Source ServiceLevelObjective 'SQLDB_GP_Gen5_2', target ServiceLevelObjective 'SQLDB_HS_Gen5_2', target database MaxSize '32'GB",
               "isCancellable": true
             }
           },
@@ -46,11 +41,13 @@
               "estimatedCompletionTime": "2023-02-17T14:30:30.71Z",
               "description": "'UpdateLogicalDatabase' on database 'testdb', Source ServiceLevelObjective 'SQLDB_GP_Gen5_2', target ServiceLevelObjective 'SQLDB_HS_Gen5_2', target database MaxSize '32'GB",
               "isCancellable": true,
-              "phaseCode": 3,
-              "phaseDescription": "WaitingForCutover (3 of 4)",
-              "phaseInformation": {
-                "performCutoverBy": "2/17/2023 11:57:06 AM",
-                "dataDelayInMb": "31"
+              "operationPhaseDetails": {
+                "phase": "WaitingForCutover",
+                "phaseInformation": {
+                  "step": "3 of 4",
+                  "performCutoverBy": "2/17/2023 11:57:06 AM",
+                  "dataDelayInMb": "31"
+                }
               }
             }
           }
