@@ -1531,13 +1531,36 @@
       "properties": {
         "reportUrl": {
           "description": "Sas url to the async benefit utilization summaries report. Will be empty if the report is in Running or Failed state.",
-          "type": "string"
+          "$ref": "#/definitions/BenefitUtilizationSummaryReportSchema"
+        },
+        "secondaryReportUrl": {
+          "description": "Sas url to async benefit utilization summaries report in secondary storage in case of primary outage. Will be empty if the report is in Running or Failed state.",
+          "$ref": "#/definitions/BenefitUtilizationSummaryReportSchema"
         },
         "validUntil": {
           "description": "The date that the sas url provided in reportUrl expires.",
           "type": "string",
           "format": "date-time"
         }
+      }
+    },
+    "BenefitUtilizationSummaryReportSchema": {
+      "description": "The CSV file from the reportUrl and secondaryReportUrl blob link will consist of the following columns of benefit utilizaiton data. UtilizedPercentage will be 0 for savings plans reports and non data bricks reservations. Utilization percentages will be 0 for data bricks reservations.",
+      "type": "string",
+      "enum": [
+        "BenefitKind",
+        "AvgUtilizationPercentage",
+        "BenefitOrderId",
+        "BenefitId",
+        "BenefitType",
+        "MaxUtilizationPercentage",
+        "MinUtilizationPercentage",
+        "UsageDate",
+        "UtilizedPercentage"
+      ],
+      "x-ms-enum": {
+        "name": "BenefitUtilizationSummaryReportSchema",
+        "modelAsString": true
       }
     },
     "BenefitUtilizationSummariesRequest": {
