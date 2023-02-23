@@ -362,7 +362,8 @@
           "$ref": "#/definitions/InstanceViewStatus",
           "description": "Describes colocation status of a resource in the Proximity Placement Group."
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "VirtualMachineSize": {
       "properties": {
@@ -669,7 +670,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceIdNotRequired"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ],
       "description": "Specifies information about the image to use. You can specify information about platform images, marketplace images, or virtual machine images. This element is required when you want to use a platform image, marketplace image, or virtual machine image, but is not used in other creation operations. NOTE: Image reference publisher and offer can only be set when you create the scale set."
@@ -709,7 +710,8 @@
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ],
-      "description": "Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. <br><br> NOTE: The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details."
+      "description": "Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. <br><br> NOTE: The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details.",
+      "x-ms-azure-resource": true
     },
     "KeyVaultKeyReference": {
       "properties": {
@@ -895,7 +897,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../common-types/v1/common.json#/definitions/SubResourceIdNotRequired"
+          "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ],
       "description": "The parameters of a managed disk."
@@ -1454,7 +1456,8 @@
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource"
         }
       ],
-      "description": "Describes a network interface reference."
+      "description": "Describes a network interface reference.",
+      "x-ms-azure-resource": true
     },
     "PublicIPAddressSku": {
       "properties": {
