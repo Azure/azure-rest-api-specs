@@ -406,6 +406,15 @@
             "$ref": "#/definitions/CertificateTags"
           }
         }
+      },
+      "NodeCount": {
+        "type": "integer",
+        "format": "int32",
+        "description": "Number of CCF nodes in the Managed CCF.",
+        "title": "NodeCount",
+        "default": 3,
+        "minimum": 3,
+        "maximum": 15
       }
     },
     "ManagedCCFProperties": {
@@ -444,6 +453,12 @@
           "description": "Provisioning state of Ledger Resource",
           "readOnly": true,
           "$ref": "#/definitions/ProvisioningState"
+        },
+        "nodeCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of CCF nodes in the Managed CCF.",
+          "$ref": "#/definitions/NodeCount"
         }
       }
     },
