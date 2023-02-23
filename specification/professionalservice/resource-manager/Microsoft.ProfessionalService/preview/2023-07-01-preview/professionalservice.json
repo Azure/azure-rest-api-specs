@@ -6,12 +6,20 @@
     "description": "REST APIs for Marketplace Professional Service Offers"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -801,20 +809,20 @@
           "description": "Whether the ProfessionalService subscription will auto renew upon term end."
         },
         "quoteId": {
-            "type": "string",
-            "description": "The quote id which the ProfessionalService will be purchase with."
+          "type": "string",
+          "description": "The quote id which the ProfessionalService will be purchase with."
         },
         "storeFront": {
-            "type": "string",
-            "description": "The store front which initiates the purchase."
+          "type": "string",
+          "description": "The store front which initiates the purchase."
         },
         "termUnit": {
-            "type": "string",
-            "description": "The unit term eg P1M,P1Y,P2Y,P3Y meaning month,1year,2year,3year respectively"
+          "type": "string",
+          "description": "The unit term eg P1M,P1Y,P2Y,P3Y meaning month,1year,2year,3year respectively"
         },
         "billingPeriod": {
-            "type": "string",
-            "description": "The billing period eg P1M,P1Y for monthly,yearly respectively"
+          "type": "string",
+          "description": "The billing period eg P1M,P1Y for monthly,yearly respectively"
         }
       }
     },
@@ -1018,13 +1026,13 @@
       "x-ms-parameter-location": "method"
     },
     "ResourceNameParameter": {
-        "name": "resourceName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9-_.()]{0,63}[a-zA-Z0-9-_()]$",
-        "description": "The name of the resource.",
-        "x-ms-parameter-location": "method"
+      "name": "resourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9-_.()]{0,63}[a-zA-Z0-9-_()]$",
+      "description": "The name of the resource.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
