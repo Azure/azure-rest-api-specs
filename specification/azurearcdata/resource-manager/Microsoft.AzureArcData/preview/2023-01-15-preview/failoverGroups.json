@@ -70,12 +70,12 @@
         },
         "spec": {
           "$ref": "#/definitions/FailoverGroupSpec",
-          "description": "null",
+          "description": "The specifications of the failover group resource.",
           "x-ms-client-flatten": false
         },
         "status": {
           "$ref": "#/definitions/FailoverGroupStatus",
-          "description": "null",
+          "description": "The status of the failover group custom resource.",
           "x-ms-client-flatten": false
         }
       },
@@ -92,11 +92,11 @@
           "type": "string",
           "description": "The shared name of the failover group for this SQL managed instance. Both SQL managed instance and its partner have to use the same shared name."
         },
-        "sourceMI": {
+        "sourceManagedInstance": {
           "type": "string",
           "description": "The name of the SQL managed instance with this failover group role."
         },
-        "partnerMI": {
+        "partnerManagedInstance": {
           "type": "string",
           "description": "The name of the partner SQL managed instance."
         },
@@ -106,7 +106,8 @@
         },
         "partnerMirroringCert": {
           "type": "string",
-          "description": "The mirroring endpoint public certificate for the partner SQL managed instance. Only PEM format is supported."
+          "description": "The mirroring endpoint public certificate for the partner SQL managed instance. Only PEM format is supported.",
+          "x-ms-secret": true
         },
         "partnerSyncMode": {
           "type": "string",
@@ -137,7 +138,9 @@
           "description": "The role of the SQL managed instance in this failover group."
         }
       },
-      "additionalProperties": {},
+      "additionalProperties": {
+        "type": "string"
+      },
       "required": [
         "role"
       ]
@@ -148,6 +151,7 @@
       "properties": {
         "lastUpdateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The time that the custom resource was last updated."
         },
         "observedGeneration": {
@@ -157,6 +161,15 @@
         },
         "state": {
           "type": "string",
+          "enum": [
+            "Waiting",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          },
           "description": "The state of the failover group custom resource."
         },
         "results": {
@@ -165,6 +178,16 @@
         },
         "role": {
           "type": "string",
+          "enum": [
+            "primary",
+            "secondary",
+            "force-primary-allow-data-loss",
+            "force-secondary"
+          ],
+          "x-ms-enum": {
+            "name": "instanceFailoverGroupRole",
+            "modelAsString": true
+          },
           "description": "The role of the managed instance."
         },
         "replicas": {
@@ -180,7 +203,9 @@
           ]
         }
       },
-      "additionalProperties": {}
+      "additionalProperties": {
+        "type": "object"
+      }
     },
     "AGReplicas": {
       "type": "object",
@@ -204,7 +229,7 @@
         },
         "synchronizationState": {
           "type": "string",
-          "description": "The synchronization state."
+          "description": "The synchronization state of the availability group replicas."
         },
         "availabilityMode": {
           "type": "string",
