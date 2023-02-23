@@ -194,6 +194,9 @@
           "Creates or updates an MicrosoftPurviewInformationProtection data connector": {
             "$ref": "./examples/dataConnectors/CreateMicrosoftPurviewInformationProtectionDataConnetor.json"
           },
+          "Creates or updates a Microsoft Threat Intelligence data connector.": {
+            "$ref": "./examples/dataConnectors/CreateMicrosoftThreatIntelligenceDataConnector.json"
+          },
           "Creates or updates an Office PowerBI data connector": {
             "$ref": "./examples/dataConnectors/CreateOfficePowerBIDataConnector.json"
           },
@@ -272,6 +275,9 @@
           },
           "Delete an MicrosoftPurviewInformationProtection data connector": {
             "$ref": "./examples/dataConnectors/DeleteMicrosoftPurviewInformationProtectionDataConnetor.json"
+          },
+          "Delete an MicrosoftThreatIntelligence data connector": {
+            "$ref": "./examples/dataConnectors/DeleteMicrosoftThreatIntelligenceDataConnector.json"
           },
           "Delete an Office PowerBI data connector": {
             "$ref": "./examples/dataConnectors/DeleteOfficePowerBIDataConnetor.json"
@@ -1081,24 +1087,6 @@
     "MSTIDataConnectorDataTypes": {
       "description": "The available data types for Microsoft Threat Intelligence Platforms data connector.",
       "properties": {
-        "bingSafetyPhishingURL": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataConnectorDataTypeCommon"
-            }
-          ],
-          "properties": {
-            "lookbackPeriod": {
-              "description": "lookback period",
-              "type": "string"
-            }
-          },
-          "description": "Data type for Microsoft Threat Intelligence Platforms data connector.",
-          "type": "object",
-          "required": [
-            "lookbackPeriod"
-          ]
-        },
         "microsoftEmergingThreatFeed": {
           "allOf": [
             {
@@ -1107,7 +1095,7 @@
           ],
           "properties": {
             "lookbackPeriod": {
-              "description": "lookback period",
+              "description": "The lookback period for the feed to be imported.",
               "type": "string"
             }
           },
@@ -1120,7 +1108,6 @@
       },
       "type": "object",
       "required": [
-        "bingSafetyPhishingURL",
         "microsoftEmergingThreatFeed"
       ]
     },
