@@ -186,7 +186,7 @@
             "required": true,
             "description": "Review to update request object",
             "schema": {
-              "$ref": "#/definitions/UpdateReviewRequest"
+              "$ref": "#/definitions/PatchReview"
             }
           },
           {
@@ -198,7 +198,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the updated review object"
+            "description": "Returns the updated review object",
+            "schema": {
+              "$ref": "#/definitions/PatchReview"
+            }
           },
           "default": {
             "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
@@ -602,6 +605,19 @@
               }
             ]
           }
+        }
+      }
+    },
+    "PatchReview": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties":{
+        "properties": {
+          "$ref": "#/definitions/ReviewDto"
         }
       }
     },
