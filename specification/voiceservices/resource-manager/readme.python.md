@@ -15,5 +15,5 @@ clear-output-folder: true
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/voiceservice/azure-mgmt-voiceservices/azure/mgmt/voiceservices
+output-folder: $(python-sdks-folder)/voiceservices/azure-mgmt-voiceservices/azure/mgmt/voiceservices
 ```
