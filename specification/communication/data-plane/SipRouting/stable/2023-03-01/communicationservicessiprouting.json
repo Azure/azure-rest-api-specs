@@ -234,8 +234,22 @@
         "user_impersonation": "impersonate your user account"
       },
       "description": "Azure Active Directory OAuth2 Flow"
+    },
+    "apiKey": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "An authentication string containing a signature generated using HMAC-SHA256 scheme."
     }
   },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ],
+      "apiKey": []
+    }
+  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{endpoint}",
     "useSchemePrefix": false,
