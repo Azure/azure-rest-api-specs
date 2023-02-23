@@ -4,6 +4,7 @@ import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-autorest";
 import "@cadl-lang/openapi";
 import "./models.cadl";
+import "@azure-tools/cadl-dpg";
 
 using Cadl.Reflection;
 using Cadl.Http;
@@ -12,13 +13,15 @@ using Autorest;
 using Cadl.Versioning;
 using Azure.Core;
 using OpenAPI;
+using Azure.DPG;
 
-namespace BatchServiceClient;
+namespace BatchService;
 
 
 // Interfaces ////////////////////
+@operationGroup
 @tag("Applications")
-interface ApplicationOperations {
+interface Applications {
   @summary("Lists all of the applications available in the specified Account.")
   @doc("""
 This operation returns only Applications and versions that are available for
@@ -54,6 +57,7 @@ API.
   >;
 }
 
+@operationGroup
 @tag("Pools")
 interface Pool {
   @summary("""
@@ -207,7 +211,7 @@ error code PoolBeingDeleted.
   @head
   Exists is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & BatchPoolHeaders,
-    PoolDoesntExistResponseHeaders
+    (PoolDoesntExistResponseHeaders | PoolDoesExistResponseHeaders)
   >;
 
 
@@ -228,11 +232,11 @@ error code PoolBeingDeleted.
 
       @doc("An OData $select clause.")
       @query
-      $select: string;
+      $select?: string;
 
       @doc("An OData $expand clause.")
       @query
-      $expand: string;
+      $expand?: string;
     },
     BatchResponseHeaders & BatchPool 
   > ; 
@@ -383,7 +387,7 @@ Nodes, use the Pool remove Compute Nodes API instead.
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
+      @statusCode code: "202";
       
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
@@ -409,14 +413,7 @@ be used to halt the initial sizing of the Pool when it is created.
   @post
   StopResize is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & BatchPoolHeaders,
-    BatchResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode code: "200";
-      
-      @doc("The OData ID of the resource to which the request applied")
-      @header("DataServiceId")
-      "DataServiceId": string;
-    }
+    PoolStopResizeResponseHeaders
   >;
 
   @summary("Updates the properties of the specified Pool.")
@@ -442,14 +439,7 @@ with this request, then the Batch service will remove the existing StartTask.
       @body
       poolUpdatePropertiesParameter: BatchPool;
     },
-    BatchResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode code: "200";
-      
-      @doc("The OData ID of the resource to which the request applied")
-      @header("DataServiceId")
-      "DataServiceId": string;
-    }
+    PoolUpdatePropertiesResponseHeaders
   >;
 
  
@@ -472,18 +462,12 @@ Each request may remove up to 100 nodes.
       @body
       parameters: NodeRemoveParameters;
     },
-     BatchResponseHeaders & {
-      @doc("A process exit code.")
-      @statusCode code: "200";
-      
-      @doc("The OData ID of the resource to which the request applied")
-      @header("DataServiceId")
-      "DataServiceId": string;
-    }
+    PoolRemoveNodesResponseHeaders
   >;
 
 }
 
+@operationGroup
 @tag("Accounts")
 interface Account {
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
@@ -526,6 +510,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 
 }
 
+@operationGroup
 @tag("Jobs")
 interface Job {
   @summary("Gets lifetime summary statistics for all of the Jobs in the specified Account.")
@@ -736,7 +721,7 @@ Tasks cannot be added and any remaining active Tasks will not be scheduled.
 
       @doc("The parameters for the request.")
       @body
-      parameters: BatchJobTerminateParameters;
+      parameters?: BatchJobTerminateParameters;
     },
      BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -792,15 +777,15 @@ An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs.
 """)
       @query
-      $filter: string;
+      $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      $select: string;
+      $select?: string;
 
       @doc("An OData $expand clause.")
       @query
-      $expand: string;
+      $expand?: string;
 
     },
     BatchResponseHeaders & BatchJobListResult
@@ -822,15 +807,15 @@ An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-jobs-in-a-job-schedule.
 """)
       @query
-      $filter: string;
+      $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      $select: string;
+      $select?: string;
 
       @doc("An OData $expand clause.")
       @query
-      $expand: string;
+      $expand?: string;
     },
     BatchResponseHeaders & BatchJobListResult
   >;
@@ -861,11 +846,11 @@ An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-job-preparation-and-release-status.
 """)
       @query
-      $filter: string;
+      $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      $select: string;
+      $select?: string;
     },
     BatchResponseHeaders & BatchJobListPreparationAndReleaseTaskStatusResult
   >;
@@ -890,8 +875,9 @@ up to date. If you need exact task counts, use a list query.
   >;
 }
 
+@operationGroup
 @tag("Certificates")
-interface CertificateOperations {
+interface Certificates {
   @summary("Adds a Certificate to the specified Account.")
   @doc("Adds a Certificate to the specified Account.")
   @example("./examples/CertificateAdd.json", "Certificate add")
@@ -922,11 +908,11 @@ An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-certificates.
 """)
       @query
-      $filter: string;
+      $filter?: string;
 
       @doc("An OData $select clause.")
       @query
-      $select: string;
+      $select?: string;
     },
     BatchResponseHeaders & CertificateListResult
   >;
@@ -1013,12 +999,13 @@ active if you decide that you want to continue using the Certificate.
 
       @doc("An OData $select clause.")
       @query
-      $select: string;
+      $select?: string;
     },
     BatchResponseHeaders & Certificate
   >;
 }
 
+@operationGroup
 @tag("Files")
 interface File {
   @summary("Deletes the specified Task file from the Compute Node where the Task ran.")
@@ -1035,7 +1022,7 @@ directory and all of the files and subdirectories in it. If recursive is false
 then the directory must be empty or deletion will fail.
 """)
       @query
-      recursive: boolean;
+      recursive?: boolean;
     },
     BatchClientResponseHeaders & {
       @doc("A process exit code.")
@@ -1150,14 +1137,14 @@ An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-task-files.
 """)
       @query
-      $filter: string;
+      $filter?: string;
 
       @doc("""
 Whether to list children of the Task directory. This parameter can be used in
 combination with the filter parameter to list specific type of files.
 """)
       @query
-      recursive: boolean;
+      recursive?: boolean;
     },
     BatchResponseHeaders & NodeFileListResult
   >;
@@ -1183,16 +1170,17 @@ An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-compute-node-files.
 """)
       @query
-      $filter: string;
+      $filter?: string;
 
       @doc("Whether to list children of a directory.")
       @query
-      recursive: boolean;
+      recursive?: boolean;
     },
     BatchResponseHeaders & NodeFileListResult
   >;
 }
 
+@operationGroup
 @tag("JobSchedules")
 interface JobSchedule {
   @summary("Checks the specified Job Schedule exists.")
@@ -1207,12 +1195,12 @@ interface JobSchedule {
       jobScheduleId: string;
     },
     BatchResponseHeaders & {
-      @doc("A process exit code.")
+      @doc("A response containing headers related to the Job Schedule, if it exists.")
       @statusCode code: "200";
       } | 
       {
       @doc("The Job Schedule does not exist.")
-      @statusCode code: "204";
+      @statusCode code: "404";
       }
   >;
 
@@ -1430,6 +1418,7 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
   >;
 }
 
+@operationGroup
 @tag("Tasks")
 interface Task {
   @summary("Adds a Task to the specified Job.")
@@ -1706,8 +1695,9 @@ will fail if the Job has completed (or is terminating or deleting).
   >;
 }
 
+@operationGroup
 @tag("ComputeNodes")
-interface ComputeNodeOperations {
+interface ComputeNodes {
   @summary("Adds a user Account to the specified Compute Node.")
   @doc("""
 You can add a user Account to a Compute Node only when it is in the idle or
@@ -1848,7 +1838,7 @@ Account on a Compute Node only when it is in the idle or running state.
 
       @doc("The parameters for the request.")
       @body
-      parameters: NodeRebootParameters;
+      parameters?: NodeRebootParameters;
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -1881,7 +1871,7 @@ cloud service configuration property.
 
       @doc("The parameters for the request.")
       @body
-      parameters: NodeReimageParameters;
+      parameters?: NodeReimageParameters;
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -1913,7 +1903,7 @@ scheduling state is enabled.
 
       @doc("The parameters for the request.")
       @body
-      parameters: NodeDisableSchedulingParameters;
+      parameters?: NodeDisableSchedulingParameters;
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
@@ -2058,7 +2048,7 @@ An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-nodes-in-a-pool.
 """)
       @query
-      $filter: string;
+      $filter?: string;
 
       @doc("An OData $select clause.")
       @query
@@ -2068,8 +2058,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
   >;
 }
 
+@operationGroup
 @tag("ComputeNodes")
-interface ComputeNodeExtensionOperations {
+interface ComputeNodeExtensions {
   @summary("Gets information about the specified Compute Node Extension.")
   @doc("Gets information about the specified Compute Node Extension.")
   @example("./examples/ComputeNodeExtensionGet.json", "Get compute node extension")
@@ -2125,6 +2116,41 @@ about.
 
 
 // headers ////////////////////
+
+@doc("The request to the Batch service was successful.")
+model PoolRemoveNodesResponseHeaders {
+  ...BatchResponseHeaders;
+  @doc("A process exit code.")
+  @statusCode code: "202";
+
+  @doc("The OData ID of the resource to which the request applied")
+  @header("DataServiceId")
+  "DataServiceId": string;
+}
+
+@doc("The request to the Batch service was successful.")
+model PoolUpdatePropertiesResponseHeaders {
+  ...BatchResponseHeaders;
+  @doc("A process exit code.")
+  @statusCode code: "204";
+
+  @doc("The OData ID of the resource to which the request applied")
+  @header("DataServiceId")
+  "DataServiceId": string;
+}
+
+alias PoolStopResizeResponseHeaders = PoolResizeResponseHeaders;
+
+@doc("The request to the Batch service was successful.")
+model PoolResizeResponseHeaders {
+  ...BatchResponseHeaders;
+  @doc("A process exit code.")
+  @statusCode code: "202";
+
+  @doc("The OData ID of the resource to which the request applied")
+  @header("DataServiceId")
+  "DataServiceId": string;
+}
 
 @doc("Common header values for pool requests")
 model FileResponse {
@@ -2235,6 +2261,12 @@ model BatchClientResponseHeaders {
   "request-id"?: string;
 }
 
+@doc("A response containing headers related to the Pool, if it exists.")
+model PoolDoesExistResponseHeaders {
+  ...BatchResponseHeaders;
+  @doc("A process exit code.")
+  @statusCode code: "200";  
+}
 
 @doc("The Pool does not exist.")
 model PoolDoesntExistResponseHeaders {
@@ -2269,6 +2301,7 @@ applications can be returned.
   @query
   @minValue(1)
   @maxValue(1000)
+  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
   maxresults?: int32 = 1000;
 
   @doc("""
@@ -2278,6 +2311,7 @@ directly.
 """)
   @header
   @format("date-time-rfc1123")
+  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
   "ocp-date"?: string;
 }
 
@@ -2320,6 +2354,7 @@ The maximum number of items to return in the response. A maximum of 1000
 applications can be returned.
 """)
   @query
+  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
   timeOut?: int32 = 30;
 
   @doc("""
@@ -2327,11 +2362,13 @@ The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
   @header
+  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
   @format("uuid")
   "client-request-id"?: string;
 
   @doc("Whether the server should return the client-request-id in the response.")
   @header
+  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
   "return-client-request-id"?: boolean = false;
 
   @doc("""
@@ -2340,6 +2377,7 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
   @header
+  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
   @format("date-time-rfc1123")
   "ocp-date"?: string;
 }

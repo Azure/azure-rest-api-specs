@@ -9,294 +9,519 @@ using Cadl.Versioning;
 using Azure.Core;
 using OpenAPI;
 
-namespace BatchServiceClient;
+namespace BatchService;
 
 
 enum OSType {
+  @doc("The Linux operating system.")
   Linux: "linux",
+
+  @doc("The Windows operating system.")
   Windows: "windows",
 }
 
 enum VerificationType {
+  @doc("The Image is guaranteed to be compatible with the associated Compute Node agent SKU and all Batch features have been confirmed to work as expected.")
   Verified: "verified",
+
+  @doc("The associated Compute Node agent SKU should have binary compatibility with the Image, but specific functionality has not been verified.")
   Unverified: "unverified",
 }
 
 enum CertificateState {
+  @doc("The Certificate is available for use in Pools.")
   Active: "active",
+
+  @doc("The user has requested that the Certificate be deleted, but the delete operation has not yet completed. You may not reference the Certificate when creating or updating Pools.")
   Deleting: "deleting",
+
+  @doc("The user requested that the Certificate be deleted, but there are Pools that still have references to the Certificate, or it is still installed on one or more Nodes. (The latter can occur if the Certificate has been removed from the Pool, but the Compute Node has not yet restarted. Compute Nodes refresh their Certificates only when they restart.) You may use the cancel Certificate delete operation to cancel the delete, or the delete Certificate operation to retry the delete.")
   DeleteFailed: "deletefailed",
 }
 
 enum CertificateFormat {
+  @doc("The Certificate is a PFX (PKCS#12) formatted Certificate or Certificate chain.")
   Pfx: "pfx",
+
+  @doc("The Certificate is a base64-encoded X.509 Certificate.")
   Cer: "cer",
 }
 
 enum JobScheduleState {
+  @doc("The Job Schedule is active and will create Jobs as per its schedule.")
   Active: "active",
+
+  @doc("The Job Schedule has terminated, either by reaching its end time or by the user terminating it explicitly.")
   Completed: "completed",
+
+  @doc("The user has disabled the Job Schedule. The scheduler will not initiate any new Jobs will on this schedule, but any existing active Job will continue to run.")
   Disabled: "disabled",
+
+  @doc("The Job Schedule has no more work to do, or has been explicitly terminated by the user, but the termination operation is still in progress. The scheduler will not initiate any new Jobs for this Job Schedule, nor is any existing Job active.")
   Terminating: "terminating",
+
+  @doc("The user has requested that the Job Schedule be deleted, but the delete operation is still in progress. The scheduler will not initiate any new Jobs for this Job Schedule, and will delete any existing Jobs and Tasks under the Job Schedule, including any active Job. The Job Schedule will be deleted when all Jobs and Tasks under the Job Schedule have been deleted.")
   Deleting: "deleting",
 }
 
 enum OnAllTasksComplete {
+  @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
+
+  @doc("")
   TerminateJob: "terminatejob",
 }
 
 enum OnTaskFailure {
+  @doc("Do nothing. The Job remains active unless terminated or disabled by some other means.")
   NoAction: "noaction",
+
+  @doc("Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'.")
   PerformExitOptionsJobAction: "performexitoptionsjobaction",
 }
 
 enum ContainerWorkingDirectory {
+  @doc("Use the standard Batch service Task working directory, which will contain the Task Resource Files populated by Batch.")
   TaskWorkingDirectory: "taskWorkingDirectory",
+
+  @doc("Use the working directory defined in the container Image. Beware that this directory will not contain the Resource Files downloaded by Batch.")
   ContainerImageDefault: "containerImageDefault",
 }
 
 enum OutputFileUploadCondition {
+  @doc("Upload the file(s) only after the Task process exits with an exit code of 0.")
   TaskSuccess: "tasksuccess",
+
+  @doc("Upload the file(s) only after the Task process exits with a nonzero exit code.")
   TaskFailure: "taskfailure",
+
+  @doc("Upload the file(s) after the Task process exits, no matter what the exit code was.")
   TaskCompletion: "taskcompletion",
 }
 
 enum AutoUserScope {
+  @doc("Specifies that the service should create a new user for the Task.")
   Task: "task",
+
+  @doc("Specifies that the Task runs as the common auto user Account which is created on every Compute Node in a Pool.")
   Pool: "pool",
 }
 
 enum ElevationLevel {
+  @doc("The user is a standard user without elevated access.")
   NonAdmin: "nonadmin",
+
+  @doc("The user is a user with elevated access and operates with full Administrator permissions.")
   Admin: "admin",
 }
 
 enum PoolLifetimeOption {
+  @doc("The Pool exists for the lifetime of the Job Schedule. The Batch Service creates the Pool when it creates the first Job on the schedule. You may apply this option only to Job Schedules, not to Jobs.")
   JobSchedule: "jobschedule",
+
+  @doc("The Pool exists for the lifetime of the Job to which it is dedicated. The Batch service creates the Pool when it creates the Job. If the 'job' option is applied to a Job Schedule, the Batch service creates a new auto Pool for every Job created on the schedule.")
   Job: "job",
 }
 
 enum CachingType {
+  @doc("The caching mode for the disk is not enabled.")
   None: "none",
+
+  @doc("The caching mode for the disk is read only.")
   ReadOnly: "readonly",
+
+  @doc("The caching mode for the disk is read and write.")
   ReadWrite: "readwrite",
 }
 
 enum StorageAccountType {
+  @doc("The data disk should use standard locally redundant storage.")
   StandardLRS: "standard_lrs",
+
+  @doc("The data disk should use premium locally redundant storage.")
   PremiumLRS: "premium_lrs",
 }
 
 enum DiskEncryptionTarget {
+  @doc("The OS Disk on the compute node is encrypted.")
   OsDisk: "osdisk",
+
+  @doc("The temporary disk on the compute node is encrypted. On Linux this encryption applies to other partitions (such as those on mounted data disks) when encryption occurs at boot time.")
   TemporaryDisk: "temporarydisk",
 }
 
 enum NodePlacementPolicyType {
+  @doc("All nodes in the pool will be allocated in the same region.")
   Regional: "regional",
+
+  @doc("Nodes in the pool will be spread across different availability zones with best effort balancing.")
   Zonal: "zonal",
 }
 
 enum ComputeNodeFillType {
+  @doc("Tasks should be assigned evenly across all Compute Nodes in the Pool.")
   Spread: "spread",
+
+  @doc("As many Tasks as possible (taskSlotsPerNode) should be assigned to each Compute Node in the Pool before any Tasks are assigned to the next Compute Node in the Pool.")
   Pack: "pack",
 }
 
 enum DynamicVNetAssignmentScope {
+  @doc("No dynamic VNet assignment is enabled.")
   None: "none",
+
+  @doc("Dynamic VNet assignment is done per-job.")
   Job: "job",
 }
 
 enum InboundEndpointProtocol {
+  @doc("Use TCP for the endpoint.")
   Tcp: "tcp",
+
+  @doc("Use UDP for the endpoint.")
   Udp: "udp",
 }
 
 enum NetworkSecurityGroupRuleAccess {
+  @doc("Allow access.")
   Allow: "allow",
+
+  @doc("Deny access.")
   Deny: "deny",
 }
 
 enum IPAddressProvisioningType {
+  @doc("A public IP will be created and managed by Batch. There may be multiple public IPs depending on the size of the Pool.")
   BatchManaged: "batchmanaged",
+
+  @doc("Public IPs are provided by the user and will be used to provision the Compute Nodes.")
   UserManaged: "usermanaged",
+
+  @doc("No public IP Address will be created.")
   NoPublicIPAddresses: "nopublicipaddresses",
 }
 
 enum DiffDiskPlacement{
+  @doc("The Ephemeral OS Disk is stored on the VM cache.")
   CacheDisk: "cachedisk",
 }
 
 enum ContainerType {
+  @doc("A Docker compatible container technology will be used to launch the containers.")
   DockerCompatible: "dockerCompatible",
 }
 enum AccessScope {
+  @doc("Grants access to perform all operations on the Job containing the Task.")
   Job: "job",
 }
 
 enum CertificateStoreLocation {
+  @doc("Certificates should be installed to the CurrentUser Certificate store.")
   CurrentUser: "currentuser",
+
+  @doc("Certificates should be installed to the LocalMachine Certificate store.")
   LocalMachine: "localmachine",
 }
 
 enum CertificateVisibility {
+  @doc("The Certificate should be visible to the user account under which the StartTask is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well.")
   StartTask: "starttask",
+
+  @doc("The Certificate should be visible to the user accounts under which Job Tasks are run.")
   Task: "task",
+
+  @doc("The Certificate should be visible to the user accounts under which users remotely access the Compute Node.")
   RemoteUser: "remoteuser",
 }
 
 enum LoginMode {
+  @doc("The LOGON32_LOGON_BATCH Win32 login mode. The batch login mode is recommended for long running parallel processes.")
   Batch: "batch",
+
+  @doc("The LOGON32_LOGON_INTERACTIVE Win32 login mode. UAC is enabled on Windows VirtualMachineConfiguration Pools. If this option is used with an elevated user identity in a Windows VirtualMachineConfiguration Pool, the user session will not be elevated unless the application executed by the Task command line is configured to always require administrative privilege or to always require maximum privilege.")
   Interactive: "interactive",
 }
 
 enum NodeCommunicationMode {
+  @doc("The node communication mode is automatically set by the Batch service.")
   Default: "default",
+
+  @doc("Nodes using the classic communication mode require inbound TCP communication on ports 29876 and 29877 from the \"BatchNodeManagement.{region}\" service tag and outbound TCP communication on port 443 to the \"Storage.region\" and \"BatchNodeManagement.{region}\" service tags.")
   Classic: "classic",
+
+  @doc("Nodes using the simplified communication mode require outbound TCP communication on port 443 to the \"BatchNodeManagement.{region}\" service tag. No open inbound ports are required.")
   Simplified: "simplified",
 }
 
 enum JobState {
+  @doc("The Job is available to have Tasks scheduled.")
   Active: "active",
+
+  @doc("A user has requested that the Job be disabled, but the disable operation is still in progress (for example, waiting for Tasks to terminate).")
   Disabling: "disabling",
+
+  @doc("A user has disabled the Job. No Tasks are running, and no new Tasks will be scheduled.")
   Disabled: "disabled",
+
+  @doc("A user has requested that the Job be enabled, but the enable operation is still in progress.")
   Enabling: "enabling",
+
+  @doc("The Job is about to complete, either because a Job Manager Task has completed or because the user has terminated the Job, but the terminate operation is still in progress (for example, because Job Release Tasks are running).")
   Terminating: "terminating",
+
+  @doc("All Tasks have terminated, and the system will not accept any more Tasks or any further changes to the Job.")
   Completed: "completed",
+
+  @doc("A user has requested that the Job be deleted, but the delete operation is still in progress (for example, because the system is still terminating running Tasks).")
   Deleting: "deleting",
 }
 
 enum ErrorCategory {
+  @doc("The error is due to a user issue, such as misconfiguration.")
   UserError: "usererror",
+
+  @doc("The error is due to an internal server issue.")
   ServerError: "servererror",
 }
 
 enum DisableJobOption {
+  @doc("Terminate running Tasks and requeue them. The Tasks will run again when the Job is enabled.")
   Requeue: "requeue",
+
+  @doc("Terminate running Tasks. The Tasks will be completed with failureInfo indicating that they were terminated, and will not run again.")
   Terminate: "terminate",
+
+  @doc("Allow currently running Tasks to complete.")
   Wait: "wait",
 }
 
 enum JobPreparationTaskState {
+  @doc("The Task is currently running (including retrying).")
   Running: "running",
+
+  @doc("The Task has exited with exit code 0, or the Task has exhausted its retry limit, or the Batch service was unable to start the Task due to Task preparation errors (such as resource file download failures).")
   Completed: "completed",
 }
 
 enum TaskExecutionResult {
+  @doc("The Task ran successfully.")
   Success: "success",
+
+  @doc("There was an error during processing of the Task. The failure may have occurred before the Task process was launched, while the Task process was executing, or after the Task process exited.")
   Failure: "failure",
 }
 
 enum JobReleaseTaskState {
+  @doc("The Task is currently running (including retrying).")
   Running: "running",
+
+  @doc("The Task has exited with exit code 0, or the Task has exhausted its retry limit, or the Batch service was unable to start the Task due to Task preparation errors (such as resource file download failures).")
   Completed: "completed",
 }
 
 enum PoolState {
+  @doc("The Pool is available to run Tasks subject to the availability of Compute Nodes.")
   Active: "active",
+
+  @doc("The user has requested that the Pool be deleted, but the delete operation has not yet completed.")
   Deleting: "deleting",
 }
 
 enum AllocationState {
+  @doc("The Pool is not resizing. There are no changes to the number of Compute Nodes in the Pool in progress. A Pool enters this state when it is created and when no operations are being performed on the Pool to change the number of Compute Nodes.")
   Steady: "steady",
+
+  @doc("The Pool is resizing; that is, Compute Nodes are being added to or removed from the Pool.")
   Resizing: "resizing",
+
+  @doc("The Pool was resizing, but the user has requested that the resize be stopped, but the stop request has not yet been completed.")
   Stopping: "stopping",
 }
 
 enum PoolIdentityType {
+  @doc("Batch pool has user assigned identities with it.")
   "UserAssigned",
+
+  @doc("Batch pool has no identity associated with it. Setting `None` in update pool will remove existing identities.")
   "None",
 }
 
 enum ComputeNodeDeallocationOption {
+  @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Remove Compute Nodes as soon as Tasks have been terminated.")
   Requeue: "requeue",
+
+  @doc("Terminate running Tasks. The Tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Remove Compute Nodes as soon as Tasks have been terminated.")
   Terminate: "terminate",
+
+  @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Remove Compute Nodes when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
+
+  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Remove Compute Nodes when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
 
 enum JobAction {
+  @doc("Take no action.")
   None: "none",
+
+  @doc("Disable the Job. This is equivalent to calling the disable Job API, with a disableTasks value of requeue.")
   Disable: "disable",
+
+  @doc("Terminate the Job. The terminateReason in the Job's executionInfo is set to \"TaskFailed\".")
   Terminate: "terminate",
 }
 
 enum DependencyAction {
+  @doc("Satisfy tasks waiting on this task; once all dependencies are satisfied, the task will be scheduled to run.")
   Satisfy: "satisfy",
+
+  @doc("Blocks tasks waiting on this task, preventing them from being scheduled.")
   Block: "block",
 }
 
 enum TaskState {
+  @doc("The Task is queued and able to run, but is not currently assigned to a Compute Node. A Task enters this state when it is created, when it is enabled after being disabled, or when it is awaiting a retry after a failed run.")
   Active: "active",
+
+  @doc("The Task has been assigned to a Compute Node, but is waiting for a required Job Preparation Task to complete on the Compute Node. If the Job Preparation Task succeeds, the Task will move to running. If the Job Preparation Task fails, the Task will return to active and will be eligible to be assigned to a different Compute Node.")
   Preparing: "preparing",
+
+  @doc("The Task is running on a Compute Node. This includes task-level preparation such as downloading resource files or deploying Packages specified on the Task - it does not necessarily mean that the Task command line has started executing.")
   Running: "running",
+
+  @doc("The Task is no longer eligible to run, usually because the Task has finished successfully, or the Task has finished unsuccessfully and has exhausted its retry limit. A Task is also marked as completed if an error occurred launching the Task, or when the Task has been terminated.")
   Completed: "completed",
 }
 
 enum TaskAddStatus {
+  @doc("The Task was added successfully.")
   Success: "success",
+
+  @doc("The Task failed to add due to a client error and should not be retried without modifying the request as appropriate.")
   ClientError: "clienterror",
+
+  @doc("Task failed to add due to a server error and can be retried without modification.")
   ServerError: "servererror",
 }
 
 enum SubtaskState {
+  @doc("The Task has been assigned to a Compute Node, but is waiting for a required Job Preparation Task to complete on the Compute Node. If the Job Preparation Task succeeds, the Task will move to running. If the Job Preparation Task fails, the Task will return to active and will be eligible to be assigned to a different Compute Node.")
   Preparing: "preparing",
+
+  @doc("The Task is running on a Compute Node. This includes task-level preparation such as downloading resource files or deploying Packages specified on the Task - it does not necessarily mean that the Task command line has started executing.")
   Running: "running",
+
+  @doc("The Task is no longer eligible to run, usually because the Task has finished successfully, or the Task has finished unsuccessfully and has exhausted its retry limit. A Task is also marked as completed if an error occurred launching the Task, or when the Task has been terminated.")
   Completed: "completed",
 }
 
 enum ComputeNodeState {
+  @doc("The Compute Node is not currently running a Task.")
   Idle: "idle",
+
+  @doc("The Compute Node is rebooting.")
   Rebooting: "rebooting",
+
+  @doc("The Compute Node is reimaging.")
   Reimaging: "reimaging",
+
+  @doc("The Compute Node is running one or more Tasks (other than a StartTask).")
   Running: "running",
+
+  @doc("The Compute Node cannot be used for Task execution due to errors.")
   Unusable: "unusable",
+
+  @doc("The Batch service has obtained the underlying virtual machine from Azure Compute, but it has not yet started to join the Pool.")
   Creating: "creating",
+
+  @doc("The Batch service is starting on the underlying virtual machine.")
   Starting: "starting",
+
+  @doc("The StartTask has started running on the Compute Node, but waitForSuccess is set and the StartTask has not yet completed.")
   WaitingForStartTask: "waitingforstarttask",
+
+  @doc("The StartTask has failed on the Compute Node (and exhausted all retries), and waitForSuccess is set. The Compute Node is not usable for running Tasks.")
   StartTaskFailed: "starttaskfailed",
+
+  @doc("The Batch service has lost contact with the Compute Node, and does not know its true state.")
   Unknown: "unknown",
+
+  @doc("The Compute Node is leaving the Pool, either because the user explicitly removed it or because the Pool is resizing or autoscaling down.")
   LeavingPool: "leavingpool",
+
+  @doc("The Compute Node is not currently running a Task, and scheduling of new Tasks to the Compute Node is disabled.")
   Offline: "offline",
+
+  @doc("The Spot/Low-priority Compute Node has been preempted. Tasks which were running on the Compute Node when it was preempted will be rescheduled when another Compute Node becomes available.")
   Preempted: "preempted",
 }
 
 enum SchedulingState {
+  @doc("Tasks can be scheduled on the Compute Node.")
   Enabled: "enabled",
+
+  @doc("No new Tasks will be scheduled on the Compute Node. Tasks already running on the Compute Node may still run to completion. All Compute Nodes start with scheduling enabled.")
   Disabled: "disabled",
 }
 
 enum StartTaskState {
+  @doc("The StartTask is currently running.")
   Running: "running",
+
+  @doc("The StartTask has exited with exit code 0, or the StartTask has failed and the retry limit has reached, or the StartTask process did not run due to Task preparation errors (such as resource file download failures).")
   Completed: "completed",
 }
 
 enum ComputeNodeRebootOption {
+  @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Restart the Compute Node as soon as Tasks have been terminated.")
   Requeue: "requeue",
+
+  @doc("Terminate running Tasks. The Tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Restart the Compute Node as soon as Tasks have been terminated.")
   Terminate: "terminate",
+
+  @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Restart the Compute Node when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
+
+  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Restart the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
 
 enum ComputeNodeReimageOption {
+  @doc("Terminate running Task processes and requeue the Tasks. The Tasks will run again when a Compute Node is available. Reimage the Compute Node as soon as Tasks have been terminated.")
   Requeue: "requeue",
+
+  @doc("Terminate running Tasks. The Tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Reimage the Compute Node as soon as Tasks have been terminated.")
   Terminate: "terminate",
+
+  @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Reimage the Compute Node when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
+
+  @doc("Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Reimage the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
 
 enum DisableComputeNodeSchedulingOption {
+  @doc("Terminate running Task processes and requeue the Tasks. The Tasks may run again on other Compute Nodes, or when Task scheduling is re-enabled on this Compute Node. Enter offline state as soon as Tasks have been terminated.")
   Requeue: "requeue",
+
+  @doc("Terminate running Tasks. The Tasks will be completed with failureInfo indicating that they were terminated, and will not run again. Enter offline state as soon as Tasks have been terminated.")
   Terminate: "terminate",
+
+  @doc("Allow currently running Tasks to complete. Schedule no new Tasks while waiting. Enter offline state when all Tasks have completed.")
   TaskCompletion: "taskcompletion",
 }
 
 enum StatusLevelTypes {
+  @doc("")
   "Error",
+
+  @doc("")
   "Info",
+
+  @doc("")
   "Warning",
 }
+
 
 @doc("The result of listing the applications available in an Account.")
 @pagedResult
