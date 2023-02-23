@@ -36,11 +36,7 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "packageType",
-            "in": "path",
-            "description": "The archive repository type.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PackageTypeParameter"
           }
         ],
         "responses": {
@@ -88,18 +84,10 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "packageType",
-            "in": "path",
-            "description": "The archive repository type.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PackageTypeParameter"
           },
           {
-            "name": "archiveName",
-            "in": "path",
-            "description": "The archive name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveNameParameter"
           }
         ],
         "responses": {
@@ -142,18 +130,10 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "packageType",
-            "in": "path",
-            "description": "The archive repository type.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PackageTypeParameter"
           },
           {
-            "name": "archiveName",
-            "in": "path",
-            "description": "The archive name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveNameParameter"
           },
           {
             "name": "archiveCreateParameters",
@@ -220,18 +200,10 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "packageType",
-            "in": "path",
-            "description": "The archive repository type.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PackageTypeParameter"
           },
           {
-            "name": "archiveName",
-            "in": "path",
-            "description": "The archive name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveNameParameter"
           }
         ],
         "responses": {
@@ -286,18 +258,10 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "packageType",
-            "in": "path",
-            "description": "The archive repository type.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PackageTypeParameter"
           },
           {
-            "name": "archiveName",
-            "in": "path",
-            "description": "The archive name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveNameParameter"
           },
           {
             "name": "archiveUpdateParameters",
@@ -345,7 +309,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{repositoryType}/archives/{archiveName}/versions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives/{archiveName}/versions": {
       "get": {
         "tags": [
           "ArchiveVersions"
@@ -366,18 +330,10 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "repositoryType",
-            "in": "path",
-            "description": "The archive repository type.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PackageTypeParameter"
           },
           {
-            "name": "archiveName",
-            "in": "path",
-            "description": "The archive name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveNameParameter"
           }
         ],
         "responses": {
@@ -404,7 +360,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{repositoryType}/archives/{archiveName}/versions/{archiveVersionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/packages/{packageType}/archives/{archiveName}/versions/{archiveVersionName}": {
       "get": {
         "tags": [
           "ArchiveVersions"
@@ -425,25 +381,13 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "repositoryType",
-            "in": "path",
-            "description": "The archive repository type.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PackageTypeParameter"
           },
           {
-            "name": "archiveName",
-            "in": "path",
-            "description": "The archive name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveNameParameter"
           },
           {
-            "name": "archiveVersionName",
-            "in": "path",
-            "description": "The archive version name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveVersionNameParameter"
           }
         ],
         "responses": {
@@ -486,25 +430,13 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "repositoryType",
-            "in": "path",
-            "description": "The archive repository type.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PackageTypeParameter"
           },
           {
-            "name": "archiveName",
-            "in": "path",
-            "description": "The archive name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveNameParameter"
           },
           {
-            "name": "archiveVersionName",
-            "in": "path",
-            "description": "The archive version name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveVersionNameParameter"
           }
         ],
         "responses": {
@@ -562,25 +494,13 @@
             "$ref": "#/parameters/RegistryNameParameter"
           },
           {
-            "name": "repositoryType",
-            "in": "path",
-            "description": "The archive repository type.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/PackageTypeParameter"
           },
           {
-            "name": "archiveName",
-            "in": "path",
-            "description": "The archive name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveNameParameter"
           },
           {
-            "name": "archiveVersionName",
-            "in": "path",
-            "description": "The archive version name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ArchiveVersionNameParameter"
           }
         ],
         "responses": {
