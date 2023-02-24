@@ -3134,6 +3134,251 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/trafficSplitting": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the traffic splitting properties for a static site as a collection.",
+        "description": "Description for Gets the traffic splitting properties for a static site as a collection.",
+        "operationId": "StaticSites_ListBasicAuth",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteTrafficSplittingPropertiesCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../2022-03-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists the traffic splitting properties of a static site.": {
+            "$ref": "./examples/ListStaticSiteTrafficSplitting.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/trafficSplitting/{trafficSplittingName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets the traffic splitting state of a static site.",
+        "description": "Description for Gets the traffic splitting state of a static site.",
+        "operationId": "StaticSites_GetTrafficSplitting",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trafficSplittingName",
+            "in": "path",
+            "description": "name of the traffic splitting entry.",
+            "required": true,
+            "type": "string",
+            "pattern": "default",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "TrafficSplittingName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteTrafficSplittingPropertiesARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../2022-03-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the traffic splitting state of a static site": {
+            "$ref": "./examples/GetStaticSiteTrafficSplitting.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Adds or updates traffic splitting for a static site.",
+        "description": "Description for Adds or updates traffic splitting for a static site.",
+        "operationId": "StaticSites_CreateOrUpdateTrafficSplitting",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trafficSplittingName",
+            "in": "path",
+            "description": "name of the traffic splitting entry.",
+            "required": true,
+            "type": "string",
+            "pattern": "default",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BasicAuthName",
+              "modelAsString": true
+            }
+          },
+          {
+            "name": "trafficSplittingEnvelope",
+            "in": "body",
+            "description": "A JSON representation of the traffic splitting properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StaticSiteTrafficSplittingPropertiesARMResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteTrafficSplittingPropertiesARMResource"
+            }
+          },
+          "202": {
+            "description": "Asynchronous operation in progress.",
+            "schema": {
+              "$ref": "#/definitions/StaticSiteTrafficSplittingPropertiesARMResource"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../2022-03-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates or updates traffic splitting properties of a static site.": {
+            "$ref": "./examples/CreateOrUpdateStaticSiteTrafficSplitting.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deletes traffic splitting for a static site.",
+        "description": "Description for Deletes traffic splitting for a static site.",
+        "operationId": "StaticSites_DeleteTrafficSplitting",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the static site.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "trafficSplittingName",
+            "in": "path",
+            "description": "name of the traffic splitting entry.",
+            "required": true,
+            "type": "string",
+            "pattern": "default",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "TrafficSplittingName",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../2022-03-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes traffic splitting for a static site.": {
+            "$ref": "./examples/DeleteStaticSiteTrafficSplitting.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/staticSites/{name}/userProvidedFunctionApps": {
       "get": {
         "tags": [
@@ -4266,6 +4511,11 @@
             "name"
           ],
           "readOnly": true
+        },
+        "trafficSplitting": {
+          "$ref": "#/definitions/StaticSiteTrafficSplittingProperties",
+          "description": "Traffic splitting distribution for the static site",
+          "readOnly": true
         }
       }
     },
@@ -4852,6 +5102,31 @@
         "isPrivate": {
           "description": "Whether or not the newly generated repository is a private repository. Defaults to false (i.e. public).",
           "type": "boolean"
+        }
+      }
+    },
+    "StaticSiteTrafficSplittingProperties": {
+      "description": "Properties for traffic splitting in a static site",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../2022-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteTrafficSplittingProperties resource specific properties",
+          "type": "object",
+          "properties": {
+            "environmentDistribution": {
+              "type": "object",
+              "additionalProperties": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
         }
       }
     },
