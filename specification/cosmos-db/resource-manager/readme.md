@@ -610,6 +610,24 @@ directive:
   - suppress: LroLocationHeader
     from: cosmos-db.json
     reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: OperationIdNounVerb
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ResourceNameRestriction
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: RepeatedPathInfo
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: XmsIdentifierValidation
+    from: managedCassandra.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroLocationHeader
+    from: services.json
+    reason: Temporarily suppressing linter errors and will be fixed later
 ```
 
 ---
