@@ -357,7 +357,7 @@ Number of top contributed
 variables for one anomalous time stamp in the response. The default is
 10.
 """)
-  topContributorCount: int32;
+  topContributorCount?: int32 = 10;
 }
 
 @doc("Variable values.")
