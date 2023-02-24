@@ -21,11 +21,17 @@ output-folder: $(go-sdk-folder)/$(module-name)
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: package-2022-01-15-privatepreview
+  - tag: package-2023-02-01-preview
 ```
 ### Tag: package-2022-01-15-privatepreview and go
 These settings apply only when `--tag=package-2022-01-15-privatepreview --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 ``` yaml $(tag) == 'package-2022-01-15-privatepreview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2022-01-15-privatepreview/$(namespace)
+```
+### Tag: package-2023-02-01-preview and go
+These settings apply only when `--tag=package-2023-02-01-preview --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+``` yaml $(tag) == 'package-2023-02-01-preview ' && $(go)
+output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2023-02-01-preview/$(namespace)
 ```
