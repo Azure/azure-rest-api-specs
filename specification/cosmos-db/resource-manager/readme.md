@@ -585,6 +585,7 @@ directive:
     reason: Temporarily suppressing linter errors and will be fixed later
   - suppress: ResourceNameRestriction
     from: cosmos-db.json
+    where: $.paths
     reason: Temporarily suppressing linter errors and will be fixed later
   - suppress: XmsIdentifierValidation
     from: cosmos-db.json
