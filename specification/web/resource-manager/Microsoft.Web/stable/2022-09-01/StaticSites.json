@@ -1452,9 +1452,14 @@
             "description": "name of the basic auth entry.",
             "required": true,
             "type": "string",
+            "pattern": "default",
             "enum": [
-              "Default"
-            ]
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BasicAuthName",
+              "modelAsString": true
+            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -1507,9 +1512,14 @@
             "description": "name of the basic auth entry.",
             "required": true,
             "type": "string",
+            "pattern": "default",
             "enum": [
-              "Default"
-            ]
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "BasicAuthName",
+              "modelAsString": true
+            }
           },
           {
             "name": "basicAuthEnvelope",
@@ -1542,7 +1552,7 @@
           }
         },
         "x-ms-examples": {
-          "Creates or updates basic auth properties of a static site.": {
+          "Creates or updates basic auth properties for a static site.": {
             "$ref": "./examples/CreateOrUpdateStaticSiteBasicAuth.json"
           }
         }
