@@ -5130,6 +5130,31 @@
         }
       }
     },
+    "StaticSiteTrafficSplittingPropertiesARMResource": {
+      "description": "Static site traffic splitting properties ARM resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../2022-03-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "StaticSiteTrafficSplittingPropertiesARMResource resource specific properties",
+          "type": "object",
+          "properties": {
+            "environmentDistribution": {
+              "type": "object",
+              "additionalProperties": {
+                "format": "int32",
+                "type": "integer"
+              }
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "StaticSiteTrafficSplittingPropertiesCollection": {
       "description": "Collection of static site traffic splitting.",
       "required": [
