@@ -3462,6 +3462,7 @@
         "tags": [
           "DppResourceGuardProxies"
         ],
+        "summary": "Returns the list of ResourceGuardProxies associated with the vault",
         "operationId": "DppResourceGuardProxy_List",
         "produces": [
           "application/json"
@@ -3509,6 +3510,7 @@
         "tags": [
           "DppResourceGuardProxies"
         ],
+        "summary": "Returns the ResourceGuardProxy object associated with the vault, and that matches the name in the request",
         "operationId": "DppResourceGuardProxy_Get",
         "produces": [
           "application/json"
@@ -3559,7 +3561,8 @@
         "tags": [
           "DppResourceGuardProxies"
         ],
-        "operationId": "DppResourceGuardProxy_Put",
+        "summary": "Creates or Updates a ResourceGuardProxy",
+        "operationId": "DppResourceGuardProxy_CreateOrUpdate",
         "produces": [
           "application/json"
         ],
@@ -3618,6 +3621,7 @@
         "tags": [
           "DppResourceGuardProxies"
         ],
+        "summary": "Deletes the ResourceGuardProxy",
         "operationId": "DppResourceGuardProxy_Delete",
         "produces": [
           "application/json"
@@ -3670,6 +3674,7 @@
         "tags": [
           "DppResourceGuardProxies"
         ],
+        "summary": "UnlockDelete call for ResourceGuardProxy, executed before one can delete it",
         "operationId": "DppResourceGuardProxy_UnlockDelete",
         "produces": [
           "application/json"
@@ -7244,6 +7249,7 @@
       }
     },
     "ResourceGuardOperationDetail": {
+      "description": "VaultCritical Operation protected by a resource guard",
       "type": "object",
       "properties": {
         "vaultCriticalOperation": {
@@ -7255,6 +7261,7 @@
       }
     },
     "ResourceGuardProxyBase": {
+      "description": "ResourceGuardProxyBase object, used in ResourceGuardProxyBaseResource",
       "type": "object",
       "properties": {
         "resourceGuardResourceId": {
@@ -7276,6 +7283,7 @@
       }
     },
     "ResourceGuardProxyBaseResource": {
+      "description": "ResourceGuardProxyBaseResource object, used for response and request bodies for ResourceGuardProxy APIs",
       "type": "object",
       "allOf": [
         {
