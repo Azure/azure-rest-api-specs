@@ -5130,6 +5130,27 @@
         }
       }
     },
+    "StaticSiteTrafficSplittingPropertiesCollection": {
+      "description": "Collection of static site traffic splitting.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StaticSiteTrafficSplittingPropertiesARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "StaticSiteUserARMResource": {
       "description": "Static Site User ARM resource.",
       "type": "object",
