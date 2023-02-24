@@ -55,7 +55,7 @@
   },
   "definitions": {
     "BillingMeter": {
-      "description": "A premium billing meter.",
+      "description": "Billing meter.",
       "type": "object",
       "allOf": [
         {
@@ -72,17 +72,8 @@
           "type": "object",
           "properties": {
             "category": {
-              "description": "Used to map workload profile types to billing meter.",
-              "type": "string",
-              "enum": [
-                "PremiumSkuGeneralPurpose",
-                "PremiumSkuMemoryOptimized",
-                "PremiumSkuComputeOptimized"
-              ],
-              "x-ms-enum": {
-                "name": "Category",
-                "modelAsString": true
-              }
+              "description": "Used to categorize billing meters.",
+              "type": "string"
             },
             "meterType": {
               "type": "string",
@@ -97,7 +88,7 @@
       }
     },
     "BillingMeterCollection": {
-      "description": "Collection of premium workload billing meters.",
+      "description": "Collection of billing meters.",
       "required": [
         "value"
       ],

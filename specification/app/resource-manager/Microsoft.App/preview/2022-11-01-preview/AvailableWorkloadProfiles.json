@@ -58,7 +58,7 @@
   },
   "definitions": {
     "AvailableWorkloadProfile": {
-      "description": "A premium workload profile.",
+      "description": "A workload profile with specific hardware configure to run container apps.",
       "type": "object",
       "allOf": [
         {
@@ -74,18 +74,9 @@
           "description": "Revision resource specific properties",
           "type": "object",
           "properties": {
-            "billingMeterCategory": {
-              "description": "Used to map workload profile types to billing meter.",
-              "type": "string",
-              "enum": [
-                "PremiumSkuGeneralPurpose",
-                "PremiumSkuMemoryOptimized",
-                "PremiumSkuComputeOptimized"
-              ],
-              "x-ms-enum": {
-                "name": "Category",
-                "modelAsString": true
-              }
+            "category": {
+              "description": "Used to categorize workload profiles.",
+              "type": "string"
             },
             "applicability": {
               "type": "string",
