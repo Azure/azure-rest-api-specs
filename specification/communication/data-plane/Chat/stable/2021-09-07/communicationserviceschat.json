@@ -1557,8 +1557,8 @@
             "$ref": "#/definitions/ChatParticipant"
           }
         },
-        "deletionStrategy": {
-          "$ref": "#/definitions/DeletionStrategy"
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1597,8 +1597,8 @@
           "type": "string",
           "example": "2020-10-30T10:50:50Z"
         },
-        "deletionStrategy": {
-          "$ref": "#/definitions/DeletionStrategy"
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1650,8 +1650,8 @@
           "readOnly": true,
           "example": "2020-10-30T10:50:50Z"
         },
-        "deletionStrategy": {
-          "$ref": "#/definitions/DeletionStrategy"
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1685,8 +1685,8 @@
           "type": "string",
           "example": "Lunch Thread"
         },
-        "deletionStrategy": {
-          "$ref": "#/definitions/DeletionStrategy"
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1701,22 +1701,31 @@
         }
       }
     },
-    "DeletionStrategy": {
+    "RetentionPolicy": {
+      "description": "Data retention policy for auto deletion.",
       "type": "object",
-      "discriminator": "strategy",
+      "discriminator": "retentionPolicyType",
       "properties": {
-        "strategy": {
-          "type": "string"
+        "retentionPolicyType": {
+          "description": "Retention Policy Type",
+          "enum": [
+            "basedOnThreadCreationDate"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RetentionPolicyType",
+            "modelAsString": true
+          }
         }
       },
       "required": [
-        "strategy"
+        "retentionPolicyType"
       ]
     },  
-    "DeleteBasedOnCreationStrategy": {
+    "BasedOnThreadCreationDateRetentionPolicy": {
       "allOf": [
         {
-          "$ref": "#/definitions/DeletionStrategy"
+          "$ref": "#/definitions/RetentionPolicy"
         },
         {
           "type": "object",
@@ -1724,12 +1733,13 @@
             "daysAfterCreation":{
               "type": "integer",
               "format": "int32",
-              "description": "Only 90 is accepted for now"
+              "description": "Indicates how many days after the thread creation the thread will be deleted. Only 90 is accepted for now."
             }
           },
           "required": [
             "daysAfterCreation"
-          ]
+          ],
+          "x-ms-discriminator-value": "basedOnThreadCreationDate"
         }
       ]
     }
