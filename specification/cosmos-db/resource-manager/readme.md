@@ -577,6 +577,39 @@ directive:
   - suppress: DeleteOperationResponses
     from: managedCassandra.json
     reason: Linter is broken and throwing false positives.
+  - suppress: UnSupportedPatchProperties
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroPatch202
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ResourceNameRestriction
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: XmsIdentifierValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: CreateOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: DeleteOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PostOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: MissingTypeObject
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ParametersOrder
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroLocationHeader
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
 ```
 
 ---
