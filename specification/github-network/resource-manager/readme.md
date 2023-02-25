@@ -29,16 +29,25 @@ These are the global settings for the Resource Provider.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-02-15-preview
+tag: package-2023-03-15-beta
 ```
 
-### Tag: package-2023-02-15-preview
+### Tag: package-2023-03-15-beta
 
-These settings apply only when `--tag=package-2023-02-15-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-03-15-beta` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-02-15-preview'
+```yaml $(tag) == 'package-2023-03-15-beta'
 input-file:
-  - GitHub.Network/preview/2023-02-15-preview/GitHub.Network.json
+  - GitHub.Network/preview/2023-03-15-beta/GitHub.Network.json
+```
+
+### Tag: package-2023-03-15-alpha
+
+These settings apply only when `--tag=package-2023-03-15-alpha` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-03-15-alpha'
+input-file:
+  - GitHub.Network/preview/2023-03-15-alpha/GitHub.Network.json
 ```
 
 # Code Generation
