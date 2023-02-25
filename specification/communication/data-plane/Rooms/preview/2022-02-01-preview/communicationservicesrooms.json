@@ -278,7 +278,7 @@
         "tags": [
           "Participants"
         ],
-        "summary": "Upsert participants to a room",
+        "summary": "Patch participants in a room",
         "operationId": "Rooms_PatchParticipants",
         "consumes": [
           "application/merge-patch+json"
@@ -290,7 +290,7 @@
           {
             "in": "path",
             "name": "roomId",
-            "description": "The identifier of the room to update the participants in.",
+            "description": "The identifier of the room to patch the participants in.",
             "required": true,
             "type": "string"
           },
@@ -300,7 +300,7 @@
           {
             "in": "body",
             "name": "patchParticipantsRequest",
-            "description": "An updated set of participants of the room.",
+            "description": "A patched set of participants of the room.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchParticipantsRequest"
@@ -470,27 +470,36 @@
     "PatchParticipantsRequest": {
       "description": "Participants to be patched in the room.",
       "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "role": {
-            "$ref": "#/definitions/Role"
+      "properties": {
+        "participants": {
+          "description": "Participants to be patched.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParticipantProperties"
+          },
+          "example": {
+            "rawId1": {
+              "role": "Presenter"
+            },
+            "rawId2": {
+              "role": "Attendee"
+            },
+            "rawId3": null
           }
         }
-      },
-      "example": {
-        "rawId1": {
-          "role": "Presenter"
-        },
-        "rawId2": {
-          "role": "Attendee"
-        },
-        "rawId3": null
       }
     },
     "PatchParticipantsResult": {
       "description": "Request response for patching participants.",
       "type": "object"
+    },
+    "ParticipantProperties": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/Role"
+        }
+      }
     },
     "ParticipantsCollection": {
       "description": "A collection of participants in a room.",
