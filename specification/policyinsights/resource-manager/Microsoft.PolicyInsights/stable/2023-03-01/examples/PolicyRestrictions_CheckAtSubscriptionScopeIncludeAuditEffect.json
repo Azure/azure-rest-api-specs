@@ -31,7 +31,8 @@
         {
           "field": "tags"
         }
-      ]
+      ],
+      "includeAuditEffect": true
     }
   },
   "responses": {
@@ -91,11 +92,11 @@
                   "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/1E17783A",
                   "policyDefinitionReferenceId": "DefRef"
                 },
-                "policyEffect": "Audit",
+                "policyEffect": "Deny",
                 "reason": "location must be one of the following: eastus, westus, westus2"
               },
               {
-                "result": "Deny",
+                "result": "Audit",
                 "values": [
                   "eastus",
                   "westus"
@@ -133,7 +134,8 @@
                     "targetValue": "microsoft.compute/virtualmachines",
                     "operator": "equals"
                   }
-                ]
+                ],
+                "reason": "Resource creation of microsoft.compute/virtualmachines is not allowed"
               },
               "effectDetails": {
                 "policyEffect": "Deny"

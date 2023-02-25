@@ -51,7 +51,9 @@
                   "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/57DAC8A0",
                   "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/05D92080",
                   "policyDefinitionReferenceId": "DefRef"
-                }
+                },
+                "policyEffect": "Deny",
+                "reason": "tags.newtag is required"
               }
             ]
           },
@@ -70,7 +72,9 @@
                   "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/7EB1508A",
                   "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/735551F1",
                   "policyDefinitionReferenceId": "DefRef"
-                }
+                },
+                "policyEffect": "Audit",
+                "reason": "tags.environment is required"
               }
             ]
           },
@@ -87,7 +91,9 @@
                   "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/1563EBD3",
                   "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/1E17783A",
                   "policyDefinitionReferenceId": "DefRef"
-                }
+                },
+                "policyEffect": "Audit",
+                "reason": "location must be one of the following: eastus, westus, westus2"
               },
               {
                 "result": "Deny",
@@ -100,7 +106,9 @@
                   "policyAssignmentId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policyAssignments/5382A69D",
                   "policySetDefinitionId": "/subscriptions/d8db6de6-2b96-46af-b825-07aef2033c0b/providers/microsoft.authorization/policySetDefinitions/392D107B",
                   "policyDefinitionReferenceId": "DefRef"
-                }
+                },
+                "policyEffect": "Audit",
+                "reason": "location must be one of the following: westus2"
               }
             ]
           }
@@ -127,6 +135,9 @@
                     "operator": "equals"
                   }
                 ]
+              },
+              "effectDetails": {
+                "policyEffect": "Deny"
               }
             }
           ]

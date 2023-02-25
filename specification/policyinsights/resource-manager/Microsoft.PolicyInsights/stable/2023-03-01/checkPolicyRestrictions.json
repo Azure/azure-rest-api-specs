@@ -177,6 +177,10 @@
           "items": {
             "$ref": "#/definitions/PendingField"
           }
+        },
+        "includeAuditEffect": {
+          "description": "Whether to include the audit effect in the results. Defaults to false.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -292,7 +296,8 @@
           "enum": [
             "Required",
             "Removed",
-            "Deny"
+            "Deny",
+            "Audit"
           ],
           "x-ms-enum": {
             "name": "FieldRestrictionResult",
@@ -309,6 +314,10 @@
               {
                 "value": "Deny",
                 "description": "The field and/or values will be denied by policy."
+              },
+              {
+                "value": "Audit",
+                "description": "The field and/or values will be audited by policy."
               }
             ]
           },
@@ -331,6 +340,16 @@
           "description": "The details of the policy that is causing the field restriction.",
           "$ref": "#/definitions/PolicyReference",
           "readOnly": true
+        },
+        "policyEffect": {
+          "description": "The effect of the policy that is causing the field restriction.",
+          "$ref": "#/definitions/PolicyEffect",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for the restriction.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -349,7 +368,12 @@
         },
         "evaluationDetails": {
           "description": "The detailed results of the policy expressions and values that were evaluated.",
-          "$ref": "../../stable/2019-10-01/policyStates.json#/definitions/PolicyEvaluationDetails",
+          "$ref": "#/definitions/PolicyEvaluationDetails",
+          "readOnly": true
+        },
+        "effectDetails": {
+          "description": "The details of the effect that was applied to the resource.",
+          "$ref": "#/definitions/PolicyEffectDetails",
           "readOnly": true
         }
       }
@@ -374,6 +398,108 @@
         },
         "policyAssignmentId": {
           "description": "The resource identifier of the policy assignment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyEffectDetails": {
+      "description": "The details of the effect that was applied to the resource.",
+      "properties": {
+        "policyEffect": {
+          "description": "The effect that was applied to the resource",
+          "$ref": "#/definitions/PolicyEffect",
+          "readOnly": true
+        }
+      }
+    },
+    "PolicyEffect": {
+      "description": "The effect of the policy that is causing the restriction.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Audit",
+        "Deny",
+        "Append",
+        "Modify",
+        "AuditIfNotExists",
+        "DeployIfNotExists",
+        "Disabled",
+        "Manual",
+        "DenyAction",
+        "SupportsCapability"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyEffect",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "The policy effect is not specified."
+          },
+          {
+            "value": "Audit",
+            "description": "The policy effect is audit."
+          },
+          {
+            "value": "Deny",
+            "description": "The policy effect is deny."
+          },
+          {
+            "value": "Append",
+            "description": "The policy effect is append."
+          },
+          {
+            "value": "Modify",
+            "description": "The policy effect is modify."
+          },
+          {
+            "value": "AuditIfNotExists",
+            "description": "The policy effect is audit if not exists."
+          },
+          {
+            "value": "DeployIfNotExists",
+            "description": "The policy effect is deploy if not exists."
+          },
+          {
+            "value": "Disabled",
+            "description": "The policy effect is disabled."
+          },
+          {
+            "value": "Manual",
+            "description": "The policy effect is manual."
+          },
+          {
+            "value": "DenyAction",
+            "description": "The policy effect is deny action."
+          },
+          {
+            "value": "SupportsCapability",
+            "description": "The policy effect is supports capability."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "PolicyEvaluationDetails": {
+      "type": "object",
+      "description": "Policy evaluation details.",
+      "properties": {
+        "evaluatedExpressions": {
+          "description": "Details of the evaluated expressions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpressionEvaluationDetails"
+          },
+          "x-ms-identifiers": []
+        },
+        "ifNotExistsDetails": {
+          "description": "Evaluation details of IfNotExists effect.",
+          "type": "object",
+          "$ref": "#/definitions/IfNotExistsEvaluationDetails"
+        },
+        "reason": {
+          "description": "The reason for the evaluation result.",
           "type": "string",
           "readOnly": true
         }
