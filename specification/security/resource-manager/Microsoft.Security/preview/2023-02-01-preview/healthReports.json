@@ -232,15 +232,15 @@
       "description": "The environment details of the resource",
       "properties": {
         "nativeResourceId": {
-          "description": "The native resource id of the resource (in case of Azure, the resource Id)",
+          "description": "The native resource id of the resource (in case of Azure - the resource Id, in case of MC - the native resource id)",
           "type": "string"
         },
         "environmentHierarchyId": {
-          "description": "The hierarchy id of the connector (in case of Azure, the subscription Id)",
+          "description": "The hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the hierarchyId id)",
           "type": "string"
         },
         "organizationalHierarchyId": {
-          "description": "The organizational hierarchy id of the connector (in case of Azure, the tenant Id)",
+          "description": "The organizational hierarchy id of the connector (in case of Azure - the subscription Id, in case of MC - the organizational hierarchyId id)",
           "type": "string"
         },
         "subscriptionId": {
@@ -248,7 +248,7 @@
           "type": "string"
         },
         "tenantId": {
-          "description": "The subscription Id",
+          "description": "The tenant Id",
           "type": "string"
         }
       }
@@ -348,7 +348,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
+      "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
       "description": "The health report Key - Unique key for the health report type",
       "x-ms-parameter-location": "method"
     }
