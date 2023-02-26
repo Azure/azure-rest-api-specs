@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/healthReports": {
+    "/{scope}/providers/Microsoft.Security/healthReports": {
       "get": {
         "x-ms-examples": {
           "List health reports": {
@@ -51,7 +51,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/Scope"
           }
         ],
         "responses": {
@@ -350,6 +350,14 @@
       "type": "string",
       "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
       "description": "The health report Key - Unique key for the health report type",
+      "x-ms-parameter-location": "method"
+    },
+    "Scope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the health reports. Valid scopes are: subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
       "x-ms-parameter-location": "method"
     }
   }
