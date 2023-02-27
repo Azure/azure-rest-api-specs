@@ -665,7 +665,7 @@
             "name": "Status",
             "in": "query",
             "description": "Used to filter returned snapshots by their status property.",
-            "type": "string",
+            "type": "array",
             "enum": [
               "provisioning",
               "ready",
@@ -675,7 +675,8 @@
             "x-ms-enum": {
               "name": "SnapshotStatus",
               "modelAsString": true
-            }
+            },
+            "collectionFormat": "csv"
           }
         ],
         "responses": {
