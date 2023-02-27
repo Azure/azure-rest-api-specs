@@ -50,6 +50,9 @@
           },
           "Create or update an Activity Log Alert rule with 'containsAny'": {
             "$ref": "./examples/ActivityLogAlertRule_CreateOrUpdateRuleWithContainsAny.json"
+          },
+          "Create or update an Activity Log Alert rule for tenant level events": {
+            "$ref": "./examples/ActivityLogAlertRule_CreateOrUpdateTenantLevelServiceHealthRule.json"
           }
         },
         "parameters": [
@@ -333,6 +336,7 @@
       }
     },
     "ActivityLogAlertResource": {
+      "type": "object",
       "description": "An Activity Log Alert rule resource.",
       "allOf": [
         {
@@ -348,6 +352,7 @@
       }
     },
     "AlertRuleList": {
+      "type": "object",
       "description": "A list of Activity Log Alert rules.",
       "properties": {
         "value": {
@@ -496,9 +501,11 @@
       ]
     },
     "AlertRulePatchObject": {
+      "type": "object",
       "description": "An Activity Log Alert rule object for the body of patch operations.",
       "properties": {
         "tags": {
+          "type": "object",
           "description": "The resource tags",
           "additionalProperties": {
             "type": "string"
@@ -512,6 +519,7 @@
       }
     },
     "AlertRulePatchProperties": {
+      "type": "object",
       "description": "An Activity Log Alert rule properties for patch operations.",
       "properties": {
         "enabled": {
@@ -544,6 +552,7 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
       "description": "The name of the Activity Log Alert rule.",
       "x-ms-parameter-location": "method"
     }
