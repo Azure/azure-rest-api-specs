@@ -202,6 +202,9 @@
         "x-ms-examples": {
           "Create environments": {
             "$ref": "./examples/ManagedEnvironments_CreateOrUpdate.json"
+          },
+          "Create environment with custom infrastructureResourceGroup": {
+            "$ref": "./examples/ManagedEnvironments_CustomInfrastructureResourceGroup_Create.json"
           }
         }
       },
@@ -1228,6 +1231,14 @@
             "daprConfiguration": {
               "$ref": "#/definitions/DaprConfiguration",
               "description": "The configuration of Dapr component."
+            },
+            "infrastructureResourceGroup": {
+              "description": "Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. If a subnet ID is provided, this resource group will be created in the same subscription as the subnet.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             }
           },
           "x-ms-client-flatten": true
