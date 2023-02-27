@@ -24,22 +24,32 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the confidentialledger.
 
-```yaml
+``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2022-09-08-preview
+tag: package-preview-2023-01
 ```
 
 
+### Tag: package-preview-2023-01
+
+These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-01'
+input-file:
+  - Microsoft.ConfidentialLedger/preview/2023-01-26-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/preview/2023-01-26-preview/managedccf.json
+```
 ### Tag: package-2022-09-08-preview
 
 These settings apply only when `--tag=package-2022-09-08-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-09-08-preview'
+``` yaml $(tag) == 'package-2022-09-08-preview'
 input-file:
   - Microsoft.ConfidentialLedger/preview/2022-09-08-preview/confidentialledger.json
   - Microsoft.ConfidentialLedger/preview/2022-09-08-preview/managedccf.json
 ```
+
 ### Tag: package-2020-12-01-preview
 
 These settings apply only when `--tag=package-2020-12-01-preview` is specified on the command line.

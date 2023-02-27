@@ -31,6 +31,15 @@ add-credentials: true
 title: StorageCacheManagementClient
 ```
 
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.StorageCache/preview/2023-03-01-preview/storagecache.json
+  - Microsoft.StorageCache/preview/2023-03-01-preview/amlfilesystem.json
+```
 
 ### Tag: package-2023-01
 
