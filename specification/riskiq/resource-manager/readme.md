@@ -50,3 +50,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
 ```
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)

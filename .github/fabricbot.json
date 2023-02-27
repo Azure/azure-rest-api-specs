@@ -2362,7 +2362,6 @@
               "Search"
             ],
             "mentionees": [
-              "brjohnstmsft",
               "bleroy",
               "tjacobhi",
               "markheff",
@@ -4237,6 +4236,15 @@
             "exclude": [
               ""
             ]
+          },
+          {
+            "label": "ArcReview",
+            "pathFilter": [
+              "specification/hybridcompute/resource-manager/",
+              "specification/connectedvmware/resource-manager/",
+              "specification/azurestackhci/resource-manager/",
+              "specification/scvmm/resource-manager/"
+            ]
           }
         ],
         "taskName": "Auto PR based on folder paths "
@@ -4247,7 +4255,6 @@
       "capabilityId": "PrAutoLabel",
       "subCapability": "Path",
       "version": "1.0",
-      "id": "AzureSDKPullRequestLabelFolder_azure-rest-api-specs_Azure",
       "config": {
         "configs": [
           {
@@ -4891,6 +4898,45 @@
           }
         ],
         "taskName": "Auto PR based on folder paths "
+      }
+    },
+    {
+      "taskType": "trigger",
+      "capabilityId": "IssueResponder",
+      "subCapability": "IssuesOnlyResponder",
+      "version": "1.0",
+      "config": {
+        "conditions": {
+          "operator": "and",
+          "operands": [
+            {
+              "name": "hasLabel",
+              "parameters": {
+                "label": "customer-reported"
+              }
+            },
+            {
+              "name": "hasLabel",
+              "parameters": {
+                "label": "needs-triage"
+              }
+            }
+          ]
+        },
+        "eventType": "issue",
+        "eventNames": [
+          "issues",
+          "project_card"
+        ],
+        "taskName": "CXP attention",
+        "actions": [
+          {
+            "name": "addLabel",
+            "parameters": {
+              "label": "CXP Attention"
+            }
+          }
+        ]
       }
     }
   ],
