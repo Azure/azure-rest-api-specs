@@ -18,17 +18,17 @@
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}": {
       "get": {
-        "description": "Get a savings plan order.",
-        "operationId": "BillingSavingsPlanOrder_Get",
+        "description": "Get a savings plan order by billing account.",
+        "operationId": "SavingsPlanOrder_GetByBillingAccount",
         "tags": [
           "Savings plan order"
         ],
         "x-ms-examples": {
           "SavingsPlanOrderGet": {
-            "$ref": "./examples/billingSavingsPlanOrderGet.json"
+            "$ref": "./examples/savingsPlanOrderGetByBillingAccount.json"
           },
           "SavingsPlanOrderWithExpandedPaymentsGet": {
-            "$ref": "./examples/billingSavingsPlanOrderExpandedSchedule.json"
+            "$ref": "./examples/savingsPlanOrderExpandedScheduleGetByBillingAccount.json"
           }
         },
         "parameters": [
@@ -63,8 +63,8 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders": {
       "get": {
-        "description": "List all Savings plan orders.",
-        "operationId": "BillingSavingsPlanOrder_List",
+        "description": "List all Savings plan orders by billing account.",
+        "operationId": "SavingsPlanOrder_ListByBillingAccount",
         "tags": [
           "Savings plan order"
         ],
@@ -73,7 +73,7 @@
         },
         "x-ms-examples": {
           "SavingsPlanOrderList": {
-            "$ref": "./examples/billingSavingsPlanOrderList.json"
+            "$ref": "./examples/savingsPlanOrderListByBillingAccount.json"
           }
         },
         "parameters": [
@@ -111,8 +111,8 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans": {
       "get": {
-        "description": "List savings plans in an order.",
-        "operationId": "BillingSavingsPlansInOrder_List",
+        "description": "List savings plans in an order by billing account.",
+        "operationId": "SavingsPlansInOrder_ListByBillingAccount",
         "tags": [
           "Savings plan"
         ],
@@ -121,7 +121,7 @@
         },
         "x-ms-examples": {
           "SavingsPlansInOrderList": {
-            "$ref": "./examples/billingSavingsPlansInOrderList.json"
+            "$ref": "./examples/listSavingsPlansInOrderByBillingAccount.json"
           }
         },
         "parameters": [
@@ -153,8 +153,8 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlans": {
       "get": {
-        "description": "List savings plans.",
-        "operationId": "BillingSavingsPlans_List",
+        "description": "List savings plans by billing account.",
+        "operationId": "SavingsPlans_ListByBillingAccount",
         "tags": [
           "Savings plan"
         ],
@@ -163,7 +163,7 @@
         },
         "x-ms-examples": {
           "SavingsPlansList": {
-            "$ref": "./examples/billingSavingsPlansList.json"
+            "$ref": "./examples/savingsPlansListByBillingAccount.json"
           }
         },
         "parameters": [
@@ -210,17 +210,17 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}": {
       "get": {
-        "description": "Get savings plan.",
-        "operationId": "BillingSavingsPlan_Get",
+        "description": "Get savings plan by billing account.",
+        "operationId": "SavingsPlan_GetByBillingAccount",
         "tags": [
           "Savings plan"
         ],
         "x-ms-examples": {
           "SavingsPlanGet": {
-            "$ref": "./examples/billingSavingsPlanGet.json"
+            "$ref": "./examples/savingsPlanGetByBillingAccount.json"
           },
           "SavingsPlanGetExpandRenewProperties": {
-            "$ref": "./examples/billingSavingsPlanGetExpandRenewProperties.json"
+            "$ref": "./examples/savingsPlanGetExpandRenewPropertiesByBillingAccount.json"
           }
         },
         "parameters": [
@@ -256,14 +256,14 @@
         }
       },
       "patch": {
-        "description": "Update savings plan.",
-        "operationId": "BillingSavingsPlan_Update",
+        "description": "Update savings plan by billing account.",
+        "operationId": "SavingsPlan_UpdateByBillingAccount",
         "tags": [
           "Savings plan"
         ],
         "x-ms-examples": {
           "SavingsPlanUpdate": {
-            "$ref": "./examples/billingSavingsPlanUpdate.json"
+            "$ref": "./examples/savingsPlanUpdateByBillingAccount.json"
           }
         },
         "parameters": [
@@ -309,14 +309,14 @@
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/validate": {
       "post": {
-        "description": "Validate savings plan patch.",
-        "operationId": "BillingSavingsPlanUpdate_Validate",
+        "description": "Validate savings plan patch by billing account.",
+        "operationId": "SavingsPlanUpdate_ValidateByBillingAccount",
         "tags": [
           "Savings plan"
         ],
         "x-ms-examples": {
           "SavingsPlanValidateUpdate": {
-            "$ref": "./examples/billingSavingsPlanValidateUpdate.json"
+            "$ref": "./examples/savingsPlanValidateUpdateByBillingAccount.json"
           }
         },
         "parameters": [
