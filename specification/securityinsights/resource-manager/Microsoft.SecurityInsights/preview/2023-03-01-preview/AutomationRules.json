@@ -246,12 +246,14 @@
           {
             "in": "path",
             "name": "entityIdentifier",
+            "description": "Entity identifier.",
             "required": true,
             "type": "string"
           },
           {
             "in": "body",
             "name": "requestBody",
+            "description": "Describes the request body for triggering a playbook on an entity.",
             "schema": {
               "$ref": "#/definitions/EntityManualTriggerRequestBody"
             }
@@ -1243,19 +1245,23 @@
     },
     "EntityManualTriggerRequestBody": {
       "type": "object",
+      "description": "Describes the request body for triggering a playbook on an entity.",
       "required": [
         "logicAppsResourceId"
       ],
       "properties": {
         "incidentArmId": {
-          "type": "string"
+          "type": "string",
+          "description": "Incident ARM id."
         },
         "tenantId": {
           "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "description": "The tenant id of the playbook resource."
         },
         "logicAppsResourceId": {
-          "type": "string"
+          "type": "string",
+          "description": "The resource id of the playbook resource."
         }
       }
     },
