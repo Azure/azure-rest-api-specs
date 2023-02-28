@@ -730,6 +730,9 @@
           },
           {
             "$ref": "#/parameters/PathExpiryTime"
+          },
+          {
+            "$ref": "#/parameters/EncryptionContext"
           }
         ],
         "responses": {
@@ -3223,6 +3226,15 @@
       "required": false,
       "x-ms-parameter-location": "method",
       "description": "If file should be flushed after the append"
+    },
+    "EncryptionContext": {
+      "name": "x-ms-encryption-context",
+      "x-ms-client-name": "encryptionContext",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Specifies the encryption context to set on the file."
     }
   },
   "definitions": {
@@ -3300,6 +3312,9 @@
           "type": "string"
         },
         "expiryTime": {
+          "type": "string"
+        },
+        "EncryptionContext": {
           "type": "string"
         }
       }
