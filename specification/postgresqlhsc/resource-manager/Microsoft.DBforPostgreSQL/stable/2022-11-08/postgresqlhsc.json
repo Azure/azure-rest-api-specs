@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "HyperscaleCitusManagementClient",
-    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Cosmos DB for PostgreSQL resources including clusters, servers, configurations, firewall rules, roles, private endpoint connections and private link resources.",
+    "title": "Azure Cosmos DB for PostgreSQL",
+    "description": "Azure Cosmos DB for PostgreSQL database service resource provider REST APIs",
     "version": "2022-11-08"
   },
   "host": "management.azure.com",
@@ -29,7 +29,7 @@
       "flow": "implicit",
       "description": "Azure Active Directory OAuth2 Flow",
       "scopes": {
-        "user_impersonation": "impersonate your user account"
+        "user_impersonation": "Impersonate your user account."
       }
     }
   },
@@ -45,7 +45,7 @@
             "$ref": "./examples/ClusterList.json"
           }
         },
-        "description": "List all the clusters in a given subscription.",
+        "description": "Lists all clusters in a subscription.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -84,7 +84,7 @@
             "$ref": "./examples/ClusterListByResourceGroup.json"
           }
         },
-        "description": "List all the clusters in a given resource group.",
+        "description": "Lists all clusters in a resource group.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -121,7 +121,7 @@
         "tags": [
           "Clusters"
         ],
-        "operationId": "Clusters_CreateOrUpdate",
+        "operationId": "Clusters_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -190,7 +190,7 @@
         }
       },
       "get": {
-        "description": "Gets information about a cluster.",
+        "description": "Gets information about a cluster such as compute and storage configuration and cluster lifecycle metadata such as cluster creation date and time.",
         "tags": [
           "Clusters"
         ],
@@ -824,7 +824,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/firewallRules/{firewallRuleName}": {
       "put": {
-        "description": "Creates a new firewall rule or updates an existing firewall rule.",
+        "description": "Creates a new cluster firewall rule or updates an existing cluster firewall rule.",
         "tags": [
           "FirewallRules"
         ],
@@ -994,7 +994,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/firewallRules": {
       "get": {
-        "description": "List all the firewall rules in a given cluster.",
+        "description": "Lists all the firewall rules on cluster.",
         "tags": [
           "FirewallRules"
         ],
@@ -1305,7 +1305,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/start": {
       "post": {
-        "description": "Starts the cluster.",
+        "description": "Starts stopped compute on all servers in the cluster.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1359,7 +1359,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/stop": {
       "post": {
-        "description": "Stops the cluster.",
+        "description": "Stops compute on all servers in the cluster.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1413,7 +1413,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/promote": {
       "post": {
-        "description": "Promote the read replica cluster.",
+        "description": "Promotes read replica cluster to an independent read-write cluster.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1464,7 +1464,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/checkNameAvailability": {
       "post": {
-        "description": "Check the availability of name for resource",
+        "description": "Checks availability of a cluster name. Cluster names should be globally unique; at least 3 characters and at most 40 characters long; they must only contain lowercase letters, numbers, and hyphens; and must not start or end with a hyphen.",
         "tags": [
           "Clusters"
         ],
@@ -1488,7 +1488,7 @@
             "schema": {
               "$ref": "#/definitions/NameAvailabilityRequest"
             },
-            "description": "The required parameters for checking if resource name is available."
+            "description": "The required parameters for checking if cluster name is available."
           }
         ],
         "responses": {
@@ -1954,7 +1954,7 @@
         },
         "citusVersion": {
           "type": "string",
-          "description": "The Citus version of server."
+          "description": "The Citus extension version on all cluster servers."
         }
       }
     },
@@ -2025,7 +2025,7 @@
         },
         "citusVersion": {
           "type": "string",
-          "description": "The Citus version of the cluster."
+          "description": "The Citus extension version on all cluster servers."
         },
         "enableShardsOnCoordinator": {
           "type": "boolean",
@@ -2156,7 +2156,7 @@
         },
         "citusVersion": {
           "type": "string",
-          "description": "The Citus version of cluster."
+          "description": "The Citus extension version on all cluster servers."
         },
         "maintenanceWindow": {
           "$ref": "#/definitions/MaintenanceWindow",
@@ -2190,7 +2190,7 @@
         },
         "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a server."
+          "description": "If public IP address is enabled on coordinator."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -2213,7 +2213,7 @@
         },
         "nodeEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a server."
+          "description": "If public IP address is enabled on worker nodes."
         },
         "serverNames": {
           "type": "array",
@@ -2701,12 +2701,12 @@
       }
     },
     "NameAvailabilityRequest": {
-      "description": "Request from client to check resource name availability.",
+      "description": "Request from client to check cluster name availability.",
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Resource name to verify."
+          "description": "Cluster name to verify."
         },
         "type": {
           "type": "string",
@@ -2726,24 +2726,24 @@
       ]
     },
     "NameAvailability": {
-      "description": "Represents a resource name availability.",
+      "description": "Represents cluster name availability.",
       "type": "object",
       "properties": {
         "message": {
           "type": "string",
-          "description": "Error Message."
+          "description": "Error message."
         },
         "nameAvailable": {
           "type": "boolean",
-          "description": "Indicates whether the resource name is available."
+          "description": "Indicates whether the cluster name is available."
         },
         "name": {
           "type": "string",
-          "description": "name of the cluster."
+          "description": "Name of the cluster."
         },
         "type": {
           "type": "string",
-          "description": "type of the cluster"
+          "description": "Type of the cluster."
         }
       }
     },
