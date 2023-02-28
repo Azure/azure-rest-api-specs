@@ -2617,11 +2617,16 @@
         "servicePrincipalCredential": {
           "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "sasUri": {
+          "description": "SAS URI of the Azure Data Lake Storage Gen2 service. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "sasToken": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The Azure key vault secret reference of sasToken in sas uri."
         }
-      },
-      "required": [
-        "url"
-      ]
+      }
     },
     "Office365LinkedService": {
       "x-ms-discriminator-value": "Office365",
