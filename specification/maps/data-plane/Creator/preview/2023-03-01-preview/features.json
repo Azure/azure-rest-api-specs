@@ -2,14 +2,14 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Features Service",
-    "version": "2022-09-01-preview",
+    "version": "2023-03-01-preview",
     "description": "Azure Maps Features REST APIs"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{geography}.atlas.microsoft.com",
     "parameters": [
       {
-        "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/GeographicResourceLocation"
+        "$ref": "../../../Common/preview/1.0/common.json#/parameters/GeographicResourceLocation"
       }
     ]
   },
@@ -64,7 +64,7 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2022-09-01-preview",
+      "default": "2023-03-01-preview",
       "x-ms-parameter-location": "client"
     },
     "LimitFeatures": {
@@ -120,7 +120,7 @@
       "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
       "x-ms-parameter-location": "client",
       "schema": {
-        "$ref": "#/definitions/Feature"
+        "$ref": "#/definitions/FeatureRequestBody"
       }
     },
     "FeatureAttributesBody": {
@@ -146,7 +146,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -163,7 +163,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -179,7 +179,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -196,7 +196,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -212,7 +212,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -229,7 +229,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -245,7 +245,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -262,7 +262,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -278,7 +278,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -298,7 +298,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -314,7 +314,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -334,7 +334,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -350,7 +350,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -379,7 +379,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       },
@@ -416,7 +416,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -452,7 +452,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       },
@@ -489,7 +489,7 @@
             "description": "Feature Updated."
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       },
@@ -526,7 +526,7 @@
             "description": "Feature Updated."
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       },
@@ -557,7 +557,7 @@
             "description": "Feature Deleted."
           },
           "default": {
-            "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/responses/default"
+            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
         }
       }
@@ -571,7 +571,7 @@
       ],
       "properties": {
         "ontology": {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/Ontology"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "links": {
           "description": "Links to other Features endpoints.",
@@ -609,7 +609,7 @@
             "version": {
               "description": "The version of the API.",
               "type": "string",
-              "example": "2022-09-01-preview"
+              "example": "2023-03-01-preview"
             },
             "description": {
               "description": "The description of the API.",
@@ -715,7 +715,7 @@
       ],
       "properties": {
         "ontology": {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/Ontology"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "collections": {
           "description": "All the collections in a given dataset.",
@@ -759,7 +759,7 @@
           "example": "Buildings"
         },
         "ontology": {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/Ontology"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "itemType": {
           "description": "The type of the items in the collection.",
@@ -817,7 +817,7 @@
           "example": "Feature Class buildings"
         },
         "ontology": {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/Ontology"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "itemType": {
           "description": "The type of the items in the collection.",
@@ -956,7 +956,7 @@
       "type": "object",
       "properties": {
         "ontology": {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/Ontology"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "numberReturned": {
           "description": "Number of returned features.",
@@ -979,7 +979,7 @@
       ],
       "properties": {
         "ontology": {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/Ontology"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "feature": {
           "$ref": "#/definitions/Feature"
@@ -1007,7 +1007,7 @@
           "type": "string"
         },
         "ontology": {
-          "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/Ontology"
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "links": {
           "description": "Links to other Features endpoints.",
@@ -1023,10 +1023,18 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/FeatureType"
+          "$ref": "#/definitions/FeatureId"
         },
         {
-          "$ref": "#/definitions/FeatureId"
+          "$ref": "#/definitions/FeatureRequestBody"
+        }
+      ]
+    },
+    "FeatureRequestBody": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeatureType"
         },
         {
           "$ref": "#/definitions/FeatureAttributes"
