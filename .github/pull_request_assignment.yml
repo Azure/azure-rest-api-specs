@@ -67,6 +67,32 @@
 
 - rule:
     paths:
+        - "specification/**/*Management/**/*.cadl"
+        - "specification/**/*Management.Shared/**/*.cadl"
+        - "specification/**/resource-management/**/*.cadl"
+        - "specification/**/*Management/**/*.tsp"
+        - "specification/**/*Management.Shared/**/*.tsp"
+        - "specification/**/resource-management/**/*.tsp"
+    reviewers:
+        - raych1
+        - jianyexi
+        - leni-msft
+        - akning-ms
+        - ruowan
+        - xiaoxuqi-ms
+
+- rule:
+    paths:
+        - "specification/**/*.cadl"
+        - "specification/**/*.tsp"
+    reviewers:
+        - anuchandy
+        - jhendrixMSFT
+        - tjprescott
+        
+
+- rule:
+    paths:
       - "specification/network/**"
     reviewers:
       - lirenhe
@@ -79,7 +105,6 @@
     paths: "specification/common-types/**"
     reviewers:
       - raych1
-      - akning-ms
       - leni-msft
       - ruowan
       - jianyexi
@@ -114,12 +139,7 @@
     branches:
       - dev-sql-
       
-- rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights|eventgrid)/**"
-    reviewers:
-      - akning-ms
-      
+  
       
 - rule:
     paths: "specification/@(security|edgeorder|synapse)/**"
@@ -181,7 +201,8 @@
 - rule:	
     paths: "specification/mediaservices/**"	
     reviewers:	
-      - allenjzhang
+      - leni-msft
+      - tianxchen-ms
       
 - rule:
     paths:
@@ -222,18 +243,15 @@
       - "documentation/**"
     reviewers:
       - josefree
-      - akning-ms
 
 
 - rule:
     paths:
-      - "**/package.json"	
       - ".github/**"	
       - "**/azure-pipelines.yml"	
       - ".azure-pipelines/**"	
       - ".azure-pipelines-preproduction/**"	
     reviewers:
-      - akning-ms
       - raych1
 
 - rule:
@@ -245,14 +263,12 @@
       - weidongxu-microsoft
       - ArcturusZhang
       - raych1
-      - akning-ms
       - leni-msft
       - ruowan
       - jianyexi
       - chunyu3
       - changlong-liu
       - msyyc
-      - qiaozha
       - dw511214992
       - honghr
       - tianxchen-ms

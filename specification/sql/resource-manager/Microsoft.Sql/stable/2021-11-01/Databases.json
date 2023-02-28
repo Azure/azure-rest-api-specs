@@ -926,11 +926,20 @@
         },
         "elasticPoolId": {
           "description": "The resource identifier of the elastic pool containing this database.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers/elasticPools"
+              }
+            ]
+          }
         },
         "sourceDatabaseId": {
           "description": "The resource identifier of the source database associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1021,6 +1030,7 @@
         "recoveryServicesRecoveryPointId": {
           "description": "The resource identifier of the recovery point associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1028,6 +1038,14 @@
         "longTermRetentionBackupResourceId": {
           "description": "The resource identifier of the long term retention backup associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/locations/longTermRetentionBackups"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "create"
           ]
@@ -1035,6 +1053,7 @@
         "recoverableDatabaseId": {
           "description": "The resource identifier of the recoverable database associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1042,6 +1061,7 @@
         "restorableDroppedDatabaseId": {
           "description": "The resource identifier of the restorable dropped database associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1200,6 +1220,7 @@
         "sourceResourceId": {
           "description": "The resource identifier of the source associated with the create operation of this database.\r\n\r\nThis property is only supported for DataWarehouse edition and allows to restore across subscriptions.\r\n\r\nWhen sourceResourceId is specified, sourceDatabaseId, recoverableDatabaseId, restorableDroppedDatabaseId and sourceDatabaseDeletionDate must not be specified and CreateMode must be PointInTimeRestore, Restore or Recover.\r\n\r\nWhen createMode is PointInTimeRestore, sourceResourceId must be the resource ID of the existing database or existing sql pool, and restorePointInTime must be specified.\r\n\r\nWhen createMode is Restore, sourceResourceId must be the resource ID of restorable dropped database or restorable dropped sql pool.\r\n\r\nWhen createMode is Recover, sourceResourceId must be the resource ID of recoverable database or recoverable sql pool.\r\n\r\nWhen source subscription belongs to a different tenant than target subscription, “x-ms-authorization-auxiliary” header must contain authentication token for the source tenant. For more details about “x-ms-authorization-auxiliary” header see https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/authenticate-multi-tenant ",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1290,11 +1311,20 @@
         },
         "elasticPoolId": {
           "description": "The resource identifier of the elastic pool containing this database.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers/elasticPools"
+              }
+            ]
+          }
         },
         "sourceDatabaseId": {
           "description": "The resource identifier of the source database associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1385,6 +1415,7 @@
         "recoveryServicesRecoveryPointId": {
           "description": "The resource identifier of the recovery point associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1392,6 +1423,14 @@
         "longTermRetentionBackupResourceId": {
           "description": "The resource identifier of the long term retention backup associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/locations/longTermRetentionBackups"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "create"
           ]
@@ -1406,6 +1445,7 @@
         "restorableDroppedDatabaseId": {
           "description": "The resource identifier of the restorable dropped database associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1806,6 +1846,7 @@
         "storageAccountResourceId": {
           "description": "The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for StorageUri parameter.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -1813,6 +1854,7 @@
         "sqlServerResourceId": {
           "description": "The resource id for the SQL server which is the target of this request. If set, private endpoint connection will be created for the SQL server. Must match server which is target of the operation.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]

@@ -38,6 +38,15 @@ input-file:
   - Azure.Analytics.Purview.DevopsPolicies/preview/2022-11-01-preview/purviewDevopsPolicy.json
 ```
 
+### Tag: package-2022-12-01-preview
+
+These settings apply only when `--tag=package-2022-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12-01-preview'
+input-file:
+  - Azure.Analytics.Purview.SelfServicePolicies/preview/2022-12-01-preview/purviewSelfServicePolicy.json
+```
+
 ### Tag: package-preview-2022-03
 
 These settings apply only when `--tag=package-preview-2022-03` is specified on the command line.
@@ -156,6 +165,21 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 ```yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
   - Azure.Analytics.Purview.Share/preview/2021-09-01-preview/share.json
+```
+
+``` yaml
+openapi-type: data-plane
+tag: package-2023-02-15-preview
+title: PurviewShareClient
+```
+
+### Tag: package-2023-02-15-preview
+
+These settings apply only when `--tag=package-2023-02-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-02-15-preview'
+input-file:
+  - Azure.Analytics.Purview.Share/preview/2023-02-15-preview/share.json
 ```
 
 ``` yaml
