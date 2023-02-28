@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-10-11-preview",
+    "version": "2022-09-16-preview",
     "title": "DeveloperHubServiceClient",
     "description": "The AKS Developer Hub Service Client"
   },
@@ -471,6 +471,53 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevHub/locations/{location}/generatePreviewArtifacts": {
+      "post": {
+        "tags": [
+          "Artifacts"
+        ],
+        "operationId": "GeneratePreviewArtifacts",
+        "summary": "Generate preview dockerfile and manifests.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "parameters",
+            "required": false,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/ArtifactGenerationProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GeneratePreviewArtifactsResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Artifact Generation Properties": {
+            "$ref": "./examples/GeneratePreviewArtifacts.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -499,6 +546,9 @@
           "description": "Profile of a github workflow.",
           "$ref": "#/definitions/GitHubWorkflowProfile",
           "x-ms-client-flatten": true
+        },
+        "artifactGenerationProperties": {
+          "$ref": "#/definitions/ArtifactGenerationProperties"
         }
       }
     },
@@ -664,11 +714,67 @@
         }
       }
     },
+    "ArtifactGenerationProperties": {
+      "description": "Properties used for generating artifacts such as Dockerfiles and manifests.",
+      "title": "Artifact Generation Properties",
+      "type": "object",
+      "properties": {
+        "generationLanguage": {
+          "$ref": "#/definitions/GenerationLanguage"
+        },
+        "languageVersion": {
+          "type": "string",
+          "description": "The version of the language image used for execution in the generated dockerfile."
+        },
+        "builderVersion": {
+          "type": "string",
+          "description": "The version of the language image used for building the code in the generated dockerfile."
+        },
+        "port": {
+          "type": "string",
+          "description": "The port the application is exposed on."
+        },
+        "appName": {
+          "type": "string",
+          "description": "The name of the app."
+        },
+        "dockerfileOutputDirectory": {
+          "type": "string",
+          "description": "The directory to output the generated Dockerfile to."
+        },
+        "manifestOutputDirectory": {
+          "type": "string",
+          "description": "The directory to output the generated manifests to."
+        },
+        "dockerfileGenerationMode": {
+          "$ref": "#/definitions/DockerfileGenerationMode"
+        },
+        "manifestGenerationMode": {
+          "$ref": "#/definitions/ManifestGenerationMode"
+        },
+        "manifestType": {
+          "$ref": "#/definitions/GenerationManifestType"
+        },
+        "imageName": {
+          "type": "string",
+          "description": "The name of the image to be generated."
+        },
+        "namespace": {
+          "type": "string",
+          "description": "The namespace to deploy the application to."
+        },
+        "imageTag": {
+          "type": "string",
+          "description": "The tag to apply to the generated image."
+        }
+      }
+    },
     "ManifestType": {
       "type": "string",
       "enum": [
         "helm",
-        "kube"
+        "kube",
+        "kustomize"
       ],
       "x-ms-enum": {
         "name": "ManifestType",
@@ -714,6 +820,149 @@
       },
       "description": "Determines the authorization status of requests."
     },
+    "GenerationLanguage": {
+      "type": "string",
+      "enum": [
+        "clojure",
+        "csharp",
+        "erlang",
+        "go",
+        "gomodule",
+        "gradle",
+        "java",
+        "javascript",
+        "php",
+        "python",
+        "ruby",
+        "rust",
+        "swift"
+      ],
+      "x-ms-enum": {
+        "name": "GenerationLanguage",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "clojure",
+            "description": "clojure language"
+          },
+          {
+            "value": "csharp",
+            "description": "csharp language"
+          },
+          {
+            "value": "erlang",
+            "description": "erlang language"
+          },
+          {
+            "value": "go",
+            "description": "go language"
+          },
+          {
+            "value": "gomodule",
+            "description": "gomodule language"
+          },
+          {
+            "value": "gradle",
+            "description": "gradle language"
+          },
+          {
+            "value": "java",
+            "description": "java language"
+          },
+          {
+            "value": "javascript",
+            "description": "javascript language"
+          },
+          {
+            "value": "php",
+            "description": "php language"
+          },
+          {
+            "value": "python",
+            "description": "python language"
+          },
+          {
+            "value": "ruby",
+            "description": "ruby language"
+          },
+          {
+            "value": "rust",
+            "description": "rust language"
+          },
+          {
+            "value": "swift",
+            "description": "swift language"
+          }
+        ]
+      },
+      "description": "The programming language used."
+    },
+    "ManifestGenerationMode": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "ManifestGenerationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "enabled",
+            "description": "Manifests will be generated"
+          },
+          {
+            "value": "disabled",
+            "description": "Manifests will not be generated"
+          }
+        ]
+      },
+      "description": "The mode of generation to be used for generating Manifest."
+    },
+    "DockerfileGenerationMode": {
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-ms-enum": {
+        "name": "DockerfileGenerationMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "enabled",
+            "description": "Dockerfiles will be generated"
+          },
+          {
+            "value": "disabled",
+            "description": "Dockerfiles will not be generated"
+          }
+        ]
+      },
+      "description": "The mode of generation to be used for generating Dockerfiles."
+    },
+    "GenerationManifestType": {
+      "type": "string",
+      "enum": [
+        "helm",
+        "kube"
+      ],
+      "x-ms-enum": {
+        "name": "GenerationManifestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "helm",
+            "description": "Helm manifests"
+          },
+          {
+            "value": "kube",
+            "description": "Kubernetes manifests"
+          }
+        ]
+      },
+      "description": "Determines the type of manifests to be generated."
+    },
     "WorkflowRun": {
       "type": "object",
       "properties": {
@@ -754,6 +1003,20 @@
         "acrRepositoryName": {
           "type": "string",
           "description": "ACR repository"
+        }
+      }
+    },
+    "GeneratePreviewArtifactsResponse": {
+      "type": "object",
+      "description": "Dockerfile and manifest artifacts generated as a preview are returned as a map<path string,content string>",
+      "properties": {
+        "path/to/file1.withExtension": {
+          "type": "string",
+          "description": "An example generated file"
+        },
+        "path/to/file2.withExtension": {
+          "type": "string",
+          "description": "A second example file"
         }
       }
     },
@@ -855,7 +1118,7 @@
       "required": false,
       "type": "string",
       "description": "The ManagedCluster resource associated with the workflows.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "WorkflowNameParameter": {
       "name": "workflowName",
@@ -874,7 +1137,7 @@
       "required": true,
       "type": "string",
       "description": "The code response from authenticating the GitHub App.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     },
     "GitHubOAuthStateParameter": {
       "name": "state",
@@ -882,7 +1145,7 @@
       "required": true,
       "type": "string",
       "description": "The state response from authenticating the GitHub App.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "client"
     }
   }
 }
