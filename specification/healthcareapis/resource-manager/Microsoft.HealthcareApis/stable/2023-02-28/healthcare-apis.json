@@ -44,6 +44,9 @@
         "x-ms-examples": {
           "Get metadata": {
             "$ref": "./examples/legacy/ServiceGet.json"
+          },
+          "Get metadata for CMK enabled service in data sovereign region": {
+            "$ref": "./examples/legacy/ServiceGetInDataSovereignRegionWithCmkEnabled.json"
           }
         },
         "parameters": [
@@ -87,6 +90,9 @@
           },
           "Create or Update a service with minimum parameters": {
             "$ref": "./examples/legacy/ServiceCreateMinimum.json"
+          },
+          "Create or Update a service with all parameters and CMK enabled in a data sovereign region": {
+            "$ref": "./examples/legacy/ServiceCreateInDataSovereignRegionWithCmkEnabled.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -2373,6 +2379,11 @@
           "type": "string",
           "description": "The URI of the customer-managed key for the backing database.",
           "readOnly": false
+        },
+        "crossTenantCmkApplicationId": {
+          "type": "string",
+          "description": "The multi-tenant application id used to enable CMK access for services in a data sovereign region.",
+          "readOnly":  false
         }
       }
     },
