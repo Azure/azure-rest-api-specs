@@ -10140,14 +10140,16 @@
           "x-ms-identifiers": []
         },
         "policyFormatVersion": {
-          "description": "Version of the client encryption policy definition. Please note, user passed value is ignored. Default policy version is 1.",
+          "description": "Version of the client encryption policy definition. Supported versions are 1 and 2. Version 2 supports id and partition key path encryption. ",
           "type": "integer",
-          "format": "int32",
-          "default": 1
+          "minimum": 1,
+          "maximum": 2,
+          "format": "int32"
         }
       },
       "required": [
-        "includedPaths"
+        "includedPaths",
+        "policyFormatVersion"
       ]
     },
     "ClientEncryptionIncludedPath": {
