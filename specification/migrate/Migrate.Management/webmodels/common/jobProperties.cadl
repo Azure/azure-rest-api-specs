@@ -1,0 +1,36 @@
+import "@cadl-lang/rest";
+
+@doc("Job REST Resource.")
+model JobProperties {
+  @doc("Gets operation status.")
+  @visibility("read")
+  status?: string;
+
+  @doc("Gets operation start time.")
+  @visibility("read")
+  startTime?: string;
+
+  @doc("Gets operation end time.")
+  @visibility("read")
+  endTime?: string;
+
+  @doc("Gets or sets the display name of the Job.")
+  @visibility("read")
+  displayName?: string;
+
+  @doc("Gets the client request Id used in the operation execution context.")
+  @visibility("read")
+  clientRequestId?: string;
+
+  @doc("Gets the activity Id used in the operation execution context.")
+  @visibility("read")
+  activityId?: string;
+
+  @OpenAPI.extension("x-ms-identifiers", [])
+  @doc("Gets the errors.")
+  @visibility("read")
+  errors?: ErrorDetails[];
+
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
