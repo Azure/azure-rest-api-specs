@@ -328,15 +328,15 @@
               },
               "description": "Infra network profile for HCI platform"
             },
-            "kubevirt": {
+            "networkCloud": {
               "type": "object",
               "properties": {
-                "vnetName": {
+                "networkId": {
                   "type": "string",
-                  "description": "Name of the network in KubeVirt"
+                  "description": "The ARM ID of Network Cloud Network Resource to Associate with this VirtualNetwork"
                 }
               },
-              "description": "Infra network profile for KubeVirt platform"
+              "description": "Infra network profile for the NetworkCloud platform"
             },
             "vmware": {
               "type": "object",
@@ -396,7 +396,6 @@
         },
         "dnsServers": {
           "type": "array",
-          "readOnly": true,
           "description": "Address of the DNS servers associated with the network",
           "items": {
             "type": "string"
@@ -404,12 +403,10 @@
         },
         "gateway": {
           "type": "string",
-          "readOnly": true,
           "description": "Address of the Gateway associated with the network"
         },
         "ipAddressPrefix": {
           "type": "string",
-          "readOnly": true,
           "description": "IP Address Prefix of the network"
         },
         "vlanID": {
