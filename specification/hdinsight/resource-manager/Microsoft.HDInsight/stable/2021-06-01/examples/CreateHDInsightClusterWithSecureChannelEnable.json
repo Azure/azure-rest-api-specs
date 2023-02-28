@@ -1,0 +1,160 @@
+{
+    "parameters": {
+      "clusterName": "cluster1",
+      "resourceGroupName": "rg1",
+      "api-version": "2021-06-01",
+      "subscriptionId": "subid",
+      "parameters": {
+        "properties": {
+          "clusterVersion": "4.0",
+          "osType": 1,
+          "clusterDefinition": {
+            "kind": "hadoop",
+            "componentVersion": {},
+            "configurations": {
+              "gateway": {
+                "restAuthCredential.isEnabled": "true",
+                "restAuthCredential.username": "admin",
+                "restAuthCredential.password": "**********"
+              }
+            }
+          },
+          "computeProfile": {
+            "roles": [
+              {
+                "name": "headnode",
+                "targetInstanceCount": 2,
+                "hardwareProfile": {
+                  "vmSize": "Standard_D3"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser",
+                    "password": "**********"
+                  }
+                },
+                "encryptDataDisks": false
+              },
+              {
+                "name": "workernode",
+                "targetInstanceCount": 2,
+                "hardwareProfile": {
+                  "vmSize": "Standard_D3"
+                },
+                "osProfile": {
+                  "linuxOperatingSystemProfile": {
+                    "username": "sshuser",
+                    "password": "**********"
+                  }
+                },
+                "encryptDataDisks": false
+              }
+            ]
+          },
+          "storageProfile": {
+            "storageaccounts": [
+              {
+                "name": "mystorage.blob.core.windows.net",
+                "isDefault": true,
+                "container": "default8525",
+                "key": "storagekey",
+                "fileSystem": null,
+                "enableSecureChannel": true
+              }
+            ]
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "headers": {
+          "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+        },
+        "body": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.HDInsight/clusters/cluster1",
+          "name": "cluster1",
+          "type": "Microsoft.HDInsight/clusters",
+          "location": "South Central US",
+          "etag": "3b76ce3d-892c-4036-9d8b-8ade18ba7a4b",
+          "tags": null,
+          "properties": {
+            "clusterVersion": "4.0.3000.1",
+            "clusterHdpVersion": "",
+            "osType": "Linux",
+            "clusterDefinition": {
+              "blueprint": "https://blueprints.azurehdinsight.net/hadoop-4.0.3000.1.2302241130.json",
+              "kind": "hadoop",
+              "componentVersion": {
+                "hadoop": "3.1"
+              }
+            },
+            "computeProfile": {
+              "roles": [
+                {
+                  "name": "headnode",
+                  "targetInstanceCount": 2,
+                  "hardwareProfile": {
+                    "vmSize": "standard_d3_v2"
+                  },
+                  "osProfile": {
+                    "linuxOperatingSystemProfile": {
+                      "username": "sshuser"
+                    }
+                  },
+                  "encryptDataDisks": false
+                },
+                {
+                  "name": "workernode",
+                  "targetInstanceCount": 2,
+                  "hardwareProfile": {
+                    "vmSize": "standard_d3_v2"
+                  },
+                  "osProfile": {
+                    "linuxOperatingSystemProfile": {
+                      "username": "sshuser"
+                    }
+                  },
+                  "encryptDataDisks": false
+                }
+              ]
+            },
+            "provisioningState": "InProgress",
+            "clusterState": "Accepted",
+            "createdDate": "2023-02-27T09:47:13.86",
+            "quotaInfo": {
+              "coresUsed": 16
+            },
+            "tier": "standard",
+            "encryptionInTransitProperties": {
+              "isEncryptionInTransitEnabled": false
+            },
+            "storageProfile": {
+              "storageaccounts": [
+                {
+                  "name": "mystorage.blob.core.windows.net",
+                  "resourceId": null,
+                  "msiResourceId": null,
+                  "key": null,
+                  "fileSystem": null,
+                  "container": "default8525",
+                  "saskey": null,
+                  "isDefault": true,
+                  "fileshare": null
+                }
+              ]
+            },
+            "minSupportedTlsVersion": "1.2",
+            "excludedServicesConfig": {
+              "excludedServicesConfigId": "default",
+              "excludedServicesList": ""
+            },
+            "computeIsolationProperties": {
+              "enableComputeIsolation": false,
+              "hostSku": null
+            }
+          }
+        }
+      }
+    }
+  }
