@@ -64,7 +64,6 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2023-03-01-preview",
       "x-ms-parameter-location": "client"
     },
     "UdidQuery": {
@@ -158,12 +157,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
-            }
-          },
           "202": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
           },
@@ -308,15 +301,13 @@
         "conversions": {
           "description": "A list of all the previously submitted conversion requests.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Conversion"
           }
         },
         "nextLink": {
           "description": "If present, the location of the next page of data.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -326,26 +317,22 @@
       "properties": {
         "conversionId": {
           "description": "A unique id that represents the artifact of a _successfully_ completed conversion process.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "ontology": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "udid": {
           "description": "The unique id of the content provided to create this conversion.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "created": {
           "description": "The date and time of this conversion.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "description": {
           "description": "User provided description of the content being converted.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "featureCounts": {
           "description": "A summary of feature counts in this conversion.",
@@ -353,8 +340,7 @@
             "type": "integer",
             "format": "int64"
           },
-          "type": "object",
-          "readOnly": true
+          "type": "object"
         }
       }
     }
