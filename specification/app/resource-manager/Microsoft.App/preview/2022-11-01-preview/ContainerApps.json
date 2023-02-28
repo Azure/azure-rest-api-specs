@@ -881,6 +881,16 @@
           "type": "string",
           "x-ms-secret": true,
           "readOnly": true
+        },
+        "identity": {
+          "description": "Resource ID of a managed identity to authenticate with Azure Key Vault, or System to use a system-assigned identity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "keyVaultUrl": {
+          "description": "Azure Key Vault URL pointing to the secret referenced by the container app.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -912,8 +922,7 @@
       "description": "Custom Domain of a Container App",
       "type": "object",
       "required": [
-        "name",
-        "certificateId"
+        "name"
       ],
       "properties": {
         "name": {
@@ -981,28 +990,28 @@
       ],
       "properties": {
         "allowedOrigins": {
-          "description": "allowed origins",
+          "description": "Specifies the content for the access-control-allow-origins header",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "allowedMethods": {
-          "description": "allowed HTTP methods",
+          "description": "Specifies the content for the access-control-allow-methods header",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "allowedHeaders": {
-          "description": "allowed HTTP headers",
+          "description": "Specifies the content for the access-control-allow-headers header",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "exposeHeaders": {
-          "description": "expose HTTP headers ",
+          "description": "Specifies the content for the access-control-expose-headers header ",
           "type": "array",
           "items": {
             "type": "string"
@@ -1010,11 +1019,11 @@
         },
         "maxAge": {
           "format": "int32",
-          "description": "max time client can cache the result",
+          "description": "Specifies the content for the access-control-max-age header",
           "type": "integer"
         },
         "allowCredentials": {
-          "description": "allow credential or not",
+          "description": "Specifies whether the resource allows credentials",
           "type": "boolean"
         }
       }

@@ -14,9 +14,6 @@
             "type": "Microsoft.App/managedEnvironments",
             "location": "North Central US",
             "tags": {},
-            "sku": {
-              "name": "Premium"
-            },
             "properties": {
               "provisioningState": "Succeeded",
               "deploymentErrors": null,
@@ -25,10 +22,7 @@
               "appLogsConfiguration": null,
               "zoneRedundant": true,
               "vnetConfiguration": {
-                "outboundSettings": {
-                  "outBoundType": "UserDefinedRouting",
-                  "virtualNetworkApplianceIp": "192.168.1.20"
-                }
+                "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
               },
               "customDomainConfiguration": {
                 "customDomainVerificationId": "custom domain verification id",
@@ -61,7 +55,8 @@
                   "workloadProfileType": "Consumption",
                   "workloadProfileName": "My-consumption-01"
                 }
-              ]
+              ],
+              "infrastructureResourceGroup": "capp-svc-jlaw-demo1-northcentralus"
             }
           },
           {
@@ -70,9 +65,6 @@
             "type": "Microsoft.App/managedEnvironments",
             "location": "North Central US",
             "tags": {},
-            "sku": {
-              "name": "Consumption"
-            },
             "properties": {
               "provisioningState": "Succeeded",
               "deploymentErrors": null,
@@ -89,11 +81,9 @@
               },
               "eventStreamEndpoint": "testEndpoint",
               "vnetConfiguration": {
-                "outboundSettings": {
-                  "outBoundType": "UserDefinedRouting",
-                  "virtualNetworkApplianceIp": "192.168.1.20"
-                }
-              }
+                "infrastructureSubnetId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/RGName/providers/Microsoft.Network/virtualNetworks/VNetName/subnets/subnetName1"
+              },
+              "infrastructureResourceGroup": "capp-svc-demo1-northcentralus"
             }
           }
         ]

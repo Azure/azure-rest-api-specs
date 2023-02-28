@@ -202,6 +202,9 @@
         "x-ms-examples": {
           "Create environments": {
             "$ref": "./examples/ManagedEnvironments_CreateOrUpdate.json"
+          },
+          "Create environment with custom infrastructureResourceGroup": {
+            "$ref": "./examples/ManagedEnvironments_CustomInfrastructureResourceGroup_Create.json"
           }
         }
       },
@@ -994,8 +997,8 @@
         "tags": [
           "ManagedEnvironments"
         ],
-        "summary": "Get all workload Profile States for a Premium Managed Environment..",
-        "description": "Get all workload Profile States for a Premium Managed Environment.",
+        "summary": "Get all workload Profile States for a Managed Environment..",
+        "description": "Get all workload Profile States for a Managed Environment.",
         "operationId": "ManagedEnvironments_ListWorkloadProfileStates",
         "parameters": [
           {
@@ -1041,31 +1044,6 @@
     }
   },
   "definitions": {
-    "ManagedEnvironmentOutboundSettings": {
-      "type": "object",
-      "description": "Configuration used to control the Environment Egress outbound traffic",
-      "properties": {
-        "outBoundType": {
-          "$ref": "#/definitions/ManagedEnvironmentOutBoundType"
-        },
-        "virtualNetworkApplianceIp": {
-          "description": "Virtual Appliance IP used as the Egress controller for the Environment",
-          "type": "string"
-        }
-      }
-    },
-    "ManagedEnvironmentOutBoundType": {
-      "enum": [
-        "LoadBalancer",
-        "UserDefinedRouting"
-      ],
-      "description": "Outbound type for the cluster",
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ManagedEnvironmentOutBoundType",
-        "modelAsString": true
-      }
-    },
     "AppLogsConfiguration": {
       "description": "Configuration of application logs",
       "type": "object",
@@ -1102,41 +1080,13 @@
         }
       }
     },
-    "ManagedEnvironmentQuota": {
-      "type": "object",
-      "description": "Managed environment quota status",
-      "properties": {
-        "cores": {
-          "description": "The cores quota status",
-          "$ref": "#/definitions/QuotaStatus"
-        }
-      }
-    },
-    "QuotaStatus": {
-      "type": "object",
-      "description": "Quota status",
-      "properties": {
-        "total": {
-          "type": "number",
-          "format": "double",
-          "readOnly": true,
-          "description": "Total quota amount"
-        },
-        "used": {
-          "type": "number",
-          "format": "double",
-          "readOnly": true,
-          "description": "Used quota amount"
-        }
-      }
-    },
     "VnetConfiguration": {
       "type": "object",
       "description": "Configuration properties for apps environment to join a Virtual Network",
       "properties": {
         "internal": {
           "type": "boolean",
-          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide runtimeSubnetId and infrastructureSubnetId if enabling this property",
+          "description": "Boolean indicating the environment only has an internal load balancer. These environments do not have a public static IP resource. They must provide infrastructureSubnetId if enabling this property",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1144,15 +1094,7 @@
         },
         "infrastructureSubnetId": {
           "type": "string",
-          "description": "Resource ID of a subnet for infrastructure components. This subnet must be in the same VNET as the subnet defined in runtimeSubnetId. Must not overlap with any other provided IP ranges.",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "runtimeSubnetId": {
-          "type": "string",
-          "description": "This field is deprecated and not used. If you wish to provide your own subnet that Container App containers are injected into, then you should leverage the infrastructureSubnetId.",
+          "description": "Resource ID of a subnet for infrastructure components. Must not overlap with any other provided IP ranges.",
           "x-ms-mutability": [
             "create",
             "read"
@@ -1181,10 +1123,6 @@
             "create",
             "read"
           ]
-        },
-        "outboundSettings": {
-          "$ref": "#/definitions/ManagedEnvironmentOutboundSettings",
-          "description": "Configuration used to control the Environment Egress outbound traffic"
         }
       }
     },
@@ -1197,10 +1135,6 @@
         }
       ],
       "properties": {
-        "sku": {
-          "$ref": "#/definitions/EnvironmentSkuProperties",
-          "description": "SKU properties of the Environment."
-        },
         "kind": {
           "type": "string",
           "description": "Kind of the Environment."
@@ -1298,9 +1232,13 @@
               "$ref": "#/definitions/DaprConfiguration",
               "description": "The configuration of Dapr component."
             },
-            "quotas": {
-              "$ref": "#/definitions/ManagedEnvironmentQuota",
-              "description": "Quota status for the environment."
+            "infrastructureResourceGroup": {
+              "description": "Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. If a subnet ID is provided, this resource group will be created in the same subscription as the subnet.",
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
             }
           },
           "x-ms-client-flatten": true
@@ -1411,42 +1349,8 @@
         "maximumCount"
       ]
     },
-    "EnvironmentSkuProperties": {
-      "description": "Managed Environment resource SKU properties.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the Sku.",
-          "externalDocs": {
-            "url": "https://aka.ms/container-apps-pricing"
-          },
-          "enum": [
-            "Consumption",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Consumption",
-                "description": "Consumption SKU of Managed Environment."
-              },
-              {
-                "value": "Premium",
-                "description": "Premium SKU of Managed Environment."
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "name"
-      ]
-    },
     "workloadProfileStates": {
-      "description": "Collection of all the workload Profile States for a Premium Managed Environment..",
+      "description": "Collection of all the workload Profile States for a Managed Environment..",
       "type": "object",
       "allOf": [
         {

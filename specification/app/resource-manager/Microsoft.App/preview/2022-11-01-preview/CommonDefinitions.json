@@ -559,6 +559,14 @@
             "update"
           ],
           "x-ms-secret": true
+        },
+        "identity": {
+          "description": "Resource ID of a managed identity to authenticate with Azure Key Vault, or System to use a system-assigned identity.",
+          "type": "string"
+        },
+        "keyVaultUrl": {
+          "description": "Azure Key Vault URL pointing to the secret referenced by the container app.",
+          "type": "string"
         }
       }
     },
@@ -618,7 +626,8 @@
           "description": "Storage type for the volume. If not provided, use EmptyDir.",
           "enum": [
             "AzureFile",
-            "EmptyDir"
+            "EmptyDir",
+            "Secret"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -627,7 +636,31 @@
           }
         },
         "storageName": {
-          "description": "Name of storage resource. No need to provide for EmptyDir.",
+          "description": "Name of storage resource. No need to provide for EmptyDir and Secret.",
+          "type": "string"
+        },
+        "secrets": {
+          "description": "List of secrets to be added in volume. If no secrets are provided, all secrets in collection will be added to volume.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretVolumeItem"
+          },
+          "x-ms-identifiers": [
+            "secretRef"
+          ]
+        }
+      }
+    },
+    "SecretVolumeItem": {
+      "description": "Secret to be added to volume.",
+      "type": "object",
+      "properties": {
+        "secretRef": {
+          "description": "Name of the Container App secret from which to pull the secret value.",
+          "type": "string"
+        },
+        "path": {
+          "description": "Path to project secret to. If no path is provided, path defaults to name of secret listed in secretRef.",
           "type": "string"
         }
       }
@@ -1065,6 +1098,42 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "JobTemplate": {
+      "description": "Container Apps Job versioned application definition. Defines the desired state of an immutable revision. Any changes to this section Will result in a new revision being created",
+      "type": "object",
+      "properties": {
+        "initContainers": {
+          "description": "List of specialized containers that run before app containers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InitContainer"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "containers": {
+          "description": "List of container definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Container"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "volumes": {
+          "description": "List of volume definitions for the Container App.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     }
