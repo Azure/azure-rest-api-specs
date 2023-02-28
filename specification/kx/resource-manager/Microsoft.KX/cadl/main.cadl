@@ -38,6 +38,15 @@ enum ProvisioningStateKV {
 @secret
 model PasswordString is string {}
 
+@doc("Configuration of the managed resource group associated with the resource.")
+model ManagedResourceGroupConfiguration {
+  @doc("The resource group name.")
+  name: string;
+
+  @doc("The resource group location.")
+  location: string;
+}
+
 @doc("Details of the kdbInsightsEnterprise resource.")
 model KdbInsightsEnterpriseProperties {
   @visibility("create")
@@ -48,6 +57,10 @@ model KdbInsightsEnterpriseProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  @visibility("read")
+  @doc("Configuration of the managed resource group associated with the resource.")
+  managedResourceGroupConfiguration?: ManagedResourceGroupConfiguration;
 }
 
 @armResourceOperations

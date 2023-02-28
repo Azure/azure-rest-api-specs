@@ -10,7 +10,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.managednetworkfabric
   package-name: azure-mgmt-managednetworkfabric
-  package-version: 2022-01-15-privatepreview
+  package-version: 2023-02-01-preview
   clear-output-folder: true
 ```
 

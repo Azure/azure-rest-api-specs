@@ -1,0 +1,75 @@
+import "@cadl-lang/rest";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-providerhub-controller";
+import "./sqlDbSingleDatabaseTarget.cadl";
+import "./sqlDbElasticPoolTarget.cadl";
+import "./sqlMiTarget.cadl";
+import "./sqlVmTarget.cadl";
+
+@service({
+  title: "Microsoft.DatabaseWatcher",
+  version: "2023-03-01-preview",
+})
+
+@Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+@armProviderNamespace
+namespace Microsoft.DatabaseWatcher;
+
+using Cadl.Http;
+using Cadl.Rest;
+using Azure.ResourceManager;
+using OpenAPI;
+
+interface Operations extends Azure.ResourceManager.Operations {}
+
+@doc("A DatabaseWatcherProviderHub resource")
+model Watcher is TrackedResource<WatcherProperties> {
+  @doc("Database watcher name.")
+  @key("watcherName")
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{3,60}$")
+  @path
+  @segment("watchers")
+  name: string;
+
+  ...ManagedServiceIdentity
+}
+
+@doc("rp specific properties of the resource Watcher")
+model WatcherProperties {
+  @doc("A data store for collected monitoring data.")
+  datastore?: Datastore;
+  
+  @visibility("read")
+  @doc("The provisioning state of the resource.")
+  provisioningState?: ResourceProvisioningState;
+}
+
+@doc("Properties of data store")
+model Datastore {
+  @doc("ARM ResourceId of an Azure Data Explorer database.")
+  adxDatabaseResourceId: string;
+  @doc("URI of an Azure Data Explorer Cluster.")
+  adxClusterUri: string;
+}
+
+@armResourceOperations
+interface Watchers extends TrackedResourceOperations<Watcher, WatcherProperties> {
+  @doc("Action to start monitoring all targets configured for a given database watcher.")
+  @action 
+  @post
+  @armResourceAction(Watcher)
+  start(...ResourceInstanceParameters<Watcher>): ArmResponse<Watcher> | ErrorResponse;
+}
+
+@parentResource(Watcher)
+model Target is ProxyResource<TargetProperties> {
+  @doc("Target resource name.")
+  @key("targetName")
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{3,60}$")
+  @segment("targets")
+  @path
+  name: string;
+}

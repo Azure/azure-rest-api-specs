@@ -8,11 +8,21 @@
   },
   "responses": {
     "200": {
-      "description": "Successful."
+      "description": "Successful.",
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
     },
     "202": {
-      "description": "Cluster delete request accepted."
+      "description": "Cluster delete request accepted.",
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
     },
-    "204": {}
+    "204": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      }
+    }
   }
 }

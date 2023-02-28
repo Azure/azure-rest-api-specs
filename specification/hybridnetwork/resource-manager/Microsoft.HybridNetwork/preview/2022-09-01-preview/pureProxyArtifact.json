@@ -82,7 +82,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifacts/{artifactName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifactVersions": {
       "get": {
         "tags": [
           "ProxyArtifact"
@@ -128,9 +128,7 @@
             "$ref": "./examples/PureProxyArtifact/ArtifactGet.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/artifactStores/{artifactStoreName}/artifacts/{artifactName}/artifactVersion/{artifactVersionName}": {
+      },
       "patch": {
         "tags": [
           "ProxyArtifact"
@@ -149,9 +147,6 @@
           },
           {
             "$ref": "./common.json#/parameters/ArtifactNameParameter"
-          },
-          {
-            "$ref": "./common.json#/parameters/ArtifactVersionNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -205,7 +200,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ProxyArtifactOverview"
+            "$ref": "#/definitions/ProxyArtifactListOverview"
           },
           "description": "A list of available proxy artifacts."
         },
@@ -216,6 +211,16 @@
         }
       },
       "description": "The proxy artifact list result."
+    },
+    "ProxyArtifactListOverview": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "readOnly": true,
+      "description": "The proxy artifact overview."
     },
     "ProxyArtifactOverview": {
       "type": "object",
@@ -269,9 +274,11 @@
       "description": "The artifact updating request payload.",
       "type": "object",
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ArtifactChangeStateProperties",
+        "artifactVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactChangeStateProperties"
+          },
           "description": "Artifact update state properties."
         }
       }
@@ -280,6 +287,9 @@
       "description": "The artifact update state properties.",
       "type": "object",
       "properties": {
+        "artifactVersion": {
+          "type": "string"
+        },
         "artifactState": {
           "$ref": "#/definitions/ArtifactState",
           "description": "The artifact state"

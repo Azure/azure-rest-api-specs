@@ -1384,7 +1384,7 @@
         "properties": {
           "type": "object",
           "description": "The public cloud connectors properties",
-          "$ref": "#/definitions/PublicCloudConnectorsProperties",
+          "$ref": "#/definitions/PatchablePublicCloudConnectorsProperties",
           "x-ms-client-flatten": true
         }
       }
@@ -1447,6 +1447,21 @@
         }
       }
     },
+    "PatchablePublicCloudConnectorsProperties": {
+      "type": "object",
+      "description": "The properties of public cloud connectors",
+      "required": [
+        "awsCloudProfile"
+      ],
+      "properties": {
+        "awsCloudProfile": {
+          "type": "object",
+          "description": "The cloud profile for AWS.",
+          "$ref": "#/definitions/PatchableAwsCloudProfile",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "AwsCloudProfile": {
       "type": "object",
       "description": "The cloud profile for AWS.",
@@ -1458,6 +1473,22 @@
           "type": "string",
           "description": "Account id for the AWS account."
         },
+        "excludedAccounts": {
+          "type": "array",
+          "description": "List of AWS accounts which needs to be excluded.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "PatchableAwsCloudProfile": {
+      "type": "object",
+      "description": "The cloud profile for AWS.",
+      "required": [
+        "excludedAccounts"
+      ],
+      "properties": {
         "excludedAccounts": {
           "type": "array",
           "description": "List of AWS accounts which needs to be excluded.",

@@ -388,6 +388,11 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The status of the last operation.",
           "readOnly": true
+        },
+        "managedResourceGroupConfiguration": {
+          "$ref": "#/definitions/ManagedResourceGroupConfiguration",
+          "description": "Configuration of the managed resource group associated with the resource.",
+          "readOnly": true
         }
       },
       "description": "Details of the kdbInsightsEnterprise resource."
@@ -456,6 +461,24 @@
       "type": "object",
       "properties": {},
       "description": "The updatable properties of the KdbInsightsEnterpriseResource."
+    },
+    "ManagedResourceGroupConfiguration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource group name."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource group location."
+        }
+      },
+      "description": "Configuration of the managed resource group associated with the resource.",
+      "required": [
+        "name",
+        "location"
+      ]
     },
     "PasswordString": {
       "type": "string",

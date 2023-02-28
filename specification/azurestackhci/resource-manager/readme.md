@@ -29,7 +29,7 @@ title: AzureStackHCIClient
 description: Azure Stack HCI management service
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2022-12-15
+tag: package-2023-02
 ```
 
 ## Suppression
@@ -59,11 +59,28 @@ directive:
 ```
 
 
+### Tag: package-2023-02
+
+These settings apply only when `--tag=package-2023-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-02'
+input-file:
+  - Microsoft.AzureStackHCI/stable/2023-02-01/arcSettings.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/clusters.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/extensions.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/offers.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/operations.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/publishers.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/skus.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/updateRuns.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/updateSummaries.json
+  - Microsoft.AzureStackHCI/stable/2023-02-01/updates.json
+```
 ### Tag: package-preview-2022-12-15
 
 These settings apply only when `--tag=package-preview-2022-12-15` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-12-15'
+``` yaml $(tag) == 'package-preview-2022-12-15'
 input-file:
   - Microsoft.AzureStackHCI/preview/2022-12-15-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2022-12-15-preview/clusters.json
@@ -84,11 +101,12 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2022-12-15-preview/virtualMachines.json
   - Microsoft.AzureStackHCI/preview/2022-12-15-preview/virtualNetworks.json
 ```
+
 ### Tag: package-2022-12
 
 These settings apply only when `--tag=package-2022-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-12'
+``` yaml $(tag) == 'package-2022-12'
 input-file:
   - Microsoft.AzureStackHCI/stable/2022-12-01/arcSettings.json
   - Microsoft.AzureStackHCI/stable/2022-12-01/clusters.json
@@ -106,7 +124,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2022-12` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-12'
+``` yaml $(tag) == 'package-preview-2022-12'
 input-file:
   - Microsoft.AzureStackHCI/preview/2022-12-01-preview/arcSettings.json
   - Microsoft.AzureStackHCI/preview/2022-12-01-preview/clusters.json
@@ -119,6 +137,7 @@ input-file:
   - Microsoft.AzureStackHCI/preview/2022-12-01-preview/updateSummaries.json
   - Microsoft.AzureStackHCI/preview/2022-12-01-preview/updates.json
 ```
+
 ### Tag: package-preview-2022-11
 
 These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.

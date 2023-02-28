@@ -6,7 +6,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(track2)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-oep
+package-name: azure-mgmt-meds
 no-namespace-folders: true
 package-version: 1.0.0b1
 clear-output-folder: true
@@ -14,10 +14,10 @@ clear-output-folder: true
 
 ``` yaml $(python-mode) == 'update' && $(track2)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/oep/azure-mgmt-oep/azure/mgmt/oep
+output-folder: $(python-sdks-folder)/meds/azure-mgmt-meds/azure/mgmt/meds
 ```
 
 ``` yaml $(python-mode) == 'create' && $(track2)
 basic-setup-py: true
-output-folder: $(python-sdks-folder)/oep/azure-mgmt-oep
+output-folder: $(python-sdks-folder)/meds/azure-mgmt-meds
 ```

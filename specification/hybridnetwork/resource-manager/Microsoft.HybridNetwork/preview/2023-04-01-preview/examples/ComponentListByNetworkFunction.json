@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2023-04-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "networkFunctionName": "testNf"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/rg/providers/Microsoft.HybridNetwork/networkFunctions/testNf/components/testComponent",
+            "name": "testComponent",
+            "type": "Microsoft.HybridNetwork/networkFunctions/components",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "deploymentProfile": "{\"chart\":{\"name\":\"testChartName\",\"version\":\"v1.0.0\"},\"releaseName\":\"testReleaseName\",\"targetNamespace\":\"testTargetNameSpace\",\"values\":{\".repoBase\":\"testrepo.azurecr.io/\"}}"
+            }
+          }
+        ],
+        "nextLink": "nextLink"
+      }
+    }
+  }
+}

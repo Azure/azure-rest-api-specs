@@ -1713,6 +1713,9 @@
         "sshProfile": {
           "$ref": "#/definitions/SshProfile"
         },
+        "autoscaleProfile": {
+          "$ref": "#/definitions/AutoscaleProfile"
+        },
         "kafkaProfile": {
           "type": "object",
           "description": "Kafka cluster profile.",
@@ -1789,6 +1792,191 @@
         }
       }
     },
+    "AutoscaleProfile": {
+      "type": "object",
+      "description": "This is the Autoscale profile for the cluster. This will allow customer to create cluster enabled with Autoscale.",
+      "required": [
+        "enabled"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "This indicates whether auto scale is enabled on HDInsight on AKS cluster."
+        },
+        "gracefulDecommissionTimeout": {
+          "type": "integer",
+          "description": "This property is for graceful decommission timeout; It has a default setting of 3600 seconds before forced shutdown takes place. This is the maximal time to wait for running containers and applications to complete before transition a DECOMMISSIONING node into DECOMMISSIONED. The default value is 3600 seconds. Negative value (like -1) is handled as infinite timeout."
+        },
+        "autoscaleType": {
+          "type": "string",
+          "description": "User to specify which type of Autoscale to be implemented - Scheduled Based or Load Based."
+        },
+        "scheduleBasedConfig": {
+          "type": "object",
+          "description": "Profiles of schedule based Autoscale.",
+          "items": {
+            "$ref": "#/definitions/ScheduleBasedConfig"
+          }
+        },
+        "loadBasedConfig": {
+          "description": "Profiles of load based Autoscale.",
+          "items": {
+            "$ref": "#/definitions/LoadBasedConfig"
+          }
+        }
+      }
+    },
+    "ScheduleBasedConfig": {
+      "type": "object",
+      "description": "Profile of schedule based Autoscale.",
+      "required": [
+        "timeZone",
+        "defaultCount",
+        "schedules"
+      ],
+      "properties": {
+        "timeZone": {
+          "type": "string",
+          "description": "User has to specify the timezone on which the schedule has to be set for schedule based autoscale configuration."
+        },
+        "defaultCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Setting default node count of current schedule configuration. Default node count specifies the number of nodes which are default when an specified scaling operation is executed (scale up/scale down)"
+        },
+        "schedules": {
+          "type": "array",
+          "description": "This specifies the schedules where scheduled based Autoscale to be enabled, the user has a choice to set multiple rules within the schedule across days and times (start/end).",
+          "items": {
+            "$ref": "#/definitions/Schedule"
+          }
+        }
+      }
+    },
+    "Schedule": {
+      "type": "object",
+      "required": [
+        "days",
+        "startTime",
+        "endTime",
+        "count"
+      ],
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$",
+          "description": "User has to set the start time of current schedule configuration, format like 10:30 (HH:MM)."
+        },
+        "endTime": {
+          "type": "string",
+          "pattern": "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$",
+          "description": "User has to set the end time of current schedule configuration, format like 10:30 (HH:MM)."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User has to set the node count anticipated at end of the scaling operation of the set current schedule configuration, format is integer."
+        },
+        "days": {
+          "type": "array",
+          "description": "User has to set the days where schedule has to be set for autoscale operation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LoadBasedConfig": {
+      "type": "object",
+      "description": "Profile of load based Autoscale.",
+      "required": [
+        "minNodes",
+        "maxNodes",
+        "scalingRules"
+      ],
+      "properties": {
+        "minNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User needs to set the minimum number of nodes for load based scaling, the load based scaling will use this to scale up and scale down between minimum and maximum number of nodes."
+        },
+        "maxNodes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User needs to set the maximum number of nodes for load based scaling, the load based scaling will use this to scale up and scale down between minimum and maximum number of nodes."
+        },
+        "pollInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "User can specify the poll interval, this is the time period (in seconds) after which scaling metrics are polled for triggering a scaling operation."
+        },
+        "cooldownPeriod": {
+          "type": "integer",
+          "description": "This is a cool down period, this is a time period in seconds, which determines the amount of time that must elapse between a scaling activity started by a rule and the start of the next scaling activity, regardless of the rule that triggers it. The default value is 300 seconds."
+        },
+        "scalingRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScalingRule"
+          }
+        }
+      }
+    },
+    "ScalingRule": {
+      "type": "object",
+      "required": [
+        "actionType",
+        "comparisonRule",
+        "evaluationCount",
+        "scalingMetric"
+      ],
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "enum": [
+            "scaleup",
+            "scaledown"
+          ]
+        },
+        "evaluationCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "This is an evaluation count for a scaling condition, the number of times a trigger condition should be successful, before scaling activity is triggered."
+        },
+        "scalingMetric": {
+          "type": "string",
+          "description": "Metrics name for individual workloads."
+        },
+        "comparisonRule": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ComparisonRule"
+          }
+        }
+      }
+    },
+    "ComparisonRule": {
+      "type": "object",
+      "required": [
+        "operator",
+        "threshold"
+      ],
+      "properties": {
+        "operator": {
+          "type": "string",
+          "enum": [
+            "greaterThan",
+            "greaterThanOrEqual",
+            "lessThan",
+            "lessThanOrEqual"
+          ]
+        },
+        "threshold": {
+          "type": "number",
+          "description": "Threshold setting."
+        }
+      }
+    },
     "ClusterResourceProperties": {
       "type": "object",
       "required": [
@@ -1839,11 +2027,42 @@
     "ComputeProfile": {
       "type": "object",
       "description": "The compute profile.",
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "The virtual machine SKU.",
+          "pattern": "^[a-zA-Z0-9_\\-]{0,256}$"
+        },
+        "count": {
+          "description": "The number of virtual machines.",
+          "type": "integer",
+          "format": "int32",
+          "maximum": 100.0,
+          "minimum": 1.0
+        },
+        "nodes": {
+          "type": "array",
+          "description": "The nodes definitions.",
+          "items": {
+            "$ref": "#/definitions/NodeProfile"
+          }
+        }
+      }
+    },
+    "NodeProfile": {
+      "type": "object",
+      "description": "The node profile.",
       "required": [
+        "type",
         "vmSize",
         "count"
       ],
       "properties": {
+        "type": {
+          "type": "string",
+          "description": "The node type.",
+          "pattern": "^(head|Head|HEAD|worker|Worker|WORKER)$"
+        },
         "vmSize": {
           "type": "string",
           "description": "The virtual machine SKU.",

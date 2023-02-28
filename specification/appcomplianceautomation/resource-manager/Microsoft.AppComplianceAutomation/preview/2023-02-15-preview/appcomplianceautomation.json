@@ -991,7 +991,7 @@
         "events",
         "payloadUrl",
         "contentType",
-        "sslVerified"
+        "enableSslVerification"
       ],
       "properties": {
         "webhookId": {
@@ -1002,7 +1002,7 @@
         "webhookName": {
           "type": "string",
           "description": "Webhook name",
-          "readOnly": false
+          "readOnly": true
         },
         "status": {
           "type": "string",
@@ -1067,16 +1067,16 @@
           "readOnly": false,
           "x-ms-secret": true
         },
-        "enableWebhookKey": {
+        "updateWebhookKey": {
           "type": "string",
-          "description": "whether to enable webhookKey.",
+          "description": "whether to update webhookKey.",
           "enum": [
             "true",
             "false"
           ],
           "readOnly": false,
           "x-ms-enum": {
-            "name": "EnableWebhookKey",
+            "name": "UpdateWebhookKey",
             "modelAsString": true
           }
         },
@@ -1093,7 +1093,7 @@
             "modelAsString": true
           }
         },
-        "sslVerified": {
+        "enableSslVerification": {
           "type": "string",
           "description": "whether to enable ssl verification",
           "enum": [
@@ -1102,7 +1102,7 @@
           ],
           "readOnly": false,
           "x-ms-enum": {
-            "name": "SslVerified",
+            "name": "EnableSslVerification",
             "modelAsString": true
           }
         },

@@ -1,0 +1,14 @@
+emit:
+  - "@azure-tools/cadl-autorest"
+  - "@azure-tools/cadl-providerhub-controller"
+
+options:
+  "@azure-tools/cadl-autorest":
+    azure-resource-provider-folder: ./swagger/operatorvoicemail/resource-manager
+    examples-directory: ./examples
+    omit-unreachable-types: true
+    output-file: operatorvoicemail.json
+    emitter-output-dir: "{output-dir}"
+
+  "@azure-tools/cadl-providerhub-controller":
+    emitter-output-dir: "{output-dir}/generated"
