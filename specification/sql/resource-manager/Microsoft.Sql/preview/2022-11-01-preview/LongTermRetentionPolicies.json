@@ -186,42 +186,7 @@
     }
   },
   "definitions": {
-    "LongTermRetentionPolicy": {
-      "description": "A long term retention policy.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/LongTermRetentionPolicyProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "LongTermRetentionPolicyListResult": {
-      "description": "A list of long term retention policies.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of results.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LongTermRetentionPolicy"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "LongTermRetentionPolicyProperties": {
+    "BaseLongTermRetentionPolicyProperties": {
       "description": "Properties of a long term retention policy",
       "type": "object",
       "properties": {
@@ -253,6 +218,41 @@
           "format": "int32",
           "description": "The week of year to take the yearly backup in an ISO 8601 format.",
           "type": "integer"
+        }
+      }
+    },
+    "LongTermRetentionPolicy": {
+      "description": "A long term retention policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BaseLongTermRetentionPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "LongTermRetentionPolicyListResult": {
+      "description": "A list of long term retention policies.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LongTermRetentionPolicy"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
