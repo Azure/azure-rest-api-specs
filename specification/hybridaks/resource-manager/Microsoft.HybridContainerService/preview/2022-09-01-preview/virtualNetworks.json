@@ -1,0 +1,548 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridContainerService",
+    "description": "The Microsoft.HybridContainerService Rest API spec.",
+    "version": "2022-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworksName}": {
+      "get": {
+        "operationId": "virtualNetworks_Retrieve",
+        "x-ms-examples": {
+          "GetVirtualNetwork": {
+            "$ref": "./examples/GetVirtualNetwork.json"
+          }
+        },
+        "summary": "Gets the virtual network",
+        "description": "Gets the Hybrid AKS virtual network",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworksNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieves the virtualNetworks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworks"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "virtualNetworks_CreateOrUpdate",
+        "x-ms-examples": {
+          "PutVirtualNetwork": {
+            "$ref": "./examples/PutVirtualNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Puts the virtual network",
+        "description": "Puts the Hybrid AKS virtual network",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworksNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualNetworks",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/virtualNetworks"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the virtualNetworks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworks"
+            }
+          },
+          "201": {
+            "description": "Creates the virtualNetworks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworks"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "virtualNetworks_Delete",
+        "x-ms-examples": {
+          "DeleteVirtualNetwork": {
+            "$ref": "./examples/DeleteVirtualNetwork.json"
+          }
+        },
+        "summary": "Deletes the virtual network",
+        "description": "Deletes the Hybrid AKS virtual network",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworksNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes the virtualNetworks resource."
+          },
+          "204": {
+            "description": "No content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "virtualNetworks_Update",
+        "x-ms-examples": {
+          "UpdateVirtualNetwork": {
+            "$ref": "./examples/UpdateVirtualNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "summary": "Patches the virtual network",
+        "description": "Patches the Hybrid AKS virtual network",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/virtualNetworksNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualNetworks",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/virtualNetworksPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updates the virtualNetworks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworks"
+            }
+          },
+          "202": {
+            "description": "Updates the virtualNetworks resource.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworks"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks": {
+      "get": {
+        "operationId": "virtualNetworks_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListVirtualNetworkByResourceGroup": {
+            "$ref": "./examples/ListVirtualNetworkByResourceGroup.json"
+          }
+        },
+        "summary": "List virtual networks by resource group",
+        "description": "Lists the Hybrid AKS virtual networks by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all virtualNetworks under the resource group.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworksListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridContainerService/virtualNetworks": {
+      "get": {
+        "operationId": "virtualNetworks_ListBySubscription",
+        "x-ms-examples": {
+          "ListVirtualNetworkBySubscription": {
+            "$ref": "./examples/ListVirtualNetworkBySubscription.json"
+          }
+        },
+        "summary": "List virtual networks by subscription",
+        "description": "Lists the Hybrid AKS virtual networks by subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists all virtualNetworks under the subscription.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworksListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "virtualNetworksProperties": {
+      "type": "object",
+      "x-ms-client-flatten": true,
+      "properties": {
+        "infraVnetProfile": {
+          "type": "object",
+          "properties": {
+            "hci": {
+              "type": "object",
+              "properties": {
+                "mocGroup": {
+                  "type": "string",
+                  "description": "Resource group in MOC(Microsoft On-premises Cloud)"
+                },
+                "mocLocation": {
+                  "type": "string",
+                  "description": "Location in MOC(Microsoft On-premises Cloud)"
+                },
+                "mocVnetName": {
+                  "type": "string",
+                  "description": "Virtual Network name in MOC(Microsoft On-premises Cloud)"
+                }
+              },
+              "description": "Infra network profile for HCI platform"
+            },
+            "kubevirt": {
+              "type": "object",
+              "properties": {
+                "vnetName": {
+                  "type": "string",
+                  "description": "Name of the network in KubeVirt"
+                }
+              },
+              "description": "Infra network profile for KubeVirt platform"
+            },
+            "vmware": {
+              "type": "object",
+              "properties": {
+                "segmentName": {
+                  "type": "string",
+                  "description": "Name of the network segment in VSphere"
+                }
+              },
+              "description": "Infra network profile for VMware platform"
+            }
+          }
+        },
+        "vipPool": {
+          "type": "array",
+          "description": "Virtual IP Pool for Kubernetes",
+          "x-ms-identifiers": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "endIP": {
+                "type": "string",
+                "description": "Ending IP address for the IP Pool"
+              },
+              "startIP": {
+                "type": "string",
+                "description": "Starting IP address for the IP Pool"
+              }
+            }
+          }
+        },
+        "vmipPool": {
+          "type": "array",
+          "description": "IP Pool for Virtual Machines",
+          "x-ms-identifiers": [],
+          "items": {
+            "type": "object",
+            "properties": {
+              "endIP": {
+                "type": "string",
+                "description": "Ending IP address for the IP Pool"
+              },
+              "startIP": {
+                "type": "string",
+                "description": "Starting IP address for the IP Pool"
+              }
+            }
+          }
+        },
+        "dhcpServers": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Address of the DHCP servers associated with the network",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dnsServers": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Address of the DNS servers associated with the network",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gateway": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Address of the Gateway associated with the network"
+        },
+        "ipAddressPrefix": {
+          "type": "string",
+          "readOnly": true,
+          "description": "IP Address Prefix of the network"
+        },
+        "vlanID": {
+          "type": "string",
+          "readOnly": true,
+          "description": "VLAN Id used by the network"
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "InProgress",
+            "Deleting",
+            "Updating",
+            "Accepted",
+            "Created"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "provisioningState"
+          }
+        },
+        "status": {
+          "type": "object",
+          "readOnly": true,
+          "properties": {
+            "provisioningStatus": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "operationId": {
+                  "type": "string"
+                },
+                "phase": {
+                  "type": "string",
+                  "description": "Phase represents the current phase of cluster actuation. E.g. Pending, Running, Terminating, Failed etc."
+                },
+                "status": {
+                  "type": "string"
+                }
+              },
+              "description": "Contains Provisioning errors"
+            }
+          },
+          "description": "HybridAKSNetworkStatus defines the observed state of HybridAKSNetwork"
+        }
+      },
+      "description": "HybridAKSNetworkSpec defines the desired state of HybridAKSNetwork"
+    },
+    "virtualNetworks": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/virtualNetworksProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        },
+        "extendedLocation": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "The extended location type."
+            },
+            "name": {
+              "type": "string",
+              "description": "The extended location name."
+            }
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "The virtualNetworks resource definition."
+    },
+    "virtualNetworksPatch": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "The virtualNetworks resource patch definition."
+    },
+    "virtualNetworksListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/virtualNetworks"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      },
+      "x-ms-identifiers": []
+    }
+  },
+  "parameters": {
+    "virtualNetworksNameParameter": {
+      "name": "virtualNetworksName",
+      "description": "Parameter for the name of the virtual network",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "maxLength": 64,
+      "minLength": 3
+    }
+  }
+}
