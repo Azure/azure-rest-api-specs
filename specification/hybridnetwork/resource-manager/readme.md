@@ -29,6 +29,27 @@ openapi-type: arm
 openapi-subtype: rpaas
 tag: package-2023-01-01
 ```
+
+### Tag: package-2023-04-01-preview
+
+These settings apply only when `--tag=package-2023-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04-01-preview'
+input-file:
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/common.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/configurationGroupSchema.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/configurationGroupValues.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/networkFunction.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/networkFunctionDefinition.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/networkServiceDesign.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/operation.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/proxyPublisher.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/publisher.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/pureProxyArtifact.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/site.json
+  - Microsoft.HybridNetwork/preview/2023-04-01-preview/siteNetworkService.json
+```
+
 ### Tag: package-2023-01-01
 
 These settings apply only when `--tag=package-2023-01-01` is specified on the command line.
