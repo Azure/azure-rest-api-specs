@@ -293,6 +293,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok"
+          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -944,28 +947,28 @@
       ],
       "properties": {
         "allowedOrigins": {
-          "description": "allowed origins",
+          "description": "Specifies the content for the access-control-allow-origins header",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "allowedMethods": {
-          "description": "allowed HTTP methods",
+          "description": "Specifies the content for the access-control-allow-methods header",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "allowedHeaders": {
-          "description": "allowed HTTP headers",
+          "description": "Specifies the content for the access-control-allow-headers header",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "exposeHeaders": {
-          "description": "expose HTTP headers ",
+          "description": "Specifies the content for the access-control-expose-headers header ",
           "type": "array",
           "items": {
             "type": "string"
@@ -973,11 +976,11 @@
         },
         "maxAge": {
           "format": "int32",
-          "description": "max time client can cache the result",
+          "description": "Specifies the content for the access-control-max-age header",
           "type": "integer"
         },
         "allowCredentials": {
-          "description": "allow credential or not",
+          "description": "Specifies whether the resource allows credentials",
           "type": "boolean"
         }
       }
