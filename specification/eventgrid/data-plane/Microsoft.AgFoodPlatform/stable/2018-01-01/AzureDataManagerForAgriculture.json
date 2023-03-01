@@ -1,0 +1,1938 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Schema of Azure Data Manager for Agriculture events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure Data Manager for Agriculture Configuration events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.",
+    "version": "2018-01-01"
+  },
+  "paths": { },
+  "definitions": {
+    "AttachmentResourceType": {
+      "description": "Attachment resource type.",
+      "enum": [
+        "Party",
+        "Farm",
+        "Field",
+        "SeasonalField",
+        "Boundary",
+        "ApplicationData",
+        "HarvestData",
+        "TillageData",
+        "PlantingData",
+        "PlantTissueAnalysis"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AttachmentResourceType",
+        "modelAsString": true
+      }
+    },
+    "BoundaryParentType": {
+      "description": "Boundary parent type enum.",
+      "enum": [
+        "Field",
+        "SeasonalField",
+        "Zone",
+        "Prescription",
+        "PlantTissueAnalysis",
+        "ApplicationData",
+        "PlantingData",
+        "TillageData",
+        "HarvestData"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "BoundaryParentType",
+        "modelAsString": true
+      }
+    },
+    "DataManagerForAgriApplicationDataChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.ApplicationDataChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source of the farm operation data.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriAttachmentChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.AttachmentChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Associated resource id for the attachment.",
+          "type": "string"
+        },
+        "resourceType": {
+          "$ref": "#/definitions/AttachmentResourceType"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriBiomassModelJobStatusChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.BiomassModelJobStatusChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party id for which job was created.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status message to capture more details of the job.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "Date-time when last action was taken on job, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "isCancellationRequested": {
+          "description": "Flag that gets set when job cancellation is requested.",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriBoundaryChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.BoundaryChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "parentId": {
+          "description": "Id of the parent it belongs to.",
+          "type": "string"
+        },
+        "parentType": {
+          "$ref": "#/definitions/BoundaryParentType"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriCropChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.CropChanged event.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriCropProductChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.CropProductChanged event.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriDeviceChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.DeviceChanged event.",
+      "type": "object",
+      "properties": {
+        "deviceDataModelId": {
+          "description": "Id associated with the deviceDataModel.",
+          "type": "string"
+        },
+        "integrationId": {
+          "description": "Id associated with the integration.",
+          "type": "string"
+        },
+        "sensorPartnerId": {
+          "description": "Id associated with the sensorPartner.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriDeviceDataModelChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.DeviceDataModelChanged event.",
+      "type": "object",
+      "properties": {
+        "sensorPartnerId": {
+          "description": "Id associated with the sensorPartner.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriFarmChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.FarmChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriFarmOperationDataIngestionJobStatusChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.FarmOperationDataIngestionJobStatusChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party id for which job was created.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status message to capture more details of the job.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "Date-time when last action was taken on job, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "isCancellationRequested": {
+          "description": "Flag that gets set when job cancellation is requested.",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriFieldChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.FieldChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "farmId": {
+          "description": "Id of the associated Farm.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriHarvestDataChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.HarvestDataChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source of the farm operation data.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriImageProcessingRasterizeJobStatusChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.ImageProcessingRasterizeJobStatusChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "shapefileAttachmentId": {
+          "description": "Attachment id of the shapefile for which job was created.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Party id for which job was created.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status message to capture more details of the job.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "Date-time when last action was taken on job, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "isCancellationRequested": {
+          "description": "Flag that gets set when job cancellation is requested.",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriInsightAttachmentChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.InsightAttachmentChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "insightId": {
+          "description": "Id associated with the insight resource.",
+          "type": "string"
+        },
+        "modelId": {
+          "description": "Id of the associated model.",
+          "type": "string"
+        },
+        "resourceType": {
+          "$ref": "#/definitions/FarmHierarchyResourceType"
+        },
+        "resourceId": {
+          "description": "Id of the associated resource.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriInsightChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.InsightChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "modelId": {
+          "description": "Id of the associated model.",
+          "type": "string"
+        },
+        "resourceType": {
+          "$ref": "#/definitions/FarmHierarchyResourceType"
+        },
+        "resourceId": {
+          "description": "Id of the associated resource.",
+          "type": "string"
+        },
+        "modelVersion": {
+          "description": "Version of the associated model.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriManagementZoneChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.ManagementZoneChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "seasonId": {
+          "description": "Season Id associated with the management zone.",
+          "type": "string"
+        },
+        "cropId": {
+          "description": "Crop Id associated with the management zone.",
+          "type": "string"
+        },
+        "fieldId": {
+          "description": "Field Id associated with the management zone.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriNutrientAnalysisChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.NutrientAnalysisChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "parentId": {
+          "description": "Id of the parent it belongs to.",
+          "type": "string"
+        },
+        "parentType": {
+          "$ref": "#/definitions/NutrientAnalysisParentType"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriPartyChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.PartyChanged event.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriPlantTissueAnalysisChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.PlantTissueAnalysisChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "fieldId": {
+          "description": "Field Id associated with the plant tissue analysis.",
+          "type": "string"
+        },
+        "cropId": {
+          "description": "Crop Id associated with the plant tissue analysis.",
+          "type": "string"
+        },
+        "cropProductId": {
+          "description": "Crop Product Id associated with the plant tissue analysis.",
+          "type": "string"
+        },
+        "seasonId": {
+          "description": "Season Id associated with the plant tissue analysis.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriPlantingDataChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.PlantingDataChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source of the farm operation data.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriPrescriptionChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.PrescriptionChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "prescriptionMapId": {
+          "description": "Associated prescription map Id.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriPrescriptionMapChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.PrescriptionMapChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "seasonId": {
+          "description": "Season Id associated with the prescription map.",
+          "type": "string"
+        },
+        "cropId": {
+          "description": "Crop Id associated with the prescription map.",
+          "type": "string"
+        },
+        "fieldId": {
+          "description": "Field Id associated with the prescription map.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriSatelliteDataIngestionJobStatusChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SatelliteDataIngestionJobStatusChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party id for which job was created.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status message to capture more details of the job.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "Date-time when last action was taken on job, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "isCancellationRequested": {
+          "description": "Flag that gets set when job cancellation is requested.",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriSeasonChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SeasonChanged event.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriSeasonalFieldChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SeasonalFieldChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "seasonId": {
+          "description": "Id of the season it belongs to.",
+          "type": "string"
+        },
+        "fieldId": {
+          "description": "Id of the field it belongs to.",
+          "type": "string"
+        },
+        "farmId": {
+          "description": "Id of the associated Farm.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriSensorChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SensorChanged event.",
+      "type": "object",
+      "properties": {
+        "sensorDataModelId": {
+          "description": "Id associated with the sensorDataModel.",
+          "type": "string"
+        },
+        "integrationId": {
+          "description": "Id associated with the integration.",
+          "type": "string"
+        },
+        "deviceId": {
+          "description": "Id associated with the device.",
+          "type": "string"
+        },
+        "sensorPartnerId": {
+          "description": "Id associated with the sensorPartner.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriSensorDataModelChangedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SensorDataModelChanged event.",
+      "type": "object",
+      "properties": {
+        "sensorPartnerId": {
+          "description": "Id associated with the sensorPartner.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriSensorMappingChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SensorMappingChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "sensorId": {
+          "description": "Id associated with the sensor.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id associated with the party.",
+          "type": "string"
+        },
+        "boundaryId": {
+          "description": "Id associated with the boundary.",
+          "type": "string"
+        },
+        "sensorPartnerId": {
+          "description": "Id associated with the sensorPartner.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriSensorPartnerIntegrationChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SensorPartnerIntegrationChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "integrationId": {
+          "description": "Id of the integration.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party.",
+          "type": "string"
+        },
+        "sensorPartnerId": {
+          "description": "Id associated with the sensorPartner.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriSensorPlacementModelJobStatusChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SensorPlacementModelJobStatusChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party id for which job was created.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status message to capture more details of the job.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "Date-time when last action was taken on job, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "isCancellationRequested": {
+          "description": "Flag that gets set when job cancellation is requested.",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriSoilMoistureModelJobStatusChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.SoilMoistureModelJobStatusChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party id for which job was created.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status message to capture more details of the job.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "Date-time when last action was taken on job, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "isCancellationRequested": {
+          "description": "Flag that gets set when job cancellation is requested.",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriTillageDataChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.TillageDataChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "source": {
+          "description": "Source of the farm operation data.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriWeatherDataIngestionJobStatusChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.WeatherDataIngestionJobStatusChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party id for which job was created.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status message to capture more details of the job.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "Date-time when last action was taken on job, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "isCancellationRequested": {
+          "description": "Flag that gets set when job cancellation is requested.",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriWeatherDataRefresherJobStatusChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.WeatherDataRefresherJobStatusChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "partyId": {
+          "description": "Party id for which job was created.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status message to capture more details of the job.",
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/JobStatus"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "Date-time when last action was taken on job, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "isCancellationRequested": {
+          "description": "Flag that gets set when job cancellation is requested.",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "DataManagerForAgriZoneChangedV2EventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.AgFoodPlatform.ZoneChangedV2 event.",
+      "type": "object",
+      "properties": {
+        "managementZoneId": {
+          "description": "Management Zone Id associated with the zone.",
+          "type": "string"
+        },
+        "partyId": {
+          "description": "Id of the party it belongs to.",
+          "type": "string"
+        },
+        "actionType": {
+          "$ref": "#/definitions/ResourceActionType"
+        },
+        "status": {
+          "description": "Status of the resource.",
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was last modified, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        },
+        "eTag": {
+          "description": "The ETag value to implement optimistic concurrency.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "A list of key value pairs that describe the resource.\r\nOnly string and numeral values are supported.",
+          "type": "object",
+          "additionalProperties": { }
+        },
+        "id": {
+          "description": "Unique id of resource.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name to identify resource.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Textual description of resource.",
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date-time when resource was created, sample format: yyyy-MM-ddTHH:mm:ssZ.",
+          "type": "string"
+        }
+      }
+    },
+    "FarmHierarchyResourceType": {
+      "description": "Farm hierarchy resource type.",
+      "enum": [
+        "Party",
+        "Farm",
+        "Field",
+        "SeasonalField",
+        "Boundary"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FarmHierarchyResourceType",
+        "modelAsString": true
+      }
+    },
+    "JobStatus": {
+      "description": "Various states a job can be in.",
+      "enum": [
+        "Waiting",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Cancelled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JobStatus",
+        "modelAsString": true
+      }
+    },
+    "NutrientAnalysisParentType": {
+      "description": "Nutrient analysis parent type.",
+      "enum": [
+        "PlantTissueAnalysis"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NutrientAnalysisParentType",
+        "modelAsString": true
+      }
+    },
+    "ResourceActionType": {
+      "description": "Action occurred on a resource.",
+      "enum": [
+        "Created",
+        "Updated",
+        "Deleted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ResourceActionType",
+        "modelAsString": true
+      }
+    }
+  }
+}
