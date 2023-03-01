@@ -51,7 +51,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-04'
 input-file:
-  - Microsoft.AlertsManagement/preview/2023-04-01-preview/AlertProcessingRules.json
+  - Microsoft.AlertsManagement/preview/2023-04-01-preview/TenantActivityLogAlerts.json
 ```
 ### Tag: package-preview-2023-01
 
@@ -73,6 +73,7 @@ input-file:
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
   - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
   - Microsoft.AlertsManagement/preview/2023-01-01-preview/AlertRuleRecommendations.json
+  - Microsoft.AlertsManagement/preview/2023-04-01-preview/TenantActivityLogAlerts.json
 ```
 
 ### Tag: package-preview-2021-08
