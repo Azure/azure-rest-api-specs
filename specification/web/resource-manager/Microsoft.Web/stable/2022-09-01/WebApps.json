@@ -21879,13 +21879,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/workflowConfigurations/{configurationName}": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/listWorkflowsConnections": {
+      "post": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Get workflow app's configurations connections information by its ID for web site, or a deployment slot.",
-        "operationId": "WebApps_ListInstanceWorkflowsConfigurationConnectionsSlot",
+        "summary": "Lists logic app's connections for web site, or a deployment slot.",
+        "operationId": "WebApps_ListWorkflowsConnectionsSlot",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -21898,14 +21898,6 @@
           },
           {
             "$ref": "#/parameters/slotNameParameter"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "description": "Name of workflow configurations.",
-            "required": true,
-            "type": "string",
-            "pattern": "^connections$"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -22033,13 +22025,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/workflowConfigurations/{configurationName}": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/listWorkflowsConnections": {
+      "post": {
         "tags": [
           "WebApps"
         ],
-        "summary": "Get workflow app's configurations connections information by its ID for web site, or a deployment slot.",
-        "operationId": "WebApps_ListWorkflowsConfiguration",
+        "summary": "Lists logic app's connections for web site, or a deployment slot.",
+        "operationId": "WebApps_ListWorkflowsConnections",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -22049,14 +22041,6 @@
           },
           {
             "$ref": "#/parameters/siteNameParameter"
-          },
-          {
-            "name": "configurationName",
-            "in": "path",
-            "description": "Name of workflow configurations.",
-            "required": true,
-            "type": "string",
-            "pattern": "^connections$"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
