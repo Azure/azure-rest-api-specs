@@ -1546,7 +1546,8 @@
       "description": "Defines the type of the play source",
       "enum": [
         "file",
-        "text"
+        "text",
+        "ssml"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -1574,6 +1575,10 @@
         "textSource": {
           "$ref": "#/definitions/TextSource",
           "description": "Defines the text source info to be used for play"
+        },
+        "ssmlSource": {
+          "$ref": "#/definitions/SsmlSource",
+          "description": "Defines the ssml(Speech Synthesis Markup Language) source info to be used for play"
         }
       }
     },
@@ -1632,6 +1637,18 @@
         },
         "voiceName": {
           "description": "Voice name to be played\r\nRefer to available Text-to-speech voices here: <seealso href=\"https://learn.microsoft.com/en-us/azure/cognitive-services/speech-service/language-support?tabs=stt-tts\" />",
+          "type": "string"
+        }
+      }
+    },
+    "SsmlSource": {
+      "required": [
+        "ssmlText"
+      ],
+      "type": "object",
+      "properties": {
+        "ssmlText": {
+          "description": "Ssml string for the cognitive service to be played",
           "type": "string"
         }
       }
@@ -2515,68 +2532,68 @@
     }
   },
   "parameters": {
-      "ApiVersionParameter": {
-        "name": "api-version",
-        "in": "query",
-        "description": "Version of API to invoke.",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "Endpoint": {
-        "name": "endpoint",
-        "in": "path",
-        "description": "The endpoint of the Azure Communication resource.",
-        "required": true,
-        "type": "string",
-        "x-ms-skip-url-encoding": true,
-        "x-ms-parameter-location": "client"
-      }
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Version of API to invoke.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
-    "responses": {
-      "400": {
-        "description": "BadRequest",
-        "schema": {
-          "$ref": "#/definitions/CommunicationErrorResponse"
-        },
-        "x-ms-error-response": true
-      },
-      "401": {
-        "description": "Unauthorized",
-        "schema": {
-          "$ref": "#/definitions/CommunicationErrorResponse"
-        },
-        "x-ms-error-response": true
-      },
-      "403": {
-        "description": "Forbidden",
-        "schema": {
-          "$ref": "#/definitions/CommunicationErrorResponse"
-        },
-        "x-ms-error-response": true
-      },
-      "404": {
-        "description": "NotFound",
-        "schema": {
-          "$ref": "#/definitions/CommunicationErrorResponse"
-        },
-        "x-ms-error-response": true
-      },
-      "500": {
-        "description": "InternalServerError",
-        "schema": {
-          "$ref": "#/definitions/CommunicationErrorResponse"
-        },
-        "x-ms-error-response": true
-      }
-    },
-    "x-ms-parameterized-host": {
-      "hostTemplate": "{endpoint}",
-      "useSchemePrefix": false,
-      "parameters": [
-        {
-          "$ref": "#/parameters/Endpoint"
-        }
-      ]
+    "Endpoint": {
+      "name": "endpoint",
+      "in": "path",
+      "description": "The endpoint of the Azure Communication resource.",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
     }
+  },
+  "responses": {
+    "400": {
+      "description": "BadRequest",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "401": {
+      "description": "Unauthorized",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "403": {
+      "description": "Forbidden",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "404": {
+      "description": "NotFound",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    },
+    "500": {
+      "description": "InternalServerError",
+      "schema": {
+        "$ref": "#/definitions/CommunicationErrorResponse"
+      },
+      "x-ms-error-response": true
+    }
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
   }
+}
