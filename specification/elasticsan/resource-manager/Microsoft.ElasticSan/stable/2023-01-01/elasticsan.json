@@ -267,8 +267,8 @@
               "$ref": "#/definitions/ElasticSan"
             }
           },
-          "201": {
-            "description": "Created -- Resource Created; operation will complete asynchronously.",
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ElasticSan"
             }
@@ -330,12 +330,7 @@
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
           },
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
@@ -382,12 +377,7 @@
             "description": "OK -- Delete operation completed successfully."
           },
           "202": {
-            "description": "Accepted -- Delete request accepted; operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously."
           },
           "204": {
             "description": "NoContent --ElasticSAN does not exist in the subscription."
@@ -401,7 +391,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "ElasticSans_Delete_MaximumSet_Gen": {
@@ -544,8 +534,8 @@
               "$ref": "#/definitions/VolumeGroup"
             }
           },
-          "201": {
-            "description": "Created -- VolumeGroup Created; operation will complete asynchronously.",
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/VolumeGroup"
             }
@@ -610,12 +600,7 @@
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
           },
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
@@ -665,12 +650,7 @@
             "description": "OK -- Delete operation completed successfully."
           },
           "202": {
-            "description": "Accepted -- Delete request accepted; operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously."
           },
           "204": {
             "description": "NoContent -- Resource does not exist in the subscription."
@@ -684,7 +664,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "VolumeGroups_Delete_MaximumSet_Gen": {
@@ -785,8 +765,8 @@
               "$ref": "#/definitions/Volume"
             }
           },
-          "201": {
-            "description": "Created -- Volume Created; operation will complete asynchronously.",
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Volume"
             }
@@ -854,12 +834,7 @@
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
           },
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
@@ -912,12 +887,7 @@
             "description": "Delete operation completed successfully."
           },
           "202": {
-            "description": "Delete request accepted; operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Delete request accepted; operation will complete asynchronously."
           },
           "204": {
             "description": "Resource does not exist in the subscription."
@@ -931,7 +901,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Volumes_Delete_MaximumSet_Gen": {
@@ -1212,12 +1182,10 @@
               "$ref": "#/definitions/Snapshot"
             }
           },
-          "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
+          "201": {
+            "description": "Created -- Resource Created; operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Snapshot"
             }
           },
           "default": {
@@ -1270,14 +1238,6 @@
           "200": {
             "description": "OK -- Delete operation completed successfully."
           },
-          "202": {
-            "description": "Delete request accepted; operation will complete asynchronously.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
-          },
           "204": {
             "description": "NoContent -- Resource does not exist in the subscription."
           },
@@ -1290,7 +1250,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Snapshots_Delete_MaximumSet_Gen": {
@@ -1359,8 +1319,7 @@
       "required": true,
       "type": "string",
       "description": "The ID of the target subscription.",
-      "minLength": 1,
-      "x-ms-parameter-location": "client"
+      "minLength": 1
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -1368,8 +1327,7 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for this operation.",
-      "minLength": 1,
-      "x-ms-parameter-location": "client"
+      "minLength": 1
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
@@ -1505,6 +1463,9 @@
     },
     "ElasticSanList": {
       "type": "object",
+      "required": [
+        "value"
+      ],
       "description": "List of Elastic Sans",
       "additionalProperties": false,
       "properties": {
@@ -1525,6 +1486,9 @@
     "ElasticSan": {
       "type": "object",
       "description": "Response for ElasticSan request.",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1872,6 +1836,9 @@
     },
     "VolumeGroupList": {
       "type": "object",
+      "required": [
+        "value"
+      ],
       "description": "List of Volume Groups",
       "additionalProperties": false,
       "properties": {
@@ -1978,6 +1945,9 @@
     },
     "VolumeList": {
       "type": "object",
+      "required": [
+        "value"
+      ],
       "description": "List of Volumes",
       "additionalProperties": false,
       "properties": {
@@ -2327,6 +2297,9 @@
     },
     "SnapshotList": {
       "type": "object",
+      "required": [
+        "value"
+      ],
       "description": "List of Snapshots",
       "additionalProperties": false,
       "properties": {

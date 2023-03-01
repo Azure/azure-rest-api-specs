@@ -2,21 +2,45 @@
   "title": "ElasticSans_Create",
   "operationId": "ElasticSans_Create",
   "parameters": {
-    "subscriptionId": "380ADE44-8347-4D31-B84C-4E3AB5416B2D",
+    "subscriptionId": "1CE318B5-A2A7-4919-847C-68A812C17EEC",
     "resourceGroupName": "rgelasticsan",
-    "elasticSanName": "3Ou8_eD4",
-    "parameters": {},
+    "elasticSanName": "7o5-U",
+    "parameters": {
+      "properties": {
+        "sku": {
+          "name": "Premium_LRS"
+        },
+        "baseSizeTiB": 4,
+        "extendedCapacitySizeTiB": 20
+      }
+    },
     "api-version": "2023-01-01"
   },
   "responses": {
     "200": {
-      "body": {}
+      "body": {
+        "properties": {
+          "sku": {
+            "name": "Premium_LRS"
+          },
+          "baseSizeTiB": 4,
+          "extendedCapacitySizeTiB": 20
+        }
+      }
     },
-    "201": {
+    "202": {
       "headers": {
         "Azure-AsyncOperation": "https://contoso.com/operationstatus"
       },
-      "body": {}
+      "body": {
+        "properties": {
+          "sku": {
+            "name": "Premium_LRS"
+          },
+          "baseSizeTiB": 4,
+          "extendedCapacitySizeTiB": 20
+        }
+      }
     }
   }
 }
