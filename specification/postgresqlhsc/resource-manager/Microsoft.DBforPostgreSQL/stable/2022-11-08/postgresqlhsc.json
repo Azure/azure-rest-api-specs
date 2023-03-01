@@ -285,7 +285,7 @@
         }
       },
       "patch": {
-        "description": "Updates an existing cluster. The request body can contain one to many of the properties present in the normal cluster definition.",
+        "description": "Updates an existing cluster. The request body can contain one or several properties from the cluster definition.",
         "tags": [
           "Clusters"
         ],
@@ -295,19 +295,19 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Update the cluster": {
+          "Update multiple configuration settings of the cluster": {
             "$ref": "./examples/ClusterUpdate.json"
           },
-          "Scale compute": {
+          "Scale compute up or down": {
             "$ref": "./examples/ClusterScaleCompute.json"
           },
-          "Scale storage": {
+          "Scale up storage": {
             "$ref": "./examples/ClusterScaleStorage.json"
           },
-          "Add new worker nodes": {
+          "Scale out: Add new worker nodes": {
             "$ref": "./examples/ClusterAddNode.json"
           },
-          "Update customer maintenance window": {
+          "Update or define maintenance window": {
             "$ref": "./examples/ClusterUpdateMaintenanceWindow.json"
           }
         },
@@ -1254,7 +1254,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/restart": {
       "post": {
-        "description": "Restarts the cluster.",
+        "description": "Restarts all nodes in the cluster.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1305,7 +1305,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/start": {
       "post": {
-        "description": "Starts stopped compute on all servers in the cluster.",
+        "description": "Starts stopped compute on all cluster nodes.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1359,7 +1359,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/stop": {
       "post": {
-        "description": "Stops compute on all servers in the cluster.",
+        "description": "Stops compute on all cluster nodes.",
         "tags": [
           "ClusterOperations"
         ],
@@ -1423,7 +1423,7 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Promote the read replica": {
+          "Promote read replica cluster to an independent read-write cluster.": {
             "$ref": "./examples/ClusterPromoteReadReplica.json"
           }
         },
@@ -1878,15 +1878,15 @@
         "vCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of a server (max: 64)."
+          "description": "The vCores count of a server."
         },
         "enableHa": {
           "type": "boolean",
-          "description": "If high availability is enabled or not for the server."
+          "description": "If high availability (HA) is enabled or not for the server."
         },
         "enablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a server.",
+          "description": "If public access is enabled on server",
           "readOnly": true
         },
         "isReadOnly": {
@@ -1950,11 +1950,11 @@
         },
         "postgresqlVersion": {
           "type": "string",
-          "description": "The PostgreSQL version of server."
+          "description": "The major PostgreSQL version of server."
         },
         "citusVersion": {
           "type": "string",
-          "description": "The Citus extension version on all cluster servers."
+          "description": "The Citus extension version of server."
         }
       }
     },
@@ -2017,11 +2017,11 @@
             "create",
             "update"
           ],
-          "description": "The password of the administrator login."
+          "description": "The password of the administrator login. Each cluster is created with pre-defined administrative role called ‘citus’. "
         },
         "postgresqlVersion": {
           "type": "string",
-          "description": "The PostgreSQL version of the cluster."
+          "description": "The major PostgreSQL version on all cluster servers."
         },
         "citusVersion": {
           "type": "string",
@@ -2033,11 +2033,11 @@
         },
         "enableHa": {
           "type": "boolean",
-          "description": "If high availability is enabled or not for the cluster."
+          "description": "If high availability (HA) is enabled or not for the cluster."
         },
         "preferredPrimaryZone": {
           "type": "string",
-          "description": "Preferred primary zone for the cluster"
+          "description": "Preferred primary availability zone (AZ) for all cluster servers."
         },
         "coordinatorServerEdition": {
           "type": "string",
@@ -2051,11 +2051,11 @@
         "coordinatorVCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of the coordinator (max: 64)."
+          "description": "The vCores count of the coordinator (max: 96)."
         },
         "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for the coordinator."
+          "description": "If public access is enabled on coordinator."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -2064,21 +2064,21 @@
         "nodeCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1."
+          "description": "Worker node count of the cluster. When node count is 0, it represents a single node configuration with the ability to create distributed tables on that node. 2 or more worker nodes represent multi-node configuration. Node count value cannot be 1."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
           "format": "int64",
-          "description": "The storage of a node in MB."
+          "description": "The storage in MB on each worker node."
         },
         "nodeVCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of a node (max: 64)."
+          "description": "The compute in vCores on each worker node (max: 104)."
         },
         "nodeEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP is requested or not for a node.",
+          "description": "If public access is enabled on worker nodes.",
           "readOnly": true
         },
         "maintenanceWindow": {
@@ -2152,7 +2152,7 @@
         },
         "postgresqlVersion": {
           "type": "string",
-          "description": "The PostgreSQL version of cluster."
+          "description": "The major PostgreSQL version on all cluster servers."
         },
         "citusVersion": {
           "type": "string",
@@ -2164,7 +2164,7 @@
         },
         "preferredPrimaryZone": {
           "type": "string",
-          "description": "Preferred primary zone for the cluster"
+          "description": "Preferred primary availability zone (AZ) for all cluster servers."
         },
         "enableShardsOnCoordinator": {
           "type": "boolean",
@@ -2172,7 +2172,7 @@
         },
         "enableHa": {
           "type": "boolean",
-          "description": "If high availability is enabled or not for the server."
+          "description": "If high availability (HA) is enabled or not for the cluster."
         },
         "coordinatorServerEdition": {
           "type": "string",
@@ -2186,11 +2186,11 @@
         "coordinatorVCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of a server (max: 64). Required for creation."
+          "description": "The vCores count of a server (max: 96). Required for creation."
         },
         "coordinatorEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP address is enabled on coordinator."
+          "description": "If public access is enabled on coordinator."
         },
         "nodeServerEdition": {
           "type": "string",
@@ -2199,21 +2199,21 @@
         "nodeCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Worker node count of the cluster. When node count is 0, it represents a coordinator with the ability to create distributed tables on that node. Node count value can not be 1. Required for creation."
+          "description": "Worker node count of the cluster. When node count is 0, it represents a single node configuration with the ability to create distributed tables on that node. 2 or more worker nodes represent multi-node configuration. Node count value cannot be 1. Required for creation."
         },
         "nodeStorageQuotaInMb": {
           "type": "integer",
           "format": "int64",
-          "description": "The storage of a server in MB."
+          "description": "The storage in MB on each worker node."
         },
         "nodeVCores": {
           "type": "integer",
           "format": "int64",
-          "description": "The vCores count of a server (max: 64)."
+          "description": "The compute in vCores on each worker node (max: 104)."
         },
         "nodeEnablePublicIpAccess": {
           "type": "boolean",
-          "description": "If public IP address is enabled on worker nodes."
+          "description": "If public access is enabled on worker nodes."
         },
         "serverNames": {
           "type": "array",
@@ -2233,12 +2233,12 @@
         },
         "sourceLocation": {
           "type": "string",
-          "description": "The location of source cluster for read replica clusters."
+          "description": "The Azure region of source cluster for read replica clusters."
         },
         "pointInTimeUTC": {
           "type": "string",
           "format": "date-time",
-          "description": "Restore point creation time (ISO8601 format), specifying the time to restore from."
+          "description": "Date and time in UTC (ISO8601 format) for cluster restore."
         },
         "readReplicas": {
           "type": "array",
@@ -2267,26 +2267,26 @@
     },
     "MaintenanceWindow": {
       "type": "object",
-      "description": "Maintenance window of a cluster.",
+      "description": "Schedule settings for regular cluster updates.",
       "properties": {
         "customWindow": {
           "type": "string",
-          "description": "indicates whether custom window is enabled or disabled"
+          "description": "Indicates whether custom maintenance window is enabled or not."
         },
         "startHour": {
           "type": "integer",
           "format": "int32",
-          "description": "start hour for maintenance window"
+          "description": "Start hour within preferred day of the week for maintenance window."
         },
         "startMinute": {
           "type": "integer",
           "format": "int32",
-          "description": "start minute for maintenance window"
+          "description": "Start minute within the start hour for maintenance window."
         },
         "dayOfWeek": {
           "type": "integer",
           "format": "int32",
-          "description": "day of week for maintenance window"
+          "description": "Preferred day of the week for maintenance window."
         }
       }
     },
@@ -2758,7 +2758,7 @@
       }
     },
     "SimplePrivateEndpointConnection": {
-      "description": "A private endpoint connection",
+      "description": "A private endpoint connection.",
       "type": "object",
       "allOf": [
         {
