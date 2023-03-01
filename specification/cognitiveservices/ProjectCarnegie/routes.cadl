@@ -39,6 +39,7 @@ interface ImageOperations {
   >;
 }
 
+
 interface TextLists{
     @summary("Get Text List By listId")
     @doc("Returns text list details of the Text List with list Id equal to list Id passed.")
@@ -56,22 +57,74 @@ interface TextLists{
     @doc("Get All Text Lists")
     ListTextLists is Azure.Core.ResourceList<TextList>;
 
-}
+    // @post
+    // @route("/text/lists/{listName}")
+    // @summary("Create Item In Text List")
+    // op CreateListItem(
+    //   @doc("Text List Item Info")
+    //   @body listItemInfo: TextListItemInfo,
+    //   @doc("List Id of Text Listlist.")
+    //   @path
+    //   listName: string;
+    //   ): {
+    //   @statusCode statusCode: 201,
+    //   @header Location: string,
+    //   @body result: TextListItem
+    // } | Azure.Core.Foundations.ErrorResponse;
 
-interface TextListItems {
+    // @put
+    // @route("/text/lists/{listName}/items/{itemId}")
+    // @summary("Update Item In Text List")
+    // op UpdateListItem(
+    //   @doc("Text List Item Info")
+    //   @body listItemInfo: TextListItemInfo,
+    //   @doc("List Id of Text Listlist.")
+    //   @path
+    //   listName: string,
+    //   @path
+    //   @doc("Item Id")
+    //   itemId: string;
+    //   ): {
+    //   @statusCode statusCode: 200,
+    //   @header Location: string,
+    //   @body result: TextListItem
+    // } | Azure.Core.Foundations.ErrorResponse;
+
+    addItems is ResourceAction<TextList, BatchCreateTextListItemsRequest, BatchCreateTextListItemsResponse>;
+
+    removeItems is ResourceAction<TextList, BatchDeleteTextListItemsRequest, NoContentResponse>;
+
     @summary("Get Item By itemId and listId")
     @doc("Get Item By itemId and listId")
     GetTextListItem is Azure.Core.ResourceRead<TextListItem>;
-
-    @summary("Create Or Update Item In Text List")
-    @doc("Create Or Update Item In Text List")
-    CreateOrUpdateListItem is Azure.Core.ResourceCreateOrUpdate<TextListItem>;
   
-    @summary("Delete Item By itemId and listId")
-    @doc("Delete Item By itemId and listId")
-    DeleteTextListItem is Azure.Core.ResourceDelete<TextListItem>;
+    // @summary("Delete Item By itemId and listId")
+    // @doc("Delete Item By itemId and listId")
+    // DeleteTextListItem is Azure.Core.ResourceDelete<TextListItem>;
 
     @summary("Get All Items By listId")
     @doc("Get All Items By listId")
     ListTextListItems is Azure.Core.ResourceList<TextListItem>;
 }
+
+// interface TextListItems {
+//     @summary("Get Item By itemId and listId")
+//     @doc("Get Item By itemId and listId")
+//     GetTextListItem is Azure.Core.ResourceRead<TextListItem>;
+
+//     @summary("Create Or Update Item In Text List")
+//     @doc("Create Or Update Item In Text List")
+//     CreateOrUpdateListItem is Azure.Core.ResourceCreateOrUpdate<TextListItem>;
+  
+//     @summary("Delete Item By itemId and listId")
+//     @doc("Delete Item By itemId and listId")
+//     DeleteTextListItem is Azure.Core.ResourceDelete<TextListItem>;
+
+//     @summary("Get All Items By listId")
+//     @doc("Get All Items By listId")
+//     ListTextListItems is Azure.Core.ResourceList<TextListItem>;
+// }
+
+// interface TextListItems {
+
+// }

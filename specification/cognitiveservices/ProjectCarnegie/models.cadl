@@ -123,14 +123,10 @@ model ImageDetectMultiSeverityResult {
 @resource("text/lists")
 model TextList {
   @doc("Text List Id.")
-  @key("listId")
+  @key("listName")
   @visibility("read","create","query")
   @maxLength(64)
-  listId: string;
-
-  @doc("Text List name.")
-  @maxLength(256)
-  name?: string;
+  listName: string;
 
   @doc("Description for Text List.")
   @maxLength(1024)
@@ -153,11 +149,39 @@ model TextListItem {
 
   @doc("Text list item content.")
   @maxLength(128)
-  text?: string;
+  text: string;
 
   @doc("""
 Language of this item, Value may contain only the language code (ex. \"en\",
 \"fr\") of BCP 47. If not assigned, \"en\" will be used
 """)
-  language?: string;
+  language: string;
+}
+
+model TextListItemInfo{
+  @doc("Text data description")
+  @maxLength(1024)
+  description?: string;
+
+  @doc("Text list item content.")
+  @maxLength(128)
+  text: string;
+
+  @doc("""
+Language of this item, Value may contain only the language code (ex. \"en\",
+\"fr\") of BCP 47. If not assigned, \"en\" will be used
+""")
+  language: string;
+}
+
+model BatchCreateTextListItemsRequest{
+  items?: TextListItemInfo[];
+}
+
+model BatchCreateTextListItemsResponse{
+  items?: TextListItem[];
+}
+
+model BatchDeleteTextListItemsRequest{
+  itemsIds?: string[];
 }
