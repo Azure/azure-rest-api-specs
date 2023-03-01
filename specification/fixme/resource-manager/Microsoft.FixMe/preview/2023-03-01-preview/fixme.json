@@ -1,0 +1,733 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.FixMe",
+    "version": "2023-03-01-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "FixMeInstances"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.FixMe/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.FixMe/fixMeInstances": {
+      "get": {
+        "tags": [
+          "FixMeInstances"
+        ],
+        "operationId": "FixMeInstances_ListBySubscription",
+        "description": "List FixMeInstance resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FixMeInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "FixMeInstances_ListBySubscription": {
+            "$ref": "./examples/FixMeInstances_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FixMe/fixMeInstances": {
+      "get": {
+        "tags": [
+          "FixMeInstances"
+        ],
+        "operationId": "FixMeInstances_ListByResourceGroup",
+        "description": "List FixMeInstance resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FixMeInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FixMeInstances_ListByResourceGroup": {
+            "$ref": "./examples/FixMeInstances_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.FixMe/fixMeInstances/{fixMeInstanceName}": {
+      "get": {
+        "tags": [
+          "FixMeInstances"
+        ],
+        "operationId": "FixMeInstances_Get",
+        "description": "Get a FixMeInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fixMeInstanceName",
+            "in": "path",
+            "required": true,
+            "description": "FixMe Instance name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FixMeInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FixMeInstances_Get_3": {
+            "$ref": "./examples/FixMeInstances_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FixMeInstances"
+        ],
+        "operationId": "FixMeInstances_CreateOrUpdate",
+        "description": "Create a FixMeInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fixMeInstanceName",
+            "in": "path",
+            "required": true,
+            "description": "FixMe Instance name",
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/FixMeInstance"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FixMeInstance"
+            }
+          },
+          "201": {
+            "description": "ARM create operation completed successfully.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/FixMeInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FixMeInstances_CreateOrUpdate_0": {
+            "$ref": "./examples/FixMeInstances_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "FixMeInstances"
+        ],
+        "operationId": "FixMeInstances_Update",
+        "description": "Update a FixMeInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fixMeInstanceName",
+            "in": "path",
+            "required": true,
+            "description": "FixMe Instance name",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/FixMeInstanceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FixMeInstance"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "FixMeInstances_Update_4": {
+            "$ref": "./examples/FixMeInstances_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "FixMeInstances"
+        ],
+        "operationId": "FixMeInstances_Delete",
+        "description": "Delete a FixMeInstance",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "fixMeInstanceName",
+            "in": "path",
+            "required": true,
+            "description": "FixMe Instance name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "FixMeInstances_Delete_6": {
+            "$ref": "./examples/FixMeInstances_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ApimProfile": {
+      "type": "object",
+      "properties": {
+        "publisherName": {
+          "type": "string",
+          "description": "Name of publisher.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "publisherEmail": {
+          "type": "string",
+          "description": "Publisher Email.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The properties related to Apim",
+      "required": [
+        "publisherName",
+        "publisherEmail"
+      ]
+    },
+    "FixMeInstance": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FixMeInstanceProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A FixMeProviderHub resource",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "FixMeInstanceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FixMeInstance"
+          },
+          "x-cadl-name": "FixMeInstance[]",
+          "description": "The FixMeInstance items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-cadl-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a FixMeInstance list operation.",
+      "required": [
+        "value"
+      ]
+    },
+    "FixMeInstanceProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "prefix": {
+          "type": "string",
+          "description": "FixMeInstance Unique Prefix.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "apimProfile": {
+          "$ref": "#/definitions/ApimProfile",
+          "description": "Profile of Apim Resource created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sqlProfile": {
+          "$ref": "#/definitions/SqlProfile",
+          "description": "Profile of SQL Resource created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "synapseProfile": {
+          "$ref": "#/definitions/SynapseProfile",
+          "description": "Profile of Synapse Resource created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "m365Profile": {
+          "$ref": "#/definitions/M365Profile",
+          "description": "Profile of M365 Resources created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Details of the FixMe FixMeInstance.",
+      "required": [
+        "prefix",
+        "apimProfile",
+        "sqlProfile",
+        "synapseProfile"
+      ]
+    },
+    "FixMeInstanceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        }
+      },
+      "description": "The type used for update operations of the FixMeInstance."
+    },
+    "M365Profile": {
+      "type": "object",
+      "properties": {
+        "adminUserName": {
+          "type": "string",
+          "description": "Power Platform Administrator User Name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "adminPassword": {
+          "type": "string",
+          "description": "Power Platform Administrator Password.",
+          "format": "password",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "accessPolicyUserId": {
+          "type": "string",
+          "description": "Power Platform Access Policy User Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetTenantId": {
+          "type": "string",
+          "description": "Power Platform Access Target Tenant Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "helpDeskUserName": {
+          "type": "string",
+          "description": "Power Platform Helpdesk User Name.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "helpDeskUserPassword": {
+          "type": "string",
+          "description": "Power Platform Helpdesk User Password.",
+          "format": "password",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "targetEnvironment": {
+          "type": "string",
+          "description": "Power Platform Target Environment.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "sqlConnectionId": {
+          "type": "string",
+          "description": "Power Platform SQL Connection Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "oneDriveConnectionId": {
+          "type": "string",
+          "description": "Power Platform One Drive Connection Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "teamsConnectionId": {
+          "type": "string",
+          "description": "Power Platform Teams Connection Id.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The properties related to Microsoft 365 Resources",
+      "required": [
+        "adminUserName",
+        "adminPassword",
+        "accessPolicyUserId",
+        "targetTenantId",
+        "helpDeskUserName",
+        "helpDeskUserPassword",
+        "targetEnvironment",
+        "sqlConnectionId",
+        "oneDriveConnectionId",
+        "teamsConnectionId"
+      ]
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "SqlProfile": {
+      "type": "object",
+      "properties": {
+        "administratorLoginPassword": {
+          "type": "string",
+          "description": "The administrator password of the SQL logical server.",
+          "format": "password",
+          "x-ms-secret": true,
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "administratorId": {
+          "type": "string",
+          "description": "Administrator Id of SQL Database",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "description": "The properties related to Azure SQL Resource",
+      "required": [
+        "administratorId",
+        "administratorLoginPassword"
+      ]
+    },
+    "SynapseProfile": {
+      "type": "object",
+      "properties": {
+        "synapseAdminLogin": {
+          "type": "string",
+          "description": "Synapse Administrator Login",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "synapseAdminTenant": {
+          "type": "string",
+          "description": "Synapse Administrator Tenant",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "synapseAdminSid": {
+          "type": "string",
+          "description": "Synapse Administrator Sid",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "The properties related to Azure Synapse Resource",
+      "required": [
+        "synapseAdminLogin",
+        "synapseAdminTenant",
+        "synapseAdminSid"
+      ]
+    }
+  },
+  "parameters": {}
+}

@@ -405,8 +405,7 @@
           "description": "The resource-specific properties for this resource.",
           "x-ms-mutability": [
             "read",
-            "create",
-            "update"
+            "create"
           ],
           "x-ms-client-flatten": true
         },
@@ -483,6 +482,11 @@
           "type": "string",
           "description": "Azure Tenant Id"
         },
+        "initialCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Initial capacity for Dell Filesystem"
+        },
         "marketplace": {
           "$ref": "#/definitions/Marketplace",
           "description": "Marketplace details"
@@ -509,6 +513,11 @@
           "type": "string",
           "description": "Azure Tenant Id"
         },
+        "initialCapacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Initial capacity for Dell Filesystem"
+        },
         "marketplace": {
           "$ref": "#/definitions/Marketplace",
           "description": "Marketplace details"
@@ -531,7 +540,8 @@
         "tenantId",
         "marketplace",
         "provisioningState",
-        "user"
+        "user",
+        "initialCapacity"
       ]
     },
     "Marketplace": {
