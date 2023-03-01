@@ -30,13 +30,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "#/parameters/billingProfileNameParameter"
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
-            "$ref": "#/parameters/invoiceSectionNameParameter"
+            "$ref": "./types.json#/parameters/invoiceSectionName"
           },
           {
             "$ref": "#/parameters/transferNameParameter"
@@ -73,13 +73,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "#/parameters/billingProfileNameParameter"
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
-            "$ref": "#/parameters/invoiceSectionNameParameter"
+            "$ref": "./types.json#/parameters/invoiceSectionName"
           },
           {
             "$ref": "#/parameters/transferNameParameter"
@@ -133,13 +133,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "#/parameters/billingProfileNameParameter"
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
-            "$ref": "#/parameters/invoiceSectionNameParameter"
+            "$ref": "./types.json#/parameters/invoiceSectionName"
           },
           {
             "$ref": "#/parameters/transferNameParameter"
@@ -178,13 +178,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "#/parameters/billingProfileNameParameter"
+            "$ref": "./types.json#/parameters/billingProfileName"
           },
           {
-            "$ref": "#/parameters/invoiceSectionNameParameter"
+            "$ref": "./types.json#/parameters/invoiceSectionName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -223,10 +223,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "#/parameters/customerNameParameter"
+            "$ref": "./types.json#/parameters/customerName"
           },
           {
             "$ref": "#/parameters/transferNameParameter"
@@ -263,10 +263,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "#/parameters/customerNameParameter"
+            "$ref": "./types.json#/parameters/customerName"
           },
           {
             "$ref": "#/parameters/transferNameParameter"
@@ -320,10 +320,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "#/parameters/customerNameParameter"
+            "$ref": "./types.json#/parameters/customerName"
           },
           {
             "$ref": "#/parameters/transferNameParameter"
@@ -362,10 +362,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountNameParameter"
+            "$ref": "./types.json#/parameters/billingAccountName"
           },
           {
-            "$ref": "#/parameters/customerNameParameter"
+            "$ref": "./types.json#/parameters/customerName"
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -700,7 +700,7 @@
       "description": "Details of the transfer.",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/Resource"
+          "$ref": "./types.json#/definitions/ArmResource"
         }
       ],
       "properties": {
@@ -716,7 +716,7 @@
       "description": "Details of the transfer.",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/Resource"
+          "$ref": "./types.json#/definitions/ArmResource"
         }
       ],
       "properties": {
@@ -732,7 +732,7 @@
       "description": "Details of the transfer.",
       "allOf": [
         {
-          "$ref": "./types.json#/definitions/Resource"
+          "$ref": "./types.json#/definitions/ArmResource"
         }
       ],
       "properties": {
@@ -1151,38 +1151,6 @@
     }
   },
   "parameters": {
-    "billingAccountNameParameter": {
-      "name": "billingAccountName",
-      "in": "path",
-      "description": "The ID that uniquely identifies a billing account.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "billingProfileNameParameter": {
-      "name": "billingProfileName",
-      "in": "path",
-      "description": "The ID that uniquely identifies a billing profile.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "customerNameParameter": {
-      "name": "customerName",
-      "in": "path",
-      "description": "The ID that uniquely identifies a customer.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "invoiceSectionNameParameter": {
-      "name": "invoiceSectionName",
-      "in": "path",
-      "description": "The ID that uniquely identifies an invoice section.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "transferNameParameter": {
       "name": "transferName",
       "x-ms-parameter-location": "method",
