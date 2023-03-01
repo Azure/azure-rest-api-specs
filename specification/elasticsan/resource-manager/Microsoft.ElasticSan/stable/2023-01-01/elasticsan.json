@@ -1182,22 +1182,12 @@
               "$ref": "#/definitions/Snapshot"
             }
           },
-          "201": {
-            "description": "Created -- Resource Created; operation will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/Snapshot"
-            }
-          },
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
               "$ref": "#/definitions/Error"
             }
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Snapshots_Update_MaximumSet_Gen": {
@@ -1237,6 +1227,9 @@
         "responses": {
           "200": {
             "description": "OK -- Delete operation completed successfully."
+          },
+          "202": {
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously."
           },
           "204": {
             "description": "NoContent -- Resource does not exist in the subscription."
