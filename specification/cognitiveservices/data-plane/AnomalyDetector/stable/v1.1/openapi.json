@@ -578,7 +578,8 @@
         "modelId": {
           "type": "string",
           "description": "Model identifier.",
-          "format": "uuid"
+          "format": "uuid",
+          "readOnly": true
         },
         "createdTime": {
           "type": "string",
@@ -1048,7 +1049,8 @@
         "resultId": {
           "type": "string",
           "description": "Result identifier, which is used to fetch the results of an inference call.",
-          "format": "uuid"
+          "format": "uuid",
+          "readOnly": true
         },
         "summary": {
           "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionResultSummary",
@@ -1086,13 +1088,13 @@
         "topContributorCount": {
           "type": "integer",
           "format": "int32",
-          "description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10."
+          "description": "An optional field, which is used to specify the number of top contributed\nvariables for one anomalous timestamp in the response. The default number is\n10.",
+          "default": 10
         }
       },
       "description": "Request of last detection.",
       "required": [
-        "variables",
-        "topContributorCount"
+        "variables"
       ]
     },
     "Multivariate.MultivariateLastDetectionResult": {
