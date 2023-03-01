@@ -1013,45 +1013,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/availableGroundStations/{groundStationName}": {
-      "get": {
-        "tags": [
-          "Ground Station"
-        ],
-        "operationId": "AvailableGroundStations_Get",
-        "description": "Gets the specified available ground station.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/groundStationNameParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. The operation returns the resulting ground station resource.",
-            "schema": {
-              "$ref": "#/definitions/AvailableGroundStation"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get GroundStation": {
-            "$ref": "./examples/AvailableGroundStationGet.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Orbital/locations/{location}/operationResults/{operationId}": {
       "get": {
         "tags": [
@@ -2173,14 +2134,6 @@
       "description": "Contact Profile name.",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "groundStationNameParameter": {
-      "name": "groundStationName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Ground Station name.",
       "x-ms-parameter-location": "method"
     },
     "spacecraftNameParameter": {
