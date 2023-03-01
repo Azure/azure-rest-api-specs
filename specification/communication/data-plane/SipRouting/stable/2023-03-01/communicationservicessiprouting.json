@@ -54,8 +54,8 @@
         "tags": [
           "SipConfiguration"
         ],
-        "summary": "Patches SIP configuration for resource.",
-        "operationId": "SipRouting_Patch",
+        "summary": "Updates SIP configuration for resource.",
+        "operationId": "SipRouting_Update",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -69,15 +69,15 @@
           {
             "in": "body",
             "name": "body",
-            "description": "Sip configuration patch object.",
+            "description": "Sip configuration update object.",
             "schema": {
-              "$ref": "#/definitions/SipConfigurationPatch"
+              "$ref": "#/definitions/SipConfigurationUpdate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Patched configuration is returned.",
+            "description": "Updated configuration is returned.",
             "schema": {
               "$ref": "#/definitions/SipConfiguration"
             }
@@ -96,8 +96,8 @@
           }
         },
         "x-ms-examples": {
-          "Patch SIP configuration for resource": {
-            "$ref": "./examples/PatchSipConfiguration.json"
+          "Update SIP configuration for resource": {
+            "$ref": "./examples/UpdateSipConfiguration.json"
           }
         }
       }
@@ -118,8 +118,8 @@
         }
       }
     },
-    "TrunkPatch": {
-      "description": "Represents a SIP trunk patch.",
+    "TrunkUpdate": {
+      "description": "Represents a SIP trunk update.",
       "type": "object",
       "properties": {
         "sipSignalingPort": {
@@ -184,8 +184,8 @@
         }
       }
     },
-    "SipConfigurationPatch": {
-      "description": "Represents a SIP configuration patch.",
+    "SipConfigurationUpdate": {
+      "description": "Represents a SIP configuration update.",
       "type": "object",
       "properties": {
         "trunks": {
@@ -193,7 +193,7 @@
           "maxProperties": 250,
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/TrunkPatch"
+            "$ref": "#/definitions/TrunkUpdate"
           }
         },
         "routes": {
