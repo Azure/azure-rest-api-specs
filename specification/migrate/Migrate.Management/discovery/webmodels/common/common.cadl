@@ -317,9 +317,10 @@ enum ApplicationDiscoveryScopeStatus {
 
 @doc("Contains data related application and roles discovery scope.")
 model ApplicationDiscovery {
-  // @doc("Gets discovery scope status.")
-  // @visibility("read")
-  // "discoveryScopeStatus"?: ApplicationDiscoveryScopeStatus;
+  @doc("Gets discovery scope status.")
+  @visibility("read")
+  discoveryScopeStatus?: ApplicationDiscoveryScopeStatus;
+
   @doc("Gets errors for discovery scope.")
   @visibility("read")
   errors?: HealthErrorDetails[];
@@ -349,8 +350,19 @@ model GuestOSDetails {
   osArchitecture?: string;
 }
 
-@doc("Dependency  Map ServiceMap Extensions Scope Map Request")
-model DependencyMapServiceMapExtensionsScopeMapRequest {
+@doc("DependencyMap Service Map Extensions Dependency Map Request Filters")
+model DependencyMapServiceMapExtensionsDependencyMapRequestFilters {
+  @doc("array of machine ids")
+  machineIds?: string[];
+
+  @doc("array of process Ids")
+  processIds?: string[];
+}
+@doc("DependencyMap ServiceMap Extensions SingleMachine DetailedMap Request")
+model DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest {
+  @doc("id of machine")
+  machineId?: string;
+
   @doc("start time")
   startTime?: zonedDateTime;
 
@@ -361,24 +373,8 @@ model DependencyMapServiceMapExtensionsScopeMapRequest {
   filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
 }
 
-@doc("DependencyMap Service Map Extensions Dependency Map Request Filters")
-model DependencyMapServiceMapExtensionsDependencyMapRequestFilters {
-  @doc("array of machine ids")
-  machineIds?: string[];
-
-  @doc("array of process Ids")
-  processIds?: string[];
-}
-@doc("DependencyMap ServiceMap Extensions SingleMachine DetailedMap Request")
-model DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
-  extends DependencyMapServiceMapExtensionsScopeMapRequest {
-  @doc("id of machine")
-  machineId?: string;
-}
-
 @doc("DependencyMap ServiceMap Extensions Client GroupMembers Request")
-model DependencyMapServiceMapExtensionsClientGroupMembersRequest
-  extends DependencyMapServiceMapExtensionsScopeMapRequest {
+model DependencyMapServiceMapExtensionsClientGroupMembersRequest {
   @doc("id of machine")
   machineId?: string;
 
@@ -387,13 +383,41 @@ model DependencyMapServiceMapExtensionsClientGroupMembersRequest
 
   @doc("name of process")
   processName?: string;
+
+  @doc("start time")
+  startTime?: zonedDateTime;
+
+  @doc("end time")
+  endTime?: zonedDateTime;
+
+  @doc("optional filters")
+  filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
 }
 
 @doc("DependencyMap ServiceMap Extensions ServerGroup Members Request")
-model DependencyMapServiceMapExtensionsServerGroupMembersRequest
-  extends DependencyMapServiceMapExtensionsScopeMapRequest {
+model DependencyMapServiceMapExtensionsServerGroupMembersRequest {
   @doc("port of server")
   serverPort?: int32;
+
+  @doc("start time")
+  startTime?: zonedDateTime;
+
+  @doc("end time")
+  endTime?: zonedDateTime;
+
+  @doc("optional filters")
+  filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
+}
+@doc("DependencyMap ServiceMapExtensions Scope MapRequest")
+model DependencyMapServiceMapExtensionsScopeMapRequest {
+  @doc("start time")
+  startTime?: zonedDateTime;
+
+  @doc("end time")
+  endTime?: zonedDateTime;
+
+  @doc("optional filters")
+  filters?: DependencyMapServiceMapExtensionsDependencyMapRequestFilters;
 }
 
 @doc("""
@@ -461,11 +485,8 @@ enum PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues {
   "Failed",
 }
 
-@knownValues(
-  PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues
-)
-scalar PrivateEndpointConnectionPropertiesV2ProvisioningState
-  extends string;
+@knownValues(PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues)
+scalar PrivateEndpointConnectionPropertiesV2ProvisioningState extends string;
 
 enum PrivateLinkServiceConnectionStateStatusKnownValues {
   "Approved",
@@ -474,11 +495,8 @@ enum PrivateLinkServiceConnectionStateStatusKnownValues {
   "Disconnected",
 }
 
-@knownValues(
-  PrivateLinkServiceConnectionStateStatusKnownValues
-)
-scalar PrivateLinkServiceConnectionStateStatus
-  extends string;
+@knownValues(PrivateLinkServiceConnectionStateStatusKnownValues)
+scalar PrivateLinkServiceConnectionStateStatus extends string;
 
 @doc("Class for site properties.")
 model MasterSiteProperties {
@@ -582,11 +600,23 @@ enum V202007MasterSitePropertiesPublicNetworkAccess {
 
 //@knownValues(V202007MasterSitePropertiesPublicNetworkAccess)
 // scalar MicrosoftAzureFDSWebRoleV202007MasterSitePropertiesPublicNetworkAccess
- // extends string;
+// extends string;
 
 #suppress "@azure-tools/cadl-azure-core/casing-style"
 #suppress "@azure-tools/cadl-azure-core/documentation-required"
 model MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody {
+  
+  @doc("Relative URL to get this resource.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Gets the name of the resource.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Gets the resource type.")
+  @visibility("read")
+  type?: string;
   remotePrivateEndpoint?: PrivateEndpointDetails;
 }
 
@@ -715,17 +745,17 @@ model ErrorDetails {
   @visibility("read")
   agentErrorRecommendedAction?: string;
 }
-
 @doc("The list of Machine MetaData.")
 model MachineMetadataList {
+  @OpenAPI.extension("x-ms-identifiers", [])
   @doc("The list of Machine MetaData.")
   value: MachineMetadata[];
 }
 
 @doc("The properties of Machine MetaData")
-model MachineMetadata { //TODO
+model MachineMetadata {
   @doc("arm id of the machine.")
-  id: string;
+  machineArmId: string;
 
   @doc("value representing state of dependency mapping (enabled/disabled).")
   dependencyMapping: string;
@@ -743,7 +773,7 @@ enum ProvisioningState {
   Updating,
   Deleting,
   Accepted,
-  InProgress
+  InProgress,
 }
 
 @doc("Error contract returned when some exception occurs in Rest API.")
@@ -928,8 +958,8 @@ model SiteUsageResponse {
   @doc("Gets or sets the number of clusters part of the site.")
   clusterCount: int32;
 
-  @doc("The status of the last operation.")
-  provisioningState?: ProvisioningState;
+  // @doc("The status of the last operation.")
+  // provisioningState?: ProvisioningState;
 }
 @doc("Nonce Request REST Resource.")
 model NonceRequest {
@@ -2250,3 +2280,176 @@ model OtherDatabase {
   version?: string;
 }
 
+@doc("""
+Defines class that represents input to enable or disable DMP on machine
+      
+      for cosmos entity operation.
+""")
+model UpdateMachineRunAsAccount {
+  @doc("Gets or sets the machine collection.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  machines?: UpdateMachineRunAsAccountRunAsAccountMachineInput[];
+}
+
+@doc("Machine class.")
+model UpdateMachineRunAsAccountRunAsAccountMachineInput {
+  @doc("Gets or sets the ARM id of the machine.")
+  machineId?: string;
+
+  @doc("Gets or sets a run as account to be associated with machine.")
+  runAsAccountId?: string;
+}
+
+@doc("Defines class that represents input to update list of tags on machine.")
+model UpdateMachineTags {
+  @doc("Gets or sets the machine collection.")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  machines?: UpdateMachineTagsMachineInput[];
+}
+
+@doc("Machine class.")
+model UpdateMachineTagsMachineInput {
+  @doc("Gets or sets the ARM id of the machine.")
+  machineId?: string;
+
+  @doc("Gets or sets Tags.")
+  tags?: Record<string>;
+}
+@doc("PrivateEndpoint Models PrivateEndpoint Details")
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails {
+  @doc("manual PrivateLink Service Connections")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  manualPrivateLinkServiceConnections?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[];
+
+  @doc("private Link ServiceConnections")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  privateLinkServiceConnections?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection[];
+
+  @doc("privateLink Service Proxies")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  privateLinkServiceProxies?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy[];
+
+  @doc("connection Details")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  connectionDetails?: MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration[];
+
+  @doc("provisioning state enum")
+  @visibility("read")
+  provisioningState?: ProvisioningState;
+}
+
+@doc("PrivateEndpoint Models Private LinkServiceConnection")
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnection {
+  @doc("name values")
+  name?: string;
+
+  @doc("group ids")
+  groupIds?: string[];
+
+  @doc("request Message")
+  requestMessage?: string;
+}
+
+@doc("PrivateEndpoint Models PrivateLink Service Proxy")
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceProxy {
+  @doc("id value")
+  id?: string;
+
+  @doc("group Connectivity Information")
+  @OpenAPI.extension("x-ms-identifiers", [])
+  groupConnectivityInformation?: MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation[];
+
+  @doc("remote PrivateEndpoint Connection")
+  remotePrivateEndpointConnection?: MicrosoftAzureMigratePrivateEndpointModelsResourceId;
+
+  @doc("remote PrivateLink ServiceConnection State")
+  remotePrivateLinkServiceConnectionState?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState;
+}
+
+@doc("PrivateEndpoint Models Ip Configuration")
+model MicrosoftAzureMigratePrivateEndpointModelsIpConfiguration {
+  @doc("id value")
+  id?: string;
+
+  @doc("private Ip Address")
+  privateIpAddress?: string;
+
+  @doc("link Identifier")
+  linkIdentifier?: string;
+
+  @doc("group Id")
+  groupId?: string;
+
+  @doc("member Name")
+  memberName?: string;
+}
+
+@doc("PrivateEndpoint ModelsGroup Connectivity Information")
+model MicrosoftAzureMigratePrivateEndpointModelsGroupConnectivityInformation {
+  @doc("group Id")
+  groupId?: string;
+
+  @doc("member Name")
+  memberName?: string;
+
+  @doc("customer Visible Fqdns")
+  customerVisibleFqdns?: string[];
+
+  @doc("internal Fqdn")
+  internalFqdn?: string;
+
+  @doc("redirect Map Id")
+  redirectMapId?: string;
+
+  @doc("privateLink ServiceArm Region")
+  privateLinkServiceArmRegion?: string;
+}
+
+@doc("PrivateEndpoint Models ResourceId")
+model MicrosoftAzureMigratePrivateEndpointModelsResourceId {
+  @visibility("read")
+  @doc("id value")
+  id?: string;
+}
+
+@doc("PrivateEndpoint Models PrivateLink ServiceConnection State")
+model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionState {
+  @doc("status value")
+  status?: MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus;
+
+  @doc("description value")
+  description?: string;
+
+  @doc("actions Required")
+  actionsRequired?: string;
+}
+
+@doc("Value indicating whether the VM is highly available")
+@knownValues(
+  MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusValues
+)
+scalar MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus
+  extends string;
+enum MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusValues {
+  "Approved",
+  "Pending",
+  "Rejected",
+  "Disconnected",
+}
+@doc("Server machine software inventory REST resource.")
+model ServerSoftwareInventory {
+  @doc("Gets the relative URL to get this Server machine.")
+  @visibility("read")
+  id?: string;
+
+  @doc("Handled by resource provider.")
+  @visibility("read")
+  type?: string;
+
+  @doc("Gets the Name of the machine.")
+  @visibility("read")
+  name?: string;
+
+  @doc("Gets or sets software inventory properties.")
+  properties?: MachineSoftwareInventoryProperties;
+}

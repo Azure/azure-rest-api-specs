@@ -53,7 +53,6 @@ using OpenAPI;
 @doc("Azure OffAzure Resource Provider management API.")
 namespace Microsoft.OffAzure;
 
-
 interface Operations extends Azure.ResourceManager.OperationsCustom {}
 enum Versions {
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -90,23 +89,17 @@ enum Versions {
 #suppress "@azure-tools/cadl-azure-resource-manager/no-resource-delete-operation"
 #suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface HyperVClusterInt {
-  @tag("HyperVClusterController")
+@added(Versions.v2018_05_01_preview)
+interface HyperVClusterController {
   @doc("Method to get a Hyper-V cluster.")
-  @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVCluster_GetCluster")
   get is ArmResourceReadNoError<HyperVCluster>;
 
-  @tag("HyperVClusterController")
-  @added(Versions.v2018_05_01_preview)
   @operationId("HyperVCluster_PutCluster")
   create is ArmResourceCreateOrUpdateAsyncCustom<HyperVCluster>;
 
   // @tag("HyperVClusterController")
   // delete is ArmResourceDeleteSyncNoError<HyperVCluster>;
 
-  @added(Versions.v2018_05_01_preview)
-  @tag("HyperVClusterController")
   @segment("clusters")
   @operationId("HyperVCluster_GetAllClustersInSite")
   listByParent is ArmResourceListByParentUpdated<
@@ -131,7 +124,6 @@ model VMwareSite is TrackedResource<SitesProperties> {
   @segment("VMwareSites")
   @doc("Site name")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -144,61 +136,68 @@ model VMwareSite is TrackedResource<SitesProperties> {
 }
 
 @armResourceOperations
-interface VmwareSites {
-  @tag("SitesController")
+interface SitesController {
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_GetSite")
   get is ArmResourceReadNoError<VMwareSite>;
 
   @added(Versions.v2018_05_01_preview)
-  @operationId("Sites_PutSite")
-  create is ArmResourceCreateOrUpdateSyncCustom<VMwareSite>;
-
-
-  @armResourceUpdate(InnerError)
-  @patch
-  @added(Versions.v2018_05_01_preview)
-  @operationId("Sites_PatchSite")
-  @doc("Update a VMwareSite")
-  updateVmwareSite(
-    ...ResourceInstanceParameters<VMwareSite>,
-
-    @doc(" body with updated properties.")
-    @body
-    body: VMwareSite
-  ): ArmResponse<VMwareSite>;
- 
-  @tag("SitesController")
-  @added(Versions.v2018_05_01_preview)
   @operationId("Sites_DeleteSite")
   delete is ArmResourceDeleteSyncNoError<VMwareSite>;
 
-  @added(Versions.v2022_10_27)
-  @summary("Get all vmware sites.")
-  @doc("Get all the vmware sites in the subscription.")
-  @tag("VMwareSites")
-  @operationId("VMwareSites_ListBySubscription")
-  listBySubscription is ArmListBySubscriptionNoError<VMwareSite>;
-
-  @added(Versions.v2020_01_01)
-  @summary("Get all vmware sites.")
-  @doc("Get all the vmware sites in the resource group.")
-  @tag("VMwareSites")
-  @operationId("VMwareSites_List")
-  listByParent is ArmResourceListByParentUpdated<VMwareSite>;
-
-  @added(Versions.v2018_05_01_preview)
-  @tag("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController")
-  @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
-  @operationId("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController_ExportAppsAndRoles")
-  ExportApplications is ArmResourceActionNoContentNoBodyAsync<VMwareSite>;
-
   @doc("Method to refresh a site.")
-  @tag("SitesController")
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_RefreshSite")
   refresh is ArmResourceActionAsyncNoRequestBody<VMwareSite, {}>;
 
+  @doc("Method to get site error summary.")
+  @armResourceRead(InnerError)
+  @segment("errorSummary")
+  @added(Versions.v2018_05_01_preview)
+  @get
+  errorSummary(
+    ...ResourceInstanceParameters<VMwareSite>
+  ): ArmResponse<SiteErrorSummary>;
+
+  @doc("Method to get site error summary.")
+  @armResourceRead(InnerError)
+  @segment("usage")
+  @added(Versions.v2018_05_01_preview)
+  @get
+  usage(
+    ...ResourceInstanceParameters<VMwareSite>
+  ): ArmResponse<VMwareSiteUsage>;
+  @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
+  @armResourceAction(InnerError)
+  @added(Versions.v2020_01_01)
+  @post
+  @operationId("SitesController_ExportMachines")
+  ExportMachines(
+    ...ResourceInstanceParameters<VMwareSite>,
+
+    #suppress "@azure-tools/cadl-azure-core/casing-style"
+    @doc("filter query")
+    @query
+    $filter?: string
+  ): ArmAcceptedResponse;
+
+  @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
+  @added(Versions.v2020_01_01)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController_ExportMachineErrors")
+  ExportMachineErrors is ArmResourceActionNoContentAsyncNoError<
+    VMwareSite,
+    VersionedV202001ExportMachineErrorsRequest
+  >;
+
+  @added(Versions.v2018_05_01_preview)
+  @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController_ExportAppsAndRoles")
+  ExportApplications is ArmResourceActionNoBodyAsync<VMwareSite>;
+}
+
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@armResourceOperations
+interface VMwareOperationsStatus {
   @doc("A operation status resource belonging to a site resource.")
   @armResourceRead(InnerError)
   @get
@@ -212,96 +211,66 @@ interface VmwareSites {
     @segment("operationsStatus")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
+}
 
-  @doc("Method to get site health summary.")
-  @armResourceAction(InnerError)
-  @added(Versions.v2018_05_01_preview)
-  @post
-  @operationId("Sites_GetSiteHealthSummary")
-  healthSummary(
-    ...ResourceInstanceParameters<VMwareSite>
-  ): ArmResponse<SiteHealthSummaryCollection>;
-
-  @doc("Method to get site error summary.")
-  @armResourceRead(InnerError)
-  @segment("errorSummary")
-  @added(Versions.v2018_05_01_preview)
-  @get
-  errorSummary(
-    ...ResourceInstanceParameters<VMwareSite>,
-
-    @doc("VmwareSite.")
-    @path
-    //@pattern("^[a-zA-Z0-9-]{3,24}$")
-    vmwareSite: string
-  ): ArmResponse<SiteErrorSummaryCollection>;
-
-  @doc("Method to get site error summary.")
-  @armResourceRead(InnerError)
-  @segment("usage")
-  @added(Versions.v2018_05_01_preview)
-  @get
-  usage(
-    ...ResourceInstanceParameters<VMwareSite>,
-
-    @doc("VmwareSite.")
-    @path
-    //@pattern("^[a-zA-Z0-9-]{3,24}$")
-    vmwareSite: string
-  ): ArmResponse<SiteUsageResponse>;
-
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@armResourceOperations
+interface VMwarePropertiesController {
   @added(Versions.v2019_05_01_preview)
-  @tag("Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.VMwarePropertiesController")
   @doc("""
 Method to enable disable dependency map status for machines
             in a
 site.
 """)
   @operationId("Microsoft.Azure.FDS.WebRole.V2019_05_01_preview.VMwarePropertiesController_UpdateMachineDependencyMapStatus")
-  UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomMapRequest<
+  UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
     VMwareSite,
     UpdateMachineDepMapStatus
   >;
 
   @added(Versions.v2019_05_01_preview)
-  @tag("VMwarePropertiesController")
   @doc("Method to associate Run as account to machine\r\n            in a site.")
-  UpdateRunAsAccount is ArmResourceActionAsyncNoError<VMwareSite, {}, {}>;
+  UpdateRunAsAccount is ArmResourceActionNoContentAsyncCustomUpdateRunAsAccount<
+    VMwareSite,
+    UpdateMachineRunAsAccount
+  >;
 
   @added(Versions.v2019_05_01_preview)
-  @tag("VMwarePropertiesController")
   @doc("Method to associate Run as account to machine\r\n            in a site.")
-  UpdateTags is ArmResourceActionAsyncNoError<VMwareSite, {}, {}>;
+  UpdateTags is ArmResourceActionNoContentAsyncCustomUpdateMachineTags<
+    VMwareSite,
+    UpdateMachineTags
+  >;
 
   @added(Versions.v2019_05_01_preview)
   @doc("Method to update properties for machines   in a site.")
-  @tag("VMwarePropertiesController")
-  UpdateProperties is ArmResourceActionNoContentAsyncNoError<
+  UpdateProperties is ArmResourceActionNoContentAsyncNoErrorMetaDataBody<
     VMwareSite,
     MachineMetadataList
   >;
+}
 
-  @doc("Method to get site usage.")
-  @added(Versions.v2020_01_01)
-  @operationId("Sites_GetSiteUsage")
-  summary is ArmResourceActionSyncNoRequestBody<VMwareSite, VMwareSiteUsage>;
-
-  @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
-  @tag("SitesController")
-  @added(Versions.v2020_01_01)
-  ExportMachines is ArmResourceActionSyncNoError<VMwareSite, {}, {}>;
-
-  @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController_ExportMachineErrors")
-  @added(Versions.v2020_01_01)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01.SitesController_ExportMachineErrors")
-  ExportMachineErrors is ArmResourceActionNoContentAsyncNoError<
-    VMwareSite,
-    VersionedV202001ExportMachineErrorsRequest
+@armResourceOperations
+interface WebAppPropertiesController {
+  @added(Versions.v2020_11_11_preview)
+  @summary("""
+Method to update properties for web applications.
+            in a site.
+""")
+  @doc("""
+Method to update properties for web applications.
+            in a site.
+""")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppPropertiesController_UpdateWebApplicationProperty")
+  UpdateProperties is ArmResourceActionNoContentAsyncNoError<
+    WebAppSite,
+    WebAppPropertiesCollection
   >;
+}
 
+@armResourceOperations
+interface DependencyMapController {
   @doc("API to generate coarse map for the list of machines.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController")
   @added(Versions.v2020_01_01_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController_GenerateCoarseMapAsync")
   generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
@@ -311,7 +280,6 @@ site.
 
   @doc("API to generate detailed map for a selected machine.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.DependencyMapController_GenerateDetailedMapAsync")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.DependencyMapController")
   @added(Versions.v2020_01_01_preview)
   generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
     VMwareSite,
@@ -319,7 +287,6 @@ site.
   >;
 
   @doc("API to list client group members for the selected client group.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController")
   @added(Versions.v2020_01_01_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController_ClientGroupsMembersAsync")
   clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
@@ -328,7 +295,6 @@ site.
   >;
 
   @doc("API to list server group members for the selected server group.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController_ServerGroupsMembersAsync")
   @added(Versions.v2020_01_01_preview)
   serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
@@ -337,13 +303,52 @@ site.
   >;
 
   @doc("API to generate report containing agentless dependencies.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController")
   @added(Versions.v2020_01_01_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.DependencyMapController_ExportDependencies")
   exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
     VMwareSite,
     DependencyMapServiceMapExtensionsExportDependenciesRequest
   >;
+}
+
+@armResourceOperations
+interface VmwareSites {
+  @added(Versions.v2018_05_01_preview)
+  @operationId("Sites_PutSite")
+  create is ArmResourceCreateOrUpdateSyncCustom<VMwareSite>;
+
+  @armResourceUpdate(InnerError)
+  @patch
+  @added(Versions.v2018_05_01_preview)
+  @operationId("Sites_PatchSite")
+  @doc("Update a VMwareSite")
+  updateVmwareSite(
+    ...ResourceInstanceParameters<VMwareSite>,
+
+    @doc(" body with updated properties.")
+    @body
+    body: VMwareSite
+  ): ArmResponse<VMwareSite>;
+
+  @added(Versions.v2022_10_27)
+  @summary("Get all vmware sites.")
+  @doc("Get all the vmware sites in the subscription.")
+  @operationId("VMwareSites_ListBySubscription")
+  listBySubscription is ArmListBySubscriptionNoError<VMwareSite>;
+
+  @added(Versions.v2020_01_01)
+  @summary("Get all vmware sites.")
+  @doc("Get all the vmware sites in the resource group.")
+  listByParent is ArmResourceListByParentUpdated<VMwareSite>;
+
+  @doc("Method to get site health summary.")
+  @armResourceAction(InnerError)
+  @added(Versions.v2018_05_01_preview)
+  @post
+  @operationId("Sites_GetSiteHealthSummary")
+  healthSummary(
+    ...ResourceInstanceParameters<VMwareSite>
+  ): ArmResponse<SiteHealthSummaryCollection>;
 }
 
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -354,7 +359,6 @@ model MachineResource is ProxyResource<VmwareMachineProperties> {
   @key("machineName")
   @segment("machines")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   @doc("Gets tags that can be used with ODATA.")
@@ -364,13 +368,11 @@ model MachineResource is ProxyResource<VmwareMachineProperties> {
 }
 
 @armResourceOperations
-interface Machines {
-  @tag("MachinesController")
+interface MachinesController {
   @added(Versions.v2018_05_01_preview)
   @operationId("Machines_GetMachine")
   get is ArmResourceReadNoError<MachineResource>;
 
-  @tag("MachinesController")
   @added(Versions.v2018_05_01_preview)
   @operationId("Machines_GetAllMachinesInSite")
   listByParent is ArmResourceListByParentUpdated<
@@ -399,28 +401,16 @@ interface Machines {
       totalRecordCount?: int32;
     }
   >;
-  //
-  @tag("MachinesController")
+ 
   @doc("Method to stop a machine.")
   @added(Versions.v2018_05_01_preview)
   @operationId("Machines_StopMachine")
   stop is ArmResourceActionAsyncNoRequestBody<MachineResource, {}>;
 
-  @tag("MachinesController")
   @doc("Method to start a machine.")
   @added(Versions.v2018_05_01_preview)
   @operationId("Machines_StartMachine")
   start is ArmResourceActionAsyncNoRequestBody<MachineResource, {}>;
-
-  @doc("Method to get machine with application and roles present in it.")
-  @segment("applications")
-  @armResourceRead(InnerError)
-  @tag("VmwareMachinesController")
-  @added(Versions.v2018_05_01_preview)
-  @get
-  applications(
-    ...ResourceInstanceParameters<MachineResource>
-  ): ArmResponse<MachineResource>;
 
   @summary("Method to get a machines software inventory like applications and roles.")
   @doc("Method to get a machines software inventory like applications and roles.")
@@ -432,6 +422,17 @@ interface Machines {
     ...ResourceInstanceParameters<MachineResource>
   ): ArmResponse<VmwareMachineSoftwareInventory>;
 }
+@armResourceOperations
+interface VmwareMachinesController {
+  @doc("Method to get machine with application and roles present in it.")
+  @segment("applications")
+  @armResourceRead(InnerError)
+  @added(Versions.v2018_05_01_preview)
+  @get
+  applications(
+    ...ResourceInstanceParameters<MachineResource>
+  ): ArmResponse<MachineResource>;
+}
 
 #suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("A vcenter resource belonging to a site resource.")
@@ -441,14 +442,13 @@ model VCenter is ProxyResource<VCenterProperties> {
   @key("vcenterName")
   @segment("vCenters")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
-@tag("VCenterController")
+#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
 @added(Versions.v2018_05_01_preview)
-interface VmwareVcenters {
+interface VCenterController {
   @operationId("VCenter_GetVCenter")
   get is ArmResourceReadNoError<VCenter>;
   @operationId("VCenter_PutVCenter")
@@ -479,14 +479,12 @@ model VmwareRunAsAccountResource
   @key("accountName")
   @segment("runAsAccounts")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
 @armResourceOperations
-@tag("RunAsAccountsController")
 @added(Versions.v2018_05_01_preview)
-interface VmwareRunAsAccounts {
+interface RunAsAccountsController {
   @operationId("RunAsAccounts_GetRunAsAccount")
   get is ArmResourceReadNoError<VmwareRunAsAccountResource>;
   @operationId("RunAsAccounts_GetAllRunAsAccountsInSite")
@@ -500,13 +498,16 @@ model VmwareHostResource is ProxyResource<VmwareHostProperties> {
   @key("hostName")
   @segment("hosts")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
+
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Gets the name of the host.")
+  @visibility("read")
+  hostName?: string;
 }
 
-@tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.VMwareHostController")
 @armResourceOperations
-interface VmwareHosts {
+interface VmwareHostController {
   @added(Versions.v2020_01_01_preview)
   get is ArmResourceReadNoError<VmwareHostResource>;
 
@@ -521,14 +522,12 @@ model VmwareJobResource is ProxyResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
 @armResourceOperations
 @added(Versions.v2018_05_01_preview)
-@tag("JobsController")
-interface VmwareJobs {
+interface JobsController {
   @operationId("Jobs_GetJob")
   get is ArmResourceReadNoError<VmwareJobResource>;
   @operationId("Jobs_GetAllJobsInSite")
@@ -543,7 +542,6 @@ model HyperVSite is TrackedResource<SiteProperties> {
   @segment("HyperVSites")
   @doc("Site name")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -555,26 +553,69 @@ model HyperVSite is TrackedResource<SiteProperties> {
   location?: string;
 }
 
+#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface HypervSites {
-  @tag("HyperVSitesController")
+interface HyperVDependencyMapController {
+  @doc("API to generate coarse map for the list of machines.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_GenerateCoarseMapAsync")
+  generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
+    HyperVSite,
+    DependencyMapServiceMapExtensionsScopeMapRequest
+  >;
+
+  @doc("API to generate detailed map for a selected machine.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_GenerateDetailedMapAsync")
+  generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
+    HyperVSite,
+    DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
+  >;
+
+  @doc("API to list client group members for the selected client group.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_ClientGroupsMembersAsync")
+  clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
+    HyperVSite,
+    DependencyMapServiceMapExtensionsClientGroupMembersRequest
+  >;
+
+  @doc("API to list server group members for the selected server group.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_ServerGroupsMembersAsync")
+  serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
+    HyperVSite,
+    DependencyMapServiceMapExtensionsServerGroupMembersRequest
+  >;
+
+  @doc("API to generate report containing agentless dependencies.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_ExportDependencies")
+  exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
+    HyperVSite,
+    DependencyMapServiceMapExtensionsExportDependenciesRequest
+  >;
+
+  @doc("Method to enable disable dependency map status for machines\r\n            in a site.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVMachinesController_UpdateMachineDependencyMapStatus")
+  UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomMapRequest<
+    HyperVSite,
+    UpdateMachineDepMapStatus
+  >;
+}
+
+#suppress "@azure-tools/cadl-azure-core/casing-style"
+@armResourceOperations
+interface HyperVSitesController {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_GetSite")
   get is ArmResourceReadNoError<HyperVSite>;
 
-  @tag("HyperVSitesController")
   @operationId("HyperVSites_PutSite")
   @added(Versions.v2018_05_01_preview)
-  create is ArmResourceCreateOrUpdateSyncCustom<HyperVSite>;
+  create is ArmResourceCreateOrUpdateSync<HyperVSite>;
 
-  @added(Versions.v2022_10_27)
-  @summary("Get all hyperv  sites.")
-  @doc("Get all the hyperv  sites in the subscription.")
-  @operationId("HyperVSites_ListBySubscription")
-  listBySubscription is ArmListBySubscriptionNoError<HyperVSite>;
-
-
- 
   @armResourceUpdate(InnerError)
   @patch
   @added(Versions.v2018_05_01_preview)
@@ -588,32 +629,9 @@ interface HypervSites {
     body: HyperVSite
   ): ArmResponse<HyperVSite>;
 
-  @tag("HyperVSitesController")
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_DeleteSite")
   delete is ArmResourceDeleteSyncNoError<HyperVSite>;
-
-  @added(Versions.v2022_10_27)
-  @summary("Get all hyperv sites.")
-  @doc("Get all the hyperv sites in the subscription.")
-  @tag("HypervSites")
-  @operationId("HyperVSites_List")
-  listByParent is ArmResourceListByParentUpdated<HyperVSite>;
-
-  @doc("A operation status resource belonging to a site resource.")
-  @armResourceRead(InnerError)
-  @get
-  @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVOperationsStatus_GetOperationStatus")
-  HyperVOperationsStatus(
-    ...ResourceInstanceParameters<HyperVSite>,
-
-    @doc("Operation status  Arm Name.")
-    @path
-    //@pattern("^[a-zA-Z0-9-]{3,24}$")
-    @segment("operationsStatus")
-    operationStatusName: string
-  ): ArmResponse<OperationStatus>;
 
   @doc("Method to get site health summary.")
   @armResourceAction(InnerError)
@@ -635,7 +653,7 @@ interface HypervSites {
     @doc("Appliance Name")
     @query
     applianceName: string
-  ): ArmResponse<SiteErrorSummaryCollection>;
+  ): ArmResponse<SiteErrorSummary>;
 
   @doc("Method to get site error summary.")
   @armResourceRead(InnerError)
@@ -646,7 +664,6 @@ interface HypervSites {
     ...ResourceInstanceParameters<HyperVSite>
   ): ArmResponse<SiteUsageResponse>;
 
-  @tag("HyperVSitesController")
   @doc("Method to refresh a site.")
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_RefreshSite")
@@ -657,67 +674,6 @@ interface HypervSites {
   @operationId("HyperVSites_GetSiteUsage")
   summary is ArmResourceActionSyncNoRequestBody<HyperVSite, HyperVSiteUsage>;
 
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("API to generate coarse map for the list of machines.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_GenerateCoarseMapAsync")
-  generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
-    DependencyMapServiceMapExtensionsScopeMapRequest
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("API to generate detailed map for a selected machine.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_GenerateDetailedMapAsync")
-  generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
-    DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("API to list client group members for the selected client group.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_ClientGroupsMembersAsync")
-  clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
-    DependencyMapServiceMapExtensionsClientGroupMembersRequest
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("API to list server group members for the selected server group.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_ServerGroupsMembersAsync")
-  serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
-    DependencyMapServiceMapExtensionsServerGroupMembersRequest
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("API to generate report containing agentless dependencies.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController_ExportDependencies")
-  exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
-    DependencyMapServiceMapExtensionsExportDependenciesRequest
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("Method to enable disable dependency map status for machines\r\n            in a site.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVMachinesController_UpdateMachineDependencyMapStatus")
-  UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
-    UpdateMachineDepMapStatus
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2018_05_01_preview.SitesController_ExportAppsAndRoles")
-  ExportApplications is ArmResourceActionNoContentNoBodyAsync<HyperVSite>;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
   @added(Versions.v2020_08_01_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVSitesController_ExportMachineErrors")
@@ -725,13 +681,35 @@ interface HypervSites {
     HyperVSite,
     VersionedV202001ExportMachineErrorsRequest
   >;
+}
 
+@armResourceOperations
+interface HypervSites {
+  @added(Versions.v2022_10_27)
+  @summary("Get all hyperv  sites.")
+  @doc("Get all the hyperv  sites in the subscription.")
+  @operationId("HyperVSites_ListBySubscription")
+  listBySubscription is ArmListBySubscriptionNoError<HyperVSite>;
+
+  @added(Versions.v2022_10_27)
+  @summary("Get all hyperv sites.")
+  @doc("Get all the hyperv sites in the subscription.")
+  listByParent is ArmResourceListByParentUpdated<HyperVSite>;
+
+  @doc("A operation status resource belonging to a site resource.")
+  @armResourceRead(InnerError)
+  @get
   @added(Versions.v2018_05_01_preview)
-  @doc("Method to update custom properties for HYPERV machines\r\n            in a site.")
-  UpdateProperties is ArmResourceActionNoContentAsyncNoError<
-    HyperVSite,
-    MachineMetadataList
-  >;
+  @operationId("HyperVOperationsStatus_GetOperationStatus")
+  HyperVOperationsStatus(
+    ...ResourceInstanceParameters<HyperVSite>,
+
+    @doc("Operation status  Arm Name.")
+    @path
+    //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    @segment("operationsStatus")
+    operationStatusName: string
+  ): ArmResponse<OperationStatus>;
 }
 
 #suppress "@azure-tools/cadl-azure-core/casing-style"
@@ -769,10 +747,10 @@ model HyperVCluster is ProxyResource<HyperVClusterProperties> {
   name: string;
 }
 
-@tag("HyperVJobController")
+#suppress "@azure-tools/cadl-azure-core/casing-style"
 @added(Versions.v2018_05_01_preview)
 @armResourceOperations
-interface HypervJobs {
+interface HyperVJobController {
   @operationId("HyperVJobs_GetJob")
   get is ArmResourceReadNoError<HyperVJob>;
   @operationId("HyperVJobs_GetAllJobsInSite")
@@ -794,18 +772,15 @@ model HyperVHost is ProxyResource<HyperVHostProperties> {
 #suppress "@azure-tools/cadl-azure-resource-manager/no-resource-delete-operation"
 #suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface HyperVHostInt {
-  @tag("HyperVHostController")
+interface HyperVHostController {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVHost_GetHost")
   get is ArmResourceReadNoError<HyperVHost>;
 
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_01_01_preview.HyperVHostController")
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVHost_PutHost")
   create is ArmResourceCreateOrUpdateAsyncCustom<HyperVHost>;
 
-  @tag("HyperVHostController")
   @segment("hosts")
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVHost_GetAllHostsInSite")
@@ -823,6 +798,7 @@ interface HyperVHostInt {
   >;
 }
 #suppress "@azure-tools/cadl-azure-core/casing-style"
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("A machine resource belonging to a site resource.")
 @parentResource(HyperVSite)
 model HyperVMachine is ProxyResource<HyperVMachineProperties> {
@@ -832,11 +808,15 @@ model HyperVMachine is ProxyResource<HyperVMachineProperties> {
   @path
   //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
+
+  @doc("Gets tags that can be used with ODATA.")
+  @visibility("read")
+  @added(Versions.v2020_07_10)
+  tags?: Record<object>;
 }
 
-//@tag("Microsoft.Azure.FDS.WebRole.V2022_10_27.HyperVMachinesController")
 @armResourceOperations
-interface HypervMachines {
+interface HypervMachinesController {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVMachines_GetMachine")
   get is ArmResourceReadNoError<HyperVMachine>;
@@ -873,15 +853,12 @@ interface HypervMachines {
   @doc("Method to get machine with application and roles present in it.")
   @segment("applications")
   @armResourceRead(InnerError)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVMachinesController")
   @added(Versions.v2020_08_01_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVMachinesController_GetHyperVMachineApplications")
   @get
   applications(
     ...ResourceInstanceParameters<HyperVMachine>
   ): ArmResponse<HyperVMachine>;
-
-  
 
   @summary("Method to get a machines software inventory like applications and roles.")
   @doc("Method to get a machines software inventory like applications and roles.")
@@ -892,6 +869,13 @@ interface HypervMachines {
   Seven10MachinesControllerGetMachineSoftwareInventory(
     ...ResourceInstanceParameters<HyperVMachine>
   ): ArmResponse<HyperVVMSoftwareInventory>;
+
+  @added(Versions.v2018_05_01_preview)
+  @doc("Method to update custom properties for HYPERV machines\r\n            in a site.")
+  UpdateProperties is ArmResourceActionNoContentAsyncNoErrorMetaDataBody<
+    HyperVSite,
+    MachineMetadataList
+  >;
 }
 
 @doc("A machine resource belonging to a site resource.")
@@ -906,10 +890,10 @@ model HypervRunAsAccountResource
   name: string;
 }
 
+#suppress "@azure-tools/cadl-azure-core/casing-style"
 @added(Versions.v2018_05_01_preview)
 @armResourceOperations
-@tag("HyperVRunAsAccountsController")
-interface HypervRunAsAccounts {
+interface HyperVRunAsAccountsController {
   @operationId("HyperVRunAsAccounts_GetRunAsAccount")
   get is ArmResourceReadNoError<HypervRunAsAccountResource>;
 
@@ -935,19 +919,17 @@ model ServerSiteResource is TrackedResource<SitesProperties> {
 //*** Server sites tracked resource ***/
 @armResourceOperations
 @added(Versions.v2019_05_01_preview)
-interface ServerSitesInterface {
+interface ServersController {
   get is ArmResourceReadNoError<ServerSiteResource>;
   create is ArmResourceCreateOrUpdateAsyncCustom<ServerSiteResource>;
   update is ArmResourcePatchSyncNoError<ServerSiteResource, SitesProperties>;
   delete is ArmResourceDeleteSyncNoError<ServerSiteResource>;
 
-  //@route("/subscriptions/{subscriptionId}/serverSites/{siteName}/refreshSite") //TODO add ServerSites in path
   @doc("Operation to refresh a site")
-  RefreshSite is ArmResourceActionNoContentAsyncNoError<ServerSiteResource, {}>;
+  RefreshSite is ArmResourceActionAsyncNoRequestBody<ServerSiteResource, {}>;
 
-  @route("/subscriptions/{subscriptionId}/serverSites/{siteName}/updateProperties") //TODO add ServerSites in path
   @doc("Operation to update custom properties for servers")
-  UpdateProperties is ArmResourceActionNoContentAsyncNoError<
+  UpdateProperties is ArmResourceActionNoContentAsyncNoErrorMetaDataBody<
     ServerSiteResource,
     MachineMetadataList
   >;
@@ -962,13 +944,10 @@ interface ServerSitesInterface {
 
     @doc("Operation status  Arm Name.")
     @path
-    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("operationsStatus")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
 
-  // TODO: These APIs do not conform to ARM modeling and hence using the raw form
-  // of defining them. We will need to fix this in the future.
   @get
   @doc("Get a serve site usage.")
   @segment("usage")
@@ -978,20 +957,12 @@ interface ServerSitesInterface {
   ): ArmResponse<ServerSiteUsageResponse>;
 
   @get
-  @doc("Get the health summary for a server site.")
-  @segment("healthsummary")
-  @armResourceRead(InnerError)
-  healthSummary(
-    ...ResourceInstanceParameters<ServerSiteResource>
-  ): ArmResponse<SiteHealthSummaryCollection>;
-  //
-  @get
   @doc("Get the error summary for a server site.")
   @segment("errorSummary")
   @armResourceRead(InnerError)
   errorSummary(
     ...ResourceInstanceParameters<ServerSiteResource>
-  ): ArmResponse<SiteErrorSummaryCollection>;
+  ): ArmResponse<SiteErrorSummary>;
   //
   @get
   @doc("Get all machines in a site.")
@@ -999,54 +970,18 @@ interface ServerSitesInterface {
   @armResourceRead(InnerError)
   machines(
     ...ResourceInstanceParameters<ServerSiteResource>
-  ): ArmResponse<ServerResource>;
+  ): ArmResponse<ServerMachineResource>;
 
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("API to list client group members for the selected client group.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_ClientGroupsMembersAsync")
-  clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
-    ServerSiteResource,
-    DependencyMapServiceMapExtensionsClientGroupMembersRequest
-  >;
+  @summary("Method to get a machines software inventory like applications and roles.")
+  @doc("Method to get a machines software inventory like applications and roles.")
+  @armResourceRead(InnerError)
+  @get
+  @added(Versions.v2022_10_27)
+  @segment("softwareInventory/default")
+  GetServerSoftwareInventory(
+    ...ResourceInstanceParameters<ServerMachineResource>
+  ): ArmResponse<ServerSoftwareInventory>;
 
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("API to list server group members for the selected server group.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_ServerGroupsMembersAsync")
-  serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
-    ServerSiteResource,
-    DependencyMapServiceMapExtensionsServerGroupMembersRequest
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController")
-  @doc("API to generate coarse map for the list of machines.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_GenerateCoarseMapAsync")
-  generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
-    ServerSiteResource,
-    DependencyMapServiceMapExtensionsScopeMapRequest
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController")
-  @doc("API to generate detailed map for a selected machine.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_GenerateDetailedMapAsync")
-  generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
-    ServerSiteResource,
-    DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.HyperVDependencyMapController")
-  @doc("API to generate report containing agentless dependencies.")
-  @added(Versions.v2020_08_01_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_ExportDependencies")
-  exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
-    ServerSiteResource,
-    DependencyMapServiceMapExtensionsExportDependenciesRequest
-  >;
-
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServersController")
   @doc("Method to enable disable dependency map status for machines\r\n            in a site.")
   @added(Versions.v2020_08_01_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServersController_UpdateMachineDependencyMapStatus")
@@ -1055,13 +990,29 @@ interface ServerSitesInterface {
     UpdateMachineDepMapStatus
   >;
 
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerSitesController")
+  @doc("Method to get machine with application and roles present in it.")
+  @segment("applications")
+  @armResourceRead(InnerError)
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServersController_GetHyperVMachineApplications")
+  @get
+  applications(
+    ...ResourceInstanceParameters<ServerMachineResource>
+  ): ArmResponse<ServerMachineResource>;
+
+  
+  getMachine is ArmResourceReadNoError<ServerMachineResource>;
+  createMachine is ArmResourceCreateOrUpdateAsyncCustom<ServerMachineResource>;
+  deleteMachine is ArmResourceDeleteSyncNoError<ServerMachineResource>;
+}
+
+@armResourceOperations
+interface ServerSitesController {
   @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
   @added(Versions.v2020_08_01_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerSitesController_ExportAppsAndRoles")
   ExportApplications is ArmResourceActionNoContentNoBodyAsync<ServerSiteResource>;
 
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerSitesController")
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
   @added(Versions.v2020_08_01_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerSitesController_ExportMachineErrors")
@@ -1069,27 +1020,81 @@ interface ServerSitesInterface {
     ServerSiteResource,
     VersionedV202001ExportMachineErrorsRequest
   >;
+
+  @doc("Method to get site usage.")
+  @added(Versions.v2020_01_01_preview)
+  @operationId("ServerSitesController_GetSiteUsage")
+  summary is ArmResourceActionSyncNoRequestBody<
+    ServerSiteResource,
+    ServerSiteUsage
+  >;
+
+  @doc("Method to get site health summary.")
+  @armResourceAction(InnerError)
+  @added(Versions.v2020_01_01_preview)
+  @post
+  @operationId("ServerSitesController_GetSiteHealthSummary")
+  healthSummary(
+    ...ResourceInstanceParameters<ServerSiteResource>
+  ): ArmResponse<SiteHealthSummaryCollection>;
 }
+@armResourceOperations
+interface ServerDependencyMapController {
+  @doc("API to list client group members for the selected client group.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_ClientGroupsMembersAsync")
+  clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsClientGroupMembersRequest
+  >;
 
+  @doc("API to list server group members for the selected server group.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_ServerGroupsMembersAsync")
+  serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsServerGroupMembersRequest
+  >;
+
+  @doc("API to generate coarse map for the list of machines.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_GenerateCoarseMapAsync")
+  generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsScopeMapRequest
+  >;
+
+  @doc("API to generate detailed map for a selected machine.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_GenerateDetailedMapAsync")
+  generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
+  >;
+
+  @doc("API to generate report containing agentless dependencies.")
+  @added(Versions.v2020_08_01_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_08_01_preview.ServerDependencyMapController_ExportDependencies")
+  exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
+    ServerSiteResource,
+    DependencyMapServiceMapExtensionsExportDependenciesRequest
+  >;
+}
 //*** Server Machine Proxy Resource ***/
-
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("A machine resource belonging to a site resource.")
 @parentResource(ServerSiteResource)
-model ServerResource is ProxyResource<ServerProperties> {
+model ServerMachineResource is ProxyResource<ServerProperties> {
   @doc(" A server machine name")
   @key("machineName")
   @segment("machines")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
-}
 
-@armResourceOperations
-@added(Versions.v2019_05_01_preview)
-interface ServerMachines {
-  get is ArmResourceReadNoError<ServerResource>;
-  create is ArmResourceCreateOrUpdateAsyncCustom<ServerResource>;
-  delete is ArmResourceDeleteSyncNoError<ServerResource>;
+  @doc("Gets tags that can be used with ODATA.")
+  @visibility("read")
+  @added(Versions.v2020_07_10)
+  tags?: Record<object>;
 }
 
 //*** Server RunAsAccount Proxy Resource ***/
@@ -1128,120 +1133,40 @@ model ServerJobResource is ProxyResource<JobProperties> {
 
 @armResourceOperations
 @added(Versions.v2019_05_01_preview)
-interface ServerJobs {
+interface ServerJobsController {
   get is ArmResourceReadNoError<ServerJobResource>;
   listByParent is ArmResourceListByParentUpdated<ServerJobResource>;
 }
 
 @doc("A ImportSiteResource")
-model ImportSiteResource is TrackedResource<SitesProperties> {
+model ImportSiteResource is TrackedResource<ImportSitesProperties> {
   @key("siteName")
   @segment("importSites")
   @doc("Site name")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
+
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Gets or sets the eTag for concurrency control.")
+  eTag?: string;
 }
 
 @doc("A host resource belonging to a site resource.")
 @parentResource(ImportSiteResource)
-model ImportJobResource is ProxyResource<ImportJobProperties> {
+model ImportJobResource is ProxyResource<JobProperties> {
   @doc(" Jobs name")
   @key("jobName")
   @segment("jobs")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 @armResourceOperations
 @added(Versions.v2019_05_01_preview)
-@tag("ImportJobsController")
-interface ImportJobs {
+interface ImportJobsController {
   get is ArmResourceReadNoError<ImportJobResource>;
   listByParent is ArmResourceListByParentUpdated<ImportJobResource>;
-}
 
-@doc("An machine resource belonging to a site resource.")
-@parentResource(ImportSiteResource)
-model ImportMachineResource is ProxyResource<ImportMachineProperties> {
-  @doc("Machine name")
-  @key("machineName")
-  @segment("machines")
-  @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
-  name: string;
-}
-
-@armResourceOperations
-@added(Versions.v2019_05_01_preview)
-interface ImportMachines {
-  @tag("MachinesController")
-  get is ArmResourceReadNoError<ImportMachineResource>;
-
-  @tag("ImportMachinesController")
-  listByParent is ArmResourceListByParentUpdated<
-    ImportMachineResource,
-    {
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-      ...ApiVersionParameter;
-
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
-      @doc("filter query")
-      @query
-      $filter?: string;
-
-      @doc("page size  query")
-      @query
-      pagesize?: string;
-
-      @query
-      @doc("Optional parameter for continuation token.")
-      continuationToken?: string;
-
-      @query
-      @doc("Total count of machines in the given site.")
-      totalRecordCount?: int32;
-    }
-  >;
-
-  @tag("ImportMachinesController")
-  delete is ArmResourceDeleteSyncNoError<ImportMachineResource>;
-}
-
-@armResourceOperations
-interface ImportSites {
-  @tag("ImportSitesController")
-  @added(Versions.v2019_05_01_preview)
-  get is ArmResourceReadNoError<ImportSiteResource>;
-
-  @added(Versions.v2019_05_01_preview)
-  create is ArmResourceCreateOrUpdateAsyncCustom<ImportSiteResource>;
-
-  @added(Versions.v2019_05_01_preview)
-  update is ArmResourcePatchSyncNoError<ImportSiteResource, SitesProperties>;
-
-  @tag("ImportSitesController")
-  @added(Versions.v2019_05_01_preview)
-  delete is ArmResourceDeleteSyncNoError<ImportSiteResource>;
-
-  @tag("ImportSitesController")
-  @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
-  @added(Versions.v2019_05_01_preview)
-  ExportUri is ArmResourceActionSyncNoError<
-    ImportSiteResource,
-    SasUriResponse,
-    SasUriResponse
-  >;
-
-  @doc("Method to refresh a site.")
-  @tag("SitesController")
-  @added(Versions.v2019_05_01_preview)
-  ImportUri is ArmResourceActionAsyncNoError<
-    ImportSiteResource,
-    SasUriResponse,
-    SasUriResponse
-  >;
+  
 
   @doc("Method to get all delete import machines job for the given site.")
   @armResourceRead(InnerError)
@@ -1261,7 +1186,6 @@ interface ImportSites {
 
     @doc("Job Arm Name.")
     @path
-    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("DeleteJobs")
     jobName: string
   ): ArmResponse<V20200201DeleteImportMachinesJob>;
@@ -1273,7 +1197,7 @@ interface ImportSites {
   @added(Versions.v2020_02_01)
   exportjobs(
     ...ResourceInstanceParameters<ImportSiteResource>
-  ): ArmResponse<ImportDeleteImportMachinesJobDeleteImportMachinesJobCollection>;
+  ): ArmResponse<V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection>;
 
   @doc("Gets the export imported machines job with the given job name.")
   @armResourceRead(InnerError)
@@ -1284,10 +1208,9 @@ interface ImportSites {
 
     @doc("Job Arm Name.")
     @path
-    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("ExportJobs")
     jobName: string
-  ): ArmResponse<V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection>;
+  ): ArmResponse<V20200201ExportImportedMachinesJob>;
 
   @doc("Method to get all import machines job for the given site.")
   @armResourceRead(InnerError)
@@ -1307,7 +1230,6 @@ interface ImportSites {
 
     @doc("Job Arm Name.")
     @path
-    //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("ImportJobs")
     jobName: string
   ): ArmResponse<V20200201ImportMachinesJob>;
@@ -1329,14 +1251,95 @@ interface ImportSites {
     @body
     body: V20200201DeleteImportMachinesJob
   ): ArmResponse<V20200201DeleteImportMachinesJob>;
+}
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+@doc("An machine resource belonging to a site resource.")
+@parentResource(ImportSiteResource)
+model ImportMachineResource is ProxyResource<ImportMachineProperties> {
+  @doc("Machine name")
+  @key("machineName")
+  @segment("machines")
+  @path
+  name: string;
 
-  @tag("ImportSitesController")
+  @doc("Gets tags that can be used with ODATA.")
+  @visibility("read")
+  @added(Versions.v2020_07_10)
+  tags?: Record<object>;
+}
+
+@armResourceOperations
+@added(Versions.v2019_05_01_preview)
+interface ImportMachinesController {
+  get is ArmResourceReadNoError<ImportMachineResource>;
+  listByParent is ArmResourceListByParentUpdated<
+    ImportMachineResource,
+    {
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
+      ...ApiVersionParameter;
+
+      #suppress "@azure-tools/cadl-azure-core/casing-style"
+      @doc("filter query")
+      @query
+      $filter?: string;
+
+      #suppress "@azure-tools/cadl-azure-core/casing-style"
+      @doc("page size  query")
+      @query
+      $top?: string;
+
+      @query
+      @doc("Optional parameter for continuation token.")
+      continuationToken?: string;
+
+      @query
+      @doc("Total count of machines in the given site.")
+      totalRecordCount?: int32;
+    }
+  >;
+  delete is ArmResourceDeleteSyncNoError<ImportMachineResource>;
+}
+
+@armResourceOperations
+interface ImportSitesController {
+  @added(Versions.v2019_05_01_preview)
+  get is ArmResourceReadNoError<ImportSiteResource>;
+
+  @added(Versions.v2019_05_01_preview)
+  create is ArmResourceCreateOrUpdateSyncCustom<ImportSiteResource>;
+
+  @added(Versions.v2019_05_01_preview)
+  update is ArmResourcePatchSyncNoError<
+    ImportSiteResource,
+    ImportSitesProperties
+  >;
+
+  @added(Versions.v2019_05_01_preview)
+  delete is ArmResourceDeleteSyncNoError<ImportSiteResource>;
+
+  @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
+  @added(Versions.v2019_05_01_preview)
+  ExportUri is ArmResourceActionSyncNoError<
+    ImportSiteResource,
+    SasUriResponse,
+    SasUriResponse
+  >;
+
+  @doc("Method to refresh a site.")
+  @added(Versions.v2019_05_01_preview)
+  ImportUri is ArmResourceActionSyncNoError<
+    ImportSiteResource,
+    SasUriResponse,
+    SasUriResponse
+  >;
+
   @doc("Deletes the imported machines for site.")
   @added(Versions.v2020_02_01)
   deleteImportedMachines is ArmResourceActionSyncNoError<
     ImportSiteResource,
-    {},
-    V20190501PreviewSasUriResponse
+    V20190501PreviewSasUriResponse,
+    {}
   >;
 }
 
@@ -1360,9 +1363,8 @@ model MasterSite is TrackedResource<MasterSiteProperties> {
 }
 
 @armResourceOperations
-interface MasterSites {
+interface MasterSitesController {
   @added(Versions.v2020_07_07)
-  @tag("MasterSites")
   @operationId("MasterSites_GetSite")
   @summary("Method to get a master site.")
   get is ArmResourceReadNoError<MasterSite>;
@@ -1373,7 +1375,6 @@ interface MasterSites {
   @doc("Method to create or update a site.")
   create is ArmResourceCreateOrUpdateAsyncNoError<MasterSite>;
 
-  @tag("MasterSites")
   @added(Versions.v2020_07_07)
   @operationId("MasterSites_DeleteSite")
   @summary("Method to delete a site.")
@@ -1382,38 +1383,22 @@ interface MasterSites {
 
   @added(Versions.v2020_07_07)
   @summary("Get all the sites in the subscription.")
-  @doc("Get all the sites in the subscription.")  
-  @tag("MasterSites")
+  @doc("Get all the sites in the subscription.")
   @operationId("MasterSites_ListBySubscription")
   listBySubscription is ArmListBySubscriptionNoError<MasterSite>;
 
   @added(Versions.v2020_07_07)
   @summary("Get all sites.")
   @doc("Get all the sites in the resource group.")
-  @tag("MasterSites")
   @operationId("MasterSites_List")
   listByParent is ArmResourceListByParentUpdated<MasterSite>;
-
 
   @added(Versions.v2020_07_07)
   @summary("Method to update an existing site.")
   @doc("Method to update an existing site.")
-  @tag("MasterSites")
   @operationId("MasterSites_PatchSite")
   update is ArmResourcePatchAsyncNoError<MasterSite, MasterSiteProperties>;
 
-  // @armResourceUpdate(InnerError)
-  // @patch
-  // @added(Versions.v2020_07_07)
-  // @operationId("MasterSites_PatchSite")
-  // @doc("Method to patch an existing site")
-  // updateMasterSite(
-  //   ...ResourceInstanceParameters<MasterSite>,
-
-  //   @doc(" Body with site details.")
-  //   @body
-  //   body: MasterSite
-  // ): ArmResponse<MasterSite>;
 
   @summary("Method to get error summary from master site for an appliance.")
   @doc("Method to get error summary from master site for an appliance.")
@@ -1421,7 +1406,6 @@ interface MasterSites {
   @added(Versions.v2020_07_07)
   @post
   @operationId("MasterSites_GetErrorSummary")
-  @tag("MasterSites")
   errorSummary(
     ...ResourceInstanceParameters<MasterSite>,
 
@@ -1429,17 +1413,38 @@ interface MasterSites {
     @query
     applianceName: string
   ): ArmResponse<SiteErrorSummary>;
+}
+
+@armResourceOperations
+interface ApplianceNonceController {
 
   @added(Versions.v2020_11_11_preview)
   @summary("Method to create and get Nonce.")
   @doc("Method to create and get Nonce.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.ApplianceNonceController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.ApplianceNonceController_CreateAndGetNonceAsync")
   applianceRegistrationInfo is ArmResourceActionSyncNoError<
     MasterSite,
     NonceRequest,
     ApplianceNonce
   >;
+}
+
+@armResourceOperations
+interface MasterSitesOperationsStatusController {
+
+  @doc("A operation status resource belonging to a master site resource.")
+  @armResourceRead(InnerError)
+  @get
+  @added(Versions.v2020_07_07)
+  @operationId("MasterSitesOperationsStatusController_GetOperationStatus")
+  VmwareOperationStatus(
+    ...ResourceInstanceParameters<MasterSite>,
+
+    @doc("Operation status  Arm Name.")
+    @path
+    @segment("operationsStatus")
+    operationStatusName: string
+  ): ArmResponse<OperationStatus>;
 }
 
 @doc("REST model used to encapsulate Private Link properties for tracked resources.")
@@ -1451,6 +1456,10 @@ model PrivateEndpointConnection
   @segment("privateEndpointConnections")
   @path
   name: string;
+
+  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @doc("Gets or sets the eTag for concurrency control.")
+  eTag?: string;
 }
 
 @armResourceOperations
@@ -1458,7 +1467,6 @@ interface PrivateEndpointConnectionController {
   @summary("Gets the private link resource.")
   @doc("Gets the private link resource.")
   @added(Versions.v2020_07_07)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController_GetPrivateEndpointConnection")
   get is ArmResourceReadNoError<PrivateEndpointConnection>;
 
@@ -1466,20 +1474,17 @@ interface PrivateEndpointConnectionController {
   @doc("Deletes the private link resource.")
   @added(Versions.v2020_07_07)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController_DeletePrivateEndpointConnection")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController")
-  delete is ArmResourceDeleteAsyncNoError<PrivateEndpointConnection>;
+  delete is ArmResourceDeleteSyncNoError<PrivateEndpointConnection>;
 
   @summary("Gets the private link resource.")
   @doc("Gets the private link resource.")
   @added(Versions.v2020_07_07)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController_PutPrivateEndpointConnection")
   create is ArmResourceCreateOrUpdateSyncNoError<PrivateEndpointConnection>;
 
   @added(Versions.v2020_07_07)
   @summary("Gets the private link resource.")
   @doc("Gets the private link resource.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionController_GetPrivateEndpointConnections")
   listByParent is ArmResourceListByParentUpdated<PrivateEndpointConnection>;
 }
@@ -1487,7 +1492,7 @@ interface PrivateEndpointConnectionController {
 @doc("A vcenter resource belonging to a site resource.")
 @parentResource(MasterSite)
 model PrivateEndpointConnectionProxy
-  is ProxyResource<PrivateEndpointConnectionPropertiesV2> {
+  is ProxyResource<MicrosoftAzureMigratePrivateEndpointModelsPrivateEndpointDetails> {
   @doc(" Private endpoint connection proxy name.")
   @key("pecProxyName")
   @segment("privateEndpointConnectionProxies")
@@ -1500,52 +1505,58 @@ interface PrivateEndpointConnectionProxyController {
   @summary("Gets the private endpoint connection proxy.")
   @doc("Gets the private endpoint connection proxy.")
   @added(Versions.v2020_07_07)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy")
-  get is ArmResourceReadNoError<PrivateEndpointConnectionProxy>;
+  get is ArmResourceReadNoError<MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody>;
 
   @summary("Deletes the private endpoint connection proxy.")
   @doc("Deletes the private endpoint connection proxy.")
   @added(Versions.v2020_07_07)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
   delete is ArmResourceDeleteAsyncNoError<PrivateEndpointConnectionProxy>;
 
   @summary("Gets the private endpoint connection proxy.")
   @doc("Gets the private endpoint connection proxy.")
   @added(Versions.v2020_07_07)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy")
-  create is ArmResourceCreateOrUpdateSyncNoError<PrivateEndpointConnectionProxy>;
+  create is ArmResourceCreateOrUpdateSyncNoError<MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody>;
 
   @doc("Gets the private endpoint connection proxy.")
   @armResourceRead(InnerError)
   @get
   @added(Versions.v2020_07_07)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_GetPecProxyStatus")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
   @segment("operationsStatus")
   PecOperationStatus(
     ...ResourceInstanceParameters<PrivateEndpointConnectionProxy>
   ): ArmResponse<IArmAsyncOperationStatus>;
 
-  #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-missing-api-version"
+  //#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-missing-api-version"
+  // @summary("Gets the private endpoint connection proxy.")
+  // @doc("Gets the private endpoint connection proxy.")
+  // @added(Versions.v2020_07_07)
+  // @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy")
+  // Validate is ArmResourceActionSyncNoError<
+  //   PrivateEndpointConnectionProxy,
+  //   MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody,
+  //   MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody
+  // >;
+
   @summary("Gets the private endpoint connection proxy.")
   @doc("Gets the private endpoint connection proxy.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController")
   @added(Versions.v2020_07_07)
+  @armResourceAction(InnerError)
+  @post
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy")
-  Validate is ArmResourceActionAsyncNoRequestBody<
-    PrivateEndpointConnectionProxy,
-    PrivateEndpointConnectionProxy,
-    MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody
-  >;
+  Validate(
+    ...ResourceInstanceParameters<PrivateEndpointConnectionProxy>,
+    @doc("Request body.")
+@body "body": MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody,
+  ): ArmResponse<MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody>;
 }
 
 @doc("REST model used to encapsulate Private Link properties for tracked resources.")
 @parentResource(MasterSite)
-model PrivateLinkResource
-  is ProxyResource<PrivateLinkResourceProperties> {
+model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @doc("Private link resource name.")
   @key("privateLinkResourceName")
   @segment("privateLinkResources")
@@ -1554,7 +1565,6 @@ model PrivateLinkResource
 }
 
 @armResourceOperations
-@tag("Microsoft.Azure.FDS.WebRole.V2020_07_07.PrivateLinkResourcesController")
 interface PrivateLinkResourcesController {
   @summary("Gets the private link resource.")
   @doc("Gets the private link resource.")
@@ -1583,28 +1593,24 @@ interface SqlSitesController {
   @summary("Method to get a site.")
   @doc("Method to get a site.")
   @added(Versions.v2020_11_11_preview)
-  @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_GetSites")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_GetSite")
   get is ArmResourceReadNoError<SqlSite>;
 
   @summary("Deletes the SQL site.")
   @doc("Deletes the SQL site.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_DeleteSite")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController")
   delete is ArmResourceDeleteAsyncNoError<SqlSite>;
 
   @summary("Method to create a SQL site.")
   @doc("Method to create a SQL site.")
   @added(Versions.v2020_11_11_preview)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_PutSite")
   create is ArmResourceCreateOrUpdateSyncNoError<SqlSite>;
 
   @added(Versions.v2020_11_11_preview)
   @summary("Method to update an existing site.")
   @doc("Method to update an existing site.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_PatchSite")
   update is ArmResourcePatchAsyncNoError<SqlSite, SqlSiteProperties>;
 
@@ -1612,7 +1618,6 @@ interface SqlSitesController {
   @summary("Method to get all sites.")
   @doc("Method to get all sites.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_GetSites")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController")
   listByParent is ArmResourceListByParentUpdated<SqlSite>;
 
   @summary("Method to generate report containing SQL servers.")
@@ -1620,7 +1625,6 @@ interface SqlSitesController {
   @armResourceAction(InnerError)
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_ExportSqlServers")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController")
   ExportSqlServers is ArmResourceActionAsyncNoRequestBody<
     SqlSite,
     {},
@@ -1646,7 +1650,6 @@ interface SqlSitesController {
   @added(Versions.v2020_11_11_preview)
   @post
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_GetSiteErrorSummary")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController")
   errorSummary(
     ...ResourceInstanceParameters<SqlSite>,
 
@@ -1657,13 +1660,11 @@ interface SqlSitesController {
 
   @doc("Method to get site usage/summary.")
   @added(Versions.v2020_11_11_preview)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_GetSiteUsage")
   summary is ArmResourceActionSyncNoRequestBody<SqlSite, SqlSiteUsage>;
 
   @summary("Method to refresh a site.")
   @doc("Method to refresh a site.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlSitesController_RefreshSite")
   refresh is ArmResourceActionAsyncNoError<SqlSite, SqlSiteRefreshBody, {}>;
@@ -1696,16 +1697,14 @@ interface WebAppSitesController {
   @doc("Method to get a site.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController_GetSite")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController")
   get is ArmResourceReadNoError<WebAppSite>;
 
   @summary("Deletes the WebApp site.")
   @doc("Deletes the WebApp site.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController_DeleteSite")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController")
   delete is ArmResourceDeleteAsyncNoError<WebAppSite>;
-  ///TODO make it sync custom
+
   @summary("Method to create a WebApp site.")
   @doc("Method to create a WebApp site.")
   @added(Versions.v2020_11_11_preview)
@@ -1716,7 +1715,6 @@ interface WebAppSitesController {
   @added(Versions.v2020_11_11_preview)
   @summary("Method to update an existing site.")
   @doc("Method to update an existing site.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController_PatchSite")
   update is ArmResourcePatchAsyncNoError<WebAppSite, WebAppSiteProperties>;
 
@@ -1724,12 +1722,10 @@ interface WebAppSitesController {
   @summary("Method to get all sites.")
   @doc("Method to get all sites.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController_GetSites")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController")
   listByParent is ArmResourceListByParentUpdated<WebAppSite>;
 
   @doc("Method to generate report containing web app inventory.")
   @added(Versions.v2020_11_11_preview)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController_ExportWebAppInventory")
   ExportInventory is ArmResourceActionAsyncNoRequestBody<
     WebAppSite,
@@ -1752,7 +1748,6 @@ interface WebAppSitesController {
   @added(Versions.v2020_11_11_preview)
   @post
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController_GetSiteErrorSummary")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController")
   errorSummary(
     ...ResourceInstanceParameters<WebAppSite>,
 
@@ -1763,31 +1758,17 @@ interface WebAppSitesController {
 
   @doc("Method to get site usage/summary.")
   @added(Versions.v2020_11_11_preview)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController_GetSiteUsage")
   summary is ArmResourceActionSyncNoRequestBody<WebAppSite, WebAppSiteUsage>;
 
   @summary("Method to refresh a site.")
   @doc("Method to refresh a site.")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController")
-  @added(Versions.v2020_11_11_preview)
+ @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController_RefreshSite")
-  refresh is ArmResourceActionAsyncNoError<WebAppSite, ProxySiteRefreshBody, {}>;
-
-  @added(Versions.v2020_11_11_preview)
-  @summary("""
-Method to update properties for web applications.
-            in a site.
-""")
-  @doc("""
-Method to update properties for web applications.
-            in a site.
-""")
-@tag("VMwarePropertiesController")
-@operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppPropertiesController_UpdateWebApplicationProper")
-  UpdateProperties is ArmResourceActionNoContentAsyncNoError<
-  WebAppSite,
-  WebAppPropertiesCollection
+  refresh is ArmResourceActionAsyncNoError<
+    WebAppSite,
+    ProxySiteRefreshBody,
+    {}
   >;
 }
 
@@ -1808,7 +1789,6 @@ interface TomcatWebApplicationsController {
   @doc("Method to get an Tomcat web application.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.TomcatWebApplicationsController_GetWebApplication")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.TomcatWebApplicationsController")
   get is ArmResourceReadNoError<TomcatWebApplications>;
 
   // #suppress "order is different"
@@ -1816,7 +1796,6 @@ interface TomcatWebApplicationsController {
   @summary("Method to get all Tomcat web application.")
   @doc("Method to get all Tomcat web application.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.TomcatWebApplicationsController_GetWebApplications")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.TomcatWebApplicationsController")
   listByParent is ArmResourceListByParentUpdated<
     TomcatWebApplications,
     {
@@ -1862,15 +1841,13 @@ interface TomcatWebServersController {
   @doc("Method to get an Tomcat web server.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.TomcatWebServersController_GetWebServer")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.TomcatWebServersController")
   get is ArmResourceReadNoError<TomcatWebServers>;
 
-  // #suppress "order is different"
+  
   @added(Versions.v2020_11_11_preview)
   @summary("Method to get all Tomcat web servers.")
   @doc("Method to get all Tomcat web servers.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.TomcatWebServersController_GetWebServers")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.TomcatWebServersController")
   listByParent is ArmResourceListByParentUpdated<
     TomcatWebServers,
     {
@@ -1911,13 +1888,13 @@ model IISWebApplications is ProxyResource<IISWebApplicationProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface IisWebApplicationsController {
+interface IISWebApplicationsController {
   @summary("Method to get an IIS web application.")
   @doc("Method to get an IIS web application.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.IISWebApplicationsController_GetWebApplication")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.IISWebApplicationsController")
   get is ArmResourceReadNoError<IISWebApplications>;
 
   // #suppress "order is different"
@@ -1925,7 +1902,6 @@ interface IisWebApplicationsController {
   @summary("Method to get all IIS web application.")
   @doc("Method to get all IIS web application.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.IISWebApplicationsController_GetWebApplications")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.IISWebApplicationsController")
   listByParent is ArmResourceListByParentUpdated<
     IISWebApplications,
     {
@@ -1966,21 +1942,19 @@ model IISWebServers is ProxyResource<IISWebServerProperties> {
   name: string;
 }
 
+#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface IisWebServersController {
+interface IISWebServersController {
   @summary("Method to get an IIS web server.")
   @doc("Method to get an IIS web server.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.IISWebServersController_GetWebServer")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.IISWebServersController")
   get is ArmResourceReadNoError<IISWebServers>;
 
-  // #suppress "order is different"
   @added(Versions.v2020_11_11_preview)
   @summary("Method to get all IIS web servers.")
   @doc("Method to get all IIS web servers.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.IISWebServersController_GetWebServers")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.IISWebServersController")
   listByParent is ArmResourceListByParentUpdated<
     IISWebServers,
     {
@@ -2022,25 +1996,22 @@ model DiscoverySiteDataSource
 }
 
 @armResourceOperations
-interface DiscoverySiteDataSourcesController {
+interface WebAppDiscoverySiteDataSourcesController {
   @summary("Method to get a Web app data source in site.")
   @doc("Method to get a Web app data source in site.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppDiscoverySiteDataSourceController_GetDataSource")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppDiscoverySiteDataSourceController")
   get is ArmResourceReadNoError<DiscoverySiteDataSource>;
 
   @summary("Method to delete a Web app data source in site.")
   @doc("Method to delete a Web app data source in site.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppDiscoverySiteDataSourceController_DeleteDataSource")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppDiscoverySiteDataSourceController")
   delete is ArmResourceDeleteAsyncNoError<DiscoverySiteDataSource>;
 
   @summary("Method to create or update a Web app data source in site.")
   @doc("Method to create or update a Web app data source in site.")
   @added(Versions.v2020_11_11_preview)
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppDiscoverySiteDataSourceController")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController_PutSite")
   create is ArmResourceCreateOrUpdateAsyncCustom<DiscoverySiteDataSource>;
 
@@ -2048,7 +2019,6 @@ interface DiscoverySiteDataSourcesController {
   @summary("Method to get all Web app data sources in site.")
   @doc("Method to get all Web app data sources in site.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppDiscoverySiteDataSourceController_GetDataSources")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppDiscoverySiteDataSourceController")
   listByParent is ArmResourceListByParentUpdated<DiscoverySiteDataSource>;
 }
 
@@ -2068,14 +2038,12 @@ interface WebAppExtendedMachinesController {
   @doc("Method to get a extended machine.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppExtendedMachinesController_GetMachineExtension")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppExtendedMachinesController")
   get is ArmResourceReadNoError<WebAppExtendedMachine>;
 
   @added(Versions.v2020_11_11_preview)
   @summary("Method to get all extended machines.")
   @doc("Method to get all extended machines.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppExtendedMachinesController_GetMachineExtensions")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppExtendedMachinesController")
   listByParent is ArmResourceListByParentUpdated<
     WebAppExtendedMachine,
     {
@@ -2122,7 +2090,6 @@ interface WebApplicationsController {
   @summary("Method to get all IIS web applications.")
   @doc("Method to get all IIS web applications.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebApplicationsController_GetWebApplications")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebApplicationsController")
   listByParent is ArmResourceListByParentUpdated<
     WebRoleV202011PreviewWebApplication,
     {
@@ -2167,14 +2134,12 @@ interface WebAppRunAsAccountsController {
   @doc(("Method to get run as account."))
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppRunAsAccountsController_GetRunAsAccount")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppRunAsAccountsController")
   get is ArmResourceReadNoError<WebAppRunAsAccount>;
 
   @added(Versions.v2020_11_11_preview)
   @summary("Method to get all run as accounts.")
   @doc("Method to get all run as accounts.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppRunAsAccountsController_GetRunAsAccounts")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppRunAsAccountsController")
   listByParent is ArmResourceListByParentUpdated<WebAppRunAsAccount>;
 }
 
@@ -2190,12 +2155,11 @@ model WebServer is ProxyResource<WebServerProperties> {
 }
 
 @armResourceOperations
-interface WebServersControllerGetWebServers {
+interface WebServersController {
   @added(Versions.v2020_11_11_preview)
   @summary("Method to get all web servers.")
   @doc("Method to get all web servers.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebServersController_GetWebServers")
-  @tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebServersController")
   listByParent is ArmResourceListByParentUpdated<
     WebServer,
     {
@@ -2225,24 +2189,48 @@ interface WebServersControllerGetWebServers {
 }
 
 @armResourceOperations
-@tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlAvailabilityGroupController")
 interface SqlAvailabilityGroupController {
   @summary("Gets the sql availability group.")
   @doc("Gets the sql availability group.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlAvailabilityGroupController_GetSqlAvailabilityGroup")
-  get is ArmResourceRead<SqlAvailabilityGroup>;
+  get is ArmResourceReadNoError<SqlAvailabilityGroup>;
 
   @added(Versions.v2020_11_11_preview)
   @summary("Gets the sql availability groups.")
   @doc("Gets the sql availability groups.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlAvailabilityGroupController_GetSqlAvailabilityGroups")
-  listByParent is ArmResourceListByParentUpdated<SqlAvailabilityGroup>;
+  listByParent is ArmResourceListByParentUpdated<
+    SqlAvailabilityGroup,
+    {
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
+      ...ApiVersionParameter;
+
+      #suppress "@azure-tools/cadl-azure-core/casing-style"
+      @doc("filter query")
+      @query
+      $filter?: string;
+
+      #suppress "@azure-tools/cadl-azure-core/casing-style"
+      @doc("page size  query")
+      @query
+      $top?: string;
+
+      @query
+      @doc("Optional parameter for continuation token.")
+      continuationToken?: string;
+
+      @query
+      @doc("Total count of machines in the given site.")
+      totalRecordCount?: int32;
+    }
+  >;
 }
 
 @doc("Class representing the web model of SQL Server.")
 @parentResource(SqlSite)
-model SqlServer   is ProxyResource<SqlServerProperties> {
+model SqlServer is ProxyResource<SqlServerProperties> {
   @doc("SQL server name.")
   @key("sqlServerName")
   @segment("sqlServers")
@@ -2251,24 +2239,48 @@ model SqlServer   is ProxyResource<SqlServerProperties> {
 }
 
 @armResourceOperations
-@tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlServerController")
-interface SqlServerController {
+interface SqlServersController {
   @summary("Gets the sql server.")
   @doc("Gets the sql server.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlServersController_GetSqlServer")
-  get is ArmResourceRead<SqlServer>;
+  get is ArmResourceReadNoError<SqlServer>;
 
   @added(Versions.v2020_11_11_preview)
   @summary("Gets the sql servers.")
   @doc("Gets the sql servers.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlServersController_GetSqlServers")
-  listByParent is ArmResourceListByParentUpdated<SqlServer>;
+  listByParent is ArmResourceListByParentUpdated<
+    SqlServer,
+    {
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
+      ...ApiVersionParameter;
+
+      #suppress "@azure-tools/cadl-azure-core/casing-style"
+      @doc("filter query")
+      @query
+      $filter?: string;
+
+      #suppress "@azure-tools/cadl-azure-core/casing-style"
+      @doc("page size  query")
+      @query
+      $top?: string;
+
+      @query
+      @doc("Optional parameter for continuation token.")
+      continuationToken?: string;
+
+      @query
+      @doc("Total count of machines in the given site.")
+      totalRecordCount?: int32;
+    }
+  >;
 }
 
 @doc("Class representing the web model of SQL Database.")
 @parentResource(SqlSite)
-model SqlDatabase   is ProxyResource<SqlDatabaseProperties> {
+model SqlDatabase is ProxyResource<SqlDatabaseProperties> {
   @doc("SQL Database name.")
   @key("sqlDatabaseName")
   @segment("sqlDatabases")
@@ -2277,19 +2289,68 @@ model SqlDatabase   is ProxyResource<SqlDatabaseProperties> {
 }
 
 @armResourceOperations
-@tag("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlDatabaseController")
-interface SqlDatabaseController {
+interface SqlDatabasesController {
   @summary("Gets the sql Database.")
   @doc("Gets the sql Database.")
   @added(Versions.v2020_11_11_preview)
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlDatabasesController_GetSqlDatabase")
-  get is ArmResourceRead<SqlDatabase>;
+  get is ArmResourceReadNoError<SqlDatabase>;
 
   @added(Versions.v2020_11_11_preview)
   @summary("Gets the sql Databases.")
   @doc("Gets the sql Databases.")
   @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlDatabasesController_GetSqlDatabases")
-  listByParent is ArmResourceListByParentUpdated<SqlDatabase>;
+  listByParent is ArmResourceListByParentUpdated<
+    SqlDatabase,
+    {
+      ...SubscriptionIdParameter;
+      ...ResourceGroupParameter;
+      ...ApiVersionParameter;
+
+      #suppress "@azure-tools/cadl-azure-core/casing-style"
+      @doc("filter query")
+      @query
+      $filter?: string;
+
+      #suppress "@azure-tools/cadl-azure-core/casing-style"
+      @doc("page size  query")
+      @query
+      $top?: string;
+
+      @query
+      @doc("Optional parameter for continuation token.")
+      continuationToken?: string;
+
+      @query
+      @doc("Total count of machines in the given site.")
+      totalRecordCount?: int32;
+    }
+  >;
+}
+
+@doc("Class representing the web model of SQL Database.")
+@parentResource(SqlSite)
+model SqlJob is ProxyResource<JobProperties> {
+  @doc("SQL Job name.")
+  @key("sqlJobName")
+  @segment("sqlJobs")
+  @path
+  name: string;
+}
+
+@armResourceOperations
+interface SqlJobsController {
+  @summary("Gets the sql Job.")
+  @doc("Gets the sql Job.")
+  @added(Versions.v2020_11_11_preview)
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlJobsController_GetSqlJob")
+  get is ArmResourceReadNoError<SqlJob>;
+
+  @added(Versions.v2020_11_11_preview)
+  @summary("Gets the sql Jobs.")
+  @doc("Gets the sql Jobs.")
+  @operationId("Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.SqlJobsController_GetSqlJobs")
+  listByParent is ArmResourceListByParentUpdated<SqlJob>;
 }
 
 @doc("A runasaccount resource belonging to a site resource.")
@@ -2305,33 +2366,30 @@ model SqlRunAsAccountResource
 }
 
 @armResourceOperations
-@tag("RunAsAccountsController")
 @added(Versions.v2020_11_11_preview)
-interface SqlRunAsAccounts {
+interface SqlRunAsAccountsController {
   @operationId("SqlRunAsAccounts_GetRunAsAccount")
-  get is ArmResourceRead<SqlRunAsAccountResource>;
+  get is ArmResourceReadNoError<SqlRunAsAccountResource>;
   @operationId("SqlRunAsAccounts_GetAllRunAsAccountsInSite")
   listByParent is ArmResourceListByParentUpdated<SqlRunAsAccountResource>;
 }
 
 @doc("A SQL discovery site data source resource.")
 @parentResource(SqlSite)
-model SqlDiscoverySiteDataSourceResource is
- ProxyResource<SqlDiscoverySiteDataSourceProperties>
-{
-    @doc("SQL Discovery site data source name.")
-    @key("discoverySiteDataSourceName")
-    @segment("discoverySiteDataSources")
-    @path
-    name: string;
+model SqlDiscoverySiteDataSourceResource
+  is ProxyResource<SqlDiscoverySiteDataSourceProperties> {
+  @doc("SQL Discovery site data source name.")
+  @key("discoverySiteDataSourceName")
+  @segment("discoverySiteDataSources")
+  @path
+  name: string;
 }
 
-@tag("SqlDiscoverySiteDataSourceController")
 @armResourceOperations
 @added(Versions.v2020_11_11_preview)
 interface SqlDiscoverySiteDataSourceController {
   @operationId("SqlDiscoverySiteDataSource_GetSqlDiscoverySiteDataSource")
-  get is ArmResourceRead<SqlDiscoverySiteDataSourceResource>;
+  get is ArmResourceReadNoError<SqlDiscoverySiteDataSourceResource>;
 
   @operationId("SqlDiscoverySiteDataSource_PutSqlDiscoverySiteDataSource")
   create is ArmResourceCreateOrUpdateAsyncCustom<SqlDiscoverySiteDataSourceResource>;
@@ -2341,4 +2399,37 @@ interface SqlDiscoverySiteDataSourceController {
 
   @operationId("SqlDiscoverySiteDataSource_GetAllSqlDiscoverySiteDataSourcesInSite")
   listByParent is ArmResourceListByParentUpdated<SqlDiscoverySiteDataSourceResource>;
+}
+
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-missing-api-version"
+#suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-operation-missing-decorator"
+@armResourceOperations
+interface SubscriptionController {
+  @summary("Method to delete all sites under a subscription.")
+  @doc("Method to delete all sites under a subscription.")
+  @route("/subscriptions/{subscriptionId}")
+  @delete
+  DeleteSubscription is OperationCustom<
+    {
+      ...SubscriptionIdParameter;
+    },
+    void
+  >;
+}
+
+@armResourceOperations
+interface SqlOperationsStatusController {
+  @doc("Method to get operation status.")
+  @armResourceRead(InnerError)
+  @get
+  @added(Versions.v2020_11_11_preview)
+  @operationId("SqlOperationsStatus_GetOperationStatus")
+  SqlOperationStatus(
+    ...ResourceInstanceParameters<SqlSite>,
+
+    @doc("Operation status  Arm Name.")
+    @path
+    @segment("operationsStatus")
+    operationStatusName: string
+  ): ArmResponse<OperationStatus>;
 }

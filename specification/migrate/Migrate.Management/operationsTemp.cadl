@@ -7,6 +7,8 @@ using Cadl.Rest;
 using OpenAPI;
 using Autorest;
 using Azure.ResourceManager.Foundations;
+using Azure.Core.Traits;
+using Azure.Core.Traits.Private;
 
 namespace Azure.ResourceManager;
 @autoRoute
@@ -47,6 +49,24 @@ op ArmResourceActionNoContentNoBodyAsync<
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
 
 ): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponse ;
+
+@autoRoute
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    "final-state-via": "azure-async-operation",
+  }
+)
+@armResourceAction(TResource)
+@post
+op ArmResourceActionNoBodyAsync<
+  TResource extends ArmResource,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+):  ArmAcceptedResponse ;
 
 
 @doc("The response of a {name} list operation.", TResource)
@@ -89,7 +109,73 @@ op ArmResourceActionNoContentAsyncCustomMapRequest<
   @doc("The content of the action request")
   @body
   mapRequest: TRequest
-): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponse ;
+): ArmAcceptedResponse ;
+
+@autoRoute
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    "final-state-via": "azure-async-operation",
+  }
+)
+@armResourceAction(TResource)
+@post
+op ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
+  TResource extends ArmResource,
+  TRequest extends object,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("The content of the action request")
+  @body
+  updateMachineDepMapStatus: TRequest
+):  ArmAcceptedResponse ;
+
+@autoRoute
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    "final-state-via": "azure-async-operation",
+  }
+)
+@armResourceAction(TResource)
+@post
+op ArmResourceActionNoContentAsyncCustomUpdateRunAsAccount<
+  TResource extends ArmResource,
+  TRequest extends object,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("The content of the action request")
+  @body
+  updateMachineRunAsAccount: TRequest
+):  ArmAcceptedResponse ;
+
+@autoRoute
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    "final-state-via": "azure-async-operation",
+  }
+)
+@armResourceAction(TResource)
+@post
+op ArmResourceActionNoContentAsyncCustomUpdateMachineTags<
+  TResource extends ArmResource,
+  TRequest extends object,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("The content of the action request")
+  @body
+  updateMachineTags: TRequest
+):  ArmAcceptedResponse ;
 
 
 @autoRoute
@@ -153,8 +239,9 @@ interface OperationsCustom {
   @doc("List the operations for the provider")
   @segment("operations")
   @get
+  @operationId("Operations_List")
   list(
-    ...ApiVersionParameter,
+   // ...ApiVersionParameter,
 
     @path
     @segment("providers")
@@ -162,4 +249,18 @@ interface OperationsCustom {
     provider: "Microsoft.ThisWillBeReplaced"
   ): ArmResponse<OperationListResult> ;
 }
+
+#suppress "@azure-tools/cadl-providerhub/operation-requires-documentation" "This is a library operation."
+op OperationCustom<
+  TParams,
+  TResponse,
+  Traits extends object = {},
+  TErrorResponse = Azure.Core.Foundations.ErrorResponse
+>(
+  ...TraitProperties<
+    Traits & VersionParameterTrait<ApiVersionParameter>,
+    TraitLocation.ApiVersionParameter
+  >,
+  ...TParams
+): ArmDeletedResponse | TResponse ;
 

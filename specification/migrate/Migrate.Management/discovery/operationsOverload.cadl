@@ -167,9 +167,7 @@ op ArmResourceDeleteAsyncNoError<
   TResource extends ArmResource,
   TBaseParameters = BaseParameters<TResource>
 >(...ResourceInstanceParametersCustom<TResource, TBaseParameters>):
-  | ArmDeletedResponse
-  | ArmDeleteAcceptedResponse
-  | ArmDeletedNoContentResponse
+  | ArmDeleteAcceptedResponse | ArmDeletedNoContentResponse
   ;
 
 @autoRoute
@@ -242,7 +240,30 @@ op ArmResourceActionNoContentAsyncNoError<
   @doc("The content of the action request")
   @body
   body: TRequest
-): ArmNoContentResponse<"Action completed successfully."> | ArmAcceptedResponse ;
+):  ArmAcceptedResponse ;
+
+@autoRoute
+@extension("x-ms-long-running-operation", true)
+@extension(
+  "x-ms-long-running-operation-options",
+  {
+    "final-state-via": "azure-async-operation",
+  }
+)
+@armResourceAction(TResource)
+@post
+op ArmResourceActionNoContentAsyncNoErrorMetaDataBody<
+  TResource extends ArmResource,
+  TRequest extends object,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParametersCustom<TResource, TBaseParameters>,
+
+  @doc("The content of the action request")
+  @body
+  metaData: TRequest
+):  ArmAcceptedResponse ;
+
 
 @autoRoute
 @armResourceAction(TResource)

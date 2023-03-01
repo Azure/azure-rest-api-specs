@@ -7,15 +7,6 @@ enum CosmosDBDeleteImportedMachinesJobEntityDeleteImportedMachinesJobPropertiesJ
     "Failed",
 }
 
-enum CosmosDBImportMachinesJobEntityImportMachinesJobProperties {
-    "Unknown",
-    "Completed",
-    "CompletedWithWarnings",
-    "CompletedWithErrors",
-    "Failed",
-    "WaitingForBlobUpload",
-    "InProgress",
-}
 
 @doc("Import URI response class.")
 model SasUriResponse {
@@ -188,6 +179,38 @@ model V20200201ImportMachinesJobImportMachinesJobCollection {
     nextLink?: string;
 }
 
+@doc("ImportMachines JobProperties")
+model ImportMachinesJobEntityImportMachinesJobProperties {
+    @doc("blob name")
+    blobName?: string;
+    @doc("blob sasUri")
+    blobSasUri?: string;
+    @doc("job Result")
+    jobResult?: CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResult;
+    @doc("number Of Machines Imported")
+    numberOfMachinesImported?: int32;
+    @doc("blob Creation TimeStamp")
+    blobCreationTimeStamp?: zonedDateTime;
+    @doc("error summary")
+    errorSummary?: ImportMachinesJobEntityImportMachinesJobPropertiesJobErrorSummary;
+}
+
+
+@knownValues(
+    CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResultValues
+)
+scalar CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResult
+    extends string;
+enum CosmosDBImportMachinesJobEntityImportMachinesJobPropertiesJobResultValues {
+    "Unknown",
+    "Completed",
+    "CompletedWithWarnings",
+    "CompletedWithErrors",
+    "Failed",
+    "WaitingForBlobUpload",
+    "InProgress",
+}
+
 @doc("Import machines Job REST Resource.")
 model V20200201ImportMachinesJob {
     @doc("""
@@ -198,7 +221,7 @@ Microsoft.OffAzure/ImportSites/jobs/importJobs.
     type?: string;
 
     @doc("Gets or sets the import job properties.")
-    properties?: CosmosDBImportMachinesJobEntityImportMachinesJobProperties;
+    properties?: ImportMachinesJobEntityImportMachinesJobProperties;
 
     @doc("Gets or sets the relative ARM name to get job.")
     id?: string;

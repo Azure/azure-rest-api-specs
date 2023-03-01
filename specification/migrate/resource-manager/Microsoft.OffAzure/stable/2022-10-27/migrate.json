@@ -206,69 +206,6 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateEndpointConnectionProxies/{pecProxyName}/validate": {
-      "post": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
-        "summary": "Gets the private endpoint connection proxy.",
-        "description": "Gets the private endpoint connection proxy.",
-        "parameters": [
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "description": "Site name",
-            "type": "string"
-          },
-          {
-            "name": "pecProxyName",
-            "in": "path",
-            "required": true,
-            "description": " Private endpoint connection proxy name.",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "remotePrivateEndpoint": {
-                  "$ref": "#/definitions/PrivateEndpointDetails"
-                }
-              },
-              "x-cadl-name": "Azure.ResourceManager.ResourceInstanceParameters<PrivateEndpointConnectionProxy, MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody>"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen.json"
-          },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.OffAzure/operations": {
       "get": {
         "tags": [
@@ -3698,6 +3635,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateEndpointConnectionProxies/{pecProxyName}/validate": {
+      "post": {
+        "tags": [
+          "PrivateEndpointConnectionProxyController"
+        ],
+        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
+        "summary": "Gets the private endpoint connection proxy.",
+        "description": "Gets the private endpoint connection proxy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string"
+          },
+          {
+            "name": "pecProxyName",
+            "in": "path",
+            "required": true,
+            "description": " Private endpoint connection proxy name.",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Request body.",
+            "schema": {
+              "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen.json"
+          },
+          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateEndpointConnections": {
       "get": {
         "tags": [
@@ -4041,6 +4038,9 @@
         "x-ms-examples": {
           "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MaximumSet_Gen": {
             "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MaximumSet_Gen.json"
+          },
+          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MinimumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MinimumSet_Gen.json"
           }
         }
       }
@@ -4050,7 +4050,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites",
+        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite",
         "summary": "Method to get a site.",
         "description": "Method to get a site.",
         "parameters": [
@@ -4087,8 +4087,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MaximumSet_Gen.json"
+          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite_MaximumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite_MaximumSet_Gen.json"
+          },
+          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite_MinimumSet_Gen": {
+            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite_MinimumSet_Gen.json"
           }
         }
       },
