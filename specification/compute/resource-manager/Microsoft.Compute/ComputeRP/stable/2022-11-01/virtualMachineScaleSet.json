@@ -3651,6 +3651,8 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0,
+          "maximum": 1000,
+          "default": 0,
           "description": "The base number of regular priority VMs that will be created in this scale set as it scales out."
         },
         "regularPriorityPercentageAboveBase": {
@@ -3658,6 +3660,7 @@
           "format": "int32",
           "minimum": 0,
           "maximum": 100,
+          "default": 0,
           "description": "The percentage of VM instances, after the base regular priority count has been reached, that are expected to use regular priority."
         }
       },
@@ -4898,6 +4901,18 @@
         "proximityPlacementGroup": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
+        "priorityMixPolicy": {
+          "$ref": "#/definitions/PriorityMixPolicy",
+          "description": "Specifies the desired targets for mixing Spot and Regular priority VMs within the same VMSS Flex instance."
+        },
+        "spotRestorePolicy": {
+          "$ref": "#/definitions/SpotRestorePolicy",
+          "description": "Specifies the Spot Restore properties for the virtual machine scale set."
+        },
+        "evictionPolicy": {
+          "$ref": "./computeRPCommon.json#/definitions/evictionPolicy",
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
