@@ -218,6 +218,9 @@
       "post": {
         "description": "Generates a copy project operation authorization to the current target Azure resource.",
         "operationId": "TextAnalysisAuthoring_CopyProjectAuthorization",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -226,11 +229,13 @@
             "$ref": "common.json#/parameters/ProjectNamePathParameter"
           },
           {
-            "in": "query",
-            "name": "allowOverwrite",
-            "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization.",
-            "type": "string",
-            "x-ms-parameter-location": "method"
+            "in": "body",
+            "name": "body",
+            "description": "The copy project authorization info.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringCopyAuthorizationOptions"
+            }
           },
           {
             "$ref": "common.json#/parameters/ApiVersionParameter"
@@ -302,8 +307,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Deploy Project": {
-            "$ref": "./examples/analyzetext-authoring/SuccessfulDeployProject.json"
+          "Successful Copy Project": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulCopyProject.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -496,6 +501,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The status of the long running operation.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringCopyProjectJobState"
+            }
+          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -2385,17 +2396,54 @@
       },
       "x-ms-client-name": "ConfusionMatrixRow"
     },
-    "TextAnalysisAuthoringCopyProjectOptions": {
-      "description": "Represents the options for copying an existing project to another Azure resource.",
+    "TextAnalysisAuthoringCopyAuthorizationOptions": {
+      "description": "Represents the options for authorizing a project copy to the current Azure resource.",
       "required": [
-        "targetProjectName",
-        "accessToken",
-        "expirationDateTime",
-        "targetSubscriptionId",
-        "targetResoureRegion"
+        "projectKind"
       ],
       "type": "object",
       "properties": {
+        "projectKind": {
+          "description": "Represents the project kind.",
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
+        },
+        "storageInputContainerName": {
+          "description": "The name of the storage container.",
+          "type": "string"
+        },
+        "allowOverwrite": {
+          "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization.",
+          "type": "boolean"
+        }
+      },
+      "x-ms-client-name": "CopyAuthorizationOptions"
+    },
+    "TextAnalysisAuthoringCopyProjectJobState": {
+      "description": "Represents the state of a copy job.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TextAnalysisAuthoringJobState"
+        }
+      ],
+      "x-ms-client-name": "CopyProjectJobState"
+    },
+    "TextAnalysisAuthoringCopyProjectOptions": {
+      "description": "Represents the options for copying an existing project to another Azure resource.",
+      "required": [
+        "projectKind",
+        "targetProjectName",
+        "accessToken",
+        "expirationDateTime",
+        "targetResourceId",
+        "targetResourceRegion"
+      ],
+      "type": "object",
+      "properties": {
+        "projectKind": {
+          "description": "Represents the project kind.",
+          "$ref": "#/definitions/TextAnalysisAuthoringProjectKind"
+        },
         "targetProjectName": {
           "description": "The project name to be copied-into.",
           "type": "string"
@@ -2409,11 +2457,11 @@
           "description": "The expiration of the access token.",
           "type": "string"
         },
-        "targetSubscriptionId": {
-          "description": "Represents the target Azure resource subscription Id.",
+        "targetResourceId": {
+          "description": "Represents the target Azure resource ID.",
           "type": "string"
         },
-        "targetResoureRegion": {
+        "targetResourceRegion": {
           "description": "Represents the target Azure resource region.",
           "type": "string"
         }
