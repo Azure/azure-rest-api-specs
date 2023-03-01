@@ -95,8 +95,8 @@ scenarios:
                     privateLinkServiceId: $(configurationStoreId)
                     groupIds:
                       - $(groupName)
-      - step: PrivateEndpointConnections_Update
-        exampleFile: ../examples/ConfigurationStoresCreatePrivateEndpointConnection.json
+      - step: PrivateEndpointConnections_CreateOrUpdate
+        exampleFile: ../examples/ConfigurationStoresUpdatePrivateEndpointConnection.json
       - step: PrivateEndpointConnections_ListByConfigurationStore
         exampleFile: ../examples/ConfigurationStoresListPrivateEndpointConnections.json
       - step: PrivateEndpointConnections_Get
