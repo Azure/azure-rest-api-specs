@@ -850,8 +850,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/ReservationOrderResponse"
+          "final-state-via": "location"
         },
         "parameters": [
           {
@@ -868,6 +867,12 @@
           "Return"
         ],
         "responses": {
+          "200": {
+            "description": "The resource has been returned",
+            "schema": {
+              "$ref": "#/definitions/ReservationOrderResponse"
+            }
+          },
           "202": {
             "description": "Detailed refund info of a reservation",
             "headers": {
