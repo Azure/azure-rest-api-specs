@@ -51,10 +51,16 @@
                         "$ref": "#/parameters/TenantActivityLogAlertNameParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/TenantActivityLogAlertRuleResourceParameter"
+                        "name": "tenantActivityLogAlertRule",
+                        "description": "The Tenant Activity Log Alert rule to create or use for the update.",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TenantActivityLogAlertResource"
+                        }
                     }
                 ],
                 "responses": {
@@ -94,7 +100,7 @@
                         "$ref": "#/parameters/TenantActivityLogAlertNameParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -128,7 +134,7 @@
                         "$ref": "#/parameters/TenantActivityLogAlertNameParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -148,10 +154,10 @@
             },
             "patch": {
                 "description": "Updates 'tags' and 'enabled' fields in an existing Tenant Alert rule. This method is used to update the Alert rule tags, and to enable or disable the Alert rule. To update other fields use CreateOrUpdate operation.",
-                "operationId": "Tenant ActivityLogAlerts_Update",
+                "operationId": "TenantActivityLogAlerts_Update",
                 "x-ms-examples": {
                     "Patch a Tenant Activity Log Alert rule": {
-                        "$ref": "./examples/TenantActivityLogAlertRule_PatchRule.json"
+                        "$ref": "./examples/TenantActivityLogAlertRule_UpdateRule.json"
                     }
                 },
                 "parameters": [
@@ -162,17 +168,23 @@
                         "$ref": "#/parameters/TenantActivityLogAlertNameParameter"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
                     },
                     {
-                        "$ref": "#/parameters/TenantActivityLogAlertRulePatchParameter"
+                        "name": "tenantActivityLogAlertRulePatch",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TenantAlertRulePatchObject"
+                        },
+                        "description": "Parameters supplied to the operation."
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "An existing Activity Log Alert rule was successfully updated.",
                         "schema": {
-                            "$ref": "#/definitions/ActivityLogAlertResource"
+                            "$ref": "#/definitions/TenantActivityLogAlertResource"
                         }
                     },
                     "default": {
@@ -198,7 +210,7 @@
                 },
                 "parameters": [
                     {
-                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -234,7 +246,7 @@
                         "$ref": "#/parameters/ManagementGroupId"
                     },
                     {
-                        "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+                        "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
                     }
                 ],
                 "responses": {
@@ -282,7 +294,7 @@
             ],
             "allOf": [
                 {
-                    "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+                    "$ref": "#/definitions/AzureResource"
                 }
             ],
             "properties": {
@@ -432,8 +444,8 @@
                 "actionGroupId"
             ]
         },
-        "AlertRulePatchObject": {
-            "description": "A Tenant Activity Log Alert rule object for the body of patch operations.",
+        "TenantAlertRulePatchObject": {
+            "description": "An Activity Log Alert rule object for the body of patch operations.",
             "properties": {
                 "tags": {
                     "description": "The resource tags",
@@ -473,6 +485,44 @@
                     "readOnly": true
                 }
             }
+        },
+        "AzureResource": {
+            "description": "An Azure resource object.",
+            "x-ms-azure-resource": true,
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "The resource Id.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "name": {
+                    "description": "The name of the resource.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "type": {
+                    "description": "The type of the resource.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "location": {
+                    "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
+                    "type": "string",
+                    "default": "global",
+                    "x-ms-mutability": [
+                        "read",
+                        "create"
+                    ]
+                },
+                "tags": {
+                    "description": "The tags of the resource.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            }
         }
     },
     "parameters": {
@@ -482,7 +532,8 @@
             "required": true,
             "type": "string",
             "description": "The ID of the target management group.",
-            "minLength": 1
+            "minLength": 1,
+            "x-ms-parameter-location": "method"
         },
         "TenantActivityLogAlertNameParameter": {
             "name": "alertRuleName",
@@ -491,24 +542,6 @@
             "type": "string",
             "description": "The name of the Tenant Activity Log Alert rule.",
             "x-ms-parameter-location": "method"
-        },
-        "TenantActivityLogAlertRuleResourceParameter": {
-            "name": "tenantActivityLogAlertRule",
-            "description": "The Tenant Activity Log Alert rule to create or use for the update.",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/TenantActivityLogAlertResource"
-            }
-        },
-        "TenantActivityLogAlertRulePatchParameter": {
-            "name": "tenantActivityLogAlertRulePatch",
-            "in": "body",
-            "required": true,
-            "schema": {
-                "$ref": "#/definitions/TenantAlertRulePatchObject"
-            },
-            "description": "Parameters supplied to the operation."
         }
     }
 }
