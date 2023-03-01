@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{nameOfMigration}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{targetDBServerName}/migrations/{migrationName}": {
       "put": {
         "tags": [
           "Migrations"
@@ -364,7 +364,10 @@
         },
         "migrationName": {
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         },
         "migrationDetailsLevel": {
           "$ref": "#/definitions/MigrationDetailsLevel",
@@ -798,7 +801,7 @@
       "x-ms-parameter-location": "method"
     },
     "MigrationNameParameter": {
-      "name": "nameOfMigration",
+      "name": "migrationName",
       "in": "path",
       "required": true,
       "type": "string",
