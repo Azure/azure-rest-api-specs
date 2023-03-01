@@ -17,7 +17,7 @@
         "tags": [
           "SinglePublicProduct"
         ],
-        "summary": "Single Public Product API provides an unauthenticated endpoint for consuming product attributes of a single commercial Marketplace public product. Each API request must include an API key allocated to you.Send an email to Catalog_DL_email_address including the following details to get the API Key:\n-Customer name\n-Service/Product name\n-AD Registered App ID (if available)\n-Focal point email\n-Use case/scenario\n-Expected traffic volume (daily)",
+        "summary": "Single Public Product API provides an unauthenticated endpoint for consuming product attributes of a single commercial Marketplace public product. Each API request must include an API key allocated to you.Send an email to Catalog_DL_email_address including the following details to get the API Key:\n- - Customer name\n- - Service/Product name\n- - AD Registered App ID (if available)\n- - Focal point email\n- - Use case/scenario\n- - Expected traffic volume (daily)",
         "operationId": "SinglePublicProduct_Get",
         "x-ms-examples": {
           "Product_Get": {
@@ -106,7 +106,7 @@
         "tags": [
           "ListingPublicProducts"
         ],
-        "summary": "Public Products API provides an unauthenticated endpoint for consuming commercial Marketplace public products. In addition, it enables filtering on selected product properties, search, and getting starting price information per product. Each API request must include an API key allocated to you (see X-API-Key description).Send an email to Catalog_DL_email_address including the following details to get the API Key:\n-Customer name\n-Service/Product name\n-AD Registered App ID (if available)\n-Focal point email\n-Use case/scenario\n-Expected traffic volume (daily)",
+        "summary": "Public Products API provides an unauthenticated endpoint for consuming commercial Marketplace public products. In addition, it enables filtering on selected product properties, search, and getting starting price information per product. Each API request must include an API key allocated to you (see X-API-Key description).Send an email to Catalog_DL_email_address including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume (daily)",
         "x-ms-examples": {
           "Product_Get": {
             "$ref": "./examples/ListingPublicProducts_Get.json"
@@ -162,7 +162,7 @@
             "type": "string",
             "name": "filter",
             "in": "query",
-            "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'. Fields that can be filtered by are:\n - `description`\n - `displayName`\n - `uniqueProductId`\n - `uniqueProductId`"
+            "description": "Filters the results, based on a Boolean condition. Example: '$filter=(isReseller eq true)'. Fields that can be filtered by are:\n- `description`\n- `displayName`\n- `uniqueProductId`\n- `uniqueProductId`"
           },
           {
             "type": "string",
@@ -274,7 +274,7 @@
           "description": "Publisher id"
         },
         "azureBenefit": {
-          "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n`Eligible` - Product is eligible for Azure consumption commitment benefit\n`NotEligible` - Product is not eligible for Azure consumption commitment benefit",
+          "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - Product is eligible for Azure consumption commitment benefit\n`NotEligible` - Product is not eligible for Azure consumption commitment benefit",
           "allOf": [
             {
               "$ref": "#/definitions/AzureBenefit"
@@ -289,7 +289,7 @@
           }
         },
         "publisherType": {
-          "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n`Microsoft` - Product is published by Microsoft (1st party product)\n`Third Party` - Product is published by Third Party Vendor",
+          "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor",
           "allOf": [
             {
               "$ref": "#/definitions/PublisherType"
@@ -297,7 +297,7 @@
           ]
         },
         "publishingStage": {
-          "description": "Product publishing stage. Possible values:\n`Preview` - Product is available to restricted audience\n`Live` - Product is publicly available in the Marketplace",
+          "description": "Product publishing stage. Possible values:\n- `Preview` - Product is available to restricted audience\n- `Live` - Product is publicly available in the Marketplace",
           "allOf": [
             {
               "$ref": "#/definitions/PublishingStage"
@@ -309,7 +309,7 @@
           "description": "Unique product identifier"
         },
         "productType": {
-          "description": "The delivery method or deployment model. Possible values:\n`SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n`VirtualMachine` -  The product is Image service instances with usage-based pricing\n`AzureApplication` \n`DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n`DynamicsBC` - Dynamics 365 business Central \n`Container` -  The product is delivered as Container\n`DynamicsOps` - Dynamics 365 Operations Apps\n`None` - Product type returned for Azure Services, Container Extensions and VM extensions\n`IotEdgeModules` - Resource is delivered as IoT Edge Module\n`ContainerApps` - Resource is delivered as Container App\n`ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n`ManagedServices` - The product is delivered as Managed Service\n`PowerBI` - Power BI products\n`CosellOnly` - Products available in scope of Co-Sell program only\n`PowerBIVisuals` - Power BI Visuals products\n`Office365` - Office 365 products\n`DevService` - Dev Service\n`AADApps` - Azure Active Directory Applications\n`VisualStudioExtension` - Visual Studio Extensions\n`SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n`ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
+          "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -325,7 +325,7 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "The list of the pricing types for which this offer is designated. Possible Values: \n`Free` - Product has at least one plan that is free of charge.\n`FreeTrial` - Product has at least one plan that is free trial.\n`Byol` - Product has at least one plan that is bring your own license.\n`Payg` - Product has at least one plan that is Pay as you go, usage based billing model.\n`Ri` - Product has at least one plan that is Reserved Instance billing model.",
+          "description": "The list of the pricing types for which this offer is designated. Possible Values: \n- `Free` - Product has at least one plan that is free of charge.\n- `FreeTrial` - Product has at least one plan that is free trial.\n- `Byol` - Product has at least one plan that is bring your own license.\n- `Payg` - Product has at least one plan that is Pay as you go, usage based billing model.\n- `Ri` - Product has at least one plan that is Reserved Instance billing model.",
           "items": {
             "$ref": "#/definitions/PricingType"
           }
@@ -461,7 +461,7 @@
           "description": "CSP legal terms URI"
         },
         "legalTermsType": {
-          "description": "Supported legal terms type. Possible values:\n`EA` - Microsoft Enterprise Agreement\n`None` - None",
+          "description": "Supported legal terms type. Possible values:\n- `EA` - Microsoft Enterprise Agreement\n- `None` - None",
           "allOf": [
             {
               "$ref": "#/definitions/LegalTermsType"
@@ -726,7 +726,7 @@
           "description": "Display name of the plan"
         },
         "vmArchitectureType": {
-          "description": "VM Architecture Type. Applicable to Virtual Machine products only. PossibleValues:\n`Arm64` - The VM image architecture of the plan is Arm64\n`X64Gen1` - The VM image architecture of the plan is X64 Generation1\n`X64Gen2` - The VM image architecture of the plan is X64 Generation2",
+          "description": "VM Architecture Type. Applicable to Virtual Machine products only. PossibleValues:\n- `Arm64` - The VM image architecture of the plan is Arm64\n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2",
           "allOf": [
             {
               "$ref": "#/definitions/VmArchitectureType"
@@ -1048,7 +1048,7 @@
           "description": "Artifact uri"
         },
         "artifactType": {
-          "description": "The type of the artifact. Possible values:\n`Custom` - Custom artifact type\n`Fragment` - Contains link to the nested ARM template\n`Metadata` - Metadata artifact type\n`Template` - Contains link to the main ARM template ",
+          "description": "The type of the artifact. Possible values:\n- `Custom` - Custom artifact type\n- `Fragment` - Contains link to the nested ARM template\n- `Metadata` - Metadata artifact type\n- `Template` - Contains link to the main ARM template ",
           "allOf": [
             {
               "$ref": "#/definitions/ArtifactType"
@@ -1139,7 +1139,7 @@
           "description": "Display name of the plan"
         },
         "vmArchitectureType": {
-          "description": "VM Architecture Type. Applicable to Virtual Machine products only. PossibleValues:\n`Arm64` - The VM image architecture of the plan is Arm64\n`X64Gen1` - The VM image architecture of the plan is X64 Generation1\n`X64Gen2` - The VM image architecture of the plan is X64 Generation2",
+          "description": "VM Architecture Type. Applicable to Virtual Machine products only. PossibleValues:\n- `Arm64` - The VM image architecture of the plan is Arm64\n- `X64Gen1` - The VM image architecture of the plan is X64 Generation1\n- `X64Gen2` - The VM image architecture of the plan is X64 Generation2",
           "allOf": [
             {
               "$ref": "#/definitions/VmArchitectureType"
@@ -1147,7 +1147,7 @@
           ]
         },
         "cspState": {
-          "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n`OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n`Optout` - Plan configured CSP program opt-out\n`SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects",
+          "description": "Value showing whether the plan is available for purchase through CSP channel. Possible values: \n- `OptIn` - Plan configured CSP program opt-in for any partner in the CSP Program\n- `Optout` - Plan configured CSP program opt-out\n- `SelectiveOptIn` - Plan configured CSP program opt-in for specific partners in the CSP program ISV selects",
           "allOf": [
             {
               "$ref": "#/definitions/CspState"
@@ -1681,7 +1681,7 @@
           "description": "Publisher id"
         },
         "azureBenefit": {
-          "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n`Eligible` - Product is eligible for Azure consumption commitment benefit\n`NotEligible` - Product is not eligible for Azure consumption commitment benefit",
+          "description": "Eligibility for Azure consumption commitment benefit (https://docs.microsoft.com/en-us/marketplace/azure-consumption-commitment-benefit). Possible values: \n- `Eligible` - Product is eligible for Azure consumption commitment benefit\n- `NotEligible` - Product is not eligible for Azure consumption commitment benefit",
           "allOf": [
             {
               "$ref": "#/definitions/AzureBenefit"
@@ -1696,7 +1696,7 @@
           }
         },
         "publisherType": {
-          "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n`Microsoft` - Product is published by Microsoft (1st party product)\n`Third Party` - Product is published by Third Party Vendor",
+          "description": "A value indicating whether this is a Microsoft or third party product. Possible values:\n- `Microsoft` - Product is published by Microsoft (1st party product)\n- `Third Party` - Product is published by Third Party Vendor",
           "allOf": [
             {
               "$ref": "#/definitions/PublisherType"
@@ -1704,7 +1704,7 @@
           ]
         },
         "publishingStage": {
-          "description": "Product publishing stage. Possible values:\n`Preview` - Product is available to restricted audience\n`Live` - Product is publicly available in the Marketplace",
+          "description": "Product publishing stage. Possible values:\n- `Preview` - Product is available to restricted audience\n- `Live` - Product is publicly available in the Marketplace",
           "allOf": [
             {
               "$ref": "#/definitions/PublishingStage"
@@ -1716,7 +1716,7 @@
           "description": "Unique product identifier"
         },
         "productType": {
-          "description": "The delivery method or deployment model. Possible values:\n`SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n`VirtualMachine` -  The product is Image service instances with usage-based pricing\n`AzureApplication` \n`DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n`DynamicsBC` - Dynamics 365 business Central \n`Container` -  The product is delivered as Container\n`DynamicsOps` - Dynamics 365 Operations Apps\n`None` - Product type returned for Azure Services, Container Extensions and VM extensions\n`IotEdgeModules` - Resource is delivered as IoT Edge Module\n`ContainerApps` - Resource is delivered as Container App\n`ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n`ManagedServices` - The product is delivered as Managed Service\n`PowerBI` - Power BI products\n`CosellOnly` - Products available in scope of Co-Sell program only\n`PowerBIVisuals` - Power BI Visuals products\n`Office365` - Office 365 products\n`DevService` - Dev Service\n`AADApps` - Azure Active Directory Applications\n`VisualStudioExtension` - Visual Studio Extensions\n`SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n`ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
+          "description": "The delivery method or deployment model. Possible values:\n- `SaaS` - The product is a Software solution purchased on pay-as-you-go basis from a cloud service provider\n- `VirtualMachine` -  The product is Image service instances with usage-based pricing\n- `AzureApplication` \n- `DynamicsCE` - All Dynamics products except for DynamicsBC and DynamicsOps\n- `DynamicsBC` - Dynamics 365 business Central \n- `Container` -  The product is delivered as Container\n- `DynamicsOps` - Dynamics 365 Operations Apps\n- `None` - Product type returned for Azure Services, Container Extensions and VM extensions\n- `IotEdgeModules` - Resource is delivered as IoT Edge Module\n- `ContainerApps` - Resource is delivered as Container App\n- `ConsultingServices` Consulting Services (available only in Azure Marketplace as listing offers)\n- `ManagedServices` - The product is delivered as Managed Service\n- `PowerBI` - Power BI products\n- `CosellOnly` - Products available in scope of Co-Sell program only\n- `PowerBIVisuals` - Power BI Visuals products\n- `Office365` - Office 365 products\n- `DevService` - Dev Service\n- `AADApps` - Azure Active Directory Applications\n- `VisualStudioExtension` - Visual Studio Extensions\n- `SolutionTemplate` - Solution Template plan type (applicable to Azure Applications only)\n- `ManagedApplication` - Managed Application plan type (applicable to Azure Applications only)",
           "allOf": [
             {
               "$ref": "#/definitions/ProductType"
@@ -1732,7 +1732,7 @@
         },
         "pricingTypes": {
           "type": "array",
-          "description": "The list of the pricing types for which this offer is designated. Possible Values: \n`Free` - Product has at least one plan that is free of charge.\n`FreeTrial` - Product has at least one plan that is free trial.\n`Byol` - Product has at least one plan that is bring your own license.\n`Payg` - Product has at least one plan that is Pay as you go, usage based billing model.\n`Ri` - Product has at least one plan that is Reserved Instance billing model.",
+          "description": "The list of the pricing types for which this offer is designated. Possible Values: \n- `Free` - Product has at least one plan that is free of charge.\n- `FreeTrial` - Product has at least one plan that is free trial.\n- `Byol` - Product has at least one plan that is bring your own license.\n- `Payg` - Product has at least one plan that is Pay as you go, usage based billing model.\n- `Ri` - Product has at least one plan that is Reserved Instance billing model.",
           "items": {
             "$ref": "#/definitions/PricingType"
           }
