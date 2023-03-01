@@ -20,7 +20,7 @@
             "status": "Active",
             "tenantId": "00000000-0000-0000-0000-000000000000",
             "reportName": "testReportName",
-            "offerGuid": "00000000-0000-0000-0000-000000000000",
+            "offerGuid": "00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002",
             "timeZone": "GMT Standard Time",
             "triggerTime": "2022-03-04T15:00:00.000Z",
             "nextTriggerTime": "2022-03-04T15:00:00.000Z",
@@ -36,6 +36,12 @@
                 "tags": {
                   "key1": "value1"
                 }
+              },
+              {
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/acat-aws/providers/microsoft.security/securityconnectors/acatawsconnector/securityentitydata/aws-iam-user-testuser",
+                "resourceType": "iam.user",
+                "resourceOrigin": "AWS",
+                "accountId": "000000000000"
               }
             ],
             "complianceStatus": {
@@ -90,10 +96,21 @@
                                   "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
                                   "resourceType": "Microsoft.SignalRService/SignalR",
                                   "resourceOrigin": "Azure",
-                                  "resourceStatus": "Healthy",
+                                  "resourceStatus": "Unhealthy",
                                   "resourceStatusChangeDate": "2023-01-12T16:17:20.150Z",
                                   "recommendationIds": [
                                     "failed_reason_1"
+                                  ]
+                                },
+                                {
+                                  "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/acat-aws/providers/microsoft.security/securityconnectors/acatawsconnector/securityentitydata/aws-iam-user-testuser",
+                                  "resourceType": "iam.user",
+                                  "resourceOrigin": "AWS",
+                                  "accountId": "000000000000",
+                                  "resourceStatus": "Unhealthy",
+                                  "resourceStatusChangeDate": "2023-01-12T16:17:20.150Z",
+                                  "recommendationIds": [
+                                    "failed_reason_2"
                                   ]
                                 }
                               ],
@@ -105,6 +122,17 @@
                                     {
                                       "recommendationSolutionIndex": "1",
                                       "recommendationSolutionContent": "Setting minimal TLS version to 1.2 improves security by ensuring your SQL Managed Instance can only be accessed from clients using TLS 1.2. Using versions of TLS less than 1.2 is not recommended since they have well documented security vulnerabilities",
+                                      "isRecommendSolution": "true"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "recommendationId": "failed_reason_2",
+                                  "recommendationShortName": "Invalid AWS TLS Config",
+                                  "recommendationSolutions": [
+                                    {
+                                      "recommendationSolutionIndex": "1",
+                                      "recommendationSolutionContent": "Open the AWS related service, and set its TLS version to 1.2 or higher version.",
                                       "isRecommendSolution": "true"
                                     }
                                   ]

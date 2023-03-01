@@ -859,6 +859,10 @@
             "modelAsString": true
           }
         },
+        "accountId": {
+          "description": "Account Id. For example - the AWS account id.",
+          "type": "string"
+        },
         "tags": {
           "type": "object",
           "description": "Resource's tag type.",
@@ -908,7 +912,7 @@
           "readOnly": true
         },
         "offerGuid": {
-          "description": "Report offer Guid.",
+          "description": "A list of comma-separated offerGuids indicates a series of offerGuids that map to the report. For example, \"00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002\" and \"00000000-0000-0000-0000-000000000003\".",
           "type": "string"
         },
         "timeZone": {
@@ -1369,6 +1373,11 @@
       "properties": {
         "resourceId": {
           "description": "The Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountId": {
+          "description": "Account Id. For example - AWS account Id.",
           "type": "string",
           "readOnly": true
         },
