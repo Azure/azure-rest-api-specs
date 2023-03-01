@@ -24,16 +24,25 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the communicationservices.
 
-```yaml
+``` yaml
 openapi-type: data-plane
-tag: package-chat-2021-03-07
+tag: package-preview-2023-07
 ```
 
+
+### Tag: package-preview-2023-07
+
+These settings apply only when `--tag=package-preview-2023-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-07'
+input-file:
+  - preview/2023-07-01-preview/communicationserviceschat.json
+```
 ### Tag: package-2020-09-21-preview2
 
 These settings apply only when `--tag=package-2020-09-21-preview2` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-09-21-preview2'
+``` yaml $(tag) == 'package-2020-09-21-preview2'
 input-file:
   - preview/2020-09-21-preview2/communicationserviceschat.json
 title:
@@ -44,7 +53,7 @@ title:
 
 These settings apply only when `--tag=package-2020-11-01-preview3` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-11-01-preview3'
+``` yaml $(tag) == 'package-2020-11-01-preview3'
 input-file:
   - preview/2020-11-01-preview3/communicationserviceschat.json
 title:
@@ -55,7 +64,7 @@ title:
 
 These settings apply only when `--tag=package-2021-01-27-preview4` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-01-27-preview4'
+``` yaml $(tag) == 'package-2021-01-27-preview4'
 input-file:
   - preview/2021-01-27-preview4/communicationserviceschat.json
 title:
@@ -66,7 +75,7 @@ title:
 
 These settings apply only when `--tag=package-2021-03-01-preview5` is specified on the command line.
 
-```yaml $(tag) == 'package-2021-03-01-preview5'
+``` yaml $(tag) == 'package-2021-03-01-preview5'
 input-file:
   - preview/2021-03-01-preview5/communicationserviceschat.json
 title:
@@ -77,7 +86,7 @@ title:
 
 These settings apply only when `--tag=package-chat-2021-03-07` is specified on the command line.
 
-```yaml $(tag) == 'package-chat-2021-03-07'
+``` yaml $(tag) == 'package-chat-2021-03-07'
 input-file:
   - stable/2021-03-07/communicationserviceschat.json
 title:
@@ -88,7 +97,7 @@ title:
 
 These settings apply only when `--tag=package-2021-04-05-preview6` is specified on the command line.
 
-```yaml $(tag) == 'package-chat-2021-04-05-preview6'
+``` yaml $(tag) == 'package-chat-2021-04-05-preview6'
 input-file:
   - preview/2021-04-05-preview6/communicationserviceschat.json
 title:
@@ -99,7 +108,7 @@ title:
 
 These settings apply only when `--tag=package-2021-09-07` is specified on the command line.
 
-```yaml $(tag) == 'package-chat-2021-09-07'
+``` yaml $(tag) == 'package-chat-2021-09-07'
 input-file:
   - stable/2021-09-07/communicationserviceschat.json
 title:
@@ -110,7 +119,7 @@ title:
 
 These settings apply only when `--tag=2021-10-01-preview7` is specified on the command line.
 
-```yaml $(tag) == 'package-chat-2021-10-01-preview7'
+``` yaml $(tag) == 'package-chat-2021-10-01-preview7'
 input-file:
   - preview/2021-10-01-preview7/communicationserviceschat.json
 title:
@@ -146,7 +155,7 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 
 These settings apply only when `--swift` is specified on the command line.
 
-```yaml $(swift)
+``` yaml $(swift)
 clear-output-folder: false
 namespace: AzureCommunicationChat
 title: AzureCommunicationChat
@@ -174,4 +183,3 @@ directive:
   transform: >
     $["x-ms-client-name"] = "ChatError";
 ```
-
