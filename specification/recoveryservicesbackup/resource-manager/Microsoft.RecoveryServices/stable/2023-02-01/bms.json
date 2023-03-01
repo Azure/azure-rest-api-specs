@@ -7419,6 +7419,10 @@
         "recoveryPointProperties": {
           "description": "Properties of Recovery Point",
           "$ref": "#/definitions/RecoveryPointProperties"
+        },
+        "isPrivateAccessEnabledOnAnyDisk": {
+          "description": "This flag denotes if any of the disks in the VM are using Private access network setting",
+          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "IaasVMRecoveryPoint"
@@ -7443,6 +7447,28 @@
       "properties": {
         "securedVMOsDiskEncryptionSetId": {
           "description": "Gets or Sets Disk Encryption Set Id for Secured VM OS Disk",
+          "type": "string"
+        }
+      }
+    },
+    "TargetDiskNetworkAccessSettings": {
+      "description": "Specifies target network access settings for disks of VM to be restored.",
+      "type": "object",
+      "properties": {
+        "targetDiskNetworkAccessOption": {
+          "description": "Network access settings to be used for restored disks",
+          "enum": [
+            "SameAsOnSourceDisks",
+            "EnablePrivateAccessForAllDisks",
+            "EnablePublicAccessForAllDisks"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TargetDiskNetworkAccessOption"
+          }
+        },
+        "targetDiskAccessId": {
+          "description": "Gets or sets the ARM resource ID of the target disk access to be used when TargetDiskNetworkAccessOption is set to TargetDiskNetworkAccessOption.UseNew",
           "type": "string"
         }
       }
@@ -7561,6 +7587,10 @@
         "securedVMDetails": {
           "$ref": "#/definitions/SecuredVMDetails",
           "description": "Stores Secured VM Details"
+        },
+        "targetDiskNetworkAccessSettings": {
+          "$ref": "#/definitions/TargetDiskNetworkAccessSettings",
+          "description": "Specifies target network access settings for disks of VM to be restored,"
         }
       },
       "x-ms-discriminator-value": "IaasVMRestoreRequest"
