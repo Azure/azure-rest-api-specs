@@ -36,9 +36,18 @@ tag: package-flexibleserver-2021-12-01-preview
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-2020-01-01
+tag: package-preview-2022-01
 ```
 
+
+### Tag: package-preview-2022-01
+
+These settings apply only when `--tag=package-preview-2022-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-01'
+input-file:
+  - Microsoft.DBforMySQL/preview/2022-01-02/mysql.json
+```
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
