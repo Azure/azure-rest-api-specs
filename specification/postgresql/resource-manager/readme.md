@@ -61,11 +61,11 @@ input-file:
   - Microsoft.DBforPostgreSQL/stable/2022-12-01/VirtualNetwork.json
 ```
 
-### Tag: package-flexibleserver-2022-05-01-preview
+### Tag: package-flexibleserver-2022-05-01-preview-only
 
-These settings apply only when `--tag=package-flexibleserver-2022-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2022-05-01-preview-only` is specified on the command line.
 
-```yaml $(tag) == 'package-flexibleserver-2022-05-01-preview'
+```yaml $(tag) == 'package-flexibleserver-2022-05-01-preview-only'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Migrations.json
   - Microsoft.DBforPostgreSQL/preview/2022-05-01-preview/Operations.json
