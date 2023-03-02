@@ -278,7 +278,7 @@
         "tags": [
           "Participants"
         ],
-        "summary": "Upsert participants to a room",
+        "summary": "Patch participants in a room.",
         "operationId": "Rooms_PatchParticipants",
         "consumes": [
           "application/merge-patch+json"
@@ -290,7 +290,7 @@
           {
             "in": "path",
             "name": "roomId",
-            "description": "Room id to patch participants.",
+            "description": "The identifier of the room to patch the participants in.",
             "required": true,
             "type": "string"
           },
@@ -300,7 +300,7 @@
           {
             "in": "body",
             "name": "patchParticipantsRequest",
-            "description": "Participants to be patched to the room.",
+            "description": "A patched set of participants of the room.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PatchParticipantsRequest"
@@ -309,9 +309,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The participants were successfully added. The action returns an empty object.",
+            "description": "The participants were successfully patched. The action returns the patched participants of a room.",
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ParticipantsCollection"
             }
           },
           "default": {
@@ -337,10 +337,10 @@
   },
   "definitions": {
     "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
     },
     "CommunicationError": {
-      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationError"
     },
     "CreateRoomRequest": {
       "description": "Request payload for creating new room.",
@@ -377,7 +377,7 @@
       "type": "object",
       "properties": {
         "rawId": {
-          "description": "Raw id of the identifier.",
+          "description": "Raw id of the identifier. Please refer to the following document for additional information on Raw id. <br> https://learn.microsoft.com/azure/communication-services/concepts/identifiers?pivots=programming-language-rest#raw-id-representation",
           "type": "string"
         },
         "role": {
@@ -393,7 +393,7 @@
       "type": "object",
       "properties": {
         "rawId": {
-          "description": "Raw id of the identifier.",
+          "description": "Raw id of the identifier. Please refer to the following document for additional information on Raw id. <br> https://learn.microsoft.com/azure/communication-services/concepts/identifiers?pivots=programming-language-rest#raw-id-representation",
           "type": "string"
         },
         "role": {
@@ -470,22 +470,31 @@
     "PatchParticipantsRequest": {
       "description": "Participants to be patched in the room.",
       "type": "object",
-      "additionalProperties": {
-        "type": "object",
-        "properties": {
-          "role": {
-            "$ref": "#/definitions/Role"
+      "properties": {
+        "participants": {
+          "description": "Participants to be patched.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParticipantProperties"
+          },
+          "example": {
+            "rawId1": {
+              "role": "Presenter"
+            },
+            "rawId2": {
+              "role": "Attendee"
+            },
+            "rawId3": null
           }
         }
-      },
-      "example": {
-        "rawId1": {
-          "role": "Presenter"
-        },
-        "rawId2": {
-          "role": "Attendee"
-        },
-        "rawId3": null
+      }
+    },
+    "ParticipantProperties": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/Role"
+        }
       }
     },
     "ParticipantsCollection": {
