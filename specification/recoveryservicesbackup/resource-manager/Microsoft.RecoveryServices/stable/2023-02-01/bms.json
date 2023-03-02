@@ -7412,6 +7412,10 @@
             "$ref": "#/definitions/RecoveryPointMoveReadinessInfo"
           }
         },
+        "securityType": {
+          "description": "Security Type of the Disk",
+          "type": "string"
+        },
         "recoveryPointProperties": {
           "description": "Properties of Recovery Point",
           "$ref": "#/definitions/RecoveryPointProperties"
@@ -7433,6 +7437,16 @@
         },
         "type": {
           "description": "Type of the extended location. Possible values include: 'EdgeZone'",
+          "type": "string"
+        }
+      }
+    },
+    "SecuredVMDetails": {
+      "description": "Restore request parameters for Secured VMs",
+      "type": "object",
+      "properties": {
+        "securedVMOsDiskEncryptionSetId": {
+          "description": "Gets or Sets Disk Encryption Set Id for Secured VM OS Disk",
           "type": "string"
         }
       }
@@ -7569,6 +7583,10 @@
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation",
           "description": "Target extended location where the VM should be restored,\r\nshould be null if restore is to be done in public cloud"
+        },
+        "securedVMDetails": {
+          "$ref": "#/definitions/SecuredVMDetails",
+          "description": "Stores Secured VM Details"
         },
         "targetDiskNetworkAccessSettings": {
           "$ref": "#/definitions/TargetDiskNetworkAccessSettings",
