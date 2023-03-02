@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+
+variables:
+  vmName:
+    type: string
+    prefix: test
+
+prepareSteps:
+  - step: createVirtualMachine
+    operationId: VirtualMachines_CreateOrUpdate
+    readmeTag: ../../../../../../compute/resource-manager/readme.md#package-2022-11-01
+    parameters:
+      vmName: $(vmName)
