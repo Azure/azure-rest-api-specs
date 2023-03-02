@@ -17,7 +17,7 @@
         "tags": [
           "SinglePublicProduct"
         ],
-        "summary": "Single Public Product API provides an unauthenticated endpoint for consuming product attributes of a single commercial Marketplace public product. Each API request must include an API key allocated to you. Send an email to Catalog_DL_email_address including the following details to get the API Key:\n- - Customer name\n- - Service/Product name\n- - AD Registered App ID (if available)\n- - Focal point email\n- - Use case/scenario\n- - Expected traffic volume (daily)",
+        "summary": "Single Public Product API provides an unauthenticated endpoint for consuming product attributes of a single commercial Marketplace public product. Each API request must include an API key allocated to you. Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
         "operationId": "SinglePublicProduct_Get",
         "x-ms-examples": {
           "Product_Get": {
@@ -51,7 +51,7 @@
             "type": "string",
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default in \"en\"",
             "default": "en"
           },
           {
@@ -65,7 +65,7 @@
             "type": "array",
             "name": "hideKeys",
             "in": "query",
-            "description": "Add hide key to retrieve preview products",
+            "description": "Add hide key to retrieve preview items. Hidekeys are provided in 'multi' format: &Hidekeys[]=\"first\"&Hidekeys[]=\"second\"",
             "collectionFormat": "multi",
             "items": {
               "type": "string"
@@ -87,7 +87,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 - In case of a misconfigured request.\n\n * 404 - In case product not found.\n\n * 500 - In case of internal error.",
+            "description": " Error Responses: \n\n * 400 - In case of a misconfigured request.\n\n * 401 - In case of a missing api key header\n\n * 404 - In case product not found.\n\n * 500 - In case of internal error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             },
@@ -106,7 +106,7 @@
         "tags": [
           "ListingPublicProducts"
         ],
-        "summary": "Public Products API provides an unauthenticated endpoint for consuming commercial Marketplace public products. In addition, it enables filtering on selected product properties, search, and getting starting price information per product. Each API request must include an API key allocated to you (see X-API-Key description). Send an email to Catalog_DL_email_address including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume (daily)",
+        "summary": "Public Products API provides an unauthenticated endpoint for consuming commercial Marketplace public products. In addition, it enables filtering on selected product properties, search, and getting starting price information per product. Each API request must include an API key allocated to you (see X-API-Key description).Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
         "x-ms-examples": {
           "Product_Get": {
             "$ref": "./examples/ListingPublicProducts_Get.json"
@@ -133,7 +133,7 @@
             "type": "string",
             "name": "language",
             "in": "query",
-            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'",
+            "description": "Language to search, ISO 639-1 two-letter code, possible values - 'en,cs,de,es,fr,hu,it,ja,ko,nl,pl,pt-br,pt-pt,ru,sv,tr,zh-hans,zh-hant'. Default in \"en\"",
             "default": "en"
           },
           {
@@ -146,7 +146,7 @@
             "type": "array",
             "name": "hideKeys",
             "in": "query",
-            "description": "Add hide key to retrieve preview products",
+            "description": "Add hide key to retrieve preview items. Hidekeys are provided in 'multi' format: &Hidekeys[]=\"first\"&Hidekeys[]=\"second\"",
             "collectionFormat": "multi",
             "items": {
               "type": "string"
@@ -174,7 +174,7 @@
             "type": "string",
             "name": "orderby",
             "in": "query",
-            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: '$orderby=displayName desc'.Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`"
+            "description": "Ordering expression for the results using OData notation. Avoid using orderby unless essential as this may impact the latency of your request.  Example: '$orderby=displayName desc'.This API only supports ordering by a single field. Fields that can be ordered by are:\n- `lastModifiedDateTime`\n- `uniqueProductId`\n- `productType`\n- `displayName`\n- `publisherId`"
           },
           {
             "type": "string",
@@ -192,7 +192,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 - In case of a misconfigured request.\n\n * 500 - In case of internal error.",
+            "description": " Error Responses: \n\n * 400 - In case of a misconfigured request.\n\n * 401 - In case of a missing api key header\n\n * 500 - In case of internal error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             },
@@ -559,7 +559,7 @@
         },
         "isCoreVm": {
           "type": "boolean",
-          "description": "Set to true only for offers of OfferType.VirtualMachine to indicate that it was originally of OfferType.CoreVirtualMachine"
+          "description": "Set to true only for offers of ProductType.VirtualMachine to indicate that it was originally of ProductType.CoreVirtualMachine"
         }
       }
     },
@@ -719,7 +719,7 @@
         },
         "uniquePlanId": {
           "type": "string",
-          "description": "Unique plan Id which is obtained by combining uniqueProductId and PlanId with no separator in between"
+          "description": "Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between"
         },
         "displayName": {
           "type": "string",
@@ -1131,7 +1131,7 @@
         },
         "uniquePlanId": {
           "type": "string",
-          "description": "Unique plan Id which is obtained by combining uniqueProductId and PlanId with no separator in between"
+          "description": "Unique plan Id which is prefixed by combining uniqueProductId and PlanId with no separator in between"
         },
         "displayName": {
           "type": "string",
@@ -1229,10 +1229,6 @@
         "id": {
           "type": "string",
           "description": "The id"
-        },
-        "legacyPlanId": {
-          "type": "string",
-          "description": "Legacy plan Id which is obtained by combining Offer LegacyId and PlanId with no separator in between"
         },
         "availabilities": {
           "type": "array",
