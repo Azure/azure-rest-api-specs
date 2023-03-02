@@ -17,7 +17,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2022-10-31"
+default-api-version: "2023-01-31"
 clear-output-folder: true
 batch:
   - tag: package-2023-01
@@ -40,7 +40,7 @@ perform-load: false
 These settings apply only when `--tag=package-2023-01 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2022-10' && $(python)
+``` yaml $(tag) == 'package-2023-01' && $(python)
 namespace: azure.mgmt.digitaltwins.v2023_01_31
 output-folder: $(python-sdks-folder)/digitaltwins/azure-mgmt-digitaltwins/azure/mgmt/digitaltwins/v2023_01_31
 ```

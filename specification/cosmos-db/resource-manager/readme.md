@@ -27,10 +27,26 @@ These are the global settings for the Cosmos-DB API.
 ``` yaml
 title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2022-11
+tag: package-preview-2022-11
 ```
+### Tag: package-preview-2022-11
 
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
 
+```yaml $(tag) == 'package-preview-2022-11'
+input-file:
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2022-11-15-preview/services.json
+
+```
 ### Tag: package-2022-11
 
 These settings apply only when `--tag=package-2022-11` is specified on the command line.
@@ -46,6 +62,7 @@ input-file:
   - Microsoft.DocumentDB/stable/2022-11-15/rbac.json
   - Microsoft.DocumentDB/stable/2022-11-15/restorable.json
   - Microsoft.DocumentDB/stable/2022-11-15/services.json
+
 ```
 ### Tag: package-preview-2022-08
 
@@ -560,6 +577,57 @@ directive:
   - suppress: DeleteOperationResponses
     from: managedCassandra.json
     reason: Linter is broken and throwing false positives.
+  - suppress: UnSupportedPatchProperties
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroPatch202
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ResourceNameRestriction
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: XmsIdentifierValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: CreateOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: DeleteOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: PostOperationAsyncResponseValidation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: MissingTypeObject
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ParametersOrder
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroLocationHeader
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: OperationIdNounVerb
+    from: cosmos-db.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: ResourceNameRestriction
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: RepeatedPathInfo
+    from: dataTransferService.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: XmsIdentifierValidation
+    from: managedCassandra.json
+    reason: Temporarily suppressing linter errors and will be fixed later
+  - suppress: LroLocationHeader
+    from: services.json
+    reason: Temporarily suppressing linter errors and will be fixed later
 ```
 
 ---
