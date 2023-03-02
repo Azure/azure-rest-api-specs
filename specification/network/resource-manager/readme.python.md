@@ -20,6 +20,7 @@ multiapi: true
 default-api-version: "2022-07-01"
 clear-output-folder: true
 batch:
+  - tag: package-2022-09
   - tag: package-2022-07
   - tag: package-2021-02
   - tag: package-2021-02-preview-only
@@ -60,6 +61,16 @@ batch:
 ``` yaml $(multiapiscript)
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/
 perform-load: false
+```
+
+### Tag: package-2022-09 and python
+
+These settings apply only when `--tag=package-2022-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2022-09'
+namespace: azure.mgmt.network.v2022_09_01
+output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2022_09_01
 ```
 
 ### Tag: package-2022-07 and python
