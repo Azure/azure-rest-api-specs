@@ -72,7 +72,6 @@ namespace: azure.mgmt.network.v2022_09_01
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2022_09_01
 ```
 
-
 ### Tag: package-2021-02-preview-only and python
 
 These settings apply only when `--tag=package-2021-02-preview-only --python` is specified on the command line.
