@@ -457,7 +457,24 @@
           ],
           "x-ms-enum": {
             "name": "OperatorType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EqualTo",
+                "description": "Alert will be triggered if the evaluated cost is the same as threshold value. Note: It’s not recommended to use this OperatorType as there’s low chance of cost being exactly the same as threshold value, leading to missing of your alert. This OperatorType will be deprecated in future. ",
+                "name": "EqualTo"
+              },
+              {
+                "value": "GreaterThan",
+                "description": "Alert will be triggered if the evaluated cost is greater than the threshold value. Note: This is the recommended OperatorType while configuring Budget Alert.",
+                "name": "GreaterThan"
+              },
+              {
+                "value": "GreaterThanOrEqualTo",
+                "description": "Alert will be triggered if the evaluated cost is greater than or equal to the threshold value.",
+                "name": "GreaterThanOrEqualTo"
+              }
+            ]
           }
         },
         "threshold": {
