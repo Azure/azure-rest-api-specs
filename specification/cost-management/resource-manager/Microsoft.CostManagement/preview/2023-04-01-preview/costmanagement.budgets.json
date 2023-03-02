@@ -220,6 +220,7 @@
   "definitions": {
     "BudgetsListResult": {
       "description": "Result of listing budgets. It contains a list of available budgets in the scope provided.",
+      "type": "object",
       "properties": {
         "value": {
           "description": "The list of budgets.",
@@ -254,6 +255,7 @@
     },
     "BudgetProperties": {
       "description": "The properties of the budget.",
+      "type": "object",
       "properties": {
         "category": {
           "description": "The category of the budget, whether the budget tracks cost or usage.",
@@ -268,8 +270,7 @@
         },
         "amount": {
           "description": "The total amount of cost to track with the budget",
-          "type": "number",
-          "format": "decimal"
+          "type": "number"
         },
         "timeGrain": {
           "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain. BillingMonth, BillingQuarter, and BillingAnnual are only supported by WD customers",
@@ -325,6 +326,7 @@
     },
     "BudgetTimePeriod": {
       "description": "The start and end date for a budget.",
+      "type": "object",
       "properties": {
         "startDate": {
           "description": "The start date for the budget.",
@@ -343,6 +345,7 @@
     },
     "BudgetFilter": {
       "description": "May be used to filter budgets by resource group, resource, or meter.",
+      "type": "object",
       "properties": {
         "and": {
           "description": "The logical \"AND\" expression. Must have at least 2 items.",
@@ -365,6 +368,7 @@
     },
     "BudgetFilterProperties": {
       "description": "The Dimensions or Tags to filter a budget by.",
+      "type": "object",
       "properties": {
         "dimensions": {
           "description": "Has comparison expression for a dimension",
@@ -378,6 +382,7 @@
     },
     "BudgetComparisonExpression": {
       "description": "The comparison expression to be used in the budgets.",
+      "type": "object",
       "properties": {
         "name": {
           "description": "The name of the column to use in comparison.",
@@ -411,11 +416,11 @@
     },
     "CurrentSpend": {
       "description": "The current amount of cost which is being tracked for a budget.",
+      "type": "object",
       "properties": {
         "amount": {
           "description": "The total amount of cost which is being tracked by the budget.",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "unit": {
@@ -427,11 +432,11 @@
     },
     "ForecastSpend": {
       "description": "The forecasted cost which is being tracked for a budget.",
+      "type": "object",
       "properties": {
         "amount": {
           "description": "The forecasted cost for the total time period which is being tracked by the budget. This value is only provided if the budget contains a forecast alert type.",
           "type": "number",
-          "format": "decimal",
           "readOnly": true
         },
         "unit": {
@@ -443,6 +448,7 @@
     },
     "Notification": {
       "description": "The notification associated with a budget.",
+      "type": "object",
       "properties": {
         "enabled": {
           "description": "The notification is enabled or not.",
@@ -480,8 +486,7 @@
         },
         "threshold": {
           "description": "Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0 and 1000.",
-          "type": "number",
-          "format": "decimal"
+          "type": "number"
         },
         "contactEmails": {
           "description": "Email addresses to send the budget notification to when the threshold is exceeded. Must have at least one contact email or contact group specified at the Subscription or Resource Group scopes. All other scopes must have at least one contact email specified.",
