@@ -27,6 +27,7 @@ These are the global settings for the ResourceHealth API.
 ``` yaml
 openapi-type: arm
 tag: package-2022-10
+azure-validator: true
 ```
 
 
@@ -118,7 +119,13 @@ These settings apply only when `--tag=package-2020-05-01` is specified on the co
 input-file:
 - Microsoft.ResourceHealth/stable/2020-05-01/ResourceHealth.json
 ```
-
+### Suppression
+``` yaml
+directive:
+  - suppress: DefaultErrorResponseSchema
+    from: ResourceHealth.json
+    reason: Changing the Error Response would be considered a breaking change
+```
 ---
 
 # Code Generation
