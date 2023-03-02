@@ -1221,7 +1221,7 @@
                 "$ref": "#/definitions/WorkloadProfile"
               },
               "x-ms-identifiers": [
-                "workloadProfileType"
+                "name"
               ]
             },
             "kedaConfiguration": {
@@ -1319,6 +1319,10 @@
       "description": "Workload profile to scope container app execution.",
       "type": "object",
       "properties": {
+        "name": {
+          "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
+          "description": "Workload profile type for the workloads to run on."
+        },
         "workloadProfileType": {
           "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileType",
           "description": "Workload profile type for the workloads to run on."
@@ -1335,9 +1339,8 @@
         }
       },
       "required": [
-        "workloadProfileType",
-        "minimumCount",
-        "maximumCount"
+        "name",
+        "workloadProfileType"
       ]
     },
     "workloadProfileStates": {
