@@ -531,6 +531,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
+      "get": {
+        "tags": [
+          "OperationResults"
+        ],
+        "description": "Get operationResults for a Data Manager For Agriculture resource.",
+        "operationId": "OperationResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "locations",
+            "description": "Location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "operationResultsId",
+            "description": "operationResultsId for a specific location.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ArmAsyncOperation"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "OperationResults_Get": {
+            "$ref": "./examples/OperationResults_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{dataManagerForAgricultureResourceName}/extensions/{extensionId}": {
       "put": {
         "tags": [
@@ -762,59 +815,6 @@
         "x-ms-examples": {
           "Extensions_ListByDataManagerForAgriculture": {
             "$ref": "./examples/Extensions_ListByDataManagerForAgriculture.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
-      "get": {
-        "tags": [
-          "OperationResults"
-        ],
-        "description": "Get operationResults for a Data Manager For Agriculture resource.",
-        "operationId": "OperationResults_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "path",
-            "name": "locations",
-            "description": "Location.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "operationResultsId",
-            "description": "operationResultsId for a specific location.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ArmAsyncOperation"
-            }
-          },
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "OperationResults_Get": {
-            "$ref": "./examples/OperationResults_Get.json"
           }
         }
       }
