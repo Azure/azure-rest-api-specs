@@ -46,7 +46,7 @@
       "name": "HyperVClusterController"
     },
     {
-      "name": "SitesController"
+      "name": "Sites"
     },
     {
       "name": "VMwareOperationsStatus"
@@ -91,7 +91,7 @@
       "name": "HypervSites"
     },
     {
-      "name": "HyperVJobController"
+      "name": "HyperVJobs"
     },
     {
       "name": "HyperVHostController"
@@ -769,7 +769,7 @@
         "tags": [
           "HyperVClusterController"
         ],
-        "operationId": "HyperVCluster_GetCluster",
+        "operationId": "HyperVClusterController_GetCluster",
         "description": "Method to get a Hyper-V cluster.",
         "parameters": [
           {
@@ -805,11 +805,11 @@
           }
         },
         "x-ms-examples": {
-          "HyperVCluster_GetCluster_MaximumSet_Gen": {
-            "$ref": "./examples/HyperVCluster_GetCluster_MaximumSet_Gen.json"
+          "HyperVClusterController_GetCluster_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVClusterController_GetCluster_MaximumSet_Gen.json"
           },
-          "HyperVCluster_GetCluster_MinimumSet_Gen": {
-            "$ref": "./examples/HyperVCluster_GetCluster_MinimumSet_Gen.json"
+          "HyperVClusterController_GetCluster_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVClusterController_GetCluster_MinimumSet_Gen.json"
           }
         }
       },
@@ -817,7 +817,7 @@
         "tags": [
           "HyperVClusterController"
         ],
-        "operationId": "HyperVCluster_PutCluster",
+        "operationId": "HyperVClusterController_PutCluster",
         "description": "Create a HyperVCluster",
         "parameters": [
           {
@@ -870,11 +870,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "HyperVCluster_PutCluster_MaximumSet_Gen": {
-            "$ref": "./examples/HyperVCluster_PutCluster_MaximumSet_Gen.json"
+          "HyperVClusterController_PutCluster_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVClusterController_PutCluster_MaximumSet_Gen.json"
           },
-          "HyperVCluster_PutCluster_MinimumSet_Gen": {
-            "$ref": "./examples/HyperVCluster_PutCluster_MinimumSet_Gen.json"
+          "HyperVClusterController_PutCluster_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVClusterController_PutCluster_MinimumSet_Gen.json"
           }
         }
       }
@@ -1383,7 +1383,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/jobs": {
       "get": {
         "tags": [
-          "HyperVJobController"
+          "HyperVJobs"
         ],
         "operationId": "HyperVJobs_GetAllJobsInSite",
         "description": "List HyperVJob resources by HyperVSite",
@@ -1429,7 +1429,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites/{siteName}/jobs/{jobName}": {
       "get": {
         "tags": [
-          "HyperVJobController"
+          "HyperVJobs"
         ],
         "operationId": "HyperVJobs_GetJob",
         "description": "Get a HyperVJob",
@@ -8864,7 +8864,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}": {
       "get": {
         "tags": [
-          "SitesController"
+          "Sites"
         ],
         "operationId": "Sites_GetSite",
         "description": "Get a VMwareSite",
@@ -8905,7 +8905,7 @@
       },
       "delete": {
         "tags": [
-          "SitesController"
+          "Sites"
         ],
         "operationId": "Sites_DeleteSite",
         "description": "Delete a VMwareSite",
@@ -9108,9 +9108,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/errorSummary": {
       "get": {
         "tags": [
-          "SitesController"
+          "Sites"
         ],
-        "operationId": "SitesController_ErrorSummary",
+        "operationId": "Sites_ErrorSummary",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -9139,11 +9139,11 @@
           }
         },
         "x-ms-examples": {
-          "SitesController_ErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/SitesController_ErrorSummary_MaximumSet_Gen.json"
+          "Sites_ErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_ErrorSummary_MaximumSet_Gen.json"
           },
-          "SitesController_ErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/SitesController_ErrorSummary_MinimumSet_Gen.json"
+          "Sites_ErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_ErrorSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -9151,7 +9151,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/exportApplications": {
       "post": {
         "tags": [
-          "SitesController"
+          "Sites"
         ],
         "operationId": "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles",
         "description": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
@@ -9262,7 +9262,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/exportMachineErrors": {
       "post": {
         "tags": [
-          "SitesController"
+          "Sites"
         ],
         "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
@@ -9322,7 +9322,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/exportMachines": {
       "post": {
         "tags": [
-          "SitesController"
+          "Sites"
         ],
         "operationId": "SitesController_ExportMachines",
         "description": "Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.",
@@ -10124,7 +10124,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/refresh": {
       "post": {
         "tags": [
-          "SitesController"
+          "Sites"
         ],
         "operationId": "Sites_RefreshSite",
         "description": "Method to refresh a site.",
@@ -10331,7 +10331,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/summary": {
       "post": {
         "tags": [
-          "SitesController"
+          "Sites"
         ],
         "operationId": "Sites_GetSiteUsage",
         "description": "Method to get site usage/summary.",
@@ -10614,9 +10614,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/usage": {
       "get": {
         "tags": [
-          "SitesController"
+          "Sites"
         ],
-        "operationId": "SitesController_Usage",
+        "operationId": "Sites_Usage",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -10645,11 +10645,11 @@
           }
         },
         "x-ms-examples": {
-          "SitesController_Usage_MaximumSet_Gen": {
-            "$ref": "./examples/SitesController_Usage_MaximumSet_Gen.json"
+          "Sites_Usage_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_Usage_MaximumSet_Gen.json"
           },
-          "SitesController_Usage_MinimumSet_Gen": {
-            "$ref": "./examples/SitesController_Usage_MinimumSet_Gen.json"
+          "Sites_Usage_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_Usage_MinimumSet_Gen.json"
           }
         }
       }
