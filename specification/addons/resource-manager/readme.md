@@ -1,13 +1,13 @@
 # Addons
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Addons RP.
 
-
-
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for Addons, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,29 @@ To build the SDK for Addons, simply [Install AutoRest](https://aka.ms/autorest/i
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-
-### Basic Information 
 These are the global settings for the Addons API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03
+tag: package-preview-2021-09
 ```
 
+
+### Tag: package-preview-2021-09
+
+These settings apply only when `--tag=package-preview-2021-09` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-09'
+input-file:
+  - Microsoft.Addons/preview/2021-09-12/addons-swagger.json
+```
 ### Tag: package-2018-03
 
 These settings apply only when `--tag=package-2018-03` is specified on the command line.
@@ -48,6 +57,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -63,7 +73,8 @@ swagger-to-sdk:
 ```
 
 ---
-## C# 
+
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -76,7 +87,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/addons/Microsoft.Azure.Management.Addons/src/Generated
   clear-output-folder: true
 ```
-
 
 ## Python
 
@@ -94,11 +104,13 @@ python:
   package-name: azure-mgmt-addons
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt-addons/azure/mgmt/addons
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
@@ -156,8 +168,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-
-
-
-
