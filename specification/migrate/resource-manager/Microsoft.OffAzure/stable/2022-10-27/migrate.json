@@ -533,7 +533,7 @@
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "Resource create parameters.",
@@ -547,12 +547,6 @@
             "description": "ARM operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/HyperVSite"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -775,7 +769,7 @@
         "tags": [
           "HyperVClusterController"
         ],
-        "operationId": "HyperVClusterController_Get",
+        "operationId": "HyperVCluster_GetCluster",
         "description": "Method to get a Hyper-V cluster.",
         "parameters": [
           {
@@ -811,11 +805,11 @@
           }
         },
         "x-ms-examples": {
-          "HyperVClusterController_Get_MaximumSet_Gen": {
-            "$ref": "./examples/HyperVClusterController_Get_MaximumSet_Gen.json"
+          "HyperVCluster_GetCluster_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVCluster_GetCluster_MaximumSet_Gen.json"
           },
-          "HyperVClusterController_Get_MinimumSet_Gen": {
-            "$ref": "./examples/HyperVClusterController_Get_MinimumSet_Gen.json"
+          "HyperVCluster_GetCluster_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVCluster_GetCluster_MinimumSet_Gen.json"
           }
         }
       },
@@ -10334,6 +10328,49 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/summary": {
+      "post": {
+        "tags": [
+          "SitesController"
+        ],
+        "operationId": "Sites_GetSiteUsage",
+        "description": "Method to get site usage/summary.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VMwareSiteUsage"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sites_GetSiteUsage_MaximumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteUsage_MaximumSet_Gen.json"
+          },
+          "Sites_GetSiteUsage_MinimumSet_Gen": {
+            "$ref": "./examples/Sites_GetSiteUsage_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}/updateDependencyMapStatus": {
       "post": {
         "tags": [
@@ -12604,6 +12641,10 @@
             "create"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -12614,6 +12655,9 @@
         }
       },
       "description": "A HyperV SiteResource",
+      "required": [
+        "id"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -12643,6 +12687,10 @@
     "HyperVSiteUpdate": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -13560,12 +13608,19 @@
             "create"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
         }
       },
       "description": "A ImportSiteResource",
+      "required": [
+        "id"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -13575,6 +13630,10 @@
     "ImportSiteResourceUpdate": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -13819,6 +13878,10 @@
             "create"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -13829,6 +13892,9 @@
         }
       },
       "description": "A MasterSite",
+      "required": [
+        "id"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -13907,6 +13973,10 @@
     "MasterSiteUpdate": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -15195,9 +15265,16 @@
             "read",
             "create"
           ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
         }
       },
       "description": "A ServerSiteResource",
+      "required": [
+        "id"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -15207,6 +15284,10 @@
     "ServerSiteResourceUpdate": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -17593,6 +17674,10 @@
             "create"
           ]
         },
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
@@ -17603,6 +17688,9 @@
         }
       },
       "description": "A VMwareSite",
+      "required": [
+        "id"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
@@ -17632,6 +17720,10 @@
     "VMwareSiteUpdate": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
