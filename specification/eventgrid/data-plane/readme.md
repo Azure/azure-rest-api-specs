@@ -139,6 +139,7 @@ input-file:
 - Microsoft.ContainerService/stable/2018-01-01/ContainerService.json
 - Microsoft.ApiManagement/stable/2018-01-01/APIManagement.json
 - Microsoft.HealthcareApis/stable/2018-01-01/HealthcareApis.json
+- Microsoft.AgFoodPlatform/preview/2018-01-01/AzureDataManagerForAgriculture.json
 
 ```
 
