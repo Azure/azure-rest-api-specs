@@ -289,6 +289,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironment"
+            }
+          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -644,7 +650,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/authtoken": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/getAuthtoken": {
       "post": {
         "tags": [
           "ManagedEnvironments"
@@ -677,10 +683,6 @@
               "$ref": "#/definitions/EnvironmentAuthToken"
             }
           },
-          "404": {
-            "description": "Not found.",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "Error response.",
             "schema": {
@@ -691,6 +693,56 @@
         "x-ms-examples": {
           "Get Managed Environment Auth Token": {
             "$ref": "./examples/ManagedEnvironments_GetAuthToken.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/workloadProfileStates": {
+      "get": {
+        "tags": [
+          "ManagedEnvironments"
+        ],
+        "summary": "Get all workload Profile States for a Premium Managed Environment..",
+        "description": "Get all workload Profile States for a Premium Managed Environment.",
+        "operationId": "ManagedEnvironments_ListWorkloadProfileStates",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/workloadProfileStatesCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List environments by subscription": {
+            "$ref": "./examples/ManagedEnvironments_ListWorkloadProfileStates.json"
           }
         }
       }
@@ -953,6 +1005,7 @@
             "token": {
               "description": "Auth token value.",
               "type": "string",
+              "x-ms-secret": true,
               "readOnly": true
             },
             "expires": {
@@ -1024,6 +1077,59 @@
       "required": [
         "name"
       ]
+    },
+    "workloadProfileStates": {
+      "description": "Collection of all the workload Profile States for a Premium Managed Environment..",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Workload Profile resource specific properties.",
+          "type": "object",
+          "properties": {
+            "minimumCount": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Minimum count of instances."
+            },
+            "maximumCount": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Maximum count of nodes."
+            },
+            "currentCount": {
+              "type": "integer",
+              "format": "int32",
+              "description": "Current count of nodes."
+            }
+          }
+        }
+      }
+    },
+    "workloadProfileStatesCollection": {
+      "description": "Collection of workloadProfileStates",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/workloadProfileStates"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     }
   },
   "securityDefinitions": {

@@ -19,6 +19,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
+default-api-version: "2022-09-01"
 clear-output-folder: true
 batch:
   - tag: package-privatelinks-2020-05
@@ -31,7 +32,7 @@ batch:
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
   - multiapiscript-locks: true
-  - tag: package-managedapplications-2018-06
+  - tag: package-managedapplications-2019-07
   - multiapiscript-managedapplications: true
   - tag: package-policy-2021-06
   - tag: package-policy-2020-09
@@ -45,6 +46,7 @@ batch:
   - tag: package-policy-2016-04
   - tag: package-policy-2015-10
   - multiapiscript-policy: true
+  - tag: package-resources-2022-09
   - tag: package-resources-2021-04
   - tag: package-resources-2021-01
   - tag: package-resources-2020-10
@@ -228,14 +230,14 @@ namespace: azure.mgmt.resource.locks.v2015_01_01
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/locks/v2015_01_01
 ```
 
-### Tag: package-managedapplications-2018-06 and python
+### Tag: package-managedapplications-2019-07 and python
 
-These settings apply only when `--tag=package-managedapplications-2018-06 --python` is specified on the command line.
+These settings apply only when `--tag=package-managedapplications-2019-07 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-managedapplications-2018-06'
-namespace: azure.mgmt.resource.managedapplications.v2018_06_01
-output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications/v2018_06_01
+``` yaml $(tag) == 'package-managedapplications-2019-07'
+namespace: azure.mgmt.resource.managedapplications.v2019_07_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications/v2019_07_01
 ```
 
 ### Tag: package-policy-2021-06 and python
@@ -346,6 +348,16 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-policy-2015-10'
 namespace: azure.mgmt.resource.policy.v2015_10_01_preview
 output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2015_10_01_preview
+```
+
+### Tag: package-resources-2022-09 and python
+
+These settings apply only when `--tag=package-resources-2022-09 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-resources-2022-09'
+namespace: azure.mgmt.resource.resources.v2022_09_01
+output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2022_09_01
 ```
 
 ### Tag: package-resources-2021-04 and python
