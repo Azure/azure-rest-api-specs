@@ -270,6 +270,9 @@ input-file:
 ``` yaml
 directive:
   - suppress: R4011
+    from: costmanagement.budgets.json
+    reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'  
+  - suppress: R4011
     from: costmanagement.exports.json
     reason: 'API change needed, The delete operation is defined without a 200 or 204 error response implementation,please add it'  
   - suppress: R3023
