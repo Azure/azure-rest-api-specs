@@ -528,7 +528,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/jobs/{jobName}/executions": {
-      "post": {
+      "get": {
         "tags": [
           "Jobs"
         ],
@@ -551,6 +551,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The filter to apply on the operation.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -558,14 +565,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ContainerAppJobExecutions"
-            }
-          },
-          "202": {
-            "description": "OK",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
             }
           },
           "default": {
@@ -577,7 +576,7 @@
         },
         "x-ms-examples": {
           "Get a Container Apps Job Executions": {
-            "$ref": "./examples/Job_Executions.json"
+            "$ref": "./examples/Job_Executions_Get.json"
           }
         },
         "x-ms-pageable": {
@@ -947,7 +946,8 @@
             "Stopped",
             "Degraded",
             "Failed",
-            "Unknown"
+            "Unknown",
+            "Succeeded"
           ],
           "type": "string",
           "readOnly": true,
