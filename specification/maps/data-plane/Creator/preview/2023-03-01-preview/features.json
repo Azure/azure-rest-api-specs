@@ -457,10 +457,10 @@
       },
       "put": {
         "description": "This Put Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API **replaces** the feature identified by the provided id in the given collection, i.e., the request body overwrites all the existing attributes of a feature.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
-        "operationId": "Features_Put",
+        "operationId": "Features_Replace",
         "x-ms-examples": {
           "PutFeature": {
-            "$ref": "./examples/features/Features_Put.json"
+            "$ref": "./examples/features/Features_Replace.json"
           }
         },
         "consumes": [
@@ -494,10 +494,10 @@
       },
       "patch": {
         "description": "This Patch Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API **updates** attributes by performing a merge patch on the feature identified by the provided id in the given collection. It allows for the update of individual feature attributes without implicitly overwriting excluded attributes in the request body.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
-        "operationId": "Features_Patch",
+        "operationId": "Features_Update",
         "x-ms-examples": {
           "PatchFeature": {
-            "$ref": "./examples/features/Features_Patch.json"
+            "$ref": "./examples/features/Features_Update.json"
           }
         },
         "consumes": [
