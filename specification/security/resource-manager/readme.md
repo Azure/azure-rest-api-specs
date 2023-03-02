@@ -90,7 +90,7 @@ The following packages may be composed from multiple api-versions.
 
 These settings apply only when `--tag=package-preview-2023-02` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2023-02'
+``` yaml $(tag) == 'package-preview-2023-02'
 input-file:
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
   - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
