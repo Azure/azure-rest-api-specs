@@ -32,6 +32,24 @@
           "provisioningState": "Succeeded"
         }
       }
+    },
+    "400": {
+      "error": {
+        "code": "ModelValidationFailed",
+        "message": "Request input validation failed.",
+        "details": [
+          {
+            "code": "ModelValidationFailed",
+            "message": "The Payload field is required.",
+            "target": "Payload"
+          },
+          {
+            "code": "ModelValidationFailed",
+            "message": "Error converting value \"InvalidStatus\" to type 'PrivateEndpointState'. Path 'properties.privateLinkServiceConnectionState.status', line 1, position 624. Refer path description for more information.",
+            "target": "Payload.properties.privateLinkServiceConnectionState.status"
+          }
+        ]
+      }
     }
   }
 }
