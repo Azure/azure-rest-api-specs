@@ -41,6 +41,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 input-file:
   - Microsoft.CostManagement/preview/2023-04-01-preview/common-types.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.benefits.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.budgets.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.exports.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.generatecostdetailsreport.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.generatedetailedcostreport.json
