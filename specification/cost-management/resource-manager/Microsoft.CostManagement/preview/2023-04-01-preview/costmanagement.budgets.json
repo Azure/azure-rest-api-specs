@@ -70,9 +70,6 @@
               "$ref": "common-types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -223,11 +220,6 @@
           "items": {
             "$ref": "#/definitions/Budget"
           }
-        },
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -252,7 +244,7 @@
       "type": "object",
       "properties": {
         "category": {
-          "description": "The category of the budget, whether the budget tracks cost or usage.",
+          "description": "The category of the budget.",
           "type": "string",
           "enum": [
             "Cost"
