@@ -1613,7 +1613,11 @@
       "x-ms-enum": {
         "name": "Kind",
         "modelAsString": true
-      }
+      },
+      "x-ms-mutability": [
+        "create",
+        "read"
+      ]
     },
     "Bot": {
       "type": "object",
@@ -1802,7 +1806,8 @@
         "schemaTransformationVersion": {
           "type": "string",
           "description": "The channel schema transformation version for the bot",
-          "default": "0.0"
+          "x-nullable": true,
+          "default": null
         },
         "storageResourceId": {
           "type": "string",
@@ -1940,12 +1945,12 @@
         "extensionKey1": {
           "type": "string",
           "description": "The extensionKey1",
-          "readOnly": true
+          "default": ""
         },
         "extensionKey2": {
           "type": "string",
           "description": "The extensionKey2",
-          "readOnly": true
+          "default": ""
         },
         "sites": {
           "type": "array",
@@ -1977,6 +1982,11 @@
         "disableLocalAuth": {
           "type": "boolean",
           "description": "Opt-out of local authentication and ensure only MSI and AAD can be used exclusively for authentication."
+        },
+        "requireTermsAgreement": {
+          "type": "boolean",
+          "description": "Whether customer needs to agree to new terms.",
+          "x-ms-nullable": true
         }
       }
     },
@@ -1992,7 +2002,11 @@
         "etag": {
           "type": "string",
           "description": "Entity Tag of the resource",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "provisioningState": {
           "type": "string",
@@ -2426,12 +2440,12 @@
         "extensionKey1": {
           "type": "string",
           "description": "The extensionKey1",
-          "readOnly": true
+          "default": ""
         },
         "extensionKey2": {
           "type": "string",
           "description": "The extensionKey2",
-          "readOnly": true
+          "default": ""
         },
         "DirectLineEmbedCode": {
           "type": "string",
@@ -2576,7 +2590,8 @@
         },
         "registerBeforeOAuthFlow": {
           "type": "boolean",
-          "description": "Whether to register the settings before OAuth validation is performed. Recommended to True."
+          "description": "Whether to register the settings before OAuth validation is performed. Recommended to True.",
+          "readOnly": true
         },
         "IsValidated": {
           "type": "boolean",
@@ -2714,6 +2729,106 @@
       },
       "description": "The parameters to provide for the DirectLine Speech channel."
     },
+    "Omnichannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "Omnichannel",
+      "description": "Omnichannel channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ]
+    },
+    "TelephonyChannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "TelephonyChannel",
+      "description": "Telephony channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TelephonyChannelProperties",
+          "description": "The set of properties specific to Telephony channel resource"
+        }
+      }
+    },
+    "TelephonyChannelProperties": {
+      "type": "object",
+      "properties": {
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TelephonyPhoneNumbers"
+          },
+          "description": "The list of Telephony phone numbers"
+        },
+        "apiConfigurations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TelephonyChannelResourceApiConfiguration"
+          },
+          "description": "The list of Telephony api configuration"
+        },
+        "cognitiveServiceSubscriptionKey": {
+          "type": "string",
+          "description": "The extensionKey1",
+          "x-nullable": true
+        },
+        "cognitiveServiceRegion": {
+          "type": "string",
+          "description": "The extensionKey2",
+          "x-nullable": true
+        },
+        "defaultLocale": {
+          "type": "string",
+          "description": "The default locale of the channel",
+          "x-nullable": true
+        },
+        "premiumSKU": {
+          "type": "string",
+          "description": "The premium SKU applied to the channel",
+          "x-nullable": true
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Whether the channel is enabled"
+        }
+      },
+      "description": "The parameters to provide for the Direct Line channel."
+    },
+    "AcsChatChannel": {
+      "type": "object",
+      "x-ms-discriminator-value": "AcsChatChannel",
+      "description": "AcsChat channel definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ]
+    },
+    "SearchAssistant": {
+      "type": "object",
+      "x-ms-discriminator-value": "SearchAssistant",
+      "description": "SearchAssistant definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ]
+    },
+    "M365Extensions": {
+      "type": "object",
+      "x-ms-discriminator-value": "M365Extensions",
+      "description": "M365 Extensions definition",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Channel"
+        }
+      ]
+    },
     "ChannelResponseList": {
       "properties": {
         "nextLink": {
@@ -2757,6 +2872,10 @@
     "Site": {
       "type": "object",
       "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant Id"
+        },
         "siteId": {
           "type": "string",
           "description": "Site Id",
@@ -2767,7 +2886,11 @@
         },
         "siteName": {
           "type": "string",
-          "description": "Site name"
+          "description": "Site name",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "key": {
           "type": "string",
@@ -2822,11 +2945,15 @@
         },
         "isV1Enabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for Bot Framework V1 protocol."
+          "description": "Whether this site is enabled for Bot Framework V1 protocol.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "isV3Enabled": {
           "type": "boolean",
-          "description": "Whether this site is enabled for Bot Framework V1 protocol."
+          "description": "Whether this site is enabled for Bot Framework V3 protocol."
         },
         "isSecureSiteEnabled": {
           "type": "boolean",
@@ -2838,6 +2965,11 @@
           "items": {
             "type": "string"
           }
+        },
+        "isWebChatSpeechEnabled": {
+          "type": "boolean",
+          "description": "Whether this site is enabled for Webchat Speech",
+          "default": false
         },
         "isWebchatPreviewEnabled": {
           "type": "boolean",
@@ -2855,7 +2987,11 @@
       "properties": {
         "siteName": {
           "type": "string",
-          "description": "The site name"
+          "description": "The site name",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "key": {
           "type": "string",
@@ -2876,6 +3012,95 @@
         "siteName",
         "key"
       ]
+    },
+    "TelephonyPhoneNumbers": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The element id."
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The phone number."
+        },
+        "acsEndpoint": {
+          "type": "string",
+          "description": "The endpoint of ACS.",
+          "x-nullable": true
+        },
+        "acsSecret": {
+          "type": "string",
+          "description": "The secret of ACS.",
+          "x-nullable": true
+        },
+        "acsResourceId": {
+          "type": "string",
+          "description": "The resource id of ACS.",
+          "x-nullable": true
+        },
+        "cognitiveServiceSubscriptionKey": {
+          "type": "string",
+          "description": "The subscription key of cognitive service.",
+          "x-nullable": true
+        },
+        "cognitiveServiceRegion": {
+          "type": "string",
+          "description": "The service region of cognitive service.",
+          "x-nullable": true
+        },
+        "cognitiveServiceResourceId": {
+          "type": "string",
+          "description": "The resource id of cognitive service.",
+          "x-nullable": true
+        },
+        "defaultLocale": {
+          "type": "string",
+          "description": "The default locale of the phone number.",
+          "x-nullable": true
+        },
+        "offerType": {
+          "type": "string",
+          "description": "Optional Property that will determine the offering type of the phone.",
+          "x-nullable": true
+        }
+      },
+      "description": "A telephone number for the Telephony channel"
+    },
+    "TelephonyChannelResourceApiConfiguration": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of config."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "The provider name.",
+          "x-nullable": true
+        },
+        "cognitiveServiceSubscriptionKey": {
+          "type": "string",
+          "description": "The cognitive service subscription key.",
+          "x-nullable": true
+        },
+        "cognitiveServiceRegion": {
+          "type": "string",
+          "description": "The cognitive service region.",
+          "x-nullable": true
+        },
+        "cognitiveServiceResourceId": {
+          "type": "string",
+          "description": "The cognitive service resourceId.",
+          "x-nullable": true
+        },
+        "defaultLocale": {
+          "type": "string",
+          "description": "The default locale.",
+          "x-nullable": true
+        }
+      },
+      "description": "A resource Api configuration for the Telephony channel"
     },
     "ConnectionItemName": {
       "properties": {
@@ -2903,14 +3128,6 @@
     },
     "ConnectionSettingProperties": {
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id associated with the Connection Setting."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name associated with the Connection Setting."
-        },
         "clientId": {
           "type": "string",
           "description": "Client Id associated with the Connection Setting."
@@ -2927,7 +3144,8 @@
         },
         "scopes": {
           "type": "string",
-          "description": "Scopes associated with the Connection Setting"
+          "description": "Scopes associated with the Connection Setting",
+          "default": ""
         },
         "serviceProviderId": {
           "type": "string",
@@ -3066,18 +3284,18 @@
         },
         "serviceProviderName": {
           "type": "string",
-          "description": "Display Name of the Service Provider",
+          "description": "Name of the Service Provider",
           "readOnly": true
         },
         "devPortalUrl": {
           "type": "string",
-          "description": "Display Name of the Service Provider",
+          "description": "URL of Dev Portal",
           "readOnly": true
         },
         "iconUrl": {
           "type": "string",
-          "description": "Display Name of the Service Provider",
-          "readOnly": true
+          "description": "The URL of icon",
+          "default": ""
         },
         "parameters": {
           "description": "The list of parameters for the Service Provider",
@@ -3211,6 +3429,11 @@
         "message": {
           "description": "additional message from the bot management api showing why a bot name is not available",
           "type": "string"
+        },
+        "absCode": {
+          "description": "response code from ABS",
+          "type": "string",
+          "x-ms-nullable": true
         }
       }
     },
@@ -3405,7 +3628,10 @@
         "DirectLineSpeechChannel",
         "OutlookChannel",
         "Omnichannel",
-        "TelephonyChannel"
+        "TelephonyChannel",
+        "AcsChatChannel",
+        "SearchAssistant",
+        "M365Extensions"
       ],
       "x-ms-enum": {
         "name": "channelName",
@@ -3458,6 +3684,15 @@
           },
           {
             "value": "TelephonyChannel"
+          },
+          {
+            "value": "AcsChatChannel"
+          },
+          {
+            "value": "SearchAssistant"
+          },
+          {
+            "value": "M365Extensions"
           }
         ]
       },
