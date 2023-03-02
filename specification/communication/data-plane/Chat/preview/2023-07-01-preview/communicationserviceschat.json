@@ -1704,43 +1704,48 @@
     "RetentionPolicy": {
       "description": "Data retention policy for auto deletion.",
       "type": "object",
-      "discriminator": "retentionPolicyType",
+      "discriminator": "policyType",
       "properties": {
-        "retentionPolicyType": {
+        "policyType": {
           "description": "Retention Policy Type",
           "enum": [
             "basedOnThreadCreationDate"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "RetentionPolicyType",
-            "modelAsString": true
+            "name": "policyType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "basedOnThreadCreationDate",
+                "description": "Thread retention policy based on thread creation date."
+              }
+            ]
           }
         }
       },
       "required": [
-        "retentionPolicyType"
+        "policyType"
       ]
-    },  
+    },
     "BasedOnThreadCreationDateRetentionPolicy": {
+      "description": "Thread retention policy based on thread creation date.",
+      "type": "object",
+      "x-ms-discriminator-value": "basedOnThreadCreationDate",
       "allOf": [
         {
           "$ref": "#/definitions/RetentionPolicy"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "daysAfterCreation":{
-              "type": "integer",
-              "format": "int32",
-              "description": "Indicates how many days after the thread creation the thread will be deleted. Only 90 is accepted for now."
-            }
-          },
-          "required": [
-            "daysAfterCreation"
-          ],
-          "x-ms-discriminator-value": "basedOnThreadCreationDate"
         }
+      ],
+      "properties": {
+        "daysAfterCreation": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Indicates how many days after the thread creation the thread will be deleted. Only 90 is accepted for now."
+        }
+      },
+      "required": [
+        "daysAfterCreation"
       ]
     }
   },
