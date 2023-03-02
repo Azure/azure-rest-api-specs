@@ -1,0 +1,26 @@
+emit: [
+  "@azure-tools/cadl-csharp",
+  "@azure-tools/cadl-python",
+  "@azure-tools/cadl-java",
+  "@azure-tools/cadl-typescript"
+]
+options:
+  "@azure-tools/cadl-csharp":
+    clear-output-folder: true
+    namespace: Azure.AI.TextTranslator
+    model-namespace: true
+  "@azure-tools/cadl-python":
+    "basic-setup-py": true
+    "package-version": 1.0.0b1
+    "package-name": azure-ai-translation-text
+  "@azure-tools/cadl-java":
+    "emitter-output-dir": "cadl-output/@azure-tools/cadl-java"
+    namespace: com.azure.ai.texttranslator
+  "@azure-tools/cadl-typescript":
+    "emitter-output-dir": "cadl-output/@azure-tools/cadl-typescript"
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    packageDetails:
+      name: "@azure-rest/cognitiveservices-translator"
+      description: "Microsoft Translator Service"

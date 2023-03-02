@@ -1,0 +1,35 @@
+{
+  "operationId": "Translator_TextTranslation_Transliterate",
+  "title": "Map source language script or alphabet to a target language script or alphabet.",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "ApiVersion": "v3.0",
+    "Content-Type": "application/json",
+    "Language": "zh-Hans",
+    "FromScript": "Hans",
+    "ToScript": "Latn",
+    "body": [
+      {"Text":"这是个测试。"}
+    ]
+  },
+  "responses": {
+    "200": [
+      {
+        "text": "zhè shì gè cè shì。",
+        "script": "Latn"
+      }
+    ],
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-requestid": "Request id for tracing"
+      },
+      "body": {
+        "error": {
+          "code": 400000,
+          "message": "Error Message"
+        }
+      }
+    }
+  }
+}
