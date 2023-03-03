@@ -986,8 +986,38 @@
           "readOnly": true,
           "format": "date-time",
           "description": "The timestamp of the last workflow run."
+        },
+        "workflowRunStatus": {
+          "$ref": "#/definitions/WorkflowRunStatus"
         }
       }
+    },
+    "WorkflowRunStatus": {
+      "type": "string",
+      "enum": [
+        "queued",
+        "inprogress",
+        "completed"
+      ],
+      "x-ms-enum": {
+        "name": "ManifestType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "queued",
+            "description": "Workflow run is queued"
+          },
+          {
+            "value": "inprogress",
+            "description": "Workflow run is inprogress"
+          },
+          {
+            "value": "completed",
+            "description": "Workflow run is completed"
+          }
+        ]
+      },
+      "description": "Describes the status of the workflow run"
     },
     "ACR": {
       "type": "object",
