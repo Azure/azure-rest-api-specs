@@ -19434,9 +19434,6 @@
     },
     "PackageResponse": {
       "description": "Package response returned after async package operation completes successfully.",
-      "required": [
-        "inferencingServer"
-      ],
       "type": "object",
       "properties": {
         "baseEnvironmentSource": {
@@ -19479,11 +19476,13 @@
           "x-nullable": true
         },
         "inferencingServer": {
-          "description": "[Required] Inferencing server configurations.",
+          "description": "Inferencing server configurations.",
           "$ref": "#/definitions/InferencingServer",
+          "readOnly": true,
           "x-ms-mutability": [
             "read"
-          ]
+          ],
+          "x-nullable": true
         },
         "inputs": {
           "description": "Collection of inputs.",
