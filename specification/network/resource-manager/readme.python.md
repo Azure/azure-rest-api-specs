@@ -17,10 +17,10 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python)
 multiapi: true
-default-api-version: "2022-07-01"
+default-api-version: "2022-09-01"
 clear-output-folder: true
 batch:
-  - tag: package-2022-07
+  - tag: package-2022-09
   - tag: package-2021-02
   - tag: package-2021-02-preview-only
   - tag: package-2020-11
@@ -40,18 +40,8 @@ batch:
   - tag: package-2019-02
   - tag: package-2018-12
   - tag: package-2018-11
-  - tag: package-2018-10
-  - tag: package-2018-08
-  - tag: package-2018-07
-  - tag: package-2018-06
   - tag: package-2018-04
-  - tag: package-2018-02
-  - tag: package-2018-01
   - tag: package-2017-10
-  - tag: package-2017-06
-  - tag: package-2017-03
-  - tag: package-2016-12
-  - tag: package-2016-09
   - tag: package-2015-06split
   - multiapiscript: true
 
@@ -62,14 +52,14 @@ output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/netwo
 perform-load: false
 ```
 
-### Tag: package-2022-07 and python
+### Tag: package-2022-09 and python
 
-These settings apply only when `--tag=package-2022-07 --python` is specified on the command line.
+These settings apply only when `--tag=package-2022-09 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2022-07'
-namespace: azure.mgmt.network.v2022_07_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2022_07_01
+``` yaml $(tag) == 'package-2022-09'
+namespace: azure.mgmt.network.v2022_09_01
+output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2022_09_01
 ```
 
 ### Tag: package-2021-02-preview-only and python
@@ -263,46 +253,6 @@ namespace: azure.mgmt.network.v2018_11_01
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2018_11_01
 ```
 
-### Tag: package-2018-10 and python
-
-These settings apply only when `--tag=package-2018-10 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-10'
-namespace: azure.mgmt.network.v2018_10_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2018_10_01
-```
-
-### Tag: package-2018-08 and python
-
-These settings apply only when `--tag=package-2018-08 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-08'
-namespace: azure.mgmt.network.v2018_08_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2018_08_01
-```
-
-### Tag: package-2018-07 and python
-
-These settings apply only when `--tag=package-2018-07 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-07'
-namespace: azure.mgmt.network.v2018_07_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2018_07_01
-```
-
-### Tag: package-2018-06 and python
-
-These settings apply only when `--tag=package-2018-06 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-06'
-namespace: azure.mgmt.network.v2018_06_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2018_06_01
-```
-
 ### Tag: package-2018-04 and python
 
 These settings apply only when `--tag=package-2018-04 --python` is specified on the command line.
@@ -313,26 +263,6 @@ namespace: azure.mgmt.network.v2018_04_01
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2018_04_01
 ```
 
-### Tag: package-2018-02 and python
-
-These settings apply only when `--tag=package-2018-02 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-02'
-namespace: azure.mgmt.network.v2018_02_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2018_02_01
-```
-
-### Tag: package-2018-01 and python
-
-These settings apply only when `--tag=package-2018-01 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2018-01'
-namespace: azure.mgmt.network.v2018_01_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2018_01_01
-```
-
 ### Tag: package-2017-10 and python
 
 These settings apply only when `--tag=package-2017-10 --python` is specified on the command line.
@@ -341,46 +271,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2017-10'
 namespace: azure.mgmt.network.v2017_10_01
 output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2017_10_01
-```
-
-### Tag: package-2017-06 and python
-
-These settings apply only when `--tag=package-2017-06 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2017-06'
-namespace: azure.mgmt.network.v2017_06_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2017_06_01
-```
-
-### Tag: package-2017-03 and python
-
-These settings apply only when `--tag=package-2017-03 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2017-03'
-namespace: azure.mgmt.network.v2017_03_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2017_03_01
-```
-
-### Tag: package-2016-12 and python
-
-These settings apply only when `--tag=package-2016-12 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2016-12'
-namespace: azure.mgmt.network.v2016_12_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2016_12_01
-```
-
-### Tag: package-2016-09 and python
-
-These settings apply only when `--tag=package-2016-09 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2016-09'
-namespace: azure.mgmt.network.v2016_09_01
-output-folder: $(python-sdks-folder)/network/azure-mgmt-network/azure/mgmt/network/v2016_09_01
 ```
 
 ### Tag: package-2015-06split and python
