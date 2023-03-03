@@ -981,17 +981,21 @@
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
             "name": "machineName",
+            "in": "path",
             "required": true,
             "type": "string",
-            "description": "Name of the machine."
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54,
+            "description": "The name of the hybrid machine."
           },
           {
             "in": "path",
             "name": "metadataName",
             "required": true,
             "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
             "description": "Name of the HybridIdentityMetadata."
           },
           {
@@ -1011,6 +1015,62 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata": {
+      "get": {
+        "tags": [
+          "HybridIdentityMetadata"
+        ],
+        "operationId": "HybridIdentityMetadata_ListByMachines",
+        "summary": "Implements GET HybridIdentityMetadata in a machine.",
+        "description": "Returns the list of HybridIdentityMetadata of the given machine.",
+        "x-ms-examples": {
+          "HybridIdentityMetadataListByVirtualMachines": {
+            "$ref": "./examples/HybridIdentityMetadata_ListByVirtualMachines.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9-_\\.]",
+            "minLength": 1,
+            "maxLength": 54,
+            "description": "The name of the hybrid machine."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -1915,6 +1975,26 @@
         }
       },
       "description": "Describes the subnet."
+    },
+    "HybridIdentityMetadataList": {
+      "description": "List of HybridIdentityMetadata.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "Url to follow for getting next page of HybridIdentityMetadata.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of HybridIdentityMetadata",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HybridIdentityMetadata"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "HybridIdentityMetadata": {
       "description": "Defines the HybridIdentityMetadata.",
