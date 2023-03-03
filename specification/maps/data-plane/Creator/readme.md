@@ -43,6 +43,7 @@ input-file:
   - preview/2023-03-01-preview/alias.json
   - preview/2023-03-01-preview/dataset.json
   - preview/2023-03-01-preview/dwgconversion.json
+  - preview/2023-03-01-preview/features.json
   - preview/2023-03-01-preview/featurestate.json
   - preview/2023-03-01-preview/mapconfiguration.json
   - preview/2023-03-01-preview/routeset.json
