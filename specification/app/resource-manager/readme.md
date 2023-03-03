@@ -26,6 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
+<<<<<<< HEAD
 tag: package-preview-2022-11
 ```
 
@@ -54,11 +55,21 @@ input-file:
   - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2022-11-01-preview/SourceControls.json
 ```
+=======
+tag: package-2022-10
+```
+
+
+>>>>>>> main
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
+<<<<<<< HEAD
 ``` yaml $(tag) == 'package-2022-10'
+=======
+```yaml $(tag) == 'package-2022-10'
+>>>>>>> main
 input-file:
   - Microsoft.App/stable/2022-10-01/AuthConfigs.json
   - Microsoft.App/stable/2022-10-01/AvailableWorkloadProfiles.json
@@ -77,7 +88,10 @@ input-file:
   - Microsoft.App/stable/2022-10-01/ManagedEnvironmentsStorages.json
   - Microsoft.App/stable/2022-10-01/SourceControls.json
 ```
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 ### Tag: package-preview-2022-06
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.

@@ -294,7 +294,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Ok"
+            "description": "Ok",
+            "schema": {
+              "$ref": "#/definitions/ContainerApp"
+            }
           },
           "202": {
             "description": "Patch operation is in progress."
@@ -899,7 +902,7 @@
           }
         },
         "certificateId": {
-          "description": "Resource Id of the Certificate to be bound to this hostname. Must exist in the Managed Environment.",
+          "description": "Resource Id of the Certificate to be bound to this hostname.",
           "type": "string"
         }
       }
@@ -947,28 +950,28 @@
       ],
       "properties": {
         "allowedOrigins": {
-          "description": "Specifies the content for the access-control-allow-origins header",
+          "description": "allowed origins",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "allowedMethods": {
-          "description": "Specifies the content for the access-control-allow-methods header",
+          "description": "allowed HTTP methods",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "allowedHeaders": {
-          "description": "Specifies the content for the access-control-allow-headers header",
+          "description": "allowed HTTP headers",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "exposeHeaders": {
-          "description": "Specifies the content for the access-control-expose-headers header ",
+          "description": "expose HTTP headers ",
           "type": "array",
           "items": {
             "type": "string"
@@ -976,11 +979,11 @@
         },
         "maxAge": {
           "format": "int32",
-          "description": "Specifies the content for the access-control-max-age header",
+          "description": "max time client can cache the result",
           "type": "integer"
         },
         "allowCredentials": {
-          "description": "Specifies whether the resource allows credentials",
+          "description": "allow credential or not",
           "type": "boolean"
         }
       }

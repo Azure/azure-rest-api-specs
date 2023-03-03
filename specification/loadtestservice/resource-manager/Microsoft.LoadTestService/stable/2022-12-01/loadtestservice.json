@@ -393,6 +393,12 @@
           },
           "201": {
             "description": "Created -- LoadTest resource created",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/LoadTestResource"
             }
@@ -457,7 +463,13 @@
             }
           },
           "202": {
-            "description": "Accepted -- LoadTest resource patch request accepted"
+            "description": "Accepted -- LoadTest resource patch request accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Resource provider error response about the failure.",
@@ -504,7 +516,13 @@
             "description": "OK -- resource deleted"
           },
           "202": {
-            "description": "Accepted -- LoadTest resource delete request accepted"
+            "description": "Accepted -- LoadTest resource delete request accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content -- resource deleted"
@@ -600,7 +618,7 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The type of identity used for the resource."
         }
       },
@@ -616,10 +634,14 @@
       "properties": {
         "tags": {
           "description": "Resource tags.",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-nullable": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The type of identity used for the resource."
         },
         "properties": {
@@ -690,7 +712,8 @@
             },
             "resourceId": {
               "type": "string",
-              "description": "user assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId"
+              "description": "user assigned identity to use for accessing key encryption key Url. Ex: /subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/<resource group>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId",
+              "x-nullable": true
             }
           }
         },

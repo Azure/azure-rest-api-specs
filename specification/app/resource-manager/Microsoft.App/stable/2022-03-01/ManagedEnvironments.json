@@ -289,6 +289,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Ok.",
+            "schema": {
+              "$ref": "#/definitions/ManagedEnvironment"
+            }
+          },
           "202": {
             "description": "Patch operation is in progress."
           },
@@ -751,10 +757,6 @@
             "daprAIInstrumentationKey": {
               "type": "string",
               "description": "Azure Monitor instrumentation key used by Dapr to export Service to Service communication telemetry",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ],
               "x-ms-secret": true
             },
             "daprAIConnectionString": {
