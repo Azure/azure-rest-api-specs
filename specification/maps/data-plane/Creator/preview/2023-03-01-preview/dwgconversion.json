@@ -64,7 +64,6 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2023-03-01-preview",
       "x-ms-parameter-location": "client"
     },
     "UdidQuery": {
@@ -83,26 +82,31 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "OutputOntology": {
-      "name": "outputOntology",
-      "description": "Output ontology version. \"facility-2.0\" is the only supported value at this time. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/creator-facility-ontology) for more information about Azure Maps Creator ontologies.",
+    "DwgPackageVersion": {
+      "name": "dwgPackageVersion",
+      "description": "The drawing package version.",
       "type": "string",
       "in": "query",
       "required": true,
       "enum": [
-        "facility-2.0"
+        "1.0",
+        "2.0"
       ],
       "x-ms-enum": {
-        "name": "OutputOntology",
+        "name": "DwgPackageVersion",
         "modelAsString": true,
         "values": [
           {
-            "value": "facility-2.0",
-            "description": "Facility ontology defines how Azure Maps Creator internally stores facility data in a Creator dataset."
+            "value": "1.0",
+            "description": "The drawing package version 1.0. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/drawing-requirements?pivots=1.0) for more information."
+          },
+          {
+            "value": "2.0",
+            "description": "The drawing package version 2.0. Please refer to this [article](https://docs.microsoft.com/en-us/azure/azure-maps/drawing-requirements?pivots=2.0) for more information."
           }
         ]
       },
-      "x-ms-client-default": "facility-2.0",
+      "x-ms-client-default": "1.0",
       "x-ms-parameter-location": "method"
     },
     "DescriptionDwgConversion": {
@@ -125,7 +129,7 @@
     "/conversions": {
       "post": {
         "description": "**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\nCreator makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. [This](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps) article introduces concepts and tools that apply to Azure Maps Creator.\n\nThe Conversion API lets the caller import a set of DWG design files as a zipped [Drawing Package](https://aka.ms/am-drawing-package) into Azure Maps. The [Drawing Package](https://aka.ms/am-drawing-package) should first be uploaded using the [Azure Maps Data Service](https://docs.microsoft.com/rest/api/maps/data). Once uploaded, use the `udid` returned by the [Data Upload API](https://docs.microsoft.com/rest/api/maps/data-v2/upload-preview) to call this Conversion API.\n\n## Convert DWG package\n\nThe Conversion API performs a [long-running operation](https://aka.ms/am-creator-lrt-v2).\n\n## Debug DWG package issues\n\n\nDuring the Conversion process, if there are any issues with the DWG package [errors and warnings](https://aka.ms/am-conversion-errors) are provided in the response along with a *diagnostic package* to visualize and diagnose these issues. In case any issues are encountered with your DWG package, the Conversion operation status process as detailed [here](https://aka.ms/am-creator-lrt-v2) returns the location of the *diagnostic package* that can be downloaded by the caller to help them visualize and diagnose these issues. The *diagnostic package* location can be found in the properties section of the conversion operation status response and looks like the following:\n\n```json\n{\n \"properties\": {\n \"diagnosticPackageLocation\": \"https://us.atlas.microsoft.com/mapdata/{DiagnosticPackageId}?api-version=1.0\" \n } \n}\n```\n\nThe *diagnostic package* can be downloaded by executing a `HTTP GET` request on the `diagnosticPackageLocation`.\nFor more details on how to use the tool to visualize and diagnose all the errors and warnings see [Drawing Error Visualizer](https://aka.ms/am-drawing-errors-visualizer). <br>\n\nA conversion operation will be marked as *success* if there are zero or more warnings but will be marked as *failed* if any errors are encountered. ",
-        "operationId": "Conversion_Convert",
+        "operationId": "Conversion_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -146,19 +150,13 @@
             "$ref": "#/parameters/UdidQuery"
           },
           {
-            "$ref": "#/parameters/OutputOntology"
+            "$ref": "#/parameters/DwgPackageVersion"
           },
           {
             "$ref": "#/parameters/DescriptionDwgConversion"
           }
         ],
         "responses": {
-          "200": {
-            "description": "The operation is running or complete. If the operation was successful, use the Resource-Location header to obtain the path to the result.",
-            "schema": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/LongRunningOperationResult"
-            }
-          },
           "202": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/202AsyncV2"
           },
@@ -303,15 +301,13 @@
         "conversions": {
           "description": "A list of all the previously submitted conversion requests.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Conversion"
           }
         },
         "nextLink": {
           "description": "If present, the location of the next page of data.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -321,26 +317,22 @@
       "properties": {
         "conversionId": {
           "description": "A unique id that represents the artifact of a _successfully_ completed conversion process.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "ontology": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/Ontology"
         },
         "udid": {
           "description": "The unique id of the content provided to create this conversion.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "created": {
           "description": "The date and time of this conversion.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "description": {
           "description": "User provided description of the content being converted.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "featureCounts": {
           "description": "A summary of feature counts in this conversion.",
@@ -348,8 +340,7 @@
             "type": "integer",
             "format": "int64"
           },
-          "type": "object",
-          "readOnly": true
+          "type": "object"
         }
       }
     }
