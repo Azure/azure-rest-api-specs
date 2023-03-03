@@ -19,6 +19,9 @@ variables:
   reportId:
     type: string
     prefix: reportid
+  vmName:
+    type: string
+    prefix: test
 
 prepareSteps:
   - step: createVirtualMachine
@@ -31,18 +34,16 @@ scenarios:
   - scenario: GeneratedScenario
     steps:     
       - operationId: GuestConfigurationAssignments_CreateOrUpdate
-        exampleFile: >-
-          ../../2022-01-25/examples/createOrUpdateGuestConfigurationAssignment.json
+        exampleFile: ../../2020-06-25/examples/createOrUpdateGuestConfigurationAssignment.json
       - operationId: GuestConfigurationAssignments_SubscriptionList
-        exampleFile: ../../2022-01-25/examples/listSubGuestConfigurationAssignments.json
+        exampleFile: ../../2020-06-25/examples/listSubGuestConfigurationAssignments.json
       - operationId: GuestConfigurationAssignments_Get
-        exampleFile: ../../2022-01-25/examples/getGuestConfigurationAssignment.json
+        exampleFile: ../../2020-06-25/examples/getGuestConfigurationAssignment.json
       - operationId: GuestConfigurationAssignments_List
-        exampleFile: ../../2022-01-25/examples/listGuestConfigurationAssignments.json
+        exampleFile: ../../2020-06-25/examples/listGuestConfigurationAssignments.json
       - operationId: GuestConfigurationAssignments_RGList
-        exampleFile: ../../2022-01-25/examples/listRGGuestConfigurationAssignments.json
+        exampleFile: ../../2020-06-25/examples/listRGGuestConfigurationAssignments.json
       - operationId: Operations_List
-        exampleFile: ../../2022-01-25/examples/listOperations.json
+        exampleFile: ../../2020-06-25/examples/listOperations.json
       - operationId: GuestConfigurationAssignmentReports_Get
-        exampleFile: >-
-          ../../2022-01-25/examples/getGuestConfigurationAssignmentReportById.json
+        exampleFile: ../../2020-06-25/examples/getGuestConfigurationAssignmentReportById.json
