@@ -956,6 +956,63 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/hybridIdentityMetadata/{metadataName}": {
+      "get": {
+        "tags": [
+          "HybridIdentityMetadata"
+        ],
+        "operationId": "HybridIdentityMetadata_Get",
+        "summary": "Gets HybridIdentityMetadata.",
+        "description": "Implements HybridIdentityMetadata GET method.",
+        "x-ms-examples": {
+          "GetHybridIdentityMetadata": {
+            "$ref": "./examples/GetHybridIdentityMetadata.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "machineName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the machine."
+          },
+          {
+            "in": "path",
+            "name": "metadataName",
+            "required": true,
+            "type": "string",
+            "description": "Name of the HybridIdentityMetadata."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/HybridIdentityMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1858,6 +1915,49 @@
         }
       },
       "description": "Describes the subnet."
+    },
+    "HybridIdentityMetadata": {
+      "description": "Defines the HybridIdentityMetadata.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Resource properties.",
+          "$ref": "#/definitions/HybridIdentityMetadataProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "description": "The system data."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "HybridIdentityMetadataProperties": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "resourceUid": {
+          "description": "The unique identifier for the resource.",
+          "type": "string"
+        },
+        "publicKey": {
+          "description": "The Public Key.",
+          "type": "string"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity",
+          "readOnly": true
+        }
+      }
     }
   },
   "parameters": {}
