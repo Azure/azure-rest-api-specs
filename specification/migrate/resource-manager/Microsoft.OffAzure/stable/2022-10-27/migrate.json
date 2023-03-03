@@ -151,9 +151,6 @@
       "name": "WebAppSitesController"
     },
     {
-      "name": "Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController"
-    },
-    {
       "name": "TomcatWebApplicationsController"
     },
     {
@@ -213,7 +210,11 @@
         ],
         "operationId": "Operations_List",
         "description": "List the operations for the provider",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
@@ -347,46 +348,11 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy",
-        "summary": "Gets the private endpoint connection proxy.",
-        "description": "Gets the private endpoint connection proxy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy_MaximumSet_Gen.json"
-          },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy_MinimumSet_Gen.json"
-          }
-        }
-      },
       "put": {
         "tags": [
           "PrivateEndpointConnectionProxyController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy",
         "summary": "Gets the private endpoint connection proxy.",
         "description": "Gets the private endpoint connection proxy.",
         "parameters": [
@@ -418,11 +384,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy_MaximumSet_Gen.json"
+          "PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy_MinimumSet_Gen.json"
+          "PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy_MinimumSet_Gen.json"
           }
         }
       }
@@ -656,7 +622,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ClientGroupsMembersAsync",
+        "operationId": "HyperVDependencyMapController_ClientGroupsMembersAsync",
         "description": "API to list client group members for the selected client group.",
         "parameters": [
           {
@@ -702,11 +668,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen.json"
+          "HyperVDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen.json"
+          "HyperVDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -934,7 +900,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ExportDependencies",
+        "operationId": "HyperVDependencyMapController_ExportDependencies",
         "description": "API to generate report containing agentless dependencies.",
         "parameters": [
           {
@@ -980,11 +946,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ExportDependencies_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ExportDependencies_MaximumSet_Gen.json"
+          "HyperVDependencyMapController_ExportDependencies_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_ExportDependencies_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ExportDependencies_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ExportDependencies_MinimumSet_Gen.json"
+          "HyperVDependencyMapController_ExportDependencies_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_ExportDependencies_MinimumSet_Gen.json"
           }
         }
       }
@@ -994,7 +960,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVSitesController_ExportMachineErrors",
+        "operationId": "HyperVSitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
         "parameters": [
           {
@@ -1040,11 +1006,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVSitesController_ExportMachineErrors_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVSitesController_ExportMachineErrors_MaximumSet_Gen.json"
+          "HyperVSitesController_ExportMachineErrors_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVSitesController_ExportMachineErrors_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVSitesController_ExportMachineErrors_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVSitesController_ExportMachineErrors_MinimumSet_Gen.json"
+          "HyperVSitesController_ExportMachineErrors_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVSitesController_ExportMachineErrors_MinimumSet_Gen.json"
           }
         }
       }
@@ -1054,7 +1020,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateCoarseMapAsync",
+        "operationId": "HyperVDependencyMapController_GenerateCoarseMapAsync",
         "description": "API to generate coarse map for the list of machines.",
         "parameters": [
           {
@@ -1100,11 +1066,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen.json"
+          "HyperVDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen.json"
+          "HyperVDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -1114,7 +1080,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateDetailedMapAsync",
+        "operationId": "HyperVDependencyMapController_GenerateDetailedMapAsync",
         "description": "API to generate detailed map for a selected machine.",
         "parameters": [
           {
@@ -1160,11 +1126,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen.json"
+          "HyperVDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen.json"
+          "HyperVDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -1607,7 +1573,7 @@
         "tags": [
           "HypervMachinesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_GetHyperVMachineApplications",
+        "operationId": "HyperVMachinesController_GetHyperVMachineApplications",
         "description": "Method to get machine with application and roles present in it.",
         "parameters": [
           {
@@ -1643,11 +1609,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_GetHyperVMachineApplications_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_GetHyperVMachineApplications_MaximumSet_Gen.json"
+          "HyperVMachinesController_GetHyperVMachineApplications_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVMachinesController_GetHyperVMachineApplications_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_GetHyperVMachineApplications_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_GetHyperVMachineApplications_MinimumSet_Gen.json"
+          "HyperVMachinesController_GetHyperVMachineApplications_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVMachinesController_GetHyperVMachineApplications_MinimumSet_Gen.json"
           }
         }
       }
@@ -1905,7 +1871,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ServerGroupsMembersAsync",
+        "operationId": "HyperVDependencyMapController_ServerGroupsMembersAsync",
         "description": "API to list server group members for the selected server group.",
         "parameters": [
           {
@@ -1951,11 +1917,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen.json"
+          "HyperVDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen.json"
+          "HyperVDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -2008,7 +1974,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_UpdateMachineDependencyMapStatus",
+        "operationId": "HyperVMachinesController_UpdateMachineDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\r\n            in a site.",
         "parameters": [
           {
@@ -2054,11 +2020,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen.json"
+          "HyperVMachinesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
+            "$ref": "./examples/HyperVMachinesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen.json"
+          "HyperVMachinesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen": {
+            "$ref": "./examples/HyperVMachinesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -3368,7 +3334,7 @@
         "tags": [
           "ApplianceNonceController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewApplianceNonceController_CreateAndGetNonceAsync",
+        "operationId": "ApplianceNonceController_CreateAndGetNonceAsync",
         "summary": "Method to create and get Nonce.",
         "description": "Method to create and get Nonce.",
         "parameters": [
@@ -3407,11 +3373,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewApplianceNonceController_CreateAndGetNonceAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewApplianceNonceController_CreateAndGetNonceAsync_MaximumSet_Gen.json"
+          "ApplianceNonceController_CreateAndGetNonceAsync_MaximumSet_Gen": {
+            "$ref": "./examples/ApplianceNonceController_CreateAndGetNonceAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewApplianceNonceController_CreateAndGetNonceAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewApplianceNonceController_CreateAndGetNonceAsync_MinimumSet_Gen.json"
+          "ApplianceNonceController_CreateAndGetNonceAsync_MinimumSet_Gen": {
+            "$ref": "./examples/ApplianceNonceController_CreateAndGetNonceAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -3518,11 +3484,60 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateEndpointConnectionProxies/{pecProxyName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionProxyController"
+        ],
+        "operationId": "PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy",
+        "summary": "Gets the private endpoint connection proxy.",
+        "description": "Gets the private endpoint connection proxy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string"
+          },
+          {
+            "name": "pecProxyName",
+            "in": "path",
+            "required": true,
+            "description": " Private endpoint connection proxy name.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy_MinimumSet_Gen.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "PrivateEndpointConnectionProxyController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy",
         "summary": "Deletes the private endpoint connection proxy.",
         "description": "Deletes the private endpoint connection proxy.",
         "parameters": [
@@ -3570,11 +3585,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy_MaximumSet_Gen.json"
+          "PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
+          "PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
           }
         }
       }
@@ -3584,7 +3599,7 @@
         "tags": [
           "PrivateEndpointConnectionProxyController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPecProxyStatus",
+        "operationId": "PrivateEndpointConnectionProxyController_GetPecProxyStatus",
         "description": "Gets the private endpoint connection proxy.",
         "parameters": [
           {
@@ -3620,11 +3635,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPecProxyStatus_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPecProxyStatus_MaximumSet_Gen.json"
+          "PrivateEndpointConnectionProxyController_GetPecProxyStatus_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_GetPecProxyStatus_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPecProxyStatus_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPecProxyStatus_MinimumSet_Gen.json"
+          "PrivateEndpointConnectionProxyController_GetPecProxyStatus_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_GetPecProxyStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -3634,7 +3649,7 @@
         "tags": [
           "PrivateEndpointConnectionProxyController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
+        "operationId": "PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
         "summary": "Gets the private endpoint connection proxy.",
         "description": "Gets the private endpoint connection proxy.",
         "parameters": [
@@ -3680,11 +3695,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen.json"
+          "PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
+          "PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
           }
         }
       }
@@ -3694,7 +3709,7 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnections",
+        "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnections",
         "summary": "Gets the private link resource.",
         "description": "Gets the private link resource.",
         "parameters": [
@@ -3727,11 +3742,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnections_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnections_MaximumSet_Gen.json"
+          "PrivateEndpointConnectionController_GetPrivateEndpointConnections_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionController_GetPrivateEndpointConnections_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnections_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnections_MinimumSet_Gen.json"
+          "PrivateEndpointConnectionController_GetPrivateEndpointConnections_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionController_GetPrivateEndpointConnections_MinimumSet_Gen.json"
           }
         }
       }
@@ -3741,7 +3756,7 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnection",
+        "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnection",
         "summary": "Gets the private link resource.",
         "description": "Gets the private link resource.",
         "parameters": [
@@ -3778,11 +3793,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnection_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnection_MaximumSet_Gen.json"
+          "PrivateEndpointConnectionController_GetPrivateEndpointConnection_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionController_GetPrivateEndpointConnection_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnection_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnection_MinimumSet_Gen.json"
+          "PrivateEndpointConnectionController_GetPrivateEndpointConnection_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionController_GetPrivateEndpointConnection_MinimumSet_Gen.json"
           }
         }
       },
@@ -3790,7 +3805,7 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
+        "operationId": "PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
         "summary": "Deletes the private link resource.",
         "description": "Deletes the private link resource.",
         "parameters": [
@@ -3827,11 +3842,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_DeletePrivateEndpointConnection_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_DeletePrivateEndpointConnection_MaximumSet_Gen.json"
+          "PrivateEndpointConnectionController_DeletePrivateEndpointConnection_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionController_DeletePrivateEndpointConnection_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_DeletePrivateEndpointConnection_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_DeletePrivateEndpointConnection_MinimumSet_Gen.json"
+          "PrivateEndpointConnectionController_DeletePrivateEndpointConnection_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionController_DeletePrivateEndpointConnection_MinimumSet_Gen.json"
           }
         }
       },
@@ -3839,7 +3854,7 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_PutPrivateEndpointConnection",
+        "operationId": "PrivateEndpointConnectionController_PutPrivateEndpointConnection",
         "summary": "Gets the private link resource.",
         "description": "Gets the private link resource.",
         "parameters": [
@@ -3885,11 +3900,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_PutPrivateEndpointConnection_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_PutPrivateEndpointConnection_MaximumSet_Gen.json"
+          "PrivateEndpointConnectionController_PutPrivateEndpointConnection_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionController_PutPrivateEndpointConnection_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_PutPrivateEndpointConnection_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_PutPrivateEndpointConnection_MinimumSet_Gen.json"
+          "PrivateEndpointConnectionController_PutPrivateEndpointConnection_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionController_PutPrivateEndpointConnection_MinimumSet_Gen.json"
           }
         }
       }
@@ -3899,7 +3914,7 @@
         "tags": [
           "PrivateLinkResourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResources",
+        "operationId": "PrivateLinkResourcesController_GetPrivateLinkResources",
         "summary": "Gets the private link resource.",
         "description": "Gets the private link resource.",
         "parameters": [
@@ -3932,11 +3947,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResources_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResources_MaximumSet_Gen.json"
+          "PrivateLinkResourcesController_GetPrivateLinkResources_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResourcesController_GetPrivateLinkResources_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResources_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResources_MinimumSet_Gen.json"
+          "PrivateLinkResourcesController_GetPrivateLinkResources_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResourcesController_GetPrivateLinkResources_MinimumSet_Gen.json"
           }
         }
       }
@@ -3946,7 +3961,7 @@
         "tags": [
           "PrivateLinkResourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResource",
+        "operationId": "PrivateLinkResourcesController_GetPrivateLinkResource",
         "summary": "Gets the private link resource.",
         "description": "Gets the private link resource.",
         "parameters": [
@@ -3983,11 +3998,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResource_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResource_MaximumSet_Gen.json"
+          "PrivateLinkResourcesController_GetPrivateLinkResource_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResourcesController_GetPrivateLinkResource_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResource_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResource_MinimumSet_Gen.json"
+          "PrivateLinkResourcesController_GetPrivateLinkResource_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResourcesController_GetPrivateLinkResource_MinimumSet_Gen.json"
           }
         }
       }
@@ -3997,7 +4012,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites",
+        "operationId": "SqlSitesController_GetSites",
         "summary": "Method to get all sites.",
         "description": "Method to get all sites.",
         "parameters": [
@@ -4030,11 +4045,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MaximumSet_Gen.json"
+          "SqlSitesController_GetSites_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_GetSites_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites_MinimumSet_Gen.json"
+          "SqlSitesController_GetSites_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_GetSites_MinimumSet_Gen.json"
           }
         }
       }
@@ -4044,7 +4059,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite",
+        "operationId": "SqlSitesController_GetSite",
         "summary": "Method to get a site.",
         "description": "Method to get a site.",
         "parameters": [
@@ -4081,11 +4096,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite_MaximumSet_Gen.json"
+          "SqlSitesController_GetSite_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_GetSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite_MinimumSet_Gen.json"
+          "SqlSitesController_GetSite_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_GetSite_MinimumSet_Gen.json"
           }
         }
       },
@@ -4093,7 +4108,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_DeleteSite",
+        "operationId": "SqlSitesController_DeleteSite",
         "summary": "Deletes the SQL site.",
         "description": "Deletes the SQL site.",
         "parameters": [
@@ -4141,11 +4156,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_DeleteSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_DeleteSite_MaximumSet_Gen.json"
+          "SqlSitesController_DeleteSite_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_DeleteSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_DeleteSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_DeleteSite_MinimumSet_Gen.json"
+          "SqlSitesController_DeleteSite_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_DeleteSite_MinimumSet_Gen.json"
           }
         }
       },
@@ -4153,7 +4168,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PutSite",
+        "operationId": "SqlSitesController_PutSite",
         "summary": "Method to create a SQL site.",
         "description": "Method to create a SQL site.",
         "parameters": [
@@ -4199,11 +4214,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PutSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PutSite_MaximumSet_Gen.json"
+          "SqlSitesController_PutSite_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_PutSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PutSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PutSite_MinimumSet_Gen.json"
+          "SqlSitesController_PutSite_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_PutSite_MinimumSet_Gen.json"
           }
         }
       },
@@ -4211,7 +4226,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PatchSite",
+        "operationId": "SqlSitesController_PatchSite",
         "summary": "Method to update an existing site.",
         "description": "Method to update an existing site.",
         "parameters": [
@@ -4271,11 +4286,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PatchSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PatchSite_MaximumSet_Gen.json"
+          "SqlSitesController_PatchSite_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_PatchSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PatchSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PatchSite_MinimumSet_Gen.json"
+          "SqlSitesController_PatchSite_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_PatchSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -4528,7 +4543,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteErrorSummary",
+        "operationId": "SqlSitesController_GetSiteErrorSummary",
         "summary": "Method to get error summary from SQL site.",
         "description": "Method to get error summary from SQL site.",
         "parameters": [
@@ -4572,11 +4587,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteErrorSummary_MaximumSet_Gen.json"
+          "SqlSitesController_GetSiteErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_GetSiteErrorSummary_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteErrorSummary_MinimumSet_Gen.json"
+          "SqlSitesController_GetSiteErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_GetSiteErrorSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -4586,7 +4601,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_ExportSqlServers",
+        "operationId": "SqlSitesController_ExportSqlServers",
         "summary": "Method to generate report containing SQL servers.",
         "description": "Method to generate report containing SQL servers.",
         "parameters": [
@@ -4645,11 +4660,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_ExportSqlServers_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_ExportSqlServers_MaximumSet_Gen.json"
+          "SqlSitesController_ExportSqlServers_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ExportSqlServers_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_ExportSqlServers_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_ExportSqlServers_MinimumSet_Gen.json"
+          "SqlSitesController_ExportSqlServers_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ExportSqlServers_MinimumSet_Gen.json"
           }
         }
       }
@@ -4716,7 +4731,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_RefreshSite",
+        "operationId": "SqlSitesController_RefreshSite",
         "summary": "Method to refresh a site.",
         "description": "Method to refresh a site.",
         "parameters": [
@@ -4778,11 +4793,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_RefreshSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_RefreshSite_MaximumSet_Gen.json"
+          "SqlSitesController_RefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_RefreshSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_RefreshSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_RefreshSite_MinimumSet_Gen.json"
+          "SqlSitesController_RefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_RefreshSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -4902,7 +4917,7 @@
         "tags": [
           "SqlAvailabilityGroupController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroups",
+        "operationId": "SqlAvailabilityGroupController_GetSqlAvailabilityGroups",
         "summary": "Gets the sql availability groups.",
         "description": "Gets the sql availability groups.",
         "parameters": [
@@ -4971,11 +4986,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroups_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroups_MaximumSet_Gen.json"
+          "SqlAvailabilityGroupController_GetSqlAvailabilityGroups_MaximumSet_Gen": {
+            "$ref": "./examples/SqlAvailabilityGroupController_GetSqlAvailabilityGroups_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroups_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroups_MinimumSet_Gen.json"
+          "SqlAvailabilityGroupController_GetSqlAvailabilityGroups_MinimumSet_Gen": {
+            "$ref": "./examples/SqlAvailabilityGroupController_GetSqlAvailabilityGroups_MinimumSet_Gen.json"
           }
         }
       }
@@ -4985,7 +5000,7 @@
         "tags": [
           "SqlAvailabilityGroupController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroup",
+        "operationId": "SqlAvailabilityGroupController_GetSqlAvailabilityGroup",
         "summary": "Gets the sql availability group.",
         "description": "Gets the sql availability group.",
         "parameters": [
@@ -5029,11 +5044,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroup_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroup_MaximumSet_Gen.json"
+          "SqlAvailabilityGroupController_GetSqlAvailabilityGroup_MaximumSet_Gen": {
+            "$ref": "./examples/SqlAvailabilityGroupController_GetSqlAvailabilityGroup_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroup_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroup_MinimumSet_Gen.json"
+          "SqlAvailabilityGroupController_GetSqlAvailabilityGroup_MinimumSet_Gen": {
+            "$ref": "./examples/SqlAvailabilityGroupController_GetSqlAvailabilityGroup_MinimumSet_Gen.json"
           }
         }
       }
@@ -5043,7 +5058,7 @@
         "tags": [
           "SqlDatabasesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabases",
+        "operationId": "SqlDatabasesController_GetSqlDatabases",
         "summary": "Gets the sql Databases.",
         "description": "Gets the sql Databases.",
         "parameters": [
@@ -5112,11 +5127,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabases_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabases_MaximumSet_Gen.json"
+          "SqlDatabasesController_GetSqlDatabases_MaximumSet_Gen": {
+            "$ref": "./examples/SqlDatabasesController_GetSqlDatabases_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabases_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabases_MinimumSet_Gen.json"
+          "SqlDatabasesController_GetSqlDatabases_MinimumSet_Gen": {
+            "$ref": "./examples/SqlDatabasesController_GetSqlDatabases_MinimumSet_Gen.json"
           }
         }
       }
@@ -5126,7 +5141,7 @@
         "tags": [
           "SqlDatabasesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabase",
+        "operationId": "SqlDatabasesController_GetSqlDatabase",
         "summary": "Gets the sql Database.",
         "description": "Gets the sql Database.",
         "parameters": [
@@ -5170,11 +5185,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabase_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabase_MaximumSet_Gen.json"
+          "SqlDatabasesController_GetSqlDatabase_MaximumSet_Gen": {
+            "$ref": "./examples/SqlDatabasesController_GetSqlDatabase_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabase_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabase_MinimumSet_Gen.json"
+          "SqlDatabasesController_GetSqlDatabase_MinimumSet_Gen": {
+            "$ref": "./examples/SqlDatabasesController_GetSqlDatabase_MinimumSet_Gen.json"
           }
         }
       }
@@ -5184,7 +5199,7 @@
         "tags": [
           "SqlJobsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJobs",
+        "operationId": "SqlJobsController_GetSqlJobs",
         "summary": "Gets the sql Jobs.",
         "description": "Gets the sql Jobs.",
         "parameters": [
@@ -5224,11 +5239,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJobs_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJobs_MaximumSet_Gen.json"
+          "SqlJobsController_GetSqlJobs_MaximumSet_Gen": {
+            "$ref": "./examples/SqlJobsController_GetSqlJobs_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJobs_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJobs_MinimumSet_Gen.json"
+          "SqlJobsController_GetSqlJobs_MinimumSet_Gen": {
+            "$ref": "./examples/SqlJobsController_GetSqlJobs_MinimumSet_Gen.json"
           }
         }
       }
@@ -5238,7 +5253,7 @@
         "tags": [
           "SqlJobsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJob",
+        "operationId": "SqlJobsController_GetSqlJob",
         "summary": "Gets the sql Job.",
         "description": "Gets the sql Job.",
         "parameters": [
@@ -5282,11 +5297,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJob_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJob_MaximumSet_Gen.json"
+          "SqlJobsController_GetSqlJob_MaximumSet_Gen": {
+            "$ref": "./examples/SqlJobsController_GetSqlJob_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJob_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJob_MinimumSet_Gen.json"
+          "SqlJobsController_GetSqlJob_MinimumSet_Gen": {
+            "$ref": "./examples/SqlJobsController_GetSqlJob_MinimumSet_Gen.json"
           }
         }
       }
@@ -5296,7 +5311,7 @@
         "tags": [
           "SqlServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServers",
+        "operationId": "SqlServersController_GetSqlServers",
         "summary": "Gets the sql servers.",
         "description": "Gets the sql servers.",
         "parameters": [
@@ -5365,11 +5380,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServers_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServers_MaximumSet_Gen.json"
+          "SqlServersController_GetSqlServers_MaximumSet_Gen": {
+            "$ref": "./examples/SqlServersController_GetSqlServers_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServers_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServers_MinimumSet_Gen.json"
+          "SqlServersController_GetSqlServers_MinimumSet_Gen": {
+            "$ref": "./examples/SqlServersController_GetSqlServers_MinimumSet_Gen.json"
           }
         }
       }
@@ -5379,7 +5394,7 @@
         "tags": [
           "SqlServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServer",
+        "operationId": "SqlServersController_GetSqlServer",
         "summary": "Gets the sql server.",
         "description": "Gets the sql server.",
         "parameters": [
@@ -5423,11 +5438,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServer_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServer_MaximumSet_Gen.json"
+          "SqlServersController_GetSqlServer_MaximumSet_Gen": {
+            "$ref": "./examples/SqlServersController_GetSqlServer_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServer_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServer_MinimumSet_Gen.json"
+          "SqlServersController_GetSqlServer_MinimumSet_Gen": {
+            "$ref": "./examples/SqlServersController_GetSqlServer_MinimumSet_Gen.json"
           }
         }
       }
@@ -5437,7 +5452,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteUsage",
+        "operationId": "SqlSitesController_GetSiteUsage",
         "description": "Method to get site usage/summary.",
         "parameters": [
           {
@@ -5473,11 +5488,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteUsage_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteUsage_MaximumSet_Gen.json"
+          "SqlSitesController_GetSiteUsage_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_GetSiteUsage_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteUsage_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteUsage_MinimumSet_Gen.json"
+          "SqlSitesController_GetSiteUsage_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_GetSiteUsage_MinimumSet_Gen.json"
           }
         }
       }
@@ -5487,7 +5502,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSites",
+        "operationId": "WebAppSitesController_GetSites",
         "summary": "Method to get all sites.",
         "description": "Method to get all sites.",
         "parameters": [
@@ -5520,11 +5535,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSites_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSites_MaximumSet_Gen.json"
+          "WebAppSitesController_GetSites_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_GetSites_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSites_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSites_MinimumSet_Gen.json"
+          "WebAppSitesController_GetSites_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_GetSites_MinimumSet_Gen.json"
           }
         }
       }
@@ -5534,7 +5549,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSite",
+        "operationId": "WebAppSitesController_GetSite",
         "summary": "Method to get a site.",
         "description": "Method to get a site.",
         "parameters": [
@@ -5571,11 +5586,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSite_MaximumSet_Gen.json"
+          "WebAppSitesController_GetSite_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_GetSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSite_MinimumSet_Gen.json"
+          "WebAppSitesController_GetSite_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_GetSite_MinimumSet_Gen.json"
           }
         }
       },
@@ -5583,7 +5598,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_DeleteSite",
+        "operationId": "WebAppSitesController_DeleteSite",
         "summary": "Deletes the WebApp site.",
         "description": "Deletes the WebApp site.",
         "parameters": [
@@ -5631,20 +5646,19 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_DeleteSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_DeleteSite_MaximumSet_Gen.json"
+          "WebAppSitesController_DeleteSite_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_DeleteSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_DeleteSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_DeleteSite_MinimumSet_Gen.json"
+          "WebAppSitesController_DeleteSite_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_DeleteSite_MinimumSet_Gen.json"
           }
         }
       },
       "put": {
         "tags": [
-          "WebAppSitesController",
-          "Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController"
+          "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PutSite",
+        "operationId": "WebAppSitesController_PutSite",
         "summary": "Method to create a WebApp site.",
         "description": "Method to create a WebApp site.",
         "parameters": [
@@ -5690,11 +5704,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PutSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PutSite_MaximumSet_Gen.json"
+          "WebAppSitesController_PutSite_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_PutSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PutSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PutSite_MinimumSet_Gen.json"
+          "WebAppSitesController_PutSite_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_PutSite_MinimumSet_Gen.json"
           }
         }
       },
@@ -5702,7 +5716,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PatchSite",
+        "operationId": "WebAppSitesController_PatchSite",
         "summary": "Method to update an existing site.",
         "description": "Method to update an existing site.",
         "parameters": [
@@ -5762,11 +5776,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PatchSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PatchSite_MaximumSet_Gen.json"
+          "WebAppSitesController_PatchSite_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_PatchSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PatchSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PatchSite_MinimumSet_Gen.json"
+          "WebAppSitesController_PatchSite_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_PatchSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -5776,7 +5790,7 @@
         "tags": [
           "WebAppDiscoverySiteDataSourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSources",
+        "operationId": "WebAppDiscoverySiteDataSourceController_GetDataSources",
         "summary": "Method to get all Web app data sources in site.",
         "description": "Method to get all Web app data sources in site.",
         "parameters": [
@@ -5816,11 +5830,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSources_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSources_MaximumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_GetDataSources_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_GetDataSources_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSources_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSources_MinimumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_GetDataSources_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_GetDataSources_MinimumSet_Gen.json"
           }
         }
       }
@@ -5830,7 +5844,7 @@
         "tags": [
           "WebAppDiscoverySiteDataSourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSource",
+        "operationId": "WebAppDiscoverySiteDataSourceController_GetDataSource",
         "summary": "Method to get a Web app data source in site.",
         "description": "Method to get a Web app data source in site.",
         "parameters": [
@@ -5874,11 +5888,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSource_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSource_MaximumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_GetDataSource_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_GetDataSource_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSource_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSource_MinimumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_GetDataSource_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_GetDataSource_MinimumSet_Gen.json"
           }
         }
       },
@@ -5886,7 +5900,7 @@
         "tags": [
           "WebAppDiscoverySiteDataSourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_DeleteDataSource",
+        "operationId": "WebAppDiscoverySiteDataSourceController_DeleteDataSource",
         "summary": "Method to delete a Web app data source in site.",
         "description": "Method to delete a Web app data source in site.",
         "parameters": [
@@ -5941,11 +5955,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_DeleteDataSource_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_DeleteDataSource_MaximumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_DeleteDataSource_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_DeleteDataSource_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_DeleteDataSource_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_DeleteDataSource_MinimumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_DeleteDataSource_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_DeleteDataSource_MinimumSet_Gen.json"
           }
         }
       },
@@ -5953,7 +5967,7 @@
         "tags": [
           "WebAppDiscoverySiteDataSourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_PutDataSource",
+        "operationId": "WebAppDiscoverySiteDataSourceController_PutDataSource",
         "summary": "Method to create or update a Web app data source in site.",
         "description": "Method to create or update a Web app data source in site.",
         "parameters": [
@@ -6014,11 +6028,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_PutDataSource_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_PutDataSource_MaximumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_PutDataSource_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_PutDataSource_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_PutDataSource_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_PutDataSource_MinimumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_PutDataSource_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_PutDataSource_MinimumSet_Gen.json"
           }
         }
       }
@@ -6028,7 +6042,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteErrorSummary",
+        "operationId": "WebAppSitesController_GetSiteErrorSummary",
         "summary": "Method to get error summary from web app site.",
         "description": "Method to get error summary from web app site.",
         "parameters": [
@@ -6072,11 +6086,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteErrorSummary_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteErrorSummary_MaximumSet_Gen.json"
+          "WebAppSitesController_GetSiteErrorSummary_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_GetSiteErrorSummary_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteErrorSummary_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteErrorSummary_MinimumSet_Gen.json"
+          "WebAppSitesController_GetSiteErrorSummary_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_GetSiteErrorSummary_MinimumSet_Gen.json"
           }
         }
       }
@@ -6086,7 +6100,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_ExportWebAppInventory",
+        "operationId": "WebAppSitesController_ExportWebAppInventory",
         "description": "Method to generate report containing web app inventory.",
         "parameters": [
           {
@@ -6137,11 +6151,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_ExportWebAppInventory_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_ExportWebAppInventory_MaximumSet_Gen.json"
+          "WebAppSitesController_ExportWebAppInventory_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_ExportWebAppInventory_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_ExportWebAppInventory_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_ExportWebAppInventory_MinimumSet_Gen.json"
+          "WebAppSitesController_ExportWebAppInventory_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_ExportWebAppInventory_MinimumSet_Gen.json"
           }
         }
       }
@@ -6151,7 +6165,7 @@
         "tags": [
           "WebAppExtendedMachinesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtensions",
+        "operationId": "WebAppExtendedMachinesController_GetMachineExtensions",
         "summary": "Method to get all extended machines.",
         "description": "Method to get all extended machines.",
         "parameters": [
@@ -6220,11 +6234,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtensions_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtensions_MaximumSet_Gen.json"
+          "WebAppExtendedMachinesController_GetMachineExtensions_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppExtendedMachinesController_GetMachineExtensions_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtensions_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtensions_MinimumSet_Gen.json"
+          "WebAppExtendedMachinesController_GetMachineExtensions_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppExtendedMachinesController_GetMachineExtensions_MinimumSet_Gen.json"
           }
         }
       }
@@ -6234,7 +6248,7 @@
         "tags": [
           "WebAppExtendedMachinesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtension",
+        "operationId": "WebAppExtendedMachinesController_GetMachineExtension",
         "summary": "Method to get a extended machine.",
         "description": "Method to get a extended machine.",
         "parameters": [
@@ -6278,11 +6292,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtension_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtension_MaximumSet_Gen.json"
+          "WebAppExtendedMachinesController_GetMachineExtension_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppExtendedMachinesController_GetMachineExtension_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtension_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtension_MinimumSet_Gen.json"
+          "WebAppExtendedMachinesController_GetMachineExtension_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppExtendedMachinesController_GetMachineExtension_MinimumSet_Gen.json"
           }
         }
       }
@@ -6292,7 +6306,7 @@
         "tags": [
           "IISWebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplications",
+        "operationId": "IisWebApplicationsController_GetWebApplications",
         "summary": "Method to get all IIS web application.",
         "description": "Method to get all IIS web application.",
         "parameters": [
@@ -6361,11 +6375,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplications_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplications_MaximumSet_Gen.json"
+          "IisWebApplicationsController_GetWebApplications_MaximumSet_Gen": {
+            "$ref": "./examples/IisWebApplicationsController_GetWebApplications_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplications_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplications_MinimumSet_Gen.json"
+          "IisWebApplicationsController_GetWebApplications_MinimumSet_Gen": {
+            "$ref": "./examples/IisWebApplicationsController_GetWebApplications_MinimumSet_Gen.json"
           }
         }
       }
@@ -6375,7 +6389,7 @@
         "tags": [
           "IISWebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplication",
+        "operationId": "IisWebApplicationsController_GetWebApplication",
         "summary": "Method to get an IIS web application.",
         "description": "Method to get an IIS web application.",
         "parameters": [
@@ -6419,11 +6433,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplication_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplication_MaximumSet_Gen.json"
+          "IisWebApplicationsController_GetWebApplication_MaximumSet_Gen": {
+            "$ref": "./examples/IisWebApplicationsController_GetWebApplication_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplication_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplication_MinimumSet_Gen.json"
+          "IisWebApplicationsController_GetWebApplication_MinimumSet_Gen": {
+            "$ref": "./examples/IisWebApplicationsController_GetWebApplication_MinimumSet_Gen.json"
           }
         }
       }
@@ -6433,7 +6447,7 @@
         "tags": [
           "IISWebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServers",
+        "operationId": "IisWebServersController_GetWebServers",
         "summary": "Method to get all IIS web servers.",
         "description": "Method to get all IIS web servers.",
         "parameters": [
@@ -6502,11 +6516,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServers_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServers_MaximumSet_Gen.json"
+          "IisWebServersController_GetWebServers_MaximumSet_Gen": {
+            "$ref": "./examples/IisWebServersController_GetWebServers_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServers_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServers_MinimumSet_Gen.json"
+          "IisWebServersController_GetWebServers_MinimumSet_Gen": {
+            "$ref": "./examples/IisWebServersController_GetWebServers_MinimumSet_Gen.json"
           }
         }
       }
@@ -6516,7 +6530,7 @@
         "tags": [
           "IISWebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServer",
+        "operationId": "IisWebServersController_GetWebServer",
         "summary": "Method to get an IIS web server.",
         "description": "Method to get an IIS web server.",
         "parameters": [
@@ -6560,11 +6574,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServer_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServer_MaximumSet_Gen.json"
+          "IisWebServersController_GetWebServer_MaximumSet_Gen": {
+            "$ref": "./examples/IisWebServersController_GetWebServer_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServer_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServer_MinimumSet_Gen.json"
+          "IisWebServersController_GetWebServer_MinimumSet_Gen": {
+            "$ref": "./examples/IisWebServersController_GetWebServer_MinimumSet_Gen.json"
           }
         }
       }
@@ -6574,7 +6588,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_RefreshSite",
+        "operationId": "WebAppSitesController_RefreshSite",
         "summary": "Method to refresh a site.",
         "description": "Method to refresh a site.",
         "parameters": [
@@ -6636,11 +6650,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_RefreshSite_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_RefreshSite_MaximumSet_Gen.json"
+          "WebAppSitesController_RefreshSite_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_RefreshSite_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_RefreshSite_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_RefreshSite_MinimumSet_Gen.json"
+          "WebAppSitesController_RefreshSite_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_RefreshSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -6650,7 +6664,7 @@
         "tags": [
           "WebAppRunAsAccountsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccounts",
+        "operationId": "WebAppRunAsAccountsController_GetRunAsAccounts",
         "summary": "Method to get all run as accounts.",
         "description": "Method to get all run as accounts.",
         "parameters": [
@@ -6690,11 +6704,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccounts_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccounts_MaximumSet_Gen.json"
+          "WebAppRunAsAccountsController_GetRunAsAccounts_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppRunAsAccountsController_GetRunAsAccounts_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccounts_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccounts_MinimumSet_Gen.json"
+          "WebAppRunAsAccountsController_GetRunAsAccounts_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppRunAsAccountsController_GetRunAsAccounts_MinimumSet_Gen.json"
           }
         }
       }
@@ -6704,7 +6718,7 @@
         "tags": [
           "WebAppRunAsAccountsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccount",
+        "operationId": "WebAppRunAsAccountsController_GetRunAsAccount",
         "summary": "Method to get run as account.",
         "description": "Method to get run as account.",
         "parameters": [
@@ -6748,11 +6762,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccount_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccount_MaximumSet_Gen.json"
+          "WebAppRunAsAccountsController_GetRunAsAccount_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppRunAsAccountsController_GetRunAsAccount_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccount_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccount_MinimumSet_Gen.json"
+          "WebAppRunAsAccountsController_GetRunAsAccount_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppRunAsAccountsController_GetRunAsAccount_MinimumSet_Gen.json"
           }
         }
       }
@@ -6762,7 +6776,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteUsage",
+        "operationId": "WebAppSitesController_GetSiteUsage",
         "description": "Method to get site usage/summary.",
         "parameters": [
           {
@@ -6798,11 +6812,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteUsage_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteUsage_MaximumSet_Gen.json"
+          "WebAppSitesController_GetSiteUsage_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_GetSiteUsage_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteUsage_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteUsage_MinimumSet_Gen.json"
+          "WebAppSitesController_GetSiteUsage_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_GetSiteUsage_MinimumSet_Gen.json"
           }
         }
       }
@@ -6812,7 +6826,7 @@
         "tags": [
           "TomcatWebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplications",
+        "operationId": "TomcatWebApplicationsController_GetWebApplications",
         "summary": "Method to get all Tomcat web application.",
         "description": "Method to get all Tomcat web application.",
         "parameters": [
@@ -6881,11 +6895,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplications_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplications_MaximumSet_Gen.json"
+          "TomcatWebApplicationsController_GetWebApplications_MaximumSet_Gen": {
+            "$ref": "./examples/TomcatWebApplicationsController_GetWebApplications_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplications_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplications_MinimumSet_Gen.json"
+          "TomcatWebApplicationsController_GetWebApplications_MinimumSet_Gen": {
+            "$ref": "./examples/TomcatWebApplicationsController_GetWebApplications_MinimumSet_Gen.json"
           }
         }
       }
@@ -6895,7 +6909,7 @@
         "tags": [
           "TomcatWebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplication",
+        "operationId": "TomcatWebApplicationsController_GetWebApplication",
         "summary": "Method to get an Tomcat web application.",
         "description": "Method to get an Tomcat web application.",
         "parameters": [
@@ -6939,11 +6953,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplication_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplication_MaximumSet_Gen.json"
+          "TomcatWebApplicationsController_GetWebApplication_MaximumSet_Gen": {
+            "$ref": "./examples/TomcatWebApplicationsController_GetWebApplication_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplication_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplication_MinimumSet_Gen.json"
+          "TomcatWebApplicationsController_GetWebApplication_MinimumSet_Gen": {
+            "$ref": "./examples/TomcatWebApplicationsController_GetWebApplication_MinimumSet_Gen.json"
           }
         }
       }
@@ -6953,7 +6967,7 @@
         "tags": [
           "TomcatWebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServers",
+        "operationId": "TomcatWebServersController_GetWebServers",
         "summary": "Method to get all Tomcat web servers.",
         "description": "Method to get all Tomcat web servers.",
         "parameters": [
@@ -7022,11 +7036,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServers_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServers_MaximumSet_Gen.json"
+          "TomcatWebServersController_GetWebServers_MaximumSet_Gen": {
+            "$ref": "./examples/TomcatWebServersController_GetWebServers_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServers_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServers_MinimumSet_Gen.json"
+          "TomcatWebServersController_GetWebServers_MinimumSet_Gen": {
+            "$ref": "./examples/TomcatWebServersController_GetWebServers_MinimumSet_Gen.json"
           }
         }
       }
@@ -7036,7 +7050,7 @@
         "tags": [
           "TomcatWebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServer",
+        "operationId": "TomcatWebServersController_GetWebServer",
         "summary": "Method to get an Tomcat web server.",
         "description": "Method to get an Tomcat web server.",
         "parameters": [
@@ -7080,11 +7094,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServer_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServer_MaximumSet_Gen.json"
+          "TomcatWebServersController_GetWebServer_MaximumSet_Gen": {
+            "$ref": "./examples/TomcatWebServersController_GetWebServer_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServer_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServer_MinimumSet_Gen.json"
+          "TomcatWebServersController_GetWebServer_MinimumSet_Gen": {
+            "$ref": "./examples/TomcatWebServersController_GetWebServer_MinimumSet_Gen.json"
           }
         }
       }
@@ -7094,7 +7108,7 @@
         "tags": [
           "WebAppPropertiesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppPropertiesController_UpdateWebApplicationProperty",
+        "operationId": "WebAppPropertiesController_UpdateWebApplicationProperty",
         "summary": "Method to update properties for web applications.\n            in a site.",
         "description": "Method to update properties for web applications.\n            in a site.",
         "parameters": [
@@ -7148,11 +7162,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppPropertiesController_UpdateWebApplicationProperty_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppPropertiesController_UpdateWebApplicationProperty_MaximumSet_Gen.json"
+          "WebAppPropertiesController_UpdateWebApplicationProperty_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppPropertiesController_UpdateWebApplicationProperty_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppPropertiesController_UpdateWebApplicationProperty_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppPropertiesController_UpdateWebApplicationProperty_MinimumSet_Gen.json"
+          "WebAppPropertiesController_UpdateWebApplicationProperty_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppPropertiesController_UpdateWebApplicationProperty_MinimumSet_Gen.json"
           }
         }
       }
@@ -7162,7 +7176,7 @@
         "tags": [
           "WebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebApplicationsController_GetWebApplications",
+        "operationId": "WebApplicationsController_GetWebApplications",
         "summary": "Method to get all IIS web applications.",
         "description": "Method to get all IIS web applications.",
         "parameters": [
@@ -7231,11 +7245,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebApplicationsController_GetWebApplications_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebApplicationsController_GetWebApplications_MaximumSet_Gen.json"
+          "WebApplicationsController_GetWebApplications_MaximumSet_Gen": {
+            "$ref": "./examples/WebApplicationsController_GetWebApplications_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebApplicationsController_GetWebApplications_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebApplicationsController_GetWebApplications_MinimumSet_Gen.json"
+          "WebApplicationsController_GetWebApplications_MinimumSet_Gen": {
+            "$ref": "./examples/WebApplicationsController_GetWebApplications_MinimumSet_Gen.json"
           }
         }
       }
@@ -7245,7 +7259,7 @@
         "tags": [
           "WebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebServersController_GetWebServers",
+        "operationId": "WebServersController_GetWebServers",
         "summary": "Method to get all web servers.",
         "description": "Method to get all web servers.",
         "parameters": [
@@ -7314,11 +7328,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebServersController_GetWebServers_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebServersController_GetWebServers_MaximumSet_Gen.json"
+          "WebServersController_GetWebServers_MaximumSet_Gen": {
+            "$ref": "./examples/WebServersController_GetWebServers_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebServersController_GetWebServers_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebServersController_GetWebServers_MinimumSet_Gen.json"
+          "WebServersController_GetWebServers_MinimumSet_Gen": {
+            "$ref": "./examples/WebServersController_GetWebServers_MinimumSet_Gen.json"
           }
         }
       }
@@ -7520,7 +7534,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ClientGroupsMembersAsync",
+        "operationId": "ServerDependencyMapController_ClientGroupsMembersAsync",
         "description": "API to list client group members for the selected client group.",
         "parameters": [
           {
@@ -7566,11 +7580,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen.json"
+          "ServerDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen.json"
+          "ServerDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -7623,7 +7637,7 @@
         "tags": [
           "ServerSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportAppsAndRoles",
+        "operationId": "ServerSitesController_ExportAppsAndRoles",
         "description": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
         "parameters": [
           {
@@ -7663,11 +7677,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportAppsAndRoles_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportAppsAndRoles_MaximumSet_Gen.json"
+          "ServerSitesController_ExportAppsAndRoles_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ExportAppsAndRoles_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportAppsAndRoles_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportAppsAndRoles_MinimumSet_Gen.json"
+          "ServerSitesController_ExportAppsAndRoles_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ExportAppsAndRoles_MinimumSet_Gen.json"
           }
         }
       }
@@ -7677,7 +7691,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ExportDependencies",
+        "operationId": "ServerDependencyMapController_ExportDependencies",
         "description": "API to generate report containing agentless dependencies.",
         "parameters": [
           {
@@ -7723,11 +7737,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ExportDependencies_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ExportDependencies_MaximumSet_Gen.json"
+          "ServerDependencyMapController_ExportDependencies_MaximumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_ExportDependencies_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ExportDependencies_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ExportDependencies_MinimumSet_Gen.json"
+          "ServerDependencyMapController_ExportDependencies_MinimumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_ExportDependencies_MinimumSet_Gen.json"
           }
         }
       }
@@ -7737,7 +7751,7 @@
         "tags": [
           "ServerSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportMachineErrors",
+        "operationId": "ServerSitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
         "parameters": [
           {
@@ -7783,11 +7797,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportMachineErrors_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportMachineErrors_MaximumSet_Gen.json"
+          "ServerSitesController_ExportMachineErrors_MaximumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ExportMachineErrors_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportMachineErrors_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportMachineErrors_MinimumSet_Gen.json"
+          "ServerSitesController_ExportMachineErrors_MinimumSet_Gen": {
+            "$ref": "./examples/ServerSitesController_ExportMachineErrors_MinimumSet_Gen.json"
           }
         }
       }
@@ -7797,7 +7811,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateCoarseMapAsync",
+        "operationId": "ServerDependencyMapController_GenerateCoarseMapAsync",
         "description": "API to generate coarse map for the list of machines.",
         "parameters": [
           {
@@ -7843,11 +7857,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen.json"
+          "ServerDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen.json"
+          "ServerDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -7857,7 +7871,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateDetailedMapAsync",
+        "operationId": "ServerDependencyMapController_GenerateDetailedMapAsync",
         "description": "API to generate detailed map for a selected machine.",
         "parameters": [
           {
@@ -7903,11 +7917,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen.json"
+          "ServerDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen.json"
+          "ServerDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -8262,7 +8276,7 @@
         "tags": [
           "ServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_GetHyperVMachineApplications",
+        "operationId": "ServersController_GetHyperVMachineApplications",
         "description": "Method to get machine with application and roles present in it.",
         "parameters": [
           {
@@ -8298,11 +8312,11 @@
           }
         },
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_GetHyperVMachineApplications_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_GetHyperVMachineApplications_MaximumSet_Gen.json"
+          "ServersController_GetHyperVMachineApplications_MaximumSet_Gen": {
+            "$ref": "./examples/ServersController_GetHyperVMachineApplications_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_GetHyperVMachineApplications_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_GetHyperVMachineApplications_MinimumSet_Gen.json"
+          "ServersController_GetHyperVMachineApplications_MinimumSet_Gen": {
+            "$ref": "./examples/ServersController_GetHyperVMachineApplications_MinimumSet_Gen.json"
           }
         }
       }
@@ -8560,7 +8574,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ServerGroupsMembersAsync",
+        "operationId": "ServerDependencyMapController_ServerGroupsMembersAsync",
         "description": "API to list server group members for the selected server group.",
         "parameters": [
           {
@@ -8606,11 +8620,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen.json"
+          "ServerDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen.json"
+          "ServerDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen": {
+            "$ref": "./examples/ServerDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -8663,7 +8677,7 @@
         "tags": [
           "ServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_UpdateMachineDependencyMapStatus",
+        "operationId": "ServersController_UpdateMachineDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\r\n            in a site.",
         "parameters": [
           {
@@ -8709,11 +8723,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_UpdateMachineDependencyMapStatus_MaximumSet_Gen.json"
+          "ServersController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
+            "$ref": "./examples/ServersController_UpdateMachineDependencyMapStatus_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_UpdateMachineDependencyMapStatus_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_UpdateMachineDependencyMapStatus_MinimumSet_Gen.json"
+          "ServersController_UpdateMachineDependencyMapStatus_MinimumSet_Gen": {
+            "$ref": "./examples/ServersController_UpdateMachineDependencyMapStatus_MinimumSet_Gen.json"
           }
         }
       }
@@ -9050,7 +9064,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ClientGroupsMembersAsync",
+        "operationId": "DependencyMapController_ClientGroupsMembersAsync",
         "description": "API to list client group members for the selected client group.",
         "parameters": [
           {
@@ -9096,11 +9110,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen.json"
+          "DependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_ClientGroupsMembersAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen.json"
+          "DependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_ClientGroupsMembersAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -9153,7 +9167,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles",
+        "operationId": "SitesController_ExportAppsAndRoles",
         "description": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
         "parameters": [
           {
@@ -9190,11 +9204,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MaximumSet_Gen.json"
+          "SitesController_ExportAppsAndRoles_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportAppsAndRoles_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles_MinimumSet_Gen.json"
+          "SitesController_ExportAppsAndRoles_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportAppsAndRoles_MinimumSet_Gen.json"
           }
         }
       }
@@ -9204,7 +9218,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ExportDependencies",
+        "operationId": "DependencyMapController_ExportDependencies",
         "description": "API to generate report containing agentless dependencies.",
         "parameters": [
           {
@@ -9250,11 +9264,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ExportDependencies_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ExportDependencies_MaximumSet_Gen.json"
+          "DependencyMapController_ExportDependencies_MaximumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_ExportDependencies_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ExportDependencies_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ExportDependencies_MinimumSet_Gen.json"
+          "DependencyMapController_ExportDependencies_MinimumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_ExportDependencies_MinimumSet_Gen.json"
           }
         }
       }
@@ -9264,7 +9278,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors",
+        "operationId": "SitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
         "parameters": [
           {
@@ -9310,11 +9324,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MaximumSet_Gen.json"
+          "SitesController_ExportMachineErrors_MaximumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportMachineErrors_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors_MinimumSet_Gen.json"
+          "SitesController_ExportMachineErrors_MinimumSet_Gen": {
+            "$ref": "./examples/SitesController_ExportMachineErrors_MinimumSet_Gen.json"
           }
         }
       }
@@ -9378,7 +9392,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_GenerateCoarseMapAsync",
+        "operationId": "DependencyMapController_GenerateCoarseMapAsync",
         "description": "API to generate coarse map for the list of machines.",
         "parameters": [
           {
@@ -9424,11 +9438,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen.json"
+          "DependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_GenerateCoarseMapAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen.json"
+          "DependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_GenerateCoarseMapAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -9438,7 +9452,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewDependencyMapController_GenerateDetailedMapAsync",
+        "operationId": "DependencyMapController_GenerateDetailedMapAsync",
         "description": "API to generate detailed map for a selected machine.",
         "parameters": [
           {
@@ -9484,11 +9498,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewDependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen.json"
+          "DependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_GenerateDetailedMapAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_08_01_PreviewDependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen.json"
+          "DependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_GenerateDetailedMapAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -10273,7 +10287,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ServerGroupsMembersAsync",
+        "operationId": "DependencyMapController_ServerGroupsMembersAsync",
         "description": "API to list server group members for the selected server group.",
         "parameters": [
           {
@@ -10319,11 +10333,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen.json"
+          "DependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_ServerGroupsMembersAsync_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen.json"
+          "DependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen": {
+            "$ref": "./examples/DependencyMapController_ServerGroupsMembersAsync_MinimumSet_Gen.json"
           }
         }
       }
@@ -10376,7 +10390,7 @@
         "tags": [
           "VMwarePropertiesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus",
+        "operationId": "MwarePropertiesController_UpdateMachineDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\n            in a\nsite.",
         "parameters": [
           {
@@ -10422,11 +10436,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen.json"
+          "MwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen": {
+            "$ref": "./examples/MwarePropertiesController_UpdateMachineDependencyMapStatus_MaximumSet_Gen.json"
           },
-          "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen": {
-            "$ref": "./examples/MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen.json"
+          "MwarePropertiesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen": {
+            "$ref": "./examples/MwarePropertiesController_UpdateMachineDependencyMapStatus_MinimumSet_Gen.json"
           }
         }
       }
