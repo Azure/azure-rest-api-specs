@@ -13,6 +13,9 @@ variables:
   name:
     type: string
     prefix: name
+  adminPassword:
+    type: secureString
+    prefix: Admin@1
 
 prepareSteps:
   - step: createVirtualNetwork
@@ -119,7 +122,7 @@ prepareSteps:
           osProfile:
             computerName: $(vmName)
             adminUsername: azureuser
-            adminPassword: Admin@01
+            adminPassword: $(adminPassword)
           additionalCapabilities: {}
   - step: createVirtualMachineScaleSets
     operationId: VirtualMachineScaleSets_CreateOrUpdate
@@ -146,7 +149,7 @@ prepareSteps:
             osProfile:
               computerNamePrefix: vmss
               adminUsername: $(vmssName)
-              adminPassword: Admin@01
+              adminPassword: $(adminPassword)
             networkProfile:
               networkInterfaceConfigurations:
               - name:  $(vmssName)
@@ -182,6 +185,4 @@ scenarios:
       exampleFile: ../../2022-01-25/examples/createOrUpdateGuestConfigurationVMSSAssignment.json
     - operationId: GuestConfigurationAssignmentsVMSS_Get
       exampleFile: ../../2022-01-25/examples/getVMSSGuestConfigurationAssignment.json
-    - operationId: GuestConfigurationAssignmentsVMSS_List
-      exampleFile: ../../2022-01-25/examples/listVMSSGuestConfigurationAssignments.json
       
