@@ -4,7 +4,7 @@
     "resourceGroupName": "myResourceGroupName",
     "vmName": "myVMName",
     "guestConfigurationAssignmentName": "NotInstalledApplicationForWindows",
-    "api-version": "2022-01-25",
+    "api-version": "2020-06-25",
     "parameters": {
       "location": "westcentralus",
       "name": "NotInstalledApplicationForWindows",
@@ -12,7 +12,7 @@
         "context": "Azure policy",
         "guestConfiguration": {
           "name": "NotInstalledApplicationForWindows",
-          "version": "1.0.0.3",
+          "version": "1.*",
           "contentUri": "https://thisisfake/pacakge",
           "contentHash": "123contenthash",
           "assignmentType": "ApplyAndAutoCorrect",
@@ -31,7 +31,7 @@
       "headers": {},
       "body": {
         "location": "westcentralus",
-        "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/NotInstalledApplicationForWindows",
+        "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.ConnectedVMwarevSphere/virtualmachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/NotInstalledApplicationForWindows",
         "name": "NotInstalledApplicationForWindows",
         "properties": {
           "complianceStatus": "Pending",
@@ -48,7 +48,6 @@
             "contentUri": null,
             "contentHash": null,
             "contentType": null,
-            "assignmentSource": "AzurePolicy",
             "configurationParameter": [
               {
                 "name": "[InstalledApplication]NotInstalledApplicationResource1;Name",
@@ -64,7 +63,7 @@
       "headers": {},
       "body": {
         "location": "westcentralus",
-        "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/Microsoft.Compute/virtualMachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/NotInstalledApplicationForWindows",
+        "id": "/subscriptions/mysubscriptionid/resourceGroups/myResourceGroupName/providers/microsoft.ConnectedVMwarevSphere/virtualmachines/myvm/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/NotInstalledApplicationForWindows",
         "name": "NotInstalledApplicationForWindows",
         "properties": {
           "complianceStatus": "Pending",
@@ -81,7 +80,6 @@
             "contentUri": null,
             "contentHash": null,
             "contentType": null,
-            "assignmentSource": "AzurePolicy",
             "configurationParameter": [
               {
                 "name": "[InstalledApplication]NotInstalledApplicationResource1;Name",
