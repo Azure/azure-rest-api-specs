@@ -412,11 +412,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
-            "name": "serverName",
-            "in": "path",
-            "description": "The name of the server containing the failover group.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ServerNameParameter"
           },
           {
             "name": "failoverGroupName",
@@ -702,7 +698,16 @@
       }
     }
   },
-  "parameters": {},
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "description": "The name of the server.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
