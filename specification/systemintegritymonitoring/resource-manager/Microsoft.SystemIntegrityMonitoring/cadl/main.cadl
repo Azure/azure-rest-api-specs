@@ -25,7 +25,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("A SystemIntegrityMonitoring Hub.")
 model SIMHubResource is TrackedResource<SIMHubProperties> {
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,64}$")
   @key("simHubName")
   @segment("simHubs")
   @doc("Name of the resource")
@@ -37,7 +37,7 @@ model SIMHubResource is TrackedResource<SIMHubProperties> {
 @doc("A device profile that holds measurement profiles uploaded by a clean room device. Scoped under a SIM Hub.")
 @parentResource(SIMHubResource)
 model DeviceProfileResource is TrackedResource<DeviceProfileProperties> {
-  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,64}$")
   @key("deviceProfileName")
   @segment("deviceProfiles")
   @doc("Name of the resource")
@@ -81,7 +81,7 @@ interface DeviceProfiles extends ResourceOperations<DeviceProfileResource, Devic
   @post
   @segment("removeForResourceConnection")
   @doc("Removes measurement profile version currently applied to specified azure resource connections.")
-  op RemoveForResourceConnections(
+  op RemoveForResourceConnection(
 	...ResourceInstanceParameters<DeviceProfileResource>,
 
 	@body
