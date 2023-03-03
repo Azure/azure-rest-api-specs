@@ -13,8 +13,6 @@ variables:
   name:
     type: string
     prefix: name
-  adminPassword:
-    type: secureString
 
 prepareSteps:
   - step: createVirtualNetwork
@@ -121,7 +119,7 @@ prepareSteps:
           osProfile:
             computerName: $(vmName)
             adminUsername: azureuser
-            adminPassword: $(adminPassword)
+            adminPassword: Admin@01
           additionalCapabilities: {}
   - step: createVirtualMachineScaleSets
     operationId: VirtualMachineScaleSets_CreateOrUpdate
@@ -148,7 +146,7 @@ prepareSteps:
             osProfile:
               computerNamePrefix: vmss
               adminUsername: $(vmssName)
-              adminPassword: $(adminPassword)
+              adminPassword: Admin@01
             networkProfile:
               networkInterfaceConfigurations:
               - name:  $(vmssName)
