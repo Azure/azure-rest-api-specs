@@ -336,11 +336,11 @@
     }
   },
   "definitions": {
-    "CommunicationErrorResponse": {
-      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
-    },
     "CommunicationError": {
       "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationError"
+    },
+    "CommunicationErrorResponse": {
+      "$ref": "../../../Common/stable/2022-07-13/common.json#/definitions/CommunicationErrorResponse"
     },
     "CreateRoomRequest": {
       "description": "Request payload for creating new room.",
@@ -368,23 +368,6 @@
         }
       }
     },
-    "RoomParticipant": {
-      "description": "A participant of the room.",
-      "required": [
-        "rawId",
-        "role"
-      ],
-      "type": "object",
-      "properties": {
-        "rawId": {
-          "description": "Raw ID representation of the communication identifier. Please refer to the following document for additional information on Raw ID. <br> https://learn.microsoft.com/azure/communication-services/concepts/identifiers?pivots=programming-language-rest#raw-id-representation",
-          "type": "string"
-        },
-        "role": {
-          "$ref": "#/definitions/Role"
-        }
-      }
-    },
     "InvitedRoomParticipant": {
       "description": "A participant invited to the room.",
       "required": [
@@ -398,6 +381,56 @@
         },
         "role": {
           "$ref": "#/definitions/Role"
+        }
+      }
+    },
+    "ParticipantProperties": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/Role"
+        }
+      }
+    },
+    "ParticipantsCollection": {
+      "description": "A collection of participants in a room.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of participants",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoomParticipant"
+          }
+        },
+        "nextLink": {
+          "description": "If there are more participants that can be retrieved, the next link will be populated.",
+          "type": "string"
+        }
+      }
+    },
+    "PatchParticipantsRequest": {
+      "description": "Participants to be patched in the room.",
+      "type": "object",
+      "properties": {
+        "participants": {
+          "description": "Participants to be patched.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParticipantProperties"
+          },
+          "example": {
+            "rawId1": {
+              "role": "Presenter"
+            },
+            "rawId2": {
+              "role": "Attendee"
+            },
+            "rawId3": null
+          }
         }
       }
     },
@@ -449,6 +482,23 @@
         }
       }
     },
+    "RoomParticipant": {
+      "description": "A participant of the room.",
+      "required": [
+        "rawId",
+        "role"
+      ],
+      "type": "object",
+      "properties": {
+        "rawId": {
+          "description": "Raw ID representation of the communication identifier. Please refer to the following document for additional information on Raw ID. <br> https://learn.microsoft.com/azure/communication-services/concepts/identifiers?pivots=programming-language-rest#raw-id-representation",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/Role"
+        }
+      }
+    },
     "UpdateRoomRequest": {
       "description": "Request payload for updating a room.",
       "type": "object",
@@ -464,56 +514,6 @@
           "description": "(Optional) The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2020-09-08T15:55:41Z"
-        }
-      }
-    },
-    "PatchParticipantsRequest": {
-      "description": "Participants to be patched in the room.",
-      "type": "object",
-      "properties": {
-        "participants": {
-          "description": "Participants to be patched.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/ParticipantProperties"
-          },
-          "example": {
-            "rawId1": {
-              "role": "Presenter"
-            },
-            "rawId2": {
-              "role": "Attendee"
-            },
-            "rawId3": null
-          }
-        }
-      }
-    },
-    "ParticipantProperties": {
-      "type": "object",
-      "properties": {
-        "role": {
-          "$ref": "#/definitions/Role"
-        }
-      }
-    },
-    "ParticipantsCollection": {
-      "description": "A collection of participants in a room.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "A collection of participants",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoomParticipant"
-          }
-        },
-        "nextLink": {
-          "description": "If there are more participants that can be retrieved, the next link will be populated.",
-          "type": "string"
         }
       }
     }
