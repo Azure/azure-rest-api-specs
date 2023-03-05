@@ -578,6 +578,25 @@
               "description": "Error message indicating why the operation failed.",
               "type": "string",
               "readOnly": true
+            },
+            "details": {
+              "type": "array",
+              "uniqueItems": false,
+              "items": {
+                "properties": {
+                  "code": {
+                    "description": "Error code.",
+                    "type": "string",
+                    "readOnly": true
+                  },
+                  "message": {
+                    "description": "Error message indicating why the operation failed.",
+                    "type": "string",
+                    "readOnly": true
+                  }
+                }
+              },
+              "description": "List of inner error messages indicating why the operation failed."
             }
           }
         }
