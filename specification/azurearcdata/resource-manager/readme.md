@@ -27,10 +27,27 @@ These are the global settings for the azurearcdata.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2022-06
+tag: package-preview-2023-01
 ```
 
 
+### Tag: package-preview-2023-01
+
+These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-01'
+input-file:
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/activeDirectoryConnectors.json
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/azurearcdata.json
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/common.json
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/dataControllers.json
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/failoverGroups.json
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/operations.json
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/postgresInstances.json
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/sqlManagedInstances.json
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/sqlServerInstances.json
+  - Microsoft.AzureArcData/preview/2023-01-15-preview/sqlServerDatabases.json
+```
 ### Tag: package-preview-2022-06
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.

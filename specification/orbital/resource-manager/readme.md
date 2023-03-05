@@ -26,7 +26,16 @@ These are the global settings for the orbital.
 
 ```yaml
 openapi-type: arm
-tag: package-2022-03-01
+tag: package-2022-11-01
+```
+
+### Tag: package-2022-11-01
+
+These settings apply only when `--tag=package-2022-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-11-01'
+input-file:
+  - Microsoft.Orbital/stable/2022-11-01/orbital.json
 ```
 
 ### Tag: package-2022-03-01
