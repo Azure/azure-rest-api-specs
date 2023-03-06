@@ -54,7 +54,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/SqlPool_Get"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
@@ -689,19 +689,19 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/SqlPool_Get"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "OK"
           },
           "202": {
             "schema": {
-              "$ref": "#/definitions/SqlPool_Get"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "Accepted"
           },
           "201": {
             "schema": {
-              "$ref": "#/definitions/SqlPool_Get"
+              "$ref": "#/definitions/SqlPool"
             },
             "description": "Created"
           },
@@ -5289,6 +5289,10 @@
         }
       ],
       "properties": {
+        "kind": {
+          "type": "string",
+          "description": "kind"
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "SQL pool SKU"
@@ -5350,8 +5354,7 @@
           "description": "If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted.",
           "x-ms-mutability": [
             "create",
-            "read",
-            "update"
+            "read"
           ]
         }
       }
@@ -5450,6 +5453,18 @@
             "create",
             "read"
           ]
+        },
+        "currentServiceObjectiveName": {
+          "type": "string",
+          "description": "currentServiceObjectiveName"
+        },
+        "defaultSecondaryLocation": {
+          "type": "string",
+          "description": "defaultSecondaryLocation"
+        },
+        "catalogCollation": {
+          "type": "string",
+          "description": "catalogCollation"
         }
       }
     },

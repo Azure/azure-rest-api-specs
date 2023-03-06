@@ -93,7 +93,7 @@
         "responses": {
           "200": {
             "schema": {
-              "$ref": "#/definitions/Workspace_Get"
+              "$ref": "#/definitions/Workspace"
             },
             "description": ""
           },
@@ -1109,15 +1109,6 @@
           "description": "Prevent Data Exfiltration",
           "type": "boolean"
         },
-        "linkedAccessCheckOnTargetResource": {
-          "description": "Linked Access Check On Target Resource",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        },
         "allowedAadTenantIdsForLinking": {
           "description": "Allowed Aad Tenant Ids For Linking",
           "type": "array",
@@ -1267,7 +1258,11 @@
         "connectivityEndpoints": {
           "description": "Connectivity endpoints",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-ms-mutability": [
+              "create",
+              "read"
+            ]
           },
           "type": "object",
           "readOnly": true
@@ -1342,11 +1337,7 @@
         },
         "azureADOnlyAuthentication": {
           "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
+          "type": "boolean"
         },
         "trustedServiceBypassEnabled": {
           "description": "Is trustedServiceBypassEnabled for the workspace",
@@ -1621,168 +1612,6 @@
     "ErrorAdditionalInfo": {
       "type": "object",
       "description": "Array"
-    },
-    "Workspace_Get": {
-      "description": "A workspace",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Workspace resource properties",
-          "$ref": "#/definitions/WorkspaceProperties_Get",
-          "x-ms-client-flatten": true
-        },
-        "identity": {
-          "description": "Identity of the workspace",
-          "$ref": "#/definitions/ManagedIdentity"
-        }
-      }
-    },
-    "WorkspaceProperties_Get": {
-      "description": "Workspace properties",
-      "type": "object",
-      "properties": {
-        "defaultDataLakeStorage": {
-          "description": "Workspace default data lake storage account details",
-          "$ref": "#/definitions/DataLakeStorageAccountDetails"
-        },
-        "sqlAdministratorLoginPassword": {
-          "description": "SQL administrator login password",
-          "type": "string"
-        },
-        "managedResourceGroupName": {
-          "description": "Workspace managed resource group. The resource group name uniquely identifies the resource group within the user subscriptionId. The resource group name must be no longer than 90 characters long, and must be alphanumeric characters (Char.IsLetterOrDigit()) and '-', '_', '(', ')' and'.'. Note that the name cannot end with '.'",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "provisioningState": {
-          "description": "Resource provisioning state",
-          "type": "string",
-          "readOnly": true
-        },
-        "sqlAdministratorLogin": {
-          "description": "Login for workspace SQL active directory administrator",
-          "type": "string"
-        },
-        "virtualNetworkProfile": {
-          "description": "Virtual Network profile",
-          "$ref": "#/definitions/VirtualNetworkProfile"
-        },
-        "connectivityEndpoints": {
-          "description": "Connectivity endpoints",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "type": "object",
-          "readOnly": true
-        },
-        "managedVirtualNetwork": {
-          "description": "Setting this to 'default' will ensure that all compute for this workspace is in a virtual network managed on behalf of the user.",
-          "type": "string"
-        },
-        "privateEndpointConnections": {
-          "description": "Private endpoint connections to the workspace",
-          "type": "array",
-          "items": {
-            "$ref": "../../../../common/v1/privateEndpointConnection.json#/definitions/PrivateEndpointConnection"
-          }
-        },
-        "encryption": {
-          "description": "The encryption details of the workspace",
-          "$ref": "#/definitions/EncryptionDetails"
-        },
-        "workspaceUID": {
-          "description": "The workspace unique identifier",
-          "type": "string",
-          "readOnly": true,
-          "format": "uuid"
-        },
-        "extraProperties": {
-          "description": "Workspace level configs and feature flags",
-          "type": "object",
-          "readOnly": true
-        },
-        "managedVirtualNetworkSettings": {
-          "description": "Managed Virtual Network Settings",
-          "$ref": "#/definitions/ManagedVirtualNetworkSettings_Get"
-        },
-        "workspaceRepositoryConfiguration": {
-          "description": "Git integration settings",
-          "$ref": "#/definitions/WorkspaceRepositoryConfiguration"
-        },
-        "purviewConfiguration": {
-          "description": "Purview Configuration",
-          "$ref": "#/definitions/PurviewConfiguration"
-        },
-        "adlaResourceId": {
-          "description": "The ADLA resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "publicNetworkAccess": {
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "description": "Enable or Disable public network access to workspace",
-          "default": "Enabled",
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkspacePublicNetworkAccess",
-            "modelAsString": true
-          }
-        },
-        "cspWorkspaceAdminProperties": {
-          "description": "Initial workspace AAD admin properties for a CSP subscription",
-          "$ref": "#/definitions/CspWorkspaceAdminProperties"
-        },
-        "settings": {
-          "description": "Workspace settings",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "type": "object",
-          "readOnly": true
-        },
-        "azureADOnlyAuthentication": {
-          "description": "Enable or Disable AzureADOnlyAuthentication on All Workspace subresource",
-          "type": "boolean",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ]
-        },
-        "trustedServiceBypassEnabled": {
-          "description": "Is trustedServiceBypassEnabled for the workspace",
-          "type": "boolean",
-          "default": false
-        }
-      }
-    },
-    "ManagedVirtualNetworkSettings_Get": {
-      "description": "Managed Virtual Network Settings",
-      "type": "object",
-      "properties": {
-        "preventDataExfiltration": {
-          "description": "Prevent Data Exfiltration",
-          "type": "boolean"
-        },
-        "allowedAadTenantIdsForLinking": {
-          "description": "Allowed Aad Tenant Ids For Linking",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Tenant Id"
-          }
-        }
-      }
     }
   }
 }
