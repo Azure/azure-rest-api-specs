@@ -29,6 +29,15 @@ openapi-type: data-plane
 tag: package-1-0
 ```
 
+### Tag: package-2022-11-01-preview
+
+These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-11-01-preview'
+input-file:
+- Microsoft.AppConfiguration/preview/2022-11-01-preview/appconfiguration.json
+```
+
 ### Tag: package-2019-07
 
 These settings apply only when `--tag=package-1-0` is specified on the command line.
@@ -66,6 +75,18 @@ directive:
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: appconfiguration.json
     where: $.definitions.KeyValue.properties.last_modified
+    reason: Existing property names. The service uses snake casing for json properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: appconfiguration.json
+    where: $.definitions.Snapshot.properties.composition_type
+    reason: Existing property names. The service uses snake casing for json properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: appconfiguration.json
+    where: $.definitions.Snapshot.properties.items_count
+    reason: Existing property names. The service uses snake casing for json properties.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: appconfiguration.json
+    where: $.definitions.Snapshot.properties.items_link
     reason: Existing property names. The service uses snake casing for json properties.
   - suppress: XmsParameterLocation
     from: appconfiguration.json
