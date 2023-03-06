@@ -118,7 +118,8 @@
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -163,7 +164,8 @@
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "environmentEnvelope",
@@ -199,6 +201,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
           "Create environments": {
             "$ref": "./examples/ManagedEnvironments_CreateOrUpdate.json"
@@ -224,7 +229,8 @@
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -235,7 +241,12 @@
             "description": "Delete operation completed"
           },
           "202": {
-            "description": "Delete operation is in progress"
+            "description": "Delete operation is in progress",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Environment does not exist"
@@ -252,7 +263,10 @@
             "$ref": "./examples/ManagedEnvironments_Delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -273,7 +287,8 @@
             "in": "path",
             "description": "Name of the Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "environmentEnvelope",
@@ -296,7 +311,12 @@
             }
           },
           "202": {
-            "description": "Patch operation is in progress."
+            "description": "Patch operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -333,7 +353,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -383,14 +404,16 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "certificateName",
             "in": "path",
             "description": "Name of the Certificate.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -435,7 +458,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "certificateName",
@@ -495,7 +519,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "certificateName",
@@ -548,7 +573,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "certificateName",
@@ -611,7 +637,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "name": "checkNameAvailabilityRequest",
@@ -670,7 +697,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -720,7 +748,8 @@
             "in": "path",
             "description": "Name of the Managed Environment.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
         "responses": {
