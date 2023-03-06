@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "cacheName": "cache1",
+    "accessPolicyName": "accessPolicy1",
+    "api-version": "2023-05-01",
+    "parameters": {
+      "properties": {
+        "commandPermissions": "+get +hget",
+        "keyPermissions": "allkeys",
+        "pubSubChannelPermissions": "allchannels"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/accessPolicies/accessPolicy1",
+      "name": "cache1/accessPolicy1",
+      "type": "Microsoft.Cache/Redis/accessPolicies",
+      "properties": {
+        "provisioningState": "Creating/Updating/Succeeded/Deleting",
+        "commandPermissions": "+get +hget",
+        "keyPermissions": "allkeys",
+        "pubSubChannelPermissions": "allchannels",
+        "type": "Custom"
+      }
+    }
+  }
+}
