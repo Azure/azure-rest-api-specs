@@ -24,9 +24,7 @@
             "in": "path",
             "description": "Name of Azure service",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/components/parameters/ApiVersionParameter"
@@ -59,7 +57,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Service"
+                  "$ref": "./examples/ListServices.json"
                 }
               }
             }
@@ -73,11 +71,6 @@
                 }
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "Gets details of Azure service": {
-            "$ref": "./examples/ListService.json"
           }
         }
       }
@@ -95,9 +88,7 @@
           "in": "path",
           "description": "Name of Azure service for which the problem classifications need to be retrieved.",
           "required": true,
-          "schema": {
             "type": "string"
-          }
         },
         {
           "$ref": "#/components/parameters/ApiVersionParameter"
@@ -130,7 +121,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ProblemClassificationsListResult"
+                "$ref": "./examples/ListProblemClassifications.json"
               }
             }
           }
@@ -144,11 +135,6 @@
               }
             }
           }
-        }
-      },
-      "x-ms-examples": {
-        "Gets details of Azure service": {
-          "$ref": "./examples/ListProblemClassifications.json"
         }
       }
     }
@@ -164,12 +150,39 @@
       }
     },
     "schemas": {
-      "ProblemClassificationsListResult": {
-        "description": "Collection of ProblemClassification resources",
+      "Service": {
+        "description": "Object that represents a Service resource.",
         "type": "object",
         "properties": {
-          "value": {
-            "description": "List of ProblemClassification resources"
+          "id": {
+            "description": "Id of the resource",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Name of the resource",
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "description": "Type of the resource 'Microsoft.Support/services'",
+            "type": "string",
+            "readOnly": true
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/components/schemas/ServiceProperties",
+            "description": "Properties of the resource"
+          }
+        }
+      },
+      "ServiceProperties": {
+        "description": "Details about Azure service available for support ticket creation",
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "description": "Localized name of Azure service",
+            "type": "string"
           }
         }
       },
