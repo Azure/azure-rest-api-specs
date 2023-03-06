@@ -23,21 +23,7 @@ multiapi: true
 default-api-version: "2022-03-01"
 clear-output-folder: true
 batch:
-  - tag: package-2022-03-only
-  - tag: package-2021-03-only
-  - tag: package-2021-01-15-only
-  - tag: package-2021-01-only
-  - tag: package-2020-12-only
-  - tag: package-2020-09-only
-  - tag: package-2020-06-only
-  - tag: package-2019-08-only
-  - tag: package-2018-11-only
   - tag: package-2018-02-only
-  - tag: package-2016-09-only
-  - tag: package-2016-08-only
-  - tag: package-2016-03-only
-  - tag: package-2015-08-only
-  - tag: package-2015-04-only
   - multiapiscript: true
 ```
 
