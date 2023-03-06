@@ -94,7 +94,7 @@ interface LedgerEntries {
   >;
 
   @summary("Gets the current value available in the ledger.")
-  @segmentSeparator("/")
+  @actionSeparator("/")
   @doc("A collection id may optionally be specified.")
   getCurrentLedgerEntry is Azure.Core.ResourceCollectionAction<
     LedgerEntry,
@@ -105,13 +105,13 @@ interface LedgerEntries {
   @action("receipt")
   @summary("Gets a receipt certifying ledger contents at a particular transaction id.")
   @doc("Gets a receipt certifying ledger contents at a particular transaction id.")
-  @segmentSeparator("/")
+  @actionSeparator("/")
   getReceipt is Azure.Core.ResourceAction<LedgerEntry, {}, TransactionReceipt>;
 
   @action("status")
   @summary("Gets the status of an entry identified by a transaction id.")
   @doc("Gets the status of an entry identified by a transaction id.")
-  @segmentSeparator("/")
+  @actionSeparator("/")
   getTransactionStatus is Azure.Core.ResourceAction<LedgerEntry, {}, TransactionStatus>;
 }
 

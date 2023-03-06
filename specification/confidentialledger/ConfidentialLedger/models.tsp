@@ -13,30 +13,21 @@ model CollectionIdParameter {
   collectionId: string;
 }
 
-enum ConfidentialLedgerQueryStateKnownValues {
+enum ConfidentialLedgerQueryState {
   "Loading",
   "Ready",
 }
 
-@knownValues(ConfidentialLedgerQueryStateKnownValues)
-model ConfidentialLedgerQueryState is string;
-
-enum TransactionStateKnownValues {
+enum TransactionState {
   "Committed",
   "Pending",
 }
 
-@knownValues(TransactionStateKnownValues)
-model TransactionState is string;
-
-enum ConfidentialLedgerUserRoleNameKnownValues {
+enum ConfidentialLedgerUserRoleName {
   "Administrator",
   "Contributor",
   "Reader",
 }
-
-@knownValues(ConfidentialLedgerUserRoleNameKnownValues)
-model ConfidentialLedgerUserRoleName is string;
 
 @doc("The governance script for the application.")
 model Constitution {
@@ -55,6 +46,7 @@ model ConsortiumMember {
 
   @doc("Identifier assigned to the member.")
   @key
+  @visibility("read")
   id: string;
 }
 
@@ -87,6 +79,7 @@ model EnclaveQuote {
 model Collection {
   @key
   @doc("The collection id.")
+  @visibility("read")
   collectionId: string;
 }
 
