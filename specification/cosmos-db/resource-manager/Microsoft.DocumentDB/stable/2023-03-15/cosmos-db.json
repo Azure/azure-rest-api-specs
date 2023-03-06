@@ -7423,6 +7423,41 @@
           "readOnly": true,
           "type": "string",
           "description": "Description of the connection string"
+        },
+        "keyKind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Kind of the connection string",
+          "enum": [
+            "Primary",
+            "Secondary",
+            "PrimaryReadonly",
+            "SecondaryReadonly"
+          ],
+          "x-ms-enum": {
+            "name": "KeyKind",
+            "modelAsString": true
+          }
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the connection string",
+          "enum": [
+            "Sql",
+            "Table",
+            "MongoDB",
+            "Cassandra",
+            "CassandraConnectorMetadata",
+            "Gremlin",
+            "SqlDedicatedGateway",
+            "GremlinV2",
+            "Undefined"
+          ],
+          "x-ms-enum": {
+            "name": "KeyKind",
+            "modelAsString": true
+          }
         }
       }
     },
