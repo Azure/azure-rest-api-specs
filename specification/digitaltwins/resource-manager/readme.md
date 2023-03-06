@@ -26,18 +26,27 @@ These are the global settings for the digitaltwins.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-10
+tag: package-2023-01
 ```
 
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.DigitalTwins/stable/2023-01-31/digitaltwins.json
+```
 
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-10'
+``` yaml $(tag) == 'package-2022-10'
 input-file:
   - Microsoft.DigitalTwins/stable/2022-10-31/digitaltwins.json
 ```
+
 ### Tag: package-2022-05
 
 These settings apply only when `--tag=package-2022-05` is specified on the command line.
