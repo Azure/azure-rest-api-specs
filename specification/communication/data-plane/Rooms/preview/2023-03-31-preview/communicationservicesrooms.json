@@ -72,6 +72,41 @@
             "$ref": "./examples/Rooms_CreateRoom.json"
           }
         }
+      },"get": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Retrieves collection of existing rooms.",
+        "operationId": "Rooms_GetRooms",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [ ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The action returns a collection of rooms.",
+            "schema": {
+              "$ref": "#/definitions/RoomsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get meeting room.": {
+            "$ref": "./examples/Rooms_GetRooms.json"
+          }
+        }
       }
     },
     "/rooms/{roomId}": {
@@ -122,6 +157,7 @@
           }
         }
       },
+
       "patch": {
         "tags": [
           "Rooms"
@@ -479,6 +515,26 @@
           "description": "The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2021-09-08T15:55:41Z"
+        }
+      }
+    },
+    "RoomsCollection": {
+      "description": "A collection of existing rooms.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of rooms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoomModel"
+          }
+        },
+        "nextLink": {
+          "description": "If there are more rooms that can be retrieved, the next link will be populated.",
+          "type": "string"
         }
       }
     },
