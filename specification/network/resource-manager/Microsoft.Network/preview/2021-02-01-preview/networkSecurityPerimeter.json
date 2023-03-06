@@ -749,62 +749,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/resourceAssociations/{associationName}/reconcile": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/AssociationNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NspAssociationReconcile"
-        ],
-        "operationId": "NspAssociationReconcile_Post",
-        "description": "Reconcile NSP association",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NspAssociationReconcile"
-            },
-            "description": "Parameters for NSP association reconcile"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Reconcile NSP association.",
-            "schema": {
-              "$ref": "#/definitions/NspAssociationReconcile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspAssociationReconcile": {
-            "$ref": "./examples/NspAssociationReconcile.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/perimeterAssociableResourceTypes": {
       "get": {
         "operationId": "PerimeterAssociableResourceTypes_List",
@@ -840,65 +784,6 @@
         "x-ms-examples": {
           "Check Dns Name Availability": {
             "$ref": "./examples/PerimeterAssociableResourcesList.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkSecurityPerimeters/{networkSecurityPerimeterName}/profiles/{profileName}/accessRules/{accessRuleName}/reconcile": {
-      "parameters": [
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/NetworkSecurityPerimeterNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ProfileNameParameter"
-        },
-        {
-          "$ref": "#/parameters/AccessRuleNameParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        }
-      ],
-      "post": {
-        "tags": [
-          "NspAccessRulesReconcile"
-        ],
-        "operationId": "NspAccessRulesReconcile_Post",
-        "description": "Reconcile NSP access rules",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/NspAccessRuleReconcile"
-            },
-            "description": "Parameters for NSP access rule reconcile"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Reconcile NSP access rule.",
-            "schema": {
-              "$ref": "#/definitions/NspAccessRuleReconcile"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NspAccessRuleReconcile": {
-            "$ref": "./examples/NspAccessRuleReconcile.json"
           }
         }
       }
