@@ -8441,11 +8441,6 @@
       "type": "object",
       "title": "ConsolePatchProperties represents the properties of the virtual machine console that can be patched.",
       "properties": {
-        "duration": {
-          "description": "The duration this console access will be allowed for the user. The values are specified in ISO8601 duration format.",
-          "type": "string",
-          "pattern": "^P(?!$)(\\d+Y)?(\\d+M)?(\\d+W)?(\\d+D)?(T(?=\\d)(\\d+H)?(\\d+M)?(\\d+S)?)?$"
-        },
         "enabled": {
           "description": "The credentials used to login to the image repository that has access to the specified image.",
           "type": "string",
@@ -8457,6 +8452,11 @@
             "modelAsString": true,
             "name": "ConsoleEnabled"
           }
+        },
+        "expiration": {
+          "description": "The date and time after which the key will be disallowed access.",
+          "type": "string",
+          "format": "date-time"
         },
         "sshPublicKey": {
           "$ref": "#/definitions/SshPublicKey"
