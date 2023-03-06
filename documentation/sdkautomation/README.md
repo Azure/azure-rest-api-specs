@@ -28,7 +28,7 @@ SDK Automation is launched with matrix in azure pipeline. For each language conf
         ```
     2. For CADL PR, filter the list of cadl-project.yaml: find the `options` config in cadl-project.yaml, and see if the specified language is configure for that cadl-location.yaml.
     
-    If the configured language is not found here, generation for this readme.md will be skipped.
+    If the configured language is not found here, generation for this cadl-project.yaml will be skipped.
 
 4. Get `specificationRepositoryConfiguration.json` from spec repo default branch. See [SpecRepoConfig](#specrepoconfig). Get the repo and branch config in the file.
 
