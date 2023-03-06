@@ -1874,7 +1874,7 @@
             "description": "The name of the resource group."
           },
           {
-            "cacheName": "name",
+            "name": "cacheName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -1907,7 +1907,7 @@
           "200": {
             "description": "The access policy was successfully added.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyGetPutResponse"
             }
           },
           "default": {
@@ -1993,7 +1993,7 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "name",
+            "name": "cacheName",
             "in": "path",
             "required": true,
             "type": "string",
@@ -2004,7 +2004,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy."
+            "description": "The name of the access policy that is being deleted from the Redis cache."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2017,7 +2017,7 @@
           "200": {
             "description": "Response of get access policy.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyGetPutResponse"
             }
           },
           "default": {
@@ -2026,6 +2026,60 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/accessPolicies": {
+      "get": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicy_List",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyList": {
+            "$ref": "./examples/RedisCacheAccessPolicyList.json"
+          }
+        },
+        "description": "Gets the list of access policies associated with this redis cache",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of list access policies.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -2886,10 +2940,15 @@
       "required": [
         "properties"
       ],
-      "description": "Parameters required for creating an access policy for the redis cache."
+      "description": "Parameters required for creating an access policy for the redis cache"
     },
-    "RedisCacheAccessPolicyResponse": {
+    "RedisCacheAccessPolicyGetPutResponse": {
       "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of access policy",
+          "readOnly": true
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/RedisCacheAccessPolicyProperties",
@@ -2898,56 +2957,48 @@
         "type": {
           "type": "string",
           "description": "Built-In policy or Custom by user",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "enum": [
-            "Built-In",
-            "Custom"
-          ]
-        },
-        "required": [
-          "properties",
-          "type"
-        ],
-        "description": "Response to put/get access policy operation for Redis cache."
+          "readOnly": true
+        }
       },
       "required": [
+        "provisioningState",
         "properties",
         "type"
       ],
-      "description": "Parameters required for creating an access policy for the redis cache."
+      "description": "Response to get/put access policy."
+    },
+    "RedisCacheAccessPolicyListResponse": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisCacheAccessPolicyGetPutResponse"
+          },
+          "description": "List of access policies (with properties) of a Redis cache."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set."
+        }
+      },
+      "description": "List of access policies (with properties) of a Redis cache."
     },
     "RedisCacheAccessPolicyProperties": {
       "description": "Create properties for an access policy",
       "properties": {
         "commandPermissions": {
           "type": "string",
-          "description": "Command permissions for the access policy.",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
+          "description": "Command permissions for the access policy."
         },
         "keyPermissions": {
           "type": "string",
-          "description": "Key permissions for the access policy.",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
+          "description": "Key permissions for the access policy."
         },
         "pubSubChannelPermissions": {
           "type": "string",
-          "description": "Pub sub channel permissions for the access policy.",
-          "x-ms-mutability": [
-            "create",
-            "read",
-            "update"
-          ]
-        }
+          "description": "Pub sub channel permissions for the access policy."
+        },
       },
       "required": [
         "commandPermissions",
