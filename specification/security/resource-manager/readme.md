@@ -319,9 +319,6 @@ input-file:
 - Microsoft.Security/stable/2020-01-01/secureScore.json
 - Microsoft.Security/stable/2020-01-01/SecuritySolutions.json
 - Microsoft.Security/preview/2020-01-01-preview/connectors.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
-- Microsoft.Security/preview/2020-07-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/stable/2022-01-01/alerts.json
 - Microsoft.Security/stable/2022-05-01/settings.json
 - Microsoft.Security/preview/2021-01-15-preview/ingestionSettings.json
