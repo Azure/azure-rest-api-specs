@@ -1,7 +1,7 @@
-import "./main.cadl";
-import "@azure-tools/cadl-dpg";
+import "./main.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
-using Azure.DPG;
+using Azure.ClientGenerator.Core;
 
 namespace Azure.ConfidentialLedger;
 

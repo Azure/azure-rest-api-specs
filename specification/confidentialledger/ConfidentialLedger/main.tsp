@@ -1,9 +1,9 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "./routes.cadl";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "./routes.tsp";
 
-using Cadl.Rest;
-using Cadl.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.Core;
 
 @service({

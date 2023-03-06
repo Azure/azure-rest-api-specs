@@ -1,13 +1,13 @@
-import "@azure-tools/cadl-azure-core";
-import "@cadl-lang/rest";
-import "./models.cadl";
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "./models.tsp";
 
-using Cadl.Rest;
-using Cadl.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 
 namespace Azure.ConfidentialLedger;
 
-#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service."
 @summary("Gets the constitution used for governance.")
 @route("governance/constitution")
 @doc("""
@@ -16,12 +16,12 @@ consortium members.
 """)
 op getConstitution is Azure.Core.Foundations.Operation< {}, Constitution>;
 
-#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service."
 @summary("Lists the consortium members.")
 @doc("Consortium members can manage the Confidential Ledger.")
 op listConsortiumMembers is Azure.Core.Foundations.NonPagedResourceList<ConsortiumMember>;
 
-#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service."
 @summary("Gets quotes for all nodes of the Confidential Ledger.")
 @doc("""
 A quote is an SGX enclave measurement that can be used to verify the validity
@@ -30,13 +30,13 @@ of a node and its enclave.
 @route("enclaveQuotes")
 op getEnclaveQuotes is Azure.Core.Foundations.Operation<{}, Enclaves>;
 
-#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service."
 @summary("Retrieves a list of collection ids present in the Confidential Ledger")
 @doc("Collection ids are user-created collections of ledger entries")
 op listCollections is Azure.Core.Foundations.NonPagedResourceList<Collection>;
 
 interface LedgerEntries {
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service."
   @summary("Gets ledger entries from a collection corresponding to a range.")
   @doc("""
   A collection id may optionally be specified. Only entries in the specified (or
@@ -71,7 +71,7 @@ interface LedgerEntries {
     }
   >;  
 
-  #suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is an existing service."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service."
   @route("transactions/{transactionId}")
   @summary("""
   Gets the ledger entry at the specified transaction id. A collection id may
