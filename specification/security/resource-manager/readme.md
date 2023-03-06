@@ -329,6 +329,7 @@ input-file:
 - Microsoft.Security/preview/2022-01-01-preview/governanceAssignments.json
 - Microsoft.Security/preview/2022-07-01-preview/applications.json
 - Microsoft.Security/preview/2022-11-20-preview/apiCollections.json
+- Microsoft.Security/preview/2023-02-01-preview/healthReports.json
 
 
 # Needed when there is more than one input file
