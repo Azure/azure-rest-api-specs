@@ -8602,6 +8602,60 @@
         }
       }
     },
+    "A2AFabricSpecificLocationDetails": {
+      "description": "ExtendedLocation details data.",
+      "type": "object",
+      "properties": {
+        "initialPrimaryZone": {
+          "description": "The initial source zone info.",
+          "type": "string"
+        },
+        "initialRecoveryZone": {
+          "description": "The initial target zone info.",
+          "type": "string"
+        },
+        "initialPrimaryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The initial primary ExtendedLocation."
+        },
+        "initialRecoveryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The initial recovery ExtendedLocation."
+        },
+        "initialPrimaryFabricLocation": {
+          "description": "Initial primary fabric location info.",
+          "type": "string"
+        },
+        "initialRecoveryFabricLocation": {
+          "description": "The initial recovery fabric location info.",
+          "type": "string"
+        },
+        "primaryZone": {
+          "description": "Source zone info.",
+          "type": "string"
+        },
+        "recoveryZone": {
+          "description": "The target zone info.",
+          "type": "string"
+        },
+        "primaryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The primary ExtendedLocation."
+        },
+        "recoveryExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The recovery ExtendedLocation."
+        },
+        "primaryFabricLocation": {
+          "description": "Primary fabric location info.",
+          "type": "string"
+        },
+        "recoveryFabricLocation": {
+          "description": "The recovery fabric location info.",
+          "type": "string"
+        }
+      }
+    },
     "A2APolicyCreationInput": {
       "description": "A2A Policy creation input.",
       "required": [
@@ -10349,6 +10403,14 @@
             "$ref": "#/definitions/A2AExtendedLocationDetails"
           },
           "x-ms-identifiers": []
+        },
+        "locationDetails": {
+          "description": "The location details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/A2AFabricSpecificLocationDetails"
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "Azure"
@@ -11588,6 +11650,14 @@
       "properties": {
         "zoneToZoneMappings": {
           "description": "A value indicating whether the zone to zone mappings are to be returned.",
+          "type": "string"
+        },
+        "extendedLocationMappings": {
+          "description": "A value indicating whether the Extended Location mappings are to be returned.",
+          "type": "string"
+        },
+        "locationDetails": {
+          "description": "A value indicating whether the location details are to be returned.",
           "type": "string"
         },
         "fetchAgentDetails": {
