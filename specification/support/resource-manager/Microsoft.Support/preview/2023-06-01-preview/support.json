@@ -1,0 +1,213 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-06-01-preview",
+    "title": "Microsoft.Support",
+    "description": "Microsoft Azure Support Resource Provider."
+  },
+  "servers": [
+    {
+      "url": "https://management.azure.com"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Support/services/{serviceName}/classifications": {
+      "post": {
+        "tags": [
+          "Services"
+        ],
+        "description": "Gets a specific Azure service for support ticket creation.",
+        "operationId": "Services_List",
+        "parameters": [
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "Name of Azure service",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/components/parameters/ApiVersionParameter"
+          }
+        ],
+        "requestBody": {
+          "description": "Request body for support ticket creation.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "problemSummary": {
+                    "type": "string",
+                    "description": "A summary of the problem."
+                  },
+                  "resourceId": {
+                    "type": "string",
+                    "description": "The ID of the Azure resource associated with the problem."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved Azure service for support ticket creation.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "./examples/ListServices.json"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExceptionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+"/providers/Microsoft.Support/services/{serviceName}/problemClassifications/classifications": {
+    "post": {
+      "tags": [
+        "ProblemClassifications"
+      ],
+      "description": "Lists all the problem classifications (categories) available for a specific Azure service.<br/><br/> Always use the problem classifications obtained programmatically. This practice ensures that you always have the most recent set of problem classification Ids.",
+      "operationId": "ProblemClassifications_List",
+      "parameters": [
+        {
+          "name": "serviceName",
+          "in": "path",
+          "description": "Name of Azure service for which the problem classifications need to be retrieved.",
+          "required": true,
+            "type": "string"
+        },
+        {
+          "$ref": "#/components/parameters/ApiVersionParameter"
+        }
+      ],
+        "requestBody": {
+        "description": "The problem summary for which a support ticket can be created.",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "resourceId": {
+                  "type": "string",
+                  "description": "The resource ID"
+                },
+                "problemSummary": {
+                  "type": "string",
+                  "description": "The problem summary"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "Successfully retrieved list of problem classifications for the specified Azure service.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "./examples/ListProblemClassifications.json"
+              }
+            }
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExceptionResponse"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"components": {
+    "parameters": {
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "description": "The version of the API to be used with the client request.",
+        "required": true
+      }
+    },
+    "schemas": {
+      "Service": {
+        "description": "Object that represents a Service resource.",
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Id of the resource",
+            "type": "string",
+            "readOnly": true
+          },
+          "name": {
+            "description": "Name of the resource",
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "description": "Type of the resource 'Microsoft.Support/services'",
+            "type": "string",
+            "readOnly": true
+          },
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/components/schemas/ServiceProperties",
+            "description": "Properties of the resource"
+          }
+        }
+      },
+      "ServiceProperties": {
+        "description": "Details about Azure service available for support ticket creation",
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "description": "Localized name of Azure service",
+            "type": "string"
+          }
+        }
+      },
+      "ExceptionResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/components/schemas/ServiceError",
+            "description": "This is an error"
+          }
+        }
+      },
+    "ServiceError": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The error code."
+          },
+          "message": {
+            "type": "string",
+            "description": "The error message."
+          }
+        }
+      }
+    }
+  }
+}
