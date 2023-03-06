@@ -709,7 +709,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/{clusterName}/nodeConfigurations/{configurationName}": {
       "get": {
-        "description": "Gets information of a configuration for node.",
+        "description": "Gets information of a configuration for worker nodes.",
         "tags": [
           "Configurations"
         ],
@@ -752,7 +752,7 @@
         }
       },
       "put": {
-        "description": "Updates configuration of nodes in a cluster",
+        "description": "Updates configuration of worker nodes in a cluster",
         "tags": [
           "Configurations"
         ],
@@ -1633,7 +1633,7 @@
         }
       },
       "put": {
-        "description": "Approve or reject a private endpoint connection with a given name.",
+        "description": "Approves or Rejects a private endpoint connection with a given name.",
         "tags": [
           "PrivateEndpointConnections"
         ],
@@ -1643,7 +1643,7 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Approve or reject a private endpoint connection with a given name": {
+          "Approves or Rejects a Private Endpoint Connection with a given name.": {
             "$ref": "./examples/PrivateEndpointConnectionCreateOrUpdate.json"
           }
         },
@@ -2650,7 +2650,7 @@
           "description": "The localized display information for this particular operation or action."
         },
         "isDataAction": {
-          "description": "Indicates whether the operation is a data action",
+          "description": "Indicates whether the operation is a data action.",
           "type": "boolean"
         },
         "origin": {
@@ -2683,7 +2683,7 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Collection of available operation details",
+          "description": "Collection of available operation details.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2892,7 +2892,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the private endpoint connection associated with the Azure resource.",
+      "description": "The name of the private endpoint connection associated with the cluster.",
       "pattern": "^[-\\w\\._]+$",
       "x-ms-parameter-location": "method"
     },
