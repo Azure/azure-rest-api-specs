@@ -72,16 +72,17 @@
             "$ref": "./examples/Rooms_CreateRoom.json"
           }
         }
-      },"get": {
+      },
+      "get": {
         "tags": [
           "Rooms"
         ],
-        "summary": "Retrieves collection of existing rooms.",
+        "summary": "Retrieves all created rooms.",
         "operationId": "Rooms_GetRooms",
         "produces": [
           "application/json"
         ],
-        "parameters": [ ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "Request successful. The action returns a collection of rooms.",
@@ -157,7 +158,6 @@
           }
         }
       },
-
       "patch": {
         "tags": [
           "Rooms"
@@ -519,7 +519,7 @@
       }
     },
     "RoomsCollection": {
-      "description": "A collection of existing rooms.",
+      "description": "A collection of rooms.",
       "required": [
         "value"
       ],
