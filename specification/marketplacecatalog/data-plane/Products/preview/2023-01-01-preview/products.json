@@ -109,10 +109,10 @@
         "summary": "Public Products API provides an unauthenticated endpoint for consuming commercial Marketplace public products. In addition, it enables filtering on selected product properties, search, and getting starting price information per product. Each API request must include an API key allocated to you (see X-API-Key description).Send an email to MKPL_Platform_API_DL@microsoft.com including the following details to get the API Key:\n- Customer name\n- Service/Product name\n- AD Registered App ID (if available)\n- Focal point email\n- Use case/scenario\n- Expected traffic volume, including peak requests per second (daily)",
         "x-ms-examples": {
           "Product_Get": {
-            "$ref": "./examples/ListingPublicProducts_Get.json"
+            "$ref": "./examples/PublicProducts_List.json"
           }
         },
-        "operationId": "PublicProducts_Get",
+        "operationId": "PublicProducts_List",
         "parameters": [
           {
             "type": "string",
@@ -219,6 +219,9 @@
     "ErrorResponse": {
       "description": "The Catalog API error response object",
       "type": "object",
+      "required": [
+        "error"
+      ],
       "properties": {
         "error": {
           "description": "The Catalog API response details",
@@ -229,6 +232,10 @@
     "ErrorResponseDetails": {
       "description": "The Catalog API error response details object",
       "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
           "description": "The error code description. Such as code=InternalError",
