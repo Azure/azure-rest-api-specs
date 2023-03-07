@@ -22,6 +22,17 @@ batch:
   - tag: package-2021-10-01
   - tag: package-2022-02-01
   - tag: package-2022-08-01-preview
+  - tag: package-2023-02-01
+```
+
+### Tag: package-2023-02-01 and ruby
+
+These settings apply only when `--tag=package-2023-02-01 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2023-02-01' && $(ruby)
+namespace: "Azure::Signalr::Mgmt::V2023_02_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_signalr/lib
 ```
 
 ### Tag: package-2022-08-01-preview and ruby
