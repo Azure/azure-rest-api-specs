@@ -34,7 +34,7 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2022-09
+tag: package-2023-01
 ```
 
 ### Suppression
