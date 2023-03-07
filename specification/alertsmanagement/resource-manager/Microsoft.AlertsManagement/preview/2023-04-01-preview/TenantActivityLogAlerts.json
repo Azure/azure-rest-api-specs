@@ -267,22 +267,41 @@
     }
   },
   "definitions": {
-    "TenantAlertRuleList": {
-      "description": "A list of Tenant Activity Log Alert rules.",
+    "AzureResource": {
+      "description": "An Azure resource object.",
+      "x-ms-azure-resource": true,
+      "type": "object",
       "properties": {
-        "value": {
-          "description": "The list of Tenant Activity Log Alert rules.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TenantActivityLogAlertResource"
-          },
-          "x-ms-identifiers": [
-            "id"
+        "id": {
+          "description": "The resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
+          "type": "string",
+          "default": "global",
+          "x-ms-mutability": [
+            "read",
+            "create"
           ]
         },
-        "nextLink": {
-          "description": "Provides the link to retrieve the next set of elements.",
-          "type": "string"
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -302,6 +321,26 @@
           "description": "The Activity Log Alert rule properties of the resource.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AlertRuleProperties"
+        }
+      }
+    },
+    "TenantAlertRuleList": {
+      "type": "object",
+      "description": "A list of Tenant Activity Log Alert rules.",
+      "properties": {
+        "value": {
+          "description": "The list of Tenant Activity Log Alert rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TenantActivityLogAlertResource"
+          },
+          "x-ms-identifiers": [
+            "id"
+          ]
+        },
+        "nextLink": {
+          "description": "Provides the link to retrieve the next set of elements.",
+          "type": "string"
         }
       }
     },
@@ -445,9 +484,11 @@
       ]
     },
     "TenantAlertRulePatchObject": {
+      "type": "object",
       "description": "An Activity Log Alert rule object for the body of patch operations.",
       "properties": {
         "tags": {
+          "type": "object",
           "description": "The resource tags",
           "additionalProperties": {
             "type": "string"
@@ -461,6 +502,7 @@
       }
     },
     "TenantAlertRulePatchProperties": {
+      "type": "object",
       "description": "An Activity Log Alert rule properties for patch operations.",
       "properties": {
         "enabled": {
@@ -485,47 +527,17 @@
           "readOnly": true
         }
       }
-    },
-    "AzureResource": {
-      "description": "An Azure resource object.",
-      "x-ms-azure-resource": true,
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "The location of the resource. Since Azure Activity Log Alerts is a global service, the location of the rules should always be 'global'.",
-          "type": "string",
-          "default": "global",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     }
   },
   "parameters": {
+    "TenantActivityLogAlertNameParameter": {
+      "name": "alertRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the Tenant Activity Log Alert rule.",
+      "x-ms-parameter-location": "method"
+    },
     "ManagementGroupId": {
       "name": "managementGroupId",
       "in": "path",
@@ -533,14 +545,6 @@
       "type": "string",
       "description": "The ID of the target management group.",
       "minLength": 1,
-      "x-ms-parameter-location": "method"
-    },
-    "TenantActivityLogAlertNameParameter": {
-      "name": "alertRuleName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the Tenant Activity Log Alert rule.",
       "x-ms-parameter-location": "method"
     }
   }
