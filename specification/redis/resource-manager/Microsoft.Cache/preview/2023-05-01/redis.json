@@ -1962,7 +1962,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The access policy 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome."
+            "description": "The access policy 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
