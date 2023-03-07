@@ -3244,10 +3244,7 @@
         "assignments": {
           "type": "array",
           "items": {
-            "objectId": {
-              "type": "string",
-              "description": "Object Id to assign access policy to"
-            }
+            "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentObjectId"
           }
         }
       },
@@ -3255,6 +3252,18 @@
         "properties"
       ],
       "description": "Parameters required for deleting an access policy assignment"
+    },
+    "RedisCacheAccessPolicyAssignmentObjectId": {
+      "description": "Properties for deleting an access policy assignment",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "Object Id to assign access policy to"
+        }
+      },
+      "required": [
+        "objectId"
+      ]
     },
     "Operation": {
       "description": "REST API operation",
