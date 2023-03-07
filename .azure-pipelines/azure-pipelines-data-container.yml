@@ -10,10 +10,10 @@ parameters:
 - name: PathToDockefile
   displayName: Path To Docker File
   type: string
-  default: scripts/datacontainer/Dockerfile
+  default: scripts/datacontainer
   values:
-  - scripts/datacontainer-windows/Dockerfile
-  - scripts/datacontainer/Dockerfile
+  - scripts/datacontainer-windows
+  - scripts/datacontainer
 
 
 schedules:
@@ -47,13 +47,13 @@ steps:
   inputs:
     SourceFolder: $(Build.SourcesDirectory)
     contents: .git/**
-    targetFolder: $(Build.SourcesDirectory)/scripts/datacontainer
+    targetFolder: $(Build.SourcesDirectory)/${{ parameters.PathToDockerfile }}
 
 - task: Docker@2
   displayName: Build and Push
   inputs:
     command: buildAndPush
-    Dockerfile: ${{ parameters.PathToDockerfile }}
+    Dockerfile: ${{ parameters.PathToDockerfile }}/Dockerfile
     repository: $(CONTAINER_REGISTRY_REPOSITORY_NAME)
     tags: |
       latest
