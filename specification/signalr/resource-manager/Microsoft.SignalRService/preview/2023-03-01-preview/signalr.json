@@ -3,7 +3,7 @@
   "info": {
     "title": "SignalRManagementClient",
     "description": "REST API for Azure SignalR Service",
-    "version": "2023-02-01"
+    "version": "2023-03-01-preview"
   },
   "paths": {
     "/providers/Microsoft.SignalRService/operations": {
@@ -1245,6 +1245,293 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all replicas belong to this resource",
+        "operationId": "SignalRReplicas_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes replicas of the resource.",
+            "schema": {
+              "$ref": "#/definitions/ReplicaList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRReplicas_List": {
+            "$ref": "./examples/SignalRReplicas_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the replica and its properties.",
+        "operationId": "SignalRReplicas_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "replicaName",
+            "description": "Name of the replica",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding replica.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRReplicas_Get": {
+            "$ref": "./examples/SignalRReplicas_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a replica.",
+        "operationId": "SignalRReplicas_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "replicaName",
+            "description": "Name of the replica",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a replica.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "201": {
+            "description": "Created or updated. The response describes the new replica and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRReplicas_CreateOrUpdate": {
+            "$ref": "./examples/SignalRReplicas_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to delete a replica.",
+        "operationId": "SignalRReplicas_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "replicaName",
+            "description": "Name of the replica",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the replica is deleted."
+          },
+          "204": {
+            "description": "Success. The response indicates the replica is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRReplicas_Delete": {
+            "$ref": "./examples/SignalRReplicas_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to update an exiting replica.",
+        "operationId": "SignalRReplicas_Update",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "replicaName",
+            "description": "Name of the replica",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a replica.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "201": {
+            "description": "Updated. The response describes the new replica and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "SignalRReplicas_Update": {
+            "$ref": "./examples/SignalRReplicas_Update.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/restart": {
       "post": {
         "tags": [
@@ -2256,6 +2543,53 @@
       "properties": {
         "keyType": {
           "$ref": "#/definitions/KeyType"
+        }
+      }
+    },
+    "Replica": {
+      "description": "A class represent a replica resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReplicaProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      }
+    },
+    "ReplicaList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of the replica",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Replica"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "ReplicaProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
         }
       }
     },
