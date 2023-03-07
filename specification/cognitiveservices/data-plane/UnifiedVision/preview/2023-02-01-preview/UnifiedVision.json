@@ -77,6 +77,123 @@
         }
       }
     },
+    "/retrieval:vectorizeText": {
+      "post": {
+        "tags": [
+          "ImageRetrievalApi"
+        ],
+        "summary": "Return vector from a text.",
+        "operationId": "ImageRetrieval_VectorizeText",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model-version",
+            "description": "Model version.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Request of VectorizeText.",
+            "schema": {
+              "$ref": "#/definitions/VectorizeTextRequestApiModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SingleVectorResultApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageRetrieval_VectorizeText": {
+            "$ref": "./examples/ImageRetrieval_VectorizeText.json"
+          }
+        }
+      }
+    },
+    "/retrieval:vectorizeImage": {
+      "post": {
+        "tags": [
+          "ImageRetrievalApi"
+        ],
+        "summary": "Return vector from an image.",
+        "operationId": "ImageRetrieval_VectorizeImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model-version",
+            "description": "Model version.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImageUrl"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SingleVectorResultApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageRetrieval_VectorizeImage": {
+            "$ref": "./examples/ImageRetrieval_VectorizeImage.json"
+          }
+        }
+      }
+    },
     "/imageanalysis:analyze": {
       "post": {
         "tags": [
@@ -1654,6 +1771,24 @@
         }
       }
     },
+    "SingleVectorResultApiModel": {
+      "description": "Results of image vectorization.",
+      "type": "object",
+      "properties": {
+        "vector": {
+          "description": "Vector of the image.",
+          "type": "array",
+          "items": {
+            "format": "float",
+            "type": "number"
+          }
+        },
+        "modelVersion": {
+          "description": "Model version.",
+          "type": "string"
+        }
+      }
+    },
     "SmartCropsResult": {
       "description": "Smart cropping result.",
       "required": [
@@ -1705,6 +1840,20 @@
           "items": {
             "$ref": "#/definitions/Tag"
           }
+        }
+      }
+    },
+    "VectorizeTextRequestApiModel": {
+      "description": "Model for VectorizeText request.",
+      "required": [
+        "text"
+      ],
+      "type": "object",
+      "properties": {
+        "text": {
+          "description": "Text for vectorization.",
+          "minLength": 1,
+          "type": "string"
         }
       }
     },
@@ -2173,6 +2322,71 @@
           },
           "Segment_ForegroundMatting_FromImageStream": {
             "$ref": "./examples/Segment_ForegroundMatting_FromImageStream.json"
+          }
+        }
+      }
+    },
+    "/retrieval:vectorizeImage?overload=stream": {
+      "post": {
+        "tags": [
+          "ImageRetrievalApi"
+        ],
+        "summary": "Return vector from an image.",
+        "operationId": "ImageRetrieval_VectorizeImageFromImageStream",
+        "consumes": [
+          "application/octet-stream",
+          "image/jpeg",
+          "image/gif",
+          "image/tiff",
+          "image/bmp",
+          "image/png"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "model-version",
+            "description": "Model version.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "An image stream.",
+            "required": true,
+            "schema": {
+              "format": "byte",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SingleVectorResultApiModel"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ImageRetrieval_VectorizeImageFromImageStream": {
+            "$ref": "./examples/ImageRetrieval_VectorizeImageFromImageStream.json"
           }
         }
       }
