@@ -59,7 +59,10 @@
             "$ref": "#/definitions/PaymentMethodLink"
           },
           "readOnly": true,
-          "type": "array"
+          "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ]
         }
       },
       "type": "object"
@@ -214,7 +217,7 @@
       "description": "The list of payment methods.",
       "properties": {
         "nextLink": {
-          "description": "The link(url) to the next page of results.",
+          "description": "The link (url) to the next page of results.",
           "readOnly": true,
           "type": "string"
         },
@@ -227,7 +230,10 @@
           "type": "array"
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-ms-identifiers": [
+        "id"
+      ]
     }
   },
   "host": "management.azure.com",
@@ -243,6 +249,7 @@
       "name": "paymentMethodName",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z\\d-+_]{1,128}$",
       "x-ms-parameter-location": "method"
     }
   },
