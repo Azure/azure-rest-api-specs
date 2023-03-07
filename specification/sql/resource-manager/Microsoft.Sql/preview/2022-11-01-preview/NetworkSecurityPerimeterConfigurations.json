@@ -196,7 +196,7 @@
         "provisioningState": {
           "type": "string"
         },
-        "perimeter": {
+        "networkSecurityPerimeter": {
           "$ref": "#/definitions/NSPConfigPerimeter"
         },
         "resourceAssociation": {
@@ -204,6 +204,12 @@
         },
         "profile": {
           "$ref": "#/definitions/NSPConfigProfile"
+        },
+        "provisioningIssues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NSPProvisioningIssue"
+          }
         }
       }
     },
@@ -302,6 +308,43 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NSPConfigAccessRule"
+          }
+        }
+      }
+    },
+    "NSPProvisioningIssue": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/NSPProvisioningIssueProperties"
+        }
+      }
+    },
+    "NSPProvisioningIssueProperties": {
+      "type": "object",
+      "properties": {
+        "issueType": {
+          "type": "string"
+        },
+        "severity": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "suggestedResourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suggestedAccessRules": {
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
       }
