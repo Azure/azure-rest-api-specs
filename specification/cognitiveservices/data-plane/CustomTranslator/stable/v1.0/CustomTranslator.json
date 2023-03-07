@@ -1,0 +1,5044 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Microsoft Custom Translator API Preview 1.0",
+    "description": "Documentation for the Microsoft Custom Translator API<br/>C# code sample: https://github.com/MicrosoftTranslator/CustomTranslatorApiSamples",
+    "contact": {
+      "name": "Microsoft Custom Translator",
+      "email": "custommt@microsoft.com"
+    },
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/texttranslator/v1.0/categories": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "summary": "Gets the list of categories that can be assigned to the project.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TextTranslatorCategory"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/documents": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Gets the documents.",
+        "description": "### REMARKS ###\r\nDocuments can be filtered using standard OData $filter syntax. Supported fields and operations:\r\n- Name - document name to filter by. Supported operations are 'eq' and 'substringof'.\r\n- DocumentType - Document type filter. Supported operations are 'eq'. Can support multi-selection.\r\n- LanguageCode - Language code filter. Supported operations are 'eq' . Can support multi-selection.\r\n- IsParallel - Filter by the IsParallel boolean flag. Supported operations are 'eq'.\r\n- ProjectLanguages - Filter for documents applicable to a project with the specified language pair.  Language pair should be specified with a '->' between the languages. Supported operations are 'eq'.\r\n<br /><br />\r\nOnly basic 'and' operator is supported between different field filters. DocumentType allow for 'or' operation within the group. Also no nested conditions are supported.\r\n<br />\r\nExample: /api/texttranslator/v1/documents?$filter=substringof(Name, 'Document 1') and documentType eq 'training,testing' and languageCode eq 'de' and isParallel eq false\r\n<br />\r\nExample with ProjectLanguages - /api/texttranslator/v1/documents?$filter=projectLanguage eq 'en->de'\r\n<br /><br />\r\nTo sort the returned results please use the standard OData $orderby syntax. Supported fields are:\r\n- name- document name to order by.\r\n- createdDate- document created date to order by.\r\n- documentType- document type to order by - Training,Testing,Tuning, Phrase Dictionary and Sentence Dictionary in ascending or descending.\r\n<br /><br />\r\nOnly one orderBy field can be used at a time, else a 404  will be returned.\r\n<br />\r\nExample with Name : /api/texttranslator/v1/documents?$orderby=name desc\r\n<br />\r\nExample with CreatedDate: /api/texttranslator/v1/documents?$orderby=createdDate asc\r\n<br />\r\nExample with DocumentType: /api/texttranslator/v1/documents?$orderby=documentType desc",
+        "operationId": "GetDocuments",
+        "parameters": [
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "description": "Index of the page.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "in": "query",
+            "description": "Id of the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeAllDocumentsFields",
+            "in": "query",
+            "description": "Whether or not to return the optional field 'AllDocuments'\r\n            that includes basic information about documents outside the pagination range.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "prioritizeModel",
+            "in": "query",
+            "description": "When paginating results, ensures that documents that are part of this model\r\n            are listed before all other documents. If both prioritizeModel and orderby are provided, prioritzeModel will\r\n            be ignored.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The OData $filter parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The OData $orderby parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limits the number of items per page. If not provided, defaults to 10.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorDocumentsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/documents/{id}": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Gets the requested document",
+        "operationId": "GetDocument",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of the document for which details are requested",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorDocumentInfo"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Delete the document",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the document to be deleted",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/documents/{id}/files": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Gets the files for the document",
+        "operationId": "GetFiles",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of the document for which the files information is requested",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TextTranslatorFileInfo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/documents/{id}/files/{fileid}/content": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Gets the content of the requested file",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The document identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "fileId",
+            "in": "path",
+            "description": "The file id.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "description": "Index of the page",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Number of items per page",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorFileContentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/documents/{id}/export": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Downloads a zip containing the file(s) belonging to this document",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of the document for which files are requested",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/x-zip-compressed": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/documents/import": {
+      "post": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Upload files for processing. Documents are created asynchronously. Upload status can be checked using the returned job id",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "query",
+            "description": "Workspace id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "Files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "description": "Gets or sets the uploaded Files"
+                  },
+                  "DocumentDetails": {
+                    "type": "string",
+                    "description": "Gets or sets the document details with their files that are being uploaded. \r\nmultipart/form-data type does not serialize/de-serialize to anything other than file or string\r\nThis will be parsed in the controller to type IEnumerable[ImportDocumentRequestDetails]"
+                  }
+                }
+              },
+              "encoding": {
+                "Files": {
+                  "style": "form"
+                },
+                "DocumentDetails": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestTranslatorImportFilesResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/documents/import/jobs/{jobid}": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Gets the status of the document import",
+        "description": "### REMARKS ###\r\nDocument import status can be filtered using standard OData $filter syntax. Supported fields and operations:\r\n- FileName - Filters by document name. Supported operations are 'eq' and 'substringof'.\r\n- LanguageCode - Filters by language code. Supported operation is 'eq'.\r\n- Status - Filters by the import status. Supported operation is 'eq', 'lt' (less than), 'gt' (greater than).\r\n<br /><br />\r\nOnly basic 'and' operator is supported between different field filters, and nested conditions are not supported.\r\n<br /><br />\r\nExample: /api/texttranslator/v1/documents/import/jobs/{jobId}?$filter=substringof(FileName, 'Document 1') and languageCode eq 'de' and status lt '254'\r\n<br />",
+        "operationId": "ImportJobStatus",
+        "parameters": [
+          {
+            "name": "jobId",
+            "in": "path",
+            "description": "The job identifier",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The OData $filter parameter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "description": "Index of the page. If not provided, defaults to returning the first page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limits the number of items per page. If not provided, defaults to 10.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorImportJobStatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/documents/import/jobs/all": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Gets the status of all past document imports",
+        "description": "### REMARKS ###\r\nDocument import status can be filtered using standard OData $filter syntax. Supported fields and operations:\r\n- Name - Filters by document name. Supported operations are 'eq' and 'substringof'.\r\n- LanguageCode - Filters by language code. Supported operation is 'eq'.\r\n- Status - Filters by the import status. Supported operations are 'eq', 'lt' (less than), 'gt' (greater than).\r\n- UploadDateStart - Supported operation is 'ge' (greater than or equal to)\r\n- UploadDateEnd - Supported operation is 'le' (less than or equal to)\r\n<br /><br />\r\nOnly basic 'and' operator is supported between different field filters, and nested conditions are not supported.\r\n<br /><br />\r\nExample: /api/texttranslator/v1/documents/import/jobs/all?$filter=substringof(Name, 'Document 1') and languagePair eq 'de,en' and status lt '254'\r\n<br />",
+        "operationId": "ImportAllJobsStatus",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The OData $filter parameter",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "workspaceId",
+            "in": "query",
+            "description": "Id for the workspace to fetch the jobs from.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "description": "Index of the page. If not provided, defaults to returning the first page.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limits the number of items per page. If not provided, defaults to 10.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorImportAllJobsStatusResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/documents/export": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "summary": "Downloads a zip containing Documents file(s) selected from project or all documents for model (does not require method override on header)",
+        "parameters": [
+          {
+            "name": "documentIds[]",
+            "in": "query",
+            "description": "The Ids of the document for which files are requested",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/x-zip-compressed": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/languages": {
+      "get": {
+        "tags": [
+          "Languages"
+        ],
+        "summary": "Gets the list of languages supported by Translator Studio",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TextTranslatorLanguage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/languages/supportedlanguagepairs": {
+      "get": {
+        "tags": [
+          "Languages"
+        ],
+        "summary": "Gets the list of language pairs are supported by the text translator for transalation.",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TextTranslatorLanguagePair"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/models/{id}": {
+      "get": {
+        "tags": [
+          "Models"
+        ],
+        "summary": "Get the model details.",
+        "description": "### REMARKS ###\r\nTo sort the returned results please use the standard OData $orderby syntax. Supported fields are:\r\n- sourceSentences - Orders documents returned by number of source sentences.\r\n- targetSentences - Orders documents returned by number of target sentences.\r\n- alignedSentences - Orders documents returned by number of aligned sentences.\r\n- usedSentences - Orders documents returned by number of used sentences.\r\n<br /><br />\r\nOnly one orderBy field can be used at a time, else a 404  will be returned.\r\n<br />\r\nExample with SourceSentences : /api/texttranslator/v1/documents?$orderby=sourceSentences desc\r\n<br />\r\nExample with TargetSentences : /api/texttranslator/v1/documents?$orderby=targetSentences asc\r\n<br />\r\nExample with AlignedSentences: /api/texttranslator/v1/documents?$orderby=alignedSentences desc\r\n<br />\r\nExample with UsedSentences: /api/texttranslator/v1/documents?$orderby=usedSentences asc",
+        "operationId": "GetModel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of the requested model.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The OData $orderby parameter.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorModelInfo"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Models"
+        ],
+        "summary": "Updates the model.",
+        "description": "### REMARKS ###\r\nDocuments can only be added or removed from the model if it is in a draft state.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the model to update.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The updated model object.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorModelUpdateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorModelUpdateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorModelUpdateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorModelUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorModelUpdateResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Models"
+        ],
+        "summary": "Deletes the model.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of the model to delete.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/models": {
+      "post": {
+        "tags": [
+          "Models"
+        ],
+        "summary": "Creates a new model.",
+        "description": "### REMARKS ###\r\nThe field 'isAutoTrain' defaults to true if not set. If it is set to false, it \r\ncreates the model in a draft state.",
+        "requestBody": {
+          "description": "The model to be added.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorModelRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorModelRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorModelRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorModelRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/models/{id}/train": {
+      "post": {
+        "tags": [
+          "Models"
+        ],
+        "summary": "Train a model.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of the model to train.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/models/{id}/deployment": {
+      "post": {
+        "tags": [
+          "Models"
+        ],
+        "summary": "Deploy or undeploy a model.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the model to deploy or undeploy.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "An array of regions to be deployed/undeployed",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TextTranslatorModelRegionStatus"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TextTranslatorModelRegionStatus"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TextTranslatorModelRegionStatus"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TextTranslatorModelRegionStatus"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/models/{id}/tests": {
+      "get": {
+        "tags": [
+          "Models"
+        ],
+        "summary": "Gets the list of tests for the model.",
+        "description": "### REMARKS ###\r\nTests can be filtered using standard OData $filter syntax. Supported fields and operations:        \r\n- TestName - test name to filter by. Supported operations are 'eq' and 'substringof'.\r\n- Status - Supported operations are 'eq'.\r\n<br /><br />\r\nOnly basic 'and' operator is supported between different field filters. Also no nested conditions are supported.\r\n<br />\r\n    Example: /api/texttranslator/v1/models/{id}/tests?$filter=substringof(testName, 'Test 1') and status eq 'Complete'",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id of the model to which tests belong.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The OData $filter parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "description": "The page index. Default is 1.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorTestsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/models/{id}/undeployhubmodel": {
+      "delete": {
+        "tags": [
+          "Models"
+        ],
+        "summary": "Accepts a request to undeploy a Hub model deployed to API V3.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the corresponding model in Custom Translator with status Hub Deployed.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/projects": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Gets the list of projects.",
+        "description": "### REMARKS ###\r\nProjects can be filtered using standard OData $filter syntax. Supported fields and operations:\r\n- Name- project name to filter by. Supported operations are 'eq' and 'substringof'.\r\n- SourceLanguage- Supported operations are 'eq'.\r\n- TargetLanguage- Supported operations are 'eq'.\r\n- Category- Supported operations are 'eq'.\r\n<br /><br />\r\nOnly basic 'and' operator is supported between different field filters. Source language, target language, and category\r\nallow for 'or' operator within the group.\r\n<br />\r\nExample: /api/texttranslator/v1/projects?$filter=substringof(name, 'Project 1') and status eq 'Deployed' and targetLanguage eq 'de,en'\r\n<br /><br /><br />\r\nTo sort the returned results please use the standard OData $orderby syntax. Supported fields are:\r\n- name- project name to order by.\r\n- createdDate- project created date to order by.\r\n<br /><br />\r\nOnly one orderBy field can be used at a time, else a 404  will be returned.\r\n<br />\r\nExample with Name : /api/texttranslator/v1/projects?$orderby=name desc\r\n<br />\r\nExample with CreatedDate : /api/texttranslator/v1/projects?$orderby=createdDate asc",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "query",
+            "description": "The id of the workspace.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The OData $filter parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The OData $orderby parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "description": "The page index. Optional, if not provided returns all results.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorProjectsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Create a project.",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "query",
+            "description": "Workspace id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The project to create",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorProjectRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorProjectRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorProjectRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorProjectRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/projects/{id}": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Gets the project specified by Id.",
+        "operationId": "GetProject",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Id for the project for which details are requested.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorProjectInfo"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Delete the current project",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id of the project",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Updates the project.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the project to update.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The project to update",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorProjectUpdateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorProjectUpdateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorProjectUpdateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorProjectUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorProjectInfo"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/projects/{id}/models": {
+      "get": {
+        "tags": [
+          "Projects"
+        ],
+        "summary": "Gets all the Models for the given project.",
+        "description": "### REMARKS ###\r\nModels can be filtered using standard OData $filter syntax. Supported fields and operations:\r\n- ModelName - Model name to filter by. Supported operations are 'eq' and 'substringof'.\r\n- DocumentType - Returns the model if it uses the given document type. Supported operations are 'eq'. \r\n- Status - Current status of the model (for example: 'deployed'). Supported operation is 'eq' and 'or' operator within the group.\r\n<br /><br />\r\nOnly basic 'and' operator is supported between different field filters. Also no nested conditions are supported.\r\n<br />\r\n     Example: /api/texttranslator/v1/projects/{id}/models?$filter=substringof(modelName, 'Model 1') and documentType eq 'training' and status eq 'deployed,draft'\r\n<br /><br /><br />\r\nTo sort the returned results please use the standard OData $orderby syntax. If an $orderby parameter is not provided, default sort order\r\nreturns any published models first, followed by most recently modified. Supported fields are:\r\n- name - Model name to order by\r\n- modifiedDate - Model modified date to order by\r\n<br /><br />\r\nOnly one orderBy field can be used at a time, else a 404  will be returned.\r\n<br />\r\nExample with Name : /api/texttranslator/v1/documents?$orderby=name desc\r\n<br />\r\nExample with ModifiedDate: /api/texttranslator/v1/documents?$orderby=modifiedDate asc",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "The OData $filter parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "$orderby",
+            "in": "query",
+            "description": "The OData $orderby parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "pageIndex",
+            "in": "query",
+            "description": "The page index. Optional, if not provided returns all results.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorModelsResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/regions": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "summary": "Gets the list of regions.",
+        "operationId": "GetRegions",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Region"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/subscriptions": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "summary": "Gets the translator text subscription for this workspace.",
+        "operationId": "GetSubscriptions",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "query",
+            "description": "Workspace id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorSubscriptionResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/subscriptions/billingregions": {
+      "get": {
+        "tags": [
+          "Subscriptions"
+        ],
+        "summary": "Gets the translator text subscription regions.",
+        "operationId": "GetBillingRegions",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TextTranslatorBillingRegions"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/tests/{id}": {
+      "get": {
+        "tags": [
+          "Tests"
+        ],
+        "summary": "Gets details of a specific test.",
+        "operationId": "GetTest",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The test identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorTestInfo"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/tests/{id}/export": {
+      "post": {
+        "tags": [
+          "Tests"
+        ],
+        "summary": "Export the test resuls as a zip file.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The test identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/x-zip-compressed": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/tests/{id}/results": {
+      "get": {
+        "tags": [
+          "Tests"
+        ],
+        "summary": "Gets aligned source, ref, general, and MT sentences.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The test identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorTestEntriessResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/workspaces": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Gets the list of workspaces that the user has access to.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorWorkspacesReponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Creates a new workspace",
+        "requestBody": {
+          "description": "Subscription and workspace name",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorCreateWorkspaceRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorCreateWorkspaceRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorCreateWorkspaceRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorCreateWorkspaceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "The request was not formatted correctly."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/workspaces/{id}": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Gets the information for a specific workspace.",
+        "operationId": "GetWorkspace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id for the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorWorkspaceInfo"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user does not have permission to access the given workspace, or it does not exist."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Deletes a workspace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id for the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "The user does not have permission to access the given workspace, or it does not exist."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/workspaces/{id}/name": {
+      "put": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Changes the name of a workspace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id for the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The new name",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorWorkspaceNameRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorWorkspaceNameRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorWorkspaceNameRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TextTranslatorWorkspaceNameRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "The request was not formatted correctly."
+          },
+          "404": {
+            "description": "The user does not have permission to access the given workspace, or it does not exist."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/workspaces/{id}/users": {
+      "get": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Gets the list of users with access to a specific workspace",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id for the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextTranslatorWorkspaceUsersResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The user does not have permission to access the given workspace, or it does not exist."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Adds users to the workspace. If the user already has permissions to the \r\nworkspace, this  will update their level of permissions to whatever is\r\nspecified.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id for the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The users to be added",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TextTranslatorWorkspacePermissionInfo"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TextTranslatorWorkspacePermissionInfo"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TextTranslatorWorkspacePermissionInfo"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TextTranslatorWorkspacePermissionInfo"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "The request was not formatted correctly."
+          },
+          "404": {
+            "description": "The user does not have permission to access the given workspace, or it does not exist."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    },
+    "/api/texttranslator/v1.0/workspaces/{id}/users/{userid}": {
+      "delete": {
+        "tags": [
+          "Workspaces"
+        ],
+        "summary": "Removes a users permissions to the workspace.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id for the workspace",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user to be deleted",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "The user does not have permission to access the given workspace, or it does not exist."
+          }
+        },
+        "security": [
+          {
+            "bearer": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Application": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ApplicationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ApplicationIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "CreatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "ModifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ModifiedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "CreatedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "ApplicationSubscriptions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationSubscriptions"
+            },
+            "nullable": true
+          },
+          "Document": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "nullable": true
+          },
+          "File": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/File"
+            },
+            "nullable": true
+          },
+          "Project": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Project"
+            },
+            "nullable": true
+          },
+          "UploadHistory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadHistory"
+            },
+            "nullable": true
+          },
+          "ApplicationSharings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationSharing"
+            },
+            "nullable": true
+          },
+          "ApplicationCredit": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationCredit"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationCredit": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Type": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Credits": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ApplicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Application": {
+            "$ref": "#/components/schemas/Application"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationSharing": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ApplicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ApplicationUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "RoleId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "IsDefaultApplication": {
+            "type": "boolean"
+          },
+          "ApplicationUser": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "Application": {
+            "$ref": "#/components/schemas/Application"
+          },
+          "Role": {
+            "$ref": "#/components/schemas/Role"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationSubscriptions": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ApplicationIdentifier": {
+            "type": "string",
+            "nullable": true
+          },
+          "ResourceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "BillingRegion": {
+            "type": "string",
+            "nullable": true
+          },
+          "EncryptionScopeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "DataRegion": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsCMKEnabled": {
+            "type": "boolean"
+          },
+          "ApplicationIdentifierNavigation": {
+            "$ref": "#/components/schemas/Application"
+          },
+          "BillingRegionNavigation": {
+            "$ref": "#/components/schemas/BillingRegions"
+          },
+          "DataRegionNavigation": {
+            "$ref": "#/components/schemas/BillingRegions"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ApplicationUser": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "UserName": {
+            "type": "string",
+            "nullable": true
+          },
+          "OrganizationName": {
+            "type": "string",
+            "nullable": true
+          },
+          "InviteEmail": {
+            "type": "string",
+            "nullable": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "IsNewUser": {
+            "type": "boolean"
+          },
+          "CanShare": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "ObjectId": {
+            "type": "string",
+            "nullable": true
+          },
+          "TenantId": {
+            "type": "string",
+            "nullable": true
+          },
+          "UPN": {
+            "type": "string",
+            "nullable": true
+          },
+          "IDP": {
+            "type": "string",
+            "nullable": true
+          },
+          "DocumentCreatedByNavigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "nullable": true
+          },
+          "DocumentModifiedByNavigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "nullable": true
+          },
+          "File": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/File"
+            },
+            "nullable": true
+          },
+          "ModelCreatedByNavigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Model"
+            },
+            "nullable": true
+          },
+          "ModelModifiedByNavigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Model"
+            },
+            "nullable": true
+          },
+          "ProjectCreatedByNavigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Project"
+            },
+            "nullable": true
+          },
+          "ProjectModifiedByNavigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Project"
+            },
+            "nullable": true
+          },
+          "TestCreatedByNavigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Test"
+            },
+            "nullable": true
+          },
+          "TestModifiedByNavigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Test"
+            },
+            "nullable": true
+          },
+          "UploadHistoryCreatedByNavigation": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadHistory"
+            },
+            "nullable": true
+          },
+          "Applications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Application"
+            },
+            "nullable": true
+          },
+          "ApplicationSharings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationSharing"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BillingRegions": {
+        "type": "object",
+        "properties": {
+          "BillingRegionCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "BillingRegionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "BillingEndpoint": {
+            "type": "string",
+            "nullable": true
+          },
+          "MonitoringStorageAccountName": {
+            "type": "string",
+            "nullable": true
+          },
+          "MeteringKeySecretName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ApplicationSubscriptionsBillingRegion": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationSubscriptions"
+            },
+            "nullable": true
+          },
+          "ApplicationSubscriptionsDataRegion": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationSubscriptions"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Code": {
+            "type": "string",
+            "nullable": true
+          },
+          "Project": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Project"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Document": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ApplicationId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "DocumentTypeId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "IsParallel": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "AlignedSentenceCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "CreatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "ModifiedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IsAvailable": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Application": {
+            "$ref": "#/components/schemas/Application"
+          },
+          "CreatedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "DocumentType": {
+            "$ref": "#/components/schemas/DocumentType"
+          },
+          "ModifiedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "DocumentFiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentFiles"
+            },
+            "nullable": true
+          },
+          "ModelDocuments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelDocuments"
+            },
+            "nullable": true
+          },
+          "ProcessedDocument": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessedDocument"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentFiles": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "DocumentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "FileId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Document": {
+            "$ref": "#/components/schemas/Document"
+          },
+          "File": {
+            "$ref": "#/components/schemas/File"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DocumentType": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DocType": {
+            "type": "string",
+            "nullable": true
+          },
+          "Documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Document"
+            },
+            "nullable": true
+          },
+          "UploadHistoryRecords": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadHistory"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Errors": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "File": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ParentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "ApplicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Extension": {
+            "type": "string",
+            "nullable": true
+          },
+          "LanguageCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "BlobLocation": {
+            "type": "string",
+            "nullable": true
+          },
+          "SntBlobLocation": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "$ref": "#/components/schemas/FileStatus"
+          },
+          "SentenceCount": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "CharacterCount": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "FileSize": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "CreatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UploadHistoryId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Application": {
+            "$ref": "#/components/schemas/Application"
+          },
+          "CreatedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "DocumentFiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentFiles"
+            },
+            "nullable": true
+          },
+          "UploadHistory": {
+            "$ref": "#/components/schemas/UploadHistory"
+          },
+          "Language": {
+            "$ref": "#/components/schemas/Language"
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileStatus": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Language": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DisplayName": {
+            "type": "string",
+            "nullable": true
+          },
+          "LanguageCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "LanguagePairSourceLanguage": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LanguagePair"
+            },
+            "nullable": true
+          },
+          "LanguagePairTargetLanguage": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LanguagePair"
+            },
+            "nullable": true
+          },
+          "Files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/File"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "LanguagePair": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "SourceLanguageId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "TargetLanguageId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "IsAvailable": {
+            "type": "boolean"
+          },
+          "SourceLanguage": {
+            "$ref": "#/components/schemas/Language"
+          },
+          "TargetLanguage": {
+            "$ref": "#/components/schemas/Language"
+          },
+          "Project": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Project"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MigrationTrainingHistory": {
+        "type": "object",
+        "properties": {
+          "MigrationId": {
+            "type": "string",
+            "nullable": true
+          },
+          "SourceID": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ModelId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "SourceWorkspace": {
+            "type": "string",
+            "nullable": true
+          },
+          "TargetWorkspace": {
+            "type": "string",
+            "nullable": true
+          },
+          "HubBLEUScore": {
+            "type": "number",
+            "format": "double"
+          },
+          "Regions": {
+            "type": "string",
+            "nullable": true
+          },
+          "Model": {
+            "$ref": "#/components/schemas/Model"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Model": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ProjectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "ModelStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "StatusInfo": {
+            "type": "string",
+            "nullable": true
+          },
+          "IsWhitelisted": {
+            "type": "boolean"
+          },
+          "IsHidden": {
+            "type": "boolean"
+          },
+          "ResetAutoTestingDataset": {
+            "type": "boolean"
+          },
+          "ResetAutoTuningDataset": {
+            "type": "boolean"
+          },
+          "TuningSentenceCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "TestingSentenceCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "CreatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "ModifiedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "StartDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CompletionDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "IsAutoDeploy": {
+            "type": "boolean"
+          },
+          "IsCancelled": {
+            "type": "boolean"
+          },
+          "TrainingType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "AutoDeployThreshold": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScorePunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScorePunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreUnpunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreUnpunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreCipunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreCipunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreCiunpunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreCiunpunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "ModelType": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ErrorCode": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CreatedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "ModifiedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "Project": {
+            "$ref": "#/components/schemas/Project"
+          },
+          "RetrainedFromMapping": {
+            "$ref": "#/components/schemas/RetrainMapping"
+          },
+          "RetrainedToMapping": {
+            "$ref": "#/components/schemas/RetrainMapping"
+          },
+          "ModelDocuments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelDocuments"
+            },
+            "nullable": true
+          },
+          "ProcessedDocuments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProcessedDocument"
+            },
+            "nullable": true
+          },
+          "Tests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Test"
+            },
+            "nullable": true
+          },
+          "MigrationTrainingHistories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MigrationTrainingHistory"
+            },
+            "nullable": true
+          },
+          "ModelRegionStatuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ModelRegionStatus"
+            },
+            "nullable": true
+          },
+          "UnsupportedDeployedHubModels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UnsupportedDeployedHubModel"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelDocuments": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ModelId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "DocumentId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Document": {
+            "$ref": "#/components/schemas/Document"
+          },
+          "Model": {
+            "$ref": "#/components/schemas/Model"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelRegionStatus": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ModelId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Region": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "IsDeployed": {
+            "type": "boolean"
+          },
+          "DeploymentStatus": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Model": {
+            "$ref": "#/components/schemas/Model"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ModelStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ModelType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ProcessedDocument": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ModelId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "DocumentType": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "AlignedSentenceCount": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "UsedSentenceCount": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "DocumentId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "Document": {
+            "$ref": "#/components/schemas/Document"
+          },
+          "Model": {
+            "$ref": "#/components/schemas/Model"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Project": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ApplicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CategoryId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "CategoryDescriptor": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProjectName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ProjectLabel": {
+            "type": "string",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "IsDeleted": {
+            "type": "boolean"
+          },
+          "CreatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "ModifiedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "LanguagePairId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Application": {
+            "$ref": "#/components/schemas/Application"
+          },
+          "Category": {
+            "$ref": "#/components/schemas/Category"
+          },
+          "CreatedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "LanguagePair": {
+            "$ref": "#/components/schemas/LanguagePair"
+          },
+          "ModifiedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "ProjectCredit": {
+            "$ref": "#/components/schemas/ProjectCredit"
+          },
+          "Model": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Model"
+            },
+            "nullable": true
+          },
+          "Billing": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectBilling"
+            },
+            "nullable": true
+          },
+          "BillingAudits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectBillingAudit"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectBilling": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "LastBillingDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "Project": {
+            "$ref": "#/components/schemas/Project"
+          },
+          "ProjectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "Region": {
+            "$ref": "#/components/schemas/Region"
+          },
+          "RegionId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectBillingAudit": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "BillingDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "BillingType": {
+            "type": "string",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "nullable": true
+          },
+          "Project": {
+            "$ref": "#/components/schemas/Project"
+          },
+          "ProjectId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ProjectCredit": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "ProjectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "FreeTrainings": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "Project": {
+            "$ref": "#/components/schemas/Project"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Region": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "RegionName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Billing": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProjectBilling"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RetrainMapping": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "SourceModelId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "RetrainedModelId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "RetrainReason": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "RetrainDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "SourceModel": {
+            "$ref": "#/components/schemas/Model"
+          },
+          "RetrainedModel": {
+            "$ref": "#/components/schemas/Model"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "RoleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "ApplicationSharings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ApplicationSharing"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RoleInfo": {
+        "required": [
+          "Id",
+          "RoleName"
+        ],
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Gets or sets the id for this role.",
+            "format": "int32"
+          },
+          "RoleName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Gets or sets the name of this role."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a users role in a workspace."
+      },
+      "ShareUserInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "description": "Gets or sets the id for the user",
+            "format": "uuid"
+          },
+          "EmailAddress": {
+            "type": "string",
+            "description": "Gets or sets the email address for the user this workspace has been\r\nshared with.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about each user a workspace \r\nhas been shared with. Because the user's UserName\r\nmay not be yet known (if they haven't signed into\r\nCustom Translator yet), returns EmailAddress instead."
+      },
+      "SharingInfo": {
+        "required": [
+          "Id",
+          "Role",
+          "User"
+        ],
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Gets or sets the share id",
+            "format": "int64"
+          },
+          "User": {
+            "$ref": "#/components/schemas/ShareUserInfo"
+          },
+          "Role": {
+            "$ref": "#/components/schemas/RoleInfo"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a user that has permissions to a workspace."
+      },
+      "Test": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "ModelId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "SentenceCount": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "BaselineBleuScorePunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScorePunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreUnpunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreUnpunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreCipunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreCipunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreCiunpunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreCiunpunctuated": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "CreatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "ModifiedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "CreatedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          },
+          "Model": {
+            "$ref": "#/components/schemas/Model"
+          },
+          "ModifiedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          }
+        },
+        "additionalProperties": false
+      },
+      "TestStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TestTranslatorImportFilesResponse": {
+        "type": "object",
+        "properties": {
+          "JobId": {
+            "type": "string",
+            "description": "Gets or sets the job identifier.",
+            "format": "uuid"
+          },
+          "FilesAcceptedForProcessing": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Gets or sets the files accepted for processing.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "ImportFiles response.\r\nReturn the job ids for imported files"
+      },
+      "TextTranslatorBaseDocumentInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Gets or sets Id",
+            "format": "int64"
+          },
+          "TrainingDocumentType": {
+            "$ref": "#/components/schemas/TrainingDocumentType"
+          },
+          "ExtractedSentenceCount": {
+            "type": "integer",
+            "description": "Gets or sets extracted sentence count.",
+            "format": "int64"
+          },
+          "CharacterCount": {
+            "type": "integer",
+            "description": "Gets or sets character count.",
+            "format": "int64"
+          },
+          "UsedByPrioritizedModel": {
+            "type": "boolean",
+            "description": "Gets or sets if this model is used by the specified prioritized model",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class containing base information about a document. Used for \r\nselect all/none functionality on the front end."
+      },
+      "TextTranslatorBaseDocumentResponse": {
+        "type": "object",
+        "properties": {
+          "Documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorBaseDocumentInfo"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TextTranslatorBillingRegions": {
+        "type": "object",
+        "properties": {
+          "BillingRegionCode": {
+            "type": "string",
+            "description": "Gets or sets the billing region (GBL, USW2, etc)",
+            "nullable": true
+          },
+          "BillingRegionName": {
+            "type": "string",
+            "description": "Gets or sets the billing region name (Global, US West 2, etc)",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Defines the a billing region"
+      },
+      "TextTranslatorCategory": {
+        "required": [
+          "Id",
+          "Name"
+        ],
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Id of the Category",
+            "format": "int64"
+          },
+          "Name": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Name of the Category"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Defines a category of the project."
+      },
+      "TextTranslatorCreateWorkspaceRequest": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets the name of the workspace",
+            "nullable": true
+          },
+          "Subscription": {
+            "$ref": "#/components/schemas/TextTranslatorSubscriptionRequest"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The input class for creating a new workspace."
+      },
+      "TextTranslatorDocumentInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Gets or sets Id",
+            "format": "int64"
+          },
+          "TrainingDocumentType": {
+            "$ref": "#/components/schemas/TrainingDocumentType"
+          },
+          "ExtractedSentenceCount": {
+            "type": "integer",
+            "description": "Gets or sets extracted sentence count.",
+            "format": "int64"
+          },
+          "CharacterCount": {
+            "type": "integer",
+            "description": "Gets or sets character count.",
+            "format": "int64"
+          },
+          "UsedByPrioritizedModel": {
+            "type": "boolean",
+            "description": "Gets or sets if this model is used by the specified prioritized model",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets Name",
+            "nullable": true
+          },
+          "IsParallel": {
+            "type": "boolean",
+            "description": "Gets or sets IsParallel - paired/unpaired with source document"
+          },
+          "CreatedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "ModifiedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "Files": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorFileInfo"
+            },
+            "description": "Gets or sets the files associated with the document. Each document may have many files, one for each language.\r\nIf document has one file, that may mean that only one language data was uploaded for it, and others still need to be provided.",
+            "nullable": true
+          },
+          "Languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorLanguage"
+            },
+            "description": "Gets or sets the file languages associated with the document.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "description": "Gets or sets CreatedDate",
+            "format": "date-time"
+          },
+          "IsAvailable": {
+            "type": "boolean",
+            "description": "A document is available when it is NOT\r\n1. A monolingual document\r\n2. A dictionary\r\n3. Has a language pair that is not supported",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class containing detailed information about document."
+      },
+      "TextTranslatorDocumentInfoResponse": {
+        "type": "object",
+        "properties": {
+          "PageIndex": {
+            "type": "integer",
+            "description": "Gets or sets the page index.",
+            "format": "int32"
+          },
+          "TotalPageCount": {
+            "type": "integer",
+            "description": "Gets or sets the total number of pages.",
+            "format": "int32"
+          },
+          "Documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorDocumentInfo"
+            },
+            "description": "Gets or sets the documents.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TextTranslatorDocumentInstance": {
+        "type": "object",
+        "properties": {
+          "DocumentInfo": {
+            "$ref": "#/components/schemas/TextTranslatorDocumentInfo"
+          },
+          "ProcessedDocumentInfo": {
+            "$ref": "#/components/schemas/TextTranslatorProcessedDocumentInfo"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A class containing references to documents and corresponding processed documents."
+      },
+      "TextTranslatorDocumentsResponse": {
+        "type": "object",
+        "properties": {
+          "PaginatedDocuments": {
+            "$ref": "#/components/schemas/TextTranslatorDocumentInfoResponse"
+          },
+          "AllDocuments": {
+            "$ref": "#/components/schemas/TextTranslatorBaseDocumentResponse"
+          }
+        },
+        "additionalProperties": false,
+        "description": "API results container for TextTranslatorDocuments."
+      },
+      "TextTranslatorFileContentResponse": {
+        "type": "object",
+        "properties": {
+          "PageIndex": {
+            "type": "integer",
+            "description": "Gets or sets the page index.",
+            "format": "int32"
+          },
+          "TotalPageCount": {
+            "type": "integer",
+            "description": "Gets or sets the total number of pages.",
+            "format": "int32"
+          },
+          "Items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Gets or sets the items of the document",
+            "nullable": true
+          },
+          "TotalExtractedSentences": {
+            "type": "integer",
+            "description": "Gets or sets the total number of extracted sentences.",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Result container for file content."
+      },
+      "TextTranslatorFileInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Gets or sets Id",
+            "format": "int64"
+          },
+          "FileName": {
+            "type": "string",
+            "description": "Gets or sets the File Name",
+            "nullable": true
+          },
+          "Language": {
+            "$ref": "#/components/schemas/TextTranslatorLanguage"
+          },
+          "UploadDate": {
+            "type": "string",
+            "description": "Gets or sets UploadDate",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ExtractedSentenceCount": {
+            "type": "integer",
+            "description": "Gets or sets ExtractedSentenceCount",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A class for the file information."
+      },
+      "TextTranslatorImportAllJobsStatusInfo": {
+        "type": "object",
+        "properties": {
+          "JobId": {
+            "type": "string",
+            "description": "Relevant job id.",
+            "format": "uuid"
+          },
+          "NumberFiles": {
+            "type": "integer",
+            "description": "The number of files represented by this job id. The parent placeholder\r\nfor .zip and .tmx files is only included in this count if it is the only\r\nitem listed in UploadHistory for the job.",
+            "format": "int32"
+          },
+          "NumberFilesWithErrors": {
+            "type": "integer",
+            "description": "The number of files represented by this job id that have failed. The\r\nparent placeholder for .zip and .tmx files is only included in this count\r\nif it is the only item listed in UploadHistory for the job.",
+            "format": "int32"
+          },
+          "Name": {
+            "type": "string",
+            "description": "Display name of the job. For .zip/ .tmx files, this is name + extension \r\nof the parent item. For parallel data this \"DocumentName\" row \r\nin the UploadHistory table.",
+            "nullable": true
+          },
+          "Status": {
+            "$ref": "#/components/schemas/TextTranslatorImportJobStatus"
+          },
+          "DocumentType": {
+            "$ref": "#/components/schemas/TrainingDocumentType"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "description": "Job creation date.",
+            "format": "date-time"
+          },
+          "CreatedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "Languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorLanguage"
+            },
+            "description": "The file languages associated with this document.",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "ImportAllJobsStatusResponse"
+      },
+      "TextTranslatorImportAllJobsStatusResponse": {
+        "type": "object",
+        "properties": {
+          "PageIndex": {
+            "type": "integer",
+            "description": "Gets or sets the page index.",
+            "format": "int32"
+          },
+          "TotalPageCount": {
+            "type": "integer",
+            "description": "Gets or sets the total number of pages.",
+            "format": "int32"
+          },
+          "Jobs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorImportAllJobsStatusInfo"
+            },
+            "description": "Gets or sets the list of upload jobs.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "API results container for TextTranslatorImportAllJobs response."
+      },
+      "TextTranslatorImportJobFileStatusInfo": {
+        "type": "object",
+        "properties": {
+          "Status": {
+            "$ref": "#/components/schemas/TextTranslatorImportJobStatus"
+          },
+          "ModifiedDate": {
+            "type": "string",
+            "description": "Gets or sets the date the upload status was last modified",
+            "format": "date-time"
+          },
+          "FileName": {
+            "type": "string",
+            "description": "Gets or sets the name of the file.",
+            "nullable": true
+          },
+          "DocumentName": {
+            "type": "string",
+            "description": "Gets or sets the name of the document.",
+            "nullable": true
+          },
+          "Summary": {
+            "type": "string",
+            "description": "Gets or sets the summary.",
+            "nullable": true
+          },
+          "Id": {
+            "type": "integer",
+            "description": "Gets or sets the identifier.",
+            "format": "int32"
+          },
+          "ParentId": {
+            "type": "integer",
+            "description": "Gets or sets the parent identifier.",
+            "format": "int32",
+            "nullable": true
+          },
+          "Language": {
+            "$ref": "#/components/schemas/TextTranslatorLanguage"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Text Translator Import Job File Status"
+      },
+      "TextTranslatorImportJobStatus": {
+        "required": [
+          "DisplayName",
+          "Id"
+        ],
+        "type": "object",
+        "properties": {
+          "DisplayName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The display name of the status."
+          },
+          "Id": {
+            "type": "integer",
+            "description": "The id for the status.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Defines the status of an import job."
+      },
+      "TextTranslatorImportJobStatusResponse": {
+        "type": "object",
+        "properties": {
+          "PageIndex": {
+            "type": "integer",
+            "description": "Gets or sets the page index.",
+            "format": "int32"
+          },
+          "TotalPageCount": {
+            "type": "integer",
+            "description": "Gets or sets the total number of pages.",
+            "format": "int32"
+          },
+          "JobName": {
+            "type": "string",
+            "description": "Gets or sets the name for the job overall",
+            "nullable": true
+          },
+          "FileProcessingStatus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorImportJobFileStatusInfo"
+            },
+            "description": "Gets or sets the file processing status.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "ImportJobStatus Response - POCO object"
+      },
+      "TextTranslatorLanguage": {
+        "required": [
+          "DisplayName",
+          "Id",
+          "LanguageCode"
+        ],
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "The Id of the language",
+            "format": "int64"
+          },
+          "DisplayName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The Display Name of the language"
+          },
+          "LanguageCode": {
+            "minLength": 1,
+            "type": "string",
+            "description": "The ISO code of the language"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Defines a language that can be used in the text translator."
+      },
+      "TextTranslatorLanguagePair": {
+        "required": [
+          "SourceLanguage",
+          "TargetLanguage"
+        ],
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "The Id for the language pair.",
+            "format": "int64"
+          },
+          "SourceLanguage": {
+            "$ref": "#/components/schemas/TextTranslatorLanguage"
+          },
+          "TargetLanguage": {
+            "$ref": "#/components/schemas/TextTranslatorLanguage"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A language pair that is supported by the text translator for transalation."
+      },
+      "TextTranslatorModelInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Gets or sets the model Id.",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets the name of the model.",
+            "nullable": true
+          },
+          "ModelIdentifier": {
+            "type": "string",
+            "description": "Gets the Identifier with which this sytem can be used for translations through our translate API. This field is autogenerated by the \r\nsystem when the model is deployed.",
+            "nullable": true
+          },
+          "ProjectId": {
+            "type": "string",
+            "description": "Gets or sets the Id of the project to which the model belongs.",
+            "format": "uuid"
+          },
+          "Documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorDocumentInstance"
+            },
+            "description": "Gets or sets the list of documents used for training this model",
+            "nullable": true
+          },
+          "ModelRegionStatuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorModelRegionStatus"
+            },
+            "description": "Gets or sets the Regions this model is deployed in",
+            "nullable": true
+          },
+          "BaselineBleuScorePunctuated": {
+            "type": "number",
+            "description": "Gets or sets baseline BleuScore (case-sensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScorePunctuated": {
+            "type": "number",
+            "description": "Gets or sets BleuScore (case-sensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreUnpunctuated": {
+            "type": "number",
+            "description": "Gets or sets baseline BleuScore (case-sensitive, Unpunctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreUnpunctuated": {
+            "type": "number",
+            "description": "Gets or sets BleuScore (case-sensitive, Unpunctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreCIPunctuated": {
+            "type": "number",
+            "description": "Gets or sets baseline BleuScore (case-insensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreCIPunctuated": {
+            "type": "number",
+            "description": "Gets or sets BleuScore (case-insensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreCIUnpunctuated": {
+            "type": "number",
+            "description": "Gets or sets baseline BleuScore (case-insensitive, Unpunctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreCIUnpunctuated": {
+            "type": "number",
+            "description": "Gets or sets BleuScore (case-insensitive, Unpunctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "StartDate": {
+            "type": "string",
+            "description": "Gets or sets StartDate",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CompletionDate": {
+            "type": "string",
+            "description": "Gets or sets CompletionDate",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ModifiedDate": {
+            "type": "string",
+            "description": "Gets or sets ModifiedDate",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "description": "Gets or sets CreatedDate",
+            "format": "date-time",
+            "nullable": true
+          },
+          "CreatedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "ModifiedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "TrainingSentenceCount": {
+            "type": "integer",
+            "description": "Gets or sets TrainingSentenceCount",
+            "format": "int32",
+            "nullable": true
+          },
+          "TuningSentenceCount": {
+            "type": "integer",
+            "description": "Gets or sets TuningSentenceCount",
+            "format": "int32",
+            "nullable": true
+          },
+          "TestingSentenceCount": {
+            "type": "integer",
+            "description": "Gets or sets TestingSentenceCount",
+            "format": "int32",
+            "nullable": true
+          },
+          "PhraseDictionarySentenceCount": {
+            "type": "integer",
+            "description": "Gets or sets DictionarySentenceCount",
+            "format": "int32",
+            "nullable": true
+          },
+          "SentenceDictionarySentenceCount": {
+            "type": "integer",
+            "description": "Gets or sets DictionarySentenceCount",
+            "format": "int32",
+            "nullable": true
+          },
+          "MonolingualSentenceCount": {
+            "type": "integer",
+            "description": "Gets or sets MonolingualSentenceCount",
+            "format": "int32",
+            "nullable": true
+          },
+          "ModelStatus": {
+            "$ref": "#/components/schemas/ModelStatus"
+          },
+          "IsTuningAuto": {
+            "type": "boolean",
+            "description": "Gets or sets IsTuningAuto",
+            "nullable": true
+          },
+          "IsTestingAuto": {
+            "type": "boolean",
+            "description": "Gets or sets IsTestingAuto",
+            "nullable": true
+          },
+          "IsAutoDeploy": {
+            "type": "boolean",
+            "description": "Gets or sets IsAutoDeploy",
+            "nullable": true
+          },
+          "AutoDeployThreshold": {
+            "type": "number",
+            "description": "Gets or sets the auto deployment bleu score diff threshold. Auto-deploy will occur when the \r\nbleu score threshold meets or exceeds the specified minimum.",
+            "format": "double",
+            "nullable": true
+          },
+          "HubBLEUScore": {
+            "type": "number",
+            "description": "Gets or sets the BLEU Score in MT Hub for the given model.",
+            "format": "double",
+            "nullable": true
+          },
+          "HubCategory": {
+            "type": "string",
+            "description": "Gets the Category of this Model in Hub",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ErrorCode": {
+            "$ref": "#/components/schemas/Errors"
+          },
+          "ModelType": {
+            "$ref": "#/components/schemas/ModelType"
+          },
+          "RetrainedFromSourceModelId": {
+            "type": "integer",
+            "description": "Gets or sets the source model from which this model was scheduled for retraining",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": ""
+      },
+      "TextTranslatorModelRegionStatus": {
+        "required": [
+          "IsDeployed",
+          "Region"
+        ],
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "integer",
+            "description": "Gets or sets the RegionId",
+            "format": "int32"
+          },
+          "IsDeployed": {
+            "type": "boolean",
+            "description": "Gets or sets the id for this role."
+          }
+        },
+        "additionalProperties": false,
+        "description": "Information about a region a model is deployed or not deployed in"
+      },
+      "TextTranslatorModelRegionStatusWithName": {
+        "required": [
+          "IsDeployed",
+          "Region",
+          "RegionName"
+        ],
+        "type": "object",
+        "properties": {
+          "Region": {
+            "type": "integer",
+            "description": "Gets or sets the RegionId",
+            "format": "int32"
+          },
+          "IsDeployed": {
+            "type": "boolean",
+            "description": "Gets or sets the id for this role."
+          },
+          "RegionName": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Gets or sets the region name"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Expanded information about regions a model is deployed in"
+      },
+      "TextTranslatorModelRequest": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets Name",
+            "nullable": true
+          },
+          "ProjectId": {
+            "type": "string",
+            "description": "Gets or sets the Id of the project to which the model belongs.",
+            "format": "uuid"
+          },
+          "DocumentIds": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "List of DocumentIds",
+            "nullable": true
+          },
+          "IsTuningAuto": {
+            "type": "boolean",
+            "description": "Gets or sets IsTuningAuto",
+            "nullable": true
+          },
+          "IsTestingAuto": {
+            "type": "boolean",
+            "description": "Gets or sets IsTestingAuto",
+            "nullable": true
+          },
+          "IsAutoDeploy": {
+            "type": "boolean",
+            "description": "Gets or sets IsAutoDeploy",
+            "nullable": true
+          },
+          "IsAutoTrain": {
+            "type": "boolean",
+            "description": "Gets or sets IsAutoTrain. If AutoTrain is not set, \r\ndefaults to true. If AutoTrain is set to false, \r\nit will create the model in a draft state.",
+            "nullable": true
+          },
+          "AutoDeployThreshold": {
+            "type": "number",
+            "description": "Gets or sets the auto deployment bleu score diff threshold. Auto-deploy will occur when the \r\nbleu score threshold meets or exceeds the specified minimum.",
+            "format": "double",
+            "nullable": true
+          },
+          "SourceModelIdForRetrain": {
+            "type": "integer",
+            "description": "Gets or sets the source model from which this model was scheduled for retraining",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The input class for model requests."
+      },
+      "TextTranslatorModelUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets Name",
+            "nullable": true
+          },
+          "AddDocuments": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "Adds documents to the model.",
+            "nullable": true
+          },
+          "RemoveDocuments": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "Removes documents from the model.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The input class for model update requests."
+      },
+      "TextTranslatorModelUpdateResponse": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets the updated model name.",
+            "nullable": true
+          },
+          "Documents": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "description": "Gets or sets the ids used by the model",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Contains the update model information."
+      },
+      "TextTranslatorModelsResponse": {
+        "type": "object",
+        "properties": {
+          "PageIndex": {
+            "type": "integer",
+            "description": "Gets or sets the page index.",
+            "format": "int32"
+          },
+          "TotalPageCount": {
+            "type": "integer",
+            "description": "Gets or sets the total number of pages.",
+            "format": "int32"
+          },
+          "Models": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorModelInfo"
+            },
+            "description": "Gets or sets training models.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A container for models results."
+      },
+      "TextTranslatorProcessedDocumentInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Gets or Sets Id",
+            "format": "int64"
+          },
+          "ModelId": {
+            "type": "integer",
+            "description": "Gets or Sets parent model Id",
+            "format": "int64"
+          },
+          "DocumentId": {
+            "type": "integer",
+            "description": "Gets or Sets document set from which the documents were derived",
+            "format": "int64"
+          },
+          "AlignedSentenceCount": {
+            "type": "integer",
+            "description": "Aligned sentence count after sentence alignment is executed",
+            "format": "int64"
+          },
+          "UsedSentenceCount": {
+            "type": "integer",
+            "description": "Sentences used after filtering and auto selection occur",
+            "format": "int64"
+          }
+        },
+        "additionalProperties": false,
+        "description": "A class containing information related to the document after it has been processed in a specific model training"
+      },
+      "TextTranslatorProjectInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "description": "Gets or sets Id",
+            "format": "uuid"
+          },
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets Name",
+            "nullable": true
+          },
+          "Label": {
+            "type": "string",
+            "description": "Gets or sets the ProjectLabel",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Gets or sets Description",
+            "nullable": true
+          },
+          "LanguagePair": {
+            "$ref": "#/components/schemas/TextTranslatorLanguagePair"
+          },
+          "Category": {
+            "$ref": "#/components/schemas/TextTranslatorCategory"
+          },
+          "CategoryDescriptor": {
+            "type": "string",
+            "description": "Gets or sets CategoryDescriptor",
+            "nullable": true
+          },
+          "BaselineBleuScoreCIPunctuated": {
+            "type": "number",
+            "description": "Gets or sets baseline BleuScore (case-insensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreCIPunctuated": {
+            "type": "number",
+            "description": "Gets or sets BleuScore (case-insensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "Status": {
+            "$ref": "#/components/schemas/ModelStatus"
+          },
+          "ModifiedDate": {
+            "type": "string",
+            "description": "Gets or sets ModifiedDate",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "description": "Gets the CreatedDate",
+            "format": "date-time",
+            "nullable": true,
+            "readOnly": true
+          },
+          "CreatedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "ModifiedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "ApiDomain": {
+            "type": "string",
+            "description": "Gets the Api Domain",
+            "nullable": true,
+            "readOnly": true
+          },
+          "IsAvailable": {
+            "type": "boolean",
+            "description": "Maps to the IsAvailable of the unerlying Language pair.",
+            "readOnly": true
+          },
+          "HubCategory": {
+            "type": "string",
+            "description": "Gets the Category of this Model in Hub",
+            "nullable": true
+          },
+          "HasFreeTraining": {
+            "type": "boolean",
+            "description": "Gets if this project has a free training available"
+          },
+          "ModelRegionStatus": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorModelRegionStatusWithName"
+            },
+            "description": "Gets or sets the regions the model in this project is deployed in",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "TextTranslatorProjectRequest": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets Name",
+            "nullable": true
+          },
+          "CategoryDescriptor": {
+            "type": "string",
+            "description": "Gets or sets CategoryDescriptor",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Gets or sets Description",
+            "nullable": true
+          },
+          "Label": {
+            "type": "string",
+            "description": "Gets or sets the project label.",
+            "nullable": true
+          },
+          "LanguagePairId": {
+            "type": "integer",
+            "description": "The Id for the language pair.",
+            "format": "int32",
+            "readOnly": true
+          },
+          "CategoryId": {
+            "type": "integer",
+            "description": "Gets or sets Category",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "The input class for model requests."
+      },
+      "TextTranslatorProjectUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets Name",
+            "nullable": true
+          },
+          "CategoryDescriptor": {
+            "type": "string",
+            "description": "Gets or sets CategoryDescriptor",
+            "nullable": true
+          },
+          "Description": {
+            "type": "string",
+            "description": "Gets or sets Description",
+            "nullable": true
+          },
+          "Label": {
+            "type": "string",
+            "description": "Gets or sets the project label.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The input class for model update requests."
+      },
+      "TextTranslatorProjectsResponse": {
+        "type": "object",
+        "properties": {
+          "PageIndex": {
+            "type": "integer",
+            "description": "Gets or sets the page index.",
+            "format": "int32"
+          },
+          "TotalPageCount": {
+            "type": "integer",
+            "description": "Gets or sets the total number of pages.",
+            "format": "int32"
+          },
+          "Projects": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorProjectInfo"
+            },
+            "description": "Gets or sets projects",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A container for project results."
+      },
+      "TextTranslatorSubscriptionRequest": {
+        "type": "object",
+        "properties": {
+          "SubscriptionKey": {
+            "type": "string",
+            "description": "Gets or sets Name",
+            "nullable": true
+          },
+          "BillingRegionCode": {
+            "type": "string",
+            "description": "Gets or sets the region",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The input class for subscription requests."
+      },
+      "TextTranslatorSubscriptionResponse": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "description": "Subscription id",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "description": "Name of users Azure resource",
+            "nullable": true
+          },
+          "Kind": {
+            "type": "string",
+            "description": "Kind of subscription\r\nExample: TextTranslation",
+            "nullable": true
+          },
+          "Sku": {
+            "type": "string",
+            "description": "Subscription SKU type\r\nExample: S1",
+            "nullable": true
+          },
+          "IsCMKEnabled": {
+            "type": "boolean",
+            "description": "If CMK is enabled on this subscription"
+          },
+          "Region": {
+            "$ref": "#/components/schemas/TextTranslatorBillingRegions"
+          },
+          "Billing": {
+            "$ref": "#/components/schemas/TrainingPriceInformation"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Defines an application subscription."
+      },
+      "TextTranslatorTestEntriessResponse": {
+        "type": "object",
+        "properties": {
+          "TestEntries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorTestEntry"
+            },
+            "description": "Gets or sets Test result entries",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Result container for test entries."
+      },
+      "TextTranslatorTestEntry": {
+        "type": "object",
+        "properties": {
+          "Source": {
+            "type": "string",
+            "description": "Gets the source string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "Target": {
+            "type": "string",
+            "description": "Gets the target string",
+            "nullable": true,
+            "readOnly": true
+          },
+          "ReferenceString": {
+            "type": "string",
+            "description": "Gets the reference string. May be null.",
+            "nullable": true,
+            "readOnly": true
+          },
+          "General": {
+            "type": "string",
+            "description": "Gets the general string - this is the translation \r\ngenerated by the non-customized baseline",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class containing a test entry."
+      },
+      "TextTranslatorTestInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "description": "Gets or sets Id",
+            "format": "int64"
+          },
+          "Name": {
+            "type": "string",
+            "description": "The Name of this test",
+            "nullable": true
+          },
+          "ModelId": {
+            "type": "integer",
+            "description": "The Model with which the test is associated",
+            "format": "int64"
+          },
+          "Status": {
+            "$ref": "#/components/schemas/TestStatus"
+          },
+          "BaselineBleuScorePunctuated": {
+            "type": "number",
+            "description": "Gets or sets baseline BleuScore (case-sensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScorePunctuated": {
+            "type": "number",
+            "description": "Gets or sets BleuScore (case-sensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreUnpunctuated": {
+            "type": "number",
+            "description": "Gets or sets baseline BleuScore (case-sensitive, Unpunctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreUnpunctuated": {
+            "type": "number",
+            "description": "Gets or sets BleuScore (case-sensitive, Unpunctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreCIPunctuated": {
+            "type": "number",
+            "description": "Gets or sets baseline BleuScore (case-insensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreCIPunctuated": {
+            "type": "number",
+            "description": "Gets or sets BleuScore (case-insensitive, punctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BaselineBleuScoreCIUnpunctuated": {
+            "type": "number",
+            "description": "Gets or sets baseline BleuScore (case-insensitive, Unpunctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "BleuScoreCIUnpunctuated": {
+            "type": "number",
+            "description": "Gets or sets BleuScore (case-insensitive, Unpunctuated).",
+            "format": "double",
+            "nullable": true
+          },
+          "SentenceCount": {
+            "type": "integer",
+            "description": "The SentenceCount of the test",
+            "format": "int32",
+            "nullable": true
+          },
+          "CreatedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "ModifiedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Contains the required details of a Translator Studio Test"
+      },
+      "TextTranslatorTestsResponse": {
+        "type": "object",
+        "properties": {
+          "PageIndex": {
+            "type": "integer",
+            "description": "Gets or sets the page index.",
+            "format": "int32"
+          },
+          "TotalPageCount": {
+            "type": "integer",
+            "description": "Gets or sets the total number of pages.",
+            "format": "int32"
+          },
+          "Tests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorTestInfo"
+            },
+            "description": "Gets or sets Tests",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Result container for tests."
+      },
+      "TextTranslatorWorkspaceInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "description": "Gets or sets the workspace id.",
+            "nullable": true
+          },
+          "Role": {
+            "$ref": "#/components/schemas/RoleInfo"
+          },
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets the name of the workspace.",
+            "nullable": true
+          },
+          "IsCreator": {
+            "type": "boolean",
+            "description": "Gets or sets if this user is the creator of the workspace."
+          },
+          "IsDefaultWorkspace": {
+            "type": "boolean",
+            "description": "Gets or sets if this user has this workspace set as their default workspace."
+          },
+          "CreatedBy": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "CreatedDate": {
+            "type": "string",
+            "description": "Gets or sets when the workspace was created.",
+            "format": "date-time"
+          },
+          "Sharing": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingInfo"
+            },
+            "description": "Gets or sets the information about who this workspace is shared with.",
+            "nullable": true
+          },
+          "HasMigrations": {
+            "type": "boolean",
+            "description": "Gets or sets if the current workspace has any migrations."
+          },
+          "Region": {
+            "$ref": "#/components/schemas/TextTranslatorBillingRegions"
+          },
+          "Subscription": {
+            "$ref": "#/components/schemas/TextTranslatorSubscriptionResponse"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Metadata about an individual workspace"
+      },
+      "TextTranslatorWorkspaceNameRequest": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string",
+            "description": "Gets or sets name",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "The input class for change of workspace name requests."
+      },
+      "TextTranslatorWorkspacePermissionInfo": {
+        "required": [
+          "EmailAddress",
+          "RoleId"
+        ],
+        "type": "object",
+        "properties": {
+          "EmailAddress": {
+            "minLength": 1,
+            "type": "string",
+            "description": "Gets or sets the email address for the user this workspace has been\r\nshared with."
+          },
+          "RoleId": {
+            "type": "integer",
+            "description": "Gets or sets the id for this role.",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false,
+        "description": "Class for a single workspace permission request."
+      },
+      "TextTranslatorWorkspaceUsersResponse": {
+        "type": "object",
+        "properties": {
+          "Users": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharingInfo"
+            },
+            "description": "Gets or sets information for users with access to this workspace.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A container for workspace users results"
+      },
+      "TextTranslatorWorkspacesReponse": {
+        "type": "object",
+        "properties": {
+          "Workspaces": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TextTranslatorWorkspaceInfo"
+            },
+            "description": "Gets or sets information for workspaces.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "A container for workspace results"
+      },
+      "TrainingDocumentType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "TrainingPriceInformation": {
+        "type": "object",
+        "properties": {
+          "IsPaidSubscription": {
+            "type": "boolean"
+          },
+          "MaximumCharacterCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PricePerMillionCharacters": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UnsupportedDeployedHubModel": {
+        "type": "object",
+        "properties": {
+          "HubProjectId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "CTProjectId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "HubCategoryId": {
+            "type": "string",
+            "nullable": true
+          },
+          "ModelId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "IsDeployed": {
+            "type": "boolean"
+          },
+          "IsDeleted": {
+            "type": "boolean"
+          },
+          "Model": {
+            "$ref": "#/components/schemas/Model"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UploadHistory": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "JobId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ApplicationId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "ParentId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "Name": {
+            "type": "string",
+            "nullable": true
+          },
+          "Extension": {
+            "type": "string",
+            "nullable": true
+          },
+          "BlobContainerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "BlobLocation": {
+            "type": "string",
+            "nullable": true
+          },
+          "LanguageCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "Summary": {
+            "type": "string",
+            "nullable": true
+          },
+          "AllowOverwrite": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "Status": {
+            "$ref": "#/components/schemas/UploadStatus"
+          },
+          "CreatedBy": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "CreatedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ModifiedDate": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "DocumentTypeId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "DocumentName": {
+            "type": "string",
+            "nullable": true
+          },
+          "Application": {
+            "$ref": "#/components/schemas/Application"
+          },
+          "DocumentType": {
+            "$ref": "#/components/schemas/DocumentType"
+          },
+          "CreatedByNavigation": {
+            "$ref": "#/components/schemas/ApplicationUser"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UploadStatus": {
+        "enum": [
+          0,
+          10,
+          20,
+          30,
+          35,
+          40,
+          50,
+          60,
+          254,
+          255
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "UserInfo": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "type": "string",
+            "description": "Gets or Sets the User Id",
+            "format": "uuid"
+          },
+          "UserName": {
+            "type": "string",
+            "description": "Gets or Sets the User Name",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false,
+        "description": "Basic user information - object used for \r\nCreatedBy/ModifiedBy response fields"
+      }
+    },
+    "securitySchemes": {
+      "bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
