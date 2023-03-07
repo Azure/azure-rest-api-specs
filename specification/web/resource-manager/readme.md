@@ -1223,22 +1223,7 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-02-only'
 input-file:
-- Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json
-- Microsoft.CertificateRegistration/stable/2018-02-01/CertificateRegistrationProvider.json
-- Microsoft.DomainRegistration/stable/2018-02-01/Domains.json
-- Microsoft.DomainRegistration/stable/2018-02-01/TopLevelDomains.json
-- Microsoft.DomainRegistration/stable/2018-02-01/DomainRegistrationProvider.json
-- Microsoft.Web/stable/2018-02-01/Certificates.json
-- Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
-- Microsoft.Web/stable/2018-02-01/DeletedWebApps.json
-- Microsoft.Web/stable/2018-02-01/Diagnostics.json
-- Microsoft.Web/stable/2018-02-01/Provider.json
-- Microsoft.Web/stable/2018-02-01/Recommendations.json
 - Microsoft.Web/stable/2018-02-01/ResourceProvider.json
-- Microsoft.Web/stable/2018-02-01/WebApps.json
-- Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
-- Microsoft.Web/stable/2018-02-01/AppServicePlans.json
-- Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
 directive:
   # suppress each RPC 3019 error
 - where: $.definitions.Identifier.properties
