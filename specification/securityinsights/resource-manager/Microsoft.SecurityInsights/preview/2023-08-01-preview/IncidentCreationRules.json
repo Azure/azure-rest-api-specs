@@ -254,12 +254,16 @@
     },
     "IncidentCreationRuleCondition": {
       "description": "Describes a incident creation rule condition.",
+      "required": [
+        "conditionType"
+      ],
       "type": "object",
       "properties": {
         "conditionType": {
           "$ref": "#/definitions/IncidentCreationRuleConditionType"
         }
-      }
+      },
+      "discriminator": "conditionType"
     },
     "IncidentCreationRuleConditionType": {
       "enum": [
@@ -278,8 +282,22 @@
         ]
       }
     },
+    "IncidentCreationRuleGroupingAttribute": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "$ref": "#/definitions/IncidentCreationRulePropertyGroupingSupportedProperty"
+        },
+        "propertyValue": {
+          "type": "string"
+        }
+      }
+    },
     "IncidentCreationRuleGroupingConfiguration": {
       "description": "Describes incident creation rule grouping configuration.",
+      "required": [
+        "groupingKind"
+      ],
       "type": "object",
       "properties": {
         "enabled": {
@@ -298,7 +316,8 @@
           "description": "Determines if a closed incident should be reopened in case the grouping properties are matched.",
           "type": "boolean"
         }
-      }
+      },
+      "discriminator": "groupingKind"
     },
     "IncidentCreationRuleProperties": {
       "description": "Incident creation rule properties.",
@@ -369,6 +388,155 @@
         }
       }
     },
+    "IncidentCreationRulePropertyBasedValuesGrouping": {
+      "type": "object",
+      "properties": {
+        "groupingAttributes": {
+          "description": "The grouping attributes that will determine if the alert should be grouped to an incident.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IncidentCreationRuleGroupingAttribute"
+          }
+        }
+      }
+    },
+    "IncidentCreationRulePropertyConditionSupportedOperator": {
+      "enum": [
+        "Equals",
+        "NotEquals",
+        "Contains",
+        "NotContains",
+        "StartsWith",
+        "NotStartsWith",
+        "EndsWith",
+        "NotEndsWith"
+      ],
+      "type": "string",
+      "example": "Equals",
+      "x-ms-enum": {
+        "name": "IncidentCreationRulePropertyConditionSupportedOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Equals",
+            "description": "Evaluates if the property equals at least one of the condition values."
+          },
+          {
+            "value": "NotEquals",
+            "description": "Evaluates if the property does not equal any of the condition values."
+          },
+          {
+            "value": "Contains",
+            "description": "Evaluates if the property contains at least one of the condition values."
+          },
+          {
+            "value": "NotContains",
+            "description": "Evaluates if the property does not contain any of the condition values."
+          },
+          {
+            "value": "StartsWith",
+            "description": "Evaluates if the property starts with any of the condition values."
+          },
+          {
+            "value": "NotStartsWith",
+            "description": "Evaluates if the property does not start with any of the condition values."
+          },
+          {
+            "value": "EndsWith",
+            "description": "Evaluates if the property ends with any of the condition values"
+          },
+          {
+            "value": "NotEndsWith",
+            "description": "Evaluates if the property does not end with any of the condition values."
+          }
+        ]
+      }
+    },
+    "IncidentCreationRulePropertyConditionSupportedProperty": {
+      "description": "The property to evaluate in a incident creation rule property condition.",
+      "enum": [
+        "AlertDisplayName",
+        "AlertAnalyticRuleId",
+        "AlertProductName",
+        "AlertSeverity",
+        "AlertType"
+      ],
+      "type": "string",
+      "example": "AlertDisplayName",
+      "x-ms-enum": {
+        "name": "IncidentCreationRulePropertyConditionSupportedProperty",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AlertDisplayName",
+            "description": "The name of the alert."
+          },
+          {
+            "value": "AlertAnalyticRuleId",
+            "description": "The analytic rule id of the alert."
+          },
+          {
+            "value": "AlertProductName",
+            "description": "The name of the product of the alert."
+          },
+          {
+            "value": "AlertSeverity",
+            "description": "The severity of the alert."
+          },
+          {
+            "value": "AlertType",
+            "description": "The type of the alert."
+          }
+        ]
+      }
+    },
+    "IncidentCreationRulePropertyGroupingSupportedProperty": {
+      "description": "The property to evaluate by which we will group alerts.",
+      "enum": [
+        "Entities",
+        "CustomDetails",
+        "AlertProperties"
+      ],
+      "type": "string",
+      "example": "Entities",
+      "x-ms-enum": {
+        "name": "IncidentCreationRulePropertyGroupingSupportedProperty",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Entities",
+            "description": "Group alerts by identical entities."
+          },
+          {
+            "value": "CustomDetails",
+            "description": "Group alerts by custom details."
+          },
+          {
+            "value": "AlertProperties",
+            "description": "Group alerts by alert properties."
+          }
+        ]
+      }
+    },
+    "IncidentCreationRulePropertyValuesCondition": {
+      "type": "object",
+      "properties": {
+        "propertyName": {
+          "$ref": "#/definitions/IncidentCreationRulePropertyConditionSupportedProperty"
+        },
+        "operator": {
+          "$ref": "#/definitions/IncidentCreationRulePropertyConditionSupportedOperator"
+        },
+        "propertyValues": {
+          "maxItems": 50,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "IncidentCreationRulesList": {
       "type": "object",
       "properties": {
@@ -383,6 +551,40 @@
           "type": "string"
         }
       }
+    },
+    "PropertyBasedGroupingProperties": {
+      "description": "Describes a incident creation rule grouping configuration that evaluates properties values",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IncidentCreationRuleGroupingConfiguration"
+        }
+      ],
+      "properties": {
+        "groupingProperties": {
+          "type": "object",
+          "$ref": "#/definitions/IncidentCreationRulePropertyBasedValuesGrouping"
+        }
+      },
+      "x-ms-discriminator-value": "PropertyBased",
+      "x-ms-client-flatten": true
+    },
+    "IncidentCreationPropertyConditionProperties": {
+      "description": "Describes a incident creation rule condition that evaluates a property's value",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IncidentCreationRuleCondition"
+        }
+      ],
+      "properties": {
+        "conditionProperties": {
+          "type": "object",
+          "$ref": "#/definitions/IncidentCreationRulePropertyValuesCondition"
+        }
+      },
+      "x-ms-discriminator-value": "Property",
+      "x-ms-client-flatten": true
     }
   },
   "parameters": {
