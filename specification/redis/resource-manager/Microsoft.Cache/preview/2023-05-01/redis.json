@@ -3170,16 +3170,18 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/RedisCacheAccessPolicyCreateUpdateParameters"
+          "$ref": "#/definitions/RedisCacheAccessPolicy"
         }
       ],
       "description": "All properties of an access policy."
     },
     "RedisCacheAccessPolicyResponse": {
       "properties": {
-        "x-ms-client-flatten": true,
-        "$ref": "#/definitions/RedisCacheAccessPolicyProperties",
-        "description": "Properties of an access policy."
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisCacheAccessPolicyProperties",
+          "description": "Properties of an access policy."
+        }
       },
       "allOf": [
         {
