@@ -63,7 +63,6 @@ directive:
     - $..paths[($..operationId["Configurations_Update*"])]
   from: postgresqlhsc.json
   reason: Configurations have preset default values and customers can only update them, they can't create. So we don't need "Create" in operation id. 
-- 
 ```
 
 ---
