@@ -26,7 +26,7 @@ These are the global settings for the Azure Purview Catalog API.
 
 ```yaml
 openapi-type: data-plane
-tag: package-preview-2022-03
+tag: package-preview-2022-08
 ```
 
 ### Tag: package-2022-11-01-preview
@@ -36,6 +36,15 @@ These settings apply only when `--tag=package-2022-11-01-preview` is specified o
 ```yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
   - Azure.Analytics.Purview.DevopsPolicies/preview/2022-11-01-preview/purviewDevopsPolicy.json
+```
+
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Azure.Analytics.Purview.Catalog/preview/2022-08-01-preview/purviewcatalog.json
 ```
 
 ### Tag: package-2022-12-01-preview
