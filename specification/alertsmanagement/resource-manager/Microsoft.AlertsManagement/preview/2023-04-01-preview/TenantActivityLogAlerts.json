@@ -3,7 +3,7 @@
   "info": {
     "version": "2023-04-01-preview",
     "title": "Tenant Level Activity Log Alert Rules Resource Provider",
-    "description": "Tenant Level Activity Log Alert Rules provides rules creation on managemnt group level."
+    "description": "Tenant Level Activity Log Alert Rules provides rules creation on management group level."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Management/ManagementGroups/{managementGroupId}/providers/Microsoft.AlertsManagement/TenantActivityLogAlerts/{alertRuleName}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.AlertsManagement/tenantActivityLogAlerts/{alertRuleName}": {
       "put": {
         "description": "Create a new Tenant Activity Log Alert rule or update an existing one.",
         "operationId": "TenantActivityLogAlerts_CreateOrUpdate",
@@ -45,7 +45,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ManagementGroupId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ManagementGroupNameParameter"
           },
           {
             "$ref": "#/parameters/TenantActivityLogAlertNameParameter"
@@ -85,7 +85,7 @@
         }
       },
       "get": {
-        "description": "Get Teneva Activity Log Alert rule.",
+        "description": "Get Tenant Activity Log Alert rule.",
         "operationId": "TenantActivityLogAlerts_Get",
         "x-ms-examples": {
           "Get a Tenant Activity Log Alert rule": {
@@ -94,7 +94,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ManagementGroupId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ManagementGroupNameParameter"
           },
           {
             "$ref": "#/parameters/TenantActivityLogAlertNameParameter"
@@ -128,7 +128,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ManagementGroupId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ManagementGroupNameParameter"
           },
           {
             "$ref": "#/parameters/TenantActivityLogAlertNameParameter"
@@ -162,7 +162,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ManagementGroupId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ManagementGroupNameParameter"
           },
           {
             "$ref": "#/parameters/TenantActivityLogAlertNameParameter"
@@ -196,12 +196,12 @@
         }
       }
     },
-    "/providers/Microsoft.AlertsManagement/TenantActivityLogAlerts": {
+    "/providers/Microsoft.AlertsManagement/tenantActivityLogAlerts": {
       "get": {
         "description": "Get a list of all Tenant Activity Log Alert rules in the tenant.",
         "operationId": "TenantActivityLogAlerts_ListByTenant",
         "x-ms-examples": {
-          "List activity log alerts": {
+          "List activity log alerts By Tenant": {
             "$ref": "./examples/TenantActivityLogAlertRule_ListByTenant.json"
           }
         },
@@ -229,12 +229,12 @@
         }
       }
     },
-    "/providers/Microsoft.Management/ManagementGroups/{managementGroupId}/providers/Microsoft.AlertsManagement/TenantActivityLogAlerts": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupName}/providers/Microsoft.AlertsManagement/tenantActivityLogAlerts": {
       "get": {
         "description": "Get a list of all Tenant Activity Log Alert rules in a management group.",
         "operationId": "TenantActivityLogAlerts_ListByManagementGroup",
         "x-ms-examples": {
-          "List activity log alerts": {
+          "List activity log alerts By Management Group": {
             "$ref": "./examples/TenantActivityLogAlertRule_ListByManagementGroup.json"
           }
         },
@@ -243,7 +243,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ManagementGroupId"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ManagementGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -535,16 +535,8 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
       "description": "The name of the Tenant Activity Log Alert rule.",
-      "x-ms-parameter-location": "method"
-    },
-    "ManagementGroupId": {
-      "name": "managementGroupId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The ID of the target management group.",
-      "minLength": 1,
       "x-ms-parameter-location": "method"
     }
   }
