@@ -79,8 +79,8 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
-- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
-- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2021-05-01/metrics_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/preview/2022-08-01-preview/scheduledQueryRule_API.json
@@ -112,8 +112,8 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
-- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
-- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2021-05-01/metrics_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
 - Microsoft.Insights/preview/2022-08-01-preview/scheduledQueryRule_API.json
@@ -144,7 +144,7 @@ input-file:
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
-- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2021-05-01/metricDefinitions_API.json
 - Microsoft.Insights/stable/2021-05-01/metrics_API.json
 - Microsoft.Insights/stable/2019-03-01/metricBaselines_API.json
 - Microsoft.Insights/stable/2018-03-01/metricAlert_API.json
