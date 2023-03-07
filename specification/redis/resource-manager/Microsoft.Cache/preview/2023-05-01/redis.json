@@ -1864,7 +1864,7 @@
             "$ref": "./examples/RedisCacheAccessPolicyCreateUpdate.json"
           }
         },
-        "description": "Adds an access policy to Redis cache",
+        "description": "Adds an access policy to the redis cache",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -2080,6 +2080,193 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/accessPolicyAssignments/{accessPolicyName}": {
+      "put": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicyAssignment_CreateUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyAssignmentCreateUpdate": {
+            "$ref": "./examples/RedisCachePatchSchedulesCreateOrUpdate.json"
+          }
+        },
+        "description": "Adds the access policy assignment to the specified users",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Redis cache."
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the access policy to assign."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentCreateUpdateParameters"
+            },
+            "description": "Parameters supplied to the Create Update Access Policy Assignment operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The access policy assignment was successfully added.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentGetPutResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicyAssignment_Delete",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyDelete": {
+            "$ref": "./examples/RedisCacheAccessPolicyAssignmentDelete.json"
+          }
+        },
+        "description": "Deletes the access policy assignment from a redis cache",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the access policy being unassigned."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentDeleteParameters"
+            },
+            "description": "Parameters supplied to the Delete Access Policy Assignment operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The access policy assignment 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicyAssignment_Get",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyAssignmentGet": {
+            "$ref": "./examples/RedisCacheAccessPolicyAssignmentGet.json"
+          }
+        },
+        "description": "Gets the list of assignments for an access policy of a redis cache",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache."
+          },
+          {
+            "name": "accessPolicyName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the assigned access policy."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of get access policy assignments.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentGetPutResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     }
@@ -2960,11 +3147,6 @@
           "readOnly": true
         }
       },
-      "required": [
-        "provisioningState",
-        "properties",
-        "type"
-      ],
       "description": "Response to get/put access policy."
     },
     "RedisCacheAccessPolicyListResponse": {
@@ -2998,13 +3180,77 @@
         "pubSubChannelPermissions": {
           "type": "string",
           "description": "Pub sub channel permissions for the access policy."
-        },
+        }
       },
       "required": [
         "commandPermissions",
         "keyPermissions",
         "pubSubChannelPermissions"
       ]
+    },
+    "RedisCacheAccessPolicyAssignmentCreateUpdateParameters": {
+      "properties": {
+        "assignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentProperties"
+          }
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters required for creating an access policy assignment"
+    },
+    "RedisCacheAccessPolicyAssignmentProperties": {
+      "description": "Properties for an access policy assignment",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "Object Id to assign access policy to"
+        },
+        "username": {
+          "type": "string",
+          "description": "User name"
+        }
+      },
+      "required": [
+        "objectId",
+        "username"
+      ]
+    },
+    "RedisCacheAccessPolicyAssignmentGetPutResponse": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of access policy",
+          "readOnly": true
+        },
+        "assignments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentProperties"
+          }
+        }
+      },
+      "description": "Response to get/put access policy."
+    },
+    "RedisCacheAccessPolicyAssignmentDeleteParameters": {
+      "properties": {
+        "assignments": {
+          "type": "array",
+          "items": {
+            "objectId": {
+              "type": "string",
+              "description": "Object Id to assign access policy to"
+            }
+          }
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters required for deleting an access policy assignment"
     },
     "Operation": {
       "description": "REST API operation",
