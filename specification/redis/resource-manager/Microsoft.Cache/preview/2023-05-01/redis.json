@@ -1907,7 +1907,7 @@
           "200": {
             "description": "The access policy was successfully added.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyGetPutResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyResponse"
             }
           },
           "default": {
@@ -2017,7 +2017,7 @@
           "200": {
             "description": "Response of get access policy.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyGetPutResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyResponse"
             }
           },
           "default": {
@@ -3120,63 +3120,8 @@
       ],
       "description": "Parameter required for creating a linked server to redis cache."
     },
-    "RedisCacheAccessPolicyCreateUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisCacheAccessPolicyProperties",
-          "description": "Properties required to create an access policy."
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Parameters required for creating an access policy for the redis cache"
-    },
-    "RedisCacheAccessPolicyGetPutResponse": {
-      "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of access policy",
-          "readOnly": true
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisCacheAccessPolicyProperties",
-          "description": "Properties of an access policy."
-        },
-        "type": {
-          "type": "string",
-          "description": "Built-In or Custom access policy",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "description": "Response to get/put access policy."
-    },
-    "RedisCacheAccessPolicyListResponse": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RedisCacheAccessPolicyGetPutResponse"
-          },
-          "description": "List of access policies (with properties) of a Redis cache."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Link for next set."
-        }
-      },
-      "description": "List of access policies (with properties) of a Redis cache."
-    },
-    "RedisCacheAccessPolicyProperties": {
-      "description": "Create properties for an access policy",
+    "RedisCacheAccessPolicy": {
+      "description": "Base properties for an access policy",
       "properties": {
         "commandPermissions": {
           "type": "string",
@@ -3196,6 +3141,69 @@
         "keyPermissions",
         "pubSubChannelPermissions"
       ]
+    },
+    "RedisCacheAccessPolicyCreateUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisCacheAccessPolicy",
+          "description": "Base properties required to create or update an access policy."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Parameters required for creating an access policy for the redis cache"
+    },
+    "RedisCacheAccessPolicyProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of access policy",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Built-In or Custom access policy",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCacheAccessCreateUpdateParameters"
+        }
+      ],
+      "description": "All properties of an access policy."
+    },
+    "RedisCacheAccessPolicyResponse": {
+      "properties": {
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/RedisCacheAccessPolicyProperties",
+        "description": "Properties of an access policy."
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Response to get/put access policy."
+    },
+    "RedisCacheAccessPolicyListResponse": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisCacheAccessPolicyResponse"
+          },
+          "description": "List of access policies (with properties) of a Redis cache."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set."
+        }
+      },
+      "description": "List of access policies (with properties) of a Redis cache."
     },
     "RedisCacheAccessPolicyAssignmentCreateUpdateParameters": {
       "properties": {
