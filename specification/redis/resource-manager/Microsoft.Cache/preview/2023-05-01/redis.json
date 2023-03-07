@@ -2189,15 +2189,6 @@
             "description": "The name of the access policy being unassigned."
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentDeleteParameters"
-            },
-            "description": "Parameters supplied to the Delete Access Policy Assignment operation."
-          },
-          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -3261,32 +3252,6 @@
         }
       ],
       "description": "Response to get/put access policy."
-    },
-    "RedisCacheAccessPolicyAssignmentDeleteParameters": {
-      "properties": {
-        "assignments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentObjectId"
-          }
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Parameters required for deleting an access policy assignment"
-    },
-    "RedisCacheAccessPolicyAssignmentObjectId": {
-      "description": "Properties for deleting an access policy assignment",
-      "properties": {
-        "objectId": {
-          "type": "string",
-          "description": "Object Id to assign access policy to"
-        }
-      },
-      "required": [
-        "objectId"
-      ]
     },
     "Operation": {
       "description": "REST API operation",
