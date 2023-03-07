@@ -1,260 +1,8 @@
 {
-  "consumes": [
-    "application/json"
-  ],
-  "definitions": {
-    "PaymentMethod": {
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/ArmResource"
-        }
-      ],
-      "description": "A payment method.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PaymentMethodProperties",
-          "description": "Payment method properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
-    "PaymentMethodLink": {
-      "allOf": [
-        {
-          "$ref": "./types.json#/definitions/ArmResource"
-        }
-      ],
-      "description": "A payment method link.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PaymentMethodLinkProperties",
-          "title": "Payment method link properties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "type": "object"
-    },
-    "PaymentMethodLinkProperties": {
-      "description": "The properties of a payment method link.",
-      "properties": {
-        "paymentMethod": {
-          "$ref": "#/definitions/PaymentMethodProjectionProperties",
-          "description": "Projection of a payment method"
-        }
-      },
-      "type": "object"
-    },
-    "PaymentMethodLinksListResult": {
-      "description": "The list of payment method links.",
-      "properties": {
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "value": {
-          "description": "The list of payment method links.",
-          "items": {
-            "$ref": "#/definitions/PaymentMethodLink"
-          },
-          "readOnly": true,
-          "type": "array",
-          "x-ms-identifiers": [
-            "id"
-          ]
-        }
-      },
-      "type": "object"
-    },
-    "PaymentMethodLogo": {
-      "description": "Logo of payment method.",
-      "properties": {
-        "mimeType": {
-          "description": "MIME type of the logo.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "url": {
-          "description": "Public URL of image of the logo.",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "PaymentMethodProjectionProperties": {
-      "description": "The properties of a payment method projection.",
-      "properties": {
-        "accountHolderName": {
-          "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name of the payment method.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "expiration": {
-          "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "family": {
-          "description": "The family of payment method.",
-          "enum": [
-            "creditcard",
-            "checkwire",
-            "unknown"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "paymentMethodFamily"
-          }
-        },
-        "id": {
-          "description": "Id of payment method.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "lastFourDigits": {
-          "description": "Last four digits of payment method.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "logos": {
-          "description": "The list of logos for the payment method.",
-          "items": {
-            "$ref": "#/definitions/PaymentMethodLogo"
-          },
-          "type": "array"
-        },
-        "status": {
-          "description": "Status of the payment method.",
-          "enum": [
-            "active",
-            "inactive",
-            "unknown"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "paymentMethodStatus"
-          }
-        },
-        "type": {
-          "description": "The type of payment method.",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "PaymentMethodProperties": {
-      "description": "The properties of a payment method.",
-      "properties": {
-        "accountHolderName": {
-          "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "displayName": {
-          "description": "The display name of the payment method.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "expiration": {
-          "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "family": {
-          "description": "The family of payment method.",
-          "enum": [
-            "creditcard",
-            "checkwire",
-            "unknown"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "paymentMethodFamily"
-          }
-        },
-        "lastFourDigits": {
-          "description": "Last four digits of payment method.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "logos": {
-          "description": "The list of logos for the payment method.",
-          "items": {
-            "$ref": "#/definitions/PaymentMethodLogo"
-          },
-          "type": "array"
-        },
-        "status": {
-          "description": "Status of the payment method.",
-          "enum": [
-            "active",
-            "inactive",
-            "unknown"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "paymentMethodStatus"
-          }
-        },
-        "type": {
-          "description": "The type of payment method.",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "PaymentMethodsListResult": {
-      "description": "The list of payment methods.",
-      "properties": {
-        "nextLink": {
-          "description": "The link (url) to the next page of results.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "value": {
-          "description": "The list of payment methods.",
-          "items": {
-            "$ref": "#/definitions/PaymentMethod"
-          },
-          "readOnly": true,
-          "type": "array"
-        }
-      },
-      "type": "object",
-      "x-ms-identifiers": [
-        "id"
-      ]
-    }
-  },
-  "host": "management.azure.com",
   "info": {
     "description": "The billing client allows you to view and manage your billing details programmatically.",
     "title": "PaymentManagementClient",
     "version": "2023-04-01"
-  },
-  "parameters": {
-    "paymentMethodNameParameter": {
-      "description": "The ID that uniquely identifies a payment method.",
-      "in": "path",
-      "name": "paymentMethodName",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z\\d-+_]{1,128}$",
-      "x-ms-parameter-location": "method"
-    }
   },
   "paths": {
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/paymentMethodLinks": {
@@ -547,6 +295,258 @@
       }
     }
   },
+  "definitions": {
+    "PaymentMethod": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A payment method.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PaymentMethodProperties",
+          "description": "Payment method properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "PaymentMethodLink": {
+      "allOf": [
+        {
+          "$ref": "./types.json#/definitions/ArmResource"
+        }
+      ],
+      "description": "A payment method link.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PaymentMethodLinkProperties",
+          "title": "Payment method link properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "PaymentMethodLinkProperties": {
+      "description": "The properties of a payment method link.",
+      "properties": {
+        "paymentMethod": {
+          "$ref": "#/definitions/PaymentMethodProjectionProperties",
+          "description": "Projection of a payment method"
+        }
+      },
+      "type": "object"
+    },
+    "PaymentMethodLinksListResult": {
+      "description": "The list of payment method links.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of payment method links.",
+          "items": {
+            "$ref": "#/definitions/PaymentMethodLink"
+          },
+          "readOnly": true,
+          "type": "array",
+          "x-ms-identifiers": [
+            "id"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "PaymentMethodLogo": {
+      "description": "Logo of payment method.",
+      "properties": {
+        "mimeType": {
+          "description": "MIME type of the logo.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "url": {
+          "description": "Public URL of image of the logo.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PaymentMethodProjectionProperties": {
+      "description": "The properties of a payment method projection.",
+      "properties": {
+        "accountHolderName": {
+          "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the payment method.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "expiration": {
+          "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "family": {
+          "description": "The family of payment method.",
+          "enum": [
+            "creditcard",
+            "checkwire",
+            "unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "paymentMethodFamily"
+          }
+        },
+        "id": {
+          "description": "Id of payment method.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "lastFourDigits": {
+          "description": "Last four digits of payment method.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "logos": {
+          "description": "The list of logos for the payment method.",
+          "items": {
+            "$ref": "#/definitions/PaymentMethodLogo"
+          },
+          "type": "array"
+        },
+        "status": {
+          "description": "Status of the payment method.",
+          "enum": [
+            "active",
+            "inactive",
+            "unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "paymentMethodStatus"
+          }
+        },
+        "type": {
+          "description": "The type of payment method.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PaymentMethodProperties": {
+      "description": "The properties of a payment method.",
+      "properties": {
+        "accountHolderName": {
+          "description": "The account holder name for the payment method. This is only supported for payment methods with family CreditCard.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the payment method.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "expiration": {
+          "description": "The expiration month and year of the payment method. This is only supported for payment methods with family CreditCard.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "family": {
+          "description": "The family of payment method.",
+          "enum": [
+            "creditcard",
+            "checkwire",
+            "unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "paymentMethodFamily"
+          }
+        },
+        "lastFourDigits": {
+          "description": "Last four digits of payment method.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "logos": {
+          "description": "The list of logos for the payment method.",
+          "items": {
+            "$ref": "#/definitions/PaymentMethodLogo"
+          },
+          "type": "array"
+        },
+        "status": {
+          "description": "Status of the payment method.",
+          "enum": [
+            "active",
+            "inactive",
+            "unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "paymentMethodStatus"
+          }
+        },
+        "type": {
+          "description": "The type of payment method.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PaymentMethodsListResult": {
+      "description": "The list of payment methods.",
+      "properties": {
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of payment methods.",
+          "items": {
+            "$ref": "#/definitions/PaymentMethod"
+          },
+          "readOnly": true,
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "x-ms-identifiers": [
+        "id"
+      ]
+    }
+  },
+  "host": "management.azure.com",
+  "parameters": {
+    "paymentMethodNameParameter": {
+      "description": "The ID that uniquely identifies a payment method.",
+      "in": "path",
+      "name": "paymentMethodName",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z\\d-+_]{1,128}$",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
   "produces": [
     "application/json"
   ],
