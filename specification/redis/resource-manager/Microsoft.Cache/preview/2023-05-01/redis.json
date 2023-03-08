@@ -3157,12 +3157,22 @@
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of access policy",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Updating",
+            "Succeeded",
+            "Deleting",
+            "Deleted"
+          ]
         },
         "type": {
           "type": "string",
           "description": "Built-In or Custom access policy",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Custom",
+            "BuiltIn"
+          ]
         }
       },
       "allOf": [
@@ -3253,7 +3263,13 @@
         "provisioningState": {
           "type": "string",
           "description": "Provisioning state of an access policy assignment",
-          "readOnly": true
+          "readOnly": true,
+          "enum": [
+            "Updating",
+            "Succeeded",
+            "Deleting",
+            "Deleted"
+          ]
         }
       },
       "allOf": [
