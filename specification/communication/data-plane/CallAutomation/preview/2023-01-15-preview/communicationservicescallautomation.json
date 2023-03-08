@@ -1847,7 +1847,7 @@
           "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when inviting a PSTN participant."
         },
         "sourceDisplayName": {
-          "description": "(Optional) The display name of the source that is associated with this invite operation when\r\nadding a PSTN participant or teams user.  Note: Will not update the display name in the roster.",
+          "description": "(Optional) The display name of the source that is associated with this invite operation when\r\nadding a PSTN participant or teams user. Note: Will not update the display name in the roster.",
           "type": "string"
         },
         "participantToAdd": {
@@ -2009,18 +2009,6 @@
         "modelAsString": true
       }
     },
-    "RecordingStorageType": {
-      "description": "Recording storage mode. When set to 'BlobStorage', specify required parameter 'ExternalStorageLocation', to export recording to your own blob container.",
-      "enum": [
-        "acs",
-        "blobStorage"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RecordingStorageType",
-        "modelAsString": true
-      }
-    },
     "StartCallRecordingRequest": {
       "description": "The request payload start for call recording operation with call locator.",
       "required": [
@@ -2046,18 +2034,15 @@
           "$ref": "#/definitions/RecordingFormatType"
         },
         "audioChannelParticipantOrdering": {
-          "description": "The sequential order in which audio channels are assigned to participants in the unmixed recording.\r\nWhen 'recordingChannelType' is set to 'unmixed' and `audioChannelParticipantOrdering is not specified,\r\nthe audio channel to participant mapping will be automatically assigned based on the order in which participant\r\nfirst audio was detected.  Channel to participant mapping details can be found in the metadata of the recording.",
+          "description": "The sequential order in which audio channels are assigned to participants in the unmixed recording.\r\nWhen 'recordingChannelType' is set to 'unmixed' and `audioChannelParticipantOrdering is not specified,\r\nthe audio channel to participant mapping will be automatically assigned based on the order in which participant\r\nfirst audio was detected. Channel to participant mapping details can be found in the metadata of the recording.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
           }
         },
-        "recordingStorageType": {
-          "$ref": "#/definitions/RecordingStorageType"
-        },
-        "externalStorageLocation": {
-          "description": "The location where recording is stored, when RecordingStorageType is set to 'BlobStorage'.",
-          "type": "string"
+        "externalStorage": {
+          "$ref": "#/definitions/ExternalStorage",
+          "description": "Optional property to specify location where recording will be stored"
         }
       }
     },
@@ -2087,6 +2072,46 @@
         },
         "kind": {
           "$ref": "#/definitions/CallLocatorKind"
+        }
+      }
+    },
+    "RecordingStorageType": {
+      "description": "Defines the type of external storage",
+      "enum": [
+        "acs",
+        "blobStorage"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RecordingStorageType",
+        "modelAsString": true
+      }
+    },
+    "ExternalStorage": {
+      "required": [
+        "storageType"
+      ],
+      "type": "object",
+      "properties": {
+        "storageType": {
+          "$ref": "#/definitions/RecordingStorageType"
+        },
+        "blobStorage": {
+          "$ref": "#/definitions/BlobStorage",
+          "description": "Defines the blob storage location where the recording will be stored"
+        }
+      }
+    },
+    "BlobStorage": {
+      "description": "Used to specify Blob container url to recording storage",
+      "required": [
+        "containerUri"
+      ],
+      "type": "object",
+      "properties": {
+        "containerUri": {
+          "description": "Url of a container or a location within a container",
+          "type": "string"
         }
       }
     },
