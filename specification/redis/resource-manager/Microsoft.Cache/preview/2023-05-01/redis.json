@@ -2142,7 +2142,7 @@
           "201": {
             "description": "The access policy assignment was successfully added.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentGetPutResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentResponse"
             }
           },
           "default": {
@@ -2197,7 +2197,10 @@
         ],
         "responses": {
           "202": {
-            "description": "The access policy assignment 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome."
+            "description": "The access policy assignment 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentResponse"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2252,7 +2255,7 @@
           "200": {
             "description": "Response of get access policy assignments.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentGetPutResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentResponse"
             }
           },
           "default": {
@@ -3201,21 +3204,7 @@
       },
       "description": "List of access policies (with properties) of a Redis cache."
     },
-    "RedisCacheAccessPolicyAssignmentCreateUpdateParameters": {
-      "properties": {
-        "assignments": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentProperties"
-          }
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Parameters required for creating an access policy assignment"
-    },
-    "RedisCacheAccessPolicyAssignmentProperties": {
+    "RedisCacheAccessPolicyAssignment": {
       "description": "Properties for an access policy assignment",
       "properties": {
         "objectId": {
@@ -3232,18 +3221,54 @@
         "username"
       ]
     },
-    "RedisCacheAccessPolicyAssignmentGetPutResponse": {
+    "RedisCacheAccessPolicyAssignments": {
+      "description": "An array of object ids associated with an access policy assignment",
       "properties": {
-        "provisioningState": {
-          "type": "string",
-          "description": "Provisioning state of access policy",
-          "readOnly": true
-        },
         "assignments": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentProperties"
+            "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
           }
+        }
+      },
+      "required": [
+        "assignments"
+      ]
+    },
+    "RedisCacheAccessPolicyAssignmentCreateUpdateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisCacheAccessPolicyAssignments",
+          "description": "Users to associate an access policy assignment with"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Object ids to assign the access policy to"
+    },
+    "RedisCacheAccessPolicyAssignmentProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of an access policy assignment",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/RedisCacheAccessPolicyAssignments"
+        }
+      ],
+      "description": "All properties of an access policy."
+    },
+    "RedisCacheAccessPolicyAssignmentResponse": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentProperties",
+          "description": "Properties associated with an access policy assignment."
         }
       },
       "allOf": [
@@ -3251,7 +3276,7 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Response to get/put access policy."
+      "description": "Response to an operation on access policy assignment"
     },
     "Operation": {
       "description": "REST API operation",
