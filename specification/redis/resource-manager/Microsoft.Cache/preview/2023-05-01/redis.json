@@ -3150,6 +3150,7 @@
     },
     "RedisCacheAccessPolicy": {
       "description": "Base properties for an access policy",
+      "type": "object",
       "properties": {
         "commandPermissions": {
           "type": "string",
@@ -3181,7 +3182,8 @@
       "required": [
         "properties"
       ],
-      "description": "Parameters required for creating an access policy for the redis cache"
+      "description": "Parameters required for creating an access policy for the redis cache",
+      "type": "object"
     },
     "RedisCacheAccessPolicyProperties": {
       "properties": {
@@ -3213,7 +3215,8 @@
           "$ref": "#/definitions/RedisCacheAccessPolicy"
         }
       ],
-      "description": "All properties of an access policy."
+      "description": "All properties of an access policy.",
+      "type": "object"
     },
     "RedisCacheAccessPolicyResponse": {
       "properties": {
@@ -3228,7 +3231,8 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Response to get/put access policy."
+      "description": "Response to get/put access policy.",
+      "type": "object"
     },
     "RedisCacheAccessPolicyListResponse": {
       "properties": {
@@ -3245,7 +3249,8 @@
           "description": "Link for next set."
         }
       },
-      "description": "List of access policies (with properties) of a Redis cache."
+      "description": "List of access policies (with properties) of a Redis cache.",
+      "type": "object"
     },
     "RedisCacheAccessPolicyAssignment": {
       "description": "Properties for an access policy assignment",
@@ -3262,7 +3267,8 @@
       "required": [
         "objectId",
         "username"
-      ]
+      ],
+      "type": "object"
     },
     "RedisCacheAccessPolicyAssignments": {
       "description": "An array of object ids associated with an access policy assignment",
@@ -3289,7 +3295,8 @@
       "required": [
         "properties"
       ],
-      "description": "Object ids to assign the access policy to"
+      "description": "Object ids to assign the access policy to",
+      "type": "object"
     },
     "RedisCacheAccessPolicyAssignmentProperties": {
       "properties": {
@@ -3312,7 +3319,8 @@
           "$ref": "#/definitions/RedisCacheAccessPolicyAssignments"
         }
       ],
-      "description": "All properties of an access policy."
+      "description": "All properties of an access policy.",
+      "type": "object"
     },
     "RedisCacheAccessPolicyAssignmentResponse": {
       "properties": {
@@ -3327,7 +3335,8 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Response to an operation on access policy assignment"
+      "description": "Response to an operation on access policy assignment",
+      "type": "object"
     },
     "Operation": {
       "description": "REST API operation",
