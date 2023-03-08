@@ -123,6 +123,28 @@ model WorkloadImpactProperties is ResourceProperties{
   @doc("Degree of confidence on the impact being a platform issue")
   confidenceLevel?: ConfidenceLevel;
 
+  @doc("Client incident details ex: incidentId , incident source")
+  clientIncidentDetails?: ClientIncidentDetails;
+}
+
+@doc("Client incident details ex: incidentId , incident source")
+model ClientIncidentDetails {
+  
+  @doc("Client incident id. ex : id of the incident created to investigate and address the impact if any.")
+  clientIncidentId? : string;
+
+  @doc("Client incident source. ex : source system name where the incident is created")
+  clientIncidentSource? : IncidentSource
+
+}
+
+@doc("List of incident interfaces.")
+enum IncidentSource {
+  AzureDevops,
+  ICM,
+  Jira,
+  ServiceNow,
+  Other
 }
 
 @doc("List of azure interfaces.")

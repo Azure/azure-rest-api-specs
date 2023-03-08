@@ -367,6 +367,20 @@
         "modelAsString": true
       }
     },
+    "ClientIncidentDetails": {
+      "type": "object",
+      "properties": {
+        "clientIncidentId": {
+          "type": "string",
+          "description": "Client incident id. ex : id of the incident created to investigate and address the impact if any."
+        },
+        "clientIncidentSource": {
+          "$ref": "#/definitions/IncidentSource",
+          "description": "Client incident source. ex : source system name where the incident is created"
+        }
+      },
+      "description": "Client incident details ex: incidentId , incident source"
+    },
     "ConfidenceLevel": {
       "type": "string",
       "description": "Degree of confidence on the impact being a platform issue.",
@@ -515,6 +529,21 @@
       "required": [
         "categoryId"
       ]
+    },
+    "IncidentSource": {
+      "type": "string",
+      "description": "List of incident interfaces.",
+      "enum": [
+        "AzureDevops",
+        "ICM",
+        "Jira",
+        "ServiceNow",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "IncidentSource",
+        "modelAsString": true
+      }
     },
     "Performance": {
       "type": "object",
@@ -787,6 +816,10 @@
         "confidenceLevel": {
           "$ref": "#/definitions/ConfidenceLevel",
           "description": "Degree of confidence on the impact being a platform issue"
+        },
+        "clientIncidentDetails": {
+          "$ref": "#/definitions/ClientIncidentDetails",
+          "description": "Client incident details ex: incidentId , incident source"
         }
       },
       "description": "Workload impact properties",
