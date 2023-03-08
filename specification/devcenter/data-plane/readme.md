@@ -30,6 +30,20 @@ azure-arm: false
 tag: package-2023-01-01-preview
 ```
 
+### Tag: 2023-04-01
+
+These settings apply only when `--tag=package-2023-04-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04-01'
+input-file:
+  - Microsoft.DevCenter/stable/2023-04-01/devbox.json
+  - Microsoft.DevCenter/stable/2023-04-01/devcenter.json
+  - Microsoft.DevCenter/stable/2023-04-01/environments.json
+
+directive:
+  - suppress: HostParametersValidation
+    reason: Requires URL format for endpoint params, which violates R2003 and causes problems with codegen
+```
 
 ### Tag: 2023-01-01-preview
 
