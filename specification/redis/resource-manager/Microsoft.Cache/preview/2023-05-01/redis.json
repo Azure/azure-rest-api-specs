@@ -1886,7 +1886,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy that is being added to the Redis cache."
+            "description": "The name of the access policy that is being added to the Redis cache.",
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "parameters",
@@ -1906,6 +1907,9 @@
         ],
         "responses": {
           "200": {
+            "description": "Response of put access policy"
+          },
+          "201": {
             "description": "The access policy was successfully added.",
             "schema": {
               "$ref": "#/definitions/RedisCacheAccessPolicyResponse"
@@ -1953,7 +1957,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy that is being deleted from the Redis cache."
+            "description": "The name of the access policy that is being deleted from the Redis cache.",
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1963,6 +1968,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the access policy"
+          },
+          "204": {
+            "description": "Successfully deleted the access policy"
+          },
           "202": {
             "description": "The access policy 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome.",
             "schema": {
@@ -2010,7 +2021,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy that is being deleted from the Redis cache."
+            "description": "The name of the access policy that is being deleted from the Redis cache.",
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2125,7 +2137,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy to assign."
+            "description": "The name of the access policy to assign.",
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "name": "parameters",
@@ -2144,6 +2157,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Response of put access policy assignment"
+          },
           "201": {
             "description": "The access policy assignment was successfully added.",
             "schema": {
@@ -2192,7 +2208,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the access policy being unassigned."
+            "description": "The name of the access policy being unassigned.",
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2202,6 +2219,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully deleted the access policy assignment"
+          },
+          "204": {
+            "description": "Successfully deleted the access policy assignment"
+          },
           "202": {
             "description": "The access policy assignment 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome.",
             "schema": {
@@ -2249,7 +2272,8 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the assigned access policy."
+            "description": "The name of the assigned access policy.",
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
