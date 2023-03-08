@@ -220,6 +220,13 @@ directive:
     from: consumption.json
     reason: it's not actually a resource path; the validator is confused because the Billing namespace is in the URI path.
     approved-by: "@fearthecowboy"
+
+directive:
+  - suppress: ValidFormats
+    from: consumption.json
+    reason: Our APIs take decimal parameters and return decimal properties.
+    approved-by: "@jianyexi"
+    
 ```
 
 ---
