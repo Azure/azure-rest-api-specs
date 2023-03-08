@@ -3198,7 +3198,11 @@
             "Deleted",
             "Canceled",
             "Failed"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyProvisioningState",
+            "modelAsString": true
+          }
         },
         "type": {
           "type": "string",
@@ -3277,7 +3281,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
-          }
+          },
+          "x-ms-identifiers": [
+            "objectId"
+          ]
         }
       },
       "required": [
@@ -3311,7 +3318,11 @@
             "Deleted",
             "Canceled",
             "Failed"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "AccessPolicyAssignmentProvisioningState",
+            "modelAsString": true
+          }
         }
       },
       "allOf": [
