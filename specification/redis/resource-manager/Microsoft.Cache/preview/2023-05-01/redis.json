@@ -1943,7 +1943,7 @@
         "description": "Deletes the access policy from a redis cache",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "parameters": [
           {
@@ -2208,7 +2208,7 @@
         "description": "Deletes the access policy assignment from a redis cache",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "final-state-via"
         },
         "parameters": [
           {
@@ -2323,6 +2323,61 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redis/{cacheName}/accessPolicyAssignments": {
+      "get": {
+        "tags": [
+          "Redis",
+          "AAD"
+        ],
+        "operationId": "AccessPolicyAssignment_List",
+        "x-ms-examples": {
+          "RedisCacheAccessPolicyAssignmentList": {
+            "$ref": "./examples/RedisCacheAccessPolicyAssignmentList.json"
+          }
+        },
+        "description": "Gets the list of access policy assignments associated with this redis cache",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "cacheName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the redis cache.",
+            "pattern": ".*"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response of list access policy assignments.",
+            "schema": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentListResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -3380,6 +3435,24 @@
         }
       ],
       "description": "Response to an operation on access policy assignment",
+      "type": "object"
+    },
+    "RedisCacheAccessPolicyAssignmentListResponse": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentResponse"
+          },
+          "description": "List of access policies assignments (with properties) of a Redis cache."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Link for next set."
+        }
+      },
+      "description": "List of access policies assignments (with properties) of a Redis cache.",
       "type": "object"
     },
     "Operation": {
