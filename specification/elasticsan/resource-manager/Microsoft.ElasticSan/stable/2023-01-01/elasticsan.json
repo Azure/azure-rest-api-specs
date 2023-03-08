@@ -252,7 +252,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ElasticSan"
+              "$ref": "#/definitions/ElasticSanCreateParameter"
             },
             "description": "Elastic San object."
           },
@@ -1456,9 +1456,6 @@
     },
     "ElasticSanList": {
       "type": "object",
-      "required": [
-        "value"
-      ],
       "description": "List of Elastic Sans",
       "additionalProperties": false,
       "properties": {
@@ -1476,12 +1473,33 @@
         }
       }
     },
-    "ElasticSan": {
+    "ElasticSanCreateParameter": {
       "type": "object",
       "description": "Response for ElasticSan request.",
       "required": [
         "properties"
       ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of ElasticSan.",
+          "$ref": "#/definitions/ElasticSanProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ElasticSan": {
+      "type": "object",
+      "description": "Response for ElasticSan request.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -1829,9 +1847,6 @@
     },
     "VolumeGroupList": {
       "type": "object",
-      "required": [
-        "value"
-      ],
       "description": "List of Volume Groups",
       "additionalProperties": false,
       "properties": {
@@ -1938,9 +1953,6 @@
     },
     "VolumeList": {
       "type": "object",
-      "required": [
-        "value"
-      ],
       "description": "List of Volumes",
       "additionalProperties": false,
       "properties": {
@@ -2290,9 +2302,6 @@
     },
     "SnapshotList": {
       "type": "object",
-      "required": [
-        "value"
-      ],
       "description": "List of Snapshots",
       "additionalProperties": false,
       "properties": {
