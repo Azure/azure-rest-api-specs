@@ -388,7 +388,7 @@
         }
       }
     },
-    "IncidentCreationRulePropertyBasedValuesGrouping": {
+    "IncidentCreationRulePropertyBasedGroupingProperties": {
       "type": "object",
       "properties": {
         "groupingAttributes": {
@@ -396,7 +396,9 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/IncidentCreationRuleGroupingAttribute"
-          }
+          },
+          "x-ms-identifiers": []
+
         }
       }
     },
@@ -518,7 +520,7 @@
         ]
       }
     },
-    "IncidentCreationRulePropertyValuesCondition": {
+    "IncidentCreationRulePropertyConditionProperties": {
       "type": "object",
       "properties": {
         "propertyName": {
@@ -564,7 +566,7 @@
         "groupingProperties": {
           "maxItems": 5,
           "type": "object",
-          "$ref": "#/definitions/IncidentCreationRulePropertyBasedValuesGrouping"
+          "$ref": "#/definitions/IncidentCreationRulePropertyBasedGroupingProperties"
         }
       },
       "x-ms-discriminator-value": "PropertyBased",
@@ -581,7 +583,7 @@
       "properties": {
         "conditionProperties": {
           "type": "object",
-          "$ref": "#/definitions/IncidentCreationRulePropertyValuesCondition"
+          "$ref": "#/definitions/IncidentCreationRulePropertyConditionProperties"
         }
       },
       "x-ms-discriminator-value": "Property",
