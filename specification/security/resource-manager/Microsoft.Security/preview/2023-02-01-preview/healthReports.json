@@ -48,7 +48,7 @@
         "operationId": "HealthReports_List",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Scope"
@@ -62,9 +62,9 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -87,7 +87,7 @@
         "operationId": "HealthReport_Get",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
@@ -104,9 +104,9 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed",
+            "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -198,12 +198,12 @@
           "type": "string",
           "description": "The issue name"
         },
-        "securityValue": {
+        "securityValues": {
           "type": "array",
-          "description": "The security value that will be affected by the issue",
+          "description": "The affected security values that MDC offers that will be affected by the issue, for exmaple: recommendations, alerts, etc",
           "items": {
             "type": "string",
-            "description": "security value"
+            "description": "security values"
           }
         },
         "issueDescription": {
@@ -212,11 +212,11 @@
         },
         "remediationSteps": {
           "type": "string",
-          "description": "The remediation steps to solve this issue"
+          "description": "Human readable description of what you should do to mitigate this health issue"
         },
-        "remediationLogic": {
+        "remediationScript": {
           "type": "string",
-          "description": "The remediation logic to solve this issue, can be script"
+          "description": "The remediation script to solve this issue"
         },
         "additionalData": {
           "type": "object",
