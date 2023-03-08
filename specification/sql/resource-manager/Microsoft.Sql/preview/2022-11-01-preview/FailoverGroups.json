@@ -425,15 +425,6 @@
             "maxLength": 63
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "description": "The try planned before force failover of failover group parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FailoverGroupTryPlannedBeforeForcedFailover"
-            }
-          },
-          {
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -624,27 +615,6 @@
           "type": "integer"
         }
       }
-    },
-    "FailoverGroupTryPlannedBeforeForcedFailover": {
-      "description": "A failover group try planned before forced failover request.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/FailoverGroupTryPlannedBeforeForcedFailoverProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "FailoverGroupTryPlannedBeforeForcedFailoverProperties": {
-      "description": "Properties of try planned before forced failover of failover group.",
-      "type": "object",
-      "properties": {}
     },
     "FailoverGroupUpdate": {
       "description": "A failover group update request.",
