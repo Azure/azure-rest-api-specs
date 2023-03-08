@@ -315,6 +315,9 @@ These settings apply only when `--tag=package-2022-06-01-only` is specified on t
 ``` yaml $(tag) == 'package-2022-06-01-only'
 input-file:
 - Microsoft.Insights/stable/2022-06-01/actionGroups_API.json
+- Microsoft.Insights/stable/2022-06-01/dataCollectionEndpoints_API.json
+- Microsoft.Insights/stable/2022-06-01/dataCollectionRuleAssociations_API.json
+- Microsoft.Insights/stable/2022-06-01/dataCollectionRules_API.json
 ```
 
 ### Tag: package-2022-04-01-only
