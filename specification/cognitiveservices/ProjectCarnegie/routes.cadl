@@ -104,7 +104,16 @@ interface TextLists{
 
     @summary("Get All Items By listId")
     @doc("Get All Items By listId")
-    ListTextListItems is Azure.Core.ResourceList<TextListItem>;
+    ListTextListItems is Azure.Core.ResourceList<
+    TextListItem, 
+    {
+      parameters: {
+        ...TopQueryParameter;
+        ...SkipQueryParameter;
+        ...MaxPageSizeQueryParameter;
+      };
+    }
+  >;
 }
 
 // interface TextListItems {
