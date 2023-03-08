@@ -12,7 +12,7 @@
           "Rooms"
         ],
         "summary": "Creates a new room.",
-        "operationId": "Rooms_CreateRoom",
+        "operationId": "Rooms_Create",
         "consumes": [
           "application/json"
         ],
@@ -69,7 +69,43 @@
         },
         "x-ms-examples": {
           "Create a new meeting room.": {
-            "$ref": "./examples/Rooms_CreateRoom.json"
+            "$ref": "./examples/Rooms_Create.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Rooms"
+        ],
+        "summary": "Retrieves all created rooms.",
+        "operationId": "Rooms_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Request successful. The action returns a collection of rooms.",
+            "schema": {
+              "$ref": "#/definitions/RoomsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all rooms.": {
+            "$ref": "./examples/Rooms_List.json"
           }
         }
       }
@@ -80,7 +116,7 @@
           "Rooms"
         ],
         "summary": "Retrieves an existing room by id.",
-        "operationId": "Rooms_GetRoom",
+        "operationId": "Rooms_Get",
         "produces": [
           "application/json"
         ],
@@ -118,7 +154,7 @@
         },
         "x-ms-examples": {
           "Get meeting room.": {
-            "$ref": "./examples/Rooms_GetRoom.json"
+            "$ref": "./examples/Rooms_Get.json"
           }
         }
       },
@@ -127,7 +163,7 @@
           "Rooms"
         ],
         "summary": "Update a room with given changes.",
-        "operationId": "Rooms_UpdateRoom",
+        "operationId": "Rooms_Update",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -177,7 +213,7 @@
         },
         "x-ms-examples": {
           "Update meeting room's properties.": {
-            "$ref": "./examples/Rooms_UpdateRoom.json"
+            "$ref": "./examples/Rooms_Update.json"
           }
         }
       },
@@ -186,7 +222,7 @@
           "Rooms"
         ],
         "summary": "Delete a room.",
-        "operationId": "Rooms_DeleteRoom",
+        "operationId": "Rooms_Delete",
         "produces": [
           "application/json"
         ],
@@ -221,7 +257,7 @@
         },
         "x-ms-examples": {
           "Delete a meeting room.": {
-            "$ref": "./examples/Rooms_DeleteRoom.json"
+            "$ref": "./examples/Rooms_Delete.json"
           }
         }
       }
@@ -232,7 +268,7 @@
           "Participants"
         ],
         "summary": "Get participants in a room.",
-        "operationId": "Rooms_GetParticipants",
+        "operationId": "Participants_List",
         "produces": [
           "application/json"
         ],
@@ -270,7 +306,7 @@
         },
         "x-ms-examples": {
           "Get participants": {
-            "$ref": "./examples/Rooms_GetParticipants.json"
+            "$ref": "./examples/Participants_List.json"
           }
         }
       },
@@ -279,7 +315,7 @@
           "Participants"
         ],
         "summary": "Patch participants in a room.",
-        "operationId": "Rooms_PatchParticipants",
+        "operationId": "Participants_Patch",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -329,7 +365,7 @@
         },
         "x-ms-examples": {
           "Patch participants": {
-            "$ref": "./examples/Rooms_PatchParticipants.json"
+            "$ref": "./examples/Participants_Patch.json"
           }
         }
       }
@@ -479,6 +515,26 @@
           "description": "The timestamp from when the room can no longer be joined. The timestamp is in RFC3339 format: `yyyy-MM-ddTHH:mm:ssZ`.",
           "type": "string",
           "example": "2021-09-08T15:55:41Z"
+        }
+      }
+    },
+    "RoomsCollection": {
+      "description": "A collection of rooms.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "A collection of rooms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoomModel"
+          }
+        },
+        "nextLink": {
+          "description": "If there are more rooms that can be retrieved, the next link will be populated.",
+          "type": "string"
         }
       }
     },
