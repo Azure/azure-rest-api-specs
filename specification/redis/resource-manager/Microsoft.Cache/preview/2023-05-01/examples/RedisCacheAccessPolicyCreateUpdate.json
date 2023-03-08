@@ -14,7 +14,20 @@
     }
   },
   "responses": {
-    "200": {},
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/accessPolicies/accessPolicy1",
+        "name": "cache1/accessPolicy1",
+        "type": "Microsoft.Cache/Redis/accessPolicies",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "commandPermissions": "+get +hget",
+          "keyPermissions": "allkeys",
+          "pubSubChannelPermissions": "allchannels",
+          "type": "Custom"
+        }
+      }
+    },
     "201": {
       "body": {
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1/accessPolicies/accessPolicy1",
