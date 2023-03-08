@@ -1,0 +1,45 @@
+enum ImportMachinesJobPropertiesJobResultKnownValues {
+    "Unknown",
+    "Completed",
+    "CompletedWithWarnings",
+    "CompletedWithErrors",
+    "Failed",
+    "WaitingForBlobUpload",
+    "InProgress",
+}
+
+@doc("Job REST Resource.")
+model ImportJobProperties {
+    @doc("blob name")
+    blobName?: string;
+
+    @doc("blob Sas Uri")
+    blobSasUri?: string;
+
+    @doc("job result")
+    jobResult?: ImportMachinesJobPropertiesJobResultKnownValues;
+
+    @doc("number of machines imported ")
+    numberOfMachinesImported?: int32;
+
+    @doc("blobCreation TimeStamp")
+    blobCreationTimeStamp?: zonedDateTime;
+
+    @doc("error summary")
+    errorSummary?: ImportMachinesJobPropertiesJobErrorSummary;
+
+    @doc("The status of the last operation.")
+    provisioningState?: ProvisioningState;
+}
+
+@doc("Job Error Summary")
+model ImportMachinesJobPropertiesJobErrorSummary {
+    @doc("errors list")
+    errors?: string[];
+
+    @doc("error count")
+    errorCount?: int32;
+
+    @doc("warning Count")
+    warningCount?: int32;
+}

@@ -1,0 +1,58 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/versioning";
+import "@azure-tools/cadl-providerhub";
+import "@azure-tools/cadl-azure-core";
+import "@azure-tools/cadl-azure-resource-manager";
+import "@cadl-lang/compiler";
+
+import "./source.cadl";
+import "./discoveryScope.cadl";
+
+using Cadl.Http;
+using Cadl.Rest;
+using Cadl.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+
+@doc("Error contract returned when some exception occurs in Rest API.")
+model ErrorDetails {
+  @doc("Gets the error code.")
+  @visibility("read")
+  code?: string;
+
+  @doc("Gets the error message.")
+  @visibility("read")
+  message?: string;
+
+  @doc("Gets the possible causes of error.")
+  @visibility("read")
+  possibleCauses?: string;
+
+  @doc("Gets the recommended action to resolve error.")
+  @visibility("read")
+  recommendedAction?: string;
+
+  @doc("Gets the error severity.")
+  @visibility("read")
+  severity?: string;
+
+  @doc("Gets a value indicating whether the error originated from a agent or not.")
+  @visibility("read")
+  isAgentReportedError?: boolean;
+
+  @doc("Gets the agent error code.")
+  @visibility("read")
+  agentErrorCode?: string;
+
+  @doc("Gets the error message from the agent.")
+  @visibility("read")
+  agentErrorMessage?: string;
+
+  @doc("Gets possible causes for the agent error.")
+  @visibility("read")
+  agentErrorPossibleCauses?: string;
+
+  @doc("Gets the recommended action for the agent error.")
+  @visibility("read")
+  agentErrorRecommendedAction?: string;
+}

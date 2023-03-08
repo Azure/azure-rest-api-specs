@@ -18,7 +18,18 @@ batch:
   - tag: package-migrateengine-2022-05
 ```
 
-### Tag: package-migrate-2018-02 and java
+
+
+### Tag: package-2020-02
+
+These settings apply only when `--tag=package-2020-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2020-02'
+input-file:
+  - Microsoft.OffAzure/stable/2020-02-01/migrate.json
+```
+### Tag: package-2018-02 and java
+
 
 These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
@@ -116,7 +127,9 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-migrate-2019-10
+
+tag: package-2020-02
+
 ```
 
 ### Tag: package-migrate-2018-02
@@ -208,6 +221,3 @@ swagger-to-sdk:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
-
-
-

@@ -1,0 +1,17 @@
+@doc("The list of Machine MetaData.")
+model MachineMetadataList {
+    @doc("The list of Machine MetaData.")
+    value: MachineMetadata[];
+}
+
+@doc("The properties of Machine MetaData")
+model MachineMetadata { //TODO
+    @doc("arm id of the machine.")
+    id: string;
+
+    @doc("value representing state of dependency mapping (enabled/disabled).")
+    dependencyMapping: string;
+
+    @doc("machine tags")
+    tags: Record<string>;
+}
