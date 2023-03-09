@@ -540,13 +540,6 @@
         }
       }
     },
-    "ValidSenderUsernameCollection": {
-      "description": "Collection of valid sender usernames. This is a key-value pair where key=username and value=display name.",
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      }
-    },
     "DomainProperties": {
       "description": "A class that describes the properties of a Domains resource.",
       "type": "object",
@@ -612,6 +605,7 @@
               "$ref": "#/definitions/VerificationStatusRecord"
             }
           },
+          "x-ms-client-flatten": true,
           "readOnly": true
         },
         "verificationRecords": {
@@ -634,10 +628,8 @@
               "$ref": "#/definitions/DnsRecord"
             }
           },
+          "x-ms-client-flatten": true,
           "readOnly": true
-        },
-        "validSenderUsernames": {
-          "$ref": "#/definitions/ValidSenderUsernameCollection"
         },
         "userEngagementTracking": {
           "$ref": "#/definitions/UserEngagementTracking"
@@ -655,7 +647,8 @@
       "x-ms-enum": {
         "name": "DomainManagement",
         "modelAsString": true
-      }
+      },
+      "x-ms-client-flatten": true
     },
     "UserEngagementTracking": {
       "description": "Describes whether user engagement tracking is enabled or disabled.",
@@ -682,9 +675,6 @@
           "$ref": "#/definitions/DomainProperties",
           "description": "The properties of a Domains resource.",
           "x-ms-client-flatten": true
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         }
       }
     },
@@ -692,9 +682,6 @@
       "description": "A class that describes the updatable properties of a Domains resource.",
       "type": "object",
       "properties": {
-        "validSenderUsernames": {
-          "$ref": "#/definitions/ValidSenderUsernameCollection"
-        },
         "userEngagementTracking": {
           "$ref": "#/definitions/UserEngagementTracking"
         }
