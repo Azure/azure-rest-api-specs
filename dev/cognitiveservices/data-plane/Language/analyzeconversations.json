@@ -2126,9 +2126,9 @@
       ],
       "x-ms-discriminator-value": "CustomConversationalSummarizationTask"
     },
-    "ConversationSummarizationTaskParameters": {
+    "ConversationSummarizationTaskParametersBase": {
       "type": "object",
-      "description": "Supported parameters for an conversational summarization task.",
+      "description": "Supported parameters for any conversational summarization task.",
       "required": [
         "summaryAspects"
       ],
@@ -2170,10 +2170,19 @@
       },
       "allOf": [
         {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        }
+      ]
+    },
+    "ConversationSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for prebuild conversational summarization task.",
+      "allOf": [
+        {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         },
         {
-          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase"
         }
       ]
     },
@@ -2185,7 +2194,7 @@
           "$ref": "analyzetext.json#/definitions/CustomTaskParameters"
         },
         {
-          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase"
         }
       ]
     },
