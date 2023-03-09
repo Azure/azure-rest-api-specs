@@ -882,6 +882,7 @@
       "title": "Capabilities",
       "description": "The capabilities of a base or fine tune model.",
       "required": [
+        "chat_completion",
         "completion",
         "embeddings",
         "fine_tune",
@@ -900,6 +901,10 @@
         },
         "completion": {
           "description": "A value indicating whether a model supports completion.",
+          "type": "boolean"
+        },
+        "chat_completion": {
+          "description": "A value indicating whether a model supports chat completion.",
           "type": "boolean"
         },
         "embeddings": {
@@ -1906,7 +1911,7 @@
   },
   "security": [
     {
-      "api-key": []
+      "api-key": [ ]
     }
   ],
   "schemes": [
