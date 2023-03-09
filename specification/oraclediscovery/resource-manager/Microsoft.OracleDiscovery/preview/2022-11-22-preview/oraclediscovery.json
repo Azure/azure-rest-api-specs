@@ -1839,6 +1839,13 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "extendedDetails": {
+          "description": "Gets or sets the extended details reported by the solution.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -1982,6 +1989,10 @@
           "type": "string",
           "description": "The status of database online/offline."
         },
+        "databaseName": {
+          "type": "string",
+          "description": "The name of database."
+        },
         "oracleServers": {
           "description": "List of the OracleServer ARM Id.",
           "type": "array",
@@ -2017,6 +2028,13 @@
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
+          }
+        },
+        "extendedDetails": {
+          "description": "Gets or sets the extended details reported by the solution.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
@@ -2057,6 +2075,13 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "extendedDetails": {
+          "description": "Gets or sets the extended details reported by the solution.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2096,6 +2121,13 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "extendedDetails": {
+          "description": "Gets or sets the extended details reported by the solution.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2118,6 +2150,14 @@
         "hostName": {
           "type": "string",
           "description": "The DB  IP/host name."
+        },
+        "maxServerMemoryInUseInMb": {
+          "type": "string",
+          "description": "The max server memory in use."
+        },
+        "sumOfUserDatabasesSizeInMb": {
+          "type": "string",
+          "description": "The sum of user database size."
         },
         "serviceId": {
           "description": "List of the DB ServiceId (sid).",
@@ -2183,6 +2223,22 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "dbServiceStatus": {
+          "description": "Gets or sets the provisioning state.",
+          "type": "string",
+          "enum": [
+            "Unknown",
+            "Running",
+            "Stopped"
+          ]
+        },
+        "extendedDetails": {
+          "description": "Gets or sets the extended details reported by the solution.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -2227,6 +2283,18 @@
           "description": "The error code.",
           "type": "string"
         },
+        "summaryMessage": {
+          "description": "The summarized error message.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "The account ID used to login.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The detailed error message.",
+          "type": "string"
+        },
         "possibleCause": {
           "description": "The error possible cause.",
           "type": "string"
@@ -2238,6 +2306,11 @@
         "severity": {
           "description": "Gets description of the checkpoint.",
           "type": "string"
+        },
+        "updatedTimeStamp": {
+          "description": "Time when this error was last updated.",
+          "type": "string",
+          "format": "date-time"
         }
       }
     },
@@ -2261,6 +2334,10 @@
       "properties": {
         "sampleProp": {
           "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+          "type": "string"
+        },
+        "instance": {
+          "description": "The server instance name.",
           "type": "string"
         }
       }
