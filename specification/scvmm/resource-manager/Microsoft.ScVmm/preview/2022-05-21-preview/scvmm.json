@@ -3928,6 +3928,10 @@
           "type": "string",
           "readOnly": true
         },
+        "guestAgentProfile": {
+          "description": "Guest agent status properties.",
+          "$ref": "#/definitions/GuestAgentProfile"
+        },
         "provisioningState": {
           "description": "Gets or sets the provisioning state.",
           "type": "string",
@@ -4573,6 +4577,9 @@
         "checkpointType": {
           "type": "string",
           "description": "Type of checkpoint supported for the vm."
+        },
+        "guestAgentProfile": {
+          "$ref": "#/definitions/GuestAgentProfileUpdate"
         }
       }
     },
@@ -5003,6 +5010,65 @@
         }
       },
       "x-ms-discriminator-value": "VirtualMachine"
+    },
+    "GuestAgentProfile": {
+      "description": "Defines the resource properties.",
+      "type": "object",
+      "properties": {
+        "vmUuid": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the VM's unique SMBIOS ID."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the hybrid machine agent.",
+          "enum": [
+            "Connected",
+            "Disconnected",
+            "Error"
+          ],
+          "x-ms-enum": {
+            "name": "StatusTypes",
+            "modelAsString": true
+          }
+        },
+        "lastStatusChange": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the last status change."
+        },
+        "clientPublicKey": {
+          "description": "Gets or sets the Public Key provided by the client for enabling guest management.",
+          "type": "string"
+        },
+        "agentVersion": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The hybrid machine agent full version."
+        },
+        "errorDetails": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+          },
+          "description": "Details about the error state.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "GuestAgentProfileUpdate": {
+      "description": "Specifies the guest agent settings for the virtual machine.",
+      "type": "object",
+      "properties": {
+        "clientPublicKey": {
+          "description": "Gets or sets the Public Key provided by the client for enabling guest management.",
+          "type": "string"
+        }
+      }
     },
     "HybridIdentityMetadataList": {
       "description": "List of HybridIdentityMetadata.",
