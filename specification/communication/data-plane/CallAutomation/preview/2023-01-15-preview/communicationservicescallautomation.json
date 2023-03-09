@@ -1847,7 +1847,7 @@
           "description": "The source caller Id, a phone number, that's shown to the PSTN participant being invited.\r\nRequired only when inviting a PSTN participant."
         },
         "sourceDisplayName": {
-          "description": "(Optional) The display name of the source that is associated with this invite operation when\r\nadding a PSTN participant or teams user. Note: Will not update the display name in the roster.",
+          "description": "(Optional) The display name of the source that is associated with this invite operation when\r\nadding a PSTN participant or teams user.  Note: Will not update the display name in the roster.",
           "type": "string"
         },
         "participantToAdd": {
@@ -2034,7 +2034,7 @@
           "$ref": "#/definitions/RecordingFormatType"
         },
         "audioChannelParticipantOrdering": {
-          "description": "The sequential order in which audio channels are assigned to participants in the unmixed recording.\r\nWhen 'recordingChannelType' is set to 'unmixed' and `audioChannelParticipantOrdering is not specified,\r\nthe audio channel to participant mapping will be automatically assigned based on the order in which participant\r\nfirst audio was detected. Channel to participant mapping details can be found in the metadata of the recording.",
+          "description": "The sequential order in which audio channels are assigned to participants in the unmixed recording.\r\nWhen 'recordingChannelType' is set to 'unmixed' and `audioChannelParticipantOrdering is not specified,\r\nthe audio channel to participant mapping will be automatically assigned based on the order in which participant\r\nfirst audio was detected.  Channel to participant mapping details can be found in the metadata of the recording.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CommunicationIdentifierModel"
@@ -2138,7 +2138,7 @@
       }
     },
     "AddParticipantFailed": {
-      "description": "The failed to add participants event.",
+      "description": "The failed to add participant event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -2183,8 +2183,8 @@
         }
       }
     },
-    "AddParticipantSucceeded": {
-      "description": "The participants successfully added event.",
+    "ParticipantAdded": {
+      "description": "The participant successfully added event.",
       "type": "object",
       "properties": {
         "callConnectionId": {
@@ -2331,6 +2331,71 @@
           "items": {
             "$ref": "#/definitions/CallParticipant"
           }
+        },
+        "sequenceNumber":{
+            "format": "int32",
+            "description": "Sequence number to indicate order of ParticipantsUpdated events",
+            "type": "integer"
+        }
+      }
+    },
+    "ParticipantRemoved": {
+      "description": "The participant removed event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+        },
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant"
+        }
+      }
+    },
+    "RemoveParticipantFailed": {
+      "description": "The failed to remove participant event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation. Also called ChainId for skype chain ID.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation",
+          "description": "Contains the resulting SIP code/sub-code and message from NGC services."
+        },
+        "participant": {
+          "$ref": "#/definitions/CommunicationIdentifierModel",
+          "description": "Participant"
         }
       }
     },
