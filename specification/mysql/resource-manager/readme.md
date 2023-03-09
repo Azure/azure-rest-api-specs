@@ -51,7 +51,7 @@ input-file:
 - Microsoft.DBforMySQL/Database/stable/2022-09-01/Databases.json
 - Microsoft.DBforMySQL/Firewall/stable/2022-09-01/FirewallRules.json
 - Microsoft.DBforMySQL/Flexible/stable/2022-09-01/FlexibleServers.json
-- Microsoft.DBforMySQL/Log/stable/2022-09-01/LogFiles.json
+- Microsoft.DBforMySQL/Logs/stable/2022-09-01/LogFiles.json
 - Microsoft.DBforMySQL/Service/stable/2022-09-01/ServiceOperations.json
 ```
 
