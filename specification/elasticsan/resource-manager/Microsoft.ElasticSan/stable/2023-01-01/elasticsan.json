@@ -750,7 +750,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Volume"
+              "$ref": "#/definitions/VolumeCreateParameter"
             },
             "description": "Volume object."
           },
@@ -1099,7 +1099,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Snapshot"
+              "$ref": "#/definitions/SnapshotCreateParameter"
             },
             "description": "Snapshot object."
           },
@@ -1930,6 +1930,30 @@
         }
       }
     },
+    "VolumeCreateParameter": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "description": "Response for Volume request.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of Volume.",
+          "$ref": "#/definitions/VolumeProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
     "Volume": {
       "type": "object",
       "description": "Response for Volume request.",
@@ -1972,6 +1996,9 @@
     },
     "VolumeProperties": {
       "type": "object",
+      "required": [
+        "sizeGiB"
+      ],
       "description": "Volume response properties.",
       "properties": {
         "volumeId": {
@@ -2030,7 +2057,12 @@
         "createSource": {
           "type": "string",
           "enum": [
-            "None"
+            "None",
+            "VolumeSnapshot",
+            "DiskSnapshot",
+            "Disk",
+            "DiskRestorePoint",
+            "Export"
           ],
           "x-ms-enum": {
             "name": "VolumeCreateOption",
@@ -2300,6 +2332,30 @@
         }
       ]
     },
+    "SnapshotCreateParameter": {
+      "type": "object",
+      "required": [
+        "properties"
+      ],
+      "description": "Response for Volume Snapshot request.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of Volume Snapshot.",
+          "$ref": "#/definitions/SnapshotProperties"
+        },
+        "systemData": {
+          "description": "Resource metadata required by ARM RPC",
+          "readOnly": true,
+          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
     "SnapshotList": {
       "type": "object",
       "description": "List of Snapshots",
@@ -2321,6 +2377,9 @@
     },
     "SnapshotProperties": {
       "type": "object",
+      "required": [
+        "creationData"
+      ],
       "description": "Properties for Snapshot.",
       "properties": {
         "creationData": {
@@ -2341,6 +2400,9 @@
     },
     "SnapshotCreationData": {
       "type": "object",
+      "required": [
+        "sourceUri"
+      ],
       "description": "Data used when creating a volume snapshot.",
       "properties": {
         "sourceUri": {
