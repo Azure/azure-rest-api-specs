@@ -14,7 +14,7 @@ interface TextOperations {
   @doc("A sync API for harmful content analysis for text")
   @route("/text:analyze")
   @post
-  Analyze is Azure.Core.Foundations.Operation<
+  Analyze is Azure.Core.RpcOperation<
     {
       @doc("The analysis request of the text")
       @body
@@ -29,7 +29,7 @@ interface ImageOperations {
   @doc("A sync API for harmful content analysis for image")
   @route("/image:analyze")
   @post
-  Detect is Azure.Core.Foundations.Operation<
+  Detect is Azure.Core.RpcOperation<
     {
       @doc("The analysis request of the image")
       @body
