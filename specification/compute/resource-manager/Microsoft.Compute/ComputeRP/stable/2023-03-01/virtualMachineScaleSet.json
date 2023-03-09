@@ -3271,7 +3271,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. <br><br>NOTE: If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes."
+            "description": "Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **NOTE:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes."
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -3487,7 +3487,7 @@
       "properties": {
         "vmSizeProperties": {
           "$ref": "./computeRPCommon.json#/definitions/VMSizeProperties",
-          "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-11-01. <br><br> Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
+          "description": "Specifies the properties for customizing the size of the virtual machine. Minimum api-version: 2021-11-01. Please follow the instructions in [VM Customization](https://aka.ms/vmcustomization) for more details."
         }
       },
       "description": "Specifies the hardware settings for the virtual machine scale set."
@@ -3522,7 +3522,7 @@
       "properties": {
         "enableAutomaticOSUpgrade": {
           "type": "boolean",
-          "description": "Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. <br><br> If this is set to true for Windows based scale sets, [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) is automatically set to false and cannot be set to true."
+          "description": "Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. If this is set to true for Windows based scale sets, [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) is automatically set to false and cannot be set to true."
         },
         "disableAutomaticRollback": {
           "type": "boolean",
@@ -3644,7 +3644,7 @@
           "description": "Timeout value expressed as an ISO 8601 time duration after which the platform will not try to restore the VMSS SPOT instances"
         }
       },
-      "description": "Specifies the Spot-Try-Restore properties for the virtual machine scale set. <br><br> With this property customer can enable or disable automatic restore of the evicted Spot VMSS VM instances opportunistically based on capacity availability and pricing constraint."
+      "description": "Specifies the Spot-Try-Restore properties for the virtual machine scale set. With this property customer can enable or disable automatic restore of the evicted Spot VMSS VM instances opportunistically based on capacity availability and pricing constraint."
     },
     "PriorityMixPolicy": {
       "type": "object",
@@ -3663,7 +3663,7 @@
           "description": "The percentage of VM instances, after the base regular priority count has been reached, that are expected to use regular priority."
         }
       },
-      "description": "Specifies the target splits for Spot and Regular priority VMs within a scale set with flexible orchestration mode. <br><br>With this property the customer is able to specify the base number of regular priority VMs created as the VMSS flex instance scales out and the split between Spot and Regular priority VMs after this base target has been reached."
+      "description": "Specifies the target splits for Spot and Regular priority VMs within a scale set with flexible orchestration mode. With this property the customer is able to specify the base number of regular priority VMs created as the VMSS flex instance scales out and the split between Spot and Regular priority VMs after this base target has been reached."
     },
     "OrchestrationMode": {
       "type": "string",
@@ -3727,7 +3727,7 @@
         },
         "customData": {
           "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)"
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. For using cloud-init for your VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)"
         },
         "windowsConfiguration": {
           "$ref": "./computeRPCommon.json#/definitions/WindowsConfiguration",
@@ -3735,7 +3735,7 @@
         },
         "linuxConfiguration": {
           "$ref": "./computeRPCommon.json#/definitions/LinuxConfiguration",
-          "description": "Specifies the Linux operating system settings on the virtual machine. <br><br>For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
+          "description": "Specifies the Linux operating system settings on the virtual machine. For a list of supported Linux distributions, see [Linux on Azure-Endorsed Distributions](https://docs.microsoft.com/azure/virtual-machines/linux/endorsed-distros)."
         },
         "secrets": {
           "type": "array",
@@ -3749,7 +3749,7 @@
         },
         "allowExtensionOperations": {
           "type": "boolean",
-          "description": "Specifies whether extension operations should be allowed on the virtual machine scale set. <br><br>This may only be set to False when no extensions are present on the virtual machine scale set."
+          "description": "Specifies whether extension operations should be allowed on the virtual machine scale set. This may only be set to False when no extensions are present on the virtual machine scale set."
         },
         "requireGuestProvisionSignal": {
           "type": "boolean",
@@ -3810,7 +3810,7 @@
         },
         "caching": {
           "$ref": "./computeRPCommon.json#/definitions/Caching",
-          "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**"
+          "description": "Specifies the caching requirements. Possible values are: **None,** **ReadOnly,** **ReadWrite.** The default values are: **None for Standard storage. ReadOnly for Premium storage**"
         },
         "writeAcceleratorEnabled": {
           "type": "boolean",
@@ -3818,7 +3818,7 @@
         },
         "createOption": {
           "$ref": "./computeRPCommon.json#/definitions/CreateOption",
-          "description": "Specifies how the virtual machines in the scale set should be created.<br><br> The only allowed value is: **FromImage** \\u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
+          "description": "Specifies how the virtual machines in the scale set should be created. The only allowed value is: **FromImage.** This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described."
         },
         "diffDiskSettings": {
           "$ref": "./computeRPCommon.json#/definitions/DiffDiskSettings",
@@ -3916,7 +3916,7 @@
         },
         "caching": {
           "$ref": "./computeRPCommon.json#/definitions/Caching",
-          "description": "Specifies the caching requirements. <br><br> Possible values are: <br><br> **None** <br><br> **ReadOnly** <br><br> **ReadWrite** <br><br> Default: **None for Standard storage. ReadOnly for Premium storage**"
+          "description": "Specifies the caching requirements. Possible values are: **None,** **ReadOnly,** **ReadWrite.** The default values are: **None for Standard storage. ReadOnly for Premium storage**"
         },
         "writeAcceleratorEnabled": {
           "type": "boolean",
@@ -3929,7 +3929,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. <br><br> diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023"
+          "description": "Specifies the size of an empty data disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. The property diskSizeGB is the number of bytes x 1024^3 for the disk and the value cannot be larger than 1023."
         },
         "managedDisk": {
           "description": "The managed disk parameters.",
@@ -3964,7 +3964,7 @@
         },
         "osDisk": {
           "$ref": "#/definitions/VirtualMachineScaleSetOSDisk",
-          "description": "Specifies information about the operating system disk used by the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
+          "description": "Specifies information about the operating system disk used by the virtual machines in the scale set. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         },
         "dataDisks": {
           "type": "array",
@@ -3975,13 +3975,13 @@
             "name",
             "lun"
           ],
-          "description": "Specifies the parameters that are used to add data disks to the virtual machines in the scale set. <br><br> For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
+          "description": "Specifies the parameters that are used to add data disks to the virtual machines in the scale set. For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/managed-disks-overview)."
         },
         "diskControllerType": {
           "type": "string",
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/DiskControllerType",
-            "description": "Specifies the disk controller type configured for the virtual machines in the scale set. <br><br> Minimum api-version: 2022-08-01"
+            "description": "Specifies the disk controller type configured for the virtual machines in the scale set. Minimum api-version: 2022-08-01"
           }
         }
       },
@@ -4012,7 +4012,7 @@
           "type": "string",
           "items": {
             "$ref": "./computeRPCommon.json#/definitions/DiskControllerType",
-            "description": "Specifies the disk controller type configured for the virtual machines in the scale set. <br>NOTE: You need to deallocate the virtual machines in the scale set before updating its disk controller type based on the upgrade mode configured for the scale set.<br><br> Minimum api-version: 2022-08-01"
+            "description": "Specifies the disk controller type configured for the virtual machines in the scale set. **NOTE:** You need to deallocate the virtual machines in the scale set before updating its disk controller type based on the upgrade mode configured for the scale set. Minimum api-version: 2022-08-01."
           }
         }
       },
@@ -4649,7 +4649,7 @@
         },
         "extensionsTimeBudget": {
           "type": "string",
-          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). <br><br> Minimum api-version: 2020-06-01"
+          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). Minimum api-version: 2020-06-01"
         }
       },
       "description": "Describes a virtual machine scale set extension profile."
@@ -4674,7 +4674,7 @@
         },
         "diagnosticsProfile": {
           "$ref": "./computeRPCommon.json#/definitions/DiagnosticsProfile",
-          "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+          "description": "Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15."
         },
         "extensionProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetExtensionProfile",
@@ -4686,15 +4686,15 @@
         },
         "priority": {
           "$ref": "./computeRPCommon.json#/definitions/priority",
-          "description": "Specifies the priority for the virtual machines in the scale set. <br><br>Minimum api-version: 2017-10-30-preview"
+          "description": "Specifies the priority for the virtual machines in the scale set. Minimum api-version: 2017-10-30-preview."
         },
         "evictionPolicy": {
           "$ref": "./computeRPCommon.json#/definitions/evictionPolicy",
-          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
         },
         "billingProfile": {
           "$ref": "./computeRPCommon.json#/definitions/BillingProfile",
-          "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
+          "description": "Specifies the billing related details of a Azure Spot VMSS. Minimum api-version: 2019-03-01."
         },
         "scheduledEventsProfile": {
           "$ref": "./computeRPCommon.json#/definitions/ScheduledEventsProfile",
@@ -4702,11 +4702,11 @@
         },
         "userData": {
           "type": "string",
-          "description": "UserData for the virtual machines in the scale set, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+          "description": "UserData for the virtual machines in the scale set, which must be base-64 encoded. Customer should not pass any secrets in here. Minimum api-version: 2021-03-01."
         },
         "capacityReservation": {
           "$ref": "./computeRPCommon.json#/definitions/CapacityReservationProfile",
-          "description": "Specifies the capacity reservation related details of a scale set. <br><br>Minimum api-version: 2021-04-01."
+          "description": "Specifies the capacity reservation related details of a scale set. Minimum api-version: 2021-04-01."
         },
         "applicationProfile": {
           "$ref": "./computeRPCommon.json#/definitions/ApplicationProfile",
@@ -4714,7 +4714,7 @@
         },
         "hardwareProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetHardwareProfile",
-          "description": "Specifies the hardware profile related details of a scale set. <br><br>Minimum api-version: 2021-11-01."
+          "description": "Specifies the hardware profile related details of a scale set. Minimum api-version: 2021-11-01."
         },
         "serviceArtifactReference": {
           "$ref": "#/definitions/ServiceArtifactReference",
@@ -4755,7 +4755,7 @@
         },
         "billingProfile": {
           "$ref": "./computeRPCommon.json#/definitions/BillingProfile",
-          "description": "Specifies the billing related details of a Azure Spot VMSS. <br><br>Minimum api-version: 2019-03-01."
+          "description": "Specifies the billing related details of a Azure Spot VMSS. Minimum api-version: 2019-03-01."
         },
         "scheduledEventsProfile": {
           "$ref": "./computeRPCommon.json#/definitions/ScheduledEventsProfile",
@@ -4767,7 +4767,7 @@
         },
         "hardwareProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetHardwareProfile",
-          "description": "Specifies the hardware profile related details of a scale set. <br><br>Minimum api-version: 2021-11-01."
+          "description": "Specifies the hardware profile related details of a scale set. Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -4819,11 +4819,11 @@
         },
         "proximityPlacementGroup": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
-          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+          "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. Minimum api-version: 2018-04-01."
         },
         "hostGroup": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
-          "description": "Specifies information about the dedicated host group that the virtual machine scale set resides in. <br><br>Minimum api-version: 2020-06-01."
+          "description": "Specifies information about the dedicated host group that the virtual machine scale set resides in. Minimum api-version: 2020-06-01."
         },
         "additionalCapabilities": {
           "$ref": "./computeRPCommon.json#/definitions/AdditionalCapabilities",
@@ -4849,7 +4849,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Specifies the time at which the Virtual Machine Scale Set resource was created.<br><br>Minimum api-version: 2021-11-01."
+          "description": "Specifies the time at which the Virtual Machine Scale Set resource was created. Minimum api-version: 2021-11-01."
         },
         "constrainedMaximumCapacity": {
           "type": "boolean",
@@ -5417,11 +5417,11 @@
         },
         "diagnosticsProfile": {
           "$ref": "./computeRPCommon.json#/definitions/DiagnosticsProfile",
-          "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+          "description": "Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15."
         },
         "availabilitySet": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). <br><br> For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates). Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
         },
         "provisioningState": {
           "readOnly": true,
@@ -5548,7 +5548,7 @@
         },
         "bootDiagnostics": {
           "$ref": "./computeRPCommon.json#/definitions/BootDiagnosticsInstanceView",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. You can easily view the output of your console log. Azure also enables you to see a screenshot of the VM from the hypervisor."
         },
         "statuses": {
           "type": "array",
@@ -5561,7 +5561,7 @@
         "assignedHost": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. <br><br>Minimum api-version: 2020-06-01."
+          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. Minimum api-version: 2020-06-01."
         },
         "placementGroupId": {
           "type": "string",

@@ -1036,7 +1036,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Generalize",
-        "description": "Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. <br>For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource).<br>For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/azure/virtual-machines/linux/capture-image).",
+        "description": "Sets the OS state of the virtual machine to generalized. It is recommended to sysprep the virtual machine before performing this operation. For Windows, please refer to [Create a managed image of a generalized VM in Azure](https://docs.microsoft.com/azure/virtual-machines/windows/capture-image-resource). For Linux, please refer to [How to create an image of a virtual machine or VHD](https://docs.microsoft.com/azure/virtual-machines/linux/capture-image).",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -1608,7 +1608,7 @@
             "required": false,
             "type": "integer",
             "format": "int32",
-            "description": "Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. <br><br>NOTE: If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes."
+            "description": "Expiration duration in minutes for the SAS URIs with a value between 1 to 1440 minutes. **NOTE:** If not specified, SAS URIs will be generated with a default expiration duration of 120 minutes."
           },
           {
             "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
@@ -2496,7 +2496,7 @@
         },
         "customData": {
           "type": "string",
-          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. <br><br> **Note: Do not pass any secrets or passwords in customData property** <br><br> This property cannot be updated after the VM is created. <br><br> customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/blog/custom-data-and-cloud-init-on-windows-azure/) <br><br> For using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)"
+          "description": "Specifies a base-64 encoded string of custom data. The base-64 encoded string is decoded to a binary array that is saved as a file on the Virtual Machine. The maximum length of the binary array is 65535 bytes. **Note: Do not pass any secrets or passwords in customData property.** This property cannot be updated after the VM is created. The property customData is passed to the VM to be saved as a file, for more information see [Custom Data on Azure VMs](https://azure.microsoft.com/blog/custom-data-and-cloud-init-on-windows-azure/). If using cloud-init for your Linux VM, see [Using cloud-init to customize a Linux VM during creation](https://docs.microsoft.com/azure/virtual-machines/linux/using-cloud-init)."
         }
       },
       "description": "Additional parameters for Reimaging Non-Ephemeral Virtual Machine."
@@ -2971,12 +2971,12 @@
         },
         "bootDiagnostics": {
           "$ref": "./computeRPCommon.json#/definitions/BootDiagnosticsInstanceView",
-          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. <br><br> You can easily view the output of your console log. <br><br> Azure also enables you to see a screenshot of the VM from the hypervisor."
+          "description": "Boot Diagnostics is a debugging feature which allows you to view Console Output and Screenshot to diagnose VM status. You can easily view the output of your console log. Azure also enables you to see a screenshot of the VM from the hypervisor."
         },
         "assignedHost": {
           "type": "string",
           "readOnly": true,
-          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. <br><br>Minimum api-version: 2020-06-01."
+          "description": "Resource id of the dedicated host, on which the virtual machine is allocated through automatic placement, when the virtual machine is associated with a dedicated host group that has automatic placement enabled. Minimum api-version: 2020-06-01."
         },
         "statuses": {
           "type": "array",
@@ -3021,39 +3021,39 @@
         },
         "diagnosticsProfile": {
           "$ref": "./computeRPCommon.json#/definitions/DiagnosticsProfile",
-          "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
+          "description": "Specifies the boot diagnostic settings state. Minimum api-version: 2015-06-15."
         },
         "availabilitySet": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). <br><br> For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates) <br><br> Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Availability sets overview](https://docs.microsoft.com/azure/virtual-machines/availability-set-overview). For more information on Azure planned maintenance, see [Maintenance and updates for Virtual Machines in Azure](https://docs.microsoft.com/azure/virtual-machines/maintenance-and-updates). Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
         },
         "virtualMachineScaleSet": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
-          "description": "Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. <br><br>This property cannot exist along with a non-null properties.availabilitySet reference. <br><br>Minimum api‐version: 2019‐03‐01"
+          "description": "Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. This property cannot exist along with a non-null properties.availabilitySet reference. Minimum api‐version: 2019‐03‐01."
         },
         "proximityPlacementGroup": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
-          "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+          "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. Minimum api-version: 2018-04-01."
         },
         "priority": {
           "$ref": "./computeRPCommon.json#/definitions/priority",
-          "description": "Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01"
+          "description": "Specifies the priority for the virtual machine. Minimum api-version: 2019-03-01"
         },
         "evictionPolicy": {
           "$ref": "./computeRPCommon.json#/definitions/evictionPolicy",
-          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. <br><br>For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. <br><br>For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
+          "description": "Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview."
         },
         "billingProfile": {
           "$ref": "./computeRPCommon.json#/definitions/BillingProfile",
-          "description": "Specifies the billing related details of a Azure Spot virtual machine. <br><br>Minimum api-version: 2019-03-01."
+          "description": "Specifies the billing related details of a Azure Spot virtual machine. Minimum api-version: 2019-03-01."
         },
         "host": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
-          "description": "Specifies information about the dedicated host that the virtual machine resides in. <br><br>Minimum api-version: 2018-10-01."
+          "description": "Specifies information about the dedicated host that the virtual machine resides in. Minimum api-version: 2018-10-01."
         },
         "hostGroup": {
           "$ref": "../../../common-types/v1/common.json#/definitions/SubResource",
-          "description": "Specifies information about the dedicated host group that the virtual machine resides in. <br><br>Minimum api-version: 2020-06-01. <br><br>NOTE: User cannot specify both host and hostGroup properties."
+          "description": "Specifies information about the dedicated host group that the virtual machine resides in. **NOTE:** User cannot specify both host and hostGroup properties. Minimum api-version: 2020-06-01."
         },
         "provisioningState": {
           "readOnly": true,
@@ -3076,12 +3076,12 @@
         },
         "extensionsTimeBudget": {
           "type": "string",
-          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). <br><br> Minimum api-version: 2020-06-01"
+          "description": "Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). Minimum api-version: 2020-06-01."
         },
         "platformFaultDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the scale set logical fault domain into which the Virtual Machine will be created. By default, the Virtual Machine will by automatically assigned to a fault domain that best maintains balance across available fault domains.<br><li>This is applicable only if the 'virtualMachineScaleSet' property of this Virtual Machine is set.<li>The Virtual Machine Scale Set that is referenced, must have 'platformFaultDomainCount' &gt; 1.<li>This property cannot be updated once the Virtual Machine is created.<li>Fault domain assignment can be viewed in the Virtual Machine Instance View.<br><br>Minimum api‐version: 2020‐12‐01"
+          "description": "Specifies the scale set logical fault domain into which the Virtual Machine will be created. By default, the Virtual Machine will by automatically assigned to a fault domain that best maintains balance across available fault domains. This is applicable only if the 'virtualMachineScaleSet' property of this Virtual Machine is set. The Virtual Machine Scale Set that is referenced, must have 'platformFaultDomainCount' greater than 1. This property cannot be updated once the Virtual Machine is created. Fault domain assignment can be viewed in the Virtual Machine Instance View. Minimum api‐version: 2020‐12‐01."
         },
         "scheduledEventsProfile": {
           "$ref": "./computeRPCommon.json#/definitions/ScheduledEventsProfile",
@@ -3089,21 +3089,21 @@
         },
         "userData": {
           "type": "string",
-          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. <br><br>Minimum api-version: 2021-03-01"
+          "description": "UserData for the VM, which must be base-64 encoded. Customer should not pass any secrets in here. Minimum api-version: 2021-03-01."
         },
         "capacityReservation": {
           "$ref": "./computeRPCommon.json#/definitions/CapacityReservationProfile",
-          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. <br><br>Minimum api-version: 2021-04-01."
+          "description": "Specifies information about the capacity reservation that is used to allocate virtual machine. Minimum api-version: 2021-04-01."
         },
         "applicationProfile": {
           "$ref": "./computeRPCommon.json#/definitions/ApplicationProfile",
-          "description": "Specifies the gallery applications that should be made available to the VM/VMSS"
+          "description": "Specifies the gallery applications that should be made available to the VM/VMSS."
         },
         "timeCreated": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Specifies the time at which the Virtual Machine resource was created.<br><br>Minimum api-version: 2021-11-01."
+          "description": "Specifies the time at which the Virtual Machine resource was created. Minimum api-version: 2021-11-01."
         }
       },
       "description": "Describes the properties of a Virtual Machine."

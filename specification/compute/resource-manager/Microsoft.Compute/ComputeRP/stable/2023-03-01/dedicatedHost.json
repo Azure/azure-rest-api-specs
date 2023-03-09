@@ -793,17 +793,17 @@
         },
         "supportAutomaticPlacement": {
           "type": "boolean",
-          "description": "Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'false' when not provided. <br><br>Minimum api-version: 2020-06-01."
+          "description": "Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'false' when not provided. Minimum api-version: 2020-06-01."
         },
         "additionalCapabilities": {
           "type": "object",
           "properties": {
             "ultraSSDEnabled": {
               "type": "boolean",
-              "description": "The flag that enables or disables a capability to have UltraSSD Enabled Virtual Machines on Dedicated Hosts of the Dedicated Host Group. For the Virtual Machines to be UltraSSD Enabled, UltraSSDEnabled flag for the resource needs to be set true as well. The value is defaulted to 'false' when not provided. Please refer to https://docs.microsoft.com/en-us/azure/virtual-machines/disks-enable-ultra-ssd for more details on Ultra SSD feature. <br><br>NOTE: The ultraSSDEnabled setting can only be enabled for Host Groups that are created as zonal. <br><br>Minimum api-version: 2022-03-01."
+              "description": "The flag that enables or disables a capability to have UltraSSD Enabled Virtual Machines on Dedicated Hosts of the Dedicated Host Group. For the Virtual Machines to be UltraSSD Enabled, UltraSSDEnabled flag for the resource needs to be set true as well. The value is defaulted to 'false' when not provided. Please refer to https://docs.microsoft.com/en-us/azure/virtual-machines/disks-enable-ultra-ssd for more details on Ultra SSD feature. **NOTE:** The ultraSSDEnabled setting can only be enabled for Host Groups that are created as zonal. Minimum api-version: 2022-03-01."
             }
           },
-          "description": "Enables or disables a capability on the dedicated host group.<br><br>Minimum api-version: 2022-03-01."
+          "description": "Enables or disables a capability on the dedicated host group. Minimum api-version: 2022-03-01."
         }
       },
       "required": [
@@ -830,7 +830,7 @@
           "$ref": "../../../common-types/v1/common.json#/definitions/Resource"
         }
       ],
-      "description": "Specifies information about the dedicated host group that the dedicated hosts should be assigned to. <br><br> Currently, a dedicated host can only be added to a dedicated host group at creation time. An existing dedicated host cannot be added to another dedicated host group."
+      "description": "Specifies information about the dedicated host group that the dedicated hosts should be assigned to. Currently, a dedicated host can only be added to a dedicated host group at creation time. An existing dedicated host cannot be added to another dedicated host group."
     },
     "DedicatedHostGroupUpdate": {
       "properties": {
@@ -874,7 +874,7 @@
     },
     "DedicatedHostLicenseType": {
       "type": "string",
-      "description": "Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None**",
+      "description": "Specifies the software license type that will be applied to the VMs deployed on the dedicated host. Possible values are: **None,** **Windows_Server_Hybrid,** **Windows_Server_Perpetual,** The default value is: **None.**",
       "enum": [
         "None",
         "Windows_Server_Hybrid",
@@ -964,7 +964,7 @@
         "hostId": {
           "readOnly": true,
           "type": "string",
-          "description": "A unique id generated and assigned to the dedicated host by the platform. <br><br> Does not change throughout the lifetime of the host."
+          "description": "A unique id generated and assigned to the dedicated host by the platform. Does not change throughout the lifetime of the host."
         },
         "virtualMachines": {
           "type": "array",
@@ -976,7 +976,7 @@
         },
         "licenseType": {
           "$ref": "#/definitions/DedicatedHostLicenseType",
-          "description": "Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None**"
+          "description": "Specifies the software license type that will be applied to the VMs deployed on the dedicated host. Possible values are: **None,** **Windows_Server_Hybrid,** **Windows_Server_Perpetual.** The default value is: **None.**"
         },
         "provisioningTime": {
           "readOnly": true,
@@ -998,7 +998,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "Specifies the time at which the Dedicated Host resource was created.<br><br>Minimum api-version: 2021-11-01."
+          "description": "Specifies the time at which the Dedicated Host resource was created. Minimum api-version: 2021-11-01."
         }
       },
       "description": "Properties of the dedicated host."
