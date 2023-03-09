@@ -267,8 +267,8 @@
               "$ref": "#/definitions/ElasticSan"
             }
           },
-          "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
+          "201": {
+            "description": "Created -- Resource Created; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/ElasticSan"
             }
@@ -534,8 +534,8 @@
               "$ref": "#/definitions/VolumeGroup"
             }
           },
-          "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
+          "201": {
+            "description": "Created -- Resource Created; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/VolumeGroup"
             }
@@ -765,8 +765,8 @@
               "$ref": "#/definitions/Volume"
             }
           },
-          "202": {
-            "description": "Accepted -- Create request accepted; operation will complete asynchronously.",
+          "201": {
+            "description": "Created -- Resource Created; operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/Volume"
             }
@@ -1312,7 +1312,8 @@
       "required": true,
       "type": "string",
       "description": "The ID of the target subscription.",
-      "minLength": 1
+      "minLength": 1,
+      "x-ms-parameter-location": "client"
     },
     "ApiVersionParameter": {
       "name": "api-version",
@@ -1320,7 +1321,8 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for this operation.",
-      "minLength": 1
+      "minLength": 1,
+      "x-ms-parameter-location": "client"
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
