@@ -233,10 +233,12 @@ directive:
       - $.definitions.SubResourceWithColocationStatus
     suppress:
       - RequiredPropertiesMissingInResourceModel
-  - suppress: 
-      - APIVersionPattern  
-    from: 
-      - Microsoft.Compute/common-types/v1/common.json
+  - suppress: APIVersionPattern
+    from:
+      - common.json
+  - suppress: XmsResourceInPutResponse
+    from: virtualMachineScaleSet.json
+    reason: x-ms-azure-resource tag makes 'ID' property required. However, VmssExtension is part of the VMSS property, not necessary a reousrce. So it does not always have ID.
 ```
 
 ### Tag: package-2022-11-01
