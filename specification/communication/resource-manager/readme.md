@@ -41,6 +41,7 @@ input-file:
   - Microsoft.Communication/preview/2023-03-01-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2023-03-01-preview/Domains.json
   - Microsoft.Communication/preview/2023-03-01-preview/EmailServices.json
+  - Microsoft.Communication/preview/2023-03-01-preview/SenderUsernames.json
 ```
 ### Tag: package-preview-2022-07
 
