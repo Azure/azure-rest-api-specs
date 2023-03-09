@@ -4,10 +4,10 @@
 
 Configuration for generating AzureOpenAI SDK.
 
-The current release for the AzureOpenAI is `release_2022_12_01`.
+The current release for the AzureOpenAI is `release_2023-03-15-preview`.
 
 ``` yaml
-tag: release_2022_12_01
+tag: release_2023-03-15-preview
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -51,6 +51,13 @@ These settings apply only when `--tag=release_2022_12_01` is specified on the co
 
 ``` yaml $(tag) == 'release_2022_12_01'
 input-file: stable/2022-12-01/azureopenai.json
+```
+
+## AzureOpenAI 2023-03-15-preview
+These settings apply only when `--tag=release_2023-03-15-preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2023-03-15-preview'
+input-file: stable/2023-03-15-preview/azureopenai.json
 ```
 
 AutoRest-Linter Suppressions
