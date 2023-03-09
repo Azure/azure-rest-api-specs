@@ -25,7 +25,7 @@ These are the global settings for the networkanalytics.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-04-30
+tag: package-2023-04-30-preview
 ```
 
 
@@ -47,13 +47,13 @@ input-file:
   - Microsoft.NetworkAnalytics/preview/2023-03-31-preview/networkanalytics.json
 ```
 
-### Tag: package-2023-04-30
+### Tag: package-2023-04-30-preview
 
-These settings apply only when `--tag=package-2023-04-30` is specified on the command line.
+These settings apply only when `--tag=package-2023-04-30-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-04-30'
+```yaml $(tag) == 'package-2023-04-30-preview'
 input-file:
-  - Microsoft.NetworkAnalytics/stable/2023-04-30/networkanalytics.json
+  - Microsoft.NetworkAnalytics/preview/2023-04-30-preview/networkanalytics.json
 ```
 
 # Code Generation
