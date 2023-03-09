@@ -327,6 +327,14 @@
             "description": "The dictionary of custom properties to include with the post operation. These data are appended to the alert payload."
           },
           "description": "The properties of an alert payload."
+        },
+        "actionProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The dictionary of action properties to include with the post operation. This data customizes the actions."
+          },
+          "description": "The properties of an action properties."
         }
       }
     },
@@ -385,20 +393,6 @@
         "enabled": {
           "type": "boolean",
           "description": "The flag which indicates whether this scheduled query rule is enabled. Value should be true or false"
-        },
-        "publicNetworkAccess": {
-          "description": "This determines if traffic is allowed over public network. By default it is enabled.",
-          "enum": [
-            "Enabled",
-            "Disabled",
-            "SecuredByPerimeter"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "PublicNetworkAccess",
-            "modelAsString": true
-          },
-          "default": "Enabled"
         },
         "scopes": {
           "type": "array",
