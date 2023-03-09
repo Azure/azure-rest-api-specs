@@ -803,6 +803,282 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/sqlAvailabilityGroups": {
+      "get": {
+        "tags": [
+          "sqlAvailabilityGroups"
+        ],
+        "operationId": "sqlAvailabilityGroups_List",
+        "summary": "List sqlAvailabilityGroups resources in the subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlAvailabilityGroups.json#/definitions/SqlAvailabilityGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidParameterValue - An invalid value was given to parameter.\n\n * 400 InvalidCrossSubscriptionVmMove - Invalid cross subscription move of resource.\n\n * 404 ResourceNotFound - The requested resource was not found.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Availability Groups in a subscription.": {
+            "$ref": "./examples/ListSubscriptionSqlAvailabilityGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlAvailabilityGroups": {
+      "get": {
+        "tags": [
+          "sqlAvailabilityGroups"
+        ],
+        "operationId": "sqlAvailabilityGroups_ListByResourceGroup",
+        "description": "Gets all sqlAvailabilityGroups in a resource group.",
+        "summary": "List sqlAvailabilityGroups resources in the resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlAvailabilityGroups.json#/definitions/SqlAvailabilityGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all SQL Server Instance in a resource group.": {
+            "$ref": "./examples/ListByResourceGroupSqlAvailabilityGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlAvailabilityGroups/{sqlAvailabilityGroupName}": {
+      "get": {
+        "tags": [
+          "sqlAvailabilityGroups"
+        ],
+        "operationId": "SqlAvailabilityGroups_Get",
+        "description": "Retrieves a SQL Availability Group resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlAvailabilityGroups.json#/definitions/SqlAvailabilityGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/GetSqlAvailabilityGroup.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "sqlAvailabilityGroups"
+        ],
+        "operationId": "SqlAvailabilityGroups_Create",
+        "description": "Creates or replaces a SQL Availability Group resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupName"
+          },
+          {
+            "name": "sqlAvailabilityGroup",
+            "in": "body",
+            "description": "The SQL Availability Group to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "./sqlAvailabilityGroups.json#/definitions/SqlAvailabilityGroup"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlAvailabilityGroups.json#/definitions/SqlAvailabilityGroup"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "./sqlAvailabilityGroups.json#/definitions/SqlAvailabilityGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Availability Group tags.": {
+            "$ref": "./examples/CreateOrUpdateSqlAvailabilityGroup.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "tags": [
+          "sqlAvailabilityGroups"
+        ],
+        "operationId": "SqlAvailabilityGroups_Delete",
+        "description": "Deletes a SQL Availability Group resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the SQL Availability Group."
+          },
+          "202": {
+            "description": "Resource deletion is in progress."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          },
+          "204": {
+            "description": "The specified SQL Availability Group does not exist."
+          }
+        },
+        "x-ms-examples": {
+          "Delete a SQL Server Instance.": {
+            "$ref": "./examples/DeleteSqlAvailabilityGroup.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "sqlAvailabilityGroups"
+        ],
+        "operationId": "SqlAvailabilityGroups_Update",
+        "description": "Updates a SQL Availability Group resource",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The SQL Availability Group.",
+            "required": true,
+            "schema": {
+              "$ref": "./sqlAvailabilityGroups.json#/definitions/SqlAvailabilityGroupUpdate"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./sqlAvailabilityGroups.json#/definitions/SqlAvailabilityGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates a SQL Server Instance tags.": {
+            "$ref": "./examples/UpdateSqlAvailabilityGroup.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AzureArcData/dataControllers": {
       "get": {
         "tags": [
@@ -1629,6 +1905,14 @@
     "sqlServerInstanceName": {
       "name": "sqlServerInstanceName",
       "description": "Name of SQL Server Instance",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sqlAvailabilityGroupName": {
+      "name": "sqlAvailabilityGroupName",
+      "description": "Name of SQL Availability Group",
       "in": "path",
       "required": true,
       "type": "string",
