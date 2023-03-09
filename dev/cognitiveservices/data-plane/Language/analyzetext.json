@@ -163,6 +163,9 @@
           "Successful Submit Abstractive Summarization Task": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskSubmit.json"
           },
+          "Successful Submit Custom Abstractive Summarization Task": {
+            "$ref": "./examples/text/SuccessfulCustomAbstractiveSummarizationTaskSubmit.json"
+          },
           "Successful Healthcare DocumentType Post Request": {
             "$ref": "./examples/text/SuccessfulHealthcareDocumentTypePostRequest.json"
           }
@@ -221,6 +224,9 @@
           },
           "Successful Get Abstractive Summarization Result": {
             "$ref": "./examples/text/SuccessfulAbstractiveSummarizationTaskResult.json"
+          },
+          "Successful Get Custom Abstractive Summarization Result": {
+            "$ref": "./examples/text/SuccessfulCustomAbstractiveSummarizationTaskResult.json"
           },
           "Successful Get Text Analysis Health DocumentType Request": {
             "$ref": "./examples/text/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
@@ -342,7 +348,8 @@
         "CustomEntityRecognitionLROResults",
         "CustomSingleLabelClassificationLROResults",
         "CustomMultiLabelClassificationLROResults",
-        "AbstractiveSummarizationLROResults"
+        "AbstractiveSummarizationLROResults",
+        "CustomAbstractiveSummarizationLROResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextLROResultsKind",
@@ -3859,6 +3866,24 @@
         }
       ],
       "x-ms-discriminator-value": "AbstractiveSummarization"
+    },
+    "AbstractiveSummarizationLROTask": {
+      "type": "object",
+      "description": "An object representing the task definition for an Abstractive Summarization task.",
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/AbstractiveSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomAbstractiveSummarization"
     },
     "AbstractiveSummarizationTaskParameters": {
       "type": "object",
