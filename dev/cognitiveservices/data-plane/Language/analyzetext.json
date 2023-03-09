@@ -3867,15 +3867,15 @@
       ],
       "x-ms-discriminator-value": "AbstractiveSummarization"
     },
-    "AbstractiveSummarizationLROTask": {
+    "CustomAbstractiveSummarizationLROTask": {
       "type": "object",
-      "description": "An object representing the task definition for an Abstractive Summarization task.",
+      "description": "An object representing the task definition for an Custom Abstractive Summarization task.",
       "required": [
         "parameters"
       ],
       "properties": {
         "parameters": {
-          "$ref": "#/definitions/AbstractiveSummarizationTaskParameters"
+          "$ref": "#/definitions/CustomAbstractiveSummarizationTaskParameters"
         }
       },
       "allOf": [
@@ -3897,6 +3897,18 @@
         }
       ]
     },
+    "CustomAbstractiveSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for the Custom Abstractive Summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        },
+        {
+          "$ref": "#/definitions/CustomTaskParameters"
+        }
+      ]
+    },
     "AbstractiveSummarizationLROResult": {
       "type": "object",
       "description": "An object representing the results for an Abstractive Summarization task.",
@@ -3914,6 +3926,24 @@
         "results"
       ],
       "x-ms-discriminator-value": "AbstractiveSummarizationLROResults"
+    },
+    "CustomAbstractiveSummarizationLROResult": {
+      "type": "object",
+      "description": "An object representing the results for an Custom Abstractive Summarization task.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomAbstractiveSummarizationResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeTextLROResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomAbstractiveSummarizationLROResults"
     },
     "AbstractiveSummarizationResultBase": {
       "type": "object",
@@ -3952,6 +3982,21 @@
         },
         {
           "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ],
+      "required": [
+        "documents"
+      ]
+    },
+    "CustomAbstractiveSummarizationResult": {
+      "type": "object",
+      "description": "An object representing the custom summarization results of each document.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AbstractiveSummarizationResultBase"
+        },
+        {
+          "$ref": "#/definitions/CustomResult"
         }
       ],
       "required": [
