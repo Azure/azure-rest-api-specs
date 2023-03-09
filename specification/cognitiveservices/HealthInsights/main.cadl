@@ -1,0 +1,30 @@
+import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
+import "./routes/route.oncophenotype.cadl";
+import "./routes/route.trialmatcher.cadl";
+
+using Cadl.Rest;
+using Cadl.Http;
+using Cadl.Versioning;
+using OpenAPI;
+
+@service({title: "Azure Health Insights API"})
+@versioned(ApiVersion)
+@doc("Azure Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.")
+@server(
+  "{endpoint}/healthinsights",
+  "Azure Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.",
+  {
+    @doc("Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).")
+    endpoint: url,
+  }
+)
+
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
+
+namespace AzureHealthInsights;
+
+enum ApiVersion {
+  v2023_03_01_preview: "2023-03-01-preview"
+}
+

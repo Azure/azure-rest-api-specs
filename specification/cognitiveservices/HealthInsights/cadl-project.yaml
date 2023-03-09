@@ -1,0 +1,41 @@
+parameters:
+  "package-namespace":
+    default: "namespace"
+    # cadl compile .\clinical-matching-client.cadl --arg "package-namespace=ClinicalMatching"
+    # cadl compile .\cancer-profiling-client.cadl --arg "package-namespace=CancerProfiling"
+    
+emit: [
+    "@azure-tools/cadl-autorest",
+  # "@azure-tools/cadl-csharp",
+  # "@azure-tools/cadl-python",
+  # "@azure-tools/cadl-java",
+  # "@azure-tools/cadl-typescript",
+  # "@azure-tools/cadl-apiview"
+]
+
+
+options:
+  "@azure-tools/cadl-autorest":
+     output-file: "openapi.json"
+     examples-directory: "./examples"
+  # "@azure-tools/cadl-csharp":
+  #   namespace : "Azure.Health.Insights.{package-namespace}"
+  #   clear-output-folder : true
+  #   new-project : false
+  #   model-namespace : false
+  #   emitter-output-dir : "{project-root}/cadl-output/@azure-tools/cadl-csharp/{package-namespace}"
+  #   emitter-output-dir : "{cwd}/azure-sdk-for-net-pr/sdk/healthinsights/Azure.Health.Insights.{package-namespace}/src/"
+  #  "@azure-tools/cadl-typescript": 
+  #     packageDetails:
+  #        name: "@azure-rest/azure-health-insights-{package-namespace}"
+  #        description: "Azure Health Insights {package-namespace}"
+  #  "@azure-tools/cadl-java":
+  #     namespace: "Com.Azure.Health.Insights.{package-namespace}"
+  #     clear-output-folder: true
+  #     new-project: false
+  #     model-namespace: false
+  #     emitter-output-dir : "{project-root}/cadl-output/@azure-tools/cadl-java/{package-namespace}"
+  #  "@azure-tools/cadl-python":
+  #     package-mode: "dataplane"
+  #     package-name: "azure-healthinsights-{package-namespace}"
+  #     emitter-output-dir : "{project-root}/cadl-output/@azure-tools/cadl-python/{package-namespace}"

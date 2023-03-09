@@ -1,0 +1,15 @@
+// clinical-matching-client.cadl
+import "./main.cadl";
+import "@azure-tools/cadl-dpg";
+
+using Azure.DPG;
+
+namespace ClientForAzureHealthInsights;
+  
+@client({
+    name: "ClinicalMatchingClient",
+    service: AzureHealthInsights
+})
+interface ClinicalMatchingClient {
+  MatchTrials is AzureHealthInsights.TrialMatcher.CreateJob;
+}

@@ -1,0 +1,16 @@
+// cancer-profiling-client.cadl
+import "./main.cadl";
+import "@azure-tools/cadl-dpg";
+
+using Azure.DPG;
+
+namespace ClientForAzureHealthInsights;
+
+
+@client({
+  name: "CancerProfilingClient",
+  service: AzureHealthInsights
+  })
+  interface CancerProfilingClient {
+    InferCancerProfile is AzureHealthInsights.OncoPhenotype.CreateJob;
+  }
