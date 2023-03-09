@@ -1,21 +1,3 @@
-parameters:
-- name: image
-  displayName: Pool Image
-  type: string
-  default: Ubuntu-22.04
-  values:
-  - windows-latest
-  - Ubuntu-22.04
-
-- name: PathToDockefile
-  displayName: Path To Docker File
-  type: string
-  default: scripts/datacontainer
-  values:
-  - scripts/datacontainer-windows
-  - scripts/datacontainer
-
-
 schedules:
 - cron: "0 0 * * *"
   displayName: Daily build
@@ -25,20 +7,20 @@ schedules:
   always: true
 
 pool:
-  vmImage: ${{ parameters.image }}
+  vmImage: 'Ubuntu-22.04'
 
 variables:
   IMAGE_TAG_PREFIX: $[format('1.0.{0:HHm}', pipeline.startTime)]
 
 steps:
 - task: Docker@2
-  displayName: Login to production ACR
+  displayName: Login to production ACR
   inputs:
     command: login
     containerRegistry: $(CONTAINER_REGISTRY_SERVICE_CONNECTION)
 
 - task: Docker@2
-  displayName: Login to dogfood ACR
+  displayName: Login to dogfood ACR
   inputs:
     command: login
     containerRegistry: $(DOGFOOD_CONTAINER_REGISTRY_SERVICE_CONNECTION)
@@ -47,13 +29,13 @@ steps:
   inputs:
     SourceFolder: $(Build.SourcesDirectory)
     contents: .git/**
-    targetFolder: $(Build.SourcesDirectory)/${{ parameters.PathToDockerfile }}
+    targetFolder: $(Build.SourcesDirectory)/scripts/datacontainer
 
 - task: Docker@2
   displayName: Build and Push
   inputs:
     command: buildAndPush
-    Dockerfile: ${{ parameters.PathToDockerfile }}/Dockerfile
+    Dockerfile: scripts/datacontainer/Dockerfile
     repository: $(CONTAINER_REGISTRY_REPOSITORY_NAME)
     tags: |
       latest
