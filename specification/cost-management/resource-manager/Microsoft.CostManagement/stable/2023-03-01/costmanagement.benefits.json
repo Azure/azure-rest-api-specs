@@ -704,7 +704,7 @@
             "$ref": "common-types.json#/parameters/billingAccountIdParameter"
           },
           {
-            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+            "$ref": "#/parameters/benefitAsyncOperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -749,7 +749,7 @@
             "$ref": "common-types.json#/parameters/billingProfileIdParameter"
           },
           {
-            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+            "$ref": "#/parameters/benefitAsyncOperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -791,7 +791,7 @@
             "$ref": "#/parameters/reservationOrderIdParameter"
           },
           {
-            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+            "$ref": "#/parameters/benefitAsyncOperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -836,7 +836,7 @@
             "$ref": "#/parameters/reservationIdParameter"
           },
           {
-            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+            "$ref": "#/parameters/benefitAsyncOperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -878,7 +878,7 @@
             "$ref": "#/parameters/savingsPlanOrderIdParameter"
           },
           {
-            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+            "$ref": "#/parameters/benefitAsyncOperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -923,7 +923,7 @@
             "$ref": "#/parameters/savingsPlanIdParameter"
           },
           {
-            "$ref": "#/parameters/benefitsAsyncOperationIdParameter"
+            "$ref": "#/parameters/benefitAsyncOperationIdParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -1194,7 +1194,6 @@
       "type": "string",
       "description": "Kind/type of the benefit.",
       "enum": [
-        "IncludedQuantity",
         "Reservation",
         "SavingsPlan"
       ],
@@ -1202,11 +1201,6 @@
         "name": "benefitKind",
         "modelAsString": true,
         "values": [
-          {
-            "value": "IncludedQuantity",
-            "description": "Benefit is IncludedQuantity.",
-            "name": "IncludedQuantity"
-          },
           {
             "value": "Reservation",
             "description": "Benefit is Reservation.",
@@ -1548,7 +1542,7 @@
       "description": "The CSV file from the reportUrl and secondaryReportUrl blob link will consist of the following columns of benefit utilization data. UtilizedPercentage will be 0 for savings plans reports and non data bricks reservations. Utilization percentages will be 0 for data bricks reservations.",
       "type": "string",
       "enum": [
-        "BenefitKind",
+        "Kind",
         "AvgUtilizationPercentage",
         "BenefitOrderId",
         "BenefitId",
@@ -1692,7 +1686,7 @@
         ]
       }
     },
-    "benefitsAsyncOperationIdParameter": {
+    "benefitAsyncOperationIdParameter": {
       "description": "Operation id of the report being generated",
       "in": "path",
       "name": "operationId",
