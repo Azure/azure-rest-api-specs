@@ -28,20 +28,32 @@ These are the global settings for the Azure Communication Services API.
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2022-10
+tag: package-preview-2023-03
 ```
 
 
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.Communication/preview/2023-03-01-preview/CommunicationServices.json
+  - Microsoft.Communication/preview/2023-03-01-preview/Domains.json
+  - Microsoft.Communication/preview/2023-03-01-preview/EmailServices.json
+  - Microsoft.Communication/preview/2023-03-01-preview/SenderUsernames.json
+```
 ### Tag: package-preview-2022-10
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2022-10'
+``` yaml $(tag) == 'package-preview-2022-10'
 input-file:
   - Microsoft.Communication/preview/2022-10-01-preview/CommunicationServices.json
   - Microsoft.Communication/preview/2022-10-01-preview/Domains.json
   - Microsoft.Communication/preview/2022-10-01-preview/EmailServices.json
 ```
+
 ### Tag: package-preview-2022-07
 
 These settings apply only when `--tag=package-preview-2022-07` is specified on the command line.

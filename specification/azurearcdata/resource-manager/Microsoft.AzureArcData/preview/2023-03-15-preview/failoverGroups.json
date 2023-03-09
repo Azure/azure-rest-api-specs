@@ -8,11 +8,11 @@
   "paths": {},
   "definitions": {
     "FailoverGroupListResult": {
-      "description": "A list of failover groups",
+      "description": "A list of failover groups.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of results.",
+          "description": "Array of failover group results.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/FailoverGroupResource"
@@ -28,7 +28,7 @@
     },
     "FailoverGroupResource": {
       "type": "object",
-      "description": "Failover group resource",
+      "description": "A failover group resource.",
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -51,6 +51,16 @@
       "properties": {
         "provisioningState": {
           "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted"
+          ],
+          "x-ms-enum": {
+            "name": "provisioningState",
+            "modelAsString": true
+          },
           "description": "The provisioning state of the failover group resource.",
           "readOnly": true
         },
@@ -60,15 +70,16 @@
         },
         "spec": {
           "$ref": "#/definitions/FailoverGroupSpec",
-          "description": "null",
+          "description": "The specifications of the failover group resource.",
           "x-ms-client-flatten": false
         },
         "status": {
           "$ref": "#/definitions/FailoverGroupStatus",
-          "description": "null",
+          "description": "The status of the failover group custom resource.",
           "x-ms-client-flatten": false
         }
       },
+      "additionalProperties": {},
       "required": [
         "partnerManagedInstanceId",
         "spec"
@@ -138,6 +149,7 @@
       "properties": {
         "lastUpdateTime": {
           "type": "string",
+          "format": "date-time",
           "description": "The time that the custom resource was last updated."
         },
         "observedGeneration": {
@@ -147,6 +159,15 @@
         },
         "state": {
           "type": "string",
+          "enum": [
+            "Waiting",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "state",
+            "modelAsString": true
+          },
           "description": "The state of the failover group custom resource."
         },
         "results": {
@@ -155,16 +176,29 @@
         },
         "role": {
           "type": "string",
-          "description": "The role of the managed instance."
+          "enum": [
+            "primary",
+            "secondary",
+            "force-primary-allow-data-loss",
+            "force-secondary"
+          ],
+          "x-ms-enum": {
+            "name": "instanceFailoverGroupRole",
+            "modelAsString": true
+          },
+          "description": "The role of the managed instance in the failover group."
         },
         "replicas": {
           "type": "array",
           "description": "A list of failover group replicas.",
           "items": {
             "$ref": "#/definitions/AGReplicas",
-            "description": "null",
+            "description": "The availability group replicas.",
             "x-ms-client-flatten": false
-          }
+          },
+          "x-ms-identifiers": [
+            "replicaName"
+          ]
         }
       },
       "additionalProperties": {}
@@ -187,15 +221,15 @@
         },
         "connectedState": {
           "type": "string",
-          "description": "The connected state."
+          "description": "The connected state of the replica."
         },
         "synchronizationState": {
           "type": "string",
-          "description": "The synchronization state."
+          "description": "The synchronization state of the availability group replicas."
         },
         "availabilityMode": {
           "type": "string",
-          "description": "The availability mode."
+          "description": "The availability mode of the replica."
         },
         "secondaryRoleAllowConnections": {
           "type": "string",

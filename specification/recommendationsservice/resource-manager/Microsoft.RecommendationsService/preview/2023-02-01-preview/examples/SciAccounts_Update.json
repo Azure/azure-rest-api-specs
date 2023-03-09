@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "api-version": "2023-02-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg",
+    "accountName": "sampleAccount",
+    "body": {
+      "tags": {
+        "Environment": "Test"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.RecommendationsService/sciAccounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/sciAccounts",
+        "location": "West Europe",
+        "tags": {
+          "Environment": "Test"
+        },
+        "systemData": {},
+        "properties": {
+          "seatsNumber": 100,
+          "organizationType": "Prod",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.RecommendationsService/locations/WESTUS/operationStatuses/{operationId}?api-version={api-version}"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.RecommendationsService/sciAccounts/sampleAccount",
+        "name": "sampleAccount",
+        "type": "Microsoft.RecommendationsService/sciAccounts",
+        "location": "West Europe",
+        "tags": {
+          "Environment": "Test"
+        },
+        "systemData": {},
+        "properties": {
+          "seatsNumber": 100,
+          "organizationType": "Prod",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

@@ -301,7 +301,7 @@
           }
         },
         "x-ms-examples": {
-          "Create a Arc Sql Server availability group.": {
+          "Create a Arc Sql Server availability group replica.": {
             "$ref": "./examples/CreateOrUpdateArcSqlAvailabilityGroupReplica.json"
           }
         }
@@ -415,7 +415,7 @@
             "$ref": "#/parameters/apiVersion"
           },
           {
-            "name": "sqlServerAvailabilityGroupUpdate",
+            "name": "sqlAvailabilityGroupReplicaUpdate",
             "in": "body",
             "description": "The requested availability group replica resource state.",
             "required": true,
@@ -489,9 +489,339 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlAvailabilityGroups/{sqlAvailabilityGroupName}/databases/{sqlAvailabilityGroupDatabaseName}": {
+      "put": {
+        "tags": [
+          "SqlAvailabilityGroupDatabases"
+        ],
+        "operationId": "SqlAvailabilityGroupDatabases_Create",
+        "description": "Creates or update database in an Arc Sql Availability Group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "sqlAvailabilityGroupDatabaseResource",
+            "description": "The request body for availability group databases resource.",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/SqlAvailabilityGroupDatabaseResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupDatabaseName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlAvailabilityGroupDatabaseResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a Arc availability group database.": {
+            "$ref": "./examples/CreateOrUpdateArcSqlAvailabilityGroupDatabase.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SqlAvailabilityGroupDatabases"
+        ],
+        "operationId": "SqlAvailabilityGroupDatabases_Delete",
+        "description": "Deletes an Arc Sql availability group database resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupDatabaseName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the database of the availability group."
+          },
+          "204": {
+            "description": "The specified database of availability group does not exist."
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes an Arc Sql availability group database resource": {
+            "$ref": "./examples/DeleteArcSqlAvailabilityGroupDatabase.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "SqlAvailabilityGroupDatabases"
+        ],
+        "operationId": "SqlAvailabilityGroupDatabases_Get",
+        "description": "Retrieves an Arc Sql availability group database resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupDatabaseName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SqlAvailabilityGroupDatabaseResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Retrieves an Arc Sql Server availability group database resource.": {
+            "$ref": "./examples/GetArcSqlAvailabilityGroupDatabase.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SqlAvailabilityGroupDatabases"
+        ],
+        "description": "Updates an existing Availability Group Database.",
+        "operationId": "SqlAvailabilityGroupDatabases_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupDatabaseName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "name": "sqlAvailabilityGroupDatabaseUpdate",
+            "in": "body",
+            "description": "The update availability group database resource.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlAvailabilityGroupDatabaseUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the availability group database.",
+            "schema": {
+              "$ref": "#/definitions/SqlAvailabilityGroupDatabaseResource"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a availability group replica.": {
+            "$ref": "./examples/UpdateSqlAvailabilityGroupDatabase.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureArcData/sqlAvailabilityGroups/{sqlAvailabilityGroupName}/databases": {
+      "get": {
+        "tags": [
+          "SqlAvailabilityGroupDatabases"
+        ],
+        "operationId": "SqlAvailabilityGroupDatabases_List",
+        "summary": "List the Availability Group Databases associated with the given Arc Sql AG.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/sqlAvailabilityGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSqlAvailabilityGroupDatabasesListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***",
+            "schema": {
+              "$ref": "./common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets all availability group databases associated with the availability groups .": {
+            "$ref": "./examples/ListBySqlAvailabilityGroupDatabase.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "AvailabilityGroupConfigure": {
+      "description": "The specifications of the availability group replica configuration",
+      "type": "object",
+      "properties": {
+        "endpointUrl": {
+          "type": "string",
+          "description": "Mirroring endpoint URL of availability group replica"
+        },
+        "availabilityModeDesc": {
+          "type": "string",
+          "description": "Availability Synchronization mode description of avaiability group replica."
+        },
+        "failoverModeDesc": {
+          "type": "string",
+          "description": "failover mode description of the availability group replica."
+        },
+        "sessionTimeout": {
+          "type": "integer",
+          "description": "The time-out period of availability group session replica, in seconds.",
+          "format": "int32"
+        },
+        "primaryRoleAllowConnectionsDesc": {
+          "type": "string",
+          "description": "Allowed the connections for primary role of the availability group replica."
+        },
+        "secondaryRoleAllowConnectionsDesc": {
+          "type": "string",
+          "description": "Allowed the connections for seondary role of availability group replica."
+        },
+        "createDate": {
+          "type": "string",
+          "description": "Date that the replica was created.",
+          "format": "date-time"
+        },
+        "modifyDate": {
+          "type": "string",
+          "description": "Date that the replica was modified.",
+          "format": "date-time"
+        },
+        "backupPriority": {
+          "type": "integer",
+          "description": "Represents the user-specified priority for performing backups on this replica relative to the other replicas in the same availability group.",
+          "format": "int32"
+        },
+        "readOnlyRoutingUrl": {
+          "type": "string",
+          "description": "Connectivity endpoint (URL) of the read only availability replica."
+        },
+        "readWriteRoutingUrl": {
+          "type": "string",
+          "description": "Connectivity endpoint (URL) of the read write availability replica."
+        },
+        "seedingModeDesc": {
+          "type": "string",
+          "description": "Describes seeding mode."
+        }
+      }
+    },
+    "AvailabilityGroupState": {
+      "description": "The specifications of the availability group state",
+      "type": "object",
+      "properties": {
+        "availabilityGroupReplicaRole": {
+          "type": "string",
+          "description": "Role description of the availability group replica."
+        },
+        "operationalStateDesc": {
+          "type": "string",
+          "description": "Operation state description of the availability group replica"
+        },
+        "recoveryHealthDesc": {
+          "type": "string",
+          "description": "Recovery health description of the availability group replica."
+        },
+        "synchronizationHealthDesc": {
+          "type": "string",
+          "description": "Synchronization health description of the availability group replica."
+        },
+        "connectedStateDesc": {
+          "type": "string",
+          "description": "Connected state description of the availability group replica."
+        },
+        "lastConnectErrorDescription": {
+          "type": "string",
+          "description": "Last connect error description of the availability group replica."
+        },
+        "lastConnectErrorTimestamp": {
+          "type": "string",
+          "description": "Last connect error time stamp of the availability group replica.",
+          "format": "date-time"
+        }
+      }
+    },
     "ArcSqlServerAvailabilityGroupListResult": {
       "description": "A list of Arc Sql Server Availability Group.",
       "type": "object",
@@ -539,41 +869,29 @@
           "description": "ID GUID of the availability group.",
           "pattern": "^[A-Za-z0-9]{8}-([A-Za-z0-9]{4}-){3}[A-Za-z0-9]{12}$"
         },
-        "availabilityGroupReplicaRole": {
+        "availabilityGroupName": {
           "type": "string",
-          "description": "Role description of the availability group replica."
+          "description": "the availability group name."
         },
-        "operationalStateDesc": {
-          "type": "string",
-          "description": "Operation state description of the availability group replica"
+        "configure": {
+          "$ref": "#/definitions/AvailabilityGroupConfigure",
+          "description": "null",
+          "x-ms-client-flatten": false
         },
-        "recoveryHealthDesc": {
-          "type": "string",
-          "description": "Recovery health description of the availability group replica."
-        },
-        "synchronizationHealthDesc": {
-          "type": "string",
-          "description": "Synchronization health description of the availability group replica."
-        },
-        "connectedStateDesc": {
-          "type": "string",
-          "description": "Connected state description of the availability group replica."
-        },
-        "lastConnectErrorDescription": {
-          "type": "string",
-          "description": "Last connect error description of the availability group replica."
-        },
-        "lastConnectErrorTimestamp": {
-          "type": "string",
-          "description": "Last connect error time stamp of the availability group replica.",
-          "format": "date-time"
+        "state": {
+          "$ref": "#/definitions/AvailabilityGroupState",
+          "description": "null",
+          "x-ms-client-flatten": false
         },
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the Arc-enabled SQL Server availability group resource.",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "availabilityGroupId"
+      ]
     },
     "SqlServerAvailabilityGroupUpdate": {
       "description": "An update to availability group resource.",
@@ -640,38 +958,23 @@
           "description": "ID GUID of the availability group.",
           "pattern": "^[A-Za-z0-9]{8}-([A-Za-z0-9]{4}-){3}[A-Za-z0-9]{12}$"
         },
-        "availabilityGroupReplicaRole": {
+        "replicaName": {
           "type": "string",
-          "description": "Role description of the availability group replica."
+          "description": "the replica name."
         },
-        "operationalStateDesc": {
-          "type": "string",
-          "description": "Operation state description of the availability group replica"
+        "configure": {
+          "$ref": "#/definitions/AvailabilityGroupConfigure",
+          "description": "null",
+          "x-ms-client-flatten": false
         },
-        "recoveryHealthDesc": {
-          "type": "string",
-          "description": "Recovery health description of the availability group replica."
-        },
-        "synchronizationHealthDesc": {
-          "type": "string",
-          "description": "Synchronization health description of the availability group replica."
-        },
-        "connectedStateDesc": {
-          "type": "string",
-          "description": "Connected state description of the availability group replica."
-        },
-        "lastConnectErrorDescription": {
-          "type": "string",
-          "description": "Last connect error description of the availability group replica."
-        },
-        "lastConnectErrorTimestamp": {
-          "type": "string",
-          "description": "Last connect error time stamp of the availability group replica.",
-          "format": "date-time"
+        "state": {
+          "$ref": "#/definitions/AvailabilityGroupState",
+          "description": "null",
+          "x-ms-client-flatten": false
         },
         "provisioningState": {
           "type": "string",
-          "description": "The provisioning state of the Arc-enabled SQL Server database resource.",
+          "description": "The provisioning state of the Arc-enabled SQL Server availability group resource.",
           "readOnly": true
         }
       }
@@ -689,6 +992,132 @@
         },
         "properties": {
           "$ref": "#/definitions/SqlAvailabilityGroupReplicaResourceProperties",
+          "description": "The Availability Group Replica's properties",
+          "x-ms-client-flatten": false
+        }
+      }
+    },
+    "ArcSqlAvailabilityGroupDatabasesListResult": {
+      "description": "A list of Arc Sql Availability Group Databases.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of  Arc Sql Availability Group Database.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlAvailabilityGroupDatabaseResource"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlAvailabilityGroupDatabaseResource": {
+      "type": "object",
+      "description": "Arc Sql Server Availability Group Database",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlAvailabilityGroupMultiDatabaseReplicaResourceProperties",
+          "description": "Properties of Arc Sql Availability Group Multiple Database Replica",
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlAvailabilityGroupMultiDatabaseReplicaResourceProperties": {
+      "type": "object",
+      "description": "The properties of Arc Sql availability group multiple database replica resource",
+      "properties": {
+        "groupDatabaseId": {
+          "type": "string",
+          "description": "ID GUID of the database for availability group.",
+          "pattern": "^[A-Za-z0-9]{8}-([A-Za-z0-9]{4}-){3}[A-Za-z0-9]{12}$"
+        },
+        "value": {
+          "description": "Array of  Arc Sql Availability Group Database Replicas.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlAvailabilityGroupDatabaseReplicaResourceProperties"
+          }
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Arc-enabled SQL Server availability group resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlAvailabilityGroupDatabaseReplicaResourceProperties": {
+      "type": "object",
+      "description": "The properties of Arc Sql availability group database replica resource",
+      "properties": {
+        "replicaName": {
+          "type": "string",
+          "description": "the database replica name."
+        },
+        "isLocal": {
+          "type": "boolean",
+          "description": "Whether the availability database is local."
+        },
+        "isPrimaryReplica": {
+          "type": "boolean",
+          "description": "Returns 1 if the replica is primary, or 0 if it is a secondary replica."
+        },
+        "synchronizationStateDesc": {
+          "type": "string",
+          "description": "Description of the data-movement state."
+        },
+        "isCommitParticipant": {
+          "type": "boolean",
+          "description": "Whether this replica is transaction committer."
+        },
+        "synchronizationHealthDesc": {
+          "type": "string",
+          "description": "Description of the health of database."
+        },
+        "databaseStateDesc": {
+          "type": "string",
+          "description": "Description of the database state of the availability replica."
+        },
+        "isSuspended": {
+          "type": "boolean",
+          "description": "Whether this data movement is suspeneded."
+        },
+        "suspendReasonDesc": {
+          "type": "string",
+          "description": "Description of the database suspended state reason."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the Arc-enabled SQL Server availability group resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "SqlAvailabilityGroupDatabaseUpdate": {
+      "description": "An update to Availability Group Database Replica resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SqlAvailabilityGroupMultiDatabaseReplicaResourceProperties",
           "description": "The Availability Group Replica's properties",
           "x-ms-client-flatten": false
         }
@@ -723,6 +1152,14 @@
     "sqlServerInstanceName": {
       "name": "sqlServerInstanceName",
       "description": "Name of SQL Server Instance",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "sqlAvailabilityGroupDatabaseName": {
+      "name": "sqlAvailabilityGroupDatabaseName",
+      "description": "Name of SQL Availability Group Database",
       "in": "path",
       "required": true,
       "type": "string",
