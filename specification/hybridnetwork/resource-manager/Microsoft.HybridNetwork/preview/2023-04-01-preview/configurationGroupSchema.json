@@ -278,6 +278,67 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridNetwork/publishers/{publisherName}/configurationGroupSchemas/{configurationGroupSchemaName}/updateState": {
+      "post": {
+        "tags": [
+          "ConfigurationGroupSchemas"
+        ],
+        "operationId": "ConfigurationGroupSchemas_updateState",
+        "description": "Update configuration group schema state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/PublisherNameParameter"
+          },
+          {
+            "$ref": "./common.json#/parameters/ConfigurationGroupSchemaNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigurationGroupSchemaVersionUpdateState"
+            },
+            "description": "Parameters supplied to update the state of configuration group schema."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The updated configuration group schema state.",
+            "schema": {
+              "$ref": "#/definitions/ConfigurationGroupSchemaVersionUpdateState"
+            }
+          },
+          "202": {
+            "description": "The request of updating configuration group schema state is accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update network service design version state": {
+            "$ref": "./examples/ConfigurationGroupSchemaVersionUpdateState.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -317,6 +378,12 @@
           "$ref": "./common.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the Configuration group schema resource."
         },
+        "versionState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The configuration group schema version state.",
+          "$ref": "#/definitions/ConfigurationGroupSchemaVersionState"
+        },
         "schemaDefinition": {
           "type": "string",
           "x-ms-mutability": [
@@ -344,6 +411,34 @@
         }
       },
       "description": "A list of configuration group schema resources."
+    },
+    "ConfigurationGroupSchemaVersionState": {
+      "type": "string",
+      "description": "The configuration group schema state.",
+      "enum": [
+        "Unknown",
+        "Preview",
+        "Active",
+        "Deprecated"
+      ],
+      "x-ms-enum": {
+        "name": "versionState",
+        "modelAsString": true
+      }
+    },
+    "ConfigurationGroupSchemaVersionUpdateState": {
+      "type": "object",
+      "description": "Publisher configuration group schema update request definition.",
+      "properties": {
+        "versionState": {
+          "description": "The configuration group schema state.",
+          "$ref": "#/definitions/ConfigurationGroupSchemaVersionState",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
     }
   }
 }
