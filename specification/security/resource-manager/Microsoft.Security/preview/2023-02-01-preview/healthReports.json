@@ -44,14 +44,14 @@
         "tags": [
           "HealthReports"
         ],
-        "description": "Get a list of all health reports inside a scope",
+        "description": "Get a list of all health reports inside a scope. Valid scopes are: subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
         "operationId": "HealthReports_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Scope"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ScopeParameter"
           }
         ],
         "responses": {
@@ -218,9 +218,9 @@
           "type": "string",
           "description": "The remediation script to solve this issue"
         },
-        "additionalData": {
+        "issueAdditionalData": {
           "type": "object",
-          "description": "Additional data regarding the API collection.",
+          "description": "Additional data for the given issue. The additional data depends on the issue type",
           "additionalProperties": {
             "type": "string"
           }
@@ -329,7 +329,7 @@
             "modelAsString": true
           }
         },
-        "id": {
+        "azureResourceId": {
           "type": "string",
           "readOnly": true,
           "description": "The azure id of the resource"
@@ -350,14 +350,6 @@
       "type": "string",
       "pattern": "[{]?[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$",
       "description": "The health report Key - Unique key for the health report type",
-      "x-ms-parameter-location": "method"
-    },
-    "Scope": {
-      "name": "scope",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The scope of the health reports. Valid scopes are: subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
       "x-ms-parameter-location": "method"
     }
   }

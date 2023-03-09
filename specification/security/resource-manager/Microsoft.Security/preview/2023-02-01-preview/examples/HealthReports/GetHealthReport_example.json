@@ -13,7 +13,7 @@
         "properties": {
           "resourceDetails": {
             "source": "Aws",
-            "id": "/subscriptions/a1efb6ca-fbc5-4782-9aaa-5c7daded1ce2/resourcegroups/E2E-IBB0WX/providers/Microsoft.Security/securityconnectors/AwsConnectorAllOfferings",
+            "azureResourceId": "/subscriptions/a1efb6ca-fbc5-4782-9aaa-5c7daded1ce2/resourcegroups/E2E-IBB0WX/providers/Microsoft.Security/securityconnectors/AwsConnectorAllOfferings",
             "connectorId": "bb7ad9cc-26b6-48ec-a5b4-23fc23be2733"
           },
           "environmentDetails": {
@@ -43,7 +43,7 @@
               "issueDescription": "A problem was identified with the AWS CloudFormation StackSet. The StackSet is used to create stacks across multiple accounts. To grant Defender for Cloud access to your member accounts, there is a need to run the StackSet on the member accounts.",
               "remediationSteps": "Validate that the StackSet name in AWS matches the name provided in the onboarding set up: StackSet name can be found in AWS Management Console  -> CloudFormation -> StackSets -> StackSet name In case the names do not match, update the StackSet name to match the StackSet name provided in the onboarding set up.  In case the StackSet does not exist, re-run the CloudFormation template only for StackSet. Navigate to CloudFormation 'StackSets' in AWS Management Console -> Click 'Create StackSet' -> Choose 'Upload a template file', `Choose file` and select the downloaded template. Make sure to enter the exact StackSet name as it was provided in the onboarding set up. Download template link ",
               "remediationScript": "",
-              "additionalData": {
+              "issueAdditionalData": {
                 "StacksetName": "ProdStackSet"
               }
             }
