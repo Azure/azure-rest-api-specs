@@ -1610,14 +1610,13 @@
     }
   },
   "parameters": {
-    "billingScopeBenefitRecommendationParameter": {
-      "name": "billingScope",
+    "benefitAsyncOperationIdParameter": {
+      "description": "Operation id of the report being generated",
       "in": "path",
-      "description": "The scope associated with benefit recommendation operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for enterprise agreement scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billing profile scope",
+      "name": "operationId",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method",
-      "x-ms-skip-url-encoding": true
+      "x-ms-parameter-location": "method"
     },
     "benefitRecommendationsFilterParameter": {
       "name": "$filter",
@@ -1626,37 +1625,14 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "savingsPlanOrderIdParameter": {
-      "description": "Savings plan order ID.",
+    "billingScopeBenefitRecommendationParameter": {
+      "name": "billingScope",
       "in": "path",
-      "name": "savingsPlanOrderId",
+      "description": "The scope associated with benefit recommendation operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for enterprise agreement scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billing profile scope",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "savingsPlanIdParameter": {
-      "description": "Savings plan ID.",
-      "in": "path",
-      "name": "savingsPlanId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "reservationOrderIdParameter": {
-      "description": "Reservation Order ID",
-      "in": "path",
-      "name": "reservationOrderId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "reservationIdParameter": {
-      "description": "Reservation ID",
-      "in": "path",
-      "name": "reservationId",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     },
     "grainParameter": {
       "description": "Grain.",
@@ -1692,10 +1668,34 @@
         ]
       }
     },
-    "benefitAsyncOperationIdParameter": {
-      "description": "Operation id of the report being generated",
+    "reservationIdParameter": {
+      "description": "Reservation ID",
       "in": "path",
-      "name": "operationId",
+      "name": "reservationId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "reservationOrderIdParameter": {
+      "description": "Reservation Order ID",
+      "in": "path",
+      "name": "reservationOrderId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "savingsPlanIdParameter": {
+      "description": "Savings plan ID.",
+      "in": "path",
+      "name": "savingsPlanId",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "savingsPlanOrderIdParameter": {
+      "description": "Savings plan order ID.",
+      "in": "path",
+      "name": "savingsPlanOrderId",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
