@@ -11,6 +11,111 @@
     "version": "2023-04-01"
   },
   "paths": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/policies/default": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Lists the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_GetByCustomer",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoliciesGetByCustomer": {
+            "$ref": "./examples/policiesGetByCustomer.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "description": "Updates the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "operationId": "Policies_CreateOrUpdateByCustomer",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./types.json#/parameters/billingAccountName"
+          },
+          {
+            "$ref": "./types.json#/parameters/billingProfileName"
+          },
+          {
+            "$ref": "./types.json#/parameters/customerName"
+          },
+          {
+            "$ref": "./types.json#/parameters/apiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A policy at customer scope.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "default": {
+            "description": "Default response",
+            "schema": {
+              "$ref": "./types.json#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PoliciesPutByCustomer": {
+            "$ref": "./examples/policiesPutByCustomer.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default": {
       "get": {
         "tags": [
@@ -106,105 +211,6 @@
         "x-ms-examples": {
           "PoliciesPutByBillingProfile": {
             "$ref": "./examples/policiesPutByBillingProfile.json"
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/policies/default": {
-      "get": {
-        "tags": [
-          "Policy"
-        ],
-        "description": "Lists the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Policies_GetByCustomer",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/customerName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A policy at customer scope.",
-            "schema": {
-              "$ref": "#/definitions/CustomerPolicy"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PoliciesGetByCustomer": {
-            "$ref": "./examples/policiesGetByCustomer.json"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Policy"
-        ],
-        "description": "Updates the policies for a customer. This operation is supported only for billing accounts with agreement type Microsoft Partner Agreement.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
-        },
-        "operationId": "Policies_CreateOrUpdateByCustomer",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "./types.json#/parameters/billingAccountName"
-          },
-          {
-            "$ref": "./types.json#/parameters/customerName"
-          },
-          {
-            "$ref": "./types.json#/parameters/apiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "A policy at customer scope.",
-            "schema": {
-              "$ref": "#/definitions/CustomerPolicy"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A policy at customer scope.",
-            "schema": {
-              "$ref": "#/definitions/CustomerPolicy"
-            }
-          },
-          "default": {
-            "description": "Default response",
-            "schema": {
-              "$ref": "./types.json#/definitions/ArmErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PoliciesPutByCustomer": {
-            "$ref": "./examples/policiesPutByCustomer.json"
           }
         }
       }
@@ -341,6 +347,36 @@
           "type": "string",
           "x-ms-enum": {
             "name": "EnrollmentAuthLevelState",
+            "modelAsString": true
+          }
+        },
+        "enrollmentAccountOwnerViewCharges": {
+          "description": "The policy that controls whether account owner can view charges.",
+          "enum": [
+            "Unknown",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EnrollmentAccountOwnerViewCharges",
+            "modelAsString": true
+          }
+        },
+        "enrollmentDepartmentAdminViewCharges": {
+          "description": "The policy that controls whether department admin can view charges.",
+          "enum": [
+            "Unknown",
+            "Allowed",
+            "Disabled",
+            "NotAllowed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EnrollmentDepartmentAdminViewCharges",
             "modelAsString": true
           }
         },
