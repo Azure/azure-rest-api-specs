@@ -1841,11 +1841,8 @@
           }
         },
         "extendedDetails": {
-          "description": "Gets or sets the extended details reported by the solution.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/ExtendedDetailsModel",
+          "description": "The bag for any extended property."
         }
       },
       "required": [
@@ -2031,11 +2028,8 @@
           }
         },
         "extendedDetails": {
-          "description": "Gets or sets the extended details reported by the solution.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/ExtendedDetailsModel",
+          "description": "The bag for any extended property."
         }
       }
     },
@@ -2077,11 +2071,8 @@
           }
         },
         "extendedDetails": {
-          "description": "Gets or sets the extended details reported by the solution.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/ExtendedDetailsModel",
+          "description": "The bag for any extended property."
         }
       }
     },
@@ -2123,11 +2114,8 @@
           }
         },
         "extendedDetails": {
-          "description": "Gets or sets the extended details reported by the solution.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/ExtendedDetailsModel",
+          "description": "The bag for any extended property."
         }
       }
     },
@@ -2231,14 +2219,15 @@
             "Unknown",
             "Running",
             "Stopped"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "dbServiceStatus",
+            "modelAsString": true
+          }
         },
         "extendedDetails": {
-          "description": "Gets or sets the extended details reported by the solution.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/ExtendedDetailsModel",
+          "description": "The bag for any extended property."
         }
       },
       "required": [
@@ -2340,6 +2329,13 @@
           "description": "The server instance name.",
           "type": "string"
         }
+      }
+    },
+    "ExtendedDetailsModel": {
+      "description": "Gets or sets the extended details reported by the solution.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
       }
     },
     "OracleServerResourcePatch": {
