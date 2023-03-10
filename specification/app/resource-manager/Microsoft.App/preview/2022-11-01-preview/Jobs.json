@@ -806,8 +806,16 @@
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "tags": {
-          "description": "Tags for Container Apps Jobs",
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource/properties/tags"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
         },
         "properties": {
           "type": "object",
