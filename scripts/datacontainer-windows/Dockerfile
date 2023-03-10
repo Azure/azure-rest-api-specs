@@ -11,4 +11,4 @@ COPY run.ps1 run.ps1
 RUN  powershell .\run.ps1
 
 WORKDIR C:\\usr\\data\\openapispecs
-CMD ["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "-File", "C:\\run.ps1"]
+CMD ["C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe", "-File", "C:\\usr\\data\scripts\run.ps1"]
