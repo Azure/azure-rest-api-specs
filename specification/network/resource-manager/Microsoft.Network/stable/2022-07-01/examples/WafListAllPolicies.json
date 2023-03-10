@@ -85,51 +85,6 @@
                     }
                   ],
                   "action": "Block"
-                },
-                {
-                  "name": "RateLimitRule3",
-                  "priority": 3,
-                  "rateLimitDuration": "OneMin",
-                  "rateLimitThreshold": 10,
-                  "ruleType": "RateLimitRule",
-                  "matchConditions": [
-                    {
-                      "matchVariables": [
-                        {
-                          "variableName": "RemoteAddr",
-                          "selector": null
-                        }
-                      ],
-                      "operator": "IPMatch",
-                      "negationConditon": false,
-                      "matchValues": [
-                        "192.168.1.0/24"
-                      ]
-                    },
-                    {
-                      "matchVariables": [
-                        {
-                          "variableName": "RequestHeader",
-                          "selector": "UserAgent"
-                        }
-                      ],
-                      "operator": "Contains",
-                      "negationConditon": false,
-                      "matchValues": [
-                        "Windows"
-                      ]
-                    }
-                  ],
-                  "groupByUserSession": [
-                    {
-                      "groupByVariables": [
-                        {
-                          "variableName": "ClientAddr"
-                        }
-                      ]
-                    }
-                  ],
-                  "action": "Block"
                 }
               ],
               "managedRules": {
