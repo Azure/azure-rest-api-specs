@@ -724,29 +724,6 @@
         ]
       }
     },
-    "Multivariate.DataSchemaValues": {
-      "type": "string",
-      "enum": [
-        "OneTable",
-        "MultiTable"
-      ],
-      "x-ms-enum": {
-        "name": "DataSchemaValues",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "OneTable",
-            "value": "OneTable",
-            "description": "OneTable means that your input data are all in one CSV file, which contains one 'timestamp' column and several variable columns. The default DataSchema is OneTable."
-          },
-          {
-            "name": "MultiTable",
-            "value": "MultiTable",
-            "description": "MultiTable means that your input data are separated in multiple CSV files, in each file containing one 'timestamp' column and one 'variable' column, and the CSV file name should indicate the name of the variable. The default DataSchema is OneTable."
-          }
-        ]
-      }
-    },
     "Multivariate.DiagnosticsInfo": {
       "type": "object",
       "properties": {
@@ -797,20 +774,6 @@
       "x-ms-enum": {
         "name": "FillNAMethod",
         "modelAsString": true
-      }
-    },
-    "Multivariate.FillNAMethodKnownValues": {
-      "type": "string",
-      "enum": [
-        "Previous",
-        "Subsequent",
-        "Linear",
-        "Zero",
-        "Fixed"
-      ],
-      "x-ms-enum": {
-        "name": "FillNAMethodKnownValues",
-        "modelAsString": false
       }
     },
     "Multivariate.ModelInfo": {
@@ -1272,26 +1235,6 @@
         "modelAsString": true
       }
     },
-    "Univariate.AnomalyDetectorErrorCodesKnownValues": {
-      "type": "string",
-      "enum": [
-        "InvalidCustomInterval",
-        "BadArgument",
-        "InvalidGranularity",
-        "InvalidPeriod",
-        "InvalidModelArgument",
-        "InvalidSeries",
-        "InvalidJsonFormat",
-        "RequiredGranularity",
-        "RequiredSeries",
-        "InvalidImputeMode",
-        "InvalidImputeFixedValue"
-      ],
-      "x-ms-enum": {
-        "name": "AnomalyDetectorErrorCodesKnownValues",
-        "modelAsString": false
-      }
-    },
     "Univariate.ImputeMode": {
       "type": "string",
       "enum": [
@@ -1305,47 +1248,6 @@
       "x-ms-enum": {
         "name": "ImputeMode",
         "modelAsString": true,
-        "values": [
-          {
-            "name": "Auto",
-            "value": "auto"
-          },
-          {
-            "name": "Previous",
-            "value": "previous"
-          },
-          {
-            "name": "Linear",
-            "value": "linear"
-          },
-          {
-            "name": "Fixed",
-            "value": "fixed"
-          },
-          {
-            "name": "Zero",
-            "value": "zero"
-          },
-          {
-            "name": "NotFill",
-            "value": "notFill"
-          }
-        ]
-      }
-    },
-    "Univariate.ImputeModeKnownValues": {
-      "type": "string",
-      "enum": [
-        "auto",
-        "previous",
-        "linear",
-        "fixed",
-        "zero",
-        "notFill"
-      ],
-      "x-ms-enum": {
-        "name": "ImputeModeKnownValues",
-        "modelAsString": false,
         "values": [
           {
             "name": "Auto",
@@ -1709,22 +1611,6 @@
         "isNegativeAnomaly",
         "isPositiveAnomaly"
       ]
-    },
-    "Versions": {
-      "type": "string",
-      "enum": [
-        "v1.1"
-      ],
-      "x-ms-enum": {
-        "name": "Versions",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "v1_1",
-            "value": "v1.1"
-          }
-        ]
-      }
     }
   },
   "parameters": {}
