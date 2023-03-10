@@ -160,6 +160,18 @@ input-file:
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
 ```
 
+``` yaml $(tag) == 'package-flexibleserver-2022-09-01'
+input-file:
+- Microsoft.DBforMySQL/Backups/stable/2022-09-01/Backups.json
+- Microsoft.DBforMySQL/Configurations/stable/2022-09-01/Configurations.json
+- Microsoft.DBforMySQL/Databases/stable/2022-09-01/Databases.json
+- Microsoft.DBforMySQL/Firewall/stable/2022-09-01/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/stable/2022-09-01/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/stable/2022-09-01/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/stable/2022-09-01/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/stable/2022-09-01/AzureADAdministrator.json
+```
+
 ## Suppression
 
 ``` yaml
