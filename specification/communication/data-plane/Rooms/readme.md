@@ -41,3 +41,14 @@ input-file:
 title:
   Azure Communication Services
 ```
+
+### Tag: package-rooms-2022-02-01-preview
+
+These settings apply only when `--tag=package-rooms-2022-02-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-rooms-2022-02-01-preview'
+input-file:
+  - preview/2022-02-01-preview/communicationservicesrooms.json
+title:
+  Azure Communication Services
+```

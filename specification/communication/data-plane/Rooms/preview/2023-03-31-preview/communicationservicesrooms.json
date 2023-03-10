@@ -82,7 +82,11 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Request successful. The action returns a collection of rooms.",
@@ -518,6 +522,23 @@
         }
       }
     },
+    "RoomParticipant": {
+      "description": "A participant of the room.",
+      "required": [
+        "rawId",
+        "role"
+      ],
+      "type": "object",
+      "properties": {
+        "rawId": {
+          "description": "Raw ID representation of the communication identifier. Please refer to the following document for additional information on Raw ID. <br> https://learn.microsoft.com/azure/communication-services/concepts/identifiers?pivots=programming-language-rest#raw-id-representation",
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/definitions/Role"
+        }
+      }
+    },
     "RoomsCollection": {
       "description": "A collection of rooms.",
       "required": [
@@ -535,23 +556,6 @@
         "nextLink": {
           "description": "If there are more rooms that can be retrieved, the next link will be populated.",
           "type": "string"
-        }
-      }
-    },
-    "RoomParticipant": {
-      "description": "A participant of the room.",
-      "required": [
-        "rawId",
-        "role"
-      ],
-      "type": "object",
-      "properties": {
-        "rawId": {
-          "description": "Raw ID representation of the communication identifier. Please refer to the following document for additional information on Raw ID. <br> https://learn.microsoft.com/azure/communication-services/concepts/identifiers?pivots=programming-language-rest#raw-id-representation",
-          "type": "string"
-        },
-        "role": {
-          "$ref": "#/definitions/Role"
         }
       }
     },
