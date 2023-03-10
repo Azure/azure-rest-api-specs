@@ -516,11 +516,29 @@
             "modelAsString": true
           }
         },
+        "rateLimitDuration": {
+          "type": "string",
+          "description": "Duration over which Rate Limit policy will be applied. Applies only when ruleType is RateLimitRule.",
+          "enum": [
+            "OneMin",
+            "FiveMins"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayFirewallRateLimitDuration",
+            "modelAsString": true
+          }
+        },
+        "rateLimitThreshold": {
+          "description": "Rate Limit threshold to apply in case ruleType is RateLimitRule. Must be greater than or equal to 1",
+          "type": "integer",
+          "minimum": 1
+        },
         "ruleType": {
           "description": "The rule type.",
           "type": "string",
           "enum": [
             "MatchRule",
+            "RateLimitRule",
             "Invalid"
           ],
           "x-ms-enum": {
@@ -533,6 +551,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/MatchCondition"
+          }
+        },
+        "groupByUserSession": {
+          "description": "List of user session identifier group by clauses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupByUserSession"
           }
         },
         "action": {
@@ -650,6 +675,42 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Transform"
+          }
+        }
+      }
+    },
+    "GroupByVariable": {
+      "description": "Define user session group by clause variables.",
+      "required": [
+        "variableName"
+      ],
+      "properties": {
+        "variableName": {
+          "description": "User Session clause variable.",
+          "type": "string",
+          "enum": [
+            "ClientAddr",
+            "GeoLocation",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationGatewayFirewallUserSessionVariable",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "GroupByUserSession": {
+      "description": "Define user session identifier group by clauses.",
+      "required": [
+        "groupByVariables"
+      ],
+      "properties": {
+        "groupByVariables": {
+          "description": "List of group by clause variables.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupByVariable"
           }
         }
       }
