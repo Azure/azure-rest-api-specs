@@ -800,14 +800,14 @@
     "JobPatchProperties": {
       "type": "object",
       "description": "ContainerApp resource specific properties.",
-      "tags": {
-        "description": "tags",
-        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource/properties/tags"
-      },
       "properties": {
         "identity": {
           "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "tags": {
+          "description": "Tags for Container Apps Jobs",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource/properties/tags"
         },
         "properties": {
           "type": "object",
