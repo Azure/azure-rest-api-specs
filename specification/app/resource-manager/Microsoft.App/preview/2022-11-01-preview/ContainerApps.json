@@ -212,7 +212,10 @@
             "$ref": "./examples/ContainerApps_ManagedBy_CreateOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
       },
       "delete": {
         "tags": [
@@ -245,7 +248,12 @@
             "description": "Container App deleted successfully."
           },
           "202": {
-            "description": "Delete operation is in progress."
+            "description": "Delete operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Container App does not exist."
@@ -262,7 +270,10 @@
             "$ref": "./examples/ContainerApps_Delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "patch": {
         "tags": [
@@ -292,7 +303,7 @@
             "required": true,
             "description": "Properties of a Container App that need to be updated",
             "schema": {
-              "$ref": "#/definitions/ContainerApp"
+              "$ref": "#/definitions/ContainerAppPatchProperties"
             }
           },
           {
@@ -307,7 +318,12 @@
             }
           },
           "202": {
-            "description": "Patch operation is in progress."
+            "description": "Patch operation is in progress.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Common error response.",
@@ -556,87 +572,106 @@
         },
         "properties": {
           "description": "ContainerApp resource specific properties",
-          "type": "object",
-          "properties": {
-            "provisioningState": {
-              "description": "Provisioning state of the Container App.",
-              "enum": [
-                "InProgress",
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "Deleting"
-              ],
-              "type": "string",
-              "readOnly": true,
-              "x-ms-enum": {
-                "name": "ContainerAppProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "managedEnvironmentId": {
-              "description": "Deprecated. Resource ID of the Container App's environment.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "environmentId": {
-              "description": "Resource ID of environment.",
-              "type": "string",
-              "x-ms-mutability": [
-                "create",
-                "read"
-              ]
-            },
-            "workloadProfile": {
-              "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
-              "description": "Workload profile type to pin for container app execution."
-            },
-            "latestRevisionName": {
-              "description": "Name of the latest revision of the Container App.",
-              "type": "string",
-              "readOnly": true
-            },
-            "latestReadyRevisionName": {
-              "description": "Name of the latest ready revision of the Container App.",
-              "type": "string",
-              "readOnly": true
-            },
-            "latestRevisionFqdn": {
-              "description": "Fully Qualified Domain Name of the latest revision of the Container App.",
-              "type": "string",
-              "readOnly": true
-            },
-            "customDomainVerificationId": {
-              "description": "Id used to verify domain name ownership",
-              "type": "string",
-              "readOnly": true
-            },
-            "configuration": {
-              "$ref": "#/definitions/Configuration",
-              "description": "Non versioned Container App configuration properties."
-            },
-            "template": {
-              "$ref": "./CommonDefinitions.json#/definitions/Template",
-              "description": "Container App versioned application definition."
-            },
-            "outboundIpAddresses": {
-              "description": "Outbound IP Addresses for container app.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "readOnly": true
-            },
-            "eventStreamEndpoint": {
-              "description": "The endpoint of the eventstream of the container app.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
+          "$ref": "#/definitions/ContainerAppProperties",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ContainerAppPatchProperties": {
+      "description": "Container App patch properties.",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "properties": {
+          "description": "ContainerApp resource specific properties",
+          "$ref": "#/definitions/ContainerAppProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ContainerAppProperties":{
+      "description": "Container App properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the Container App.",
+          "enum": [
+            "InProgress",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ContainerAppProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "managedEnvironmentId": {
+          "description": "Deprecated. Resource ID of the Container App's environment.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "environmentId": {
+          "description": "Resource ID of environment.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "workloadProfile": {
+          "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
+          "description": "Workload profile type to pin for container app execution."
+        },
+        "latestRevisionName": {
+          "description": "Name of the latest revision of the Container App.",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestReadyRevisionName": {
+          "description": "Name of the latest ready revision of the Container App.",
+          "type": "string",
+          "readOnly": true
+        },
+        "latestRevisionFqdn": {
+          "description": "Fully Qualified Domain Name of the latest revision of the Container App.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customDomainVerificationId": {
+          "description": "Id used to verify domain name ownership",
+          "type": "string",
+          "readOnly": true
+        },
+        "configuration": {
+          "$ref": "#/definitions/Configuration",
+          "description": "Non versioned Container App configuration properties."
+        },
+        "template": {
+          "$ref": "./CommonDefinitions.json#/definitions/Template",
+          "description": "Container App versioned application definition."
+        },
+        "outboundIpAddresses": {
+          "description": "Outbound IP Addresses for container app.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "eventStreamEndpoint": {
+          "description": "The endpoint of the eventstream of the container app.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
