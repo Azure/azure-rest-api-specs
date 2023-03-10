@@ -265,7 +265,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/CollectionsResponse"
+              "$ref": "#/definitions/CollectionsResult"
             }
           },
           "default": {
@@ -301,7 +301,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/CollectionResponse"
+              "$ref": "#/definitions/CollectionResult"
             }
           },
           "default": {
@@ -717,7 +717,7 @@
         }
       }
     },
-    "CollectionsResponse": {
+    "CollectionsResult": {
       "description": "Response after a successful request to list collections.",
       "type": "object",
       "required": [
@@ -732,7 +732,7 @@
           "description": "All the collections in a given dataset.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CollectionResponse"
+            "$ref": "#/definitions/CollectionResult"
           }
         },
         "links": {
@@ -751,7 +751,7 @@
         }
       }
     },
-    "CollectionResponse": {
+    "CollectionResult": {
       "description": "Response after a successful request to get a collection.",
       "type": "object",
       "required": [
