@@ -1,11 +1,10 @@
-$timestamp= Get-Date -UFormat "%A %m/%d/%Y %R %Z"
-echo "[$timestamp] Installing MinGit"
-Expand-Archive MinGit.zip -DestinationPath c:\MinGit
+
+echo "[$timestamp] Adding git to path"
 $env:PATH = $env:PATH + ';C:\MinGit\cmd\;C:\MinGit\cmd'
 Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\' -Name Path -Value $env:PATH
 
 $timestamp= Get-Date -UFormat "%A %m/%d/%Y %R %Z"
-echo "[$timestamp] Copying files to /user/data/openapispecs"
+echo "[$timestamp] Copying files to /usr/data/openapispecs"
 Copy-Item -Path "C:\\usr\\data\\specrepo\\.git" -Destination "C:\\usr\\data\\openapispecs\\.git" -Recurse
 
 cd "C:\\usr\\data\\openapispecs\\"
