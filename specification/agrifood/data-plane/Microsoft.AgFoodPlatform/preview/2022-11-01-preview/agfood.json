@@ -21973,6 +21973,14 @@
         "data": {
           "$ref": "#/definitions/SatelliteData"
         },
+        "providerClientId": {
+          "description": "Provider client id for authenticating to provider to pull satellite data.",
+          "type": "string"
+        },
+        "providerClientSecret": {
+          "description": "Provider client secret for authenticating to provider to pull satellite data.",
+          "type": "string"
+        },
         "id": {
           "description": "Unique job id.",
           "type": "string",
@@ -23341,7 +23349,7 @@
           "description": "Provider of satellite data. Available Value: Microsoft.",
           "minLength": 1,
           "enum": [
-            "Microsoft"
+            "SentinelHub"
           ],
           "type": "string",
           "x-ms-enum": {
