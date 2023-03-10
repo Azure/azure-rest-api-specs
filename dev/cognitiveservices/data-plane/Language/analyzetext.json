@@ -2744,8 +2744,16 @@
         "piiCategories": {
           "$ref": "#/definitions/PiiCategories"
         },
+        "excludePiiCategories": {
+          "$ref": "#/definitions/PiiCategories"
+        },
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
+        },
+        "redactionCharacter": {
+          "type": "string",
+          "description": "Optional parameter to use a Custom Character to be used for redaction in Conversational PII responses. Default character will be * as before.",
+          "default": "*"
         }
       },
       "allOf": [
