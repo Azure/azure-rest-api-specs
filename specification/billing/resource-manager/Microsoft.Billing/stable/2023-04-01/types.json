@@ -309,15 +309,6 @@
       "pattern": "^[a-zA-Z\\d-_]{1,128}$",
       "x-ms-parameter-location": "method"
     },
-    "billingRequestName": {
-      "in": "path",
-      "name": "billingRequestName",
-      "description": "The ID that uniquely identifies a billing request.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-      "x-ms-parameter-location": "method"
-    },
     "invoiceSectionName": {
       "in": "path",
       "name": "invoiceSectionName",
@@ -325,15 +316,6 @@
       "required": true,
       "type": "string",
       "pattern": "^[a-zA-Z\\d-_]{1,128}$",
-      "x-ms-parameter-location": "method"
-    },
-    "billingSubscriptionName": {
-      "in": "path",
-      "name": "billingSubscriptionName",
-      "description": "The ID that uniquely identifies a billing subscription.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
       "x-ms-parameter-location": "method"
     },
     "customerName": {
@@ -345,10 +327,37 @@
       "pattern": "^[a-zA-Z\\d-_]{1,128}$",
       "x-ms-parameter-location": "method"
     },
+    "subscriptionId": {
+      "in": "path",
+      "name": "subscriptionId",
+      "description": "The ID that uniquely identifies a billing subscription.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
+    "billingRequestName": {
+      "in": "path",
+      "name": "billingRequestName",
+      "description": "The ID that uniquely identifies a billing request.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
+    "billingSubscriptionName": {
+      "in": "path",
+      "name": "billingSubscriptionName",
+      "description": "The ID that uniquely identifies a billing subscription.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "x-ms-parameter-location": "method"
+    },
     "enrollmentAccountName": {
       "in": "path",
       "name": "enrollmentAccountName",
-      "description": "The name of the enrollment account.",
+      "description": "The ID that uniquely identifies an enrollment account",
       "required": true,
       "type": "string",
       "pattern": "^[1-9][0-9]*$",
@@ -361,15 +370,6 @@
       "required": true,
       "type": "string",
       "pattern": "^(H[0-9]-[A-Z0-9]+)$|^(?:([GHT]|HT){1}[A-Z0-9]{9})$|^(?:[D]{1}[A-Z0-9]{9})$|^(?:E{1}[B-Z0-9]{1}[A-Z0-9]{8})$|^(?:EA[A-Z0-9]{8})$",
-      "x-ms-parameter-location": "method"
-    },
-    "subscriptionId": {
-      "in": "path",
-      "name": "subscriptionId",
-      "description": "The ID that uniquely identifies a billing subscription.",
-      "required": true,
-      "type": "string",
-      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
       "x-ms-parameter-location": "method"
     }
   },

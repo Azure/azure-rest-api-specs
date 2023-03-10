@@ -62,7 +62,8 @@
             "in": "query",
             "name": "includeTenantAccount",
             "description": "When true, results will include the tenant's Microsoft Online Services Program Billing Account if the user has one of the following AAD roles: Global Administrator, Global Reader, Billing Administrator.",
-            "type": "boolean"
+            "type": "boolean",
+            "default": false
           },
           {
             "$ref": "./types.json#/parameters/apiVersionParameter"
@@ -106,6 +107,9 @@
           },
           "BillingAccountForLegacyAccountDetails": {
             "$ref": "./examples/billingAccountForLegacyAccountDetails.json"
+          },
+          "BillingAccountsListWithExpandForPONumber": {
+            "$ref": "./examples/billingAccountsListWithExpandForPONumber.json"
           }
         },
         "x-ms-pageable": {
@@ -173,6 +177,12 @@
           },
           "BillingAccountWithRegistrationNumberWithType": {
             "$ref": "./examples/billingAccountWithRegistrationNumberWithType.json"
+          },
+          "BillingAccountEA": {
+            "$ref": "./examples/billingAccountEA.json"
+          },
+          "BillingAccountWithExpandForPONumber": {
+            "$ref": "./examples/billingAccountWithExpandForPONumber.json"
           }
         }
       },
@@ -236,6 +246,9 @@
         "x-ms-examples": {
           "BillingAccountsUpdate": {
             "$ref": "./examples/billingAccountsUpdate.json"
+          },
+          "UpdateBillingAccountWithPONumber": {
+            "$ref": "./examples/updateBillingAccountWithPONumber.json"
           }
         }
       }
@@ -445,7 +458,6 @@
             "Enterprise",
             "Individual",
             "Partner",
-            "USDoD",
             "Reseller",
             "ClassicPartner",
             "Internal",
@@ -511,12 +523,20 @@
           "description": "The billing account name.",
           "type": "string"
         },
+        "enrollmentDetails": {
+          "description": "The properties of an enrollment.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/EnrollmentDetails"
+            }
+          ]
+        },
         "hasReadAccess": {
           "description": "Indicates whether user has read access to the billing account.",
           "type": "boolean"
         },
         "notificationEmailAddress": {
-          "description": "Notification email address for legacy account. This property is available for agreement type Microsoft Online Services Program.",
+          "description": "Notification email address for legacy account. Available for agreement type Microsoft Online Services Program.",
           "type": "string"
         },
         "primaryBillingTenantId": {
@@ -538,6 +558,135 @@
               "$ref": "#/definitions/RegistrationNumber"
             }
           ]
+        }
+      }
+    },
+    "EnrollmentDetails": {
+      "description": "The properties of an enrollment.",
+      "type": "object",
+      "properties": {
+        "startDate": {
+          "description": "The start date of the enrollment.",
+          "type": "string"
+        },
+        "endDate": {
+          "description": "The end date of the enrollment.",
+          "type": "string"
+        },
+        "currency": {
+          "description": "The billing currency for the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "channel": {
+          "description": "The channel type of the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "language": {
+          "description": "The language for the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "countryCode": {
+          "description": "The country code of the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCycle": {
+          "description": "The billing cycle for the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "extendedTermOption": {
+          "description": "The billing account extension opted by the company.",
+          "enum": [
+            "Unknown",
+            "Opted-In",
+            "Opted-Out"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ExtendedTermOption",
+            "modelAsString": true
+          }
+        },
+        "supportLevel": {
+          "description": "The support level offer associated with an enrollment.",
+          "enum": [
+            "None",
+            "Standard",
+            "Pro-Direct",
+            "Developer"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SupportLevel",
+            "modelAsString": true
+          }
+        },
+        "supportCoverage": {
+          "description": "The support coverage period for the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "cloud": {
+          "description": "The cloud of the enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "poNumber": {
+          "description": "The purchase order number of the enrollment.",
+          "type": "string"
+        },
+        "markupStatus": {
+          "description": "Markup status of enrollment, applicable only for indirect enrollments.",
+          "enum": [
+            "Unknown",
+            "Disabled",
+            "Preview",
+            "Published",
+            "Locked"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MarkupStatus",
+            "modelAsString": true
+          }
+        },
+        "indirectRelationshipInfo": {
+          "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/IndirectRelationshipInfo"
+            }
+          ]
+        },
+        "enrollmentInvoiceRecipient": {
+          "description": "The contact who receives invoices of the enrollment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IndirectRelationshipInfo": {
+      "description": "Identifies the billing profile that is linked to another billing profile in indirect purchase motion.",
+      "type": "object",
+      "properties": {
+        "billingAccountName": {
+          "description": "The billing account name of the partner or the customer for an indirect motion.",
+          "type": "string"
+        },
+        "billingProfileName": {
+          "description": "The billing profile name of the partner or the customer for an indirect motion. This field is not populated for Enterprise Agreement billing accounts.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name of the partner or customer for an indirect motion.",
+          "type": "string"
         }
       }
     },
@@ -581,7 +730,9 @@
           "description": "Reason for the specified billing profile status.",
           "enum": [
             "PastDue",
-            "UnusualActivity"
+            "UnusualActivity",
+            "SpendingLimitReached",
+            "SpendingLimitExpired"
           ],
           "type": "string",
           "readOnly": true,
