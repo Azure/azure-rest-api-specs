@@ -2234,7 +2234,7 @@
       ],
       "x-ms-discriminator-value": "CustomConversationalSummarizationResults"
     },
-    "SummaryResult": {
+    "SummaryResultBase": {
       "type": "object",
       "required": [
         "conversations"
@@ -2246,8 +2246,14 @@
             "$ref": "#/definitions/ConversationsSummaryResult"
           }
         }
-      },
+      }
+    },
+    "SummaryResult": {
+      "type": "object",
       "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResultBase"
+        },
         {
           "$ref": "common.json#/definitions/PreBuiltResult"
         }
@@ -2255,18 +2261,10 @@
     },
     "CustomSummaryResult": {
       "type": "object",
-      "required": [
-        "conversations"
-      ],
-      "properties": {
-        "conversations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConversationsSummaryResult"
-          }
-        }
-      },
       "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResultBase"
+        },
         {
           "$ref": "analyzetext.json#/definitions/CustomResult"
         }
