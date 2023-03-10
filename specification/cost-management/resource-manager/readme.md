@@ -352,7 +352,7 @@ directive:
     where: $.definitions.ViewProperties.properties.accumulated
     reason: 'false alarm ' 
   
-  directive:
+directive:
   - suppress: DeleteOperationResponses
     from: costmanagement.budgets.json
     reason: 'Consistent with delete api from other versions, modifying it will be a breaking change'
