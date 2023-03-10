@@ -1694,6 +1694,12 @@
       "properties": {
         "stringIndexType": {
           "$ref": "common.json#/definitions/StringIndexType"
+        },
+        "inclusionList": {
+          "$ref": "#/definitions/EntityCategories"
+        },
+        "exclusionList": {
+          "$ref": "#/definitions/EntityCategories"
         }
       },
       "allOf": [
@@ -1708,6 +1714,12 @@
       "properties": {
         "parameters": {
           "$ref": "#/definitions/EntitiesTaskParameters"
+        },
+        "inclusionList": {
+          "$ref": "#/definitions/EntityCategories"
+        },
+        "exclusionList": {
+          "$ref": "#/definitions/EntityCategories"
         }
       },
       "allOf": [
@@ -2201,6 +2213,58 @@
       "required": [
         "unit"
       ]
+    },
+    "EntityCategories": {
+      "description": "(Optional) describes the entity categories to return",
+      "items": {
+        "type": "string",
+        "x-ms-enum": {
+          "name": "EntityCategory",
+          "modelAsString": true
+        },
+        "enum": [
+          "Default",
+          "Person",
+          "PersonType",
+          "Location",
+          "Location.GPE",
+          "Location.Structural",
+          "Location.Geographical",
+          "Organization",
+          "Organization.Medical",
+          "Organization.Stock_Exchange",
+          "Organization.Sports",
+          "Event",
+          "Event.Cultural",
+          "Event.Natural",
+          "Event.Sports",
+          "Product",
+          "Product.Computing",
+          "Skill",
+          "Address",
+          "PhoneNumber",
+          "Email",
+          "URL",
+          "IP",
+          "DateTime",
+          "DateTime.Date",
+          "DateTime.Time",
+          "DateTime.DateRange",
+          "DateTime.TimeRange",
+          "DateTime.Duration",
+          "DateTime.Set",
+          "Quantity",
+          "Quantity.Number",
+          "Quantity.Percentage",
+          "Quantity.Ordinal",
+          "Quantity.Age",
+          "Quantity.Currency",
+          "Quantity.Dimensions",
+          "Quantity.Temperature"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
     },
     "LengthResolution": {
       "description": "Represents the length entity resolution model.",
