@@ -70,6 +70,9 @@
               "$ref": "common-types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -220,6 +223,11 @@
           "items": {
             "$ref": "#/definitions/Budget"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.\r\nIt's null for now, added for future use.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
