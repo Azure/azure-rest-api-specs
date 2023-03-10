@@ -766,6 +766,10 @@
                 "read"
               ]
             },
+            "workloadProfile": {
+              "$ref": "./CommonDefinitions.json#/definitions/WorkloadProfileName",
+              "description": "Workload profile type to pin for container app execution."
+            },
             "configuration": {
               "$ref": "#/definitions/JobConfiguration",
               "description": "Container Apps Job configuration properties."
@@ -796,6 +800,11 @@
     "JobPatchProperties": {
       "type": "object",
       "description": "ContainerApp resource specific properties.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ],
       "properties": {
         "identity": {
           "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
