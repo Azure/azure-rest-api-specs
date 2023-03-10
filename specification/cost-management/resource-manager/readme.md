@@ -351,8 +351,6 @@ directive:
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
     reason: 'false alarm ' 
-  
-directive:
   - suppress: DeleteOperationResponses
     from: costmanagement.budgets.json
     reason: 'Consistent with delete api from other versions, modifying it will be a breaking change'
@@ -362,8 +360,7 @@ directive:
   - suppress: NoDuplicatePathsForScopeParameter
     from: costmanagement.budgets.json
     reason: 'Budgets_Get does not use an explicitly defined scope'
-    
-    
+        
 ```
 
 ### Tag: package-2018-08-preview
