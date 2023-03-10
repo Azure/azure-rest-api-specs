@@ -332,7 +332,7 @@
         "tags": [
           "Jobs"
         ],
-        "summary": "Runs a Container Apps Job",
+        "summary": "Start a Container Apps Job",
         "operationId": "Jobs_Start",
         "parameters": [
           {
@@ -646,7 +646,7 @@
       ],
       "properties": {
         "secrets": {
-          "description": "Collection of secrets used by a Container app",
+          "description": "Collection of secrets used by a Container Apps Job",
           "type": "array",
           "items": {
             "$ref": "./CommonDefinitions.json#/definitions/Secret"
@@ -739,7 +739,7 @@
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
-          "description": "ContainerApp resource specific properties.",
+          "description": "Container Apps Job resource specific properties.",
           "type": "object",
           "properties": {
             "provisioningState": {
@@ -799,7 +799,7 @@
     },
     "JobPatchProperties": {
       "type": "object",
-      "description": "ContainerApp resource specific properties.",
+      "description": "Container Apps Job resource specific properties.",
       "properties": {
         "identity": {
           "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
