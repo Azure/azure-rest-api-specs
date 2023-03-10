@@ -2023,6 +2023,53 @@
           "description": "To indicate if enumeration of data is in progress. \r\nUntil this is true, the TotalBytesToProcess may not be valid.",
           "type": "boolean",
           "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/CloudError",
+          "description": "Error, if any, in the stage",
+          "readOnly": true
+        },
+        "actions": {
+          "description": "Available actions on the job.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "enum": [
+              "None",
+              "MoveToCleanUpDevice",
+              "Resume",
+              "Restart",
+              "ReachOutToOperation"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "CustomerResolutionCode",
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "None",
+                  "description": "No Resolution Yet"
+                },
+                {
+                  "value": "MoveToCleanUpDevice",
+                  "description": "Clean the device"
+                },
+                {
+                  "value": "Resume",
+                  "description": "Resume the job to same stage"
+                },
+                {
+                  "description": "Restart whole action.",
+                  "value": "Restart"
+                },
+                {
+                  "description": "Reach out to operation for further action.",
+                  "value": "ReachOutToOperation"
+                }
+              ]
+            }
+          },
+          "readOnly": true
         }
       }
     },
@@ -2692,6 +2739,53 @@
               }
             ]
           }
+        },
+        "error": {
+          "$ref": "#/definitions/CloudError",
+          "description": "Error, if any, in the stage",
+          "readOnly": true
+        },
+        "actions": {
+          "description": "Available actions on the job.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "enum": [
+              "None",
+              "MoveToCleanUpDevice",
+              "Resume",
+              "Restart",
+              "ReachOutToOperation"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "CustomerResolutionCode",
+              "modelAsExtensible": true,
+              "values": [
+                {
+                  "value": "None",
+                  "description": "No Resolution Yet"
+                },
+                {
+                  "value": "MoveToCleanUpDevice",
+                  "description": "Clean the device"
+                },
+                {
+                  "value": "Resume",
+                  "description": "Resume the job to same stage"
+                },
+                {
+                  "description": "Restart whole action.",
+                  "value": "Restart"
+                },
+                {
+                  "description": "Reach out to operation for further action.",
+                  "value": "ReachOutToOperation"
+                }
+              ]
+            }
+          },
+          "readOnly": true
         }
       }
     },

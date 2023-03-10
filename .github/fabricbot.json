@@ -2540,7 +2540,7 @@
             ],
             "mentionees": [
               "wonner",
-              "zesluo"
+              "yanjungao718"
             ]
           },
           {
@@ -4255,7 +4255,6 @@
       "capabilityId": "PrAutoLabel",
       "subCapability": "Path",
       "version": "1.0",
-      "id": "AzureSDKPullRequestLabelFolder_azure-rest-api-specs_Azure",
       "config": {
         "configs": [
           {
@@ -4899,6 +4898,51 @@
           }
         ],
         "taskName": "Auto PR based on folder paths "
+      }
+    },
+    {
+      "taskType": "trigger",
+      "capabilityId": "IssueResponder",
+      "subCapability": "IssuesOnlyResponder",
+      "version": "1.0",
+      "config": {
+        "conditions": {
+          "operator": "and",
+          "operands": [
+            {
+              "name": "hasLabel",
+              "parameters": {
+                "label": "customer-reported"
+              }
+            },
+            {
+              "name": "hasLabel",
+              "parameters": {
+                "label": "needs-triage"
+              }
+            },
+            {
+              "name": "isAction",
+              "parameters": {
+                "action": "labeled"
+              }
+            }
+          ]
+        },
+        "eventType": "issue",
+        "eventNames": [
+          "issues",
+          "project_card"
+        ],
+        "taskName": "CXP attention",
+        "actions": [
+          {
+            "name": "addLabel",
+            "parameters": {
+              "label": "CXP Attention"
+            }
+          }
+        ]
       }
     }
   ],

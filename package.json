@@ -9,20 +9,19 @@
   "version": "0.1.0",
   "description": "Tests for Azure REST API Specifications",
   "license": "MIT",
+  "dependencies": {
+    "@azure-tools/cadl-autorest": "0.25.0",
+    "@azure-tools/cadl-azure-core": "0.25.0",
+    "@azure-tools/cadl-azure-resource-manager": "0.25.0",
+    "@azure-tools/cadl-providerhub": "0.25.0",
+    "@azure-tools/cadl-apiview": "0.3.5",
+    "@cadl-lang/compiler": "0.39.0"
+  },
   "devDependencies": {
     "@azure/avocado": "^0.8.4",
-    "@ts-common/commonmark-to-markdown": "^2.0.2",
-    "@ts-common/fs": "0.2.0",
-    "@ts-common/iterator": "^0.3.6",
-    "@types/js-yaml": "^3.12.1",
-    "@types/mocha": "^9.0.0",
     "@types/prettier": "^2.6.1",
-    "js-yaml": "^3.13.1",
-    "json-schema-ref-parser": "^6.1.0",
-    "mocha": "^9.1.2",
     "prettier": "^2.7.1",
     "ts-node": "^10.1.0",
-    "tslib": "^1.10.0",
     "typescript": "^3.5.3"
   },
   "homepage": "https://github.com/azure/azure-rest-api-specs",
@@ -35,11 +34,9 @@
   },
   "scripts": {
     "postinstall": "tsc",
-    "test": "tsc && mocha -t 500000 --reporter min",
     "prettier-check": "ts-node ./scripts/prettier-check.ts",
     "prettier-fix": "prettier --write specification/**/*.json",
     "prettier": "prettier",
-    "tsc": "tsc",
-    "multiapi": "ts-node ./scripts/multiapi.ts"
+    "tsc": "tsc"
   }
 }
