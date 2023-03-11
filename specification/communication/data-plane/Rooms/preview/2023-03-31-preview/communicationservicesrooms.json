@@ -187,8 +187,8 @@
           },
           {
             "in": "body",
-            "name": "patchRoomRequest",
-            "description": "The patch room request",
+            "name": "updateRoomRequest",
+            "description": "The update room request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/UpdateRoomRequest"
@@ -318,8 +318,8 @@
         "tags": [
           "Participants"
         ],
-        "summary": "Patch participants in a room.",
-        "operationId": "Participants_Patch",
+        "summary": "Update participants in a room.",
+        "operationId": "Participants_Update",
         "consumes": [
           "application/merge-patch+json"
         ],
@@ -330,7 +330,7 @@
           {
             "in": "path",
             "name": "roomId",
-            "description": "The identifier of the room to patch the participants in.",
+            "description": "The identifier of the room to update the participants in.",
             "required": true,
             "type": "string"
           },
@@ -339,19 +339,19 @@
           },
           {
             "in": "body",
-            "name": "patchParticipantsRequest",
-            "description": "A patched set of participants of the room.",
+            "name": "updateParticipantsRequest",
+            "description": "A updated set of participants of the room.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchParticipantsRequest"
+              "$ref": "#/definitions/UpdateParticipantsRequest"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The participants were successfully patched. The action returns the participants of the room.",
+            "description": "The participants were successfully updated.",
             "schema": {
-              "$ref": "#/definitions/ParticipantsCollection"
+              "$ref": "#/definitions/UpdateParticipantsResult"
             }
           },
           "default": {
@@ -368,8 +368,8 @@
           }
         },
         "x-ms-examples": {
-          "Patch participants": {
-            "$ref": "./examples/Participants_Patch.json"
+          "Update participants": {
+            "$ref": "./examples/Participants_Update.json"
           }
         }
       }
@@ -424,6 +424,10 @@
         }
       }
     },
+    "UpdateParticipantsResult": {
+      "description": "Request response for updating participants.",
+      "type": "object"
+    },
     "ParticipantProperties": {
       "type": "object",
       "properties": {
@@ -452,12 +456,12 @@
         }
       }
     },
-    "PatchParticipantsRequest": {
-      "description": "Participants to be patched in the room.",
+    "UpdateParticipantsRequest": {
+      "description": "Participants to be updated in the room.",
       "type": "object",
       "properties": {
         "participants": {
-          "description": "Participants to be patched.",
+          "description": "Participants to be updated.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ParticipantProperties"
