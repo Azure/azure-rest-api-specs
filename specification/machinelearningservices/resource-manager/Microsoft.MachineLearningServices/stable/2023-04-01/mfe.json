@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Machine Learning Workspaces",
+    "title": "Azure Machine Learning Services",
     "version": "2023-04-01"
   },
   "host": "management.azure.com",
@@ -9,6 +9,2676 @@
     "https"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes": {
+      "get": {
+        "tags": [
+          "CodeContainer"
+        ],
+        "summary": "List containers.",
+        "operationId": "RegistryCodeContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Registry Code Container.": {
+            "$ref": "./examples/Registry/CodeContainer/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}": {
+      "delete": {
+        "tags": [
+          "CodeContainer"
+        ],
+        "summary": "Delete container.",
+        "operationId": "RegistryCodeContainers_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "codeName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Code Container.": {
+            "$ref": "./examples/Registry/CodeContainer/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "CodeContainer"
+        ],
+        "summary": "Get container.",
+        "operationId": "RegistryCodeContainers_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "codeName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Code Container.": {
+            "$ref": "./examples/Registry/CodeContainer/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CodeContainer"
+        ],
+        "summary": "Create or update container.",
+        "operationId": "RegistryCodeContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "codeName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeContainerResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeContainerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CodeContainerResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Code Container.": {
+            "$ref": "./examples/Registry/CodeContainer/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions": {
+      "get": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "summary": "List versions.",
+        "operationId": "RegistryCodeVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "codeName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Maximum number of records to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Registry Code Version.": {
+            "$ref": "./examples/Registry/CodeVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}": {
+      "delete": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "summary": "Delete version.",
+        "operationId": "RegistryCodeVersions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "codeName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Code Version.": {
+            "$ref": "./examples/Registry/CodeVersion/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "summary": "Get version.",
+        "operationId": "RegistryCodeVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "codeName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Code Version.": {
+            "$ref": "./examples/Registry/CodeVersion/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "summary": "Create or update version.",
+        "operationId": "RegistryCodeVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "codeName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Version entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CodeVersionResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Code Version.": {
+            "$ref": "./examples/Registry/CodeVersion/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/pendingUpload/{version}": {
+      "post": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "summary": "Generate a storage location and credential for the client to upload a code asset to.",
+        "operationId": "RegistryCodeVersions_CreateOrGetPendingUpload",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "codeName",
+            "description": "Pending upload name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pending upload request object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PendingUploadRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PendingUploadResponseDto"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrGetPendingUpload Registry Code Version.": {
+            "$ref": "./examples/Registry/CodeVersion/createOrGetPendingUpload.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/components": {
+      "get": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "List containers.",
+        "operationId": "RegistryComponentContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Registry Component Container.": {
+            "$ref": "./examples/Registry/ComponentContainer/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}": {
+      "delete": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "Delete container.",
+        "operationId": "RegistryComponentContainers_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "componentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Component Container.": {
+            "$ref": "./examples/Registry/ComponentContainer/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "Get container.",
+        "operationId": "RegistryComponentContainers_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "componentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Component Container.": {
+            "$ref": "./examples/Registry/ComponentContainer/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ComponentContainer"
+        ],
+        "summary": "Create or update container.",
+        "operationId": "RegistryComponentContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "componentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ComponentContainerResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Component Container.": {
+            "$ref": "./examples/Registry/ComponentContainer/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions": {
+      "get": {
+        "tags": [
+          "ComponentVersion"
+        ],
+        "summary": "List versions.",
+        "operationId": "RegistryComponentVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "componentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Maximum number of records to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Registry Component Version.": {
+            "$ref": "./examples/Registry/ComponentVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions/{version}": {
+      "delete": {
+        "tags": [
+          "ComponentVersion"
+        ],
+        "summary": "Delete version.",
+        "operationId": "RegistryComponentVersions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "componentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Component Version.": {
+            "$ref": "./examples/Registry/ComponentVersion/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "ComponentVersion"
+        ],
+        "summary": "Get version.",
+        "operationId": "RegistryComponentVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "componentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Component Version.": {
+            "$ref": "./examples/Registry/ComponentVersion/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ComponentVersion"
+        ],
+        "summary": "Create or update version.",
+        "operationId": "RegistryComponentVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "componentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Version entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ComponentVersionResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Component Version.": {
+            "$ref": "./examples/Registry/ComponentVersion/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/environments": {
+      "get": {
+        "tags": [
+          "EnvironmentContainer"
+        ],
+        "summary": "List environment containers.",
+        "operationId": "RegistryEnvironmentContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Registry Environment Container.": {
+            "$ref": "./examples/Registry/EnvironmentContainer/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}": {
+      "delete": {
+        "tags": [
+          "EnvironmentContainer"
+        ],
+        "summary": "Delete container.",
+        "operationId": "RegistryEnvironmentContainers_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "environmentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Environment Container.": {
+            "$ref": "./examples/Registry/EnvironmentContainer/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "EnvironmentContainer"
+        ],
+        "summary": "Get container.",
+        "operationId": "RegistryEnvironmentContainers_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "environmentName",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Environment Container.": {
+            "$ref": "./examples/Registry/EnvironmentContainer/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EnvironmentContainer"
+        ],
+        "summary": "Create or update container.",
+        "operationId": "RegistryEnvironmentContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "environmentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentContainerResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentContainerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentContainerResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Environment Container.": {
+            "$ref": "./examples/Registry/EnvironmentContainer/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions": {
+      "get": {
+        "tags": [
+          "EnvironmentVersion"
+        ],
+        "summary": "List versions.",
+        "operationId": "RegistryEnvironmentVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "environmentName",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Maximum number of records to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Registry Environment Version.": {
+            "$ref": "./examples/Registry/EnvironmentVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions/{version}": {
+      "delete": {
+        "tags": [
+          "EnvironmentVersion"
+        ],
+        "summary": "Delete version.",
+        "operationId": "RegistryEnvironmentVersions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "environmentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Environment Version.": {
+            "$ref": "./examples/Registry/EnvironmentVersion/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "EnvironmentVersion"
+        ],
+        "summary": "Get version.",
+        "operationId": "RegistryEnvironmentVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "environmentName",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentVersionResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Environment Version.": {
+            "$ref": "./examples/Registry/EnvironmentVersion/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EnvironmentVersion"
+        ],
+        "summary": "Create or update version.",
+        "operationId": "RegistryEnvironmentVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "environmentName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Version entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnvironmentVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentVersionResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/EnvironmentVersionResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Environment Version.": {
+            "$ref": "./examples/Registry/EnvironmentVersion/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models": {
+      "get": {
+        "tags": [
+          "ModelContainer"
+        ],
+        "summary": "List model containers.",
+        "operationId": "RegistryModelContainers_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Registry Model Container.": {
+            "$ref": "./examples/Registry/ModelContainer/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}": {
+      "delete": {
+        "tags": [
+          "ModelContainer"
+        ],
+        "summary": "Delete container.",
+        "operationId": "RegistryModelContainers_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Model Container.": {
+            "$ref": "./examples/Registry/ModelContainer/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "ModelContainer"
+        ],
+        "summary": "Get container.",
+        "operationId": "RegistryModelContainers_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Model Container.": {
+            "$ref": "./examples/Registry/ModelContainer/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ModelContainer"
+        ],
+        "summary": "Create or update model container.",
+        "operationId": "RegistryModelContainers_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Container entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ModelContainerResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Model Container.": {
+            "$ref": "./examples/Registry/ModelContainer/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions": {
+      "get": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "List versions.",
+        "operationId": "RegistryModelVersions_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "$orderBy",
+            "description": "Ordering of list.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "$top",
+            "description": "Maximum number of records to return.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "description": "Version identifier.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "description",
+            "description": "Model description.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "properties",
+            "description": "Comma-separated list of property names (and optionally values). Example: prop1,prop2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "listViewType",
+            "description": "View type for including/excluding (for example) archived entities.",
+            "type": "string",
+            "default": "ActiveOnly",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "ListViewType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "ActiveOnly"
+                },
+                {
+                  "value": "ArchivedOnly"
+                },
+                {
+                  "value": "All"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Registry Model Version.": {
+            "$ref": "./examples/Registry/ModelVersion/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}": {
+      "delete": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "Delete version.",
+        "operationId": "RegistryModelVersions_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "Success"
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registry Model Version.": {
+            "$ref": "./examples/Registry/ModelVersion/delete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "Get version.",
+        "operationId": "RegistryModelVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registry Model Version.": {
+            "$ref": "./examples/Registry/ModelVersion/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "Create or update version.",
+        "operationId": "RegistryModelVersions_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "Container name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Version entity to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResource"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ModelVersionResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate Registry Model Version.": {
+            "$ref": "./examples/Registry/ModelVersion/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/pendingUpload/{version}": {
+      "post": {
+        "tags": [
+          "ModelVersion"
+        ],
+        "summary": "Generate a storage location and credential for the client to upload a model asset to.",
+        "operationId": "RegistryModelVersions_CreateOrGetPendingUpload",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "registryName",
+            "description": "Name of Azure Machine Learning registry.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "modelName",
+            "description": "Model name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pending upload request object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PendingUploadRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PendingUploadResponseDto"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrGetPendingUpload Registry Model Version.": {
+            "$ref": "./examples/Registry/ModelVersion/createOrGetPendingUpload.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints": {
       "get": {
         "tags": [
@@ -58,8 +2728,8 @@
           }
         },
         "x-ms-examples": {
-          "List Batch Endpoint.": {
-            "$ref": "./examples/BatchEndpoint/list.json"
+          "List Workspace Batch Endpoint.": {
+            "$ref": "./examples/Workspace/BatchEndpoint/list.json"
           }
         },
         "x-ms-pageable": {
@@ -134,11 +2804,14 @@
           }
         },
         "x-ms-examples": {
-          "Delete Batch Endpoint.": {
-            "$ref": "./examples/BatchEndpoint/delete.json"
+          "Delete Workspace Batch Endpoint.": {
+            "$ref": "./examples/Workspace/BatchEndpoint/delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -185,8 +2858,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Batch Endpoint.": {
-            "$ref": "./examples/BatchEndpoint/get.json"
+          "Get Workspace Batch Endpoint.": {
+            "$ref": "./examples/Workspace/BatchEndpoint/get.json"
           }
         }
       },
@@ -269,8 +2942,8 @@
           }
         },
         "x-ms-examples": {
-          "Update Batch Endpoint.": {
-            "$ref": "./examples/BatchEndpoint/update.json"
+          "Update Workspace Batch Endpoint.": {
+            "$ref": "./examples/Workspace/BatchEndpoint/update.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -350,11 +3023,14 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Batch Endpoint.": {
-            "$ref": "./examples/BatchEndpoint/createOrUpdate.json"
+          "CreateOrUpdate Workspace Batch Endpoint.": {
+            "$ref": "./examples/Workspace/BatchEndpoint/createOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments": {
@@ -419,8 +3095,8 @@
           }
         },
         "x-ms-examples": {
-          "List Batch Deployment.": {
-            "$ref": "./examples/BatchDeployment/list.json"
+          "List Workspace Batch Deployment.": {
+            "$ref": "./examples/Workspace/BatchDeployment/list.json"
           }
         },
         "x-ms-pageable": {
@@ -502,11 +3178,14 @@
           }
         },
         "x-ms-examples": {
-          "Delete Batch Deployment.": {
-            "$ref": "./examples/BatchDeployment/delete.json"
+          "Delete Workspace Batch Deployment.": {
+            "$ref": "./examples/Workspace/BatchDeployment/delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -560,8 +3239,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Batch Deployment.": {
-            "$ref": "./examples/BatchDeployment/get.json"
+          "Get Workspace Batch Deployment.": {
+            "$ref": "./examples/Workspace/BatchDeployment/get.json"
           }
         }
       },
@@ -652,8 +3331,8 @@
           }
         },
         "x-ms-examples": {
-          "Update Batch Deployment.": {
-            "$ref": "./examples/BatchDeployment/update.json"
+          "Update Workspace Batch Deployment.": {
+            "$ref": "./examples/Workspace/BatchDeployment/update.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -741,11 +3420,14 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Batch Deployment.": {
-            "$ref": "./examples/BatchDeployment/createOrUpdate.json"
+          "CreateOrUpdate Workspace Batch Deployment.": {
+            "$ref": "./examples/Workspace/BatchDeployment/createOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys": {
@@ -794,8 +3476,8 @@
           }
         },
         "x-ms-examples": {
-          "ListKeys Batch Endpoint.": {
-            "$ref": "./examples/BatchEndpoint/listKeys.json"
+          "ListKeys Workspace Batch Endpoint.": {
+            "$ref": "./examples/Workspace/BatchEndpoint/listKeys.json"
           }
         }
       }
@@ -842,8 +3524,8 @@
           }
         },
         "x-ms-examples": {
-          "List Code Container.": {
-            "$ref": "./examples/CodeContainer/list.json"
+          "List Workspace Code Container.": {
+            "$ref": "./examples/Workspace/CodeContainer/list.json"
           }
         },
         "x-ms-pageable": {
@@ -897,8 +3579,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Code Container.": {
-            "$ref": "./examples/CodeContainer/delete.json"
+          "Delete Workspace Code Container.": {
+            "$ref": "./examples/Workspace/CodeContainer/delete.json"
           }
         }
       },
@@ -947,8 +3629,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Code Container.": {
-            "$ref": "./examples/CodeContainer/get.json"
+          "Get Workspace Code Container.": {
+            "$ref": "./examples/Workspace/CodeContainer/get.json"
           }
         }
       },
@@ -1016,8 +3698,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Code Container.": {
-            "$ref": "./examples/CodeContainer/createOrUpdate.json"
+          "CreateOrUpdate Workspace Code Container.": {
+            "$ref": "./examples/Workspace/CodeContainer/createOrUpdate.json"
           }
         }
       }
@@ -1067,6 +3749,18 @@
           },
           {
             "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "hash",
+            "description": "If specified, return CodeVersion assets with specified content hash value, regardless of name",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "hashVersion",
+            "description": "Hash algorithm version when listing by hash",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1084,8 +3778,8 @@
           }
         },
         "x-ms-examples": {
-          "List Code Version.": {
-            "$ref": "./examples/CodeVersion/list.json"
+          "List Workspace Code Version.": {
+            "$ref": "./examples/Workspace/CodeVersion/list.json"
           }
         },
         "x-ms-pageable": {
@@ -1146,8 +3840,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Code Version.": {
-            "$ref": "./examples/CodeVersion/delete.json"
+          "Delete Workspace Code Version.": {
+            "$ref": "./examples/Workspace/CodeVersion/delete.json"
           }
         }
       },
@@ -1203,8 +3897,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Code Version.": {
-            "$ref": "./examples/CodeVersion/get.json"
+          "Get Workspace Code Version.": {
+            "$ref": "./examples/Workspace/CodeVersion/get.json"
           }
         }
       },
@@ -1279,8 +3973,79 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Code Version.": {
-            "$ref": "./examples/CodeVersion/createOrUpdate.json"
+          "CreateOrUpdate Workspace Code Version.": {
+            "$ref": "./examples/Workspace/CodeVersion/createOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/pendingUpload/{version}": {
+      "post": {
+        "tags": [
+          "CodeVersion"
+        ],
+        "summary": "Generate a storage location and credential for the client to upload a code asset to.",
+        "operationId": "CodeVersions_CreateOrGetPendingUpload",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Container name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "version",
+            "description": "Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pending upload request object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PendingUploadRequestDto"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PendingUploadResponseDto"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateOrGetPendingUpload Workspace Code Version.": {
+            "$ref": "./examples/Workspace/CodeVersion/createOrGetPendingUpload.json"
           }
         }
       }
@@ -1354,8 +4119,8 @@
           }
         },
         "x-ms-examples": {
-          "List Component Container.": {
-            "$ref": "./examples/ComponentContainer/list.json"
+          "List Workspace Component Container.": {
+            "$ref": "./examples/Workspace/ComponentContainer/list.json"
           }
         },
         "x-ms-pageable": {
@@ -1409,8 +4174,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Component Container.": {
-            "$ref": "./examples/ComponentContainer/delete.json"
+          "Delete Workspace Component Container.": {
+            "$ref": "./examples/Workspace/ComponentContainer/delete.json"
           }
         }
       },
@@ -1459,8 +4224,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Component Container.": {
-            "$ref": "./examples/ComponentContainer/get.json"
+          "Get Workspace Component Container.": {
+            "$ref": "./examples/Workspace/ComponentContainer/get.json"
           }
         }
       },
@@ -1528,8 +4293,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Component Container.": {
-            "$ref": "./examples/ComponentContainer/createOrUpdate.json"
+          "CreateOrUpdate Workspace Component Container.": {
+            "$ref": "./examples/Workspace/ComponentContainer/createOrUpdate.json"
           }
         }
       }
@@ -1623,8 +4388,8 @@
           }
         },
         "x-ms-examples": {
-          "List Component Version.": {
-            "$ref": "./examples/ComponentVersion/list.json"
+          "List Workspace Component Version.": {
+            "$ref": "./examples/Workspace/ComponentVersion/list.json"
           }
         },
         "x-ms-pageable": {
@@ -1685,8 +4450,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Component Version.": {
-            "$ref": "./examples/ComponentVersion/delete.json"
+          "Delete Workspace Component Version.": {
+            "$ref": "./examples/Workspace/ComponentVersion/delete.json"
           }
         }
       },
@@ -1742,8 +4507,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Component Version.": {
-            "$ref": "./examples/ComponentVersion/get.json"
+          "Get Workspace Component Version.": {
+            "$ref": "./examples/Workspace/ComponentVersion/get.json"
           }
         }
       },
@@ -1818,8 +4583,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Component Version.": {
-            "$ref": "./examples/ComponentVersion/createOrUpdate.json"
+          "CreateOrUpdate Workspace Component Version.": {
+            "$ref": "./examples/Workspace/ComponentVersion/createOrUpdate.json"
           }
         }
       }
@@ -1893,8 +4658,8 @@
           }
         },
         "x-ms-examples": {
-          "List Data Container.": {
-            "$ref": "./examples/DataContainer/list.json"
+          "List Workspace Data Container.": {
+            "$ref": "./examples/Workspace/DataContainer/list.json"
           }
         },
         "x-ms-pageable": {
@@ -1948,8 +4713,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Data Container.": {
-            "$ref": "./examples/DataContainer/delete.json"
+          "Delete Workspace Data Container.": {
+            "$ref": "./examples/Workspace/DataContainer/delete.json"
           }
         }
       },
@@ -1998,8 +4763,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Data Container.": {
-            "$ref": "./examples/DataContainer/get.json"
+          "Get Workspace Data Container.": {
+            "$ref": "./examples/Workspace/DataContainer/get.json"
           }
         }
       },
@@ -2067,8 +4832,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Data Container.": {
-            "$ref": "./examples/DataContainer/createOrUpdate.json"
+          "CreateOrUpdate Workspace Data Container.": {
+            "$ref": "./examples/Workspace/DataContainer/createOrUpdate.json"
           }
         }
       }
@@ -2168,8 +4933,8 @@
           }
         },
         "x-ms-examples": {
-          "List Data Version Base.": {
-            "$ref": "./examples/DataVersionBase/list.json"
+          "List Workspace Data Version Base.": {
+            "$ref": "./examples/Workspace/DataVersionBase/list.json"
           }
         },
         "x-ms-pageable": {
@@ -2230,8 +4995,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Data Version Base.": {
-            "$ref": "./examples/DataVersionBase/delete.json"
+          "Delete Workspace Data Version Base.": {
+            "$ref": "./examples/Workspace/DataVersionBase/delete.json"
           }
         }
       },
@@ -2287,8 +5052,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Data Version Base.": {
-            "$ref": "./examples/DataVersionBase/get.json"
+          "Get Workspace Data Version Base.": {
+            "$ref": "./examples/Workspace/DataVersionBase/get.json"
           }
         }
       },
@@ -2363,8 +5128,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Data Version Base.": {
-            "$ref": "./examples/DataVersionBase/createOrUpdate.json"
+          "CreateOrUpdate Workspace Data Version Base.": {
+            "$ref": "./examples/Workspace/DataVersionBase/createOrUpdate.json"
           }
         }
       }
@@ -2771,8 +5536,8 @@
           }
         },
         "x-ms-examples": {
-          "List Environment Container.": {
-            "$ref": "./examples/EnvironmentContainer/list.json"
+          "List Workspace Environment Container.": {
+            "$ref": "./examples/Workspace/EnvironmentContainer/list.json"
           }
         },
         "x-ms-pageable": {
@@ -2826,8 +5591,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Environment Container.": {
-            "$ref": "./examples/EnvironmentContainer/delete.json"
+          "Delete Workspace Environment Container.": {
+            "$ref": "./examples/Workspace/EnvironmentContainer/delete.json"
           }
         }
       },
@@ -2876,8 +5641,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Environment Container.": {
-            "$ref": "./examples/EnvironmentContainer/get.json"
+          "Get Workspace Environment Container.": {
+            "$ref": "./examples/Workspace/EnvironmentContainer/get.json"
           }
         }
       },
@@ -2945,8 +5710,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Environment Container.": {
-            "$ref": "./examples/EnvironmentContainer/createOrUpdate.json"
+          "CreateOrUpdate Workspace Environment Container.": {
+            "$ref": "./examples/Workspace/EnvironmentContainer/createOrUpdate.json"
           }
         }
       }
@@ -3040,8 +5805,8 @@
           }
         },
         "x-ms-examples": {
-          "List Environment Version.": {
-            "$ref": "./examples/EnvironmentVersion/list.json"
+          "List Workspace Environment Version.": {
+            "$ref": "./examples/Workspace/EnvironmentVersion/list.json"
           }
         },
         "x-ms-pageable": {
@@ -3102,8 +5867,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Environment Version.": {
-            "$ref": "./examples/EnvironmentVersion/delete.json"
+          "Delete Workspace Environment Version.": {
+            "$ref": "./examples/Workspace/EnvironmentVersion/delete.json"
           }
         }
       },
@@ -3159,8 +5924,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Environment Version.": {
-            "$ref": "./examples/EnvironmentVersion/get.json"
+          "Get Workspace Environment Version.": {
+            "$ref": "./examples/Workspace/EnvironmentVersion/get.json"
           }
         }
       },
@@ -3235,8 +6000,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Environment Version.": {
-            "$ref": "./examples/EnvironmentVersion/createOrUpdate.json"
+          "CreateOrUpdate Workspace Environment Version.": {
+            "$ref": "./examples/Workspace/EnvironmentVersion/createOrUpdate.json"
           }
         }
       }
@@ -3411,7 +6176,10 @@
             "$ref": "./examples/Job/delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -3696,8 +6464,8 @@
           }
         },
         "x-ms-examples": {
-          "List Model Container.": {
-            "$ref": "./examples/ModelContainer/list.json"
+          "List Workspace Model Container.": {
+            "$ref": "./examples/Workspace/ModelContainer/list.json"
           }
         },
         "x-ms-pageable": {
@@ -3751,8 +6519,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Model Container.": {
-            "$ref": "./examples/ModelContainer/delete.json"
+          "Delete Workspace Model Container.": {
+            "$ref": "./examples/Workspace/ModelContainer/delete.json"
           }
         }
       },
@@ -3801,8 +6569,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Model Container.": {
-            "$ref": "./examples/ModelContainer/get.json"
+          "Get Workspace Model Container.": {
+            "$ref": "./examples/Workspace/ModelContainer/get.json"
           }
         }
       },
@@ -3870,8 +6638,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Model Container.": {
-            "$ref": "./examples/ModelContainer/createOrUpdate.json"
+          "CreateOrUpdate Workspace Model Container.": {
+            "$ref": "./examples/Workspace/ModelContainer/createOrUpdate.json"
           }
         }
       }
@@ -4002,8 +6770,8 @@
           }
         },
         "x-ms-examples": {
-          "List Model Version.": {
-            "$ref": "./examples/ModelVersion/list.json"
+          "List Workspace Model Version.": {
+            "$ref": "./examples/Workspace/ModelVersion/list.json"
           }
         },
         "x-ms-pageable": {
@@ -4064,8 +6832,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete Model Version.": {
-            "$ref": "./examples/ModelVersion/delete.json"
+          "Delete Workspace Model Version.": {
+            "$ref": "./examples/Workspace/ModelVersion/delete.json"
           }
         }
       },
@@ -4121,8 +6889,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Model Version.": {
-            "$ref": "./examples/ModelVersion/get.json"
+          "Get Workspace Model Version.": {
+            "$ref": "./examples/Workspace/ModelVersion/get.json"
           }
         }
       },
@@ -4197,8 +6965,8 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Model Version.": {
-            "$ref": "./examples/ModelVersion/createOrUpdate.json"
+          "CreateOrUpdate Workspace Model Version.": {
+            "$ref": "./examples/Workspace/ModelVersion/createOrUpdate.json"
           }
         }
       }
@@ -4301,8 +7069,8 @@
           }
         },
         "x-ms-examples": {
-          "List Online Endpoint.": {
-            "$ref": "./examples/OnlineEndpoint/list.json"
+          "List Workspace Online Endpoint.": {
+            "$ref": "./examples/Workspace/OnlineEndpoint/list.json"
           }
         },
         "x-ms-pageable": {
@@ -4377,11 +7145,14 @@
           }
         },
         "x-ms-examples": {
-          "Delete Online Endpoint.": {
-            "$ref": "./examples/OnlineEndpoint/delete.json"
+          "Delete Workspace Online Endpoint.": {
+            "$ref": "./examples/Workspace/OnlineEndpoint/delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -4428,8 +7199,8 @@
           }
         },
         "x-ms-examples": {
-          "Get Online Endpoint.": {
-            "$ref": "./examples/OnlineEndpoint/get.json"
+          "Get Workspace Online Endpoint.": {
+            "$ref": "./examples/Workspace/OnlineEndpoint/get.json"
           }
         }
       },
@@ -4511,8 +7282,8 @@
           }
         },
         "x-ms-examples": {
-          "Update Online Endpoint.": {
-            "$ref": "./examples/OnlineEndpoint/update.json"
+          "Update Workspace Online Endpoint.": {
+            "$ref": "./examples/Workspace/OnlineEndpoint/update.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -4592,11 +7363,14 @@
           }
         },
         "x-ms-examples": {
-          "CreateOrUpdate Online Endpoint.": {
-            "$ref": "./examples/OnlineEndpoint/createOrUpdate.json"
+          "CreateOrUpdate Workspace Online Endpoint.": {
+            "$ref": "./examples/Workspace/OnlineEndpoint/createOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments": {
@@ -4744,11 +7518,14 @@
           }
         },
         "x-ms-examples": {
-          "Delete Online Deployment.": {
-            "$ref": "./examples/OnlineDeployment/delete.json"
+          "Delete Workspace Online Deployment.": {
+            "$ref": "./examples/Workspace/OnlineDeployment/delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -4996,7 +7773,10 @@
             "$ref": "./examples/OnlineDeployment/KubernetesOnlineDeployment/createOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs": {
@@ -5191,8 +7971,8 @@
           }
         },
         "x-ms-examples": {
-          "ListKeys Online Endpoint.": {
-            "$ref": "./examples/OnlineEndpoint/listKeys.json"
+          "ListKeys Workspace Online Endpoint.": {
+            "$ref": "./examples/Workspace/OnlineEndpoint/listKeys.json"
           }
         }
       }
@@ -5268,8 +8048,8 @@
           }
         },
         "x-ms-examples": {
-          "RegenerateKeys Online Endpoint.": {
-            "$ref": "./examples/OnlineEndpoint/regenerateKeys.json"
+          "RegenerateKeys Workspace Online Endpoint.": {
+            "$ref": "./examples/Workspace/OnlineEndpoint/regenerateKeys.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -5283,7 +8063,7 @@
         "tags": [
           "OnlineEndpoint"
         ],
-        "summary": "Retrieve a valid AAD token for an Endpoint using AMLToken-based authentication.",
+        "summary": "Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.",
         "operationId": "OnlineEndpoints_GetToken",
         "produces": [
           "application/json"
@@ -5324,8 +8104,8 @@
           }
         },
         "x-ms-examples": {
-          "GetToken Online Endpoint.": {
-            "$ref": "./examples/OnlineEndpoint/getToken.json"
+          "GetToken Workspace Online Endpoint.": {
+            "$ref": "./examples/Workspace/OnlineEndpoint/getToken.json"
           }
         }
       }
@@ -5479,7 +8259,10 @@
             "$ref": "./examples/Schedule/delete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       },
       "get": {
         "tags": [
@@ -5610,7 +8393,10 @@
             "$ref": "./examples/Schedule/createOrUpdate.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        }
       }
     }
   },
@@ -5656,6 +8442,17 @@
         }
       },
       "x-ms-discriminator-value": "AccountKey",
+      "additionalProperties": false
+    },
+    "AllNodes": {
+      "description": "All nodes means the service will be running on all of the nodes of the job",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Nodes"
+        }
+      ],
+      "x-ms-discriminator-value": "All",
       "additionalProperties": false
     },
     "AmlToken": {
@@ -5781,6 +8578,43 @@
           "type": "string",
           "x-nullable": true
         }
+      },
+      "additionalProperties": false
+    },
+    "AssetProvisioningState": {
+      "description": "Provisioning state of registry asset.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AssetProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded"
+          },
+          {
+            "value": "Failed"
+          },
+          {
+            "value": "Canceled"
+          },
+          {
+            "value": "Creating"
+          },
+          {
+            "value": "Updating"
+          },
+          {
+            "value": "Deleting"
+          }
+        ]
       },
       "additionalProperties": false
     },
@@ -6510,6 +9344,28 @@
       "x-ms-discriminator-value": "Bayesian",
       "additionalProperties": false
     },
+    "BlobReferenceForConsumptionDto": {
+      "type": "object",
+      "properties": {
+        "blobUri": {
+          "format": "uri",
+          "description": "Blob URI path for client to upload data.\r\nExample: https://blob.windows.core.net/Container/Path",
+          "type": "string",
+          "x-nullable": true
+        },
+        "credential": {
+          "description": "Credential info to access storage account",
+          "$ref": "#/definitions/PendingUploadCredentialDto",
+          "x-nullable": true
+        },
+        "storageAccountArmId": {
+          "description": "Arm ID of the storage account to use",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
     "BlockedTransformers": {
       "description": "Enum for all classification models supported by AutoML.",
       "enum": [
@@ -6931,6 +9787,16 @@
           "$ref": "#/definitions/AssetContainer"
         }
       ],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state for the code container.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
       "x-ms-client-name": "CodeContainerProperties",
       "additionalProperties": false
     },
@@ -6986,6 +9852,14 @@
           "type": "string",
           "example": "https://blobStorage/folderName",
           "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the code version.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "x-ms-client-name": "CodeVersionProperties",
@@ -7191,6 +10065,16 @@
           "$ref": "#/definitions/AssetContainer"
         }
       ],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state for the component container.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
       "x-ms-client-name": "ComponentContainerProperties",
       "additionalProperties": false
     },
@@ -7258,6 +10142,14 @@
             "read"
           ],
           "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the component version.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
         }
       },
       "x-ms-client-name": "ComponentVersionProperties",
@@ -7632,6 +10524,104 @@
       "x-ms-discriminator-value": "DataPath",
       "additionalProperties": false
     },
+    "DataType": {
+      "description": "Enum to determine the type of data.",
+      "enum": [
+        "uri_file",
+        "uri_folder",
+        "mltable"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "DataType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "uri_file"
+          },
+          {
+            "value": "uri_folder"
+          },
+          {
+            "value": "mltable"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "DataVersionBase": {
+      "description": "Data version base definition",
+      "required": [
+        "dataType",
+        "dataUri"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AssetBase"
+        }
+      ],
+      "properties": {
+        "dataType": {
+          "description": "[Required] Specifies the type of data.",
+          "$ref": "#/definitions/DataType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "dataUri": {
+          "description": "[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "dataType",
+      "x-ms-client-name": "DataVersionBaseProperties"
+    },
+    "DataVersionBaseResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/DataVersionBase"
+        }
+      },
+      "x-ms-client-name": "DataVersionBase",
+      "additionalProperties": false
+    },
+    "DataVersionBaseResourceArmPaginatedResult": {
+      "description": "A paginated list of DataVersionBase entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of DataVersionBase objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type DataVersionBase.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataVersionBaseResource"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "Datastore": {
       "description": "Base definition for datastore contents configuration.",
       "required": [
@@ -7757,104 +10747,6 @@
             "value": "AzureFile"
           }
         ]
-      },
-      "additionalProperties": false
-    },
-    "DataType": {
-      "description": "Enum to determine the type of data.",
-      "enum": [
-        "uri_file",
-        "uri_folder",
-        "mltable"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "DataType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "uri_file"
-          },
-          {
-            "value": "uri_folder"
-          },
-          {
-            "value": "mltable"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "DataVersionBase": {
-      "description": "Data version base definition",
-      "required": [
-        "dataType",
-        "dataUri"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AssetBase"
-        }
-      ],
-      "properties": {
-        "dataType": {
-          "description": "[Required] Specifies the type of data.",
-          "$ref": "#/definitions/DataType",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "dataUri": {
-          "description": "[Required] Uri of the data. Usage/meaning depends on Microsoft.MachineLearning.ManagementFrontEnd.Contracts.V20221001.Assets.DataVersionBase.DataType",
-          "minLength": 1,
-          "pattern": "[a-zA-Z0-9_]",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        }
-      },
-      "discriminator": "dataType",
-      "x-ms-client-name": "DataVersionBaseProperties"
-    },
-    "DataVersionBaseResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/DataVersionBase"
-        }
-      },
-      "x-ms-client-name": "DataVersionBase",
-      "additionalProperties": false
-    },
-    "DataVersionBaseResourceArmPaginatedResult": {
-      "description": "A paginated list of DataVersionBase entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of DataVersionBase objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type DataVersionBase.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DataVersionBaseResource"
-          }
-        }
       },
       "additionalProperties": false
     },
@@ -8337,6 +11229,16 @@
           "$ref": "#/definitions/AssetContainer"
         }
       ],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state for the environment container.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
       "x-ms-client-name": "EnvironmentContainerProperties",
       "additionalProperties": false
     },
@@ -8466,6 +11368,19 @@
             "create",
             "read"
           ]
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the environment version.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "stage": {
+          "description": "Stage in the environment lifecycle assigned to this environment",
+          "type": "string",
+          "x-nullable": true
         }
       },
       "x-ms-client-name": "EnvironmentVersionProperties",
@@ -9115,7 +12030,7 @@
       "additionalProperties": false
     },
     "ImageModelDistributionSettings": {
-      "description": "Distribution expressions to sweep over values of model settings.\r\n<example>\r\nSome examples are:\r\n<code>\r\nModelName = \"choice('seresnext', 'resnest50')\";\r\nLearningRate = \"uniform(0.001, 0.01)\";\r\nLayersToFreeze = \"choice(0, 2)\";\r\n</code></example>\r\nAll distributions can be specified as distribution_name(min, max) or choice(val1, val2, ..., valn)\r\nwhere distribution name can be: uniform, quniform, loguniform, etc\r\nFor more details on how to compose distribution expressions please check the documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "description": "Distribution expressions to sweep over values of model settings.\r\n<example>\r\nSome examples are:\r\n```\r\nModelName = \"choice('seresnext', 'resnest50')\";\r\nLearningRate = \"uniform(0.001, 0.01)\";\r\nLayersToFreeze = \"choice(0, 2)\";\r\n```</example>\r\nAll distributions can be specified as distribution_name(min, max) or choice(val1, val2, ..., valn)\r\nwhere distribution name can be: uniform, quniform, loguniform, etc\r\nFor more details on how to compose distribution expressions please check the documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
       "type": "object",
       "properties": {
         "amsGradient": {
@@ -9290,7 +12205,7 @@
       "additionalProperties": false
     },
     "ImageModelDistributionSettingsClassification": {
-      "description": "Distribution expressions to sweep over values of model settings.\r\n<example>\r\nSome examples are:\r\n<code>\r\nModelName = \"choice('seresnext', 'resnest50')\";\r\nLearningRate = \"uniform(0.001, 0.01)\";\r\nLayersToFreeze = \"choice(0, 2)\";\r\n</code></example>\r\nFor more details on how to compose distribution expressions please check the documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "description": "Distribution expressions to sweep over values of model settings.\r\n<example>\r\nSome examples are:\r\n```\r\nModelName = \"choice('seresnext', 'resnest50')\";\r\nLearningRate = \"uniform(0.001, 0.01)\";\r\nLayersToFreeze = \"choice(0, 2)\";\r\n```</example>\r\nFor more details on how to compose distribution expressions please check the documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
       "type": "object",
       "allOf": [
         {
@@ -9326,7 +12241,7 @@
       "additionalProperties": false
     },
     "ImageModelDistributionSettingsObjectDetection": {
-      "description": "Distribution expressions to sweep over values of model settings.\r\n<example>\r\nSome examples are:\r\n<code>\r\nModelName = \"choice('seresnext', 'resnest50')\";\r\nLearningRate = \"uniform(0.001, 0.01)\";\r\nLayersToFreeze = \"choice(0, 2)\";\r\n</code></example>\r\nFor more details on how to compose distribution expressions please check the documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
+      "description": "Distribution expressions to sweep over values of model settings.\r\n<example>\r\nSome examples are:\r\n```\r\nModelName = \"choice('seresnext', 'resnest50')\";\r\nLearningRate = \"uniform(0.001, 0.01)\";\r\nLayersToFreeze = \"choice(0, 2)\";\r\n```</example>\r\nFor more details on how to compose distribution expressions please check the documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters\r\nFor more information on the available settings please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
       "type": "object",
       "allOf": [
         {
@@ -10286,6 +13201,11 @@
           ],
           "x-nullable": true
         },
+        "nodes": {
+          "description": "Nodes that user would like to start the service on.\r\nIf Nodes is not set or set to null, the service will only be started on leader node.",
+          "$ref": "#/definitions/Nodes",
+          "x-nullable": true
+        },
         "port": {
           "format": "int32",
           "description": "Port for endpoint.",
@@ -10584,70 +13504,6 @@
       },
       "additionalProperties": false
     },
-    "ManagedIdentity": {
-      "description": "Managed identity configuration.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityConfiguration"
-        }
-      ],
-      "properties": {
-        "clientId": {
-          "format": "uuid",
-          "description": "Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "objectId": {
-          "format": "uuid",
-          "description": "Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        },
-        "resourceId": {
-          "description": "Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ],
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "Managed",
-      "additionalProperties": false
-    },
-    "ManagedOnlineDeployment": {
-      "description": "Properties specific to a ManagedOnlineDeployment.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OnlineDeployment"
-        }
-      ],
-      "x-ms-discriminator-value": "Managed",
-      "additionalProperties": false
-    },
-    "MedianStoppingPolicy": {
-      "description": "Defines an early termination policy based on running averages of the primary metric of all runs",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EarlyTerminationPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "MedianStopping",
-      "additionalProperties": false
-    },
     "MLFlowModelJobInput": {
       "type": "object",
       "allOf": [
@@ -10725,6 +13581,70 @@
       "x-ms-discriminator-value": "mltable",
       "additionalProperties": false
     },
+    "ManagedIdentity": {
+      "description": "Managed identity configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityConfiguration"
+        }
+      ],
+      "properties": {
+        "clientId": {
+          "format": "uuid",
+          "description": "Specifies a user-assigned identity by client ID. For system-assigned, do not set this field.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "objectId": {
+          "format": "uuid",
+          "description": "Specifies a user-assigned identity by object ID. For system-assigned, do not set this field.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        },
+        "resourceId": {
+          "description": "Specifies a user-assigned identity by ARM resource ID. For system-assigned, do not set this field.",
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "ManagedOnlineDeployment": {
+      "description": "Properties specific to a ManagedOnlineDeployment.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OnlineDeployment"
+        }
+      ],
+      "x-ms-discriminator-value": "Managed",
+      "additionalProperties": false
+    },
+    "MedianStoppingPolicy": {
+      "description": "Defines an early termination policy based on running averages of the primary metric of all runs",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EarlyTerminationPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "MedianStopping",
+      "additionalProperties": false
+    },
     "ModelContainer": {
       "type": "object",
       "allOf": [
@@ -10732,6 +13652,16 @@
           "$ref": "#/definitions/AssetContainer"
         }
       ],
+      "properties": {
+        "provisioningState": {
+          "description": "Provisioning state for the model container.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
       "x-ms-client-name": "ModelContainerProperties",
       "additionalProperties": false
     },
@@ -10841,6 +13771,19 @@
         },
         "modelUri": {
           "description": "The URI path to the model contents.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state for the model version.",
+          "$ref": "#/definitions/AssetProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "stage": {
+          "description": "Stage in the model lifecycle assigned to this model",
           "type": "string",
           "x-nullable": true
         }
@@ -11000,8 +13943,44 @@
         "timeout": {
           "format": "duration",
           "description": "AutoML job timeout.",
+          "default": "P7D",
           "type": "string"
         }
+      },
+      "additionalProperties": false
+    },
+    "Nodes": {
+      "description": "Abstract Nodes definition",
+      "required": [
+        "nodesValueType"
+      ],
+      "type": "object",
+      "properties": {
+        "nodesValueType": {
+          "description": "[Required] Type of the Nodes value",
+          "$ref": "#/definitions/NodesValueType",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        }
+      },
+      "discriminator": "nodesValueType"
+    },
+    "NodesValueType": {
+      "description": "The enumerated types for the nodes value",
+      "enum": [
+        "All"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "NodesValueType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "All"
+          }
+        ]
       },
       "additionalProperties": false
     },
@@ -11193,6 +14172,15 @@
         "compute": {
           "description": "ARM resource ID of the compute if it exists.\r\noptional",
           "type": "string",
+          "x-nullable": true
+        },
+        "mirrorTraffic": {
+          "description": "Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
           "x-nullable": true
         },
         "provisioningState": {
@@ -11529,6 +14517,94 @@
     },
     "PartialUserAssignedIdentity": {
       "type": "object",
+      "additionalProperties": false
+    },
+    "PendingUploadCredentialDto": {
+      "required": [
+        "credentialType"
+      ],
+      "type": "object",
+      "properties": {
+        "credentialType": {
+          "description": "[Required] Credential type used to authentication with storage.",
+          "$ref": "#/definitions/PendingUploadCredentialType"
+        }
+      },
+      "discriminator": "credentialType"
+    },
+    "PendingUploadCredentialType": {
+      "description": "Enum to determine the PendingUpload credentials type.",
+      "enum": [
+        "SAS"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PendingUploadCredentialType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SAS"
+          }
+        ]
+      },
+      "additionalProperties": false
+    },
+    "PendingUploadRequestDto": {
+      "type": "object",
+      "properties": {
+        "pendingUploadId": {
+          "description": "If PendingUploadId = null then random guid will be used.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "pendingUploadType": {
+          "description": "TemporaryBlobReference is the only supported type",
+          "default": "TemporaryBlobReference",
+          "$ref": "#/definitions/PendingUploadType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PendingUploadResponseDto": {
+      "type": "object",
+      "properties": {
+        "blobReferenceForConsumption": {
+          "description": "Container level read, write, list SAS",
+          "$ref": "#/definitions/BlobReferenceForConsumptionDto",
+          "x-nullable": true
+        },
+        "pendingUploadId": {
+          "description": "ID for this upload request",
+          "type": "string",
+          "x-nullable": true
+        },
+        "pendingUploadType": {
+          "description": "TemporaryBlobReference is the only supported type",
+          "default": "TemporaryBlobReference",
+          "$ref": "#/definitions/PendingUploadType"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PendingUploadType": {
+      "description": "Type of storage to use for the pending upload location",
+      "enum": [
+        "None",
+        "TemporaryBlobReference"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PendingUploadType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None"
+          },
+          {
+            "value": "TemporaryBlobReference"
+          }
+        ]
+      },
       "additionalProperties": false
     },
     "PipelineJob": {
@@ -12116,6 +15192,30 @@
           "type": "integer"
         }
       },
+      "additionalProperties": false
+    },
+    "SASCredentialDto": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/PendingUploadCredentialDto"
+        }
+      ],
+      "properties": {
+        "sasUri": {
+          "format": "uri",
+          "description": "Full SAS Uri, including the storage, container/blob path and SAS token",
+          "type": "string",
+          "x-nullable": true
+        },
+        "wasbsUri": {
+          "format": "uri",
+          "description": "wasbs formatted uri for mounting containers at root, a subdirectory, or a specific file\r\nwasbs://[container_name]@[account_name].blob.core.windows.net/[path]?sas=[sas]\r\nFor now, the URI will just be the root path ([path] will be empty).",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "SAS",
       "additionalProperties": false
     },
     "SamplingAlgorithm": {
@@ -13699,17 +16799,6 @@
       "x-ms-discriminator-value": "uri_folder",
       "additionalProperties": false
     },
-    "UserIdentity": {
-      "description": "User identity configuration.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/IdentityConfiguration"
-        }
-      ],
-      "x-ms-discriminator-value": "UserIdentity",
-      "additionalProperties": false
-    },
     "UseStl": {
       "description": "Configure STL Decomposition of the time-series target column.",
       "enum": [
@@ -13734,6 +16823,17 @@
           }
         ]
       },
+      "additionalProperties": false
+    },
+    "UserIdentity": {
+      "description": "User identity configuration.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityConfiguration"
+        }
+      ],
+      "x-ms-discriminator-value": "UserIdentity",
       "additionalProperties": false
     },
     "ValidationMetricType": {
