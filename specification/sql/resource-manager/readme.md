@@ -127,6 +127,7 @@ input-file:
   - Microsoft.Sql/preview/2022-11-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetentionPolicies.json
   - Microsoft.Sql/preview/2022-11-01-preview/ManagedServerDnsAliases.json
   - Microsoft.Sql/preview/2022-11-01-preview/ManagedServerSecurityAlertPolicies.json
+  - Microsoft.Sql/preview/2022-11-01-preview/NetworkSecurityPerimeterConfigurations.json
   - Microsoft.Sql/preview/2022-11-01-preview/Operations.json
   - Microsoft.Sql/preview/2022-11-01-preview/OutboundFirewallRules.json
   - Microsoft.Sql/preview/2022-11-01-preview/PrivateEndpointConnections.json
