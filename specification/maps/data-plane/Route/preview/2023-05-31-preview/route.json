@@ -73,8 +73,8 @@
     "/route/directions": {
       "post": {
         "description": "**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\nReturns a route between an origin and a destination, passing through waypoints if they are specified. The route will take into account factors such as current traffic and the typical road speeds on the requested day of the week and time of day.\n\nInformation returned includes the distance, estimated travel time, and a representation of the route geometry. Additional routing information such as optimized waypoint order or turn by turn instructions is also available, depending on the options selected.\n\n",
-        "operationId": "Route_PostRouteDirections",
-        "x-ms-client-name": "Route_PostRouteDirections",
+        "operationId": "Route_PostDirections",
+        "x-ms-client-name": "Route_PostDirections",
         "x-ms-examples": {
           "Successfully retrieve a route between an origin and a destination with additional parameters in the body": {
             "$ref": "./examples/PostRouteDirections.json"
@@ -113,12 +113,8 @@
     "/route/directions:batch": {
       "post": {
         "description": "**Route Directions Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Directions Batch API sends batches of queries to [Route Directions API](https://docs.microsoft.com/rest/api/maps/route/getroutedirections) using just a single API call. You can call Route Directions Batch API to run synchronously (sync). The sync API up to **100** queries.\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions/batch?api-version=2023-05-31-preview&subscription-key={subscription-key}\n```\n### Batch Response Model\nThe returned data content is similar for sync requests. When downloading the results of an async batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests`i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item in `batchItems` contains `statusCode` and `response` fields. Each `response` in `batchItems` is of one of the following types:\n\n  - [`RouteDirections`](https://docs.microsoft.com/rest/api/maps/route/getroutedirections#routedirections) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\nHere's a sample Batch Response with 1 _successful_ and 1 _failed_ result:\n\n\n```json\n{\n  \"summary\": {\n    \"successfulRequests\": 1,\n    \"totalRequests\": 2\n  },\n  \"batchItems\": [\n    {\n      \"statusCode\": 200,\n      \"response\": {\n        \"type\": \"FeatureCollection\",\n        \"features\": [\n          {\n            \"type\": \"Feature\",\n            \"geometry\": {\n              \"type\": \"MultiLineString\",\n              \"coordinates\": []\n            },\n            \"properties\": {\n              \"id\": \"v70,h1207959581,i0,a0,cen-US,dAAAAAAAAAAA1,y1,s1,m1,o1,t0,wWrdB7bfOR0C9Up2\",\n              \"distanceInMeters\": 1432.9,\n              \"durationInSeconds\": 560,\n              \"durationTrafficInSeconds\": 563\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"statusCode\": 400,\n      \"response\": {\n        \"error\": {\n          \"code\": \"400 BadRequest\",\n          \"message\": \"Bad request: one or more parameters were incorrectly specified or are mutually exclusive.\"\n        }\n      }\n    }\n  ]\n}\n```",
-        "operationId": "Route_PostRouteDirectionsBatch",
-        "x-ms-client-name": "Route_PostRouteDirectionsBatch",
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
-        },
+        "operationId": "Route_PostDirectionsBatch",
+        "x-ms-client-name": "Route_PostDirectionsBatch",
         "x-ms-examples": {
           "Successfully retrieve the status for the route directions batch request": {
             "$ref": "./examples/PostRouteDirectionsBatch.json"
@@ -345,6 +341,7 @@
         "maxRouteCount": {
           "description": "Number of maximal routes to be calculated. Default: 1, minimum: 1 and maximum: 3",
           "type": "integer",
+          "format": "int64",
           "minimum": 1,
           "maximum": 3
         },
@@ -368,6 +365,7 @@
     },
     "RegionTravelSummary": {
       "description": "Travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada).",
+      "type": "object",
       "properties": {
         "name": {
           "description": "Country name",
@@ -455,6 +453,7 @@
           "properties": {
             "index": {
               "description": "It is used to identify and order the sequence of waypoints in the route, allowing for accurate navigation along the designated path.",
+              "format": "int64",
               "type": "integer"
             },
             "type": {
@@ -523,6 +522,7 @@
             },
             "durationInSeconds": {
               "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+              "format": "int64",
               "type": "integer"
             }
           }
@@ -580,14 +580,16 @@
             },
             "distanceInMeters": {
               "description": "The physical distance in meters covered by the entire route.",
-              "type": "integer"
+              "type": "number"
             },
             "durationInSeconds": {
               "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+              "format": "int64",
               "type": "integer"
             },
             "delayInSeconds": {
               "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
+              "format": "int64",
               "type": "integer"
             },
             "trafficDataUsed": {
@@ -619,7 +621,7 @@
         "waypoint"
       ],
       "x-ms-enum": {
-        "name": "point type",
+        "name": "ManeuverPointType",
         "modelAsString": true,
         "values": [
           {
@@ -640,7 +642,7 @@
         "viaWaypoint"
       ],
       "x-ms-enum": {
-        "name": "point type",
+        "name": "ViaWayPointType",
         "modelAsString": true,
         "values": [
           {
@@ -658,7 +660,7 @@
         "viaWaypoint"
       ],
       "x-ms-enum": {
-        "name": "point type",
+        "name": "WayPointType",
         "modelAsString": true,
         "values": [
           {
@@ -673,7 +675,8 @@
       }
     },
     "SubRegion": {
-      "description": "",
+      "description": "sub region",
+      "type": "object",
       "properties": {
         "name": {
           "description": "sub region name",
@@ -682,11 +685,12 @@
         },
         "distanceInMeters": {
           "description": "Length In Meters property",
-          "type": "integer",
+          "type": "number",
           "readOnly": true
         },
         "durationInSeconds": {
           "description": "Estimated travel time in seconds property that includes the delay due to real-time traffic. Note that even when traffic=false travelTimeInSeconds still includes the delay due to traffic. If DepartAt is in the future, travel time is calculated using time-dependent historic traffic data.",
+          "format": "int64",
           "type": "integer",
           "readOnly": true
         }
@@ -707,6 +711,7 @@
         },
         "travelDurationInSeconds": {
           "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+          "format": "int64",
           "type": "integer",
           "readOnly": true
         },
@@ -726,6 +731,7 @@
     },
     "SubLeg": {
       "description": "Information about a segments of the route leg defined by the route leg waypoints and any intermediate via-waypoints. For example, if the route leg has two via-waypoints in addition to start and end waypoints, there would be three (3) route sub-legs.",
+      "type": "object",
       "properties": {
         "pathLegRange": {
           "description": "Refers to the range covered by a specific leg of a route or path.",
@@ -738,6 +744,7 @@
         },
         "durationInSeconds": {
           "description": "The time, in seconds, that it takes to travel the corresponding travelDistance by the sub-leg",
+          "format": "int64",
           "type": "integer",
           "readOnly": true
         }
@@ -745,6 +752,7 @@
     },
     "PathLegRange": {
       "description": "Refers to the range covered by a specific leg of a route or path.",
+      "type": "object",
       "properties": {
         "range": {
           "description": "Refers to the range covered by a specific leg of a route or path.",
@@ -752,6 +760,7 @@
           "maximum": 2,
           "maxItems": 2,
           "items": {
+            "format": "int64",
             "type": "integer"
           }
         },
@@ -762,22 +771,26 @@
     },
     "LegPointIndex": {
       "description": "Refers to the index of a point within a specific leg of a route.",
+      "type": "object",
       "properties": {
         "legIndex": {
           "$ref": "#/definitions/LegIndex"
         },
         "index": {
           "description": "index of a point within a specific leg",
+          "format": "int64",
           "type": "integer"
         }
       }
     },
     "LegIndex": {
       "description": "The route leg index is a sequential number assigned to each leg of the route to help identify and distinguish between different segments of the route.",
+      "format": "int64",
       "type": "integer"
     },
     "Hint": {
       "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element.",
+      "type": "object",
       "properties": {
         "hintType": {
           "description": "hint type",
@@ -791,6 +804,7 @@
     },
     "Detail": {
       "description": "Information about one of the maneuvers that is part of the itinerary item. An ItineraryItem can contain more than one Detail collection. For information about the fields contained in a Detail collection.",
+      "type": "object",
       "properties": {
         "compassDegrees": {
           "description": "The direction in degrees.",
@@ -1458,6 +1472,7 @@
     },
     "Instruction": {
       "description": "A description of a maneuver in a set of directions.",
+      "type": "object",
       "properties": {
         "maneuverType": {
           "$ref": "#/definitions/ManeuverType"
@@ -1482,6 +1497,7 @@
     },
     "VehicleSpec": {
       "description": "Vehicle attributes are specified inside of a vehicleSpec. Different regions may have different definitions for the truck classification and types, e.g., light truck, medium truck, heavy truck, etc. To get the most accurate results of the route restrictions based on the truck specs, please specify the vehicle attributes.",
+      "type": "object",
       "properties": {
         "isVehicleCommercial": {
           "description": "Whether the vehicle is used for commercial purposes. Commercial vehicles may not be allowed to drive on some roads.\n  `Note`: The parameter is available only for truck mode",
@@ -1491,6 +1507,7 @@
         "heading": {
           "x-ms-client-name": "headingInDegrees",
           "description": "The directional heading of the vehicle in degrees starting at true North and continuing in clockwise direction. North is 0 degrees, east is 90 degrees, south is 180 degrees, west is 270 degrees. Possible values 0-359",
+          "format": "int64",
           "type": "integer",
           "minimum": 0,
           "maximum": 359
@@ -1519,23 +1536,27 @@
         "weight": {
           "x-ms-client-name": "weightInKilograms",
           "description": "Weight of the vehicle in kilograms. `Note`: The parameter is available only for truck mode.",
+          "format": "int64",
           "type": "integer",
           "default": 0
         },
         "maxSpeed": {
           "x-ms-client-name": "maxSpeedInKilometersPerHour",
           "description": "Maximum speed of the vehicle in km/hour. The max speed in the vehicle profile is used to check whether a vehicle is allowed on motorways. \n\n* A value of 0 means that an appropriate value for the vehicle will be determined and applied during route planning.\n\n* A non-zero value may be overridden during route planning. For example, the current traffic flow is 60 km/hour. If the vehicle  maximum speed is set to 50 km/hour, the routing engine will consider 60 km/hour as this is the current situation.  If the maximum speed of the vehicle is provided as 80 km/hour but the current traffic flow is 60 km/hour, then routing engine will again use 60 km/hour. `Note`: The parameter is available only for truck mode.",
+          "format": "int64",
           "type": "integer",
           "default": 0
         },
         "axleCount": {
           "description": "Number of axles of the vehicle. `Note`: The parameter is available only for truck mode.",
+          "format": "int64",
           "type": "integer",
           "default": 0
         },
         "axleWeight": {
           "x-ms-client-name": "axleWeightInKilograms",
           "description": "Weight per axle of the vehicle in kg. A value of 0 means that weight restrictions per axle are not considered.`Note`: The parameter is available only for truck mode.",
+          "format": "int64",
           "type": "integer",
           "default": 0
         },
