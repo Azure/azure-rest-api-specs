@@ -27,7 +27,7 @@ These are the global settings for Route Client.
 ``` yaml
 title: RouteClient
 openapi-type: data-plane
-tag: 1.0
+tag: package-2023-05-31-preview
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
@@ -40,6 +40,14 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Tag: package-2023-05-31-preview
+
+These settings apply only when `--tag=package-2023-05-31-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-05-31-preview'
+input-file:
+  - preview/2023-05-31-preview/route.json
+```
 
 ### Tag: 1.0
 

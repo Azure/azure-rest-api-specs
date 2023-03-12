@@ -105,7 +105,7 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/2023-05-31-preview/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/2023-05-31-preview/common.json#/responses/default"
           }
         }
       }
@@ -126,7 +126,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+            "$ref": "../../../Common/preview/2023-05-31-preview/common.json#/parameters/ClientId"
           },
           {
             "$ref": "#/parameters/ApiVersion"
@@ -156,7 +156,7 @@
             "x-ms-error-response": true
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "$ref": "../../../Common/preview/2023-05-31-preview/common.json#/responses/default"
           }
         }
       }
@@ -166,7 +166,6 @@
     "RouteDirectionsRequest": {
       "description": "This object is the request body.",
       "type": "object",
-      "required": ["waypoints"],
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureCollectionType"
@@ -219,7 +218,7 @@
           "enum": [
             "shortest",
             "fastestWithoutTraffic",
-            "fatestAvoidClosureWithoutTraffic",
+            "fastestAvoidClosureWithoutTraffic",
             "fastestWithTraffic"
           ],
           "x-ms-enum": {
@@ -237,7 +236,7 @@
                 "description": "The route is calculated to minimize the time. Traffic information is not used."
               },
               {
-                "value": "fatestAvoidClosureWithoutTraffic",
+                "value": "fastestAvoidClosureWithoutTraffic",
                 "name": "FastestAvoidClosureWithoutTraffic",
                 "description": "The route is calculated to minimize the time and avoid road closures. Traffic information except road closures are not used in the calculation."
               },
@@ -307,7 +306,10 @@
         "routeOutputOptions": {
           "description": "Information of route being returned. Can specify multiple values such as \"routeOutputOptions\": [\"includeRoutePath\", \"includeRegionTravelSummary\"].",
           "type": "array",
-          "default": ["includeRoutePath","excludeItinerary"],
+          "default": [
+            "includeRoutePath",
+            "excludeItinerary"
+          ],
           "items": {
             "type": "string",
             "enum": [
@@ -422,18 +424,22 @@
     "OutputFeatures": {
       "type": "array",
       "items": {
-        "anyOf": [
-          {
-            "$ref": "#/definitions/OutputManeuverPointFeatureItem"
-          },
-          {
-            "$ref": "#/definitions/OutputViaWaypointFeatureItem"
-          },
-          {
-            "$ref": "#/definitions/OutputRoutePathFeatureItem"
-          }
-        ]
+        "$ref": "#/definitions/OutputFeatureItem"
       }
+    },
+    "OutputFeatureItem": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutputManeuverPointFeatureItem"
+        },
+        {
+          "$ref": "#/definitions/OutputViaWaypointFeatureItem"
+        },
+        {
+          "$ref": "#/definitions/OutputRoutePathFeatureItem"
+        }
+      ]
     },
     "InputWaypointFeatureItem": {
       "type": "object",
@@ -1146,7 +1152,7 @@
           {
             "value": "Take",
             "name": "Take",
-            "description": "Take the road. This instruction is used when you are entering or exiting a ferry. For example the following two route instructions use the Take maneuver to tell the user to take the Seattle-Bainbridge ferry and then to exit the ferry onto Olympic Drive.\n Take Seattle-Bainbridge Ferry. Take Olympic Drive."
+            "description": "Take the road. This instruction is used when you are entering or exiting a ferry."
           },
           {
             "value": "TakeRampLeft",
