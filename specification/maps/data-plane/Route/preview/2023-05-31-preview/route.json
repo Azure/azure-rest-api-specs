@@ -1,5 +1,5 @@
 {
-  "swagger": "2.0",
+  "swagger": "3.0",
   "info": {
     "title": "Azure Maps Route Service",
     "version": "2023-05-31-preview",
@@ -312,7 +312,7 @@
               "includeRoutePath",
               "includeRegionTravelSummary",
               "excludeItinerary",
-              "RouteSummariesOnly"
+              "routeSummariesOnly"
             ],
             "x-ms-enum": {
               "name": "RouteOutputOption",
@@ -427,7 +427,7 @@
     },
     "OutputFeatureItem": {
       "type": "object",
-      "allOf": [
+      "oneOf": [
         {
           "$ref": "#/definitions/OutputManeuverPointFeatureItem"
         },
@@ -506,7 +506,10 @@
             },
             "signs": {
               "description": "Signage text for the route. There may be more than one sign value for an itinerary item.",
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             },
             "towardsRoadName": {
               "description": "The name of the street that the route goes towards in the first itinerary item.",
