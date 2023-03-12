@@ -394,6 +394,7 @@
         "groupingAttributes": {
           "description": "The grouping attributes that will determine if the alert should be grouped to an incident.",
           "type": "array",
+          "maxItems": 5,
           "items": {
             "$ref": "#/definitions/IncidentCreationRuleGroupingAttribute"
           },
@@ -563,7 +564,6 @@
       ],
       "properties": {
         "groupingProperties": {
-          "maxItems": 5,
           "type": "object",
           "$ref": "#/definitions/IncidentCreationRulePropertyBasedGroupingProperties"
         }
@@ -603,7 +603,7 @@
     "IncidentCreationRuleId": {
       "in": "path",
       "name": "incidentCreationRuleId",
-      "description": "Incident creation rule ID",
+      "description": "Incident creation rule ID (e.g. guid)",
       "required": true,
       "x-ms-parameter-location": "method",
       "type": "string"
