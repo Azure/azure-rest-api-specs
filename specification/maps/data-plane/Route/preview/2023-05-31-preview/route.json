@@ -88,12 +88,12 @@
             "$ref": "#/parameters/Accept-Language"
           },
           {
-            "name": "RouteDirectionsRequest",
+            "name": "routeDirectionsRequest",
             "in": "body",
             "description": "Request body of RouteDirections API in JSON format.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RouteDirectionsRequest"
+              "$ref": "#/definitions/DirectionsRequest"
             }
           }
         ],
@@ -110,9 +110,9 @@
         }
       }
     },
-    "/route/directions:batch": {
+    "/route/directions/batch": {
       "post": {
-        "description": "**Route Directions Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Route Directions Batch API sends batches of queries to [Route Directions API](https://docs.microsoft.com/rest/api/maps/route/getroutedirections) using just a single API call. You can call Route Directions Batch API to run synchronously (sync). The sync API up to **100** queries.\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions/batch?api-version=2023-05-31-preview&subscription-key={subscription-key}\n```\n### Batch Response Model\nThe returned data content is similar for sync requests. When downloading the results of an async batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests`i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item in `batchItems` contains `statusCode` and `response` fields. Each `response` in `batchItems` is of one of the following types:\n\n  - [`RouteDirections`](https://docs.microsoft.com/rest/api/maps/route/getroutedirections#routedirections) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\nHere's a sample Batch Response with 1 _successful_ and 1 _failed_ result:\n\n\n```json\n{\n  \"summary\": {\n    \"successfulRequests\": 1,\n    \"totalRequests\": 2\n  },\n  \"batchItems\": [\n    {\n      \"statusCode\": 200,\n      \"response\": {\n        \"type\": \"FeatureCollection\",\n        \"features\": [\n          {\n            \"type\": \"Feature\",\n            \"geometry\": {\n              \"type\": \"MultiLineString\",\n              \"coordinates\": []\n            },\n            \"properties\": {\n              \"id\": \"v70,h1207959581,i0,a0,cen-US,dAAAAAAAAAAA1,y1,s1,m1,o1,t0,wWrdB7bfOR0C9Up2\",\n              \"distanceInMeters\": 1432.9,\n              \"durationInSeconds\": 560,\n              \"durationTrafficInSeconds\": 563\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"statusCode\": 400,\n      \"response\": {\n        \"error\": {\n          \"code\": \"400 BadRequest\",\n          \"message\": \"Bad request: one or more parameters were incorrectly specified or are mutually exclusive.\"\n        }\n      }\n    }\n  ]\n}\n```",
+        "description": "**Directions Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Directions Batch API sends batches of queries to Directions API using just a single API call. The API allows caller to batch up to **100** queries.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions/batch?api-version=2023-05-31-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 0,\n            \"type\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 1,\n            \"type\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummariesOnly\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 0,\n            \"type\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 1,\n            \"type\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummariesOnly\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#uri-parameters) except query.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#directionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Route_PostDirectionsBatch",
         "x-ms-client-name": "Route_PostDirectionsBatch",
         "x-ms-examples": {
@@ -133,7 +133,7 @@
             "description": "The list of route directions queries/requests to process. The list can contain a max of 100 queries for sync version and must contain at least 1 query.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DirectionsBatchResponse"
+              "$ref": "#/definitions/DirectionsBatchRequestBody"
             }
           }
         ],
@@ -152,7 +152,7 @@
     }
   },
   "definitions": {
-    "RouteDirectionsRequest": {
+    "DirectionsRequest": {
       "description": "This object is the request body.",
       "type": "object",
       "properties": {
@@ -580,7 +580,6 @@
               }
             }
           }
-
         }
       ]
     },
@@ -642,7 +641,6 @@
               }
             }
           }
-
         }
       ]
     },
@@ -1630,8 +1628,21 @@
       "type": "string",
       "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
     },
+    "DirectionsBatchRequestBody": {
+      "description": "The list of directions queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
+      "type": "object",
+      "properties": {
+        "batchItems": {
+          "description": "The list of queries to process.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DirectionsRequest"
+          }
+        }
+      }
+    },
     "DirectionsBatchResponse": {
-      "description": "This object is returned from a successful Geocoding Batch service call.",
+      "description": "This object is returned from a successful Directions Batch service call.",
       "type": "object",
       "properties": {
         "summary": {
