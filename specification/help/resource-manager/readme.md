@@ -37,9 +37,6 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 input-file:
   - Microsoft.Help/preview/2023-01-01-preview/help.json
 ```
-
----
-
 ---
 
 # Suppression
