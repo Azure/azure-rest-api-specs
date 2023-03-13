@@ -123,7 +123,7 @@
         "tags": [
           "diagnostics"
         ],
-        "description": "This API creates a diagnostic info for your Azure issue. <br/> <br/> <b>Note:</b>&nbsp; Required parameters is the same field as additional parameters",
+        "description": "<p><b>Overview:</b></p><p>Azure Help API programmatically helps you troubleshoot Azure issues and provides access to rich and powerful self-help solutions and diagnostics. Using the API, you can perform the following operations: <table><tr><td>Solution Discovery</td><td>Lists the diagnostics for an Azure issue based on the prerequisites.</td></tr><tr><td>Diagnostics</td><td>Create and Get diagnostics for issues with Azure resources.</td></tr></table></p><p><b>Prerequisites for Diagnostics:</b> <br/> <br/> The diagnostics API is called after solutions discovery and returns diagnostic info for your Azure issue. <br/> <br/>You must have <a href=\"https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader\">reader access role </a> at the resource level to create diagnostics. <br/> <br/> 'RequiredParameterSets' from Discovery Solutions API response has to be passed via 'properties.insights.additionalParameters' as a key-value pairs to Diagnostics Api.",
         "operationId": "Diagnostics_Create",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -172,7 +172,7 @@
         "tags": [
           "diagnostics"
         ],
-        "description": "This API returns a diagnostic info for your Azure issue.",
+        "description": "<p><b>Overview:</b></p><p>Azure Help API programmatically helps you troubleshoot Azure issues and provides access to rich and powerful self-help solutions and diagnostics. Using the API, you can perform the following operations: <table><tr><td>Solution Discovery</td><td>Lists the diagnostics for an Azure issue based on the prerequisites.</td></tr><tr><td>Diagnostics</td><td>Create and Get diagnostics for issues with Azure resources.</td></tr></table></p><p><b>Prerequisites for Diagnostics:</b> <br/> <br/> The diagnostics API is called after solutions discovery and returns diagnostic info for your Azure issue. <br/> <br/>You must have <a href=\"https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader\">reader access role </a> at the resource level to get the diagnostics. <br/> <br/> 'RequiredParameterSets' from Discovery Solutions API response has to be passed via 'properties.insights.additionalParameters' as a key-value pairs to Diagnostics Api.",
         "operationId": "Diagnostics_Get",
         "parameters": [
           {
@@ -211,7 +211,7 @@
         "tags": [
           "discoverySolutions"
         ],
-        "description": "Used to discover self help solutions such as diagnostics for your Azure issue. Learn the prerequisites required to call this Api.<br/><br/>Supports solution discovery for a scoped set of Azure support issues. To get the list of ProblemClassificationIds use the ProblemClassifications Api [reference](https://learn.microsoft.com/en-us/rest/api/support/problem-classifications/list?tabs=HTTP). <br/><br/> <b>Note: </b>This API versions does not support all ProblemClassificationIds at the moment.<br/><br/>'RequiredParameterSets' have to be passed as key-value pairs via 'additionalParameters' as an input to the Diagnostics API reference.",
+        "description": "<p><b>Overview:</b></p><p>Azure Help API programmatically helps you troubleshoot Azure issues and provides access to rich and powerful self-help solutions and diagnostics. Using the API, you can perform the following operations: <table><tr><td>Solution Discovery</td><td>Lists the diagnostics for an Azure issue based on the prerequisites.</td></tr><tr><td>Diagnostics</td><td>Create and Get diagnostics for issues with Azure resources.</td></tr></table></p><p><b>Prerequisites for solution discovery:</b><br/> <br/> You can call the API to discover solutions with the following inputs: <br/> i. Required inputs: resourceUri <br/>ii. Optional input: problemClassificationId. <br/> <br/> This API enables discovery of diagnostics for a defined list of Azure support issues, and is not supported for all ProblemClassificationId(s) at the moment. For ProblemClassificationId(s) that are not supported, the API response will not return any diagnostics. You can use ProblemClassifications API to get the problem categories and ProblemClassificationId(s) <a href=\"https://docs.microsoft.com/azure/virtual-machine-scale-sets/virtual-machine-scale-sets-faq#how-do-i-turn-on-antimalware-in-my-virtual-machine-scale-set\">reference</a> <br/> <br/>. You must have <a href=\"https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#reader\">reader access role </a> at the resource level to get the solutions.<br/><br/><b>Note:</b> 'RequiredParameterSets' from Discovery Solutions API response has to be passed via 'properties.insights.additionalParameters' as an input to Diagnostics API.</p>",
         "operationId": "DiscoverySolution_List",
         "parameters": [
           {
@@ -245,7 +245,7 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List DiscoverySolutions for a KeyVault Resource": {
+          "List DiscoverySolutions for a KeyVault resource": {
             "$ref": "./examples/ListDiscoverySolutionsForKeyVaultResource.json"
           }
         }
@@ -597,14 +597,14 @@
     },
     "FilterParameter": {
       "name": "$filter",
-      "description": "Can be used to filter solutionIds by 'ProblemClassificationId'. The filter supports only 'and' and 'eq' operators. Example: $filter=(ProblemClassificationId eq 1ddda5b4-cf6c-4d4f-91ad-bc38ab0e811e and ProblemClassificationId eq 0a9673c2-7af6-4e19-90d3-4ee2461076d9).",
+      "description": "Can be used to filter solutionIds by 'ProblemClassificationId'. The filter supports only 'and' and 'eq' operators. Example: $filter=ProblemClassificationId eq '1ddda5b4-cf6c-4d4f-91ad-bc38ab0e811e' and ProblemClassificationId eq '0a9673c2-7af6-4e19-90d3-4ee2461076d9'.",
       "in": "query",
       "required": false,
       "type": "string",
       "x-ms-skip-url-encoding": true
     },
     "SkipTokenParameter": {
-      "name": "$skipToken",
+      "name": "$skiptoken",
       "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
       "in": "query",
       "required": false,
