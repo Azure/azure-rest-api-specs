@@ -40,6 +40,7 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 input-file:
   - Microsoft.Automanage/stable/2022-05-04/automanage.json
 ```
+
 ### Tag: package-2021-04-30-preview
 
 These settings apply only when `--tag=package-2021-04-30-preview` is specified on the command line.
@@ -88,7 +89,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

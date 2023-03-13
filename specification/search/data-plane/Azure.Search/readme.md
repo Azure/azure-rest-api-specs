@@ -26,6 +26,7 @@ These are the global settings for SearchServiceClient and SearchIndexClient.
 title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
+tag: package-2021-04-30-preview
 
 directive:
   - where:
@@ -168,6 +169,27 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
+```
+
+### Tag: package-2021-04-30-preview
+
+These settings apply only when `--tag=package-2021-04-30-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-04-30-preview'
+input-file:
+- preview/2021-04-30-Preview/searchservice.json
+- preview/2021-04-30-Preview/searchindex.json
+```
+
+#### Rename one of SearchError definitions
+
+SearchError is duplicated between two swaggers, rename one of them
+
+``` yaml $(tag) == 'package-2021-04-30-preview'
+directive:
+- from: preview/2021-04-30-Preview/searchservice.json
+  where: $.definitions.SearchError
+  transform: $["x-ms-client-name"] = "SearchServiceError"
 ```
 
 ### Tag: package-2021-04-searchservice-preview
