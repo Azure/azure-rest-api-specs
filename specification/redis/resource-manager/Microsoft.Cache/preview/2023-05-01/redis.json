@@ -2162,7 +2162,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentCreateUpdateParameters"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentRequestResponse"
             },
             "description": "Parameters supplied to the Create Update Access Policy Assignment operation."
           },
@@ -2177,13 +2177,13 @@
           "200": {
             "description": "The access policy assignment was successfully added.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentRequestResponse"
             }
           },
           "201": {
             "description": "The access policy assignment was successfully added.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentRequestResponse"
             }
           },
           "default": {
@@ -2256,7 +2256,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentRequestResponse"
             }
           },
           "default": {
@@ -2314,7 +2314,7 @@
           "200": {
             "description": "Response of get access policy assignments.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentRequestResponse"
             }
           },
           "default": {
@@ -3365,20 +3365,6 @@
       ],
       "type": "object"
     },
-    "RedisCacheAccessPolicyAssignmentCreateUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisCacheAccessPolicyAssignments",
-          "description": "Users to associate an access policy assignment with"
-        }
-      },
-      "required": [
-        "properties"
-      ],
-      "description": "Object ids to assign the access policy to",
-      "type": "object"
-    },
     "RedisCacheAccessPolicyAssignmentProperties": {
       "properties": {
         "provisioningState": {
@@ -3407,7 +3393,7 @@
       "description": "All properties of an access policy.",
       "type": "object"
     },
-    "RedisCacheAccessPolicyAssignmentResponse": {
+    "RedisCacheAccessPolicyAssignmentRequestResponse": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3428,7 +3414,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentResponse"
+            "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentRequestResponse"
           },
           "description": "List of access policies assignments (with properties) of a Redis cache."
         },
