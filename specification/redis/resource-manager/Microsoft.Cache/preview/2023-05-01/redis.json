@@ -3047,29 +3047,6 @@
       ],
       "description": "Parameter required for creating a linked server to redis cache."
     },
-    "RedisCacheAccessPolicy": {
-      "description": "Base properties for an access policy",
-      "type": "object",
-      "properties": {
-        "commandPermissions": {
-          "type": "string",
-          "description": "Command permissions for the access policy."
-        },
-        "keyPermissions": {
-          "type": "string",
-          "description": "Key permissions for the access policy."
-        },
-        "pubSubChannelPermissions": {
-          "type": "string",
-          "description": "Pub sub channel permissions for the access policy."
-        }
-      },
-      "required": [
-        "commandPermissions",
-        "keyPermissions",
-        "pubSubChannelPermissions"
-      ]
-    },
     "RedisCacheAccessPolicyProperties": {
       "properties": {
         "provisioningState": {
@@ -3101,12 +3078,24 @@
             "name": "AccessPolicyType",
             "modelAsString": true
           }
+        },
+        "commandPermissions": {
+          "type": "string",
+          "description": "Command permissions for the access policy."
+        },
+        "keyPermissions": {
+          "type": "string",
+          "description": "Key permissions for the access policy."
+        },
+        "pubSubChannelPermissions": {
+          "type": "string",
+          "description": "Pub sub channel permissions for the access policy."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RedisCacheAccessPolicy"
-        }
+      "required": [
+        "commandPermissions",
+        "keyPermissions",
+        "pubSubChannelPermissions"
       ],
       "description": "All properties of an access policy.",
       "type": "object"
