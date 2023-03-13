@@ -36,8 +36,8 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      $testMapXMLContent = Get-Content "$(Build.SourcesDirectory)\scripts\datacontainer-windows\Dockerfile"
-      $testMapXMLContent | % { $_.Replace("BaseImage", $(Base_Image_Windows)) } | Set-Content $(Build.SourcesDirectory)\scripts\datacontainer-windows\Dockerfile
+      $dockerfileContent = Get-Content "$(Build.SourcesDirectory)\scripts\datacontainer-windows\Dockerfile"
+      $dockerfileContent | % { $_.Replace("BaseImage", $(Base_Image_Windows)) } | Set-Content $(Build.SourcesDirectory)\scripts\datacontainer-windows\Dockerfile
 
 
 - task: Docker@2
