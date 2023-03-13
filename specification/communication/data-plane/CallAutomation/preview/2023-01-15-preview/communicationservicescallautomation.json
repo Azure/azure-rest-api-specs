@@ -1143,6 +1143,10 @@
         "azureCognitiveServicesEndpointUrl": {
           "description": "The identifier of the Cognitive Service resource assigned to this call.",
           "type": "string"
+        },
+        "customContext": {
+          "$ref": "#/definitions/CustomContext",
+          "description": "Used by customer to send custom context to targets"
         }
       }
     },
@@ -1251,6 +1255,23 @@
         },
         "audioChannelType": {
           "$ref": "#/definitions/MediaStreamingAudioChannelType"
+        }
+      }
+    },
+    "CustomContext": {
+      "type": "object",
+      "properties": {
+        "voipHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "sipHeaders": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -1435,6 +1456,10 @@
         "target": {
           "$ref": "#/definitions/CommunicationIdentifierModel",
           "description": "The target identity to redirect the call to."
+        },
+        "customContext": {
+          "$ref": "#/definitions/CustomContext",
+          "description": "Used by customer to send custom context to targets"
         }
       }
     },
@@ -1485,23 +1510,6 @@
         "operationContext": {
           "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
           "type": "string"
-        }
-      }
-    },
-    "CustomContext": {
-      "type": "object",
-      "properties": {
-        "voipHeaders": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "sipHeaders": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -2183,7 +2191,7 @@
         }
       }
     },
-    "ParticipantAdded": {
+    "AddParticipantSucceeded": {
       "description": "The participant successfully added event.",
       "type": "object",
       "properties": {
@@ -2331,15 +2339,10 @@
           "items": {
             "$ref": "#/definitions/CallParticipant"
           }
-        },
-        "sequenceNumber":{
-            "format": "int32",
-            "description": "Sequence number to indicate order of ParticipantsUpdated events",
-            "type": "integer"
         }
       }
     },
-    "ParticipantRemoved": {
+    "RemoveParticipantSucceeded": {
       "description": "The participant removed event.",
       "type": "object",
       "properties": {
