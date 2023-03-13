@@ -1192,7 +1192,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MonitoredSubscriptionListResponse"
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
             }
           },
           "default": {
@@ -1201,9 +1201,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Monitors_GetMonitoredSubscriptions": {
@@ -1247,7 +1244,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/MonitoredSubscriptionListResponse"
+              "$ref": "#/definitions/MonitoredSubscriptionProperties"
             }
           },
           "default": {
@@ -1256,9 +1253,6 @@
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Monitors_GetMonitoredSubscriptions": {
@@ -1783,7 +1777,7 @@
         }
       }
     },
-    "MonitoredSubscriptionProperties": {
+    "SubscriptionList": {
       "description": "The request to update subscriptions needed to be monitored by the Datadog monitor resource.",
       "type": "object",
       "properties": {
@@ -1806,6 +1800,19 @@
             "update"
           ]
         },
+        "MonitoredSubscriptionList": {
+          "description": "List of subscriptions and the state of the monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitoredSubscription"
+          }
+        }
+      }
+    },
+    "MonitoredSubscriptionProperties": {
+      "description": "The request to update subscriptions needed to be monitored by the Datadog monitor resource.",
+      "type": "object",
+      "properties": {
         "name": {
           "description": "Name of the monitored subscription resource.",
           "type": "string",
@@ -1821,29 +1828,8 @@
           "type": "string",
           "readOnly": true
         },
-        "subscriptionList": {
-          "description": "List of subscriptions and the state of the monitoring.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MonitoredSubscription"
-          }
-        }
-      }
-    },
-    "MonitoredSubscriptionListResponse": {
-      "description": "Response of a list operation.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Results of a list operation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MonitoredSubscriptionProperties"
-          }
-        },
-        "nextLink": {
-          "description": "Link to the next set of results, if any.",
-          "type": "string"
+        "properties": {
+          "$ref": "#/definitions/SubscriptionList"
         }
       }
     },
