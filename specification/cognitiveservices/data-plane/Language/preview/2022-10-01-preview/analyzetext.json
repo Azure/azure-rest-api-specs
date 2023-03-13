@@ -768,6 +768,25 @@
         "class"
       ]
     },
+    "DynamicClassificationDocumentResult": {
+      "type": "object",
+      "properties": {
+        "classifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClassificationResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "classifications"
+      ]
+    },
     "HealthcareTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Healthcare task.",
@@ -3139,7 +3158,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "#/definitions/ClassificationDocumentResult"
+                "$ref": "#/definitions/DynamicClassificationDocumentResult"
               }
             ]
           }

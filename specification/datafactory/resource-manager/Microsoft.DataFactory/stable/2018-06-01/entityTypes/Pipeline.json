@@ -7931,6 +7931,10 @@
           "type": "object",
           "description": "The main file used for the job, which will override the 'file' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
+        "scanFolder": {
+          "type": "object",
+          "description": "Scanning subfolders from the root folder of the main definition file, these files will be added as reference files. The folders named 'jars', 'pyFiles', 'files' or 'archives' will be scanned, and the folders name are case sensitive. Type: boolean (or Expression with resultType boolean)."
+        },
         "className": {
           "type": "object",
           "description": "The fully-qualified identifier or the main class that is in the main definition file, which will override the 'className' of the spark job definition you provide. Type: string (or Expression with resultType string)."
@@ -7979,9 +7983,33 @@
           "description": "Number of core and memory to be used for driver allocated in the specified Spark pool for the job, which will be used for overriding 'driverCores' and 'driverMemory' of the spark job definition you provide. Type: string (or Expression with resultType string)."
         },
         "numExecutors": {
-          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide.",
-          "type": "integer",
-          "format": "int32"
+          "description": "Number of executors to launch for this job, which will override the 'numExecutors' of the spark job definition you provide. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        },
+        "configurationType": {
+          "enum": [
+            "Default",
+            "Customized",
+            "Artifact"
+          ],
+          "type": "string",
+          "description": "The type of the spark config.",
+          "x-ms-enum": {
+            "name": "ConfigurationType",
+            "modelAsString": true
+          }
+        },
+        "targetSparkConfiguration": {
+          "description": "The spark configuration of the spark job.",
+          "$ref": "#/definitions/SparkConfigurationParametrizationReference"
+        },
+        "sparkConfig": {
+          "description": "Spark configuration property.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
         }
       },
       "required": [
@@ -8006,6 +8034,31 @@
         "referenceName": {
           "type": "object",
           "description": "Reference spark job name. Expression with resultType string."
+        }
+      },
+      "required": [
+        "type",
+        "referenceName"
+      ]
+    },
+    "SparkConfigurationParametrizationReference": {
+      "description": "Spark configuration reference.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Spark configuration reference type.",
+          "type": "string",
+          "enum": [
+            "SparkConfigurationReference"
+          ],
+          "x-ms-enum": {
+            "name": "SparkConfigurationReferenceType",
+            "modelAsString": true
+          }
+        },
+        "referenceName": {
+          "description": "Reference spark configuration name. Type: string (or Expression with resultType string).",
+          "type": "object"
         }
       },
       "required": [

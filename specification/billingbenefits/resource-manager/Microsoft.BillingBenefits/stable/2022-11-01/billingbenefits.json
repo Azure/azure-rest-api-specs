@@ -73,8 +73,11 @@
     },
     "/providers/Microsoft.BillingBenefits/savingsPlanOrderAliases/{savingsPlanOrderAliasName}": {
       "put": {
-        "description": "Create a savings plan.",
+        "description": "Create a savings plan. Learn more about permissions needed at https://go.microsoft.com/fwlink/?linkid=2215851",
         "operationId": "SavingsPlanOrderAlias_Create",
+        "externalDocs": {
+          "url": "https://go.microsoft.com/fwlink/?linkid=2215851/"
+        },
         "tags": [
           "Savings plan order aliases"
         ],
@@ -285,7 +288,7 @@
     "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans": {
       "get": {
         "description": "List savings plans in an order.",
-        "operationId": "SavingsPlansInOrder_List",
+        "operationId": "SavingsPlan_List",
         "tags": [
           "Savings plan"
         ],
@@ -324,7 +327,7 @@
     "/providers/Microsoft.BillingBenefits/savingsPlans": {
       "get": {
         "description": "List savings plans.",
-        "operationId": "SavingsPlans_List",
+        "operationId": "SavingsPlan_ListAll",
         "tags": [
           "Savings plan"
         ],
@@ -499,7 +502,7 @@
     "/providers/Microsoft.BillingBenefits/savingsPlanOrders/{savingsPlanOrderId}/savingsPlans/{savingsPlanId}/validate": {
       "post": {
         "description": "Validate savings plan patch.",
-        "operationId": "SavingsPlanUpdate_Validate",
+        "operationId": "SavingsPlan_ValidateUpdate",
         "tags": [
           "Savings plan"
         ],
@@ -541,7 +544,7 @@
     "/providers/Microsoft.BillingBenefits/validate": {
       "post": {
         "description": "Validate savings plan purchase.",
-        "operationId": "SavingsPlanPurchase_Validate",
+        "operationId": "ValidatePurchase",
         "tags": [
           "Savings plan"
         ],
@@ -727,7 +730,7 @@
           "$ref": "#/definitions/BillingScopeId"
         },
         "term": {
-          "$ref": "#/definitions/BenefitTerm"
+          "$ref": "#/definitions/Term"
         },
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
@@ -745,7 +748,7 @@
     },
     "BillingScopeId": {
       "type": "string",
-      "description": "Subscription that will be charged for purchasing SavingsPlan"
+      "description": "Subscription that will be charged for purchasing the benefit"
     },
     "BillingProfileId": {
       "type": "string",
@@ -766,7 +769,6 @@
       "type": "string",
       "description": "The type of the resource that is being reserved.",
       "enum": [
-        "ComputeSavingsPlan",
         "VirtualMachines",
         "SqlDatabases",
         "SuseLinux",
@@ -829,15 +831,16 @@
         "modelAsString": true
       }
     },
-    "BenefitTerm": {
+    "Term": {
       "type": "string",
-      "description": "Represent SavingsPlan term in ISO 8601 format.",
+      "description": "Represent benefit term in ISO 8601 format.",
       "enum": [
         "P1Y",
-        "P3Y"
+        "P3Y",
+        "P5Y"
       ],
       "x-ms-enum": {
-        "name": "SavingsPlanTerm",
+        "name": "Term",
         "modelAsString": true
       }
     },
@@ -882,7 +885,7 @@
     },
     "TenantId": {
       "type": "string",
-      "description": "Tenant ID where the savings plan should apply benefit."
+      "description": "Tenant ID where the benefit is applied."
     },
     "ManagementGroupId": {
       "type": "string",
@@ -899,7 +902,7 @@
     "Renew": {
       "type": "boolean",
       "default": false,
-      "description": "Setting this to true will automatically purchase a new savings plan on the expiration date time."
+      "description": "Setting this to true will automatically purchase a new benefit on the expiration date time."
     },
     "Commitment": {
       "type": "object",
@@ -1091,7 +1094,7 @@
           "$ref": "#/definitions/BillingAccountId"
         },
         "term": {
-          "$ref": "#/definitions/BenefitTerm"
+          "$ref": "#/definitions/Term"
         },
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
@@ -1131,13 +1134,14 @@
         "utilization": {
           "$ref": "#/definitions/Utilization"
         },
+        "renewSource": {
+          "$ref": "#/definitions/RenewSource"
+        },
+        "renewDestination": {
+          "$ref": "#/definitions/RenewDestination"
+        },
         "renewProperties": {
-          "type": "object",
-          "properties": {
-            "purchaseProperties": {
-              "$ref": "#/definitions/PurchaseRequest"
-            }
-          }
+          "$ref": "#/definitions/RenewProperties"
         }
       }
     },
@@ -1202,7 +1206,7 @@
           "$ref": "#/definitions/BillingAccountId"
         },
         "term": {
-          "$ref": "#/definitions/BenefitTerm"
+          "$ref": "#/definitions/Term"
         },
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
@@ -1481,7 +1485,7 @@
           "$ref": "#/definitions/BillingScopeId"
         },
         "term": {
-          "$ref": "#/definitions/BenefitTerm"
+          "$ref": "#/definitions/Term"
         },
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
@@ -1636,7 +1640,7 @@
           "$ref": "#/definitions/BillingScopeId"
         },
         "term": {
-          "$ref": "#/definitions/BenefitTerm"
+          "$ref": "#/definitions/Term"
         },
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
@@ -1723,7 +1727,7 @@
           "$ref": "#/definitions/BillingScopeId"
         },
         "term": {
-          "$ref": "#/definitions/BenefitTerm"
+          "$ref": "#/definitions/Term"
         },
         "billingPlan": {
           "$ref": "#/definitions/BillingPlan"
@@ -1764,7 +1768,7 @@
     },
     "InstanceFlexibility": {
       "type": "string",
-      "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group. Only specify for VirtualMachines reserved resource type.",
+      "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group.",
       "enum": [
         "On",
         "Off"
