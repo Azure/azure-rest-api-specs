@@ -22,10 +22,9 @@ model ClinicalCodedElement {
 }
 
 @doc("""
-A location given as a combination of city/state/country. It could specify a
-city, a state or a country.<br />In case a city is specified, either state +
-country or country (for countries where there are no states) should be added.
-In case a state is specified (without a city), country should be added.
+A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.
+In case a city is specified, either state +country/region or country/region (for countries/regions where there are no states) should be added.
+In case a state is specified (without a city), country/region should be added.
 """)
 model GeographicLocation {
   @doc("City name.")
@@ -34,6 +33,6 @@ model GeographicLocation {
   @doc("State name.")
   state?: string;
 
-  @doc("Country name.")
-  country: string;
+  @doc("Country/region name.")
+  countryOrRegion: string;
 }

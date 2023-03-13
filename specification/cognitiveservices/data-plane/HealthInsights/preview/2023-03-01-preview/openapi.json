@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure Health Insights API",
+    "title": "Azure Health Insights",
     "version": "2023-03-01-preview",
     "description": "Azure Health Insights provides an API that serves insight models, specific for Health & Life Sciences, that perform analysis and provide inferences to be used by a human.",
     "x-cadl-generated": [
@@ -151,6 +151,7 @@
             "in": "path",
             "required": true,
             "description": "A processing job identifier.",
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -280,6 +281,7 @@
             "in": "path",
             "required": true,
             "description": "A processing job identifier.",
+            "format": "uuid",
             "type": "string"
           }
         ],
@@ -985,15 +987,15 @@
           "type": "string",
           "description": "State name."
         },
-        "country": {
+        "countryOrRegion": {
           "type": "string",
-          "description": "Country name."
+          "description": "Country/region name."
         }
       },
       "description": "Details of a research facility where a clinical trial is conducted.",
       "required": [
         "name",
-        "country"
+        "countryOrRegion"
       ]
     },
     "ClinicalTrialSource": {
@@ -1284,14 +1286,14 @@
           "type": "string",
           "description": "State name."
         },
-        "country": {
+        "countryOrRegion": {
           "type": "string",
-          "description": "Country name."
+          "description": "Country/region name."
         }
       },
-      "description": "A location given as a combination of city/state/country. It could specify a\ncity, a state or a country.<br />In case a city is specified, either state +\ncountry or country (for countries where there are no states) should be added.\nIn case a state is specified (without a city), country should be added.",
+      "description": "A location given as a combination of city, state and country/region. It could specify a city, a state or a country/region.\nIn case a city is specified, either state +country/region or country/region (for countries/regions where there are no states) should be added.\nIn case a state is specified (without a city), country/region should be added.",
       "required": [
-        "country"
+        "countryOrRegion"
       ]
     },
     "Inference": {
@@ -1561,6 +1563,7 @@
         "jobId": {
           "type": "string",
           "description": "A processing job identifier.",
+          "format": "uuid",
           "readOnly": true
         },
         "createdDateTime": {
@@ -1916,6 +1919,7 @@
         "jobId": {
           "type": "string",
           "description": "A processing job identifier.",
+          "format": "uuid",
           "readOnly": true
         },
         "createdDateTime": {
