@@ -500,6 +500,92 @@
           }
         }
       }
+    },
+    "/operatorInfo/phoneNumbers/{phoneNumber}": {
+      "get": {
+        "tags": [
+          "OperatorInfo"
+        ],
+        "summary": "Endpoint for retrieving operator information for given phone number.\r\nThis includes the mnc, mcc, carrier details, and number type which can be used to determine a number’s capabilities",
+        "operationId": "GetPhoneNumberDetails",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "phoneNumber",
+            "description": "The phone number whose operator information and carrier details should be looked up",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PhoneNumberInformation"
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationError"
+            }
+          }
+        }
+      }
+    },
+    "/operatorInfo/phoneNumbers/:search": {
+      "post": {
+        "tags": [
+          "OperatorInfo"
+        ],
+        "summary": "Endpoint for retrieving operator information for a set of phone numbers.\r\nThis includes the mnc, mcc, carrier details, and number type which can be used to determine a number’s capabilities",
+        "operationId": "PostPhoneNumberDetails",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The phone numbers whose operator information and carrier details should be looked up",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PhoneNumberInformation"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "schema": {
+              "$ref": "#/definitions/CommunicationError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -869,6 +955,54 @@
         "nextLink": {
           "description": "Represents the URL link to the next page of phone number results.",
           "type": "string"
+        }
+      }
+    },
+    "CarrierInfo": {
+      "description": "Represents carrier/operator information for a phone number",
+      "type": "object",
+      "properties": {
+        "carrierName": {
+          "description": "Name of the phone carrier",
+          "type": "string"
+        },
+        "mnc": {
+          "description": "Mobile Network Code",
+          "type": "string"
+        },
+        "mcc": {
+          "description": "Mobile Country Code",
+          "type": "string"
+        }
+      }
+    },
+    "PhoneNumberInformation": {
+      "description": "Represents public info regarding a phone number and its operator information.",
+      "type": "object",
+      "properties": {
+        "phoneNumber": {
+          "description": "E.164 formatted string representation of the phone number",
+          "type": "string"
+        },
+        "phoneNumberType": {
+          "description": "Type of service associated with the phone number",
+          "enum": [
+            "geographic",
+            "mobile",
+            "paging",
+            "freephone",
+            "specialServices",
+            "testNumber",
+            "voIP"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TelephoneNumberType",
+            "modelAsString": true
+          }
+        },
+        "currentProviderInfo": {
+          "$ref": "#/definitions/CarrierInfo"
         }
       }
     }
