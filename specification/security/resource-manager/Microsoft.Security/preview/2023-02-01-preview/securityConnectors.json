@@ -356,7 +356,8 @@
             "AWS",
             "GCP",
             "Github",
-            "AzureDevOps"
+            "AzureDevOps",
+            "GitLab"
           ],
           "x-ms-enum": {
             "name": "cloudName",
@@ -393,7 +394,8 @@
             "AwsAccount",
             "GcpProject",
             "GithubScope",
-            "AzureDevOpsScope"
+            "AzureDevOpsScope",
+            "GitlabScope"
           ],
           "x-ms-enum": {
             "name": "environmentType",
@@ -637,6 +639,17 @@
       ],
       "properties": {}
     },
+    "GitlabScopeEnvironmentData": {
+      "type": "object",
+      "description": "The gitlab scope connector's environment data",
+      "x-ms-discriminator-value": "GitlabScope",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {}
+    },
     "cloudOffering": {
       "type": "object",
       "description": "The security offering details",
@@ -663,7 +676,9 @@
             "DefenderCspmAws",
             "DefenderCspmGcp",
             "DefenderForDevOpsGithub",
-            "DefenderForDevOpsAzureDevOps"
+            "DefenderForDevOpsAzureDevOps",
+            "CspmMonitorGitLab",
+            "DefenderForDevOpsGitLab"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -1294,6 +1309,28 @@
       "type": "object",
       "description": "The Defender for DevOps for Azure DevOps offering",
       "x-ms-discriminator-value": "DefenderForDevOpsAzureDevOps",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "cspmMonitorGitLab": {
+      "type": "object",
+      "description": "The CSPM monitoring for gitlab offering",
+      "x-ms-discriminator-value": "CspmMonitorGitLab",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "defenderForDevOpsGitLabOffering": {
+      "type": "object",
+      "description": "The Defender for DevOps for Gitlab offering",
+      "x-ms-discriminator-value": "DefenderForDevOpsGitLab",
       "allOf": [
         {
           "$ref": "#/definitions/cloudOffering"
