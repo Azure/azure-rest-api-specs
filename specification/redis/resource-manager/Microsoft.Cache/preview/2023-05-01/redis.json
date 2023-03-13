@@ -1988,6 +1988,7 @@
           {
             "name": "parameters",
             "in": "body",
+            "x-ms-client-flatten": true,
             "required": true,
             "schema": {
               "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentRequestResponse"
@@ -3145,33 +3146,31 @@
     "RedisCacheAccessPolicyAssignmentRequestResponse": {
       "properties": {
         "properties": {
-          "properties": {
-            "provisioningState": {
-              "type": "string",
-              "description": "Provisioning state of an access policy assignment",
-              "readOnly": true,
-              "enum": [
-                "Updating",
-                "Succeeded",
-                "Deleting",
-                "Deleted",
-                "Canceled",
-                "Failed"
-              ],
-              "x-ms-enum": {
-                "name": "AccessPolicyAssignmentProvisioningState",
-                "modelAsString": true
-              }
-            },
-            "assignments": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
-              },
-              "x-ms-identifiers": [
-                "objectId"
-              ]
+          "provisioningState": {
+            "type": "string",
+            "description": "Provisioning state of an access policy assignment",
+            "readOnly": true,
+            "enum": [
+              "Updating",
+              "Succeeded",
+              "Deleting",
+              "Deleted",
+              "Canceled",
+              "Failed"
+            ],
+            "x-ms-enum": {
+              "name": "AccessPolicyAssignmentProvisioningState",
+              "modelAsString": true
             }
+          },
+          "assignments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/RedisCacheAccessPolicyAssignment"
+            },
+            "x-ms-identifiers": [
+              "objectId"
+            ]
           }
         }
       },
