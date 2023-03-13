@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/windows/server:ltsc2022
+FROM BaseImage
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'Continue'; $verbosePreference='Continue';"]
 
 RUN mkdir usr\\data\\specrepo

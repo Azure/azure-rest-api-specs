@@ -29,13 +29,22 @@ steps:
   inputs:
     SourceFolder: $(Build.SourcesDirectory)
     contents: .git/**
-    targetFolder: $(Build.SourcesDirectory)/scripts/datacontainer-windows
+    targetFolder: $(Build.SourcesDirectory)\scripts\datacontainer-windows
+
+- task: PowerShell@2
+  displayName: 'Select Correct BaseImage for Dockerfile'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $testMapXMLContent = Get-Content "$(Build.SourcesDirectory)\scripts\datacontainer-windows\Dockerfile"
+      $testMapXMLContent | % { $_.Replace("BaseImage", $(BaseImage)) } | Set-Content $(Build.SourcesDirectory)\scripts\datacontainer-windows\Dockerfile
+
 
 - task: Docker@2
   displayName: Build and Push
   inputs:
     command: buildAndPush
-    Dockerfile: scripts/datacontainer-windows/Dockerfile
+    Dockerfile: scripts\datacontainer-windows\Dockerfile
     repository: $(CONTAINER_REGISTRY_REPOSITORY_NAME)
     tags: |
       latest
