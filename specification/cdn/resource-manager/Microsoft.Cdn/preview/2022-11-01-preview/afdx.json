@@ -82,6 +82,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/checkEndpointNameAvailability": {
+      "post": {
+        "tags": [
+          "AFDProfiles"
+        ],
+        "description": "Check the availability of an afdx endpoint name, and return the globally unique endpoint host name.",
+        "operationId": "AFDProfiles_CheckEndpointNameAvailability",
+        "x-ms-examples": {
+          "CheckEndpointNameAvailability": {
+            "$ref": "./examples/AFDProfiles_CheckEndpointNameAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "checkEndpointNameAvailabilityInput",
+            "in": "body",
+            "description": "Input to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckEndpointNameAvailabilityInput"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/profileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckEndpointNameAvailabilityOutput"
+            }
+          },
+          "default": {
+            "description": "Azure Front Door error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AfdErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/usages": {
       "post": {
         "tags": [
