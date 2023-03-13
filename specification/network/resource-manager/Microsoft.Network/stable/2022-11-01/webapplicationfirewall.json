@@ -531,6 +531,7 @@
         "rateLimitThreshold": {
           "description": "Rate Limit threshold to apply in case ruleType is RateLimitRule. Must be greater than or equal to 1",
           "type": "integer",
+          "format": "int32",
           "minimum": 1
         },
         "ruleType": {
@@ -556,6 +557,7 @@
         "groupByUserSession": {
           "description": "List of user session identifier group by clauses.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/GroupByUserSession"
           }
@@ -680,6 +682,7 @@
       }
     },
     "GroupByVariable": {
+      "type": "object",
       "description": "Define user session group by clause variables.",
       "required": [
         "variableName"
@@ -701,6 +704,7 @@
       }
     },
     "GroupByUserSession": {
+      "type": "object",
       "description": "Define user session identifier group by clauses.",
       "required": [
         "groupByVariables"
@@ -709,6 +713,7 @@
         "groupByVariables": {
           "description": "List of group by clause variables.",
           "type": "array",
+          "x-ms-identifiers": [],
           "items": {
             "$ref": "#/definitions/GroupByVariable"
           }
