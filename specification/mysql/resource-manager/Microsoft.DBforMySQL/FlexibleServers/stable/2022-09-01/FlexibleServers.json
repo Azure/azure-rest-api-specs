@@ -3,7 +3,7 @@
   "info": {
     "title": "MySQLManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules and configurations.",
-    "version": "2021-12-01-preview"
+    "version": "2022-09-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -92,7 +92,13 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -192,7 +198,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -362,7 +374,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1074,7 +1092,7 @@
           ],
           "x-ms-enum": {
             "name": "ManagedServiceIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "userAssignedIdentities": {
