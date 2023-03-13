@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2023-05-01-preview",
+    "body": {
+      "phoneNumbers": [
+        "+12061234567",
+        "+14251234567"
+      ]
+    },
+    "endpoint": "https://resourcename.communication.azure.com/"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "phoneNumbers": [
+          {
+            "phoneNumber": "+12061234567",
+            "phoneNumberType": "mobile",
+            "carrierInfo": {
+              "carrierName": "T-Mobile",
+              "mnc": "260",
+              "mcc": "310"
+            }
+          },
+          {
+            "phoneNumber": "+14251234567",
+            "phoneNumberType": "mobile",
+            "carrierInfo": {
+              "carrierName": "Verizon",
+              "mnc": "460",
+              "mcc": "310"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
