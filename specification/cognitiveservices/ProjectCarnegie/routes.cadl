@@ -6,6 +6,7 @@ using Cadl.Http;
 using Cadl.Rest;
 using Cadl.Versioning;
 using Azure.Core;
+using Azure.Core.Traits;
 
 namespace ProjectCarnegie;
 
@@ -106,13 +107,7 @@ interface TextLists{
     @doc("Get All Items By listId")
     ListTextListItems is Azure.Core.ResourceList<
     TextListItem, 
-    {
-      parameters: {
-        ...TopQueryParameter;
-        ...SkipQueryParameter;
-        ...MaxPageSizeQueryParameter;
-      };
-    }
+    ListQueryParametersTrait<StandardListQueryParameters>
   >;
 }
 
