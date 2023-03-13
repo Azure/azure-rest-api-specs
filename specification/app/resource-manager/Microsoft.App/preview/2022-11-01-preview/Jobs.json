@@ -102,7 +102,7 @@
           "Jobs"
         ],
         "summary": "Get the properties of a Container Apps Job.",
-        "operationId": "Job_Get",
+        "operationId": "Jobs_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -148,7 +148,7 @@
         ],
         "summary": "Create or Update a Container Apps Job.",
         "description": "Create or Update a Container Apps Job.",
-        "operationId": "Job_CreateOrUpdate",
+        "operationId": "Jobs_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -212,7 +212,7 @@
         ],
         "summary": "Delete a Container Apps Job.",
         "description": "Delete a Container Apps Job.",
-        "operationId": "Job_Delete",
+        "operationId": "Jobs_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -269,7 +269,7 @@
         ],
         "summary": "Update properties of a Container Apps Job",
         "description": "Patches a Container Apps Job using JSON Merge Patch",
-        "operationId": "Job_Update",
+        "operationId": "Jobs_Update",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -332,8 +332,8 @@
         "tags": [
           "Jobs"
         ],
-        "summary": "Runs a Container Apps Job",
-        "operationId": "Job_run",
+        "summary": "Start a Container Apps Job",
+        "operationId": "Jobs_Start",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -533,7 +533,7 @@
           "Jobs"
         ],
         "summary": "Get a Container Apps Job's executions",
-        "operationId": "Job_Executions",
+        "operationId": "JobsExecutions_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -646,7 +646,7 @@
       ],
       "properties": {
         "secrets": {
-          "description": "Collection of secrets used by a Container app",
+          "description": "Collection of secrets used by a Container Apps Job",
           "type": "array",
           "items": {
             "$ref": "./CommonDefinitions.json#/definitions/Secret"
@@ -731,15 +731,12 @@
         }
       ],
       "properties": {
-        "extendedLocation": {
-          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
-        },
         "identity": {
           "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
-          "description": "ContainerApp resource specific properties.",
+          "description": "Container Apps Job resource specific properties.",
           "type": "object",
           "properties": {
             "provisioningState": {
@@ -795,11 +792,23 @@
     },
     "JobPatchProperties": {
       "type": "object",
-      "description": "ContainerApp resource specific properties.",
+      "description": "Container Apps Job resource specific properties.",
       "properties": {
         "identity": {
           "description": "Managed identities needed by a container app job to interact with other Azure services to not maintain any secrets or credentials in code.",
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
         },
         "properties": {
           "type": "object",
