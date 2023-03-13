@@ -144,13 +144,6 @@
               "$ref": "#/definitions/DirectionsBatchResponse"
             }
           },
-          "408": {
-            "description": "Timeout: The request took longer to finish than the maximum amount of time defined in the api.",
-            "schema": {
-              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
-            },
-            "x-ms-error-response": true
-          },
           "default": {
             "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
           }
@@ -432,7 +425,7 @@
     "OutputFeatures": {
       "type": "array",
       "items": {
-        "$ref": "#/definitions/OutputRoutePathFeatureItem"
+        "$ref": "#/definitions/OutputFeatureItem"
       }
     },
     "OutputFeatureItem": {
@@ -475,6 +468,7 @@
       }
     },
     "OutputManeuverPointFeatureItem": {
+      "x-ms-discriminator-value": "ManeuverPoint",
       "type": "object",
       "allOf": [
         {
@@ -549,6 +543,7 @@
       ]
     },
     "OutputViaWaypointFeatureItem": {
+      "x-ms-discriminator-value": "ViaWaypoint",
       "type": "object",
       "allOf": [
         {
@@ -590,6 +585,7 @@
       ]
     },
     "OutputRoutePathFeatureItem": {
+      "x-ms-discriminator-value": "RoutePath",
       "type": "object",
       "allOf": [
         {
@@ -656,7 +652,8 @@
       "readOnly": true,
       "enum": [
         "maneuverPoint",
-        "waypoint"
+        "waypoint",
+        "viaWaypoint"
       ],
       "x-ms-enum": {
         "name": "ManeuverPointType",
