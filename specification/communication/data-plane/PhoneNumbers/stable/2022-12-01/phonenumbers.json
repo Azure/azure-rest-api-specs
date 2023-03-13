@@ -58,14 +58,14 @@
           {
             "in": "query",
             "name": "assignmentType",
-            "description": "Filter by assignmentType, e.g. User, Application.",
+            "description": "Filter by assignmentType, e.g. Person, Application.",
             "type": "string",
             "enum": [
               "person",
               "application"
             ],
             "x-ms-enum": {
-              "name": "PhoneNumberAssignmentType",
+              "name": "assignmentType",
               "modelAsString": true
             }
           },
@@ -297,21 +297,21 @@
               "tollFree"
             ],
             "x-ms-enum": {
-              "name": "PhoneNumberType",
+              "name": "phoneNumberType",
               "modelAsString": true
             }
           },
           {
             "in": "query",
             "name": "assignmentType",
-            "description": "Filter by assignmentType, e.g. Person, Application.",
+            "description": "Filter by assignmentType, e.g. User, Application.",
             "type": "string",
             "enum": [
               "person",
               "application"
             ],
             "x-ms-enum": {
-              "name": "PhoneNumberAssignmentType",
+              "name": "assignmentType",
               "modelAsString": true
             }
           },
@@ -1301,6 +1301,35 @@
           "format": "date-time",
           "description": "The date that this search result expires and phone numbers are no longer on hold. A search result expires in less than 15min, e.g. 2020-11-19T16:31:49.048Z.",
           "type": "string"
+        },
+        "errorCode": {
+          "format": "int32",
+          "description": "The error code of the search.",
+          "type": "integer"
+        },
+        "error": {
+          "description": "Mapping Error Messages to Codes",
+          "enum": [
+            "NoError",
+            "UnknownErrorCode",
+            "OutOfStock",
+            "AuthorizationDenied",
+            "MissingAddress",
+            "InvalidAddress",
+            "InvalidOfferModel",
+            "NotEnoughLicenses",
+            "NoWallet",
+            "NotEnoughCredit",
+            "NumbersPartiallyAcquired",
+            "AllNumbersNotAcquired",
+            "ReservationExpired",
+            "PurchaseFailed",
+            "BillingUnavailable",
+            "ProvisioningFailed",
+            "UnknownSearchError"
+          ],
+          "type": "string",
+          "readOnly": true
         }
       }
     },
