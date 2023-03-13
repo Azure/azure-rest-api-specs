@@ -1273,6 +1273,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateIdleShutdownSetting": {
+      "post": {
+        "tags": [
+          "MachineLearningComputes"
+        ],
+        "operationId": "Compute_UpdateIdleShutdownSetting",
+        "description": "Updates the idle shutdown setting of a compute instance.",
+        "x-ms-examples": {
+          "Update idle shutdown setting of ComputeInstance": {
+            "$ref": "./examples/Compute/updateIdleShutdownSetting.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "description": "The object for updating idle shutdown setting of specified ComputeInstance.",
+            "schema": {
+              "$ref": "#/definitions/IdleShutdownSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections": {
       "get": {
         "tags": [
@@ -4976,6 +5027,16 @@
       "x-ms-enum": {
         "name": "ComputePowerAction",
         "modelAsString": true
+      }
+    },
+    "IdleShutdownSetting": {
+      "type": "object",
+      "description": "Stops compute instance after user defined period of inactivity.",
+      "properties": {
+        "idleTimeBeforeShutdown": {
+          "type": "string",
+          "description": "Time is defined in ISO8601 format. Minimum is 15 min, maximum is 3 days."
+        }
       }
     },
     "ComputeInstanceDataMount": {
