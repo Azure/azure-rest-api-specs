@@ -16,18 +16,33 @@ namespace Microsoft.AzureSphere;
 @doc("An device group resource belonging to a product resource.")
 @parentResource(Product)
 model DeviceGroup is ProxyResource<DeviceGroupProperties> {
-  @doc("Name of device group. Use '.default' to claim devices to the catalog or read devices from the catalog instead of a specific device group.")
-  @pattern("^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]|\\.default$")
+  @doc("Name of device group.")
+  @pattern("^[A-Za-z0-9]{1,2}$|^[A-Za-z0-9][A-Za-z0-9\\s]{1,48}[A-Za-z0-9]$|^\\.default$|^\\.unassigned$")
   @key("deviceGroupName")
   @path
   @segment("deviceGroups")
   name: string;
 }
 
+interface ProxyResourceOperationsDeviceGroups<
+    TResource extends ArmResource,
+    TListParameters extends object = {}>{
+        @doc("List DeviceGroup resources by Product. '.default' and '.unassigned' are system defined values and cannot be used for product name.")
+        list is ArmResourceListByParent<TResource, TListParameters & BaseParameters<TResource>>;
+        @doc("Get a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+        get is ArmResourceRead<DeviceGroup>;
+        @doc("Create a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+        createOrUpdate is ArmResourceCreateOrUpdateAsync<DeviceGroup>;
+        @doc("Delete a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+        delete is ArmResourceDeleteAsync<DeviceGroup>;
+        @doc("Update a DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+        update is ArmResourcePatchAsync<DeviceGroup, DeviceGroupProperties>;
+    }
+
 @armResourceOperations
-interface DeviceGroups extends ProxyResourceOperationsReadListCreateDelete<DeviceGroup, ListQueryParameters> {
+interface DeviceGroups extends ProxyResourceOperationsDeviceGroups<DeviceGroup, ListQueryParameters> {
   @autoRoute
-  @doc("Counts devices in device group.")
+  @doc("Counts devices in device group. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
   @armResourceAction(DeviceGroup)
   @post
   op countDevices(
@@ -36,12 +51,12 @@ interface DeviceGroups extends ProxyResourceOperationsReadListCreateDelete<Devic
 
   @autoRoute
   @armResourceAction(DeviceGroup)
-  @doc("Bulk claims the devices.")
+  @doc("Bulk claims the devices. Use '.unassigned' or '.default' for the device group and product names when bulk claiming devices to a catalog only.")
   @post
   op claimDevices(
     ...ResourceInstanceParameters<DeviceGroup>, 
     @doc("Bulk claim devices request body.")
-    @body request: ClaimDevicesRequest
+    @body claimDevicesRequest: ClaimDevicesRequest
   ): ArmAcceptedResponse;
 }
 

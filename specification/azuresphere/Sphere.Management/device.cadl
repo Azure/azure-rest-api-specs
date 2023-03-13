@@ -18,7 +18,7 @@ namespace Microsoft.AzureSphere;
 @parentResource(DeviceGroup)
 model Device is ProxyResource<DeviceProperties> {
   @doc("Device name")
-  @pattern("^[a-zA-Z0-9-]{3,128}$")
+  @pattern("^[a-zA-Z0-9-]{128}$")
   @key("deviceName")
   @path
   @segment("devices")
@@ -27,12 +27,16 @@ model Device is ProxyResource<DeviceProperties> {
 
 interface ProxyResourceOperationsDevice<
     TResource extends ArmResource,
-    TListParameters extends object = {}>
-    extends Azure.ResourceManager.ResourceRead<TResource>,
-    ResourceListByParent<TResource, TListParameters & BaseParameters<TResource>>,
-    ResourceCreate<TResource>,
-    Azure.ResourceManager.ResourceDelete<TResource>{
-        update is ArmResourcePatchAsync<Device, DevicePatchProperties>
+    TListParameters extends object = {}>{
+        @doc("Get a Device. Use '.unassigned' or '.default' for the device group and product names when a device does not belong to a device group and product.")
+        get is ArmResourceRead<Device>;
+        @doc("Create a Device. Use '.unassigned' or '.default' for the device group and product names to claim a device to the catalog only.")
+        createOrUpdate is ArmResourceCreateOrUpdateAsync<Device>;
+        @doc("List Device resources by DeviceGroup. '.default' and '.unassigned' are system defined values and cannot be used for product or device group name.")
+        list is ArmResourceListByParent<TResource, TListParameters & BaseParameters<TResource>>;
+        delete is ArmResourceDeleteAsync<Device>;
+        @doc("Update a Device. Use '.unassigned' or '.default' for the device group and product names to move a device to the catalog level.")
+        update is CustomArmResourcePatchAsync<Device, DevicePatchProperties>;
     }
 
 @armResourceOperations
@@ -40,11 +44,11 @@ interface Devices extends ProxyResourceOperationsDevice<Device>{
   @autoRoute
   @armResourceAction(Device)
   @post
-  @doc("Generates the capability image for the device.")
+  @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
   op generateCapabilityImage(
     ...ResourceInstanceParameters<Device>, 
     @doc("Generate capability image request body.")
-    @body request: GenerateCapabilityImageRequest
+    @body generateDeviceCapabilityRequest: GenerateCapabilityImageRequest
   ): ArmResponse<SignedCapabilityImageResponse> | ErrorResponse;
 }
 
