@@ -40,6 +40,22 @@ input-file:
 
 ---
 
+---
+
+# Suppression
+
+```yaml
+directive:
+  - suppress: AllResourcesMustHaveDelete
+    reason: As a proxy only resource provider, we are creating virtual diagnostic solutions on existing resources instead of actually creating an resource. Thus, we do not support delete operation for our resource type.
+    from: help.json
+  - suppress: TopLevelResourcesListBySubscription
+    reason: We do not support top level resource; all resource types are virtual proxy only resource types. For instance, an example request path for diagnostics could be subscriptions/mySubscription/resourcegroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read/providers/Microsoft.Help/diagnostics/VMNotWorkingInsight.
+    from: help.json
+```
+
+---
+
 # Code Generation
 
 ## Swagger to SDK
