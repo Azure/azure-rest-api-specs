@@ -37,7 +37,7 @@ steps:
     targetType: 'inline'
     script: |
       $dockerfileContent = Get-Content "$(Build.SourcesDirectory)\scripts\datacontainer-windows\Dockerfile"
-      $dockerfileContent | % { $_.Replace("BaseImage", $(Base_Image_Windows)) } | Set-Content $(Build.SourcesDirectory)\scripts\datacontainer-windows\Dockerfile
+      $dockerfileContent | % { $_.Replace("BaseImage", $(Base_Image_Windows)) } | Set-Content "$(Build.SourcesDirectory)\scripts\datacontainer-windows\Dockerfile"
 
 
 - task: Docker@2
