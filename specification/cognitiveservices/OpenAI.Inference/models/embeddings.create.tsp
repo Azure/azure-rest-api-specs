@@ -1,7 +1,8 @@
-import "@cadl-lang/rest";
+import "@typespec/rest";
+import "@typespec/http";
 
-using Cadl.Rest;
-using Cadl.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 
 namespace Azure.OpenAI.Embeddings;
 
