@@ -26,7 +26,7 @@ These are the global settings for the WebPubSub API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-08-01-preview
+tag: package-2023-02-01
 ```
 
 ### Suppression
@@ -114,6 +114,15 @@ These settings apply only when `--tag=package-2022-08-01-preview` is specified o
 ```yaml $(tag) == 'package-2022-08-01-preview'
 input-file:
 - Microsoft.SignalRService/preview/2022-08-01-preview/webpubsub.json
+```
+
+### Tag: package-2023-02-01
+
+These settings apply only when `--tag=package-2023-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-02-01'
+input-file:
+- Microsoft.SignalRService/stable/2023-02-01/webpubsub.json
 ```
 
 ---
