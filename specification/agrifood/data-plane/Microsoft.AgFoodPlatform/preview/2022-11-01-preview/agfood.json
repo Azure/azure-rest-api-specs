@@ -13173,6 +13173,20 @@
           },
           {
             "in": "query",
+            "name": "providerClientId",
+            "description": "Provider client id for authenticating to provider to pull satellite data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "providerClientSecret",
+            "description": "Provider client secret for authenticating to provider to pull satellite data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
             "name": "api-version",
             "description": "The requested API version",
             "required": true,
@@ -18456,10 +18470,11 @@
           "type": "string"
         },
         "satelliteProvider": {
-          "description": "Provider of satellite data. Available Value: Microsoft.",
+          "description": "Provider of satellite data. Available Value: Microsoft, SentinelHub.",
           "minLength": 1,
           "enum": [
-            "Microsoft"
+            "Microsoft",
+            "SentinelHub"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -19285,7 +19300,8 @@
     "DataProvider": {
       "description": "Provider of satellite data.",
       "enum": [
-        "Microsoft"
+        "Microsoft",
+        "SentinelHub"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -22148,6 +22164,8 @@
         "boundaryId",
         "endDateTime",
         "partyId",
+        "providerClientId",
+        "providerClientSecret",
         "source",
         "startDateTime"
       ],
@@ -22483,6 +22501,8 @@
       "description": "Search stac Features parameters.",
       "required": [
         "endDateTime",
+        "providerClientId",
+        "providerClientSecret",
         "startDateTime"
       ],
       "type": "object",
@@ -22514,6 +22534,16 @@
           "items": {
             "type": "string"
           }
+        },
+        "providerClientId": {
+          "description": "Provider client id for authenticating to provider to pull satellite data.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "providerClientSecret": {
+          "description": "Provider client secret for authenticating to provider to pull satellite data.",
+          "minLength": 1,
+          "type": "string"
         }
       }
     },
@@ -23440,10 +23470,11 @@
           "type": "string"
         },
         "satelliteProvider": {
-          "description": "Provider of satellite data. Available Value: Microsoft.",
+          "description": "Provider of satellite data. Available Value: Microsoft, SentinelHub.",
           "minLength": 1,
           "enum": [
-            "Microsoft"
+            "Microsoft",
+            "SentinelHub"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -23629,9 +23660,10 @@
           "type": "string"
         },
         "satelliteProvider": {
-          "description": "Provider of satellite data. Available Value: Microsoft.",
+          "description": "Provider of satellite data. Available Value: Microsoft, SentinelHub.",
           "minLength": 1,
           "enum": [
+            "Microsoft",
             "SentinelHub"
           ],
           "type": "string",
