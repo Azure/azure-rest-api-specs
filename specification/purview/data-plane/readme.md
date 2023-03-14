@@ -26,7 +26,7 @@ These are the global settings for the Azure Purview Catalog API.
 
 ```yaml
 openapi-type: data-plane
-tag: package-preview-2022-03
+tag: package-preview-2022-08
 ```
 
 ### Tag: package-2022-11-01-preview
@@ -36,6 +36,24 @@ These settings apply only when `--tag=package-2022-11-01-preview` is specified o
 ```yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
   - Azure.Analytics.Purview.DevopsPolicies/preview/2022-11-01-preview/purviewDevopsPolicy.json
+```
+
+### Tag: package-preview-2022-08
+
+These settings apply only when `--tag=package-preview-2022-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2022-08'
+input-file:
+  - Azure.Analytics.Purview.Catalog/preview/2022-08-01-preview/purviewcatalog.json
+```
+
+### Tag: package-2022-12-01-preview
+
+These settings apply only when `--tag=package-2022-12-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-12-01-preview'
+input-file:
+  - Azure.Analytics.Purview.SelfServicePolicies/preview/2022-12-01-preview/purviewSelfServicePolicy.json
 ```
 
 ### Tag: package-preview-2022-03
@@ -108,6 +126,22 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+These are the global settings for the Azure Purview Workflow API.
+
+``` yaml
+openapi-type: data-plane
+tag: package-2022-05-01-preview
+```
+
+### Tag: package-2022-05-01-preview
+
+These settings apply only when `--tag=package-2022-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05-01-preview'
+input-file:
+- Azure.Analytics.Purview.Workflow/preview/2022-05-01-preview/purviewWorkflow.json
+```
+
 These are the global settings for the Purview API.
 
 ```yaml
@@ -144,17 +178,17 @@ input-file:
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2022-11-01-preview
-title: PurviewPDSClient
+tag: package-2023-02-15-preview
+title: PurviewShareClient
 ```
 
-### Tag: package-2022-11-01-preview
+### Tag: package-2023-02-15-preview
 
-These settings apply only when `--tag=package-2022-11-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2023-02-15-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-11-01-preview'
+```yaml $(tag) == 'package-2023-02-15-preview'
 input-file:
-- Azure.Analytics.Purview.PDS/preview/2022-11-01-preview/pds.json
+  - Azure.Analytics.Purview.Share/preview/2023-02-15-preview/share.json
 ```
 
 ---
@@ -224,6 +258,51 @@ directive:
 where:
   - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/xxx.get
 reason: It doesn't support file annotation in example file.
+```
+``` yaml
+directive:
+  - suppress: R3006
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: Currently systemData is not allowed.
+```
+
+``` yaml
+directive:
+  - suppress: R2020
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: Workflow definition is not a resource.
+```
+
+``` yaml
+directive:
+  - suppress: R3023
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: No operations endpoint as not ARM resource provider.
+```
+
+
+``` yaml
+directive:
+  - suppress: R2062
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: Workflow is not ARM resource.
+```
+
+``` yaml
+directive:
+  - suppress: R4011
+where:
+  - $.definitions.WorkflowDefinition.properties
+from: purviewWorkflow.json
+reason: The delete workflow definition operation have the required responses.
 ```
 
 # Code Generation

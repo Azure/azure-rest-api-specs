@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Security Center",
+    "title": "Microsoft Defender for Cloud",
     "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "version": "2022-01-01-preview"
   },
@@ -51,7 +51,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/AssessmentName"
@@ -93,7 +93,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/AssessmentName"
@@ -133,7 +133,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/AssessmentName"
@@ -182,7 +182,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+            "$ref": "#/parameters/Scope"
           },
           {
             "$ref": "#/parameters/AssessmentName"
@@ -355,6 +355,14 @@
         "$ref": "#/definitions/GovernanceAssignment"
       },
       "description": "Governance assignment over a subscription scope",
+      "x-ms-parameter-location": "method"
+    },
+    "Scope": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the Governance assignments. Valid scopes are: subscription (format: 'subscriptions/{subscriptionId}'), or security connector (format: 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName})'",
       "x-ms-parameter-location": "method"
     }
   }
