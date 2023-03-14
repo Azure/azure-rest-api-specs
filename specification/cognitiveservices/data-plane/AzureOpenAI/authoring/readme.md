@@ -70,7 +70,7 @@ directive:
 These settings apply only when `--tag=release_2023_03_15_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2023_03_15_preview'
-input-file: stable/2023-03-15-preview/azureopenai.json
+input-file: preview/2023-03-15-preview/azureopenai.json
 ```
 
 AutoRest-Linter Suppressions
