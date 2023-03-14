@@ -92,7 +92,13 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -151,7 +157,13 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -192,7 +204,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
@@ -362,7 +380,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -414,7 +438,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -457,7 +487,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -500,7 +536,13 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1074,7 +1116,7 @@
           ],
           "x-ms-enum": {
             "name": "ManagedServiceIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "userAssignedIdentities": {
@@ -1128,7 +1170,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     }
   }
 }

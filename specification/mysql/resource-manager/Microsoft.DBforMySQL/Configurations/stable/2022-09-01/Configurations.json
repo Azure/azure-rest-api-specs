@@ -80,7 +80,13 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -178,7 +184,13 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -441,7 +453,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     },
     "ConfigurationNameParameter": {
       "name": "configurationName",
@@ -449,7 +462,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the server configuration.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     },
     "ConfigurationTagsParameter": {
       "name": "tags",
@@ -457,7 +471,8 @@
       "required": false,
       "type": "string",
       "description": "The tags of the server configuration.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     },
     "ConfigurationKeywordParameter": {
       "name": "keyword",
@@ -465,7 +480,8 @@
       "required": false,
       "type": "string",
       "description": "The keyword of the server configuration.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     },
     "ConfigurationPageParameter": {
       "name": "page",
@@ -474,7 +490,8 @@
       "type": "integer",
       "format": "int32",
       "description": "The page of the server configuration.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     },
     "ConfigurationPageSizeParameter": {
       "name": "pageSize",
@@ -483,7 +500,8 @@
       "type": "integer",
       "format": "int32",
       "description": "The pageSize of the server configuration.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     }
   }
 }
