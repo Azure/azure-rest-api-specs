@@ -57,7 +57,6 @@
       "type": "string",
       "in": "query",
       "required": true,
-      "default": "2023-05-31-preview",
       "x-ms-parameter-location": "client"
     },
     "Accept-Language": {
@@ -105,14 +104,24 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
           }
         }
       }
     },
-    "/route/directions/batch": {
+    "/route/directions:batch": {
       "post": {
-        "description": "**Directions Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Directions Batch API sends batches of queries to Directions API using just a single API call. The API allows caller to batch up to **100** queries.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions/batch?api-version=2023-05-31-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 0,\n            \"type\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 1,\n            \"type\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummariesOnly\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 0,\n            \"type\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 1,\n            \"type\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummariesOnly\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#uri-parameters) except query.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#directionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
+        "description": "**Directions Batch API**\n\n\n**Applies to**: see pricing [tiers](https://aka.ms/AzureMapsPricingTier).\n\n\n\nThe Directions Batch API sends batches of queries to Directions API using just a single API call. The API allows caller to batch up to **100** queries.\n>[!Important]\n>By using this feature, you agree to the preview legal terms. See the [Preview Supplemental Terms](https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/) for additional details.\n\n### Submit Synchronous Batch Request\nThe Synchronous API is recommended for lightweight batch requests. When the service receives a request, it will respond as soon as the batch items are calculated and there will be no possibility to retrieve the results later. The Synchronous API will return a timeout error (a 408 response) if the request takes longer than 60 seconds. The number of batch items is limited to **100** for this API.\n```\nPOST https://atlas.microsoft.com/route/directions:batch?api-version=2023-05-31-preview\n```\n### POST Body for Batch Request\nTo send the _directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 2 _directions_ queries:\n\n\n```\n{\n  \"batchItems\": [\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 0,\n            \"type\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 1,\n            \"type\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"shortest\",\n      \"routeOutputOptions\": [\n        \"routeSummariesOnly\"\n      ],\n      \"maxRouteCount\": 3,\n      \"travelMode\": \"driving\"\n    },\n    {\n      \"type\": \"FeatureCollection\",\n      \"features\": [\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.3368,\n              47.614988\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 0,\n            \"type\": \"waypoint\"\n          }\n        },\n        {\n          \"type\": \"Feature\",\n          \"geometry\": {\n            \"coordinates\": [\n              -122.316067,\n              47.606356\n            ],\n            \"type\": \"Point\"\n          },\n          \"properties\": {\n            \"index\": 1,\n            \"type\": \"waypoint\"\n          }\n        }\n      ],\n      \"optimizeRoute\": \"fastestWithoutTraffic\",\n      \"routeOutputOptions\": [\n        \"routeSummariesOnly\"\n      ],\n      \"maxRouteCount\": 2,\n      \"travelMode\": \"driving\"\n    }\n  ]\n}\n ```\n\nA _directions_ batchItem object can accept any of the supported _directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#uri-parameters) except query.\n\n\nThe batch should contain at least **1** query.\n\n\n### Batch Response Model\nThe batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests` i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. The `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item is of one of the following types:\n\n  - [`DirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/directions#directionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\n",
         "operationId": "Route_PostDirectionsBatch",
         "x-ms-client-name": "Route_PostDirectionsBatch",
         "x-ms-examples": {
@@ -145,7 +154,17 @@
             }
           },
           "default": {
-            "$ref": "../../../Common/preview/1.0/common.json#/responses/default"
+            "description": "An unexpected error occurred.",
+            "schema": {
+              "$ref": "../../../Common/preview/1.0/common.json#/definitions/MapsErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code of the error that occurred."
+              }
+            },
+            "x-ms-error-response": true
           }
         }
       }
@@ -360,23 +379,24 @@
       "description": "Travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada).",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "Country name",
+        "countryRegion": {
+          "description": "Country region name",
           "type": "string",
           "readOnly": true
         },
-        "subregions": {
-          "description": "SubRegions array",
+        "adminDistricts": {
+          "description": "adminDistrict array",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/SubRegion"
+            "$ref": "#/definitions/AdminDistrict"
           }
         }
       }
     },
     "FeatureCollectionType": {
       "type": "string",
+      "description": "FeatureCollection",
       "enum": [
         "FeatureCollection"
       ],
@@ -406,7 +426,7 @@
         ]
       }
     },
-    "bbox": {
+    "Bbox": {
       "description": "A rectangular area on the earth defined as a bounding box object. The sides of the rectangles are defined by latitude and longitude values. For more information, see Location and Area Types. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: [lon1, lat1, lon2, lat2]",
       "type": "array",
       "items": {
@@ -418,20 +438,24 @@
     },
     "InputFeatures": {
       "type": "array",
+      "description": "Features",
       "items": {
         "$ref": "#/definitions/InputWaypointFeatureItem"
       }
     },
     "OutputFeatures": {
       "type": "array",
+      "description": "Features",
       "items": {
         "$ref": "#/definitions/OutputFeatureItem"
       }
     },
     "OutputFeatureItem": {
       "type": "object",
+      "description": "Feature Item",
       "properties": {
         "kind": {
+          "description": "kind",
           "type": "string"
         },
         "type": {
@@ -445,6 +469,7 @@
     },
     "InputWaypointFeatureItem": {
       "type": "object",
+      "description": "Waypoint Feature Item",
       "properties": {
         "type": {
           "$ref": "#/definitions/FeatureType"
@@ -454,6 +479,7 @@
         },
         "properties": {
           "type": "object",
+          "description": "Waypoint properties",
           "properties": {
             "index": {
               "description": "It is used to identify and order the sequence of waypoints in the route, allowing for accurate navigation along the designated path.",
@@ -461,7 +487,7 @@
               "type": "integer"
             },
             "type": {
-              "$ref": "#/definitions/WayPointType"
+              "$ref": "#/definitions/InputWayPointType"
             }
           }
         }
@@ -470,12 +496,14 @@
     "OutputManeuverPointFeatureItem": {
       "x-ms-discriminator-value": "ManeuverPoint",
       "type": "object",
+      "description": "ManeuverPoint Feature Item",
       "allOf": [
         {
           "$ref": "#/definitions/OutputFeatureItem"
         },
         {
           "type": "object",
+          "description": "ManeuverPoint properties",
           "properties": {
             "geometry": {
               "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
@@ -483,7 +511,7 @@
             "properties": {
               "type": "object",
               "properties": {
-                "type": {
+                "kind": {
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/ManeuverPointType"
@@ -551,6 +579,7 @@
         },
         {
           "type": "object",
+          "description": "ViaWaypoint properties",
           "properties": {
             "type": {
               "$ref": "#/definitions/FeatureType"
@@ -561,7 +590,7 @@
             "properties": {
               "type": "object",
               "properties": {
-                "type": {
+                "kind": {
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/ViaWayPointType"
@@ -592,6 +621,7 @@
         },
         {
           "type": "object",
+          "description": "RoutePath properties",
           "properties": {
             "type": {
               "$ref": "#/definitions/FeatureType"
@@ -601,7 +631,7 @@
               "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiLineString"
             },
             "bbox": {
-              "$ref": "#/definitions/bbox"
+              "$ref": "#/definitions/Bbox"
             },
             "properties": {
               "type": "object",
@@ -650,20 +680,20 @@
       "type": "string",
       "readOnly": true,
       "enum": [
-        "maneuverPoint",
-        "waypoint",
-        "viaWaypoint"
+        "ManeuverPoint",
+        "Waypoint",
+        "ViaWaypoint"
       ],
       "x-ms-enum": {
         "name": "ManeuverPointType",
         "modelAsString": true,
         "values": [
           {
-            "value": "maneuverPoint",
+            "value": "ManeuverPoint",
             "description": "A maneuverPoint is a specific point on a route or trip where a change in direction or mode of transportation is required or recommended."
           },
           {
-            "value": "waypoint",
+            "value": "Waypoint",
             "description": "A waypoint is a specific location or point along a route or trip that serves as a reference or stopping point."
           }
         ]
@@ -673,20 +703,20 @@
       "description": "point type",
       "type": "string",
       "enum": [
-        "viaWaypoint"
+        "ViaWaypoint"
       ],
       "x-ms-enum": {
         "name": "ViaWayPointType",
         "modelAsString": true,
         "values": [
           {
-            "value": "viaWaypoint",
+            "value": "ViaWaypoint",
             "description": "A viaWaypoint is specific waypoint that must be passed through or visited along a route or trip."
           }
         ]
       }
     },
-    "WayPointType": {
+    "InputWayPointType": {
       "description": "point type",
       "type": "string",
       "enum": [
@@ -708,12 +738,12 @@
         ]
       }
     },
-    "SubRegion": {
-      "description": "sub region",
+    "AdminDistrict": {
+      "description": "The country subdivision portion of an address.",
       "type": "object",
       "properties": {
-        "name": {
-          "description": "sub region name",
+        "longName": {
+          "description": "The long name of an address, such as ",
           "type": "string",
           "readOnly": true
         },
