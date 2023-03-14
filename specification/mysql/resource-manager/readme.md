@@ -174,6 +174,8 @@ input-file:
 - Microsoft.DBforMySQL/LogFiles/stable/2022-09-01/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/stable/2022-09-01/ServiceOperations.json
 - Microsoft.DBforMySQL/AAD/stable/2022-09-01/AzureADAdministrator.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2022-09-01/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/stable/2022-09-01/PrivateLinkResources.json
 ```
 
 ## Suppression
