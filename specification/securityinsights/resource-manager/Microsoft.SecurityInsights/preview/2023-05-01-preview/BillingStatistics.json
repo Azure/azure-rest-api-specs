@@ -73,6 +73,9 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -196,7 +199,8 @@
       "properties": {
         "activeSystemIdCount": {
           "description": "The latest count of active SAP system IDs under the Sentinel workspace",
-          "type": "integer"
+          "type": "integer",
+          "format": "int64"
         }
       },
       "required": [
