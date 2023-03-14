@@ -565,57 +565,6 @@
         "tasks"
       ]
     },
-    "CustomTaskParameters": {
-      "type": "object",
-      "description": "Parameters object for a text analysis task using custom models.",
-      "properties": {
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/TaskParameters"
-        }
-      ],
-      "required": [
-        "projectName",
-        "deploymentName"
-      ]
-    },
-    "CustomResult": {
-      "type": "object",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "common.json#/definitions/RequestStatistics"
-        },
-        "projectName": {
-          "type": "string",
-          "description": "This field indicates the project name for the model."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "This field indicates the deployment name for the model."
-        }
-      },
-      "required": [
-        "errors",
-        "projectName",
-        "deploymentName"
-      ]
-    },
     "CustomEntitiesTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Custom Entities task.",
@@ -626,7 +575,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -665,7 +614,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
@@ -677,7 +626,7 @@
       "description": "Supported parameters for a Custom Single Classification task.",
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -716,7 +665,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
@@ -746,7 +695,7 @@
       "description": "Supported parameters for a Custom Multi Classification task.",
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -857,7 +806,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -920,7 +869,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [
@@ -3710,24 +3659,6 @@
         }
       }
     },
-    "DocumentError": {
-      "type": "object",
-      "required": [
-        "id",
-        "error"
-      ],
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Document Id."
-        },
-        "error": {
-          "type": "object",
-          "description": "Document Error.",
-          "$ref": "common.json#/definitions/Error"
-        }
-      }
-    },
     "DocumentWarning": {
       "type": "object",
       "required": [
@@ -3905,7 +3836,7 @@
           "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
         },
         {
-          "$ref": "#/definitions/CustomTaskParameters"
+          "$ref": "common.json#/definitions/CustomTaskParameters"
         }
       ]
     },
@@ -3996,7 +3927,7 @@
           "$ref": "#/definitions/AbstractiveSummarizationResultBase"
         },
         {
-          "$ref": "#/definitions/CustomResult"
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ],
       "required": [

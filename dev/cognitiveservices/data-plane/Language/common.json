@@ -832,6 +832,75 @@
           "description": "The length of the context. Use of different 'stringIndexType' values can affect the length returned."
         }
       }
+    },
+    "CustomTaskParameters": {
+      "type": "object",
+      "description": "Parameters object for a text analysis task using custom models.",
+      "properties": {
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TaskParameters"
+        }
+      ],
+      "required": [
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "CustomResult": {
+      "type": "object",
+      "properties": {
+        "errors": {
+          "type": "array",
+          "description": "Errors by document id.",
+          "items": {
+            "$ref": "#/definitions/DocumentError"
+          }
+        },
+        "statistics": {
+          "$ref": "common.json#/definitions/RequestStatistics"
+        },
+        "projectName": {
+          "type": "string",
+          "description": "This field indicates the project name for the model."
+        },
+        "deploymentName": {
+          "type": "string",
+          "description": "This field indicates the deployment name for the model."
+        }
+      },
+      "required": [
+        "errors",
+        "projectName",
+        "deploymentName"
+      ]
+    },
+    "DocumentError": {
+      "type": "object",
+      "required": [
+        "id",
+        "error"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Document Id."
+        },
+        "error": {
+          "type": "object",
+          "description": "Document Error.",
+          "$ref": "#/definitions/Error"
+        }
+      }
     }
   },
   "parameters": {
