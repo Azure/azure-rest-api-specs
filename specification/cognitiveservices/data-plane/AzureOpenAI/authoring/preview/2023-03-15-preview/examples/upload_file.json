@@ -2,22 +2,21 @@
   "parameters": {
     "endpoint": "https://aoairesource.openai.azure.com",
     "api-key": "{api key}",
-    "api-version": "2022-12-01",
-    "file-id": "file-181a1cbdcdcf4677ada87f63a0928099"
+    "api-version": "2023-03-15-preview",
+    "purpose": "fine-tune",
+    "content-Type": "multipart/form-data",
+    "file": "raw file content"
   },
   "responses": {
-    "200": {
-      "headers": {},
+    "201": {
+      "headers": {
+        "location": "https://aoairesource.openai.azure.com/openai/files/file-181a1cbdcdcf4677ada87f63a0928099"
+      },
       "body": {
-        "statistics": {
-          "tokens": 42,
-          "examples": 23
-        },
-        "bytes": 140,
         "purpose": "fine-tune",
         "filename": "puppy.jsonl",
         "id": "file-181a1cbdcdcf4677ada87f63a0928099",
-        "status": "succeeded",
+        "status": "notRunning",
         "created_at": 1646126127,
         "updated_at": 1646127311,
         "object": "file"
