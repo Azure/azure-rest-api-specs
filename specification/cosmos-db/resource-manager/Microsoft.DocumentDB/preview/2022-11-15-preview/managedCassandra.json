@@ -1861,9 +1861,6 @@
               "type": "boolean",
               "description": "If the data center has Availability Zone support, apply it to the Virtual Machine ScaleSet that host the cassandra data center virtual machines."
             },
-            "authenticationMethodLdapProperties": {
-              "$ref": "#/definitions/AuthenticationMethodLdapProperties"
-            },
             "deallocated": {
               "type": "boolean",
               "description": "Whether the data center has been deallocated."
@@ -2087,16 +2084,16 @@
         "id": {
           "type": "string"
         },
-        "clusterName": {
+        "cluster_name": {
           "type": "string"
         },
-        "columnFamilies": {
+        "column_families": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "keyspaceName": {
+        "keyspace_name": {
           "type": "string"
         },
         "repairState": {
@@ -2106,21 +2103,21 @@
           "type": "number",
           "format": "double"
         },
-        "incrementalRepair": {
+        "incremental_repair": {
           "type": "boolean"
         },
-        "totalSegments": {
+        "total_segments": {
           "type": "integer",
           "format": "int32"
         },
-        "repairParallelism": {
+        "repair_parallelism": {
           "type": "string"
         },
-        "segmentsRepaired": {
+        "segments_repaired": {
           "type": "integer",
           "format": "int32"
         },
-        "lastEvent": {
+        "last_event": {
           "type": "string"
         },
         "duration": {
@@ -2138,17 +2135,38 @@
             "type": "string"
           }
         },
-        "blacklistedTables": {
+        "blacklisted_tables": {
           "type": "array",
           "items": {
             "type": "string"
           }
         },
-        "repairThreadCount": {
+        "repair_thread_count": {
           "type": "integer",
           "format": "int32"
         },
-        "repairUnitId": {
+        "repair_unit_id": {
+          "type": "string"
+        },
+        "creation_time": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "string"
+        },
+        "end_time": {
+          "type": "string"
+        },
+        "pause_time": {
+          "type": "string"
+        },
+        "current_time": {
+          "type": "string"
+        },
+        "segment_timeout": {
+          "type": "string"
+        },
+        "adaptive_schedule": {
           "type": "string"
         }
       },
