@@ -41,6 +41,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 input-file:
   - Microsoft.CostManagement/preview/2023-04-01-preview/common-types.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.benefits.json
+  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.budgets.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.exports.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.generatecostdetailsreport.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.generatedetailedcostreport.json
@@ -350,6 +351,16 @@ directive:
     from: costmanagement.json
     where: $.definitions.ViewProperties.properties.accumulated
     reason: 'false alarm ' 
+  - suppress: DeleteOperationResponses
+    from: costmanagement.budgets.json
+    reason: 'Consistent with delete api from other versions, modifying it will be a breaking change'
+  - suppress: TopLevelResourcesListBySubscription
+    from: costmanagement.budgets.json
+    reason: 'List by subscription is included in the Budgets_List operation with the scope path parameter'
+  - suppress: NoDuplicatePathsForScopeParameter
+    from: costmanagement.budgets.json
+    reason: 'Budgets_Get does not use an explicitly defined scope'
+        
 ```
 
 ### Tag: package-2018-08-preview
