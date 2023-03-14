@@ -1,0 +1,43 @@
+@doc("Describes the schema of the Azure App Configuration events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent.")
+namespace EventGrid.AppConfiguration {
+
+// need to figure out an alternative to this method --- should we pass in docstring here or should we just copy/paste and see what happens
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueModified event.")
+  model AppConfigurationKeyValueModifiedEventData {
+    ...AppConfigurationBase<"modified">;
+  }
+
+  @doc("Schema of the Data property of an EventGridEvent for a Microsoft.AppConfiguration.KeyValueDeleted event.")
+  model AppConfigurationKeyValueDeletedEventData {
+    ...AppConfigurationBase<"deleted">;
+  }
+
+  alias AppConfigurationBase<TEventType> = {
+    @doc(
+      "The key used to identify the key-value that was {name}.",
+      {
+        name: TEventType,
+      }
+    )
+    key?: string;
+
+    @doc(
+      "The label, if any, used to identify the key-value that was {name}.",
+      {
+        name: TEventType,
+      }
+    )
+    label?: string;
+
+    @doc(
+      "The etag representing the key-value that was {name}.",
+      {
+        name: TEventType,
+      }
+    )
+    etag?: string;
+
+    @doc("The sync token representing the server state after the event.")
+    syncToken?: string;
+  };
+}
