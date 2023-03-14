@@ -74,7 +74,7 @@ input-file:
   - Microsoft.Media/Metadata/stable/2023-01-01/ContentKeyPolicies.json
   - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
   - Microsoft.Media/Metadata/stable/2023-01-01/StreamingPoliciesAndStreamingLocators.json
-  - Microsoft.Media/Streaming/stable/2022-11-01/streamingservice.json
+  - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
 ```
 
 ### Tag: package-account-2023-01
