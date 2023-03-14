@@ -4710,7 +4710,11 @@
           "type": "string",
           "enum": [
             "DeliveryRuleResponseStatusCodeConditionParameters"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DeliveryRuleResponseStatusCodeConditionParameters",
+            "modelAsString": true
+          }
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -4722,7 +4726,11 @@
             "LessThanOrEqual",
             "GreaterThan",
             "GreaterThanOrEqual"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Operator",
+            "modelAsString": true
+          }
         },
         "negateCondition": {
           "description": "Describes if this is negate condition or not",
@@ -5275,15 +5283,18 @@
           "type": "string",
           "enum": [
             "DeliveryRuleCustomErrorPageActionParameters"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DeliveryRuleCustomErrorPageActionParameters",
+            "modelAsString": true
+          }
         },
-        "CustomErrorPageUrl": {
+        "customErrorPageUrl": {
           "description": "Defines the url to redirect to as the custom error page",
           "type": "string"
         }
       }
     },
-
     "DeliveryRuleOverrideResponseStatusCodeAction": {
       "description": "Defines the override response status code action for the delivery rule. Only applicable to Frontdoor Standard/Premium Profiles.",
       "type": "object",
@@ -5314,11 +5325,16 @@
           "type": "string",
           "enum": [
             "DeliveryRuleOverrideResponseStatusCodeActionParameters"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "DeliveryRuleOverrideResponseStatusCodeActionParameters",
+            "modelAsString": true
+          }
         },
-        "CustomResponseStatusCode": {
+        "customResponseStatusCode": {
           "description": "Defines the status code to override with.",
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
