@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Maps Route Service",
-    "version": "2023-05-31-preview",
+    "version": "2023-08-01-preview",
     "description": "Azure Maps Route REST APIs"
   },
   "host": "atlas.microsoft.com",
@@ -455,8 +455,7 @@
       "description": "Feature Item",
       "properties": {
         "kind": {
-          "description": "kind",
-          "type": "string"
+          "$ref": "#/definitions/Kind"
         },
         "type": {
           "$ref": "#/definitions/FeatureType"
@@ -481,13 +480,13 @@
           "type": "object",
           "description": "Waypoint properties",
           "properties": {
-            "index": {
+            "pointIndex": {
               "description": "It is used to identify and order the sequence of waypoints in the route, allowing for accurate navigation along the designated path.",
               "format": "int64",
               "type": "integer"
             },
-            "type": {
-              "$ref": "#/definitions/InputWayPointType"
+            "pointType": {
+              "$ref": "#/definitions/InputPointType"
             }
           }
         }
@@ -510,11 +509,12 @@
             },
             "properties": {
               "type": "object",
+              "description": "properties",
               "properties": {
-                "kind": {
+                "pointType": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/ManeuverPointType"
+                    "$ref": "#/definitions/PointType"
                   }
                 },
                 "legPointIndex": {
@@ -551,7 +551,7 @@
                   "description": "The name of the street that the route goes towards in the first itinerary item.",
                   "type": "string"
                 },
-                "exit": {
+                "exitIdentifier": {
                   "description": "The name or number of the exit associated with this itinerary step.",
                   "type": "string"
                 },
@@ -572,6 +572,7 @@
     },
     "OutputViaWaypointFeatureItem": {
       "x-ms-discriminator-value": "ViaWaypoint",
+      "description": "ViaWaypoint Feature Item",
       "type": "object",
       "allOf": [
         {
@@ -589,11 +590,13 @@
             },
             "properties": {
               "type": "object",
+              "description": "properties",
               "properties": {
-                "kind": {
+                "pointType": {
                   "type": "array",
+                  "description": "point type",
                   "items": {
-                    "$ref": "#/definitions/ViaWayPointType"
+                    "$ref": "#/definitions/PointType"
                   }
                 },
                 "names": {
@@ -614,6 +617,7 @@
     },
     "OutputRoutePathFeatureItem": {
       "x-ms-discriminator-value": "RoutePath",
+      "description": "RoutePath Feature Item",
       "type": "object",
       "allOf": [
         {
@@ -635,8 +639,9 @@
             },
             "properties": {
               "type": "object",
+              "description": "properties",
               "properties": {
-                "id": {
+                "resourceId": {
                   "description": "A unique ID for the resource.",
                   "type": "string"
                 },
@@ -675,17 +680,18 @@
         }
       ]
     },
-    "ManeuverPointType": {
-      "description": "point type",
+    "Kind":{
+      "description": "kind",
       "type": "string",
       "readOnly": true,
       "enum": [
         "ManeuverPoint",
         "Waypoint",
-        "ViaWaypoint"
+        "ViaWaypoint",
+        "RoutePath"
       ],
       "x-ms-enum": {
-        "name": "ManeuverPointType",
+        "name": "Kind",
         "modelAsString": true,
         "values": [
           {
@@ -695,28 +701,48 @@
           {
             "value": "Waypoint",
             "description": "A waypoint is a specific location or point along a route or trip that serves as a reference or stopping point."
+          },
+          {
+            "value": "ViaWaypoint",
+            "description": "A viaWaypoint is specific waypoint that must be passed through or visited along a route or trip."
+          },
+          {
+            "value": "RoutePath",
+            "description": "A representation of the path of a route."
           }
+
         ]
       }
     },
-    "ViaWayPointType": {
+    "PointType": {
       "description": "point type",
       "type": "string",
+      "readOnly": true,
       "enum": [
-        "ViaWaypoint"
+        "maneuverPoint",
+        "waypoint",
+        "viaWaypoint"
       ],
       "x-ms-enum": {
-        "name": "ViaWayPointType",
+        "name": "PointType",
         "modelAsString": true,
         "values": [
           {
-            "value": "ViaWaypoint",
+            "value": "maneuverPoint",
+            "description": "A maneuverPoint is a specific point on a route or trip where a change in direction or mode of transportation is required or recommended."
+          },
+          {
+            "value": "waypoint",
+            "description": "A waypoint is a specific location or point along a route or trip that serves as a reference or stopping point."
+          },
+          {
+            "value": "viaWaypoint",
             "description": "A viaWaypoint is specific waypoint that must be passed through or visited along a route or trip."
           }
         ]
       }
     },
-    "InputWayPointType": {
+    "InputPointType": {
       "description": "point type",
       "type": "string",
       "enum": [
@@ -724,7 +750,7 @@
         "viaWaypoint"
       ],
       "x-ms-enum": {
-        "name": "WayPointType",
+        "name": "InputWayPointType",
         "modelAsString": true,
         "values": [
           {
@@ -840,7 +866,7 @@
         "legIndex": {
           "$ref": "#/definitions/LegIndex"
         },
-        "index": {
+        "pointIndex": {
           "description": "index of a point within a specific leg",
           "format": "int64",
           "type": "integer"
@@ -1702,6 +1728,7 @@
       }
     },
     "DirectionsBatchResponseItem": {
+      "description": "Batch response item",
       "type": "object",
       "properties": {
         "optionalId": {

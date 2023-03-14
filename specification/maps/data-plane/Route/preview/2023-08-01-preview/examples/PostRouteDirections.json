@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2023-05-31-preview",
+    "api-version": "2023-08-01-preview",
     "routeDirectionsRequest": {
       "type": "FeatureCollection",
       "features": [
@@ -14,8 +14,8 @@
             "type": "Point"
           },
           "properties": {
-            "index": 0,
-            "type": "waypoint"
+            "pointIndex": 0,
+            "pointType": "waypoint"
           }
         },
         {
@@ -28,8 +28,8 @@
             "type": "Point"
           },
           "properties": {
-            "index": 1,
-            "type": "viaWaypoint"
+            "pointIndex": 1,
+            "pointType": "viaWaypoint"
           }
         },
         {
@@ -42,8 +42,8 @@
             "type": "Point"
           },
           "properties": {
-            "index": 2,
-            "type": "waypoint"
+            "pointIndex": 2,
+            "pointType": "waypoint"
           }
         }
       ],
@@ -71,13 +71,13 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint",
-                "Waypoint"
+              "pointType": [
+                "maneuverPoint",
+                "waypoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 0
+                "pointIndex": 0
               },
               "compassDirection": "southeast",
               "instruction": {
@@ -119,12 +119,12 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint"
+              "pointType": [
+                "maneuverPoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 1
+                "pointIndex": 1
               },
               "compassDirection": "northeast",
               "instruction": {
@@ -134,7 +134,7 @@
               },
               "sideOfStreet": "Unknown",
               "distanceInMeters": 371.6,
-              "durationInSeconds": 115,
+              "durationInSeconds": 121,
               "details": [
                 {
                   "pathLegRange": {
@@ -165,12 +165,12 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint"
+              "pointType": [
+                "maneuverPoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 3
+                "pointIndex": 3
               },
               "compassDirection": "north",
               "instruction": {
@@ -229,15 +229,15 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint"
+              "pointType": [
+                "maneuverPoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 19
+                "pointIndex": 19
               },
               "compassDirection": "east",
-              "exit": "168B",
+              "exitIdentifier": "168B",
               "instruction": {
                 "formattedText": "At Exit <ExitNumber>168B</ExitNumber>, <Action>head</Action> <TurnDir>right</TurnDir> on the ramp for <RoadName>WA-520</RoadName> toward <Sign>Bellevue / Kirkland</Sign>",
                 "maneuverType": "RampThenHighwayRight",
@@ -250,7 +250,7 @@
                 "WA-520"
               ],
               "distanceInMeters": 6765.5,
-              "durationInSeconds": 418,
+              "durationInSeconds": 464,
               "details": [
                 {
                   "pathLegRange": {
@@ -296,13 +296,13 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint",
-                "ViaWaypoint"
+              "pointType": [
+                "maneuverPoint",
+                "viaWaypoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 62
+                "pointIndex": 62
               },
               "compassDirection": "south",
               "instruction": {
@@ -343,15 +343,15 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint"
+              "pointType": [
+                "maneuverPoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 70
+                "pointIndex": 70
               },
               "compassDirection": "south",
-              "exit": "13A",
+              "exitIdentifier": "13A",
               "instruction": {
                 "formattedText": "At Exit <ExitNumber>13A</ExitNumber>, <Action>head</Action> on the ramp <TurnDir>right</TurnDir> and follow signs for <RoadName>NE 4th St</RoadName>",
                 "maneuverType": "TakeRampRight",
@@ -362,7 +362,7 @@
                 "NE 4th St"
               ],
               "distanceInMeters": 205.7,
-              "durationInSeconds": 51,
+              "durationInSeconds": 40,
               "details": [
                 {
                   "pathLegRange": {
@@ -393,12 +393,12 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint"
+              "pointType": [
+                "maneuverPoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 72
+                "pointIndex": 72
               },
               "compassDirection": "west",
               "instruction": {
@@ -408,7 +408,7 @@
               },
               "sideOfStreet": "Unknown",
               "distanceInMeters": 204.4,
-              "durationInSeconds": 40,
+              "durationInSeconds": 49,
               "details": [
                 {
                   "pathLegRange": {
@@ -439,12 +439,12 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint"
+              "pointType": [
+                "maneuverPoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 76
+                "pointIndex": 76
               },
               "compassDirection": "north",
               "instruction": {
@@ -454,7 +454,7 @@
               },
               "sideOfStreet": "Unknown",
               "distanceInMeters": 124.9,
-              "durationInSeconds": 38,
+              "durationInSeconds": 43,
               "details": [
                 {
                   "pathLegRange": {
@@ -485,12 +485,12 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint"
+              "pointType": [
+                "maneuverPoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 78
+                "pointIndex": 78
               },
               "compassDirection": "east",
               "instruction": {
@@ -500,7 +500,7 @@
               },
               "sideOfStreet": "Unknown",
               "distanceInMeters": 82.0,
-              "durationInSeconds": 20,
+              "durationInSeconds": 21,
               "details": [
                 {
                   "pathLegRange": {
@@ -531,13 +531,13 @@
               ]
             },
             "properties": {
-              "kind": [
-                "ManeuverPoint",
-                "Waypoint"
+              "pointType": [
+                "maneuverPoint",
+                "waypoint"
               ],
               "legPointIndex": {
                 "legIndex": 0,
-                "index": 80
+                "pointIndex": 80
               },
               "compassDirection": "east",
               "instruction": {
@@ -918,10 +918,10 @@
               -122.188892
             ],
             "properties": {
-              "id": "v70,h-42696064,i0,a0,cen-US,dAAAAAAAAAAA1,y1,s3,m1,o1,t15,wOX09X7POR0DHSsyzkpVewA2~ACo3NJRZMiQBAADgAX8YlD4A0~N3RoIEF2ZQ2~~~~~~~~v12,wxk54CU7RR0BhONcwQ4xewA2~ACo3NJRpcyYBAADgAQAAgD8A0~V0EtNTIwIEU1~~~1~~~~~v12,wRs1XycfOR0CgpSvYRoxewA2~ACo3NJTBFigBAADgAVaJWz8A0~TkUgNnRoIFN00~~~~~~~~v12,k0,qatt:1",
+              "resourceId": "v70,h-42696064,i0,a0,cen-US,dAAAAAAAAAAA1,y1,s3,m1,o1,t15,wOX09X7POR0DHSsyzkpVewA2~ACo3NJRZMiQBAADgAX8YlD4A0~N3RoIEF2ZQ2~~~~~~~~v12,wxk54CU7RR0BhONcwQ4xewA2~ACo3NJRpcyYBAADgAQAAgD8A0~V0EtNTIwIEU1~~~1~~~~~v12,wRs1XycfOR0CgpSvYRoxewA2~ACo3NJTBFigBAADgAVaJWz8A0~TkUgNnRoIFN00~~~~~~~~v12,k0,qatt:1",
               "distanceInMeters": 10786.4,
               "durationInSeconds": 929,
-              "durationTrafficInSeconds": 931,
+              "durationTrafficInSeconds": 989,
               "trafficDataUsed": "Flow",
               "trafficCongestion": "None",
               "legs": [
@@ -937,7 +937,7 @@
                         "legIndex": 0
                       },
                       "distanceInMeters": 8857.6,
-                      "durationInSeconds": 696
+                      "durationInSeconds": 749
                     },
                     {
                       "pathLegRange": {
@@ -948,11 +948,11 @@
                         "legIndex": 0
                       },
                       "distanceInMeters": 1928.7,
-                      "durationInSeconds": 234
+                      "durationInSeconds": 239
                     }
                   ],
                   "distanceInMeters": 10786.4,
-                  "durationInSeconds": 930
+                  "durationInSeconds": 988
                 }
               ]
             }
