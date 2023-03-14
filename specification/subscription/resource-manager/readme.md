@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Subscription.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Subscription, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,25 +15,36 @@ To build the SDK for Subscription, simply [Install AutoRest](https://aka.ms/auto
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Suppression
+
 ``` yaml
 directive:
   - suppress: R2059
 ```
 
-
 ### Basic Information
+
 These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10
+tag: package-preview-2021-10
 ```
 
+
+### Tag: package-preview-2021-10
+
+These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-10'
+input-file:
+  - Microsoft.Subscription/preview/2021-10-01-preview/subscriptions.json
+```
 ### Tag: package-2021-10
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
@@ -129,8 +140,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -215,7 +226,3 @@ input-file:
 title: SubscriptionClient
 description: The subscription client
 ```
-
-
-
-
