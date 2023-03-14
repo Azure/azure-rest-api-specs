@@ -127,7 +127,7 @@ namespace EventGrid {
     eventSubscriptionId?: string;
   }
 
- // USE SHARED ROUTES (Not supported yet by language emitters - can use with OpenAPI3)
+ // USE SHARED ROUTES
 
   alias EventType = EventGridEvent | CloudEventEvent;
 
@@ -168,70 +168,3 @@ namespace EventGrid {
 
 }
 
-// Try gen swagger and make sure that looks right and maybe create issue for models not appearing ***
-
-
-  // Use @overload
-
-  // alias EventType = EventGridEvent | CloudEventEvent;
-
-  // @post
-  // @doc("Some Doc")
-  // @route("/send")
-  // op PublishEvent is Azure.Core.RpcOperation<{
-  //   @doc("channel name")
-  //   @header("aeg-channel-name")
-  //   channelName?: string,
-
-  //   @doc("Doc for body")
-  //   @body
-  //   events: EventType
-  // }, {}>;
-
-  // @overload(PublishEvent)
-  // @post
-  // op PublishCloudEvent is Azure.Core.RpcOperation<{
-  //   @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
-  //   @body
-  //   events: CloudEventEvent,
-  //   // ...ApiVersionParameter,
-  // }, {}>;
-
-  // @overload(PublishEvent)
-  // @post
-  // op PublishEventGridEvent is Azure.Core.RpcOperation<{
-  //   @body
-  //   events: EventGridEvent,
-  //   // ...ApiVersionParameter,
-  // }, {}>;
-
-
-
-  // alias InputType = CloudEventRequest |  EventGridEvent;
-
-  // @post
-  // @route("foo")
-  // op PublishEvent(
-  //   @body
-  //   events: InputType,
-  //   ...ApiVersionParameter,
-
-  // ):OkResponse;
-
-  // @overload(PublishEvent)
-  // @post
-  // op PublishCloudEvent(
-  //   @header("content-type") contentType: "application/cloudevents-batch+json; charset=utf-8",
-  //   @body
-  //   events: CloudEventEvent,
-  //   ...ApiVersionParameter,
-  // ):OkResponse;
-
-  // @overload(PublishEvent)
-  // @post
-  // op PublishEventGridEvent(
-  //   @header("content-type") contentType:  "application/json",
-  //   @body
-  //   events: EventGridEvent,
-  //   ...ApiVersionParameter,
-  // ):OkResponse;
