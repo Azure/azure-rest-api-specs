@@ -372,8 +372,11 @@
           "description": "Apply rule to data from a specific cluster."
         },
         "scopes": {
-          "$ref": "#/definitions/StringArray",
-          "description": "Target Azure Monitor workspaces resource ids. Only one scope currently supported."
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Target Azure Monitor workspaces resource ids. This api-version is currently limited to creating with one scope. This may change in future."
         },
         "interval": {
           "type": "string",
@@ -410,17 +413,20 @@
           "description": "Enable/disable rule."
         },
         "expression": {
-          "description": "The PromQL expression to evaluate. Every evaluation cycle this is evaluated at the current time, and the result recorded as a new set of time series with the metric name as given by 'record'.",
+          "description": "The PromQL expression to evaluate. https://prometheus.io/docs/prometheus/latest/querying/basics/. Evaluated periodically as given by 'interval', and the result recorded as a new set of time series with the metric name as given by 'record'.",
           "type": "string"
         },
         "labels": {
-          "$ref": "#/definitions/StringDictionary",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "Labels to add or overwrite before storing the result."
         },
         "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The severity of the alerts fired by the rule."
+          "description": "The severity of the alerts fired by the rule. Must be between 0 and 4."
         },
         "for": {
           "type": "string",
@@ -428,8 +434,11 @@
           "format": "duration"
         },
         "annotations": {
-          "$ref": "#/definitions/StringDictionary",
-          "description": "Alert annotation key-value pairs."
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The annotations clause specifies a set of informational labels that can be used to store longer additional information such as alert descriptions or runbook links. The annotation values can be templated."
         },
         "actions": {
           "$ref": "#/definitions/PrometheusRuleGroupActions",
@@ -458,7 +467,10 @@
           "description": "The resource id of the action group to use."
         },
         "actionProperties": {
-          "$ref": "#/definitions/StringDictionary",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "The properties of an action group object."
         }
       }
@@ -477,20 +489,6 @@
           "format": "duration"
         }
       }
-    },
-    "StringDictionary": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "description": "A dictionary from string to string."
-    },
-    "StringArray": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "description": "An array of strings."
     }
   },
   "parameters": {
