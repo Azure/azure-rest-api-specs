@@ -174,12 +174,20 @@
     "DirectionsRequest": {
       "description": "This object is the request body.",
       "type": "object",
+      "required": [
+        "type",
+        "features"
+      ],
       "properties": {
         "type": {
-          "$ref": "#/definitions/FeatureCollectionType"
+          "$ref": "#/definitions/FeatureTypeEnum"
         },
         "features": {
-          "$ref": "#/definitions/InputFeatures"
+          "type": "array",
+          "description": "Features",
+          "items": {
+            "$ref": "#/definitions/WaypointFeaturesItem"
+          }
         },
         "travelMode": {
           "description": "The mode of travel for the requested route.",
@@ -368,10 +376,10 @@
       "type": "object",
       "properties": {
         "type": {
-          "$ref": "#/definitions/FeatureCollectionType"
+          "$ref": "#/definitions/FeatureTypeEnum"
         },
         "features": {
-          "$ref": "#/definitions/OutputFeatures"
+          "$ref": "#/definitions/Features"
         }
       }
     },
@@ -394,9 +402,9 @@
         }
       }
     },
-    "FeatureCollectionType": {
+    "FeatureTypeEnum": {
       "type": "string",
-      "description": "FeatureCollection",
+      "description": "must be FeatureCollection",
       "enum": [
         "FeatureCollection"
       ],
@@ -410,7 +418,7 @@
         ]
       }
     },
-    "FeatureType": {
+    "FeaturesItemTypeEnum": {
       "type": "string",
       "description": "must be Feature",
       "enum": [
@@ -436,21 +444,14 @@
       "minItems": 4,
       "maxItems": 4
     },
-    "InputFeatures": {
+    "Features": {
       "type": "array",
       "description": "Features",
       "items": {
-        "$ref": "#/definitions/InputWaypointFeatureItem"
+        "$ref": "#/definitions/FeaturesItem"
       }
     },
-    "OutputFeatures": {
-      "type": "array",
-      "description": "Features",
-      "items": {
-        "$ref": "#/definitions/OutputFeatureItem"
-      }
-    },
-    "OutputFeatureItem": {
+    "FeaturesItem": {
       "type": "object",
       "description": "Feature Item",
       "properties": {
@@ -458,7 +459,7 @@
           "$ref": "#/definitions/Kind"
         },
         "type": {
-          "$ref": "#/definitions/FeatureType"
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
         }
       },
       "discriminator": "kind",
@@ -466,12 +467,12 @@
         "kind"
       ]
     },
-    "InputWaypointFeatureItem": {
+    "WaypointFeaturesItem": {
       "type": "object",
       "description": "Waypoint Feature Item",
       "properties": {
         "type": {
-          "$ref": "#/definitions/FeatureType"
+          "$ref": "#/definitions/FeaturesItemTypeEnum"
         },
         "geometry": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
@@ -486,19 +487,19 @@
               "type": "integer"
             },
             "pointType": {
-              "$ref": "#/definitions/InputPointType"
+              "$ref": "#/definitions/InputPointTypeEnum"
             }
           }
         }
       }
     },
-    "OutputManeuverPointFeatureItem": {
+    "ManeuverPointFeaturesItem": {
       "x-ms-discriminator-value": "ManeuverPoint",
       "type": "object",
       "description": "ManeuverPoint Feature Item",
       "allOf": [
         {
-          "$ref": "#/definitions/OutputFeatureItem"
+          "$ref": "#/definitions/FeaturesItem"
         },
         {
           "type": "object",
@@ -514,7 +515,7 @@
                 "pointTypes": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/PointType"
+                    "$ref": "#/definitions/OutputPointTypeEnum"
                   }
                 },
                 "legPointIndex": {
@@ -522,47 +523,50 @@
                 },
                 "compassDirection": {
                   "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
-                  "type": "string"
+                  "type": "string",
+                  "readOnly": true
                 },
                 "details": {
                   "description": "Information about one of the maneuvers that is part of the itinerary item. An ItineraryItem can contain more than one Detail collection.",
                   "type": "array",
-                  "readOnly": true,
                   "items": {
                     "$ref": "#/definitions/Detail"
                   }
                 },
                 "instruction": {
-                  "description": "A description of a maneuver in a set of directions.",
                   "$ref": "#/definitions/Instruction"
                 },
                 "sideOfStreet": {
-                  "description": "sideOfStreet",
-                  "$ref": "#/definitions/SideOfStreet"
+                  "$ref": "#/definitions/SideOfStreetEnum"
                 },
                 "signs": {
                   "description": "Signage text for the route. There may be more than one sign value for an itinerary item.",
                   "type": "array",
+                  "readOnly": true,
                   "items": {
                     "type": "string"
                   }
                 },
                 "towardsRoadName": {
                   "description": "The name of the street that the route goes towards in the first itinerary item.",
-                  "type": "string"
+                  "type": "string",
+                  "readOnly": true
                 },
                 "exitIdentifier": {
                   "description": "The name or number of the exit associated with this itinerary step.",
-                  "type": "string"
+                  "type": "string",
+                  "readOnly": true
                 },
                 "distanceInMeters": {
                   "description": "The physical distance in meters covered by this route step.",
-                  "type": "number"
+                  "type": "number",
+                  "readOnly": true
                 },
                 "durationInSeconds": {
                   "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
                   "format": "int64",
-                  "type": "integer"
+                  "type": "integer",
+                  "readOnly": true
                 }
               }
             }
@@ -570,20 +574,20 @@
         }
       ]
     },
-    "OutputViaWaypointFeatureItem": {
+    "ViaWaypointFeaturesItem": {
       "x-ms-discriminator-value": "ViaWaypoint",
       "description": "ViaWaypoint Feature Item",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/OutputFeatureItem"
+          "$ref": "#/definitions/FeaturesItem"
         },
         {
           "type": "object",
           "description": "ViaWaypoint properties",
           "properties": {
             "type": {
-              "$ref": "#/definitions/FeatureType"
+              "$ref": "#/definitions/FeaturesItemTypeEnum"
             },
             "geometry": {
               "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
@@ -596,12 +600,13 @@
                   "type": "array",
                   "description": "point types",
                   "items": {
-                    "$ref": "#/definitions/PointType"
+                    "$ref": "#/definitions/OutputPointTypeEnum"
                   }
                 },
                 "names": {
                   "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
                   "type": "array",
+                  "readOnly": true,
                   "items": {
                     "type": "string"
                   }
@@ -615,20 +620,20 @@
         }
       ]
     },
-    "OutputRoutePathFeatureItem": {
+    "RoutePathFeaturesItem": {
       "x-ms-discriminator-value": "RoutePath",
       "description": "RoutePath Feature Item",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/OutputFeatureItem"
+          "$ref": "#/definitions/FeaturesItem"
         },
         {
           "type": "object",
           "description": "RoutePath properties",
           "properties": {
             "type": {
-              "$ref": "#/definitions/FeatureType"
+              "$ref": "#/definitions/FeaturesItemTypeEnum"
             },
             "geometry": {
               "description": "geometry",
@@ -643,35 +648,37 @@
               "properties": {
                 "resourceId": {
                   "description": "A unique ID for the resource.",
-                  "type": "string"
+                  "type": "string",
+                  "readOnly": true
                 },
                 "distanceInMeters": {
                   "description": "The physical distance in meters covered by the entire route.",
-                  "type": "number"
+                  "type": "number",
+                  "readOnly": true
                 },
                 "durationInSeconds": {
                   "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
                   "format": "int64",
-                  "type": "integer"
+                  "type": "integer",
+                  "readOnly": true
                 },
                 "durationTrafficInSeconds": {
                   "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
                   "format": "int64",
-                  "type": "integer"
+                  "type": "integer",
+                  "readOnly": true
                 },
                 "trafficDataUsed": {
-                  "description": "The type of real-time traffic data used to generate the route.",
                   "$ref": "#/definitions/TrafficDataUsed"
                 },
                 "trafficCongestion": {
-                  "description": "The level of traffic congestion along the route.",
                   "$ref": "#/definitions/TrafficCongestion"
                 },
                 "legs": {
                   "description": "An array of route legs. Check RouteLeg object description for more information.",
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/RouteLeg"
+                    "$ref": "#/definitions/Leg"
                   }
                 }
               }
@@ -713,7 +720,7 @@
         ]
       }
     },
-    "PointType": {
+    "OutputPointTypeEnum": {
       "description": "point type",
       "type": "string",
       "readOnly": true,
@@ -723,7 +730,7 @@
         "viaWaypoint"
       ],
       "x-ms-enum": {
-        "name": "PointType",
+        "name": "OutputPointTypeEnum",
         "modelAsString": true,
         "values": [
           {
@@ -741,7 +748,7 @@
         ]
       }
     },
-    "InputPointType": {
+    "InputPointTypeEnum": {
       "description": "point type",
       "type": "string",
       "enum": [
@@ -749,7 +756,7 @@
         "viaWaypoint"
       ],
       "x-ms-enum": {
-        "name": "InputWayPointType",
+        "name": "InputPointTypeEnum",
         "modelAsString": true,
         "values": [
           {
@@ -785,13 +792,14 @@
         }
       }
     },
-    "RouteLeg": {
+    "Leg": {
       "description": "Information about a section of a route between two waypoints. For more information about the fields contained ina routeLeg.",
       "type": "object",
       "properties": {
         "description": {
           "description": "A short description of the route.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "distanceInMeters": {
           "description": "The physical distance in meters covered by a route leg.",
@@ -846,6 +854,7 @@
         "range": {
           "description": "Refers to the range covered by a specific leg of a route or path.",
           "type": "array",
+          "readOnly": true,
           "maximum": 2,
           "maxItems": 2,
           "items": {
@@ -868,12 +877,14 @@
         "pointIndex": {
           "description": "index of a point within a specific leg",
           "format": "int64",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         }
       }
     },
     "LegIndex": {
       "description": "The route leg index is a sequential number assigned to each leg of the route to help identify and distinguish between different segments of the route.",
+      "readOnly": true,
       "format": "int64",
       "type": "integer"
     },
@@ -883,11 +894,13 @@
       "properties": {
         "hintType": {
           "description": "hint type",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "text": {
           "description": "hint text",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -897,15 +910,18 @@
       "properties": {
         "compassDegrees": {
           "description": "The direction in degrees.",
+          "readOnly": true,
           "type": "number"
         },
         "maneuverType": {
           "description": "The type of maneuver described by this detail collection. The ManeuverType in A detail collection can provide information for a portion of the maneuver described by the maneuverType attribute of the corresponding Instruction. For example the maneuverType attribute of an Instruction may specify TurnLeftThenTurnRight as the maneuver while the associated detail items may specify specifics about the TurnLeft and TurnRight maneuvers.",
-          "$ref": "#/definitions/ManeuverType"
+          "readOnly": true,
+          "$ref": "#/definitions/ManeuverTypeEnum"
         },
         "names": {
           "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "string"
           }
@@ -916,51 +932,12 @@
         },
         "roadType": {
           "description": "Th type of road.",
-          "$ref": "#/definitions/RoadType"
+          "readOnly": true,
+          "$ref": "#/definitions/RoadTypeEnum"
         }
       }
     },
-    "DepartureTime": {
-      "description": "The estimated departure time for the route or leg.",
-      "type": "string",
-      "readOnly": true,
-      "format": "date-time"
-    },
-    "ArrivalTime": {
-      "description": "The estimated arrival time for the route or leg.",
-      "type": "string",
-      "readOnly": true,
-      "format": "date-time"
-    },
-    "TravelMode": {
-      "description": "Travel mode.",
-      "type": "string",
-      "readOnly": true,
-      "enum": [
-        "driving",
-        "truck",
-        "walking"
-      ],
-      "x-ms-enum": {
-        "name": "TravelMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "driving",
-            "description": "The returned routes are optimized for common driving scenarios."
-          },
-          {
-            "value": "truck",
-            "description": "The returned routes are optimized for trucks."
-          },
-          {
-            "value": "walking",
-            "description": "The returned routes are optimized for pedestrians, including the use of sidewalks."
-          }
-        ]
-      }
-    },
-    "ManeuverType": {
+    "ManeuverTypeEnum": {
       "description": "The type of maneuver described by this detail collection. The ManeuverType in A detail collection can provide information for a portion of the maneuver described by the maneuverType attribute of the corresponding Instruction. For example the maneuverType attribute of an Instruction may specify TurnLeftThenTurnRight as the maneuver while the associated detail items may specify specifics about the TurnLeft and TurnRight maneuvers.",
       "type": "string",
       "readOnly": true,
@@ -1031,7 +1008,7 @@
         "Walk"
       ],
       "x-ms-enum": {
-        "name": "ManeuverType",
+        "name": "ManeuverTypeEnum",
         "modelAsString": true,
         "values": [
           {
@@ -1342,7 +1319,7 @@
         ]
       }
     },
-    "RoadType": {
+    "RoadTypeEnum": {
       "description": "The type of road.",
       "type": "string",
       "enum": [
@@ -1357,7 +1334,7 @@
         "WalkingPath"
       ],
       "x-ms-enum": {
-        "name": "RoadType",
+        "name": "RoadTypeEnum",
         "modelAsString": true,
         "values": [
           {
@@ -1408,16 +1385,17 @@
         ]
       }
     },
-    "SideOfStreet": {
+    "SideOfStreetEnum": {
       "description": "The side of the street where the destination is found based on the arrival direction. This field applies to the last itinerary item only.",
       "type": "string",
+      "readOnly": true,
       "enum": [
         "Left",
         "Right",
         "Unknown"
       ],
       "x-ms-enum": {
-        "name": "SideOfStreet",
+        "name": "SideOfStreetEnum",
         "modelAsString": true,
         "values": [
           {
@@ -1521,20 +1499,21 @@
       "type": "object",
       "properties": {
         "maneuverType": {
-          "$ref": "#/definitions/ManeuverType"
+          "$ref": "#/definitions/ManeuverTypeEnum"
         },
         "text": {
           "description": "The plain text description of the instruction.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "formattedText": {
           "description": "The formatted text description of the instruction.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "hints": {
           "description": "Additional information that may be helpful in following a route. In addition to the hint text, this element has an attribute hintType that specifies what the hint refers to, such as “NextIntersection.” Hint is an optional element and a route step can contain more than one hint.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/Hint"
           }
@@ -1735,10 +1714,10 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/FeatureType"
+          "$ref": "#/definitions/FeatureTypeEnum"
         },
         "features": {
-          "$ref": "#/definitions/OutputFeatures"
+          "$ref": "#/definitions/Features"
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
