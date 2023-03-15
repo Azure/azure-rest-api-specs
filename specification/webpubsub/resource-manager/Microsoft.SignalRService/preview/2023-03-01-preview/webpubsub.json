@@ -326,7 +326,12 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result.."
+            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result..",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -337,7 +342,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "WebPubSub_CreateOrUpdate": {
@@ -613,7 +618,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "WebPubSubCustomCertificates_CreateOrUpdate": {
@@ -827,7 +832,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "WebPubSubCustomDomains_CreateOrUpdate": {
@@ -1050,7 +1055,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "WebPubSubHubs_CreateOrUpdate": {
@@ -1457,6 +1462,11 @@
             "description": "Accepted and an async operation is executing in background to make the new key to take effect. The response contains new access keys and a Location header to query the async operation result.",
             "schema": {
               "$ref": "#/definitions/WebPubSubKeys"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1468,7 +1478,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "WebPubSub_RegenerateKey": {
@@ -1633,7 +1643,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "WebPubSubReplicas_CreateOrUpdate": {
@@ -1730,7 +1740,7 @@
               "$ref": "#/definitions/Replica"
             }
           },
-          "201": {
+          "202": {
             "description": "Updated. The response describes the new replica and contains a Location header to query the operation result.",
             "schema": {
               "$ref": "#/definitions/Replica"
@@ -1777,7 +1787,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. The response indicates the restart operation is performed in the background."
+            "description": "Accepted. The response indicates the restart operation is performed in the background.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success. The response indicates the operation is successful and no content will be returned."
@@ -1791,7 +1806,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "WebPubSubReplicas_Restart": {
@@ -1823,7 +1838,12 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. The response indicates the restart operation is performed in the background."
+            "description": "Accepted. The response indicates the restart operation is performed in the background.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Success. The response indicates the operation is successful and no content will be returned."
@@ -1837,7 +1857,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "WebPubSub_Restart": {
@@ -2006,7 +2026,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "WebPubSubSharedPrivateLinkResources_CreateOrUpdate": {
