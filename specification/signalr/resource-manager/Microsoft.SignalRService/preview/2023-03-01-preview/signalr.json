@@ -432,7 +432,12 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result.."
+            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result..",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -442,6 +447,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SignalR_Update": {
             "$ref": "./examples/SignalR_Update.json"
@@ -1516,6 +1524,11 @@
             "description": "Updated. The response describes the new replica and contains a Location header to query the operation result.",
             "schema": {
               "$ref": "#/definitions/Replica"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1526,6 +1539,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "SignalRReplicas_Update": {
             "$ref": "./examples/SignalRReplicas_Update.json"

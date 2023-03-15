@@ -432,7 +432,12 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result.."
+            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result..",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -442,6 +447,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "WebPubSub_Update": {
             "$ref": "./examples/WebPubSub_Update.json"
@@ -1739,6 +1747,11 @@
             "description": "Updated. The response describes the new replica and contains a Location header to query the operation result.",
             "schema": {
               "$ref": "#/definitions/Replica"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1749,6 +1762,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "WebPubSubReplicas_Update": {
             "$ref": "./examples/WebPubSubReplicas_Update.json"
