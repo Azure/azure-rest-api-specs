@@ -3,9 +3,9 @@
   "info": {
     "title": "Azure.CodeSigning service",
     "version": "2022-06-15-preview",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -34,14 +34,9 @@
   ],
   "tags": [],
   "paths": {
-    "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}:sign": {
+    "/codesigningaccounts/{codeSigningAccount}:sign": {
       "post": {
         "operationId": "CertificateProfileOperations_Sign",
-        "x-ms-examples": {
-          "Sign": {
-            "$ref": "../../examples/2022-06-15-preview/CertificateProfile_Sign.json"
-          }
-        },
         "summary": "Initiates a sign operation.",
         "description": "Initiates a sign operation.",
         "parameters": [
@@ -49,10 +44,11 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/CodeSignStatusParams.codeSigningAccountName"
-          },
-          {
-            "$ref": "#/parameters/CodeSignStatusParams.certificateProfileName"
+            "name": "codeSigningAccount",
+            "in": "path",
+            "required": true,
+            "description": "Azure Code Signing account name.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/CertificateProfileParam.correlationId"
@@ -63,7 +59,7 @@
             "schema": {
               "type": "object",
               "properties": {},
-              "x-cadl-name": "(anonymous model)"
+              "x-typespec-name": "(anonymous model)"
             }
           }
         ],
@@ -102,11 +98,17 @@
                 "id",
                 "status"
               ],
-              "x-cadl-name": "Azure.Core.ResourceOperationStatus<CodeSigningParam, OperationStatus, Azure.Core.Foundations.Error>"
+              "x-typespec-name": "Azure.Core.ResourceOperationStatus<CodeSigningParam, OperationStatus, Azure.Core.Foundations.Error>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -117,11 +119,6 @@
     "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}": {
       "post": {
         "operationId": "CertificateProfileOperations_GetSignOperation",
-        "x-ms-examples": {
-          "GetSignOperation": {
-            "$ref": "../../examples/2022-06-15-preview/CertificateProfile_GetSignOperation.json"
-          }
-        },
         "summary": "Gets the status of a sign operation.",
         "description": "Gets the status of a sign operation.",
         "parameters": [
@@ -140,6 +137,15 @@
           },
           {
             "$ref": "#/parameters/CodeSignStatusParams.certificateProfileName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "(anonymous model)"
+            }
           }
         ],
         "responses": {
@@ -170,11 +176,17 @@
                 "id",
                 "status"
               ],
-              "x-cadl-name": "Azure.Core.Foundations.OperationStatus<OperationStatus, Azure.Core.Foundations.Error>"
+              "x-typespec-name": "Azure.Core.Foundations.OperationStatus<OperationStatus, Azure.Core.Foundations.Error>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
@@ -205,7 +217,7 @@
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Azure.Core.Foundations.Error[]",
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
           "description": "An array of details about specific errors that led to this reported error."
         },
         "innererror": {
@@ -263,19 +275,14 @@
         "modelAsString": true
       }
     },
-    "CertificateProfileParam": {
-      "type": "object",
-      "properties": {},
-      "description": "Sign request parameters"
-    },
-    "CodeSignStatusParams": {
-      "type": "object",
-      "properties": {},
-      "description": "Sign status request parameters"
-    },
     "CodeSigningParam": {
       "type": "object",
       "properties": {
+        "codeSigningAccountName": {
+          "type": "string",
+          "description": "Azure Code Signing account name.",
+          "readOnly": true
+        },
         "body": {
           "$ref": "#/definitions/SignRequest",
           "description": "Sign request details."
@@ -283,6 +290,7 @@
       },
       "description": "Sign request parameters",
       "required": [
+        "codeSigningAccountName",
         "body"
       ]
     },
@@ -322,7 +330,7 @@
             "type": "string",
             "format": "byte"
           },
-          "x-cadl-name": "bytes[]",
+          "x-typespec-name": "bytes[]",
           "description": "List of full file hash."
         },
         "authenticodeHashList": {
@@ -331,7 +339,7 @@
             "type": "string",
             "format": "byte"
           },
-          "x-cadl-name": "bytes[]",
+          "x-typespec-name": "bytes[]",
           "description": "List of authenticode hash."
         }
       },
