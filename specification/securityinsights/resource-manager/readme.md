@@ -554,15 +554,7 @@ directive:
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     reason: 'Caused by a duplicate Resource definition in our common directory that contains systemData. We were instructed to supress this by Swagger reviewr.'
   - suppress: R3017  # GuidUsage
-    where:
-      - $.definitions.EntityManualTriggerRequestBody.properties.tenantId
-      - $.definitions.ManualTriggerRequestBody.properties.tenantId
-      - $.definitions.PlaybookActionProperties.properties.tenantId
-    from: AutomationRules.json
-    reason:
-      - EntityManualTriggerRequestBody.properties.tenantId should be a Guid.
-      - ManualTriggerRequestBody.properties.tenantId should be a Guid
-      - PlaybookActionProperties.properties.tenantId should be a Guid
+    reason: 'Tenent Id should be a Guid'
 ```
 
 ---
