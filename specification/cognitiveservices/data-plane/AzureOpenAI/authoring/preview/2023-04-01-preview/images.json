@@ -1,0 +1,365 @@
+{
+   "swagger": "2.0",
+   "info": {
+      "title": "Cognitive Services API",
+      "description": "Cognitive Services API to support OpenAI Dall-E",
+      "version": "2023-04-01-preview"
+   },
+   "host": "eastus.api.cognitive.microsoft.com",
+   "basePath": "/dalle",
+   "schemes": ["https"],
+   "securityDefinitions": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "Api-Key",
+        "in": "header"
+      }
+   },
+   "definitions": {
+      "Status": {
+         "description": "The status of the operation.",
+         "type": "string",
+         "enum": [
+            "NotStarted",
+            "Running",
+            "Failed",
+            "Canceled",
+            "Succeeded"
+         ]
+      },
+      "InnerError": {
+         "type": "object",
+         "description": "The inner error if a task in a batch failed.",
+         "properties": {
+            "message": {
+               "type": "string",
+               "description": "The error message.",
+               "example": "Operation failed as a result of our safety system."
+            },
+            "code": {
+               "type": "string",
+               "enum": [
+                  "ContentFilter",
+                  "Internal",
+                  "BlockedImages"
+               ],
+               "description": "The error code."
+            }
+         }
+      },
+      "Error": {
+         "type": "object",
+         "description": "The error if the request or operation failed.",
+         "properties": {
+            "message": {
+               "type": "string",
+               "description": "The error message.",
+               "example": "Required query parameter 'api-version' is missing."
+            },
+            "code": {
+               "type": "string",
+               "enum": [
+                  "BadRequest",
+                  "ContentFilter",
+                  "Internal",
+                  "TooManyRequests",
+                  "Unauthorized",
+                  "NotFound",
+                  "OperationNotInTerminalState",
+                  "BlockedImages",
+                  "RequestTimout"
+               ],
+               "description": "The error code."
+            },
+            "details": {
+               "type": "array",
+               "items": {
+                  "$ref": "#/components/schemas/InnerError"
+               }
+            }
+         },
+         "required": [
+            "message",
+            "code"
+         ]
+      },
+      "ErrorResponse": {
+         "type": "object",
+         "properties": {
+            "error": {
+               "$ref": "#/components/schemas/Error"
+            }
+         },
+         "required": [
+            "error"
+         ]
+      },
+      "ImageResult": {
+         "type": "object",
+         "description": "The image url if successful, and an error otherwise.",
+         "properties": {
+            "url": {
+               "type": "string",
+               "description": "The image url.",
+               "example": "https://www.contoso.com"
+            },
+            "error": {
+               "$ref": "#/components/schemas/Error"
+            }
+         }
+      },
+      "OperationResult": {
+         "type": "array",
+         "description": "The result data of the operation, if successful",
+         "items": {
+            "$ref": "#/components/schemas/ImageResult"
+         }
+      },
+      "OperationResponse": {
+         "type": "object",
+         "properties": {
+            "id": {
+               "type": "string",
+               "description": "The ID of the operation.",
+               "example": "59c7e2ea-7450-4e85-9762-55c78727f4c7"
+            },
+            "created": {
+               "type": "integer",
+               "format": "int64",
+               "description": "The unix timestamp when the operation was created.",
+               "example": "1676540381"
+            },
+            "last_action": {
+               "type": "integer",
+               "format": "int64",
+               "description": "The unix timestamp for when the current state was entered.",
+               "example": "1676540381"
+            },
+            "expires_at": {
+               "type": "integer",
+               "format": "int64",
+               "description": "The unix timestamp when the operation expires.",
+               "example": "1676540381"
+            },
+            "data": {
+               "$ref": "#/components/schemas/OperationResult"
+            },
+            "status": {
+               "$ref": "#/components/schemas/Status"
+            },
+            "error": {
+               "$ref": "#/components/schemas/Error"
+            }
+         },
+         "required": [
+            "id",
+            "status",
+            "created",
+            "last_action"
+         ]
+      },
+      "ImageResolution": {
+         "description": "The resolution of the image (256x256, 512x512, or 1024x1024). Smaller images are faster to generate.",
+         "type": "string",
+         "enum": [
+            "256x256",
+            "512x512",
+            "1024x1024"
+         ],
+         "default": "1024x1024"
+      },
+      "GenerateImagesPostRequest": {
+         "type": "object",
+         "properties": {
+            "prompt": {
+               "type": "string",
+               "description": "The prompt to generate an image from.",
+               "minLength": 1,
+               "maxLength": 1000
+            },
+            "n": {
+               "type": "integer",
+               "description": "The number of images to generate.",
+               "minimum": 1,
+               "default": 1
+            },
+            "size": {
+               "$ref": "#/components/schemas/ImageResolution"
+            }
+         },
+         "required": [
+            "prompt"
+         ]
+      },
+      "GenerateImagesPostResponse": {
+         "type": "object",
+         "properties": {
+            "status": {
+               "$ref": "#/components/schemas/Status"
+            }
+         },
+         "required": [
+            "id"
+         ]
+      }
+   },
+   "paths": {
+      "/images/generate": {
+         "post": {
+            "summary": "Generates a batch of images from a text caption",
+            "operationId": "Images_Generate",
+            "consumes": [
+               "application/json"
+            ],
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [
+               {
+                  "in": "query",
+                  "name": "api-version",
+                  "required": true,
+                  "type": "string",
+                  "description": "API version."
+               },
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/definitions/GenerateImagesPostRequest"
+                  }
+                }
+            ],
+            "responses": {
+               "202": {
+                  "description": "Created",
+                  "headers": {
+                     "Operation-Location": {
+                        "type": "string",
+                        "description": "URL to poll for the operation result."
+                     }
+                  },
+                  "schema": {
+                     "$ref": "#/definitions/GenerateImagesPostResponse"
+                  }
+               },
+               "400": {
+                  "description": "BadRequest",
+                  "schema": {
+                     "$ref": "#/definitions/ErrorResponse"
+                  }
+               },
+               "429": {
+                  "description": "TooManyRequests",
+                  "schema": {
+                     "$ref": "#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/operations/{operationId}": {
+         "get": {
+            "summary": "Returns the status of the operation",
+            "operationId": "Operations_Get",
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [
+               {
+                  "in": "query",
+                  "name": "api-version",
+                  "required": true,
+                  "type": "string",
+                  "description": "API version."
+               },
+               {
+                  "in": "path",
+                  "name": "operationId",
+                  "required": true,
+                  "type": "string",
+                  "description": "The id of the operation"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK",
+                  "headers": {
+                     "Operation-Location": {
+                        "schema": {
+                           "type": "string"
+                        },
+                        "description": "The location of the operation."
+                     },
+                     "Retry-After": {
+                        "schema": {
+                           "type": "integer"
+                        },
+                        "description": "Indicates the number of seconds that the client should wait before trying to get the result from the URL identified by the Operation-Location header if the operation did not terminate yet."
+                     }
+                  },
+                  "schema": {
+                     "$ref": "#/components/schemas/OperationResponse"
+                  }
+               },
+               "400": {
+                  "description": "BadRequest",
+                  "schema": {
+                     "$ref": "#/components/schemas/ErrorResponse"
+                  }
+               },
+               "404": {
+                  "description": "NotFound",
+                  "schema": {
+                     "$ref": "#/components/schemas/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "delete": {
+            "summary": "Deletes an operation (if in terminal state)",
+            "operationId": "Operations_Delete",
+            "parameters": [
+               {
+                  "in": "query",
+                  "name": "api-version",
+                  "required": true,
+                  "type": "string",
+                  "description": "API version."
+               },
+               {
+                  "in": "path",
+                  "name": "operationId",
+                  "required": true,
+                  "type": "string",
+                  "description": "The id of the operation"
+               }
+            ],
+            "responses": {
+               "204": {
+                  "description": "NoContent"
+               },
+               "400": {
+                  "description": "BadRequest",
+                  "schema": {
+                     "$ref": "#/components/schemas/ErrorResponse"
+                  }
+               },
+               "404": {
+                  "description": "NotFound",
+                  "schema": {
+                     "$ref": "#/components/schemas/ErrorResponse"
+                  }
+               },
+               "409": {
+                  "description": "Conflict",
+                  "schema": {
+                     "$ref": "#/components/schemas/ErrorResponse"
+                  }
+               }
+            }
+         }
+      }
+   }
+}
