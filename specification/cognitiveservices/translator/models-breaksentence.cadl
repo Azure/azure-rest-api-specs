@@ -29,7 +29,7 @@ model BreakSentenceParameters {
 
     @body
     @doc("Array of the text for which values the sentence boundaries will be calculated.")
-    content: InputTextElement[];
+    content: InputTextItem[];
 }
 
 @doc("Response for the Break SEntence API.")
@@ -38,11 +38,11 @@ model BreakSentenceResult {
 
     @body
     @doc("Array of the break sentence elements.")
-    result: BreakSentenceElement[];
+    result: BreakSentenceItem[];
 }
 
 @doc("Elemented containing break sentence result.")
-model BreakSentenceElement {
+model BreakSentenceItem {
     @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
     detectedLanguage?: DetectedLanguage;
 

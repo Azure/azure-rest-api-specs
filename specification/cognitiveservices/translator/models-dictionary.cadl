@@ -32,7 +32,7 @@ model DictionaryLookupParamters {
 
     @body
     @doc("Array of the text to be sent to dictionary.")
-    content: InputTextElement[];
+    content: InputTextItem[];
 }
 
 @doc("Request paramters for the dictionary examples API.")
@@ -41,7 +41,7 @@ model DictionaryExamplesParamters {
 
     @body
     @doc("Array of the text to be sent to dictionary.")
-    content: DictionaryExampleTextElement[];
+    content: DictionaryExampleTextItem[];
 }
 
 @doc("Response for the dictionary lookup API.")
@@ -50,7 +50,7 @@ model DictionaryLookupResult {
 
     @body
     @doc("Array of the dictionary lookup elements.")
-    result: DictionaryLookupElement[];
+    result: DictionaryLookupItem[];
 }
 
 @doc("Response for the dictionary examples API.")
@@ -59,11 +59,11 @@ model DictionaryExamplesResult {
 
     @body
     @doc("Array of the dictionary examples elements.")
-    result: DictionaryExampleElement[];
+    result: DictionaryExampleItem[];
 }
 
 @doc("Element containing the text with translation.")
-model DictionaryExampleTextElement extends InputTextElement {
+model DictionaryExampleTextItem extends InputTextItem {
     @doc("""
     A string specifying the translated text previously returned by the Dictionary lookup operation. 
     This should be the value from the normalizedTarget field in the translations list of the Dictionary 
@@ -73,7 +73,7 @@ model DictionaryExampleTextElement extends InputTextElement {
 }
 
 @doc("Dictionary Lookup Element")
-model DictionaryLookupElement {
+model DictionaryLookupItem {
     @doc("""
     A string giving the normalized form of the source term.
     For example, if the request is "JOHN", the normalized form will be "john".
@@ -173,7 +173,7 @@ model BackTranslation {
 }
 
 @doc("Dictionary Example element")
-model DictionaryExampleElement {
+model DictionaryExampleItem {
     @doc("""
     A string giving the normalized form of the source term. Generally, this should be identical
     to the value of the Text field at the matching list index in the body of the request.
@@ -189,11 +189,11 @@ model DictionaryExampleElement {
     @doc("""
     A list of examples for the (source term, target term) pair.
     """)
-    examples: Example[];
+    examples: DictionaryExample[];
 }
 
 @doc("Dictionary Example")
-model Example {
+model DictionaryExample {
     @doc("""
     The string to concatenate before the value of sourceTerm to form a complete example.
     Do not add a space character, since it is already there when it should be.

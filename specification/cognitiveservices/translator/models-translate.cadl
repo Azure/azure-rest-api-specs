@@ -37,7 +37,7 @@ model TranslateParameters {
     Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
     complete element. Possible values are: plain (default) or html.
     """)
-    textType?: TextTypes = TextTypes.plain;
+    textType?: TextType = TextType.plain;
 
     @query
     @doc("""
@@ -52,14 +52,14 @@ model TranslateParameters {
     Specifies how profanities should be treated in translations.
     Possible values are: NoAction (default), Marked or Deleted.
     """)
-    profanityAction?: ProfanityActions = ProfanityActions.NoAction;
+    profanityAction?: ProfanityAction = ProfanityAction.NoAction;
 
     @query
     @doc("""
     Specifies how profanities should be marked in translations.
     Possible values are: Asterisk (default) or Tag. 
     """)
-    profanityMarker?: ProfanityMarkers = ProfanityMarkers.Asterisk;
+    profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
     @query
     @doc("""
@@ -110,7 +110,7 @@ model TranslateParameters {
 
     @body
     @doc("Array of the text to be translated.")
-    content: InputTextElement[];
+    content: InputTextItem[];
 }
 
 @doc("Response for the translation API.")
@@ -119,7 +119,7 @@ model TranslationResult {
 
     @body
     @doc("Array of the translated text elements.")
-    result: TranslatedTextElement[];
+    result: TranslatedTextItem[];
 
     @header("x-mt-system")
     @doc("""
@@ -142,7 +142,7 @@ model TranslationResult {
 
 @fixed
 @doc("Translation text type")
-enum TextTypes {
+enum TextType {
     plain,
     html
 }
@@ -163,7 +163,7 @@ enum ProfanityMarker {
 }
 
 @doc("Element containing the translated text")
-model TranslatedTextElement {
+model TranslatedTextItem {
     @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
     detectedLanguage?: DetectedLanguage;
 
@@ -210,7 +210,7 @@ model Translation {
     @doc("""
     Alignment information.
     """)
-    alignment?: Alignment;
+    alignment?: TranslatedTextAlignment;
 
     @doc("""
     Sentence boundaries in the input and output texts.
@@ -228,7 +228,7 @@ model Transliteration {
 }
 
 @doc("Alignment information object.")
-model Alignment {
+model TranslatedTextAlignment {
     @doc("""
     Maps input text to translated text. The alignment information is only provided when the request 
     parameter includeAlignment is true. Alignment is returned as a string value of the following 
