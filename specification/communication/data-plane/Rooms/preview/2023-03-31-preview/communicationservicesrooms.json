@@ -400,27 +400,10 @@
         },
         "participants": {
           "description": "(Optional) Collection of participants invited to the room.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InvitedRoomParticipant"
-          },
-          "x-ms-identifiers": []
-        }
-      }
-    },
-    "InvitedRoomParticipant": {
-      "description": "A participant invited to the room.",
-      "required": [
-        "rawId"
-      ],
-      "type": "object",
-      "properties": {
-        "rawId": {
-          "description": "Raw ID representation of the communication identifier. Please refer to the following document for additional information on Raw ID. <br> https://learn.microsoft.com/azure/communication-services/concepts/identifiers?pivots=programming-language-rest#raw-id-representation",
-          "type": "string"
-        },
-        "role": {
-          "$ref": "#/definitions/Role"
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ParticipantProperties"
+          }
         }
       }
     },
@@ -504,7 +487,7 @@
         "id": {
           "description": "Unique identifier of a room. This id is server generated.",
           "type": "string",
-          "example": "999126454"
+          "example": "99199690362660524"
         },
         "createdAt": {
           "format": "date-time",
