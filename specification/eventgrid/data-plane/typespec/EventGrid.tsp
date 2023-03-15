@@ -132,6 +132,7 @@ namespace EventGrid {
   alias EventType = EventGridEvent | CloudEventEvent;
 
   @doc("Publish Events")
+  @post
   @route("/send", { shared: true})
   op send is Azure.Core.RpcOperation<{
     @doc("channel name")
