@@ -9,10 +9,10 @@ using Cadl.Versioning;
   title: "BatchServiceClient",
   version: "2022-10-01.16.0",
 })
+@server("https://{endpoint}", "Batch Account endpoint", {endpoint: url})
 @useAuth(AADToken)
 @versioned(BatchService.Versions)
 @versionedDependency([[BatchService.Versions.v2022_10_01, Azure.Core.Versions.v1_0_Preview_2]])
-@server("https://{endpoint}", "Batch Account endpoint", {endpoint: url})
 
 @doc("A client for issuing REST requests to the Azure Batch service.")
 namespace BatchService;
