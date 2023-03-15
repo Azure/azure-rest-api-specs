@@ -254,6 +254,9 @@
           },
           "Create a scale set with Service Artifact Reference": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithServiceArtifactReference.json"
+          },
+          "Create a scale set with Security Posture Reference": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_Create_WithSecurityPostureReference.json"
           }
         }
       },
@@ -4719,6 +4722,10 @@
         "serviceArtifactReference": {
           "$ref": "#/definitions/ServiceArtifactReference",
           "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01"
+        },
+        "securityPostureReference": {
+          "$ref": "#/definitions/SecurityPostureReference",
+          "description": "Specifies the security posture to be used for all virtual machines in the scale set. Minimum api-version: 2023-03-01"
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -5816,6 +5823,23 @@
         }
       },
       "description": "Specifies the service artifact reference id used to set same image version for all virtual machines in the scale set when using 'latest' image version. Minimum api-version: 2022-11-01"
+    },
+    "SecurityPostureReference": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The security posture reference id in the form of /CommunityGalleries/{communityGalleryName}/securityPostures/{securityPostureName}/versions/{major.minor.patch}|{major.*}|latest"
+        },
+        "excludeExtensions": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualMachine.json#/definitions/VirtualMachineExtension"
+          },
+          "description": "List of virtual machine extensions to exclude when applying the Security Posture."
+        }
+      },
+      "description": "Specifies the security posture to be used for all virtual machines in the scale set. Minimum api-version: 2023-03-01"
     }
   }
 }
