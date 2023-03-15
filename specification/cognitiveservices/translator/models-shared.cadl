@@ -5,7 +5,7 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-namespace Translator.TextTranslation;
+namespace TextTranslation;
 
 alias CommonParameters = {
     @header("X-ClientTraceId")
@@ -31,7 +31,7 @@ alias CommonResultHeaders = {
 
 @doc("Representation of the Error Response from Translator Service.")
 @error
-model MtErrorResponse {
+model ErrorResponse {
     ...CommonResultHeaders;
 
     @doc("Error details.")

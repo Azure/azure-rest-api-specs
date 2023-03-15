@@ -6,7 +6,7 @@ using Cadl.Http;
 using Cadl.Rest;
 using Azure.Core;
 
-namespace Translator.TextTranslation;
+namespace TextTranslation;
 
 @doc("Request parameters for the translate API.")
 model TranslateParameters {
@@ -149,7 +149,7 @@ enum TextTypes {
 
 @fixed
 @doc("Translator profanity actions")
-enum ProfanityActions {
+enum ProfanityAction {
     NoAction,
     Marked,
     Deleted
@@ -157,7 +157,7 @@ enum ProfanityActions {
 
 @fixed
 @doc("Translator profanity markers")
-enum ProfanityMarkers {
+enum ProfanityMarker {
     Asterisk,
     Tag
 }
