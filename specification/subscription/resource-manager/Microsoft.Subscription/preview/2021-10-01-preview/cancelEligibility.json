@@ -71,6 +71,9 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponseBody"
             }
+          },
+          "x-ms-pageable": {
+            "nextLinkName": "nextLink"
           }
         }
       }
@@ -93,57 +96,67 @@
     "ErrorResponseBody": {
       "type": "object",
       "properties": {
-        "reasons": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Reasons"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "Reasons[]",
-          "description": "Error response Body for subscription not eligibile to cancel."
+        "error": {
+          "$ref": "#/definitions/Reasons"
         }
       },
       "required": [
-        "reasons"
+        "error"
+      ]
+    },
+    "Reason": {
+      "type": "object",
+      "properties": {
+        "SeverityLevel": {
+          "type": "string"
+        },
+        "ErrorCode": {
+          "type": "string"
+        },
+        "ErrorMessage": {
+          "type": "string"
+        },
+        "ResourceLockOwners": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]"
+        },
+        "Resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]"
+        }
+      },
+      "required": [
+        "SeverityLevel",
+        "ErrorCode",
+        "ErrorMessage"
       ]
     },
     "Reasons": {
       "type": "object",
       "properties": {
-        "severityLevel": {
-          "type": "string",
-          "description": "Severity level"
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "Error Code"
-        },
-        "errorMessage": {
-          "type": "string",
-          "description": "Error Message"
-        },
-        "resourceLockOwners": {
+        "reasons": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/Reason"
           },
-          "x-typespec-name": "string[]",
-          "description": "Resource Lock Owners"
+          "x-ms-identifiers": [],
+          "x-typespec-name": "Reason[]"
         },
-        "resources": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-typespec-name": "string[]",
-          "description": "Resources of the subscription"
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       },
-      "description": "Reasons for subscription not eligibile for cancel",
       "required": [
-        "severityLevel",
-        "errorCode",
-        "errorMessage"
+        "reasons",
+        "nextLink"
       ]
     }
   },
