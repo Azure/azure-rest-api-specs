@@ -1,19 +1,16 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
   title: "Azure.CodeSigning service",
 })
 @versioned(Azure.CodeSigning.Versions)
-@versionedDependency(
-  [[Azure.CodeSigning.Versions.v2022_06_15_preview, Azure.Core.Versions.v1_0_Preview_1]]
-)
 
 @server(
   "https://{region}.codesigning.azure.net/", 
@@ -26,10 +23,10 @@ using Azure.Core;
 namespace Azure.CodeSigning;
 
 enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2022_06_15_preview: "2022-06-15-preview",
 }
 
-#suppress "@azure-tools/cadl-azure-core/use-standard-operations" "This is a custom operation status endpoint."
 interface CertificateProfileOperations {
   @summary("Gets the status of a sign operation.")
   @doc("Gets the status of a sign operation.")
