@@ -834,6 +834,20 @@
             "cloudRoleArn": {
               "type": "string",
               "description": "The cloud role ARN in AWS for this feature"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for servers Arc auto provisioning",
+              "properties": {
+                "proxy": {
+                  "type": "string",
+                  "description": "Optional http proxy endpoint to use for the Arc agent"
+                },
+                "privateLinkScope": {
+                  "type": "string",
+                  "description": "Optional Arc private link scope resource id to link the Arc agent"
+                }
+              }
             }
           }
         },
@@ -959,6 +973,20 @@
             "cloudRoleArn": {
               "type": "string",
               "description": "The cloud role ARN in AWS for this feature"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for servers Arc auto provisioning",
+              "properties": {
+                "proxy": {
+                  "type": "string",
+                  "description": "Optional http proxy endpoint to use for the Arc agent"
+                },
+                "privateLinkScope": {
+                  "type": "string",
+                  "description": "Optional Arc private link scope resource id to link the Arc agent"
+                }
+              }
             }
           }
         },
@@ -969,6 +997,20 @@
             "enabled": {
               "type": "boolean",
               "description": "Is RDS protection enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "databasesDspm": {
+          "type": "object",
+          "description": "The databases DSPM configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is databases DSPM protection enabled"
             },
             "cloudRoleArn": {
               "type": "string",
@@ -1057,6 +1099,20 @@
             "enabled": {
               "type": "boolean",
               "description": "Is arc auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for servers Arc auto provisioning",
+              "properties": {
+                "proxy": {
+                  "type": "string",
+                  "description": "Optional http proxy endpoint to use for the Arc agent"
+                },
+                "privateLinkScope": {
+                  "type": "string",
+                  "description": "Optional Arc private link scope resource id to link the Arc agent"
+                }
+              }
             }
           }
         },
@@ -1120,6 +1176,40 @@
               }
             }
           }
+        },
+        "vmScanners": {
+          "type": "object",
+          "description": "The Microsoft Defender for Server VM scanning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Server VM scanning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Server VM scanning",
+              "properties": {
+                "scanningMode": {
+                  "type": "string",
+                  "description": "The scanning mode for the vm scan.",
+                  "enum": [
+                    "Default"
+                  ],
+                  "x-ms-enum": {
+                    "name": "scanningMode",
+                    "modelAsString": true
+                  }
+                },
+                "exclusionTags": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "VM tags that indicates that VM should not be scanned"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -1140,6 +1230,20 @@
             "enabled": {
               "type": "boolean",
               "description": "Is arc auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for servers Arc auto provisioning",
+              "properties": {
+                "proxy": {
+                  "type": "string",
+                  "description": "Optional http proxy endpoint to use for the Arc agent"
+                },
+                "privateLinkScope": {
+                  "type": "string",
+                  "description": "Optional Arc private link scope resource id to link the Arc agent"
+                }
+              }
             }
           }
         },
@@ -1292,6 +1396,20 @@
             "cloudRoleArn": {
                   "type": "string",
                   "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "databasesDspm": {
+          "type": "object",
+          "description": "The databases DSPM configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is databases DSPM protection enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
             }
           }
         }
