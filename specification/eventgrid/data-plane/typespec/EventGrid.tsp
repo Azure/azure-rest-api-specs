@@ -129,42 +129,35 @@ namespace EventGrid {
 
  // USE SHARED ROUTES
 
-  alias EventType = EventGridEvent | CloudEventEvent;
+  alias EventType = EventGridEvent[] | CloudEventEvent[];
 
-  @doc("Publish Events")
-  @post
+  @doc("Publish CloudEvents")
   @route("/send", { shared: true})
-  op send is Azure.Core.RpcOperation<{
-    @doc("channel name")
+  op PublishCloudEvent is Azure.Core.RpcOperation<{
+    
+    @doc("content type")
+    @header("content-type")
+    contentType: "application/cloudevents-batch+json; charset=utf-8",
+
+    @doc("Required only when publishing to partner namespaces with partner topic routing mode ChannelNameHeader.")
     @header("aeg-channel-name")
     channelName?: string,
 
     @doc("Events being published.")
     @body
-    events: EventType
-  }, {}>;
-
-  @doc("Publish CloudEvents")
-  @overload(send)
-  @route("/send", { shared: true})
-  op PublishCloudEvent is Azure.Core.RpcOperation<{
-    @doc("content type")
-    @header("content-type")
-    contentType: "application/cloudevents-batch+json; charset=utf-8",
-
-    @doc("Events being published.")
-    @body
-    events: CloudEventEvent,
+    events: CloudEventEvent[],
   }, {} >;
 
   @doc("Publish EventGridEvents")
-  @overload(send)
   @route("/send", { shared: true})
   op PublishEventGridEvent is Azure.Core.RpcOperation<{
+    @doc("content type")
+    @header("content-type")
+    contentType: "application/json",
 
     @doc("Events being published.")
     @body
-    events: EventGridEvent,
+    events: EventGridEvent[],
   }, {} >;
 
 }
