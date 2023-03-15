@@ -150,6 +150,9 @@
           "Successful Conversation Summarization Task Submit": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskSubmit.json"
           },
+          "Successful Custom Conversation Summarization Task Submit": {
+            "$ref": "./examples/conversations/SuccessfulCustomConversationSummarizationTaskSubmit.json"
+          },
           "Successful Conversation Sentiment Analysis Job Request": {
             "$ref": "./examples/conversations/SuccessfulConversationSentimentSubmit.json"
           }
@@ -202,6 +205,9 @@
           },
           "Successful Get Conversation Summarization Result": {
             "$ref": "./examples/conversations/SuccessfulConversationSummarizationTaskResult.json"
+          },
+          "Successful Get Custom Conversation Summarization Result": {
+            "$ref": "./examples/conversations/SuccessfulCustomConversationSummarizationTaskResult.json"
           }
         }
       }
@@ -1653,6 +1659,7 @@
       "enum": [
         "ConversationalPIITask",
         "ConversationalSummarizationTask",
+        "CustomConversationalSummarizationTask",
         "ConversationalSentimentTask"
       ],
       "x-ms-enum": {
@@ -1666,6 +1673,7 @@
       "enum": [
         "ConversationalPIIResults",
         "ConversationalSummarizationResults",
+        "CustomConversationalSummarizationResults",
         "ConversationalSentimentResults"
       ],
       "x-ms-enum": {
@@ -2103,9 +2111,24 @@
       ],
       "x-ms-discriminator-value": "ConversationalSummarizationTask"
     },
-    "ConversationSummarizationTaskParameters": {
+    "AnalyzeCustomConversationSummarizationTask": {
       "type": "object",
-      "description": "Supported parameters for an conversational summarization task.",
+      "description": "Task definition for custom conversational summarization.",
+      "properties": {
+        "parameters": {
+          "$ref": "#/definitions/CustomConversationSummarizationTaskParameters"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationLROTask"
+        }
+      ],
+      "x-ms-discriminator-value": "CustomConversationalSummarizationTask"
+    },
+    "ConversationSummarizationTaskParametersBase": {
+      "type": "object",
+      "description": "Supported parameters for any conversational summarization task.",
       "required": [
         "summaryAspects"
       ],
@@ -2147,10 +2170,31 @@
       },
       "allOf": [
         {
+          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+        }
+      ]
+    },
+    "ConversationSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for pre-build conversational summarization task.",
+      "allOf": [
+        {
           "$ref": "common.json#/definitions/PreBuiltTaskParameters"
         },
         {
-          "$ref": "common.json#/definitions/AbstractiveSummarizationTaskParametersBase"
+          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase"
+        }
+      ]
+    },
+    "CustomConversationSummarizationTaskParameters": {
+      "type": "object",
+      "description": "Supported parameters for a custom conversation summarization task.",
+      "allOf": [
+        {
+          "$ref": "common.json#/definitions/CustomTaskParameters"
+        },
+        {
+          "$ref": "#/definitions/ConversationSummarizationTaskParametersBase"
         }
       ]
     },
@@ -2172,7 +2216,25 @@
       ],
       "x-ms-discriminator-value": "ConversationalSummarizationResults"
     },
-    "SummaryResult": {
+    "AnalyzeCustomConversationSummarizationResult": {
+      "type": "object",
+      "description": "Result for the custom summarization task on the conversation.",
+      "properties": {
+        "results": {
+          "$ref": "#/definitions/CustomSummaryResult"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AnalyzeConversationJobResult"
+        }
+      ],
+      "required": [
+        "results"
+      ],
+      "x-ms-discriminator-value": "CustomConversationalSummarizationResults"
+    },
+    "SummaryResultBase": {
       "type": "object",
       "required": [
         "conversations"
@@ -2184,10 +2246,27 @@
             "$ref": "#/definitions/ConversationsSummaryResult"
           }
         }
-      },
+      }
+    },
+    "SummaryResult": {
+      "type": "object",
       "allOf": [
         {
+          "$ref": "#/definitions/SummaryResultBase"
+        },
+        {
           "$ref": "common.json#/definitions/PreBuiltResult"
+        }
+      ]
+    },
+    "CustomSummaryResult": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SummaryResultBase"
+        },
+        {
+          "$ref": "common.json#/definitions/CustomResult"
         }
       ]
     },
