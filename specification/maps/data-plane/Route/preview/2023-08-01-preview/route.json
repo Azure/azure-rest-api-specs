@@ -478,18 +478,22 @@
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
         },
         "properties": {
-          "type": "object",
-          "description": "Waypoint properties",
-          "properties": {
-            "pointIndex": {
-              "description": "It is used to identify and order the sequence of waypoints in the route, allowing for accurate navigation along the designated path.",
-              "format": "int64",
-              "type": "integer"
-            },
-            "pointType": {
-              "$ref": "#/definitions/InputPointTypeEnum"
-            }
-          }
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WaypointProperties"
+        }
+      }
+    },
+    "WaypointProperties": {
+      "type": "object",
+      "description": "Waypoint properties",
+      "properties": {
+        "pointIndex": {
+          "description": "It is used to identify and order the sequence of waypoints in the route, allowing for accurate navigation along the designated path.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "pointType": {
+          "$ref": "#/definitions/InputPointTypeEnum"
         }
       }
     },
@@ -509,70 +513,74 @@
               "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
             },
             "properties": {
-              "type": "object",
-              "description": "properties",
-              "properties": {
-                "pointTypes": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/OutputPointTypeEnum"
-                  }
-                },
-                "legPointIndex": {
-                  "$ref": "#/definitions/LegPointIndex"
-                },
-                "compassDirection": {
-                  "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
-                  "type": "string",
-                  "readOnly": true
-                },
-                "details": {
-                  "description": "Information about one of the maneuvers that is part of the itinerary item. An ItineraryItem can contain more than one Detail collection.",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Detail"
-                  }
-                },
-                "instruction": {
-                  "$ref": "#/definitions/Instruction"
-                },
-                "sideOfStreet": {
-                  "$ref": "#/definitions/SideOfStreetEnum"
-                },
-                "signs": {
-                  "description": "Signage text for the route. There may be more than one sign value for an itinerary item.",
-                  "type": "array",
-                  "readOnly": true,
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "towardsRoadName": {
-                  "description": "The name of the street that the route goes towards in the first itinerary item.",
-                  "type": "string",
-                  "readOnly": true
-                },
-                "exitIdentifier": {
-                  "description": "The name or number of the exit associated with this itinerary step.",
-                  "type": "string",
-                  "readOnly": true
-                },
-                "distanceInMeters": {
-                  "description": "The physical distance in meters covered by this route step.",
-                  "type": "number",
-                  "readOnly": true
-                },
-                "durationInSeconds": {
-                  "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
-                  "format": "int64",
-                  "type": "integer",
-                  "readOnly": true
-                }
-              }
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/ManeuverPointProperties"
             }
           }
         }
       ]
+    },
+    "ManeuverPointProperties": {
+      "description": "ManeuverPoint Properties",
+      "type": "object",
+      "properties": {
+        "pointTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutputPointTypeEnum"
+          }
+        },
+        "legPointIndex": {
+          "$ref": "#/definitions/LegPointIndex"
+        },
+        "compassDirection": {
+          "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Information about one of the maneuvers that is part of the itinerary item. An ItineraryItem can contain more than one Detail collection.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Detail"
+          }
+        },
+        "instruction": {
+          "$ref": "#/definitions/Instruction"
+        },
+        "sideOfStreet": {
+          "$ref": "#/definitions/SideOfStreetEnum"
+        },
+        "signs": {
+          "description": "Signage text for the route. There may be more than one sign value for an itinerary item.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "towardsRoadName": {
+          "description": "The name of the street that the route goes towards in the first itinerary item.",
+          "type": "string",
+          "readOnly": true
+        },
+        "exitIdentifier": {
+          "description": "The name or number of the exit associated with this itinerary step.",
+          "type": "string",
+          "readOnly": true
+        },
+        "distanceInMeters": {
+          "description": "The physical distance in meters covered by this route step.",
+          "type": "number",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        }
+      }
     },
     "ViaWaypointFeaturesItem": {
       "x-ms-discriminator-value": "ViaWaypoint",
@@ -593,32 +601,36 @@
               "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
             },
             "properties": {
-              "type": "object",
-              "description": "properties",
-              "properties": {
-                "pointTypes": {
-                  "type": "array",
-                  "description": "point types",
-                  "items": {
-                    "$ref": "#/definitions/OutputPointTypeEnum"
-                  }
-                },
-                "names": {
-                  "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
-                  "type": "array",
-                  "readOnly": true,
-                  "items": {
-                    "type": "string"
-                  }
-                },
-                "legPointIndex": {
-                  "$ref": "#/definitions/LegPointIndex"
-                }
-              }
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/ViaWaypointProperties"
             }
           }
         }
       ]
+    },
+    "ViaWaypointProperties": {
+      "description": "ViaWaypoint Properties",
+      "type": "object",
+      "properties": {
+        "pointTypes": {
+          "type": "array",
+          "description": "point types",
+          "items": {
+            "$ref": "#/definitions/OutputPointTypeEnum"
+          }
+        },
+        "names": {
+          "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "legPointIndex": {
+          "$ref": "#/definitions/LegPointIndex"
+        }
+      }
     },
     "RoutePathFeaturesItem": {
       "x-ms-discriminator-value": "RoutePath",
@@ -643,49 +655,53 @@
               "$ref": "#/definitions/Bbox"
             },
             "properties": {
-              "type": "object",
-              "description": "properties",
-              "properties": {
-                "resourceId": {
-                  "description": "A unique ID for the resource.",
-                  "type": "string",
-                  "readOnly": true
-                },
-                "distanceInMeters": {
-                  "description": "The physical distance in meters covered by the entire route.",
-                  "type": "number",
-                  "readOnly": true
-                },
-                "durationInSeconds": {
-                  "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
-                  "format": "int64",
-                  "type": "integer",
-                  "readOnly": true
-                },
-                "durationTrafficInSeconds": {
-                  "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
-                  "format": "int64",
-                  "type": "integer",
-                  "readOnly": true
-                },
-                "trafficDataUsed": {
-                  "$ref": "#/definitions/TrafficDataUsed"
-                },
-                "trafficCongestion": {
-                  "$ref": "#/definitions/TrafficCongestion"
-                },
-                "legs": {
-                  "description": "An array of route legs. Check RouteLeg object description for more information.",
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Leg"
-                  }
-                }
-              }
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/RoutePathProperties"
             }
           }
         }
       ]
+    },
+    "RoutePathProperties": {
+      "type": "object",
+      "description": "RoutePath properties",
+      "properties": {
+        "resourceId": {
+          "description": "A unique ID for the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "distanceInMeters": {
+          "description": "The physical distance in meters covered by the entire route.",
+          "type": "number",
+          "readOnly": true
+        },
+        "durationInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "durationTrafficInSeconds": {
+          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "trafficDataUsed": {
+          "$ref": "#/definitions/TrafficDataUsed"
+        },
+        "trafficCongestion": {
+          "$ref": "#/definitions/TrafficCongestion"
+        },
+        "legs": {
+          "description": "An array of route legs. Check RouteLeg object description for more information.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Leg"
+          }
+        }
+      }
     },
     "Kind": {
       "description": "kind",
