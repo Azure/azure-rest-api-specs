@@ -638,7 +638,15 @@
         },
         "syncAgentId": {
           "description": "ARM resource id of the sync agent in the sync member.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Sql/servers/syncAgents"
+              }
+            ]
+          }
         },
         "sqlServerDatabaseId": {
           "format": "uuid",
@@ -647,7 +655,8 @@
         },
         "syncMemberAzureDatabaseResourceId": {
           "description": "ARM resource id of the sync member logical database, for sync members in Azure.",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "usePrivateLinkConnection": {
           "description": "Whether to use private link connection.",
