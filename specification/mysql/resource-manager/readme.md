@@ -28,11 +28,11 @@ These are the global settings for the MySql API.
 title: MySQLManagementClient
 description: The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules, VNET rules, log files and configurations with new business model.
 openapi-type: arm
-tag: package-2022-09-01
+tag: package-2022-09-30-preview
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-2022-09-01
+tag: package-2022-09-30-preview
 ```
 
 ``` yaml $(package-singleservers)
@@ -160,22 +160,22 @@ input-file:
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
 ```
 
-### Tag: package-2022-09-01
+### Tag: package-2022-09-30
 
-These settings apply only when `--tag=package-2022-09-01` is specified on the command line.
+These settings apply only when `--tag=package-2022-09-30` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-09-01'
+``` yaml $(tag) == 'package-2022-09-30'
 input-file:
-- Microsoft.DBforMySQL/Backups/stable/2022-09-01/Backups.json
-- Microsoft.DBforMySQL/Configurations/stable/2022-09-01/Configurations.json
-- Microsoft.DBforMySQL/Databases/stable/2022-09-01/Databases.json
-- Microsoft.DBforMySQL/Firewall/stable/2022-09-01/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/stable/2022-09-01/FlexibleServers.json
-- Microsoft.DBforMySQL/LogFiles/stable/2022-09-01/LogFiles.json
-- Microsoft.DBforMySQL/ServiceOperations/stable/2022-09-01/ServiceOperations.json
-- Microsoft.DBforMySQL/AAD/stable/2022-09-01/AzureADAdministrator.json
-- Microsoft.DBforMySQL/PrivateLink/stable/2022-09-01/PrivateEndpointConnections.json
-- Microsoft.DBforMySQL/PrivateLink/stable/2022-09-01/PrivateLinkResources.json
+- Microsoft.DBforMySQL/Backups/preview/package-2022-09-30/Backups.json
+- Microsoft.DBforMySQL/Configurations/preview/package-2022-09-30/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/package-2022-09-30/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/package-2022-09-30/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/package-2022-09-30/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/package-2022-09-30/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/package-2022-09-30/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/preview/package-2022-09-30/AzureADAdministrator.json
+- Microsoft.DBforMySQL/PrivateLink/preview/package-2022-09-30/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/preview/package-2022-09-30/PrivateLinkResources.json
 ```
 
 ## Suppression
