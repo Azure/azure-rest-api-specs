@@ -48,6 +48,8 @@ input-file:
   - Microsoft.DocumentDB/preview/2023-03-01-preview/rbac.json
   - Microsoft.DocumentDB/preview/2023-03-01-preview/restorable.json
   - Microsoft.DocumentDB/preview/2023-03-01-preview/services.json
+modelerfour:
+  lenient-model-deduplication: true
 ```
 ### Tag: package-preview-2022-11
 

@@ -159,13 +159,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The mongo cluster request has no changes for the resource.",
+            "description": "OK. The mongo cluster request has no updates for the resource.",
             "schema": {
               "$ref": "#/definitions/MongoCluster"
             }
           },
           "201": {
-            "description": "Created. The mongo cluster is being created or updated asynchronously. Poll for provisioningState=Succeeded to find when the operation completes.",
+            "description": "The mongo cluster is being created or updated asynchronously. Poll for provisioningState=Succeeded to find when the operation completes.",
             "schema": {
               "$ref": "#/definitions/MongoCluster"
             }
@@ -375,8 +375,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK. The firewall request has no updates for the resource.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
           "201": {
-            "description": "Created. The firewall rule is being created or updated asynchronously. Poll for provisioningState=Succeeded to find when the operation completes.",
+            "description": "The firewall rule is being created or updated asynchronously. Poll for provisioningState=Succeeded to find when the operation completes.",
             "schema": {
               "$ref": "#/definitions/FirewallRule"
             }
@@ -625,7 +631,7 @@
     }
   },
   "definitions": {
-    "MongoClusterProvisioningState": {
+    "ProvisioningState": {
       "description": "The provisioning state of the resource.",
       "type": "string",
       "enum": [
@@ -636,7 +642,7 @@
         "Dropping"
       ],
       "x-ms-enum": {
-        "name": "MongoClusterProvisioningState",
+        "name": "ProvisioningState",
         "modelAsString": true
       },
       "readOnly": true
@@ -772,7 +778,7 @@
           "description": "Earliest restore timestamp in UTC ISO8601 format."
         },
         "provisioningState": {
-          "$ref": "#/definitions/MongoClusterProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "A provisioning state of the mongo cluster.",
           "readOnly": true
         },
@@ -850,7 +856,7 @@
       "description": "The properties of a mongo cluster firewall rule.",
       "properties": {
         "provisioningState": {
-          "$ref": "#/definitions/MongoClusterProvisioningState",
+          "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the firewall rule.",
           "readOnly": true
         },
