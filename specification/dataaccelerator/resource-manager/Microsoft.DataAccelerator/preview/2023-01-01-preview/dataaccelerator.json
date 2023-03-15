@@ -169,7 +169,7 @@
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/ClusterProperties"
+              "$ref": "#/definitions/IndexCluster"
             }
           }
         ],
@@ -342,24 +342,7 @@
           "type": "object",
           "description": "Properties of an Index Cluster",
           "x-ms-client-flatten": true,
-          "properties": {
-            "provisioningState": {
-              "description": "Provisioning state of the Extension proxy resource.",
-              "type": "string",
-              "enum": [
-                "Succeeded",
-                "Failed",
-                "Canceled",
-                "Accepted",
-                "Provisioning"
-              ],
-              "x-ms-enum": {
-                "name": "ProvisioningState",
-                "modelAsString": true
-              },
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/ClusterProperties"
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
@@ -425,19 +408,36 @@
       "description": "Definition of the properties for a TagRules resource.",
       "type": "object",
       "properties": {
+        "provisioningState": {
+          "description": "Provisioning state of the cluster resource.",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Accepted",
+            "Provisioning",
+            "NotSpecified",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "Deleted",
+            "PartiallySucceeded",
+            "InProgress",
+            "DisableInProgress",
+            "Connected",
+            "PartiallyConnected",
+            "Disconnected"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
+          "readOnly": true
+        },
         "Sku": {
           "$ref": "#/definitions/ResourceSku"
-        },
-        "Location": {
-          "description": "Location where the resource should be created, if the resourcegroup exists it will be created in the same location as the resource group",
-          "type": "string"
-        },
-        "Tags": {
-          "description": "Tags to attach to the index cluster",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          }
         },
         "ManagementPortalAppId": {
           "description": "App Id of the management portal",
