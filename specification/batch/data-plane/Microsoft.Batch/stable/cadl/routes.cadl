@@ -17,7 +17,6 @@ using Azure.DPG;
 
 namespace BatchService;
 
-
 // Interfaces ////////////////////
 @operationGroup
 @tag("Applications")
@@ -36,8 +35,10 @@ API.
   @get
   List is Azure.Core.Foundations.Operation<
     BatchApplicationListHeaders,
-    BatchResponseHeaders & ApplicationListResult
-  > ; 
+    BatchResponseHeaders & ApplicationListResult,
+    {},
+    BatchError
+  >;
 
   @summary("Gets information about the specified Application.")
   @doc("""
@@ -76,7 +77,8 @@ last aggregation interval is returned.
   ListUsageMetrics is Azure.Core.ResourceList<
     PoolUsageMetrics,
     {
-      parameters: BatchApplicationListHeaders & Pool_ListUsageMetricRequestHeaders;
+      parameters: BatchApplicationListHeaders &
+        Pool_ListUsageMetricRequestHeaders;
       response: BatchResponseHeaders;
     }
   >;
@@ -96,9 +98,10 @@ periodic roll-up of statistics. The typical delay is about 30 minutes.
   @get
   GetAllLifetimeStatistics is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders,
-    BatchResponseHeaders & PoolStatistics 
-  >; 
-
+    BatchResponseHeaders & PoolStatistics,
+    {},
+    BatchError
+  >;
 
   @summary("Adds a Pool to the specified Account.")
   @doc("""
@@ -130,31 +133,33 @@ to Microsoft Support engineers.
   @post
   Add is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @body
       @doc("The Pool to be added.")
       pool: BatchPool;
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "201";
+      @statusCode
+      code: "201";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
-
-@summary("Lists all of the Pools in the specified Account.")
+  @summary("Lists all of the Pools in the specified Account.")
   @doc("Lists all of the Pools in the specified Account.")
   @route("/pools")
-  @example(
-    "./examples/PoolList_Basic.json",
-    "Pool list"
-  )
+  @example("./examples/PoolList_Basic.json", "Pool list")
   @get
   List is Azure.Core.Foundations.Operation<
-    BatchApplicationListHeaders &{
+    BatchApplicationListHeaders & {
       @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-pools.
@@ -170,12 +175,12 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       @query
       $expand?: string;
     },
-    BatchResponseHeaders & BatchPoolListResult
+    BatchResponseHeaders & BatchPoolListResult,
+    {},
+    BatchError
   >;
 
-
-
-@summary("Deletes a Pool from the specified Account.")
+  @summary("Deletes a Pool from the specified Account.")
   @doc("""
 When you request that a Pool be deleted, the following actions occur: the Pool
 state is set to deleting; any ongoing resize operation on the Pool are stopped;
@@ -190,37 +195,29 @@ zero size before deleting the Pool. If you call an Update, Patch or Delete API
 on a Pool in the deleting state, it will fail with HTTP status code 409 with
 error code PoolBeingDeleted.
 """)
-  @example(
-    "./examples/PoolDelete.json",
-    "Pool delete"
-  )
+  @example("./examples/PoolDelete.json", "Pool delete")
   @route("/pools/{poolId}")
   @delete
   Delete is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & BatchPoolHeaders,
-    DeleteResponseHeaders
+    DeleteResponseHeaders,
+    {},
+    BatchError
   >;
 
-
- @doc("Gets basic properties of a Pool.")
- @example(
-    "./examples/PoolExists.json",
-    "Check Pool Exists"
-  )
+  @doc("Gets basic properties of a Pool.")
+  @example("./examples/PoolExists.json", "Check Pool Exists")
   @route("/pools/{poolId}")
   @head
   Exists is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & BatchPoolHeaders,
-    (PoolDoesntExistResponseHeaders | PoolDoesExistResponseHeaders)
+    PoolDoesntExistResponseHeaders | PoolDoesExistResponseHeaders,
+    {},
+    BatchError
   >;
 
-
-
- @doc("Gets information about the specified Pool.")
-  @example(
-    "./examples/PoolGet_Basic.json",
-    "Pool get"
-  )
+  @doc("Gets information about the specified Pool.")
+  @example("./examples/PoolGet_Basic.json", "Pool get")
   @example(
     "./examples/PoolGet_VirtualMachineConfigurationWithExtensions.json",
     "Get a VirtualMachineConfiguration pool with extensions"
@@ -228,54 +225,56 @@ error code PoolBeingDeleted.
   @route("/pools/{poolId}")
   @get
   Get is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchPoolHeaders & {
+    BatchClientRequestHeaders &
+      BatchPoolHeaders & {
+        @doc("An OData $select clause.")
+        @query
+        $select?: string;
 
-      @doc("An OData $select clause.")
-      @query
-      $select?: string;
+        @doc("An OData $expand clause.")
+        @query
+        $expand?: string;
+      },
+    BatchResponseHeaders & BatchPool,
+    {},
+    BatchError
+  >;
 
-      @doc("An OData $expand clause.")
-      @query
-      $expand?: string;
-    },
-    BatchResponseHeaders & BatchPool 
-  > ; 
-
-
- @summary("Updates the properties of the specified Pool.")
+  @summary("Updates the properties of the specified Pool.")
   @doc("""
 This only replaces the Pool properties specified in the request. For example,
 if the Pool has a StartTask associated with it, and a request does not specify
 a StartTask element, then the Pool keeps the existing StartTask.
 """)
-  @example(
-    "./examples/PoolPatch.json",
-    "Patch the Pool"
-  )
+  @example("./examples/PoolPatch.json", "Patch the Pool")
   @route("/pools/{poolId}")
   @patch
   Patch is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchPoolHeaders &{
-      @doc("The parameters for the request.")
-      @body
-      poolUpdate: BatchPool;
-    },
+    BatchClientRequestHeaders &
+      BatchPoolHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
+
+        @doc("The parameters for the request.")
+        @body
+        poolUpdate: BatchPool;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
-      
+      @statusCode
+      code: "200";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
-@summary("Disables automatic scaling for a Pool.")
+  @summary("Disables automatic scaling for a Pool.")
   @doc("Disables automatic scaling for a Pool.")
-  @example(
-    "./examples/PoolDisableAutoScale.json",
-    "Disable pool autoscale"
-  )
+  @example("./examples/PoolDisableAutoScale.json", "Disable pool autoscale")
   @route("/pools/{poolId}/disableautoscale")
   @post
   DisableAutoScale is Azure.Core.Foundations.Operation<
@@ -286,16 +285,18 @@ a StartTask element, then the Pool keeps the existing StartTask.
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
-      
+      @statusCode
+      code: "200";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
-
- @summary("Enables automatic scaling for a Pool.")
+  @summary("Enables automatic scaling for a Pool.")
   @doc("""
 You cannot enable automatic scaling on a Pool if a resize operation is in
 progress on the Pool. If automatic scaling of the Pool is currently disabled,
@@ -304,43 +305,46 @@ scaling of the Pool is already enabled, you may specify a new autoscale formula
 and/or a new evaluation interval. You cannot call this API for the same Pool
 more than once every 30 seconds.
 """)
-  @example(
-    "./examples/PoolEnableAutoscale.json",
-    "Pool enable autoscale"
-  )
+  @example("./examples/PoolEnableAutoscale.json", "Pool enable autoscale")
   @route("/pools/{poolId}/enableautoscale")
   @post
   EnableAutoScale is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchPoolHeaders & {
-      @doc("The parameters for the request.")
-      @body
-      parameters: BatchPoolEnableAutoScaleParameters;
-    },
+    BatchClientRequestHeaders &
+      BatchPoolHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
+
+        @doc("The parameters for the request.")
+        @body
+        poolEnableAutoScaleParameter: BatchPoolEnableAutoScaleParameters;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
-      
+      @statusCode
+      code: "200";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
-
- @summary("Gets the result of evaluating an automatic scaling formula on the Pool.")
+  @summary("Gets the result of evaluating an automatic scaling formula on the Pool.")
   @doc("""
 This API is primarily for validating an autoscale formula, as it simply returns
 the result without applying the formula to the Pool. The Pool must have auto
 scaling enabled in order to evaluate a formula.
 """)
-  @example(
-    "./examples/PoolEvaluateAutoscale.json",
-    "Pool evaluate autoscale"
-  )
+  @example("./examples/PoolEvaluateAutoscale.json", "Pool evaluate autoscale")
   @route("/pools/{poolId}/evaluateautoscale")
   @post
   EvaluateAutoScale is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The ID of the Pool on which to evaluate the automatic scaling formula.")
       @path
       poolId: string;
@@ -349,20 +353,21 @@ scaling enabled in order to evaluate a formula.
       @body
       parameters: BatchPoolEvaluateAutoScaleParameters;
     },
-     BatchResponseHeaders & AutoScaleRun  & {
-      @doc("A process exit code.")
-      @statusCode code: "200";
-      
-      @doc("The OData ID of the resource to which the request applied")
-      @header("DataServiceId")
-      "DataServiceId": string;
-    }
+    BatchResponseHeaders &
+      AutoScaleRun & {
+        @doc("A process exit code.")
+        @statusCode
+        code: "200";
+
+        @doc("The OData ID of the resource to which the request applied")
+        @header("DataServiceId")
+        DataServiceId: string;
+      },
+      {},
+      BatchError
   >;
 
-
-
-
- @summary("Changes the number of Compute Nodes that are assigned to a Pool.")
+  @summary("Changes the number of Compute Nodes that are assigned to a Pool.")
   @doc("""
 You can only resize a Pool when its allocation state is steady. If the Pool is
 already resizing, the request fails with status code 409. When you resize a
@@ -372,27 +377,30 @@ the Batch service returns an error 409. If you resize a Pool downwards, the
 Batch service chooses which Compute Nodes to remove. To remove specific Compute
 Nodes, use the Pool remove Compute Nodes API instead.
 """)
-  @example(
-    "./examples/PoolResize.json",
-    "Pool resize"
-  )
+  @example("./examples/PoolResize.json", "Pool resize")
   @route("/pools/{poolId}/resize")
   @post
   Resize is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchPoolHeaders & {
-  
-      @doc("The parameters for the request.")
-      @body
-      parameters: BatchPoolResizeParameters;
-    },
+    BatchClientRequestHeaders &
+      BatchPoolHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
+
+        @doc("The parameters for the request.")
+        @body
+        parameters: BatchPoolResizeParameters;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "202";
-      
+      @statusCode
+      code: "202";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
   @summary("Stops an ongoing resize operation on the Pool.")
@@ -405,15 +413,14 @@ the Pool allocation state changes first to stopping and then to steady. A
 resize operation need not be an explicit resize Pool request; this API can also
 be used to halt the initial sizing of the Pool when it is created.
 """)
-  @example(
-    "./examples/PoolStopResize.json",
-    "Pool stop resize"
-  )
+  @example("./examples/PoolStopResize.json", "Pool stop resize")
   @route("/pools/{poolId}/stopresize")
   @post
   StopResize is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & BatchPoolHeaders,
-    PoolStopResizeResponseHeaders
+    PoolStopResizeResponseHeaders,
+    {},
+    BatchError
   >;
 
   @summary("Updates the properties of the specified Pool.")
@@ -422,49 +429,50 @@ This fully replaces all the updatable properties of the Pool. For example, if
 the Pool has a StartTask associated with it and if StartTask is not specified
 with this request, then the Batch service will remove the existing StartTask.
 """)
-  @example(
-    "./examples/PoolUpdate.json",
-    "Pool update"
-  )
+  @example("./examples/PoolUpdate.json", "Pool update")
   @route("/pools/{poolId}/updateproperties")
   @post
   UpdateProperties is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The ID of the Pool to update.")
       @path
       poolId: string;
-
 
       @doc("The parameters for the request.")
       @body
       poolUpdatePropertiesParameter: BatchPool;
     },
-    PoolUpdatePropertiesResponseHeaders
+    PoolUpdatePropertiesResponseHeaders,
+    {},
+    BatchError
   >;
 
- 
   @summary("Removes Compute Nodes from the specified Pool.")
   @doc("""
 This operation can only run when the allocation state of the Pool is steady.
 When this operation runs, the allocation state changes from steady to resizing.
 Each request may remove up to 100 nodes.
 """)
-  @example(
-    "./examples/PoolRemoveNodes.json",
-    "Pool remove nodes"
-  )
+  @example("./examples/PoolRemoveNodes.json", "Pool remove nodes")
   @route("/pools/{poolId}/removenodes")
   @post
   RemoveNodes is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchPoolHeaders & {
-    
-      @doc("The parameters for the request.")
-      @body
-      parameters: NodeRemoveParameters;
-    },
-    PoolRemoveNodesResponseHeaders
-  >;
+    BatchClientRequestHeaders &
+      BatchPoolHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
 
+        @doc("The parameters for the request.")
+        @body
+        parameters: NodeRemoveParameters;
+      },
+    PoolRemoveNodesResponseHeaders,
+    {},
+    BatchError
+  >;
 }
 
 @operationGroup
@@ -472,23 +480,27 @@ Each request may remove up to 100 nodes.
 interface Account {
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @doc("Lists all Virtual Machine Images supported by the Azure Batch service.")
-  @example("./examples/AccountListSupportedImages.json", "Account list node agent skus")
+  @example(
+    "./examples/AccountListSupportedImages.json",
+    "Account list node agent skus"
+  )
   @route("/supportedimages")
   @get
   ListSupportedImages is Azure.Core.Foundations.Operation<
-       BatchApplicationListHeaders & {
-        @doc("""
+    BatchApplicationListHeaders & {
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
 """)
-        @query
-        $filter?: string;
-      },
-      BatchResponseHeaders & AccountListSupportedImagesResult
+      @query
+      $filter?: string;
+    },
+    BatchResponseHeaders & AccountListSupportedImagesResult,
+    {},
+    BatchError
   >;
 
-
- @doc("""
+  @doc("""
 Gets the number of Compute Nodes in each state, grouped by Pool. Note that the
 numbers returned may not always be up to date. If you need exact node counts,
 use a list query.
@@ -497,17 +509,18 @@ use a list query.
   @route("/nodecounts")
   @get
   ListPoolNodeCounts is Azure.Core.Foundations.Operation<
-       BatchApplicationListHeaders & {
-        @doc("""
+    BatchApplicationListHeaders & {
+      @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.
 """)
-        @query
-        $filter?: string;
-      },
-      BatchClientResponseHeaders & PoolNodeCountsListResult
+      @query
+      $filter?: string;
+    },
+    BatchClientResponseHeaders & PoolNodeCountsListResult,
+    {},
+    BatchError
   >;
-
 }
 
 @operationGroup
@@ -520,16 +533,20 @@ Account, from Account creation to the last update time of the statistics. The
 statistics may not be immediately available. The Batch service performs
 periodic roll-up of statistics. The typical delay is about 30 minutes.
 """)
-  @example("./examples/JobGetLifetimeStatistics.json", "Job get lifetime statistics")
+  @example(
+    "./examples/JobGetLifetimeStatistics.json",
+    "Job get lifetime statistics"
+  )
   @route("/lifetimejobstats")
   @get
   GetAllLifetimeStatistics is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders,
-    BatchResponseHeaders & JobStatistics
+    BatchResponseHeaders & JobStatistics,
+    {},
+    BatchError
   >;
 
-
- @summary("Deletes a Job.")
+  @summary("Deletes a Job.")
   @doc("""
 Deleting a Job also deletes all Tasks that are part of that Job, and all Job
 statistics. This also overrides the retention period for Task data; that is, if
@@ -544,41 +561,43 @@ that the Job is being deleted.
   @route("/jobs/{jobId}")
   @delete
   Delete is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job to delete.")
-      @path
-      jobId: string;
-    },
-    DeleteResponseHeaders
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job to delete.")
+        @path
+        jobId: string;
+      },
+    DeleteResponseHeaders,
+    {},
+    BatchError
   >;
 
-
-@summary("Gets information about the specified Job.")
+  @summary("Gets information about the specified Job.")
   @doc("Gets information about the specified Job.")
   @example("./examples/JobGet.json", "Job get")
   @route("/jobs/{jobId}")
   @get
   Get is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job.")
+        @path
+        jobId: string;
 
-      @doc("An OData $select clause.")
-      @query
-      $select?: string;
+        @doc("An OData $select clause.")
+        @query
+        $select?: string;
 
-      @doc("An OData $expand clause.")
-      @query
-      $expand?: string;
-
-      
-    },
-    BatchResponseHeaders & BatchJob
+        @doc("An OData $expand clause.")
+        @query
+        $expand?: string;
+      },
+    BatchResponseHeaders & BatchJob,
+    {},
+    BatchError
   >;
 
-
- @summary("Updates the properties of the specified Job.")
+  @summary("Updates the properties of the specified Job.")
   @doc("""
 This replaces only the Job properties specified in the request. For example, if
 the Job has constraints, and a request does not specify the constraints
@@ -588,25 +607,31 @@ element, then the Job keeps the existing constraints.
   @route("/jobs/{jobId}")
   @patch
   Patch is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job whose properties you want to update.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
 
-      @doc("The parameters for the request.")
-      @body
-      jobUpdate: BatchJob;
-    },
+        @doc("The ID of the Job whose properties you want to update.")
+        @path
+        jobId: string;
+
+        @doc("The parameters for the request.")
+        @body
+        jobUpdate: BatchJob;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
-      
+      @statusCode
+      code: "200";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
-
 
   @summary("Updates the properties of the specified Job.")
   @doc("""
@@ -618,27 +643,33 @@ with this request, then the Batch service will remove the existing constraints.
   @route("/jobs/{jobId}")
   @put
   Update is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job whose properties you want to update.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
 
-      @doc("The parameters for the request.")
-      @body
-      job: BatchJob;
-    },
+        @doc("The ID of the Job whose properties you want to update.")
+        @path
+        jobId: string;
+
+        @doc("The parameters for the request.")
+        @body
+        job: BatchJob;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
-      
+      @statusCode
+      code: "200";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
-
- @summary("Disables the specified Job, preventing new Tasks from running.")
+  @summary("Disables the specified Job, preventing new Tasks from running.")
   @doc("""
 The Batch Service immediately moves the Job to the disabling state. Batch then
 uses the disableTasks parameter to determine what to do with the currently
@@ -653,23 +684,30 @@ the request fails with status code 409.
   @route("/jobs/{jobId}/disable")
   @post
   Disable is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & BatchMatchHeaders &{
-      @doc("The ID of the Job to disable.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
 
-      @doc("The parameters for the request.")
-      @body
-      parameters: BatchJobDisableParameters;
-    },
+        @doc("The ID of the Job to disable.")
+        @path
+        jobId: string;
+
+        @doc("The parameters for the request.")
+        @body
+        parameters: BatchJobDisableParameters;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "202";
-      
+      @statusCode
+      code: "202";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
   @summary("Enables the specified Job, allowing new Tasks to run.")
@@ -685,23 +723,26 @@ than 180 days ago, those Tasks will not run.
   @route("/jobs/{jobId}/enable")
   @post
   Enable is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job to enable.")
-      @path
-      jobId: string;
-    },
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job to enable.")
+        @path
+        jobId: string;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "202";
-      
+      @statusCode
+      code: "202";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
-
-@summary("Terminates the specified Job, marking it as completed.")
+  @summary("Terminates the specified Job, marking it as completed.")
   @doc("""
 When a Terminate Job request is received, the Batch service sets the Job to the
 terminating state. The Batch service then terminates any running Tasks
@@ -714,23 +755,27 @@ Tasks cannot be added and any remaining active Tasks will not be scheduled.
   @route("/jobs/{jobId}/terminate")
   @post
   Terminate is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job to terminate.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job to terminate.")
+        @path
+        jobId: string;
 
-      @doc("The parameters for the request.")
-      @body
-      parameters?: BatchJobTerminateParameters;
-    },
-     BatchResponseHeaders & {
+        @doc("The parameters for the request.")
+        @body
+        parameters?: BatchJobTerminateParameters;
+      },
+    BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "202";
-      
+      @statusCode
+      code: "202";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
   @summary("Adds a Job to the specified Account.")
@@ -751,18 +796,24 @@ engineers.
   @post
   Add is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The Job to be added.")
       @body
       job: BatchJob;
     },
-     BatchResponseHeaders & {
+    BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "201";
-      
+      @statusCode
+      code: "201";
+
       @doc("The OData ID of the resource to which the request applied")
       @header("DataServiceId")
-      "DataServiceId": string;
-    }
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
   @summary("Lists all of the Jobs in the specified Account.")
@@ -786,14 +837,18 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       @doc("An OData $expand clause.")
       @query
       $expand?: string;
-
     },
-    BatchResponseHeaders & BatchJobListResult
+    BatchResponseHeaders & BatchJobListResult,
+    {},
+    BatchError
   >;
 
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
   @doc("Lists the Jobs that have been created under the specified Job Schedule.")
-  @example("./examples/JobListFromJobSchedule.json", "List Job Under Job Schedule")
+  @example(
+    "./examples/JobListFromJobSchedule.json",
+    "List Job Under Job Schedule"
+  )
   @route("/jobschedules/{jobScheduleId}/jobs")
   @get
   ListFromJobSchedule is Azure.Core.Foundations.Operation<
@@ -817,7 +872,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       @query
       $expand?: string;
     },
-    BatchResponseHeaders & BatchJobListResult
+    BatchResponseHeaders & BatchJobListResult,
+    {},
+    BatchError
   >;
 
   @summary("""
@@ -832,7 +889,10 @@ invoked on a Job which has no Job Preparation or Job Release Task, the Batch
 service returns HTTP status code 409 (Conflict) with an error code of
 JobPreparationTaskNotSpecified.
 """)
-  @example("./examples/JobListPreparationAndReleaseTaskStatus.json", "Job list preparation and release task status")
+  @example(
+    "./examples/JobListPreparationAndReleaseTaskStatus.json",
+    "Job list preparation and release task status"
+  )
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
   @get
   ListPreparationAndReleaseTaskStatus is Azure.Core.Foundations.Operation<
@@ -852,7 +912,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       @query
       $select?: string;
     },
-    BatchResponseHeaders & BatchJobListPreparationAndReleaseTaskStatusResult
+    BatchResponseHeaders & BatchJobListPreparationAndReleaseTaskStatusResult,
+    {},
+    BatchError
   >;
 
   @summary("Gets the Task counts for the specified Job.")
@@ -871,7 +933,9 @@ up to date. If you need exact task counts, use a list query.
       @path
       jobId: string;
     },
-    BatchClientResponseHeaders & TaskCountsResult
+    BatchClientResponseHeaders & TaskCountsResult,
+    {},
+    BatchError
   >;
 }
 
@@ -885,15 +949,24 @@ interface Certificates {
   @post
   Add is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & {
-    
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The Certificate to be added.")
       @body
       certificate: Certificate;
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "201";
-      }
+      @statusCode
+      code: "201";
+
+      @header("DataServiceId")
+      @doc("The OData ID of the resource to which the request applied.")
+      DataServiceId: string;
+    },
+    {},
+    BatchError
   >;
 
   @summary("Lists all of the Certificates that have been added to the specified Account.")
@@ -914,7 +987,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       @query
       $select?: string;
     },
-    BatchResponseHeaders & CertificateListResult
+    BatchResponseHeaders & CertificateListResult,
+    {},
+    BatchError
   >;
 
   @summary("Cancels a failed deletion of a Certificate from the specified Account.")
@@ -927,7 +1002,10 @@ Certificate, you do not need to run this operation after the deletion failed.
 You must make sure that the Certificate is not being used by any resources, and
 then you can try again to delete the Certificate.
 """)
-  @example("./examples/CertificateCancelDelete.json", "Certificate cancel delete")
+  @example(
+    "./examples/CertificateCancelDelete.json",
+    "Certificate cancel delete"
+  )
   @route("/certificates(thumbprintAlgorithm={thumbprintAlgorithm},thumbprint={thumbprint})/canceldelete")
   @post
   CancelDeletion is Azure.Core.Foundations.Operation<
@@ -939,17 +1017,18 @@ then you can try again to delete the Certificate.
       @doc("The thumbprint of the Certificate being deleted.")
       @path
       thumbprint: string;
-
-    
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "204";
+      @statusCode
+      code: "204";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Deletes a Certificate from the specified Account.")
@@ -979,8 +1058,11 @@ active if you decide that you want to continue using the Certificate.
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "202";
-    }
+      @statusCode
+      code: "202";
+    },
+    {},
+    BatchError
   >;
 
   @doc("Gets information about the specified Certificate.")
@@ -1001,7 +1083,9 @@ active if you decide that you want to continue using the Certificate.
       @query
       $select?: string;
     },
-    BatchResponseHeaders & Certificate
+    BatchResponseHeaders & Certificate,
+    {},
+    BatchError
   >;
 }
 
@@ -1022,44 +1106,55 @@ directory and all of the files and subdirectories in it. If recursive is false
 then the directory must be empty or deletion will fail.
 """)
       @query
-      recursive?: boolean;
+      recursive: boolean;
     },
     BatchClientResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
-      }
+      @statusCode
+      code: "200";
+    },
+    {},
+    BatchError
   >;
 
   @doc("Returns the content of the specified Task file.")
   @example("./examples/FileGetFromTask.json", "Get File From Task")
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
-  @get      
+  @get
   GetFromTask is Azure.Core.Foundations.Operation<
-    BatchJobFileClientRequestHeaders & BatchModifiedSinceHeaders & {
-  
-      @doc("""
+    BatchJobFileClientRequestHeaders &
+      BatchModifiedSinceHeaders & {
+        @doc("""
 The byte range to be retrieved. The default is to retrieve the entire file. The
 format is bytes=startRange-endRange.
 """)
-      @header
-      "ocp-range"?: string;
-    },
-    BatchResponseHeaders & FileResponse & {
-      @header("content-type") contentType: "application/octet-stream";
+        @header
+        "ocp-range"?: string;
+      },
+    BatchResponseHeaders &
+      FileResponse & {
+        @header("content-type") contentType: "application/octet-stream";
 
-      @body
-      @doc("A response containing the file content.")
-      file: bytes;
-    }
+        @body
+        @doc("A response containing the file content.")
+        file: bytes;
+      },
+      {},
+      BatchError
   >;
 
   @doc("Gets the properties of the specified Task file.")
-  @example("./examples/FileGetPropertiesFromTask.json", "File get properties from task")
+  @example(
+    "./examples/FileGetPropertiesFromTask.json",
+    "File get properties from task"
+  )
   @route("/jobs/{jobId}/tasks/{taskId}/files/{filePath}")
   @head
   GetPropertiesFromTask is Azure.Core.Foundations.Operation<
     BatchJobFileClientRequestHeaders & BatchModifiedSinceHeaders,
-    BatchResponseHeaders & FileResponse
+    BatchResponseHeaders & FileResponse,
+    {},
+    BatchError
   >;
 
   @summary("Deletes the specified file from the Compute Node.")
@@ -1069,7 +1164,6 @@ format is bytes=startRange-endRange.
   @delete
   DeleteFromComputeNode is Azure.Core.Foundations.Operation<
     BatchPoolFileClientRequestHeaders & {
-  
       @doc("""
 Whether to delete children of a directory. If the filePath parameter represents
 a directory instead of a file, you can set recursive to true to delete the
@@ -1079,10 +1173,13 @@ then the directory must be empty or deletion will fail.
       @query
       recursive?: boolean;
     },
-    BatchClientResponseHeaders & { 
+    BatchClientResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
-      }
+      @statusCode
+      code: "200";
+    },
+    {},
+    BatchError
   >;
 
   @doc("Returns the content of the specified Compute Node file.")
@@ -1090,31 +1187,39 @@ then the directory must be empty or deletion will fail.
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @get
   GetFromComputeNode is Azure.Core.Foundations.Operation<
-    BatchPoolFileClientRequestHeaders & BatchModifiedSinceHeaders & {
-     
-      @doc("""
+    BatchPoolFileClientRequestHeaders &
+      BatchModifiedSinceHeaders & {
+        @doc("""
 The byte range to be retrieved. The default is to retrieve the entire file. The
 format is bytes=startRange-endRange.
 """)
-      @header
-      "ocp-range"?: string;
-    },
-    BatchResponseHeaders & FileResponse & {
-      @header("content-type") contentType: "application/octet-stream";
+        @header
+        "ocp-range"?: string;
+      },
+    BatchResponseHeaders &
+      FileResponse & {
+        @header("content-type") contentType: "application/octet-stream";
 
-      @body
-      @doc("A response containing the file content.")
-      file: bytes;
-    }
+        @body
+        @doc("A response containing the file content.")
+        file: bytes;
+      },
+      {},
+      BatchError
   >;
 
   @doc("Gets the properties of the specified Compute Node file.")
-  @example("./examples/FileGetPropertiesFromNode.json", "File get properties from node")
+  @example(
+    "./examples/FileGetPropertiesFromNode.json",
+    "File get properties from node"
+  )
   @route("/pools/{poolId}/nodes/{nodeId}/files/{filePath}")
   @head
   GetPropertiesFromComputeNode is Azure.Core.Foundations.Operation<
     BatchPoolFileClientRequestHeaders & BatchModifiedSinceHeaders,
-    BatchResponseHeaders & FileResponse
+    BatchResponseHeaders & FileResponse,
+    {},
+    BatchError
   >;
 
   @summary("Lists the files in a Task's directory on its Compute Node.")
@@ -1146,7 +1251,9 @@ combination with the filter parameter to list specific type of files.
       @query
       recursive?: boolean;
     },
-    BatchResponseHeaders & NodeFileListResult
+    BatchResponseHeaders & NodeFileListResult,
+    {},
+    BatchError
   >;
 
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
@@ -1156,7 +1263,6 @@ combination with the filter parameter to list specific type of files.
   @get
   ListFromComputeNode is Azure.Core.Foundations.Operation<
     BatchApplicationListHeaders & {
-    
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1176,7 +1282,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       @query
       recursive?: boolean;
     },
-    BatchResponseHeaders & NodeFileListResult
+    BatchResponseHeaders & NodeFileListResult,
+    {},
+    BatchError
   >;
 }
 
@@ -1189,19 +1297,23 @@ interface JobSchedule {
   @route("/jobschedules/{jobScheduleId}")
   @head
   Exists is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule which you want to check.")
-      @path
-      jobScheduleId: string;
-    },
-    BatchResponseHeaders & {
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job Schedule which you want to check.")
+        @path
+        jobScheduleId: string;
+      },
+    (BatchResponseHeaders & {
       @doc("A response containing headers related to the Job Schedule, if it exists.")
-      @statusCode code: "200";
-      } | 
-      {
+      @statusCode
+      code: "200";
+    }) | {
       @doc("The Job Schedule does not exist.")
-      @statusCode code: "404";
-      }
+      @statusCode
+      code: "404";
+    },
+    {},
+    BatchError
   >;
 
   @summary("Deletes a Job Schedule from the specified Account.")
@@ -1216,12 +1328,15 @@ though they are still counted towards Account lifetime statistics.
   @route("/jobschedules/{jobScheduleId}")
   @delete
   Delete is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to delete.")
-      @path
-      jobScheduleId: string;
-    },
-    DeleteResponseHeaders
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job Schedule to delete.")
+        @path
+        jobScheduleId: string;
+      },
+    DeleteResponseHeaders,
+    {},
+    BatchError
   >;
 
   @doc("Gets information about the specified Job Schedule.")
@@ -1229,20 +1344,23 @@ though they are still counted towards Account lifetime statistics.
   @route("/jobschedules/{jobScheduleId}")
   @get
   Get is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to get.")
-      @path
-      jobScheduleId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job Schedule to get.")
+        @path
+        jobScheduleId: string;
 
-      @doc("An OData $select clause.")
-      @query
-      $select?: string;
+        @doc("An OData $select clause.")
+        @query
+        $select?: string;
 
-      @doc("An OData $expand clause.")
-      @query
-      $expand?: string;
-    },
-    BatchResponseHeaders & BatchJobSchedule
+        @doc("An OData $expand clause.")
+        @query
+        $expand?: string;
+      },
+    BatchResponseHeaders & BatchJobSchedule,
+    {},
+    BatchError
   >;
 
   @summary("Updates the properties of the specified Job Schedule.")
@@ -1257,23 +1375,30 @@ running Jobs are unaffected.
   @route("/jobschedules/{jobScheduleId}")
   @patch
   Patch is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to update.")
-      @path
-      jobScheduleId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
 
-      @doc("The parameters for the request.")
-      @body
-      jobScheduleUpdate: BatchJobSchedule;
-    },
+        @doc("The ID of the Job Schedule to update.")
+        @path
+        jobScheduleId: string;
+
+        @doc("The parameters for the request.")
+        @body
+        jobScheduleUpdate: BatchJobSchedule;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
+      @statusCode
+      code: "200";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Updates the properties of the specified Job Schedule.")
@@ -1288,23 +1413,30 @@ running Jobs are unaffected.
   @route("/jobschedules/{jobScheduleId}")
   @put
   Update is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to update.")
-      @path
-      jobScheduleId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
 
-      @doc("The parameters for the request.")
-      @body
-      jobSchedule: BatchJobSchedule;
-    },
+        @doc("The ID of the Job Schedule to update.")
+        @path
+        jobScheduleId: string;
+
+        @doc("The parameters for the request.")
+        @body
+        jobSchedule: BatchJobSchedule;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
+      @statusCode
+      code: "200";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Disables a Job Schedule.")
@@ -1313,19 +1445,23 @@ running Jobs are unaffected.
   @route("/jobschedules/{jobScheduleId}/disable")
   @post
   Disable is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to disable.")
-      @path
-      jobScheduleId: string;
-    },
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job Schedule to disable.")
+        @path
+        jobScheduleId: string;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "204";
+      @statusCode
+      code: "204";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Enables a Job Schedule.")
@@ -1334,19 +1470,23 @@ running Jobs are unaffected.
   @route("/jobschedules/{jobScheduleId}/enable")
   @post
   Enable is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to enable.")
-      @path
-      jobScheduleId: string;
-    },
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job Schedule to enable.")
+        @path
+        jobScheduleId: string;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "204";
+      @statusCode
+      code: "204";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Terminates a Job Schedule.")
@@ -1355,41 +1495,54 @@ running Jobs are unaffected.
   @route("/jobschedules/{jobScheduleId}/terminate")
   @post
   Terminate is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job Schedule to terminates.")
-      @path
-      jobScheduleId: string;
-    },
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job Schedule to terminates.")
+        @path
+        jobScheduleId: string;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "202";
+      @statusCode
+      code: "202";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Adds a Job Schedule to the specified Account.")
   @doc("Adds a Job Schedule to the specified Account.")
   @example("./examples/JobScheduleAdd_Basic.json", "Add a basic JobSchedule")
-  @example("./examples/JobScheduleAdd_Complex.json", "Add a complex JobScheduleAdd")
+  @example(
+    "./examples/JobScheduleAdd_Complex.json",
+    "Add a complex JobScheduleAdd"
+  )
   @route("/jobschedules")
   @post
   Add is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The Job Schedule to be added.")
       @body
       jobSchedule: BatchJobSchedule;
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "201";
+      @statusCode
+      code: "201";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Lists all of the Job Schedules in the specified Account.")
@@ -1414,7 +1567,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       @query
       $expand?: string;
     },
-    BatchResponseHeaders & BatchJobScheduleListResult
+    BatchResponseHeaders & BatchJobScheduleListResult,
+    {},
+    BatchError
   >;
 }
 
@@ -1428,13 +1583,25 @@ Task has not completed within 180 days of being added it will be terminated by
 the Batch service and left in whatever state it was in at that time.
 """)
   @example("./examples/TaskAdd_Basic.json", "Add a basic task")
-  @example("./examples/TaskAdd_ExitConditions.json", "Add a task with exit conditions")
-  @example("./examples/TaskAdd_ContainerSettings.json", "Add a task with container settings")
-  @example("./examples/TaskAdd_RequiredSlots.json", "Add a task with extra slot requirement")
+  @example(
+    "./examples/TaskAdd_ExitConditions.json",
+    "Add a task with exit conditions"
+  )
+  @example(
+    "./examples/TaskAdd_ContainerSettings.json",
+    "Add a task with container settings"
+  )
+  @example(
+    "./examples/TaskAdd_RequiredSlots.json",
+    "Add a task with extra slot requirement"
+  )
   @route("/jobs/{jobId}/tasks")
   @post
   Add is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The ID of the Job to which the Task is to be added.")
       @path
       jobId: string;
@@ -1445,12 +1612,15 @@ the Batch service and left in whatever state it was in at that time.
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "201";
+      @statusCode
+      code: "201";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Lists all of the Tasks that are associated with the specified Job.")
@@ -1483,7 +1653,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       @query
       $expand?: string;
     },
-    BatchResponseHeaders & BatchTaskListResult
+    BatchResponseHeaders & BatchTaskListResult,
+    {},
+    BatchError
   >;
 
   @summary("Adds a collection of Tasks to the specified Job.")
@@ -1503,12 +1675,21 @@ lifetime of a Task from addition to completion is 180 days. If a Task has not
 completed within 180 days of being added it will be terminated by the Batch
 service and left in whatever state it was in at that time.
 """)
-  @example("./examples/TaskAddCollection_Basic.json", "Add a basic collection of tasks")
-  @example("./examples/TaskAddCollection_Complex.json", "Add a complex collection of tasks")
+  @example(
+    "./examples/TaskAddCollection_Basic.json",
+    "Add a basic collection of tasks"
+  )
+  @example(
+    "./examples/TaskAddCollection_Complex.json",
+    "Add a complex collection of tasks"
+  )
   @route("/jobs/{jobId}/addtaskcollection")
   @post
   AddCollection is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The ID of the Job to which the Task collection is to be added.")
       @path
       jobId: string;
@@ -1517,7 +1698,9 @@ service and left in whatever state it was in at that time.
       @body
       taskCollection: BatchTaskCollection;
     },
-    BatchClientResponseHeaders & TaskAddCollectionResult
+    BatchClientResponseHeaders & TaskAddCollectionResult,
+    {},
+    BatchError
   >;
 
   @summary("Deletes a Task from the specified Job.")
@@ -1532,19 +1715,23 @@ background.
   @route("/jobs/{jobId}/tasks/{taskId}")
   @delete
   Delete is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job from which to delete the Task.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job from which to delete the Task.")
+        @path
+        jobId: string;
 
-      @doc("The ID of the Task to delete.")
-      @path
-      taskId: string;
-    },
+        @doc("The ID of the Task to delete.")
+        @path
+        taskId: string;
+      },
     BatchClientResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
-    }
+      @statusCode
+      code: "200";
+    },
+    {},
+    BatchError
   >;
 
   @summary("Gets information about the specified Task.")
@@ -1557,29 +1744,32 @@ information about subtasks.
   @route("/jobs/{jobId}/tasks/{taskId}")
   @get
   Get is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job that contains the Task.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job that contains the Task.")
+        @path
+        jobId: string;
 
-      @doc("The ID of the Task to get information about.")
-      @path
-      taskId: string;
+        @doc("The ID of the Task to get information about.")
+        @path
+        taskId: string;
 
-      @doc("An OData $select clause.")
-      @query
-      $select?: string;
+        @doc("An OData $select clause.")
+        @query
+        $select?: string;
 
-      @doc("An OData $expand clause.")
-      @query
-      $expand?: string;
-    },
-
-    BatchResponseHeaders & BatchTask & {
-      @header("DataServiceId")
-      @doc("The OData ID of the resource to which the request applied.")
-      DataServiceId: string;
-    }
+        @doc("An OData $expand clause.")
+        @query
+        $expand?: string;
+      },
+    BatchResponseHeaders &
+      BatchTask & {
+        @header("DataServiceId")
+        @doc("The OData ID of the resource to which the request applied.")
+        DataServiceId: string;
+      },
+    {},
+    BatchError
   >;
 
   @doc("Updates the properties of the specified Task.")
@@ -1587,27 +1777,34 @@ information about subtasks.
   @route("/jobs/{jobId}/tasks/{taskId}")
   @put
   Update is Azure.Core.Foundations.Operation<
-    BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job containing the Task.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @header("content-type")
+        contentType: "application/json; odata=minimalmetadata";
 
-      @doc("The ID of the Task to update.")
-      @path
-      taskId: string;
+        @doc("The ID of the Job containing the Task.")
+        @path
+        jobId: string;
 
-      @doc("The parameters for the request.")
-      @body
-      task: BatchTask;
-    },
+        @doc("The ID of the Task to update.")
+        @path
+        taskId: string;
+
+        @doc("The parameters for the request.")
+        @body
+        task: BatchTask;
+      },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
+      @statusCode
+      code: "200";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("""
@@ -1632,7 +1829,9 @@ Task.
       @query
       $select?: string;
     },
-    BatchResponseHeaders & BatchTaskListSubtasksResult
+    BatchResponseHeaders & BatchTaskListSubtasksResult,
+    {},
+    BatchError
   >;
 
   @summary("Terminates the specified Task.")
@@ -1645,20 +1844,23 @@ primary task; subtasks are then terminated asynchronously in the background.
   @route("/jobs/{jobId}/tasks/{taskId}/terminate")
   @post
   Terminate is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job containing the Task.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job containing the Task.")
+        @path
+        jobId: string;
 
-      @doc("The ID of the Task to terminate.")
-      @path
-      taskId: string;
-    },
+        @doc("The ID of the Task to terminate.")
+        @path
+        taskId: string;
+      },
     BatchResponseHeaders & {
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("""
@@ -1678,20 +1880,23 @@ will fail if the Job has completed (or is terminating or deleting).
   @route("/jobs/{jobId}/tasks/{taskId}/reactivate")
   @post
   Reactivate is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & BatchMatchHeaders & {
-      @doc("The ID of the Job containing the Task.")
-      @path
-      jobId: string;
+    BatchClientRequestHeaders &
+      BatchMatchHeaders & {
+        @doc("The ID of the Job containing the Task.")
+        @path
+        jobId: string;
 
-      @doc("The ID of the Task to reactivate.")
-      @path
-      taskId: string;
-    },
+        @doc("The ID of the Task to reactivate.")
+        @path
+        taskId: string;
+      },
     BatchResponseHeaders & {
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 }
 
@@ -1707,7 +1912,10 @@ running state.
   @route("/pools/{poolId}/nodes/{nodeId}/users")
   @post
   AddUser is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1722,12 +1930,15 @@ running state.
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "201";
+      @statusCode
+      code: "201";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Deletes a user Account from the specified Compute Node.")
@@ -1739,7 +1950,7 @@ running state.
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @delete
   DeleteUser is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1754,8 +1965,11 @@ running state.
     },
     BatchClientResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
-    }
+      @statusCode
+      code: "200";
+    },
+    {},
+    BatchError
   >;
 
   @summary("""
@@ -1772,7 +1986,10 @@ Account on a Compute Node only when it is in the idle or running state.
   @route("/pools/{poolId}/nodes/{nodeId}/users/{userName}")
   @put
   UpdateUser is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1791,12 +2008,15 @@ Account on a Compute Node only when it is in the idle or running state.
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
+      @statusCode
+      code: "200";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Gets information about the specified Compute Node.")
@@ -1805,7 +2025,7 @@ Account on a Compute Node only when it is in the idle or running state.
   @route("/pools/{poolId}/nodes/{nodeId}")
   @get
   Get is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1818,7 +2038,9 @@ Account on a Compute Node only when it is in the idle or running state.
       @query
       $select?: string;
     },
-    BatchResponseHeaders & ComputeNode
+    BatchResponseHeaders & ComputeNode,
+    {},
+    BatchError
   >;
 
   @summary("Restarts the specified Compute Node.")
@@ -1827,7 +2049,10 @@ Account on a Compute Node only when it is in the idle or running state.
   @route("/pools/{poolId}/nodes/{nodeId}/reboot")
   @post
   Reboot is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1842,12 +2067,15 @@ Account on a Compute Node only when it is in the idle or running state.
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "202";
+      @statusCode
+      code: "202";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Reinstalls the operating system on the specified Compute Node.")
@@ -1860,7 +2088,10 @@ cloud service configuration property.
   @route("/pools/{poolId}/nodes/{nodeId}/reimage")
   @post
   Reimage is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
+
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1875,12 +2106,15 @@ cloud service configuration property.
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "202";
+      @statusCode
+      code: "202";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Disables Task scheduling on the specified Compute Node.")
@@ -1892,7 +2126,7 @@ scheduling state is enabled.
   @route("/pools/{poolId}/nodes/{nodeId}/disablescheduling")
   @post
   DisableScheduling is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1907,12 +2141,15 @@ scheduling state is enabled.
     },
     BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
+      @statusCode
+      code: "200";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Enables Task scheduling on the specified Compute Node.")
@@ -1924,7 +2161,7 @@ state is disabled
   @route("/pools/{poolId}/nodes/{nodeId}/enablescheduling")
   @post
   EnableScheduling is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1933,14 +2170,17 @@ state is disabled
       @path
       nodeId: string;
     },
-    BatchResponseHeaders  & {
+    BatchResponseHeaders & {
       @doc("A process exit code.")
-      @statusCode code: "200";
+      @statusCode
+      code: "200";
 
       @header("DataServiceId")
       @doc("The OData ID of the resource to which the request applied.")
       DataServiceId: string;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("Gets the settings required for remote login to a Compute Node.")
@@ -1951,11 +2191,14 @@ invoked only on Pools created with the virtual machine configuration property.
 For Pools created with a cloud service configuration, see the GetRemoteDesktop
 API.
 """)
-  @example("./examples/NodeGetRemoteLoginSettings.json", "Node get remote login settings")
+  @example(
+    "./examples/NodeGetRemoteLoginSettings.json",
+    "Node get remote login settings"
+  )
   @route("/pools/{poolId}/nodes/{nodeId}/remoteloginsettings")
   @get
   GetRemoteLoginSettings is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1964,7 +2207,9 @@ API.
       @path
       nodeId: string;
     },
-    BatchResponseHeaders & ComputeNodeGetRemoteLoginSettingsResult
+    BatchResponseHeaders & ComputeNodeGetRemoteLoginSettingsResult,
+    {},
+    BatchError
   >;
 
   @summary("Gets the Remote Desktop Protocol file for the specified Compute Node.")
@@ -1974,11 +2219,14 @@ user Account on the Compute Node. This API can only be invoked on Pools created
 with a cloud service configuration. For Pools created with a virtual machine
 configuration, see the GetRemoteLoginSettings API.
 """)
-  @example("./examples/NodeGetRemoteDesktop.json", "Get RDP file of the compute node")
+  @example(
+    "./examples/NodeGetRemoteDesktop.json",
+    "Get RDP file of the compute node"
+  )
   @route("/pools/{poolId}/nodes/{nodeId}/rdp")
   @get
   GetRemoteDesktop is Azure.Core.Foundations.Operation<
-     BatchClientRequestHeaders & {
+    BatchClientRequestHeaders & {
       @doc("The ID of the Pool that contains the Compute Node.")
       @path
       poolId: string;
@@ -1996,7 +2244,9 @@ Protocol file.
       @body
       @doc("A response containing the file content.")
       file: bytes;
-    }
+    },
+    {},
+    BatchError
   >;
 
   @summary("""
@@ -2009,27 +2259,35 @@ from Compute Nodes if you are experiencing an error and wish to escalate to
 Azure support. The Azure Batch service log files should be shared with Azure
 support to aid in debugging issues with the Batch service.
 """)
-  @example("./examples/NodeUploadBatchServiceLogs.json", "Upload BatchService Logs")
+  @example(
+    "./examples/NodeUploadBatchServiceLogs.json",
+    "Upload BatchService Logs"
+  )
   @route("/pools/{poolId}/nodes/{nodeId}/uploadbatchservicelogs")
   @post
-  UploadBatchServiceLogs is  Azure.Core.Foundations.Operation<
+  UploadBatchServiceLogs is Azure.Core.Foundations.Operation<
     BatchClientRequestHeaders & {
-        @doc("The ID of the Pool that contains the Compute Node.")
-        @path
-        poolId: string;
+      @header("content-type")
+      contentType: "application/json; odata=minimalmetadata";
 
-        @doc("""
+      @doc("The ID of the Pool that contains the Compute Node.")
+      @path
+      poolId: string;
+
+      @doc("""
 The ID of the Compute Node for which you want to get the Remote Desktop
 Protocol file.
 """)
-        @path
-        nodeId: string;
+      @path
+      nodeId: string;
 
-        @doc("The Azure Batch service log files upload configuration.")
-        @body
-        uploadBatchServiceLogsConfiguration: UploadBatchServiceLogsConfiguration;
-      },
-      BatchClientResponseHeaders & UploadBatchServiceLogsResult
+      @doc("The Azure Batch service log files upload configuration.")
+      @body
+      uploadBatchServiceLogsConfiguration: UploadBatchServiceLogsConfiguration;
+    },
+    BatchClientResponseHeaders & UploadBatchServiceLogsResult,
+    {},
+    BatchError
   >;
 
   @summary("Lists the Compute Nodes in the specified Pool.")
@@ -2054,7 +2312,9 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
       @query
       $select?: string;
     },
-    BatchResponseHeaders & ComputeNodeListResult
+    BatchResponseHeaders & ComputeNodeListResult,
+    {},
+    BatchError
   >;
 }
 
@@ -2063,7 +2323,10 @@ https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#li
 interface ComputeNodeExtensions {
   @summary("Gets information about the specified Compute Node Extension.")
   @doc("Gets information about the specified Compute Node Extension.")
-  @example("./examples/ComputeNodeExtensionGet.json", "Get compute node extension")
+  @example(
+    "./examples/ComputeNodeExtensionGet.json",
+    "Get compute node extension"
+  )
   @route("/pools/{poolId}/nodes/{nodeId}/extensions/{extensionName}")
   @get
   Get is Azure.Core.Foundations.Operation<
@@ -2087,16 +2350,21 @@ about.
       @query
       $select?: string;
     },
-    BatchResponseHeaders & NodeVMExtension
+    BatchResponseHeaders & NodeVMExtension,
+    {},
+    BatchError
   >;
 
   @summary("Lists the Compute Nodes Extensions in the specified Pool.")
   @doc("Lists the Compute Nodes Extensions in the specified Pool.")
-  @example("./examples/ComputeNodeExtensionList.json", "List compute node extensions")
+  @example(
+    "./examples/ComputeNodeExtensionList.json",
+    "List compute node extensions"
+  )
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
   @get
   List is Azure.Core.Foundations.Operation<
-    BatchApplicationListHeaders &  {
+    BatchApplicationListHeaders & {
       @doc("The ID of the Pool that contains Compute Node.")
       @path
       poolId: string;
@@ -2109,34 +2377,38 @@ about.
       @query
       $select?: string;
     },
-    BatchResponseHeaders & NodeVMExtensionList
+    BatchResponseHeaders & NodeVMExtensionList,
+    {},
+    BatchError
   >;
 }
-
-
 
 // headers ////////////////////
 
 @doc("The request to the Batch service was successful.")
 model PoolRemoveNodesResponseHeaders {
   ...BatchResponseHeaders;
+
   @doc("A process exit code.")
-  @statusCode code: "202";
+  @statusCode
+  code: "202";
 
   @doc("The OData ID of the resource to which the request applied")
   @header("DataServiceId")
-  "DataServiceId": string;
+  DataServiceId: string;
 }
 
 @doc("The request to the Batch service was successful.")
 model PoolUpdatePropertiesResponseHeaders {
   ...BatchResponseHeaders;
+
   @doc("A process exit code.")
-  @statusCode code: "204";
+  @statusCode
+  code: "204";
 
   @doc("The OData ID of the resource to which the request applied")
   @header("DataServiceId")
-  "DataServiceId": string;
+  DataServiceId: string;
 }
 
 alias PoolStopResizeResponseHeaders = PoolResizeResponseHeaders;
@@ -2144,97 +2416,98 @@ alias PoolStopResizeResponseHeaders = PoolResizeResponseHeaders;
 @doc("The request to the Batch service was successful.")
 model PoolResizeResponseHeaders {
   ...BatchResponseHeaders;
+
   @doc("A process exit code.")
-  @statusCode code: "202";
+  @statusCode
+  code: "202";
 
   @doc("The OData ID of the resource to which the request applied")
   @header("DataServiceId")
-  "DataServiceId": string;
+  DataServiceId: string;
 }
 
 @doc("Common header values for pool requests")
 model FileResponse {
-      @doc("A process exit code.")
-      @statusCode code: "200";
+  @doc("A process exit code.")
+  @statusCode
+  code: "200";
 
-      @header
-      @doc("The file creation time.")
-      @format("date-time-rfc1123")
-      "ocp-creation-time"?: string;
+  @header
+  @doc("The file creation time.")
+  @format("date-time-rfc1123")
+  "ocp-creation-time"?: string;
 
-      @header
-      @doc("Whether the object represents a directory.")   
-      "ocp-batch-file-isdirectory": boolean;
+  @header
+  @doc("Whether the object represents a directory.")
+  "ocp-batch-file-isdirectory": boolean;
 
-      @header
-      @doc("The URL of the file.")            
-      "ocp-batch-file-url": string;
+  @header
+  @doc("The URL of the file.")
+  "ocp-batch-file-url": string;
 
-      @header
-      @doc("The file mode attribute in octal format.")          
-      "ocp-batch-file-mode": string;
+  @header
+  @doc("The file mode attribute in octal format.")
+  "ocp-batch-file-mode": string;
 
-      @header
-      @doc("The length of the file.")             
-      "Content-Length": int64;
+  @header
+  @doc("The length of the file.")
+  "Content-Length": int64;
 
-      //@header
-      //@doc("The content type of the file.")
-      //"content-Type":  string;
-    }
-
+  //@header
+  //@doc("The content type of the file.")
+  //"content-Type":  string;
+}
 
 @doc("Common header values for pool requests")
 model BatchPoolHeaders extends BatchMatchHeaders {
- 
-      @doc("The ID of the Pool to get.")
-      @path
-      poolId: string;
-    }
+  @doc("The ID of the Pool to get.")
+  @path
+  poolId: string;
+}
 
 @doc("Common header values for pool requests")
-model BatchMatchHeaders extends BatchModifiedSinceHeaders{
- 
-      @doc("""
+model BatchMatchHeaders extends BatchModifiedSinceHeaders {
+  @doc("""
 An ETag value associated with the version of the resource known to the client.
 The operation will be performed only if the resource's current ETag on the
 service exactly matches the value specified by the client.
 """)
-      @header
-      "If-Match"?: string;
+  @header
+  "If-Match"?: string;
 
-      @doc("""
+  @doc("""
 An ETag value associated with the version of the resource known to the client.
 The operation will be performed only if the resource's current ETag on the
 service does not match the value specified by the client.
 """)
-      @header
-      "If-None-Match"?: string;
-    }
+  @header
+  "If-None-Match"?: string;
+}
 
 @doc("Common header values for modified headers")
-model BatchModifiedSinceHeaders{
-    @doc("""
+model BatchModifiedSinceHeaders {
+  @doc("""
 A timestamp indicating the last modified time of the resource known to the
 client. The operation will be performed only if the resource on the service has
 been modified since the specified time.
 """)
-      @header
-      @format("date-time-rfc1123")
-      "If-Modified-Since"?: string;
+  @header
+  @format("date-time-rfc1123")
+  "If-Modified-Since"?: string;
 
-      @doc("""
+  @doc("""
 A timestamp indicating the last modified time of the resource known to the
 client. The operation will be performed only if the resource on the service has
 not been modified since the specified time.
 """)
-      @header
-      @format("date-time-rfc1123")
-      "If-Unmodified-Since"?: string;
+  @header
+  @format("date-time-rfc1123")
+  "If-Unmodified-Since"?: string;
 }
 
 // This is the standard set of headers that most of batch apis return
-alias BatchResponseHeaders = BatchClientResponseHeaders & BatchEtagResponseHeaders;
+alias BatchResponseHeaders = BatchClientResponseHeaders &
+  BatchEtagResponseHeaders;
 
 @doc("Etag related response header values")
 model BatchEtagResponseHeaders {
@@ -2264,21 +2537,24 @@ model BatchClientResponseHeaders {
 @doc("A response containing headers related to the Pool, if it exists.")
 model PoolDoesExistResponseHeaders {
   ...BatchResponseHeaders;
+
   @doc("A process exit code.")
-  @statusCode code: "200";  
+  @statusCode
+  code: "200";
 }
 
 @doc("The Pool does not exist.")
 model PoolDoesntExistResponseHeaders {
   @doc("A process exit code.")
-  @statusCode code: "404";  
+  @statusCode
+  code: "404";
 }
-
 
 @doc("The parameters for a widget status request")
 model DeleteResponseHeaders {
   @doc("A process exit code.")
-  @statusCode code: "202";
+  @statusCode
+  code: "202";
 
   @doc("The client-request-id provided by the client during the request. This will be returned only if the return-client-request-id parameter was set to true.")
   @header
@@ -2289,9 +2565,6 @@ model DeleteResponseHeaders {
   "request-id"?: string;
 }
 
-
-
-
 @doc("The parameters for a widget status request")
 model BatchApplicationListHeaders extends BatchClientRequestHeaders {
   @doc("""
@@ -2301,7 +2574,12 @@ applications can be returned.
   @query
   @minValue(1)
   @maxValue(1000)
-  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
+  @extension(
+    "x-ms-parameter-grouping",
+    {
+      postfix: "Options",
+    }
+  )
   maxresults?: int32 = 1000;
 
   @doc("""
@@ -2311,41 +2589,44 @@ directly.
 """)
   @header
   @format("date-time-rfc1123")
-  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
+  @extension(
+    "x-ms-parameter-grouping",
+    {
+      postfix: "Options",
+    }
+  )
   "ocp-date"?: string;
 }
 
 @doc("Common header parms for Pool related File operartions")
-model BatchPoolFileClientRequestHeaders extends BatchClientRequestHeaders{
-      @doc("The ID of the Pool that contains the Compute Node.")
-      @path
-      poolId: string;
+model BatchPoolFileClientRequestHeaders extends BatchClientRequestHeaders {
+  @doc("The ID of the Pool that contains the Compute Node.")
+  @path
+  poolId: string;
 
-      @doc("The ID of the Compute Node from which you want to delete the file.")
-      @path
-      nodeId: string;
+  @doc("The ID of the Compute Node from which you want to delete the file.")
+  @path
+  nodeId: string;
 
-      @doc("The path to the file or directory that you want to delete.")
-      @path
-      filePath: string;
+  @doc("The path to the file or directory that you want to delete.")
+  @path
+  filePath: string;
 }
 
 @doc("Common header parms for Job related File operartions")
-model BatchJobFileClientRequestHeaders extends BatchClientRequestHeaders{
-      @doc("The ID of the Job that contains the Task.")
-      @path
-      jobId: string;
+model BatchJobFileClientRequestHeaders extends BatchClientRequestHeaders {
+  @doc("The ID of the Job that contains the Task.")
+  @path
+  jobId: string;
 
-      @doc("The ID of the Task whose file you want to retrieve.")
-      @path
-      taskId: string;
+  @doc("The ID of the Task whose file you want to retrieve.")
+  @path
+  taskId: string;
 
-      @doc("The path to the Task file that you want to get the content of.")
-      @path
-      filePath: string;
+  @doc("The path to the Task file that you want to get the content of.")
+  @path
+  filePath: string;
 }
-
-
 
 @doc("The parameters for a widget status request")
 model BatchClientRequestHeaders {
@@ -2354,7 +2635,12 @@ The maximum number of items to return in the response. A maximum of 1000
 applications can be returned.
 """)
   @query
-  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
+  @extension(
+    "x-ms-parameter-grouping",
+    {
+      postfix: "Options",
+    }
+  )
   timeOut?: int32 = 30;
 
   @doc("""
@@ -2362,13 +2648,23 @@ The caller-generated request identity, in the form of a GUID with no decoration
 such as curly braces, e.g. 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 """)
   @header
-  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
+  @extension(
+    "x-ms-parameter-grouping",
+    {
+      postfix: "Options",
+    }
+  )
   @format("uuid")
   "client-request-id"?: string;
 
   @doc("Whether the server should return the client-request-id in the response.")
   @header
-  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
+  @extension(
+    "x-ms-parameter-grouping",
+    {
+      postfix: "Options",
+    }
+  )
   "return-client-request-id"?: boolean = false;
 
   @doc("""
@@ -2377,36 +2673,38 @@ current system clock time; set it explicitly if you are calling the REST API
 directly.
 """)
   @header
-  @extension("x-ms-parameter-grouping",{"postfix": "Options"})
+  @extension(
+    "x-ms-parameter-grouping",
+    {
+      postfix: "Options",
+    }
+  )
   @format("date-time-rfc1123")
   "ocp-date"?: string;
 }
 
-
-
 @doc("The parameters for a widget status request")
 model Pool_ListUsageMetricRequestHeaders {
-
-        @doc("""
+  @doc("""
 The earliest time from which to include metrics. This must be at least two and
 a half hours before the current time. If not specified this defaults to the
 start time of the last aggregation interval currently available.
 """)
-        @query
-        starttime?: zonedDateTime;
+  @query
+  starttime?: zonedDateTime;
 
-        @doc("""
+  @doc("""
 The latest time from which to include metrics. This must be at least two hours
 before the current time. If not specified this defaults to the end time of the
 last aggregation interval currently available.
 """)
-        @query
-        endtime?: zonedDateTime;
+  @query
+  endtime?: zonedDateTime;
 
-        @doc("""
+  @doc("""
 An OData $filter clause. For more information on constructing this filter, see
 https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-account-usage-metrics.
 """)
-        @query
-        $filter?: string;
+  @query
+  $filter?: string;
 }
