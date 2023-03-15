@@ -160,22 +160,22 @@ input-file:
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
 ```
 
-### Tag: package-2022-09-30
+### Tag: package-2022-09-30-preview
 
-These settings apply only when `--tag=package-2022-09-30` is specified on the command line.
+These settings apply only when `--tag=package-2022-09-30-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-09-30'
+``` yaml $(tag) == 'package-2022-09-30-preview'
 input-file:
-- Microsoft.DBforMySQL/Backups/preview/package-2022-09-30/Backups.json
-- Microsoft.DBforMySQL/Configurations/preview/package-2022-09-30/Configurations.json
-- Microsoft.DBforMySQL/Databases/preview/package-2022-09-30/Databases.json
-- Microsoft.DBforMySQL/Firewall/preview/package-2022-09-30/FirewallRules.json
-- Microsoft.DBforMySQL/FlexibleServers/preview/package-2022-09-30/FlexibleServers.json
-- Microsoft.DBforMySQL/LogFiles/preview/package-2022-09-30/LogFiles.json
-- Microsoft.DBforMySQL/ServiceOperations/preview/package-2022-09-30/ServiceOperations.json
-- Microsoft.DBforMySQL/AAD/preview/package-2022-09-30/AzureADAdministrator.json
-- Microsoft.DBforMySQL/PrivateLink/preview/package-2022-09-30/PrivateEndpointConnections.json
-- Microsoft.DBforMySQL/PrivateLink/preview/package-2022-09-30/PrivateLinkResources.json
+- Microsoft.DBforMySQL/Backups/preview/2022-09-30-preview/Backups.json
+- Microsoft.DBforMySQL/Configurations/preview/2022-09-30-preview/Configurations.json
+- Microsoft.DBforMySQL/Databases/preview/2022-09-30-preview/Databases.json
+- Microsoft.DBforMySQL/Firewall/preview/2022-09-30-preview/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/preview/2022-09-30-preview/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/preview/2022-09-30-preview/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/preview/2022-09-30-preview/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/preview/2022-09-30-preview/AzureADAdministrator.json
+- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateEndpointConnections.json
+- Microsoft.DBforMySQL/PrivateLink/preview/2022-09-30-preview/PrivateLinkResources.json
 ```
 
 ## Suppression
