@@ -1,10 +1,10 @@
-import "@azure-tools/cadl-azure-core";
-import "./models/deployment.models.cadl";
-import "./serviceCustomizations.cadl";
+import "@azure-tools/typespec-azure-core";
+import "./models/deployment.models.tsp";
+import "./serviceCustomizations.tsp";
 
 namespace Azure.OpenAI;
 
-using Cadl.Http;
+using TypeSpec.Http;
 using Azure.Core;
 
 interface Deployments {
