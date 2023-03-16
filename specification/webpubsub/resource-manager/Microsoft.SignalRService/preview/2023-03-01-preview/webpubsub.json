@@ -1245,7 +1245,7 @@
           "200": {
             "description": "Success. The response describes a private endpoint connection.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1280,7 +1280,7 @@
             "description": "The resource of private endpoint and its properties",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           {
@@ -1300,7 +1300,7 @@
           "200": {
             "description": "OK. The response indicates the private endpoint connection is updated successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -2721,6 +2721,16 @@
         }
       }
     },
+    "PrivateEndpoint": {
+      "description": "Private endpoint",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Full qualified Id of the private endpoint",
+          "type": "string"
+        }
+      }
+    },
     "PrivateEndpointACL": {
       "description": "ACL for a private endpoint",
       "required": [
@@ -2739,6 +2749,21 @@
         }
       }
     },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection to an azure resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      }
+    },
     "PrivateEndpointConnectionList": {
       "description": "A list of private endpoint connections",
       "type": "object",
@@ -2747,13 +2772,38 @@
           "description": "The list of the private endpoint connections",
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "x-ms-identifiers": []
         },
         "nextLink": {
           "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
           "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Private endpoint connection properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "groupIds": {
+          "description": "Group IDs",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
         }
       }
     },
@@ -2822,6 +2872,37 @@
           },
           "x-ms-identifiers": []
         }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "Connection state of the private endpoint connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus"
+        },
+        "description": {
+          "description": "The reason for approval/rejection of the connection.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "A message indicating if changes on the service provider require any updates on the consumer.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStatus": {
+      "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PrivateLinkServiceConnectionStatus",
+        "modelAsString": true
       }
     },
     "ProvisioningState": {
@@ -3445,7 +3526,7 @@
           "description": "Private endpoint connections to the resource.",
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true,
           "x-ms-identifiers": []
