@@ -138,3 +138,21 @@ model SubscriptionKeyParameterNames {
   @doc("Subscription key query string parameter name.")
   query: string;
 }
+
+model ApiSchema {
+  id: string;
+  contentType: string;
+  document?: string;
+}
+
+model ApiRelease {
+  id: string;
+  createdDateTime: zonedDateTime;
+  updatedDateTime: zonedDateTime;
+  notes: string;
+}
+
+model ApiHostname {
+  id: string;
+  value: string;
+}
