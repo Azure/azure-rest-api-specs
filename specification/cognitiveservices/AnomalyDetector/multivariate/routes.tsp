@@ -1,9 +1,10 @@
-import "@azure-tools/cadl-azure-core";
-import "@cadl-lang/rest";
-import "./models.cadl";
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "@typespec/http";
+import "./models.tsp";
 
-using Cadl.Rest;
-using Cadl.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 
 namespace AnomalyDetector.Multivariate;
 
