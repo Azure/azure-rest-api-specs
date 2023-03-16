@@ -37,3 +37,11 @@ These settings apply only when `--tag=package-2021-05` is specified on the comma
 input-file:
   - Microsoft.ServiceBus/stable/2021-05/servicebus.json
 ```
+
+### Suppression
+
+``` yaml
+directive:
+  - suppress: ModelValidation
+    reason: XML Models, not JSON.
+```

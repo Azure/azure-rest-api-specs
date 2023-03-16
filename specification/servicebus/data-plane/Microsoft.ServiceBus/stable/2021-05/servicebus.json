@@ -68,7 +68,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client API Version."
+      "description": "Client API Version.",
+      "x-ms-parameter-location": "client"
     },
     "Endpoint": {
       "in": "path",
@@ -100,7 +101,11 @@
         "Manage",
         "Send",
         "Listen"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "AccessRights",
+        "modelAsString": false
+      }
     },
     "AuthorizationRule": {
       "description": "Authorization rule of an entity",
@@ -333,7 +338,11 @@
         "Renaming",
         "Restoring",
         "Unknown"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "EntityAvailabilityStatus",
+        "modelAsString": false
+      }
     },
     "EntityStatus": {
       "description": "Status of a Service Bus resource",
@@ -352,7 +361,11 @@
         "Restoring",
         "SendDisabled",
         "Unknown"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "EntityStatus",
+        "modelAsString": false
+      }
     },
     "MessageCountDetails": {
       "description": "Details about the message counts in entity.",
@@ -361,6 +374,7 @@
         "activeMessageCount": {
           "description": "Number of active messages in the queue, topic, or subscription.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "ActiveMessageCount",
             "prefix": "d2p1",
@@ -370,6 +384,7 @@
         "deadLetterMessageCount": {
           "description": "Number of messages that are dead lettered.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "DeadLetterMessageCount",
             "prefix": "d2p1",
@@ -379,6 +394,7 @@
         "scheduledMessageCount": {
           "description": "Number of scheduled messages.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "ScheduledMessageCount",
             "prefix": "d2p1",
@@ -388,6 +404,7 @@
         "transferDeadLetterMessageCount": {
           "description": "Number of messages transferred into dead letters.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "TransferDeadLetterMessageCount",
             "prefix": "d2p1",
@@ -397,6 +414,7 @@
         "transferMessageCount": {
           "description": "Number of messages transferred to another queue, topic, or subscription.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "TransferMessageCount",
             "prefix": "d2p1",
@@ -420,7 +438,11 @@
         "Basic",
         "Standard",
         "Premium"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "MessagingSku",
+        "modelAsString": false
+      }
     },
     "NamespaceProperties": {
       "description": "The metadata related to a Service Bus namespace.",
@@ -453,6 +475,7 @@
         "messagingUnits": {
           "description": "The number of messaging units allocated to the namespace.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "MessagingUnits",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -550,7 +573,11 @@
         "Mixed",
         "EventHub",
         "Relay"
-      ]
+      ],
+      "x-ms-enum": {
+        "name": "NamespaceType",
+        "modelAsString": true
+      }
     },
     "QueueDescription": {
       "description": "Description of a Service Bus queue resource.",
@@ -572,7 +599,7 @@
         "maxSizeInMegabytes": {
           "description": "The maximum size of the queue in megabytes, which is the size of memory allocated for the queue.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "xml": {
             "name": "MaxSizeInMegabytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -623,6 +650,7 @@
         "maxDeliveryCount": {
           "description": "The maximum delivery count. A message is automatically deadlettered after this number of deliveries. Default value is 10.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "MaxDeliveryCount",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -639,6 +667,7 @@
         "sizeInBytes": {
           "description": "The size of the queue, in bytes.",
           "type": "integer",
+          "format": "int64",
           "xml": {
             "name": "SizeInBytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -647,6 +676,7 @@
         "messageCount": {
           "description": "The number of messages in the queue.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "MessageCount",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -768,6 +798,7 @@
         "maxMessageSizeInKilobytes": {
           "description": "The maximum size in kilobytes of message payload that can be accepted by the queue.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "MaxMessageSizeInKilobytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -943,6 +974,7 @@
         "code": {
           "description": "The service error code.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "Code"
           }
@@ -976,7 +1008,7 @@
         "maxSizeInMegabytes": {
           "description": "The maximum size of the topic in megabytes, which is the size of memory allocated for the topic.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "xml": {
             "name": "MaxSizeInMegabytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1010,6 +1042,7 @@
         "sizeInBytes": {
           "description": "The size of the topic, in bytes.",
           "type": "integer",
+          "format": "int64",
           "xml": {
             "name": "SizeInBytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1087,6 +1120,7 @@
         "subscriptionCount": {
           "description": "The number of subscriptions in the topic.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "SubscriptionCount",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1139,6 +1173,7 @@
         "maxMessageSizeInKilobytes": {
           "description": "The maximum size in kilobytes of message payload that can be accepted by the topic.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "MaxMessageSizeInKilobytes",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1319,6 +1354,7 @@
         "messageCount": {
           "description": "The number of messages in the subscription.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "MessageCount",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1327,6 +1363,7 @@
         "maxDeliveryCount": {
           "description": "The maximum delivery count. A message is automatically deadlettered after this number of deliveries. Default value is 10.",
           "type": "integer",
+          "format": "int32",
           "xml": {
             "name": "MaxDeliveryCount",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -2080,12 +2117,14 @@
           {
             "name": "$skip",
             "type": "integer",
+            "format": "int32",
             "in": "query",
             "default": 0
           },
           {
             "name": "$top",
             "type": "integer",
+            "format": "int32",
             "in": "query",
             "default": 100
           },
@@ -2258,12 +2297,14 @@
           {
             "name": "$skip",
             "type": "integer",
+            "format": "int32",
             "in": "query",
             "default": 0
           },
           {
             "name": "$top",
             "type": "integer",
+            "format": "int32",
             "in": "query",
             "default": 100
           },
@@ -2463,12 +2504,14 @@
           {
             "name": "$skip",
             "type": "integer",
+            "format": "int32",
             "in": "query",
             "default": 0
           },
           {
             "name": "$top",
             "type": "integer",
+            "format": "int32",
             "in": "query",
             "default": 100
           },
