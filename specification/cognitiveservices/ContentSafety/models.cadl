@@ -1,8 +1,10 @@
-import "@cadl-lang/rest";
+import "@typespec/http";
+import "@typespec/rest";
 
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 
-namespace ProjectCarnegie;
+namespace ContentSafety;
 
 enum TextCategory {
   "Hate",
@@ -158,6 +160,7 @@ Language of this item, Value may contain only the language code (ex. \"en\",
   language: string;
 }
 
+@doc("Item Info in Text List")
 model TextListItemInfo{
   @doc("Text data description")
   @maxLength(1024)

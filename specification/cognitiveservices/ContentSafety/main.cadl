@@ -1,20 +1,21 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "./routes.cadl";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
-  title: "ProjectCarnegie service",
+  title: "ContentSafety service",
 })
-@versioned(ProjectCarnegie.Versions)
+@versioned(ContentSafety.Versions)
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
-  "{endpoint}/carnegie",
+  "{endpoint}/contentsafety",
   "Analyze harmful content",
   {
     @doc("""
@@ -25,7 +26,7 @@ https://<resource-name>.cognitiveservices.azure.com).
   }
 )
 @doc("Analyze harmful content")
-namespace ProjectCarnegie;
+namespace ContentSafety;
 
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)

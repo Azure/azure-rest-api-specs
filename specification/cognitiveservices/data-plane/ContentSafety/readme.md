@@ -1,8 +1,8 @@
-# Project Carnegie
+# Content Safety
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Project Carnegie.
+This is the AutoRest configuration file for Content Safety.
 
 ## Getting Started
 
@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the Project Carnegie.
+These are the global settings for the Content Safety.
 
 ```yaml
 openapi-type: data-plane
@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-04-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-04-30-preview'
 input-file:
-  - ProjectCarnegie/preview/2023-04-30-preview/projectcarnegie.json
+  - ContentSafety/preview/2023-04-30-preview/contentsafety.json
 ```
 
 ---
