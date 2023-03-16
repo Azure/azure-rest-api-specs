@@ -211,13 +211,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Hunt"
-            }
-          },
-          "201": {
-            "description": "Created",
+            "description": "Create or update the Hunt",
             "schema": {
               "$ref": "#/definitions/Hunt"
             }
@@ -420,13 +414,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HuntRelation"
-            }
-          },
-          "201": {
-            "description": "Created",
+            "description": "Create or update the hunt relation",
             "schema": {
               "$ref": "#/definitions/HuntRelation"
             }
@@ -629,13 +617,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/HuntComment"
-            }
-          },
-          "201": {
-            "description": "Created",
+            "description": "Create or update the hunt comment",
             "schema": {
               "$ref": "#/definitions/HuntComment"
             }
@@ -710,7 +692,8 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "status"
-          }
+          },
+          "default": "New"
         },
         "hypothesisStatus": {
           "description": "The hypothesis status of the hunt.",
@@ -723,7 +706,8 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "hypothesisStatus"
-          }
+          },
+          "default": "Unknown"
         },
         "attackTactics": {
           "description": "A list of mitre attack tactics the hunt is associated with",
