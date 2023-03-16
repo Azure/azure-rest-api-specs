@@ -30,3 +30,8 @@ model Error {
   message: string;
   details?: string;
 }
+
+model NameValuePair {
+  name: string;
+  value: string;
+}
