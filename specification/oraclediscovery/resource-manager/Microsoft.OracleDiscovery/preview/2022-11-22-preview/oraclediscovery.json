@@ -1839,10 +1839,6 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
-        },
-        "extendedDetails": {
-          "$ref": "#/definitions/ExtendedDetailsModel",
-          "description": "The bag for any extended property."
         }
       },
       "required": [
@@ -2026,10 +2022,6 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
-        },
-        "extendedDetails": {
-          "$ref": "#/definitions/ExtendedDetailsModel",
-          "description": "The bag for any extended property."
         }
       }
     },
@@ -2069,10 +2061,6 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
-        },
-        "extendedDetails": {
-          "$ref": "#/definitions/ExtendedDetailsModel",
-          "description": "The bag for any extended property."
         }
       }
     },
@@ -2112,10 +2100,6 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
-        },
-        "extendedDetails": {
-          "$ref": "#/definitions/ExtendedDetailsModel",
-          "description": "The bag for any extended property."
         }
       }
     },
@@ -2225,9 +2209,9 @@
             "modelAsString": true
           }
         },
-        "extendedDetails": {
-          "$ref": "#/definitions/ExtendedDetailsModel",
-          "description": "The bag for any extended property."
+        "isDBLevelErrorExist": {
+          "type": "boolean",
+          "description": "True if there is any error encountered in DB discovery."
         }
       },
       "required": [
@@ -2293,7 +2277,7 @@
           "type": "string"
         },
         "severity": {
-          "description": "Gets description of the checkpoint.",
+          "description": "Gets description of the severity.",
           "type": "string"
         },
         "updatedTimeStamp": {
@@ -2329,13 +2313,6 @@
           "description": "The server instance name.",
           "type": "string"
         }
-      }
-    },
-    "ExtendedDetailsModel": {
-      "description": "Gets or sets the extended details reported by the solution.",
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
       }
     },
     "OracleServerResourcePatch": {
