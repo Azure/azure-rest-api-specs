@@ -2,17 +2,37 @@
   "parameters": {
     "api-version": "2022-09-01",
     "subscriptionId": "subid",
-    "resourceGroupName": "rg1",
-    "networkWatcherName": "nw1",
+    "resourceGroupName": "rgnetworkWatcher",
+    "networkWatcherName": "u",
     "parameters": {
       "source": {
-        "resourceId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1"
+        "resourceId": "/subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Compute/virtualMachines/vm1",
+        "port": 49366,
+        "address": "nurrepxvrug",
+        "vmssIndex": "plsybqdkavglttroko"
       },
       "destination": {
         "address": "192.168.100.4",
-        "port": 3389
+        "port": 3389,
+        "resourceId": "gakgcsmpa"
       },
-      "preferredIPVersion": "IPv4"
+      "preferredIPVersion": "IPv4",
+      "protocol": "Tcp",
+      "analysisModes": "NextHop",
+      "protocolConfiguration": {
+        "HTTPConfiguration": {
+          "method": "Get",
+          "headers": [
+            {
+              "name": "cbbtziucbyabsoggn",
+              "value": "unnkqfngh"
+            }
+          ],
+          "validStatusCodes": [
+            26
+          ]
+        }
+      }
     }
   },
   "responses": {
@@ -27,7 +47,64 @@
             "nextHopIds": [
               "75c8d819-b208-4584-a311-1aa45ce753f9"
             ],
-            "issues": []
+            "issues": [],
+            "previousHopIds": [
+              "xcfjxsaybz"
+            ],
+            "links": [
+              {
+                "nextHopId": "ahemcldfn",
+                "linkType": "ouydmxfiauvpmrang",
+                "properties": {
+                  "roundTripTimeMin": 3785804368,
+                  "roundTripTimeAvg": 3372975824,
+                  "roundTripTimeMax": 3626804193
+                },
+                "issues": [
+                  {
+                    "origin": "Local",
+                    "severity": "Error",
+                    "type": "Unknown",
+                    "context": [
+                      {
+                        "key1453": "pjtxivkianpo"
+                      }
+                    ]
+                  }
+                ],
+                "context": {
+                  "key4526": "shwnxouzdaexl"
+                },
+                "resourceId": "bghggbhppyqtyoavtwwk"
+              }
+            ],
+            "previousLinks": [
+              {
+                "nextHopId": "ahemcldfn",
+                "linkType": "ouydmxfiauvpmrang",
+                "properties": {
+                  "roundTripTimeMin": 3785804368,
+                  "roundTripTimeAvg": 3372975824,
+                  "roundTripTimeMax": 3626804193
+                },
+                "issues": [
+                  {
+                    "origin": "Local",
+                    "severity": "Error",
+                    "type": "Unknown",
+                    "context": [
+                      {
+                        "key1453": "pjtxivkianpo"
+                      }
+                    ]
+                  }
+                ],
+                "context": {
+                  "key4526": "shwnxouzdaexl"
+                },
+                "resourceId": "bghggbhppyqtyoavtwwk"
+              }
+            ]
           },
           {
             "type": "VirtualNetwork",
@@ -35,7 +112,64 @@
             "address": "192.168.100.4",
             "resourceId": "subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
             "nextHopIds": [],
-            "issues": []
+            "issues": [],
+            "previousHopIds": [
+              "jvqutelsobanxwoolm"
+            ],
+            "links": [
+              {
+                "nextHopId": "ahemcldfn",
+                "linkType": "ouydmxfiauvpmrang",
+                "properties": {
+                  "roundTripTimeMin": 3785804368,
+                  "roundTripTimeAvg": 3372975824,
+                  "roundTripTimeMax": 3626804193
+                },
+                "issues": [
+                  {
+                    "origin": "Local",
+                    "severity": "Error",
+                    "type": "Unknown",
+                    "context": [
+                      {
+                        "key1453": "pjtxivkianpo"
+                      }
+                    ]
+                  }
+                ],
+                "context": {
+                  "key4526": "shwnxouzdaexl"
+                },
+                "resourceId": "bghggbhppyqtyoavtwwk"
+              }
+            ],
+            "previousLinks": [
+              {
+                "nextHopId": "ahemcldfn",
+                "linkType": "ouydmxfiauvpmrang",
+                "properties": {
+                  "roundTripTimeMin": 3785804368,
+                  "roundTripTimeAvg": 3372975824,
+                  "roundTripTimeMax": 3626804193
+                },
+                "issues": [
+                  {
+                    "origin": "Local",
+                    "severity": "Error",
+                    "type": "Unknown",
+                    "context": [
+                      {
+                        "key1453": "pjtxivkianpo"
+                      }
+                    ]
+                  }
+                ],
+                "context": {
+                  "key4526": "shwnxouzdaexl"
+                },
+                "resourceId": "bghggbhppyqtyoavtwwk"
+              }
+            ]
           }
         ],
         "connectionStatus": "Connected",
@@ -43,12 +177,91 @@
         "minLatencyInMs": 1,
         "maxLatencyInMs": 4,
         "probesSent": 100,
-        "probesFailed": 0
+        "probesFailed": 21,
+        "nextHopAnalysis": {
+          "nextHopType": "Internet",
+          "nextHopIpAddress": "nkzsnvgsbvhiapxjavqtsurho",
+          "routeTableId": "qkf"
+        },
+        "sourceSecurityRuleAnalysis": {
+          "results": [
+            {
+              "profile": {
+                "direction": "Inbound",
+                "protocol": "yqmidzbcdmvsihwpvrtanizdq",
+                "source": "ddcspzdvlyqhxupgqqsjhekukt",
+                "destination": "dyxorrdzdmpamxaoybzrsqno",
+                "destinationPort": "bgwhpfcuhfyowpbpujtssy"
+              },
+              "networkSecurityGroupResult": {
+                "securityRuleAccessResult": "Allow",
+                "evaluatedNetworkSecurityGroups": [
+                  {
+                    "networkSecurityGroupId": "rhzw",
+                    "appliedTo": "f",
+                    "matchedRule": {
+                      "ruleName": "ildsyymo",
+                      "action": "ptqyuwrwj"
+                    },
+                    "rulesEvaluationResult": [
+                      {
+                        "name": "saoueafrlscv",
+                        "protocolMatched": true,
+                        "sourceMatched": true,
+                        "sourcePortMatched": true,
+                        "destinationMatched": true,
+                        "destinationPortMatched": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "destinationSecurityRuleAnalysis": {
+          "results": [
+            {
+              "profile": {
+                "direction": "Inbound",
+                "protocol": "yqmidzbcdmvsihwpvrtanizdq",
+                "source": "ddcspzdvlyqhxupgqqsjhekukt",
+                "destination": "dyxorrdzdmpamxaoybzrsqno",
+                "destinationPort": "bgwhpfcuhfyowpbpujtssy"
+              },
+              "networkSecurityGroupResult": {
+                "securityRuleAccessResult": "Allow",
+                "evaluatedNetworkSecurityGroups": [
+                  {
+                    "networkSecurityGroupId": "rhzw",
+                    "appliedTo": "f",
+                    "matchedRule": {
+                      "ruleName": "ildsyymo",
+                      "action": "ptqyuwrwj"
+                    },
+                    "rulesEvaluationResult": [
+                      {
+                        "name": "saoueafrlscv",
+                        "protocolMatched": true,
+                        "sourceMatched": true,
+                        "sourcePortMatched": true,
+                        "destinationMatched": true,
+                        "destinationPortMatched": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "sourcePortStatus": "Unknown",
+        "destinationPortStatus": "Unknown"
       }
     },
     "202": {
       "headers": {
-        "Location": "https:/management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectivityCheck?api-version=2022-09-01"
+        "location": "https://contoso.com/operationstatus"
       },
       "body": {
         "hops": [
@@ -60,7 +273,64 @@
             "nextHopIds": [
               "75c8d819-b208-4584-a311-1aa45ce753f9"
             ],
-            "issues": []
+            "issues": [],
+            "previousHopIds": [
+              "xcfjxsaybz"
+            ],
+            "links": [
+              {
+                "nextHopId": "ahemcldfn",
+                "linkType": "ouydmxfiauvpmrang",
+                "properties": {
+                  "roundTripTimeMin": 3785804368,
+                  "roundTripTimeAvg": 3372975824,
+                  "roundTripTimeMax": 3626804193
+                },
+                "issues": [
+                  {
+                    "origin": "Local",
+                    "severity": "Error",
+                    "type": "Unknown",
+                    "context": [
+                      {
+                        "key1453": "pjtxivkianpo"
+                      }
+                    ]
+                  }
+                ],
+                "context": {
+                  "key4526": "shwnxouzdaexl"
+                },
+                "resourceId": "bghggbhppyqtyoavtwwk"
+              }
+            ],
+            "previousLinks": [
+              {
+                "nextHopId": "ahemcldfn",
+                "linkType": "ouydmxfiauvpmrang",
+                "properties": {
+                  "roundTripTimeMin": 3785804368,
+                  "roundTripTimeAvg": 3372975824,
+                  "roundTripTimeMax": 3626804193
+                },
+                "issues": [
+                  {
+                    "origin": "Local",
+                    "severity": "Error",
+                    "type": "Unknown",
+                    "context": [
+                      {
+                        "key1453": "pjtxivkianpo"
+                      }
+                    ]
+                  }
+                ],
+                "context": {
+                  "key4526": "shwnxouzdaexl"
+                },
+                "resourceId": "bghggbhppyqtyoavtwwk"
+              }
+            ]
           },
           {
             "type": "VirtualNetwork",
@@ -68,7 +338,64 @@
             "address": "192.168.100.4",
             "resourceId": "subscriptions/subid/resourceGroups/rg2/providers/Microsoft.Network/networkInterfaces/nic1/ipConfigurations/ipconfig1",
             "nextHopIds": [],
-            "issues": []
+            "issues": [],
+            "previousHopIds": [
+              "jvqutelsobanxwoolm"
+            ],
+            "links": [
+              {
+                "nextHopId": "ahemcldfn",
+                "linkType": "ouydmxfiauvpmrang",
+                "properties": {
+                  "roundTripTimeMin": 3785804368,
+                  "roundTripTimeAvg": 3372975824,
+                  "roundTripTimeMax": 3626804193
+                },
+                "issues": [
+                  {
+                    "origin": "Local",
+                    "severity": "Error",
+                    "type": "Unknown",
+                    "context": [
+                      {
+                        "key1453": "pjtxivkianpo"
+                      }
+                    ]
+                  }
+                ],
+                "context": {
+                  "key4526": "shwnxouzdaexl"
+                },
+                "resourceId": "bghggbhppyqtyoavtwwk"
+              }
+            ],
+            "previousLinks": [
+              {
+                "nextHopId": "ahemcldfn",
+                "linkType": "ouydmxfiauvpmrang",
+                "properties": {
+                  "roundTripTimeMin": 3785804368,
+                  "roundTripTimeAvg": 3372975824,
+                  "roundTripTimeMax": 3626804193
+                },
+                "issues": [
+                  {
+                    "origin": "Local",
+                    "severity": "Error",
+                    "type": "Unknown",
+                    "context": [
+                      {
+                        "key1453": "pjtxivkianpo"
+                      }
+                    ]
+                  }
+                ],
+                "context": {
+                  "key4526": "shwnxouzdaexl"
+                },
+                "resourceId": "bghggbhppyqtyoavtwwk"
+              }
+            ]
           }
         ],
         "connectionStatus": "Connected",
@@ -76,7 +403,86 @@
         "minLatencyInMs": 1,
         "maxLatencyInMs": 4,
         "probesSent": 100,
-        "probesFailed": 0
+        "probesFailed": 21,
+        "nextHopAnalysis": {
+          "nextHopType": "Internet",
+          "nextHopIpAddress": "nkzsnvgsbvhiapxjavqtsurho",
+          "routeTableId": "qkf"
+        },
+        "sourceSecurityRuleAnalysis": {
+          "results": [
+            {
+              "profile": {
+                "direction": "Inbound",
+                "protocol": "yqmidzbcdmvsihwpvrtanizdq",
+                "source": "ddcspzdvlyqhxupgqqsjhekukt",
+                "destination": "dyxorrdzdmpamxaoybzrsqno",
+                "destinationPort": "bgwhpfcuhfyowpbpujtssy"
+              },
+              "networkSecurityGroupResult": {
+                "securityRuleAccessResult": "Allow",
+                "evaluatedNetworkSecurityGroups": [
+                  {
+                    "networkSecurityGroupId": "rhzw",
+                    "appliedTo": "f",
+                    "matchedRule": {
+                      "ruleName": "ildsyymo",
+                      "action": "ptqyuwrwj"
+                    },
+                    "rulesEvaluationResult": [
+                      {
+                        "name": "saoueafrlscv",
+                        "protocolMatched": true,
+                        "sourceMatched": true,
+                        "sourcePortMatched": true,
+                        "destinationMatched": true,
+                        "destinationPortMatched": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "destinationSecurityRuleAnalysis": {
+          "results": [
+            {
+              "profile": {
+                "direction": "Inbound",
+                "protocol": "yqmidzbcdmvsihwpvrtanizdq",
+                "source": "ddcspzdvlyqhxupgqqsjhekukt",
+                "destination": "dyxorrdzdmpamxaoybzrsqno",
+                "destinationPort": "bgwhpfcuhfyowpbpujtssy"
+              },
+              "networkSecurityGroupResult": {
+                "securityRuleAccessResult": "Allow",
+                "evaluatedNetworkSecurityGroups": [
+                  {
+                    "networkSecurityGroupId": "rhzw",
+                    "appliedTo": "f",
+                    "matchedRule": {
+                      "ruleName": "ildsyymo",
+                      "action": "ptqyuwrwj"
+                    },
+                    "rulesEvaluationResult": [
+                      {
+                        "name": "saoueafrlscv",
+                        "protocolMatched": true,
+                        "sourceMatched": true,
+                        "sourcePortMatched": true,
+                        "destinationMatched": true,
+                        "destinationPortMatched": true
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "sourcePortStatus": "Unknown",
+        "destinationPortStatus": "Unknown"
       }
     }
   }
