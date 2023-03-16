@@ -1880,33 +1880,41 @@
       "type": "object",
       "properties": {
         "keyspace": {
-          "type": "string"
+          "type": "string",
+          "description": "keyspace to be repaired."
         },
         "owner": {
-          "type": "string"
+          "type": "string",
+          "description": "owner of the repair run."
         },
         "cause": {
-          "type": "string"
+          "type": "string",
+          "description": "note on reason for repair run."
         },
         "tables": {
           "type": "array",
           "items": {
             "type": "string"
-          }          
+          },
+          "description": "list of column famalies to be repaird. if empty whole keyspace will be repaired."
         },
         "segmentCount": {
           "type": "integer",
-          "format": "int32"          
+          "format": "int32",
+          "description": "Number of segments in repair run"
         },
         "repairParallelism": {
-          "type": "string"
+          "type": "string",
+          "description": "Defines the used repair parallelism for repair run. Valid values are SEQUENTIAL, PARALLEL or DATACENTER_AWARE."
         },
         "intensity": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "description": "Defines the repair intensity for repair run."
         },
         "incrementalRepair": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Defines if incremental repair should be done. [true/false]. True when this flag is passed. False otherwise."
         },
         "autoStart": {
           "type": "boolean",
@@ -1916,24 +1924,28 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "description": "A specific comma separated list of nodes IP address whose tokens should be repaired."
         },
         "dataCenters": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "description": "A float representing the current system-wide CPU utilization as a percentage."
         },
         "blacklistedTables": {
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "description": "The name of the tables that should not be repaired. Cannot be used in conjunction with the tables parameter."
         },
         "repairThreadCount": {
           "type": "integer",
           "format": "int32"
-        }
+        },
+        "description": "Thread Count to be used for the parallel repair. Since Cassandra 2.2, repairs can be performed with up to 4 threads in order to parallelize the work on different token ranges."
       },
       "additionalProperties": false
     },
