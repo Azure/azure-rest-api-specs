@@ -10,6 +10,8 @@ model Collection<T> {
   value: T[];
 }
 
+alias ApiResponse<T> = T | ErrorResponse;
+@doc("List operations' default parameters.")
 model ListParams {
   @query skip?: int32;
   @query @maxValue(100) top?: int32;

@@ -11,13 +11,11 @@ model CommonParams {
   @path apiId: string;
 }
 
-// @get op List<T>(...ListParams): T;
-
 @route("/apis")
 @doc("Lists a collection of APIs.")
-op ListApis(...ListParams): Collection<Api> | ErrorResponse;
+op ListApis(...ListParams): ApiResponse<Collection<Api>>;
 
 @get
 @route("/apis/{apiId}")
 @doc("Gets the details of the API specified by its identifier.")
-op GetApi(...CommonParams): Api | ErrorResponse;
+op GetApi(...CommonParams): ApiResponse<Api>;
