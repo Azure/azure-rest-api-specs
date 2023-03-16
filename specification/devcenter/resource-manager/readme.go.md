@@ -15,6 +15,16 @@ module-name: sdk/resourcemanager/devcenter/armdevcenter
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+directive:
+- rename-model:
+    from: DevCenterSku
+    to: SkuInfo
+- from: vdi.json
+  where: "$.definitions.SkuListResult.properties.value.items"
+  transform: >-
+    return {
+            "$ref": "commonDefinitions.json#/definitions/SkuInfo"
+          }
 ```
 
 ### Go multi-api

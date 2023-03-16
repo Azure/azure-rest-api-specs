@@ -88,6 +88,76 @@
         }
       }
     },
+    "HealthcareDicomImageCreatedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageCreated event.",
+      "type": "object",
+      "properties": {
+        "imageStudyInstanceUid": {
+          "description": "Unique identifier for the Study",
+          "type": "string"
+        },
+        "imageSeriesInstanceUid": {
+          "description": "Unique identifier for the Series",
+          "type": "string"
+        },
+        "imageSopInstanceUid": {
+          "description": "Unique identifier for the DICOM Image",
+          "type": "string"
+        },
+        "serviceHostName": {
+          "description": "Domain name of the DICOM account for this image.",
+          "type": "string"
+        },
+        "sequenceNumber": {
+          "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "x-ms-examples": {
+        "DicomImageCreatedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/dicom_image_created.json"
+        },
+        "DicomImageCreatedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/dicom_image_created.json"
+        }
+      }
+    },
+    "HealthcareDicomImageDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.HealthcareApis.DicomImageDeleted event.",
+      "type": "object",
+      "properties": {
+        "imageStudyInstanceUid": {
+          "description": "Unique identifier for the Study",
+          "type": "string"
+        },
+        "imageSeriesInstanceUid": {
+          "description": "Unique identifier for the Series",
+          "type": "string"
+        },
+        "imageSopInstanceUid": {
+          "description": "Unique identifier for the DICOM Image",
+          "type": "string"
+        },
+        "serviceHostName": {
+          "description": "Host name of the DICOM account for this image.",
+          "type": "string"
+        },
+        "sequenceNumber": {
+          "description": "Sequence number of the DICOM Service within Azure Health Data Services. It is unique for every image creation and deletion within the service.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "x-ms-examples": {
+        "DicomImageDeletedCloudEventsSchema": {
+          "$ref": "./examples/cloud-events-schema/dicom_image_deleted.json"
+        },
+        "DicomImageDeletedEventGridSchema": {
+          "$ref": "./examples/event-grid-schema/dicom_image_deleted.json"
+        }
+      }
+    },
     "HealthcareFhirResourceType": {
       "description": "Schema of FHIR resource type enumeration.",
       "type": "string",
@@ -907,4 +977,3 @@
     }
   }
 }
-  

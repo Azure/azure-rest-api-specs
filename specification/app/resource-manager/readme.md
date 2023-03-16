@@ -26,15 +26,69 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-2022-03
+tag: package-2022-10
 ```
 
+
+### Tag: package-2022-10
+
+These settings apply only when `--tag=package-2022-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-10'
+input-file:
+  - Microsoft.App/stable/2022-10-01/AuthConfigs.json
+  - Microsoft.App/stable/2022-10-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2022-10-01/BillingMeters.json
+  - Microsoft.App/stable/2022-10-01/CommonDefinitions.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2022-10-01/ContainerApps.json
+  - Microsoft.App/stable/2022-10-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2022-10-01/Diagnostics.json
+  - Microsoft.App/stable/2022-10-01/Global.json
+  - Microsoft.App/stable/2022-10-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2022-10-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2022-10-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2022-10-01/SourceControls.json
+```
+### Tag: package-preview-2022-06
+
+These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-06'
+input-file:
+  - Microsoft.App/preview/2022-06-01-preview/AuthConfigs.json
+  - Microsoft.App/preview/2022-06-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2022-06-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2022-06-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-06-01-preview/Diagnostics.json
+  - Microsoft.App/preview/2022-06-01-preview/Global.json
+  - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-06-01-preview/SourceControls.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-06-01-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2022-06-01-preview/BillingMeters.json
+directive:
+- suppress: R3018
+  from: AuthConfigs.json
+  reason: Use of boolean type is required
+- suppress: R3016
+  from: AuthConfigs.json
+  reason: Use disableWWWAuthenticate to align with AuthSettingV2
+```
 
 ### Tag: package-2022-03
 
 These settings apply only when `--tag=package-2022-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2022-03'
+``` yaml $(tag) == 'package-2022-03'
 input-file:
   - Microsoft.App/stable/2022-03-01/AuthConfigs.json
   - Microsoft.App/stable/2022-03-01/CommonDefinitions.json
@@ -53,6 +107,7 @@ directive:
   from: AuthConfigs.json
   reason: Use disableWWWAuthenticate to align with AuthSettingV2
 ```
+
 ### Tag: package-2022-01-01-preview
 
 These settings apply only when `--tag=package-2022-01-01-preview` is specified on the command line.
