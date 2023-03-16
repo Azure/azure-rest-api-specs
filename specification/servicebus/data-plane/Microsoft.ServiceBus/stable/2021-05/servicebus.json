@@ -1172,7 +1172,6 @@
           "xml": {
             "namespace": "http://www.w3.org/2005/Atom"
           }
-
         },
         "published": {
           "description": "The timestamp for when this topic was published",
@@ -1540,14 +1539,16 @@
           "xml": {
             "name": "Value",
             "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
-          }        
+          }
         }
       }
     },
     "RuleFilter": {
       "type": "object",
       "discriminator": "type",
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "xml": {
         "name": "Filter",
         "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1708,9 +1709,11 @@
       ]
     },
     "RuleAction": {
-      "type":"object",
+      "type": "object",
       "discriminator": "type",
-      "required": ["type"],
+      "required": [
+        "type"
+      ],
       "xml": {
         "name": "Action",
         "namespace": "http://schemas.microsoft.com/netservices/2010/10/servicebus/connect"
@@ -1775,7 +1778,9 @@
     "EmptyRuleAction": {
       "type": "object",
       "allOf": [
-        {"$ref": "#/definitions/RuleAction"}
+        {
+          "$ref": "#/definitions/RuleAction"
+        }
       ]
     },
     "RuleDescription": {
