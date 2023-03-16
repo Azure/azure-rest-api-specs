@@ -217,6 +217,66 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityIdentifier}/runPlaybook": {
+      "post": {
+        "tags": [
+          "manualTrigger"
+        ],
+        "description": "Triggers playbook on a specific entity.",
+        "operationId": "Entities_RunPlaybook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "in": "path",
+            "name": "entityIdentifier",
+            "description": "Entity identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "requestBody",
+            "description": "Describes the request body for triggering a playbook on an entity.",
+            "schema": {
+              "$ref": "#/definitions/EntityManualTriggerRequestBody"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Entities_RunPlaybook": {
+            "$ref": "./examples/manualTrigger/Entities_RunPlaybook.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/incidents/{incidentIdentifier}/runPlaybook": {
       "post": {
         "tags": [
@@ -1183,6 +1243,28 @@
         ]
       }
     },
+    "EntityManualTriggerRequestBody": {
+      "type": "object",
+      "description": "Describes the request body for triggering a playbook on an entity.",
+      "required": [
+        "logicAppsResourceId"
+      ],
+      "properties": {
+        "incidentArmId": {
+          "type": "string",
+          "description": "Incident ARM id."
+        },
+        "tenantId": {
+          "format": "uuid",
+          "type": "string",
+          "description": "The tenant id of the playbook resource."
+        },
+        "logicAppsResourceId": {
+          "type": "string",
+          "description": "The resource id of the playbook resource."
+        }
+      }
+    },
     "IncidentPropertiesAction": {
       "type": "object",
       "properties": {
@@ -1234,6 +1316,9 @@
     },
     "PlaybookActionProperties": {
       "type": "object",
+      "required": [
+        "logicAppResourceId"
+      ],
       "properties": {
         "logicAppResourceId": {
           "description": "The resource id of the playbook resource.",
