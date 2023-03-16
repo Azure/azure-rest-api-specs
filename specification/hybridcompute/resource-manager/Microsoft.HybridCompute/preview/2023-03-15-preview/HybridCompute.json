@@ -1632,7 +1632,17 @@
         },
         "kind": {
           "type": "string",
-          "description": "Indicates which kind of VM fabric the instance is an instance of, such as ConnectedVMwarevSphere or AzureStackHCI."
+          "description": "Indicates which kind of VM fabric the instance is an instance of, such as HCI or SCVMM etc.",
+          "enum": [
+            "AVS",
+            "HCI",
+            "SCVMM",
+            "VMware"
+          ],
+          "x-ms-enum": {
+            "name": "privateCloudKind",
+            "modelAsString": true
+          }
         }
       },
       "allOf": [
