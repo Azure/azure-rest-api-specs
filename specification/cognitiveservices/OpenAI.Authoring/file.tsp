@@ -1,12 +1,13 @@
-import "@azure-tools/cadl-azure-core";
-import "@cadl-lang/rest";
-import "./models/file.models.cadl";
-import "./serviceCustomizations.cadl";
+import "@azure-tools/typespec-azure-core";
+import "@typespec/rest";
+import "@typespec/http";
+import "./models/file.models.tsp";
+import "./serviceCustomizations.tsp";
 
 namespace Azure.OpenAI;
 
-using Cadl.Rest;
-using Cadl.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.Core;
 
 interface Files
