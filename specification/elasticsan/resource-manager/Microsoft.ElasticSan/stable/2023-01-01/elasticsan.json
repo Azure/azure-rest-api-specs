@@ -126,7 +126,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -168,7 +168,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -197,7 +197,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -213,7 +213,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -242,7 +242,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -276,7 +276,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -304,7 +304,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -330,12 +330,17 @@
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -363,7 +368,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -377,7 +382,12 @@
             "description": "OK -- Delete operation completed successfully."
           },
           "202": {
-            "description": "Accepted -- Delete request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent --ElasticSAN does not exist in the subscription."
@@ -385,13 +395,13 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "ElasticSans_Delete_MaximumSet_Gen": {
@@ -413,7 +423,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -432,7 +442,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -458,7 +468,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -477,7 +487,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -506,7 +516,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -543,7 +553,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -571,7 +581,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -600,12 +610,17 @@
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -633,7 +648,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -650,7 +665,12 @@
             "description": "OK -- Delete operation completed successfully."
           },
           "202": {
-            "description": "Accepted -- Delete request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- Resource does not exist in the subscription."
@@ -658,13 +678,13 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "VolumeGroups_Delete_MaximumSet_Gen": {
@@ -686,7 +706,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -708,7 +728,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -734,7 +754,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -774,7 +794,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -802,7 +822,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -834,12 +854,17 @@
             }
           },
           "202": {
-            "description": "Accepted -- Update request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Update request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -867,7 +892,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -887,7 +912,12 @@
             "description": "Delete operation completed successfully."
           },
           "202": {
-            "description": "Delete request accepted; operation will complete asynchronously."
+            "description": "Delete request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "Resource does not exist in the subscription."
@@ -895,13 +925,13 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Volumes_Delete_MaximumSet_Gen": {
@@ -923,7 +953,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -948,7 +978,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -974,7 +1004,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -996,7 +1026,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1025,7 +1055,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -1054,7 +1084,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1083,7 +1113,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -1123,7 +1153,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1151,7 +1181,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -1177,7 +1207,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Returned when the create operation is successfully completed.",
+            "description": "OK -- Returned when the update operation is successfully completed.",
             "schema": {
               "$ref": "#/definitions/Snapshot"
             }
@@ -1185,7 +1215,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1209,7 +1239,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -1229,7 +1259,12 @@
             "description": "OK -- Delete operation completed successfully."
           },
           "202": {
-            "description": "Accepted -- Delete request accepted; operation will complete asynchronously."
+            "description": "Accepted -- Delete request accepted; operation will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent -- Resource does not exist in the subscription."
@@ -1237,13 +1272,13 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Snapshots_Delete_MaximumSet_Gen": {
@@ -1265,7 +1300,7 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ElasticSanNameParameter"
@@ -1290,7 +1325,7 @@
           "default": {
             "description": "Error from the ElasticSan Resource Provider.",
             "schema": {
-              "$ref": "#/definitions/Error"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -2396,6 +2431,11 @@
           "description": "Size of Source Volume",
           "type": "integer",
           "format": "int64",
+          "readOnly": true
+        },
+        "volumeName": {
+          "description": "Source Volume Name of a snapshot",
+          "type": "string",
           "readOnly": true
         }
       }
