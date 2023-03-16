@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 input-file:
   - Microsoft.MachineLearningServices/stable/2023-04-01/machineLearningServices.json
   - Microsoft.MachineLearningServices/stable/2023-04-01/mfe.json
-  - Microsoft.MachineLearningServices/preview/2023-04-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2023-04-01/registries.json
   - Microsoft.MachineLearningServices/stable/2023-04-01/workspaceFeatures.json
 ```
 ### Tag: package-preview-2023-02
