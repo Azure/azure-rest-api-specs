@@ -1226,11 +1226,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "privateEndpointConnectionName",
-            "description": "The name of the private endpoint connection",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1249,7 +1245,7 @@
           "200": {
             "description": "Success. The response describes a private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1276,11 +1272,7 @@
         ],
         "parameters": [
           {
-            "in": "path",
-            "name": "privateEndpointConnectionName",
-            "description": "The name of the private endpoint connection",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "in": "body",
@@ -1288,7 +1280,7 @@
             "description": "The resource of private endpoint and its properties",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           {
@@ -1308,7 +1300,7 @@
           "200": {
             "description": "OK. The response indicates the private endpoint connection is updated successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
           "default": {
@@ -1332,11 +1324,7 @@
         "operationId": "WebPubSubPrivateEndpointConnections_Delete",
         "parameters": [
           {
-            "in": "path",
-            "name": "privateEndpointConnectionName",
-            "description": "The name of the private endpoint connection",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2167,14 +2155,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CustomCertificateProperties"
@@ -2245,14 +2229,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/CustomDomainProperties"
@@ -2741,16 +2721,6 @@
         }
       }
     },
-    "PrivateEndpoint": {
-      "description": "Private endpoint",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Full qualified Id of the private endpoint",
-          "type": "string"
-        }
-      }
-    },
     "PrivateEndpointACL": {
       "description": "ACL for a private endpoint",
       "required": [
@@ -2769,25 +2739,6 @@
         }
       }
     },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection to an azure resource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
-        }
-      }
-    },
     "PrivateEndpointConnectionList": {
       "description": "A list of private endpoint connections",
       "type": "object",
@@ -2796,7 +2747,7 @@
           "description": "The list of the private endpoint connections",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "x-ms-identifiers": []
         },
@@ -2806,37 +2757,12 @@
         }
       }
     },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Private endpoint connection properties",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "$ref": "#/definitions/ProvisioningState"
-        },
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpoint"
-        },
-        "groupIds": {
-          "description": "Group IDs",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
-        }
-      }
-    },
     "PrivateLinkResource": {
       "description": "Private link resource",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -2898,37 +2824,6 @@
         }
       }
     },
-    "PrivateLinkServiceConnectionState": {
-      "description": "Connection state of the private endpoint connection",
-      "type": "object",
-      "properties": {
-        "status": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus"
-        },
-        "description": {
-          "description": "The reason for approval/rejection of the connection.",
-          "type": "string"
-        },
-        "actionsRequired": {
-          "description": "A message indicating if changes on the service provider require any updates on the consumer.",
-          "type": "string"
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStatus": {
-      "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
-      "enum": [
-        "Pending",
-        "Approved",
-        "Rejected",
-        "Disconnected"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "PrivateLinkServiceConnectionStatus",
-        "modelAsString": true
-      }
-    },
     "ProvisioningState": {
       "description": "Provisioning state of the resource.",
       "enum": [
@@ -2947,15 +2842,6 @@
         "name": "ProvisioningState",
         "modelAsString": true
       }
-    },
-    "ProxyResource": {
-      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
     },
     "RegenerateKeyParameters": {
       "description": "Parameters describes the request to regenerate access keys",
@@ -2981,10 +2867,6 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ReplicaProperties"
-        },
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       }
     },
@@ -3012,28 +2894,6 @@
           "$ref": "#/definitions/ProvisioningState"
         }
       }
-    },
-    "Resource": {
-      "description": "The core properties of ARM resources.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Fully qualified resource Id for the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "description": "The name of the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "The type of the resource - e.g. \"Microsoft.SignalRService/SignalR\"",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
     },
     "ResourceLogCategory": {
       "description": "Resource log category configuration of a Microsoft.SignalRService resource.",
@@ -3182,14 +3042,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties"
@@ -3447,14 +3303,10 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
-        },
         "properties": {
           "$ref": "#/definitions/WebPubSubHubProperties"
         }
@@ -3593,7 +3445,7 @@
           "description": "Private endpoint connections to the resource.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/definitions/PrivateEndpointConnection"
           },
           "readOnly": true,
           "x-ms-identifiers": []
@@ -3673,10 +3525,6 @@
         },
         "identity": {
           "$ref": "#/definitions/ManagedIdentity"
-        },
-        "systemData": {
-          "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData"
         }
       }
     },
