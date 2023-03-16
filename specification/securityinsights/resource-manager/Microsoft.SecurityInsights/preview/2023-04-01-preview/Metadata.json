@@ -352,83 +352,7 @@
     },
     "metadataKind": {
       "type": "string",
-      "description": "The kind of content the metadata is for.",
-      "enum": [
-        "DataConnector",
-        "DataType",
-        "Workbook",
-        "WorkbookTemplate",
-        "Playbook",
-        "PlaybookTemplate",
-        "AnalyticsRuleTemplate",
-        "AnalyticsRule",
-        "HuntingQuery",
-        "InvestigationQuery",
-        "Parser",
-        "Watchlist",
-        "WatchlistTemplate",
-        "Solution",
-        "AzureFunction",
-        "LogicAppsCustomConnector",
-        "AutomationRule"
-      ],
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "kind",
-        "values": [
-          {
-            "value": "DataConnector"
-          },
-          {
-            "value": "DataType"
-          },
-          {
-            "value": "Workbook"
-          },
-          {
-            "value": "WorkbookTemplate"
-          },
-          {
-            "value": "Playbook"
-          },
-          {
-            "value": "PlaybookTemplate"
-          },
-          {
-            "value": "AnalyticsRuleTemplate"
-          },
-          {
-            "value": "AnalyticsRule"
-          },
-          {
-            "value": "HuntingQuery"
-          },
-          {
-            "value": "InvestigationQuery"
-          },
-          {
-            "value": "Parser"
-          },
-          {
-            "value": "Watchlist"
-          },
-          {
-            "value": "WatchlistTemplate"
-          },
-          {
-            "value": "Solution"
-          },
-          {
-            "value": "AzureFunction"
-          },
-          {
-            "value": "LogicAppsCustomConnector"
-          },
-          {
-            "value": "AutomationRule"
-          }
-        ]
-      }
+      "description": "The kind of content the metadata is for."
     },
     "metadataSource": {
       "description": "The original source of the content item, where it comes from.",
@@ -892,6 +816,7 @@
       "in": "path",
       "name": "metadataName",
       "required": true,
+      "pattern": "^\\S+$",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
