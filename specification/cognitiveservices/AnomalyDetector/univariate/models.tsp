@@ -1,8 +1,9 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 
 namespace AnomalyDetector.Univariate;
