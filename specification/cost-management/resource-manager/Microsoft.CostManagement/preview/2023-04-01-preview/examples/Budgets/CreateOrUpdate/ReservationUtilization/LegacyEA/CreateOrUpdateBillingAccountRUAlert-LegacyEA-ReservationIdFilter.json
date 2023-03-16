@@ -14,7 +14,7 @@
           "endDate": "2025-04-01T00:00:00Z"
         },
         "filter": {
-          "dimensions":{
+          "dimensions": {
             "name": "ReservationId",
             "operator": "In",
             "values": [
@@ -55,7 +55,7 @@
             "endDate": "2025-04-01T00:00:00Z"
           },
           "filter": {
-            "dimensions":{
+            "dimensions": {
               "name": "ReservationId",
               "operator": "In",
               "values": [
@@ -94,30 +94,30 @@
             "startDate": "2023-04-01T00:00:00Z",
             "endDate": "2025-04-01T00:00:00Z"
           },
-        "filter": {
-          "dimensions":{
-            "name": "ReservationId",
-            "operator": "In",
-            "values": [
-              "00000000-0000-0000-0000-000000000000",
-              "00000000-0000-0000-0000-000000000001",
-              "00000000-0000-0000-0000-000000000002"
-            ]
+          "filter": {
+            "dimensions": {
+              "name": "ReservationId",
+              "operator": "In",
+              "values": [
+                "00000000-0000-0000-0000-000000000000",
+                "00000000-0000-0000-0000-000000000001",
+                "00000000-0000-0000-0000-000000000002"
+              ]
+            }
+          },
+          "notifications": {
+            "Actual_LessThan_99_Percent": {
+              "enabled": true,
+              "operator": "LessThan",
+              "threshold": 99,
+              "frequency": "Weekly",
+              "locale": "en-us",
+              "contactEmails": [
+                "johndoe@contoso.com",
+                "janesmith@contoso.com"
+              ]
+            }
           }
-        },
-        "notifications": {
-          "Actual_LessThan_99_Percent": {
-            "enabled": true,
-            "operator": "LessThan",
-            "threshold": 99,
-            "frequency": "Weekly",
-            "locale": "en-us",
-            "contactEmails": [
-              "johndoe@contoso.com",
-              "janesmith@contoso.com"
-            ]
-          }
-        }
         }
       }
     }
