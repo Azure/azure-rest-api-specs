@@ -2149,7 +2149,7 @@
           "type": "string",
           "enum": [
             "TemporalMd",
-            "NumericMd",
+            "NumberMd",
             "OrdinalMd",
             "SpeedMd",
             "WeightMd",
@@ -2170,7 +2170,7 @@
         }
       },
       "required": [
-        "MetadataKind"
+        "metadataKind"
       ]
     },
     "QuantityMd": {
@@ -2231,7 +2231,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "VolumeAgeMd",
+      "x-ms-discriminator-value": "VolumeMd",
       "properties": {
         "unit": {
           "type": "string",
@@ -2554,24 +2554,6 @@
         "unit"
       ]
     },
-    "BooleanMd": {
-      "description": "A Metadata for boolean expressions",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseMd"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "BooleanMd",
-      "properties": {
-        "value": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "TemporalMd": {
       "description": "A Metadata for datetime entity instances.",
       "allOf": [
@@ -2702,7 +2684,7 @@
         }
       }
     },
-    "NumericRangeMd": {
+    "NumberRangeMd": {
       "description": "represents the Metadata of numeric intervals.",
       "allOf": [
         {
@@ -2710,7 +2692,7 @@
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumericRangeMd",
+      "x-ms-discriminator-value": "NumberRangeMd",
       "properties": {
         "rangeKind": {
           "type": "string",
