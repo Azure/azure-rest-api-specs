@@ -1,7 +1,7 @@
-import "@azure-tools/cadl-dpg";
-import "./main.cadl";
+import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
 
-using Azure.DPG;
+using Azure.ClientGenerator.Core;
 
 @@convenientAPI(AnomalyDetector.Multivariate.GetMultivariateBatchDetectionResult, true)
 @@convenientAPI(AnomalyDetector.Multivariate.TrainMultivariateModel, true)
