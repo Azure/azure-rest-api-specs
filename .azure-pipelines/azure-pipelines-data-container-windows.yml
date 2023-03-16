@@ -7,7 +7,7 @@ schedules:
   always: true
 
 pool:
-  vmImage: 'Ubuntu-22.04'
+  vmImage: 'windows-latest'
 
 variables:
   IMAGE_TAG_PREFIX: $[format('1.0.{0:HHm}', pipeline.startTime)]
@@ -29,13 +29,13 @@ steps:
   inputs:
     SourceFolder: $(Build.SourcesDirectory)
     contents: .git/**
-    targetFolder: $(Build.SourcesDirectory)/scripts/datacontainer
+    targetFolder: $(Build.SourcesDirectory)\scripts\datacontainer-windows
 
 - task: Docker@2
   displayName: Build and Push
   inputs:
     command: buildAndPush
-    Dockerfile: scripts/datacontainer/Dockerfile
+    Dockerfile: scripts\datacontainer-windows\Dockerfile
     repository: $(CONTAINER_REGISTRY_REPOSITORY_NAME)
     tags: |
       latest
