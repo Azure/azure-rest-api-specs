@@ -8,19 +8,24 @@
   "definitions": {
     "resourceIdentity": {
       "type": "object",
-      "description": "The managed identity of a resource.",
+      "description": "The identity of a resource.",
       "properties": {
         "type": {
           "type": "string",
           "description": "String of the resource identity type.",
           "enum": [
             "None",
-            "SystemAssigned"
+            "SystemAssigned",
+            "UserAssigned"
           ],
           "x-ms-enum": {
             "name": "ResourceIdentityType",
             "modelAsString": false
           }
+        },
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/userAssignedIdentities",
+          "description": "The list of user identities associated with the experiment. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
         },
         "principalId": {
           "type": "string",
@@ -39,6 +44,26 @@
         "type"
       ],
       "additionalProperties": false
+    },
+    "userAssignedIdentities": {
+      "type": "object",
+      "description": "The list of user identities associated with the experiment.",
+          "additionalProperties": {
+            "type": "object",
+            "description": "The list of user identities associated with the experiment.",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          }
     },
     "url": {
       "type": "string",

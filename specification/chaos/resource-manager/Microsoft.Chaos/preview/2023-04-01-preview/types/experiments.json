@@ -72,6 +72,21 @@
         "properties"
       ]
     },
+    "experimentUpdate": {
+      "type": "object",
+      "description": "Describes an experiment update.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "description": "The identity of the experiment resource.",
+          "$ref": "./common.json#/definitions/resourceIdentity"
+        }
+      }
+    },
     "experimentProperties": {
       "description": "Model that represents the Experiment properties model.",
       "type": "object",
@@ -212,8 +227,7 @@
         "duration": {
           "type": "string",
           "description": "ISO8601 formatted string that represents a duration.",
-          "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?$",
-          "format": "duration"
+          "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?$"
         }
       },
       "required": [
@@ -266,8 +280,7 @@
         "duration": {
           "type": "string",
           "description": "ISO8601 formatted string that represents a duration.",
-          "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?$",
-          "format": "duration"
+          "pattern": "^P(\\d+Y)?(\\d+M)?(\\d+D)?(T(\\d+H)?(\\d+M)?(\\d+(\\.\\d+)?S)?)?$"
         },
         "parameters": {
           "description": "List of key value pairs.",
@@ -313,7 +326,7 @@
         "value"
       ],
       "additionalProperties": false
-    },
+    },    
     "selector": {
       "type": "object",
       "description": "Model that represents a selector in the Experiment resource.",
@@ -344,9 +357,6 @@
           "items": {
             "$ref": "#/definitions/targetReference"
           }
-        },
-        "filter": {
-          "$ref": "#/definitions/filter"
         }
       },
       "required": [
@@ -354,58 +364,6 @@
         "id",
         "targets"
       ],
-      "additionalProperties": false
-    },
-    "filter": {
-      "type": "object",
-      "description": "Model that represents available filter types that can be applied to a targets list.",
-      "discriminator": "type",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Enum that discriminates between filter types. Currently only `Simple` type is supported.",
-          "enum": [
-            "Simple"
-          ],
-          "x-ms-enum": {
-            "name": "FilterType",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
-    },
-    "simpleFilter": {
-      "type": "object",
-      "description": "Model that represents a simple target filter.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/filter"
-        }
-      ],
-      "properties": {
-        "parameters": {
-          "$ref": "#/definitions/simpleFilterParameters"
-        }
-      },
-      "additionalProperties": false,
-      "x-ms-discriminator-value": "Simple"
-    },
-    "simpleFilterParameters": {
-      "description": "Model that represents the Simple filter parameters.",
-      "type": "object",
-      "properties": {
-        "zones": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "String of the availability zone ID."
-          },
-          "description": "List of Azure availability zones to filter targets by."
-        }
-      },
       "additionalProperties": false
     },
     "targetReference": {
