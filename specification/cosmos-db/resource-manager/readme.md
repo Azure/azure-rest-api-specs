@@ -47,7 +47,6 @@ input-file:
   - Microsoft.DocumentDB/stable/2023-03-15/restorable.json
   - Microsoft.DocumentDB/stable/2023-03-15/services.json
 
-tag: package-preview-2023-03
 ```
 
 
