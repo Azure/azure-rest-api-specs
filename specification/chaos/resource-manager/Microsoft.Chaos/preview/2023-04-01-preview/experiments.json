@@ -262,11 +262,11 @@
         }
       },
       "patch": {
-        "description": "Updates Experiment.",
+        "description": "The operation to update an experiment.",
         "tags": [
           "Experiments"
         ],
-        "operationId": "Experiments_Patch",
+        "operationId": "Experiments_Update",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -282,10 +282,10 @@
             "$ref": "./types/experiments.json#/parameters/experimentName"
           },
           {
-            "name": "experiment",
-            "description": "Experiment resource used to patch experiment.",
+            "name": "parameters",
             "in": "body",
             "required": true,
+            "description": "Parameters supplied to the Update experiment operation.",
             "schema": {
               "$ref": "./types/experiments.json#/definitions/experimentUpdate"
             }
