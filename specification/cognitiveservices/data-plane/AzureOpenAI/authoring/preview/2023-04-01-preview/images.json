@@ -9,10 +9,25 @@
    "basePath": "/dalle",
    "schemes": ["https"],
    "securityDefinitions": {
-      "api_key": {
+      "Api-Key": {
         "type": "apiKey",
         "name": "Api-Key",
-        "in": "header"
+        "in": "header",
+        "description": "Provide your Cognitive Services Azure OpenAI account key here."
+      }
+   },
+   "security": [
+      {
+        "Api-Key": []
+      }
+    ],
+   "parameters": {
+      "apiVersionQueryParameter": {
+        "in": "query",
+        "name": "api-version",
+        "description": "The requested API version.",
+        "required": true,
+        "type": "string"
       }
    },
    "definitions": {
@@ -74,7 +89,7 @@
             "details": {
                "type": "array",
                "items": {
-                  "$ref": "#/components/schemas/InnerError"
+                  "$ref": "#/definitions/InnerError"
                }
             }
          },
@@ -87,7 +102,7 @@
          "type": "object",
          "properties": {
             "error": {
-               "$ref": "#/components/schemas/Error"
+               "$ref": "#/definitions/Error"
             }
          },
          "required": [
@@ -104,7 +119,7 @@
                "example": "https://www.contoso.com"
             },
             "error": {
-               "$ref": "#/components/schemas/Error"
+               "$ref": "#/definitions/Error"
             }
          }
       },
@@ -112,7 +127,7 @@
          "type": "array",
          "description": "The result data of the operation, if successful",
          "items": {
-            "$ref": "#/components/schemas/ImageResult"
+            "$ref": "#/definitions/ImageResult"
          }
       },
       "OperationResponse": {
@@ -142,13 +157,13 @@
                "example": "1676540381"
             },
             "data": {
-               "$ref": "#/components/schemas/OperationResult"
+               "$ref": "#/definitions/OperationResult"
             },
             "status": {
-               "$ref": "#/components/schemas/Status"
+               "$ref": "#/definitions/Status"
             },
             "error": {
-               "$ref": "#/components/schemas/Error"
+               "$ref": "#/definitions/Error"
             }
          },
          "required": [
@@ -184,7 +199,7 @@
                "default": 1
             },
             "size": {
-               "$ref": "#/components/schemas/ImageResolution"
+               "$ref": "#/definitions/ImageResolution"
             }
          },
          "required": [
@@ -195,7 +210,7 @@
          "type": "object",
          "properties": {
             "status": {
-               "$ref": "#/components/schemas/Status"
+               "$ref": "#/definitions/Status"
             }
          },
          "required": [
@@ -216,11 +231,7 @@
             ],
             "parameters": [
                {
-                  "in": "query",
-                  "name": "api-version",
-                  "required": true,
-                  "type": "string",
-                  "description": "API version."
+                  "$ref": "#/parameters/apiVersionQueryParameter"
                },
                {
                   "in": "body",
@@ -244,16 +255,10 @@
                      "$ref": "#/definitions/GenerateImagesPostResponse"
                   }
                },
-               "400": {
-                  "description": "BadRequest",
+               "default": {
+                  "description": "An error occurred.",
                   "schema": {
-                     "$ref": "#/definitions/ErrorResponse"
-                  }
-               },
-               "429": {
-                  "description": "TooManyRequests",
-                  "schema": {
-                     "$ref": "#/definitions/ErrorResponse"
+                    "$ref": "#/definitions/ErrorResponse"
                   }
                }
             }
@@ -268,11 +273,7 @@
             ],
             "parameters": [
                {
-                  "in": "query",
-                  "name": "api-version",
-                  "required": true,
-                  "type": "string",
-                  "description": "API version."
+                  "$ref": "#/parameters/apiVersionQueryParameter"
                },
                {
                   "in": "path",
@@ -300,19 +301,13 @@
                      }
                   },
                   "schema": {
-                     "$ref": "#/components/schemas/OperationResponse"
+                     "$ref": "#/definitions/OperationResponse"
                   }
                },
-               "400": {
-                  "description": "BadRequest",
+               "default": {
+                  "description": "An error occurred.",
                   "schema": {
-                     "$ref": "#/components/schemas/ErrorResponse"
-                  }
-               },
-               "404": {
-                  "description": "NotFound",
-                  "schema": {
-                     "$ref": "#/components/schemas/ErrorResponse"
+                    "$ref": "#/definitions/ErrorResponse"
                   }
                }
             }
@@ -340,22 +335,10 @@
                "204": {
                   "description": "NoContent"
                },
-               "400": {
-                  "description": "BadRequest",
+               "default": {
+                  "description": "An error occurred.",
                   "schema": {
-                     "$ref": "#/components/schemas/ErrorResponse"
-                  }
-               },
-               "404": {
-                  "description": "NotFound",
-                  "schema": {
-                     "$ref": "#/components/schemas/ErrorResponse"
-                  }
-               },
-               "409": {
-                  "description": "Conflict",
-                  "schema": {
-                     "$ref": "#/components/schemas/ErrorResponse"
+                    "$ref": "#/definitions/ErrorResponse"
                   }
                }
             }
