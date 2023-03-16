@@ -1,14 +1,15 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "./common.cadl";
-import "./deployment.cadl";
-import "./file.cadl";
-import "./finetune.cadl";
-import "./model.routes.cadl";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
+import "./common.tsp";
+import "./deployment.tsp";
+import "./file.tsp";
+import "./finetune.tsp";
+import "./model.routes.tsp";
 
-using Cadl.Rest;
-using Cadl.Http;
-using Cadl.Versioning;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> |

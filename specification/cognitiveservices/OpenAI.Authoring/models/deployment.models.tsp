@@ -1,7 +1,8 @@
-import "@cadl-lang/rest";
+import "@typespec/rest";
+import "@typespec/http";
 
-using Cadl.Rest;
-using Cadl.Rest.Resource;
+using TypeSpec.Rest;
+using TypeSpec.Rest.Resource;
 
 namespace Azure.OpenAI;
 

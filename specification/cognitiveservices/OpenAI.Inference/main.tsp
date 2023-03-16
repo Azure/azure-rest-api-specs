@@ -1,11 +1,12 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
+import "@typespec/rest";
+import "@typespec/http";
+import "@typespec/versioning";
 
-import "./routes.cadl";
+import "./routes.tsp";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> |
@@ -47,7 +48,7 @@ enum ServiceApiVersions {
 
 
 @doc("A specific deployment")
-@Cadl.Rest.resource("deployments")
+@TypeSpec.Rest.resource("deployments")
 model Deployment {
   @visibility("read")
   @doc("deployment id of the deployed model")

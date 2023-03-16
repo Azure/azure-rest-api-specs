@@ -1,5 +1,5 @@
-import "@azure-tools/cadl-azure-core";
-import "./common.cadl";
+import "@azure-tools/typespec-azure-core";
+import "./common.tsp";
 
 namespace Azure.OpenAI.ServiceCustomizations;
 
@@ -12,5 +12,5 @@ model OpenAiList<T extends object, TType extends Azure.OpenAI.TypeDiscriminator>
 }
 
 // TODO: enum value types not supported in csharp emitter, change TypeDiscriminator to TypeDiscriminatorKnownValues enum when fixed
-#suppress "@azure-tools/cadl-azure-core/documentation-required" "Internal template - no need for public documentation"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "Internal template - no need for public documentation"
 op OpenAIListOperation<T extends object, TType extends Azure.OpenAI.TypeDiscriminator> is Azure.Core.Foundations.ResourceList<T, {}, OpenAiList<T, TType>>;
