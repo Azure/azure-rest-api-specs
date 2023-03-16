@@ -718,13 +718,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AgFoodPlatform/farmBeats/{farmBeatsResourceName}/operationResults/{operationResultsId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AgFoodPlatform/locations/{locations}/operationResults/{operationResultsId}": {
       "get": {
         "tags": [
-          "FarmBeatsModels"
+          "OperationResults"
         ],
         "description": "Get operationResults for a FarmBeats resource.",
-        "operationId": "FarmBeatsModels_GetOperationResult",
+        "operationId": "OperationResults_Get",
         "produces": [
           "application/json"
         ],
@@ -733,18 +733,19 @@
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/FarmBeatsResourceNameParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "path",
+            "name": "locations",
+            "description": "Location.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
             "name": "operationResultsId",
-            "description": "The operation results id.",
+            "description": "operation Results Id.",
             "required": true,
             "type": "string",
             "pattern": "^[A-Za-z0-9]+(-[A-Za-z0-9]+)*$"
@@ -765,8 +766,8 @@
           }
         },
         "x-ms-examples": {
-          "FarmBeatsModels_GetOperationResult": {
-            "$ref": "./examples/FarmBeatsModels_GetOperationResult.json"
+          "OperationResults_Get": {
+            "$ref": "./examples/OperationResults_Get.json"
           }
         }
       }
@@ -1620,7 +1621,7 @@
       "description": "Api properties.",
       "type": "object",
       "properties": {
-        "apiFreshnessWindowInMinutes": {
+        "apiFreshnessTimeInMinutes": {
           "format": "int32",
           "description": "Interval in minutes for which the weather data for the api needs to be refreshed.",
           "maximum": 10080,
@@ -1898,6 +1899,33 @@
         }
       }
     },
+    "ArmAsyncOperation": {
+      "description": "Arm async operation class.\r\nRef: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/ArmAsyncOperationError"
+        }
+      }
+    },
+    "ArmAsyncOperationError": {
+      "description": "Arm async operation error class.\r\nRef: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/async-api-reference.md#azure-asyncoperation-resource-format.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status of the async operation.",
+          "type": "string"
+        }
+      }
+    },
     "SensorIntegration": {
       "description": "Sensor integration request model.",
       "type": "object",
@@ -2047,16 +2075,6 @@
           "description": "Continuation link (absolute URI) to the next page of results in the list.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "ArmAsyncOperation": {
-      "description": "Arm async operation class.\r\nRef: https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/async-operations.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of the async operation.",
-          "type": "string"
         }
       }
     },
