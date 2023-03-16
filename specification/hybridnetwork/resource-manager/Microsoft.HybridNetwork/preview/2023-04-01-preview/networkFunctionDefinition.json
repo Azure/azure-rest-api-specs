@@ -1065,22 +1065,8 @@
           "description": "The deployment parameters of the network function definition version."
         },
         "networkFunctionType": {
-          "type": "string",
           "description": "The network function type.",
-          "enum": [
-            "Unknown",
-            "VirtualNetworkFunction",
-            "ContainerizedNetworkFunction",
-            "DelegatedNetworkFunction"
-          ],
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "x-ms-enum": {
-            "name": "NetworkFunctionType",
-            "modelAsString": true
-          }
+          "$ref": "./common.json#/definitions/NetworkFunctionType"
         }
       }
     },
@@ -1914,7 +1900,7 @@
       "description": "Publisher network function definition version update request definition.",
       "properties": {
         "versionState": {
-          "description": "The network function definition version state.",
+          "description": "The network function definition version state. Only the 'Active' and 'Deprecated' states are allowed for updates. Other states are used for internal state transitioning.",
           "$ref": "#/definitions/VersionState",
           "x-ms-mutability": [
             "read",

@@ -1,23 +1,30 @@
 {
-  "operationId": "Products_Get",
-  "title": "Products_Get",
+  "operationId": "Products_Update",
+  "title": "Products_Update",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "MyResourceGroup1",
     "catalogName": "MyCatalog1",
     "productName": "MyProduct1",
+    "properties": {},
     "api-version": "2022-09-01-preview"
   },
   "responses": {
     "200": {
-      "description": "The details of an Azure Sphere product.",
+      "description": "ARM operation completed successfully.",
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MyResourceGroup1/providers/Microsoft.AzureSphere/catalogs/MyCatalog1/products/MyProduct1",
         "type": "microsoft.azureSphere/catalogs/products",
         "properties": {
-          "description": "product description."
+          "description": "Product description."
         }
       }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://foo.com/operationstatus"
+      },
+      "description": "Resource update request accepted."
     }
   }
 }

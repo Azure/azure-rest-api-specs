@@ -31,17 +31,17 @@ interface Images extends ProxyResourceOperationsReadListCreateDelete<Image, List
 @doc("The properties of image")
 model ImageProperties {
 
-  @doc("Image as a UTF-8 encoded base 64 string.")
+  @doc("Image as a UTF-8 encoded base 64 string on image create. This field contains the image URI on image reads.")
   @visibility("create", "read")
   image?: string,
 
   @doc("Image ID")
-  @visibility("read")
+  @visibility("create", "read")
   imageId?: string,
 
-  @doc("Image file name")
+  @doc("Image name")
   @visibility("read")
-  imageFileName?: string,
+  imageName?: string,
 
   @doc("Regional data boundary for an image")
   @visibility("create", "read")

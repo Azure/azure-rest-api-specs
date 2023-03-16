@@ -1809,20 +1809,19 @@
         },
         "autoscaleType": {
           "type": "string",
-          "description": "User to specify which type of Autoscale to be implemented - Scheduled Based or Load Based."
+          "description": "User to specify which type of Autoscale to be implemented - Scheduled Based or Load Based.",
+          "enum": [
+            "ScheduleBased",
+            "LoadBased"
+          ]
         },
         "scheduleBasedConfig": {
-          "type": "object",
           "description": "Profiles of schedule based Autoscale.",
-          "items": {
-            "$ref": "#/definitions/ScheduleBasedConfig"
-          }
+          "$ref": "#/definitions/ScheduleBasedConfig"
         },
         "loadBasedConfig": {
           "description": "Profiles of load based Autoscale.",
-          "items": {
-            "$ref": "#/definitions/LoadBasedConfig"
-          }
+          "$ref": "#/definitions/LoadBasedConfig"
         }
       }
     },
@@ -1881,7 +1880,16 @@
           "type": "array",
           "description": "User has to set the days where schedule has to be set for autoscale operation.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ]
           }
         }
       }
@@ -1948,10 +1956,7 @@
           "description": "Metrics name for individual workloads."
         },
         "comparisonRule": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/ComparisonRule"
-          }
+          "$ref": "#/definitions/ComparisonRule"
         }
       }
     },
