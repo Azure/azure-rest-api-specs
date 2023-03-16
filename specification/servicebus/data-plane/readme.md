@@ -42,6 +42,7 @@ input-file:
 
 ``` yaml
 directive:
-  - suppress: ModelValidation
-    reason: XML Models, not JSON.
+  - suppress: XMS_EXAMPLE_NOTFOUND_ERROR
+    from: servicebus.json
+    reason: Response body is XML, not JSON, so cannot validate.
 ```
