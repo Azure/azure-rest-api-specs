@@ -1688,7 +1688,7 @@
       },
       "description": "Represents the confidence scores across all sentiment classes: positive and negative."
     },
-    "EntityCategories": {
+    "EntityList": {
       "description": "(Optional) describes the entity categories to return",
       "items": {
         "type": "string",
@@ -1699,12 +1699,12 @@
         "enum": [
           "Default",
           "Address",
-          "Numberic",
+          "Numeric",
           "Age",
           "Currency",
           "Number",
           "NumberRange",
-          "Percentag",
+          "Percentage",
           "Ordinal",
           "Temperature",
           "Dimension",
@@ -1743,7 +1743,7 @@
           "Person",
           "PersonType",
           "Email",
-          "Url",
+          "URL",
           "IP",
           "PhoneNumber",
           "Product",
@@ -1785,10 +1785,10 @@
           "$ref": "common.json#/definitions/StringIndexType"
         },
         "inclusionList": {
-          "$ref": "#/definitions/EntityCategories"
+          "$ref": "#/definitions/EntityList"
         },
         "exclusionList": {
-          "$ref": "#/definitions/EntityCategories"
+          "$ref": "#/definitions/EntityList"
         },
         "overlapPolicy": {
           "$ref": "#/definitions/BaseEntityOverlapPolicy"
@@ -1888,12 +1888,12 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Entity type."
+          "description": "Tags are to express some similarities/affinity between entities. Entity Tags will be unique globally."
         },
         "score": {
           "type": "string",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
+          "description": "Detection score between 0 and 1 of the extracted entity."
         }
       }
     },
@@ -1904,7 +1904,47 @@
         "category",
         "offset",
         "length",
-        "score"
+        "confidenceScore"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "type": "string",
+          "description": "Entity type."
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        }
+      }
+    },
+    "EntityWithTags": {
+      "type": "object",
+      "required": [
+        "text",
+        "offset",
+        "length",
+        "score",
+        "tags",
+        "type"
       ],
       "properties": {
         "text": {
@@ -1913,7 +1953,7 @@
         },
         "type": {
           "type": "string",
-          "description": "Entity type."
+          "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
         },
         "offset": {
           "type": "integer",
@@ -1928,7 +1968,7 @@
         "score": {
           "type": "number",
           "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
+          "description": "Detection score between 0 and 1 of the extracted entity."
         },
         "tags": {
           "$ref": "#/definitions/EntityTags"
@@ -1939,7 +1979,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/Entity"
+          "$ref": "#/definitions/EntityWithTags"
         }
       ],
       "properties": {
@@ -1947,7 +1987,7 @@
           "description": "The collection of entity metadata objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BaseMetadata"
+            "$ref": "#/definitions/BaseMd"
           }
         }
       }
@@ -2092,7 +2132,7 @@
         }
       }
     },
-    "BaseMetadata": {
+    "BaseMd": {
       "description": "The abstract base class for entity Metadatas.",
       "type": "object",
       "discriminator": "metadataKind",
@@ -2101,21 +2141,20 @@
           "description": "The entity Metadata object kind.",
           "type": "string",
           "enum": [
-            "BooleanMetadata",
-            "DateTimeMetadata",
-            "NumberMetadata",
-            "OrdinalMetadata",
-            "SpeedMetadata",
-            "WeightMetadata",
-            "LengthMetadata",
-            "VolumeMetadata",
-            "AreaMetadata",
-            "AgeMetadata",
-            "InformationMetadata",
-            "TemperatureMetadata",
-            "CurrencyMetadata",
-            "NumericRangeMetadata",
-            "TemporalSpanMetadata"
+            "TemporalMd",
+            "NumericMd",
+            "OrdinalMd",
+            "SpeedMd",
+            "WeightMd",
+            "LengthMd",
+            "VolumeMd",
+            "AreaMd",
+            "AgeMd",
+            "InformationMd",
+            "TemperatureMd",
+            "CurrencyMd",
+            "NumberRangeMd",
+            "TemporalSpanMd"
           ],
           "x-ms-enum": {
             "name": "MetadataKind",
@@ -2141,11 +2180,11 @@
         "value"
       ]
     },
-    "AgeMetadata": {
+    "AgeMd": {
       "description": "Represents the Age entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         },
         {
           "$ref": "#/definitions/QuantityMetadata"
@@ -2174,11 +2213,11 @@
         "unit"
       ]
     },
-    "VolumeMetadata": {
+    "VolumeMd": {
       "description": "Represents the volume entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         },
         {
           "$ref": "#/definitions/QuantityMetadata"
@@ -2230,11 +2269,11 @@
         "unit"
       ]
     },
-    "SpeedMetadata": {
+    "SpeedMd": {
       "description": "Represents the speed entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         },
         {
           "$ref": "#/definitions/QuantityMetadata"
@@ -2272,11 +2311,11 @@
         "unit"
       ]
     },
-    "AreaMetadata": {
+    "AreaMd": {
       "description": "Represents the area entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         },
         {
           "$ref": "#/definitions/QuantityMetadata"
@@ -2313,11 +2352,11 @@
         "unit"
       ]
     },
-    "LengthMetadata": {
+    "LengthMd": {
       "description": "Represents the length entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         },
         {
           "$ref": "#/definitions/QuantityMetadata"
@@ -2358,11 +2397,11 @@
         "unit"
       ]
     },
-    "InformationMetadata": {
+    "InformationMd": {
       "description": "Represents the information (data) entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         },
         {
           "$ref": "#/definitions/QuantityMetadata"
@@ -2399,11 +2438,11 @@
         "unit"
       ]
     },
-    "TemperatureMetadata": {
+    "TemperatureMd": {
       "description": "Represents the temperature entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         },
         {
           "$ref": "#/definitions/QuantityMetadata"
@@ -2432,11 +2471,11 @@
         "unit"
       ]
     },
-    "WeightMetadata": {
+    "WeightMd": {
       "description": "Represents the weight entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         },
         {
           "$ref": "#/definitions/QuantityMetadata"
@@ -2476,11 +2515,11 @@
         "unit"
       ]
     },
-    "CurrencyMetadata": {
+    "CurrencyMd": {
       "description": "Represents the currency entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         },
         {
           "$ref": "#/definitions/QuantityMetadata"
@@ -2508,11 +2547,11 @@
         "unit"
       ]
     },
-    "BooleanMetadata": {
+    "BooleanMd": {
       "description": "A Metadata for boolean expressions",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         }
       ],
       "type": "object",
@@ -2526,11 +2565,11 @@
         "value"
       ]
     },
-    "DateTimeMetadata": {
+    "TemporalMd": {
       "description": "A Metadata for datetime entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         }
       ],
       "type": "object",
@@ -2538,21 +2577,6 @@
       "properties": {
         "timex": {
           "$ref": "#/definitions/TimeExpression"
-        },
-        "dateTimeSubKind": {
-          "type": "string",
-          "enum": [
-            "Time",
-            "Date",
-            "DateTime",
-            "Duration",
-            "Set"
-          ],
-          "x-ms-enum": {
-            "name": "DateTimeSubKind",
-            "modelAsString": true
-          },
-          "description": "The DateTime SubKind"
         },
         "value": {
           "type": "string",
@@ -2564,15 +2588,14 @@
       },
       "required": [
         "timex",
-        "dateTimeSubKind",
         "value"
       ]
     },
-    "NumberMetadata": {
+    "NumberMd": {
       "description": "A Metadata for numeric entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         }
       ],
       "type": "object",
@@ -2605,11 +2628,11 @@
         "value"
       ]
     },
-    "OrdinalMetadata": {
+    "OrdinalMd": {
       "description": "A Metadata for ordinal numbers entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         }
       ],
       "type": "object",
@@ -2643,11 +2666,11 @@
         "value"
       ]
     },
-    "TemporalSpanMetadata": {
+    "TemporalSpanMd": {
       "description": "represents the Metadata of a date and/or time span.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         }
       ],
       "type": "object",
@@ -2672,11 +2695,11 @@
         }
       }
     },
-    "NumericRangeMetadata": {
+    "NumericRangeMd": {
       "description": "represents the Metadata of numeric intervals.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMetadata"
+          "$ref": "#/definitions/BaseMd"
         }
       ],
       "type": "object",
