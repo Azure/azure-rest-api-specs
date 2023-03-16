@@ -2046,7 +2046,27 @@
         "redactionCharacter": {
           "type": "string",
           "description": "Optional parameter to use a Custom Character to be used for redaction in Conversational PII responses. Default character will be * as before.",
-          "default": "*"
+          "default": "*",
+          "x-ms-enum": {
+            "name": "redactionCharacter",
+            "modelAsString": true
+          },
+          "enum": [
+            "!",
+            "#",
+            "$",
+            "%",
+            "&",
+            "*",
+            "+",
+            "-",
+            "=",
+            "?",
+            "@",
+            "^",
+            "_",
+            "~"
+          ]
         },
         "excludeList": {
           "description": "List of categories that need to be excluded instead of included.",
