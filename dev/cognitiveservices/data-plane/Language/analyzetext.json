@@ -1688,6 +1688,95 @@
       },
       "description": "Represents the confidence scores across all sentiment classes: positive and negative."
     },
+    "EntityCategories": {
+      "description": "(Optional) describes the entity categories to return",
+      "items": {
+        "type": "string",
+        "x-ms-enum": {
+          "name": "EntityCategory",
+          "modelAsString": true
+        },
+        "enum": [
+          "Default",
+          "Address",
+          "Numberic",
+          "Age",
+          "Currency",
+          "Number",
+          "NumberRange",
+          "Percentag",
+          "Ordinal",
+          "Temperature",
+          "Dimension",
+          "Length",
+          "Weight",
+          "Height",
+          "Speed",
+          "Area",
+          "Volume",
+          "Information",
+          "Temporal",
+          "Date",
+          "Time",
+          "DateTime",
+          "DateRange",
+          "TimeRange",
+          "DateTimeRange",
+          "Duration",
+          "SetTemporal",
+          "Event",
+          "SocialEvent",
+          "CulturalEvent",
+          "NatrualEvent",
+          "Location",
+          "GPE",
+          "City",
+          "Stage",
+          "CountryRegion",
+          "Continent",
+          "Structural",
+          "Geological",
+          "Organization",
+          "MedicalOrganization",
+          "StockExchange",
+          "SportsOrganizaiton",
+          "Person",
+          "PersonType",
+          "Email",
+          "Url",
+          "IP",
+          "PhoneNumber",
+          "Product",
+          "ComputingProduct",
+          "Skill"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "BaseEntityOverlapPolicy": {
+      "description": "The abstract base class for entity Metadatas.",
+      "type": "object",
+      "discriminator": "policyKind",
+      "properties": {
+        "policyKind": {
+          "description": "The entity Metadata object kind.",
+          "type": "string",
+          "default": "matchLongest",
+          "enum": [
+            "matchLongest",
+            "allowOverlap"
+          ],
+          "x-ms-enum": {
+            "name": "policyKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "policyKind"
+      ]
+    },
     "EntitiesTaskParameters": {
       "type": "object",
       "description": "Supported parameters for an Entity Recognition task.",
@@ -1700,6 +1789,9 @@
         },
         "exclusionList": {
           "$ref": "#/definitions/EntityCategories"
+        },
+        "overlapPolicy": {
+          "$ref": "#/definitions/BaseEntityOverlapPolicy"
         }
       },
       "allOf": [
@@ -1714,12 +1806,6 @@
       "properties": {
         "parameters": {
           "$ref": "#/definitions/EntitiesTaskParameters"
-        },
-        "inclusionList": {
-          "$ref": "#/definitions/EntityCategories"
-        },
-        "exclusionList": {
-          "$ref": "#/definitions/EntityCategories"
         }
       },
       "allOf": [
@@ -1784,7 +1870,7 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/EntityWithResolution"
+            "$ref": "#/definitions/EntityWithMetadata"
           }
         }
       },
@@ -1797,6 +1883,20 @@
         "entities"
       ]
     },
+    "EntityTags": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Entity type."
+        },
+        "score": {
+          "type": "string",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        }
+      }
+    },
     "Entity": {
       "type": "object",
       "required": [
@@ -1804,20 +1904,16 @@
         "category",
         "offset",
         "length",
-        "confidenceScore"
+        "score"
       ],
       "properties": {
         "text": {
           "type": "string",
           "description": "Entity text as appears in the request."
         },
-        "category": {
+        "type": {
           "type": "string",
           "description": "Entity type."
-        },
-        "subcategory": {
-          "type": "string",
-          "description": "(Optional) Entity sub type."
         },
         "offset": {
           "type": "integer",
@@ -1829,14 +1925,17 @@
           "format": "int32",
           "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
         },
-        "confidenceScore": {
+        "score": {
           "type": "number",
           "format": "double",
           "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "tags": {
+          "$ref": "#/definitions/EntityTags"
         }
       }
     },
-    "EntityWithResolution": {
+    "EntityWithMetadata": {
       "type": "object",
       "allOf": [
         {
@@ -1844,11 +1943,11 @@
         }
       ],
       "properties": {
-        "resolutions": {
-          "description": "The collection of entity resolution objects.",
+        "metadata": {
+          "description": "The collection of entity metadata objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BaseResolution"
+            "$ref": "#/definitions/BaseMetadata"
           }
         }
       }
@@ -1993,43 +2092,43 @@
         }
       }
     },
-    "BaseResolution": {
-      "description": "The abstract base class for entity resolutions.",
+    "BaseMetadata": {
+      "description": "The abstract base class for entity Metadatas.",
       "type": "object",
-      "discriminator": "resolutionKind",
+      "discriminator": "metadataKind",
       "properties": {
-        "resolutionKind": {
-          "description": "The entity resolution object kind.",
+        "metadataKind": {
+          "description": "The entity Metadata object kind.",
           "type": "string",
           "enum": [
-            "BooleanResolution",
-            "DateTimeResolution",
-            "NumberResolution",
-            "OrdinalResolution",
-            "SpeedResolution",
-            "WeightResolution",
-            "LengthResolution",
-            "VolumeResolution",
-            "AreaResolution",
-            "AgeResolution",
-            "InformationResolution",
-            "TemperatureResolution",
-            "CurrencyResolution",
-            "NumericRangeResolution",
-            "TemporalSpanResolution"
+            "BooleanMetadata",
+            "DateTimeMetadata",
+            "NumberMetadata",
+            "OrdinalMetadata",
+            "SpeedMetadata",
+            "WeightMetadata",
+            "LengthMetadata",
+            "VolumeMetadata",
+            "AreaMetadata",
+            "AgeMetadata",
+            "InformationMetadata",
+            "TemperatureMetadata",
+            "CurrencyMetadata",
+            "NumericRangeMetadata",
+            "TemporalSpanMetadata"
           ],
           "x-ms-enum": {
-            "name": "ResolutionKind",
+            "name": "MetadataKind",
             "modelAsString": true
           }
         }
       },
       "required": [
-        "resolutionKind"
+        "MetadataKind"
       ]
     },
-    "QuantityResolution": {
-      "description": "Represents resolutions for quantities.",
+    "QuantityMetadata": {
+      "description": "Represents Metadatas for quantities.",
       "type": "object",
       "properties": {
         "value": {
@@ -2042,18 +2141,18 @@
         "value"
       ]
     },
-    "AgeResolution": {
-      "description": "Represents the Age entity resolution model.",
+    "AgeMetadata": {
+      "description": "Represents the Age entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "AgeResolution",
+      "x-ms-discriminator-value": "AgeMetadata",
       "properties": {
         "unit": {
           "type": "string",
@@ -2075,18 +2174,18 @@
         "unit"
       ]
     },
-    "VolumeResolution": {
-      "description": "Represents the volume entity resolution model.",
+    "VolumeMetadata": {
+      "description": "Represents the volume entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "VolumeResolution",
+      "x-ms-discriminator-value": "VolumeMetadata",
       "properties": {
         "unit": {
           "type": "string",
@@ -2131,18 +2230,18 @@
         "unit"
       ]
     },
-    "SpeedResolution": {
-      "description": "Represents the speed entity resolution model.",
+    "SpeedMetadata": {
+      "description": "Represents the speed entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "SpeedResolution",
+      "x-ms-discriminator-value": "SpeedMetadata",
       "properties": {
         "unit": {
           "type": "string",
@@ -2173,18 +2272,18 @@
         "unit"
       ]
     },
-    "AreaResolution": {
-      "description": "Represents the area entity resolution model.",
+    "AreaMetadata": {
+      "description": "Represents the area entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "AreaResolution",
+      "x-ms-discriminator-value": "AreaMetadata",
       "properties": {
         "unit": {
           "type": "string",
@@ -2214,70 +2313,18 @@
         "unit"
       ]
     },
-    "EntityCategories": {
-      "description": "(Optional) describes the entity categories to return",
-      "items": {
-        "type": "string",
-        "x-ms-enum": {
-          "name": "EntityCategory",
-          "modelAsString": true
-        },
-        "enum": [
-          "Default",
-          "Person",
-          "PersonType",
-          "Location",
-          "Location.GPE",
-          "Location.Structural",
-          "Location.Geographical",
-          "Organization",
-          "Organization.Medical",
-          "Organization.Stock_Exchange",
-          "Organization.Sports",
-          "Event",
-          "Event.Cultural",
-          "Event.Natural",
-          "Event.Sports",
-          "Product",
-          "Product.Computing",
-          "Skill",
-          "Address",
-          "PhoneNumber",
-          "Email",
-          "URL",
-          "IP",
-          "DateTime",
-          "DateTime.Date",
-          "DateTime.Time",
-          "DateTime.DateRange",
-          "DateTime.TimeRange",
-          "DateTime.Duration",
-          "DateTime.Set",
-          "Quantity",
-          "Quantity.Number",
-          "Quantity.Percentage",
-          "Quantity.Ordinal",
-          "Quantity.Age",
-          "Quantity.Currency",
-          "Quantity.Dimensions",
-          "Quantity.Temperature"
-        ]
-      },
-      "type": "array",
-      "uniqueItems": true
-    },
-    "LengthResolution": {
-      "description": "Represents the length entity resolution model.",
+    "LengthMetadata": {
+      "description": "Represents the length entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "LengthResolution",
+      "x-ms-discriminator-value": "LengthMetadata",
       "properties": {
         "unit": {
           "type": "string",
@@ -2311,18 +2358,18 @@
         "unit"
       ]
     },
-    "InformationResolution": {
-      "description": "Represents the information (data) entity resolution model.",
+    "InformationMetadata": {
+      "description": "Represents the information (data) entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "InformationResolution",
+      "x-ms-discriminator-value": "InformationMetadata",
       "properties": {
         "unit": {
           "type": "string",
@@ -2352,18 +2399,18 @@
         "unit"
       ]
     },
-    "TemperatureResolution": {
-      "description": "Represents the temperature entity resolution model.",
+    "TemperatureMetadata": {
+      "description": "Represents the temperature entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemperatureResolution",
+      "x-ms-discriminator-value": "TemperatureMetadata",
       "properties": {
         "unit": {
           "type": "string",
@@ -2385,18 +2432,18 @@
         "unit"
       ]
     },
-    "WeightResolution": {
-      "description": "Represents the weight entity resolution model.",
+    "WeightMetadata": {
+      "description": "Represents the weight entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "WeightResolution",
+      "x-ms-discriminator-value": "WeightMetadata",
       "properties": {
         "unit": {
           "type": "string",
@@ -2429,18 +2476,18 @@
         "unit"
       ]
     },
-    "CurrencyResolution": {
-      "description": "Represents the currency entity resolution model.",
+    "CurrencyMetadata": {
+      "description": "Represents the currency entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityResolution"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "CurrencyResolution",
+      "x-ms-discriminator-value": "CurrencyMetadata",
       "properties": {
         "ISO4217": {
           "type": "string",
@@ -2461,15 +2508,15 @@
         "unit"
       ]
     },
-    "BooleanResolution": {
-      "description": "A resolution for boolean expressions",
+    "BooleanMetadata": {
+      "description": "A Metadata for boolean expressions",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "BooleanResolution",
+      "x-ms-discriminator-value": "BooleanMetadata",
       "properties": {
         "value": {
           "type": "boolean"
@@ -2479,15 +2526,15 @@
         "value"
       ]
     },
-    "DateTimeResolution": {
-      "description": "A resolution for datetime entity instances.",
+    "DateTimeMetadata": {
+      "description": "A Metadata for datetime entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "DateTimeResolution",
+      "x-ms-discriminator-value": "DateTimeMetadata",
       "properties": {
         "timex": {
           "$ref": "#/definitions/TimeExpression"
@@ -2521,15 +2568,15 @@
         "value"
       ]
     },
-    "NumberResolution": {
-      "description": "A resolution for numeric entity instances.",
+    "NumberMetadata": {
+      "description": "A Metadata for numeric entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumberResolution",
+      "x-ms-discriminator-value": "NumberMetadata",
       "properties": {
         "numberKind": {
           "type": "string",
@@ -2558,15 +2605,15 @@
         "value"
       ]
     },
-    "OrdinalResolution": {
-      "description": "A resolution for ordinal numbers entity instances.",
+    "OrdinalMetadata": {
+      "description": "A Metadata for ordinal numbers entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "OrdinalResolution",
+      "x-ms-discriminator-value": "OrdinalMetadata",
       "properties": {
         "offset": {
           "type": "string",
@@ -2596,15 +2643,15 @@
         "value"
       ]
     },
-    "TemporalSpanResolution": {
-      "description": "represents the resolution of a date and/or time span.",
+    "TemporalSpanMetadata": {
+      "description": "represents the Metadata of a date and/or time span.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemporalSpanResolution",
+      "x-ms-discriminator-value": "TemporalSpanMetadata",
       "properties": {
         "begin": {
           "$ref": "#/definitions/TimeExpression"
@@ -2625,15 +2672,15 @@
         }
       }
     },
-    "NumericRangeResolution": {
-      "description": "represents the resolution of numeric intervals.",
+    "NumericRangeMetadata": {
+      "description": "represents the Metadata of numeric intervals.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseResolution"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumericRangeResolution",
+      "x-ms-discriminator-value": "NumericRangeMetadata",
       "properties": {
         "rangeKind": {
           "type": "string",
@@ -2653,7 +2700,7 @@
             "name": "RangeKind",
             "modelAsString": true
           },
-          "description": "The kind of range that the resolution object represents."
+          "description": "The kind of range that the Metadata object represents."
         },
         "minimum": {
           "type": "number",

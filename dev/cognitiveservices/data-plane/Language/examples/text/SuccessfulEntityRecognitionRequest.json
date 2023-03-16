@@ -1,98 +1,331 @@
 {
   "parameters": {
-    "Ocp-Apim-Subscription-Key": "{API key}",
-    "api-version": "2023-04-15-preview",
-    "Endpoint": "{Endpoint}",
-    "body": {
-      "kind": "EntityRecognition",
-      "parameters": {
-        "modelVersion": "latest"
-      },
-      "analysisInput": {
-        "documents": [
-          {
-            "id": "1",
-            "language": "en",
-            "text": "Microsoft was founded by Bill Gates and Paul Allen on April 4, 1975."
+      "Ocp-Apim-Subscription-Key": "{API key}",
+      "api-version": "2023-04-15-preview",
+      "Endpoint": "{Endpoint}",
+      "body": {
+          "kind": "EntityRecognition",
+          "parameters": {
+              "modelVersion": "latest",
+              "includeList": [
+                  "Default"
+              ],
+              "excludeList": [
+                  "ComputingProduct",
+                  "Volume"
+              ],
+              "overlapPolicy": {
+                  "policyKind": "allowOverlap"
+              }
           },
-          {
-            "id": "2",
-            "language": "en",
-            "text": "Pike place market is my favorite Seattle attraction."
+          "analysisInput": {
+              "documents": [
+                  {
+                      "id": "2",
+                      "language": "en",
+                      "text": "When I was 5 years old I had $90.00 dollars to my name."
+                  },
+                  {
+                      "id": "3",
+                      "language": "en",
+                      "text": "When we flew from LAX it seemed like we were moving at 10 meters per second. I was lucky to see Hong Kong, Effile Tower, and the Nile."
+                  },
+                  {
+                      "id": "4",
+                      "language": "en",
+                      "text": "25th April Meeting was an intresting one. At least we gont to experience the FIFA WorldCup"
+                  },
+                  {
+                      "id": "5",
+                      "language": "en",
+                      "text": "My IP is 127.12.1.1 and my phone   number is 5555555555"
+                  }
+              ]
           }
-        ]
       }
-    }
   },
   "responses": {
-    "200": {
-      "headers": {},
-      "body": {
-        "kind": "EntityRecognitionResults",
-        "results": {
-          "documents": [
-            {
-              "entities": [
-                {
-                  "category": "Organization",
-                  "confidenceScore": 0.84,
-                  "length": 9,
-                  "offset": 0,
-                  "text": "Microsoft"
-                },
-                {
-                  "category": "Person",
-                  "confidenceScore": 0.85,
-                  "length": 10,
-                  "offset": 25,
-                  "text": "Bill Gates"
-                },
-                {
-                  "category": "Person",
-                  "confidenceScore": 0.9,
-                  "length": 10,
-                  "offset": 40,
-                  "text": "Paul Allen"
-                },
-                {
-                  "text": "April 4, 1975",
-                  "category": "DateTime",
-                  "subcategory": "Date",
-                  "offset": 54,
-                  "length": 13,
-                  "confidenceScore": 0.99,
-                  "resolutions": [
-                    {
-                      "resolutionKind": "DateTimeResolution",
-                      "dateTimeSubKind": "Date",
-                      "timex": "1975-04-04",
-                      "value": "1975-04-04"
-                    }
-                  ]
-                }
-              ],
-              "id": "1",
-              "warnings": []
-            },
-            {
-              "entities": [
-                {
-                  "category": "Location",
-                  "confidenceScore": 0.55,
-                  "length": 7,
-                  "offset": 33,
-                  "subcategory": "GPE",
-                  "text": "Seattle"
-                }
-              ],
-              "id": "2",
-              "warnings": []
-            }
-          ],
-          "errors": [],
-          "modelVersion": "2021-06-01"
-        }
+      "200": {
+          "headers": {},
+          "body": {
+              "kind": "EntityRecognitionResults",
+              "results": {
+                  "documents": [
+                      {
+                          "entities": [
+                              {
+                                  "text": "5 years old",
+                                  "type": "Age",
+                                  "offset": 11,
+                                  "length": 11,
+                                  "score": 0.99,
+                                  "tags": [
+                                      {
+                                          "Name": "Numeric",
+                                          "score": 0.99
+                                      },
+                                      {
+                                          "Name": "Age",
+                                          "score": 0.99
+                                      }
+                                  ],
+                                  "metadata": {
+                                      "unit": "Year",
+                                      "value": 5.0
+                                  }
+                              },
+                              {
+                                  "text": "$90.00",
+                                  "type": "Currency",
+                                  "offset": 29,
+                                  "length": 14,
+                                  "score": 0.99,
+                                  "tags": [
+                                      {
+                                          "Name": "Numeric",
+                                          "score": 0.99
+                                      },
+                                      {
+                                          "Name": "Currency",
+                                          "score": 0.99
+                                      }
+                                  ],
+                                  "metadata": [
+                                      {
+                                          "unit": "Dollar",
+                                          "ISO4217": "USD",
+                                          "value": 90.0
+                                      }
+                                  ]
+                              }
+                          ],
+                          "id": "2",
+                          "warnings": []
+                      },
+                      {
+                          "entities": [
+                              {
+                                  "text": "LAX",
+                                  "type": "Airport",
+                                  "offset": 18,
+                                  "length": 3,
+                                  "score": 0.72,
+                                  "tags": [
+                                      {
+                                          "name": "Location",
+                                          "score": 0.90
+                                      },
+                                      {
+                                          "name": "Structural",
+                                          "score": 0.72
+                                      }
+                                  ]
+                              },
+                              {
+                                  "text": "10 meters per second",
+                                  "type": "Speed",
+                                  "offset": 55,
+                                  "length": 20,
+                                  "score": 0.8,
+                                  "tags": [
+                                      {
+                                          "name": "Dimension",
+                                          "score": 0.84
+                                      },
+                                      {
+                                          "name": "Numeric",
+                                          "score": 0.84
+                                      },
+                                      {
+                                          "name": "“Speed”",
+                                          "score": 0.8
+                                      }
+                                  ],
+                                  "metadata": [
+                                      {
+                                          "unit": "MetersPerSecond",
+                                          "value": 10.0
+                                      }
+                                  ]
+                              },
+                              {
+                                  "text": "Hongkong",
+                                  "type": "City",
+                                  "offset": 96,
+                                  "length": 9,
+                                  "score": 0.8,
+                                  "tags": [
+                                      {
+                                          "name": "Location",
+                                          "score": 0.84
+                                      },
+                                      {
+                                          "name": "GPE",
+                                          "score": 0.84
+                                      },
+                                      {
+                                          "name": "City",
+                                          "score": 0.8
+                                      }
+                                  ]
+                              },
+                              {
+                                  "text": "Eiffel Tower",
+                                  "type": "Structural",
+                                  "offset": 107,
+                                  "length": 12,
+                                  "score": 0.90,
+                                  "tags": [
+                                      {
+                                          "name": "Location",
+                                          "score": 0.90
+                                      },
+                                      {
+                                          "name": "Structural",
+                                          "score": 0.90
+                                      }
+                                  ]
+                              },
+                              {
+                                  "text": "Nile",
+                                  "type": "Location",
+                                  "offset": 129,
+                                  "length": 4,
+                                  "score": 0.63,
+                                  "tags": [
+                                      {
+                                          "name": "Location",
+                                          "score": 0.90
+                                      },
+                                      {
+                                          "name": "Geological",
+                                          "score": 0.63
+                                      }
+                                  ]
+                              }
+                          ],
+                          "id": "3",
+                          "warnings": []
+                      },
+                      {
+                          "entities": [
+                              {
+                                  "text": "25th April",
+                                  "type": "Date",
+                                  "offset": 0,
+                                  "length": 10,
+                                  "confidenceScore": 0.58,
+                                  "tag": [
+                                      {
+                                          "name": "Temporal",
+                                          "score": 0.90
+                                      },
+                                      {
+                                          "name": "Date",
+                                          "score": 0.58
+                                      }
+                                  ],
+                                  "metadata": {
+                                      "dateValues": [
+                                          {
+                                              "timex": "XXXX-04-25",
+                                              "value": "2022-04-25"
+                                          },
+                                          {
+                                              "timex": "XXXX-04-25",
+                                              "value": "2023-04-25"
+                                          }
+                                      ]
+                                  }
+                              },
+                              {
+                                  "text": "25th April Meeting",
+                                  "type": "Event",
+                                  "offset": 0,
+                                  "length": 18,
+                                  "score": 0.55,
+                                  "tags": [
+                                      {
+                                          "name": "Event",
+                                          "score": 0.55
+                                      }
+                                  ]
+                              },
+                              {
+                                  "text": "25th April Meeting",
+                                  "type": "CulturalEvent",
+                                  "offset": 0,
+                                  "length": 18,
+                                  "score": 0.55,
+                                  "tags": [
+                                      {
+                                          "name": "Event",
+                                          "score": 0.55
+                                      },
+                                      {
+                                          "name": "CulturalEvent",
+                                          "score": 0.55
+                                      }
+                                  ]
+                              },
+                              {
+                                  "text": "FIFA Worldcup",
+                                  "category": "SportsEvent",
+                                  "offset": 0,
+                                  "length": 13,
+                                  "score": 0.51,
+                                  "tags": [
+                                      {
+                                          "name": "Event",
+                                          "score": 0.55
+                                      },
+                                      {
+                                          "name": "SportsEvent",
+                                          "score": 0.51
+                                      }
+                                  ]
+                              }
+                          ],
+                          "id": "4",
+                          "warnings": []
+                      },
+                      {
+                          "entities": [
+                              {
+                                  "text": "127.12.1.1",
+                                  "type": "IP",
+                                  "offset": 9,
+                                  "length": 10,
+                                  "score": 0.8,
+                                  "tags": [
+                                      {
+                                          "name": "IP",
+                                          "score": 0.8
+                                      }
+                                  ]
+                              },
+                              {
+                                  "text": "5555555555",
+                                  "type": "PhoneNumber",
+                                  "offset": 45,
+                                  "length": 9,
+                                  "confidenceScore": 0.8,
+                                  "tags": [
+                                      {
+                                          "name": "PhoneNumber",
+                                          "score": 0.8
+                                      }
+                                  ]
+                              }
+                          ],
+                          "id": "5",
+                          "warnings": []
+                      }
+                  ],
+                  "errors": [],
+                  "modelVersion": "2021-06-01"
+              }
+          }
       }
-    }
   }
 }
