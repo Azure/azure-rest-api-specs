@@ -48,8 +48,6 @@ input-file:
   - Microsoft.DocumentDB/stable/2023-03-15/services.json
 
 ```
-
-
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
