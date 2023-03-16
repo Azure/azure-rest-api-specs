@@ -523,7 +523,7 @@
             "values": [
               {
                 "value": "EqualTo",
-                "description": "CategoryType: Cost only.\n Notificaiton will be triggered if the evaluated cost is the same as threshold value. Note: It’s not recommended to use this OperatorType as there’s low chance of cost being exactly the same as threshold value, leading to missing of your alert. This OperatorType will be deprecated in future. ",
+                "description": "CategoryType: Cost only.\n Notification will be triggered if the evaluated cost is the same as threshold value. Note: It’s not recommended to use this OperatorType as there’s low chance of cost being exactly the same as threshold value, leading to missing of your alert. This OperatorType will be deprecated in future. ",
                 "name": "EqualTo"
               },
               {
@@ -548,8 +548,9 @@
           "description": "Threshold value associated with a notification. It is always percent and has to be between 0 and 100 with a maximum of 2 decimal places.\n\n CategoryType: Cost\n Notification is sent when the cost exceeded the threshold. \n\n CategoryType: ReservationUtilization\n Notification is sent when a reservation has a utilization percentage below the threshold.",
           "type": "number"
         },
-        "frequency":{
+        "frequency": {
           "description": "Frequency of a notification. Represents how long the notification will be silent after triggering an alert for a threshold breach.\n CategoryType:ReservationUtilization only.\n If not specified, the frequency will be set by default based on the timeGrain (Weekly when timeGrain: Last7Days, Monthly when timeGrain: Last30Days)",
+          "type": "string",
           "enum": [
             "Daily",
             "Weekly",
