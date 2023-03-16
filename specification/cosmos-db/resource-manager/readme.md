@@ -46,6 +46,31 @@ input-file:
   - Microsoft.DocumentDB/stable/2023-03-15/rbac.json
   - Microsoft.DocumentDB/stable/2023-03-15/restorable.json
   - Microsoft.DocumentDB/stable/2023-03-15/services.json
+
+tag: package-preview-2023-03
+```
+
+
+### Tag: package-preview-2023-03
+
+These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-03'
+input-file:
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/cosmos-db.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/dataTransferService.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/managedCassandra.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/mongoCluster.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/mongorbac.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/notebook.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/privateEndpointConnection.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/privateLinkResources.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/rbac.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/restorable.json
+  - Microsoft.DocumentDB/preview/2023-03-01-preview/services.json
+modelerfour:
+  lenient-model-deduplication: true
+
 ```
 ### Tag: package-preview-2022-11
 
