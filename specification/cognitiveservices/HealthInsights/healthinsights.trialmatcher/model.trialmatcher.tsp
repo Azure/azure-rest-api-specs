@@ -1,9 +1,9 @@
-import "@cadl-lang/rest";
-import "../healthinsights.common/model.common.request.cadl";
-import "../healthinsights.common/model.common.response.cadl";
-import "../healthinsights.common/model.common.shared.cadl";
+import "@typespec/rest";
+import "../healthinsights.common/model.common.request.tsp";
+import "../healthinsights.common/model.common.response.tsp";
+import "../healthinsights.common/model.common.shared.tsp";
 
-using Cadl.Rest;
+using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
 

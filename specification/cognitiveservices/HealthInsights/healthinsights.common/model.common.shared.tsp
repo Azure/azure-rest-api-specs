@@ -1,6 +1,6 @@
-import "@cadl-lang/rest";
+import "@typespec/rest";
 
-using Cadl.Rest;
+using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
 

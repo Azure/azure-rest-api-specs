@@ -1,11 +1,11 @@
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-autorest";
-import "./model.trialmatcher.cadl";
-import "../healthinsights.common/primitives.cadl";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-autorest";
+import "./model.trialmatcher.tsp";
+import "../healthinsights.common/primitives.tsp";
 
 using Azure.Core;
-using Cadl.Rest;
-using Cadl.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 using Autorest;
 
 namespace AzureHealthInsights;
