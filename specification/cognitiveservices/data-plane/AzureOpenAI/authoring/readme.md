@@ -92,3 +92,14 @@ These settings apply only when `api-version=2023-04-201-preview` is specified in
 ``` yaml $(tag) == 'release_2023_04_01_preview'
 input-file: preview/2023-04-01-preview/images.json
 ```
+
+AutoRest-Linter Suppressions
+
+``` yaml
+# Ignore autorest-linter issues that cannot be resolved without breaking compatibility to existing openai api
+directive: 
+  - suppress: ValidFormats
+    reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
+  - suppress: IntegerTypeMustHaveFormat
+    reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
+```

@@ -2,7 +2,7 @@
    "swagger": "2.0",
    "info": {
       "title": "Azure OpenAI DALL-E API version 2023-04-01-preview",
-      "description": "Cognitive Services API to support OpenAI Dall-E",
+      "description": "Cognitive Services API to support OpenAI DALL-E",
       "version": "2023-04-01-preview"
    },
    "host": "eastus.api.cognitive.microsoft.com",
@@ -64,7 +64,7 @@
                      }
                   },
                   "schema": {
-                     "$ref": "#/definitions/GenerateImagestResponse"
+                     "$ref": "#/definitions/GenerateImagesResponse"
                   }
                },
                "default": {
@@ -100,9 +100,8 @@
                   "description": "OK",
                   "headers": {
                      "Retry-After": {
-                        "schema": {
-                           "type": "integer"
-                        },
+                        "type": "integer",
+                        "format": "int64",
                         "description": "Indicates the number of seconds that the client should wait before trying to get the result from the URL identified by the Operation-Location header if the operation did not terminate yet."
                      }
                   },
@@ -405,8 +404,8 @@
             "prompt"
          ]
       },
-      "GenerateImagestResponse": {
-         "title": "GenerateImagestResponse",
+      "GenerateImagesResponse": {
+         "title": "GenerateImagesResponse",
          "description": "Defines response after creating an operation to generate images. It contains the status and the id of the operation.",
          "type": "object",
          "properties": {
