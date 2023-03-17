@@ -444,7 +444,7 @@
       "description": "The workspace manager assignment properties",
       "properties": {
         "targetResourceName": {
-          "description": "The name of the workspace manager group targeted by the workspace manager assignment",
+          "description": "The resource name of the workspace manager group targeted by the workspace manager assignment",
           "type": "string"
         },
         "lastJobEndTime": {
@@ -574,6 +574,7 @@
             "Failed"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "modelAsString": true,
             "name": "provisioningState",
@@ -600,7 +601,8 @@
         "startTime": {
           "description": "The time the job started",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "errorMessage": {
           "description": "Message to describe error, if an error exists",
@@ -628,6 +630,7 @@
             "InProgress"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "modelAsString": true,
             "name": "status",
@@ -648,8 +651,9 @@
           }
         },
         "executionTime": {
-          "description": "The time the item publishing was executed",
+          "description": "The time the item publishing was completed",
           "format": "date-time",
+          "readOnly": true,
           "type": "string"
         },
         "errors": {
