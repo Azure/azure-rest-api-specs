@@ -75,11 +75,6 @@
     "experimentUpdate": {
       "type": "object",
       "description": "Describes an experiment update.",
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
-        }
-      ],
       "properties": {
         "identity": {
           "description": "The identity of the experiment resource.",
@@ -407,6 +402,9 @@
           "description": "URL to retrieve the Experiment status.",
           "readOnly": true
         }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/cancel"
       },
       "additionalProperties": false
     },
