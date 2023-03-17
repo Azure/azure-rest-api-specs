@@ -1768,6 +1768,8 @@
       "readOnly": true
     },
     "OperationDetails": {
+      "description": "Details of a long running operation.",
+      "type": "object",
       "properties": {
         "id": {
           "description": "The unique id of the operation.",
@@ -1790,13 +1792,56 @@
         },
         "error": {
           "description": "An error, available when the status is `Failed`, describing why the operation failed.",
-          "$ref": "#/definitions/Error"          
+          "$ref": "#/definitions/ErrorDetail"          
         }
       },
       "required": [
         "id",
         "status"
       ]
+    },
+    "ErrorDetail": {
+      "description": "The details of an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human-readable representation of the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "An array of details about specific errors that led to this reported error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          }
+        },
+        "innererror": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerError"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "InnerError": {
+      "description": "An object containing specific information about an error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "type": "string"
+        },
+        "innererror": {
+          "description": "An object containing more specific information than the current object about the error.",
+          "$ref": "#/definitions/InnerError"
+        }
+      }
     },
     "KeyListResult": {
       "description": "The result of a list request.",
