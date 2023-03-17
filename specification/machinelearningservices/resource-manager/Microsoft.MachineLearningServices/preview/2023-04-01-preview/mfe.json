@@ -11103,6 +11103,7 @@
         },
         "uri": {
           "description": "[Required] Input Asset URI.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -11479,6 +11480,7 @@
         },
         "storeName": {
           "description": "[Required] Azure Data Lake store name.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -11508,6 +11510,7 @@
       "properties": {
         "accountName": {
           "description": "[Required] Storage account name.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -11527,6 +11530,7 @@
         },
         "filesystem": {
           "description": "[Required] The name of the Data Lake Gen2 filesystem.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -11592,6 +11596,7 @@
       "properties": {
         "accountName": {
           "description": "[Required] Storage account name.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -11611,6 +11616,7 @@
         },
         "fileShareName": {
           "description": "[Required] The name of the Azure file share that the datastore points to.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -11716,6 +11722,7 @@
       "properties": {
         "resourceId": {
           "description": "[Required] Resource id accepting ArmId or AzureMlId.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -12194,6 +12201,7 @@
       "properties": {
         "contextUri": {
           "description": "[Required] URI of the Docker build context used to build the image. Supports blob URIs on environment creation and may return blob or Git URIs.\r\n<seealso href=\"https://docs.docker.com/engine/reference/commandline/build/#extended-description\" />",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "example": "https://storage-account.blob.core.windows.net/azureml/DockerBuildContext/95ddede6b9b8c4e90472db3acd0a8d28/",
@@ -12261,6 +12269,7 @@
         },
         "thumbprint": {
           "description": "[Required] Thumbprint of the certificate used for authentication.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -12759,6 +12768,7 @@
         },
         "environmentId": {
           "description": "[Required] The ARM resource ID of the Environment specification for the job.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -13129,6 +13139,7 @@
       "properties": {
         "expression": {
           "description": "[Required] Specifies cron expression of schedule.\r\nThe expression should follow NCronTab format.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -13601,6 +13612,7 @@
         },
         "dataUri": {
           "description": "[Required] Uri of the data. Example: https://go.microsoft.com/fwlink/?linkid=2202330",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -15428,6 +15440,7 @@
         },
         "nameNodeAddress": {
           "description": "[Required] IP Address or DNS HostName.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -15463,6 +15476,7 @@
       "properties": {
         "assetId": {
           "description": "[Required] ARM resource ID of the asset.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -17166,6 +17180,7 @@
       "properties": {
         "kerberosKdcAddress": {
           "description": "[Required] IP Address or DNS HostName.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -17175,6 +17190,7 @@
         },
         "kerberosPrincipal": {
           "description": "[Required] Kerberos Username",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -17184,6 +17200,7 @@
         },
         "kerberosRealm": {
           "description": "[Required] Domain over which a Kerberos authentication server has the authority to authenticate a user, host or service.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -17713,6 +17730,7 @@
       "properties": {
         "value": {
           "description": "[Required] Literal value for the input.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -17956,6 +17974,7 @@
       "properties": {
         "inferencingComputeBinding": {
           "description": "[Required] AML compute binding used in inferencing.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -17966,6 +17985,7 @@
         },
         "trainingComputeBinding": {
           "description": "[Required] AML compute binding used in training.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -18792,6 +18812,7 @@
         },
         "primaryMetric": {
           "description": "[Required] Name of the metric to optimize.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         }
@@ -19413,6 +19434,7 @@
         },
         "targetEnvironmentName": {
           "description": "[Required] Target environment name to be generated by package.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -20350,6 +20372,7 @@
       "properties": {
         "path": {
           "description": "[Required] The path for the route.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
@@ -20975,6 +20998,7 @@
       "properties": {
         "name": {
           "description": "[Required] The name of the SKU. Ex - P3. It is typically a letter+number code.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
@@ -21022,6 +21046,7 @@
         },
         "codeId": {
           "description": "[Required] ARM resource ID of the code asset.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string",
           "x-ms-mutability": [
@@ -22431,6 +22456,7 @@
         },
         "environmentId": {
           "description": "[Required] The ARM resource ID of the Environment specification for the job.",
+          "minLength": 1,
           "pattern": "[a-zA-Z0-9_]",
           "type": "string"
         },
