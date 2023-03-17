@@ -1,6 +1,7 @@
 import "@cadl-lang/rest";
 import "@azure-tools/cadl-azure-core";
 import "./models-shared.cadl";
+import "./models-transliterate.cadl";
 
 using Cadl.Http;
 using Cadl.Rest;
@@ -211,7 +212,7 @@ model Translation {
     @doc("""
     An object giving the translated text in the script specified by the toScript parameter.
     """)
-    transliteration?: Transliteration;
+    transliteration?: TransliteratedText;
 
     @doc("""
     Alignment information.
@@ -222,15 +223,6 @@ model Translation {
     Sentence boundaries in the input and output texts.
     """)
     sentLen?: SentenceLength;
-}
-
-@doc("An object giving the translated text in the script specified by the toScript parameter.")
-model Transliteration {
-    @doc("A string specifying the target script.")
-    script: string;
-
-    @doc("A string giving the translated text in the target script.")
-    text: string;
 }
 
 @doc("Alignment information object.")
