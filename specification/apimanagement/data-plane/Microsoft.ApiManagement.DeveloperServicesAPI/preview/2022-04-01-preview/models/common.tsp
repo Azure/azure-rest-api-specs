@@ -11,6 +11,7 @@ model Collection<T> {
 }
 
 alias ApiResponse<T> = T | ErrorResponse;
+
 @doc("List operations' default parameters.")
 model ListParams {
   @query skip?: int32;

@@ -5,6 +5,7 @@ import "@typespec/openapi3";
 import "./resources/apis.tsp";
 import "./resources/apiVersionSets.tsp";
 import "./resources/configuration.tsp";
+import "./resources/confirmations.tsp";
 
 @service({
   title: "Developer Services API",
