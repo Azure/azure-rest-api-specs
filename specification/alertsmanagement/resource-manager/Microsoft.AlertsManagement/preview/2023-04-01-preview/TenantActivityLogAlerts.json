@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2023-04-01-preview",
-    "title": "Tenant Level Activity Log Alert Rules Resource Provider",
+    "title": "Tenant Level Activity Log Alert Rules in AlertsManagement Resource Provider",
     "description": "Tenant Level Activity Log Alert Rules provides rules creation on management group level."
   },
   "host": "management.azure.com",
@@ -79,7 +79,7 @@
           "default": {
             "description": "An error occurred and the Activity Log Alert rule could not be created or updated.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -113,7 +113,7 @@
           "default": {
             "description": "An error occurred and the Activity Log Alert rule could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -147,7 +147,7 @@
           "default": {
             "description": "An error occurred and the Activity Log Alert rule could not be deleted.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -190,7 +190,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -201,7 +201,7 @@
         "description": "Get a list of all Tenant Activity Log Alert rules in the tenant.",
         "operationId": "TenantActivityLogAlerts_ListByTenant",
         "x-ms-examples": {
-          "List activity log alerts By Tenant": {
+          "List Activity Log Alerts by tenant": {
             "$ref": "./examples/TenantActivityLogAlertRule_ListByTenant.json"
           }
         },
@@ -223,7 +223,7 @@
           "default": {
             "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -234,7 +234,7 @@
         "description": "Get a list of all Tenant Activity Log Alert rules in a management group.",
         "operationId": "TenantActivityLogAlerts_ListByManagementGroup",
         "x-ms-examples": {
-          "List activity log alerts By Management Group": {
+          "List Activity Log Alerts by management group": {
             "$ref": "./examples/TenantActivityLogAlertRule_ListByManagementGroup.json"
           }
         },
@@ -259,7 +259,7 @@
           "default": {
             "description": "An error occurred and the list of Activity Log Alert rules could not be retrieved.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -509,22 +509,6 @@
           "description": "Indicates whether this Activity Log Alert rule is enabled. If an Activity Log Alert rule is not enabled, then none of its actions will be activated.",
           "type": "boolean",
           "default": true
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "The error response.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "The error message indicating why the operation failed.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }
