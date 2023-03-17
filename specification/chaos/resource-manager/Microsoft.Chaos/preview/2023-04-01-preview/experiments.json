@@ -248,6 +248,12 @@
               "$ref": "./types/experiments.json#/definitions/experiment"
             }
           },
+          "201": {
+            "description": "Experiment resource created.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experiment"
+            }
+          },
           "default": {
             "description": "Error response returned if request was unsuccessful.",
             "schema": {
@@ -281,7 +287,7 @@
             "$ref": "./types/experiments.json#/parameters/experimentName"
           },
           {
-            "name": "parameters",
+            "name": "experiment",
             "in": "body",
             "required": true,
             "description": "Parameters supplied to the Update experiment operation.",
@@ -320,7 +326,7 @@
         "operationId": "Experiments_Cancel",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "location"
         },
         "parameters": [
           {
@@ -339,6 +345,11 @@
         "responses": {
           "202": {
             "description": "Operation result returned if request was successful.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "./types/experiments.json#/definitions/experimentCancelOperationResult"
             }
@@ -363,6 +374,10 @@
         "tags": [
           "Experiments"
         ],
+        "x-ms-long-running-operation" : true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "operationId": "Experiments_Start",
         "parameters": [
           {
@@ -381,6 +396,11 @@
         "responses": {
           "202": {
             "description": "Operation result returned if request was successful.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "schema": {
               "$ref": "./types/experiments.json#/definitions/experimentStartOperationResult"
             }

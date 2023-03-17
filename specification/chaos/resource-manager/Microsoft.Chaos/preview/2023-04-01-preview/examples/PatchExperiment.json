@@ -3,14 +3,13 @@
       "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
       "resourceGroupName": "exampleRG",
       "experimentName": "exampleExperiment",
-      "api-version": "2021-09-15-preview",
+      "api-version": "2023-04-01-preview",
       "experiment": {
-        "location": "centraluseuap",
         "identity": {
-          "type": "UserAssigned"
-        },
-        "userAssignedIdentities": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
             "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.ManagedIdentity/userAssignedIdentity/exampleUMI": {}
+          }
         }
       }
     },
@@ -39,13 +38,13 @@
                     "name": "branch1",
                     "actions": [
                       {
-                        "type": "Continuous",
+                        "type": "continuous",
                         "name": "urn:csci:provider:providername:Shutdown/1.0",
                         "selectorId": "selector1",
                         "duration": "PT10M",
-                        "parameters": {
-                          "restartWhenComplete": true
-                        }
+                        "parameters": [
+                          {"restartWhenComplete": true}
+                        ]
                       }
                     ]
                   }
