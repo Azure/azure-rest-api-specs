@@ -11,6 +11,12 @@ model Collection<T> {
 }
 
 alias ApiResponse<T> = T | ErrorResponse;
+alias CreatedApiResponse<T> = Created<T> | ErrorResponse;
+
+model Created<T> {
+  @statusCode statusCode: 201;
+  @body body: T;
+}
 
 @doc("List operations' default parameters.")
 model ListParams {

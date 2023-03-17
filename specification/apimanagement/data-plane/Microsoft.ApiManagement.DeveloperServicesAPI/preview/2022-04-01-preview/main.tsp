@@ -10,6 +10,7 @@ import "./resources/delegation.tsp";
 import "./resources/identity.tsp";
 import "./resources/products.tsp";
 import "./resources/tags.tsp";
+import "./resources/users.tsp";
 
 @service({
   title: "Developer Services API",
