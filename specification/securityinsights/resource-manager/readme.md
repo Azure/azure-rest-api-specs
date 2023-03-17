@@ -41,6 +41,10 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/AlertRules.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/AutomationRules.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/Bookmarks.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentPackages.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentProductPackages.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentProductTemplates.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/ContentTemplates.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/Enrichment.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/Entities.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/EntityQueries.json
