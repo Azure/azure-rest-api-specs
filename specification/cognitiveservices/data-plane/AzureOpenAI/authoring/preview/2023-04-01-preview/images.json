@@ -28,6 +28,133 @@
          "x-ms-parameter-location": "client"
       }
    },
+   "paths": {
+      "/images/generate": {
+         "post": {
+            "summary": "Generates a batch of images from a text caption",
+            "operationId": "Images_Generate",
+            "consumes": [
+               "application/json"
+            ],
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [
+               {
+                  "$ref": "#/parameters/apiVersionQueryParameter"
+               },
+               {
+                  "in": "body",
+                  "name": "body",
+                  "required": true,
+                  "schema": {
+                    "$ref": "#/definitions/GenerateImagesPostRequest"
+                  }
+                }
+            ],
+            "responses": {
+               "202": {
+                  "description": "Created",
+                  "headers": {
+                     "Operation-Location": {
+                        "type": "string",
+                        "description": "URL to poll for the operation result."
+                     }
+                  },
+                  "schema": {
+                     "$ref": "#/definitions/GenerateImagesPostResponse"
+                  }
+               },
+               "default": {
+                  "description": "An error occurred.",
+                  "schema": {
+                    "$ref": "#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/operations/{operationId}": {
+         "get": {
+            "summary": "Returns the status of the operation",
+            "operationId": "Operations_Get",
+            "produces": [
+               "application/json"
+            ],
+            "parameters": [
+               {
+                  "$ref": "#/parameters/apiVersionQueryParameter"
+               },
+               {
+                  "in": "path",
+                  "name": "operationId",
+                  "required": true,
+                  "type": "string",
+                  "description": "The id of the operation"
+               }
+            ],
+            "responses": {
+               "200": {
+                  "description": "OK",
+                  "headers": {
+                     "Operation-Location": {
+                        "schema": {
+                           "type": "string"
+                        },
+                        "description": "The location of the operation."
+                     },
+                     "Retry-After": {
+                        "schema": {
+                           "type": "integer"
+                        },
+                        "description": "Indicates the number of seconds that the client should wait before trying to get the result from the URL identified by the Operation-Location header if the operation did not terminate yet."
+                     }
+                  },
+                  "schema": {
+                     "$ref": "#/definitions/OperationResponse"
+                  }
+               },
+               "default": {
+                  "description": "An error occurred.",
+                  "schema": {
+                    "$ref": "#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "delete": {
+            "summary": "Deletes an operation (if in terminal state)",
+            "operationId": "Operations_Delete",
+            "parameters": [
+               {
+                  "in": "query",
+                  "name": "api-version",
+                  "required": true,
+                  "type": "string",
+                  "description": "API version."
+               },
+               {
+                  "in": "path",
+                  "name": "operationId",
+                  "required": true,
+                  "type": "string",
+                  "description": "The id of the operation"
+               }
+            ],
+            "responses": {
+               "204": {
+                  "description": "NoContent"
+               },
+               "default": {
+                  "description": "An error occurred.",
+                  "schema": {
+                    "$ref": "#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      }
+   },
    "definitions": {
       "Status": {
          "description": "The status of the operation.",
@@ -251,133 +378,6 @@
             "id",
             "status"
          ]
-      }
-   },
-   "paths": {
-      "/images/generate": {
-         "post": {
-            "summary": "Generates a batch of images from a text caption",
-            "operationId": "Images_Generate",
-            "consumes": [
-               "application/json"
-            ],
-            "produces": [
-               "application/json"
-            ],
-            "parameters": [
-               {
-                  "$ref": "#/parameters/apiVersionQueryParameter"
-               },
-               {
-                  "in": "body",
-                  "name": "body",
-                  "required": true,
-                  "schema": {
-                    "$ref": "#/definitions/GenerateImagesPostRequest"
-                  }
-                }
-            ],
-            "responses": {
-               "202": {
-                  "description": "Created",
-                  "headers": {
-                     "Operation-Location": {
-                        "type": "string",
-                        "description": "URL to poll for the operation result."
-                     }
-                  },
-                  "schema": {
-                     "$ref": "#/definitions/GenerateImagesPostResponse"
-                  }
-               },
-               "default": {
-                  "description": "An error occurred.",
-                  "schema": {
-                    "$ref": "#/definitions/ErrorResponse"
-                  }
-               }
-            }
-         }
-      },
-      "/operations/{operationId}": {
-         "get": {
-            "summary": "Returns the status of the operation",
-            "operationId": "Operations_Get",
-            "produces": [
-               "application/json"
-            ],
-            "parameters": [
-               {
-                  "$ref": "#/parameters/apiVersionQueryParameter"
-               },
-               {
-                  "in": "path",
-                  "name": "operationId",
-                  "required": true,
-                  "type": "string",
-                  "description": "The id of the operation"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "OK",
-                  "headers": {
-                     "Operation-Location": {
-                        "schema": {
-                           "type": "string"
-                        },
-                        "description": "The location of the operation."
-                     },
-                     "Retry-After": {
-                        "schema": {
-                           "type": "integer"
-                        },
-                        "description": "Indicates the number of seconds that the client should wait before trying to get the result from the URL identified by the Operation-Location header if the operation did not terminate yet."
-                     }
-                  },
-                  "schema": {
-                     "$ref": "#/definitions/OperationResponse"
-                  }
-               },
-               "default": {
-                  "description": "An error occurred.",
-                  "schema": {
-                    "$ref": "#/definitions/ErrorResponse"
-                  }
-               }
-            }
-         },
-         "delete": {
-            "summary": "Deletes an operation (if in terminal state)",
-            "operationId": "Operations_Delete",
-            "parameters": [
-               {
-                  "in": "query",
-                  "name": "api-version",
-                  "required": true,
-                  "type": "string",
-                  "description": "API version."
-               },
-               {
-                  "in": "path",
-                  "name": "operationId",
-                  "required": true,
-                  "type": "string",
-                  "description": "The id of the operation"
-               }
-            ],
-            "responses": {
-               "204": {
-                  "description": "NoContent"
-               },
-               "default": {
-                  "description": "An error occurred.",
-                  "schema": {
-                    "$ref": "#/definitions/ErrorResponse"
-                  }
-               }
-            }
-         }
       }
    },
    "securityDefinitions": {
