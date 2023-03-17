@@ -157,16 +157,44 @@
    },
    "definitions": {
       "Status": {
+         "title": "State",
          "description": "The status of the operation.",
-         "type": "string",
          "enum": [
             "NotStarted",
             "Running",
-            "Failed",
+            "Succeeded",
             "Canceled",
-            "Succeeded"
-         ]
-      },
+            "Failed"
+         ],
+         "type": "string",
+         "readOnly": true,
+         "x-ms-enum": {
+           "name": "Status",
+           "modelAsString": true,
+           "values": [
+            {
+               "value": "NotStarted",
+               "description": "The operation was created and is not queued to be processed in the future."
+            },
+            {
+               "value": "Running",
+               "description": "The operation has started to be processed."
+            },
+            {
+               "value": "Succeeded",
+               "description": "The operation has successfully be processed and is ready for consumption."
+            },
+            {
+               "value": "Canceled",
+               "description": "The operation has been canceled and is incomplete."
+            },
+            {
+               "value": "Failed",
+               "description": "The operation has completed processing with a failure and cannot be further consumed."
+            }
+           ]
+         }
+       },
       "InnerError": {
          "type": "object",
          "description": "The inner error if a task in a batch failed.",
