@@ -382,6 +382,48 @@
         }
       }
     },
+    "PrivateEndpointConnection": {
+      "description": "Private endpoint connection denoting the underlying private endpoint, its connection status, and its properties",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified resource ID",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "description": "The name of the resource",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "description": "The type of the resource",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "The properties of the private endpoint connection",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
     "AzureMonitorWorkspace": {
       "description": "Properties of an Azure Monitor workspace",
       "type": "object",
@@ -430,6 +472,19 @@
           "allOf": [
             {
               "$ref": "#/definitions/IngestionSettings"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "privateEndpointConnections": {
+          "description": "List of private endpoint connections",
+          "type": "array",
+          "items": [
+            {
+              "$ref": "#/definitions/PrivateEndpointConnection"
             }
           ],
           "readOnly": true,
