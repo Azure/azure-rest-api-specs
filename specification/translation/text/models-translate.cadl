@@ -37,7 +37,7 @@ model TranslateParameters {
     Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
     complete element. Possible values are: plain (default) or html.
     """)
-    textType?: TextType = TextType.plain;
+    textType?: TextType = "Plain";
 
     @query
     @doc("""
@@ -52,14 +52,14 @@ model TranslateParameters {
     Specifies how profanities should be treated in translations.
     Possible values are: NoAction (default), Marked or Deleted.
     """)
-    profanityAction?: ProfanityAction = ProfanityAction.NoAction;
+    profanityAction?: ProfanityAction = "NoAction";
 
     @query
     @doc("""
     Specifies how profanities should be marked in translations.
     Possible values are: Asterisk (default) or Tag. 
     """)
-    profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
+    profanityMarker?: ProfanityMarker = "Asterisk";
 
     @query
     @doc("""
@@ -140,27 +140,33 @@ model TranslationResult {
     meteredUsage: int32;
 }
 
-@fixed
+enum TextTypeKnownValues {
+  Plain: "plain",
+  Html: "html",
+}
+
 @doc("Translation text type")
-enum TextType {
-    plain,
-    html
+@knownValues(TextTypeKnownValues)
+scalar TextType extends string;
+
+enum ProfanityActionKnownValues {
+    NoAction: "NoAction",
+    Marked: "Marked",
+    Deleted: "Deleted",
 }
 
-@fixed
 @doc("Translator profanity actions")
-enum ProfanityAction {
-    NoAction,
-    Marked,
-    Deleted
+@knownValues(ProfanityActionKnownValues)
+scalar ProfanityAction extends string;
+
+enum ProfanityMarkerKnownValues {
+    Asterisk: "Asterisk",
+    Tag: "Tag",
 }
 
-@fixed
 @doc("Translator profanity markers")
-enum ProfanityMarker {
-    Asterisk,
-    Tag
-}
+@knownValues(ProfanityMarkerKnownValues)
+scalar ProfanityMarker extends string;
 
 @doc("Element containing the translated text")
 model TranslatedTextItem {
