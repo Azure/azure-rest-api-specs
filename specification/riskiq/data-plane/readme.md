@@ -4,11 +4,11 @@
 
 Configuration for generating EASM SDK.
 
-The current release is `2022-11-01-preview`.
+The current release is `2023-03-01-preview`.
 
 ``` yaml
 
-tag: 2022-11-01-preview
+tag: 2023-03-01-preview
 add-credentials: true
 openapi-type: data-plane
 openapi-subtype: providerHub
