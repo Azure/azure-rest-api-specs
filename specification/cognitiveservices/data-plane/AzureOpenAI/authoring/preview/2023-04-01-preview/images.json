@@ -33,6 +33,7 @@
          "post": {
             "summary": "Generates a batch of images from a text caption",
             "operationId": "Images_Generate",
+            "x-ms-long-running-operation": true,
             "consumes": [
                "application/json"
             ],
@@ -46,6 +47,7 @@
                {
                   "in": "body",
                   "name": "body",
+                  "description": "The specification of the images that should be generated.",
                   "required": true,
                   "schema": {
                     "$ref": "#/definitions/GenerateImagesCreation"
@@ -274,15 +276,17 @@
          }
       },
       "ErrorResponse": {
+         "title": "ErrorResponse",
+         "description": "Error response as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
+         "required": [
+           "error"
+         ],
          "type": "object",
          "properties": {
-            "error": {
-               "$ref": "#/definitions/Error"
-            }
-         },
-         "required": [
-            "error"
-         ]
+           "error": {
+             "$ref": "#/definitions/Error"
+           }
+         }
       },
       "ImageResult": {
          "type": "object",
@@ -298,13 +302,16 @@
          }
       },
       "OperationResult": {
-         "type": "array",
+         "title": "OperationResult",
          "description": "The result data of the operation, if successful",
+         "type": "array",
          "items": {
             "$ref": "#/definitions/ImageResult"
          }
       },
       "OperationResponse": {
+         "title": "OperationResponse",
+         "description": "The operation response containing the id and the status of the operation. If successful, it contains data with the generated images and an error otherwise.",
          "type": "object",
          "properties": {
             "id": {
@@ -374,6 +381,8 @@
          }
       },
       "GenerateImagesCreation": {
+         "title": "GenerateImagesCreation",
+         "description": "Defines the request to create an operation to generate images.",
          "type": "object",
          "properties": {
             "prompt": {
@@ -383,6 +392,7 @@
             },
             "n": {
                "type": "integer",
+               "format": "int64",
                "description": "The number of images to generate.",
                "minimum": 1,
                "default": 1
@@ -396,6 +406,8 @@
          ]
       },
       "GenerateImagestResponse": {
+         "title": "GenerateImagestResponse",
+         "description": "Defines response after creating an operation to generate images. It contains the status and the id of the operation.",
          "type": "object",
          "properties": {
             "status": {
