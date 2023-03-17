@@ -8,6 +8,7 @@ import "./resources/configuration.tsp";
 import "./resources/confirmations.tsp";
 import "./resources/delegation.tsp";
 import "./resources/identity.tsp";
+import "./resources/products.tsp";
 
 @service({
   title: "Developer Services API",
