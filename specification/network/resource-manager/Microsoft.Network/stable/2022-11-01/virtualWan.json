@@ -5034,6 +5034,237 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections/{connectionName}": {
+      "put": {
+        "operationId": "NetworkVirtualApplianceConnections_CreateOrUpdate",
+        "x-ms-examples": {
+          "NetworkVirtualApplianceConnectionPut": {
+            "$ref": "./examples/NetworkVirtualApplianceConnectionPut.json"
+          }
+        },
+        "description": "Creates a connection to Network Virtual Appliance, if it doesn't exist else updates the existing NVA connection'",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the NVA connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "NetworkVirtualApplianceConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            },
+            "description": "Parameters supplied in an NetworkVirtualApplianceConnection PUT operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update successful. Returns the details of the NVA connection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            }
+          },
+          "201": {
+            "description": "Create successful. Returns the details of the NVA connection created or updated.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "get": {
+        "operationId": "NetworkVirtualApplianceConnections_Get",
+        "x-ms-examples": {
+          "NetworkVirtualApplianceConnectionGet": {
+            "$ref": "./examples/NetworkVirtualApplianceConnectionGet.json"
+          }
+        },
+        "description": "Retrieves the details of specified NVA connection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the NVA connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the NVA connection",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "NetworkVirtualApplianceConnections_Delete",
+        "x-ms-examples": {
+          "NetworkVirtualApplianceConnectionDelete": {
+            "$ref": "./examples/NetworkVirtualApplianceConnectionDelete.json"
+          }
+        },
+        "description": "Deletes a NVA connection.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "name": "connectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the NVA connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful.NVA Connection deleted."
+          },
+          "202": {
+            "description": "Accepted, and the operation will continue asynchronously."
+          },
+          "204": {
+            "description": "No NVA connections exist by the name provided."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkVirtualAppliances/{networkVirtualApplianceName}/networkVirtualApplianceConnections": {
+      "get": {
+        "operationId": "NetworkVirtualApplianceConnections_List",
+        "x-ms-examples": {
+          "NetworkVirtualApplianceConnectionList": {
+            "$ref": "./examples/NetworkVirtualApplianceConnectionList.json"
+          }
+        },
+        "description": "Lists NetworkVirtualApplianceConnections under the NVA.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "networkVirtualApplianceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the Network Virtual Appliance."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Lists all the NVA connections under an NVA.",
+            "schema": {
+              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/bgpConnections/{connectionName}": {
       "get": {
         "operationId": "VirtualHubBgpConnection_Get",
