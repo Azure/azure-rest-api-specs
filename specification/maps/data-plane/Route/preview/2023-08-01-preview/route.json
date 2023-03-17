@@ -1701,6 +1701,28 @@
       "type": "string",
       "description": "The is the link to the next page of the features returned. If it's the last page, no this field."
     },
+    "OptionalId": {
+      "type": "object",
+      "description": "optional Id",
+      "properties": {
+        "optionalId": {
+          "description": "id of the request which would show in corresponding batchItem",
+          "type": "string"
+        }
+      }
+    },
+    "DirectionsBatchRequestItem": {
+      "description": "Batch Query object",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OptionalId"
+        },
+        {
+          "$ref": "#/definitions/DirectionsRequest"
+        }
+      ]
+    },
     "DirectionsBatchRequestBody": {
       "description": "The list of directions queries/requests to process. The list can contain a max of 100 queries and must contain at least 1 query.",
       "type": "object",
@@ -1709,10 +1731,34 @@
           "description": "The list of queries to process.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DirectionsRequest"
+            "$ref": "#/definitions/DirectionsBatchRequestItem"
           }
         }
       }
+    },
+    "DirectionsBatchResponseItem": {
+      "description": "Batch response item",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OptionalId"
+        },
+        {
+          "$ref": "#/definitions/RouteDirectionsResponse"
+        },
+        {
+          "type": "object",
+          "description": "",
+          "properties": {
+            "nextLink": {
+              "$ref": "#/definitions/NextLink"
+            },
+            "error": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
+            }
+          }
+        }
+      ]
     },
     "DirectionsBatchResponse": {
       "description": "This object is returned from a successful Directions Batch service call.",
@@ -1740,28 +1786,9 @@
           "items": {
             "$ref": "#/definitions/DirectionsBatchResponseItem"
           }
-        }
-      }
-    },
-    "DirectionsBatchResponseItem": {
-      "description": "Batch response item",
-      "type": "object",
-      "properties": {
-        "optionalId": {
-          "description": "id of the batchItem which would be the same as the id in the request",
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/FeatureTypeEnum"
-        },
-        "features": {
-          "$ref": "#/definitions/Features"
         },
         "nextLink": {
           "$ref": "#/definitions/NextLink"
-        },
-        "error": {
-          "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorDetail"
         }
       }
     }
