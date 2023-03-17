@@ -320,39 +320,38 @@
           }
         },
         "routeOutputOptions": {
-          "description": "Information of route being returned. Can specify multiple values such as \"routeOutputOptions\": [\"includeRoutePath\", \"includeRegionTravelSummary\"].",
+          "description": "Information of route being returned. Can specify multiple values such as \"routeOutputOptions\": [\"routePath\", \"regionTravelSummary\"].",
           "type": "array",
           "default": [
-            "includeRoutePath",
-            "excludeItinerary"
+            "routeSummary"
           ],
           "items": {
             "type": "string",
             "enum": [
-              "includeRoutePath",
-              "includeRegionTravelSummary",
-              "excludeItinerary",
-              "routeSummariesOnly"
+              "routeSummary",
+              "regionTravelSummary",
+              "routePath",
+              "itinerary"
             ],
             "x-ms-enum": {
               "name": "RouteOutputOption",
               "modelAsString": true,
               "values": [
                 {
-                  "value": "excludeItinerary",
-                  "description": "Do not include detailed directions in the response. Detailed directions are provided as itinerary items and contain details such as written instructions and traffic location codes."
+                  "value": "routeSummary",
+                  "description": "Include only travel time and distance for the route, and do not provide other information. Only supported for route without waypoints."
+                },
+                {
+                  "value": "regionTravelSummary",
+                  "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada). `Note`:The parameter is available only for driving and walking mode"
                 },
                 {
                   "value": "routePath",
                   "description": "Include a set of point (latitude and longitude) values that describe the route’s path in the response."
                 },
                 {
-                  "value": "routeSummariesOnly",
-                  "description": "Include only travel time and distance for the route, and do not provide other information. Only supported for route without waypoints."
-                },
-                {
-                  "value": "regionTravelSummary",
-                  "description": "Include travel summary of distance, time, and toll road distance by two entity types: country (e.g. US, Canada) and administrative division or subregion (e.g. “state” in US and “province” in Canada). `Note`:The parameter is available only for driving and walking mode"
+                  "value": "itinerary",
+                  "description": "Include detailed directions in the response. Detailed directions are provided as itinerary items and contain details such as written instructions and traffic location codes."
                 }
               ]
             }
