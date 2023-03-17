@@ -424,6 +424,108 @@
         }
       }
     },
+    "PrivateEndpointConnectionProperties": {
+      "description": "The properties of the private endpoint connection",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "description": "Gets provisioning state of the private endpoint connection",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "privateEndpoint": {
+          "description": "Gets or sets the private endpoint which the connection belongs to",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PrivateEndpoint"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "groupIds": {
+          "description": "The private link resource group ids",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "privateLinkServiceConnectionState": {
+          "description": "Gets or sets connection state of the private endpoint connection",
+          "allOf": [
+            {
+              "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+            }
+          ],
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "The private endpoint which the connection belongs to",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "ARM resource ID",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "The connection state of the private endpoint connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service",
+          "enum": [
+            "Approved",
+            "Rejected",
+            "Removed"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "description": {
+          "description": "The reason for approval/rejection of the connection",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "actionsRequired": {
+          "description": "A message indicating if changes on the service provider require any updates on the consumer",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
     "AzureMonitorWorkspace": {
       "description": "Properties of an Azure Monitor workspace",
       "type": "object",
