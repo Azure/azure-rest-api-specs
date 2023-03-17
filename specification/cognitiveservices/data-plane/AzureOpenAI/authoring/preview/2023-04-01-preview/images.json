@@ -1,7 +1,7 @@
 {
    "swagger": "2.0",
    "info": {
-      "title": "Cognitive Services API",
+      "title": "Azure OpenAI DALL-E API version 2023-04-01-preview",
       "description": "Cognitive Services API to support OpenAI Dall-E",
       "version": "2023-04-01-preview"
    },
@@ -63,30 +63,20 @@
          }
       },
       "Error": {
+         "title": "Error",
+         "description": "Error content as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
          "type": "object",
-         "description": "The error if the request or operation failed.",
          "properties": {
             "message": {
-               "type": "string",
-               "description": "The error message.",
-               "example": "Required query parameter 'api-version' is missing."
+               "description": "The message of this error.",
+               "minLength": 1,
+               "type": "string"
             },
             "code": {
-               "type": "string",
-               "enum": [
-                  "BadRequest",
-                  "ContentFilter",
-                  "Internal",
-                  "TooManyRequests",
-                  "Unauthorized",
-                  "NotFound",
-                  "OperationNotInTerminalState",
-                  "BlockedImages",
-                  "RequestTimout"
-               ],
-               "description": "The error code."
+               "$ref": "#/definitions/ErrorCode"
             },
             "details": {
+               "description": "The error details if available.",
                "type": "array",
                "items": {
                   "$ref": "#/definitions/InnerError"
@@ -97,6 +87,49 @@
             "message",
             "code"
          ]
+      },
+      "ErrorCode": {
+         "title": "ErrorCode",
+         "description": "Error codes as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
+         "enum": [
+            "BadRequest",
+            "Internal",
+            "TooManyRequests",
+            "Unauthorized",
+            "NotFound",
+            "OperationNotInTerminalState"
+         ],
+         "type": "string",
+         "x-ms-enum": {
+           "name": "ErrorCode",
+           "modelAsString": true,
+           "values": [
+            {
+               "value": "BadRequest",
+               "description": "The request data is invalid for this operation."
+            },
+            {
+               "value": "Internal",
+               "description": "Internal error. Please retry."
+            },
+            {
+               "value": "TooManyRequests",
+               "description": "Too many requests. Please retry later."
+            },
+            {
+               "value": "Unauthorized",
+               "description": "The current user/api key is not authorized for the operation."
+            },
+            {
+               "value": "NotFound",
+               "description": "The resource is not found."
+            },
+            {
+               "value": "OperationNotInTerminalState",
+               "description": "The operation cannot be executed in the current resource's state."
+            }
+           ]
+         }
       },
       "ErrorResponse": {
          "type": "object",
@@ -173,8 +206,8 @@
             "last_action"
          ]
       },
-      "ImageResolution": {
-         "description": "The resolution of the image (256x256, 512x512, or 1024x1024). Smaller images are faster to generate.",
+      "Size": {
+         "description": "The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
          "type": "string",
          "enum": [
             "256x256",
@@ -188,9 +221,8 @@
          "properties": {
             "prompt": {
                "type": "string",
-               "description": "The prompt to generate an image from.",
-               "minLength": 1,
-               "maxLength": 1000
+               "description": "A text description of the desired image(s).",
+               "minLength": 1
             },
             "n": {
                "type": "integer",
@@ -199,7 +231,7 @@
                "default": 1
             },
             "size": {
-               "$ref": "#/definitions/ImageResolution"
+               "$ref": "#/definitions/Size"
             }
          },
          "required": [
@@ -211,10 +243,15 @@
          "properties": {
             "status": {
                "$ref": "#/definitions/Status"
+            },
+            "id": {
+               "type": "string",
+               "description": " The Id of the asynchronous operation that can be used to query its status later."
             }
          },
          "required": [
-            "id"
+            "id",
+            "status"
          ]
       }
    },
