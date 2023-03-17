@@ -960,7 +960,7 @@
       "properties": {
         "privileged": {
           "type": "boolean",
-          "description": "The flag to determine if the container permissions is eleveted to Privileged."
+          "description": "The flag to determine if the container permissions is elevated to Privileged."
         },
         "allowPrivilegeEscalation": {
           "type": "boolean",
@@ -982,12 +982,13 @@
         },
         "seccompProfile": {
           "type": "string",
-          "description": "a base64 encoded string containing the contents of the JSON in the Seccomp profile"
+          "description": "a base64 encoded string containing the contents of the JSON in the seccomp profile"
         }
       }
     },
     "SecurityContextCapabilitiesDefinition": {
       "description": "The capabilities to add or drop from a container.",
+      "type": "object",
       "properties": {
         "add": {
           "type": "array",
