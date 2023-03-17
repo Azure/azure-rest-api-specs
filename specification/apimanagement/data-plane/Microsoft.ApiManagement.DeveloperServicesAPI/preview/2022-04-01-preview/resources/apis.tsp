@@ -11,9 +11,7 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesAPI.Resources.Apis;
 
-model CommonParams {
-  @path apiId: string;
-}
+//Routes
 
 @route("/apis")
 @doc("List a collection of APIs.")
@@ -23,7 +21,12 @@ op ListApis(...ListParams): ApiResponse<Collection<Api>>;
 @route("/apis/{apiId}")
 @doc("Get the details of the API specified by its identifier.")
 @get
-op GetApi(...CommonParams): ApiResponse<Api>;
+op GetApi(
+  ...CommonParams,
+  @header accept?: ContentTypes,
+  @query export?: boolean
+): ApiResponse<TypedBody<string, ContentTypes>>;
+//application/json should return Api
 
 @route("/apis/{apiId}/schemas")
 @doc("List a collection of APIs schemas.")
@@ -126,3 +129,22 @@ op ListApiOperationTags(
   ...ListParams,
   @path operationId: string
 ): ApiResponse<Collection<Tag>>;
+
+//Definitions
+
+model CommonParams {
+  @path apiId: string;
+}
+
+model TypedBody<BodyType, ContentType> {
+  @body body: BodyType;
+  @header contentType: ContentType;
+}
+
+alias ContentTypes =
+  | "application/json"
+  | "application/vnd.sun.wadl+xml"
+  | "application/wsdl+xml"
+  | "application/vnd.swagger.doc+json"
+  | "application/vnd.oai.openapi"
+  | "application/vnd.oai.openapi+json";
