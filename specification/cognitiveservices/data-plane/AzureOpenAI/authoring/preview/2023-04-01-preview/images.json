@@ -344,14 +344,34 @@
          ]
       },
       "Size": {
+         "title": "Size",
          "description": "The size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
-         "type": "string",
          "enum": [
             "256x256",
             "512x512",
             "1024x1024"
          ],
-         "default": "1024x1024"
+         "type": "string",
+         "default": "1024x1024",
+         "readOnly": true,
+         "x-ms-enum": {
+           "name": "Size",
+           "modelAsString": true,
+           "values": [
+            {
+               "value": "256x256",
+               "description": "The desired size of the generated image is 256x256 pixels."
+            },
+            {
+               "value": "512x512",
+               "description": "The desired size of the generated image is 512x512 pixels."
+            },
+            {
+               "value": "1024x1024",
+               "description": "The desired size of the generated image is 1024x1024 pixels."
+            }
+           ]
+         }
       },
       "GenerateImagesPostRequest": {
          "type": "object",
