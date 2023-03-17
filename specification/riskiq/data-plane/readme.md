@@ -42,6 +42,14 @@ input-file:
   - Microsoft.Easm/preview/2022-11-01-preview/easm.json
 ```
 
+### Release 2023-03-01-preview
+These settings apply only when `--tag=2023-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == '2023-03-01-preview'
+input-file:
+  - Microsoft.Easm/preview/2023-03-01-preview/easm.json
+```
+
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
