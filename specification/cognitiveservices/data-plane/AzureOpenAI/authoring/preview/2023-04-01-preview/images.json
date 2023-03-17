@@ -7,20 +7,6 @@
    },
    "host": "eastus.api.cognitive.microsoft.com",
    "basePath": "/dalle",
-   "schemes": ["https"],
-   "securityDefinitions": {
-      "Api-Key": {
-        "type": "apiKey",
-        "name": "Api-Key",
-        "in": "header",
-        "description": "Provide your Cognitive Services Azure OpenAI account key here."
-      }
-   },
-   "security": [
-      {
-        "Api-Key": []
-      }
-    ],
    "parameters": {
       "apiVersionQueryParameter": {
         "in": "query",
@@ -381,5 +367,30 @@
             }
          }
       }
-   }
+   },
+   "securityDefinitions": {
+      "api-key": {
+        "type": "apiKey",
+        "name": "Api-Key",
+        "in": "header",
+        "description": "Provide your Cognitive Services Azure OpenAI account key here."
+      }
+    },
+    "security": [
+      {
+        "api-key": []
+      }
+    ],
+    "schemes": [
+      "https"
+    ],
+    "x-ms-parameterized-host": {
+      "hostTemplate": "{endpoint}/openai",
+      "useSchemePrefix": false,
+      "parameters": [
+        {
+          "$ref": "#/parameters/endpoint"
+        }
+      ]
+    }
 }
