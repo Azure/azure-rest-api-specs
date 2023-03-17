@@ -738,50 +738,6 @@
         }
       }
     },
-    "/operations": {
-      "get": {
-        "tags": [
-          "Snapshots"
-        ],
-        "summary": "Gets the state of the snapshot creation operation.",
-        "operationId": "GetOperationDetails",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "snapshot",
-            "in": "query",
-            "description": "The name of the key-value snapshot to retrieve.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/OperationDetails"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetOperationStatus": {
-            "$ref": "./examples/GetOperationStatus.json"
-          }
-        }
-      }
-    },
     "/snapshots/{name}": {
       "get": {
         "tags": [
@@ -1526,6 +1482,50 @@
           }
         }
       }
+    },
+    "/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Gets the state of a long running operation.",
+        "operationId": "GetOperationDetails",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "name": "snapshot",
+            "in": "query",
+            "description": "Snapshot identifier for the long running operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OperationDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetOperationStatus": {
+            "$ref": "./examples/GetOperationStatus.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1770,9 +1770,11 @@
     "OperationDetails": {
       "properties": {
         "id": {
+          "description": "The unique id of the operation.",
           "type": "string"
         },
         "status": {
+          "description": "The current status of the operation",
           "enum": [
             "NotStarted",
             "Running",
@@ -1787,6 +1789,7 @@
           }
         },
         "error": {
+          "description": "An error, available when the status is `Failed`, describing why the operation failed.",
           "$ref": "#/definitions/Error"          
         }
       },
