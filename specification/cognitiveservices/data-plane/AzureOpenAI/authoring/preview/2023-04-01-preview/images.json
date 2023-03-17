@@ -312,19 +312,19 @@
                "description": "The ID of the operation."
             },
             "created": {
-               "type": "integer",
-               "format": "int64",
-               "description": "The unix timestamp when the operation was created."
+               "format": "unixtime",
+               "description": "A timestamp when this job or item was created (in unix epochs).",
+               "type": "integer"
             },
             "last_action": {
-               "type": "integer",
-               "format": "int64",
-               "description": "The unix timestamp for when the current state was entered."
+               "format": "unixtime",
+               "description": "A timestamp when this job or item was modified last (in unix epochs).",
+               "type": "integer"
             },
             "expires_at": {
-               "type": "integer",
-               "format": "int64",
-               "description": "The unix timestamp when the operation expires."
+               "format": "unixtime",
+               "description": "A timestamp when this job or item will expire (in unix epochs).",
+               "type": "integer"
             },
             "data": {
                "$ref": "#/definitions/OperationResult"
