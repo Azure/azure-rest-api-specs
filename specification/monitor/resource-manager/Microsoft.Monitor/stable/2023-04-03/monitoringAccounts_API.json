@@ -430,8 +430,19 @@
       "properties": {
         "provisioningState": {
           "description": "Gets provisioning state of the private endpoint connection",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Deleting",
+            "Failed",
+            "Canceled"
+          ],
           "type": "string",
           "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          },
           "x-ms-mutability": [
             "read"
           ]
