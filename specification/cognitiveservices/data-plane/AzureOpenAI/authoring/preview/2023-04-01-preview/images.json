@@ -33,7 +33,6 @@
          "post": {
             "summary": "Generates a batch of images from a text caption",
             "operationId": "Images_Generate",
-            "x-ms-long-running-operation": true,
             "consumes": [
                "application/json"
             ],
@@ -73,6 +72,10 @@
                     "$ref": "#/definitions/ErrorResponse"
                   }
                }
+            },
+            "x-ms-long-running-operation": true,
+            "x-ms-long-running-operation-options": {
+              "final-state-via": "azure-async-operation"
             }
          }
       },
