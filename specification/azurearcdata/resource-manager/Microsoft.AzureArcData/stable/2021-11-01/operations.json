@@ -1,0 +1,103 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-11-01",
+    "title": "AzureArcDataManagementClient",
+    "description": "The AzureArcData management API provides a RESTful set of web APIs to manage Azure Data Services on Azure Arc Resources."
+  },
+  "paths": {},
+  "definitions": {
+    "Operation": {
+      "description": "Azure Data Services on Azure Arc operation definition.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The localized display information for this particular operation / action."
+        },
+        "origin": {
+          "description": "The intended executor of the operation.",
+          "enum": [
+            "user",
+            "system"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "OperationOrigin",
+            "modelAsString": true
+          }
+        },
+        "isDataAction": {
+          "description": "Indicates whether the operation is a data action",
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "Additional descriptions for the operation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "x-ms-client-flatten": false
+        }
+      },
+      "required": [
+        "name",
+        "display",
+        "isDataAction"
+      ]
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Azure Data Services on Azure Arc operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Display metadata associated with the operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The localized friendly form of the resource type related to this action/operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized friendly description for the operation.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "resource",
+        "operation",
+        "description"
+      ]
+    }
+  }
+}

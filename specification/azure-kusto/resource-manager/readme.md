@@ -200,6 +200,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-java
   - repo: azure-cli-extensions
   - repo: azure-resource-manager-schemas
@@ -236,6 +237,10 @@ directive:
     where: $.definitions.DataConnection.required
     reason: Discriminator kind is required also in patch
   - suppress: R2016
+    from: kusto.json
+    where: $.definitions.Database.required
+    reason: Discriminator kind is required also in patch
+  - suppress: OAV131
     from: kusto.json
     where: $.definitions.Database.required
     reason: Discriminator kind is required also in patch

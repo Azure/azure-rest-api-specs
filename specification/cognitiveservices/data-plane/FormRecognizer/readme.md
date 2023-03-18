@@ -15,6 +15,13 @@ openapi-type: data-plane
 
 # Releases
 
+### Release 2021-09-30-preview
+These settings apply only when `--tag=2021-09-30-preview` is specified on the command line.
+``` yaml $(tag) == '2021-09-30-preview'
+input-file:
+  - preview/2021-09-30-preview/FormRecognizer.json
+```
+
 ### Release 2.1
 These settings apply only when `--tag=release_2_1` is specified on the command line.
 ``` yaml $(tag) == 'release_2_1'
@@ -69,6 +76,31 @@ input-file:
   - preview/v1.0/FormRecognizerReceipt.json
   - preview/v1.0/FormRecognizerReceiptOcr.json
 ```
+
+
+## Suppression
+``` yaml
+directive:
+  - suppress: PATTERN
+    from: FormRecognizer/preview/2021-09-30-preview/FormRecognizer.json
+    where: $.parameters.modelId
+    reason: Bug in example validation
+  - suppress: LongRunningResponseStatusCode
+    from: FormRecognizer/preview/2021-09-30-preview/FormRecognizer.json
+    reason: Latest guidelines recommend 202 for long running operations.
+  - suppress: ValidFormats
+    from: FormRecognizer/preview/2021-09-30-preview/FormRecognizer.json
+    where: 
+    - $.definitions.UrlContentSource.format
+    - $.definitions.AzureBlobContentSource.properties.containerUrl.format
+    - $.definitions.DocumentField.properties.valueTime.format
+    reason: uri and time are valid formats in JsonSchema/Swagger and does not affect SDK.
+  - suppress: AvoidNestedProperties
+    from: FormRecognizer/preview/2021-09-30-preview/FormRecognizer.json
+    where: $.definitions.DocumentFieldSchema.properties.properties
+    reason: Intentionally trying to mimic JsonSchema with recursion.
+```
+
 
 ## Swagger to SDK
 

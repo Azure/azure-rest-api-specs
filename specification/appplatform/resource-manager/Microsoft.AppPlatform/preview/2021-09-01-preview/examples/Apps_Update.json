@@ -1,0 +1,129 @@
+{
+  "parameters": {
+    "appResource": {
+      "properties": {
+        "public": true,
+        "activeDeploymentName": "mydeployment1",
+        "fqdn": "myapp.mydomain.com",
+        "httpsOnly": false,
+        "enableEndToEndTLS": false,
+        "temporaryDisk": {
+          "sizeInGB": 2,
+          "mountPath": "/mytemporarydisk"
+        },
+        "persistentDisk": {
+          "sizeInGB": 2,
+          "mountPath": "/mypersistentdisk"
+        },
+        "customPersistentDisks": [
+          {
+            "customPersistentDiskProperties": {
+              "type": "AzureFileVolume",
+              "mountPath": "/mypath1/mypath2",
+              "mountOptions": [],
+              "shareName": "myFileShare"
+            },
+            "storageId": "myASCStorageID"
+          }
+        ]
+      },
+      "identity": {
+        "type": "SystemAssigned",
+        "principalId": null,
+        "tenantId": null
+      },
+      "location": "eastus"
+    },
+    "api-version": "2021-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "serviceName": "myservice",
+    "appName": "myapp"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "public": true,
+          "url": "myapp.myservice.azuremicroservices.io",
+          "provisioningState": "Succeeded",
+          "activeDeploymentName": "mydeployment1",
+          "fqdn": "myapp.mydomain.com",
+          "httpsOnly": false,
+          "enableEndToEndTLS": false,
+          "temporaryDisk": {
+            "sizeInGB": 2,
+            "mountPath": "/mytemporarydisk"
+          },
+          "persistentDisk": {
+            "sizeInGB": 2,
+            "usedInGB": 1,
+            "mountPath": "/mypersistentdisk"
+          },
+          "customPersistentDisks": [
+            {
+              "customPersistentDiskProperties": {
+                "type": "AzureFileVolume",
+                "mountPath": "/mypath1/mypath2",
+                "mountOptions": [],
+                "shareName": "myFileShare"
+              },
+              "storageId": "myASCStorageID"
+            }
+          ]
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "principalid",
+          "tenantId": "tenantid"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp",
+        "name": "myapp"
+      }
+    },
+    "202": {
+      "body": {
+        "properties": {
+          "public": true,
+          "url": "myapp.myservice.azuremicroservices.io",
+          "provisioningState": "Updating",
+          "activeDeploymentName": "mydeployment1",
+          "fqdn": "myapp.mydomain.com",
+          "httpsOnly": false,
+          "enableEndToEndTLS": false,
+          "temporaryDisk": {
+            "sizeInGB": 2,
+            "mountPath": "/mytemporarydisk"
+          },
+          "persistentDisk": {
+            "sizeInGB": 2,
+            "usedInGB": 1,
+            "mountPath": "/mypersistentdisk"
+          },
+          "customPersistentDisks": [
+            {
+              "customPersistentDiskProperties": {
+                "type": "AzureFileVolume",
+                "mountPath": "/mypath1/mypath2",
+                "mountOptions": [],
+                "shareName": "myFileShare"
+              },
+              "storageId": "myASCStorageID"
+            }
+          ]
+        },
+        "type": "Microsoft.AppPlatform/Spring/apps",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "principalid",
+          "tenantId": "tenantid"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.AppPlatform/Spring/myservice/apps/myapp",
+        "name": "myapp"
+      }
+    }
+  }
+}

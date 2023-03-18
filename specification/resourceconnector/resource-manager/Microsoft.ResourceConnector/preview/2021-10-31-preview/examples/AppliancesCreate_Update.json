@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2021-10-31-preview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "testresourcegroup",
+    "resourceName": "appliance01",
+    "parameters": {
+      "location": "West US",
+      "properties": {
+        "distro": "AKSEdge",
+        "infrastructureConfig": {
+          "provider": "VMWare"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/providers/Microsoft.ResourceConnector/appliances/appliance01",
+        "name": "appliance01",
+        "type": "Microsoft.ResourceConnector/appliances",
+        "location": "West US",
+        "properties": {
+          "distro": "AKSEdge",
+          "version": "1.0.1",
+          "provisioningState": "Succeeded",
+          "status": "Connected",
+          "infrastructureConfig": {
+            "provider": "VMWare"
+          }
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "111111-1111-1111-1111-111111111111"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-04-24T18:53:29.0928001Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-04-24T18:53:29.0928001Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/testrg/providers/Microsoft.ResourceConnector/appliances/appliance01",
+        "name": "appliance01",
+        "type": "Microsoft.ResourceConnector/appliances",
+        "location": "West US",
+        "properties": {
+          "distro": "AKSEdge",
+          "version": "1.0.1",
+          "provisioningState": "Creating",
+          "status": "WaitingForHeartbeat",
+          "infrastructureConfig": {
+            "provider": "VMWare"
+          }
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "11111111-1111-1111-1111-111111111111",
+          "tenantId": "111111-1111-1111-1111-111111111111"
+        },
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2020-04-24T18:53:29.0928001Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2020-04-24T18:53:29.0928001Z"
+        }
+      }
+    }
+  }
+}

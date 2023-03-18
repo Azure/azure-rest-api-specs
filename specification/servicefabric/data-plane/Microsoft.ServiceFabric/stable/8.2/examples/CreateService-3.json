@@ -1,0 +1,47 @@
+{
+  "operationId": "CreateService",
+  "description": "This example shows how to create a stateless Service Fabric service with a dns name definied and auto scaling based on cpu usage.",
+  "parameters": {
+    "applicationId": "test",
+    "api-version": "6.0",
+    "ServiceDescription": {
+      "ServiceKind": "Stateless",
+      "ApplicationName": "fabric:/test",
+      "ServiceName": "fabric:/test/test1",
+      "ServiceTypeName": "StatelessFrontendService",
+      "InitializationData": [],
+      "PartitionDescription": {
+        "PartitionScheme": "Singleton"
+      },
+      "InstanceCount": 2,
+      "PlacementConstraints": "Color==Blue",
+      "CorrelationScheme": [],
+      "ServiceLoadMetrics": [],
+      "ServicePlacementPolicies": [],
+      "DefaultMoveCost": "Low",
+      "IsDefaultMoveCostSpecified": true,
+      "ServicePackageActivationMode": "ExclusiveProcess",
+      "ServiceDnsName": "test1.test",
+      "ScalingPolicies": [
+        {
+          "ScalingTrigger": {
+            "Kind": "AveragePartitionLoad",
+            "MetricName": "servicefabric:/_CpuCores",
+            "LowerLoadThreshold": "0.300000",
+            "UpperLoadThreshold": "0.800000",
+            "ScaleIntervalInSeconds": 600
+          },
+          "ScalingMechanism": {
+            "Kind": "PartitionInstanceCount",
+            "MinInstanceCount": 1,
+            "MaxInstanceCount": 6,
+            "ScaleIncrement": 2
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {}
+  }
+}

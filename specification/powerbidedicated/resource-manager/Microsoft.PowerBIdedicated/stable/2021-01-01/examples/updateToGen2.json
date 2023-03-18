@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60",
+    "resourceGroupName": "TestRG",
+    "dedicatedCapacityName": "azsdktest",
+    "api-version": "2021-01-01",
+    "capacityUpdateParameters": {
+      "sku": {
+        "name": "A1",
+        "tier": "PBIE_Azure"
+      },
+      "tags": {
+        "testKey": "testValue"
+      },
+      "properties": {
+        "mode": "Gen2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.PowerBIDedicated/capacities/azsdktest",
+        "location": "West US",
+        "name": "azsdktest",
+        "properties": {
+          "administration": {
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
+          },
+          "mode": "Gen2",
+          "provisioningState": "Provisioning",
+          "state": "Provisioning"
+        },
+        "sku": {
+          "name": "A1",
+          "tier": "PBIE_Azure"
+        },
+        "tags": {
+          "testKey": "testValue"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T00:00:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-01T00:00:19.1234567Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.PowerBIDedicated/capacities/azsdktest",
+        "location": "West US",
+        "name": "azsdktest",
+        "properties": {
+          "administration": {
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
+          },
+          "mode": "Gen2",
+          "provisioningState": "Provisioning",
+          "state": "Provisioning"
+        },
+        "sku": {
+          "name": "A1",
+          "tier": "PBIE_Azure"
+        },
+        "tags": {
+          "testKey": "testValue"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2021-01-01T00:00:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-01T00:00:19.1234567Z"
+        }
+      }
+    }
+  }
+}

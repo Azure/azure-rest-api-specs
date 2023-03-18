@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2021-09-01",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeprofiles/default",
+        "name": "default",
+        "properties": {
+          "agentPoolProfiles": [
+            {
+              "kubernetesVersion": "1.7.7",
+              "name": "agent",
+              "osType": "Linux",
+              "upgrades": [
+                {
+                  "kubernetesVersion": "1.7.9"
+                },
+                {
+                  "kubernetesVersion": "1.7.11",
+                  "isPreview": true
+                }
+              ]
+            }
+          ],
+          "controlPlaneProfile": {
+            "kubernetesVersion": "1.7.7",
+            "name": "master",
+            "osType": "Linux",
+            "upgrades": [
+              {
+                "kubernetesVersion": "1.7.9",
+                "isPreview": true
+              },
+              {
+                "kubernetesVersion": "1.7.11"
+              }
+            ]
+          }
+        },
+        "type": "Microsoft.ContainerService/managedClusters/upgradeprofiles"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "title": "Get data export destination",
+  "description": "Get a data export destination with Id.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "destinationId": "destination1",
+    "api-version": "1.1-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "1021f12a-6969-4eff-8518-57cac5f128ab",
+        "displayName": "Webhook No Auth",
+        "type": "webhook@v1",
+        "url": "https://webhook.site/9bda8769-d540-4d92-946b-48c5a01e59bd",
+        "headerCustomizations": {
+          "x-custom-region": {
+            "value": "westcentralus",
+            "secret": false
+          }
+        },
+        "status": "error",
+        "errors": [
+          {
+            "code": "InvalidResponse",
+            "message": "The webhook returned a 4xx status code."
+          }
+        ]
+      }
+    }
+  }
+}

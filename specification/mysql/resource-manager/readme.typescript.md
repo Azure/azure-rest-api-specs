@@ -6,8 +6,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-mysql"
-  output-folder: "$(typescript-sdks-folder)/sdk/mysql/arm-mysql"
   clear-output-folder: true
   generate-metadata: true
 ```

@@ -26,15 +26,32 @@ These are the global settings for the LabServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2021-10
+tag: package-preview-2021-11
 ```
 
 
+### Tag: package-preview-2021-11
+
+These settings apply only when `--tag=package-preview-2021-11` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2021-11'
+input-file:
+  - Microsoft.LabServices/preview/2021-11-15-preview/Images.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/LabPlans.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/LabServices.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Labs.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/OperationResults.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Schedules.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Users.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/VirtualMachines.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Usages.json
+  - Microsoft.LabServices/preview/2021-11-15-preview/Skus.json
+```
 ### Tag: package-preview-2021-10
 
 These settings apply only when `--tag=package-preview-2021-10` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2021-10'
+``` yaml $(tag) == 'package-preview-2021-10'
 input-file:
   - Microsoft.LabServices/preview/2021-10-01-preview/LabServices.json
   - Microsoft.LabServices/preview/2021-10-01-preview/OperationResults.json
@@ -45,6 +62,7 @@ input-file:
   - Microsoft.LabServices/preview/2021-10-01-preview/VirtualMachines.json
   - Microsoft.LabServices/preview/2021-10-01-preview/Schedules.json
 ```
+
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
