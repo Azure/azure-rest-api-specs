@@ -263,7 +263,6 @@
           "Experiments"
         ],
         "operationId": "Experiments_Update",
-        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "./types/common.json#/parameters/apiVersion"
@@ -289,13 +288,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated the Experiment."
+            "description": "Experiment resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experiment"
+            }
           },
           "default": {
             "description": "Error response returned if request was unsuccessful.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }      
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create/update a Experiment in a resource group.": {
+            "$ref": "./examples/PatchExperiment.json"
           }
         }
       }
