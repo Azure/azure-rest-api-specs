@@ -256,6 +256,48 @@
             "$ref": "./examples/CreateOrUpdateAExperiment.json"
           }
         }
+      },
+      "patch": {
+        "description": "The operation to update an experiment.",
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_Update",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/experiments.json#/parameters/experimentName"
+          },
+          {
+            "name": "experiment",
+            "in": "body",
+            "required": true,
+            "description": "Parameters supplied to the Update experiment operation.",
+            "schema": {
+              "$ref": "./types/experiments.json#/definitions/experimentUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the Experiment."
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }      
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/experiments/{experimentName}/cancel": {
