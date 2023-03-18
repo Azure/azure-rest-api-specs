@@ -606,7 +606,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/pendingUpload/{version}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}/pendingUpload": {
       "post": {
         "tags": [
           "CodeVersion"
@@ -1941,7 +1941,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/pendingUpload/{version}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}/pendingUpload": {
       "post": {
         "tags": [
           "DataVersionRegistry"
@@ -3342,7 +3342,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/pendingUpload/{version}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}/pendingUpload": {
       "post": {
         "tags": [
           "ModelVersion"
@@ -4717,7 +4717,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/pendingUpload/{version}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/pendingUpload": {
       "post": {
         "tags": [
           "CodeVersion"
@@ -7178,7 +7178,7 @@
           {
             "in": "query",
             "name": "stage",
-            "description": "stage",
+            "description": "Specifies the featurestore stage",
             "type": "string"
           }
         ],
@@ -7655,7 +7655,7 @@
           {
             "in": "query",
             "name": "description",
-            "description": "description.",
+            "description": "Description for the features.",
             "type": "string"
           }
         ],
@@ -8188,7 +8188,7 @@
           {
             "in": "query",
             "name": "stage",
-            "description": "stage",
+            "description": "Specifies the featurestore stage",
             "type": "string"
           }
         ],
@@ -14813,7 +14813,8 @@
               "type": "string"
             }
           },
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-identifiers": []
         },
         "tableName": {
           "description": "Name of the table on data import Database source",
