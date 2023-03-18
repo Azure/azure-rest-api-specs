@@ -26,23 +26,50 @@ These are the global settings for the Redis API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2020-12
+tag: package-2022-06
 ```
 
+
+### Tag: package-2022-06
+
+These settings apply only when `--tag=package-2022-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-06'
+input-file:
+  - Microsoft.Cache/stable/2022-06-01/redis.json
+```
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.Cache/stable/2022-05-01/redis.json
+```
+
+### Tag: package-2021-06
+
+These settings apply only when `--tag=package-2021-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2021-06'
+input-file:
+  - Microsoft.Cache/stable/2021-06-01/redis.json
+```
 
 ### Tag: package-2020-12
 
 These settings apply only when `--tag=package-2020-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-12'
+``` yaml $(tag) == 'package-2020-12'
 input-file:
   - Microsoft.Cache/stable/2020-12-01/redis.json
 ```
+
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2020-06'
+``` yaml $(tag) == 'package-2020-06'
 input-file:
   - Microsoft.Cache/stable/2020-06-01/redis.json
 ```
@@ -51,7 +78,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-07-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-07-preview'
+``` yaml $(tag) == 'package-2019-07-preview'
 input-file:
   - Microsoft.Cache/preview/2019-07-01/redis.json
 ```
@@ -112,11 +139,10 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-go-track2
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
@@ -124,6 +150,7 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_redis']
   - repo: azure-sdk-for-python-track2
   - repo: azure-resource-manager-schemas
+  - repo: azure-powershell
 ```
 
 ## C#
@@ -151,51 +178,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.redis
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-redis
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-03
-  - tag: package-2017-10
-```
-
-### Tag: package-2018-03 and java
-
-These settings apply only when `--tag=package-2018-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.redis.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2018_03_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-10 and java
-
-These settings apply only when `--tag=package-2017-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.redis.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/sdk/redis/mgmt-v2017_10_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 # Validation
 
@@ -241,6 +224,3 @@ directive:
     from: redis.json
     reason: This is false positive, 'linkedServers' is not a tracked resource.
 ```
-
-
-

@@ -6,8 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ``` yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "@azure/arm-machinelearningservices"
-  output-folder: "$(typescript-sdks-folder)/sdk/machinelearningservices/arm-machinelearningservices"
-  clear-output-folder: true
+  package-name: "@azure/arm-machinelearning"
+  output-folder: "$(typescript-sdks-folder)/sdk/machinelearning/arm-machinelearning"
   generate-metadata: true
 ```

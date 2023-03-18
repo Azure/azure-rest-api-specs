@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-powerbidedicated"
   output-folder: "$(typescript-sdks-folder)/sdk/powerbidedicated/arm-powerbidedicated"
-  clear-output-folder: true
   generate-metadata: true
 ```

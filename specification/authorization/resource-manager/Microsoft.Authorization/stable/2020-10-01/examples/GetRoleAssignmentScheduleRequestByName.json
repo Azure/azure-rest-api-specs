@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "scope": "providers/Microsoft.Subscription/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f",
+    "roleAssignmentScheduleRequestName": "fea7a502-9a96-4806-a26f-eee560e52045",
+    "api-version": "2020-10-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "targetRoleAssignmentScheduleId": "b1477448-2cc6-4ceb-93b4-54a202a89413",
+          "targetRoleAssignmentScheduleInstanceId": null,
+          "scope": "/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f",
+          "roleDefinitionId": "/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleDefinitions/c8d4ff99-41c3-41a8-9f60-21dfdad59608",
+          "principalId": "a3bb8764-cb92-4276-9d2a-ca1e895e55ea",
+          "principalType": "User",
+          "requestType": "SelfActivate",
+          "status": "Provisioned",
+          "approvalId": null,
+          "scheduleInfo": {
+            "startDateTime": "2020-09-09T21:35:27.91Z",
+            "expiration": {
+              "type": "AfterDuration",
+              "endDateTime": null,
+              "duration": "PT8H"
+            }
+          },
+          "ticketInfo": {
+            "ticketNumber": null,
+            "ticketSystem": null
+          },
+          "justification": null,
+          "requestorId": "a3bb8764-cb92-4276-9d2a-ca1e895e55ea",
+          "createdOn": "2020-09-09T21:35:27.91Z",
+          "condition": "@Resource[Microsoft.Storage/storageAccounts/blobServices/containers:ContainerName] StringEqualsIgnoreCase 'foo_storage_container'",
+          "conditionVersion": "1.0",
+          "expandedProperties": {
+            "scope": {
+              "id": "/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f",
+              "displayName": "Pay-As-You-Go",
+              "type": "subscription"
+            },
+            "roleDefinition": {
+              "id": "/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/roleDefinitions/c8d4ff99-41c3-41a8-9f60-21dfdad59608",
+              "displayName": "Contributor",
+              "type": "BuiltInRole"
+            },
+            "principal": {
+              "id": "a3bb8764-cb92-4276-9d2a-ca1e895e55ea",
+              "displayName": "User Account",
+              "email": "user@my-tenant.com",
+              "type": "User"
+            }
+          }
+        },
+        "name": "fea7a502-9a96-4806-a26f-eee560e52045",
+        "id": "/subscriptions/dfa2a084-766f-4003-8ae1-c4aeb893a99f/providers/Microsoft.Authorization/RoleAssignmentScheduleRequests/fea7a502-9a96-4806-a26f-eee560e52045",
+        "type": "Microsoft.Authorization/RoleAssignmentScheduleRequests"
+      }
+    }
+  }
+}

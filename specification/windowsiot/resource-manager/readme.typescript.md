@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-windowsiot"
   output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-windowsiot"
-  clear-output-folder: true
   generate-metadata: true
 ```

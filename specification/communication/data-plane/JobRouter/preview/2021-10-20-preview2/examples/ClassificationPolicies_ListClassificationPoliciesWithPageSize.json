@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.westus.communications.azure.com",
+    "api-version": "2021-10-20_preview2",
+    "maxpagesize": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "MainClassificationPolicy",
+            "name": "Main",
+            "fallbackQueueId": "MainQueue",
+            "queueSelectors": [
+              {
+                "kind": "rule",
+                "rule": {
+                  "kind": "expression-rule",
+                  "language": "PowerFx",
+                  "expression": "If(job.Escalated = true, \"SecondaryQueue\", \"MainQueue\")"
+                }
+              }
+            ],
+            "prioritizationRule": {
+              "kind": "static-rule",
+              "value": "2"
+            },
+            "workerSelectors": []
+          },
+          {
+            "id": "SecondaryClassificationPolicy",
+            "name": "Secondary",
+            "fallbackQueueId": "MainQueue",
+            "queueSelectors": [
+              {
+                "kind": "rule",
+                "rule": {
+                  "kind": "expression-rule",
+                  "language": "PowerFx",
+                  "expression": "If(job.VIP = true, \"VIPQueue\", \"MainQueue\")"
+                }
+              }
+            ],
+            "prioritizationRule": {
+              "kind": "static-rule",
+              "value": "1"
+            },
+            "workerSelectors": []
+          }
+        ],
+        "nextLink": "null"
+      }
+    }
+  }
+}

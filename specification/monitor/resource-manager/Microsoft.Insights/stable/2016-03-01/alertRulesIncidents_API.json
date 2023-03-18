@@ -45,7 +45,7 @@
         "operationId": "AlertRuleIncidents_Get",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -94,7 +94,7 @@
         "operationId": "AlertRuleIncidents_ListByAlertRule",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/RuleNameParameter"
@@ -165,6 +165,9 @@
           "items": {
             "$ref": "#/definitions/Incident"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "the incident collection."
         }
       },
@@ -186,14 +189,6 @@
     }
   },
   "parameters": {
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "RuleNameParameter": {
       "name": "ruleName",
       "in": "path",

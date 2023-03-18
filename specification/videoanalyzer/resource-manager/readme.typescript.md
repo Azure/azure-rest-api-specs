@@ -9,6 +9,5 @@ typescript:
   package-name: "@azure/arm-videoanalyzer"
   output-folder: "$(typescript-sdks-folder)/sdk/videoanalyzer/arm-videoanalyzer"
   payload-flattening-threshold: 1
-  clear-output-folder: true
   generate-metadata: true
 ```

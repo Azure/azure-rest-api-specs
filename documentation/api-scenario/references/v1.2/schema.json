@@ -1,0 +1,820 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "scope": {
+      "$ref": "#/definitions/Scope"
+    },
+    "authentication": {
+      "$ref": "#/definitions/Authentication"
+    },
+    "variables": {
+      "$ref": "#/definitions/Variables"
+    },
+    "prepareSteps": {
+      "type": "array",
+      "description": "Prepare steps before executing scenarios",
+      "items": {
+        "$ref": "#/definitions/Step"
+      }
+    },
+    "scenarios": {
+      "type": "array",
+      "description": "API scenarios",
+      "items": {
+        "$ref": "#/definitions/Scenario"
+      },
+      "minItems": 1
+    },
+    "cleanUpSteps": {
+      "type": "array",
+      "description": "Clean up steps after executing scenarios",
+      "items": {
+        "$ref": "#/definitions/Step"
+      }
+    }
+  },
+  "required": [
+    "scenarios"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "Name": {
+      "type": "string",
+      "pattern": "^[A-Za-z_$][A-Za-z0-9_-]*$"
+    },
+    "Authentication": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "AADToken",
+            "AzureKey",
+            "None"
+          ],
+          "default": "AADToken"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "AADToken"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "type": {},
+              "scope": {
+                "type": "string",
+                "description": "The resource identifier (application ID URI) of the resource you want, affixed with the .default suffix",
+                "examples": [
+                  "https://management.azure.com/.default",
+                  "https://storage.azure.com/.default"
+                ]
+              }
+            },
+            "required": [
+              "scope"
+            ],
+            "additionalProperties": false
+          },
+          "else": {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "AzureKey"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "type": {},
+                "key": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string",
+                  "default": "Authorization"
+                },
+                "in": {
+                  "type": "string",
+                  "enum": [
+                    "header",
+                    "query"
+                  ],
+                  "default": "header"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalProperties": false
+            },
+            "else": {
+              "properties": {
+                "type": {}
+              },
+              "additionalProperties": false
+            }
+          }
+        }
+      ]
+    },
+    "Scope": {
+      "type": "string",
+      "oneOf": [
+        {
+          "enum": ["ResourceGroup", "Subscription", "Tenant", "None"],
+          "default": "ResourceGroup"
+        },
+        {
+          "format": "uri-reference",
+          "pattern": "^.+\\.(yaml|yml)$"
+        }
+      ]
+    },
+    "JsonPointer": {
+      "type": "string",
+      "description": "JSON Pointer described by RFC 6901, e.g. /foo/bar",
+      "pattern": "^(/(([^/~])|(~[01]))*)*$"
+    },
+    "VariableType": {
+      "type": "string",
+      "enum": [
+        "array",
+        "bool",
+        "int",
+        "object",
+        "secureString",
+        "secureObject",
+        "string"
+      ],
+      "default": "string"
+    },
+    "Variables": {
+      "type": "object",
+      "propertyNames": {
+        "$ref": "#/definitions/Name"
+      },
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/VariableType"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "string",
+                        "secureString"
+                      ]
+                    }
+                  }
+                },
+                "then": {
+                  "anyOf": [
+                    {
+                      "properties": {
+                        "type": {},
+                        "value": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    {
+                      "properties": {
+                        "type": {},
+                        "prefix": {
+                          "type": "string"
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "enum": [
+                        "object",
+                        "secureObject"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ]
+                },
+                "then": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "type": {},
+                        "value": {
+                          "type": "object"
+                        }
+                      },
+                      "required": [
+                        "value"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "properties": {
+                        "type": {},
+                        "patches": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/JsonPatchOp"
+                          }
+                        }
+                      },
+                      "required": [
+                        "patches"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "array"
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ]
+                },
+                "then": {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "type": {},
+                        "value": {
+                          "type": "array",
+                          "items": {}
+                        }
+                      },
+                      "required": [
+                        "value"
+                      ],
+                      "additionalProperties": false
+                    },
+                    {
+                      "properties": {
+                        "type": {},
+                        "patches": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/JsonPatchOp"
+                          }
+                        }
+                      },
+                      "required": [
+                        "patches"
+                      ],
+                      "additionalProperties": false
+                    }
+                  ]
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "bool"
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "type": {},
+                    "value": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "int"
+                    }
+                  },
+                  "required": [
+                    "type"
+                  ]
+                },
+                "then": {
+                  "properties": {
+                    "type": {},
+                    "value": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "value"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "Scenario": {
+      "type": "object",
+      "properties": {
+        "scenario": {
+          "$ref": "#/definitions/Name",
+          "description": "Name of the scenario that uniquely identifies it"
+        },
+        "description": {
+          "type": "string",
+          "description": "A long description of the scenario"
+        },
+        "authentication": {
+          "$ref": "#/definitions/Authentication",
+          "description": "Authentication method to use for the scenario"
+        },
+        "variables": {
+          "$ref": "#/definitions/Variables"
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Step"
+          }
+        }
+      },
+      "required": [
+        "steps"
+      ],
+      "additionalProperties": false
+    },
+    "Step": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/StepOperation"
+        },
+        {
+          "$ref": "#/definitions/StepExample"
+        },
+        {
+          "$ref": "#/definitions/StepArmTemplate"
+        },
+        {
+          "$ref": "#/definitions/StepArmDeploymentScript"
+        },
+        {
+          "$ref": "#/definitions/StepRoleAssignment"
+        }
+      ]
+    },
+    "StepBase": {
+      "type": "object",
+      "properties": {
+        "step": {
+          "$ref": "#/definitions/Name",
+          "description": "The name of the step that uniquely identifies it"
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief explanation about the step"
+        },
+        "variables": {
+          "$ref": "#/definitions/Variables"
+        }
+      }
+    },
+    "StepRestBase": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
+      "properties": {
+        "authentication": {
+          "$ref": "#/definitions/Authentication"
+        },
+        "outputVariables": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/definitions/Name"
+          },
+          "additionalProperties": {
+            "properties": {
+              "type": {
+                "$ref": "#/definitions/VariableType"
+              },
+              "fromRequest": {
+                "$ref": "#/definitions/JsonPointer"
+              },
+              "fromResponse": {
+                "$ref": "#/definitions/JsonPointer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "StepOperation": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepRestBase"
+        }
+      ],
+      "properties": {
+        "operationId": {
+          "type": "string"
+        },
+        "readmeTag": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "responses": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "patternProperties": {
+            "^([2-5][0-9]{2})|([245]xx)$": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "headers": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      }
+                    },
+                    "body": {
+                      "type": [
+                        "object",
+                        "number",
+                        "array",
+                        "integer",
+                        "string",
+                        "boolean",
+                        "null"
+                      ]
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/JsonTestOp"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "step": {},
+        "description": {},
+        "authentication": {},
+        "variables": {},
+        "outputVariables": {}
+      },
+      "required": [
+        "operationId"
+      ],
+      "additionalProperties": false
+    },
+    "StepExample": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepRestBase"
+        }
+      ],
+      "properties": {
+        "exampleFile": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "operationId": {
+          "type": "string"
+        },
+        "readmeTag": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "requestUpdate": {
+          "type": "array",
+          "description": "Update request parameters",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          },
+          "minItems": 1
+        },
+        "responseUpdate": {
+          "type": "array",
+          "description": "Update expected response",
+          "items": {
+            "$ref": "#/definitions/JsonPatchOp"
+          },
+          "minItems": 1
+        },
+        "step": {},
+        "description": {},
+        "authentication": {},
+        "variables": {},
+        "outputVariables": {}
+      },
+      "required": [
+        "exampleFile"
+      ],
+      "additionalProperties": false
+    },
+    "StepArmTemplate": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
+      "properties": {
+        "armTemplate": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "step": {},
+        "description": {},
+        "variables": {}
+      },
+      "required": [
+        "armTemplate"
+      ],
+      "additionalProperties": false
+    },
+    "StepArmDeploymentScript": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
+      "properties": {
+        "armDeploymentScript": {
+          "type": "string",
+          "format": "uri-reference"
+        },
+        "arguments": {
+          "type": "string"
+        },
+        "environmentVariables": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name",
+              "value"
+            ]
+          }
+        },
+        "step": {},
+        "description": {},
+        "variables": {}
+      },
+      "required": [
+        "armDeploymentScript"
+      ],
+      "additionalProperties": false
+    },
+    "StepRoleAssignment": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StepBase"
+        }
+      ],
+      "properties": {
+        "roleAssignment": {
+          "type": "object",
+          "properties": {
+            "roleName": {
+              "type": "string"
+            },
+            "roleDefinitionId": {
+              "type": "string"
+            },
+            "principalId": {
+              "type": "string"
+            },
+            "scope": {
+              "type": "string"
+            },
+            "principalType": {
+              "type": "string",
+              "enum": ["User", "Group", "ServicePrincipal", "ForeignGroup", "Device"],
+              "default": "ServicePrincipal"
+            }
+          },
+          "oneOf": [
+            {
+              "required": ["roleName", "principalId", "scope"]
+            },
+            {
+              "required": ["roleDefinitionId", "principalId", "scope"]
+            }
+          ]
+        },
+        "step": {},
+        "description": {},
+        "variables": {}
+      },
+      "required": ["roleAssignment"],
+      "additionalProperties": false
+    },
+    "JsonPatchOp": {
+      "type": "object",
+      "description": "Change a JSON document in a format described by RFC 6902",
+      "oneOf": [
+        {
+          "$ref": "#/definitions/JsonPatchOpAdd"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpRemove"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpReplace"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpCopy"
+        },
+        {
+          "$ref": "#/definitions/JsonPatchOpMove"
+        }
+      ]
+    },
+    "JsonPatchOpAdd": {
+      "type": "object",
+      "required": [
+        "add",
+        "value"
+      ],
+      "properties": {
+        "add": {
+          "$ref": "#/definitions/JsonPointer"
+        },
+        "value": {}
+      },
+      "additionalProperties": false
+    },
+    "JsonPatchOpRemove": {
+      "type": "object",
+      "required": [
+        "remove"
+      ],
+      "properties": {
+        "remove": {
+          "$ref": "#/definitions/JsonPointer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "JsonPatchOpReplace": {
+      "type": "object",
+      "required": [
+        "replace",
+        "value"
+      ],
+      "properties": {
+        "replace": {
+          "$ref": "#/definitions/JsonPointer"
+        },
+        "value": {}
+      },
+      "additionalProperties": false
+    },
+    "JsonPatchOpCopy": {
+      "type": "object",
+      "required": [
+        "copy",
+        "from"
+      ],
+      "properties": {
+        "copy": {
+          "$ref": "#/definitions/JsonPointer"
+        },
+        "from": {
+          "$ref": "#/definitions/JsonPointer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "JsonPatchOpMove": {
+      "type": "object",
+      "required": [
+        "move",
+        "from"
+      ],
+      "properties": {
+        "move": {
+          "$ref": "#/definitions/JsonPointer"
+        },
+        "from": {
+          "$ref": "#/definitions/JsonPointer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "JsonTestOp": {
+      "type": "object",
+      "required": [
+        "test"
+      ],
+      "properties": {
+        "test": {
+          "$ref": "#/definitions/JsonPointer"
+        }
+      },
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "type": "object",
+              "required": [
+                "value"
+              ],
+              "properties": {
+                "test": {},
+                "value": {}
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "required": [
+                "expression"
+              ],
+              "properties": {
+                "test": {},
+                "expression": {
+                  "type": "string",
+                  "examples": [
+                    "to.not.have.property('b')",
+                    "to.match(/^foo/)",
+                    "to.not.be.undefined"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2021-08-01-preview",
+    "title": "SqlManagementClient",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups/{serverTrustGroupName}": {
+      "get": {
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Gets a server trust group.",
+        "operationId": "ServerTrustGroups_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverTrustGroupName",
+            "in": "path",
+            "description": "The name of the server trust group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the the specified server trust group.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerTrustGroupNotFound - Server trust group with specified name does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 406 ServerTrustGroupMemberIsBusy - Group member '{0}' is not in a valid state and cannot perform Server trust group operation.\n\n * 406 ServerTrustGroupInInvalidState - SQL trust group '{0}' is busy and cannot perform requested operation.\n\n * 406 ServerTrustGroupMemberNotFound - Group member '{0}' is not found, therefore we cannot perform Server trust group operation."
+          }
+        },
+        "x-ms-examples": {
+          "Get server trust group": {
+            "$ref": "./examples/ServerTrustGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Creates or updates a server trust group.",
+        "operationId": "ServerTrustGroups_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverTrustGroupName",
+            "in": "path",
+            "description": "The name of the server trust group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The server trust group parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroup"
+            }
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the server trust group.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroup"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ServerTrustGroupCreateRequestInvalid - The resource or resource properties in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembers - The group members property in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembersCount - The group members property has an invalid number of servers\n\n * 400 ServerTrustGroupCreateRequestInvalidServer - The given serverId field in create server trust group request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestDuplicateServer - One or more of the provided servers are duplicates.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopes - The trust scope property in the request body is empty or invalid.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopesValue - The trust scope property in the request body has an invalid value.\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembersCount2 - The group members property has an invalid number of servers\n\n * 404 ServerTrustGroupNotFound - Server trust group with specified name does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 406 ServerTrustGroupMemberIsBusy - Group member '{0}' is not in a valid state and cannot perform Server trust group operation.\n\n * 406 ServerTrustGroupInInvalidState - SQL trust group '{0}' is busy and cannot perform requested operation.\n\n * 406 ServerTrustGroupMemberNotFound - Group member '{0}' is not found, therefore we cannot perform Server trust group operation.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "201": {
+            "description": "Successfully created the server trust group.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroup"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create server trust group": {
+            "$ref": "./examples/ServerTrustGroupCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Deletes a server trust group.",
+        "operationId": "ServerTrustGroups_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serverTrustGroupName",
+            "in": "path",
+            "description": "The name of the server trust group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the server trust group."
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 ServerTrustGroupCreateRequestInvalid - The resource or resource properties in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembers - The group members property in the request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembersCount - The group members property has an invalid number of servers\n\n * 400 ServerTrustGroupCreateRequestInvalidServer - The given serverId field in create server trust group request body is empty or invalid\n\n * 400 ServerTrustGroupCreateRequestDuplicateServer - One or more of the provided servers are duplicates.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopes - The trust scope property in the request body is empty or invalid.\n\n * 400 ServerTrustGroupCreateRequestInvalidTrustScopesValue - The trust scope property in the request body has an invalid value.\n\n * 400 ServerTrustGroupCreateRequestInvalidGroupMembersCount2 - The group members property has an invalid number of servers\n\n * 404 ServerTrustGroupNotFound - Server trust group with specified name does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 406 ServerTrustGroupMemberIsBusy - Group member '{0}' is not in a valid state and cannot perform Server trust group operation.\n\n * 406 ServerTrustGroupInInvalidState - SQL trust group '{0}' is busy and cannot perform requested operation.\n\n * 406 ServerTrustGroupMemberNotFound - Group member '{0}' is not found, therefore we cannot perform Server trust group operation.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation."
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "The specified server trust group does not exist."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Drop server trust group": {
+            "$ref": "./examples/ServerTrustGroupDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/serverTrustGroups": {
+      "get": {
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Lists a server trust group.",
+        "operationId": "ServerTrustGroups_ListByLocation",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The name of the region where the resource is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server trust groups.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ServerTrustGroupNotFound - Server trust group with specified name does not exist.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 406 ServerTrustGroupMemberIsBusy - Group member '{0}' is not in a valid state and cannot perform Server trust group operation.\n\n * 406 ServerTrustGroupInInvalidState - SQL trust group '{0}' is busy and cannot perform requested operation.\n\n * 406 ServerTrustGroupMemberNotFound - Group member '{0}' is not found, therefore we cannot perform Server trust group operation."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List server trust groups": {
+            "$ref": "./examples/ServerTrustGroupList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/serverTrustGroups": {
+      "get": {
+        "tags": [
+          "ServerTrustGroups"
+        ],
+        "description": "Gets a server trust groups by instance name.",
+        "operationId": "ServerTrustGroups_ListByInstance",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedInstanceNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the server trust groups.",
+            "schema": {
+              "$ref": "#/definitions/ServerTrustGroupListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 ResourceNotFound - The requested resource was not found."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List server trust groups by managed instance": {
+            "$ref": "./examples/ServerTrustGroupListByManagedInstance.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ServerTrustGroupProperties": {
+      "description": "Properties of a server trust group.",
+      "required": [
+        "groupMembers",
+        "trustScopes"
+      ],
+      "type": "object",
+      "properties": {
+        "groupMembers": {
+          "description": "Group members information for the server trust group.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerInfo"
+          }
+        },
+        "trustScopes": {
+          "description": "Trust scope of the server trust group.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "GlobalTransactions",
+              "ServiceBroker"
+            ],
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ServerInfo": {
+      "description": "Server info for the server trust group.",
+      "required": [
+        "serverId"
+      ],
+      "type": "object",
+      "properties": {
+        "serverId": {
+          "description": "Server Id.",
+          "type": "string"
+        }
+      }
+    },
+    "ServerTrustGroup": {
+      "description": "A server trust group.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerTrustGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ServerTrustGroupListResult": {
+      "description": "A list of server trust groups.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Array of results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerTrustGroup"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Link to retrieve next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ManagedInstanceNameParameter": {
+      "name": "managedInstanceName",
+      "in": "path",
+      "description": "The name of the managed instance.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

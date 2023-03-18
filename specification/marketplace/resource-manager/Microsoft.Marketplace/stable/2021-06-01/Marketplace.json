@@ -1351,7 +1351,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Recipient"
-          }
+          },
+          "x-ms-identifiers": [
+            "principalId"
+          ]
         },
         "sendToAllMarketplaceAdmins": {
           "description": "Gets or sets whether to send email to all marketplace admins for new requests",
@@ -1473,7 +1476,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OfferProperties"
-          }
+          },
+          "x-ms-identifiers": [
+            "uniqueOfferId"
+          ]
         },
         "nextLink": {
           "description": "URL to get the next set of PrivateStore list results if there are any.",
@@ -1557,7 +1563,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Plan"
-          }
+          },
+          "x-ms-identifiers": [
+            "skuId"
+          ]
         }
       }
     },
@@ -1688,7 +1697,10 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/PlanRequesterDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "planId"
+          ]
         },
         "collectionIds": {
           "description": "Gets or sets list of associated collection ids",
@@ -1718,7 +1730,8 @@
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/UserRequestDetails"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -1806,7 +1819,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/planDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "planId"
+          ]
         },
         "isClosed": {
           "description": "Gets a value indicating whether the request is closed",
@@ -1927,19 +1943,32 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StopSellNotifications"
-          }
+          },
+          "x-ms-identifiers": [
+            "offerId",
+            "messageCode"
+          ]
         },
         "newNotifications": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/NewNotifications"
-          }
+          },
+          "x-ms-identifiers": [
+            "offerId",
+            "messageCode"
+          ]
         },
         "approvalRequests": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/RequestApprovalsDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "offerId",
+            "publisherId",
+            "messageCode"
+          ]
         }
       }
     },
@@ -1973,7 +2002,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PlanNotificationDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "planId"
+          ]
         }
       }
     },
@@ -2007,7 +2039,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PlanNotificationDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "planId"
+          ]
         }
       }
     },
@@ -2055,7 +2090,10 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PlanNotificationDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "planId"
+          ]
         }
       }
     },
@@ -2160,14 +2198,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CollectionsDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "collectionId"
+          ]
         },
         "failed": {
           "description": "Failed collections",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CollectionsDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "collectionId"
+          ]
         }
       }
     },
@@ -2208,14 +2252,20 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/CollectionsDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "collectionId"
+          ]
         },
         "failed": {
           "description": "Failed collections",
           "type": "array",
           "items": {
             "$ref": "#/definitions/CollectionsDetails"
-          }
+          },
+          "x-ms-identifiers": [
+            "collectionId"
+          ]
         }
       }
     },
@@ -2261,7 +2311,10 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/QueryApprovedPlansDetails"
-      }
+      },
+      "x-ms-identifiers": [
+        "planId"
+      ]
     },
     "QueryApprovedPlansDetails": {
       "description": "Query approved plans response",
@@ -2401,6 +2454,9 @@
           "items": {
             "$ref": "#/definitions/SingleOperation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of Microsoft.Marketplace operations supported by the Microsoft.Marketplace resource provider."
         },
         "nextLink": {

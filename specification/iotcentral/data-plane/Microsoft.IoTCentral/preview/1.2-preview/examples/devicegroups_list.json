@@ -1,0 +1,47 @@
+{
+  "title": "DeviceGroup List",
+  "description": "List all device groups in your application.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "api-version": "1.2-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "475cad48-b7ff-4a09-b51e-1a9021385453",
+            "displayName": "DeviceGroupEntry1",
+            "description": "This is a default device group containing all the devices for this particular Device Template.",
+            "filter": "SELECT * FROM devices WHERE $template = \"dtmi:modelDefinition:dtdlv2\" AND $provisioned = true",
+            "organizations": [
+              "seattle"
+            ]
+          },
+          {
+            "id": "c2d5ae1d-2cb7-4f58-bf44-5e816aba0a0e",
+            "displayName": "DeviceGroupEntry2",
+            "description": "This is a default device group containing all the devices for this particular Device Template.",
+            "filter": "SELECT * FROM devices WHERE $template = \"dtmi:modelDefinition:model1\"",
+            "organizations": [
+              "redmond"
+            ]
+          },
+          {
+            "id": "241ad72b-32aa-4216-aabe-91b240582c8d",
+            "displayName": "DeviceGroupEntry3",
+            "description": "This is a default device group containing all the devices for this particular Device Template.",
+            "filter": "SELECT * FROM devices WHERE $template = \"dtmi:modelDefinition:model2\" AND $simulated = true"
+          },
+          {
+            "id": "group4",
+            "displayName": "DeviceGroupEntry4",
+            "description": "This is a default device group containing all the devices for this particular Device Template.",
+            "filter": "SELECT * FROM devices WHERE $template = \"dtmi:modelDefinition:model3\""
+          }
+        ]
+      }
+    }
+  }
+}

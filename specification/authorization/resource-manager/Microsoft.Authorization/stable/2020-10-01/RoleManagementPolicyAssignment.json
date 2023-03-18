@@ -1,0 +1,393 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AuthorizationManagementClient",
+    "version": "2020-10-01",
+    "description": "Role based access control provides you a way to apply granular level policy administration down to individual resources or resource groups. These operations enable you to manage role assignments. A role assignment grants access to Azure Active Directory users."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Authorization/roleManagementPolicyAssignments/{roleManagementPolicyAssignmentName}": {
+      "get": {
+        "tags": [
+          "roleManagementPolicyAssignments"
+        ],
+        "operationId": "RoleManagementPolicyAssignments_Get",
+        "description": "Get the specified role management policy assignment for a resource scope",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role management policy.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleManagementPolicyAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of format {guid_guid} the role management policy assignment to get."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the role management policy.",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetConfigurations": {
+            "$ref": "./examples/GetRoleManagementPolicyAssignmentByName.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "roleManagementPolicyAssignments"
+        ],
+        "operationId": "RoleManagementPolicyAssignments_Create",
+        "description": "Create a role management policy assignment",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role management policy assignment to upsert.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleManagementPolicyAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of format {guid_guid} the role management policy assignment to upsert."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyAssignment"
+            },
+            "description": "Parameters for the role management policy assignment."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns the created or updated policy assignment.",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PutRoleManagementPolicyAssignment": {
+            "$ref": "./examples/PutRoleManagementPolicyAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "roleManagementPolicyAssignments"
+        ],
+        "operationId": "RoleManagementPolicyAssignments_Delete",
+        "description": "Delete a role management policy assignment",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role management policy assignment to delete.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "roleManagementPolicyAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of format {guid_guid} the role management policy assignment to delete."
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Successfully deleted the policy assignment."
+          },
+          "204": {
+            "description": "NoContent - policy assignment does not exists."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteRoleManagementPolicyAssignment": {
+            "$ref": "./examples/DeleteRoleManagementPolicyAssignment.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.Authorization/roleManagementPolicyAssignments": {
+      "get": {
+        "tags": [
+          "roleManagementPolicyAssignments"
+        ],
+        "operationId": "RoleManagementPolicyAssignments_ListForScope",
+        "description": "Gets role management assignment policies for a resource scope.",
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The scope of the role management policy.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of role management policies.",
+            "schema": {
+              "$ref": "#/definitions/RoleManagementPolicyAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "GetRoleManagementPolicyAssignmentByScope": {
+            "$ref": "./examples/GetRoleManagementPolicyAssignmentByScope.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RoleManagementPolicyAssignment": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role management policy Id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role management policy name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The role management policy type."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RoleManagementPolicyAssignmentProperties",
+          "description": "Role management policy properties."
+        }
+      },
+      "type": "object",
+      "description": "Role management policy"
+    },
+    "RoleManagementPolicyAssignmentProperties": {
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "The role management policy scope."
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition of management policy assignment."
+        },
+        "policyId": {
+          "type": "string",
+          "description": "The policy id role management policy assignment."
+        },
+        "effectiveRules": {
+          "type": "array",
+          "items": {
+            "$ref": "./common-types.json#/definitions/RoleManagementPolicyRule"
+          },
+          "readOnly": true,
+          "description": "The readonly computed rule applied to the policy."
+        },
+        "policyAssignmentProperties": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Additional properties of scope, role definition and policy",
+          "$ref": "#/definitions/PolicyAssignmentProperties"
+        }
+      },
+      "type": "object",
+      "description": "Role management policy assignment properties with scope."
+    },
+    "RoleManagementPolicyAssignmentListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RoleManagementPolicyAssignment"
+          },
+          "description": "Role management policy assignment list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "type": "object",
+      "description": "Role management policy assignment list operation result."
+    },
+    "PolicyAssignmentProperties": {
+      "properties": {
+        "scope": {
+          "type": "object",
+          "description": "Details of the resource scope",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Scope id of the resource"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the resource"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the resource"
+            }
+          }
+        },
+        "roleDefinition": {
+          "type": "object",
+          "description": "Details of role definition",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the role definition"
+            },
+            "displayName": {
+              "type": "string",
+              "description": "Display name of the role definition"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the role definition"
+            }
+          }
+        },
+        "policy": {
+          "type": "object",
+          "description": "Details of the policy",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Id of the policy"
+            },
+            "lastModifiedBy": {
+              "$ref": "./common-types.json#/definitions/Principal"
+            },
+            "lastModifiedDateTime": {
+              "type": "string",
+              "format": "date-time",
+              "description": "The last modified date time."
+            }
+          }
+        }
+      },
+      "type": "object",
+      "description": "Expanded info of resource scope, role definition and policy"
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
+      "type": "object",
+      "description": "An error response from the service."
+    },
+    "CloudErrorBody": {
+      "x-ms-external": true,
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      },
+      "type": "object",
+      "description": "An error response from the service."
+    }
+  }
+}

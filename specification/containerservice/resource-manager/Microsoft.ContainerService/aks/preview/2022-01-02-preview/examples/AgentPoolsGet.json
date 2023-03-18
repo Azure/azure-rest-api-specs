@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2022-01-02-preview",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "agentpool1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
+        "name": "agentpool1",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "count": 3,
+          "vmSize": "Standard_DS1_v2",
+          "maxPods": 110,
+          "osType": "Linux",
+          "orchestratorVersion": "1.9.6",
+          "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
+          "upgradeSettings": {
+            "maxSurge": "33%"
+          }
+        }
+      }
+    }
+  }
+}

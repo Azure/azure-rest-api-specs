@@ -1,0 +1,284 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2021-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates/{sentinelOnboardingStateName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get Sentinel onboarding state": {
+            "$ref": "./examples/onboardingStates/GetSentinelOnboardingState.json"
+          }
+        },
+        "tags": [
+          "SentinelOnboardingStates"
+        ],
+        "description": "Get Sentinel onboarding state",
+        "operationId": "SentinelOnboardingStates_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SentinelOnboardingStateName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingState"
+            }
+          },
+          "default": {
+            "description": "Error in getting the Sentinel onboarding state",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create Sentinel onboarding state": {
+            "$ref": "./examples/onboardingStates/CreateSentinelOnboardingState.json"
+          }
+        },
+        "tags": [
+          "SentinelOnboardingStates"
+        ],
+        "description": "Create Sentinel onboarding state",
+        "operationId": "SentinelOnboardingStates_Create",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SentinelOnboardingStateName"
+          },
+          {
+            "$ref": "#/parameters/SentinelOnboardingStateParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingState"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingState"
+            }
+          },
+          "default": {
+            "description": "Error in creating the Sentinel onboarding state",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete Sentinel onboarding state": {
+            "$ref": "./examples/onboardingStates/DeleteSentinelOnboardingState.json"
+          }
+        },
+        "tags": [
+          "SentinelOnboardingStates"
+        ],
+        "description": "Delete Sentinel onboarding state",
+        "operationId": "SentinelOnboardingStates_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/SentinelOnboardingStateName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error in deleting the Sentinel onboarding state",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/onboardingStates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all Sentinel onboarding states": {
+            "$ref": "./examples/onboardingStates/GetAllSentinelOnboardingStates.json"
+          }
+        },
+        "tags": [
+          "SentinelOnboardingStates"
+        ],
+        "description": "Gets all Sentinel onboarding states",
+        "operationId": "SentinelOnboardingStates_List",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/2.0/types.json#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SentinelOnboardingStatesList"
+            }
+          },
+          "default": {
+            "description": "Error in listing the Sentinel onboarding states",
+            "schema": {
+              "$ref": "../../../common/2.0/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SentinelOnboardingStateProperties": {
+      "description": "The Sentinel onboarding state properties",
+      "type": "object",
+      "properties": {
+        "customerManagedKey": {
+          "description": "Flag that indicates the status of the CMK setting",
+          "type": "boolean"
+        }
+      }
+    },
+    "SentinelOnboardingState": {
+      "allOf": [
+        {
+          "$ref": "../../../common/2.0/types.json#/definitions/ResourceWithEtag"
+        }
+      ],
+      "description": "Sentinel onboarding state",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SentinelOnboardingStateProperties",
+          "description": "The Sentinel onboarding state object",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "SentinelOnboardingStatesList": {
+      "description": "List of the Sentinel onboarding states",
+      "properties": {
+        "value": {
+          "description": "Array of Sentinel onboarding states",
+          "items": {
+            "$ref": "#/definitions/SentinelOnboardingState"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object",
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {
+    "SentinelOnboardingStateName": {
+      "description": "The Sentinel onboarding state name. Supports - default",
+      "in": "path",
+      "name": "sentinelOnboardingStateName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SentinelOnboardingStateParameter": {
+      "description": "The Sentinel onboarding state parameter",
+      "in": "body",
+      "name": "sentinelOnboardingStateParameter",
+      "required": false,
+      "schema": {
+        "$ref": "#/definitions/SentinelOnboardingState"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

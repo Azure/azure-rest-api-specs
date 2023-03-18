@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "subscriptionId": "433a8dfd-e5d5-4e77-ad86-90acdc75eb1a",
+    "resourceGroupName": "SampleResourceGroup",
+    "dataCatalogName": "Catalog1",
+    "classificationRuleName": "ClassificationRule1",
+    "api-version": "2022-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      },
+      "body": {
+        "id": "/subscriptions/12345678-1234-1234-12345678abc/resourceGroups/SampleResourceGroup/providers/Microsoft.DataCatalog/DataCatalogs/Catalog1/ClassificationRules/ClassificationRule1",
+        "name": "ClassificationRule1",
+        "kind": "Custom",
+        "properties": {
+          "minimumPercentageMatch": 80,
+          "classificationAction": "Keep",
+          "description": "second one",
+          "version": 4,
+          "classificationName": "CUSTOM.TEST.TWO",
+          "ruleStatus": "Enabled",
+          "createdAt": "2019-12-09T06:43:30.8478469Z",
+          "lastModifiedAt": "2019-12-09T07:04:53.2807344Z",
+          "dataPatterns": [
+            {
+              "kind": "Regex",
+              "pattern": "^data1$"
+            },
+            {
+              "kind": "Regex",
+              "pattern": "^data2$"
+            }
+          ],
+          "columnPatterns": [
+            {
+              "kind": "Regex",
+              "pattern": "^column1$"
+            }
+          ]
+        }
+      }
+    },
+    "204": {
+      "headers": {
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888"
+      }
+    }
+  }
+}

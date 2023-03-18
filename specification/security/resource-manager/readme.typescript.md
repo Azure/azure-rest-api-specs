@@ -8,6 +8,5 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-security"
   output-folder: "$(typescript-sdks-folder)/sdk/security/arm-security"
-  clear-output-folder: true
   generate-metadata: true
 ```

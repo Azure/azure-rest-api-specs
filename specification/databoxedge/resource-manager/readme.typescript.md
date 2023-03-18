@@ -10,7 +10,6 @@ typescript:
   payload-flattening-threshold: 0
   package-name: "@azure/arm-databoxedge"
   output-folder: "$(typescript-sdks-folder)/sdk/databoxedge/arm-databoxedge"
-  clear-output-folder: true
   generate-metadata: true
 ```
 
@@ -22,7 +21,6 @@ These settings apply only when `--profile-content=profile-hybrid-2020-09-01` is 
 typescript:
   package-name: "@azure/arm-databoxedge-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/databoxedge/arm-databoxedge-profile-2020-09-01-hybrid"
-  clear-output-folder: true
   azure-arm: true
   generate-metadata: true
   batch:

@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Security Center",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "title": "Microsoft Defender for Cloud",
+    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
     "version": "2020-01-01-preview"
   },
   "host": "management.azure.com",
@@ -218,7 +218,7 @@
     },
     "SecurityContact": {
       "type": "object",
-      "description": "Contact details and configurations for notifications coming from Azure Security Center.",
+      "description": "Contact details and configurations for notifications coming from Microsoft Defender for Cloud.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -238,7 +238,7 @@
       "properties": {
         "emails": {
           "type": "string",
-          "description": "List of email addresses which will get notifications from Azure Security Center by the configurations defined in this security contact."
+          "description": "List of email addresses which will get notifications from Microsoft Defender for Cloud by the configurations defined in this security contact."
         },
         "phone": {
           "type": "string",
@@ -301,11 +301,11 @@
         },
         "notificationsByRole": {
           "type": "object",
-          "description": "Defines whether to send email notifications from Azure Security Center to persons with specific RBAC roles on the subscription.",
+          "description": "Defines whether to send email notifications from Microsoft Defender for Cloud to persons with specific RBAC roles on the subscription.",
           "properties": {
             "state": {
               "type": "string",
-              "description": "Defines whether to send email notifications from Azure Security Center to persons with specific RBAC roles on the subscription.",
+              "description": "Defines whether to send email notifications from AMicrosoft Defender for Cloud to persons with specific RBAC roles on the subscription.",
               "enum": [
                 "On",
                 "Off"
@@ -327,7 +327,7 @@
             },
             "roles": {
               "type": "array",
-              "description": "Defines which RBAC roles will get email notifications from Azure Security Center. List of allowed RBAC roles: ",
+              "description": "Defines which RBAC roles will get email notifications from Microsoft Defender for Cloud. List of allowed RBAC roles: ",
               "items": {
                 "$ref": "#/definitions/SecurityContactRole"
               }

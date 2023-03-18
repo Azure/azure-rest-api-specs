@@ -1,0 +1,84 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-SouthEastAsia",
+    "serverName": "testsvr",
+    "databaseName": "testdw",
+    "api-version": "2021-08-01-preview",
+    "parameters": {
+      "location": "southeastasia",
+      "properties": {
+        "createMode": "PointInTimeRestore",
+        "sourceResourceId": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/srcsvr/databases/srcdw",
+        "restorePointInTime": "2022-01-22T05:35:31.503Z"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "DataWarehouse",
+          "tier": "DataWarehouse",
+          "capacity": 9000
+        },
+        "kind": "v12.0,user,datawarehouse,gen2",
+        "properties": {
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "maxSizeBytes": 263882790666240,
+          "status": "Online",
+          "databaseId": "188784c9-d602-4684-86cf-e67b6f03551a",
+          "creationDate": "2022-01-24T06:46:14.99Z",
+          "currentServiceObjectiveName": "DW1000c",
+          "requestedServiceObjectiveName": "DW1000c",
+          "defaultSecondaryLocation": "eastus",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "readScale": "Disabled",
+          "currentSku": {
+            "name": "DataWarehouse",
+            "tier": "DataWarehouse",
+            "capacity": 9000
+          },
+          "currentBackupStorageRedundancy": "Geo"
+        },
+        "location": "southeastasia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdw",
+        "name": "testdw",
+        "type": "Microsoft.Sql/servers/databases"
+      }
+    },
+    "201": {
+      "body": {
+        "sku": {
+          "name": "DataWarehouse",
+          "tier": "DataWarehouse",
+          "capacity": 9000
+        },
+        "kind": "v12.0,user,datawarehouse,gen2",
+        "properties": {
+          "collation": "SQL_Latin1_General_CP1_CI_AS",
+          "maxSizeBytes": 263882790666240,
+          "status": "Online",
+          "databaseId": "188784c9-d602-4684-86cf-e67b6f03551a",
+          "creationDate": "2022-01-24T06:46:14.99Z",
+          "currentServiceObjectiveName": "DW1000c",
+          "requestedServiceObjectiveName": "DW1000c",
+          "defaultSecondaryLocation": "eastus",
+          "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
+          "readScale": "Disabled",
+          "currentSku": {
+            "name": "DataWarehouse",
+            "tier": "DataWarehouse",
+            "capacity": 9000
+          },
+          "currentBackupStorageRedundancy": "Geo"
+        },
+        "location": "southeastasia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdw",
+        "name": "testdw",
+        "type": "Microsoft.Sql/servers/databases"
+      }
+    },
+    "202": {}
+  }
+}

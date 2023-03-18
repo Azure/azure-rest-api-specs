@@ -2,11 +2,21 @@
 
 These settings apply only when `--go` is specified on the command line.
 
-```yaml $(go)
+```yaml $(go) && !$(track2)
 go:
   license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
   namespace: softwareplan
+```
+
+The softwareplan has been retired and will not be supported by track2 go SDK.
+
+### Go multi-api
+
+``` yaml $(go) && $(multiapi)
+batch:
+  - tag: package-2019-12-01
+  - tag: package-2019-06-01-preview
 ```
 
 ### Tag: package-2019-06-01-preview and go

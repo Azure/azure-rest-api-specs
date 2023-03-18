@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "fa68082f-8ff7-4a25-95c7-ce9da541242f",
+    "resourceGroupName": "SdkRg5154",
+    "jobName": "SdkJob952",
+    "api-version": "2021-12-01",
+    "$expand": "details",
+    "x-ms-client-request-id": [
+      "ff3829ca-bcb0-4737-b6e0-52af57f34bb7"
+    ],
+    "Accept-Language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.29017.01",
+      "OSName/Windows",
+      "OSVersion/Microsoft.Windows.10.0.18363.",
+      "Microsoft.Azure.Management.DataBox.DataBoxManagementClient/1.1.0"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "Content-Length": [
+      "584"
+    ],
+    "jobResourceUpdateParameter": {
+      "properties": {
+        "details": {
+          "contactDetails": {
+            "contactName": "Update Job",
+            "phone": "1234567890",
+            "phoneExtension": "1234",
+            "emailList": [
+              "testing@microsoft.com"
+            ]
+          },
+          "shippingAddress": {
+            "streetAddress1": "16 TOWNSEND ST",
+            "streetAddress2": "Unit 1",
+            "city": "San Francisco",
+            "stateOrProvince": "CA",
+            "country": "US",
+            "postalCode": "94107",
+            "companyName": "Microsoft",
+            "addressType": "Commercial"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {},
+    "200": {
+      "body": {
+        "properties": {
+          "transferType": "ImportToAzure",
+          "isCancellable": true,
+          "isShippingAddressEditable": true,
+          "status": "DeviceOrdered",
+          "startTime": "2018-04-13T16:28:38.9999793+05:30"
+        },
+        "location": "westus",
+        "tags": {},
+        "sku": {
+          "name": "DataBox"
+        },
+        "name": "SdkJob952",
+        "id": "/subscriptions/fa68082f-8ff7-4a25-95c7-ce9da541242f/resourceGroups/SdkRg5154/providers/Microsoft.DataBox/jobs/SdkJob952",
+        "type": "Microsoft.DataBox/jobs"
+      }
+    }
+  }
+}

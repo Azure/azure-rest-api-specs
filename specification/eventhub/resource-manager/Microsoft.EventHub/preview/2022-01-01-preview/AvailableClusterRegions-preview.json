@@ -1,0 +1,100 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EventHubManagementClient",
+    "description": "Azure Event Hubs client for managing Event Hubs Cluster, IPFilter Rules and VirtualNetworkRules resources.",
+    "version": "2022-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/availableClusterRegions": {
+      "get": {
+        "tags": [
+          "Event Hubs Clusters AvailableClusterRegions"
+        ],
+        "operationId": "Clusters_ListAvailableClusterRegion",
+        "x-ms-examples": {
+          "ListAvailableClusters": {
+            "$ref": "./examples/Clusters/ListAvailableClustersGet.json"
+          }
+        },
+        "description": "List the quantity of available pre-provisioned Event Hubs Clusters, indexed by Azure region.",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available clusters listed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableClustersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why available clusters could not be successfully listed.",
+            "schema": {
+              "$ref": "../../../common/v2/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailableClustersList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableCluster"
+          },
+          "description": "The count of readily available and pre-provisioned Event Hubs Clusters per region."
+        }
+      },
+      "description": "The response of the List Available Clusters operation."
+    },
+    "AvailableCluster": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location fo the Available Cluster"
+        }
+      },
+      "description": "Pre-provisioned and readily available Event Hubs Cluster count per region."
+    }
+  },
+  "parameters": {}
+}

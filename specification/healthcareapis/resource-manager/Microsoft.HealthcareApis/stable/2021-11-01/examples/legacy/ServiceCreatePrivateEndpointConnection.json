@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2021-11-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rgname",
+    "resourceName": "service1",
+    "privateEndpointConnectionName": "myConnection",
+    "properties": {
+      "properties": {
+        "privateLinkServiceConnectionState": {
+          "status": "Approved",
+          "description": "Auto-Approved"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.HealthcareApis/services/service1/privateEndpointConnections/myConnection",
+        "name": "myConnection",
+        "type": "Microsoft.HealthcareApis/services/privateEndpointConnections",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpoint": {
+            "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/peexample01"
+          },
+          "privateLinkServiceConnectionState": {
+            "status": "Approved",
+            "description": "Auto-Approved",
+            "actionsRequired": "None"
+          }
+        }
+      }
+    }
+  }
+}

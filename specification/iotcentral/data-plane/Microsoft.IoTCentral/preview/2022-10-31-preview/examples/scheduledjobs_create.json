@@ -1,0 +1,52 @@
+{
+  "title": "Create a scheduled job definition",
+  "description": "Create a scheduled job definition.",
+  "parameters": {
+    "baseDomain": "azureiotcentral.com",
+    "subdomain": "appsubdomain",
+    "scheduledJobId": "newScheduledJobId",
+    "api-version": "2022-10-31-preview",
+    "body": {
+      "displayName": "New Scheduled Job",
+      "description": "",
+      "group": "ad86219f-d224-48ad-a29b-b593a4e4bb38",
+      "data": [
+        {
+          "type": "command",
+          "target": "dtmi:modelDefinition:test;1",
+          "path": "Reboot",
+          "value": null
+        }
+      ],
+      "schedule": {
+        "start": "2022-05-24T22:29:01Z",
+        "recurrence": "daily"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "newScheduledJobId",
+        "displayName": "New Scheduled Job",
+        "description": "",
+        "group": "ad86219f-d224-48ad-a29b-b593a4e4bb38",
+        "data": [
+          {
+            "type": "command",
+            "target": "dtmi:modelDefinition:bhmvjf0oj:k6ulbcbyndp",
+            "path": "Reboot",
+            "value": null
+          }
+        ],
+        "schedule": {
+          "start": "2022-05-24T22:29:01Z",
+          "recurrence": "daily"
+        },
+        "enabled": true,
+        "completed": false,
+        "etag": "\"970070b9-0000-0800-0000-628d554b0000\""
+      }
+    }
+  }
+}

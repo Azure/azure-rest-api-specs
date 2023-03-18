@@ -1,0 +1,372 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-01-01",
+    "title": "RecoveryServicesClient",
+    "x-ms-code-generation-settings": {
+      "internalConstructors": false
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/certificates/{certificateName}": {
+      "put": {
+        "tags": [
+          "VaultCertificates"
+        ],
+        "description": "Uploads a certificate for a resource.",
+        "operationId": "VaultCertificates_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "certificateName",
+            "in": "path",
+            "description": "Certificate friendly name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "certificateRequest",
+            "in": "body",
+            "description": "Input parameters for uploading the vault certificate.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CertificateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultCertificateResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Download vault credential file": {
+            "$ref": "./examples/PUTVaultCred.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/registeredIdentities/{identityName}": {
+      "delete": {
+        "tags": [
+          "RegisteredIdentities"
+        ],
+        "description": "Unregisters the given container from your Recovery Services vault.",
+        "operationId": "RegisteredIdentities_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "name": "identityName",
+            "in": "path",
+            "description": "Name of the protection container to unregister.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Delete registered Identity": {
+            "$ref": "./examples/DeleteRegisteredIdentities.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CertificateRequest": {
+      "description": "Details of the certificate to be uploaded to the vault.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RawCertificateData"
+        }
+      }
+    },
+    "RawCertificateData": {
+      "description": "Raw certificate data.",
+      "type": "object",
+      "properties": {
+        "authType": {
+          "description": "Specifies the authentication type.",
+          "enum": [
+            "Invalid",
+            "ACS",
+            "AAD",
+            "AccessControlService",
+            "AzureActiveDirectory"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AuthType",
+            "modelAsString": true
+          }
+        },
+        "certificate": {
+          "format": "byte",
+          "description": "The base64 encoded certificate raw data string",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceCertificateAndAadDetails": {
+      "description": "Certificate details representing the Vault credentials for AAD.",
+      "required": [
+        "certificate",
+        "resourceId",
+        "aadAuthority",
+        "aadTenantId",
+        "servicePrincipalClientId",
+        "servicePrincipalObjectId",
+        "azureManagementEndpointAudience",
+        "subject",
+        "validFrom",
+        "validTo",
+        "thumbprint",
+        "friendlyName",
+        "issuer"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCertificateDetails"
+        }
+      ],
+      "properties": {
+        "aadAuthority": {
+          "description": "AAD tenant authority.",
+          "type": "string"
+        },
+        "aadTenantId": {
+          "description": "AAD tenant Id.",
+          "type": "string"
+        },
+        "servicePrincipalClientId": {
+          "description": "AAD service principal clientId.",
+          "type": "string"
+        },
+        "servicePrincipalObjectId": {
+          "description": "AAD service principal ObjectId.",
+          "type": "string"
+        },
+        "azureManagementEndpointAudience": {
+          "description": "Azure Management Endpoint Audience.",
+          "type": "string"
+        },
+        "serviceResourceId": {
+          "description": "Service Resource Id.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AzureActiveDirectory"
+    },
+    "ResourceCertificateAndAcsDetails": {
+      "description": "Certificate details representing the Vault credentials for ACS.",
+      "required": [
+        "certificate",
+        "resourceId",
+        "globalAcsNamespace",
+        "globalAcsHostName",
+        "globalAcsRPRealm",
+        "subject",
+        "validFrom",
+        "validTo",
+        "thumbprint",
+        "friendlyName",
+        "issuer"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceCertificateDetails"
+        }
+      ],
+      "properties": {
+        "globalAcsNamespace": {
+          "description": "ACS namespace name - tenant for our service.",
+          "type": "string"
+        },
+        "globalAcsHostName": {
+          "description": "Acs mgmt host name to connect to.",
+          "type": "string"
+        },
+        "globalAcsRPRealm": {
+          "description": "Global ACS namespace RP realm.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "AccessControlService"
+    },
+    "ResourceCertificateDetails": {
+      "description": "Certificate details representing the Vault credentials.",
+      "required": [
+        "authType"
+      ],
+      "type": "object",
+      "properties": {
+        "authType": {
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "type": "string"
+        },
+        "certificate": {
+          "format": "byte",
+          "description": "The base64 encoded certificate raw data string.",
+          "type": "string"
+        },
+        "friendlyName": {
+          "description": "Certificate friendly name.",
+          "type": "string"
+        },
+        "issuer": {
+          "description": "Certificate issuer.",
+          "type": "string"
+        },
+        "resourceId": {
+          "format": "int64",
+          "description": "Resource ID of the vault.",
+          "type": "integer"
+        },
+        "subject": {
+          "description": "Certificate Subject Name.",
+          "type": "string"
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string"
+        },
+        "validFrom": {
+          "format": "date-time",
+          "description": "Certificate Validity start Date time.",
+          "type": "string"
+        },
+        "validTo": {
+          "format": "date-time",
+          "description": "Certificate Validity End Date time.",
+          "type": "string"
+        }
+      },
+      "discriminator": "authType"
+    },
+    "VaultCertificateResponse": {
+      "description": "Certificate corresponding to a vault that can be used by clients to register themselves with the vault.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Resource name associated with the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type represents the complete path of the form Namespace/ResourceType/ResourceType/...",
+          "type": "string",
+          "readOnly": true
+        },
+        "id": {
+          "description": "Resource Id represents the complete path to the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ResourceCertificateDetails"
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription Id.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group where the recovery services vault is present.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "VaultName": {
+      "name": "vaultName",
+      "in": "path",
+      "description": "The name of the recovery services vault.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string"
+    },
+    "ApiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client Api Version.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account."
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

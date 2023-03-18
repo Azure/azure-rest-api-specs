@@ -484,7 +484,8 @@
           "description": "Input to dashboard part.",
           "items": {
             "type": "object"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "settings": {
           "type": "object",
@@ -545,7 +546,8 @@
           "description": "The dashboard parts.",
           "items": {
             "$ref": "#/definitions/DashboardParts"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "description": "The dashboard len's metadata.",
@@ -565,7 +567,8 @@
           "description": "The dashboard lenses.",
           "items": {
             "$ref": "#/definitions/DashboardLens"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "metadata": {
           "description": "The dashboard metadata.",
@@ -652,6 +655,9 @@
           "items": {
             "$ref": "#/definitions/ResourceProviderOperation"
           },
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "List of operations supported by this resource provider."
         },
         "nextLink": {
@@ -727,6 +733,9 @@
           "items": {
             "$ref": "#/definitions/ErrorDefinition"
           },
+          "x-ms-identifiers": [
+            "code"
+          ],
           "readOnly": true
         }
       }

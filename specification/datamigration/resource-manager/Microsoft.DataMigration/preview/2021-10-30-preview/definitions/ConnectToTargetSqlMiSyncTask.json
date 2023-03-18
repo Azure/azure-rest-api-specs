@@ -1,0 +1,63 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Database Migration Service Resource Provider",
+    "version": "2021-10-30-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "ConnectToTargetSqlMISyncTaskInput": {
+      "type": "object",
+      "description": "Input for the task that validates connection to Azure SQL Database Managed Instance online scenario.",
+      "properties": {
+        "targetConnectionInfo": {
+          "$ref": "./Common.json#/definitions/MiSqlConnectionInfo",
+          "description": "Connection information for Azure SQL Database Managed Instance"
+        },
+        "azureApp": {
+          "description": "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account",
+          "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp"
+        }
+      },
+      "required": [
+        "targetConnectionInfo",
+        "azureApp"
+      ]
+    },
+    "ConnectToTargetSqlMISyncTaskOutput": {
+      "type": "object",
+      "description": "Output for the task that validates connection to Azure SQL Database Managed Instance.",
+      "properties": {
+        "targetServerVersion": {
+          "type": "string",
+          "description": "Target server version",
+          "readOnly": true
+        },
+        "targetServerBrandVersion": {
+          "type": "string",
+          "description": "Target server brand version",
+          "readOnly": true
+        },
+        "validationErrors": {
+          "description": "Validation errors",
+          "type": "array",
+          "items": {
+            "$ref": "./Common.json#/definitions/ReportableException"
+          },
+          "readOnly": true
+        }
+      }
+    }
+  }
+}

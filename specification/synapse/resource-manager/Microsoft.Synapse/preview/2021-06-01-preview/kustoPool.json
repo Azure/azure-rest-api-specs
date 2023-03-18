@@ -2299,6 +2299,54 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/kustoPools/{kustoPoolName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "KustoPoolPrivateLinkResources"
+        ],
+        "operationId": "KustoPoolPrivateLinkResources_List",
+        "x-ms-examples": {
+          "KustoPoolPrivateLinkResourcesList": {
+            "$ref": "./examples/KustoPoolPrivateLinkResourcesList.json"
+          }
+        },
+        "description": "Lists all Kusto pool PrivateLinkResources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/kustoPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResources"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
   },
   "definitions": {
@@ -2619,7 +2667,11 @@
         },
         "workspaceUID": {
           "type": "string",
-          "description": "The workspace unique identifier."
+          "description": "The workspace unique identifier.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         }
       },
       "description": "Class representing the Kusto pool properties."
@@ -2950,6 +3002,74 @@
           "type": "boolean",
           "readOnly": true,
           "description": "Indicates whether the database is followed."
+        }
+      },
+      "description": "Class representing the Kusto database properties."
+    },
+    "ReadOnlyFollowingDatabase": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The database properties.",
+          "$ref": "#/definitions/ReadOnlyFollowingDatabaseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Database"
+        }
+      ],
+      "description": "Class representing a read only following database.",
+      "x-ms-discriminator-value": "ReadOnlyFollowing"
+    },
+    "ReadOnlyFollowingDatabaseProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "readOnly": true,
+          "description": "The provisioned state of the resource."
+        },
+        "softDeletePeriod": {
+          "type": "string",
+          "readOnly": true,
+          "format": "duration",
+          "description": "The time the data should be kept before it stops being accessible to queries in TimeSpan."
+        },
+        "hotCachePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time the data should be kept in cache for fast queries in TimeSpan."
+        },
+        "statistics": {
+          "$ref": "#/definitions/DatabaseStatistics",
+          "readOnly": true,
+          "description": "The statistics of the database."
+        },
+        "leaderClusterResourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the leader cluster"
+        },
+        "attachedDatabaseConfigurationName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the attached database configuration cluster"
+        },
+        "principalsModificationKind": {
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Union",
+            "Replace",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "PrincipalsModificationKind",
+            "modelAsString": true
+          },
+          "description": "The principals modification kind of the database"
         }
       },
       "description": "Class representing the Kusto database properties."
@@ -3527,6 +3647,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
           "description": "The provisioned state of the resource."
+        },
+        "aadObjectId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The service principal object id in AAD (Azure active directory)"
         }
       },
       "description": "A class representing cluster principal property."
@@ -3649,6 +3774,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ResourceProvisioningState",
           "description": "The provisioned state of the resource."
+        },
+        "aadObjectId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The service principal object id in AAD (Azure active directory)"
         }
       },
       "description": "A class representing database principal property."
@@ -3796,6 +3926,72 @@
           "description": "The collection of available SKUs for an existing resource."
         }
       }
+    },
+    "PrivateLinkResources": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KustoPoolPrivateLinkResources"
+          },
+          "description": "The list of Kusto Private Link Resources."
+        }
+      },
+      "description": "The list Kusto Private Link Resources operation response."
+    },
+    "KustoPoolPrivateLinkResources": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateLinkResourcesProperties",
+          "description": "The Private Link Resources."
+        },
+        "systemData": {
+          "readOnly": true,
+          "type": "object",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/systemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing a Private Link Resources."
+    },
+    "PrivateLinkResourcesProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Private link resources GroupId"
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "description": "The private link resource required zone names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ResourceProvisioningState",
+          "description": "The provisioned state of the resource."
+        }
+      },
+      "description": "Private Link Resources Properties."
     }
   },
   "parameters": {

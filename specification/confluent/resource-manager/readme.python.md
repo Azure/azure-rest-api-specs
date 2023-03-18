@@ -15,12 +15,7 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update'
+``` yaml $(python)
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/confluent/azure-mgmt-confluent/azure/mgmt/confluent
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/confluent/azure-mgmt-confluent
 ```
