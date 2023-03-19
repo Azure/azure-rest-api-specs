@@ -1,11 +1,11 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/openapi";
-import "../healthinsights.trialmatcher/route.trialmatcher.cadl";
-import "../healthinsights.oncophenotype/route.oncophenotype.cadl";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "../healthinsights.trialmatcher/route.trialmatcher.tsp";
+import "../healthinsights.oncophenotype/route.oncophenotype.tsp";
 
-using Cadl.Rest;
-using Cadl.Http;
-using Cadl.Versioning;
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 using OpenAPI;
 
 @service({title: "Azure Health Insights"})

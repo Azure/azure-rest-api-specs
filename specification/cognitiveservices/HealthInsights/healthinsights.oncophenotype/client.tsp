@@ -1,7 +1,7 @@
-import "../healthinsights.autorest/main.cadl";
-import "@azure-tools/cadl-dpg";
+import "../healthinsights.openapi/main.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
-using Azure.DPG;
+using Azure.ClientGenerator.Core;
 
 namespace ClientForAzureHealthInsights;
 

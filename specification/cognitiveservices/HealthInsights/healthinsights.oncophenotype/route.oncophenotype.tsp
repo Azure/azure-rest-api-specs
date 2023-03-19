@@ -1,12 +1,12 @@
-import "@azure-tools/cadl-azure-core";
-import "@azure-tools/cadl-autorest";
-import "@cadl-lang/openapi";
-import "./model.oncophenotype.cadl";
-import "../healthinsights.common/primitives.cadl";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-autorest";
+import "@typespec/openapi";
+import "./model.oncophenotype.tsp";
+import "../healthinsights.common/primitives.tsp";
 
 using Azure.Core;
-using Cadl.Rest;
-using Cadl.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 using Autorest;
 
 namespace AzureHealthInsights;

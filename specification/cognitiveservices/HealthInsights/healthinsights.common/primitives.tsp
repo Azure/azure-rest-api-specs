@@ -1,7 +1,7 @@
-import "@cadl-lang/rest";
+import "@typespec/rest";
 
 using Azure.Core;
-using Cadl.Http;
+using TypeSpec.Http;
 namespace AzureHealthInsights;
 
 @doc("Long running RPC operation template")
