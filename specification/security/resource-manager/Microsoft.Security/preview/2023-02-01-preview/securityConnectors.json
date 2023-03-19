@@ -406,7 +406,7 @@
     },
     "AwsEnvironmentData": {
       "type": "object",
-      "description": "The aws connector environment data",
+      "description": "The AWS connector environment data",
       "x-ms-discriminator-value": "AwsAccount",
       "allOf": [
         {
@@ -424,7 +424,7 @@
           "description": "list of regions to scan",
           "items": {
             "type": "string",
-            "description": "aws regions names"
+            "description": "AWS regions names"
           }
         },
         "accountName": {
@@ -436,7 +436,7 @@
     },
     "AwsOrganizationalData": {
       "type": "object",
-      "description": "The awsOrganization data ",
+      "description": "The AWS Organization data",
       "discriminator": "organizationMembershipType",
       "required": [
         "organizationMembershipType"
@@ -458,7 +458,7 @@
     },
     "AwsOrganizationalDataMaster": {
       "type": "object",
-      "description": "The awsOrganization data for the master account",
+      "description": "The AWS Organization data for the master account",
       "x-ms-discriminator-value": "Organization",
       "allOf": [
         {
@@ -482,7 +482,7 @@
     },
     "AwsOrganizationalDataMember": {
       "type": "object",
-      "description": "The awsOrganization data for the member account",
+      "description": "The AWS Organization data for the member account",
       "x-ms-discriminator-value": "Member",
       "allOf": [
         {
@@ -841,7 +841,7 @@
               "properties": {
                 "proxy": {
                   "type": "string",
-                  "description": "Optional http proxy endpoint to use for the Arc agent"
+                  "description": "Optional HTTP proxy endpoint to use for the Arc agent"
                 },
                 "privateLinkScope": {
                   "type": "string",
@@ -930,7 +930,7 @@
                 },
                 "scanningMode": {
                   "type": "string",
-                  "description": "The scanning mode for the vm scan.",
+                  "description": "The scanning mode for the VM scan.",
                   "enum": [
                     "Default"
                   ],
@@ -1191,7 +1191,7 @@
               "properties": {
                 "scanningMode": {
                   "type": "string",
-                  "description": "The scanning mode for the vm scan.",
+                  "description": "The scanning mode for the VM scan.",
                   "enum": [
                     "Default"
                   ],
@@ -1339,7 +1339,7 @@
     },
     "defenderCspmAwsOffering": {
       "type": "object",
-      "description": "The CSPM P1 for Aws offering",
+      "description": "The CSPM P1 for AWS offering",
       "x-ms-discriminator-value": "DefenderCspmAws",
       "allOf": [
         {
@@ -1365,7 +1365,7 @@
                 },
                 "scanningMode": {
                   "type": "string",
-                  "description": "The scanning mode for the vm scan.",
+                  "description": "The scanning mode for the VM scan.",
                   "enum": [
                     "Default"
                   ],
