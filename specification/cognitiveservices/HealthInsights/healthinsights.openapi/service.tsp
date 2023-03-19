@@ -1,4 +1,4 @@
-# imports to rest, http and versioning should be done outside of this file (csharp emitter issue)
+// imports to rest,http and versioning should be done outside of this file (csharp emitter issue)
 
 import "@typespec/rest";
 import "@typespec/http";
