@@ -1,4 +1,3 @@
-import "@typespec/rest";
 import "../healthinsights.common/model.common.request.tsp";
 import "../healthinsights.common/model.common.response.tsp";
 import "../healthinsights.common/model.common.shared.tsp";
@@ -82,22 +81,6 @@ The bio-medical category related to the coded concept, e.g. Diagnosis, Symptom, 
   category?: string;
 }
 
-@doc("A piece of evidence from a clinical note (text document).")
-model ClinicalNoteEvidence {
-  @doc("The identifier of the document containing the evidence.")
-  id: string;
-
-  @doc("The actual text span which is evidence for the inference.")
-  text?: string;
-
-  @doc("The start index of the evidence text span in the document (0 based).")
-  @minValue(0)
-  offset: int32;
-
-  @doc("The length of the evidence text span.")
-  @minValue(1)
-  length: int32;
-}
 
 @doc("An inference made by the Trial Matcher model regarding a patient.")
 model TrialMatcherInference {

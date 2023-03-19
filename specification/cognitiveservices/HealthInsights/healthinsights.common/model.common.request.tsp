@@ -1,4 +1,3 @@
-import "@typespec/rest";
 import "./model.common.shared.tsp";
 
 using TypeSpec.Rest;

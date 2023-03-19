@@ -1,12 +1,8 @@
-import "@typespec/rest";
-import "@typespec/openapi";
 import "../healthinsights.trialmatcher/route.trialmatcher.tsp";
 import "../healthinsights.oncophenotype/route.oncophenotype.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
-using OpenAPI;
+using TypeSpec.Http;
 
 @service({title: "Azure Health Insights"})
 @versioned(ApiVersion)

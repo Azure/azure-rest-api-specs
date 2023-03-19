@@ -1,4 +1,3 @@
-import "@typespec/rest";
 import "./model.common.shared.tsp";
 
 using TypeSpec.Rest;
@@ -46,6 +45,23 @@ model Inference {
   @minValue(0)
   @maxValue(1)
   confidenceScore?: float32;
+}
+
+@doc("A piece of evidence from a clinical note (text document).")
+model ClinicalNoteEvidence {
+  @doc("The identifier of the document containing the evidence.")
+  id: string;
+
+  @doc("The actual text span which is evidence for the inference.")
+  text?: string;
+
+  @doc("The start index of the evidence text span in the document (0 based).")
+  @minValue(0)
+  offset: int32;
+
+  @doc("The length of the evidence text span.")
+  @minValue(1)
+  length: int32;
 }
 
 @doc("A piece of evidence corresponding to an inference.")

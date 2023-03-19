@@ -1,4 +1,3 @@
-import "@typespec/rest";
 import "../healthinsights.common/model.common.request.tsp";
 import "../healthinsights.common/model.common.response.tsp";
 import "../healthinsights.common/model.common.shared.tsp";

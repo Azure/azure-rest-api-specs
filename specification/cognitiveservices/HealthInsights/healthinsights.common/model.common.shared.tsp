@@ -1,5 +1,3 @@
-import "@typespec/rest";
-
 using TypeSpec.Rest;
 
 namespace AzureHealthInsights;
