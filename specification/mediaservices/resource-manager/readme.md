@@ -26,7 +26,7 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-account-2023-01
+tag: package-metadata-2023-01
 opt-in-extensible-enums: true
 ```
 
@@ -62,6 +62,35 @@ directive:
     from: Accounts.json
 ```
 
+### Tag: package-metadata-2023-01
+
+These settings apply only when `--tag=package-metadata-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-metadata-2023-01'
+input-file:
+  - Microsoft.Media/Metadata/stable/2023-01-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2023-01-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-11-01/streamingservice.json
+```
+
+### Tag: package-2023-01
+
+These settings apply only when `--tag=package-2023-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-01'
+input-file:
+  - Microsoft.Media/Metadata/stable/2023-01-01/AccountFilters.json
+  - Microsoft.Media/Accounts/stable/2023-01-01/Accounts.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/AssetsAndAssetFilters.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/ContentKeyPolicies.json
+  - Microsoft.Media/Encoding/stable/2022-07-01/Encoding.json
+  - Microsoft.Media/Metadata/stable/2023-01-01/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/Streaming/stable/2022-08-01/streamingservice.json
+```
 
 ### Tag: package-account-2023-01
 
@@ -77,6 +106,7 @@ input-file:
   - Microsoft.Media/Metadata/stable/2022-08-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/Streaming/stable/2022-11-01/streamingservice.json
 ```
+
 ### Tag: package-streaming-2022-11
 
 These settings apply only when `--tag=package-streaming-2022-11` is specified on the command line.
