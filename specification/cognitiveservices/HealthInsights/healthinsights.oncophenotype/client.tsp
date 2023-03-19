@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
-import "../healthinsights.openapi/main.tsp";
+import "../healthinsights.openapi/service.tsp";
+import "./route.oncophenotype.tsp";
 
 using Azure.ClientGenerator.Core;
 
