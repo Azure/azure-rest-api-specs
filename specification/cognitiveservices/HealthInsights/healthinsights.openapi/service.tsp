@@ -1,9 +1,12 @@
 
-import "@typespec/versioning";
+import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 
-using TypeSpec.Versioning;
+using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
+
 
 @service({title: "Azure Health Insights"})
 @versioned(ApiVersion)
