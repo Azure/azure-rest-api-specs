@@ -60,25 +60,31 @@
               "ruleCollectionType": "FirewallPolicyFilterRuleCollection",
               "name": "Example-Filter-Rule-Collection",
               "action": {
-                "type": "Deny"
+                "type": "Allow"
               },
               "rules": [
                 {
                   "ruleType": "ApplicationRule",
                   "name": "rule1",
-                  "description": "Deny inbound rule",
+                  "description": "Insert HTTP header rule",
                   "protocols": [
                     {
-                      "protocolType": "Https",
-                      "port": 443
+                      "protocolType": "Http",
+                      "port": 80
                     }
                   ],
                   "sourceAddresses": [
                     "216.58.216.164",
                     "10.0.0.0/24"
                   ],
-                  "webCategories": [
-                    "Hacking"
+                  "fqdnTags": [
+                    "WindowsVirtualDesktop"
+                  ],
+                  "httpHeadersToInsert": [
+                    {
+                        "HeaderName": "Restrict-Access-To-Tenants",
+                        "HeaderValue": "contoso.com,fabrikam.onmicrosoft.com"
+                    }
                   ]
                 }
               ]
@@ -106,19 +112,25 @@
                 {
                   "ruleType": "ApplicationRule",
                   "name": "rule1",
-                  "description": "Deny inbound rule",
+                  "description": "Insert HTTP header rule",
                   "protocols": [
                     {
-                      "protocolType": "Https",
-                      "port": 443
+                      "protocolType": "Http",
+                      "port": 80
                     }
                   ],
                   "sourceAddresses": [
                     "216.58.216.164",
                     "10.0.0.0/24"
                   ],
-                  "webCategories": [
-                    "Hacking"
+                  "fqdnTags": [
+                    "WindowsVirtualDesktop"
+                  ],
+                  "httpHeadersToInsert": [
+                    {
+                        "HeaderName": "Restrict-Access-To-Tenants",
+                        "HeaderValue": "contoso.com,fabrikam.onmicrosoft.com"
+                    }
                   ]
                 }
               ]
