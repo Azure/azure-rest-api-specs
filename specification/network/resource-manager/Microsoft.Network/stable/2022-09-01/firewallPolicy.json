@@ -1292,6 +1292,14 @@
             "type": "string"
           },
           "x-ms-identifiers": []
+        },
+        "httpHeadersToInsert": {
+          "type": "array",
+          "description": "List of HTTP/S headers to insert.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyHttpHeaderToInsert"
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "Rule of type application."
@@ -2154,6 +2162,20 @@
             "type": "string"
           }
         }
+      }
+    },
+    "FirewallPolicyHttpHeaderToInsert": {
+      "description": "name and value of HTTP/S header to insert",
+      "type": "object",
+      "properties": {
+        "headerName": {
+          "description": "Contains the name of the header",
+          "type": "string"
+        },
+        "headerValue": {
+          "description": "Contains the value of the header",
+          "type": "string"
+       }
       }
     }
   }
