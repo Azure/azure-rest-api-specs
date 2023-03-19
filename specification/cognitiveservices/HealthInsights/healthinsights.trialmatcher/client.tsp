@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-client-generator-core";
 import "../healthinsights.openapi/main.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -8,6 +9,6 @@ namespace ClientForAzureHealthInsights;
     name: "ClinicalMatchingClient",
     service: AzureHealthInsights
 })
-interface ClinicalMatchingClient {
+  interface ClinicalMatchingClient {
   MatchTrials is AzureHealthInsights.TrialMatcher.CreateJob;
 }

@@ -1,3 +1,8 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-autorest";
+import "@typespec/rest";
+import "@typespec/http";
+
 import "./model.trialmatcher.tsp";
 import "../healthinsights.common/primitives.tsp";
 

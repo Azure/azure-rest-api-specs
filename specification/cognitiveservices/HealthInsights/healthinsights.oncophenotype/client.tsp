@@ -1,14 +1,14 @@
+import "@azure-tools/typespec-client-generator-core";
 import "../healthinsights.openapi/main.tsp";
 
 using Azure.ClientGenerator.Core;
 
 namespace ClientForAzureHealthInsights;
 
-
 @client({
-  name: "CancerProfilingClient",
-  service: AzureHealthInsights
-  })
+    name: "CancerProfilingClient",
+    service: AzureHealthInsights
+})
   interface CancerProfilingClient {
-    InferCancerProfile is AzureHealthInsights.OncoPhenotype.CreateJob;
-  }
+  InferCancerProfile is AzureHealthInsights.OncoPhenotype.CreateJob;
+}
