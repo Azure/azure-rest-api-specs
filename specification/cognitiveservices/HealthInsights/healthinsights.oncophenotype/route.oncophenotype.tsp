@@ -1,6 +1,3 @@
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-autorest";
-import "@typespec/openapi";
 import "./model.oncophenotype.tsp";
 import "../healthinsights.common/primitives.tsp";
 
