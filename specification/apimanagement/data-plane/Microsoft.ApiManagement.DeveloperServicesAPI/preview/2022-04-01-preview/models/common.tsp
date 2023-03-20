@@ -4,14 +4,20 @@ using TypeSpec.Http;
 
 namespace DeveloperServicesAPI.Models;
 
+//API response for 200 with content
+alias ApiResponse<T> = T | ErrorResponse;
+
+//API response for 201 with content
+alias CreatedApiResponse<T> = Created<T> | ErrorResponse;
+
 @doc("Collection object for listing operations.")
 model Collection<T> {
+  @doc("Relative URL to next page of collection.")
   nextLink: string;
+
+  @doc("Collection itself.")
   value: T[];
 }
-
-alias ApiResponse<T> = T | ErrorResponse;
-alias CreatedApiResponse<T> = Created<T> | ErrorResponse;
 
 model Created<T> {
   @statusCode statusCode: 201;
@@ -20,21 +26,36 @@ model Created<T> {
 
 @doc("List operations' default parameters.")
 model ListParams {
-  @query skip?: int32;
-  @query @maxValue(100) top?: int32;
-  @query filter?: string;
+  @doc("Number of element to skip.")
+  @query
+  skip?: int32;
+
+  @doc("Number of element to take from the top.")
+  @query
+  @maxValue(100)
+  top?: int32;
+
+  @doc("OData filter query option.")
+  @query
+  filter?: string;
 }
 
 @error
-@doc("Error response.")
+@doc("Error response object.")
 model ErrorResponse {
+  @doc("Error itself.")
   error: Error;
 }
 
 @doc("Error.")
 model Error {
+  @doc("Error code.")
   code: string;
+
+  @doc("Error message.")
   message: string;
+
+  @doc("Error details if exists.")
   details?: string;
 }
 
