@@ -3,7 +3,10 @@
   "info": {
     "title": "Quantum Client",
     "description": "Azure Quantum REST API client",
-    "version": "2021-11-01-preview"
+    "version": "2022-09-12-preview",
+    "contact": {
+      "email": "azqengg@microsoft.com"
+    }
   },
   "host": "quantum.azure.com",
   "schemes": [
@@ -15,12 +18,33 @@
   "produces": [
     "application/json"
   ],
+  "securityDefinitions": {
+    "AzureAuth": {
+      "type": "oauth2",
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+      "flow": "application",
+      "description": "Azure Active Directory OAuth2 Authentication",
+      "scopes": {
+        "<audience>/.default": "client credential scope"
+      }
+    }
+  },
+  "security": [
+    {
+      "AzureAuth": [
+        "<audience>/.default"
+      ]
+    }
+  ],
   "paths": {
-    "/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs": {
       "get": {
         "operationId": "Jobs_List",
         "description": "List jobs.",
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -37,6 +61,12 @@
             "schema": {
               "$ref": "#/definitions/JobDetailsList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            }
           }
         },
         "x-ms-examples": {
@@ -49,11 +79,14 @@
         }
       }
     },
-    "/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/jobs/{jobId}": {
       "get": {
         "operationId": "Jobs_Get",
         "description": "Get job by id",
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -91,6 +124,9 @@
         "operationId": "Jobs_Create",
         "description": "Create a job.",
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -144,6 +180,9 @@
         "description": "Cancel a job.",
         "parameters": [
           {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
@@ -177,6 +216,9 @@
         "operationId": "Jobs_Patch",
         "description": "Patch a job.",
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -223,11 +265,14 @@
         }
       }
     },
-    "/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/providerStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/providerStatus": {
       "get": {
         "operationId": "Providers_GetStatus",
         "description": "Get provider status.",
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -262,11 +307,14 @@
         }
       }
     },
-    "/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/storage/sasUri": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/storage/sasUri": {
       "post": {
         "operationId": "Storage_SasUri",
         "description": "Gets a URL with SAS token for a container/blob in the storage account associated with the workspace. The SAS URL can be used to upload job input and/or download job output.",
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -307,11 +355,14 @@
         }
       }
     },
-    "/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/quotas": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/quotas": {
       "get": {
         "operationId": "Quotas_List",
         "description": "List quotas for the given workspace.",
         "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
           },
@@ -345,27 +396,384 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions": {
+      "get": {
+        "operationId": "Sessions_List",
+        "description": "List sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SessionDetailsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of sessions in a Quantum Workspace": {
+            "$ref": "./examples/sessionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}": {
+      "get": {
+        "operationId": "Sessions_Get",
+        "description": "Get session by id",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sessionIdParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Get a session's metadata": {
+            "$ref": "./examples/sessionGet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Sessions_Open",
+        "description": "Open a session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sessionIdParameter"
+          },
+          {
+            "name": "session",
+            "description": "The complete metadata of the session to be opened.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          }
+        ],
+        "x-ms-examples": {
+          "Open a new session in the Quantum Workspace": {
+            "$ref": "./examples/sessionPut.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}:close": {
+      "post": {
+        "operationId": "Sessions_Close",
+        "description": "Close a session",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sessionIdParameter"
+          }
+        ],
+        "x-ms-examples": {
+          "Close a session": {
+            "$ref": "./examples/sessionClose.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SessionDetails"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/sessions/{sessionId}/jobs": {
+      "get": {
+        "operationId": "Sessions_JobsList",
+        "description": "List jobs in a session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/sessionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/JobDetailsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of jobs in a session": {
+            "$ref": "./examples/sessionJobsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Quantum/workspaces/{workspaceName}/topLevelItems": {
+      "get": {
+        "operationId": "TopLevelItems_List",
+        "description": "List top-level items.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ItemDetailsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/RestError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of top-level items": {
+            "$ref": "./examples/topLevelItemsList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
-    "JobDetailsList": {
-      "description": "List of job details.",
+    "ItemDetailsList": {
+      "description": "List of item details.",
+      "type": "object",
       "properties": {
         "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ItemDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ItemDetails": {
+      "description": "Item details. An item can be a job or a session.",
+      "type": "object",
+      "discriminator": "itemType",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the item."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes."
+        },
+        "providerId": {
+          "type": "string",
+          "description": "The unique identifier for the provider."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target identifier to run the job."
+        },
+        "itemType": {
+          "type": "string",
+          "description": "The type of item.",
+          "enum": [
+            "Job",
+            "Session"
+          ],
+          "x-ms-enum": {
+            "name": "ItemType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Job",
+                "description": "A program, problem, or application submitted for processing."
+              },
+              {
+                "value": "Session",
+                "description": "A logical grouping of jobs."
+              }
+            ]
+          }
+        },
+        "creationTime": {
+          "type": "string",
           "readOnly": true,
+          "format": "date-time",
+          "description": "The creation time of the item."
+        },
+        "beginExecutionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time when the item began execution."
+        },
+        "endExecutionTime": {
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time",
+          "description": "The time when the item finished execution."
+        },
+        "costEstimate": {
+          "$ref": "#/definitions/CostEstimate"
+        },
+        "errorData": {
+          "$ref": "#/definitions/ErrorData"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "providerId",
+        "target",
+        "itemType"
+      ]
+    },
+    "JobDetailsList": {
+      "description": "List of job details.",
+      "type": "object",
+      "properties": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/JobDetails"
           }
         },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total records count number."
-        },
         "nextLink": {
           "type": "string",
-          "readOnly": true,
           "description": "Link to the next page of results."
         }
       }
@@ -373,14 +781,30 @@
     "JobDetails": {
       "description": "Job details.",
       "type": "object",
+      "x-ms-discriminator-value": "Job",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemDetails"
+        }
+      ],
       "properties": {
-        "id": {
+        "jobType": {
           "type": "string",
-          "description": "The job id."
+          "description": "The type of job.",
+          "enum": [
+            "Unknown",
+            "QuantumComputing",
+            "Optimization"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "JobType",
+            "modelAsString": true
+          }
         },
-        "name": {
+        "sessionId": {
           "type": "string",
-          "description": "The job name. Is not required for the name to be unique and it's only used for display purposes."
+          "description": "The ID of the session that the job is part of."
         },
         "containerUri": {
           "type": "string",
@@ -398,33 +822,9 @@
           "type": "object",
           "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data."
         },
-        "providerId": {
-          "type": "string",
-          "description": "The unique identifier for the provider."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target identifier to run the job."
-        },
-        "metadata": {
-          "type": "object",
-          "x-nullable": true,
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The job metadata. Metadata provides client the ability to store client-specific information"
-        },
-        "outputDataUri": {
-          "type": "string",
-          "description": "The output blob SAS uri. When a job finishes successfully, results will be uploaded to this blob."
-        },
-        "outputDataFormat": {
-          "type": "string",
-          "description": "The format of the output data."
-        },
         "status": {
           "type": "string",
-          "description": "The job status.",
+          "description": "The status of the job.",
           "readOnly": true,
           "enum": [
             "Waiting",
@@ -438,48 +838,32 @@
             "modelAsString": true
           }
         },
-        "creationTime": {
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time",
-          "description": "The creation time of the job."
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The job metadata. Metadata provides client the ability to store client-specific information"
         },
-        "beginExecutionTime": {
+        "outputDataUri": {
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true,
-          "format": "date-time",
-          "description": "The time when the job began execution."
+          "description": "The output blob SAS uri. When a job finishes successfully, results will be uploaded to this blob."
         },
-        "endExecutionTime": {
+        "outputDataFormat": {
           "type": "string",
-          "readOnly": true,
-          "x-nullable": true,
-          "format": "date-time",
-          "description": "The time when the job finished execution."
+          "description": "The format of the output data."
         },
         "cancellationTime": {
           "type": "string",
           "readOnly": true,
-          "x-nullable": true,
           "format": "date-time",
           "description": "The time when a job was successfully cancelled."
         },
-        "costEstimate": {
-          "$ref": "#/definitions/CostEstimate",
-          "readOnly": true,
-          "x-nullable": true,
-          "description": "The job cost billed by the provider. The final cost on your bill might be slightly different due to added taxes and currency conversion rates."
-        },
-        "errorData": {
-          "$ref": "#/definitions/ErrorData",
-          "readOnly": true,
-          "x-nullable": true,
-          "description": "The error data for the job. This is expected only when Status 'Failed'."
+        "quantumComputingData": {
+          "$ref": "#/definitions/QuantumComputingData"
         },
         "tags": {
           "type": "array",
-          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -488,10 +872,88 @@
       },
       "required": [
         "containerUri",
-        "inputDataFormat",
-        "providerId",
-        "target"
+        "inputDataFormat"
       ]
+    },
+    "SessionDetailsList": {
+      "description": "List of session details.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SessionDetails"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next page of results."
+        }
+      }
+    },
+    "SessionDetails": {
+      "description": "Session details.",
+      "type": "object",
+      "x-ms-discriminator-value": "Session",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ItemDetails"
+        }
+      ],
+      "properties": {
+        "jobFailurePolicy": {
+          "type": "string",
+          "description": "Policy controlling the behavior of the Session when a job in the session fails.",
+          "enum": [
+            "Abort",
+            "Continue"
+          ],
+          "default": "Abort",
+          "x-ms-enum": {
+            "name": "SessionJobFailurePolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Abort",
+                "description": "New jobs submitted after a job fails will be rejected. "
+              },
+              {
+                "value": "Continue",
+                "description": "New jobs submitted after a job fails will be accepted."
+              }
+            ]
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the session.",
+          "readOnly": true,
+          "enum": [
+            "Waiting",
+            "Executing",
+            "Succeeded",
+            "Failed",
+            "Failure(s)",
+            "TimedOut"
+          ],
+          "x-ms-enum": {
+            "name": "SessionStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "QuantumComputingData": {
+      "description": "Quantum computing data.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of quantum computing items in the job."
+        }
+      }
     },
     "BlobDetails": {
       "description": "Blob details.",
@@ -522,9 +984,9 @@
     },
     "ProviderStatusList": {
       "description": "Providers status.",
+      "type": "object",
       "properties": {
         "value": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ProviderStatus"
@@ -532,22 +994,20 @@
         },
         "nextLink": {
           "type": "string",
-          "readOnly": true,
           "description": "Link to the next page of results."
         }
       }
     },
     "ProviderStatus": {
       "description": "Providers status.",
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "readOnly": true,
           "description": "Provider id."
         },
         "currentAvailability": {
           "type": "string",
-          "readOnly": true,
           "description": "Provider availability.",
           "enum": [
             "Available",
@@ -560,7 +1020,6 @@
           }
         },
         "targets": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/TargetStatus"
@@ -570,15 +1029,14 @@
     },
     "TargetStatus": {
       "description": "Target status.",
+      "type": "object",
       "properties": {
         "id": {
           "type": "string",
-          "readOnly": true,
           "description": "Target id."
         },
         "currentAvailability": {
           "type": "string",
-          "readOnly": true,
           "description": "Target availability.",
           "enum": [
             "Available",
@@ -593,21 +1051,19 @@
         "averageQueueTime": {
           "type": "integer",
           "format": "int64",
-          "readOnly": true,
           "description": "Average queue time in seconds."
         },
         "statusPage": {
           "type": "string",
-          "readOnly": true,
           "description": "A page with detailed status of the provider."
         }
       }
     },
     "QuotaList": {
       "description": "List of quotas.",
+      "type": "object",
       "properties": {
         "value": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/Quota"
@@ -615,7 +1071,6 @@
         },
         "nextLink": {
           "type": "string",
-          "readOnly": true,
           "description": "Link to the next page of results."
         }
       }
@@ -671,6 +1126,8 @@
       }
     },
     "CostEstimate": {
+      "description": "The job cost billed by the provider. The final cost on your bill might be slightly different due to added taxes and currency conversion rates.",
+      "type": "object",
       "properties": {
         "currencyCode": {
           "type": "string",
@@ -687,10 +1144,11 @@
           "type": "number",
           "description": "The estimated total."
         }
-      },
-      "description": "The job cost billed by the provider. The final cost on your bill might be slightly different due to added taxes and currency conversion rates."
+      }
     },
     "UsageEvent": {
+      "description": "Usage event details.",
+      "type": "object",
       "properties": {
         "dimensionId": {
           "type": "string",
@@ -716,19 +1174,23 @@
           "type": "number",
           "description": "The unit price."
         }
-      },
-      "description": "Usage event details."
+      }
     },
     "RestError": {
-      "type": "object",
       "description": "Error information returned by the API",
+      "type": "object",
       "properties": {
         "error": {
           "$ref": "#/definitions/ErrorData"
         }
-      }
+      },
+      "required": [
+        "error"
+      ]
     },
     "ErrorData": {
+      "description": "An error response from Azure.",
+      "type": "object",
       "properties": {
         "code": {
           "type": "string",
@@ -739,7 +1201,10 @@
           "description": "A message describing the error, intended to be suitable for displaying in a user interface."
         }
       },
-      "description": "An error response from Azure."
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "PatchRequest": {
       "type": "array",
@@ -749,6 +1214,7 @@
     },
     "JsonPatchDocument": {
       "description": "A JSONPatch document as defined by RFC 6902",
+      "type": "object",
       "required": [
         "op",
         "path"
@@ -786,6 +1252,14 @@
     }
   },
   "parameters": {
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The client API version.",
+      "required": true,
+      "x-ms-parameter-location": "client",
+      "type": "string"
+    },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
@@ -815,8 +1289,20 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "maxLength": 36,
       "x-ms-parameter-location": "method",
       "description": "Id of the job."
+    },
+    "sessionIdParameter": {
+      "name": "sessionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "maxLength": 36,
+      "x-ms-parameter-location": "method",
+      "description": "Id of the session."
     }
   }
 }
