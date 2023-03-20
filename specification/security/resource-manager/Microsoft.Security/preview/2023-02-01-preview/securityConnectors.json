@@ -64,7 +64,7 @@
           "default": {
             "description": "Error response that describes why the operation failed.",
             "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+              "$ref": "../../../common/v5/types.json#/definitions/CloudError"
             }
           }
         },
@@ -436,7 +436,7 @@
     },
     "AwsOrganizationalData": {
       "type": "object",
-      "description": "The AWS Organization data",
+      "description": "The AWS organization data",
       "discriminator": "organizationMembershipType",
       "required": [
         "organizationMembershipType"
@@ -458,7 +458,7 @@
     },
     "AwsOrganizationalDataMaster": {
       "type": "object",
-      "description": "The AWS Organization data for the master account",
+      "description": "The AWS organization data for the master account",
       "x-ms-discriminator-value": "Organization",
       "allOf": [
         {
@@ -482,7 +482,7 @@
     },
     "AwsOrganizationalDataMember": {
       "type": "object",
-      "description": "The AWS Organization data for the member account",
+      "description": "The AWS organization data for the member account",
       "x-ms-discriminator-value": "Member",
       "allOf": [
         {
@@ -641,7 +641,7 @@
     },
     "GitlabScopeEnvironmentData": {
       "type": "object",
-      "description": "The gitlab scope connector's environment data",
+      "description": "The GitLab scope connector's environment data",
       "x-ms-discriminator-value": "GitlabScope",
       "allOf": [
         {
@@ -1006,11 +1006,11 @@
         },
         "databasesDspm": {
           "type": "object",
-          "description": "The databases DSPM configuration",
+          "description": "The databases data security posture management (DSPM) configuration",
           "properties": {
             "enabled": {
               "type": "boolean",
-              "description": "Is databases DSPM protection enabled"
+              "description": "Is databases data security posture management (DSPM) protection enabled"
             },
             "cloudRoleArn": {
               "type": "string",
@@ -1106,7 +1106,7 @@
               "properties": {
                 "proxy": {
                   "type": "string",
-                  "description": "Optional http proxy endpoint to use for the Arc agent"
+                  "description": "Optional HTTP proxy endpoint to use for the Arc agent"
                 },
                 "privateLinkScope": {
                   "type": "string",
@@ -1205,7 +1205,7 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "description": "VM tags that indicates that VM should not be scanned"
+                  "description": "VM tags that indicate that VM should not be scanned"
                 }
               }
             }
@@ -1391,7 +1391,7 @@
           "properties": {
             "enabled": {
               "type": "boolean",
-              "description": "Is Microsoft Defender Data Sensitivity discovery is enabled"
+              "description": "Is Microsoft Defender Data Sensitivity discovery enabled"
             },
             "cloudRoleArn": {
               "type": "string",
@@ -1448,9 +1448,9 @@
       ],
       "properties": {}
     },
-    "cspmMonitorGitLab": {
+    "cspmMonitorGitLabOffering": {
       "type": "object",
-      "description": "The CSPM monitoring for gitlab offering",
+      "description": "The CSPM (Cloud security posture management) monitoring for gitlab offering",
       "x-ms-discriminator-value": "CspmMonitorGitLab",
       "allOf": [
         {
