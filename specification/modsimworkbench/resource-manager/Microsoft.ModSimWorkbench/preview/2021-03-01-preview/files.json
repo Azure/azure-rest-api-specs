@@ -83,18 +83,11 @@
           "default": {
             "description": "Default Error Response",
             "schema": {
-              "$ref": "./modsimworkbenches.json../../../../../common-types/resource-management/v3/types.json#/parameters/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/Definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
         },
-        "security": [
-          {
-            "azure_auth": [
-              "user_impersonation"
-            ]
-          }
-        ],
         "x-ms-examples": {
           "Files Get": {
             "$ref": "./examples/FilesGet.json"
@@ -167,7 +160,7 @@
           "default": {
             "description": "",
             "schema": {
-              "$ref": "./modsimworkbenches.json../../../../../common-types/resource-management/v3/types.json#/parameters/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/Definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
@@ -248,7 +241,7 @@
           "default": {
             "description": "",
             "schema": {
-              "$ref": "./modsimworkbenches.json../../../../../common-types/resource-management/v3/types.json#/parameters/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/Definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
@@ -310,7 +303,7 @@
           "default": {
             "description": "Default Error Response",
             "schema": {
-              "$ref": "./modsimworkbenches.json../../../../../common-types/resource-management/v3/types.json#/parameters/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/Definitions/ErrorResponse"
             },
             "x-ms-error-response": true
           }
@@ -367,7 +360,7 @@
         }
       }
     },
-    "FilePropertiesFormat": {
+    "FileProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -408,7 +401,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/FilePropertiesFormat",
+          "$ref": "#/definitions/FileProperties",
           "description": "File properties",
           "type": "object"
         }
