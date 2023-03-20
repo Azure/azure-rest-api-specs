@@ -139,20 +139,38 @@ model SubscriptionKeyParameterNames {
   query: string;
 }
 
+@doc("A Schema used by an API.")
 model ApiSchema {
+  @doc("API schema identifier.")
   id: string;
+
+  @doc("Media type of the schema document (e.g. application/json, application/xml).")
   contentType: string;
+
+  @doc("The document representing the Schema.")
   document?: string;
 }
 
+@doc("API release information")
 model ApiRelease {
+  @doc("API release identifier.")
   id: string;
+
+  @doc("Release creation date and time.")
   createdDateTime: zonedDateTime;
+
+  @doc("Release update date and time.")
   updatedDateTime: zonedDateTime;
+
+  @doc("Release notes.")
   notes: string;
 }
 
+@doc("API hostname information")
 model ApiHostname {
+  @doc("API hostname identifier.")
   id: string;
+
+  @doc("Hostname value.")
   value: string;
 }
