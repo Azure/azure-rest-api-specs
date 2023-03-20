@@ -1,527 +1,527 @@
 {
-   "swagger": "2.0",
-   "info": {
-      "title": "Azure OpenAI DALL-E API version 2023-04-15-preview",
-      "description": "Cognitive Services API to support OpenAI DALL-E",
-      "version": "2023-04-15-preview"
-   },
-   "host": "eastus.api.cognitive.microsoft.com",
-   "basePath": "/dalle",
-   "parameters": {
-      "endpoint": {
-         "in": "path",
-         "name": "endpoint",
-         "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://aoairesource.openai.azure.com. Replace \"aoairesource\" with your Azure OpenAI account name).",
-         "required": true,
-         "type": "string",
-         "format": "url",
-         "x-ms-skip-url-encoding": true,
-         "x-ms-parameter-location": "client"
-      },
-      "apiVersionQueryParameter": {
-         "in": "query",
-         "name": "api-version",
-         "description": "The requested API version.",
-         "required": true,
-         "type": "string",
-         "x-ms-client-default": "2023-04-15-preview",
-         "x-ms-parameter-location": "client"
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure OpenAI DALL-E API version 2023-04-15-preview",
+    "description": "Cognitive Services API to support OpenAI DALL-E",
+    "version": "2023-04-15-preview"
+  },
+  "host": "eastus.api.cognitive.microsoft.com",
+  "basePath": "/dalle",
+  "parameters": {
+    "endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://aoairesource.openai.azure.com. Replace \"aoairesource\" with your Azure OpenAI account name).",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "apiVersionQueryParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The requested API version.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-default": "2023-04-15-preview",
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "paths": {
+    "/images/generate": {
+      "post": {
+        "summary": "Generates a batch of images from a text caption",
+        "operationId": "Images_Generate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The specification of the images that should be generated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GenerateImagesCreation"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Created",
+            "headers": {
+              "operation-location": {
+                "type": "string",
+                "format": "url",
+                "description": "URL to poll for the operation result."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Service generated correlation id identifying the request, in the form of a GUID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/GenerateImagesResponse"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code indicating what went wrong."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Service generated correlation id identifying the request, in the form of a GUID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "Creating an image generation operation.": {
+            "$ref": "./examples/post_images_generate.json"
+          }
+        }
       }
-   },
-   "paths": {
-      "/images/generate": {
-         "post": {
-            "summary": "Generates a batch of images from a text caption",
-            "operationId": "Images_Generate",
-            "consumes": [
-               "application/json"
-            ],
-            "produces": [
-               "application/json"
-            ],
-            "parameters": [
-               {
-                  "$ref": "#/parameters/apiVersionQueryParameter"
-               },
-               {
-                  "in": "body",
-                  "name": "body",
-                  "description": "The specification of the images that should be generated.",
-                  "required": true,
-                  "schema": {
-                    "$ref": "#/definitions/GenerateImagesCreation"
-                  }
-               }
-            ],
-            "responses": {
-               "202": {
-                  "description": "Created",
-                  "headers": {
-                     "operation-location": {
-                        "type": "string",
-                        "format": "url",
-                        "description": "URL to poll for the operation result."
-                     },
-                     "x-ms-request-id": {
-                        "type": "string",
-                        "format": "uuid",
-                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
-                     }
-                  },
-                  "schema": {
-                     "$ref": "#/definitions/GenerateImagesResponse"
-                  }
-               },
-               "default": {
-                  "description": "An error occurred.",
-                  "headers": {
-                     "x-ms-error-code": {
-                        "type": "string",
-                        "description": "The error code indicating what went wrong."
-                     },
-                     "x-ms-request-id": {
-                        "type": "string",
-                        "format": "uuid",
-                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
-                     }
-                  },
-                  "schema": {
-                    "$ref": "#/definitions/ErrorResponse"
-                  }
-               }
+    },
+    "/operations/{operation-id}": {
+      "get": {
+        "summary": "Returns the status of the operation",
+        "operationId": "Operations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "path",
+            "name": "operation-id",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The id of the operation",
+            "maxLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "retry-after": {
+                "type": "integer",
+                "format": "int64",
+                "description": "Indicates the number of seconds that the client should wait before trying to get the result from the URL identified by the Operation-Location header if the operation did not terminate yet."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Service generated correlation id identifying the request, in the form of a GUID."
+              }
             },
-            "x-ms-long-running-operation": true,
-            "x-ms-long-running-operation-options": {
-              "final-state-via": "azure-async-operation"
-            },
-            "x-ms-examples": {
-               "Creating an image generation operation.": {
-                 "$ref": "./examples/post_images_generate.json"
-               }
+            "schema": {
+              "$ref": "#/definitions/OperationResponse"
             }
-         }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code indicating what went wrong."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Service generated correlation id identifying the request, in the form of a GUID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Getting the result of a specific operation.": {
+            "$ref": "./examples/get_operation.json"
+          }
+        }
       },
-      "/operations/{operation-id}": {
-         "get": {
-            "summary": "Returns the status of the operation",
-            "operationId": "Operations_Get",
-            "produces": [
-               "application/json"
-            ],
-            "parameters": [
-               {
-                  "$ref": "#/parameters/apiVersionQueryParameter"
-               },
-               {
-                  "in": "path",
-                  "name": "operation-id",
-                  "required": true,
-                  "type": "string",
-                  "format": "uuid",
-                  "description": "The id of the operation",
-                  "maxLength": 36,
-                  "pattern": "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$"
-               }
-            ],
-            "responses": {
-               "200": {
-                  "description": "OK",
-                  "headers": {
-                     "retry-after": {
-                        "type": "integer",
-                        "format": "int64",
-                        "description": "Indicates the number of seconds that the client should wait before trying to get the result from the URL identified by the Operation-Location header if the operation did not terminate yet."
-                     },
-                     "x-ms-request-id": {
-                        "type": "string",
-                        "format": "uuid",
-                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
-                     }
-                  },
-                  "schema": {
-                     "$ref": "#/definitions/OperationResponse"
-                  }
-               },
-               "default": {
-                  "description": "An error occurred.",
-                  "headers": {
-                     "x-ms-error-code": {
-                        "type": "string",
-                        "description": "The error code indicating what went wrong."
-                     },
-                     "x-ms-request-id": {
-                        "type": "string",
-                        "format": "uuid",
-                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
-                     }
-                  },
-                  "schema": {
-                    "$ref": "#/definitions/ErrorResponse"
-                  }
-               }
-            },
-            "x-ms-examples": {
-               "Getting the result of a specific operation.": {
-                 "$ref": "./examples/get_operation.json"
-               }
+      "delete": {
+        "summary": "Deletes an operation (if in terminal state)",
+        "operationId": "Operations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "path",
+            "name": "operation-id",
+            "required": true,
+            "type": "string",
+            "format": "uuid",
+            "description": "The id of the operation",
+            "maxLength": 36,
+            "pattern": "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Service generated correlation id identifying the request, in the form of a GUID."
+              }
             }
-         },
-         "delete": {
-            "summary": "Deletes an operation (if in terminal state)",
-            "operationId": "Operations_Delete",
-            "parameters": [
-               {
-                  "$ref": "#/parameters/apiVersionQueryParameter"
-               },
-               {
-                  "in": "path",
-                  "name": "operation-id",
-                  "required": true,
-                  "type": "string",
-                  "format": "uuid",
-                  "description": "The id of the operation",
-                  "maxLength": 36,
-                  "pattern": "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$"
-               }
-            ],
-            "responses": {
-               "204": {
-                  "description": "NoContent",
-                  "headers": {
-                     "x-ms-request-id": {
-                        "type": "string",
-                        "format": "uuid",
-                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
-                     }
-                  }
-               },
-               "default": {
-                  "description": "An error occurred.",
-                  "headers": {
-                     "x-ms-error-code": {
-                        "type": "string",
-                        "description": "The error code indicating what went wrong."
-                     },
-                     "x-ms-request-id": {
-                        "type": "string",
-                        "format": "uuid",
-                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
-                     }
-                  },
-                  "schema": {
-                    "$ref": "#/definitions/ErrorResponse"
-                  }
-               }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code indicating what went wrong."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "Service generated correlation id identifying the request, in the form of a GUID."
+              }
             },
-            "x-ms-examples": {
-               "Deleting a specific operation.": {
-                 "$ref": "./examples/delete_operation.json"
-               }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
-         }
+          }
+        },
+        "x-ms-examples": {
+          "Deleting a specific operation.": {
+            "$ref": "./examples/delete_operation.json"
+          }
+        }
       }
-   },
-   "definitions": {
-      "Status": {
-         "title": "State",
-         "description": "The status of the operation.",
-         "enum": [
-            "NotStarted",
-            "Running",
-            "Succeeded",
-            "Canceled",
-            "Failed"
-         ],
-         "type": "string",
-         "readOnly": true,
-         "x-ms-enum": {
-           "name": "Status",
-           "modelAsString": true,
-           "values": [
-            {
-               "value": "NotStarted",
-               "description": "The operation was created and is not queued to be processed in the future."
-            },
-            {
-               "value": "Running",
-               "description": "The operation has started to be processed."
-            },
-            {
-               "value": "Succeeded",
-               "description": "The operation has successfully be processed and is ready for consumption."
-            },
-            {
-               "value": "Canceled",
-               "description": "The operation has been canceled and is incomplete."
-            },
-            {
-               "value": "Failed",
-               "description": "The operation has completed processing with a failure and cannot be further consumed."
-            }
-           ]
-         }
-      },
-      "InnerError": {
-         "type": "object",
-         "description": "The inner error if a task in a batch failed.",
-         "properties": {
-            "message": {
-               "type": "string",
-               "description": "The error message."
-            },
-            "code": {
-               "type": "string",
-               "enum": [
-                  "ContentFilter",
-                  "Internal",
-                  "BlockedImages"
-               ],
-               "description": "The error code."
-            }
-         }
-      },
-      "Error": {
-         "title": "Error",
-         "description": "Error content as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
-         "type": "object",
-         "properties": {
-            "message": {
-               "description": "The message of this error.",
-               "minLength": 1,
-               "type": "string"
-            },
-            "code": {
-               "$ref": "#/definitions/ErrorCode"
-            },
-            "details": {
-               "description": "The error details if available.",
-               "type": "array",
-               "items": {
-                  "$ref": "#/definitions/InnerError"
-               }
-            }
-         },
-         "required": [
-            "message",
-            "code"
-         ]
-      },
-      "ErrorCode": {
-         "title": "ErrorCode",
-         "description": "Error codes as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
-         "enum": [
-            "BadRequest",
+    }
+  },
+  "definitions": {
+    "Status": {
+      "title": "State",
+      "description": "The status of the operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Canceled",
+        "Failed"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "Status",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "NotStarted",
+            "description": "The operation was created and is not queued to be processed in the future."
+          },
+          {
+            "value": "Running",
+            "description": "The operation has started to be processed."
+          },
+          {
+            "value": "Succeeded",
+            "description": "The operation has successfully be processed and is ready for consumption."
+          },
+          {
+            "value": "Canceled",
+            "description": "The operation has been canceled and is incomplete."
+          },
+          {
+            "value": "Failed",
+            "description": "The operation has completed processing with a failure and cannot be further consumed."
+          }
+        ]
+      }
+    },
+    "InnerError": {
+      "type": "object",
+      "description": "The inner error if a task in a batch failed.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        },
+        "code": {
+          "type": "string",
+          "enum": [
+            "ContentFilter",
             "Internal",
-            "TooManyRequests",
-            "Unauthorized",
-            "NotFound",
-            "OperationNotInTerminalState"
-         ],
-         "type": "string",
-         "x-ms-enum": {
-           "name": "ErrorCode",
-           "modelAsString": true,
-           "values": [
-            {
-               "value": "BadRequest",
-               "description": "The request data is invalid for this operation."
-            },
-            {
-               "value": "Internal",
-               "description": "Internal error. Please retry."
-            },
-            {
-               "value": "TooManyRequests",
-               "description": "Too many requests. Please retry later."
-            },
-            {
-               "value": "Unauthorized",
-               "description": "The current user/api key is not authorized for the operation."
-            },
-            {
-               "value": "NotFound",
-               "description": "The resource is not found."
-            },
-            {
-               "value": "OperationNotInTerminalState",
-               "description": "The operation cannot be executed in the current resource's state."
-            }
-           ]
-         }
-      },
-      "ErrorResponse": {
-         "title": "ErrorResponse",
-         "description": "Error response as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
-         "required": [
-           "error"
-         ],
-         "type": "object",
-         "properties": {
-           "error": {
-             "$ref": "#/definitions/Error"
-           }
-         }
-      },
-      "ImageResult": {
-         "type": "object",
-         "description": "The image url if successful, and an error otherwise.",
-         "properties": {
-            "url": {
-               "type": "string",
-               "description": "The URL that provides temporary access to download the generated image."
-            },
-            "error": {
-               "$ref": "#/definitions/Error"
-            }
-         }
-      },
-      "OperationResult": {
-         "title": "OperationResult",
-         "description": "The result data of the operation, if successful",
-         "type": "array",
-         "items": {
-            "$ref": "#/definitions/ImageResult"
-         }
-      },
-      "OperationResponse": {
-         "title": "OperationResponse",
-         "description": "The operation response containing the id and the status of the operation. If successful, it contains data with the generated images and an error otherwise.",
-         "type": "object",
-         "properties": {
-            "id": {
-               "format": "uuid",
-               "description": "The ID of the operation.",
-               "type": "string"
-            },
-            "created": {
-               "format": "unixtime",
-               "description": "A timestamp when this job or item was created (in unix epochs).",
-               "type": "integer"
-            },
-            "last_action": {
-               "format": "unixtime",
-               "description": "A timestamp when this job or item was modified last (in unix epochs).",
-               "type": "integer"
-            },
-            "expires": {
-               "format": "unixtime",
-               "description": "A timestamp when this job or item will expire (in unix epochs).",
-               "type": "integer"
-            },
-            "data": {
-               "$ref": "#/definitions/OperationResult"
-            },
-            "status": {
-               "$ref": "#/definitions/Status"
-            },
-            "error": {
-               "$ref": "#/definitions/Error"
-            }
-         },
-         "required": [
-            "id",
-            "status",
-            "created",
-            "last_action"
-         ]
-      },
-      "Size": {
-         "title": "Size",
-         "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
-         "enum": [
-            "256x256",
-            "512x512",
-            "1024x1024"
-         ],
-         "type": "string",
-         "default": "1024x1024",
-         "x-ms-enum": {
-           "name": "Size",
-           "modelAsString": true,
-           "values": [
-            {
-               "value": "256x256",
-               "description": "The desired size of the generated image is 256x256 pixels."
-            },
-            {
-               "value": "512x512",
-               "description": "The desired size of the generated image is 512x512 pixels."
-            },
-            {
-               "value": "1024x1024",
-               "description": "The desired size of the generated image is 1024x1024 pixels."
-            }
-           ]
-         }
-      },
-      "GenerateImagesCreation": {
-         "title": "GenerateImagesCreation",
-         "description": "Defines the request to create an operation to generate images.",
-         "type": "object",
-         "properties": {
-            "prompt": {
-               "type": "string",
-               "description": "A text description of the desired image(s).",
-               "minLength": 1
-            },
-            "n": {
-               "type": "integer",
-               "format": "int64",
-               "description": "The number of images to generate.",
-               "minimum": 1,
-               "default": 1
-            },
-            "size": {
-               "$ref": "#/definitions/Size"
-            }
-         },
-         "required": [
-            "prompt"
-         ]
-      },
-      "GenerateImagesResponse": {
-         "title": "GenerateImagesResponse",
-         "description": "Defines response after creating an operation to generate images. It contains the status and the id of the operation.",
-         "type": "object",
-         "properties": {
-            "status": {
-               "$ref": "#/definitions/Status"
-            },
-            "id": {
-               "type": "string",
-               "format": "uuid",
-               "description": " The Id of the asynchronous operation that can be used to query its status later."
-            }
-         },
-         "required": [
-            "id",
-            "status"
-         ]
+            "BlockedImages"
+          ],
+          "description": "The error code."
+        }
       }
-   },
-   "securityDefinitions": {
-      "api-key": {
-        "type": "apiKey",
-        "name": "Api-Key",
-        "in": "header",
-        "description": "Provide your Cognitive Services Azure OpenAI account key here."
-      }
-   },
-   "security": [
-      {
-        "api-key": []
-      }
-   ],
-    "schemes": [
-      "https"
-   ],
-   "x-ms-parameterized-host": {
-      "hostTemplate": "{endpoint}/openai",
-      "useSchemePrefix": false,
-      "parameters": [
-         {
-            "$ref": "#/parameters/endpoint"
-         }
+    },
+    "Error": {
+      "title": "Error",
+      "description": "Error content as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The message of this error.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "code": {
+          "$ref": "#/definitions/ErrorCode"
+        },
+        "details": {
+          "description": "The error details if available.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InnerError"
+          }
+        }
+      },
+      "required": [
+        "message",
+        "code"
       ]
-   }
+    },
+    "ErrorCode": {
+      "title": "ErrorCode",
+      "description": "Error codes as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
+      "enum": [
+        "BadRequest",
+        "Internal",
+        "TooManyRequests",
+        "Unauthorized",
+        "NotFound",
+        "OperationNotInTerminalState"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "BadRequest",
+            "description": "The request data is invalid for this operation."
+          },
+          {
+            "value": "Internal",
+            "description": "Internal error. Please retry."
+          },
+          {
+            "value": "TooManyRequests",
+            "description": "Too many requests. Please retry later."
+          },
+          {
+            "value": "Unauthorized",
+            "description": "The current user/api key is not authorized for the operation."
+          },
+          {
+            "value": "NotFound",
+            "description": "The resource is not found."
+          },
+          {
+            "value": "OperationNotInTerminalState",
+            "description": "The operation cannot be executed in the current resource's state."
+          }
+        ]
+      }
+    },
+    "ErrorResponse": {
+      "title": "ErrorResponse",
+      "description": "Error response as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
+      "required": [
+        "error"
+      ],
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "ImageResult": {
+      "type": "object",
+      "description": "The image url if successful, and an error otherwise.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "The URL that provides temporary access to download the generated image."
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      }
+    },
+    "OperationResult": {
+      "title": "OperationResult",
+      "description": "The result data of the operation, if successful",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ImageResult"
+      }
+    },
+    "OperationResponse": {
+      "title": "OperationResponse",
+      "description": "The operation response containing the id and the status of the operation. If successful, it contains data with the generated images and an error otherwise.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "format": "uuid",
+          "description": "The ID of the operation.",
+          "type": "string"
+        },
+        "created": {
+          "format": "unixtime",
+          "description": "A timestamp when this job or item was created (in unix epochs).",
+          "type": "integer"
+        },
+        "last_action": {
+          "format": "unixtime",
+          "description": "A timestamp when this job or item was modified last (in unix epochs).",
+          "type": "integer"
+        },
+        "expires": {
+          "format": "unixtime",
+          "description": "A timestamp when this job or item will expire (in unix epochs).",
+          "type": "integer"
+        },
+        "data": {
+          "$ref": "#/definitions/OperationResult"
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "created",
+        "last_action"
+      ]
+    },
+    "Size": {
+      "title": "Size",
+      "description": "The desired size of the generated images. Must be one of 256x256, 512x512, or 1024x1024.",
+      "enum": [
+        "256x256",
+        "512x512",
+        "1024x1024"
+      ],
+      "type": "string",
+      "default": "1024x1024",
+      "x-ms-enum": {
+        "name": "Size",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "256x256",
+            "description": "The desired size of the generated image is 256x256 pixels."
+          },
+          {
+            "value": "512x512",
+            "description": "The desired size of the generated image is 512x512 pixels."
+          },
+          {
+            "value": "1024x1024",
+            "description": "The desired size of the generated image is 1024x1024 pixels."
+          }
+        ]
+      }
+    },
+    "GenerateImagesCreation": {
+      "title": "GenerateImagesCreation",
+      "description": "Defines the request to create an operation to generate images.",
+      "type": "object",
+      "properties": {
+        "prompt": {
+          "type": "string",
+          "description": "A text description of the desired image(s).",
+          "minLength": 1
+        },
+        "n": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of images to generate.",
+          "minimum": 1,
+          "default": 1
+        },
+        "size": {
+          "$ref": "#/definitions/Size"
+        }
+      },
+      "required": [
+        "prompt"
+      ]
+    },
+    "GenerateImagesResponse": {
+      "title": "GenerateImagesResponse",
+      "description": "Defines response after creating an operation to generate images. It contains the status and the id of the operation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": " The Id of the asynchronous operation that can be used to query its status later."
+        }
+      },
+      "required": [
+        "id",
+        "status"
+      ]
+    }
+  },
+  "securityDefinitions": {
+    "api-key": {
+      "type": "apiKey",
+      "name": "Api-Key",
+      "in": "header",
+      "description": "Provide your Cognitive Services Azure OpenAI account key here."
+    }
+  },
+  "security": [
+    {
+      "api-key": []
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/openai",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/endpoint"
+      }
+    ]
+  }
 }
