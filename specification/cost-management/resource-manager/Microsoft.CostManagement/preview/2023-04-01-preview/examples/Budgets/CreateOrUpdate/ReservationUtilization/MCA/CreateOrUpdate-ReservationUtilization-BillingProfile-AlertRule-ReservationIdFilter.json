@@ -1,14 +1,15 @@
 {
   "parameters": {
     "api-version": "2023-04-01-preview",
-    "billingAccountId": "123456",
-    "budgetName": "TestRUAlert",
-    "scope": "providers/Microsoft.Billing/billingAccounts/123456",
+    "billingAccountId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01",
+    "billingProfileId": "KKKK-LLLL-MMM-NNN",
+    "budgetName": "TestAlertRule",
+    "scope": "providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/billingProfiles/KKKK-LLLL-MMM-NNN",
     "parameters": {
       "eTag": "\"1d34d016a593709\"",
       "properties": {
         "category": "ReservationUtilization",
-        "timeGrain": "Last7Days",
+        "timeGrain": "Last30Days",
         "timePeriod": {
           "startDate": "2023-04-01T00:00:00Z",
           "endDate": "2025-04-01T00:00:00Z"
@@ -29,7 +30,7 @@
             "enabled": true,
             "operator": "LessThan",
             "threshold": 99,
-            "frequency": "Weekly",
+            "frequency": "Daily",
             "locale": "en-us",
             "contactEmails": [
               "johndoe@contoso.com",
@@ -43,13 +44,13 @@
   "responses": {
     "201": {
       "body": {
-        "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/budgets/TestRUAlert",
-        "name": "TestRUAlert",
+        "id": "providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/billingProfiles/KKKK-LLLL-MMM-NNN/providers/Microsoft.CostManagement/budgets/TestAlertRule",
+        "name": "TestAlertRule",
         "type": "Microsoft.CostManagement/budgets",
         "eTag": "\"1d34d012214157f\"",
         "properties": {
           "category": "ReservationUtilization",
-          "timeGrain": "Last7Days",
+          "timeGrain": "Last30Days",
           "timePeriod": {
             "startDate": "2023-04-01T00:00:00Z",
             "endDate": "2025-04-01T00:00:00Z"
@@ -70,7 +71,7 @@
               "enabled": true,
               "operator": "LessThan",
               "threshold": 99,
-              "frequency": "Weekly",
+              "frequency": "Daily",
               "locale": "en-us",
               "contactEmails": [
                 "johndoe@contoso.com",
@@ -83,13 +84,13 @@
     },
     "200": {
       "body": {
-        "id": "providers/Microsoft.Billing/billingAccounts/123456/providers/Microsoft.CostManagement/budgets/TestRUAlert",
-        "name": "TestRUAlert",
+        "id": "providers/Microsoft.Billing/billingAccounts/aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee:ffffffff-gggg-hhhh-iiii-jjjjjjjjjjjj_2023-04-01/billingProfiles/KKKK-LLLL-MMM-NNN/providers/Microsoft.CostManagement/budgets/TestAlertRule",
+        "name": "TestAlertRule",
         "type": "Microsoft.CostManagement/budgets",
         "eTag": "\"1d34d012214157f\"",
         "properties": {
           "category": "ReservationUtilization",
-          "timeGrain": "Last7Days",
+          "timeGrain": "Last30Days",
           "timePeriod": {
             "startDate": "2023-04-01T00:00:00Z",
             "endDate": "2025-04-01T00:00:00Z"
@@ -110,7 +111,7 @@
               "enabled": true,
               "operator": "LessThan",
               "threshold": 99,
-              "frequency": "Weekly",
+              "frequency": "Daily",
               "locale": "en-us",
               "contactEmails": [
                 "johndoe@contoso.com",
