@@ -57,9 +57,15 @@
                "202": {
                   "description": "Created",
                   "headers": {
-                     "Operation-Location": {
+                     "operation-location": {
                         "type": "string",
+                        "format": "url",
                         "description": "URL to poll for the operation result."
+                     },
+                     "x-ms-request-id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
                      }
                   },
                   "schema": {
@@ -72,6 +78,11 @@
                      "x-ms-error-code": {
                         "type": "string",
                         "description": "The error code indicating what went wrong."
+                     },
+                     "x-ms-request-id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
                      }
                   },
                   "schema": {
@@ -113,10 +124,15 @@
                "200": {
                   "description": "OK",
                   "headers": {
-                     "Retry-After": {
+                     "retry-after": {
                         "type": "integer",
                         "format": "int64",
                         "description": "Indicates the number of seconds that the client should wait before trying to get the result from the URL identified by the Operation-Location header if the operation did not terminate yet."
+                     },
+                     "x-ms-request-id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
                      }
                   },
                   "schema": {
@@ -129,6 +145,11 @@
                      "x-ms-error-code": {
                         "type": "string",
                         "description": "The error code indicating what went wrong."
+                     },
+                     "x-ms-request-id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
                      }
                   },
                   "schema": {
@@ -159,7 +180,14 @@
             ],
             "responses": {
                "204": {
-                  "description": "NoContent"
+                  "description": "NoContent",
+                  "headers": {
+                     "x-ms-request-id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
+                     }
+                  }
                },
                "default": {
                   "description": "An error occurred.",
@@ -167,6 +195,11 @@
                      "x-ms-error-code": {
                         "type": "string",
                         "description": "The error code indicating what went wrong."
+                     },
+                     "x-ms-request-id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "Service generated correlation id identifying the request, in the form of a GUID."
                      }
                   },
                   "schema": {
