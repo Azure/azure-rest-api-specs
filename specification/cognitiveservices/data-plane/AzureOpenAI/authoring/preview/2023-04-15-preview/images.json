@@ -32,7 +32,7 @@
       "/images/generate": {
          "post": {
             "summary": "Generates a batch of images from a text caption",
-            "operationId": "Images_Generate",
+            "Operation-Id": "Images_Generate",
             "consumes": [
                "application/json"
             ],
@@ -101,10 +101,10 @@
             }
          }
       },
-      "/operations/{operationId}": {
+      "/operations/{Operation-Id}": {
          "get": {
             "summary": "Returns the status of the operation",
-            "operationId": "Operations_Get",
+            "Operation-Id": "Operations_Get",
             "produces": [
                "application/json"
             ],
@@ -114,9 +114,10 @@
                },
                {
                   "in": "path",
-                  "name": "operationId",
+                  "name": "Operation-Id",
                   "required": true,
                   "type": "string",
+                  "format": "uuid",
                   "description": "The id of the operation"
                }
             ],
@@ -165,16 +166,17 @@
          },
          "delete": {
             "summary": "Deletes an operation (if in terminal state)",
-            "operationId": "Operations_Delete",
+            "Operation-Id": "Operations_Delete",
             "parameters": [
                {
                   "$ref": "#/parameters/apiVersionQueryParameter"
                },
                {
                   "in": "path",
-                  "name": "operationId",
+                  "name": "Operation-Id",
                   "required": true,
                   "type": "string",
+                  "format": "uuid",
                   "description": "The id of the operation"
                }
             ],
