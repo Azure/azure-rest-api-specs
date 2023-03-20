@@ -68,6 +68,12 @@
                },
                "default": {
                   "description": "An error occurred.",
+                  "headers": {
+                     "x-ms-error-code": {
+                        "type": "string",
+                        "description": "The error code indicating what went wrong."
+                     }
+                  },
                   "schema": {
                     "$ref": "#/definitions/ErrorResponse"
                   }
@@ -119,9 +125,20 @@
                },
                "default": {
                   "description": "An error occurred.",
+                  "headers": {
+                     "x-ms-error-code": {
+                        "type": "string",
+                        "description": "The error code indicating what went wrong."
+                     }
+                  },
                   "schema": {
                     "$ref": "#/definitions/ErrorResponse"
                   }
+               }
+            },
+            "x-ms-examples": {
+               "Getting the result of a specific operation.": {
+                 "$ref": "./examples/get_operation.json"
                }
             }
          },
@@ -146,6 +163,12 @@
                },
                "default": {
                   "description": "An error occurred.",
+                  "headers": {
+                     "x-ms-error-code": {
+                        "type": "string",
+                        "description": "The error code indicating what went wrong."
+                     }
+                  },
                   "schema": {
                     "$ref": "#/definitions/ErrorResponse"
                   }
@@ -322,8 +345,9 @@
          "type": "object",
          "properties": {
             "id": {
-               "type": "string",
-               "description": "The ID of the operation."
+               "format": "uuid",
+               "description": "The ID of the operation.",
+               "type": "string"
             },
             "created": {
                "format": "unixtime",
@@ -367,7 +391,6 @@
          ],
          "type": "string",
          "default": "1024x1024",
-         "readOnly": true,
          "x-ms-enum": {
            "name": "Size",
            "modelAsString": true,
