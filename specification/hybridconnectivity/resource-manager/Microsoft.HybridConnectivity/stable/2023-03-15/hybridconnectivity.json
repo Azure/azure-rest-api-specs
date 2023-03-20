@@ -51,20 +51,20 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Operation details.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -91,7 +91,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -107,7 +107,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -137,7 +137,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -156,7 +156,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -181,7 +181,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -209,7 +209,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -230,7 +230,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -258,7 +258,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -279,7 +279,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -298,33 +298,79 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       }
     },
-    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/serviceconfigurations/{serviceConfigurationName}": {
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/serviceConfigurations": {
       "get": {
         "tags": [
-          "Serviceconfigurations"
+          "ServiceConfigurations"
+        ],
+        "summary": "Lists of all the services associated with endpoint resource",
+        "operationId": "Serviceconfigurations_ListByEndpointResource",
+        "description": "API to enumerate registered services in service configurations under a Endpoint Resource",
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "GetClustersExample": {
+            "$ref": "./examples/ServiceConfigurationsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/EndpointNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/serviceConfigurations/{serviceConfigurationName}": {
+      "get": {
+        "tags": [
+          "ServiceConfigurations"
         ],
         "description": "Gets the details about the service to the resource.",
-        "operationId": "Serviceconfigurations_Get",
+        "operationId": "ServiceConfigurations_Get",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
           "HybridConnectivityEndpointsServiceconfigurationsGetSSH": {
-            "$ref": "./examples/ServiceconfigurationsGetSSH.json"
+            "$ref": "./examples/ServiceConfigurationsGetSSH.json"
           },
           "HybridConnectivityEndpointsServiceconfigurationsGetWAC": {
-            "$ref": "./examples/ServiceconfigurationsGetWAC.json"
+            "$ref": "./examples/ServiceConfigurationsGetWAC.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -338,7 +384,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Service details",
+            "description": "Service configuration resource request was successful",
             "schema": {
               "$ref": "#/definitions/ServiceConfigurationResource"
             }
@@ -346,7 +392,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -354,24 +400,24 @@
       },
       "put": {
         "tags": [
-          "Serviceconfigurations"
+          "ServiceConfigurations"
         ],
         "description": "Create a service in serviceConfiguration for the endpoint resource.",
-        "operationId": "Serviceconfigurations_Create",
+        "operationId": "ServiceConfigurations_CreateOrupdate",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
           "ServiceconfigurationsPutSSH": {
-            "$ref": "./examples/ServiceconfigurationsPutSSH.json"
+            "$ref": "./examples/ServiceConfigurationsPutSSH.json"
           },
           "ServiceconfigurationsPutWAC": {
-            "$ref": "./examples/ServiceconfigurationsPutWAC.json"
+            "$ref": "./examples/ServiceConfigurationsPutWAC.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -394,7 +440,13 @@
         ],
         "responses": {
           "200": {
-            "description": "ServiceConfiguration Resource details.",
+            "description": "ServiceConfiguration resource create request was successful.",
+            "schema": {
+              "$ref": "#/definitions/ServiceConfigurationResource"
+            }
+          },
+          "201": {
+            "description": "ServiceConfiguration resource is successfully created",
             "schema": {
               "$ref": "#/definitions/ServiceConfigurationResource"
             }
@@ -402,28 +454,28 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "patch": {
         "tags": [
-          "Serviceconfigurations"
+          "ServiceConfigurations"
         ],
         "description": "Update the service details in the service configurations of the target resource.",
-        "operationId": "Serviceconfigurations_Update",
+        "operationId": "ServiceConfigurations_Update",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
           "ServiceconfigurationsPatchSSH": {
-            "$ref": "./examples/ServiceconfigurationsPatchSSH.json"
+            "$ref": "./examples/ServiceConfigurationsPatchSSH.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -454,28 +506,28 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         }
       },
       "delete": {
         "tags": [
-          "Serviceconfigurations"
+          "ServiceConfigurations"
         ],
         "description": "Deletes the service details to the target resource.",
-        "operationId": "Serviceconfigurations_Delete",
+        "operationId": "ServiceConfigurations_Delete",
         "produces": [
           "application/json"
         ],
         "x-ms-examples": {
           "ServiceconfigurationsDeleteSSH": {
-            "$ref": "./examples/ServiceconfigurationsDeleteSSH.json"
+            "$ref": "./examples/ServiceConfigurationsDeleteSSH.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -497,55 +549,9 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
-      }
-    },
-    "/{resourceUri}/providers/Microsoft.HybridConnectivity/endpoints/{endpointName}/serviceconfigurations": {
-      "get": {
-        "tags": [
-          "Serviceconfigurations"
-        ],
-        "summary": "Lists of all the services associated with endpoint resource",
-        "operationId": "Serviceconfigurations_ListByEndpointResource",
-        "description": "API to enumerate registered services in service configurations under a Endpoint Resource",
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "GetClustersExample": {
-            "$ref": "./examples/ServiceconfigurationsList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceUriParameter"
-          },
-          {
-            "$ref": "#/parameters/EndpointNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServiceConfigurationList"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -566,7 +572,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -596,7 +602,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -620,7 +626,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -642,7 +648,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -666,7 +672,7 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/ResourceUriParameter"
@@ -694,7 +700,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -857,13 +863,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "systemData": {
           "description": "System data of endpoint resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "x-ms-client-flatten": true
         },
         "properties": {
@@ -878,13 +884,13 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "systemData": {
           "description": "System data of endpoint resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
           "x-ms-client-flatten": true
         },
         "properties": {
@@ -918,8 +924,8 @@
           "description": "The resource Id of the connectivity endpoint (optional)."
         },
         "port": {
-          "type": "string",
-          "pattern": "^[0-9]+$",
+          "type": "integer",
+          "format": "int32",
           "description": "The port on which service is enabled."
         },
         "provisioningState": {
@@ -928,25 +934,22 @@
           "description": "The resource provisioning state.",
           "enum": [
             "Succeeded",
+            "Creating",
+            "Updating",
             "Failed",
             "Canceled"
           ],
           "x-ms-enum": {
-            "name": "result",
+            "name": "ProvisioningState",
             "modelAsString": true
           }
         }
       }
     },
     "ServiceConfigurationResourcePatch": {
-      "description": "The service details under serviceconfiguration for the target resource.",
+      "description": "The service details under service configuration for the target endpoint resource.",
       "type": "object",
       "properties": {
-        "systemData": {
-          "description": "System data of endpoint resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
-          "x-ms-client-flatten": true
-        },
         "properties": {
           "description": "The service configuration properties.",
           "$ref": "#/definitions/ServiceConfigurationPropertiesPatch",
@@ -959,8 +962,8 @@
       "description": "Service configuration details",
       "properties": {
         "port": {
-          "type": "string",
-          "pattern": "^[0-9]+$",
+          "type": "integer",
+          "format": "int32",
           "description": "The port on which service is enabled."
         }
       }
@@ -1018,7 +1021,7 @@
         },
         "serviceName": {
           "type": "string",
-          "description": "The name of the service.",
+          "description": "The name of the service. It is an optional property, if not provided, service configuration tokens issue code would be by passed.",
           "enum": [
             "SSH",
             "WAC"
@@ -1032,7 +1035,7 @@
     },
     "ListCredentialsRequest": {
       "type": "object",
-      "description": "Represent ListCredentials Request object.",
+      "description": "The details of the service for which credentials needs to be returned.",
       "properties": {
         "serviceName": {
           "type": "string",
