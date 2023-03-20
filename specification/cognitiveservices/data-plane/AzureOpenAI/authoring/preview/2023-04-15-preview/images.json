@@ -32,7 +32,7 @@
       "/images/generate": {
          "post": {
             "summary": "Generates a batch of images from a text caption",
-            "Operation-Id": "Images_Generate",
+            "operation-id": "Images_Generate",
             "consumes": [
                "application/json"
             ],
@@ -51,7 +51,7 @@
                   "schema": {
                     "$ref": "#/definitions/GenerateImagesCreation"
                   }
-                }
+               }
             ],
             "responses": {
                "202": {
@@ -101,10 +101,10 @@
             }
          }
       },
-      "/operations/{Operation-Id}": {
+      "/operations/{operation-id}": {
          "get": {
             "summary": "Returns the status of the operation",
-            "Operation-Id": "Operations_Get",
+            "operation-id": "Operations_Get",
             "produces": [
                "application/json"
             ],
@@ -114,11 +114,13 @@
                },
                {
                   "in": "path",
-                  "name": "Operation-Id",
+                  "name": "operation-id",
                   "required": true,
                   "type": "string",
                   "format": "uuid",
-                  "description": "The id of the operation"
+                  "description": "The id of the operation",
+                  "maxLength": 36,
+                  "pattern": "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$"
                }
             ],
             "responses": {
@@ -166,18 +168,20 @@
          },
          "delete": {
             "summary": "Deletes an operation (if in terminal state)",
-            "Operation-Id": "Operations_Delete",
+            "operation-id": "Operations_Delete",
             "parameters": [
                {
                   "$ref": "#/parameters/apiVersionQueryParameter"
                },
                {
                   "in": "path",
-                  "name": "Operation-Id",
+                  "name": "operation-id",
                   "required": true,
                   "type": "string",
                   "format": "uuid",
-                  "description": "The id of the operation"
+                  "description": "The id of the operation",
+                  "maxLength": 36,
+                  "pattern": "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$"
                }
             ],
             "responses": {
