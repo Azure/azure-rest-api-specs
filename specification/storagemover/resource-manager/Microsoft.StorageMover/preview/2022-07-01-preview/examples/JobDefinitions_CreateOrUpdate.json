@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "api-version": "2022-07-01-preview",
+    "subscriptionId": "11111111-2222-3333-4444-555555555555",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "projectName": "examples-projectName",
+    "jobDefinitionName": "examples-jobDefinitionName",
+    "jobDefinition": {
+      "properties": {
+        "description": "Example Job Definition Description",
+        "copyMode": "Additive",
+        "sourceName": "examples-sourceEndpointName",
+        "sourceSubpath": "/",
+        "targetName": "examples-targetEndpointName",
+        "targetSubpath": "/",
+        "agentName": "migration-agent"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/projects/examples-projectName/jobDefinitions/examples-jobDefinitionName",
+        "name": "examples-jobDefinitionName",
+        "type": "Microsoft.StorageMover/storageMovers/projectName/jobDefinitionName",
+        "properties": {
+          "description": "Example Job Definition Description",
+          "copyMode": "Additive",
+          "sourceName": "examples-sourceEndpointName",
+          "sourceResourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-sourceEndpointName",
+          "sourceSubpath": "/",
+          "targetName": "examples-targetEndpointName",
+          "targetResourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-targetEndpointName",
+          "targetSubpath": "/",
+          "latestJobRunName": null,
+          "latestJobRunResourceId": null,
+          "latestJobRunStatus": null,
+          "agentName": "migration-agent",
+          "agentResourceId": "/subscriptions/11111111-2222-3333-4444-555555555555/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/agents/migration-agent"
+        }
+      }
+    }
+  }
+}

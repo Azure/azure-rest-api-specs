@@ -28,7 +28,17 @@ These are the global settings for the Automanage API.
 title: AutomanageClient
 description: Automanage Client
 openapi-type: arm
-tag: package-2021-04-30-preview
+tag: package-2022-05
+```
+
+
+### Tag: package-2022-05
+
+These settings apply only when `--tag=package-2022-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2022-05'
+input-file:
+  - Microsoft.Automanage/stable/2022-05-04/automanage.json
 ```
 
 ### Tag: package-2021-04-30-preview
@@ -79,15 +89,15 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_automanage']
+  - repo: azure-powershell
 ```
 
 ## Python
@@ -107,4 +117,3 @@ csharp:
   output-folder: $(csharp-sdks-folder)/automanage/Microsoft.Azure.Management.Automanage/src/Generated
   clear-output-folder: true
 ```
-
