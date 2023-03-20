@@ -92,6 +92,9 @@
             "$ref": "#/parameters/ApiVersion"
           },
           {
+            "$ref": "../../../Common/preview/1.0/common.json#/parameters/ClientId"
+          },
+          {
             "$ref": "#/parameters/Accept-Language"
           },
           {
@@ -580,11 +583,11 @@
           "type": "string",
           "readOnly": true
         },
-        "details": {
-          "description": "Information about one of the maneuvers that is part of the itinerary item. An ItineraryItem can contain more than one Detail collection.",
+        "steps": {
+          "description": "steps between two consecutive maneuver points",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Detail"
+            "$ref": "#/definitions/Step"
           }
         },
         "instruction": {
@@ -594,7 +597,7 @@
           "$ref": "#/definitions/SideOfStreetEnum"
         },
         "signs": {
-          "description": "Signage text for the route. There may be more than one sign value for an itinerary item.",
+          "description": "Signage text for the route. There may be more than one sign value",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -607,7 +610,7 @@
           "readOnly": true
         },
         "exitIdentifier": {
-          "description": "The name or number of the exit associated with this itinerary step.",
+          "description": "The name or number of the exit associated with this route step.",
           "type": "string",
           "readOnly": true
         },
@@ -751,7 +754,6 @@
       "readOnly": true,
       "enum": [
         "ManeuverPoint",
-        "Waypoint",
         "ViaWaypoint",
         "RoutePath"
       ],
@@ -889,7 +891,6 @@
       "type": "object",
       "properties": {
         "pathLegRange": {
-          "description": "Refers to the range covered by a specific leg of a route or path.",
           "$ref": "#/definitions/PathLegRange"
         },
         "distanceInMeters": {
@@ -962,8 +963,8 @@
         }
       }
     },
-    "Detail": {
-      "description": "Information about one of the maneuvers that is part of the itinerary item. An ItineraryItem can contain more than one Detail collection. For information about the fields contained in a Detail collection.",
+    "Step": {
+      "description": "A route leg contain turn-by-turn instructions. A step refers to a range of a route between two consecutive maneuverPoint.",
       "type": "object",
       "properties": {
         "compassDegrees": {
@@ -972,7 +973,6 @@
           "type": "number"
         },
         "maneuverType": {
-          "description": "The type of maneuver described by this detail collection. The ManeuverType in A detail collection can provide information for a portion of the maneuver described by the maneuverType attribute of the corresponding Instruction. For example the maneuverType attribute of an Instruction may specify TurnLeftThenTurnRight as the maneuver while the associated detail items may specify specifics about the TurnLeft and TurnRight maneuvers.",
           "readOnly": true,
           "$ref": "#/definitions/ManeuverTypeEnum"
         },
@@ -985,11 +985,9 @@
           }
         },
         "pathLegRange": {
-          "description": "Refers to the range covered by a specific leg of a route or path.",
           "$ref": "#/definitions/PathLegRange"
         },
         "roadType": {
-          "description": "Th type of road.",
           "readOnly": true,
           "$ref": "#/definitions/RoadTypeEnum"
         }
@@ -1444,7 +1442,7 @@
       }
     },
     "SideOfStreetEnum": {
-      "description": "The side of the street where the destination is found based on the arrival direction. This field applies to the last itinerary item only.",
+      "description": "The side of the street where the destination is found based on the arrival direction. This field applies to the last maneuverPoint only.",
       "type": "string",
       "readOnly": true,
       "enum": [
