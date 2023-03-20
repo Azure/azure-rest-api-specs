@@ -626,7 +626,7 @@
         "vCPUsAvailable": {
           "type": "integer",
           "format": "int32",
-          "description": "Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list) ."
+          "description": "Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size exposed in api response of [List all available virtual machine sizes in a region](https://docs.microsoft.com/en-us/rest/api/compute/resource-skus/list)."
         },
         "vCPUsPerCore": {
           "type": "integer",
@@ -934,7 +934,7 @@
         },
         "caching": {
           "$ref": "#/definitions/Caching",
-          "description": "Specifies the caching requirements. Possible values are: **None,** **ReadOnly,** **ReadWrite.** <br><br> The defaulting behavior is: **None** for Standard storage. **ReadOnly** for Premium storage."
+          "description": "Specifies the caching requirements. Possible values are: **None,** **ReadOnly,** **ReadWrite.** The defaulting behavior is: **None for Standard storage. ReadOnly for Premium storage.**"
         },
         "writeAcceleratorEnabled": {
           "type": "boolean",
@@ -1096,7 +1096,7 @@
         },
         "encryptionAtHost": {
           "type": "boolean",
-          "description": "This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. The defaulting behavior is: The Encryption at host will be disabled unless this property is set to true for the resource."
+          "description": "This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. The default behavior is: The Encryption at host will be disabled unless this property is set to true for the resource."
         },
         "securityType": {
           "type": "string",
