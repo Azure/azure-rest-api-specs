@@ -12,6 +12,9 @@ import "./resources/products.tsp";
 import "./resources/tags.tsp";
 import "./resources/users.tsp";
 
+using TypeSpec.Http;
+
+@useAuth(ApiKeyAuth<ApiKeyLocation.header, "Authorization">)
 @service({
   title: "Developer Services API",
   version: "2022-04-01-preview",
