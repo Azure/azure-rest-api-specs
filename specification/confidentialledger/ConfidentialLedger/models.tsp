@@ -16,6 +16,7 @@ model CollectionIdParameter {
 enum ConfidentialLedgerQueryState {
   "Loading",
   "Ready",
+  "Test"
 }
 
 enum TransactionState {
