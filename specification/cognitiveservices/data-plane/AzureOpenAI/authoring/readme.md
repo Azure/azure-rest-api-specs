@@ -86,11 +86,11 @@ directive:
     reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
 ```
 
-## AzureOpenAI 2023-04-01-preview
+## AzureOpenAI 2023-04-15-preview
 These settings apply only when `api-version=2023-04-201-preview` is specified in the query parameters of the request.
 
 ``` yaml $(tag) == 'release_2023_04_01_preview'
-input-file: preview/2023-04-01-preview/images.json
+input-file: preview/2023-04-15-preview/images.json
 ```
 
 AutoRest-Linter Suppressions
