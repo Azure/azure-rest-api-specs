@@ -312,7 +312,7 @@
       "type": "object",
       "properties": {
         "category": {
-          "description": "The category of the budget. 'Cost' defines a Budget, 'ReservationUtilization' defines an RU (Reservation Utilization) Alert.",
+          "description": "The category of the budget. 'Cost' defines a Budget, 'ReservationUtilization' defines an RU (Reservation Utilization) Alert Rule.",
           "type": "string",
           "enum": [
             "Cost",
@@ -320,7 +320,18 @@
           ],
           "x-ms-enum": {
             "name": "CategoryType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Cost",
+                "description": "A Budget that evaluates monetary cost of Azure resources against an amount, and alerts based on a configured notification threshold.",
+                "name": "Cost"
+              },
+              {
+                "value": "ReservationUtilization",
+                "description": "An Alert Rule that evalutes the utilization percentage of Azure Reservations, and alerts based on a configured notification threshold."
+              }
+            ]
           }
         },
         "amount": {
@@ -328,7 +339,7 @@
           "type": "number"
         },
         "timeGrain": {
-          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain. BillingMonth, BillingQuarter, and BillingAnnual are only supported by WD customers. Last7Days and Last30Days only apply to RU Alerts.",
+          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain. BillingMonth, BillingQuarter, and BillingAnnual are only supported by WD customers. Last7Days and Last30Days only apply to CategoryType: ReservationUtilization only.",
           "type": "string",
           "enum": [
             "Monthly",
@@ -342,7 +353,49 @@
           ],
           "x-ms-enum": {
             "name": "TimeGrainType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Monthly",
+                "description": "CategoryType: Cost only.\n\n The budget will track costs in the current calendar month against the amount.",
+                "name": "Monthly"
+              },
+              {
+                "value": "Quarterly",
+                "description": "CategoryType: Cost only.\n\n The budget will track costs in the current calendar quarter against the amount.",
+                "name": "Quarterly"
+              },
+              {
+                "value": "Annually",
+                "description": "CategoryType: Cost only.\n\n The budget will track costs in the current calendar year against the amount.",
+                "name": "Annually"
+              },
+              {
+                "value": "BillingMonth",
+                "description": "CategoryType: Cost only. Web Direct customers only.\n\n The budget will track costs in the current billing month against the amount.",
+                "name": "BillingMonth"
+              },
+              {
+                "value": "BillingQuarter",
+                "description": "CategoryType: Cost only. Web Direct customers only.\n\n The budget will track costs in the current billing quarter against the amount.",
+                "name": "BillingQuarter"
+              },
+              {
+                "value": "BillingAnnual",
+                "description": "CategoryType: Cost only. Web Direct customers only.\n\n The budget will track costs in the current billing year against the amount.",
+                "name": "BillingAnnual"
+              },
+              {
+                "value": "Last7Days",
+                "description": "CategoryType: ReservationUtilization only.\n\n The Reservation Utilization Alert Rule will evaluate reservations based on their 7-Day utilization percentage.",
+                "name": "BillingMonth"
+              },
+              {
+                "value": "Last30Days",
+                "description": "CategoryType: ReservationUtilization only.\n\n The Reservation Utilization Alert Rule will evaluate reservations based on their 30-Day utilization percentage.",
+                "name": "BillingMonth"
+              }
+            ]
           }
         },
         "timePeriod": {
@@ -354,7 +407,7 @@
           "$ref": "#/definitions/BudgetFilter"
         },
         "currentSpend": {
-          "description": "The current amount of cost which is being tracked for a budget.",
+          "description": "CategoryType: Cost only.\n\n The current amount of cost which is being tracked for a budget.",
           "$ref": "#/definitions/CurrentSpend",
           "readOnly": true
         },
@@ -367,7 +420,7 @@
           "maxItems": 5
         },
         "forecastSpend": {
-          "description": "The forecasted cost which is being tracked for a budget.",
+          "description": "CategoryType: Cost only.\n\n The forecasted cost which is being tracked for a budget.",
           "$ref": "#/definitions/ForecastSpend",
           "readOnly": true
         }
@@ -383,12 +436,12 @@
       "type": "object",
       "properties": {
         "startDate": {
-          "description": "The start date for the budget.\n\nConstraints for CategoryType: Cost\nMust be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than twelve months. Past start date should  be selected within the timegrain period.\n\nConstraints for CategoryType: ReservationUtilization\nMust be on or after the current date and less than the end date.",
+          "description": "The start date for the budget.\n\n- Constraints for **CategoryType: Cost** - Must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than twelve months. Past start date should  be selected within the timegrain period.\n\n- Constraints for **CategoryType: ReservationUtilization** - Must be on or after the current date and less than the end date.",
           "type": "string",
           "format": "date-time"
         },
         "endDate": {
-          "description": "The end date for the budget.\n\nConstraints for CategoryType: Cost\nNo constraints. If not provided, we default this to 10 years from the start date.\n\nConstraints for CategoryType: ReservationUtilization\nEnd date cannot be more than 3 years after the start date.",
+          "description": "The end date for the budget.\n\n- Constraints for **CategoryType: Cost** - No constraints. If not provided, we default this to 10 years from the start date.\n\n- Constraints for **CategoryType: ReservationUtilization** - End date cannot be more than 3 years after the start date.",
           "type": "string",
           "format": "date-time"
         }
@@ -402,7 +455,7 @@
       "type": "object",
       "properties": {
         "and": {
-          "description": "The logical \"AND\" expression. Applicable to CategoryType: Cost only. Must have at least 2 items.",
+          "description": "CategoryType: Cost only.\n\n The logical \"AND\" expression. Must have at least 2 items.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/BudgetFilterProperties"
@@ -415,7 +468,7 @@
           "$ref": "#/definitions/BudgetComparisonExpression"
         },
         "tags": {
-          "description": "Has comparison expression for a tag. Applicable to CategoryType: Cost only.",
+          "description": "CategoryType: Cost only.\n\n Has comparison expression for a tag.",
           "$ref": "#/definitions/BudgetComparisonExpression"
         }
       }
@@ -429,7 +482,7 @@
           "$ref": "#/definitions/BudgetComparisonExpression"
         },
         "tags": {
-          "description": "Has comparison expression for a tag. Applicable to CategoryType: Cost only.",
+          "description": "CategoryType: Cost only.\n\n Has comparison expression for a tag.",
           "$ref": "#/definitions/BudgetComparisonExpression"
         }
       }
@@ -469,7 +522,7 @@
       ]
     },
     "CurrentSpend": {
-      "description": "The current amount of cost which is being tracked for a budget. Only applies when CategoryType: Cost.",
+      "description": "CategoryType: Cost only.\n\n The current amount of cost which is being tracked for a budget",
       "type": "object",
       "properties": {
         "amount": {
@@ -485,7 +538,7 @@
       }
     },
     "ForecastSpend": {
-      "description": "The forecasted cost which is being tracked for a budget. Only applies when CategoryType: Cost.",
+      "description": "CategoryType: Cost only.\n\n The forecasted cost which is being tracked for a budget.",
       "type": "object",
       "properties": {
         "amount": {
@@ -509,7 +562,7 @@
           "type": "boolean"
         },
         "operator": {
-          "description": "The comparison operator.\n\n Allowed values for CategoryType: Cost\n EqualTo, GreaterThan, GreaterThanOrEqualTo\n\n Allowed values for CategoryType: ReservationUtilization\n LessThan",
+          "description": "The comparison operator.\n\n- Allowed values for **CategoryType: Cost** - EqualTo, GreaterThan, GreaterThanOrEqualTo\n\n- Allowed values for **CategoryType: ReservationUtilization** - LessThan",
           "type": "string",
           "enum": [
             "EqualTo",
@@ -538,18 +591,18 @@
               },
               {
                 "value": "LessThan",
-                "description": "CategoryType: ReservationUtilization only.\n Notification will be triggered if any Reservations in the scope of the RU alert have a utilization less than the threshold percentage.",
+                "description": "CategoryType: ReservationUtilization only.\n Notification will be triggered if any Reservations in the scope of the Reservation Utilization Alert Rule have a utilization less than the threshold percentage.",
                 "name": "LessThan"
               }
             ]
           }
         },
         "threshold": {
-          "description": "Threshold value associated with a notification. It is always percent and has to be between 0 and 100 with a maximum of 2 decimal places.\n\n CategoryType: Cost\n Notification is sent when the cost exceeded the threshold. \n\n CategoryType: ReservationUtilization\n Notification is sent when a reservation has a utilization percentage below the threshold.",
+          "description": "Threshold value associated with a notification. It is always percent and has to be between 0 and 100 with a maximum of 2 decimal places.\n\n- **CategoryType: Cost** - Notification is sent when the cost exceeded the threshold.\n\n- **CategoryType: ReservationUtilization** - Notification is sent when a reservation has a utilization percentage below the threshold.",
           "type": "number"
         },
         "frequency": {
-          "description": "Frequency of a notification. Represents how long the notification will be silent after triggering an alert for a threshold breach.\n CategoryType:ReservationUtilization only.\n If not specified, the frequency will be set by default based on the timeGrain (Weekly when timeGrain: Last7Days, Monthly when timeGrain: Last30Days)",
+          "description": "CategoryType: ReservationUtilization only.\n\nFrequency of a notification. Represents how long the notification will be silent after triggering an alert for a threshold breach. If not specified, the frequency will be set by default based on the timeGrain (Weekly when timeGrain: Last7Days, Monthly when timeGrain: Last30Days)",
           "type": "string",
           "enum": [
             "Daily",
@@ -604,7 +657,7 @@
           "maxItems": 50
         },
         "thresholdType": {
-          "description": "The type of threshold. Only applicable for CategoryType: Cost.",
+          "description": "CategoryType: Cost only.\n\n The type of threshold.",
           "type": "string",
           "enum": [
             "Actual",
@@ -674,7 +727,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with budget operations.\n\n Supported scopes for CategoryType: Cost\n\n Azure RBAC Scopes:\n '/subscriptions/{subscriptionId}/' for subscription scope,\n '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,\n '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope,\n\n Legacy EA (Enterprise Agreement) Scopes:\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope,\n\n MCA (Modern Customer Agreement) Scopes:\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope (CSP only),\n\n AWS Scopes:\n '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}' for External Billing Account scope,\n '/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionId} for External Subscription scope'\n\n Supported scopes for CategoryType: ReservationUtilization\n\n Enterprise Agreement Scopes:\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account Scope\n\n Modern Customer Agreement Scopes:\n\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "description": "The scope associated with budget operations.\n\n Supported scopes for CategoryType: Cost\n\n Azure RBAC Scopes: '/subscriptions/{subscriptionId}/' for subscription scope,\n '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope,\n '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope,\n\n Legacy EA (Enterprise Agreement) Scopes: \n\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope,\n\n MCA (Modern Customer Agreement) Scopes:\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope,\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope (CSP only),\n\n AWS Scopes:\n '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}' for External Billing Account scope,\n '/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionId} for External Subscription scope'\n\n Supported scopes for CategoryType: ReservationUtilization\n\n Enterprise Agreement Scopes:\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account Scope\n\n Modern Customer Agreement Scopes:\n\n '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
