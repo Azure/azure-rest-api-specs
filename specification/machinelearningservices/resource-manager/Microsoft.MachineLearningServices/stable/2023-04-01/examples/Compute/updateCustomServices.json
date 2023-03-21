@@ -7,39 +7,38 @@
     "api-version": "2023-04-01",
     "customServices": [
       {
-        "name": "rstudio-workbench",
-        "image": {
-          "type": "docker",
-          "reference": "ghcr.io/azure/rstudio-workbench:latest"
-        },
-        "environmentVariables": {
-          "RSP_LICENSE": {
-            "type": "local",
-            "value": "XXXX-XXXX-XXXX-XXXX-XXXX-XXXX-XXXX"
-          }
-        },
-        "docker": {
-          "privileged": true
-        },
-        "endpoints": [
-          {
-            "protocol": "http",
-            "name": "connect",
-            "target": 8888,
-            "published": 4444,
-            "hostIp": null
-          }
-        ],
-        "volumes": [
-          {
-            "type": "bind",
-            "source": "/mnt/azureuser/",
-            "target": "/home/azureuser/",
-            "readOnly": true
-          }
-        ]
+          "endpoints": [
+              {
+                  "name": "lab",
+                  "target": 8888,
+                  "published": 8888,
+                  "protocol": "http"
+              }
+          ],
+          "image": {
+              "type": "docker",
+              "reference": "docker.io/jupyter/minimal-notebook:latest"
+          },
+          "name": "jupyter"
+      },
+      {
+          "endpoints": [
+              {
+                  "name": "connect",
+                  "target": 8787,
+                  "published": 8787,
+                  "protocol": "http"
+              }
+          ],
+          "image": {
+              "type": "docker",
+              "reference": "docker.io/rocker/rstudio:latest"
+          },
+          "name": "rocker",
+          "title": "Rocker R ML IDE",
+          "description": "An open source R IDE."
       }
-    ]
+  ]
   },
   "responses": {
     "200": {}
