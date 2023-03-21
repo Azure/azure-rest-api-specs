@@ -505,9 +505,6 @@
         },
         "type": {
           "$ref": "#/definitions/FeaturesItemTypeEnum"
-        },
-        "geometry": {
-          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
         }
       },
       "discriminator": "kind",
@@ -530,7 +527,12 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/WaypointProperties"
         }
-      }
+      },
+      "required": [
+        "type",
+        "geometry",
+        "properties"
+      ]
     },
     "WaypointProperties": {
       "type": "object",
@@ -567,6 +569,11 @@
             }
           }
         }
+      ],
+      "required": [
+        "type",
+        "geometry",
+        "properties"
       ]
     },
     "ManeuverPointProperties": {
@@ -656,6 +663,11 @@
             }
           }
         }
+      ],
+      "required": [
+        "type",
+        "geometry",
+        "properties"
       ]
     },
     "ViaWaypointProperties": {
@@ -710,6 +722,12 @@
             }
           }
         }
+      ],
+      "required": [
+        "type",
+        "geometry",
+        "properties",
+        "bbox"
       ]
     },
     "RoutePathProperties": {
@@ -816,6 +834,7 @@
     "InputPointTypeEnum": {
       "description": "point type",
       "type": "string",
+      "default": "waypoint",
       "enum": [
         "waypoint",
         "viaWaypoint"
