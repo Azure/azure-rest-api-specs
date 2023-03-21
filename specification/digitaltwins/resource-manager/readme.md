@@ -29,7 +29,6 @@ openapi-type: arm
 tag: package-2023-01
 ```
 
-
 ### Tag: package-2023-01
 
 These settings apply only when `--tag=package-2023-01` is specified on the command line.
@@ -38,6 +37,7 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 input-file:
   - Microsoft.DigitalTwins/stable/2023-01-31/digitaltwins.json
 ```
+
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
