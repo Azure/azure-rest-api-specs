@@ -34,7 +34,6 @@ https://westus.api.cognitive.microsoft.com).
 @versionedDependency(
   [
     [
-      ServiceApiVersions.v2022_12_01,
       ServiceApiVersions.v2023_03_15_Preview,
       Azure.Core.Versions.v1_0_Preview_1
     ]

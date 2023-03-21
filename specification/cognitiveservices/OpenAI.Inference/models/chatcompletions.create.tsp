@@ -5,7 +5,7 @@ import "./completions.create.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Azure.OpenAI.Completions;
+namespace Azure.OpenAI.ChatCompletions;
 
 @doc("""
 """)
