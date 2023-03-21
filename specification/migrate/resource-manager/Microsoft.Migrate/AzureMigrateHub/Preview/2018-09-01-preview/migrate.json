@@ -118,7 +118,23 @@
     },
     "virtualDesktopUserName": {
       "name": "virtualDesktopUserName",
+      "description": "The ARM name of the webserver to be fetched.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "webServerId": {
+      "name": "webServerId",
       "description": "The ARM name of the virtual desktop user.",
+      "type": "string",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "required": true
+    },
+    "webSiteName": {
+      "name": "webSiteName",
+      "description": "The ARM name of the website to be fetched.",
       "type": "string",
       "in": "path",
       "x-ms-parameter-location": "method",
@@ -1231,6 +1247,129 @@
         "x-ms-examples": {
           "Solutions_CleanupData": {
             "$ref": "./examples/MigrateProjects_EnumerateWebServers.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebServers/{webServerId}": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebserversController"
+        ],
+        "summary": "Gets a webserver in the migrate project.",
+        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebserversController_GetWebServer",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/webServerId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebServer"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_CleanupData": {
+            "$ref": "./examples/MigrateProjects_GetWebServer.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebSites": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebSitesController"
+        ],
+        "summary": "Gets a list of websites in the migrate project.",
+        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebSitesController_EnumerateWebSites",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/continuationToken"
+          },
+          {
+            "$ref": "#/parameters/pageSize"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebSiteCollection"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_CleanupData": {
+            "$ref": "./examples/MigrateProjects_EnumerateWebSites.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/MigrateProjects/{migrateProjectName}/WebSites/{webSiteName}": {
+      "get": {
+        "tags": [
+          "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebSitesController"
+        ],
+        "summary": "Gets a website in the migrate project.",
+        "operationId": "Microsoft.Azure.AMH.WebRole.V2018_09_01_preview.WebSitesController_GetWebSite",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/migrateProjectName"
+          },
+          {
+            "$ref": "#/parameters/webSiteName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WebSite"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Solutions_CleanupData": {
+            "$ref": "./examples/MigrateProjects_GetWebSite.json"
           }
         }
       }
