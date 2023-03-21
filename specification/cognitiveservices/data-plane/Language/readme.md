@@ -34,8 +34,6 @@ input-file:
   - stable/2023-04-01/analyzetext-authoring.json
   - stable/2023-04-01/analyzeconversations.json
   - stable/2023-04-01/analyzeconversations-authoring.json
-  - stable/2023-04-01/questionanswering.json
-  - stable/2023-04-01/questionanswering-authoring.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:

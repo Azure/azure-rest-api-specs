@@ -28,8 +28,6 @@ input-file:
   - analyzetext-authoring.json
   - analyzeconversations.json
   - analyzeconversations-authoring.json
-  - questionanswering.json
-  - questionanswering-authoring.json
 title:
   Microsoft Cognitive Language Service
 modelerfour:
