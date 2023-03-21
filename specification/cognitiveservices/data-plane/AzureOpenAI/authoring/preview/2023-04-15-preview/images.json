@@ -120,7 +120,7 @@
             "format": "uuid",
             "description": "The id of the operation",
             "maxLength": 36,
-            "pattern": "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -181,7 +181,7 @@
             "format": "uuid",
             "description": "The id of the operation",
             "maxLength": 36,
-            "pattern": "^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -261,25 +261,6 @@
         ]
       }
     },
-    "InnerError": {
-      "type": "object",
-      "description": "The inner error if a task in a batch failed.",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "code": {
-          "type": "string",
-          "enum": [
-            "ContentFilter",
-            "Internal",
-            "BlockedImages"
-          ],
-          "description": "The error code."
-        }
-      }
-    },
     "Error": {
       "title": "Error",
       "description": "Error content as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
@@ -292,13 +273,6 @@
         },
         "code": {
           "$ref": "#/definitions/ErrorCode"
-        },
-        "details": {
-          "description": "The error details if available.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InnerError"
-          }
         }
       },
       "required": [
@@ -362,6 +336,48 @@
         }
       }
     },
+    "ImageErrorCode": {
+      "title": "ErrorCode",
+      "description": "Error codes for image errors.",
+      "enum": [
+        "ContentFilter",
+        "BlockedImages"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ErrorCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ContentFilter",
+            "description": "Generated image was filtered as a result of our safety system."
+          },
+          {
+            "value": "BlockedImages",
+            "description": "The user provided images were blocked by our safety system."
+          }
+        ]
+      }
+    },
+    "ImageError": {
+      "title": "Error",
+      "description": "The error when an image could not be generated.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "The message of this error.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "code": {
+          "$ref": "#/definitions/ImageErrorCode"
+        }
+      },
+      "required": [
+        "message",
+        "code"
+      ]
+    },
     "ImageResult": {
       "type": "object",
       "description": "The image url if successful, and an error otherwise.",
@@ -371,7 +387,7 @@
           "description": "The URL that provides temporary access to download the generated image."
         },
         "error": {
-          "$ref": "#/definitions/Error"
+          "$ref": "#/definitions/ImageError"
         }
       }
     },
