@@ -2747,6 +2747,7 @@
       "description": "This is the storage profile of a Gallery Image Version."
     },
     "ValidationsProfile": {
+      "type": "object",
       "properties": {
         "validationEtag": {
           "type": "string",
@@ -2756,7 +2757,9 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ExecutedValidation"
-          }
+          },
+          "x-ms-identifiers": [],
+          "description": "A list of executedValidation."
         },
         "platformAttributes": {
           "type": "object",
@@ -2793,6 +2796,7 @@
       "description": "The gallery artifact version source."
     },
     "ExecutedValidation": {
+      "type": "object",
       "properties": {
         "type": {
           "type": "string",
