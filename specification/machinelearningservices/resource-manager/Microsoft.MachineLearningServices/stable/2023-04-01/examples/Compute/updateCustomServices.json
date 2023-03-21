@@ -7,38 +7,38 @@
     "api-version": "2023-04-01",
     "customServices": [
       {
-          "endpoints": [
-              {
-                  "name": "lab",
-                  "target": 8888,
-                  "published": 8888,
-                  "protocol": "http"
-              }
-          ],
-          "image": {
-              "type": "docker",
-              "reference": "docker.io/jupyter/minimal-notebook:latest"
-          },
-          "name": "jupyter"
+        "endpoints": [
+          {
+            "name": "lab",
+            "target": 8888,
+            "published": 8888,
+            "protocol": "http"
+          }
+        ],
+        "image": {
+          "type": "docker",
+          "reference": "docker.io/jupyter/minimal-notebook:latest"
+        },
+        "name": "jupyter"
       },
       {
-          "endpoints": [
-              {
-                  "name": "connect",
-                  "target": 8787,
-                  "published": 8787,
-                  "protocol": "http"
-              }
-          ],
-          "image": {
-              "type": "docker",
-              "reference": "docker.io/rocker/rstudio:latest"
-          },
-          "name": "rocker",
-          "title": "Rocker R ML IDE",
-          "description": "An open source R IDE."
+        "endpoints": [
+          {
+            "name": "connect",
+            "target": 8787,
+            "published": 8787,
+            "protocol": "http"
+          }
+        ],
+        "image": {
+          "type": "docker",
+          "reference": "docker.io/rocker/rstudio:latest"
+        },
+        "name": "rocker",
+        "title": "Rocker R ML IDE",
+        "description": "An open source R IDE."
       }
-  ]
+    ]
   },
   "responses": {
     "200": {}
