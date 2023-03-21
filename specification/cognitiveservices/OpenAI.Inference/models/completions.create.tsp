@@ -33,6 +33,7 @@ Minimum of 0 and maximum of 2 allowed.
 """)
     temperature?: float32;
 
+// Note: this is reprojected as "NucleusSamplingFactor"
     @doc("""
 An alternative to sampling with temperature, called nucleus sampling, where the
 model considers the results of the tokens with top_p probability mass. So 0.1
@@ -45,6 +46,7 @@ Minimum of 0 and maximum of 1 allowed.
 """)
     top_p?: float32;
 
+// Note: this is reprojected as "TokenSelectionBias"
     @doc("""
 Defaults to null. Modify the likelihood of specified tokens appearing in the
 completion. Accepts a json object that maps tokens (specified by their token ID
@@ -62,19 +64,21 @@ token. As an example, you can pass {\"50256\" &#58; -100} to prevent the
     @doc("The ID of the end-user, for use in tracking and rate-limiting.")
     user?: string;
 
+// Note: this is reprojected as "ChoicesPerPrompt"
     @doc("""
 How many snippets to generate for each prompt. Minimum of 1 and maximum of 128
 allowed.
 """)
     n?: int32;
 
-// stream mode requires some API update that we cannot generate nbow
+// Suppression: Streaming is managed via API surface (method-level)
 //     @doc("""
 // Whether to enable streaming for this endpoint. If set, tokens will be sent as
 // server-sent events as they become available.
 // """)
 //     stream?: boolean;
 
+// Note: this is reprojected as "LogProbabilityCount"
     @doc("""
 Include the log probabilities on the `logprobs` most likely tokens, as well the
 chosen tokens. So for example, if `logprobs` is 10, the API will return a list
@@ -83,8 +87,9 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
 """)
     logprobs?: int32;
 
-    @doc("The name of the model to use")
-    "model"?: string;
+// Suppression: this is handled at the method level
+//    @doc("The name of the model to use")
+//    "model"?: string;
 
     @doc("Echo back the prompt in addition to the completion")
     echo?: boolean;
@@ -92,14 +97,16 @@ have logprobs returned. Minimum of 0 and maximum of 100 allowed.
     @doc("A sequence which indicates the end of the current document.")
     stop?: string[];
 
-    @doc("Completion configuration")
-    completion_config?: string;
+// Suppression: pending retroactive removal from data plane
+//    @doc("Completion configuration")
+//    completion_config?: string;
 
-    @doc("""
-can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
-enabled, 2=full cache
-""")
-    cache_level?: int32;
+// Suppression: pending retroactive removal from data plane
+//     @doc("""
+// can be used to disable any server-side caching, 0=no cache, 1=prompt prefix
+// enabled, 2=full cache
+// """)
+//     cache_level?: int32;
 
     @doc("""
 How much to penalize new tokens based on their existing frequency in the text
@@ -114,6 +121,7 @@ far. Increases the model's likelihood to talk about new topics.
 """)
     frequency_penalty?: float32;
 
+// Note: this is reprojected as "GenerationSampleCount"
     @doc("""
 How many generations to create server side, and display only the best. Will not
 stream intermediate progress if best_of > 1. Has maximum value of 128.

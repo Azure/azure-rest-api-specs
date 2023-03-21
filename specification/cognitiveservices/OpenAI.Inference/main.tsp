@@ -35,6 +35,7 @@ https://westus.api.cognitive.microsoft.com).
   [
     [
       ServiceApiVersions.v2022_12_01,
+      ServiceApiVersions.v2023_03_15_Preview,
       Azure.Core.Versions.v1_0_Preview_1
     ]
   ]
@@ -44,6 +45,7 @@ namespace Azure.OpenAI;
 
 enum ServiceApiVersions {
   v2022_12_01: "2022-12-01",
+  v2023_03_15_Preview: "2023-03-15-preview",
 }
 
 
