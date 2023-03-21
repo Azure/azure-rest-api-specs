@@ -7,19 +7,11 @@
     "api-version": "2023-04-01-preview",
     "body": {
       "properties": {
-        "partialNotificationSetting": {
+        "notificationSetting": {
           "webhooks": {
             "string": {
               "eventType": "string",
-              "webhookType": "AzureDevOps",
-              "planUri": "string",
-              "projectId": "string",
-              "hubName": "string",
-              "planId": "string",
-              "authToken": "string",
-              "jobId": "string",
-              "timelineId": "string",
-              "taskInstanceId": "string"
+              "webhookType": "AzureDevOps"
             }
           }
         }
@@ -42,7 +34,7 @@
             "string": "string"
           },
           "displayName": "string",
-          "status": "Starting",
+          "status": "Canceled",
           "experimentName": "string",
           "services": {
             "string": {
@@ -70,21 +62,19 @@
               "string"
             ],
             "emailOn": [
-              "JobFailed"
+              "JobCompleted"
             ],
             "webhooks": {
               "string": {
                 "eventType": "string",
-                "webhookType": "AzureDevOps",
-                "planUri": "string",
-                "projectId": "string",
-                "hubName": "string",
-                "planId": "string",
-                "authToken": "string",
-                "jobId": "string",
-                "timelineId": "string",
-                "taskInstanceId": "string"
+                "webhookType": "AzureDevOps"
               }
+            }
+          },
+          "secretsConfiguration": {
+            "string": {
+              "workspaceSecretName": "string",
+              "uri": null
             }
           },
           "jobType": "Command",
@@ -97,10 +87,10 @@
             ],
             "properties": {
               "string": {
-                "6fcd731e-223c-41af-8baa-aff9bfde38e4": null
+                "00cac5bf-6a80-4db4-9c7f-1feebe8c21c8": null
               }
             },
-            "shmSize": "string",
+            "shmSize": "2g",
             "dockerArgs": "string"
           },
           "codeId": "string",
@@ -119,9 +109,9 @@
               "uri": "string",
               "assetName": "string",
               "assetVersion": "string",
-              "mode": "Direct",
+              "mode": "Upload",
               "autoDeleteSetting": {
-                "condition": "LastAccessedGreaterThan",
+                "condition": "CreatedGreaterThan",
                 "value": "string"
               },
               "jobOutputType": "uri_file"
@@ -143,7 +133,7 @@
             "string": "string"
           },
           "parameters": {
-            "decea586-0f51-4237-a7e1-84a0f9b73fc9": null
+            "6f851dd9-5a2d-4bd7-8a67-3b0e6a075bdb": null
           },
           "queueSettings": {
             "jobTier": "Premium",
@@ -151,12 +141,12 @@
           }
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999+00:41",
+          "createdAt": "2020-01-01T12:34:56.999+00:44",
           "createdBy": "string",
-          "createdByType": "Application",
-          "lastModifiedAt": "2020-01-01T12:34:56.999+00:41",
+          "createdByType": "Key",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:44",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "Application"
+          "lastModifiedByType": "Key"
         }
       }
     }
