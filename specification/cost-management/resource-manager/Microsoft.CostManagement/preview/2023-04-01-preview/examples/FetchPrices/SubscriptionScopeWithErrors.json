@@ -1,0 +1,52 @@
+{
+    "parameters": {
+      "api-version": "2023-04-01-preview",
+      "subscriptionId": "43342d79-afa0-48b8-9397-5134621370d0",
+      "parameters": {
+        "regionAgnosticIds": {
+          "ids": [
+            "2fee86b7-7c49-46ac-851f-95094c188ef6",
+            "2416f530-b190-43d7-9fec-239e1a57ea66"
+          ],
+          "location": "eastus"
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "body": [
+          {
+            "id": "e0e25f73-0d85-4350-bd93-d9d5bca75a58",
+            "error": {
+              "type": "InvalidOfferingId",
+              "description": "The OfferingId provided is invalid."
+            }
+          },
+          {
+            "id": "2fee86b7-7c49-46ac-851f-95094c188ef6",
+            "unitOfMeasure": "1 Hour",
+            "billingCurrency": "USD",
+            "pricingCurrency": "USD",
+            "prices": [
+              {
+                "type": "Consumption",
+                "tierMinimumUnits": 0,
+                "unitPrice": 1.65,
+                "unitPriceinBillingCurrency": 1.65,
+                "unitEffectivePrice": 1.485,
+                "unitEffectivePriceInBillingCurrency": 1.485
+              },
+              {
+                "type": "DevTestConsumption",
+                "tierMinimumUnits": 0,
+                "unitPrice": 1.10,
+                "unitPriceinBillingCurrency": 1.10,
+                "unitEffectivePrice": 0.945,
+                "unitEffectivePriceInBillingCurrency": 0.945
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }

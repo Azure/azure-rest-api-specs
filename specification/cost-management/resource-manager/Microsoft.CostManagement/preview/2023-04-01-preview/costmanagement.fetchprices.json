@@ -1,0 +1,273 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2023-04-01-preview",
+    "title": "CostManagementClient"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/fetchPrices": {
+      "post": {
+        "tags": [
+          "FetchPrices"
+        ],
+        "operationId": "FetchPrices_SubscriptionScope",
+        "description": "Retrieves prices for a given set of product identifiers.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "FetchPrices": {
+            "$ref": "./examples/FetchPrices/SubscriptionScope.json"
+          },
+          "FetchPricesWithErrors": {
+            "$ref": "./examples/FetchPrices/SubscriptionScopeWithErrors.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RequestDefinition"
+            },
+            "description": "Parameters supplied to the FetchPrices post operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FetchPricesResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "common-types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FetchPricesResult": {
+      "type": "array",
+      "description": "Pricing related properties for each identifier requested.",
+      "items": {
+        "$ref": "#/definitions/PriceSet"
+      }
+    },
+    "RequestDefinition": {
+      "type": "object",
+      "description": "Parameters that needs to be included in the request to retrieve prices.",
+      "properties": {
+        "regionAgnosticIds": {
+          "description": "Uniquely identifies a product for which the prices will be returned.",
+          "$ref": "#/definitions/RegionAgnosticIds"
+        }
+      },
+      "required": [
+        "regionAgnosticIds"
+      ]
+    },
+    "RegionAgnosticIds": {
+      "type": "object",
+      "description": "Pricing details by identifier",
+      "properties": {
+        "ids": {
+          "description": "List of OfferingIds. The array can hold a maximum of 1000 elements.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "description": "Name of the location or zone where the resource is present. If empty, the default value is Global. ARM locations can be fetched from [Subscriptions - List Locations | Microsoft Docs](https://learn.microsoft.com/en-us/rest/api/resources/subscriptions/list-locations?tabs=HTTP). The value in 'name' property of this API response should be used.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ids"
+      ]
+    },
+    "PriceSet": {
+      "type": "object",
+      "description": "Pricing details by identifier",
+      "properties": {
+        "id": {
+          "description": "OfferingId for which the prices will be returned.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "Consumption meterId for the product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "How usage is measured for the service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "prices": {
+          "description": "Collection of prices for the given product identifier.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Prices"
+          },
+          "x-ms-identifiers": []
+        },
+        "pricingCurrency": {
+          "description": "Currency in which the price is represented.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingCurrency": {
+          "description": "Customer's local currency in which the price is represented.",
+          "type": "string",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Details of the error, if any.",
+          "type": "string",
+          "readOnly": true,
+          "$ref": "#/definitions/PricingError"
+        }
+      }
+    },
+    "Prices": {
+      "type": "object",
+      "description": "Pricing details by identifier",
+      "properties": {
+        "type": {
+          "description": "Type of the price.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Consumption",
+            "DevTestConsumption",
+            "SavingsPlanConsumption",
+            "Spot"
+          ],
+          "x-ms-enum": {
+            "name": "PriceType",
+            "modelAsString": true
+          }
+        },
+        "term": {
+          "description": "Applicable for SavingsPlan and Entitlement price types. ",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "P1Y",
+            "P3Y"
+          ],
+          "x-ms-enum": {
+            "name": "Term",
+            "modelAsString": true
+          }
+        },
+        "tierMinimumUnits": {
+          "description": "Minimum units of consumption to avail the price.",
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true
+        },
+        "unitPrice": {
+          "description": "Unit price without discount.",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "unitPriceinBillingCurrency": {
+          "description": "Unit price without discount in billing currency.",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "unitEffectivePrice": {
+          "description": "Unit price with discount.",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        },
+        "unitEffectivePriceinBillingCurrency": {
+          "description": "Unit price with discount in billing currency.",
+          "type": "number",
+          "format": "double",
+          "readOnly": true
+        }
+      }
+    },
+    "PricingError": {
+      "type": "object",
+      "description": "Pricing details by identifier",
+      "properties": {
+        "type": {
+          "description": "Type of error.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "InvalidOfferingId"
+          ],
+          "x-ms-enum": {
+            "name": "ErrorType",
+            "modelAsString": true
+          }
+        },
+        "description": {
+          "description": "Text describing why prices weren't returned for an identifier.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Id that uniquely identifies an azure subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
