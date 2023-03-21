@@ -1,133 +1,133 @@
 {
   "parameters": {
-      "Ocp-Apim-Subscription-Key": "{API key}",
-      "api-version": "2023-04-15-preview",
-      "Endpoint": "{Endpoint}",
-      "body": {
-          "kind": "EntityRecognition",
-          "parameters": {
-              "modelVersion": "latest",
-              "inclusionList": [
-                  "Default"
-              ],
-              "exclusionList": [
-                  "Numeric"
-              ],
-              "overlapPolicy": {
-                  "policyKind": "allowOverlap"
-              }
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2023-04-15-preview",
+    "Endpoint": "{Endpoint}",
+    "body": {
+      "kind": "EntityRecognition",
+      "parameters": {
+        "modelVersion": "latest",
+        "inclusionList": [
+          "Default"
+        ],
+        "exclusionList": [
+          "Numeric"
+        ],
+        "overlapPolicy": {
+          "policyKind": "allowOverlap"
+        }
+      },
+      "analysisInput": {
+        "documents": [
+          {
+            "id": "2",
+            "language": "en",
+            "text": "When I was 5 years old I had $90.00 dollars to my name."
           },
-          "analysisInput": {
-              "documents": [
-                  {
-                      "id": "2",
-                      "language": "en",
-                      "text": "When I was 5 years old I had $90.00 dollars to my name."
-                  },
-                  {
-                      "id": "3",
-                      "language": "en",
-                      "text": "When we flew from LAX it seemed like we were moving at 10 meters per second. I was lucky to see Hong Kong, Effile Tower, and the Nile."
-                  }
-              ]
+          {
+            "id": "3",
+            "language": "en",
+            "text": "When we flew from LAX it seemed like we were moving at 10 meters per second. I was lucky to see Hong Kong, Effile Tower, and the Nile."
           }
+        ]
       }
+    }
   },
   "responses": {
-      "200": {
-          "headers": {},
-          "body": {
-              "kind": "EntityRecognitionResults",
-              "results": {
-                  "documents": [
-                      {
-                          "entities": [],
-                          "id": "2",
-                          "warnings": []
-                      },
-                      {
-                          "entities": [
-                              {
-                                  "text": "LAX",
-                                  "type": "Airport",
-                                  "offset": 18,
-                                  "length": 3,
-                                  "score": 0.72,
-                                  "tags": [
-                                      {
-                                          "name": "Location",
-                                          "score": 0.90
-                                      },
-                                      {
-                                          "name": "Structural",
-                                          "score": 0.72
-                                      }
-                                  ]
-                              },
-                              {
-                                  "text": "Hongkong",
-                                  "type": "City",
-                                  "offset": 96,
-                                  "length": 9,
-                                  "score": 0.8,
-                                  "tags": [
-                                      {
-                                          "name": "Location",
-                                          "score": 0.84
-                                      },
-                                      {
-                                          "name": "GPE",
-                                          "score": 0.84
-                                      },
-                                      {
-                                          "name": "City",
-                                          "score": 0.8
-                                      }
-                                  ]
-                              },
-                              {
-                                  "text": "Eiffel Tower",
-                                  "type": "Structural",
-                                  "offset": 107,
-                                  "length": 12,
-                                  "score": 0.90,
-                                  "tags": [
-                                      {
-                                          "name": "Location",
-                                          "score": 0.90
-                                      },
-                                      {
-                                          "name": "Structural",
-                                          "score": 0.90
-                                      }
-                                  ]
-                              },
-                              {
-                                  "text": "Nile",
-                                  "type": "Geological",
-                                  "offset": 129,
-                                  "length": 4,
-                                  "score": 0.63,
-                                  "tags": [
-                                      {
-                                          "name": "Location",
-                                          "score": 0.90
-                                      },
-                                      {
-                                          "name": "Geological",
-                                          "score": 0.63
-                                      }
-                                  ]
-                              }
-                          ],
-                          "id": "3",
-                          "warnings": []
-                      }
-                  ],
-                  "errors": [],
-                  "modelVersion": "2021-06-01"
-              }
-          }
+    "200": {
+      "headers": {},
+      "body": {
+        "kind": "EntityRecognitionResults",
+        "results": {
+          "documents": [
+            {
+              "entities": [],
+              "id": "2",
+              "warnings": []
+            },
+            {
+              "entities": [
+                {
+                  "text": "LAX",
+                  "type": "Airport",
+                  "offset": 18,
+                  "length": 3,
+                  "score": 0.72,
+                  "tags": [
+                    {
+                      "name": "Location",
+                      "score": 0.9
+                    },
+                    {
+                      "name": "Structural",
+                      "score": 0.72
+                    }
+                  ]
+                },
+                {
+                  "text": "Hongkong",
+                  "type": "City",
+                  "offset": 96,
+                  "length": 9,
+                  "score": 0.8,
+                  "tags": [
+                    {
+                      "name": "Location",
+                      "score": 0.84
+                    },
+                    {
+                      "name": "GPE",
+                      "score": 0.84
+                    },
+                    {
+                      "name": "City",
+                      "score": 0.8
+                    }
+                  ]
+                },
+                {
+                  "text": "Eiffel Tower",
+                  "type": "Structural",
+                  "offset": 107,
+                  "length": 12,
+                  "score": 0.9,
+                  "tags": [
+                    {
+                      "name": "Location",
+                      "score": 0.9
+                    },
+                    {
+                      "name": "Structural",
+                      "score": 0.9
+                    }
+                  ]
+                },
+                {
+                  "text": "Nile",
+                  "type": "Geological",
+                  "offset": 129,
+                  "length": 4,
+                  "score": 0.63,
+                  "tags": [
+                    {
+                      "name": "Location",
+                      "score": 0.9
+                    },
+                    {
+                      "name": "Geological",
+                      "score": 0.63
+                    }
+                  ]
+                }
+              ],
+              "id": "3",
+              "warnings": []
+            }
+          ],
+          "errors": [],
+          "modelVersion": "2021-06-01"
+        }
       }
+    }
   }
 }
