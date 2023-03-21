@@ -4467,11 +4467,14 @@
           "type": "object",
           "$ref": "#/definitions/DomainValidationProperties"
         },
-        "referencedRoutePath": {
+        "referencedRoutePaths": {
           "description": "The JSON object list that contains the overall picture of how routes are used for the shared custom domain across different profiles.",
           "readOnly": true,
-          "type": "object",
-          "$ref": "#/definitions/AFDDomainReferencedRoutePathList"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AFDDomainReferencedRoutePath"
+          },
+          "x-ms-identifiers": ["/routeId/id"]
         }
       }
     },
@@ -4563,23 +4566,11 @@
         }
       }
     },
-    "AFDDomainReferencedRoutePathList": {
-      "description": "The JSON object list that contains the overall picture of how routes are used for the shared custom domain across different profiles.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AFDDomainReferencedRoutePath"
-          },
-          "description": "List of route configuration of the shared custom domain."
-        }
-      }
-    },
     "AFDDomainReferencedRoutePath": {
       "description": "route configuration of the shared custom domain.",
       "type": "object",
       "properties": {
-        "route": {
+        "routeId": {
           "description": "Resource reference to the shared custom domain.",
           "type": "object",
           "$ref": "./cdn.json#/definitions/ResourceReference"
