@@ -309,7 +309,7 @@
         "tags": [
           "ServiceConfigurations"
         ],
-        "summary": "Lists of all the services associated with endpoint resource",
+        "summary": "Lists of all the services associated with endpoint resource.",
         "operationId": "ServiceConfigurations_ListByEndpointResource",
         "description": "API to enumerate registered services in service configurations under a Endpoint Resource",
         "produces": [
@@ -402,7 +402,7 @@
         "tags": [
           "ServiceConfigurations"
         ],
-        "description": "Create a service in serviceConfiguration for the endpoint resource.",
+        "description": "Create or update a service in serviceConfiguration for the endpoint resource.",
         "operationId": "ServiceConfigurations_CreateOrupdate",
         "produces": [
           "application/json"
@@ -446,7 +446,7 @@
             }
           },
           "201": {
-            "description": "ServiceConfiguration resource is successfully created",
+            "description": "ServiceConfiguration resource is successfully created.",
             "schema": {
               "$ref": "#/definitions/ServiceConfigurationResource"
             }
@@ -541,10 +541,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The endpoint is deleted successfully."
+            "description": "The service configuration resource is deleted successfully."
           },
           "204": {
-            "description": "The endpoint has been deleted already."
+            "description": "The service configuration resource has been deleted already."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -925,7 +925,7 @@
         },
         "port": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The port on which service is enabled."
         },
         "provisioningState": {
@@ -963,7 +963,7 @@
       "properties": {
         "port": {
           "type": "integer",
-          "format": "int32",
+          "format": "int64",
           "description": "The port on which service is enabled."
         }
       }
