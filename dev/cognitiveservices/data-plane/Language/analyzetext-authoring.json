@@ -888,8 +888,8 @@
           }
         },
         "x-ms-examples": {
-          "Successful Get Delete Deployment From Resources Status": {
-            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeleteDeploymentFromResourcesStatus.json"
+          "Successful Get Deployment Status": {
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetDeploymentStatus.json"
           }
         }
       }
@@ -2158,6 +2158,64 @@
         }
       }
     },
+    "/authoring/analyze-text/projects/global/prebuilt-entities": {
+      "get": {
+        "description": "Lists the supported prebuilt entities that can be used while creating composed entities.",
+        "operationId": "TextAnalysisAuthoring_GetSupportedPrebuiltEntities",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/TextAnalysisAuthoringProjectKindQueryOptionalParameter"
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "description": "The language to get supported prebuilt entities for. Required if multilingual is false. This is BCP-47 representation of a language. For example, use \"en\" for English, \"en-gb\" for English (UK), \"es\" for Spanish etc.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "in": "query",
+            "name": "multilingual",
+            "description": "Whether to get the support prebuilt entities for multilingual or monolingual projects. If true, the language parameter is ignored.",
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "$ref": "common.json#/parameters/TopParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/SkipParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/MaxPageSizeParameter"
+          },
+          {
+            "$ref": "common.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list of supported prebuilt entities.",
+            "schema": {
+              "$ref": "#/definitions/TextAnalysisAuthoringPrebuiltEntities"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "common.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "value"
+        }
+      }
+    },
     "/authoring/analyze-text/projects/global/training-config-versions": {
       "get": {
         "description": "Lists the support training config version for a given project type.",
@@ -2434,7 +2492,7 @@
         "projectKind",
         "targetProjectName",
         "accessToken",
-        "expirationDateTime",
+        "expiresAt",
         "targetResourceId",
         "targetResourceRegion"
       ],
@@ -2452,7 +2510,7 @@
           "description": "The access token.",
           "type": "string"
         },
-        "expirationDateTime": {
+        "expiresAt": {
           "format": "date-time",
           "description": "The expiration of the access token.",
           "type": "string"
@@ -3078,32 +3136,32 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
@@ -3986,7 +4044,7 @@
       "description": "Represents the properties for the model file.",
       "required": [
         "name",
-        "contentUrl"
+        "contentUri"
       ],
       "type": "object",
       "properties": {
@@ -3994,8 +4052,9 @@
           "description": "The name of the file.",
           "type": "string"
         },
-        "contentUrl": {
-          "description": "The url to retrieve the content of the file.",
+        "contentUri": {
+          "format": "uri",
+          "description": "The URI to retrieve the content of the file.",
           "type": "string"
         }
       },
@@ -4074,36 +4133,83 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
       "x-ms-client-name": "MultiLabelClassificationEvaluationSummary"
+    },
+    "TextAnalysisAuthoringPrebuiltEntities": {
+      "description": "Represents a list of the retrieved supported prebuilt entities.",
+      "required": [
+        "value",
+        "nextLink"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The supported prebuilt entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextAnalysisAuthoringPrebuiltEntity"
+          }
+        },
+        "nextLink": {
+          "description": "The next page link.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-client-name": "PrebuiltEntities"
+    },
+    "TextAnalysisAuthoringPrebuiltEntity": {
+      "description": "Represents a supported prebuilt entity.",
+      "required": [
+        "category",
+        "description",
+        "examples"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "The prebuilt entity category.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description.",
+          "type": "string"
+        },
+        "examples": {
+          "description": "English examples for the entity.",
+          "type": "string"
+        }
+      },
+      "x-ms-client-name": "PrebuiltEntity"
     },
     "TextAnalysisAuthoringProjectDeletionJobState": {
       "description": "Represents the state of a project deletion job.",
@@ -4581,32 +4687,32 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
@@ -4639,32 +4745,32 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
@@ -4797,32 +4903,32 @@
         },
         "microF1": {
           "format": "float",
-          "description": "Represents the micro F1",
+          "description": "Represents the micro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microPrecision": {
           "format": "float",
-          "description": "Represents the micro precision",
+          "description": "Represents the micro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "microRecall": {
           "format": "float",
-          "description": "Represents the micro recall",
+          "description": "Represents the micro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroF1": {
           "format": "float",
-          "description": "Represents the macro F1",
+          "description": "Represents the macro F1. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroPrecision": {
           "format": "float",
-          "description": "Represents the macro precision",
+          "description": "Represents the macro precision. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         },
         "macroRecall": {
           "format": "float",
-          "description": "Represents the macro recall",
+          "description": "Represents the macro recall. Expected value is a float between 0 and 1 inclusive.",
           "type": "number"
         }
       },
