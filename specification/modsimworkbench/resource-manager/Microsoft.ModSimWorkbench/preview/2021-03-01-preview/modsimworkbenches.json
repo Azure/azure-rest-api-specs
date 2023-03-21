@@ -123,11 +123,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "in": "path",
-            "name": "resourceGroup",
-            "description": "the workbench name.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -580,7 +576,7 @@
       }
     },
     "CidrBlock": {
-      "description": "this is an extension of IPAddress which includes logic related to Classes Interdomain Routing (CIDR) formatted IP Addresses.  \r\nE.g. 192.168.0.0/24, most people's default class C RFC 1918 IP space for their home router",
+      "description": "Specifies the IP address range for ModSimWorkbench workbench will use in CIDR notation. Avoid overlapping or duplicated IP address range with other ModSimWorkbench workbenches and on-premise networks when connecting to on-premise networks using VPN or ExpressRoute.",
       "type": "string"
     },
     "AppOidc": {
@@ -589,11 +585,11 @@
       "properties": {
         "clientId": {
           "type": "string",
-          "description": "Client Id"
+          "description": "Specifies the key vault secret identifier for Azure AD app client secret ID."
         },
         "secretUri": {
           "type": "string",
-          "description": "Client secret"
+          "description": "Specifies the key vault secret identifier for Azure AD app client secret value."
         }
       }
     },
@@ -607,7 +603,7 @@
           "$ref": "#/definitions/AppOidc"
         },
         "sku": {
-          "description": "Name of SKU.",
+          "description": "Name of SKU for workbench resource.",
           "type": "string"
         },
         "provisioningState": {
