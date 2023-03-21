@@ -1,0 +1,53 @@
+{
+  "operationId": "CertificateProfile_Sign",
+  "title": "Initiates a sign operation.",
+  "parameters": {
+    "codeSigningAccountName": "YourAccountName",
+    "certificateProfileName": "YourCertificateProfileName",
+    "api-version": "2022-06-15-preview",
+    "x-correlation-id": "9797c668-5b3c-4586-8e0c-2768c8160bad",
+    "body": {
+      "signatureAlgorithm": {
+        "value": "RS256"
+      },
+      "digest": "RU9Gxlc6itrq37oQXfQePL+FdaSHYNsUvtyALsQMjEY=",
+      "fileHashList": [
+        "AQIDBAUGBwgJAAsMDQ4PEBESEwoVFhcYGRobHB0UHyA=",
+        "ChQeKDI8RlBaAG54goyWoKq0vmTS3Obw+h4lJicoKSo="
+      ],
+      "authenticodeHashList": [
+        "dy8+qNT52Q05ugE8YiNeMfSedqvP5l35tgO7VwOqvvg=",
+        "E3OElkMcpKpkOe3+Xz6ADAgeYXQ5zoy7TMqyBGn2Bpc="
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "azure-async-operation": "http://localhost:8080/operations/76f60a30-d088-42e0-b16d-b76b88d3cbe1"
+      },
+      "body": {
+        "status": {
+          "value": "InProgress"
+        },
+        "signStatus": {
+          "operationId": "76f60a30-d088-42e0-b16d-b76b88d3cbe1",
+          "status": {
+            "value": "InProgress"
+          },
+          "signature": "OWY4NmQwODE4ODRjN2Q2NTlhMmZlYWEwYzU1YWQwMTVhM2JmNGYxYjJiMGI4MjJjZDE1ZDZjMTViMGYwMGEwOA==",
+          "signingCertificate": "OWY4NmQwODE4ODRjN2Q2NTlhMmZlYWEwYzU1YWQwMTVhM2JmNGYxYjJiMGI4MjJjZDE1ZDZjMTViMGYwMGEwOA=="
+        }
+      }
+    },
+    "default": {
+      "body": {
+        "errorDetail": {
+          "code": "InternalServerError",
+          "message": "An error occurred while processing the request.",
+          "target": "sign"
+        }
+      }
+    }
+  }
+}
