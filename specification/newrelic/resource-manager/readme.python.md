@@ -8,12 +8,12 @@ title: NewRelicObservabilityMgmtClient
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
 namespace: azure.mgmt.newrelicobservability
-package-name: azure-mgmt-newrelic
+package-name: azure-mgmt-newrelicobservability
 package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/newrelicobservability/azure-mgmt-newrelic/azure/mgmt/newrelicobservability
+output-folder: $(python-sdks-folder)/newrelicobservability/azure-mgmt-newrelicobservability/azure/mgmt/newrelicobservability
 ```
