@@ -1,2 +1,38 @@
+parameters:
+  python-sdk-folder:
+    default: "{cwd}/azure-sdk-for-python/"
+  java-sdk-folder:
+    default: "{cwd}/azure-sdk-for-java/"
+  js-sdk-folder:
+    default: "{cwd}/azure-sdk-for-js/"
+  csharp-sdk-folder:
+    default: "{cwd}/azure-sdk-for-csharp/"
+  service-directory-name:
+    default: "typespec-azure"
 emit:
-  - '@typespec/openapi3'
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    output-file: "azure.apimanagement.developerservicesapi.json"
+    azure-resource-provider-folder: ../../../../data-plane
+    examples-directory: ./examples
+  "@azure-tools/typespec-python":
+    package-name: "azure-apimanagement-developerservicesapi"
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-mode: dataplane
+  "@azure-tools/typespec-csharp":
+    namespace: "Azure.ApiManagement.DeveloperServicesAPI"
+    clear-output-folder: true
+    model-namespace: false
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+  "@azure-tools/typespec-typescript":
+    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/azure-apimanagement-developerservicesapi-rest"
+    generateMetadata: true
+    generateTest: true
+    azureSdkForJs: true
+    packageDetails:
+      name: "@azure-rest/azure-apimanagement-developerservicesapi-rest"
+      description: "Azure.ApiManagement.DeveloperServicesAPI Service"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-apimanagement-developerservicesapi"
+    namespace: com.azure.apimanagement.developerservicesapi

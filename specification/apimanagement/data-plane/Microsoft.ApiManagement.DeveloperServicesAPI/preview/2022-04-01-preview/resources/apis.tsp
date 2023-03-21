@@ -25,7 +25,7 @@ op GetApi(
   ...CommonParams,
   @header accept?: ContentTypes,
   @query export?: boolean
-): ApiResponse<TypedBody<Api | string, ContentTypes>>;
+): ApiResponse<TypedBody<Api, ContentTypes>>;
 //application/json should return Api
 
 @route("/apis/{apiId}/schemas")
