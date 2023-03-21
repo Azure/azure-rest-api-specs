@@ -502,10 +502,10 @@
       "type": "object"
     },
     "assignmentItem": {
-      "description": "Object to describe the resource added",
+      "description": "An entity describing a content item.",
       "properties": {
         "resourceId": {
-          "description": "The resource id ",
+          "description": "The resource id of the content item",
           "type": "string"
         }
       },
@@ -606,16 +606,17 @@
         },
         "errorMessage": {
           "description": "Message to describe error, if an error exists",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       },
       "type": "object"
     },
     "jobItem": {
-      "description": "Object to describe the item added",
+      "description": "An entity describing the publish status of a content item.",
       "properties": {
         "resourceId": {
-          "description": "The resource id",
+          "description": "The resource id of the content item",
           "type": "string"
         },
         "status": {
