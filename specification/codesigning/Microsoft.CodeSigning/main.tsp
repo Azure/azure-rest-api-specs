@@ -31,14 +31,17 @@ interface CertificateProfileOperations {
   @summary("Gets the status of a sign operation.")
   @doc("Gets the status of a sign operation.")
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
-  GetSignOperation is Foundations.GetOperationStatus<CodeSignStatusParams,OperationStatus>;
+  GetSignOperation is Foundations.GetOperationStatus<CodeSignStatus,OperationStatus>;
+
+  @summary("Gets a list of Extended Key Usage OIDs that are allowed.")
+  @doc("Gets a list of Extended Key Usage OIDs that are allowed.")
+  GetSignEku is ResourceList<Eku>;
 
   @summary("Initiates a sign operation.")
   @doc("Initiates a sign operation.")
   @pollingOperation(CertificateProfileOperations.GetSignOperation)
-  Sign is LongRunningResourceAction<CodeSigningParam,CertificateProfileParam,OperationStatus>;
+  Sign is ResourceAction<CertificateProfile,SignRequest,OperationStatus>;
 }
-
 
 @doc("Algorithms supported for signing.")
 enum SignatureAlgorithm {
@@ -64,8 +67,28 @@ enum Status {
   "Canceled",
 }
 
+@doc("Code Signing Account")
+@resource("codesigningaccounts")
+model CodeSigningAccount {
+    @key("codeSigningAccountName")
+    @visibility("read")
+    @doc("Azure Code Signing account name.")
+    codeSigningAccountName: string;
+}
+
+@doc("Certificate Profile")
+@resource("certificateprofiles")
+@parentResource(CodeSigningAccount)
+model CertificateProfile {
+    @key("certificateProfileName")
+    @visibility("read")
+    @doc("Azure Code Signing certificate profile name.")
+    certificateProfileName: string;
+}
+
 @doc("The sign request information to be signed.")
 model SignRequest {
+
   @doc("The following algorithm identifiers are supported.")
   signatureAlgorithm: SignatureAlgorithm;
 
@@ -109,42 +132,9 @@ digest.
   signingCertificate?: bytes;
 }
 
-@doc("Sign request parameters")
-@resource("codesigningaccounts")
-model CodeSigningParam {
-  @key("codeSigningAccount")
-  @visibility("read")
-  @doc("Azure Code Signing account name.")
-  @path
-  codeSigningAccountName: string;
-
-  @doc("Sign request details.")
-  @body
-  body: SignRequest;
-}
-
-@doc("Sign request parameters")
-@resource("certificateprofiles")
-model CertificateProfileParam {
-  @key("certificateProfileName")
-  @visibility("read")
-  @doc("Certificate profile name.")
-  @path
-  certificateProfileName: string;
-
-  @doc("Client optional correlation id to organize sub-processes")
-  @header correlationId?: string;
-}
-
 @doc("Sign status request parameters")
-@resource("codesigningaccounts")
-model CodeSignStatusParams {
-  @key("operatId")
-  @visibility("read")
-  @doc("ID of the operation.")
-  @path
-  operatId: string;
-  
+@parentResource(CertificateProfile)
+model CodeSignStatus {
   @doc("Azure Code Signing account name.")
   @path
   codeSigningAccountName: string;
@@ -152,4 +142,14 @@ model CodeSignStatusParams {
   @doc("Certificate profile name.")
   @path
   certificateProfileName: string;
+}
+
+@doc("Extended Key Usage OIDs that are allowed.")
+@resource("sign/eku")
+@parentResource(CertificateProfile)
+model Eku {
+  @key("eku")
+  @visibility("read")
+  @doc("The element of eku list.")
+  body: string[];
 }

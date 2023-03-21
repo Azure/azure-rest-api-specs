@@ -34,7 +34,7 @@
   ],
   "tags": [],
   "paths": {
-    "/codesigningaccounts/{codeSigningAccount}:sign": {
+    "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}:sign": {
       "post": {
         "operationId": "CertificateProfileOperations_Sign",
         "summary": "Initiates a sign operation.",
@@ -44,61 +44,32 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "codeSigningAccount",
+            "name": "codeSigningAccountName",
             "in": "path",
             "required": true,
             "description": "Azure Code Signing account name.",
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CertificateProfileParam.correlationId"
+            "name": "certificateProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Azure Code Signing certificate profile name.",
+            "type": "string"
           },
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "(anonymous model)"
+              "$ref": "#/definitions/SignRequest"
             }
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "description": "The location of an instance of OperationStatus",
-                "type": "string",
-                "format": "uri"
-              }
-            },
+          "200": {
+            "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "id": {
-                  "type": "string",
-                  "description": "The unique ID of the operation."
-                },
-                "status": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
-                  "description": "The status of the operation"
-                },
-                "error": {
-                  "$ref": "#/definitions/Azure.Core.Foundations.Error",
-                  "description": "Error object that describes the error when status is \"Failed\"."
-                },
-                "result": {
-                  "$ref": "#/definitions/OperationStatus",
-                  "description": "The result of the operation."
-                }
-              },
-              "description": "Provides status details for long running operations.",
-              "required": [
-                "id",
-                "status"
-              ],
-              "x-typespec-name": "Azure.Core.ResourceOperationStatus<CodeSigningParam, OperationStatus, Azure.Core.Foundations.Error>"
+              "$ref": "#/definitions/OperationStatus"
             }
           },
           "default": {
@@ -117,7 +88,7 @@
       }
     },
     "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}": {
-      "post": {
+      "get": {
         "operationId": "CertificateProfileOperations_GetSignOperation",
         "summary": "Gets the status of a sign operation.",
         "description": "Gets the status of a sign operation.",
@@ -133,19 +104,10 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/CodeSignStatusParams.codeSigningAccountName"
+            "$ref": "#/parameters/CodeSignStatus.codeSigningAccountName"
           },
           {
-            "$ref": "#/parameters/CodeSignStatusParams.certificateProfileName"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {},
-              "x-typespec-name": "(anonymous model)"
-            }
+            "$ref": "#/parameters/CodeSignStatus.certificateProfileName"
           }
         ],
         "responses": {
@@ -191,6 +153,77 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
+        }
+      }
+    },
+    "/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/eku": {
+      "get": {
+        "operationId": "CertificateProfileOperations_GetSignEku",
+        "summary": "Gets a list of Extended Key Usage OIDs that are allowed.",
+        "description": "Gets a list of Extended Key Usage OIDs that are allowed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "codeSigningAccountName",
+            "in": "path",
+            "required": true,
+            "description": "Azure Code Signing account name.",
+            "type": "string"
+          },
+          {
+            "name": "certificateProfileName",
+            "in": "path",
+            "required": true,
+            "description": "Azure Code Signing certificate profile name.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Eku"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Eku[]",
+                  "description": "The Eku items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of Eku items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Eku, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -275,22 +308,49 @@
         "modelAsString": true
       }
     },
-    "CodeSigningParam": {
+    "CertificateProfile": {
+      "type": "object",
+      "properties": {
+        "certificateProfileName": {
+          "type": "string",
+          "description": "Azure Code Signing certificate profile name.",
+          "readOnly": true
+        }
+      },
+      "description": "Certificate Profile",
+      "required": [
+        "certificateProfileName"
+      ]
+    },
+    "CodeSigningAccount": {
       "type": "object",
       "properties": {
         "codeSigningAccountName": {
           "type": "string",
           "description": "Azure Code Signing account name.",
           "readOnly": true
-        },
-        "body": {
-          "$ref": "#/definitions/SignRequest",
-          "description": "Sign request details."
         }
       },
-      "description": "Sign request parameters",
+      "description": "Code Signing Account",
       "required": [
-        "codeSigningAccountName",
+        "codeSigningAccountName"
+      ]
+    },
+    "Eku": {
+      "type": "object",
+      "properties": {
+        "body": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "The element of eku list.",
+          "readOnly": true
+        }
+      },
+      "description": "Extended Key Usage OIDs that are allowed.",
+      "required": [
         "body"
       ]
     },
@@ -440,16 +500,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "CertificateProfileParam.correlationId": {
-      "name": "correlation-id",
-      "in": "header",
-      "required": false,
-      "description": "Client optional correlation id to organize sub-processes",
-      "x-ms-client-name": "correlationId",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "CodeSignStatusParams.certificateProfileName": {
+    "CodeSignStatus.certificateProfileName": {
       "name": "certificateProfileName",
       "in": "path",
       "required": true,
@@ -457,7 +508,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "CodeSignStatusParams.codeSigningAccountName": {
+    "CodeSignStatus.codeSigningAccountName": {
       "name": "codeSigningAccountName",
       "in": "path",
       "required": true,
