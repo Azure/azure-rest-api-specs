@@ -8990,6 +8990,69 @@
       },
       "description": "ExpressRouteConnection list."
     },
+    "NetworkVirtualApplianceConnectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the NetworkVirtualApplianceConnection resource."
+        },
+        "asn": {
+          "type": "integer",
+          "readOnly": false,
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "ASN."
+        },
+        "tunnelIdentifier": {
+          "type": "integer",
+          "readOnly": false,
+          "format": "int64",
+          "minimum": 0,
+          "maximum": 4294967295,
+          "description": "Unique indentifier for the connection."
+        },
+        "bgpPeerAddress": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of bgpPeerAddresses for the NVA instances"
+        },
+        "enableInternetSecurity": {
+          "type": "boolean",
+          "description": "Enable internet security."
+        },
+        "routingConfiguration": {
+          "$ref": "#/definitions/RoutingConfiguration",
+          "description": "The Routing Configuration indicating the associated and propagated route tables on this connection."
+        }
+      },
+      "description": "Properties of the NetworkVirtualApplianceConnection subresource."
+    },
+    "NetworkVirtualApplianceConnection": {
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkVirtualApplianceConnectionProperties",
+          "description": "Properties of the express route connection."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "NetworkVirtualApplianceConnection resource."
+    },
     "ListVirtualHubBgpConnectionResults": {
       "properties": {
         "value": {
