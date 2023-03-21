@@ -1,21 +1,22 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-azure-core";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
 import "../Contoso.WidgetManager.Shared";
 
-using Cadl.Http;
-using Cadl.Rest;
-using Cadl.Versioning;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 @service({
     title: "Contoso Widget Manager",
   })
 @versioned(Contoso.WidgetManager.Versions)
-@versionedDependency([[Contoso.WidgetManager.Versions.v2022_11_01_Preview, Azure.Core.Versions.v1_0_Preview_1]])
+
 namespace Azure.Contoso.WidgetManager;
 
 enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2022_11_01_Preview: "2022-11-01-preview",
 }
 
