@@ -6866,6 +6866,155 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features": {
+      "get": {
+        "tags": [
+          "Feature"
+        ],
+        "summary": "List Features.",
+        "operationId": "Features_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "featuresetName",
+            "description": "Featureset name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "featuresetVersion",
+            "description": "Featureset Version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
+          },
+          {
+            "in": "query",
+            "name": "tags",
+            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "featureName",
+            "description": "feature name.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "description",
+            "description": "description.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeatureResourceArmPaginatedResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Feature.": {
+            "$ref": "./examples/Feature/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features/{featureName}": {
+      "get": {
+        "tags": [
+          "Feature"
+        ],
+        "summary": "Get feature.",
+        "operationId": "Features_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "featuresetName",
+            "description": "Feature set name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "featuresetVersion",
+            "description": "Feature set version identifier. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "featureName",
+            "description": "Feature Name. This is case-sensitive.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/FeatureResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Feature.": {
+            "$ref": "./examples/Feature/get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}": {
       "delete": {
         "tags": [
@@ -7526,160 +7675,6 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/getFeature": {
-      "post": {
-        "tags": [
-          "FeaturesetVersion"
-        ],
-        "summary": "Get feature.",
-        "operationId": "FeaturesetVersions_GetFeature",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Feature set name. This is case-sensitive.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "version",
-            "description": "Feature set version identifier. This is case-sensitive.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Feature Name request. This is case-sensitive.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetFeatureRequest"
-            }
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/Feature"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "GetFeature Workspace Featureset Version.": {
-            "$ref": "./examples/Workspace/FeaturesetVersion/getFeature.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/listFeatures": {
-      "post": {
-        "tags": [
-          "FeaturesetVersion"
-        ],
-        "summary": "List Features.",
-        "operationId": "FeaturesetVersions_ListFeatures",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "in": "path",
-            "name": "name",
-            "description": "Featureset name. This is case-sensitive.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "path",
-            "name": "version",
-            "description": "Featureset Version identifier. This is case-sensitive.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "machineLearningServices.json#/parameters/PaginationParameter"
-          },
-          {
-            "in": "query",
-            "name": "$tags",
-            "description": "Comma-separated list of tag names (and optionally values). Example: tag1,tag2=value2",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "featureName",
-            "description": "feature name.",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "description",
-            "description": "Description for the features.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/FeatureArmPaginatedResult"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ListFeatures Workspace Featureset Version.": {
-            "$ref": "./examples/Workspace/FeaturesetVersion/listFeatures.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -15808,51 +15803,24 @@
     "Feature": {
       "description": "Dto object representing feature",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
       "properties": {
         "dataType": {
           "description": "Specifies type",
           "default": "String",
           "$ref": "#/definitions/FeatureDataType"
         },
-        "description": {
-          "description": "Specifies description",
-          "type": "string",
-          "x-nullable": true
-        },
         "featureName": {
           "description": "Specifies name",
           "type": "string",
           "x-nullable": true
-        },
-        "tags": {
-          "description": "Specifies tags",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
         }
       },
-      "additionalProperties": false
-    },
-    "FeatureArmPaginatedResult": {
-      "description": "A paginated list of Feature entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of Feature objects. If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "An array of objects of type Feature.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Feature"
-          },
-          "x-ms-identifiers": []
-        }
-      },
+      "x-ms-client-name": "FeatureProperties",
       "additionalProperties": false
     },
     "FeatureAttributionDriftMonitoringSignal": {
@@ -16012,6 +15980,44 @@
             "description": "System auto-generates feature lags."
           }
         ]
+      },
+      "additionalProperties": false
+    },
+    "FeatureResource": {
+      "description": "Azure Resource Manager resource envelope.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/Feature"
+        }
+      },
+      "x-ms-client-name": "Feature",
+      "additionalProperties": false
+    },
+    "FeatureResourceArmPaginatedResult": {
+      "description": "A paginated list of Feature entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Feature objects. If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "An array of objects of type Feature.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeatureResource"
+          }
+        }
       },
       "additionalProperties": false
     },
@@ -16875,18 +16881,6 @@
           "items": {
             "$ref": "#/definitions/ForecastingModels"
           },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "GetFeatureRequest": {
-      "description": "Request payload to retrieve feature information from a  given feature set version",
-      "type": "object",
-      "properties": {
-        "featureName": {
-          "description": "Specifies name of the feature.",
-          "type": "string",
           "x-nullable": true
         }
       },
@@ -22023,7 +22017,7 @@
       "description": "Mutable base definition for a job.",
       "type": "object",
       "properties": {
-        "partialNotificationSetting": {
+        "notificationSetting": {
           "description": "Mutable notification setting for the job",
           "$ref": "#/definitions/PartialNotificationSetting",
           "x-nullable": true
