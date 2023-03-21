@@ -74,9 +74,8 @@
           "x-ms-client-flatten": false
         },
         "status": {
-          "$ref": "#/definitions/FailoverGroupStatus",
-          "description": "The status of the failover group custom resource.",
-          "x-ms-client-flatten": false
+          "type": "object",
+          "description": "The status of the failover group custom resource."
         }
       },
       "additionalProperties": {},
@@ -142,100 +141,6 @@
       "required": [
         "role"
       ]
-    },
-    "FailoverGroupStatus": {
-      "type": "object",
-      "description": "The status of the Kubernetes custom resource.",
-      "properties": {
-        "lastUpdateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The time that the custom resource was last updated."
-        },
-        "observedGeneration": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The version of the replicaSet associated with the failover group custom resource."
-        },
-        "state": {
-          "type": "string",
-          "enum": [
-            "Waiting",
-            "Succeeded",
-            "Failed"
-          ],
-          "x-ms-enum": {
-            "name": "state",
-            "modelAsString": true
-          },
-          "description": "The state of the failover group custom resource."
-        },
-        "results": {
-          "type": "string",
-          "description": "The message in case of a failure in the failover group."
-        },
-        "role": {
-          "type": "string",
-          "enum": [
-            "primary",
-            "secondary",
-            "force-primary-allow-data-loss",
-            "force-secondary"
-          ],
-          "x-ms-enum": {
-            "name": "instanceFailoverGroupRole",
-            "modelAsString": true
-          },
-          "description": "The role of the managed instance in the failover group."
-        },
-        "replicas": {
-          "type": "array",
-          "description": "A list of failover group replicas.",
-          "items": {
-            "$ref": "#/definitions/AGReplicas",
-            "description": "The availability group replicas.",
-            "x-ms-client-flatten": false
-          },
-          "x-ms-identifiers": [
-            "replicaName"
-          ]
-        }
-      },
-      "additionalProperties": {}
-    },
-    "AGReplicas": {
-      "type": "object",
-      "description": "The information about each failover group replica.",
-      "properties": {
-        "healthState": {
-          "type": "string",
-          "description": "The health state of the replica."
-        },
-        "replicaName": {
-          "type": "string",
-          "description": "The replica name."
-        },
-        "role": {
-          "type": "string",
-          "description": "The role of the replica."
-        },
-        "connectedState": {
-          "type": "string",
-          "description": "The connected state of the replica."
-        },
-        "synchronizationState": {
-          "type": "string",
-          "description": "The synchronization state of the availability group replicas."
-        },
-        "availabilityMode": {
-          "type": "string",
-          "description": "The availability mode of the replica."
-        },
-        "secondaryRoleAllowConnections": {
-          "type": "string",
-          "description": "The secondary role allowed connections."
-        }
-      }
     }
   },
   "securityDefinitions": {
