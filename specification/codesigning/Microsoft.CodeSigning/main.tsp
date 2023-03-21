@@ -71,7 +71,7 @@ enum Status {
 @resource("codesigningaccounts")
 model CodeSigningAccount {
     @key("codeSigningAccountName")
-    @visibility("read")
+    @visibility("read", "update")
     @doc("Azure Code Signing account name.")
     codeSigningAccountName: string;
 }
@@ -81,7 +81,7 @@ model CodeSigningAccount {
 @parentResource(CodeSigningAccount)
 model CertificateProfile {
     @key("certificateProfileName")
-    @visibility("read")
+    @visibility("read", "update")
     @doc("Azure Code Signing certificate profile name.")
     certificateProfileName: string;
 }
@@ -149,7 +149,7 @@ model CodeSignStatus {
 @parentResource(CertificateProfile)
 model Eku {
   @key("eku")
-  @visibility("read")
+  @visibility("read", "update")
   @doc("The element of eku list.")
   body: string[];
 }
