@@ -1528,6 +1528,84 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/fetchSecondaryRecoveryPoints": {
+      "post": {
+          "tags": [
+              "FetchSecondaryRecoveryPoints"
+          ],
+          "description": "Returns a list of Secondary Recovery Points for a DataSource in a vault, that can be used for Cross Region Restore.",
+          "operationId": "FetchSecondaryRPs",
+          "produces": [
+              "application/json"
+          ],
+          "parameters": [
+              {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+              {
+                  "name": "location",
+                  "in": "path",
+                  "required": true,
+                  "type": "string"
+              },
+              {
+                  "name": "parameters",
+                  "in": "body",
+                  "description": "Request body for operation",
+                  "required": true,
+                  "schema": {
+                      "$ref": "#/definitions/FetchSecondaryRPsRequestParameters"
+                  }
+              },
+              {
+                  "name": "$filter",
+                  "in": "query",
+                  "description": "OData filter options.",
+                  "required": false,
+                  "type": "string"
+              },
+              {
+                  "name": "$skipToken",
+                  "in": "query",
+                  "description": "skipToken Filter.",
+                  "required": false,
+                  "type": "string"
+              }
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                      "$ref": "#/definitions/AzureBackupRecoveryPointResourceList"
+                  }
+              },
+              "404": {
+                  "description": "NotFound"
+              },
+              "default": {
+                "description": "Error response describing why the operation failed.",
+                "schema": {
+                  "$ref": "#/definitions/CloudError"
+                }
+              }
+          },
+          "x-ms-odata": "#/definitions/RecoveryPointsFilters",
+          "x-ms-pageable": {
+              "nextLinkName": "nextLink"
+          },
+          "x-ms-examples": {
+              "Fetch SecondaryRPs": {
+                  "$ref": "./examples/FetchSecondaryRPs.json"
+              }
+          }
+      }
+  },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/backupVaults/{vaultName}/backupInstances/{backupInstanceName}/rehydrate": {
       "post": {
         "description": "rehydrate recovery point for restore for a BackupInstance",
@@ -5101,6 +5179,20 @@
       },
       "title": "ClientDiscoveryValueForSingleApi",
       "type": "object"
+    },
+    "FetchSecondaryRPsRequestParameters": {
+        "description": "Information about BI whose secondary RecoveryPoints are requested\r\nSource region and\r\nBI ARM path",
+        "type": "object",
+        "properties": {
+            "sourceRegion": {
+                "description": "Source region in which BackupInstance is located",
+                "type": "string"
+            },
+            "sourceBackupInstanceId": {
+                "description": "ARM Path of BackupInstance",
+                "type": "string"
+            }
+        }
     },
     "CloudError": {
       "description": "An error response from Azure Backup.",
