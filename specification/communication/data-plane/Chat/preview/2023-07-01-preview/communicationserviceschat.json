@@ -1357,6 +1357,58 @@
         }
       }
     },
+    "AttachmentType": {
+      "description": "The type of attachment.",
+      "enum": [
+        "teamsInlineImage"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AttachmentType",
+        "modelAsString": true
+      }
+    },
+    "ChatAttachment": {
+      "description": "An attachment in a chat message.",
+      "required": [
+        "id",
+        "attachmentType",
+        "url"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Id of the attachment",
+          "type": "string",
+          "example": "A27C7079-626F-4D23-8BEE-582F2C376B5A"
+        },
+        "attachmentType": {
+          "$ref": "#/definitions/AttachmentType"
+        },
+        "contentType": {
+          "description": "The type of content of the attachment, if available",
+          "type": "string",
+          "example": "png"
+        },
+        "name": {
+          "description": "The name of the attachment content.",
+          "type": "string",
+          "example": "SomeImage.png"
+        },
+        "url": {
+          "description": "The URL where the attachment can be downloaded",
+          "type": "string",
+          "format": "uri",
+          "example": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/original"
+        },
+        "previewUrl": {
+          "description": "The URL where the preview of attachment can be downloaded",
+          "type": "string",
+          "format": "uri",
+          "example": "https://{geoChatGW}/threads/{chatThreadId}/messages/{chatMessageId}/teamsInterop/images/{imageId}/views/small"
+        }
+      }
+    },
     "ChatMessageContent": {
       "description": "Content of a chat message.",
       "type": "object",
@@ -1376,6 +1428,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ChatParticipant"
+          }
+        },
+        "attachments": {
+          "description": "List of attachments for this message",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChatAttachment"
           }
         },
         "initiatorCommunicationIdentifier": {
