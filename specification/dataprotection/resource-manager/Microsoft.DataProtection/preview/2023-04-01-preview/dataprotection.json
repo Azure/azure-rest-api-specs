@@ -4818,6 +4818,22 @@
         "featureSettings": {
           "$ref": "#/definitions/FeatureSettings",
           "description": "Feature Settings"
+        },
+        "secureScore": {
+            "description": "Secure Score of Backup Vault",
+            "enum": [
+                "None",
+                "Minimum",
+                "Adequate",
+                "Maximum",
+                "NotSupported"
+            ],
+            "type": "string",
+            "readOnly": true,
+            "x-ms-enum": {
+                "name": "SecureScoreLevel",
+                "modelAsString": true
+            }
         }
       },
       "required": [
