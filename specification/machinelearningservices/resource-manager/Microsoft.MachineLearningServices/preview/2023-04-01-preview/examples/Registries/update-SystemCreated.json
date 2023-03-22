@@ -7,16 +7,17 @@
     "body": {
       "properties": {},
       "tags": {},
+      "location": "string",
       "kind": "string",
       "identity": {
-        "type": "UserAssigned",
+        "type": "SystemAssigned",
         "userAssignedIdentities": {
           "string": {}
         }
       },
       "sku": {
         "name": "string",
-        "tier": "Premium",
+        "tier": "Basic",
         "size": "string",
         "family": "string",
         "capacity": 1
@@ -27,165 +28,96 @@
     "200": {
       "headers": {},
       "body": {
-        "id": "string",
-        "name": "string",
-        "type": "string",
-        "properties": {
-          "description": "string",
-          "tags": {
-            "string": "string"
-          },
-          "properties": {
-            "string": "string"
-          },
-          "regionDetails": [
+        "Tags": {},
+        "Location": "string",
+        "Kind": "string",
+        "Identity": {
+          "Type": "SystemAssigned",
+          "PrincipalId": "00000000-1111-2222-3333-444444444444",
+          "TenantId": "00000000-1111-2222-3333-444444444444",
+          "UserAssignedIdentities": {
+            "string": {
+              "PrincipalId": "00000000-1111-2222-3333-444444444444",
+              "ClientId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "Sku": {
+          "Name": "string",
+          "Tier": "Free",
+          "Size": "string",
+          "Family": "string",
+          "Capacity": 1
+        },
+        "Id": "string",
+        "Name": "string",
+        "Type": "string",
+        "Properties": {
+          "RegionDetails": [
             {
-              "location": "string",
-              "storageAccountDetails": [
+              "Location": "string",
+              "StorageAccountDetails": [
                 {
-                  "systemCreatedStorageAccount": {
-                    "storageAccountType": "string",
-                    "storageAccountHnsEnabled": false,
-                    "armResourceId": {
-                      "resourceId": "string"
+                  "SystemCreatedStorageAccount": {
+                    "StorageAccountName": "string",
+                    "StorageAccountType": "string",
+                    "StorageAccountHnsEnabled": false,
+                    "ArmResourceId": {
+                      "ResourceId": "string"
                     },
-                    "allowBlobPublicAccess": false
+                    "AllowBlobPublicAccess": false
                   }
                 }
               ],
-              "acrDetails": [
+              "AcrDetails": [
                 {
-                  "systemCreatedAcrAccount": {
-                    "acrAccountSku": "string",
-                    "armResourceId": {
-                      "resourceId": "string"
+                  "SystemCreatedAcrAccount": {
+                    "AcrAccountName": "string",
+                    "AcrAccountSku": "string",
+                    "ArmResourceId": {
+                      "ResourceId": "string"
                     }
                   }
                 }
               ]
             }
           ],
-          "managedResourceGroup": {
-            "resourceId": "string"
+          "IntellectualPropertyPublisher": "string",
+          "PublicNetworkAccess": "string",
+          "DiscoveryUrl": "string",
+          "ManagedResourceGroup": {
+            "ResourceId": "string"
           },
-          "privateLinkCount": 0,
-          "publicNetworkAccess": "Disabled",
-          "mlFlowRegistryUri": "string",
-          "intellectualPropertyPublisher": "string",
-          "discoveryUrl": "string"
-        },
-        "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999Z",
-          "createdBy": "string",
-          "createdByType": "ManagedIdentity",
-          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User"
-        },
-        "tags": {},
-        "location": "string",
-        "kind": "string",
-        "identity": {
-          "type": "UserAssigned",
-          "principalId": "00000000-1111-2222-3333-444444444444",
-          "tenantId": "00000000-1111-2222-3333-444444444444",
-          "userAssignedIdentities": {
-            "string": {
-              "principalId": "00000000-1111-2222-3333-444444444444",
-              "clientId": "00000000-1111-2222-3333-444444444444"
-            }
-          }
-        },
-        "sku": {
-          "name": "string",
-          "tier": "Basic",
-          "size": "string",
-          "family": "string",
-          "capacity": 1
-        }
-      }
-    },
-    "202": {
-      "headers": {
-        "Location": "example_location",
-        "Retry-After": 100
-      },
-      "body": {
-        "id": "string",
-        "name": "string",
-        "type": "string",
-        "properties": {
-          "description": "string",
-          "tags": {
-            "string": "string"
-          },
-          "properties": {
-            "string": "string"
-          },
-          "regionDetails": [
+          "MlFlowRegistryUri": "string",
+          "PrivateEndpointConnections": [
             {
-              "location": "string",
-              "storageAccountDetails": [
-                {
-                  "systemCreatedStorageAccount": {
-                    "storageAccountType": "string",
-                    "storageAccountHnsEnabled": false,
-                    "armResourceId": {
-                      "resourceId": "string"
-                    },
-                    "allowBlobPublicAccess": false
-                  }
-                }
-              ],
-              "acrDetails": [
-                {
-                  "systemCreatedAcrAccount": {
-                    "acrAccountSku": "string",
-                    "armResourceId": {
-                      "resourceId": "string"
-                    }
-                  }
-                }
-              ]
+              "Id": "string",
+              "Location": "string",
+              "Properties": {
+                "ProvisioningState": "string",
+                "PrivateEndpoint": {
+                  "Id": "string",
+                  "SubnetArmId": "string"
+                },
+                "PrivateLinkServiceConnectionState": {
+                  "Status": "Approved",
+                  "Description": "string",
+                  "ActionsRequired": "string"
+                },
+                "GroupIds": [
+                  "string"
+                ]
+              }
             }
-          ],
-          "managedResourceGroup": {
-            "resourceId": "string"
-          },
-          "privateLinkCount": 0,
-          "publicNetworkAccess": "Disabled",
-          "mlFlowRegistryUri": "string",
-          "intellectualPropertyPublisher": "string",
-          "discoveryUrl": "string"
+          ]
         },
-        "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999Z",
-          "createdBy": "string",
-          "createdByType": "ManagedIdentity",
-          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
-          "lastModifiedBy": "string",
-          "lastModifiedByType": "User"
-        },
-        "tags": {},
-        "location": "string",
-        "kind": "string",
-        "identity": {
-          "type": "UserAssigned",
-          "principalId": "00000000-1111-2222-3333-444444444444",
-          "tenantId": "00000000-1111-2222-3333-444444444444",
-          "userAssignedIdentities": {
-            "string": {
-              "principalId": "00000000-1111-2222-3333-444444444444",
-              "clientId": "00000000-1111-2222-3333-444444444444"
-            }
-          }
-        },
-        "sku": {
-          "name": "string",
-          "tier": "Basic",
-          "size": "string",
-          "family": "string",
-          "capacity": 1
+        "SystemData": {
+          "CreatedAt": "2020-01-01T12:34:56.999+00:02",
+          "CreatedBy": "string",
+          "CreatedByType": "User",
+          "LastModifiedAt": "2020-01-01T12:34:56.999+00:02",
+          "LastModifiedBy": "string",
+          "LastModifiedByType": "User"
         }
       }
     }

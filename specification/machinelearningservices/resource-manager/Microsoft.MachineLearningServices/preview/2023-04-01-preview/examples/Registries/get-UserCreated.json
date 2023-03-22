@@ -1,100 +1,100 @@
 {
-    "parameters": {
-      "subscriptionId": "00000000-1111-2222-3333-444444444444",
-      "resourceGroupName": "test-rg",
-      "registryName": "string",
-      "api-version": "2023-04-01-preview"
-    },
-    "responses": {
-      "200": {
-        "headers": {},
-        "body": {
-          "Tags": {},
-          "Location": "string",
-          "Kind": "string",
-          "Identity": {
-            "Type": "None",
-            "PrincipalId": "00000000-1111-2222-3333-444444444444",
-            "TenantId": "00000000-1111-2222-3333-444444444444",
-            "UserAssignedIdentities": {
-              "string": {
-                "PrincipalId": "00000000-1111-2222-3333-444444444444",
-                "ClientId": "00000000-1111-2222-3333-444444444444"
-              }
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "registryName": "string",
+    "api-version": "2023-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "Tags": {},
+        "Location": "string",
+        "Kind": "string",
+        "Identity": {
+          "Type": "UserAssigned",
+          "PrincipalId": "00000000-1111-2222-3333-444444444444",
+          "TenantId": "00000000-1111-2222-3333-444444444444",
+          "UserAssignedIdentities": {
+            "string": {
+              "PrincipalId": "00000000-1111-2222-3333-444444444444",
+              "ClientId": "00000000-1111-2222-3333-444444444444"
             }
-          },
-          "Sku": {
-            "Name": "string",
-            "Tier": "Free",
-            "Size": "string",
-            "Family": "string",
-            "Capacity": 1
-          },
-          "Id": "string",
+          }
+        },
+        "Sku": {
           "Name": "string",
-          "Type": "string",
-          "Properties": {
-            "RegionDetails": [
-              {
-                "Location": "string",
-                "StorageAccountDetails": [
-                  {
-                    "UserCreatedStorageAccount": {
-                      "ArmResourceId": {
-                        "ResourceId": "string"
-                      }
+          "Tier": "Free",
+          "Size": "string",
+          "Family": "string",
+          "Capacity": 1
+        },
+        "Id": "string",
+        "Name": "string",
+        "Type": "string",
+        "Properties": {
+          "RegionDetails": [
+            {
+              "Location": "string",
+              "StorageAccountDetails": [
+                {
+                  "UserCreatedStorageAccount": {
+                    "ArmResourceId": {
+                      "ResourceId": "string"
                     }
                   }
-                ],
-                "AcrDetails": [
-                  {
-                    "UserCreatedAcrAccount": {
-                      "ArmResourceId": {
-                        "ResourceId": "string"
-                      }
+                }
+              ],
+              "AcrDetails": [
+                {
+                  "UserCreatedAcrAccount": {
+                    "ArmResourceId": {
+                      "ResourceId": "string"
                     }
                   }
+                }
+              ]
+            }
+          ],
+          "IntellectualPropertyPublisher": "string",
+          "PublicNetworkAccess": "string",
+          "DiscoveryUrl": "string",
+          "ManagedResourceGroup": {
+            "ResourceId": "string"
+          },
+          "MlFlowRegistryUri": "string",
+          "PrivateEndpointConnections": [
+            {
+              "Id": "string",
+              "Location": "string",
+              "Properties": {
+                "ProvisioningState": "string",
+                "PrivateEndpoint": {
+                  "Id": "string",
+                  "SubnetArmId": "string"
+                },
+                "PrivateLinkServiceConnectionState": {
+                  "Status": "Approved",
+                  "Description": "string",
+                  "ActionsRequired": "string"
+                },
+                "GroupIds": [
+                  "string"
                 ]
               }
-            ],
-            "IntellectualPropertyPublisher": "string",
-            "PublicNetworkAccess": "string",
-            "DiscoveryUrl": "string",
-            "ManagedResourceGroup": {
-              "ResourceId": "string"
-            },
-            "MlFlowRegistryUri": "string",
-            "PrivateEndpointConnections": [
-              {
-                "Id": "string",
-                "Location": "string",
-                "Properties": {
-                  "ProvisioningState": "string",
-                  "PrivateEndpoint": {
-                    "Id": "string",
-                    "SubnetArmId": "string"
-                  },
-                  "PrivateLinkServiceConnectionState": {
-                    "Status": 0,
-                    "Description": "string",
-                    "ActionsRequired": "string"
-                  },
-                  "GroupIds": [
-                    "string"
-                  ]
-                }
-              }
-            ]
-          },
-          "SystemData": {
-            "CreatedAt": "2020-01-01T12:34:56.999+00:45",
-            "CreatedBy": "string",
-            "CreatedByType": 3,
-            "LastModifiedAt": "2020-01-01T12:34:56.999+00:45",
-            "LastModifiedBy": "string",
-            "LastModifiedByType": 3
-          }
+            }
+          ]
+        },
+        "SystemData": {
+          "CreatedAt": "2020-01-01T12:34:56.999+00:45",
+          "CreatedBy": "string",
+          "CreatedByType": "User",
+          "LastModifiedAt": "2020-01-01T12:34:56.999+00:45",
+          "LastModifiedBy": "string",
+          "LastModifiedByType": "User"
         }
       }
     }
   }
+}
