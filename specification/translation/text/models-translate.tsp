@@ -1,29 +1,29 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
-import "./models-shared.cadl";
-import "./models-transliterate.cadl";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "./models-shared.tsp";
+import "./models-transliterate.tsp";
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 
 namespace TextTranslation;
 
 @doc("Request parameters for the translate API.")
 model TranslateParameters {
-    ...CommonParameters;
+  ...CommonParameters;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
     in the translation scope. For example, use to=de to translate to German.
     It's possible to translate to multiple languages simultaneously by repeating the parameter in the query string. 
     For example, use to=de&to=it to translate to German and Italian.
     """)
-    to: string[];
+  to: string[];
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies the language of the input text. Find which languages are available to translate from by 
     looking up supported languages using the translation scope. If the from parameter isn't specified, 
     automatic language detection is applied to determine the source language.
@@ -31,73 +31,73 @@ model TranslateParameters {
     You must use the from parameter rather than autodetection when using the dynamic dictionary feature. 
     Note: the dynamic dictionary feature is case-sensitive.
     """)
-    from?: string;
+  from?: string;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
     complete element. Possible values are: plain (default) or html.
     """)
-    textType?: TextType = "Plain";
+  textType?: TextType = "Plain";
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     A string specifying the category (domain) of the translation. This parameter is used to get translations 
     from a customized system built with Custom Translator. Add the Category ID from your Custom Translator 
     project details to this parameter to use your deployed customized system. Default value is: general.
     """)
-    category?: string = "general";
+  category?: string = "general";
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies how profanities should be treated in translations.
     Possible values are: NoAction (default), Marked or Deleted.
     """)
-    profanityAction?: ProfanityAction = "NoAction";
+  profanityAction?: ProfanityAction = "NoAction";
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies how profanities should be marked in translations.
     Possible values are: Asterisk (default) or Tag. 
     """)
-    profanityMarker?: ProfanityMarker = "Asterisk";
+  profanityMarker?: ProfanityMarker = "Asterisk";
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies whether to include alignment projection from source text to translated text.
     Possible values are: true or false (default).
     """)
-    includeAlignment?: boolean = false;
+  includeAlignment?: boolean = false;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies whether to include sentence boundaries for the input text and the translated text.
     Possible values are: true or false (default).
     """)
-    includeSentenceLength?: boolean = false;
+  includeSentenceLength?: boolean = false;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies a fallback language if the language of the input text can't be identified. 
     Language autodetection is applied when the from parameter is omitted. If detection fails, 
     the suggestedFrom language will be assumed.
     """)
-    suggestedFrom?: string;
+  suggestedFrom?: string;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies the script of the input text.
     """)
-    fromScript?: string;
+  fromScript?: string;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies the script of the translated text.
     """)
-    toScript?: string;
+  toScript?: string;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
     Possible values are: true (default) or false.
 
@@ -107,38 +107,38 @@ model TranslateParameters {
     If no system is found with the specific category, the request will return a 400 status code. allowFallback=true 
     specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
     """)
-    allowFallback?: boolean = true;
+  allowFallback?: boolean = true;
 
-    @body
-    @doc("Array of the text to be translated.")
-    content: InputTextItem[];
+  @body
+  @doc("Array of the text to be translated.")
+  content: InputTextItem[];
 }
 
 @doc("Response for the translation API.")
 model TranslationResult {
-    ...CommonResultHeaders;
+  ...CommonResultHeaders;
 
-    @body
-    @doc("Array of the translated text elements.")
-    result: TranslatedTextItem[];
+  @body
+  @doc("Array of the translated text elements.")
+  result: TranslatedTextItem[];
 
-    @header("x-mt-system")
-    @doc("""
+  @header("x-mt-system")
+  @doc("""
     Specifies the system type that was used for translation for each 'to' language requested for translation. 
     The value is a comma-separated list of strings. Each string indicates a type:
 
     * Custom - Request includes a custom system and at least one custom system was used during translation.
     * Team - All other requests
     """)
-    mtSystem: string;
+  mtSystem: string;
 
-    @header("x-metered-usage")
-    @doc("""
+  @header("x-metered-usage")
+  @doc("""
     Specifies consumption (the number of characters for which the user will be charged) for the translation 
     job request. For example, if the word "Hello" is translated from English (en) to French (fr), 
     this field will return the value '5'.
     """)
-    meteredUsage: int32;
+  meteredUsage: int32;
 }
 
 enum TextTypeKnownValues {
@@ -151,9 +151,9 @@ enum TextTypeKnownValues {
 scalar TextType extends string;
 
 enum ProfanityActionKnownValues {
-    NoAction: "NoAction",
-    Marked: "Marked",
-    Deleted: "Deleted",
+  NoAction: "NoAction",
+  Marked: "Marked",
+  Deleted: "Deleted",
 }
 
 @doc("Translator profanity actions")
@@ -161,8 +161,8 @@ enum ProfanityActionKnownValues {
 scalar ProfanityAction extends string;
 
 enum ProfanityMarkerKnownValues {
-    Asterisk: "Asterisk",
-    Tag: "Tag",
+  Asterisk: "Asterisk",
+  Tag: "Tag",
 }
 
 @doc("Translator profanity markers")
@@ -171,63 +171,63 @@ scalar ProfanityMarker extends string;
 
 @doc("Element containing the translated text")
 model TranslatedTextItem {
-    @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
-    detectedLanguage?: DetectedLanguage;
+  @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
+  detectedLanguage?: DetectedLanguage;
 
-    @doc("""
+  @doc("""
     An array of translation results. The size of the array matches the number of target 
     languages specified through the to query parameter.
     """)
-    translations: Translation[];
+  translations: Translation[];
 
-    @doc("""
+  @doc("""
     Input text in the default script of the source language. sourceText property is present only when 
     the input is expressed in a script that's not the usual script for the language. For example, 
     if the input were Arabic written in Latin script, then sourceText.text would be the same Arabic text 
     converted into Arab script.
     """)
-    sourceText?: SourceText;
+  sourceText?: SourceText;
 }
 
 @doc("An object describing the detected language.")
 model DetectedLanguage {
-    @doc("A string representing the code of the detected language.")
-    language: string;
+  @doc("A string representing the code of the detected language.")
+  language: string;
 
-    @doc("""
+  @doc("""
     A float value indicating the confidence in the result.
     The score is between zero and one and a low score indicates a low confidence.
     """)
-    score: float32;
+  score: float32;
 }
 
 @doc("Translation result")
 model Translation {
-    @doc("A string representing the language code of the target language.")
-    to: string;
+  @doc("A string representing the language code of the target language.")
+  to: string;
 
-    @doc("A string giving the translated text.")
-    text: string;
+  @doc("A string giving the translated text.")
+  text: string;
 
-    @doc("""
+  @doc("""
     An object giving the translated text in the script specified by the toScript parameter.
     """)
-    transliteration?: TransliteratedText;
+  transliteration?: TransliteratedText;
 
-    @doc("""
+  @doc("""
     Alignment information.
     """)
-    alignment?: TranslatedTextAlignment;
+  alignment?: TranslatedTextAlignment;
 
-    @doc("""
+  @doc("""
     Sentence boundaries in the input and output texts.
     """)
-    sentLen?: SentenceLength;
+  sentLen?: SentenceLength;
 }
 
 @doc("Alignment information object.")
 model TranslatedTextAlignment {
-    @doc("""
+  @doc("""
     Maps input text to translated text. The alignment information is only provided when the request 
     parameter includeAlignment is true. Alignment is returned as a string value of the following 
     format: [[SourceTextStartIndex]:[SourceTextEndIndex]–[TgtTextStartIndex]:[TgtTextEndIndex]]. 
@@ -235,28 +235,28 @@ model TranslatedTextAlignment {
     One word may align with zero, one, or multiple words in the other language, and the aligned words may 
     be non-contiguous. When no alignment information is available, the alignment element will be empty.
     """)
-    proj: string;
+  proj: string;
 }
 
 @doc("An object returning sentence boundaries in the input and output texts.")
 model SentenceLength {
-    @doc("""
+  @doc("""
     An integer array representing the lengths of the sentences in the input text. 
     The length of the array is the number of sentences, and the values are the length of each sentence.
     """)
-    srcSentLen: int32[];
+  srcSentLen: int32[];
 
-    @doc("""
+  @doc("""
     An integer array representing the lengths of the sentences in the translated text. 
     The length of the array is the number of sentences, and the values are the length of each sentence.
     """)
-    transSentLen: int32[];
+  transSentLen: int32[];
 }
 
 @doc("Input text in the default script of the source language. ")
 model SourceText {
-    @doc("""
+  @doc("""
     Input text in the default script of the source language.
     """)
-    text: string;
+  text: string;
 }

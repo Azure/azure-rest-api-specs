@@ -1,14 +1,16 @@
-import "@cadl-lang/rest";
-import "@cadl-lang/versioning";
-import "@azure-tools/cadl-azure-core";
-import "./routes.cadl";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "./routes.tsp";
 
-using Cadl.Rest;
-using Cadl.Http;
+using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.Core;
-using Cadl.Versioning;
+using TypeSpec.Versioning;
 
-@service({title: "Text Translation"})
+@service({
+  title: "Text Translation",
+})
 @server(
   "{Endpoint}",
   "Text translation is a cloud-based REST API feature of the Translator service that uses neural machine translation technology to enable quick and accurate source-to-target text translation in real time across all supported languages.",
@@ -17,10 +19,9 @@ using Cadl.Versioning;
 Supported Text Translation endpoints (protocol and hostname, for example:
     https://api.cognitive.microsofttranslator.com).
 """)
-    Endpoint: url
+    Endpoint: url,
   }
 )
-
 @doc("""
 Text translation is a cloud-based REST API feature of the Translator service that uses neural
 machine translation technology to enable quick and accurate source-to-target text translation

@@ -1,54 +1,54 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
-import "./models-shared.cadl";
-import "./models-translate.cadl";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "./models-shared.tsp";
+import "./models-translate.tsp";
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 
 namespace TextTranslation;
 
 @doc("Request parameters for the break sentence API.")
 model BreakSentenceParameters {
-    ...CommonParameters;
+  ...CommonParameters;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Language tag identifying the language of the input text. 
     If a code isn't specified, automatic language detection will be applied.
     """)
-    language?: string;
+  language?: string;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Script tag identifying the script used by the input text. 
     If a script isn't specified, the default script of the language will be assumed.
     """)
-    script?: string;
+  script?: string;
 
-    @body
-    @doc("Array of the text for which values the sentence boundaries will be calculated.")
-    content: InputTextItem[];
+  @body
+  @doc("Array of the text for which values the sentence boundaries will be calculated.")
+  content: InputTextItem[];
 }
 
 @doc("Response for the Break SEntence API.")
 model BreakSentenceResult {
-    ...CommonResultHeaders;
+  ...CommonResultHeaders;
 
-    @body
-    @doc("Array of the break sentence elements.")
-    result: BreakSentenceItem[];
+  @body
+  @doc("Array of the break sentence elements.")
+  result: BreakSentenceItem[];
 }
 
 @doc("Elemented containing break sentence result.")
 model BreakSentenceItem {
-    @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
-    detectedLanguage?: DetectedLanguage;
+  @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
+  detectedLanguage?: DetectedLanguage;
 
-    @doc("""
+  @doc("""
     An integer array representing the lengths of the sentences in the input text.
     The length of the array is the number of sentences, and the values are the length of each sentence.
     """)
-    sentLen: int32[];
+  sentLen: int32[];
 }

@@ -1,160 +1,160 @@
-import "@cadl-lang/rest";
-import "@azure-tools/cadl-azure-core";
-import "./models-shared.cadl";
+import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
+import "./models-shared.tsp";
 
-using Cadl.Http;
-using Cadl.Rest;
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 
 namespace TextTranslation;
 
 alias DictionaryBaseParameters = {
-    ...CommonParameters;
+  ...CommonParameters;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies the language of the input text.
     The source language must be one of the supported languages included in the dictionary scope.
     """)
-    from: string;
+  from: string;
 
-    @query
-    @doc("""
+  @query
+  @doc("""
     Specifies the language of the output text.
     The target language must be one of the supported languages included in the dictionary scope.
     """)
-    to: string;
+  to: string;
 };
 
 @doc("Request parameters for the dictionary lookup API.")
 model DictionaryLookupParamters {
-    ...DictionaryBaseParameters;
+  ...DictionaryBaseParameters;
 
-    @body
-    @doc("Array of the text to be sent to dictionary.")
-    content: InputTextItem[];
+  @body
+  @doc("Array of the text to be sent to dictionary.")
+  content: InputTextItem[];
 }
 
 @doc("Request paramters for the dictionary examples API.")
 model DictionaryExamplesParamters {
-    ...DictionaryBaseParameters;
+  ...DictionaryBaseParameters;
 
-    @body
-    @doc("Array of the text to be sent to dictionary.")
-    content: DictionaryExampleTextItem[];
+  @body
+  @doc("Array of the text to be sent to dictionary.")
+  content: DictionaryExampleTextItem[];
 }
 
 @doc("Response for the dictionary lookup API.")
 model DictionaryLookupResult {
-    ...CommonResultHeaders;
+  ...CommonResultHeaders;
 
-    @body
-    @doc("Array of the dictionary lookup elements.")
-    result: DictionaryLookupItem[];
+  @body
+  @doc("Array of the dictionary lookup elements.")
+  result: DictionaryLookupItem[];
 }
 
 @doc("Response for the dictionary examples API.")
 model DictionaryExamplesResult {
-    ...CommonResultHeaders;
+  ...CommonResultHeaders;
 
-    @body
-    @doc("Array of the dictionary examples elements.")
-    result: DictionaryExampleItem[];
+  @body
+  @doc("Array of the dictionary examples elements.")
+  result: DictionaryExampleItem[];
 }
 
 @doc("Element containing the text with translation.")
 model DictionaryExampleTextItem extends InputTextItem {
-    @doc("""
+  @doc("""
     A string specifying the translated text previously returned by the Dictionary lookup operation. 
     This should be the value from the normalizedTarget field in the translations list of the Dictionary 
     lookup response. The service will return examples for the specific source-target word-pair.
     """)
-    translation: string;
+  translation: string;
 }
 
 @doc("Dictionary Lookup Element")
 model DictionaryLookupItem {
-    @doc("""
+  @doc("""
     A string giving the normalized form of the source term.
     For example, if the request is "JOHN", the normalized form will be "john".
     The content of this field becomes the input to lookup examples.
     """)
-    normalizedSource: string;
+  normalizedSource: string;
 
-    @doc("""
+  @doc("""
     A string giving the source term in a form best suited for end-user display.
     For example, if the input is "JOHN", the display form will reflect the usual
     spelling of the name: "John".
     """)
-    displaySource: string;
+  displaySource: string;
 
-    @doc("""
+  @doc("""
     A list of translations for the source term.
     """)
-    translations: DictionaryTranslation[];
+  translations: DictionaryTranslation[];
 }
 
 @doc("Translation source term.")
 model DictionaryTranslation {
-    @doc("""
+  @doc("""
     A string giving the normalized form of this term in the target language.
     This value should be used as input to lookup examples.
     """)
-    normalizedTarget: string;
+  normalizedTarget: string;
 
-    @doc("""
+  @doc("""
     A string giving the term in the target language and in a form best suited
     for end-user display. Generally, this will only differ from the normalizedTarget
     in terms of capitalization. For example, a proper noun like "Juan" will have
     normalizedTarget = "juan" and displayTarget = "Juan".
     """)
-    displayTarget: string;
+  displayTarget: string;
 
-    @doc("""
+  @doc("""
     A string associating this term with a part-of-speech tag.
     """)
-    posTag: string;
+  posTag: string;
 
-    @doc("""
+  @doc("""
     A value between 0.0 and 1.0 which represents the "confidence" 
     (or perhaps more accurately, "probability in the training data") of that translation pair. 
     The sum of confidence scores for one source word may or may not sum to 1.0.
     """)
-    confidence: float32;
+  confidence: float32;
 
-    @doc("""
+  @doc("""
     A string giving the word to display as a prefix of the translation. Currently,
     this is the gendered determiner of nouns, in languages that have gendered determiners.
     For example, the prefix of the Spanish word "mosca" is "la", since "mosca" is a feminine noun in Spanish. 
     This is only dependent on the translation, and not on the source. 
     If there is no prefix, it will be the empty string.
     """)
-    prefixWord: string;
+  prefixWord: string;
 
-    @doc("""
+  @doc("""
     A list of "back translations" of the target. For example, source words that the target can translate to.
     The list is guaranteed to contain the source word that was requested (e.g., if the source word being
     looked up is "fly", then it is guaranteed that "fly" will be in the backTranslations list).
     However, it is not guaranteed to be in the first position, and often will not be.
     """)
-    backTranslations: BackTranslation[];
+  backTranslations: BackTranslation[];
 }
 
 @doc("Back Translation")
 model BackTranslation {
-    @doc("""
+  @doc("""
     A string giving the normalized form of the source term that is a back-translation of the target.
     This value should be used as input to lookup examples.
     """)
-    normalizedText: string;
+  normalizedText: string;
 
-    @doc("""
+  @doc("""
     A string giving the source term that is a back-translation of the target in a form best
     suited for end-user display.
     """)
-    displayText: string;
+  displayText: string;
 
-    @doc("""
+  @doc("""
     An integer representing the number of examples that are available for this translation pair.
     Actual examples must be retrieved with a separate call to lookup examples. The number is mostly
     intended to facilitate display in a UX. For example, a user interface may add a hyperlink
@@ -163,70 +163,70 @@ model BackTranslation {
     by a call to lookup examples may be less than numExamples, because additional filtering may be
     applied on the fly to remove "bad" examples.
     """)
-    numExamples: int32;
+  numExamples: int32;
 
-    @doc("""
+  @doc("""
     An integer representing the frequency of this translation pair in the data. The main purpose of this
     field is to provide a user interface with a means to sort back-translations so the most frequent terms are first.
     """)
-    frequencyCount: int32;
+  frequencyCount: int32;
 }
 
 @doc("Dictionary Example element")
 model DictionaryExampleItem {
-    @doc("""
+  @doc("""
     A string giving the normalized form of the source term. Generally, this should be identical
     to the value of the Text field at the matching list index in the body of the request.
     """)
-    normalizedSource: string;
+  normalizedSource: string;
 
-    @doc("""
+  @doc("""
     A string giving the normalized form of the target term. Generally, this should be identical
     to the value of the Translation field at the matching list index in the body of the request.
     """)
-    normalizedTarget: string;
+  normalizedTarget: string;
 
-    @doc("""
+  @doc("""
     A list of examples for the (source term, target term) pair.
     """)
-    examples: DictionaryExample[];
+  examples: DictionaryExample[];
 }
 
 @doc("Dictionary Example")
 model DictionaryExample {
-    @doc("""
+  @doc("""
     The string to concatenate before the value of sourceTerm to form a complete example.
     Do not add a space character, since it is already there when it should be.
     This value may be an empty string.
     """)
-    sourcePrefix: string;
+  sourcePrefix: string;
 
-    @doc("""
+  @doc("""
     A string equal to the actual term looked up. The string is added with sourcePrefix
     and sourceSuffix to form the complete example. Its value is separated so it can be
     marked in a user interface, e.g., by bolding it.
     """)
-    sourceTerm: string;
+  sourceTerm: string;
 
-    @doc("""
+  @doc("""
     The string to concatenate after the value of sourceTerm to form a complete example.
     Do not add a space character, since it is already there when it should be.
     This value may be an empty string.
     """)
-    sourceSuffix: string;
+  sourceSuffix: string;
 
-    @doc("""
+  @doc("""
     A string similar to sourcePrefix but for the target.
     """)
-    targetPrefix: string;
+  targetPrefix: string;
 
-    @doc("""
+  @doc("""
     A string similar to sourceTerm but for the target.
     """)
-    targetTerm: string;
+  targetTerm: string;
 
-    @doc("""
+  @doc("""
     A string similar to sourceSuffix but for the target.
     """)
-    targetSuffix: string;
+  targetSuffix: string;
 }
