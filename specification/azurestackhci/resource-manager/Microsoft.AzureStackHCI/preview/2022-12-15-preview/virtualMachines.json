@@ -37,10 +37,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualMachines/{virtualMachineName}": {
       "get": {
-        "operationId": "virtualmachines_Retrieve",
-        "description": "Gets virtual machines by resource name",
+        "operationId": "VirtualMachines_Get",
+        "description": "Gets a virtual machine",
         "x-ms-examples": {
           "GetVirtualMachine": {
             "$ref": "./examples/GetVirtualMachine.json"
@@ -48,35 +48,36 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachineNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Retrieved the virtual machine resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           }
         }
       },
       "put": {
-        "operationId": "virtualmachines_CreateOrUpdate",
+        "operationId": "VirtualMachines_CreateOrUpdate",
+        "description": "The operation to create or update a virtual machine. Please note some properties can be set only during virtual machine creation.",
         "x-ms-examples": {
           "PutVirtualMachineWithGalleryImage": {
             "$ref": "./examples/PutVirtualMachineWithGalleryImage.json"
@@ -94,23 +95,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachineNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "virtualmachines",
+            "name": "virtualMachines",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           }
         ],
@@ -118,25 +119,26 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the virtual machine resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           },
           "201": {
-            "description": "Creates the virtual machine resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           }
         }
       },
       "delete": {
-        "operationId": "virtualmachines_Delete",
+        "operationId": "VirtualMachines_Delete",
+        "description": "The operation to delete a virtual machine.",
         "x-ms-examples": {
           "DeleteVirtualMachine": {
             "$ref": "./examples/DeleteVirtualMachine.json"
@@ -144,27 +146,27 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachineNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Deletes the virtual machine resource."
+            "description": "OK"
           },
           "204": {
             "description": "No content"
@@ -172,7 +174,8 @@
         }
       },
       "patch": {
-        "operationId": "virtualmachines_Update",
+        "operationId": "VirtualMachines_Update",
+        "description": "The operation to update a virtual machine.",
         "x-ms-examples": {
           "UpdateVirtualMachine": {
             "$ref": "./examples/UpdateVirtualMachine.json"
@@ -180,23 +183,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachineNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "virtualmachines",
+            "name": "virtualMachines",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/virtualmachinesPatch"
+              "$ref": "#/definitions/VirtualMachinesUpdateRequest"
             }
           }
         ],
@@ -204,27 +207,34 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the virtual machine resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
             }
           },
           "201": {
-            "description": "Updates the virtual machine resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/virtualmachines"
+              "$ref": "#/definitions/VirtualMachines"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachines"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualMachines/{virtualMachineName}/start": {
       "post": {
-        "operationId": "virtualmachines_Start",
+        "operationId": "VirtualMachines_Start",
+        "description": "The operation to start a virtual machine.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -236,37 +246,38 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachineNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Ok."
+            "description": "OK"
           },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualMachines/{virtualMachineName}/stop": {
       "post": {
-        "operationId": "virtualmachines_Stop",
+        "operationId": "VirtualMachines_Stop",
+        "description": "The operation to stop a virtual machine.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -278,37 +289,38 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachineNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Ok."
+            "description": "OK"
           },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines/{virtualmachinesName}/restart": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualMachines/{virtualMachineName}/restart": {
       "post": {
-        "operationId": "virtualmachines_Restart",
+        "operationId": "VirtualMachines_Restart",
+        "description": "The operation to restart a virtual machine.",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
@@ -320,37 +332,38 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/virtualmachinesNameParameter"
+            "$ref": "#/parameters/VirtualMachineNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Ok."
+            "description": "OK"
           },
           "202": {
-            "description": "Accepted."
+            "description": "Accepted"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualmachines": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/virtualMachines": {
       "get": {
-        "operationId": "virtualmachines_ListByResourceGroup",
+        "operationId": "VirtualMachines_ListByResourceGroup",
+        "description": "Lists all of the virtual machines in the specified resource group. Use the nextLink property in the response to get the next page of virtual machines.",
         "x-ms-examples": {
           "ListVirtualMachineByResourceGroup": {
             "$ref": "./examples/ListVirtualMachineByResourceGroup.json"
@@ -358,26 +371,26 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all virtualmachines under the resource group.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/virtualmachinesListResult"
+              "$ref": "#/definitions/VirtualMachinesListResult"
             }
           }
         },
@@ -386,9 +399,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/virtualmachines": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/virtualMachines": {
       "get": {
-        "operationId": "virtualmachines_ListBySubscription",
+        "operationId": "VirtualMachines_ListBySubscription",
+        "description": "Lists all of the virtual machines in the specified subscription. Use the nextLink property in the response to get the next page of virtual machines.",
         "x-ms-examples": {
           "ListVirtualMachineBySubscription": {
             "$ref": "./examples/ListVirtualMachineBySubscription.json"
@@ -396,23 +410,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all virtualmachines under the subscription.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/virtualmachinesListResult"
+              "$ref": "#/definitions/VirtualMachinesListResult"
             }
           }
         },
@@ -442,10 +456,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -462,7 +476,7 @@
             "description": "Name of the hybridIdentityMetadata."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -475,7 +489,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/HybridIdentityMetadata"
             }
@@ -483,7 +497,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -505,10 +519,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -525,12 +539,12 @@
             "description": "Name of the HybridIdentityMetadata."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/HybridIdentityMetadata"
             }
@@ -538,7 +552,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -548,7 +562,7 @@
           "HybridIdentityMetadata"
         ],
         "operationId": "HybridIdentityMetadata_Delete",
-        "summary": "Deletes an HybridIdentityMetadata.",
+        "summary": "Deleted an HybridIdentityMetadata.",
         "description": "Implements HybridIdentityMetadata DELETE method.",
         "x-ms-examples": {
           "DeleteHybridIdentityMetadata": {
@@ -560,10 +574,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -580,12 +594,12 @@
             "description": "Name of the HybridIdentityMetadata."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "204": {
             "description": "No Content"
@@ -593,7 +607,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -617,10 +631,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -630,12 +644,12 @@
             "description": "Name of the vm."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/HybridIdentityMetadataList"
             }
@@ -643,7 +657,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -661,13 +675,13 @@
         "description": "The operation to create or update the extension.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -701,7 +715,7 @@
             }
           },
           "201": {
-            "description": "HTTP 201 (Created) if the operation was successfully started and will complete asynchronously.",
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/MachineExtension"
             }
@@ -709,7 +723,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -731,13 +745,13 @@
         "description": "The operation to update the extension.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -779,7 +793,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -798,13 +812,13 @@
         "description": "The operation to delete the extension.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -834,7 +848,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -853,13 +867,13 @@
         "description": "The operation to get the extension.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -886,7 +900,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -906,13 +920,13 @@
         "description": "The operation to get all extensions of a non-Azure machine",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "name",
@@ -939,7 +953,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -974,10 +988,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -994,7 +1008,7 @@
             "description": "Name of the guestAgents."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -1007,7 +1021,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GuestAgent"
             }
@@ -1021,7 +1035,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1047,10 +1061,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -1067,12 +1081,12 @@
             "description": "Name of the GuestAgent."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GuestAgent"
             }
@@ -1080,7 +1094,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         }
@@ -1090,7 +1104,7 @@
           "GuestAgents"
         ],
         "operationId": "GuestAgent_Delete",
-        "summary": "Deletes an GuestAgent.",
+        "summary": "Deleted an GuestAgent.",
         "description": "Implements GuestAgent DELETE method.",
         "x-ms-examples": {
           "DeleteGuestAgent": {
@@ -1102,10 +1116,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -1122,12 +1136,12 @@
             "description": "Name of the GuestAgent."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "OK"
           },
           "202": {
             "description": "Accepted"
@@ -1138,7 +1152,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1163,10 +1177,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "in": "path",
@@ -1176,12 +1190,12 @@
             "description": "Name of the vm."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Success",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/GuestAgentList"
             }
@@ -1189,7 +1203,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1200,7 +1214,7 @@
     }
   },
   "definitions": {
-    "virtualmachinesProperties": {
+    "VirtualMachineProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -1208,31 +1222,62 @@
           "type": "object",
           "properties": {
             "vmSize": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "Default",
+                "Standard_A2_v2",
+                "Standard_A4_v2",
+                "Standard_D2s_v3",
+                "Standard_D4s_v3",
+                "Standard_D8s_v3",
+                "Standard_D16s_v3",
+                "Standard_D32s_v3",
+                "Standard_DS2_v2",
+                "Standard_DS3_v2",
+                "Standard_DS4_v2",
+                "Standard_DS5_v2",
+                "Standard_DS13_v2",
+                "Standard_K8S_v1",
+                "Standard_K8S2_v1",
+                "Standard_K8S3_v1",
+                "Standard_K8S4_v1",
+                "Standard_NK6",
+                "Standard_NK12",
+                "Standard_NV6",
+                "Standard_NV12",
+                "Standard_K8S5_v1",
+                "Custom"
+              ],
+              "default": "Default",
+              "x-ms-enum": {
+                "name": "VmSizeEnum",
+                "modelAsString": true
+              }
             },
             "processors": {
               "type": "integer",
               "format": "int32",
               "description": "number of processors for the virtual machine"
             },
-            "memoryGB": {
+            "memoryMB": {
               "type": "integer",
-              "format": "int32",
-              "description": "RAM in gb for the virtual machine"
+              "format": "int64",
+              "description": "RAM in MB for the virtual machine"
             },
             "dynamicMemoryConfig": {
               "type": "object",
               "properties": {
-                "maximumMemoryGB": {
+                "maximumMemoryMB": {
                   "type": "integer",
                   "format": "int64"
                 },
-                "minimumMemoryGB": {
+                "minimumMemoryMB": {
                   "type": "integer",
                   "format": "int64"
                 },
                 "targetMemoryBuffer": {
                   "type": "integer",
+                  "description": "Defines the amount of extra memory that should be reserved for a virtual machine at runtime, as a percentage of the total memory that the virtual machine is thought to need. This only applies to virtual systems with dynamic memory enabled. This property can be in the range of 5 to 2000.",
                   "format": "int32"
                 }
               }
@@ -1295,7 +1340,6 @@
                         "properties": {
                           "keyData": {
                             "type": "string",
-                            "x-ms-secret": true,
                             "description": "KeyData - SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Li      nux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
                           },
                           "path": {
@@ -1346,7 +1390,6 @@
                         "properties": {
                           "keyData": {
                             "type": "string",
-                            "x-ms-secret": true,
                             "description": "KeyData - SSH public key certificate used to authenticate with the VM through ssh. The key needs to be at least 2048-bit and in ssh-rsa format. <br><br> For creating ssh keys, see [Create SSH keys on Linux and Mac for Li      nux VMs in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-linux-mac-create-ssh-keys?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)."
                           },
                           "path": {
@@ -1375,10 +1418,6 @@
           },
           "description": "OsProfile - describes the configuration of the operating system and sets login data"
         },
-        "resourceName": {
-          "type": "string",
-          "description": "name of the object to be used in moc"
-        },
         "securityProfile": {
           "type": "object",
           "properties": {
@@ -1405,22 +1444,24 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "name": {
-                    "type": "string"
+                  "id": {
+                    "type": "string",
+                    "description": "Resource ID of the data disk"
                   }
                 }
               },
-              "description": "adds data disks to the virtual machine",
-              "x-ms-identifiers": [
-                "name"
-              ]
+              "description": "adds data disks to the virtual machine"
             },
             "imageReference": {
               "type": "object",
               "properties": {
-                "name": {
+                "id": {
                   "type": "string",
-                  "description": "Name - Name of the image"
+                  "x-ms-mutability": [
+                    "create",
+                    "read"
+                  ],
+                  "description": "Resource ID of the image"
                 }
               },
               "description": "Which Image to use for the virtual machine"
@@ -1430,20 +1471,21 @@
               "properties": {
                 "id": {
                   "type": "string",
-                  "description": "Specifies the virtual hard disk's ID"
+                  "description": "Resource ID of the OS disk"
                 }
               },
               "description": "VHD to attach as OS disk"
             },
-            "vmConfigContainerName": {
+            "vmConfigStoragePathId": {
               "type": "string",
-              "description": "Name of the storage container that hosts the VM configuration file"
+              "description": "Id of the storage container that hosts the VM configuration file"
             }
           },
           "description": "StorageProfile - contains information about the disks and storage information for the virtual machine"
         },
         "provisioningState": {
           "type": "string",
+          "description": "Provisioning state of the virtual machine.",
           "readOnly": true,
           "enum": [
             "Succeeded",
@@ -1471,10 +1513,9 @@
           "readOnly": true
         }
       },
-      "description": "Properties of a virtual machine resource"
+      "description": "Properties under the virtual machine resource"
     },
     "VirtualMachineStatus": {
-      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -1504,8 +1545,6 @@
           }
         },
         "provisioningStatus": {
-          "type": "object",
-          "description": "The provisioning status of the virtual machine",
           "properties": {
             "operationId": {
               "type": "string",
@@ -1520,43 +1559,39 @@
                 "InProgress"
               ],
               "x-ms-enum": {
-                "name": "ProvisioningStatusEnum",
+                "name": "Status",
                 "modelAsString": true
               }
             }
           }
         }
       },
-      "description": "VirtualMachineStatus defines the observed state of virtualmachines"
+      "description": "The observed state of virtual machines"
     },
-    "virtualmachines": {
+    "VirtualMachines": {
       "type": "object",
-      "x-ms-client-flatten": true,
       "x-ms-azure-resource": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/virtualmachinesProperties"
+          "$ref": "#/definitions/VirtualMachineProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "description": "The virtual machine resource definition."
     },
-    "hardwareProfileUpdate": {
+    "HardwareProfileUpdate": {
       "type": "object",
       "properties": {
         "vmSize": {
@@ -1586,6 +1621,7 @@
             "Standard_K8S5_v1",
             "Custom"
           ],
+          "default": "Default",
           "x-ms-enum": {
             "name": "VmSizeEnum",
             "modelAsString": true
@@ -1596,15 +1632,15 @@
           "format": "int32",
           "description": "number of processors for the virtual machine"
         },
-        "memoryGB": {
+        "memoryMB": {
           "type": "integer",
-          "format": "int32",
-          "description": "RAM in gb for the virtual machine"
+          "format": "int64",
+          "description": "RAM in MB for the virtual machine"
         }
       },
       "description": "HardwareProfile - Specifies the hardware settings for the virtual machine."
     },
-    "networkProfileUpdate": {
+    "NetworkProfileUpdate": {
       "type": "object",
       "properties": {
         "networkInterfaces": {
@@ -1623,7 +1659,7 @@
       },
       "description": "NetworkProfile - describes the network update configuration the virtual machine"
     },
-    "storageProfileUpdate": {
+    "StorageProfileUpdate": {
       "type": "object",
       "properties": {
         "dataDisks": {
@@ -1631,38 +1667,35 @@
           "items": {
             "type": "object",
             "properties": {
-              "name": {
+              "id": {
                 "type": "string"
               }
             }
           },
-          "description": "adds data disks to the virtual machine for the update call",
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "description": "adds data disks to the virtual machine for the update call"
         }
       }
     },
-    "virtualMachineUpdateProperties": {
+    "VirtualMachineUpdateProperties": {
       "description": "Defines the resource properties for the update.",
       "type": "object",
       "properties": {
         "hardwareProfile": {
-          "$ref": "#/definitions/hardwareProfileUpdate"
+          "$ref": "#/definitions/HardwareProfileUpdate"
         },
         "storageProfile": {
-          "$ref": "#/definitions/storageProfileUpdate"
+          "$ref": "#/definitions/StorageProfileUpdate"
         },
         "networkProfile": {
-          "$ref": "#/definitions/networkProfileUpdate"
+          "$ref": "#/definitions/NetworkProfileUpdate"
         }
       }
     },
-    "virtualmachinesPatch": {
+    "VirtualMachinesUpdateRequest": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/virtualMachineUpdateProperties"
+          "$ref": "#/definitions/VirtualMachineUpdateProperties"
         },
         "tags": {
           "type": "object",
@@ -1674,13 +1707,13 @@
       },
       "description": "The virtual machine resource patch definition."
     },
-    "virtualmachinesListResult": {
+    "VirtualMachinesListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/virtualmachines"
+            "$ref": "#/definitions/VirtualMachines"
           }
         },
         "nextLink": {
@@ -1726,10 +1759,9 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail"
           },
-          "description": "Details about the error state.",
-          "x-ms-identifiers": []
+          "description": "Details about the error state."
         }
       }
     },
@@ -1761,7 +1793,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
           "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
         }
       ],
@@ -1772,7 +1804,7 @@
           "$ref": "#/definitions/HybridIdentityMetadataProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
         }
       },
@@ -1791,7 +1823,7 @@
           "type": "string"
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/Identity",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Identity",
           "readOnly": true
         },
         "provisioningState": {
@@ -1824,7 +1856,7 @@
           "description": "Describes Machine Extension Properties."
         },
         "location": {
-          "description": "The geo-location where the resource lives",
+          "description": "The location.",
           "type": "string",
           "x-ms-mutability": [
             "read",
@@ -1832,23 +1864,23 @@
           ]
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
         },
         "tags": {
-          "description": "Resource tags.",
+          "description": "The Resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
         },
         "name": {
-          "description": "The name of the resource",
+          "description": "The name.",
           "type": "string",
           "readOnly": true
         },
         "id": {
-          "description": "Fully qualified resource ID for the resource.",
+          "description": "The Id.",
           "type": "string",
           "readOnly": true
         },
@@ -2066,7 +2098,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
           "description": "The resource model definition for an Azure Resource Manager proxy resource. It will have everything other than required location and tags."
         }
       ],
@@ -2077,7 +2109,7 @@
           "$ref": "#/definitions/GuestAgentProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "description": "The system data."
         }
       },
@@ -2156,14 +2188,16 @@
     }
   },
   "parameters": {
-    "virtualmachinesNameParameter": {
-      "name": "virtualmachinesName",
+    "VirtualMachineNameParameter": {
+      "name": "virtualMachineName",
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
       "maxLength": 64,
-      "minLength": 3
+      "minLength": 1,
+      "description": "Name of the virtual machine"
     }
   }
 }

@@ -37,10 +37,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages/{galleryimagesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryImages/{galleryImageName}": {
       "get": {
-        "operationId": "galleryimages_Retrieve",
-        "description": "Gets galleryimages by resource name",
+        "operationId": "GalleryImages_Get",
+        "description": "Gets a gallery image",
         "x-ms-examples": {
           "GetGalleryImage": {
             "$ref": "./examples/GetGalleryImage.json"
@@ -48,36 +48,36 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/galleryimagesNameParameter"
+            "$ref": "#/parameters/GalleryImageNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Retrieved the gallery image resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           }
         }
       },
       "put": {
-        "operationId": "galleryimages_CreateOrUpdate",
-        "description": "Create or update a gallery image.",
+        "operationId": "GalleryImages_CreateOrUpdate",
+        "description": "The operation to create or update a gallery image. Please note some properties can be set only during gallery image creation.",
         "x-ms-examples": {
           "PutGalleryImage": {
             "$ref": "./examples/PutGalleryImage.json"
@@ -89,23 +89,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/galleryimagesNameParameter"
+            "$ref": "#/parameters/GalleryImageNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "galleryimages",
+            "name": "galleryImages",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           }
         ],
@@ -113,26 +113,26 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the gallery image resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           },
           "201": {
-            "description": "Creates the gallery image resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           }
         }
       },
       "delete": {
-        "operationId": "galleryimages_Delete",
-        "description": "Delete a gallery image.",
+        "operationId": "GalleryImages_Delete",
+        "description": "The operation to delete a gallery image.",
         "x-ms-examples": {
           "DeleteGalleryImage": {
             "$ref": "./examples/DeleteGalleryImage.json"
@@ -140,27 +140,27 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/galleryimagesNameParameter"
+            "$ref": "#/parameters/GalleryImageNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Deletes the gallery image resource."
+            "description": "OK"
           },
           "204": {
             "description": "No content"
@@ -168,8 +168,8 @@
         }
       },
       "patch": {
-        "operationId": "galleryimages_Update",
-        "description": "Update a gallery image.",
+        "operationId": "GalleryImages_Update",
+        "description": "The operation to update a gallery image.",
         "x-ms-examples": {
           "UpdateGalleryImage": {
             "$ref": "./examples/UpdateGalleryImage.json"
@@ -177,23 +177,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/galleryimagesNameParameter"
+            "$ref": "#/parameters/GalleryImageNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "galleryimages",
+            "name": "galleryImages",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/galleryimagesPatch"
+              "$ref": "#/definitions/GalleryImagesUpdateRequest"
             }
           }
         ],
@@ -201,28 +201,34 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the gallery image resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
             }
           },
           "201": {
-            "description": "Updates the gallery image resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/galleryimages"
+              "$ref": "#/definitions/GalleryImages"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/GalleryImages"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryimages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/galleryImages": {
       "get": {
-        "operationId": "galleryimages_ListByResourceGroup",
-        "description": "Lists all galleryimages under the resource group.",
+        "operationId": "GalleryImages_ListByResourceGroup",
+        "description": "Lists all of the gallery images in the specified resource group. Use the nextLink property in the response to get the next page of gallery images.",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageByResourceGroup.json"
@@ -230,26 +236,26 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all galleryimages under the resource group.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/galleryimagesListResult"
+              "$ref": "#/definitions/GalleryImagesListResult"
             }
           }
         },
@@ -258,10 +264,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryimages": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/galleryImages": {
       "get": {
-        "operationId": "galleryimages_ListBySubscription",
-        "description": "List all galleryimages under the subscription",
+        "operationId": "GalleryImages_ListBySubscription",
+        "description": "Lists all of the gallery images in the specified subscription. Use the nextLink property in the response to get the next page of gallery images.",
         "x-ms-examples": {
           "ListGalleryImageByResourceGroup": {
             "$ref": "./examples/ListGalleryImageBySubscription.json"
@@ -269,23 +275,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all galleryimages under the subscription.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/galleryimagesListResult"
+              "$ref": "#/definitions/GalleryImagesListResult"
             }
           }
         },
@@ -296,7 +302,7 @@
     }
   },
   "definitions": {
-    "galleryimagesProperties": {
+    "GalleryImageProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -319,11 +325,11 @@
             "name": "OperatingSystemTypes",
             "modelAsString": false
           },
-          "description": "operating system type that the gallery image uses. Expected to be linux or windows"
+          "description": "Operating system type that the gallery image uses [Windows, Linux]"
         },
         "cloudInitDataSource": {
           "type": "string",
-          "description": "Datasource for the gallery image when provisioning with cloud-init (Azure or NoCloud)",
+          "description": "Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]",
           "enum": [
             "NoCloud",
             "Azure"
@@ -346,10 +352,10 @@
           }
         },
         "identifier": {
-          "$ref": "#/definitions/galleryImageIdentifier"
+          "$ref": "#/definitions/GalleryImageIdentifier"
         },
         "version": {
-          "$ref": "#/definitions/galleryImageVersion"
+          "$ref": "#/definitions/GalleryImageVersion"
         },
         "provisioningState": {
           "type": "string",
@@ -360,39 +366,33 @@
             "Failed",
             "InProgress",
             "Accepted",
-            "Deleting"
+            "Deleting",
+            "Canceled"
           ],
           "x-ms-enum": {
             "name": "ProvisioningStateEnum",
             "modelAsString": true
           }
         },
-        "resourceName": {
-          "type": "string",
-          "description": "name of the object to be used in moc"
-        },
         "status": {
           "$ref": "#/definitions/GalleryImageStatus"
         }
       },
-      "description": "Properties of a gallery image resource"
+      "description": "Properties under the gallery image resource"
     },
     "GalleryImageStatus": {
-      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
         "errorCode": {
           "type": "string",
-          "description": "Gallery image provisioning error code"
+          "description": "GalleryImage provisioning error code"
         },
         "errorMessage": {
           "type": "string",
           "description": "Descriptive error message"
         },
         "provisioningStatus": {
-          "type": "object",
-          "description": "The provisioning status of the gallery image",
           "properties": {
             "operationId": {
               "type": "string",
@@ -407,14 +407,13 @@
                 "InProgress"
               ],
               "x-ms-enum": {
-                "name": "ProvisioningStatusEnum",
+                "name": "Status",
                 "modelAsString": true
               }
             }
           }
         },
         "downloadStatus": {
-          "type": "object",
           "properties": {
             "downloadSizeInMB": {
               "type": "integer",
@@ -430,10 +429,9 @@
           "description": "The progress of the operation in percentage"
         }
       },
-      "description": "GalleryImageStatus defines the observed state of galleryimages"
+      "description": "The observed state of gallery images"
     },
-    "galleryImageIdentifier": {
-      "type": "object",
+    "GalleryImageIdentifier": {
       "properties": {
         "publisher": {
           "type": "string",
@@ -455,8 +453,7 @@
       ],
       "description": "This is the gallery image definition identifier."
     },
-    "galleryImageVersion": {
-      "type": "object",
+    "GalleryImageVersion": {
       "properties": {
         "name": {
           "type": "string",
@@ -464,16 +461,15 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/galleryImageVersionProperties"
+          "$ref": "#/definitions/GalleryImageVersionProperties"
         }
       },
       "description": "Specifies information about the gallery image version that you want to create or update."
     },
-    "galleryImageVersionProperties": {
-      "type": "object",
+    "GalleryImageVersionProperties": {
       "properties": {
         "storageProfile": {
-          "$ref": "#/definitions/galleryImageVersionStorageProfile"
+          "$ref": "#/definitions/GalleryImageVersionStorageProfile"
         }
       },
       "required": [
@@ -481,25 +477,23 @@
       ],
       "description": "Describes the properties of a gallery image version."
     },
-    "galleryImageVersionStorageProfile": {
-      "type": "object",
+    "GalleryImageVersionStorageProfile": {
       "properties": {
         "osDiskImage": {
-          "$ref": "#/definitions/galleryOSDiskImage"
+          "$ref": "#/definitions/GalleryOSDiskImage"
         }
       },
       "description": "This is the storage profile of a Gallery Image Version."
     },
-    "galleryOSDiskImage": {
+    "GalleryOSDiskImage": {
       "allOf": [
         {
-          "$ref": "#/definitions/galleryDiskImage"
+          "$ref": "#/definitions/GalleryDiskImage"
         }
       ],
       "description": "This is the OS disk image."
     },
-    "galleryDiskImage": {
-      "type": "object",
+    "GalleryDiskImage": {
       "properties": {
         "sizeInMB": {
           "type": "integer",
@@ -510,31 +504,27 @@
       },
       "description": "This is the disk image base class."
     },
-    "galleryimages": {
+    "GalleryImages": {
       "type": "object",
-      "description": "The gallery image resource definition.",
+      "description": "The gallery images resource definition.",
       "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/galleryimagesProperties"
+          "$ref": "#/definitions/GalleryImageProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
-    "galleryimagesPatch": {
+    "GalleryImagesUpdateRequest": {
       "type": "object",
       "properties": {
         "tags": {
@@ -545,16 +535,16 @@
           "description": "Resource tags"
         }
       },
-      "description": "The gallery image resource patch definition."
+      "description": "The gallery images resource patch definition."
     },
-    "galleryimagesListResult": {
+    "GalleryImagesListResult": {
       "type": "object",
-      "description": "List of galleryimages.",
+      "description": "List of gallery images.",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/galleryimages"
+            "$ref": "#/definitions/GalleryImages"
           }
         },
         "nextLink": {
@@ -566,14 +556,15 @@
     }
   },
   "parameters": {
-    "galleryimagesNameParameter": {
-      "name": "galleryimagesName",
+    "GalleryImageNameParameter": {
+      "name": "galleryImageName",
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
-      "maxLength": 64,
-      "minLength": 3,
+      "maxLength": 80,
+      "minLength": 1,
       "description": "Name of the gallery image"
     }
   }

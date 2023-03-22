@@ -37,10 +37,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages/{marketplacegalleryimagesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplaceGalleryImages/{marketplaceGalleryImageName}": {
       "get": {
-        "operationId": "marketplacegalleryimages_Get",
-        "description": "Gets marketplacegalleryimages by resource name",
+        "operationId": "MarketplaceGalleryImages_Get",
+        "description": "Gets a marketplace gallery image",
         "x-ms-examples": {
           "GetMarketplaceGalleryImage": {
             "$ref": "./examples/GetMarketplaceGalleryImage.json"
@@ -48,36 +48,36 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
+            "$ref": "#/parameters/MarketplaceGalleryImageNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Retrieved the marketplace gallery image resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           }
         }
       },
       "put": {
-        "operationId": "marketplacegalleryimages_CreateOrUpdate",
-        "description": "Creates or updates a marketplace gallery image",
+        "operationId": "MarketplaceGalleryImages_CreateOrUpdate",
+        "description": "The operation to create or update a marketplace gallery image. Please note some properties can be set only during marketplace gallery image creation.",
         "x-ms-examples": {
           "PutMarketplaceGalleryImage": {
             "$ref": "./examples/PutMarketplaceGalleryImage.json"
@@ -89,23 +89,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
+            "$ref": "#/parameters/MarketplaceGalleryImageNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "marketplacegalleryimages",
+            "name": "marketplaceGalleryImages",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           }
         ],
@@ -113,26 +113,26 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the marketplace gallery image resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           },
           "201": {
-            "description": "Creates the marketplace gallery image resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           }
         }
       },
       "delete": {
-        "operationId": "marketplacegalleryimages_Delete",
-        "description": "Deletes a marketplace gallery image",
+        "operationId": "MarketplaceGalleryImages_Delete",
+        "description": "The operation to delete a marketplace gallery image.",
         "x-ms-examples": {
           "DeleteMarketplaceGalleryImage": {
             "$ref": "./examples/DeleteMarketplaceGalleryImage.json"
@@ -140,27 +140,27 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
+            "$ref": "#/parameters/MarketplaceGalleryImageNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Deletes the marketplace gallery image resource."
+            "description": "OK"
           },
           "204": {
             "description": "No content"
@@ -168,8 +168,8 @@
         }
       },
       "patch": {
-        "operationId": "marketplacegalleryimages_Update",
-        "description": "Updates a marketplace gallery image",
+        "operationId": "MarketplaceGalleryImages_Update",
+        "description": "The operation to update a marketplace gallery image.",
         "x-ms-examples": {
           "UpdateMarketplaceGalleryImage": {
             "$ref": "./examples/UpdateMarketplaceGalleryImage.json"
@@ -177,23 +177,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/marketplacegalleryimagesNameParameter"
+            "$ref": "#/parameters/MarketplaceGalleryImageNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "marketplacegalleryimages",
+            "name": "marketplaceGalleryImages",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimagesPatch"
+              "$ref": "#/definitions/MarketplaceGalleryImagesUpdateRequest"
             }
           }
         ],
@@ -201,28 +201,34 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the marketplace gallery image resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           },
           "201": {
-            "description": "Updates the marketplace gallery image resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimages"
+              "$ref": "#/definitions/MarketplaceGalleryImages"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceGalleryImages"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/marketplaceGalleryImages": {
       "get": {
-        "operationId": "marketplacegalleryimages_ListByResourceGroup",
-        "description": "Lists all marketplacegalleryimages under the resource group",
+        "operationId": "MarketplaceGalleryImages_ListByResourceGroup",
+        "description": "Lists all of the marketplace gallery images in the specified resource group. Use the nextLink property in the response to get the next page of marketplace gallery images.",
         "x-ms-examples": {
           "ListMarketplaceGalleryImageByResourceGroup": {
             "$ref": "./examples/ListMarketplaceGalleryImageByResourceGroup.json"
@@ -230,26 +236,26 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all marketplacegalleryimages under the resource group.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimagesListResult"
+              "$ref": "#/definitions/MarketplaceGalleryImagesListResult"
             }
           }
         },
@@ -258,34 +264,34 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/marketplacegalleryimages": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/marketplaceGalleryImages": {
       "get": {
-        "operationId": "marketplacegalleryimages_ListBySubscription",
-        "description": "Lists all marketplacegalleryimages under the subscription",
+        "operationId": "MarketplaceGalleryImages_ListBySubscription",
+        "description": "Lists all of the marketplace gallery images in the specified subscription. Use the nextLink property in the response to get the next page of marketplace gallery images.",
         "x-ms-examples": {
-          "ListMarketplaceGalleryImageBySubscription": {
+          "ListMarketplaceGalleryImageByResourceGroup": {
             "$ref": "./examples/ListMarketplaceGalleryImageBySubscription.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all marketplacegalleryimages under the subscription.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/marketplacegalleryimagesListResult"
+              "$ref": "#/definitions/MarketplaceGalleryImagesListResult"
             }
           }
         },
@@ -296,7 +302,7 @@
     }
   },
   "definitions": {
-    "marketplacegalleryimagesProperties": {
+    "MarketplaceGalleryImageProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -314,11 +320,11 @@
             "name": "OperatingSystemTypes",
             "modelAsString": false
           },
-          "description": "operating system type that the gallery image uses. Expected to be linux or windows"
+          "description": "Operating system type that the gallery image uses [Windows, Linux]"
         },
         "cloudInitDataSource": {
           "type": "string",
-          "description": "Datasource for the gallery image when provisioning with cloud-init [Azure, NoCloud]",
+          "description": "Datasource for the gallery image when provisioning with cloud-init [NoCloud, Azure]",
           "enum": [
             "NoCloud",
             "Azure"
@@ -341,14 +347,14 @@
           }
         },
         "identifier": {
-          "$ref": "#/definitions/galleryImageIdentifier"
+          "$ref": "#/definitions/GalleryImageIdentifier"
         },
         "version": {
-          "$ref": "#/definitions/galleryImageVersion"
+          "$ref": "#/definitions/GalleryImageVersion"
         },
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of the gallery image.",
+          "description": "Provisioning state of the marketplace gallery image.",
           "readOnly": true,
           "enum": [
             "Succeeded",
@@ -363,54 +369,46 @@
             "modelAsString": true
           }
         },
-        "resourceName": {
-          "type": "string",
-          "description": "name of the object to be used in moc"
-        },
         "status": {
           "$ref": "#/definitions/MarketplaceGalleryImageStatus"
         }
       },
-      "description": "Properties of a marketplace gallery image resource"
+      "description": "Properties under the marketplace gallery image resource"
     },
     "MarketplaceGalleryImageStatus": {
-      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
         "errorCode": {
           "type": "string",
-          "description": "Marketplace gallery image provisioning error code"
+          "description": "MarketplaceGalleryImage provisioning error code"
         },
         "errorMessage": {
           "type": "string",
           "description": "Descriptive error message"
         },
         "provisioningStatus": {
-          "type": "object",
-          "description": "The provisioning status of the marketplace gallery image",
           "properties": {
             "operationId": {
               "type": "string",
-              "description": "The ID of the operation performed on the marketplace gallery image"
+              "description": "The ID of the operation performed on the gallery image"
             },
             "status": {
               "type": "string",
-              "description": "The status of the operation performed on the marketplace gallery image [Succeeded, Failed, InProgress]",
+              "description": "The status of the operation performed on the gallery image [Succeeded, Failed, InProgress]",
               "enum": [
                 "Succeeded",
                 "Failed",
                 "InProgress"
               ],
               "x-ms-enum": {
-                "name": "ProvisioningStatusEnum",
+                "name": "Status",
                 "modelAsString": true
               }
             }
           }
         },
         "downloadStatus": {
-          "type": "object",
           "properties": {
             "downloadSizeInMB": {
               "type": "integer",
@@ -418,7 +416,7 @@
               "description": "The downloaded sized of the image in MB"
             }
           },
-          "description": "The download status of the marketplace gallery image"
+          "description": "The download status of the gallery image"
         },
         "progressPercentage": {
           "type": "integer",
@@ -426,10 +424,9 @@
           "description": "The progress of the operation in percentage"
         }
       },
-      "description": "MarketplaceGalleryImageStatus defines the observed state of marketplacegalleryimages"
+      "description": "The observed state of marketplace gallery images"
     },
-    "galleryImageIdentifier": {
-      "type": "object",
+    "GalleryImageIdentifier": {
       "properties": {
         "publisher": {
           "type": "string",
@@ -451,8 +448,7 @@
       ],
       "description": "This is the gallery image definition identifier."
     },
-    "galleryImageVersion": {
-      "type": "object",
+    "GalleryImageVersion": {
       "properties": {
         "name": {
           "type": "string",
@@ -460,16 +456,15 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/galleryImageVersionProperties"
+          "$ref": "#/definitions/GalleryImageVersionProperties"
         }
       },
       "description": "Specifies information about the gallery image version that you want to create or update."
     },
-    "galleryImageVersionProperties": {
-      "type": "object",
+    "GalleryImageVersionProperties": {
       "properties": {
         "storageProfile": {
-          "$ref": "#/definitions/galleryImageVersionStorageProfile"
+          "$ref": "#/definitions/GalleryImageVersionStorageProfile"
         }
       },
       "required": [
@@ -477,25 +472,23 @@
       ],
       "description": "Describes the properties of a gallery image version."
     },
-    "galleryImageVersionStorageProfile": {
-      "type": "object",
+    "GalleryImageVersionStorageProfile": {
       "properties": {
         "osDiskImage": {
-          "$ref": "#/definitions/galleryOSDiskImage"
+          "$ref": "#/definitions/GalleryOSDiskImage"
         }
       },
       "description": "This is the storage profile of a Gallery Image Version."
     },
-    "galleryOSDiskImage": {
+    "GalleryOSDiskImage": {
       "allOf": [
         {
-          "$ref": "#/definitions/galleryDiskImage"
+          "$ref": "#/definitions/GalleryDiskImage"
         }
       ],
       "description": "This is the OS disk image."
     },
-    "galleryDiskImage": {
-      "type": "object",
+    "GalleryDiskImage": {
       "properties": {
         "sizeInMB": {
           "type": "integer",
@@ -506,31 +499,27 @@
       },
       "description": "This is the disk image base class."
     },
-    "marketplacegalleryimages": {
+    "MarketplaceGalleryImages": {
       "type": "object",
       "description": "The marketplace gallery image resource definition.",
       "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/marketplacegalleryimagesProperties"
+          "$ref": "#/definitions/MarketplaceGalleryImageProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
-    "marketplacegalleryimagesPatch": {
+    "MarketplaceGalleryImagesUpdateRequest": {
       "type": "object",
       "properties": {
         "tags": {
@@ -543,34 +532,31 @@
       },
       "description": "The marketplace gallery image resource patch definition."
     },
-    "marketplacegalleryimagesListResult": {
+    "MarketplaceGalleryImagesListResult": {
       "type": "object",
-      "description": "List of marketplacegalleryimages.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The itemed list of marketplacegalleryimages",
           "items": {
-            "$ref": "#/definitions/marketplacegalleryimages"
+            "$ref": "#/definitions/MarketplaceGalleryImages"
           }
         },
         "nextLink": {
-          "type": "string",
-          "description": "Link to the next set of results.",
-          "readOnly": true
+          "type": "string"
         }
       }
     }
   },
   "parameters": {
-    "marketplacegalleryimagesNameParameter": {
-      "name": "marketplacegalleryimagesName",
+    "MarketplaceGalleryImageNameParameter": {
+      "name": "marketplaceGalleryImageName",
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
-      "maxLength": 64,
-      "minLength": 3,
+      "maxLength": 80,
+      "minLength": 1,
       "description": "Name of the marketplace gallery image"
     }
   }

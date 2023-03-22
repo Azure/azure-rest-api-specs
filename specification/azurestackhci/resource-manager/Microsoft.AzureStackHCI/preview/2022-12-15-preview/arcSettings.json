@@ -40,16 +40,16 @@
         "description": "Get ArcSetting resources of HCI Cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -62,7 +62,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -82,10 +82,10 @@
         "description": "Get ArcSetting resource details of HCI Cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -94,7 +94,7 @@
             "$ref": "#/parameters/ArcSettingNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -107,7 +107,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -122,10 +122,10 @@
         "description": "Create ArcSetting for HCI cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -143,7 +143,7 @@
             "description": "Parameters supplied to the Create ArcSetting resource for this HCI cluster."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -156,7 +156,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -166,15 +166,15 @@
           }
         }
       },
-      "delete": {
-        "operationId": "ArcSettings_Delete",
-        "description": "Delete ArcSetting resource details of HCI Cluster.",
+      "patch": {
+        "operationId": "ArcSettings_Update",
+        "description": "Update ArcSettings for HCI cluster.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ClusterNameParameter"
@@ -183,7 +183,56 @@
             "$ref": "#/parameters/ArcSettingNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "name": "arcSetting",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArcSettingsPatch"
+            },
+            "description": "ArcSettings parameters that needs to be updated"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch ArcSetting": {
+            "$ref": "./examples/PatchArcSetting.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ArcSettings_Delete",
+        "description": "Delete ArcSetting resource details of HCI Cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -191,7 +240,7 @@
             "description": "OK"
           },
           "202": {
-            "description": "OK"
+            "description": "Accepted"
           },
           "204": {
             "description": "No content"
@@ -199,7 +248,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -211,6 +260,194 @@
           "Delete ArcSetting": {
             "$ref": "./examples/DeleteArcSetting.json"
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/generatePassword": {
+      "post": {
+        "tags": [
+          "ArcSettings"
+        ],
+        "operationId": "ArcSettings_GeneratePassword",
+        "description": "Generate password for arc settings.",
+        "x-ms-examples": {
+          "Generate Password": {
+            "$ref": "./examples/GeneratePassword.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/PasswordCredential"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/createArcIdentity": {
+      "post": {
+        "tags": [
+          "ArcSettings"
+        ],
+        "operationId": "ArcSettings_CreateIdentity",
+        "description": "Create Aad identity for arc settings.",
+        "x-ms-examples": {
+          "Create Arc Identity": {
+            "$ref": "./examples/CreateArcIdentity.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcIdentityResponse"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/consentAndInstallDefaultExtensions": {
+      "post": {
+        "tags": [
+          "ArcSettings"
+        ],
+        "operationId": "ArcSettings_ConsentAndInstallDefaultExtensions",
+        "description": "Add consent time for default extensions and initiate extensions installation",
+        "x-ms-examples": {
+          "Consent And Install Default Extensions": {
+            "$ref": "./examples/ConsentAndInstallDefaultExtensions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ArcSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/clusters/{clusterName}/arcSettings/{arcSettingName}/InitializeDisableProcess": {
+      "post": {
+        "tags": [
+          "ArcSettings"
+        ],
+        "operationId": "ArcSettings_InitializeDisableProcess",
+        "description": "Initializes ARC Disable process on the cluster",
+        "x-ms-examples": {
+          "Trigger ARC Disable": {
+            "$ref": "./examples/InitializeDisableProcess.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ArcSettingNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       }
     }
@@ -235,18 +472,49 @@
         }
       }
     },
+    "ArcSettingsPatch": {
+      "description": "ArcSetting details to update.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "description": "ArcSettings properties.",
+          "$ref": "#/definitions/ArcSettingsPatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArcSettingsPatchProperties": {
+      "description": "ArcSettings properties.",
+      "type": "object",
+      "properties": {
+        "connectivityProperties": {
+          "description": "contains connectivity related configuration for ARC resources",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ArcConnectivityProperties"
+          }
+        }
+      }
+    },
     "ArcSetting": {
       "description": "ArcSetting details.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "systemData": {
           "description": "System data of ArcSetting resource",
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
           "x-ms-client-flatten": true,
           "readOnly": true
         },
@@ -265,11 +533,24 @@
           "description": "Provisioning state of the ArcSetting proxy resource.",
           "type": "string",
           "enum": [
+            "NotSpecified",
+            "Error",
             "Succeeded",
             "Failed",
             "Canceled",
+            "Connected",
+            "Disconnected",
+            "Deleted",
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
             "Accepted",
-            "Provisioning"
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -279,8 +560,23 @@
         },
         "arcInstanceResourceGroup": {
           "description": "The resource group that hosts the Arc agents, ie. Hybrid Compute Machine resources.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
+        },
+        "arcApplicationClientId": {
+          "description": "App id of arc AAD identity.",
+          "type": "string"
+        },
+        "arcApplicationTenantId": {
+          "description": "Tenant id of arc AAD identity.",
+          "type": "string"
+        },
+        "arcServicePrincipalObjectId": {
+          "description": "Object id of arc AAD service principal.",
+          "type": "string"
+        },
+        "arcApplicationObjectId": {
+          "description": "Object id of arc AAD identity.",
+          "type": "string"
         },
         "aggregateState": {
           "description": "Aggregate state of Arc agent across the nodes in this HCI cluster.",
@@ -300,7 +596,10 @@
             "Moving",
             "PartiallySucceeded",
             "PartiallyConnected",
-            "InProgress"
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "ArcSettingAggregateState",
@@ -314,6 +613,24 @@
           "items": {
             "$ref": "#/definitions/PerNodeState"
           },
+          "readOnly": true
+        },
+        "connectivityProperties": {
+          "description": "contains connectivity related configuration for ARC resources",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ArcConnectivityProperties"
+          }
+        },
+        "defaultExtensions": {
+          "description": "Consent time for each of the default extensions category",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DefaultExtensionDetails"
+          },
+          "x-ms-identifiers": [
+            "category"
+          ],
           "readOnly": true
         }
       }
@@ -347,7 +664,13 @@
             "Creating",
             "Updating",
             "Deleting",
-            "Moving"
+            "Moving",
+            "PartiallySucceeded",
+            "PartiallyConnected",
+            "InProgress",
+            "Accepted",
+            "Provisioning",
+            "DisableInProgress"
           ],
           "x-ms-enum": {
             "name": "NodeArcState",
@@ -356,6 +679,85 @@
           "readOnly": true
         }
       }
+    },
+    "DefaultExtensionDetails": {
+      "description": "Consent time for a particular default extension category.",
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "Default extension category",
+          "type": "string",
+          "readOnly": true
+        },
+        "consentTime": {
+          "description": "Consent time for extension category",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        }
+      }
+    },
+    "ArcConnectivityProperties": {
+      "description": "Connectivity related configuration required by arc server.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "True indicates ARC connectivity is enabled"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PasswordCredential": {
+      "type": "object",
+      "properties": {
+        "secretText": {
+          "type": "string"
+        },
+        "keyId": {
+          "type": "string"
+        },
+        "startDateTime": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDateTime": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "additionalProperties": false,
+      "readOnly": true
+    },
+    "ArcIdentityResponse": {
+      "description": "ArcIdentity details.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "ArcIdentity properties.",
+          "$ref": "#/definitions/ArcIdentityResponseProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ArcIdentityResponseProperties": {
+      "type": "object",
+      "properties": {
+        "arcApplicationClientId": {
+          "type": "string"
+        },
+        "arcApplicationTenantId": {
+          "type": "string"
+        },
+        "arcServicePrincipalObjectId": {
+          "type": "string"
+        },
+        "arcApplicationObjectId": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "readOnly": true
     }
   },
   "parameters": {

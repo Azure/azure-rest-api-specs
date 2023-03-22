@@ -20,7 +20,7 @@
     "api-version": "2022-12-15-preview"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
         "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default/extensions/MicrosoftMonitoringAgent",
         "name": "MicrosoftMonitoringAgent",
@@ -39,6 +39,7 @@
             "publisher": "Microsoft.Compute",
             "type": "string",
             "typeHandlerVersion": "1.10.3",
+            "enableAutomaticUpgrade": false,
             "autoUpgradeMinorVersion": false,
             "settings": {
               "workspaceId": "xx"
@@ -48,16 +49,24 @@
           "perNodeExtensionDetails": [
             {
               "name": "Node-1",
-              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/machine/Node-1/Extensions/MicrosoftMonitoringAgent",
+              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1/Extensions/MicrosoftMonitoringAgent",
+              "typeHandlerVersion": "1.10.3",
               "state": "Connected"
             },
             {
               "name": "Node-2",
-              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/machine/Node-2/Extensions/MicrosoftMonitoringAgent",
+              "extension": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2/Extensions/MicrosoftMonitoringAgent",
+              "typeHandlerVersion": "1.10.3",
               "state": "Disconnected"
             }
-          ]
+          ],
+          "managedBy": "User"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationStatuses"
       }
     }
   }

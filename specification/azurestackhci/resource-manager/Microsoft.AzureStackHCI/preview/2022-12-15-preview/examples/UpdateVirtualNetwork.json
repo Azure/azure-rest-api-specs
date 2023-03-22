@@ -2,9 +2,9 @@
   "parameters": {
     "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
     "resourceGroupName": "test-rg",
-    "virtualnetworksName": "test-vnet",
+    "virtualNetworkName": "test-vnet",
     "api-version": "2022-12-15-preview",
-    "virtualnetworks": {
+    "virtualNetworks": {
       "tags": {
         "additionalProperties": "sample"
       }
@@ -13,9 +13,9 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualnetworks/test-vnet",
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualNetworks/test-vnet",
         "name": "test-vnet",
-        "type": "Microsoft.AzureStackHCI/virtualnetworks",
+        "type": "Microsoft.AzureStackHCI/virtualNetworks",
         "location": "West US2",
         "tags": {
           "additionalProperties": "sample"
@@ -32,9 +32,9 @@
     },
     "201": {
       "body": {
-        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualnetworks/test-vnet",
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualNetworks/test-vnet",
         "name": "test-vnet",
-        "type": "Microsoft.AzureStackHCI/virtualnetworks",
+        "type": "Microsoft.AzureStackHCI/virtualNetworks",
         "location": "West US2",
         "tags": {
           "additionalProperties": "sample"
@@ -46,6 +46,25 @@
         "properties": {
           "networkType": "Transparent",
           "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.AzureStackHCI/virtualNetworks/test-vnet",
+        "name": "test-vnet",
+        "type": "Microsoft.AzureStackHCI/virtualNetworks",
+        "location": "West US2",
+        "tags": {
+          "additionalProperties": "sample"
+        },
+        "extendedLocation": {
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "properties": {
+          "networkType": "Transparent",
+          "provisioningState": "Accepted"
         }
       }
     }

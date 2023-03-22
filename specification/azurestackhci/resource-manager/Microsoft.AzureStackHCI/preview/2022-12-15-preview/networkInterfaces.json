@@ -37,10 +37,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkinterfaces/{networkinterfacesName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkInterfaces/{networkInterfaceName}": {
       "get": {
-        "operationId": "networkinterfaces_Retrieve",
-        "description": "Gets network interfaces by resource name",
+        "operationId": "NetworkInterfaces_Get",
+        "description": "Gets a network interface",
         "x-ms-examples": {
           "GetNetworkInterface": {
             "$ref": "./examples/GetNetworkInterface.json"
@@ -48,35 +48,36 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/networkinterfacesNameParameter"
+            "$ref": "#/parameters/NetworkInterfaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Retrieved the network interface resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/NetworkInterfaces"
             }
           }
         }
       },
       "put": {
-        "operationId": "networkinterfaces_CreateOrUpdate",
+        "operationId": "NetworkInterfaces_CreateOrUpdate",
+        "description": "The operation to create or update a network interface. Please note some properties can be set only during network interface creation.",
         "x-ms-examples": {
           "PutNetworkInterface": {
             "$ref": "./examples/PutNetworkInterface.json"
@@ -88,23 +89,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/networkinterfacesNameParameter"
+            "$ref": "#/parameters/NetworkInterfaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "networkinterfaces",
+            "name": "networkInterfaces",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/NetworkInterfaces"
             }
           }
         ],
@@ -112,25 +113,26 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the network interface resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/NetworkInterfaces"
             }
           },
           "201": {
-            "description": "Creates the network interface resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/NetworkInterfaces"
             }
           }
         }
       },
       "delete": {
-        "operationId": "networkinterfaces_Delete",
+        "operationId": "NetworkInterfaces_Delete",
+        "description": "The operation to delete a network interface.",
         "x-ms-examples": {
           "DeleteNetworkInterface": {
             "$ref": "./examples/DeleteNetworkInterface.json"
@@ -138,27 +140,27 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/networkinterfacesNameParameter"
+            "$ref": "#/parameters/NetworkInterfaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Deletes the network interface resource."
+            "description": "OK"
           },
           "204": {
             "description": "No content"
@@ -166,7 +168,8 @@
         }
       },
       "patch": {
-        "operationId": "networkinterfaces_Update",
+        "operationId": "NetworkInterfaces_Update",
+        "description": "The operation to update a network interface.",
         "x-ms-examples": {
           "UpdateNetworkInterface": {
             "$ref": "./examples/UpdateNetworkInterface.json"
@@ -174,23 +177,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/networkinterfacesNameParameter"
+            "$ref": "#/parameters/NetworkInterfaceNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "networkinterfaces",
+            "name": "networkInterfaces",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/networkinterfacesPatch"
+              "$ref": "#/definitions/NetworkInterfacesUpdateRequest"
             }
           }
         ],
@@ -198,27 +201,34 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the network interface resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/NetworkInterfaces"
             }
           },
           "201": {
-            "description": "Updates the network interface resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/networkinterfaces"
+              "$ref": "#/definitions/NetworkInterfaces"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/NetworkInterfaces"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkinterfaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/networkInterfaces": {
       "get": {
-        "operationId": "networkinterfaces_ListByResourceGroup",
+        "operationId": "NetworkInterfaces_ListByResourceGroup",
+        "description": "Lists all of the network interfaces in the specified resource group. Use the nextLink property in the response to get the next page of network interfaces.",
         "x-ms-examples": {
           "ListNetworkInterfaceByResourceGroup": {
             "$ref": "./examples/ListNetworkInterfaceByResourceGroup.json"
@@ -226,26 +236,26 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all network interfaces under the resource group.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/networkinterfacesListResult"
+              "$ref": "#/definitions/NetworkInterfacesListResult"
             }
           }
         },
@@ -254,9 +264,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/networkinterfaces": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/networkInterfaces": {
       "get": {
-        "operationId": "networkinterfaces_ListBySubscription",
+        "operationId": "NetworkInterfaces_ListBySubscription",
+        "description": "Lists all of the network interfaces in the specified subscription. Use the nextLink property in the response to get the next page of network interfaces.",
         "x-ms-examples": {
           "ListNetworkInterfaceBySubscription": {
             "$ref": "./examples/ListNetworkInterfaceBySubscription.json"
@@ -264,23 +275,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all network interfaces under the subscription.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/networkinterfacesListResult"
+              "$ref": "#/definitions/NetworkInterfacesListResult"
             }
           }
         },
@@ -303,14 +314,14 @@
         }
       }
     },
-    "networkinterfacesProperties": {
+    "NetworkInterfaceProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
         "ipConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ipConfiguration"
+            "$ref": "#/definitions/IPConfiguration"
           },
           "description": "IPConfigurations - A list of IPConfigurations of the network interface.",
           "x-ms-identifiers": []
@@ -325,6 +336,7 @@
         },
         "provisioningState": {
           "type": "string",
+          "description": "Provisioning state of the network interface.",
           "readOnly": true,
           "enum": [
             "Succeeded",
@@ -339,18 +351,13 @@
             "modelAsString": true
           }
         },
-        "resourceName": {
-          "type": "string",
-          "description": "name of the object to be used in moc"
-        },
         "status": {
           "$ref": "#/definitions/NetworkInterfaceStatus"
         }
       },
-      "description": "Properties of a network interface resource"
+      "description": "Properties under the network interface resource"
     },
     "NetworkInterfaceStatus": {
-      "type": "object",
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -363,8 +370,6 @@
           "description": "Descriptive error message"
         },
         "provisioningStatus": {
-          "type": "object",
-          "description": "The provisioning status of the network interface",
           "properties": {
             "operationId": {
               "type": "string",
@@ -379,21 +384,26 @@
                 "InProgress"
               ],
               "x-ms-enum": {
-                "name": "ProvisioningStatusEnum",
+                "name": "Status",
                 "modelAsString": true
               }
             }
           }
         }
       },
-      "description": "NetworkInterfaceStatus defines the observed state of network interfaces"
+      "description": "The observed state of network interfaces"
     },
-    "ipConfiguration": {
+    "IPConfiguration": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
         "name": {
           "type": "string",
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ],
           "description": "Name - The name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
         "properties": {
@@ -440,31 +450,27 @@
       },
       "description": "InterfaceIPConfiguration iPConfiguration in a network interface."
     },
-    "networkinterfaces": {
+    "NetworkInterfaces": {
       "type": "object",
       "description": "The network interface resource definition.",
       "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/networkinterfacesProperties"
+          "$ref": "#/definitions/NetworkInterfaceProperties"
         },
         "extendedLocation": {
           "$ref": "./common.json#/definitions/ExtendedLocation",
           "description": "The extendedLocation of the resource."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
-    "networkinterfacesPatch": {
+    "NetworkInterfacesUpdateRequest": {
       "type": "object",
       "properties": {
         "tags": {
@@ -477,13 +483,13 @@
       },
       "description": "The network interface resource patch definition."
     },
-    "networkinterfacesListResult": {
+    "NetworkInterfacesListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/networkinterfaces"
+            "$ref": "#/definitions/NetworkInterfaces"
           }
         },
         "nextLink": {
@@ -493,14 +499,16 @@
     }
   },
   "parameters": {
-    "networkinterfacesNameParameter": {
-      "name": "networkinterfacesName",
+    "NetworkInterfaceNameParameter": {
+      "name": "networkInterfaceName",
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
-      "maxLength": 64,
-      "minLength": 3
+      "maxLength": 80,
+      "minLength": 1,
+      "description": "Name of the network interface"
     }
   }
 }

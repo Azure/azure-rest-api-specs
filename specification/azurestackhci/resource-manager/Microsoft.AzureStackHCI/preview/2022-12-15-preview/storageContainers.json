@@ -37,10 +37,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/storagecontainers/{storagecontainersName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/storageContainers/{storageContainerName}": {
       "get": {
-        "operationId": "storagecontainers_Retrieve",
-        "description": "Gets storagecontainers by resource name",
+        "operationId": "StorageContainers_Get",
+        "description": "Gets a storage container",
         "x-ms-examples": {
           "GetStorageContainer": {
             "$ref": "./examples/GetStorageContainer.json"
@@ -48,35 +48,36 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/storagecontainersNameParameter"
+            "$ref": "#/parameters/StorageContainerNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Retrieved the storage container resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/storagecontainers"
+              "$ref": "#/definitions/StorageContainers"
             }
           }
         }
       },
       "put": {
-        "operationId": "storagecontainers_CreateOrUpdate",
+        "operationId": "StorageContainers_CreateOrUpdate",
+        "description": "The operation to create or update a storage container. Please note some properties can be set only during storage container creation.",
         "x-ms-examples": {
           "PutStorageContainer": {
             "$ref": "./examples/PutStorageContainer.json"
@@ -88,23 +89,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/storagecontainersNameParameter"
+            "$ref": "#/parameters/StorageContainerNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "storagecontainers",
+            "name": "storageContainers",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/storagecontainers"
+              "$ref": "#/definitions/StorageContainers"
             }
           }
         ],
@@ -112,25 +113,26 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the storage container resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/storagecontainers"
+              "$ref": "#/definitions/StorageContainers"
             }
           },
           "201": {
-            "description": "Creates the storage container resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/storagecontainers"
+              "$ref": "#/definitions/StorageContainers"
             }
           }
         }
       },
       "delete": {
-        "operationId": "storagecontainers_Delete",
+        "operationId": "StorageContainers_Delete",
+        "description": "The operation to delete a storage container.",
         "x-ms-examples": {
           "DeleteStorageContainer": {
             "$ref": "./examples/DeleteStorageContainer.json"
@@ -138,27 +140,27 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/storagecontainersNameParameter"
+            "$ref": "#/parameters/StorageContainerNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Deletes the storage container resource."
+            "description": "OK"
           },
           "204": {
             "description": "No content"
@@ -166,7 +168,8 @@
         }
       },
       "patch": {
-        "operationId": "storagecontainers_Update",
+        "operationId": "StorageContainers_Update",
+        "description": "The operation to update a storage container.",
         "x-ms-examples": {
           "UpdateStorageContainer": {
             "$ref": "./examples/UpdateStorageContainer.json"
@@ -174,23 +177,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/storagecontainersNameParameter"
+            "$ref": "#/parameters/StorageContainerNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "storagecontainers",
+            "name": "storageContainers",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/storagecontainersPatch"
+              "$ref": "#/definitions/StorageContainersUpdateRequest"
             }
           }
         ],
@@ -198,27 +201,34 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Updates the storage container resource.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/storagecontainers"
+              "$ref": "#/definitions/StorageContainers"
             }
           },
           "201": {
-            "description": "Updates the storage container resource.",
+            "description": "Created",
             "schema": {
-              "$ref": "#/definitions/storagecontainers"
+              "$ref": "#/definitions/StorageContainers"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/StorageContainers"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/storagecontainers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/storageContainers": {
       "get": {
-        "operationId": "storagecontainers_ListByResourceGroup",
+        "operationId": "StorageContainers_ListByResourceGroup",
+        "description": "Lists all of the storage containers in the specified resource group. Use the nextLink property in the response to get the next page of storage containers.",
         "x-ms-examples": {
           "ListStorageContainerByResourceGroup": {
             "$ref": "./examples/ListStorageContainerByResourceGroup.json"
@@ -226,26 +236,26 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all storagecontainers under the resource group.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/storagecontainersListResult"
+              "$ref": "#/definitions/StorageContainersListResult"
             }
           }
         },
@@ -254,9 +264,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/storagecontainers": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.AzureStackHCI/storageContainers": {
       "get": {
-        "operationId": "storagecontainers_ListBySubscription",
+        "operationId": "StorageContainers_ListBySubscription",
+        "description": "Lists all of the storage containers in the specified subscription. Use the nextLink property in the response to get the next page of storage containers.",
         "x-ms-examples": {
           "ListStorageContainerByResourceGroup": {
             "$ref": "./examples/ListStorageContainerBySubscription.json"
@@ -264,23 +275,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
           "200": {
-            "description": "Lists all storagecontainers under the subscription.",
+            "description": "OK",
             "schema": {
-              "$ref": "#/definitions/storagecontainersListResult"
+              "$ref": "#/definitions/StorageContainersListResult"
             }
           }
         },
@@ -291,7 +302,7 @@
     }
   },
   "definitions": {
-    "storagecontainersProperties": {
+    "StorageContainerProperties": {
       "type": "object",
       "x-ms-client-flatten": true,
       "properties": {
@@ -300,32 +311,29 @@
           "description": "Path of the storage container on the disk"
         },
         "provisioningState": {
-          "type": "string"
-        },
-        "resourceName": {
           "type": "string",
-          "description": "name of the object to be used in moc"
-        },
-        "availableSizeMB": {
-          "type": "integer",
-          "format": "int64",
+          "description": "Provisioning state of the storage container.",
           "readOnly": true,
-          "description": "Amount of space available on the disk in MB"
-        },
-        "containerSizeMB": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "Total size of the disk in MB"
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "InProgress",
+            "Accepted",
+            "Deleting",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningStateEnum",
+            "modelAsString": true
+          }
         },
         "status": {
-          "$ref": "#/definitions/storageContainerStatus"
+          "$ref": "#/definitions/StorageContainerStatus"
         }
       },
-      "description": "Properties of a storage container resource"
+      "description": "Properties under the storage container resource"
     },
-    "storageContainerStatus": {
-      "type": "object",
+    "StorageContainerStatus": {
       "x-ms-client-flatten": true,
       "readOnly": true,
       "properties": {
@@ -348,8 +356,6 @@
           "description": "Total size of the disk in MB"
         },
         "provisioningStatus": {
-          "type": "object",
-          "description": "The provisioning status of the storage container",
           "properties": {
             "operationId": {
               "type": "string",
@@ -364,73 +370,36 @@
                 "InProgress"
               ],
               "x-ms-enum": {
-                "name": "ProvisioningStatusEnum",
+                "name": "Status",
                 "modelAsString": true
               }
             }
           }
         }
       },
-      "description": "storageContainerStatus defines the observed state of storagecontainers"
+      "description": "The observed state of storage containers"
     },
-    "storagecontainers": {
+    "StorageContainers": {
       "type": "object",
+      "description": "The storage container resource definition.",
       "x-ms-azure-resource": true,
-      "x-ms-client-flatten": true,
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/storagecontainersProperties"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Type"
-        },
-        "location": {
-          "type": "string",
-          "description": "The resource location"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "#/definitions/StorageContainerProperties"
         },
         "extendedLocation": {
-          "type": "object",
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "The extended location type."
-            },
-            "name": {
-              "type": "string",
-              "description": "The extended location name."
-            }
-          }
+          "$ref": "./common.json#/definitions/ExtendedLocation",
+          "description": "The extendedLocation of the resource."
         }
       },
-      "required": [
-        "location"
-      ],
-      "description": "The storage container resource definition."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
-    "storagecontainersPatch": {
+    "StorageContainersUpdateRequest": {
       "type": "object",
       "properties": {
         "tags": {
@@ -443,13 +412,13 @@
       },
       "description": "The storage container resource patch definition."
     },
-    "storagecontainersListResult": {
+    "StorageContainersListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/storagecontainers"
+            "$ref": "#/definitions/StorageContainers"
           }
         },
         "nextLink": {
@@ -459,14 +428,16 @@
     }
   },
   "parameters": {
-    "storagecontainersNameParameter": {
-      "name": "storagecontainersName",
+    "StorageContainerNameParameter": {
+      "name": "storageContainerName",
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,78}[_a-zA-Z0-9]$",
       "x-ms-parameter-location": "method",
-      "maxLength": 64,
-      "minLength": 3
+      "maxLength": 80,
+      "minLength": 1,
+      "description": "Name of the storage container"
     }
   }
 }
