@@ -128,8 +128,8 @@
             "headers": {
               "retry-after": {
                 "type": "integer",
-                "format": "int64",
-                "description": "Indicates the number of seconds that the client should wait before trying to get the result from the URL identified by the Operation-Location header if the operation did not terminate yet."
+                "format": "int32",
+                "description": "Indicates the number of seconds that the client should wait before executing another GET request if the operation did not terminate yet."
               },
               "x-ms-request-id": {
                 "type": "string",
@@ -475,19 +475,25 @@
       "type": "object",
       "properties": {
         "prompt": {
-          "type": "string",
           "description": "A text description of the desired image(s).",
+          "type": "string",
+          "format": "string",
           "minLength": 1
         },
         "n": {
+          "description": "The number of images to generate.",
           "type": "integer",
           "format": "int64",
-          "description": "The number of images to generate.",
           "minimum": 1,
           "default": 1
         },
         "size": {
           "$ref": "#/definitions/Size"
+        },
+        "user": {
+          "description": "A unique identifier representing your end-user, which can help to monitor and detect abuse.",
+          "type": "string",
+          "format": "string"
         }
       },
       "required": [

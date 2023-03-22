@@ -87,7 +87,7 @@ directive:
 ```
 
 ## AzureOpenAI 2023-04-15-preview
-These settings apply only when `api-version=2023-04-201-preview` is specified in the query parameters of the request.
+These settings apply only when `api-version=2023-04-15-preview` is specified in the query parameters of the request.
 
 ``` yaml $(tag) == 'release_2023_04_15_preview'
 input-file: preview/2023-04-15-preview/images.json
