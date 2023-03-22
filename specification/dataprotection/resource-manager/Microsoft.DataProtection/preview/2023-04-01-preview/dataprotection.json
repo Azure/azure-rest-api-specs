@@ -4304,6 +4304,10 @@
         "sourceResourceId": {
           "description": "Fully qualified Azure Resource Manager ID of the datasource which is being recovered.",
           "type": "string"
+        },
+        "identityDetails": {
+            "$ref": "#/definitions/IdentityDetails",
+            "description": "Contains information of the Identity Details for the BI.\r\nIf it is null, default will be considered as System Assigned."
         }
       },
       "required": [
@@ -4313,6 +4317,19 @@
       ],
       "title": "AzureBackupRestoreRequest",
       "type": "object"
+    },
+    "IdentityDetails": {
+        "type": "object",
+        "properties": {
+            "useSystemAssignedIdentity": {
+                "description": "Specifies if the BI is protected by System Identity.",
+                "type": "boolean"
+            },
+            "userAssignedIdentityArmUrl": {
+                "description": "ARM URL for User Assigned Identity.",
+                "type": "string"
+            }
+        }
     },
     "AzureBackupRestoreWithRehydrationRequest": {
       "allOf": [
@@ -4627,6 +4644,10 @@
             "name": "ValidationType",
             "modelAsString": true
           }
+        },
+        "identityDetails": {
+            "$ref": "#/definitions/IdentityDetails",
+            "description": "Contains information of the Identity Details for the BI.\r\nIf it is null, default will be considered as System Assigned."
         },
         "objectType": {
           "type": "string"
@@ -5421,12 +5442,35 @@
           "type": "string"
         },
         "type": {
-          "description": "The identityType which can be either SystemAssigned or None",
+          "description": "The identityType which can be either SystemAssigned, UserAssigned or None",
           "type": "string"
+        },
+        "userAssignedIdentities": {
+            "description": "Gets or sets the user assigned identities.",
+            "type": "object",
+            "additionalProperties": {
+                "$ref": "#/definitions/UserAssignedIdentityDetails"
+            }
         }
       },
       "title": "DppIdentityDetails",
       "type": "object"
+    },
+    "UserAssignedIdentityDetails": {
+        "description": "User Assigned Identity Details",
+        "type": "object",
+        "properties": {
+            "clientId": {
+                "description": "The Client Id of the UAMI.",
+                "type": "string",
+                "readOnly": true
+            },
+            "principalId": {
+                "description": "The Object Id of the UAMI.",
+                "type": "string",
+                "readOnly": true
+            }
+        }
     },
     "DppBaseResourceList": {
       "description": "Base for all lists of V2 resources.",
@@ -6809,8 +6853,82 @@
         },
         "immutabilitySettings": {
           "$ref": "#/definitions/ImmutabilitySettings"
+        },
+        "encryptionSettings": {
+            "$ref": "#/definitions/EncryptionSettings"
         }
       }
+    },
+    "EncryptionSettings": {
+        "description": "Class containing encryption settings of vault",
+        "type": "object",
+        "properties": {
+            "state": {
+                "description": "State of encryption",
+                "enum": [
+                    "Disabled",
+                    "Enabled",
+                    "Inconsistent"
+                ],
+                "type": "string",
+                "x-ms-enum": {
+                    "name": "EncryptionState",
+                    "modelAsString": true
+                }
+            },
+            "keyVaultProperties": {
+                "$ref": "#/definitions/CmkKeyVaultProperties",
+                "description": "Key Vault Details"
+            },
+            "kekIdentity": {
+                "$ref": "#/definitions/CmkKekIdentity",
+                "description": "Identity Details"
+            },
+            "infrastructureEncryption": {
+                "description": "State of Infrastructure encryption",
+                "enum": [
+                    "Disabled",
+                    "Enabled"
+                ],
+                "type": "string",
+                "x-ms-enum": {
+                    "name": "InfrastructureEncryptionState",
+                    "modelAsString": true
+                }
+            }
+        }
+    },
+    "CmkKekIdentity": {
+        "description": "Class containing Selected User identity settings of vault",
+        "type": "object",
+        "properties": {
+            "identityType": {
+                "enum": [
+                    "Unknown",
+                    "SystemAssigned",
+                    "UserAssigned",
+                    "None",
+                    "SystemAssignedAndUserAssigned"
+                ],
+                "type": "string",
+                "x-ms-enum": {
+                    "name": "ManagedIdentityType",
+                    "modelAsString": true
+                }
+            },
+            "identityId": {
+                "type": "string"
+            }
+        }
+    },
+    "CmkKeyVaultProperties": {
+        "description": "Class containing CMK settings of the backup vault",
+        "type": "object",
+        "properties": {
+            "keyUri": {
+                "type": "string"
+            }
+        }
     },
     "SoftDeleteSettings": {
       "description": "Soft delete related settings",
