@@ -1073,8 +1073,87 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/osType/{osType}/agentVersions": {
+      "get": {
+        "tags": [
+          "AgentVersionsList"
+        ],
+        "operationId": "AgentVersion_List",
+        "description": "Gets all Agent Versions along with the download link currently present.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "osType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Defines the os type."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentVersionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET Agent Versions": {
+            "$ref": "./examples/GETAgentVersions.json"
+          }
+        }
+      }
+    },
+    "/osType/{osType}/agentVersions/latest": {
+      "get": {
+        "tags": [
+          "LatestAgentVersion"
+        ],
+        "operationId": "Latest_AgentVersion",
+        "description": "Gets the latest Agent Version along with the download link currently present.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "osType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Defines the os type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentVersion"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET Agent Versions": {
+            "$ref": "./examples/GETLatestAgentVersion.json"
+          }
+        }
+      }
     }
-    
   },
   "definitions": {
     "ExtensionValueListResult": {
@@ -2067,6 +2146,40 @@
           "readOnly": true
         }
       }
+    },
+    "AgentVersionsList": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "agentVersions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentVersion"
+          },
+          "description": "The list of available Agent Versions.",
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next 10 available Agent Versions."
+        }
+      },
+      "description": "Describes AgentVersions List."
+    },
+    "AgentVersion": {
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "agentVersion": {
+          "type": "string",
+          "description": "Represents the agent version."
+        },
+        "downloadLink": {
+          "type": "string",
+          "description": "Represents the download link of specific agent version."
+        }
+      },
+      "description": "Describes properties of Agent Version."
     }
   },
   "parameters": {}
