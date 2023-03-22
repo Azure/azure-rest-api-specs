@@ -29,6 +29,7 @@ openapi-type: arm
 tag: package-preview-2023-04
 ```
 
+
 ---
 
 
@@ -57,6 +58,7 @@ input-file:
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/ThreatIntelligence.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/TriggeredAnalyticsRuleRuns.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/Watchlists.json
+  - Microsoft.SecurityInsights/preview/2023-04-01-preview/WorkspaceManagerAssignments.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/WorkspaceManagerConfigurations.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/WorkspaceManagerMembers.json
   - Microsoft.SecurityInsights/preview/2023-04-01-preview/dataConnectors.json
