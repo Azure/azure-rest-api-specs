@@ -356,7 +356,8 @@
             "AWS",
             "GCP",
             "Github",
-            "AzureDevOps"
+            "AzureDevOps",
+            "GitLab"
           ],
           "x-ms-enum": {
             "name": "cloudName",
@@ -393,7 +394,8 @@
             "AwsAccount",
             "GcpProject",
             "GithubScope",
-            "AzureDevOpsScope"
+            "AzureDevOpsScope",
+            "GitlabScope"
           ],
           "x-ms-enum": {
             "name": "environmentType",
@@ -404,7 +406,7 @@
     },
     "AwsEnvironmentData": {
       "type": "object",
-      "description": "The aws connector environment data",
+      "description": "The AWS connector environment data",
       "x-ms-discriminator-value": "AwsAccount",
       "allOf": [
         {
@@ -416,12 +418,25 @@
           "type": "object",
           "description": "The AWS account's organizational data",
           "$ref": "#/definitions/AwsOrganizationalData"
+        },
+        "regions": {
+          "type": "array",
+          "description": "list of regions to scan",
+          "items": {
+            "type": "string",
+            "description": "AWS regions names"
+          }
+        },
+        "accountName": {
+          "type": "string",
+          "description": "The AWS account name",
+          "readOnly": true
         }
       }
     },
     "AwsOrganizationalData": {
       "type": "object",
-      "description": "The awsOrganization data ",
+      "description": "The AWS organization data",
       "discriminator": "organizationMembershipType",
       "required": [
         "organizationMembershipType"
@@ -443,7 +458,7 @@
     },
     "AwsOrganizationalDataMaster": {
       "type": "object",
-      "description": "The awsOrganization data for the master account",
+      "description": "The AWS organization data for the master account",
       "x-ms-discriminator-value": "Organization",
       "allOf": [
         {
@@ -467,7 +482,7 @@
     },
     "AwsOrganizationalDataMember": {
       "type": "object",
-      "description": "The awsOrganization data for the member account",
+      "description": "The AWS organization data for the member account",
       "x-ms-discriminator-value": "Member",
       "allOf": [
         {
@@ -519,6 +534,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The GCP workload identity federation pool id"
+        },
+        "projectName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "GCP project name"
         }
       }
     },
@@ -569,6 +589,11 @@
         "workloadIdentityProviderId": {
           "type": "string",
           "description": "The GCP workload identity provider id which represents the permissions required to auto provision security connectors"
+        },
+        "organizationName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "GCP organization name"
         }
       }
     },
@@ -614,6 +639,17 @@
       ],
       "properties": {}
     },
+    "GitlabScopeEnvironmentData": {
+      "type": "object",
+      "description": "The GitLab scope connector's environment data",
+      "x-ms-discriminator-value": "GitlabScope",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EnvironmentData"
+        }
+      ],
+      "properties": {}
+    },
     "cloudOffering": {
       "type": "object",
       "description": "The security offering details",
@@ -640,7 +676,9 @@
             "DefenderCspmAws",
             "DefenderCspmGcp",
             "DefenderForDevOpsGithub",
-            "DefenderForDevOpsAzureDevOps"
+            "DefenderForDevOpsAzureDevOps",
+            "CspmMonitorGitLab",
+            "DefenderForDevOpsGitLab"
           ],
           "x-ms-enum": {
             "name": "offeringType",
@@ -796,6 +834,20 @@
             "cloudRoleArn": {
               "type": "string",
               "description": "The cloud role ARN in AWS for this feature"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for servers Arc auto provisioning",
+              "properties": {
+                "proxy": {
+                  "type": "string",
+                  "description": "Optional HTTP proxy endpoint to use for the Arc agent"
+                },
+                "privateLinkScope": {
+                  "type": "string",
+                  "description": "Optional Arc private link scope resource id to link the Arc agent"
+                }
+              }
             }
           }
         },
@@ -878,7 +930,7 @@
                 },
                 "scanningMode": {
                   "type": "string",
-                  "description": "The scanning mode for the vm scan.",
+                  "description": "The scanning mode for the VM scan.",
                   "enum": [
                     "Default"
                   ],
@@ -921,6 +973,20 @@
             "cloudRoleArn": {
               "type": "string",
               "description": "The cloud role ARN in AWS for this feature"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for servers Arc auto provisioning",
+              "properties": {
+                "proxy": {
+                  "type": "string",
+                  "description": "Optional http proxy endpoint to use for the Arc agent"
+                },
+                "privateLinkScope": {
+                  "type": "string",
+                  "description": "Optional Arc private link scope resource id to link the Arc agent"
+                }
+              }
             }
           }
         },
@@ -931,6 +997,20 @@
             "enabled": {
               "type": "boolean",
               "description": "Is RDS protection enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "databasesDspm": {
+          "type": "object",
+          "description": "The databases data security posture management (DSPM) configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is databases data security posture management (DSPM) protection enabled"
             },
             "cloudRoleArn": {
               "type": "string",
@@ -1019,6 +1099,20 @@
             "enabled": {
               "type": "boolean",
               "description": "Is arc auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for servers Arc auto provisioning",
+              "properties": {
+                "proxy": {
+                  "type": "string",
+                  "description": "Optional HTTP proxy endpoint to use for the Arc agent"
+                },
+                "privateLinkScope": {
+                  "type": "string",
+                  "description": "Optional Arc private link scope resource id to link the Arc agent"
+                }
+              }
             }
           }
         },
@@ -1082,6 +1176,40 @@
               }
             }
           }
+        },
+        "vmScanners": {
+          "type": "object",
+          "description": "The Microsoft Defender for Server VM scanning configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender for Server VM scanning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "configuration for Microsoft Defender for Server VM scanning",
+              "properties": {
+                "scanningMode": {
+                  "type": "string",
+                  "description": "The scanning mode for the VM scan.",
+                  "enum": [
+                    "Default"
+                  ],
+                  "x-ms-enum": {
+                    "name": "scanningMode",
+                    "modelAsString": true
+                  }
+                },
+                "exclusionTags": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "description": "VM tags that indicate that VM should not be scanned"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -1102,6 +1230,20 @@
             "enabled": {
               "type": "boolean",
               "description": "Is arc auto provisioning enabled"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "Configuration for servers Arc auto provisioning",
+              "properties": {
+                "proxy": {
+                  "type": "string",
+                  "description": "Optional http proxy endpoint to use for the Arc agent"
+                },
+                "privateLinkScope": {
+                  "type": "string",
+                  "description": "Optional Arc private link scope resource id to link the Arc agent"
+                }
+              }
             }
           }
         },
@@ -1197,7 +1339,7 @@
     },
     "defenderCspmAwsOffering": {
       "type": "object",
-      "description": "The CSPM P1 for Aws offering",
+      "description": "The CSPM P1 for AWS offering",
       "x-ms-discriminator-value": "DefenderCspmAws",
       "allOf": [
         {
@@ -1223,7 +1365,7 @@
                 },
                 "scanningMode": {
                   "type": "string",
-                  "description": "The scanning mode for the vm scan.",
+                  "description": "The scanning mode for the VM scan.",
                   "enum": [
                     "Default"
                   ],
@@ -1240,6 +1382,34 @@
                   "description": "VM tags that indicates that VM should not be scanned"
                 }
               }
+            }
+          }
+        },
+        "dataSensitivityDiscovery": {
+          "type": "object",
+          "description": "The Microsoft Defender Data Sensitivity discovery configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is Microsoft Defender Data Sensitivity discovery enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
+            }
+          }
+        },
+        "databasesDspm": {
+          "type": "object",
+          "description": "The databases DSPM configuration",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+              "description": "Is databases DSPM protection enabled"
+            },
+            "cloudRoleArn": {
+              "type": "string",
+              "description": "The cloud role ARN in AWS for this feature"
             }
           }
         }
@@ -1271,6 +1441,28 @@
       "type": "object",
       "description": "The Defender for DevOps for Azure DevOps offering",
       "x-ms-discriminator-value": "DefenderForDevOpsAzureDevOps",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "cspmMonitorGitLabOffering": {
+      "type": "object",
+      "description": "The CSPM (Cloud security posture management) monitoring for gitlab offering",
+      "x-ms-discriminator-value": "CspmMonitorGitLab",
+      "allOf": [
+        {
+          "$ref": "#/definitions/cloudOffering"
+        }
+      ],
+      "properties": {}
+    },
+    "defenderForDevOpsGitLabOffering": {
+      "type": "object",
+      "description": "The Defender for DevOps for Gitlab offering",
+      "x-ms-discriminator-value": "DefenderForDevOpsGitLab",
       "allOf": [
         {
           "$ref": "#/definitions/cloudOffering"
