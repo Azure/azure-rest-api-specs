@@ -1,0 +1,366 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "DataFactoryManagementClient",
+    "version": "2018-06-01"
+  },
+  "paths": {},
+  "definitions": {
+    "ChangeDataCapture": {
+      "description": "A Azure Data Factory object which automatically detects data changes at the source and then sends the updated data to the destination",
+      "type": "object",
+      "properties": {
+        "folder": {
+          "description": "The folder that this cdc is in. If not specified, Cdc will appear at the root level.",
+          "type": "object",
+          "properties": {
+            "name": {
+              "description": "The name of the folder that this cdc is in.",
+              "type": "string"
+            }
+          }
+        },
+        "description": {
+          "description": "The description of the change data capture.",
+          "type": "string"
+        },
+        "SourceConnectionsInfo": {
+          "description": "List of sources connections that can be used as sources in the cdc.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MapperSourceConnectionsInfo"
+          }
+        },
+        "TargetConnectionsInfo": {
+          "description": "List of target connections that can be used as sources in the cdc.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MapperTargetConnectionsInfo"
+          }
+        },
+        "Policy": {
+          "description": "Cdc policy",
+          "type": "object",
+          "$ref": "#/definitions/MapperPolicy"
+        },
+        "allowVNetOverride": {
+          "description": "A boolean to determine if the vnet configuration needs to be overwritten",
+          "type": "boolean"
+        },
+        "status": {
+          "description": "Status of the cdc as to if it is running or stopped",
+          "type": "string"
+        }
+      },
+      "required": [
+        "SourceConnectionsInfo",
+        "TargetConnectionsInfo",
+        "Policy"
+      ]
+    },
+    "MapperSourceConnectionsInfo": {
+      "description": "A object which contains list of tables and connection details for a source connection",
+      "type": "object",
+      "properties": {
+        "SourceEntities": {
+          "description": "List of source tables for a source connection.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MapperTable"
+          }
+        },
+        "Connection": {
+          "type": "object",
+          "$ref": "#/definitions/MapperConnection"
+        }
+      }
+    },
+    "MapperTargetConnectionsInfo": {
+      "description": "A object which contains list of tables and connection details for a target connection",
+      "type": "object",
+      "properties": {
+        "TargetEntities": {
+          "description": "List of source tables for a target connection.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MapperTable"
+          }
+        },
+        "Connection": {
+          "type": "object",
+          "$ref": "#/definitions/MapperConnection"
+        },
+        "DataMapperMappings": {
+          "description": "List of table mappings.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/DataMapperMapping"
+          }
+        },
+        "Relationships": {
+          "description": "List of relationship info among the tables.",
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "DataMapperMapping": {
+      "description": "Source and target table mapping details.",
+      "type": "object",
+      "properties": {
+        "targetEntityName": {
+          "description": "Name of the target table",
+          "type": "string"
+        },
+        "sourceEntityName": {
+          "description": "Name of the source table",
+          "type": "string"
+        },
+        "sourceConnectionReference": {
+          "description": "The connection reference for the source connection.",
+          "type": "object",
+          "$ref": "#/definitions/MapperConnectionReference"
+        },
+        "attributeMappingInfo": {
+          "description": "This holds the user provided attribute mapping infomation.",
+          "type": "object",
+          "$ref": "#/definitions/MapperAttributeMappings"
+        },
+        "sourceDenormalizeInfo": {
+          "description": "This holds the source denormalization infomation used while joining multiple sources.",
+          "type": "object"
+        }
+      }
+    },
+    "MapperConnectionReference": {
+      "description": "Source or target connection reference details.",
+      "type": "object",
+      "properties": {
+        "connectionName": {
+          "description": "Name of the connection",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of connection via linked service or dataset. Possible value: 'linkedservicetype'",
+          "type": "string",
+          "enum": [
+            "linkedservicetype"
+          ]
+        }
+      }
+    },
+    "MapperAttributeMappings": {
+      "description": "Attribute mapping details.",
+      "type": "object",
+      "properties": {
+        "attributeMappings": {
+          "description": "List of attribute mappings.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MapperAttributeMapping"
+          }
+        }
+      }
+    },
+    "MapperAttributeMapping": {
+      "description": "Source and target column mapping details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the target column.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the mapper attribute mapping. Note: 'Advanced' mapping type is also saved as 'Derived'.",
+          "type": "string",
+          "enum": [
+            "Direct",
+            "Derived",
+            "Aggregate"
+          ]
+        },
+        "functionName": {
+          "description": "Name of the function used for 'Aggregate' and 'Derived' (except 'Advanced') type mapping.",
+          "type": "string"
+        },
+        "expression": {
+          "description": "Expression used for 'Aggregate' and 'Derived' type mapping.",
+          "type": "string"
+        },
+        "attributeReference": {
+          "description": "Reference of the source column used in the mapping. It is used for 'Direct' mapping type only.",
+          "type": "object",
+          "$ref": "#/definitions/MapperAttributeReference"
+        },
+        "attributeReferences": {
+          "description": "List of references for source columns. It is used for 'Derived' and 'Aggregate' type mappings only",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MapperAttributeReference"
+          }
+        }
+      }
+    },
+    "MapperAttributeReference": {
+      "description": "Attribute reference details for the referred column.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the column.",
+          "type": "string"
+        },
+        "entity": {
+          "description": "Name of the table.",
+          "type": "string"
+        },
+        "entityConnectionReference": {
+          "description": "The connection reference for the connection.",
+          "type": "object",
+          "$ref": "#/definitions/MapperConnectionReference"
+        }
+      }
+    },
+    "MapperConnection": {
+      "description": "Source connection details.",
+      "type": "object",
+      "properties": {
+        "linkedService": {
+          "description": "Linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "linkedServiceType": {
+          "description": "Type of the linked service e.g.: AzureBlobFS.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of connection via linked service or dataset. Possible value: 'linkedservicetype'",
+          "type": "string",
+          "enum": [
+            "linkedservicetype"
+          ]
+        },
+        "isInlineDataset": {
+          "description": "A boolean indicating whether linked service is of type inline dataset. Possible value: true",
+          "type": "boolean",
+          "enum": [
+            true
+          ]
+        },
+        "commonDslConnectorProperties": {
+          "description": "List of name/value pairs for connection properties.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MapperDslConnectorProperties"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "MapperTable": {
+      "description": "Mapper table details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the table.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Table properties.",
+          "type": "object",
+          "$ref": "#/definitions/MapperTableProperties"
+        }
+      }
+    },
+    "MapperTableProperties": {
+      "description": "Properties for a mapper table.",
+      "type": "object",
+      "properties": {
+        "schema": {
+          "description": "List of columns for the source table.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MapperTableSchema"
+          }
+        },
+        "dslConnectorProperties": {
+          "description": "List of name/value pairs for connection properties.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/MapperDslConnectorProperties"
+          }
+        }
+      }
+    },
+    "MapperTableSchema": {
+      "description": "Schema of a mapper table in terms of column names and their corresponding data types.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the column.",
+          "type": "string"
+        },
+        "dataType": {
+          "description": "Data type of the column.",
+          "type": "string"
+        }
+      }
+    },
+    "MapperDslConnectorProperties": {
+      "description": "Connector properties of a mapper table in terms of name / value pairs.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the property.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of the property.",
+          "type": "object"
+        }
+      }
+    },
+    "MapperPolicy": {
+      "description": "Cdc Policy.",
+      "type": "object",
+      "properties": {
+        "mode": {
+          "description": "Mode of running the Cdc: batch vs continuous.",
+          "type": "string"
+        },
+        "recurrence": {
+          "description": "Defines the frequency and interval for running the cdc for batch mode.",
+          "type": "object",
+          "$ref": "#/definitions/MapperPolicyRecurrence"
+        }
+      }
+    },
+    "MapperPolicyRecurrence": {
+      "description": "Mapper policy recurrence details.",
+      "type": "object",
+      "properties": {
+        "frequency": {
+          "description": "Frequency of period in terms of 'Hour', 'Minute' or 'Second'.",
+          "type": "string"
+        },
+        "interval": {
+          "description": "Actual interval value as per frequency.",
+          "type": "integer"
+        }
+      }
+    }
+  }
+}
