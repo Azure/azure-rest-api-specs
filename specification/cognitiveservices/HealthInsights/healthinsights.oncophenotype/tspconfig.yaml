@@ -1,0 +1,11 @@
+parameters:
+  "python-sdk-folder":
+    default: "{cwd}/azure-sdk-for-python/"
+  "service-directory-name":
+    default: "healthinsights"
+
+options:
+  "@azure-tools/typespec-python":
+    "package-mode": "dataplane"
+    "package-name": "azure-healthinsights-cancerprofiling"
+    "emitter-output-dir": "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
