@@ -2656,7 +2656,7 @@
                 "name": "ResourceAssociationAccessMode",
                 "modelAsString": true
               },
-              "description": "Access Mode of teh resource association"
+              "description": "Access Mode of the resource association"
             }
           },
           "type": "object",
@@ -2678,6 +2678,10 @@
               "items": {
                 "$ref": "#/definitions/NspAccessRule"
               }
+            },
+            "diagnosticSettingsVersion": {
+              "type": "string",
+              "description": "Current diagnostic settings version."
             }
           },
           "description": "Details abou thte current network security perimeter profile."
@@ -2715,11 +2719,34 @@
         },
         "addressPrefixes": {
           "items": {
-            "description": "IP address prefix",
+            "description": "IP address prefix.",
             "type": "string"
           },
           "type": "array",
           "description": "Address prefixes in the CIDR format for inbound rules."
+        },
+        "fullyQualifiedDomainNames": {
+          "items": {
+            "description": "Fully qualfied domain name.",
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Fully qualfied domain names for inbound rules."
+        },
+        "subscriptions": {
+          "items": {
+            "description": "Subscription.",
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Subscriptions for inbound rules."
+        },
+        "networkSecurityPerimeters": {
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeter"
+          },
+          "type": "array",
+          "description": "Network Security Perimeters for inbound rules."
         }
       }
     },
@@ -2729,6 +2756,16 @@
           "type": "string",
           "readOnly": true,
           "description": "The resource id for the network security perimeter."
+        },
+        "perimeterId": {
+          "type": "string",
+          "readonly": true,
+          "description": "The immutable guid for the perimeter."
+        },
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The location of the perimeter."
         }
       }
     }
