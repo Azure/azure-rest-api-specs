@@ -335,10 +335,7 @@
             }
           },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/RegistryTrackedResource"
-            }
+            "description": "Accepted"
           },
           "200": {
             "description": "Success",
@@ -415,8 +412,31 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegistryTrackedResource"
+            }
+          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
           }
         },
         "x-ms-examples": {
@@ -426,7 +446,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     }
@@ -462,6 +482,7 @@
       "additionalProperties": false
     },
     "EndpointServiceConnectionStatus": {
+      "description": "Connection status of the service consumer with the service provider",
       "enum": [
         "Approved",
         "Pending",
@@ -566,6 +587,7 @@
       "additionalProperties": false
     },
     "PrivateEndpointConnectionARMResource": {
+      "description": "Private endpoint connection definition.",
       "type": "object",
       "properties": {
         "id": {
@@ -587,6 +609,7 @@
       "additionalProperties": false
     },
     "PrivateEndpointConnectionProperties": {
+      "description": "Properties of the Private Endpoint Connection",
       "type": "object",
       "properties": {
         "groupIds": {
@@ -616,6 +639,7 @@
       "additionalProperties": false
     },
     "PrivateEndpointResource": {
+      "description": "The PE network resource that is linked to this PE connection.",
       "type": "object",
       "properties": {
         "id": {
@@ -632,6 +656,7 @@
       "additionalProperties": false
     },
     "PrivateLinkServiceConnectionState": {
+      "description": "The connection state.",
       "type": "object",
       "properties": {
         "actionsRequired": {
