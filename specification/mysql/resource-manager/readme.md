@@ -160,11 +160,11 @@ input-file:
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
 ```
 
-### Tag: package-flexibleserver-2022-09-01-preview
+### Tag: package-flexibleserver-2022-09-30-preview
 
-These settings apply only when `--tag=package-flexibleserver-2022-09-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-flexibleserver-2022-09-30-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-flexibleserver-2021-12-01-preview'
+``` yaml $(tag) == 'package-flexibleserver-2022-09-30-preview'
 input-file:
 - Microsoft.DBforMySQL/Backups/preview/2021-12-01-preview/Backups.json
 - Microsoft.DBforMySQL/Configurations/preview/2021-12-01-preview/Configurations.json
