@@ -1,11 +1,13 @@
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-autorest";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
+using Autorest;
 
 @service({
   title: "Azure.CodeSigning service",
@@ -30,15 +32,18 @@ enum Versions {
 interface CertificateProfileOperations {
   @summary("Gets the status of a sign operation.")
   @doc("Gets the status of a sign operation.")
+  @example("./examples/CertificateProfile_GetSignOperation.json", "GetSignOperation")
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
   GetSignOperation is Foundations.GetOperationStatus<CodeSignStatus,OperationStatus>;
 
   @summary("Gets a list of Extended Key Usage OIDs that are allowed.")
   @doc("Gets a list of Extended Key Usage OIDs that are allowed.")
+  @example("./examples/CertificateProfile_GetSignEku.json", "GetSignEku")
   GetSignEku is ResourceList<Eku>;
 
   @summary("Initiates a sign operation.")
   @doc("Initiates a sign operation.")
+  @example("./examples/CertificateProfile_Sign.json", "Sign")
   @pollingOperation(CertificateProfileOperations.GetSignOperation)
   Sign is ResourceAction<CertificateProfile,SignRequest,OperationStatus>;
 }
