@@ -4,18 +4,19 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-namespace Azure.OpenAI.Embeddings;
-
 @doc("Schema to create a prompt completion from a deployment")
+@summary("This is EmbeddingsOptions's summary")
 model EmbeddingsOptions {
     @doc("The ID of the end-user, for use in tracking and rate-limiting.")
     user?: string;
 
     @doc("input type of embedding search to use")
-    input_type?: string;
+    @projectedName("json", "input_type")
+    inputType?: string;
 
-    @doc("ID of the model to use")
-    "model"?: string;
+    // Suppression: handled at the method level
+    // @doc("ID of the model to use")
+    // Model?: string;
 
     @doc("""
     Input text to get embeddings for, encoded as a string.
@@ -30,14 +31,16 @@ model EmbeddingsOptions {
 
 @doc("Expected response schema to embeddings request")
 model Embeddings {
-    @doc("Type of the data field")
-    object: "list",
+    // Suppression: not needed with strongly typed object models
+    // @doc("Type of the data field")
+    // object: "list",
 
     @doc("Embedding values for the prompts submitted in the request")
     data: EmbeddingItem[],
 
-    @doc("ID of the model to use")
-    "model"?: string;
+    // 
+    // @doc("ID of the model to use")
+    // "model"?: string;
 
     @doc("Usage counts for tokens input using the embeddings API")
     usage: EmbeddingsUsage;
@@ -45,8 +48,9 @@ model Embeddings {
 
 @doc("Expected response schema to embeddings object list item request")
 model EmbeddingItem {
-    @doc("Name of the field in which the embedding is contained")
-    object: "embedding",
+    // Suppression: not needed with strongly typed object models
+    // @doc("Name of the field in which the embedding is contained")
+    // object: "embedding",
 
     @doc("List of embeddings value for the input prompt. These represents a measurement of releated of text strings")
     embedding: float32[];
@@ -58,7 +62,7 @@ model EmbeddingItem {
 @doc("Measurment of the amount of tokens used in this request and response")
 model EmbeddingsUsage {
     @doc("Number of tokens sent in the original request")
-    prompt_tokens: int32,
+    promptTokens: int32,
     @doc("Total number of tokens transacted in this request/response")
-    total_tokens: int32
+    totalTokens: int32
 }

@@ -1,163 +1,129 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "./completions.create.tsp";
+import "@typespec/versioning";
+import "./completions.common.tsp";
+import "../main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
-namespace Azure.OpenAI.ChatCompletions;
-
-@doc("""
-""")
+@doc("A description of the intended purpose of a message within a chat completions interaction.")
+@added(Azure.OpenAI.ServiceApiVersions.v2023_03_15_Preview)
 enum ChatRole {
-    @doc("""
-""")
+    @doc("The role that instructs or sets the behavior of the assistant.")
     System,
-    @doc("""
-""")
+
+    @doc("The role that provides responses to system-instructed, user-prompted input.")
     Assistant,
-    @doc("""
-""")
+
+    @doc("The role that provides input for chat completions.")
     User
 }
 
-@doc("""
-The configuration information used for a chat completions request.
-""")
+@doc("The configuration information used for a chat completions request.")
+@added(Azure.OpenAI.ServiceApiVersions.v2023_03_15_Preview)
 model ChatCompletionsOptions {
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     messages?: ChatMessage[];
 
-    @doc("""
-""")
-    max_tokens?: int32;
+    @doc("!! Documentation Pending !!")
+    @projectedName("json", "max_tokens")
+    maxTokens?: int32;
 
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     temperature?: float32;
 
-// Note: this is reprojected as "NucleusSamplingFactor"
-    @doc("""
-""")
-    top_p?: float32;
+    @doc("!! Documentation Pending !!")
+    @projectedName("json", "top_p")
+    @projectedName("csharp", "NucleusSamplingFactor")
+    topP?: float32;
 
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     user?: string;
 
-// Note: this is reprojected as "ChoicesPerPrompt"
-    @doc("""
-""")
+    @doc("The number of choices that should be generated per provided prompt.")
+    @projectedName("csharp", "ChoicesPerPrompt")
     n?: int32;
 
-// Suppression: Streaming is managed via API surface (method-level)
-//     @doc("""
-// """)
-//     stream?: boolean;
-
-// Suppression: handled at the method level
-//    @doc("The name of the model to use")
-//    "model"?: string;
-
-// Note: this is reprojected as "StopSequences"
-    @doc
-    ("""
-""")
+    @doc("!! Documentation Pending !!")
+    @projectedName("csharp", "StopSequences")
     stop?: string[];
 
-    @doc("""
-""")
-    presence_penalty?: float32;
+    @doc("!! Documentation Pending !!")
+    @projectedName("json", "presence_penalty")
+    presencePenalty?: float32;
 
-    @doc("""
-""")
-    frequency_penalty?: float32;
+    @doc("!! Documentation Pending !!")
+    @projectedName("json", "frequency_penalty")
+    frequencyPenalty?: float32;
 };
 
+@doc("A single, role-attributed message within a chat completion interaction.")
+@added(Azure.OpenAI.ServiceApiVersions.v2023_03_15_Preview)
 model ChatMessage {
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     role: ChatRole;
-    @doc("""
-""")
+
+    @doc("!! Documentation Pending !!")
     content: string;
 }
 
+@doc("The representation of a single completions result for a chat completions request.")
+@added(Azure.OpenAI.ServiceApiVersions.v2023_03_15_Preview)
 model ChatChoice {
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     message: ChatMessage;
 
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     index: int32;
 
-    @doc("""
-""")
-    finish_reason: string;
+    @doc("!! Documentation Pending !!")
+    @projectedName("json", "finish_reason")
+    finishReason: FinishReason;
 }
 
-@doc("""
-""")
+@doc("!! Documentation Pending !!")
+@added(Azure.OpenAI.ServiceApiVersions.v2023_03_15_Preview)
 model ChatCompletions {
-    @doc("""
-    """)
-    @header "apim-request-id": string;
-    @doc("Id for completion response")
-    id?: string;
+    @doc("The unique identifier associated with this chat completions response.")
+    id: string;
 
-// Suppression: not needed in strongly typed object models
-//    object: "text_completion";
+    // Note: this is seconds since UNIX epoch start (00:00 1 Jan 1970) and needs conversion
+    @doc("!! Documentation Pending !!")
+    created: int32;
 
-// Suppression: currently handled at projection level for idiomatic representation
-//    created?: int32;
+    @doc("!! Documentation Pending !!")
+    choices: ChatChoice[];
 
-// Suppression: handled at the method level rather than request payload
-//    "model"?: string;
-
-    @doc("""
-""")
-    choices?: ChatChoice[];
-
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     usage: CompletionsUsage;
 }
 
-@doc("""
-""")
+@doc("!! Documentation Pending !!")
+@added(Azure.OpenAI.ServiceApiVersions.v2023_03_15_Preview)
 model StreamingChatChoice {
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     message: ChatMessage;
 
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     index: int32;
 
-    @doc("""
-""")
-    finish_reason: string;
+    @doc("!! Documentation Pending !!")
+    @projectedName("json", "finish_reason")
+    finishReason: FinishReason;
 }
 
-    @doc("""
-""")
+@doc("!! Documentation Pending !!")
+@added(Azure.OpenAI.ServiceApiVersions.v2023_03_15_Preview)
 model StreamingChatCompletions {
-    @doc("""
-    """)
-    @header "apim-request-id": string;
-    @doc("Id for completion response")
-    id?: string;
+    @doc("The unique identifier associated with this chat completions response.")
+    id: string;
 
-// Suppression: not needed in strongly typed object models
-//    object: "text_completion";
-//    "model"?: string;
+    // Note: this is seconds since UNIX epoch start (00:00 1 Jan 1970) and needs conversion
+    @doc("!! Documentation Pending !!")
+    created: int32;
 
-// Suppression: currently handled at projection level for idiomatic representation
-//    created?: int32;
-
-    @doc("""
-""")
+    @doc("!! Documentation Pending !!")
     choices?: StreamingChatChoice[];
 }

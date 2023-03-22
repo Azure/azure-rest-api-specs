@@ -14,19 +14,32 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.OpenAI;
 
-@doc("Return the embeddings for a given prompt.")
+@doc("Get embeddings for a given prompt.")
 @TypeSpec.Rest.actionSeparator("/")
 @action("embeddings")
 @convenientAPI(true)
-op getEmbeddings is Azure.Core.ResourceAction<Deployment, Embeddings.EmbeddingsOptions, Embeddings.Embeddings>;
+op getEmbeddings is Azure.Core.ResourceAction<Deployment, EmbeddingsOptions, Embeddings>;
 
-@doc("Return the completions for a given prompt.")
+@doc("Get completions for provided textual prompts.")
 @TypeSpec.Rest.actionSeparator("/")
 @action("completions")
 @convenientAPI(true)
-op getCompletions is Azure.Core.ResourceAction<Deployment, Completions.CompletionsOptions, Completions.Completions>;
+op getCompletions is Azure.Core.ResourceAction<Deployment, CompletionsOptions, Completions>;
+
+// @doc("Get streaming completions for provided textual prompts.")
+// @TypeSpec.Rest.actionSeparator("/")
+// @action("completions")
+// @convenientAPI(true)
+// op getCompletionsStreaming is Azure.Core.ResourceAction<Deployment, CompletionsOptions, Completions>;
 
 @doc("Get chat completions for the provided chat context messages.")
 @TypeSpec.Rest.actionSeparator("/")
+@action("chat/completions")
 @convenientAPI(true)
-op getChatCompletions is Azure.Core.ResourceAction<Deployment, ChatCompletions.ChatCompletionsOptions, ChatCompletions.ChatCompletions>;
+op getChatCompletions is Azure.Core.ResourceAction<Deployment, ChatCompletionsOptions, ChatCompletions>;
+
+// @doc("Get streaming chat completions for the provided chat context messages.")
+// @TypeSpec.Rest.actionSeparator("/")
+// @action("chat/completions")
+// @convenientAPI(true)
+// op getChatCompletionsStreaming is Azure.Core.ResourceAction<Deployment, ChatCompletionsOptions, StreamingChatCompletions>;
