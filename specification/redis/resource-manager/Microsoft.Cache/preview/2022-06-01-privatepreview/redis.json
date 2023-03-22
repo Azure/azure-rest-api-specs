@@ -1857,11 +1857,13 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The type of Redis cache to deploy. Valid values: (Basic, Standard, Premium)",
+          "description": "The type of Redis cache to deploy. Valid values: (Basic, Standard, Premium, General Purpose, Memory Optimized)",
           "enum": [
             "Basic",
             "Standard",
-            "Premium"
+            "Premium",
+            "GeneralPurpose",
+            "MemoryOptimized"
           ],
           "x-ms-enum": {
             "name": "SkuName",
@@ -1870,10 +1872,12 @@
         },
         "family": {
           "type": "string",
-          "description": "The SKU family to use. Valid values: (C, P). (C = Basic/Standard, P = Premium).",
+          "description": "The SKU family to use. Valid values: (C, P). (C = Basic/Standard, P = Premium, G = General Purpose, M = Memory Optimized).",
           "enum": [
             "C",
-            "P"
+            "P",
+            "G",
+            "M"
           ],
           "x-ms-enum": {
             "name": "SkuFamily",
