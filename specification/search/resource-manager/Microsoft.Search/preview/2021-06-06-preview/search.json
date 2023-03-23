@@ -1252,6 +1252,153 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "Services",
+          "NSP"
+        ],
+        "description": "Provides a list of effective Network Security Perimeter Associations on the search service.",
+        "operationId": "Services_ListNetworkSecurityPerimeterConfigurations",
+        "x-ms-examples":{
+          "ListNetworkSecurityPerimeterConfigurations": {
+            "$ref": "./examples/ListNetworkSecurityPerimeterConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request returns a list of Network Security Perimeter Configurations.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or resource could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associtationName}": {
+      "get": {
+        "tags": [
+          "Services",
+          "NSP"
+        ],
+        "description": "Provides the effective Network Security Perimeter configuration on the search service for the provided association.",
+        "operationId": "Services_GetNetworkSecurityPerimeterConfiguration",
+        "x-ms-examples":{
+          "ListNetworkSecurityPerimeterConfigurations": {
+            "$ref": "./examples/GetNetworkSecurityPerimeterConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PerimeterGuidParameter"
+          },
+          {
+            "$ref": "#/parameters/AssociationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request returns the provided association's Network Security Perimeter configuration.",
+            "schema": {
+              "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or resource could not be found.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/networkSecurityPerimeterConfigurations/{perimeterGuid}.{associtationName}/reconcile": {
+      "post": {
+        "tags": [
+          "Services",
+          "NSP"
+        ],
+        "description": "Triggeres an operation to reconcile differences between the effective configuration on the Search Service and the Network Security Perimeter resoruce.",
+        "operationId": "Services_ReconcileNetworkSecurityPerimeterConfiguration",
+        "x-ms-examples":{
+          "ListNetworkSecurityPerimeterConfigurations": {
+            "$ref": "./examples/ReconcileNetworkSecurityPerimeterConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SearchServiceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PerimeterGuidParameter"
+          },
+          {
+            "$ref": "#/parameters/AssociationNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was accepted and the provisioning state of the association should reflect."
+          },
+          "default": {
+            "description": "HTTP 404 (Not Found): The subscription, resource group, or resource could not be found. HTTP 409 (Conflict): The association is currently not in a terminal state.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2606,6 +2753,17 @@
       "type": "object",
       "description": "The details of the user assigned managed identity assigned to the search service."
     },
+    "NetworkSecurityPerimeterConfigurationListResult":{
+      "properties": {
+        "value": {
+          "items": {
+            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+          },
+          "type": "array",
+          "description": "List of effective network security perimeter configurations."
+        }
+      }
+    },
     "NetworkSecurityPerimeterConfiguration" : {
       "properties": {
         "x-ms-client-flatten": true,
@@ -2838,6 +2996,20 @@
       "required": true,
       "type": "string",
       "description": "The API version to use for each request."
+    },
+    "PerimeterGuidParameter": {
+      "name": "perimeterGuid",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The immutable guid for the perimeter."
+    },
+    "AssociationNameParameter": {
+      "name": "associationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the association."
     }
   }
 }
