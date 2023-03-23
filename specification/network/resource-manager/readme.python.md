@@ -22,30 +22,7 @@ default-api-version: "2022-09-01"
 clear-output-folder: true
 batch:
   - tag: package-2022-09
-  - tag: package-2021-02
-  - tag: package-2021-02-preview-only
-  - tag: package-2020-11
-  - tag: package-2020-08
-  - tag: package-2020-07
-  - tag: package-2020-06
-  - tag: package-2020-05
-  - tag: package-2020-04
-  - tag: package-2020-03
-  - tag: package-2019-12
-  - tag: package-2019-11
-  - tag: package-2019-09
-  - tag: package-2019-08
-  - tag: package-2019-07
-  - tag: package-2019-06
-  - tag: package-2019-04
-  - tag: package-2019-02
-  - tag: package-2018-12
-  - tag: package-2018-11
-  - tag: package-2018-04
-  - tag: package-2017-10
-  - tag: package-2015-06split
   - multiapiscript: true
-
 ```
 
 ``` yaml $(multiapiscript)
