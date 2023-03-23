@@ -1012,7 +1012,7 @@
         },
         "x-ms-examples": {
           "Successful List Exported Models": {
-            "$ref": "./examples/analyzetext-authoring/SuccessfulListExportModels.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulListExportedModels.json"
           }
         },
         "x-ms-pageable": {
@@ -1077,8 +1077,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Deleted successfully."
+          "202": {
+            "description": "A successful call results in triggering the deletion of the exported model.",
+            "headers": {
+              "operation-location": {
+                "description": "The location of the status API for monitoring the deletion job.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "Error response.",
@@ -1091,7 +1097,8 @@
           "Successful Delete Exported Model": {
             "$ref": "./examples/analyzetext-authoring/SuccessfulDeleteExportedModel.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "put": {
         "description": "Creates a new exported model or replaces an existing one.",
@@ -1524,7 +1531,7 @@
         },
         "x-ms-examples": {
           "Successful Get Evaluation Status": {
-            "$ref": "./examples/analyzetext-authoring/SuccessfulEvaluationProject.json"
+            "$ref": "./examples/analyzetext-authoring/SuccessfulGetEvaluationStatus.json"
           }
         }
       }
