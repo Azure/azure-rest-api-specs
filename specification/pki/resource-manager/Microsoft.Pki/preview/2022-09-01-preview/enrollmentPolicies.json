@@ -768,6 +768,15 @@
               }
             }
           }
+        },
+        "requireSignatureValidation": {
+          "type": "boolean",
+          "description": "CSR signature validation occurs by default. To disable CSR signature validation for enrollment, explicitly set this property to false."
+        },
+        "customExtensions": {
+          "description": "The enrollment policy for custom extensions.",
+          "type": "object",
+          "$ref": "#/definitions/CustomExtensionRule"
         }
       }
     },
@@ -1069,6 +1078,33 @@
         }
       }
     },
+    "CustomExtensionRule": {
+      "type": "object",
+      "properties": {
+        "allCsrExtensionsAllowed": {
+          "type": "boolean",
+          "description": "If false, the policy can specify allowedCsrExtensions. If true, then the policy cannot specify allowedCsrExtensions.",
+          "readOnly": false
+        },
+        "allowedCsrExtensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The allowed CSR extensions for this policy. Must only contain OID values.",
+            "readOnly": false
+          }
+        },
+        "additionalExtensions": {
+          "type": "array",
+          "description": "The list of additional extensions to put into every certificate.",
+          "readOnly": false,
+          "items": {
+            "$ref": "#/definitions/AdditionalExtension"
+          },
+          "maxItems": 100
+        }
+      }
+    },
     "PolicyRule": {
       "type": "object",
       "properties": {
@@ -1087,6 +1123,26 @@
           },
           "maxItems": 100,
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "AdditionalExtension": {
+      "type": "object",
+      "properties": {
+        "oid": {
+          "type": "string",
+          "description": "The unique Object Identifier (OID) of the extension.",
+          "readOnly": false
+        },
+        "critical": {
+          "type": "boolean",
+          "description": "Defines whether the extension should be marked as critical in the certificate.",
+          "readOnly": false
+        },
+        "data": {
+          "type": "string",
+          "description": "A plaintext string that will be encoded into an ASN.1 value for the defined extension.",
+          "readOnly": false
         }
       }
     },
