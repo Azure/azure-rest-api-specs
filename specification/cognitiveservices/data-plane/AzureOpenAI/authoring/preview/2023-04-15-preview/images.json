@@ -5,28 +5,6 @@
     "description": "Cognitive Services API to support OpenAI DALL-E",
     "version": "2023-04-15-preview"
   },
-  "basePath": "/dalle",
-  "parameters": {
-    "endpoint": {
-      "in": "path",
-      "name": "endpoint",
-      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://aoairesource.openai.azure.com. Replace \"aoairesource\" with your Azure OpenAI account name).",
-      "required": true,
-      "type": "string",
-      "format": "url",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    },
-    "apiVersionQueryParameter": {
-      "in": "query",
-      "name": "api-version",
-      "description": "The requested API version.",
-      "required": true,
-      "type": "string",
-      "x-ms-client-default": "2023-04-15-preview",
-      "x-ms-parameter-location": "client"
-    }
-  },
   "paths": {
     "/images/generate": {
       "post": {
@@ -41,6 +19,12 @@
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionQueryParameter"
+          },
+          {
+            "in": "header",
+            "name": "Operation-Id",
+            "description": "ID of the status monitor for the operation. If the Operation-Id header matches an existing operation and the request is not identical to the prior request, it will fail with a 400 Bad Request.",
+            "type": "string"
           },
           {
             "in": "body",
@@ -516,6 +500,27 @@
         "id",
         "status"
       ]
+    }
+  },
+  "parameters": {
+    "endpoint": {
+      "in": "path",
+      "name": "endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://aoairesource.openai.azure.com. Replace \"aoairesource\" with your Azure OpenAI account name).",
+      "required": true,
+      "type": "string",
+      "format": "url",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "apiVersionQueryParameter": {
+      "in": "query",
+      "name": "api-version",
+      "description": "The requested API version.",
+      "required": true,
+      "type": "string",
+      "x-ms-client-default": "2023-04-15-preview",
+      "x-ms-parameter-location": "client"
     }
   },
   "securityDefinitions": {
