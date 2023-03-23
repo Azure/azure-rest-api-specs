@@ -11,7 +11,7 @@
       "type": "object",
       "properties": {
         "folder": {
-          "description": "The folder that this cdc is in. If not specified, Cdc will appear at the root level.",
+          "description": "The folder that this cdc is in. If not specified, cdc will appear at the root level.",
           "type": "object",
           "properties": {
             "name": {
@@ -179,7 +179,7 @@
           "type": "string"
         },
         "type": {
-          "description": "Type of the mapper attribute mapping. Note: 'Advanced' mapping type is also saved as 'Derived'.",
+          "description": "Type of the cdc attribute mapping. Note: 'Advanced' mapping type is also saved as 'Derived'.",
           "type": "string",
           "enum": [
             "Direct",
@@ -269,7 +269,7 @@
       ]
     },
     "MapperTable": {
-      "description": "Mapper table details.",
+      "description": "Cdc table details.",
       "type": "object",
       "properties": {
         "name": {
@@ -284,7 +284,7 @@
       }
     },
     "MapperTableProperties": {
-      "description": "Properties for a mapper table.",
+      "description": "Properties for a cdc table.",
       "type": "object",
       "properties": {
         "schema": {
@@ -306,7 +306,7 @@
       }
     },
     "MapperTableSchema": {
-      "description": "Schema of a mapper table in terms of column names and their corresponding data types.",
+      "description": "Schema of a cdc table in terms of column names and their corresponding data types.",
       "type": "object",
       "properties": {
         "name": {
@@ -320,7 +320,7 @@
       }
     },
     "MapperDslConnectorProperties": {
-      "description": "Connector properties of a mapper table in terms of name / value pairs.",
+      "description": "Connector properties of a cdc table in terms of name / value pairs.",
       "type": "object",
       "properties": {
         "name": {
@@ -349,12 +349,17 @@
       }
     },
     "MapperPolicyRecurrence": {
-      "description": "Mapper policy recurrence details.",
+      "description": "Cdc policy recurrence details.",
       "type": "object",
       "properties": {
         "frequency": {
           "description": "Frequency of period in terms of 'Hour', 'Minute' or 'Second'.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Hour",
+            "Minute",
+            "Second"
+          ]
         },
         "interval": {
           "description": "Actual interval value as per frequency.",
