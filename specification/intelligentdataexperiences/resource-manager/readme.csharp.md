@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.AadCustomSecurityDiagnosticSettings
-  output-folder: $(csharp-sdks-folder)/intelligentdataexperiences/management/Microsoft.AadCustomSecurityDiagnosticSettings/GeneratedProtocol
+  namespace: Microsoft.AadCustomSecurityAttributesDiagnosticSettings
+  output-folder: $(csharp-sdks-folder)/intelligentdataexperiences/management/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/GeneratedProtocol
 ```

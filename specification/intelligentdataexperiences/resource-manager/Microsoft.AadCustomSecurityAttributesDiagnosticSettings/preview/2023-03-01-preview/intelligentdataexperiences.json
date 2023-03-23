@@ -29,7 +29,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.AadCustomSecurityDiagnosticSettings/operations": {
+    "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/operations": {
       "get": {
         "tags": ["Operations"],
         "operationId": "Operations_List",
@@ -44,21 +44,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to get list of AadCustomSecurityDiagnosticSettings operations.",
+            "description": "Successful request to get list of AadCustomSecurityAttributesDiagnosticSettings operations.",
             "schema": { "$ref": "#/definitions/OperationsDiscoveryCollection" }
           },
           "default": {
-            "description": "Error, failed to get list of AadCustomSecurityDiagnosticSettings operations.",
+            "description": "Error, failed to get list of AadCustomSecurityAttributesDiagnosticSettings operations.",
             "schema": { "$ref": "#/definitions/ErrorResponse" }
           }
         }
       }
     },
-    "/providers/Microsoft.AadCustomSecurityDiagnosticSettings/diagnosticSettings": {
+    "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/diagnosticSettings": {
       "get": {
         "tags": ["DiagnosticSettings"],
         "operationId": "DiagnosticSettings_List",
-        "description": "Gets the active diagnostic settings list for AadCustomSecurityDiagnosticSettings.",
+        "description": "Gets the active diagnostic settings list for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -66,11 +66,11 @@
         ],
         "responses": {
           "default": {
-            "description": "Error. Request for AadCustomSecurityDiagnosticSettings diagnostic settings has failed",
+            "description": "Error. Request for AadCustomSecurityAttributesDiagnosticSettings diagnostic settings has failed",
             "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
           "200": {
-            "description": "Successful request to get more information about AadCustomSecurityDiagnosticSettings diagnostic settings",
+            "description": "Successful request to get more information about AadCustomSecurityAttributesDiagnosticSettings diagnostic settings",
             "schema": { "$ref": "#/definitions/DiagnosticSettingsResourceCollection" }
           }
         },
@@ -79,11 +79,11 @@
         }
       }
     },
-    "/providers/Microsoft.AadCustomSecurityDiagnosticSettings/diagnosticSettings/{name}": {
+    "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/diagnosticSettings/{name}": {
       "get": {
         "tags": ["DiagnosticSettings"],
         "operationId": "DiagnosticSettings_Get",
-        "description": "Gets the active diagnostic setting for AadCustomSecurityDiagnosticSettings.",
+        "description": "Gets the active diagnostic setting for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -94,7 +94,7 @@
         ],
         "responses": {
           "default": {
-            "description": "Error. Request for AadCustomSecurityDiagnosticSettings diagnostic setting has failed.",
+            "description": "Error. Request for AadCustomSecurityAttributesDiagnosticSettings diagnostic setting has failed.",
             "schema": { "$ref": "#/definitions/ErrorResponse" }
           },
           "200": {
@@ -112,7 +112,7 @@
         "x-ms-examples": {
           "BatchAccountDelete": { "$ref": "./examples/createOrUpdateDiagnosticSetting.json" }
         },
-        "description": "Creates or updates diagnostic settings for AadCustomSecurityDiagnosticSettings.",
+        "description": "Creates or updates diagnostic settings for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -130,7 +130,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to create AadCustomSecurityDiagnosticSettings diagnostic setting.",
+            "description": "Successful request to create AadCustomSecurityAttributesDiagnosticSettings diagnostic setting.",
             "schema": { "$ref": "#/definitions/DiagnosticSettingsResource" }
           },
           "default": {
@@ -142,7 +142,7 @@
       "delete": {
         "tags": ["DiagnosticSettings"],
         "operationId": "DiagnosticSettings_Delete",
-        "description": "Deletes exist1ing diagnostic setting for AadCustomSecurityDiagnosticSettings.",
+        "description": "Deletes existing diagnostic setting for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -164,11 +164,11 @@
         }
       }
     },
-    "/providers/Microsoft.AadCustomSecurityDiagnosticSettings/diagnosticSettingsCategories": {
+    "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/diagnosticSettingsCategories": {
       "get": {
         "tags": ["DiagnosticSettingsCategories"],
         "operationId": "DiagnosticSettingsCategory_List",
-        "description": "Lists the diagnostic settings categories for AadCustomSecurityDiagnosticSettings.",
+        "description": "Lists the diagnostic settings categories for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
