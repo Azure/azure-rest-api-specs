@@ -148,7 +148,7 @@
         }
       },
       "delete": {
-        "summary": "Deletes an operation (if in terminal state)",
+        "summary": "Deletes an operation (if in terminal state) and all generated and user provided images associated with the operation.",
         "operationId": "Operations_Delete",
         "parameters": [
           {
@@ -400,7 +400,7 @@
         },
         "expires": {
           "format": "unixtime",
-          "description": "A timestamp when this job or item will expire (in unix epochs).",
+          "description": "A timestamp when this operation and its associated images expire and will be deleted (in unix epochs).",
           "type": "integer"
         },
         "data": {
@@ -462,7 +462,7 @@
         "n": {
           "description": "The number of images to generate.",
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "minimum": 1,
           "default": 1
         },
