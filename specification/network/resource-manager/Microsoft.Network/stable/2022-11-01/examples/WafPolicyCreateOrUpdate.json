@@ -69,6 +69,17 @@
               ]
             },
             {
+              "matchVariable": "RequestHeaderNames",
+              "selectorMatchOperator": "EqualsAny",
+              "exclusionManagedRuleSets": [
+                {
+                  "ruleSetType": "OWASP",
+                  "ruleSetVersion": "3.2",
+                  "ruleGroups": []
+                }
+              ]
+            },
+            {
               "matchVariable": "RequestArgNames",
               "selectorMatchOperator": "StartsWith",
               "selector": "test"
@@ -77,6 +88,10 @@
               "matchVariable": "RequestArgValues",
               "selectorMatchOperator": "StartsWith",
               "selector": "test"
+            },
+            {
+              "matchVariable": "RequestHeadersKeys",
+              "selectorMatchOperator": "EqualsAny"
             }
           ]
         },
@@ -223,6 +238,16 @@
                 ]
               },
               {
+                "matchVariable": "RequestHeaderNames",
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": []
+                  }
+                ]
+              },
+              {
                 "matchVariable": "RequestArgNames",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
@@ -231,6 +256,9 @@
                 "matchVariable": "RequestArgValues",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
+              },
+              {
+                "matchVariable": "RequestHeaderKeys"
               }
             ]
           },
@@ -382,6 +410,16 @@
                 ]
               },
               {
+                "matchVariable": "RequestHeaderNames",
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": []
+                  }
+                ]
+              },
+              {
                 "matchVariable": "RequestArgNames",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
@@ -390,6 +428,9 @@
                 "matchVariable": "RequestArgValues",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
+              },
+              {
+                "matchVariable": "RequestHeaderKeys"
               }
             ]
           },

@@ -155,9 +155,34 @@
                 "selector": "hello"
               },
               {
+                "matchVariable": "RequestHeaderKeys"
+              },
+              {
                 "matchVariable": "RequestArgNames",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "hello",
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": [
+                      {
+                        "ruleGroupName": "REQUEST-930-APPLICATION-ATTACK-LFI",
+                        "rules": [
+                          {
+                            "ruleId": "930120"
+                          }
+                        ]
+                      },
+                      {
+                        "ruleGroupName": "REQUEST-932-APPLICATION-ATTACK-RCE"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "matchVariable": "RequestArgKeys",
                 "exclusionManagedRuleSets": [
                   {
                     "ruleSetType": "OWASP",
