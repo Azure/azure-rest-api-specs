@@ -14,9 +14,14 @@ model EmbeddingsOptions {
     @projectedName("json", "input_type")
     inputType?: string;
 
-    // Suppression: handled at the method level
-    // @doc("ID of the model to use")
-    // Model?: string;
+    @doc("""
+    The model name to provide as part of this completions request.
+    Not applicable to Azure OpenAI, where deployment information should be included in the Azure
+    resource URI that's connected to.
+    """)
+    @projectedName("json", "model")
+    @projectedName("csharp", "InternalNonAzureModelName")
+    "model"?: string;
 
     @doc("""
     Input text to get embeddings for, encoded as a string.
@@ -31,16 +36,8 @@ model EmbeddingsOptions {
 
 @doc("Expected response schema to embeddings request")
 model Embeddings {
-    // Suppression: not needed with strongly typed object models
-    // @doc("Type of the data field")
-    // object: "list",
-
     @doc("Embedding values for the prompts submitted in the request")
     data: EmbeddingItem[],
-
-    // 
-    // @doc("ID of the model to use")
-    // "model"?: string;
 
     @doc("Usage counts for tokens input using the embeddings API")
     usage: EmbeddingsUsage;
@@ -48,10 +45,6 @@ model Embeddings {
 
 @doc("Expected response schema to embeddings object list item request")
 model EmbeddingItem {
-    // Suppression: not needed with strongly typed object models
-    // @doc("Name of the field in which the embedding is contained")
-    // object: "embedding",
-
     @doc("List of embeddings value for the input prompt. These represents a measurement of releated of text strings")
     embedding: float32[];
 
@@ -62,7 +55,10 @@ model EmbeddingItem {
 @doc("Measurment of the amount of tokens used in this request and response")
 model EmbeddingsUsage {
     @doc("Number of tokens sent in the original request")
+    @projectedName("json", "prompt_tokens")
     promptTokens: int32,
+
     @doc("Total number of tokens transacted in this request/response")
+    @projectedName("json", "total_tokens")
     totalTokens: int32
 }

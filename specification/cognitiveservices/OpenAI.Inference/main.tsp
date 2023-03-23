@@ -41,7 +41,6 @@ enum ServiceApiVersions {
   v2023_03_15_Preview: "2023-03-15-preview",
 }
 
-
 @doc("A specific deployment")
 @TypeSpec.Rest.resource("deployments")
 model Deployment {

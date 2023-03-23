@@ -5,19 +5,46 @@ import "./completions.common.tsp";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
+@doc("A description of the intended purpose of a message within a chat completions interaction.")
+enum ChatRole {
+    @doc("The role that instructs or sets the behavior of the assistant.")
+    @projectedName("json", "system")
+    system,
+
+    @doc("The role that provides responses to system-instructed, user-prompted input.")
+    @projectedName("json", "assistant")
+    assistant,
+
+    @doc("The role that provides input for chat completions.")
+    @projectedName("json", "user")
+    user,
+}
+
+@doc("A single, role-attributed message within a chat completion interaction.")
+model ChatMessage {
+    @doc("The role associated with this message payload.")
+    @projectedName("json", "role")
+    role: ChatRole;
+
+    @doc("The text associated with this message payload.")
+    @projectedName("json", "content")
+    content?: string;
+}
+
 @doc("""
-The configuration information for a completions request.
+The configuration information for a chat completions request.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-model CompletionsOptions {
+model ChatCompletionsOptions {
     @doc("""
-    The prompts to generate completions from. Defaults to a single prompt of <|endoftext|> if not
-    otherwise specified.
+    The collection of context messages associated with this chat completions request.
+    Typical usage begins with a chat message for the System role that provides instructions for
+    the behavior of the assistant, followed by alternating messages between the User and
+    Assistant roles.
     """)
-    @projectedName("json", "prompt")
-    @projectedName("csharp", "Prompts")
-    prompt?: string[];
+    @projectedName("json", "messages")
+    messages?: ChatMessage[];
 
     @doc("The maximum number of tokens to generate.")
     @projectedName("json", "max_tokens")
@@ -71,21 +98,6 @@ model CompletionsOptions {
     n?: int32;
 
     @doc("""
-    A value that controls the emission of log probabilities for the provided number of most likely
-    tokens within a completions response.
-    """)
-    @projectedName("json", "logprobs")
-    @projectedName("csharp", "LogProbabilityCount")
-    logprobs?: int32;
-
-    @doc("""
-    A value specifying whether completions responses should include input prompts as prefixes to
-    their generated output.
-    """)
-    @projectedName("json", "echo")
-    echo?: boolean;
-
-    @doc("""
     A collection of textual sequences that will end completions generation.
     """)
     @projectedName("json", "stop")
@@ -111,18 +123,6 @@ model CompletionsOptions {
     frequencyPenalty?: float32;
 
     @doc("""
-    A value that controls how many completions will be internally generated prior to response
-    formulation.
-    When used together with n, best_of controls the number of candidate completions and must be
-    greater than n.
-    Because this setting can generate many completions, it may quickly consume your token quota.
-    Use carefully and ensure reasonable settings for max_tokens and stop.
-    """)
-    @projectedName("json", "best_of")
-    @projectedName("csharp", "GenerationSampleCount")
-    bestOf?: int32;
-
-    @doc("""
     A value indicating whether chat completions should be streamed for this request.
     """)
     @projectedName("json", "stream")
@@ -140,12 +140,36 @@ model CompletionsOptions {
 };
 
 @doc("""
-Representation of the response data from a completions request.
+The representation of a single prompt completion as part of an overall chat completions request.
+Generally, `n` choices are generated per provided prompt with a default value of 1.
+Token limits and other settings may limit the number of choices generated.
+""")
+model ChatChoice {
+    @doc("The chat message for a given chat completions prompt.")
+    @projectedName("json", "message")
+    message?: ChatMessage;
+
+    @doc("The ordered index associated with this chat completions choice.")
+    @projectedName("json", "index")
+    index: int32;
+
+    @doc("The reason that this chat completions choice completed its generated.")
+    @projectedName("json", "finish_reason")
+    finishReason: CompletionsFinishReason;
+
+    @doc("The delta message content for a streaming response.")
+    @projectedName("json", "delta")
+    @projectedName("csharp", "InternalStreamingDeltaMessage")
+    delta?: ChatMessage;
+}
+
+@doc("""
+Representation of the response data from a chat completions request.
 Completions support a wide variety of tasks and generate text that continues from or "completes"
 provided prompt data.
 """)
-model Completions {
-    @doc("A unique identifier associated with this completions response.")
+model ChatCompletions {
+    @doc("A unique identifier associated with this chat completions response.")
     @projectedName("json", "id")
     id: string;
 
@@ -163,59 +187,11 @@ model Completions {
     Token limits and other settings may limit the number of choices generated.
     """)
     @projectedName("json", "choices")
-    choices?: Choice[];
+    choices?: ChatChoice[];
 
     @doc("""
     Usage information for tokens processed and generated as part of this completions operation.
     """)
     @projectedName("json", "usage")
     usage: CompletionsUsage;
-}
-
-@doc("""
-The representation of a single prompt completion as part of an overall completions request.
-Generally, `n` choices are generated per provided prompt with a default value of 1.
-Token limits and other settings may limit the number of choices generated.
-""")
-model Choice {
-    @doc("The generated text for a given completions prompt.")
-    @projectedName("json", "text")
-    text: string;
-
-    @doc("The ordered index associated with this completions choice.")
-    @projectedName("json", "index")
-    index: int32;
-
-    @doc("The log probabilities model for tokens associated with this completions choice.")
-    @projectedName("json", "logprobs")
-    @projectedName("csharp", "LogProbabilityModel")
-    logprobs?: CompletionsLogProbabilityModel;
-
-    @doc("Reason for finishing")
-    @projectedName("json", "finish_reason")
-    finishReason: CompletionsFinishReason;
-}
-
-@doc("""
-Representation of a log probabilities model for a completions generation.
-""")
-model CompletionsLogProbabilityModel {
-    @doc("The textual forms of tokens evaluated in this probability model.")
-    @projectedName("json", "tokens")
-    tokens?: string[];
-
-    @doc("A collection of log probability values for the tokens in this completions data.")
-    @projectedName("json", "token_logprobs")
-    @projectedName("csharp", "TokenLogProbabilities")
-    tokenLogprobs?: float32[];
-
-    @doc("A mapping of tokens to maximum log probability values in this completions data.")
-    @projectedName("json", "top_logprobs")
-    @projectedName("csharp", "TopLogProbabilities")
-    topLogprobs?: Record<float32>[];
-
-    @doc("The text offsets associated with tokens in this completions data.")
-    @projectedName("json", "text_offset")
-    @projectedName("csharp", "TextOffsets")
-    textOffset?: int32[];
 }
