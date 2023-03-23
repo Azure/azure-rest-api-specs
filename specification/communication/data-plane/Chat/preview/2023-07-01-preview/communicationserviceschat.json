@@ -1743,9 +1743,6 @@
           "description": "Chat thread topic.",
           "type": "string",
           "example": "Lunch Thread"
-        },
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy"
         }
       }
     },
@@ -1761,14 +1758,14 @@
       }
     },
     "RetentionPolicy": {
-      "description": "Data retention policy for auto deletion.",
+      "description": "Data retention policy for auto deletion. It's not updatable after creation.",
       "type": "object",
       "discriminator": "policyType",
       "properties": {
         "policyType": {
           "description": "Retention Policy Type",
           "enum": [
-            "basedOnThreadCreationDate"
+            "threadCreationDate"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1776,7 +1773,7 @@
             "modelAsString": true,
             "values": [
               {
-                "value": "basedOnThreadCreationDate",
+                "value": "threadCreationDate",
                 "description": "Thread retention policy based on thread creation date."
               }
             ]
@@ -1787,10 +1784,10 @@
         "policyType"
       ]
     },
-    "BasedOnThreadCreationDateRetentionPolicy": {
+    "ThreadCreationDateRetentionPolicy": {
       "description": "Thread retention policy based on thread creation date.",
       "type": "object",
-      "x-ms-discriminator-value": "basedOnThreadCreationDate",
+      "x-ms-discriminator-value": "threadCreationDate",
       "allOf": [
         {
           "$ref": "#/definitions/RetentionPolicy"
