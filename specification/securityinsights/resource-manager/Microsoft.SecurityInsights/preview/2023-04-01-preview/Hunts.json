@@ -805,27 +805,18 @@
         },
         "relatedResourceName": {
           "description": "The name of the related resource",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "relationType": {
           "description": "The type of the hunt relation",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "relatedResourceKind": {
           "description": "The resource that the relation is related to",
-          "enum": [
-            "Hunt",
-            "Incident",
-            "Bookmark",
-            "Entities",
-            "AmlWorkspace",
-            "LogAnalyticsSavedSearchQueries"
-          ],
           "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "relatedResourceKind"
-          }
+          "readOnly": true
         },
         "labels": {
           "description": "List of labels relevant to this hunt",
