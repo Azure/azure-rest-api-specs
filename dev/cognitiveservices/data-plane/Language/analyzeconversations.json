@@ -90,10 +90,10 @@
           "Conversation project result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversations.json"
           },
-          "Orchestration result": {
+          "Arbitration result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitration.json"
           },
-          "Orchestration direct target result": {
+          "Orchestrator direct target result": {
             "$ref": "./examples/conversations/SuccessfulAnalyzeConversationsArbitrationDirectTarget.json"
           }
         }
@@ -124,6 +124,7 @@
       }
     },
     "AnalyzeConversationTask": {
+      "type": "object",
       "description": "The base class of a conversation input task.",
       "discriminator": "kind",
       "required": [
@@ -136,6 +137,7 @@
       }
     },
     "AnalyzeConversationTaskResult": {
+      "type": "object",
       "description": "The base class of a conversation task result.",
       "discriminator": "kind",
       "required": [
@@ -148,6 +150,7 @@
       }
     },
     "ConversationalTask": {
+      "type": "object",
       "description": "The input for a custom conversation task.",
       "allOf": [
         {
@@ -253,6 +256,7 @@
       "additionalProperties": true
     },
     "TextConversationItem": {
+      "type": "object",
       "description": "The text modality of an input conversation.",
       "allOf": [
         {
@@ -673,60 +677,6 @@
           "items": {
             "$ref": "#/definitions/BaseExtraInformation"
           }
-        }
-      }
-    },
-    "BaseExtraInformation": {
-      "description": "The abstract base object for entity extra information.",
-      "type": "object",
-      "discriminator": "extraInformationKind",
-      "properties": {
-        "extraInformationKind": {
-          "description": "The extra information object kind.",
-          "type": "string",
-          "enum": [
-            "EntitySubtype",
-            "ListKey"
-          ],
-          "x-ms-enum": {
-            "name": "ExtraInformationKind",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "extraInformationKind"
-      ]
-    },
-    "EntitySubtype": {
-      "description": "The concrete entity Subtype model of extra information.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseExtraInformation"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "EntitySubtype",
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "The Subtype of an extracted entity type."
-        }
-      }
-    },
-    "ListKey": {
-      "description": "The list key extra data kind.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseExtraInformation"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "ListKey",
-      "properties": {
-        "key": {
-          "type": "string",
-          "description": "The canonical form of the extracted entity."
         }
       }
     },
@@ -1303,6 +1253,10 @@
         },
         "modifier": {
           "$ref": "#/definitions/TemporalModifier"
+        },
+        "timex": {
+          "type": "string",
+          "description": "An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings."
         }
       }
     },
@@ -1384,6 +1338,81 @@
     "TimeExpression": {
       "type": "string",
       "description": "An extended ISO 8601 date/time representation as described in (https://github.com/Microsoft/Recognizers-Text/blob/master/Patterns/English/English-DateTime.yaml)"
+    },
+    "BaseExtraInformation": {
+      "description": "The abstract base object for entity extra information.",
+      "type": "object",
+      "discriminator": "extraInformationKind",
+      "properties": {
+        "extraInformationKind": {
+          "description": "The extra information object kind.",
+          "type": "string",
+          "enum": [
+            "EntitySubtype",
+            "ListKey",
+            "RegexKey"
+          ],
+          "x-ms-enum": {
+            "name": "ExtraInformationKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "extraInformationKind"
+      ]
+    },
+    "EntitySubtype": {
+      "description": "The concrete entity Subtype model of extra information.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "EntitySubtype",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The Subtype of an extracted entity type."
+        }
+      }
+    },
+    "ListKey": {
+      "description": "The list key extra data kind.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "ListKey",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The canonical form of the extracted entity."
+        }
+      }
+    },
+    "RegexKey": {
+      "description": "The regex key extra data kind.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseExtraInformation"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "RegexKey",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the regex pattern used in extracting the entity."
+        },
+        "regexPattern": {
+          "type": "string",
+          "description": "The .NET regex pattern used in extracting the entity. Please visit https://docs.microsoft.com/dotnet/standard/base-types/regular-expressions for more information about .NET regular expressions."
+        }
+      }
     },
     "LuisTargetIntentResult": {
       "type": "object",
