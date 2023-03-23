@@ -1996,47 +1996,31 @@
       }
     },
     "EntityWithTags": {
-      "type": "object",
-      "required": [
-        "text",
-        "offset",
-        "length",
-        "score",
-        "tags",
-        "type"
-      ],
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Entity text as appears in the request."
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
         },
-        "type": {
-          "type": "string",
-          "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-        },
-        "score": {
-          "type": "number",
-          "format": "double",
-          "description": "Detection score between 0 and 1 of the extracted entity."
-        },
-        "tags": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/EntityTags"
+        {
+        "type": "object",
+        "required": [
+          "type",
+          "tags"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
+          },
+          "tags": {
+            "type": "array",
+            "description": "Recognized entities in the document.",
+            "items": {
+              "$ref": "#/definitions/EntityTags"
+            }
           }
         }
-      }
+        }
+      ]
     },
     "EntityWithResolution": {
       "type": "object",
