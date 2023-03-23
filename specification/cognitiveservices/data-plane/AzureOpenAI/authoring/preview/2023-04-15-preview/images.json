@@ -205,11 +205,11 @@
       "title": "State",
       "description": "The status of the operation.",
       "enum": [
-        "NotStarted",
-        "Running",
-        "Succeeded",
-        "Canceled",
-        "Failed"
+        "notStarted",
+        "running",
+        "succeeded",
+        "canceled",
+        "failed"
       ],
       "type": "string",
       "readOnly": true,
@@ -218,23 +218,23 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "NotStarted",
+            "value": "notStarted",
             "description": "The operation was created and is not queued to be processed in the future."
           },
           {
-            "value": "Running",
+            "value": "running",
             "description": "The operation has started to be processed."
           },
           {
-            "value": "Succeeded",
+            "value": "succeeded",
             "description": "The operation has successfully be processed and is ready for consumption."
           },
           {
-            "value": "Canceled",
+            "value": "canceled",
             "description": "The operation has been canceled and is incomplete."
           },
           {
-            "value": "Failed",
+            "value": "failed",
             "description": "The operation has completed processing with a failure and cannot be further consumed."
           }
         ]
@@ -263,12 +263,12 @@
       "title": "ErrorCode",
       "description": "Error codes as defined in the Microsoft REST guidelines\r\n(https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses).",
       "enum": [
-        "BadRequest",
-        "Internal",
-        "TooManyRequests",
-        "Unauthorized",
-        "NotFound",
-        "OperationNotInTerminalState"
+        "badRequest",
+        "internal",
+        "tooManyRequests",
+        "unauthorized",
+        "notFound",
+        "operationNotInTerminalState"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -276,27 +276,27 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "BadRequest",
+            "value": "badRequest",
             "description": "The request data is invalid for this operation."
           },
           {
-            "value": "Internal",
+            "value": "internal",
             "description": "Internal error. Please retry."
           },
           {
-            "value": "TooManyRequests",
+            "value": "tooManyRequests",
             "description": "Too many requests. Please retry later."
           },
           {
-            "value": "Unauthorized",
+            "value": "unauthorized",
             "description": "The current user/api key is not authorized for the operation."
           },
           {
-            "value": "NotFound",
+            "value": "notFound",
             "description": "The resource is not found."
           },
           {
-            "value": "OperationNotInTerminalState",
+            "value": "operationNotInTerminalState",
             "description": "The operation cannot be executed in the current resource's state."
           }
         ]
@@ -319,8 +319,8 @@
       "title": "ErrorCode",
       "description": "Error codes for image errors.",
       "enum": [
-        "ContentFilter",
-        "BlockedImages"
+        "contentFilter",
+        "blockedImages"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -328,11 +328,11 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "ContentFilter",
+            "value": "contentFilter",
             "description": "Generated image was filtered as a result of our safety system."
           },
           {
-            "value": "BlockedImages",
+            "value": "blockedImages",
             "description": "The user provided images were blocked by our safety system."
           }
         ]
