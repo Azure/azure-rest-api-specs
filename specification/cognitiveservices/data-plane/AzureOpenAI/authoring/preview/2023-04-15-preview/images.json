@@ -403,8 +403,14 @@
           "description": "A timestamp when this operation and its associated images expire and will be deleted (in unix epochs).",
           "type": "integer"
         },
-        "data": {
-          "$ref": "#/definitions/OperationResult"
+        "result": {
+          "type": "object",
+          "description": "The result of the operation if the operation succeeded.",
+          "properties": {
+            "data": {
+              "$ref": "#/definitions/OperationResult"
+            }
+          }
         },
         "status": {
           "$ref": "#/definitions/Status"
