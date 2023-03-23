@@ -771,7 +771,7 @@
         },
         "requireSignatureValidation": {
           "type": "boolean",
-          "description": "Signature validation occurs by default. To disable signature validation for enrollment, explicitly set this property to false."
+          "description": "CSR signature validation occurs by default. To disable CSR signature validation for enrollment, explicitly set this property to false."
         },
         "customExtensions": {
           "description": "The enrollment policy for custom extensions.",
@@ -1141,8 +1141,7 @@
         },
         "data": {
           "type": "string",
-          "format": "byte",
-          "description": "The ASN.1 encoded value corresponding to the extension.",
+          "description": "A plaintext string that will be encoded into an ASN.1 value for the defined extension.",
           "readOnly": false
         }
       }
