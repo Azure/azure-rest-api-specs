@@ -102,9 +102,6 @@
           },
           "Successful Sentiment Analysis Request": {
             "$ref": "./examples/text/SuccessfulSentimentAnalysisRequest.json"
-          },
-          "Successful Dynamic Classification Request": {
-            "$ref": "./examples/text/SuccessfuDynamicClassificationRequest.json"
           }
         }
       }
@@ -273,8 +270,7 @@
         "PiiEntityRecognition",
         "KeyPhraseExtraction",
         "LanguageDetection",
-        "EntityLinking",
-        "DynamicClassification"
+        "EntityLinking"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskKind",
@@ -311,8 +307,7 @@
         "PiiEntityRecognitionResults",
         "KeyPhraseExtractionResults",
         "LanguageDetectionResults",
-        "EntityLinkingResults",
-        "DynamicClassificationResults"
+        "EntityLinkingResults"
       ],
       "x-ms-enum": {
         "name": "AnalyzeTextTaskResultsKind",
@@ -504,23 +499,6 @@
         }
       ],
       "x-ms-discriminator-value": "SentimentAnalysis"
-    },
-    "AnalyzeTextDynamicClassificationInput": {
-      "type": "object",
-      "properties": {
-        "analysisInput": {
-          "$ref": "#/definitions/MultiLanguageAnalysisInput"
-        },
-        "parameters": {
-          "$ref": "#/definitions/DynamicClassificationTaskParameters"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTask"
-        }
-      ],
-      "x-ms-discriminator-value": "DynamicClassification"
     },
     "AnalyzeTextJobsInput": {
       "type": "object",
@@ -768,25 +746,6 @@
         "class"
       ]
     },
-    "DynamicClassificationDocumentResult": {
-      "type": "object",
-      "properties": {
-        "classifications": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ClassificationResult"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DocumentResult"
-        }
-      ],
-      "required": [
-        "classifications"
-      ]
-    },
     "HealthcareTaskParameters": {
       "type": "object",
       "description": "Supported parameters for a Healthcare task.",
@@ -871,7 +830,7 @@
           "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
         },
         {
-          "$ref": "#/definitions/DocumentDetectedLanguageString"
+          "$ref": "#/definitions/DocumentDetectedLanguage"
         }
       ]
     },
@@ -926,6 +885,7 @@
             "BodyStructure",
             "Age",
             "Gender",
+            "Ethnicity",
             "ExaminationName",
             "Date",
             "Direction",
@@ -934,21 +894,30 @@
             "MeasurementUnit",
             "RelationalOperator",
             "Time",
+            "Course",
             "GeneOrProtein",
             "Variant",
+            "Expression",
+            "MutationType",
             "AdministrativeEvent",
             "CareEnvironment",
             "HealthcareProfession",
             "Diagnosis",
             "SymptomOrSign",
             "ConditionQualifier",
+            "ConditionScale",
             "MedicationClass",
             "MedicationName",
             "Dosage",
             "MedicationForm",
             "MedicationRoute",
             "FamilyRelation",
-            "TreatmentName"
+            "TreatmentName",
+            "Allergen",
+            "Employment",
+            "LivingStatus",
+            "SubstanceUse",
+            "SubstanceUseAmount"
           ]
         },
         "subcategory": {
@@ -1007,17 +976,30 @@
           "type": "string",
           "enum": [
             "Abbreviation",
+            "BodySiteOfCondition",
+            "BodySiteOfTreatment",
+            "CourseOfCondition",
+            "CourseOfExamination",
+            "CourseOfMedication",
+            "CourseOfTreatment",
             "DirectionOfBodyStructure",
             "DirectionOfCondition",
             "DirectionOfExamination",
             "DirectionOfTreatment",
             "DosageOfMedication",
+            "ExaminationFindsCondition",
+            "ExpressionOfGene",
+            "ExpressionOfVariant",
             "FormOfMedication",
+            "FrequencyOfCondition",
             "FrequencyOfMedication",
             "FrequencyOfTreatment",
+            "MutationTypeOfGene",
+            "MutationTypeOfVariant",
             "QualifierOfCondition",
             "RelationOfExamination",
             "RouteOfMedication",
+            "ScaleOfCondition",
             "TimeOfCondition",
             "TimeOfEvent",
             "TimeOfExamination",
@@ -1026,7 +1008,8 @@
             "UnitOfCondition",
             "UnitOfExamination",
             "ValueOfCondition",
-            "ValueOfExamination"
+            "ValueOfExamination",
+            "VariantOfGene"
           ],
           "x-ms-enum": {
             "name": "relationType",
@@ -3098,81 +3081,6 @@
         }
       }
     },
-    "DynamicClassificationTaskParameters": {
-      "type": "object",
-      "description": "Supported parameters for a Zero Shot Classification task.",
-      "properties": {
-        "classificationType": {
-          "type": "string",
-          "description": "Specifies either one or multiple categories per document. Defaults to multi classification which may return more than one class for each document.",
-          "default": "Multi",
-          "enum": [
-            "Single",
-            "Multi"
-          ],
-          "x-ms-enum": {
-            "name": "ClassificationType",
-            "modelAsString": true
-          }
-        },
-        "categories": {
-          "type": "array",
-          "description": "a list of categories to which input is classified to.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltTaskParameters"
-        }
-      ],
-      "required": [
-        "categories"
-      ]
-    },
-    "DynamicClassificationTaskResult": {
-      "type": "object",
-      "properties": {
-        "results": {
-          "$ref": "#/definitions/DynamicClassificationResult"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AnalyzeTextTaskResult"
-        }
-      ],
-      "required": [
-        "results"
-      ],
-      "x-ms-discriminator-value": "DynamicClassificationResults"
-    },
-    "DynamicClassificationResult": {
-      "type": "object",
-      "properties": {
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/DynamicClassificationDocumentResult"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "common.json#/definitions/PreBuiltResult"
-        }
-      ],
-      "required": [
-        "documents"
-      ]
-    },
     "AnalyzeTextJobState": {
       "allOf": [
         {
@@ -3462,15 +3370,6 @@
       "properties": {
         "detectedLanguage": {
           "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      }
-    },
-    "DocumentDetectedLanguageString": {
-      "type": "object",
-      "properties": {
-        "detectedLanguage": {
-          "type": "string",
           "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       }
