@@ -22,7 +22,7 @@ Generate all API versions currently shipped for this package
 multiapi: true
 default-api-version: "2021-07-02"
 batch:
-  - tag: package-preview-2022-04-30
+  - tag: package-preview-2022-11-15
   - tag: package-2021-07-02
   - tag: package-2021-07
   - tag: package-2021-03
@@ -43,14 +43,14 @@ batch:
 output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub/
 perform-load: false
 ```
-### Tag: package-preview-2022-04-30 and python
+### Tag: package-preview-2022-11-15 and python
 
-These settings apply only when `--tag=package-preview-2022-04-30 --python` is specified on the command line.
+These settings apply only when `--tag=package-preview-2022-11-15 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-preview-2022-04-30' && $(python)
-namespace: azure.mgmt.iothub.v2022_04_30_preview
-output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub/v2022_04_30_preview
+``` yaml $(tag) == 'package-preview-2022-11-15' && $(python)
+namespace: azure.mgmt.iothub.v2022_11_15_preview
+output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothub/azure/mgmt/iothub/v2022_11_15_preview
 ```
 
 ### Tag: package-2021-07-02 and python
