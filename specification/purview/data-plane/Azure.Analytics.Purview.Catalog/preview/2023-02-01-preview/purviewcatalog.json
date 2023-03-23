@@ -1551,6 +1551,52 @@
         }
       }
     },
+    "/entity/import/template": {
+      "get": {
+        "tags": [
+          "Entity"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Get import template csv file",
+        "operationId": "Entity_GetTemplateFileForImport",
+        "x-ms-examples": {
+          "Entity_GetTemplateFileForImport": {
+            "$ref": "./examples/Entity_GetImportTemplate.json"
+          }
+        },
+        "produces": [
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "name": "typeName",
+            "in": "query",
+            "description": "The type name for the imported entities.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. A csv templated file will be generated.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/entity/operation/{operationGuid}": {
       "get": {
         "tags": [
@@ -1576,6 +1622,68 @@
             "description": "OK. Return the status of import csv operation.",
             "schema": {
               "$ref": "#/definitions/EntityImportCSVOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/entity/export": {
+      "post": {
+        "tags": [
+          "Entity"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Export Entity as csv file",
+        "operationId": "Entity_ExportAsCsv",
+        "x-ms-examples": {
+          "Entity_ExportAsCsv": {
+            "$ref": "./examples/Entity_ExportEntitiesAsCsv.json"
+          }
+        },
+        "produces": [
+          "text/csv"
+        ],
+        "parameters": [
+          {
+            "name": "collection",
+            "in": "query",
+            "description": "The collection id where the entities exported. Default collection is the root collection.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "typeName",
+            "in": "query",
+            "description": "The type name for the exported entities. typeName is required only when the guids provided in the request payload is null or empty.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "exportRequest",
+            "description": "Export request defining the entity guids and other values to be exported. If no fields are provided, all attributes/relationship attributes/business attributes including the contacts Expert/Owner/Steward will be exported.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EntityExportRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. A csv file contains entities will be generated.",
+            "schema": {
+              "type": "file"
             }
           },
           "default": {
@@ -7988,6 +8096,26 @@
         "errorMessage": {
           "type": "string",
           "description": "The error message."
+        }
+      }
+    },
+    "EntityExportRequest": {
+      "description": "Export request payload for entities",
+      "type": "object",
+      "properties": {
+        "guids": {
+          "description": "guids for exported entities",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "fields": {
+          "description": "fileds for exported entities, e.g. attribute name, relationship attribute name, etc",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }
