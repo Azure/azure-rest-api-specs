@@ -96,7 +96,11 @@
           "202": {
             "description": "Response indicating that a request has been accepted for processing. However, the processing has not been completed.",
             "schema": {
+<<<<<<< HEAD
               "$ref": "#/definitions/ErrorResponse"
+=======
+              "$ref": "#/definitions/ErrorObjectResponse"
+>>>>>>> upstream/main
             }
           },
           "default": {
@@ -482,6 +486,16 @@
         "message": {
           "description": "Error message indicating why the operation failed.",
           "type": "string"
+        }
+      }
+    },
+    "ErrorObjectResponse": {
+      "description": "Describes the format of Error response with a wrapper object",
+      "type": "object",
+      "properties": {
+        "error": {
+          "description": "Wrapper object for error information",
+          "$ref": "#/definitions/ErrorResponse"
         }
       }
     }
