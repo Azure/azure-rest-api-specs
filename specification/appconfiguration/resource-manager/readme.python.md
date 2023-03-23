@@ -8,6 +8,7 @@ license-header: MICROSOFT_MIT_NO_VERSION
 package-name: azure-mgmt-appconfiguration
 package-version: 1.0.0b1
 no-namespace-folders: true
+only-path-and-body-params-positional: true
 ```
 
 ### Python multi-api
@@ -20,7 +21,6 @@ default-api-version: "2022-05-01"
 multiapi: true
 batch:
   - tag: package-2022-05-01
-  - tag: package-2022-03-01-preview
   - multiapiscript: true
 ```
 
