@@ -441,6 +441,19 @@
             "$ref": "#/definitions/PerNodeExtensionState"
           },
           "readOnly": true
+        },
+        "managedBy": {
+          "description": "Indicates if the extension is managed by azure or the user.",
+          "type": "string",
+          "enum": [
+            "Azure",
+            "User"
+          ],
+          "x-ms-enum": {
+            "name": "ExtensionManagedBy",
+            "modelAsString": true
+          },
+          "readOnly": true
         }
       }
     },
