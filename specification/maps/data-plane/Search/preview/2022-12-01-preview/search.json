@@ -670,7 +670,7 @@
             "$ref": "../../../Common/preview/2022-09-01-preview/common.json#/definitions/GeoJsonPoint"
           },
           "calculationMethod": {
-            "description": "The method that was used to compute the geocode point.\n- `Interpolation`: The geocode point was matched to a point on a road using interpolation.\n- `InterpolationOffset`: The geocode point was matched to a point on a road using interpolation with an additional offset to shift the point to the side of the street.\n- `Parcel`: The geocode point was matched to the center of a parcel.\n- `Rooftop`: The geocode point was matched to the rooftop of a building.",
+            "description": "The method that was used to compute the geocode point.",
             "type": "string",
             "enum": [
               "Interpolation",
@@ -683,16 +683,20 @@
               "modelAsString": true,
               "values": [
                 {
-                  "value": "Interpolation"
+                  "value": "Interpolation",
+                  "description": "The geocode point was matched to a point on a road using interpolation."
                 },
                 {
-                  "value": "InterpolationOffset"
+                  "value": "InterpolationOffset",
+                  "description": "The geocode point was matched to a point on a road using interpolation with an additional offset to shift the point to the side of the street."
                 },
                 {
-                  "value": "Parcel"
+                  "value": "Parcel",
+                  "description": "The geocode point was matched to the center of a parcel."
                 },
                 {
-                  "value": "Rooftop"
+                  "value": "Rooftop",
+                  "description": "The geocode point was matched to the rooftop of a building."
                 }
               ]
             }
@@ -1149,7 +1153,7 @@
       }
     },
     "Confidence": {
-      "description": "The level of confidence that the geocoded location result is a match. Use this value with the match code to determine for more complete information about the match.\n\nThe confidence of a geocoded location is based on many factors including the relative importance of the geocoded location and the user’s location, if specified. The following description provides more information about how confidence scores are assigned and how results are ranked.\n\nIf the confidence is set to `High`, one or more strong matches were found. Multiple `High` confidence matches are sorted in ranked order by importance when applicable. For example, landmarks have importance but addresses do not.\n\nIf a request includes a location or a view, then the ranking may change appropriately. For example, a location query for \"Paris\" returns \"Paris, France\" and \"Paris, TX\" both with `High` confidence. \"Paris, France\" is always ranked first due to importance unless a user location indicates that the user is in or very close to Paris, TX or the map view indicates that the user is searching in that area.\n\nIn some situations, the returned match may not be at the same level as the information provided in the request. For example, a request may specify address information and the geocode service may only be able to match a postal code. In this case, if the geocode service has a confidence that the postal code matches the data, the confidence is set to `Medium` and the match code is set to `UpHierarchy` to specify that it could not match all of the information and had to search up-hierarchy.\n\nIf the location information in the query is ambiguous, and there is no additional information to rank the locations (such as user location or the relative importance of the location), the confidence is set to `Medium`. For example, a location query for \"148th Ave, Bellevue\" may return \"148th Ave SE\" and \"148th Ave NE\" both with `Medium` confidence.\n\nIf the location information in the query does not provide enough information to geocode a specific location, a less precise location value may be returned and the confidence is set to `Medium`. For example, if an address is provided, but a match is not found for the house number, the geocode result with a Roadblock entity type may be returned.",
+      "description": "The level of confidence that the geocoded location result is a match. Use this value with the match code to determine for more complete information about the match.\n\nThe confidence of a geocoded location is based on many factors including the relative importance of the geocoded location and the user’s location, if specified.",
       "type": "string",
       "enum": [
         "High",
@@ -1161,10 +1165,12 @@
         "modelAsString": true,
         "values": [
           {
-            "value": "High"
+            "value": "High",
+            "description": "If the confidence is set to `High`, one or more strong matches were found. Multiple `High` confidence matches are sorted in ranked order by importance when applicable. For example, landmarks have importance but addresses do not.\n\nIf a request includes a location or a view, then the ranking may change appropriately. For example, a location query for \"Paris\" returns \"Paris, France\" and \"Paris, TX\" both with `High` confidence. \"Paris, France\" is always ranked first due to importance unless a user location indicates that the user is in or very close to Paris, TX or the map view indicates that the user is searching in that area."
           },
           {
-            "value": "Medium"
+            "value": "Medium",
+            "description": "In some situations, the returned match may not be at the same level as the information provided in the request. For example, a request may specify address information and the geocode service may only be able to match a postal code. In this case, if the geocode service has a confidence that the postal code matches the data, the confidence is set to `Medium` and the match code is set to `UpHierarchy` to specify that it could not match all of the information and had to search up-hierarchy.\n\nIf the location information in the query is ambiguous, and there is no additional information to rank the locations (such as user location or the relative importance of the location), the confidence is set to `Medium`. For example, a location query for \"148th Ave, Bellevue\" may return \"148th Ave SE\" and \"148th Ave NE\" both with `Medium` confidence.\n\nIf the location information in the query does not provide enough information to geocode a specific location, a less precise location value may be returned and the confidence is set to `Medium`. For example, if an address is provided, but a match is not found for the house number, the geocode result with a Roadblock entity type may be returned."
           },
           {
             "value": "Low"

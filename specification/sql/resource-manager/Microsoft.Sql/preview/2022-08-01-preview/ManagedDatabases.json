@@ -598,7 +598,8 @@
       "properties": {
         "destinationManagedDatabaseId": {
           "description": "The destination managed database ID",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         }
       }
     },
@@ -706,6 +707,7 @@
         "sourceDatabaseId": {
           "description": "The resource identifier of the source database associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -713,6 +715,7 @@
         "crossSubscriptionSourceDatabaseId": {
           "description": "The resource identifier of the cross-subscription source database associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -720,6 +723,7 @@
         "restorableDroppedDatabaseId": {
           "description": "The restorable dropped database resource id to restore when creating this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -727,6 +731,7 @@
         "crossSubscriptionRestorableDroppedDatabaseId": {
           "description": "The restorable cross-subscription dropped database resource id to restore when creating this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -753,6 +758,7 @@
         "recoverableDatabaseId": {
           "description": "The resource identifier of the recoverable database associated with create operation of this database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -760,6 +766,7 @@
         "longTermRetentionBackupResourceId": {
           "description": "The name of the Long Term Retention backup to be used for restore of this managed database.",
           "type": "string",
+          "format": "arm-id",
           "x-ms-mutability": [
             "create"
           ]
@@ -804,7 +811,8 @@
       "properties": {
         "destinationManagedDatabaseId": {
           "description": "The destination managed database ID",
-          "type": "string"
+          "type": "string",
+          "format": "arm-id"
         },
         "operationMode": {
           "description": "The move operation mode.",
