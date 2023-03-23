@@ -753,6 +753,66 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/hostGroups/{hostGroupName}/hosts/{hostName}/hostSizes": {
+      "post": {
+        "tags": [
+          "DedicatedHost"
+        ],
+        "operationId": "DedicatedHosts_ListAvailableSizes",
+        "description": "Lists all available dedicated host sizes to which the specified dedicated host can be resized.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "hostGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host group."
+          },
+          {
+            "name": "hostName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the dedicated host."
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common-types/v1/common.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHostSkuListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Get Available Dedicated Host Sizes.": {
+            "$ref": "./examples/dedicatedHostExamples/DedicatedHost_ListAvailableSizes.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1056,6 +1116,21 @@
         "value"
       ],
       "description": "The list dedicated host operation response."
+    },
+    "DedicatedHostSkuListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of dedicated host skus."
+        }
+      },
+      "description": "The List Dedicated Host Skus operation response."
     }
   }
 }
