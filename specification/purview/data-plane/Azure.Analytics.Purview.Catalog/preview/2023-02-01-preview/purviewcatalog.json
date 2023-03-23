@@ -1695,6 +1695,100 @@
         }
       }
     },
+    "/entity/deleteHierarchy": {
+      "delete": {
+        "tags": [
+          "Entity"
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "description": "Delete entities with hierarchy",
+        "operationId": "Entity_DeleteWithHierarchy",
+        "x-ms-examples": {
+          "Entity_DeleteWithHierarchy": {
+            "$ref": ""
+          }
+        },
+        "parameters": [
+          {
+            "name": "guid",
+            "in": "query",
+            "description": "An array of GUIDs of entities to delete.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi",
+            "x-ms-client-name": "guids"
+          },
+          {
+            "name": "parallelCount",
+            "in": "query",
+            "description": "",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. A job to delete entities with hierarchy.",
+            "headers": {
+              "Operation-Location": {
+                "description": "Response header for long running operation",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      }
+    },
+    "/entity/deleteHierarchy/operation/{operationGuid}": {
+      "get": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Get the status of delete hierarchy operation",
+        "operationId": "Entity_GetDeleteHierarchyOperationStatus",
+        "x-ms-examples": {
+          "Entity_GetImportCsvOperationStatus": {
+            "$ref": ""
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {},
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -8111,7 +8205,7 @@
           }
         },
         "fields": {
-          "description": "fileds for exported entities, e.g. attribute name, relationship attribute name, etc",
+          "description": "fields for exported entities, e.g. attribute name, relationship attribute name, etc",
           "type": "array",
           "items": {
             "type": "string"
