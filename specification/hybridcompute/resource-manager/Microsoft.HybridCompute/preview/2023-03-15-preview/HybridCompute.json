@@ -1114,12 +1114,12 @@
         }
       }
     },
-    "/providers/Microsoft.HybridCompute/osType/{osType}/agentVersions/latest": {
+    "/providers/Microsoft.HybridCompute/osType/{osType}/agentVersions/{version}": {
       "get": {
         "tags": [
           "LatestAgentVersion"
         ],
-        "operationId": "Latest_AgentVersion",
+        "operationId": "AgentVersion_Get",
         "description": "Gets the latest Agent Version along with the download link currently present.",
         "parameters": [
           {
@@ -1131,6 +1131,13 @@
             "required": true,
             "type": "string",
             "description": "Defines the os type"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Defines the agent version"
           }
         ],
         "responses": {
