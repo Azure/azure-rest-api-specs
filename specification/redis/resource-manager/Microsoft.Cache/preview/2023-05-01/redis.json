@@ -1736,7 +1736,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyRequestResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicy"
             },
             "description": "Parameters supplied to the Create Update Access Policy operation."
           },
@@ -1751,13 +1751,13 @@
           "200": {
             "description": "The access policy was successfully added.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyRequestResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicy"
             }
           },
           "201": {
             "description": "The access policy was successfully added.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyRequestResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicy"
             }
           },
           "default": {
@@ -1821,7 +1821,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyRequestResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicy"
             }
           },
           "default": {
@@ -1870,7 +1870,7 @@
           "200": {
             "description": "Response of get access policy.",
             "schema": {
-              "$ref": "#/definitions/RedisCacheAccessPolicyRequestResponse"
+              "$ref": "#/definitions/RedisCacheAccessPolicy"
             }
           },
           "default": {
@@ -3050,7 +3050,7 @@
       "description": "All properties of an access policy.",
       "type": "object"
     },
-    "RedisCacheAccessPolicyRequestResponse": {
+    "RedisCacheAccessPolicy": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -3071,7 +3071,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RedisCacheAccessPolicyRequestResponse"
+            "$ref": "#/definitions/RedisCacheAccessPolicy"
           },
           "description": "List of access policies (with properties) of a Redis cache."
         },
@@ -3102,11 +3102,11 @@
       ],
       "type": "object"
     },
-    "RedisCacheAccessPolicyAssignmentProperties": {
+    "RedisCacheAccessPolicyAssignmentSetProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
-          "description": "Provisioning state of an access policy assignment",
+          "description": "Provisioning state of an access policy assignment set",
           "readOnly": true,
           "enum": [
             "Updating",
@@ -3132,13 +3132,13 @@
         }
       },
       "type": "object",
-      "description": "Properties of an access policy assignment"
+      "description": "Properties of an access policy assignment set"
     },
     "RedisCacheAccessPolicyAssignmentSet": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentProperties",
+          "$ref": "#/definitions/RedisCacheAccessPolicyAssignmentSetProperties",
           "description": "Properties of an access policy assignment"
         }
       },
