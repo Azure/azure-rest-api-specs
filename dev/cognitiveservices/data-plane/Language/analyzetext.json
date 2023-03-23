@@ -2261,6 +2261,21 @@
         "value"
       ]
     },
+    "AgeUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Year",
+        "Month",
+        "Week",
+        "Day"
+      ],
+      "x-ms-enum": {
+        "name": "AgeUnit",
+        "modelAsString": true
+      },
+      "description": "The Age Unit of measurement"
+    },
     "AgeResolution": {
       "description": "Represents the Age entity resolution model.",
       "allOf": [
@@ -2275,24 +2290,50 @@
       "x-ms-discriminator-value": "AgeResolution",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Year",
-            "Month",
-            "Week",
-            "Day"
-          ],
-          "x-ms-enum": {
-            "name": "AgeUnit",
-            "modelAsString": true
-          },
-          "description": "The Age Unit of measurement"
+          "$ref": "#/definitions/AgeUnit"
         }
       },
       "required": [
         "unit"
       ]
+    },
+    "VolumeUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "CubicMeter",
+        "CubicCentimeter",
+        "CubicMillimeter",
+        "Hectoliter",
+        "Decaliter",
+        "Liter",
+        "Centiliter",
+        "Milliliter",
+        "CubicYard",
+        "CubicInch",
+        "CubicFoot",
+        "CubicMile",
+        "FluidOunce",
+        "Teaspoon",
+        "Tablespoon",
+        "Pint",
+        "Quart",
+        "Cup",
+        "Gill",
+        "Pinch",
+        "FluidDram",
+        "Barrel",
+        "Minim",
+        "Cord",
+        "Peck",
+        "Bushel",
+        "Hogshead"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeUnit",
+        "modelAsString": true
+      },
+      "description": "The Volume Unit of measurement"
     },
     "VolumeResolution": {
       "description": "Represents the volume entity resolution model.",
@@ -2308,47 +2349,36 @@
       "x-ms-discriminator-value": "VolumeResolution",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "CubicMeter",
-            "CubicCentimeter",
-            "CubicMillimeter",
-            "Hectoliter",
-            "Decaliter",
-            "Liter",
-            "Centiliter",
-            "Milliliter",
-            "CubicYard",
-            "CubicInch",
-            "CubicFoot",
-            "CubicMile",
-            "FluidOunce",
-            "Teaspoon",
-            "Tablespoon",
-            "Pint",
-            "Quart",
-            "Cup",
-            "Gill",
-            "Pinch",
-            "FluidDram",
-            "Barrel",
-            "Minim",
-            "Cord",
-            "Peck",
-            "Bushel",
-            "Hogshead"
-          ],
-          "x-ms-enum": {
-            "name": "VolumeUnit",
-            "modelAsString": true
-          },
-          "description": "The Volume Unit of measurement"
+          "$ref": "#/definitions/VolumeUnit"
         }
       },
       "required": [
         "unit"
       ]
+    },
+    "SpeedUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "MeterPerSecond",
+        "KilometerPerHour",
+        "KilometerPerMinute",
+        "KilometerPerSecond",
+        "MilePerHour",
+        "Knot",
+        "FootPerSecond",
+        "FootPerMinute",
+        "YardPerMinute",
+        "YardPerSecond",
+        "MeterPerMillisecond",
+        "CentimeterPerMillisecond",
+        "KilometerPerMillisecond"
+      ],
+      "x-ms-enum": {
+        "name": "SpeedUnit",
+        "modelAsString": true
+      },
+      "description": "The speed Unit of measurement"
     },
     "SpeedResolution": {
       "description": "Represents the speed entity resolution model.",
@@ -2364,33 +2394,35 @@
       "x-ms-discriminator-value": "SpeedResolution",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "MeterPerSecond",
-            "KilometerPerHour",
-            "KilometerPerMinute",
-            "KilometerPerSecond",
-            "MilePerHour",
-            "Knot",
-            "FootPerSecond",
-            "FootPerMinute",
-            "YardPerMinute",
-            "YardPerSecond",
-            "MeterPerMillisecond",
-            "CentimeterPerMillisecond",
-            "KilometerPerMillisecond"
-          ],
-          "x-ms-enum": {
-            "name": "SpeedUnit",
-            "modelAsString": true
-          },
-          "description": "The speed Unit of measurement"
+          "$ref": "#/definitions/SpeedUnit"
         }
       },
       "required": [
         "unit"
       ]
+    },
+    "AreaUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "SquareKilometer",
+        "SquareHectometer",
+        "SquareDecameter",
+        "SquareDecimeter",
+        "SquareMeter",
+        "SquareCentimeter",
+        "SquareMillimeter",
+        "SquareInch",
+        "SquareFoot",
+        "SquareMile",
+        "SquareYard",
+        "Acre"
+      ],
+      "x-ms-enum": {
+        "name": "AreaUnit",
+        "modelAsString": true
+      },
+      "description": "The area Unit of measurement"
     },
     "AreaResolution": {
       "description": "Represents the area entity resolution model.",
@@ -2406,32 +2438,39 @@
       "x-ms-discriminator-value": "AreaResolution",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "SquareKilometer",
-            "SquareHectometer",
-            "SquareDecameter",
-            "SquareDecimeter",
-            "SquareMeter",
-            "SquareCentimeter",
-            "SquareMillimeter",
-            "SquareInch",
-            "SquareFoot",
-            "SquareMile",
-            "SquareYard",
-            "Acre"
-          ],
-          "x-ms-enum": {
-            "name": "AreaUnit",
-            "modelAsString": true
-          },
-          "description": "The area Unit of measurement"
+          "$ref": "#/definitions/AreaUnit"
         }
       },
       "required": [
         "unit"
       ]
+    },
+    "LengthUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Kilometer",
+        "Hectometer",
+        "Decameter",
+        "Meter",
+        "Decimeter",
+        "Centimeter",
+        "Millimeter",
+        "Micrometer",
+        "Nanometer",
+        "Picometer",
+        "Mile",
+        "Yard",
+        "Inch",
+        "Foot",
+        "LightYear",
+        "Pt"
+      ],
+      "x-ms-enum": {
+        "name": "LengthUnit",
+        "modelAsString": true
+      },
+      "description": "The length Unit of measurement"
     },
     "LengthResolution": {
       "description": "Represents the length entity resolution model.",
@@ -2447,36 +2486,35 @@
       "x-ms-discriminator-value": "LengthResolution",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Kilometer",
-            "Hectometer",
-            "Decameter",
-            "Meter",
-            "Decimeter",
-            "Centimeter",
-            "Millimeter",
-            "Micrometer",
-            "Nanometer",
-            "Picometer",
-            "Mile",
-            "Yard",
-            "Inch",
-            "Foot",
-            "LightYear",
-            "Pt"
-          ],
-          "x-ms-enum": {
-            "name": "LengthUnit",
-            "modelAsString": true
-          },
-          "description": "The length Unit of measurement"
+          "$ref": "#/definitions/LengthUnit"
         }
       },
       "required": [
         "unit"
       ]
+    },
+    "InformationUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Bit",
+        "Kilobit",
+        "Megabit",
+        "Gigabit",
+        "Terabit",
+        "Petabit",
+        "Byte",
+        "Kilobyte",
+        "Megabyte",
+        "Gigabyte",
+        "Terabyte",
+        "Petabyte"
+      ],
+      "x-ms-enum": {
+        "name": "InformationUnit",
+        "modelAsString": true
+      },
+      "description": "The information (data) Unit of measurement."
     },
     "InformationResolution": {
       "description": "Represents the information (data) entity resolution model.",
@@ -2492,32 +2530,27 @@
       "x-ms-discriminator-value": "InformationResolution",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Bit",
-            "Kilobit",
-            "Megabit",
-            "Gigabit",
-            "Terabit",
-            "Petabit",
-            "Byte",
-            "Kilobyte",
-            "Megabyte",
-            "Gigabyte",
-            "Terabyte",
-            "Petabyte"
-          ],
-          "x-ms-enum": {
-            "name": "InformationUnit",
-            "modelAsString": true
-          },
-          "description": "The information (data) Unit of measurement."
+          "$ref": "#/definitions/InformationUnit"
         }
       },
       "required": [
         "unit"
       ]
+    },
+    "TemperatureUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Fahrenheit",
+        "Kelvin",
+        "Rankine",
+        "Celsius"
+      ],
+      "x-ms-enum": {
+        "name": "TemperatureUnit",
+        "modelAsString": true
+      },
+      "description": "The temperature Unit of measurement."
     },
     "TemperatureResolution": {
       "description": "Represents the temperature entity resolution model.",
@@ -2533,24 +2566,38 @@
       "x-ms-discriminator-value": "TemperatureResolution",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Fahrenheit",
-            "Kelvin",
-            "Rankine",
-            "Celsius"
-          ],
-          "x-ms-enum": {
-            "name": "TemperatureUnit",
-            "modelAsString": true
-          },
-          "description": "The temperature Unit of measurement."
+          "$ref": "#/definitions/TemperatureUnit"
         }
       },
       "required": [
         "unit"
       ]
+    },
+    "WeightUnit": {
+      "type": "string",
+      "enum": [
+        "Unspecified",
+        "Kilogram",
+        "Gram",
+        "Milligram",
+        "Gallon",
+        "MetricTon",
+        "Ton",
+        "Pound",
+        "Ounce",
+        "Grain",
+        "PennyWeight",
+        "LongTonBritish",
+        "ShortTonUS",
+        "ShortHundredWeightUS",
+        "Stone",
+        "Dram"
+      ],
+      "x-ms-enum": {
+        "name": "WeightUnit",
+        "modelAsString": true
+      },
+      "description": "The weight Unit of measurement."
     },
     "WeightResolution": {
       "description": "Represents the weight entity resolution model.",
@@ -2566,30 +2613,7 @@
       "x-ms-discriminator-value": "WeightResolution",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Kilogram",
-            "Gram",
-            "Milligram",
-            "Gallon",
-            "MetricTon",
-            "Ton",
-            "Pound",
-            "Ounce",
-            "Grain",
-            "PennyWeight",
-            "LongTonBritish",
-            "ShortTonUS",
-            "ShortHundredWeightUS",
-            "Stone",
-            "Dram"
-          ],
-          "x-ms-enum": {
-            "name": "WeightUnit",
-            "modelAsString": true
-          },
-          "description": "The weight Unit of measurement."
+          "$ref": "#/definitions/WeightUnit"
         }
       },
       "required": [
@@ -2646,6 +2670,21 @@
         "value"
       ]
     },
+    "DateTimeSubKind": {
+      "type": "string",
+      "enum": [
+        "Time",
+        "Date",
+        "DateTime",
+        "Duration",
+        "Set"
+      ],
+      "x-ms-enum": {
+        "name": "DateTimeSubKind",
+        "modelAsString": true
+      },
+      "description": "The DateTime SubKind"
+    },
     "DateTimeResolution": {
       "description": "A resolution for datetime entity instances.",
       "allOf": [
@@ -2660,19 +2699,7 @@
           "$ref": "#/definitions/TimeExpression"
         },
         "dateTimeSubKind": {
-          "type": "string",
-          "enum": [
-            "Time",
-            "Date",
-            "DateTime",
-            "Duration",
-            "Set"
-          ],
-          "x-ms-enum": {
-            "name": "DateTimeSubKind",
-            "modelAsString": true
-          },
-          "description": "The DateTime SubKind"
+          "$ref": "#/definitions/DateTimeSubKind"
         },
         "value": {
           "type": "string",
@@ -2688,6 +2715,22 @@
         "value"
       ]
     },
+    "NumberKind": {
+      "type": "string",
+      "enum": [
+        "Integer",
+        "Decimal",
+        "Power",
+        "Fraction",
+        "Percent",
+        "Unspecified"
+      ],
+      "x-ms-enum": {
+        "name": "NumberKind",
+        "modelAsString": true
+      },
+      "description": "The type of the extracted number entity."
+    },
     "NumberResolution": {
       "description": "A resolution for numeric entity instances.",
       "allOf": [
@@ -2699,20 +2742,7 @@
       "x-ms-discriminator-value": "NumberResolution",
       "properties": {
         "numberKind": {
-          "type": "string",
-          "enum": [
-            "Integer",
-            "Decimal",
-            "Power",
-            "Fraction",
-            "Percent",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "NumberKind",
-            "modelAsString": true
-          },
-          "description": "The type of the extracted number entity."
+          "$ref": "#/definitions/NumberKind"
         },
         "value": {
           "type": "number",
@@ -2724,6 +2754,19 @@
         "numberKind",
         "value"
       ]
+    },
+    "OrdinalRelativeTo": {
+      "type": "string",
+      "enum": [
+        "Current",
+        "End",
+        "Start"
+      ],
+      "x-ms-enum": {
+        "name": "RelativeTo",
+        "modelAsString": true
+      },
+      "description": "The reference point that the ordinal number denotes."
     },
     "OrdinalResolution": {
       "description": "A resolution for ordinal numbers entity instances.",
@@ -2740,17 +2783,7 @@
           "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
         },
         "relativeTo": {
-          "type": "string",
-          "enum": [
-            "Current",
-            "End",
-            "Start"
-          ],
-          "x-ms-enum": {
-            "name": "RelativeTo",
-            "modelAsString": true
-          },
-          "description": "The reference point that the ordinal number denotes."
+          "$ref": "#/definitions/OrdinalRelativeTo"
         },
         "value": {
           "type": "string",
@@ -2792,6 +2825,26 @@
         }
       }
     },
+    "NumericRangeKind": {
+      "type": "string",
+      "enum": [
+        "Number",
+        "Speed",
+        "Weight",
+        "Length",
+        "Volume",
+        "Area",
+        "Age",
+        "Information",
+        "Temperature",
+        "Currency"
+      ],
+      "x-ms-enum": {
+        "name": "RangeKind",
+        "modelAsString": true
+      },
+      "description": "The kind of range that the resolution object represents."
+    },
     "NumericRangeResolution": {
       "description": "represents the resolution of numeric intervals.",
       "allOf": [
@@ -2803,24 +2856,7 @@
       "x-ms-discriminator-value": "NumericRangeResolution",
       "properties": {
         "rangeKind": {
-          "type": "string",
-          "enum": [
-            "Number",
-            "Speed",
-            "Weight",
-            "Length",
-            "Volume",
-            "Area",
-            "Age",
-            "Information",
-            "Temperature",
-            "Currency"
-          ],
-          "x-ms-enum": {
-            "name": "RangeKind",
-            "modelAsString": true
-          },
-          "description": "The kind of range that the resolution object represents."
+          "$ref": "#/definitions/NumericRangeKind"
         },
         "minimum": {
           "type": "number",
@@ -2901,19 +2937,7 @@
       "x-ms-discriminator-value": "AgeMd",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Year",
-            "Month",
-            "Week",
-            "Day"
-          ],
-          "x-ms-enum": {
-            "name": "AgeUnitMd",
-            "modelAsString": true
-          },
-          "description": "The Age Unit of measurement"
+          "$ref": "#/definitions/AgeUnit"
         }
       },
       "required": [
@@ -2934,42 +2958,7 @@
       "x-ms-discriminator-value": "VolumeMd",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "CubicMeter",
-            "CubicCentimeter",
-            "CubicMillimeter",
-            "Hectoliter",
-            "Decaliter",
-            "Liter",
-            "Centiliter",
-            "Milliliter",
-            "CubicYard",
-            "CubicInch",
-            "CubicFoot",
-            "CubicMile",
-            "FluidOunce",
-            "Teaspoon",
-            "Tablespoon",
-            "Pint",
-            "Quart",
-            "Cup",
-            "Gill",
-            "Pinch",
-            "FluidDram",
-            "Barrel",
-            "Minim",
-            "Cord",
-            "Peck",
-            "Bushel",
-            "Hogshead"
-          ],
-          "x-ms-enum": {
-            "name": "VolumeUnitMd",
-            "modelAsString": true
-          },
-          "description": "The Volume Unit of measurement"
+          "$ref": "#/definitions/VolumeUnit"
         }
       },
       "required": [
@@ -2990,28 +2979,7 @@
       "x-ms-discriminator-value": "SpeedMd",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "MetersPerSecond",
-            "KilometersPerHour",
-            "KilometersPerMinute",
-            "KilometersPerSecond",
-            "MilesPerHour",
-            "Knot",
-            "FootPerSecond",
-            "FootPerMinute",
-            "YardsPerMinute",
-            "YardsPerSecond",
-            "MetersPerMillisecond",
-            "CentimetersPerMillisecond",
-            "KilometersPerMillisecond"
-          ],
-          "x-ms-enum": {
-            "name": "SpeedUnitMd",
-            "modelAsString": true
-          },
-          "description": "The speed Unit of measurement"
+          "$ref": "#/definitions/SpeedUnit"
         }
       },
       "required": [
@@ -3032,27 +3000,7 @@
       "x-ms-discriminator-value": "AreaMd",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "SquareKilometer",
-            "SquareHectometer",
-            "SquareDecameter",
-            "SquareDecimeter",
-            "SquareMeter",
-            "SquareCentimeter",
-            "SquareMillimeter",
-            "SquareInch",
-            "SquareFoot",
-            "SquareMile",
-            "SquareYard",
-            "Acre"
-          ],
-          "x-ms-enum": {
-            "name": "AreaUnit",
-            "modelAsString": true
-          },
-          "description": "The area Unit of measurement"
+          "$ref": "#/definitions/AreaUnit"
         }
       },
       "required": [
@@ -3073,31 +3021,7 @@
       "x-ms-discriminator-value": "LengthMd",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Kilometer",
-            "Hectometer",
-            "Decameter",
-            "Meter",
-            "Decimeter",
-            "Centimeter",
-            "Millimeter",
-            "Micrometer",
-            "Nanometer",
-            "Picometer",
-            "Mile",
-            "Yard",
-            "Inch",
-            "Foot",
-            "LightYear",
-            "Pt"
-          ],
-          "x-ms-enum": {
-            "name": "LengthUnit",
-            "modelAsString": true
-          },
-          "description": "The length Unit of measurement"
+          "$ref": "#/definitions/LengthUnit"
         }
       },
       "required": [
@@ -3118,27 +3042,7 @@
       "x-ms-discriminator-value": "InformationMd",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Bit",
-            "Kilobit",
-            "Megabit",
-            "Gigabit",
-            "Terabit",
-            "Petabit",
-            "Byte",
-            "Kilobyte",
-            "Megabyte",
-            "Gigabyte",
-            "Terabyte",
-            "Petabyte"
-          ],
-          "x-ms-enum": {
-            "name": "InformationUnitMd",
-            "modelAsString": true
-          },
-          "description": "The information (data) Unit of measurement."
+          "$ref": "#/definitions/InformationUnit"
         }
       },
       "required": [
@@ -3159,19 +3063,7 @@
       "x-ms-discriminator-value": "TemperatureMd",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Fahrenheit",
-            "Kelvin",
-            "Rankine",
-            "Celsius"
-          ],
-          "x-ms-enum": {
-            "name": "TemperatureUnitMd",
-            "modelAsString": true
-          },
-          "description": "The temperature Unit of measurement."
+          "$ref": "#/definitions/TemperatureUnit"
         }
       },
       "required": [
@@ -3192,30 +3084,7 @@
       "x-ms-discriminator-value": "WeightMd",
       "properties": {
         "unit": {
-          "type": "string",
-          "enum": [
-            "Unspecified",
-            "Kilogram",
-            "Gram",
-            "Milligram",
-            "Gallon",
-            "MetricTon",
-            "Ton",
-            "Pound",
-            "Ounce",
-            "Grain",
-            "PennyWeight",
-            "LongTonBritish",
-            "ShortTonUS",
-            "ShortHundredWeightUS",
-            "Stone",
-            "Dram"
-          ],
-          "x-ms-enum": {
-            "name": "WeightUnitMd",
-            "modelAsString": true
-          },
-          "description": "The weight Unit of measurement."
+          "$ref": "#/definitions/WeightUnit"
         }
       },
       "required": [
@@ -3281,41 +3150,7 @@
       ]
     },
     "NumberMd": {
-      "description": "A Metadata for numeric entity instances.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseMd"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "NumberMd",
-      "properties": {
-        "numberKind": {
-          "type": "string",
-          "enum": [
-            "Integer",
-            "Decimal",
-            "Power",
-            "Fraction",
-            "Percent",
-            "Unspecified"
-          ],
-          "x-ms-enum": {
-            "name": "NumberKindMd",
-            "modelAsString": true
-          },
-          "description": "The type of the extracted number entity."
-        },
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "A numeric representation of what the extracted text denotes."
-        }
-      },
-      "required": [
-        "numberKind",
-        "value"
-      ]
+      "$ref": "#/definitions/NumberMd"
     },
     "OrdinalMd": {
       "description": "A Metadata for ordinal numbers entity instances.",
@@ -3332,17 +3167,7 @@
           "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
         },
         "relativeTo": {
-          "type": "string",
-          "enum": [
-            "Current",
-            "End",
-            "Start"
-          ],
-          "x-ms-enum": {
-            "name": "RelativeToMd",
-            "modelAsString": true
-          },
-          "description": "The reference point that the ordinal number denotes."
+          "$ref": "#/definitions/OrdinalRelativeTo"
         },
         "value": {
           "type": "string",
@@ -3395,24 +3220,7 @@
       "x-ms-discriminator-value": "NumberRangeMd",
       "properties": {
         "rangeKind": {
-          "type": "string",
-          "enum": [
-            "Number",
-            "Speed",
-            "Weight",
-            "Length",
-            "Volume",
-            "Area",
-            "Age",
-            "Information",
-            "Temperature",
-            "Currency"
-          ],
-          "x-ms-enum": {
-            "name": "RangeKindMd",
-            "modelAsString": true
-          },
-          "description": "The kind of range that the Metadata object represents."
+          "$ref": "#/definitions/NumericRangeKind"
         },
         "minimum": {
           "type": "number",
