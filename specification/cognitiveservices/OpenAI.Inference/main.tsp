@@ -8,6 +8,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "OpenAI is a case-sensitive name"
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> |
     OAuth2Auth<[{
