@@ -199,9 +199,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "Create environments": {
             "$ref": "./examples/ManagedEnvironments_CreateOrUpdate.json"
@@ -238,12 +235,7 @@
             "description": "Delete operation completed"
           },
           "202": {
-            "description": "Delete operation is in progress",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Delete operation is in progress"
           },
           "204": {
             "description": "Environment does not exist"
@@ -260,10 +252,7 @@
             "$ref": "./examples/ManagedEnvironments_Delete.json"
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": [
@@ -307,12 +296,7 @@
             }
           },
           "202": {
-            "description": "Patch operation is in progress.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              }
-            }
+            "description": "Patch operation is in progress."
           },
           "default": {
             "description": "Common error response.",
