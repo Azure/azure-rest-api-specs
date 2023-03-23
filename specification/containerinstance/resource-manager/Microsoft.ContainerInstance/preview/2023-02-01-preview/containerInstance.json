@@ -1360,8 +1360,13 @@
             },
             "provisioningTimeoutInSeconds": {
               "type": "integer",
-              "description": "Time in seconds in which a container group deployment would timeout and fail. If not provided, value is given 1800 seconds by default.",
+              "description": "Time in seconds in which a container group deployment would timeout and fail. The allowed maximum value is 1800 seconds. If value is not provided, property is given maximum value by default.",
               "format": "int32"
+            },
+            "isCustomProvisioningTimeout": {
+              "type": "boolean",
+              "readOnly": "true",
+              "description": "Flag indicating whether a custom value was provided for the provisioningTimeoutInSeconds property"
             },
             "restartPolicy": {
               "type": "string",
