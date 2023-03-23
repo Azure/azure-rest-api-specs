@@ -895,6 +895,10 @@ directive:
     from: templateSpecs.json
     where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
+  - from: deploymentStacks.json
+    suppress: TrackedResourcePatchOperation
+    where: $.definitions
+    reason: Not a tracked resource.
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: dataPolicyManifests.json
@@ -967,10 +971,6 @@ directive:
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
     reason: The tags API does not support system data
-suppressions:
-  - code: OperationsAPIImplementation
-    from: deploymentStacks.json
-    reason: OperationsAPI will come from Resources
 ```
 
 ---
