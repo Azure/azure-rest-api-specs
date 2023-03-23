@@ -8036,7 +8036,7 @@
           "description": "guid string"
         },
         "status": {
-          "$ref": "#/definitions/ImportCSVOperationStatus"
+          "$ref": "#/definitions/EntityImportCSVOperationStatus"
         },
         "createTime": {
           "type": "string",
@@ -8144,6 +8144,22 @@
       },
       "title": "ImportCSVOperationStatus",
       "description": "Enum of the status of import csv operation."
+    },
+    "EntityImportCSVOperationStatus": {
+      "type": "string",
+      "enum": [
+        "NotStarted",
+        "Succeeded",
+        "Failed",
+        "Running",
+        "PartialSucceeded"
+      ],
+      "x-ms-enum": {
+        "name": "EntityImportCSVOperationStatus",
+        "modelAsString": true
+      },
+      "title": "EntityImportCSVOperationStatus",
+      "description": "Enum of the status of import entity csv operation."
     },
     "BulkDeleteOperation": {
       "type": "object",
