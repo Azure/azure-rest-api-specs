@@ -1551,6 +1551,42 @@
         }
       }
     },
+    "/entity/import/operation/{operationGuid}": {
+      "get": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Get the status of import csv operation",
+        "operationId": "Entity_GetImportCsvOperationStatus",
+        "x-ms-examples": {
+          "Entity_GetImportCsvOperationStatus": {
+            "$ref": "./examples/Entity_GetImportCSVOperationStatusByOperationguid.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the status of import csv operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityImportCSVOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/entity/import/template": {
       "get": {
         "tags": [
@@ -1586,42 +1622,6 @@
             "description": "OK. A csv templated file will be generated.",
             "schema": {
               "type": "file"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/entity/import/operation/{operationGuid}": {
-      "get": {
-        "tags": [
-          "Entity"
-        ],
-        "description": "Get the status of import csv operation",
-        "operationId": "Entity_GetImportCsvOperationStatus",
-        "x-ms-examples": {
-          "Entity_GetImportCsvOperationStatus": {
-            "$ref": "./examples/Entity_GetImportCSVOperationStatusByOperationguid.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/operationGuid"
-          },
-          {
-            "$ref": "#/parameters/purviewAPIVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. Return the status of import csv operation.",
-            "schema": {
-              "$ref": "#/definitions/EntityImportCSVOperation"
             }
           },
           "default": {
@@ -1707,7 +1707,7 @@
         "operationId": "Entity_DeleteWithHierarchy",
         "x-ms-examples": {
           "Entity_DeleteWithHierarchy": {
-            "$ref": ""
+            "$ref": "./examples/Entity_DeleteWithHierarchy.json"
           }
         },
         "parameters": [
@@ -1766,8 +1766,8 @@
         "description": "Get the status of delete hierarchy operation",
         "operationId": "Entity_GetDeleteHierarchyOperationStatus",
         "x-ms-examples": {
-          "Entity_GetImportCsvOperationStatus": {
-            "$ref": ""
+          "Entity_GetDeleteHierarchyOperationStatus": {
+            "$ref": "./examples/Entity_GetDeleteHierarchyOperationStatus.json"
           }
         },
         "parameters": [
@@ -1779,7 +1779,12 @@
           }
         ],
         "responses": {
-          "200": {},
+          "200": {
+            "description": "OK. Return the status of delete hierarchy operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityDeleteHierarchyOperation"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -8051,6 +8056,36 @@
         }
       }
     },
+    "EntityDeleteHierarchyOperation": {
+      "type": "object",
+      "title": "Status of delete hierarchy operation",
+      "description": "The status of delete hierarchy operation",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "guid string"
+        },
+        "status": {
+          "$ref": "#/definitions/DeleteHierarchyOperationStatus"
+        },
+        "createTime": {
+          "type": "string",
+          "description": "The created time of the record."
+        },
+        "lastUpdateTime": {
+          "type": "string",
+          "description": "The last updated time of the record."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EntityDeleteHierarchyOperationProperties"
+        },
+        "error": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AsyncOperationError"
+        }
+      }
+    },
     "EntityImportCSVOperationProperties": {
       "type": "object",
       "properties": {
@@ -8065,6 +8100,20 @@
         "succeeded": {
           "type": "string",
           "description": "Entity numbers that already imported successfully"
+        }
+      }
+    },
+    "EntityDeleteHierarchyOperationProperties": {
+      "type": "object",
+      "properties": {
+        "entitiesToDeleteHierarchy": {
+          "type": "string"
+        },
+        "jobId": {
+          "type": "string"
+        },
+        "catalogId": {
+          "type": "string"
         }
       }
     },
@@ -8169,6 +8218,21 @@
       },
       "title": "BulkDeleteOperationStatus",
       "description": "Enum of the status of bulk delete operation."
+    },
+    "DeleteHierarchyStatus": {
+      "type": "string",
+      "enum": [
+        "NotStarted",
+        "Succeeded",
+        "Failed",
+        "Running"
+      ],
+      "x-ms-enum": {
+        "name": "DeleteHierarchyOperationStatus",
+        "modelAsString": true
+      },
+      "title": "DeleteHierarchyOperationStatus",
+      "description": "Enum of the status of delete hierarchy operation."
     },
     "LastModifiedTS": {
       "type": "string",
