@@ -164,10 +164,6 @@ namespace AzureMessagingEventGrid {
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive")
   @post op ReceiveBatchOfCloudEvents is Azure.Core.RpcOperation<{
-    @doc("content type")
-    @header("content-type")
-    contentType: "application/json; charset=utf-8";
-
     @doc("Topic Name.")
     @path
     topicName: string;
