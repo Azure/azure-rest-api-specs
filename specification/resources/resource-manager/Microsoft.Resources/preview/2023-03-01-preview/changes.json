@@ -276,6 +276,62 @@
       "description": "An individual change on the target resource",
       "type": "object",
       "properties": {
+        "propertyChangeType": {
+          "description": "The type of change that occurred",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "Insert",
+            "Update",
+            "Remove"
+          ],
+          "x-ms-enum": {
+            "name": "PropertyChangeType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Update",
+                "description": "An existing property underwent a change",
+                "name": "Update"
+              },
+              {
+                "value": "Insert",
+                "description": "A property was newly created",
+                "name": "Insert"
+              },
+              {
+                "value": "Remove",
+                "description": "An existing property was deleted",
+                "name": "Remove"
+              }
+            ]
+          }
+        },
+        "changeCategory": {
+          "description": "The entity that made the change",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "User",
+            "System"
+          ],
+          "x-ms-enum": {
+            "name": "ChangeCategory",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "User",
+                "description": "User initiated change",
+                "name": "User"
+              },
+              {
+                "value": "System",
+                "description": "System initiated change",
+                "name": "System"
+              }
+            ]
+          }
+        },
         "previousValue": {
           "description": "The target resource property value before the change",
           "type": "string",
