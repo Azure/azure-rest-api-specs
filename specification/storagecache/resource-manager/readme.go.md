@@ -15,11 +15,9 @@ module-name: sdk/resourcemanager/storagecache/armstoragecache
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+modelerfour:
+  lenient-model-deduplication: true
 directive:
-  - from: amlfilesystem.json
-    where: $.definitions.CacheIdentity.properties
-    transform: >
-      $['userAssignedIdentities']['$ref'] = "amlfilesystem.json#/definitions/UserAssignedIdentities";
   - from: swagger-document
     where: $.definitions.StorageTargetProperties.properties.provisioningState
     transform: >
