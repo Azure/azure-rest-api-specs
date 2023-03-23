@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-05-01",
+    "version": "2023-03-01-preview",
     "title": "ChangesClient",
     "description": "The Resource Changes Client"
   },
@@ -256,6 +256,11 @@
         "newResourceSnapshotId": {
           "description": "The GUID of the new snapshot",
           "type": "string",
+          "readOnly": true
+        },
+        "isTruncated": {
+          "description": "The flag indicating whether property changes dictionary was truncated in this resource",
+          "type": "boolean",
           "readOnly": true
         }
       }
