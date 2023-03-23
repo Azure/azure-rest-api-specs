@@ -53,7 +53,7 @@
             "name": "X-API-Key",
             "in": "header",
             "required": true,
-            "description": "Api Key parameter from header"
+            "description": "Use Api key provided by Marketplace Catalog Team as a parameter provided in the header"
           }
         ],
         "responses": {
@@ -64,7 +64,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "description": "*** Error Responses: ***\n\n * 400 - In case of a misconfigured request.\n\n * 500 - In case of internal error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -133,7 +133,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 - In case request malformed.\n\n * 500 - In case internal error.",
+            "description": "*** Error Responses: ***\n\n * 400 - In case of a misconfigured request.\n\n * 500 - In case of internal error.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -151,7 +151,7 @@
       ],
       "properties": {
         "error": {
-          "description": "The search error response details",
+          "description": "The Rating and Reviews error response details",
           "$ref": "#/definitions/ErrorResponseDetails"
         }
       }
@@ -175,6 +175,7 @@
       }
     },
     "PageResultOfReviewDto": {
+      "description": "Response page composed of a list of Reviews together with a next page link",
       "type": "object",
       "required": [
         "count"
@@ -200,6 +201,7 @@
       }
     },
     "ReviewDto": {
+      "description": "The Review object",
       "type": "object",
       "required": [
         "rating",
@@ -219,7 +221,7 @@
         },
         "rating": {
           "type": "number",
-          "description": "Review Rating"
+          "description": "Review's star rating"
         },
         "title": {
           "type": "string",
@@ -260,7 +262,7 @@
           "description": "External Review Url (only for external review, i.e. G2 review)"
         },
         "isvReply": {
-          "description": "ISV Reply for this review",
+          "description": "ISV reply content for this review",
           "allOf": [
             {
               "$ref": "#/definitions/IsvReplyDto"
@@ -269,12 +271,12 @@
         },
         "createdDateTime": {
           "type": "string",
-          "description": "Created Date",
+          "description": "Review creation date",
           "format": "date-time"
         },
         "lastModifiedDateTime": {
           "type": "string",
-          "description": "Last Updated Date",
+          "description": "Review last updated date",
           "format": "date-time"
         },
         "commentsCount": {
@@ -297,7 +299,7 @@
       "properties": {
         "content": {
           "type": "string",
-          "description": "ISV Reply Content"
+          "description": "ISV reply content for this review"
         },
         "repliedDateTime": {
           "type": "string",
@@ -321,7 +323,7 @@
         },
         "count": {
           "type": "integer",
-          "description": "Total count of items",
+          "description": "The total count of items in all pages",
           "format": "int32"
         },
         "nextLink": {
