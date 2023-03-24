@@ -10110,6 +10110,7 @@
         "credential": {
           "description": "Credential info to access storage account",
           "$ref": "#/definitions/PendingUploadCredentialDto",
+          "x-ms-secret": true,
           "x-nullable": true
         },
         "storageAccountArmId": {
@@ -15959,12 +15960,6 @@
         "sasUri": {
           "format": "uri",
           "description": "Full SAS Uri, including the storage, container/blob path and SAS token",
-          "type": "string",
-          "x-nullable": true
-        },
-        "wasbsUri": {
-          "format": "uri",
-          "description": "Windows Azure Storage Blob formatted uri for mounting containers at root, a subdirectory, or a specific file\r\nexample wasbs://[container_name]@[account_name].blob.core.windows.net/[path]?sas=[sas]\r\nFor now, the URI will just be the root path ([path] will be empty).",
           "type": "string",
           "x-nullable": true
         }
