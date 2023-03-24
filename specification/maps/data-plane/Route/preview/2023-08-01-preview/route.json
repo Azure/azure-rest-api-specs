@@ -503,16 +503,12 @@
       "type": "object",
       "description": "Feature Item",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/Kind"
-        },
         "type": {
           "$ref": "#/definitions/FeaturesItemTypeEnum"
         }
       },
-      "discriminator": "kind",
+      "discriminator": "type",
       "required": [
-        "kind",
         "type"
       ]
     },
@@ -552,7 +548,7 @@
       }
     },
     "ManeuverPointFeaturesItem": {
-      "x-ms-discriminator-value": "ManeuverPoint",
+      "x-ms-discriminator-value": "Feature",
       "type": "object",
       "description": "ManeuverPoint Feature Item",
       "allOf": [
@@ -643,7 +639,7 @@
       }
     },
     "ViaWaypointFeaturesItem": {
-      "x-ms-discriminator-value": "ViaWaypoint",
+      "x-ms-discriminator-value": "Feature",
       "description": "ViaWaypoint Feature Item",
       "type": "object",
       "allOf": [
@@ -698,7 +694,7 @@
       }
     },
     "RoutePathFeaturesItem": {
-      "x-ms-discriminator-value": "RoutePath",
+      "x-ms-discriminator-value": "Feature",
       "description": "RoutePath Feature Item",
       "type": "object",
       "allOf": [
@@ -771,38 +767,6 @@
             "$ref": "#/definitions/Leg"
           }
         }
-      }
-    },
-    "Kind": {
-      "description": "kind",
-      "type": "string",
-      "readOnly": true,
-      "enum": [
-        "ManeuverPoint",
-        "ViaWaypoint",
-        "RoutePath"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "ManeuverPoint",
-            "description": "A maneuverPoint is a specific point on a route or trip where a change in direction or mode of transportation is required or recommended."
-          },
-          {
-            "value": "Waypoint",
-            "description": "A waypoint is a specific location or point along a route or trip that serves as a reference or stopping point."
-          },
-          {
-            "value": "ViaWaypoint",
-            "description": "A viaWaypoint is specific waypoint that must be passed through or visited along a route or trip."
-          },
-          {
-            "value": "RoutePath",
-            "description": "A representation of the path of a route."
-          }
-        ]
       }
     },
     "OutputPointTypeEnum": {
