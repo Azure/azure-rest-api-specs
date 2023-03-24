@@ -1794,6 +1794,42 @@
         }
       }
     },
+    "/entity/deleteHierarchy/operation/{operationGuid}/cancel": {
+      "post": {
+        "tags": [
+          "Entity"
+        ],
+        "description": "Cancel the entity delete hierarchy operation",
+        "operationId": "Entity_CancelDeleteHierarchyOperation",
+        "x-ms-examples": {
+          "Entity_CancelDeleteHierarchyOperation": {
+            "$ref": "./examples/Entity_CancelDeleteHierarchyOperationResult.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/operationGuid"
+          },
+          {
+            "$ref": "#/parameters/purviewAPIVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Return the cancel result of delete hierarchy operation.",
+            "schema": {
+              "$ref": "#/definitions/EntityDeleteHierarchyOperation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/atlas/v2/glossary": {
       "get": {
         "tags": [
@@ -8241,7 +8277,8 @@
         "NotStarted",
         "Succeeded",
         "Failed",
-        "Running"
+        "Running",
+        "Aborted"
       ],
       "x-ms-enum": {
         "name": "DeleteHierarchyOperationStatus",
