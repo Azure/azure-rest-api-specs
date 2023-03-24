@@ -151,9 +151,6 @@
       "name": "WebAppSitesController"
     },
     {
-      "name": "Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController"
-    },
-    {
       "name": "TomcatWebApplicationsController"
     },
     {
@@ -213,7 +210,11 @@
         ],
         "operationId": "Operations_List",
         "description": "List the operations for the provider",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
@@ -262,7 +263,6 @@
           "MasterSitesController"
         ],
         "operationId": "MasterSites_ListBySubscription",
-        "summary": "Get all the sites in the subscription.",
         "description": "Get all the sites in the subscription.",
         "parameters": [
           {
@@ -315,39 +315,11 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy",
-        "summary": "Gets the private endpoint connection proxy.",
-        "description": "Gets the private endpoint connection proxy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody"
-            }
-          }
-        }
-      },
       "put": {
         "tags": [
           "PrivateEndpointConnectionProxyController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_PutPrivateEndpointConnectionProxy",
-        "summary": "Gets the private endpoint connection proxy.",
+        "operationId": "PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy",
         "description": "Gets the private endpoint connection proxy.",
         "parameters": [
           {
@@ -449,7 +421,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSites_PutSite",
+        "operationId": "HyperVSites_CreateSite",
         "description": "Create a HyperVSite",
         "parameters": [
           {
@@ -491,7 +463,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSites_PatchSite",
+        "operationId": "HyperVSites_UpdateSite",
         "description": "Update a HyperVSite",
         "parameters": [
           {
@@ -514,7 +486,7 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "description": "Job body with updated properties.",
+            "description": "The resource properties to be updated.",
             "schema": {
               "$ref": "#/definitions/HyperVSiteUpdate"
             }
@@ -568,7 +540,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ClientGroupsMembersAsync",
+        "operationId": "HyperVDependencyMapController_ClientGroupMembersAsync",
         "description": "API to list client group members for the selected client group.",
         "parameters": [
           {
@@ -620,7 +592,7 @@
         "tags": [
           "HyperVClusterController"
         ],
-        "operationId": "HyperVCluster_GetAllClustersInSite",
+        "operationId": "HyperVCluster_ListAllClustersInSite",
         "description": "List HyperVCluster resources by HyperVSite",
         "parameters": [
           {
@@ -764,7 +736,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSitesController_ErrorSummary",
+        "operationId": "HyperVSitesController_GetErrorSummary",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -806,7 +778,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ExportDependencies",
+        "operationId": "HyperVDependencyMapController_ExportDependencies",
         "description": "API to generate report containing agentless dependencies.",
         "parameters": [
           {
@@ -858,7 +830,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVSitesController_ExportMachineErrors",
+        "operationId": "HyperVSitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
         "parameters": [
           {
@@ -910,7 +882,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateCoarseMapAsync",
+        "operationId": "HyperVDependencyMapController_GenerateCoarseMapAsync",
         "description": "API to generate coarse map for the list of machines.",
         "parameters": [
           {
@@ -962,7 +934,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_GenerateDetailedMapAsync",
+        "operationId": "HyperVDependencyMapController_GenerateDetailedMapAsync",
         "description": "API to generate detailed map for a selected machine.",
         "parameters": [
           {
@@ -1014,7 +986,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSites_GetSiteHealthSummary",
+        "operationId": "HyperVSites_ListSiteHealthSummary",
         "description": "Method to get site health summary.",
         "parameters": [
           {
@@ -1049,7 +1021,7 @@
         "tags": [
           "HyperVHostController"
         ],
-        "operationId": "HyperVHost_GetAllHostsInSite",
+        "operationId": "HyperVHost_ListAllHostsInSite",
         "description": "List HyperVHost resources by HyperVSite",
         "parameters": [
           {
@@ -1134,7 +1106,7 @@
         "tags": [
           "HyperVHostController"
         ],
-        "operationId": "HyperVHost_PutHost",
+        "operationId": "HyperVHost_CreateHost",
         "description": "Create a HyperVHost",
         "parameters": [
           {
@@ -1193,7 +1165,7 @@
         "tags": [
           "HyperVJobs"
         ],
-        "operationId": "HyperVJobs_GetAllJobsInSite",
+        "operationId": "HyperVJobs_ListAllJobsInSite",
         "description": "List HyperVJob resources by HyperVSite",
         "parameters": [
           {
@@ -1273,7 +1245,7 @@
         "tags": [
           "HypervMachinesController"
         ],
-        "operationId": "HyperVMachines_GetAllMachinesInSite",
+        "operationId": "HyperVMachines_ListAllMachinesInSite",
         "description": "List HyperVMachine resources by HyperVSite",
         "parameters": [
           {
@@ -1383,7 +1355,7 @@
         "tags": [
           "HypervMachinesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_GetHyperVMachineApplications",
+        "operationId": "HyperVMachinesController_GetHyperVMachineApplications",
         "description": "Method to get machine with application and roles present in it.",
         "parameters": [
           {
@@ -1425,8 +1397,7 @@
         "tags": [
           "HypervMachinesController"
         ],
-        "operationId": "HypervMachinesController_Seven10MachinesControllerGetMachineSoftwareInventory",
-        "summary": "Method to get a machines software inventory like applications and roles.",
+        "operationId": "HypervMachinesController_GetMachineSoftwareInventory",
         "description": "Method to get a machines software inventory like applications and roles.",
         "parameters": [
           {
@@ -1553,7 +1524,7 @@
         "tags": [
           "HyperVRunAsAccountsController"
         ],
-        "operationId": "HyperVRunAsAccounts_GetAllRunAsAccountsInSite",
+        "operationId": "HyperVRunAsAccounts_ListAllRunAsAccountsInSite",
         "description": "List HypervRunAsAccountResource resources by HyperVSite",
         "parameters": [
           {
@@ -1633,7 +1604,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVDependencyMapController_ServerGroupsMembersAsync",
+        "operationId": "HyperVDependencyMapController_ServerGroupsMembersAsync",
         "description": "API to list server group members for the selected server group.",
         "parameters": [
           {
@@ -1685,7 +1656,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSites_GetSiteUsage",
+        "operationId": "HyperVSites_GetSummary",
         "description": "Method to get site usage.",
         "parameters": [
           {
@@ -1720,7 +1691,7 @@
         "tags": [
           "HyperVDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewHyperVMachinesController_UpdateMachineDependencyMapStatus",
+        "operationId": "HyperVMachinesController_UpdateMachineDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\r\n            in a site.",
         "parameters": [
           {
@@ -1824,7 +1795,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSitesController_Usage",
+        "operationId": "HyperVSitesController_GetUsage",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -2057,7 +2028,7 @@
         "tags": [
           "ImportJobsController"
         ],
-        "operationId": "ImportJobsController_Deletejobs",
+        "operationId": "ImportJobsController_ListDeletejobs",
         "description": "Method to get all delete import machines job for the given site.",
         "parameters": [
           {
@@ -2092,7 +2063,7 @@
         "tags": [
           "ImportJobsController"
         ],
-        "operationId": "ImportJobsController_Deletejob",
+        "operationId": "ImportJobsController_GetDeletejob",
         "description": "Gets the delete imported machines job with the given job name.",
         "parameters": [
           {
@@ -2183,7 +2154,7 @@
         "tags": [
           "ImportJobsController"
         ],
-        "operationId": "ImportJobsController_Exportjobs",
+        "operationId": "ImportJobsController_ListExportjobs",
         "description": "Method to get all export import machines job for the given site.",
         "parameters": [
           {
@@ -2218,7 +2189,7 @@
         "tags": [
           "ImportJobsController"
         ],
-        "operationId": "ImportJobsController_Exportjob",
+        "operationId": "ImportJobsController_GetExportjobs",
         "description": "Gets the export imported machines job with the given job name.",
         "parameters": [
           {
@@ -2304,7 +2275,7 @@
         "tags": [
           "ImportJobsController"
         ],
-        "operationId": "ImportJobsController_Importjobs",
+        "operationId": "ImportJobsController_ListImportjobs",
         "description": "Method to get all import machines job for the given site.",
         "parameters": [
           {
@@ -2720,8 +2691,7 @@
         "tags": [
           "MasterSitesController"
         ],
-        "operationId": "MasterSites_PutSite",
-        "summary": "Method to create or update a site.",
+        "operationId": "MasterSites_CreateSite",
         "description": "Method to create or update a site.",
         "parameters": [
           {
@@ -2772,7 +2742,6 @@
           "MasterSitesController"
         ],
         "operationId": "MasterSites_DeleteSite",
-        "summary": "Method to delete a site.",
         "description": "Method to delete a site.",
         "parameters": [
           {
@@ -2805,8 +2774,7 @@
         "tags": [
           "MasterSitesController"
         ],
-        "operationId": "MasterSites_PatchSite",
-        "summary": "Method to update an existing site.",
+        "operationId": "MasterSites_UpdateSite",
         "description": "Method to update an existing site.",
         "parameters": [
           {
@@ -2864,8 +2832,7 @@
         "tags": [
           "ApplianceNonceController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewApplianceNonceController_CreateAndGetNonceAsync",
-        "summary": "Method to create and get Nonce.",
+        "operationId": "ApplianceNonceController_ApplianceRegistrationInfo",
         "description": "Method to create and get Nonce.",
         "parameters": [
           {
@@ -2910,7 +2877,6 @@
           "MasterSitesController"
         ],
         "operationId": "MasterSites_GetErrorSummary",
-        "summary": "Method to get error summary from master site for an appliance.",
         "description": "Method to get error summary from master site for an appliance.",
         "parameters": [
           {
@@ -2990,12 +2956,51 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateEndpointConnectionProxies/{pecProxyName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnectionProxyController"
+        ],
+        "operationId": "PrivateEndpointConnectionProxyController_GetPrivateEndpointConnectionProxy",
+        "description": "Gets the private endpoint connection proxy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string"
+          },
+          {
+            "name": "pecProxyName",
+            "in": "path",
+            "required": true,
+            "description": " Private endpoint connection proxy name.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "PrivateEndpointConnectionProxyController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy",
-        "summary": "Deletes the private endpoint connection proxy.",
+        "operationId": "PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy",
         "description": "Deletes the private endpoint connection proxy.",
         "parameters": [
           {
@@ -3048,7 +3053,7 @@
         "tags": [
           "PrivateEndpointConnectionProxyController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_GetPecProxyStatus",
+        "operationId": "PrivateEndpointConnectionProxyController_GetPecProxyStatus",
         "description": "Gets the private endpoint connection proxy.",
         "parameters": [
           {
@@ -3090,8 +3095,7 @@
         "tags": [
           "PrivateEndpointConnectionProxyController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
-        "summary": "Gets the private endpoint connection proxy.",
+        "operationId": "PrivateEndpointConnectionProxyController_ValidatePrivateEndpointConnectionProxy",
         "description": "Gets the private endpoint connection proxy.",
         "parameters": [
           {
@@ -3142,8 +3146,7 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnections",
-        "summary": "Gets the private link resource.",
+        "operationId": "PrivateEndpointConnectionController_ListPrivateEndpointConnections",
         "description": "Gets the private link resource.",
         "parameters": [
           {
@@ -3181,8 +3184,7 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_GetPrivateEndpointConnection",
-        "summary": "Gets the private link resource.",
+        "operationId": "PrivateEndpointConnectionController_GetPrivateEndpointConnection",
         "description": "Gets the private link resource.",
         "parameters": [
           {
@@ -3222,8 +3224,7 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
-        "summary": "Deletes the private link resource.",
+        "operationId": "PrivateEndpointConnectionController_DeletePrivateEndpointConnection",
         "description": "Deletes the private link resource.",
         "parameters": [
           {
@@ -3263,8 +3264,7 @@
         "tags": [
           "PrivateEndpointConnectionController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateEndpointConnectionController_PutPrivateEndpointConnection",
-        "summary": "Gets the private link resource.",
+        "operationId": "PrivateEndpointConnectionController_CreatePrivateEndpointConnection",
         "description": "Gets the private link resource.",
         "parameters": [
           {
@@ -3315,8 +3315,7 @@
         "tags": [
           "PrivateLinkResourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResources",
-        "summary": "Gets the private link resource.",
+        "operationId": "PrivateLinkResourcesController_GetPrivateLinkResources",
         "description": "Gets the private link resource.",
         "parameters": [
           {
@@ -3354,8 +3353,7 @@
         "tags": [
           "PrivateLinkResourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_07_07PrivateLinkResourcesController_GetPrivateLinkResource",
-        "summary": "Gets the private link resource.",
+        "operationId": "PrivateLinkResourcesController_GetPrivateLinkResource",
         "description": "Gets the private link resource.",
         "parameters": [
           {
@@ -3397,8 +3395,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSites",
-        "summary": "Method to get all sites.",
+        "operationId": "SqlSitesController_GetSites",
         "description": "Method to get all sites.",
         "parameters": [
           {
@@ -3436,8 +3433,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSite",
-        "summary": "Method to get a site.",
+        "operationId": "SqlSitesController_GetSite",
         "description": "Method to get a site.",
         "parameters": [
           {
@@ -3477,8 +3473,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_DeleteSite",
-        "summary": "Deletes the SQL site.",
+        "operationId": "SqlSitesController_DeleteSite",
         "description": "Deletes the SQL site.",
         "parameters": [
           {
@@ -3529,8 +3524,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PutSite",
-        "summary": "Method to create a SQL site.",
+        "operationId": "SqlSitesController_CreateSite",
         "description": "Method to create a SQL site.",
         "parameters": [
           {
@@ -3579,8 +3573,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_PatchSite",
-        "summary": "Method to update an existing site.",
+        "operationId": "SqlSitesController_UpdateSite",
         "description": "Method to update an existing site.",
         "parameters": [
           {
@@ -3645,7 +3638,7 @@
         "tags": [
           "SqlDiscoverySiteDataSourceController"
         ],
-        "operationId": "SqlDiscoverySiteDataSource_GetAllSqlDiscoverySiteDataSourcesInSite",
+        "operationId": "SqlDiscoverySiteDataSourceController_ListSqlDiscoverySiteDataSourcesInSite",
         "description": "List SqlDiscoverySiteDataSourceResource resources by SqlSite",
         "parameters": [
           {
@@ -3690,7 +3683,7 @@
         "tags": [
           "SqlDiscoverySiteDataSourceController"
         ],
-        "operationId": "SqlDiscoverySiteDataSource_GetSqlDiscoverySiteDataSource",
+        "operationId": "SqlDiscoverySiteDataSourceController_GetSqlDiscoverySiteDataSource",
         "description": "Get a SqlDiscoverySiteDataSourceResource",
         "parameters": [
           {
@@ -3737,7 +3730,7 @@
         "tags": [
           "SqlDiscoverySiteDataSourceController"
         ],
-        "operationId": "SqlDiscoverySiteDataSource_PutSqlDiscoverySiteDataSource",
+        "operationId": "SqlDiscoverySiteDataSourceController_CreateSqlDiscoverySiteDataSource",
         "description": "Create a SqlDiscoverySiteDataSourceResource",
         "parameters": [
           {
@@ -3801,7 +3794,7 @@
         "tags": [
           "SqlDiscoverySiteDataSourceController"
         ],
-        "operationId": "SqlDiscoverySiteDataSource_DeleteSqlDiscoverySiteDataSource",
+        "operationId": "SqlDiscoverySiteDataSourceController_DeleteSqlDiscoverySiteDataSource",
         "description": "Delete a SqlDiscoverySiteDataSourceResource",
         "parameters": [
           {
@@ -3856,8 +3849,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteErrorSummary",
-        "summary": "Method to get error summary from SQL site.",
+        "operationId": "SqlSitesController_GetSiteErrorSummary",
         "description": "Method to get error summary from SQL site.",
         "parameters": [
           {
@@ -3906,8 +3898,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_ExportSqlServers",
-        "summary": "Method to generate report containing SQL servers.",
+        "operationId": "SqlSitesController_ExportSqlServers",
         "description": "Method to generate report containing SQL servers.",
         "parameters": [
           {
@@ -4020,8 +4011,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_RefreshSite",
-        "summary": "Method to refresh a site.",
+        "operationId": "SqlSitesController_RefreshSite",
         "description": "Method to refresh a site.",
         "parameters": [
           {
@@ -4088,7 +4078,7 @@
         "tags": [
           "SqlRunAsAccountsController"
         ],
-        "operationId": "SqlRunAsAccounts_GetAllRunAsAccountsInSite",
+        "operationId": "SqlRunAsAccounts_ListAllRunAsAccountsInSite",
         "description": "List SqlRunAsAccountResource resources by SqlSite",
         "parameters": [
           {
@@ -4182,8 +4172,7 @@
         "tags": [
           "SqlAvailabilityGroupController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroups",
-        "summary": "Gets the sql availability groups.",
+        "operationId": "SqlAvailabilityGroupController_GetSqlAvailabilityGroups",
         "description": "Gets the sql availability groups.",
         "parameters": [
           {
@@ -4257,8 +4246,7 @@
         "tags": [
           "SqlAvailabilityGroupController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlAvailabilityGroupController_GetSqlAvailabilityGroup",
-        "summary": "Gets the sql availability group.",
+        "operationId": "SqlAvailabilityGroupController_GetSqlAvailabilityGroup",
         "description": "Gets the sql availability group.",
         "parameters": [
           {
@@ -4307,8 +4295,7 @@
         "tags": [
           "SqlDatabasesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabases",
-        "summary": "Gets the sql Databases.",
+        "operationId": "SqlDatabasesController_GetSqlDatabases",
         "description": "Gets the sql Databases.",
         "parameters": [
           {
@@ -4382,8 +4369,7 @@
         "tags": [
           "SqlDatabasesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlDatabasesController_GetSqlDatabase",
-        "summary": "Gets the sql Database.",
+        "operationId": "SqlDatabasesController_GetSqlDatabase",
         "description": "Gets the sql Database.",
         "parameters": [
           {
@@ -4432,9 +4418,9 @@
         "tags": [
           "SqlJobsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJobs",
+        "operationId": "SqlJobsController_GetSqlJobs",
         "summary": "Gets the sql Jobs.",
-        "description": "Gets the sql Jobs.",
+        "description": "List SqlJob resources by SqlSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4478,9 +4464,9 @@
         "tags": [
           "SqlJobsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlJobsController_GetSqlJob",
+        "operationId": "SqlJobsController_GetSqlJob",
         "summary": "Gets the sql Job.",
-        "description": "Gets the sql Job.",
+        "description": "Get a SqlJob",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -4528,8 +4514,7 @@
         "tags": [
           "SqlServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServers",
-        "summary": "Gets the sql servers.",
+        "operationId": "SqlServersController_GetSqlServers",
         "description": "Gets the sql servers.",
         "parameters": [
           {
@@ -4603,8 +4588,7 @@
         "tags": [
           "SqlServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlServersController_GetSqlServer",
-        "summary": "Gets the sql server.",
+        "operationId": "SqlServersController_GetSqlServer",
         "description": "Gets the sql server.",
         "parameters": [
           {
@@ -4653,7 +4637,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewSqlSitesController_GetSiteUsage",
+        "operationId": "SqlSitesController_GetSummary",
         "description": "Method to get site usage/summary.",
         "parameters": [
           {
@@ -4695,8 +4679,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSites",
-        "summary": "Method to get all sites.",
+        "operationId": "WebAppSitesController_GetSites",
         "description": "Method to get all sites.",
         "parameters": [
           {
@@ -4734,8 +4717,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSite",
-        "summary": "Method to get a site.",
+        "operationId": "WebAppSitesController_GetSite",
         "description": "Method to get a site.",
         "parameters": [
           {
@@ -4775,8 +4757,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_DeleteSite",
-        "summary": "Deletes the WebApp site.",
+        "operationId": "WebAppSitesController_DeleteSite",
         "description": "Deletes the WebApp site.",
         "parameters": [
           {
@@ -4825,11 +4806,9 @@
       },
       "put": {
         "tags": [
-          "WebAppSitesController",
-          "Microsoft.Azure.FDS.WebRole.V2020_11_11_preview.WebAppSitesController"
+          "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PutSite",
-        "summary": "Method to create a WebApp site.",
+        "operationId": "WebAppSitesController_CreateSite",
         "description": "Method to create a WebApp site.",
         "parameters": [
           {
@@ -4878,8 +4857,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_PatchSite",
-        "summary": "Method to update an existing site.",
+        "operationId": "WebAppSitesController_UpdateSite",
         "description": "Method to update an existing site.",
         "parameters": [
           {
@@ -4944,8 +4922,7 @@
         "tags": [
           "WebAppDiscoverySiteDataSourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSources",
-        "summary": "Method to get all Web app data sources in site.",
+        "operationId": "WebAppDiscoverySiteDataSourceController_GetDataSources",
         "description": "Method to get all Web app data sources in site.",
         "parameters": [
           {
@@ -4990,8 +4967,7 @@
         "tags": [
           "WebAppDiscoverySiteDataSourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_GetDataSource",
-        "summary": "Method to get a Web app data source in site.",
+        "operationId": "WebAppDiscoverySiteDataSourceController_GetDataSource",
         "description": "Method to get a Web app data source in site.",
         "parameters": [
           {
@@ -5038,8 +5014,7 @@
         "tags": [
           "WebAppDiscoverySiteDataSourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_DeleteDataSource",
-        "summary": "Method to delete a Web app data source in site.",
+        "operationId": "WebAppDiscoverySiteDataSourceController_DeleteDataSource",
         "description": "Method to delete a Web app data source in site.",
         "parameters": [
           {
@@ -5097,8 +5072,7 @@
         "tags": [
           "WebAppDiscoverySiteDataSourcesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppDiscoverySiteDataSourceController_PutDataSource",
-        "summary": "Method to create or update a Web app data source in site.",
+        "operationId": "WebAppDiscoverySiteDataSourceController_CreateDataSource",
         "description": "Method to create or update a Web app data source in site.",
         "parameters": [
           {
@@ -5164,8 +5138,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteErrorSummary",
-        "summary": "Method to get error summary from web app site.",
+        "operationId": "WebAppSitesController_GetSiteErrorSummary",
         "description": "Method to get error summary from web app site.",
         "parameters": [
           {
@@ -5214,7 +5187,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_ExportWebAppInventory",
+        "operationId": "WebAppSitesController_ExportInventory",
         "description": "Method to generate report containing web app inventory.",
         "parameters": [
           {
@@ -5271,8 +5244,7 @@
         "tags": [
           "WebAppExtendedMachinesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtensions",
-        "summary": "Method to get all extended machines.",
+        "operationId": "WebAppExtendedMachinesController_GetMachineExtensions",
         "description": "Method to get all extended machines.",
         "parameters": [
           {
@@ -5346,8 +5318,7 @@
         "tags": [
           "WebAppExtendedMachinesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppExtendedMachinesController_GetMachineExtension",
-        "summary": "Method to get a extended machine.",
+        "operationId": "WebAppExtendedMachinesController_GetMachineExtension",
         "description": "Method to get a extended machine.",
         "parameters": [
           {
@@ -5396,8 +5367,7 @@
         "tags": [
           "IISWebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplications",
-        "summary": "Method to get all IIS web application.",
+        "operationId": "IisWebApplicationsController_GetWebApplications",
         "description": "Method to get all IIS web application.",
         "parameters": [
           {
@@ -5471,8 +5441,7 @@
         "tags": [
           "IISWebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebApplicationsController_GetWebApplication",
-        "summary": "Method to get an IIS web application.",
+        "operationId": "IisWebApplicationsController_GetWebApplication",
         "description": "Method to get an IIS web application.",
         "parameters": [
           {
@@ -5521,8 +5490,7 @@
         "tags": [
           "IISWebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServers",
-        "summary": "Method to get all IIS web servers.",
+        "operationId": "IisWebServersController_GetWebServers",
         "description": "Method to get all IIS web servers.",
         "parameters": [
           {
@@ -5596,8 +5564,7 @@
         "tags": [
           "IISWebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewIisWebServersController_GetWebServer",
-        "summary": "Method to get an IIS web server.",
+        "operationId": "IisWebServersController_GetWebServer",
         "description": "Method to get an IIS web server.",
         "parameters": [
           {
@@ -5646,8 +5613,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_RefreshSite",
-        "summary": "Method to refresh a site.",
+        "operationId": "WebAppSitesController_RefreshSite",
         "description": "Method to refresh a site.",
         "parameters": [
           {
@@ -5714,8 +5680,7 @@
         "tags": [
           "WebAppRunAsAccountsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccounts",
-        "summary": "Method to get all run as accounts.",
+        "operationId": "WebAppRunAsAccountsController_GetRunAsAccounts",
         "description": "Method to get all run as accounts.",
         "parameters": [
           {
@@ -5760,8 +5725,7 @@
         "tags": [
           "WebAppRunAsAccountsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppRunAsAccountsController_GetRunAsAccount",
-        "summary": "Method to get run as account.",
+        "operationId": "WebAppRunAsAccountsController_GetRunAsAccount",
         "description": "Method to get run as account.",
         "parameters": [
           {
@@ -5810,7 +5774,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppSitesController_GetSiteUsage",
+        "operationId": "WebAppSitesController_GetSummary",
         "description": "Method to get site usage/summary.",
         "parameters": [
           {
@@ -5852,8 +5816,7 @@
         "tags": [
           "TomcatWebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplications",
-        "summary": "Method to get all Tomcat web application.",
+        "operationId": "TomcatWebApplicationsController_GetWebApplications",
         "description": "Method to get all Tomcat web application.",
         "parameters": [
           {
@@ -5927,8 +5890,7 @@
         "tags": [
           "TomcatWebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebApplicationsController_GetWebApplication",
-        "summary": "Method to get an Tomcat web application.",
+        "operationId": "TomcatWebApplicationsController_GetWebApplication",
         "description": "Method to get an Tomcat web application.",
         "parameters": [
           {
@@ -5977,8 +5939,7 @@
         "tags": [
           "TomcatWebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServers",
-        "summary": "Method to get all Tomcat web servers.",
+        "operationId": "TomcatWebServersController_GetWebServers",
         "description": "Method to get all Tomcat web servers.",
         "parameters": [
           {
@@ -6052,8 +6013,7 @@
         "tags": [
           "TomcatWebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewTomcatWebServersController_GetWebServer",
-        "summary": "Method to get an Tomcat web server.",
+        "operationId": "TomcatWebServersController_GetWebServer",
         "description": "Method to get an Tomcat web server.",
         "parameters": [
           {
@@ -6102,8 +6062,7 @@
         "tags": [
           "WebAppPropertiesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebAppPropertiesController_UpdateWebApplicationProperty",
-        "summary": "Method to update properties for web applications.\n            in a site.",
+        "operationId": "WebAppPropertiesController_UpdateProperties",
         "description": "Method to update properties for web applications.\n            in a site.",
         "parameters": [
           {
@@ -6162,8 +6121,7 @@
         "tags": [
           "WebApplicationsController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebApplicationsController_GetWebApplications",
-        "summary": "Method to get all IIS web applications.",
+        "operationId": "WebApplicationsController_GetWebApplications",
         "description": "Method to get all IIS web applications.",
         "parameters": [
           {
@@ -6237,8 +6195,7 @@
         "tags": [
           "WebServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_11_11_PreviewWebServersController_GetWebServers",
-        "summary": "Method to get all web servers.",
+        "operationId": "WebServersController_GetWebServers",
         "description": "Method to get all web servers.",
         "parameters": [
           {
@@ -6472,7 +6429,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ClientGroupsMembersAsync",
+        "operationId": "ServerDependencyMapController_ClientGroupsMembersAsync",
         "description": "API to list client group members for the selected client group.",
         "parameters": [
           {
@@ -6524,7 +6481,7 @@
         "tags": [
           "ServersController"
         ],
-        "operationId": "ServersController_ErrorSummary",
+        "operationId": "ServersController_GetErrorSummary",
         "description": "Get the error summary for a server site.",
         "parameters": [
           {
@@ -6559,7 +6516,7 @@
         "tags": [
           "ServerSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportAppsAndRoles",
+        "operationId": "ServerSitesController_ExportAppsAndRoles",
         "description": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
         "parameters": [
           {
@@ -6605,7 +6562,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ExportDependencies",
+        "operationId": "ServerDependencyMapController_ExportDependencies",
         "description": "API to generate report containing agentless dependencies.",
         "parameters": [
           {
@@ -6657,7 +6614,7 @@
         "tags": [
           "ServerSitesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerSitesController_ExportMachineErrors",
+        "operationId": "ServerSitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
         "parameters": [
           {
@@ -6709,7 +6666,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateCoarseMapAsync",
+        "operationId": "ServerDependencyMapController_GenerateCoarseMapAsync",
         "description": "API to generate coarse map for the list of machines.",
         "parameters": [
           {
@@ -6761,7 +6718,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_GenerateDetailedMapAsync",
+        "operationId": "ServerDependencyMapController_GenerateDetailedMapAsync",
         "description": "API to generate detailed map for a selected machine.",
         "parameters": [
           {
@@ -6813,7 +6770,7 @@
         "tags": [
           "ServerSitesController"
         ],
-        "operationId": "ServerSitesController_GetSiteHealthSummary",
+        "operationId": "ServerSitesController_ListSiteHealthSummary",
         "description": "Method to get site health summary.",
         "parameters": [
           {
@@ -7102,7 +7059,7 @@
         "tags": [
           "ServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_GetHyperVMachineApplications",
+        "operationId": "ServersController_GetHyperVMachineApplications",
         "description": "Method to get machine with application and roles present in it.",
         "parameters": [
           {
@@ -7145,7 +7102,6 @@
           "ServersController"
         ],
         "operationId": "ServersController_GetServerSoftwareInventory",
-        "summary": "Method to get a machines software inventory like applications and roles.",
         "description": "Method to get a machines software inventory like applications and roles.",
         "parameters": [
           {
@@ -7352,7 +7308,7 @@
         "tags": [
           "ServerDependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServerDependencyMapController_ServerGroupsMembersAsync",
+        "operationId": "ServerDependencyMapController_ServerGroupMembersAsync",
         "description": "API to list server group members for the selected server group.",
         "parameters": [
           {
@@ -7439,7 +7395,7 @@
         "tags": [
           "ServersController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewServersController_UpdateMachineDependencyMapStatus",
+        "operationId": "ServersController_UpdateDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\r\n            in a site.",
         "parameters": [
           {
@@ -7543,7 +7499,7 @@
         "tags": [
           "ServersController"
         ],
-        "operationId": "ServersController_Usage",
+        "operationId": "ServerSiteResource_GetUsage",
         "description": "Get a serve site usage.",
         "parameters": [
           {
@@ -7610,7 +7566,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_GetSite",
+        "operationId": "Sites_Get",
         "description": "Get a VMwareSite",
         "parameters": [
           {
@@ -7643,7 +7599,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_DeleteSite",
+        "operationId": "Sites_Delete",
         "description": "Delete a VMwareSite",
         "parameters": [
           {
@@ -7676,7 +7632,7 @@
         "tags": [
           "VmwareSites"
         ],
-        "operationId": "Sites_PutSite",
+        "operationId": "Sites_CreateSite",
         "description": "Create a VMwareSite",
         "parameters": [
           {
@@ -7718,7 +7674,7 @@
         "tags": [
           "VmwareSites"
         ],
-        "operationId": "Sites_PatchSite",
+        "operationId": "Sites_UpdateSite",
         "description": "Update a VMwareSite",
         "parameters": [
           {
@@ -7741,7 +7697,7 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "description": " body with updated properties.",
+            "description": "The resource properties to be updated.",
             "schema": {
               "$ref": "#/definitions/VMwareSiteUpdate"
             }
@@ -7762,7 +7718,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ClientGroupsMembersAsync",
+        "operationId": "DependencyMapController_ClientGroupsMembersAsync",
         "description": "API to list client group members for the selected client group.",
         "parameters": [
           {
@@ -7814,7 +7770,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_ErrorSummary",
+        "operationId": "Sites_GetErrorSummary",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -7849,7 +7805,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles",
+        "operationId": "SitesController_ExportAppsAndRoles",
         "description": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
         "parameters": [
           {
@@ -7892,7 +7848,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ExportDependencies",
+        "operationId": "DependencyMapController_ExportDependencies",
         "description": "API to generate report containing agentless dependencies.",
         "parameters": [
           {
@@ -7944,7 +7900,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors",
+        "operationId": "SitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
         "parameters": [
           {
@@ -8042,7 +7998,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_GenerateCoarseMapAsync",
+        "operationId": "DependencyMapController_GenerateCoarseMapAsync",
         "description": "API to generate coarse map for the list of machines.",
         "parameters": [
           {
@@ -8094,7 +8050,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_08_01_PreviewDependencyMapController_GenerateDetailedMapAsync",
+        "operationId": "DependencyMapController_GenerateDetailedMapAsync",
         "description": "API to generate detailed map for a selected machine.",
         "parameters": [
           {
@@ -8146,7 +8102,7 @@
         "tags": [
           "VmwareSites"
         ],
-        "operationId": "Sites_GetSiteHealthSummary",
+        "operationId": "Sites_ListSiteHealthSummary",
         "description": "Method to get site health summary.",
         "parameters": [
           {
@@ -8261,7 +8217,7 @@
         "tags": [
           "JobsController"
         ],
-        "operationId": "Jobs_GetAllJobsInSite",
+        "operationId": "Jobs_ListAllJobsInSite",
         "description": "List VmwareJobResource resources by VMwareSite",
         "parameters": [
           {
@@ -8341,7 +8297,7 @@
         "tags": [
           "MachinesController"
         ],
-        "operationId": "Machines_GetAllMachinesInSite",
+        "operationId": "Machines_ListllMachinesInSite",
         "description": "List MachineResource resources by VMwareSite",
         "parameters": [
           {
@@ -8493,8 +8449,7 @@
         "tags": [
           "MachinesController"
         ],
-        "operationId": "MachinesController_Seven10MachinesControllerGetMachineSoftwareInventory",
-        "summary": "Method to get a machines software inventory like applications and roles.",
+        "operationId": "MachinesController_GetMachineSoftwareInventory",
         "description": "Method to get a machines software inventory like applications and roles.",
         "parameters": [
           {
@@ -8678,7 +8633,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_RefreshSite",
+        "operationId": "Sites_Refresh",
         "description": "Method to refresh a site.",
         "parameters": [
           {
@@ -8721,7 +8676,7 @@
         "tags": [
           "RunAsAccountsController"
         ],
-        "operationId": "RunAsAccounts_GetAllRunAsAccountsInSite",
+        "operationId": "RunAsAccounts_ListAllRunAsAccountsInSite",
         "description": "List VmwareRunAsAccountResource resources by VMwareSite",
         "parameters": [
           {
@@ -8801,7 +8756,7 @@
         "tags": [
           "DependencyMapController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01_PreviewDependencyMapController_ServerGroupsMembersAsync",
+        "operationId": "DependencyMapController_ServerGroupsMembersAsync",
         "description": "API to list server group members for the selected server group.",
         "parameters": [
           {
@@ -8888,7 +8843,7 @@
         "tags": [
           "VMwarePropertiesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus",
+        "operationId": "MwarePropertiesController_UpdateMachineDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\n            in a\nsite.",
         "parameters": [
           {
@@ -9096,7 +9051,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_Usage",
+        "operationId": "VMwareSitesController_GetUsage",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -9131,7 +9086,7 @@
         "tags": [
           "VCenterController"
         ],
-        "operationId": "VCenter_GetAllVCentersInSite",
+        "operationId": "VCenter_ListVCentersInSite",
         "description": "List VCenter resources by VMwareSite",
         "parameters": [
           {
@@ -9216,7 +9171,7 @@
         "tags": [
           "VCenterController"
         ],
-        "operationId": "VCenter_PutVCenter",
+        "operationId": "VCenter_CreateVCenter",
         "description": "Create a VCenter",
         "parameters": [
           {
@@ -9316,7 +9271,6 @@
           "SubscriptionController"
         ],
         "operationId": "SubscriptionController_DeleteSubscription",
-        "summary": "Method to delete all sites under a subscription.",
         "description": "Method to delete all sites under a subscription.",
         "parameters": [
           {
@@ -11130,14 +11084,47 @@
         "location": {
           "type": "string",
           "description": "Gets or sets the Azure location in which Sites is created."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/HyperVSiteUpdateProperties",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "A HyperV SiteResource",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+      "description": "The type used for update operations of the HyperVSite."
+    },
+    "HyperVSiteUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
         }
-      ]
+      },
+      "description": "The updatable properties of the HyperVSite."
     },
     "HyperVSiteUsage": {
       "type": "object",
@@ -14534,41 +14521,6 @@
       },
       "description": "Class for SQL Server database properties."
     },
-    "SqlDiscovery": {
-      "type": "object",
-      "properties": {
-        "successfullyDiscoveredServerCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets number of SQL servers successfully discovered by SQL agent."
-        },
-        "totalServerCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets total number of SQL servers."
-        },
-        "sqlMetadataHydratedRunAsAccountId": {
-          "type": "string",
-          "description": "Gets or sets the run as account ID with which SQL Metadata worked successfully"
-        },
-        "sqlMetadataDiscoveryPipe": {
-          "type": "string",
-          "description": "Gets or sets the discovery pipe used for fetching SQL Server's metadata from registry."
-        },
-        "discoveryScopeStatus": {
-          "$ref": "#/definitions/DiscoveryScopeStatus",
-          "description": "Gets or sets status of partner discovery."
-        }
-      },
-      "description": "Data related to a machine's SQL discovery.",
-      "required": [
-        "successfullyDiscoveredServerCount",
-        "totalServerCount",
-        "sqlMetadataHydratedRunAsAccountId",
-        "sqlMetadataDiscoveryPipe",
-        "discoveryScopeStatus"
-      ]
-    },
     "SqlDiscoverySiteDataSourceProperties": {
       "type": "object",
       "properties": {
@@ -16163,14 +16115,47 @@
         "location": {
           "type": "string",
           "description": "Gets or sets the Azure location in which Sites is created."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/VMwareSiteUpdateProperties",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "A VMwareSite",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+      "description": "The type used for update operations of the VMwareSite."
+    },
+    "VMwareSiteUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
         }
-      ]
+      },
+      "description": "The updatable properties of the VMwareSite."
     },
     "VMwareSiteUsage": {
       "type": "object",
@@ -16690,7 +16675,7 @@
           "readOnly": true
         },
         "sqlDiscovery": {
-          "$ref": "#/definitions/SqlDiscovery",
+          "$ref": "#/definitions/SQLDiscovery",
           "description": "Gets the data related to SQL discovery.",
           "readOnly": true
         },

@@ -120,7 +120,11 @@
         ],
         "operationId": "Operations_List",
         "description": "List the operations for the provider",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
@@ -172,7 +176,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSites_PutSite",
+        "operationId": "HyperVSites_CreateSite",
         "description": "Create a HyperVSite",
         "parameters": [
           {
@@ -214,7 +218,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSites_PatchSite",
+        "operationId": "HyperVSites_UpdateSite",
         "description": "Update a HyperVSite",
         "parameters": [
           {
@@ -237,7 +241,7 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "description": "Job body with updated properties.",
+            "description": "The resource properties to be updated.",
             "schema": {
               "$ref": "#/definitions/HyperVSiteUpdate"
             }
@@ -291,7 +295,7 @@
         "tags": [
           "HyperVClusterController"
         ],
-        "operationId": "HyperVCluster_GetAllClustersInSite",
+        "operationId": "HyperVCluster_ListAllClustersInSite",
         "description": "List HyperVCluster resources by HyperVSite",
         "parameters": [
           {
@@ -435,7 +439,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSitesController_ErrorSummary",
+        "operationId": "HyperVSitesController_GetErrorSummary",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -477,7 +481,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSites_GetSiteHealthSummary",
+        "operationId": "HyperVSites_ListSiteHealthSummary",
         "description": "Method to get site health summary.",
         "parameters": [
           {
@@ -512,7 +516,7 @@
         "tags": [
           "HyperVHostController"
         ],
-        "operationId": "HyperVHost_GetAllHostsInSite",
+        "operationId": "HyperVHost_ListAllHostsInSite",
         "description": "List HyperVHost resources by HyperVSite",
         "parameters": [
           {
@@ -597,7 +601,7 @@
         "tags": [
           "HyperVHostController"
         ],
-        "operationId": "HyperVHost_PutHost",
+        "operationId": "HyperVHost_CreateHost",
         "description": "Create a HyperVHost",
         "parameters": [
           {
@@ -656,7 +660,7 @@
         "tags": [
           "HyperVJobs"
         ],
-        "operationId": "HyperVJobs_GetAllJobsInSite",
+        "operationId": "HyperVJobs_ListAllJobsInSite",
         "description": "List HyperVJob resources by HyperVSite",
         "parameters": [
           {
@@ -736,7 +740,7 @@
         "tags": [
           "HypervMachinesController"
         ],
-        "operationId": "HyperVMachines_GetAllMachinesInSite",
+        "operationId": "HyperVMachines_ListAllMachinesInSite",
         "description": "List HyperVMachine resources by HyperVSite",
         "parameters": [
           {
@@ -931,7 +935,7 @@
         "tags": [
           "HyperVRunAsAccountsController"
         ],
-        "operationId": "HyperVRunAsAccounts_GetAllRunAsAccountsInSite",
+        "operationId": "HyperVRunAsAccounts_ListAllRunAsAccountsInSite",
         "description": "List HypervRunAsAccountResource resources by HyperVSite",
         "parameters": [
           {
@@ -1011,7 +1015,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSites_GetSiteUsage",
+        "operationId": "HyperVSites_GetSummary",
         "description": "Method to get site usage.",
         "parameters": [
           {
@@ -1098,7 +1102,7 @@
         "tags": [
           "HyperVSitesController"
         ],
-        "operationId": "HyperVSitesController_Usage",
+        "operationId": "HyperVSitesController_GetUsage",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -1762,7 +1766,7 @@
         "tags": [
           "ServersController"
         ],
-        "operationId": "ServersController_ErrorSummary",
+        "operationId": "ServersController_GetErrorSummary",
         "description": "Get the error summary for a server site.",
         "parameters": [
           {
@@ -2268,7 +2272,7 @@
         "tags": [
           "ServersController"
         ],
-        "operationId": "ServersController_Usage",
+        "operationId": "ServerSiteResource_GetUsage",
         "description": "Get a serve site usage.",
         "parameters": [
           {
@@ -2335,7 +2339,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_GetSite",
+        "operationId": "Sites_Get",
         "description": "Get a VMwareSite",
         "parameters": [
           {
@@ -2368,7 +2372,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_DeleteSite",
+        "operationId": "Sites_Delete",
         "description": "Delete a VMwareSite",
         "parameters": [
           {
@@ -2401,7 +2405,7 @@
         "tags": [
           "VmwareSites"
         ],
-        "operationId": "Sites_PutSite",
+        "operationId": "Sites_CreateSite",
         "description": "Create a VMwareSite",
         "parameters": [
           {
@@ -2443,7 +2447,7 @@
         "tags": [
           "VmwareSites"
         ],
-        "operationId": "Sites_PatchSite",
+        "operationId": "Sites_UpdateSite",
         "description": "Update a VMwareSite",
         "parameters": [
           {
@@ -2466,7 +2470,7 @@
             "name": "body",
             "in": "body",
             "required": true,
-            "description": " body with updated properties.",
+            "description": "The resource properties to be updated.",
             "schema": {
               "$ref": "#/definitions/VMwareSiteUpdate"
             }
@@ -2487,7 +2491,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_ErrorSummary",
+        "operationId": "Sites_GetErrorSummary",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -2522,7 +2526,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2018_05_01_PreviewSitesController_ExportAppsAndRoles",
+        "operationId": "SitesController_ExportAppsAndRoles",
         "description": "Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.",
         "parameters": [
           {
@@ -2565,7 +2569,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2020_01_01SitesController_ExportMachineErrors",
+        "operationId": "SitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
         "parameters": [
           {
@@ -2663,7 +2667,7 @@
         "tags": [
           "VmwareSites"
         ],
-        "operationId": "Sites_GetSiteHealthSummary",
+        "operationId": "Sites_ListSiteHealthSummary",
         "description": "Method to get site health summary.",
         "parameters": [
           {
@@ -2698,7 +2702,7 @@
         "tags": [
           "JobsController"
         ],
-        "operationId": "Jobs_GetAllJobsInSite",
+        "operationId": "Jobs_ListAllJobsInSite",
         "description": "List VmwareJobResource resources by VMwareSite",
         "parameters": [
           {
@@ -2778,7 +2782,7 @@
         "tags": [
           "MachinesController"
         ],
-        "operationId": "Machines_GetAllMachinesInSite",
+        "operationId": "Machines_ListllMachinesInSite",
         "description": "List MachineResource resources by VMwareSite",
         "parameters": [
           {
@@ -3072,7 +3076,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_RefreshSite",
+        "operationId": "Sites_Refresh",
         "description": "Method to refresh a site.",
         "parameters": [
           {
@@ -3115,7 +3119,7 @@
         "tags": [
           "RunAsAccountsController"
         ],
-        "operationId": "RunAsAccounts_GetAllRunAsAccountsInSite",
+        "operationId": "RunAsAccounts_ListAllRunAsAccountsInSite",
         "description": "List VmwareRunAsAccountResource resources by VMwareSite",
         "parameters": [
           {
@@ -3230,7 +3234,7 @@
         "tags": [
           "VMwarePropertiesController"
         ],
-        "operationId": "MicrosoftAzureFdsWebRoleV2019_05_01_PreviewVMwarePropertiesController_UpdateMachineDependencyMapStatus",
+        "operationId": "MwarePropertiesController_UpdateMachineDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\n            in a\nsite.",
         "parameters": [
           {
@@ -3438,7 +3442,7 @@
         "tags": [
           "Sites"
         ],
-        "operationId": "Sites_Usage",
+        "operationId": "VMwareSitesController_GetUsage",
         "description": "Method to get site error summary.",
         "parameters": [
           {
@@ -3473,7 +3477,7 @@
         "tags": [
           "VCenterController"
         ],
-        "operationId": "VCenter_GetAllVCentersInSite",
+        "operationId": "VCenter_ListVCentersInSite",
         "description": "List VCenter resources by VMwareSite",
         "parameters": [
           {
@@ -3558,7 +3562,7 @@
         "tags": [
           "VCenterController"
         ],
-        "operationId": "VCenter_PutVCenter",
+        "operationId": "VCenter_CreateVCenter",
         "description": "Create a VCenter",
         "parameters": [
           {
@@ -3658,7 +3662,6 @@
           "SubscriptionController"
         ],
         "operationId": "SubscriptionController_DeleteSubscription",
-        "summary": "Method to delete all sites under a subscription.",
         "description": "Method to delete all sites under a subscription.",
         "parameters": [
           {
@@ -5147,14 +5150,47 @@
         "location": {
           "type": "string",
           "description": "Gets or sets the Azure location in which Sites is created."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/HyperVSiteUpdateProperties",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "A HyperV SiteResource",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+      "description": "The type used for update operations of the HyperVSite."
+    },
+    "HyperVSiteUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
         }
-      ]
+      },
+      "description": "The updatable properties of the HyperVSite."
     },
     "HyperVSiteUsage": {
       "type": "object",
@@ -7995,41 +8031,6 @@
       },
       "description": "Class for SQL Server database properties."
     },
-    "SqlDiscovery": {
-      "type": "object",
-      "properties": {
-        "successfullyDiscoveredServerCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets number of SQL servers successfully discovered by SQL agent."
-        },
-        "totalServerCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Gets or sets total number of SQL servers."
-        },
-        "sqlMetadataHydratedRunAsAccountId": {
-          "type": "string",
-          "description": "Gets or sets the run as account ID with which SQL Metadata worked successfully"
-        },
-        "sqlMetadataDiscoveryPipe": {
-          "type": "string",
-          "description": "Gets or sets the discovery pipe used for fetching SQL Server's metadata from registry."
-        },
-        "discoveryScopeStatus": {
-          "$ref": "#/definitions/DiscoveryScopeStatus",
-          "description": "Gets or sets status of partner discovery."
-        }
-      },
-      "description": "Data related to a machine's SQL discovery.",
-      "required": [
-        "successfullyDiscoveredServerCount",
-        "totalServerCount",
-        "sqlMetadataHydratedRunAsAccountId",
-        "sqlMetadataDiscoveryPipe",
-        "discoveryScopeStatus"
-      ]
-    },
     "SqlDiscoverySiteDataSourceProperties": {
       "type": "object",
       "properties": {
@@ -9253,14 +9254,47 @@
         "location": {
           "type": "string",
           "description": "Gets or sets the Azure location in which Sites is created."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/VMwareSiteUpdateProperties",
+          "x-ms-client-flatten": true
         }
       },
-      "description": "A VMwareSite",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+      "description": "The type used for update operations of the VMwareSite."
+    },
+    "VMwareSiteUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
         }
-      ]
+      },
+      "description": "The updatable properties of the VMwareSite."
     },
     "VMwareSiteUsage": {
       "type": "object",
@@ -9755,7 +9789,7 @@
           "readOnly": true
         },
         "sqlDiscovery": {
-          "$ref": "#/definitions/SqlDiscovery",
+          "$ref": "#/definitions/SQLDiscovery",
           "description": "Gets the data related to SQL discovery.",
           "readOnly": true
         },
