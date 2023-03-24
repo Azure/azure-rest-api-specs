@@ -38,8 +38,9 @@ These settings apply only when `--tag=package-2023-02-01-preview` is specified o
 ```yaml $(tag) == 'package-2023-02-01-preview'
 input-file:
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/AccessControlLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpCommunityLists.json
-  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpPrefixLists.json
+  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpCommunities.json
+  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpExtendedCommunities.json
+  - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/IpPrefixes.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/L2IsolationDomains.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/L3IsolationDomains.json
   - Microsoft.ManagedNetworkFabric/preview/2023-02-01-preview/NetworkDeviceSkus.json

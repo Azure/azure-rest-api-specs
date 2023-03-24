@@ -34,14 +34,14 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipPrefixLists/{ipPrefixListName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/{ipExtendedCommunityName}": {
       "put": {
         "tags": [
-          "IpPrefixLists"
+          "IpExtendedCommunities"
         ],
-        "operationId": "IpPrefixLists_Create",
-        "summary": "Create Ip Prefix List.",
-        "description": "Implements Ip Prefix List PUT method.",
+        "operationId": "IpExtendedCommunities_Create",
+        "summary": "Create an IP Extended Community.",
+        "description": "Implements IP Extended Community PUT method.",
         "consumes": [
           "application/json"
         ],
@@ -60,10 +60,10 @@
           },
           {
             "in": "path",
-            "name": "ipPrefixListName",
+            "name": "ipExtendedCommunityName",
             "required": true,
             "type": "string",
-            "description": "Name of the Ip Prefix List"
+            "description": "Name of the IP Extended Community"
           },
           {
             "in": "body",
@@ -71,7 +71,7 @@
             "required": true,
             "description": "Request payload.",
             "schema": {
-              "$ref": "#/definitions/IpPrefixList"
+              "$ref": "#/definitions/IpExtendedCommunity"
             }
           }
         ],
@@ -79,7 +79,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/IpPrefixList"
+              "$ref": "#/definitions/IpExtendedCommunity"
             }
           },
           "default": {
@@ -90,18 +90,18 @@
           }
         },
         "x-ms-examples": {
-          "IpPrefixLists_Create_MinimumSet_Gen": {
-            "$ref": "./examples/IpPrefixLists_Create_MinimumSet_Gen.json"
+          "IpExtendedCommunities_Create_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_Create_MaximumSet_Gen.json"
           }
         }
       },
       "get": {
         "tags": [
-          "IpPrefixLists"
+          "IpExtendedCommunities"
         ],
-        "operationId": "IpPrefixLists_Get",
-        "summary": "Gets a Ip Prefix List.",
-        "description": "Implements Ip Prefix List GET method.",
+        "operationId": "IpExtendedCommunities_Get",
+        "summary": "Gets an IP Extended Community.",
+        "description": "Implements IP Extended Community GET method.",
         "produces": [
           "application/json"
         ],
@@ -117,17 +117,17 @@
           },
           {
             "in": "path",
-            "name": "ipPrefixListName",
+            "name": "ipExtendedCommunityName",
             "required": true,
             "type": "string",
-            "description": "Name of the Ip Prefix List"
+            "description": "Name of the IP Extended Community"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/IpPrefixList"
+              "$ref": "#/definitions/IpExtendedCommunity"
             }
           },
           "default": {
@@ -138,18 +138,18 @@
           }
         },
         "x-ms-examples": {
-          "IpPrefixLists_Get_MinimumSet_Gen": {
-            "$ref": "./examples/IpPrefixLists_Get_MinimumSet_Gen.json"
+          "IpExtendedCommunities_Get_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_Get_MaximumSet_Gen.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "IpPrefixLists"
+          "IpExtendedCommunities"
         ],
-        "operationId": "IpPrefixLists_Update",
-        "summary": "Updates a Ip Prefix List.",
-        "description": "API to update certain properties of the Ip Prefix List resource.",
+        "operationId": "IpExtendedCommunities_Update",
+        "summary": "Updates the IP Extended Community.",
+        "description": "API to update certain properties of the IP Extended Community resource.",
         "consumes": [
           "application/json"
         ],
@@ -168,18 +168,18 @@
           },
           {
             "in": "path",
-            "name": "ipPrefixListName",
+            "name": "ipExtendedCommunityName",
             "required": true,
             "type": "string",
-            "description": "Name of the Ip Prefix List"
+            "description": "Name of the IP Extended Community"
           },
           {
             "in": "body",
             "name": "body",
             "required": true,
-            "description": "Ip Prefix List properties to update.",
+            "description": "IP Extended Community properties to update.",
             "schema": {
-              "$ref": "#/definitions/IpPrefixListPatch"
+              "$ref": "#/definitions/IpExtendedCommunityPatch"
             }
           }
         ],
@@ -187,7 +187,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/IpPrefixList"
+              "$ref": "#/definitions/IpExtendedCommunity"
             }
           },
           "default": {
@@ -198,18 +198,18 @@
           }
         },
         "x-ms-examples": {
-          "IpPrefixLists_Update_MinimumSet_Gen": {
-            "$ref": "./examples/IpPrefixLists_Update_MinimumSet_Gen.json"
+          "IpExtendedCommunities_Update_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_Update_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "IpPrefixLists"
+          "IpExtendedCommunities"
         ],
-        "operationId": "IpPrefixLists_Delete",
-        "summary": "Deletes a Ip Prefix List.",
-        "description": "Implements Ip Prefix List DELETE method.",
+        "operationId": "IpExtendedCommunities_Delete",
+        "summary": "Deletes the IP Extended Community.",
+        "description": "Implements IP Extended Community DELETE method.",
         "produces": [
           "application/json"
         ],
@@ -225,10 +225,10 @@
           },
           {
             "in": "path",
-            "name": "ipPrefixListName",
+            "name": "ipExtendedCommunityName",
             "required": true,
             "type": "string",
-            "description": "Name of the Ip Prefix List"
+            "description": "Name of the IP Extended Community"
           }
         ],
         "responses": {
@@ -246,17 +246,17 @@
           }
         },
         "x-ms-examples": {
-          "IpPrefixLists_Delete_MinimumSet_Gen": {
-            "$ref": "./examples/IpPrefixLists_Delete_MinimumSet_Gen.json"
+          "IpExtendedCommunities_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_Delete_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipPrefixLists": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities": {
       "get": {
-        "operationId": "IpPrefixLists_ListByResourceGroup",
-        "summary": "List IpPrefixLists by resource group.",
-        "description": "Implements IpPrefixLists list by resource group GET method.",
+        "operationId": "IpExtendedCommunities_ListByResourceGroup",
+        "summary": "List IpExtendedCommunities by resource group.",
+        "description": "Implements IpExtendedCommunities list by resource group GET method.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -270,9 +270,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all IpPrefixLists under the resource group.",
+            "description": "Lists all IpExtendedCommunities under the resource group.",
             "schema": {
-              "$ref": "#/definitions/IpPrefixListsListResult"
+              "$ref": "#/definitions/IpExtendedCommunityListResult"
             }
           },
           "default": {
@@ -286,17 +286,17 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "IpPrefixLists_ListByResourceGroup_MinimumSet_Gen": {
-            "$ref": "./examples/IpPrefixLists_ListByResourceGroup_MinimumSet_Gen.json"
+          "IpExtendedCommunities_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_ListByResourceGroup_MaximumSet_Gen.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/ipPrefixLists": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities": {
       "get": {
-        "operationId": "IpPrefixLists_ListBySubscription",
-        "summary": "List IpPrefixLists by subscription.",
-        "description": "Implements IpPrefixLists list by subscription GET method.",
+        "operationId": "IpExtendedCommunities_ListBySubscription",
+        "summary": "List IpExtendedCommunities by subscription.",
+        "description": "Implements IpExtendedCommunities list by subscription GET method.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -307,9 +307,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Lists all IpPrefixLists under the subscription.",
+            "description": "Lists all IpExtendedCommunities under the subscription.",
             "schema": {
-              "$ref": "#/definitions/IpPrefixListsListResult"
+              "$ref": "#/definitions/IpExtendedCommunityListResult"
             }
           },
           "default": {
@@ -323,15 +323,15 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "IpPrefixLists_ListBySubscription_MinimumSet_Gen": {
-            "$ref": "./examples/IpPrefixLists_ListBySubscription_MinimumSet_Gen.json"
+          "IpExtendedCommunities_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/IpExtendedCommunities_ListBySubscription_MaximumSet_Gen.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "IpPrefixListProperties": {
+    "IpExtendedCommunityProperties": {
       "type": "object",
       "allOf": [
         {
@@ -341,25 +341,16 @@
       ],
       "properties": {
         "action": {
-          "type": "string",
-          "description": "action. Example: allow | deny.",
-          "enum": [
-            "allow",
-            "deny"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "prefixActionType"
+          "description": "Action to be taken on the configuration. Example: Permit | Deny.",
+          "$ref": "./common.json#/definitions/CommunityActionTypes"
+        },
+        "routeTargets": {
+          "type": "array",
+          "description": "Route Target List.The expected formats are ASN(plain):NN >> example 4294967294:50, ASN.ASN:NN >> example 65533.65333:40, IP-address:NN >> example 10.10.10.10:65535. The possible values of ASN,NN are in range of 0-65535, ASN(plain) is in range of 0-4294967295.",
+          "items": {
+            "description": "Route Target.",
+            "type": "string"
           }
-        },
-        "sequenceNumber": {
-          "type": "integer",
-          "format": "int32",
-          "description": "sequenceNumber of the Ip Prefix List."
-        },
-        "networkAddress": {
-          "type": "string",
-          "description": "networkAddress. Example:1.1.1.0/24 | 1.1.10.10."
         },
         "provisioningState": {
           "description": "Gets the provisioning state of the resource.",
@@ -369,12 +360,11 @@
       },
       "required": [
         "action",
-        "sequenceNumber",
-        "networkAddress"
+        "routeTargets"
       ],
-      "description": "IpPrefixListProperties define the resource properties."
+      "description": "IpExtendedCommunityProperties define the resource properties."
     },
-    "IpPrefixList": {
+    "IpExtendedCommunity": {
       "type": "object",
       "x-ms-azure-resource": true,
       "allOf": [
@@ -386,43 +376,20 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Resource properties.",
-          "$ref": "#/definitions/IpPrefixListProperties"
+          "$ref": "#/definitions/IpExtendedCommunityProperties"
         }
       },
-      "required": [
-        "location",
-        "properties"
-      ],
-      "description": "The IpPrefixList resource definition."
+      "description": "The IpExtendedCommunity resource definition."
     },
-    "IpPrefixListPatch": {
+    "IpExtendedCommunityListResult": {
       "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Resource properties.",
-          "$ref": "#/definitions/IpPrefixListPatchProperties"
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "The IpPrefixList patch resource definition."
-    },
-    "IpPrefixListsListResult": {
-      "type": "object",
-      "description": "List of IpPrefixLists.",
+      "description": "List of IpExtendedCommunities.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of IpPrefixList resources.",
+          "description": "List of IpExtendedCommunities resources.",
           "items": {
-            "$ref": "#/definitions/IpPrefixList"
+            "$ref": "#/definitions/IpExtendedCommunity"
           }
         },
         "nextLink": {
@@ -431,38 +398,19 @@
         }
       }
     },
-    "IpPrefixListPatchProperties": {
+    "IpExtendedCommunityPatch": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./common.json#/definitions/AnnotationResource",
-          "description": "Common properties for annotated type."
-        }
-      ],
+      "x-ms-azure-resource": true,
       "properties": {
-        "action": {
-          "type": "string",
-          "description": "action. Example: allow | deny.",
-          "enum": [
-            "allow",
-            "deny"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "prefixActionType"
-          }
-        },
-        "sequenceNumber": {
-          "type": "integer",
-          "format": "int32",
-          "description": "sequenceNumber of the Ip Prefix List."
-        },
-        "networkAddress": {
-          "type": "string",
-          "description": "networkAddress. Example:1.1.1.0/24 | 1.1.10.10."
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
-      "description": "IpPrefixListPatchProperties define the patchable resource properties."
+      "description": "The IpExtendedCommunities patch resource definition."
     }
   },
   "parameters": {}
