@@ -858,6 +858,28 @@
         }
       }
     },
+    "SubstituteFromDefinition": {
+      "description": "Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "kind": {
+          "description": "Define whether its ConfigMap or Secret that holds the values to be used in substitution.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Name of the ConfigMap/Secret which hold the value to be used in substitution.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "optional": {
+          "description": "Indicates how the controller will handle scenarios when the referenced ConfigMap/Secret is not present on the cluster.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
     "KustomizationDefinition": {
       "description": "The Kustomization defining how to reconcile the artifact pulled by the source type on the cluster.",
       "type": "object",
@@ -911,6 +933,28 @@
           "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.",
           "type": "boolean",
           "default": false
+        },
+        "wait": {
+          "description": "Enable/disable health check for all Kubernetes objects created by this Kustomization.",
+          "type": "boolean",
+          "default": true
+        },
+        "substitute": {
+          "description": "Key/value pairs holding the variables to be substituted in this Kustomization.",
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "substituteFrom": {
+          "description": "Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/SubstituteFromDefinition"
+          },
+          "x-nullable": true
         }
       }
     },
