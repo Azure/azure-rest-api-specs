@@ -58,6 +58,9 @@ namespace AzureMessagingEventGrid {
 
     @doc("Event data specific to the event type.")
     data?: object;
+
+    @doc("Event data specific to the event type, encoded as a base64 string.")
+    data_base64?: bytes;
     
     @doc("Type of event related to the originating occurrence.")
     type: string;
@@ -66,13 +69,13 @@ namespace AzureMessagingEventGrid {
     time?: zonedDateTime;
 
     @doc("The version of the CloudEvents specification which the event uses.")
-    specVersion: string;
+    specversion: string;
 
     @doc("Identifies the schema that data adheres to.")
-    dataSchema?: string;
+    dataschema?: string;
 
     @doc("Content type of data value.")
-    dataContentType?: string;
+    datacontenttype?: string;
 
     @doc("This describes the subject of the event in the context of the event producer (identified by source).")
     subject?: string;
