@@ -135,27 +135,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "description": "Timeout for the client to use when polling the asynchronous operation.",
-                "type": "string",
-                "format": "duration"
-              },
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
-              }
-            }
-          },
           "200": {
             "description": "Success"
           },
@@ -334,9 +313,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           },
-          "202": {
-            "description": "Accepted"
-          },
           "200": {
             "description": "Success",
             "schema": {
@@ -364,7 +340,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/regions/delete": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/registries/{registryName}/deleteRegions": {
       "post": {
         "tags": [
           "RegistryManagement"
