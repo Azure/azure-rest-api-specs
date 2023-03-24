@@ -1935,22 +1935,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetwork": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules": {
       "get": {
         "tags": [
           "ManagedNetwork"
         ],
-        "description": "Gets the managed network settings of the specified machine learning workspace.",
-        "operationId": "ManagedNetworkSettings_Get",
-        "x-ms-examples": {
-          "Get ManagedNetworkSettings": {
-            "$ref": "./examples/ManagedNetwork/get.json"
-          }
-        },
+        "operationId": "ManagedNetworkSettingsRule_List",
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -1959,13 +1953,16 @@
           },
           {
             "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettings"
+              "$ref": "#/definitions/OutboundRuleListResult"
             }
           },
           "default": {
@@ -1974,24 +1971,21 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "List ManagedNetworkSettingsRule": {
+            "$ref": "./examples/ManagedNetwork/listRule.json"
+          }
         }
-      },
-      "patch": {
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}": {
+      "delete": {
         "tags": [
           "ManagedNetwork"
         ],
-        "description": "Updates a workspace managed network settings with the specified parameters.",
-        "operationId": "ManagedNetworkSettings_Update",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Update ManagedNetworkSettings": {
-            "$ref": "./examples/ManagedNetwork/patch.json"
-          }
-        },
+        "operationId": "ManagedNetworkSettingsRule_Delete",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -2002,29 +1996,84 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ManagedNetworkDto"
-            }
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request was successful; the request was well-formed and received properly.",
-            "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettings"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
             }
           },
-          "202": {
-            "description": "Accepted"
+          "204": {
+            "description": "The machine learning workspace does not exist in the subscription."
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
           },
           "default": {
             "description": "Error",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ManagedNetworkSettingsRule": {
+            "$ref": "./examples/ManagedNetwork/deleteRule.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "operationId": "ManagedNetworkSettingsRule_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ManagedNetworkSettingsRule": {
+            "$ref": "./examples/ManagedNetwork/getRule.json"
           }
         }
       },
@@ -2032,18 +2081,8 @@
         "tags": [
           "ManagedNetwork"
         ],
-        "description": "Creates or updates a workspace managed network settings with the specified parameters.",
-        "operationId": "ManagedNetworkSettings_CreateOrUpdate",
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "CreateOrUpdate ManagedNetworkSettings": {
-            "$ref": "./examples/ManagedNetwork/put.json"
-          }
-        },
+        "operationId": "ManagedNetworkSettingsRule_CreateOrUpdate",
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -2054,23 +2093,35 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
-            "name": "body",
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
             "in": "body",
+            "name": "parameters",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkDto"
+              "$ref": "#/definitions/OutboundRuleBasicResource"
             }
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
             "description": "The request was successful; the request was well-formed and received properly.",
             "schema": {
-              "$ref": "#/definitions/ManagedNetworkSettings"
+              "$ref": "#/definitions/OutboundRuleBasicResource"
             }
-          },
-          "202": {
-            "description": "Accepted"
           },
           "default": {
             "description": "Error",
@@ -2078,6 +2129,15 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate ManagedNetworkSettingsRule": {
+            "$ref": "./examples/ManagedNetwork/createOrUpdateRule.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -2111,7 +2171,7 @@
           },
           {
             "in": "body",
-            "name": "body",
+            "name": "parameters",
             "schema": {
               "$ref": "#/definitions/ManagedNetworkProvisionOptions"
             }
@@ -2124,13 +2184,6 @@
               "Location": {
                 "description": "URI to poll for asynchronous operation result.",
                 "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
               }
             }
           },
@@ -2279,6 +2332,15 @@
       "required": true,
       "type": "string",
       "description": "Friendly name of the workspace connection",
+      "x-ms-parameter-location": "method"
+    },
+    "RuleName": {
+      "name": "ruleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the workspace managed network outbound rule",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$",
       "x-ms-parameter-location": "method"
     },
     "TargetParameter": {
@@ -6366,14 +6428,15 @@
           "$ref": "#/definitions/IsolationMode"
         },
         "networkId": {
-          "format": "uuid",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "outboundRules": {
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/OutboundRule"
-          }
+          },
+          "x-nullable": true
         },
         "status": {
           "$ref": "#/definitions/ManagedNetworkProvisionStatus"
@@ -6401,6 +6464,39 @@
       "x-ms-enum": {
         "name": "IsolationMode",
         "modelAsString": true
+      }
+    },
+    "OutboundRuleBasicResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OutboundRule"
+        }
+      },
+      "additionalProperties": false
+    },
+    "OutboundRuleListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of machine learning workspaces. Since this list may be incomplete, the nextLink field should be used to request the next list of machine learning workspaces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundRuleBasicResource"
+          }
+        },
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        }
       }
     },
     "OutboundRule": {
