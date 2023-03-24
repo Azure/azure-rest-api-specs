@@ -142,7 +142,7 @@ namespace AzureMessagingEventGrid {
     @doc("Single Cloud Event being published.")
     @body 
     event: CloudEventEvent;
-  }, {} >;
+  }, void >;
 
 
   @doc("Publish Batch of Cloud Events to namespace topic.")
