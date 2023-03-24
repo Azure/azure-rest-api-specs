@@ -159,7 +159,7 @@ namespace AzureMessagingEventGrid {
     @doc("Array of Cloud Events being published.")
     @body
     events: CloudEventEvent[];
-  }, {} >;
+  }, void >;
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive")
