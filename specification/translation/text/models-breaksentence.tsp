@@ -41,7 +41,7 @@ model BreakSentenceResult {
   result: BreakSentenceItem[];
 }
 
-@doc("Elemented containing break sentence result.")
+@doc("Item containing break sentence result.")
 model BreakSentenceItem {
   @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
   detectedLanguage?: DetectedLanguage;
