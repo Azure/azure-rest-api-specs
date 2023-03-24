@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2023-03-01",
+    "replicationProtectionClusterName": "cluster12",
+    "protectionContainerName": "eastus-container",
+    "fabricName": "eastus",
+    "resourceName": "vault1",
+    "resourceGroupName": "resourceGroupPS1",
+    "subscriptionId": "c183865e-6077-46f2-a3b1-deb0f4f4650a",
+    "failoverInput": {
+      "properties": {
+        "failoverDirection": "primarytorecovery",
+        "sourceSiteOperations": "NotRequired",
+        "providerSpecificDetails": {
+          "clusterRecoveryPointId": "/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/eastus/replicationProtectionContainers/eastus-container/replicationProtectionClusters/cluster12/recoveryPoints/6777c214-7ace-4154-9a54-2a882ea42e90",
+          "individualNodeRecoveryPoints": null,
+          "instanceType": "A2A"
+        }
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationFabrics/eastus/replicationProtectionContainers/eastus-container/replicationProtectionClusters/cluster12/operationresults/bcf9605f-1611-484c-8f52-4eb0c076d0f8?api-version=2023-01-01",
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/c183865e-6077-46f2-a3b1-deb0f4f4650a/resourceGroups/resourceGroupPS1/providers/Microsoft.RecoveryServices/vaults/vault1/replicationOperationStatus/bcf9605f-1611-484c-8f52-4eb0c076d0f8?api-version=2023-01-01",
+        "Retry-After": 30
+      }
+    }
+  }
+}
