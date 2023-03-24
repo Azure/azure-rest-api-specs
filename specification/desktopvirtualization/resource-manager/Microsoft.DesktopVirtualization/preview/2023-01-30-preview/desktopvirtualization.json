@@ -5926,6 +5926,57 @@
           "$ref": "#/definitions/Time",
           "description": "Starting time for ramp up period."
         },
+        "rampUpBehavior": {
+          "enum": [
+            "None",
+            "Assigned",
+            "All"
+          ],
+          "x-ms-enum": {
+            "name": "StartupBehavior",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "The desired startup behavior during the ramp up period for personal vms in the hostpool."
+        },
+        "rampUpActionOnDisconnect": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a user disconnect during the ramp up period."
+        },
+        "rampUpMinutesToWaitOnDisconnect": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user disconnects during the ramp up period."
+        },
+        "rampUpActionOnLogoff": {
+          "enum": [
+            "None",
+            "Deallocate",
+            "Hibernate"
+          ],
+          "x-ms-enum": {
+            "name": "SessionHandlingOperation",
+            "modelAsString": true
+          },
+          "type": "string",
+          "description": "Action to be taken after a logoff during the ramp up period."
+        },
+        "rampUpMinutesToWaitOnLogoff": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the ramp up period."
+        },
         "peakStartTime": {
           "$ref": "#/definitions/Time",
           "description": "Starting time for peak period."
@@ -5933,7 +5984,8 @@
         "peakActionOnDisconnect": {
           "enum": [
             "None",
-            "Deallocate"
+            "Deallocate",
+            "Hibernate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -5951,7 +6003,8 @@
         "peakActionOnLogoff": {
           "enum": [
             "None",
-            "Deallocate"
+            "Deallocate",
+            "Hibernate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -5973,7 +6026,8 @@
         "rampDownActionOnDisconnect": {
           "enum": [
             "None",
-            "Deallocate"
+            "Deallocate",
+            "Hibernate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -5991,7 +6045,8 @@
         "rampDownActionOnLogoff": {
           "enum": [
             "None",
-            "Deallocate"
+            "Deallocate",
+            "Hibernate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -6013,7 +6068,8 @@
         "offPeakActionOnDisconnect": {
           "enum": [
             "None",
-            "Deallocate"
+            "Deallocate",
+            "Hibernate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
@@ -6031,7 +6087,8 @@
         "offPeakActionOnLogoff": {
           "enum": [
             "None",
-            "Deallocate"
+            "Deallocate",
+            "Hibernate"
           ],
           "x-ms-enum": {
             "name": "SessionHandlingOperation",
