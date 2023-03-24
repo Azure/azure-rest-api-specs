@@ -16,3 +16,8 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/scvmm/azure-mgmt-scvmm/azure/mgmt/scvmm
 ```
+
+``` yaml $(python)
+modelerfour:
+  lenient-model-deduplication: true
+```
