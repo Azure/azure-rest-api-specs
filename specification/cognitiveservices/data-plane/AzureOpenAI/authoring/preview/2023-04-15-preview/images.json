@@ -363,6 +363,7 @@
       "properties": {
         "url": {
           "type": "string",
+          "format": "url",
           "description": "The URL that provides temporary access to download the generated image."
         },
         "error": {
@@ -370,7 +371,7 @@
         }
       }
     },
-    "OperationResult": {
+    "ImageResults": {
       "title": "OperationResult",
       "description": "The result data of the operation, if successful",
       "type": "array",
@@ -408,7 +409,7 @@
           "description": "The result of the operation if the operation succeeded.",
           "properties": {
             "data": {
-              "$ref": "#/definitions/OperationResult"
+              "$ref": "#/definitions/ImageResults"
             }
           }
         },
