@@ -507,6 +507,9 @@
           },
           "DedicatedHost_Update_MinimumSet_Gen": {
             "$ref": "./examples/dedicatedHostExamples/DedicatedHost_Update_MinimumSet_Gen.json"
+          },
+          "DedicatedHost_Update_Resize": {
+            "$ref": "./examples/dedicatedHostExamples/DedicatedHost_Update_Resize.json"
           }
         }
       },
@@ -760,7 +763,7 @@
           "DedicatedHost"
         ],
         "operationId": "DedicatedHosts_ListAvailableSizes",
-        "description": "Lists all available dedicated host sizes to which the specified dedicated host can be resized.",
+        "description": "Lists all available dedicated host sizes to which the specified dedicated host can be resized. NOTE: The dedicated host sizes provided can be used to only scale up the existing dedicated host.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -774,6 +777,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the dedicated host group."
           },
           {
@@ -781,6 +785,7 @@
             "in": "path",
             "required": true,
             "type": "string",
+            "pattern": "^[-\\w\\._]+$",
             "description": "The name of the dedicated host."
           },
           {
@@ -794,7 +799,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/DedicatedHostSkuListResult"
+              "$ref": "#/definitions/DedicatedHostSizeListResult"
             }
           },
           "default": {
@@ -1085,10 +1090,15 @@
       "description": "Specifies information about the Dedicated host."
     },
     "DedicatedHostUpdate": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/DedicatedHostProperties"
+        },
+        "sku": {
+          "$ref": "./computeRPCommon.json#/definitions/Sku",
+          "description": "SKU of the dedicated host that DedicatedHost can be resized to. Only name is required to be set. Resizing can be only used to scale up DedicatedHost. ListAvailableSizes for a list of possible values."
         }
       },
       "allOf": [
@@ -1117,7 +1127,8 @@
       ],
       "description": "The list dedicated host operation response."
     },
-    "DedicatedHostSkuListResult": {
+    "DedicatedHostSizeListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -1127,10 +1138,10 @@
           "x-ms-identifiers": [
             "name"
           ],
-          "description": "The list of dedicated host skus."
+          "description": "The list of dedicated host sizes."
         }
       },
-      "description": "The List Dedicated Host Skus operation response."
+      "description": "The List Dedicated Host sizes operation response."
     }
   }
 }
