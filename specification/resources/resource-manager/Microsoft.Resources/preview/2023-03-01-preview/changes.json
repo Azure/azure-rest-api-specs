@@ -259,9 +259,28 @@
           "readOnly": true
         },
         "isTruncated": {
-          "description": "The flag indicating whether property changes dictionary was truncated in this resource",
-          "type": "boolean",
-          "readOnly": true
+          "description": "The flag indicating whether the property changes dictionary was truncated in this resource",
+          "readOnly": true,
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "isTruncated",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "true",
+                "description": "The property changes dictionary is truncated in this resource",
+                "name": "true"
+              },
+              {
+                "value": "false",
+                "description": "The property changes dictionary is not truncated in this resource",
+                "name": "false"
+              }
+            ]
+          }
         }
       }
     },
