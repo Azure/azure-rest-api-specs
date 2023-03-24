@@ -3,7 +3,7 @@
   "info": {
     "title": "MySQLManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules and configurations.",
-    "version": "2021-12-01-preview"
+    "version": "2022-09-30-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -57,7 +57,7 @@
             "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/BackupNameParameter"
@@ -100,7 +100,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           },
           {
             "$ref": "#/parameters/BackupNameParameter"
@@ -145,7 +145,7 @@
             "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ServerNameParameter"
+            "$ref": "../../../common-types/v1/common-types.json#/parameters/ServerNameParameter"
           }
         ],
         "responses": {
@@ -239,21 +239,14 @@
     }
   },
   "parameters": {
-    "ServerNameParameter": {
-      "name": "serverName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
-    },
     "BackupNameParameter": {
       "name": "backupName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The name of the backup.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     }
   }
 }
