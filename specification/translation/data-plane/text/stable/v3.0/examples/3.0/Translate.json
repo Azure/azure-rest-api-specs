@@ -1,0 +1,43 @@
+{
+  "operationId": "Translator_TextTranslation_Translate",
+  "title": "Translate specified source language text into the target language text.",
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "ApiVersion": "v3.0",
+    "Content-Type": "application/json",
+    "To": "cs",
+    "body": [
+      {
+        "Text": "This is a test."
+      }
+    ]
+  },
+  "responses": {
+    "200": [
+      {
+        "detectedLanguage": {
+          "language": "en",
+          "score": 1.0
+        },
+        "translations": [
+          {
+            "text": "Tohle je test.",
+            "to": "cs"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-requestid": "Request id for tracing"
+      },
+      "body": {
+        "error": {
+          "code": 400000,
+          "message": "Error Message"
+        }
+      }
+    }
+  }
+}
