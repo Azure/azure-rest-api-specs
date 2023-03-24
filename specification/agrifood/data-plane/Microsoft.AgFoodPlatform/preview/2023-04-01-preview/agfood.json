@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure AgFoodPlatform Data Plane Service",
-    "description": "APIs documentation for Azure AgPlatform DataPlane Service.",
-    "version": "2022-11-01-preview"
+    "title": "Microsoft Azure Data Manager for Agriculture Data Plane Service",
+    "description": "APIs documentation for Microsoft Azure Data Manager for Agriculture DataPlane Service.",
+    "version": "2023-04-01-preview"
   },
   "paths": {
     "/application-data": {
@@ -13173,6 +13173,20 @@
           },
           {
             "in": "query",
+            "name": "providerClientId",
+            "description": "Provider client id for authenticating to provider to pull satellite data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "providerClientSecret",
+            "description": "Provider client secret for authenticating to provider to pull satellite data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
             "name": "api-version",
             "description": "The requested API version",
             "required": true,
@@ -18456,10 +18470,11 @@
           "type": "string"
         },
         "satelliteProvider": {
-          "description": "Provider of satellite data. Available Value: Microsoft.",
+          "description": "Provider of satellite data. Available Values: Microsoft, SentinelHub (Sentinel Hub by Sinergise).",
           "minLength": 1,
           "enum": [
-            "Microsoft"
+            "Microsoft",
+            "SentinelHub"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -19285,7 +19300,8 @@
     "DataProvider": {
       "description": "Provider of satellite data.",
       "enum": [
-        "Microsoft"
+        "Microsoft",
+        "SentinelHub"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -22148,6 +22164,7 @@
         "boundaryId",
         "endDateTime",
         "partyId",
+        "provider",
         "source",
         "startDateTime"
       ],
@@ -22181,6 +22198,14 @@
         },
         "data": {
           "$ref": "#/definitions/SatelliteData"
+        },
+        "providerClientId": {
+          "description": "Provider client id for authenticating to provider to pull satellite data.",
+          "type": "string"
+        },
+        "providerClientSecret": {
+          "description": "Provider client secret for authenticating to provider to pull satellite data.",
+          "type": "string"
         },
         "id": {
           "description": "Unique job id.",
@@ -22475,7 +22500,9 @@
       "description": "Search stac Features parameters.",
       "required": [
         "endDateTime",
-        "startDateTime"
+        "startDateTime",
+        "providerClientId",
+        "providerClientSecret"
       ],
       "type": "object",
       "properties": {
@@ -22506,6 +22533,16 @@
           "items": {
             "type": "string"
           }
+        },
+        "providerClientId": {
+          "description": "Provider client id for authenticating to provider to pull satellite data.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "providerClientSecret": {
+          "description": "Provider client secret for authenticating to provider to pull satellite data.",
+          "minLength": 1,
+          "type": "string"
         }
       }
     },
@@ -23432,10 +23469,11 @@
           "type": "string"
         },
         "satelliteProvider": {
-          "description": "Provider of satellite data. Available Value: Microsoft.",
+          "description": "Provider of satellite data. Available Value: Microsoft, SentinelHub (Sentinel Hub by Sinergise).",
           "minLength": 1,
           "enum": [
-            "Microsoft"
+            "Microsoft",
+            "SentinelHub"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -23621,10 +23659,11 @@
           "type": "string"
         },
         "satelliteProvider": {
-          "description": "Provider of satellite data. Available Value: Microsoft.",
+          "description": "Provider of satellite data. Available Value: Microsoft, SentinelHub (Sentinel Hub by Sinergise).",
           "minLength": 1,
           "enum": [
-            "Microsoft"
+            "Microsoft",
+            "SentinelHub"
           ],
           "type": "string",
           "x-ms-enum": {
