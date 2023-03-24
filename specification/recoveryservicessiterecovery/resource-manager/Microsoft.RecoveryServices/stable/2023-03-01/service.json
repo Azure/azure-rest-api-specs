@@ -11251,6 +11251,9 @@
     "ClusterUnplannedFailoverProviderSpecificInput": {
       "description": "Provider specific unplanned cluster failover input.",
       "type": "object",
+      "required": [
+        "instanceType"
+      ],
       "properties": {
         "instanceType": {
           "description": "The class type.",
@@ -21924,11 +21927,13 @@
     "ReplicationClusterProviderSpecificSettings": {
       "description": "Replication cluster provider specific settings.",
       "type": "object",
+      "required": [
+        "instanceType"
+      ],
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       },
       "discriminator": "instanceType"
@@ -22274,7 +22279,7 @@
           "type": "string"
         },
         "activeLocation": {
-          "description": "The Current active location of the Prptection cluster.",
+          "description": "The Current active location of the Protection cluster.",
           "type": "string"
         },
         "allowedOperations": {
@@ -22322,7 +22327,7 @@
           "type": "string"
         },
         "clusterNodeFQDNs": {
-          "description": "The List of cluster Node FQDN's.",
+          "description": "The List of cluster Node FQDNs.",
           "type": "array",
           "items": { "type": "string" }
         },
@@ -22989,6 +22994,9 @@
     "SharedDiskReplicationProviderSpecificSettings": {
       "description": "Replication provider specific settings.",
       "type": "object",
+      "required": [
+        "instanceType"
+      ],
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
