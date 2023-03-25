@@ -129,6 +129,12 @@ namespace AzureMessagingEventGrid {
     succeededLockTokens: string[];
   }
 
+  @doc("Lock token input formatting.")
+  model LockTokenInput {
+    @doc("LockToken")
+    lockTokens: string[];
+  }
+
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
 
   @doc("Publish Single Cloud Event to namespace topic.")
@@ -177,11 +183,11 @@ namespace AzureMessagingEventGrid {
 
     @doc("Max Events count to be received.")
     @query
-    maxEvents: int32;
+    maxEvents?: int32 = 1;
 
     @doc("Timeout value for receive operation in Seconds. Default is 60 seconds.")
     @query
-    timeout: int32;
+    timeout?: int32 = 60;
   }, ReceiveResponse >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
@@ -203,7 +209,7 @@ namespace AzureMessagingEventGrid {
 
     @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
     @body
-    lockTokens: string[];
+    lockTokens: LockTokenInput;
   }, LockTokensResponse >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}

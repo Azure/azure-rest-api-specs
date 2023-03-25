@@ -137,16 +137,18 @@
           {
             "name": "maxEvents",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "Max Events count to be received.",
+            "default": 1,
             "type": "integer",
             "format": "int32"
           },
           {
             "name": "timeout",
             "in": "query",
-            "required": true,
+            "required": false,
             "description": "Timeout value for receive operation in Seconds. Default is 60 seconds.",
+            "default": 60,
             "type": "integer",
             "format": "int32"
           }
@@ -201,11 +203,7 @@
             "required": true,
             "description": "Array of LockTokens for the corresponding received Cloud Events to be acknowledged.",
             "schema": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "x-typespec-name": "string[]"
+              "$ref": "#/definitions/LockTokenInput"
             }
           }
         ],
@@ -466,6 +464,23 @@
       "description": "LockToken information.",
       "required": [
         "lockToken"
+      ]
+    },
+    "LockTokenInput": {
+      "type": "object",
+      "properties": {
+        "lockTokens": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "LockToken"
+        }
+      },
+      "description": "Lock token input formatting.",
+      "required": [
+        "lockTokens"
       ]
     },
     "LockTokensResponse": {
