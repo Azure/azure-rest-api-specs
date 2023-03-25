@@ -151,7 +151,7 @@ namespace AzureMessagingEventGrid {
     @doc("Single Cloud Event being published.")
     @body 
     event: CloudEventEvent;
-  }, void >;
+  }, OkResponse>;
 
 
   @doc("Publish Batch of Cloud Events to namespace topic.")
@@ -168,7 +168,7 @@ namespace AzureMessagingEventGrid {
     @doc("Array of Cloud Events being published.")
     @body
     events: CloudEventEvent[];
-  }, void >;
+  }, OkResponse>;
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive")
@@ -187,8 +187,8 @@ namespace AzureMessagingEventGrid {
 
     @doc("Timeout value for receive operation in Seconds. Default is 60 seconds.")
     @query
-    timeout?: int32 = 60;
-  }, ReceiveResponse >;
+    timeout?: int32 =60;
+  }, ReceiveResponse & CreatedResponse >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
