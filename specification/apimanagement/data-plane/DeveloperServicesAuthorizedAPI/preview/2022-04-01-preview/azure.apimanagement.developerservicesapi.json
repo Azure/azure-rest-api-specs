@@ -1395,6 +1395,82 @@
         }
       }
     },
+    "/users/{userId}/reports/{reportType}": {
+      "get": {
+        "operationId": "Reports_ListReports",
+        "description": "List a collection of tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          },
+          {
+            "name": "reportType",
+            "in": "path",
+            "required": true,
+            "description": "Type of report.",
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "required": false,
+            "description": "Aggregate by interval.",
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "description": "OData order by query option.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Report"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Report[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<Report>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/tags": {
       "get": {
         "operationId": "Tags_ListTags",
@@ -1439,6 +1515,28 @@
               ],
               "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Tag>"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/token/revoke": {
+      "post": {
+        "operationId": "Users_RevokeToken",
+        "description": "Revoke the token of a user by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2780,6 +2878,159 @@
         }
       },
       "description": "User update object."
+    },
+    "Report": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Depending on report endpoint specifies product, API, operation or developer name."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start of aggregation period."
+        },
+        "interval": {
+          "type": "string",
+          "description": "Aggregation period."
+        },
+        "country": {
+          "type": "string",
+          "description": "Country to which this record data is related."
+        },
+        "region": {
+          "type": "string",
+          "description": "Country region to which this record data is related."
+        },
+        "zip": {
+          "type": "string",
+          "description": "Zip code to which this record data is related."
+        },
+        "userId": {
+          "type": "string",
+          "description": "User identifier."
+        },
+        "productId": {
+          "type": "string",
+          "description": "Product identifier."
+        },
+        "apiId": {
+          "type": "string",
+          "description": "API identifier."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "Operation identifier."
+        },
+        "apiRegion": {
+          "type": "string",
+          "description": "API region identifier."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Subscription identifier."
+        },
+        "callCountSuccess": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of successful calls."
+        },
+        "callCountBlocked": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of calls blocked due to invalid credentials."
+        },
+        "callCountFailed": {
+          "type": "integer",
+          "format": "int32",
+          "description": "number of calls failed due to proxy or backend errors."
+        },
+        "callCountOther": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of other calls."
+        },
+        "callCountTotal": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total number of calls."
+        },
+        "bandwidth": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Bandwidth consumed."
+        },
+        "cacheHitCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times when content was served from cache policy."
+        },
+        "cacheMissCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of times content was fetched from backend."
+        },
+        "apiTimeAvg": {
+          "type": "number",
+          "format": "double",
+          "description": "Average time it took to process request."
+        },
+        "apiTimeMin": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum time it took to process request."
+        },
+        "apiTimeMax": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum time it took to process request."
+        },
+        "serviceTimeAvg": {
+          "type": "number",
+          "format": "double",
+          "description": "Average time it took to process request in backend."
+        },
+        "serviceTimeMin": {
+          "type": "number",
+          "format": "double",
+          "description": "Minimum time it took to process request in backend."
+        },
+        "serviceTimeMax": {
+          "type": "number",
+          "format": "double",
+          "description": "Maximum time it took to process request in backend."
+        }
+      },
+      "description": "Report definition.",
+      "required": [
+        "name",
+        "timestamp",
+        "interval",
+        "country",
+        "region",
+        "zip",
+        "userId",
+        "productId",
+        "apiId",
+        "operationId",
+        "apiRegion",
+        "subscriptionId",
+        "callCountSuccess",
+        "callCountBlocked",
+        "callCountFailed",
+        "callCountOther",
+        "callCountTotal",
+        "bandwidth",
+        "cacheHitCount",
+        "cacheMissCount",
+        "apiTimeAvg",
+        "apiTimeMin",
+        "apiTimeMax",
+        "serviceTimeAvg",
+        "serviceTimeMin",
+        "serviceTimeMax"
+      ]
     }
   },
   "parameters": {
