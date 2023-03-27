@@ -185,6 +185,145 @@
         }
       }
     },
+    "/users/{userId}/apiVersionSets": {
+      "get": {
+        "operationId": "ApiVersionSets_ListApiVersionSets",
+        "description": "List a collection of API version sets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiVersionSet"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.ApiVersionSet[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.ApiVersionSet>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apiVersionSets/{versionSetId}": {
+      "get": {
+        "operationId": "ApiVersionSets_GetApiVersionSet",
+        "description": "Get API version set specified by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.ApiVersionSets.CommonParams"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiVersionSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apiVersionSets/{versionSetId}/apis": {
+      "get": {
+        "operationId": "ApiVersionSets_ListApiVersionSetApis",
+        "description": "List a collection of API version set APIs specified by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          },
+          {
+            "$ref": "#/parameters/Routes.ApiVersionSets.CommonParams"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Api"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Api[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Api>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/identities": {
       "get": {
         "operationId": "Confirmations_ListUserIdentities",
@@ -693,6 +832,74 @@
             "name": "GraphQL",
             "value": "graphql",
             "description": "API is a GraphQL API"
+          }
+        ]
+      }
+    },
+    "DeveloperServicesAPI.Models.ApiVersionSet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "API Version Set identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "API Version Set name."
+        },
+        "description": {
+          "type": "string",
+          "description": "API Version Set description."
+        },
+        "versioningScheme": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiVersionSetScheme",
+          "description": "Versioning scheme."
+        },
+        "versionQueryName": {
+          "type": "string",
+          "description": "Version query name."
+        },
+        "versionHeaderName": {
+          "type": "string",
+          "description": "Version header name."
+        }
+      },
+      "description": "API Version Set",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "versioningScheme",
+        "versionQueryName",
+        "versionHeaderName"
+      ]
+    },
+    "DeveloperServicesAPI.Models.ApiVersionSetScheme": {
+      "type": "string",
+      "description": "Versioning scheme types.",
+      "enum": [
+        "Segment",
+        "Query",
+        "Header"
+      ],
+      "x-ms-enum": {
+        "name": "ApiVersionSetScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Segment",
+            "value": "Segment",
+            "description": "Use segment for versioning scheme"
+          },
+          {
+            "name": "Query",
+            "value": "Query",
+            "description": "Use query for versioning scheme"
+          },
+          {
+            "name": "Header",
+            "value": "Header",
+            "description": "Use header for versioning scheme"
           }
         ]
       }
@@ -1451,6 +1658,13 @@
     },
     "DeveloperServicesAPI.Models.UserParams": {
       "name": "userId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Routes.ApiVersionSets.CommonParams": {
+      "name": "versionSetId",
       "in": "path",
       "required": true,
       "type": "string",
