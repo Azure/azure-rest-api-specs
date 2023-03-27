@@ -1,6 +1,6 @@
 import "@typespec/rest";
-import "../models/common.tsp";
-import "../models/configuration.tsp";
+import "../../models/common.tsp";
+import "../../models/configuration.tsp";
 
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;

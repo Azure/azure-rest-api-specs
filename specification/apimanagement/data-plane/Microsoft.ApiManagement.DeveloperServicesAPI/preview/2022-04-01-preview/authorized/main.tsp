@@ -2,7 +2,7 @@ import "@typespec/rest";
 import "@typespec/openapi3";
 
 //Resources
-import "../resources/user.tsp";
+import "./routes/user.tsp";
 
 using TypeSpec.Http;
 

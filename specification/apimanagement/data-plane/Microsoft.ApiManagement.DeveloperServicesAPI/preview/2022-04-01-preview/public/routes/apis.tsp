@@ -1,10 +1,10 @@
 import "@typespec/rest";
-import "../models/common.tsp";
-import "../models/api.tsp";
-import "../models/authorizationServer.tsp";
-import "../models/product.tsp";
-import "../models/operation.tsp";
-import "../models/tag.tsp";
+import "../../models/common.tsp";
+import "../../models/api.tsp";
+import "../../models/authorizationServer.tsp";
+import "../../models/product.tsp";
+import "../../models/operation.tsp";
+import "../../models/tag.tsp";
 
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;
