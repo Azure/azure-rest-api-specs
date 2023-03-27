@@ -1771,12 +1771,12 @@
       "uniqueItems": true
     },
     "BaseEntityOverlapPolicy": {
-      "description": "The abstract base class for entity Metadata.",
+      "description": "The abstract base class for entity OverlapPolicy.",
       "type": "object",
       "discriminator": "policyKind",
       "properties": {
         "policyKind": {
-          "description": "The entity Metadata object kind.",
+          "description": "The entity OverlapPolicy object kind.",
           "type": "string",
           "default": "matchLongest",
           "enum": [
@@ -1794,7 +1794,7 @@
       ]
     },
     "MatchLongestEntityPolicyType": {
-      "description": "Represents the Age entity Metadata model.",
+      "description": "Represents the Match longest overlap policy.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseEntityOverlapPolicy"
@@ -1804,7 +1804,7 @@
       "x-ms-discriminator-value": "matchLongest"
     },
     "AllowOverlapEntityPolicyType": {
-      "description": "Represents the Age entity Metadata model.",
+      "description": "Represents the allow overlap policy.",
       "allOf": [
         {
           "$ref": "#/definitions/BaseEntityOverlapPolicy"
