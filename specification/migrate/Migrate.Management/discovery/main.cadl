@@ -44,7 +44,6 @@ using Cadl.Rest;
 using Cadl.Versioning;
 using Azure.ResourceManager;
 using OpenAPI;
-
 @armProviderNamespace
 @service({
   title: "SingleSPNAttribute",
@@ -92,17 +91,17 @@ enum Versions {
 @added(Versions.v2018_05_01_preview)
 interface HyperVClusterController {
   @doc("Method to get a Hyper-V cluster.")
-  //@operationId("HyperVCluster_GetCluster")
+  @operationId("HyperVClusters_GetCluster")
   GetCluster is ArmResourceReadNoError<HyperVCluster>;
 
-  //@operationId("HyperVCluster_CreateCluster")
+  @operationId("HyperVClusters_CreateCluster")
   PutCluster is ArmResourceCreateOrUpdateAsyncCustom<HyperVCluster>;
 
   // @tag("HyperVClusterController")
   // delete is ArmResourceDeleteSyncNoError<HyperVCluster>;
 
   @segment("clusters")
-  @operationId("HyperVCluster_ListAllClustersInSite")
+  @operationId("HyperVClusters_ListAllClustersInSite")
   GetAllClustersInSite is ArmResourceListByParentUpdated<
     HyperVCluster,
     {
@@ -187,6 +186,13 @@ interface Sites {
   @added(Versions.v2020_01_01)
   @post
   @operationId("SitesController_ExportMachines")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      "final-state-via": "azure-async-operation",
+    }
+  )
   ExportMachines(
     ...ResourceInstanceParameters<VMwareSite>,
 
@@ -325,7 +331,7 @@ interface DependencyMapController {
 @armResourceOperations
 interface VmwareSites {
   @added(Versions.v2018_05_01_preview)
-  @operationId("Sites_CreateSite")
+  @operationId("Sites_Create")
   create is ArmResourceCreateOrUpdateSyncCustom<VMwareSite>;
 
   // @armResourceUpdate(InnerError)
@@ -337,7 +343,7 @@ interface VmwareSites {
   //   ...ResourceInstanceParameters<VMwareSite>,
 
   @added(Versions.v2018_05_01_preview)
-  @operationId("Sites_UpdateSite")
+  @operationId("Sites_Update")
   @doc("Update a VMwareSite")
   update is ArmResourcePatchSyncNoError<
   VMwareSite,
@@ -364,7 +370,7 @@ interface VmwareSites {
   @armResourceAction(InnerError)
   @added(Versions.v2018_05_01_preview)
   @post
-  @operationId("Sites_ListSiteHealthSummary")
+  @operationId("Sites_ListHealthSummary")
   healthSummary(
     ...ResourceInstanceParameters<VMwareSite>
   ): ArmResponse<SiteHealthSummaryCollection>;
@@ -389,11 +395,11 @@ model MachineResource is ProxyResource<VmwareMachineProperties> {
 @armResourceOperations
 interface MachinesController {
   @added(Versions.v2018_05_01_preview)
-  @operationId("Machines_GetMachine")
+  @operationId("Machines_Get")
   get is ArmResourceReadNoError<MachineResource>;
 
   @added(Versions.v2018_05_01_preview)
-  @operationId("Machines_ListllMachinesInSite")
+  @operationId("Machines_List")
   listByParent is ArmResourceListByParentUpdated<
     MachineResource,
     {
@@ -423,12 +429,12 @@ interface MachinesController {
 
   @doc("Method to stop a machine.")
   @added(Versions.v2018_05_01_preview)
-  @operationId("Machines_StopMachine")
+  @operationId("Machines_Stop")
   stop is ArmResourceActionAsyncNoRequestBody<MachineResource, {}>;
 
   @doc("Method to start a machine.")
   @added(Versions.v2018_05_01_preview)
-  @operationId("Machines_StartMachine")
+  @operationId("Machines_Start")
   start is ArmResourceActionAsyncNoRequestBody<MachineResource, {}>;
 
   @doc("Method to get a machines software inventory like applications and roles.")
@@ -448,6 +454,7 @@ interface VmwareMachinesController {
   @armResourceRead(InnerError)
   @added(Versions.v2018_05_01_preview)
   @get
+  @operationId("VmwareMachinesController_GetApplications")
   applications(
     ...ResourceInstanceParameters<MachineResource>
   ): ArmResponse<MachineResource>;
@@ -468,13 +475,13 @@ model VCenter is ProxyResource<VCenterProperties> {
 @armResourceOperations
 @added(Versions.v2018_05_01_preview)
 interface VCenterController {
-  @operationId("VCenter_GetVCenter")
+  @operationId("VCenters_GetVCenter")
   get is ArmResourceReadNoError<VCenter>;
-  @operationId("VCenter_CreateVCenter")
+  @operationId("VCenters_CreateVCenter")
   create is ArmResourceCreateOrUpdateAsyncCustom<VCenter>;
-  @operationId("VCenter_DeleteVCenter")
+  @operationId("VCenters_DeleteVCenter")
   delete is ArmResourceDeleteSyncNoError<VCenter>;
-  @operationId("VCenter_ListVCentersInSite")
+  @operationId("VCenters_ListVCentersInSite")
   listByParent is ArmResourceListByParentUpdated<
     VCenter,
     {
@@ -547,9 +554,9 @@ model VmwareJobResource is ProxyResource<JobProperties> {
 @armResourceOperations
 @added(Versions.v2018_05_01_preview)
 interface JobsController {
-  @operationId("Jobs_GetJob")
+  @operationId("Jobs_Get")
   get is ArmResourceReadNoError<VmwareJobResource>;
-  @operationId("Jobs_ListAllJobsInSite")
+  @operationId("Jobs_List")
   listByParent is ArmResourceListByParentUpdated<VmwareJobResource>;
 }
 
@@ -633,10 +640,10 @@ interface HyperVDependencyMapController {
 @armResourceOperations
 interface HyperVSitesController {
   @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVSites_GetSite")
+  @operationId("HyperVSites_Get")
   get is ArmResourceReadNoError<HyperVSite>;
 
-  @operationId("HyperVSites_CreateSite")
+  @operationId("HyperVSites_Create")
   @added(Versions.v2018_05_01_preview)
   create is ArmResourceCreateOrUpdateSyncCustom<HyperVSite>;
 
@@ -653,7 +660,7 @@ interface HyperVSitesController {
   // ): ArmResponse<HyperVSite>;
 
   @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVSites_UpdateSite")
+  @operationId("HyperVSites_Update")
   @doc("Update a HyperVSite")
   update is ArmResourcePatchSyncNoError<
   HyperVSite,
@@ -661,14 +668,14 @@ interface HyperVSitesController {
   >;
 
   @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVSites_DeleteSite")
+  @operationId("HyperVSites_Delete")
   delete is ArmResourceDeleteSyncNoError<HyperVSite>;
 
   @doc("Method to get site health summary.")
   @armResourceAction(InnerError)
   @added(Versions.v2018_05_01_preview)
   @post
-  @operationId("HyperVSites_ListSiteHealthSummary")
+  @operationId("HyperVSites_ListHealthSummary")
   healthSummary(
     ...ResourceInstanceParameters<HyperVSite>
   ): ArmResponse<SiteHealthSummaryCollection>;
@@ -784,7 +791,7 @@ model HyperVCluster is ProxyResource<HyperVClusterProperties> {
 @added(Versions.v2018_05_01_preview)
 @armResourceOperations
 interface HyperVJobs {
-  @operationId("HyperVJobs_GetJob")
+  @operationId("HyperVJobs_GetJ")
   get is ArmResourceReadNoError<HyperVJob>;
   @operationId("HyperVJobs_ListAllJobsInSite")
   listByParent is ArmResourceListByParentUpdated<HyperVJob>;
@@ -807,16 +814,16 @@ model HyperVHost is ProxyResource<HyperVHostProperties> {
 @armResourceOperations
 interface HyperVHostController {
   @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVHost_GetHost")
+  @operationId("HyperVHosts_GetHost")
   get is ArmResourceReadNoError<HyperVHost>;
 
   @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVHost_CreateHost")
+  @operationId("HyperVHosts_CreateHost")
   create is ArmResourceCreateOrUpdateAsyncCustom<HyperVHost>;
 
   @segment("hosts")
   @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVHost_ListAllHostsInSite")
+  @operationId("HyperVHosts_ListAllHostsInSite")
   listByParent is ArmResourceListByParentUpdated<
     HyperVHost,
     {
@@ -851,11 +858,11 @@ model HyperVMachine is ProxyResource<HyperVMachineProperties> {
 @armResourceOperations
 interface HypervMachinesController {
   @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVMachines_GetMachine")
+  @operationId("HyperVMachines_Get")
   get is ArmResourceReadNoError<HyperVMachine>;
 
   @added(Versions.v2018_05_01_preview)
-  @operationId("HyperVMachines_ListAllMachinesInSite")
+  @operationId("HyperVMachines_List")
   listByParent is ArmResourceListByParentUpdated<
     HyperVMachine,
     {
@@ -995,7 +1002,7 @@ interface ServersController {
   @doc("Get a serve site usage.")
   @segment("usage")
   @armResourceRead(InnerError)
-  @operationId("ServerSiteResource_GetUsage")
+  @operationId("ServerSiteResources_GetUsage")
   usage(
     ...ResourceInstanceParameters<ServerSiteResource>
   ): ArmResponse<ServerSiteUsageResponse>;
@@ -1008,14 +1015,6 @@ interface ServersController {
   errorSummary(
     ...ResourceInstanceParameters<ServerSiteResource>
   ): ArmResponse<SiteErrorSummary>;
-  //
-  @get
-  @doc("Get all machines in a site.")
-  @segment("machines")
-  @armResourceRead(InnerError)
-  machines(
-    ...ResourceInstanceParameters<ServerSiteResource>
-  ): ArmResponse<ServerMachineResource>;
 
   @doc("Method to get a machines software inventory like applications and roles.")
   @armResourceRead(InnerError)
@@ -1044,9 +1043,14 @@ interface ServersController {
     ...ResourceInstanceParameters<ServerMachineResource>
   ): ArmResponse<ServerMachineResource>;
 
+  
+  @operationId("ServersController_GetMachine")
   getMachine is ArmResourceReadNoError<ServerMachineResource>;
   createMachine is ArmResourceCreateOrUpdateAsyncCustom<ServerMachineResource>;
   deleteMachine is ArmResourceDeleteSyncNoError<ServerMachineResource>;
+  @doc("Get all machines in a site.")
+  @operationId("ServersController_ListMachines")
+  listByParent is ArmResourceListByParentUpdated<ServerMachineResource>;
 }
 
 @armResourceOperations
@@ -1076,7 +1080,7 @@ interface ServerSitesController {
   @armResourceAction(InnerError)
   @added(Versions.v2020_01_01_preview)
   @post
-  @operationId("ServerSitesController_ListSiteHealthSummary")
+  @operationId("ServerSitesController_ListHealthSummary")
   healthSummary(
     ...ResourceInstanceParameters<ServerSiteResource>
   ): ArmResponse<SiteHealthSummaryCollection>;
@@ -1223,7 +1227,7 @@ interface ImportJobsController {
   @operationId("ImportJobsController_ListDeletejobs")
   deletejobs(
     ...ResourceInstanceParameters<ImportSiteResource>
-  ): ArmResponse<ImportDeleteImportMachinesJobDeleteImportMachinesJobCollection>;
+  ): ArmResponse<Azure.Core.PageUpdated<ImportDeleteImportMachinesJobDeleteImportMachinesJobCollection>>;
 
   @doc("Gets the delete imported machines job with the given job name.")
   @armResourceRead(InnerError)
@@ -1247,7 +1251,7 @@ interface ImportJobsController {
   @operationId("ImportJobsController_ListExportjobs")
   exportjobs(
     ...ResourceInstanceParameters<ImportSiteResource>
-  ): ArmResponse<V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection>;
+  ): ArmResponse<Azure.Core.PageUpdated<V20200201ExportImportedMachinesJobExportImportedMachinesJobCollection>>;
 
   @doc("Gets the export imported machines job with the given job name.")
   @armResourceRead(InnerError)
@@ -1268,21 +1272,22 @@ interface ImportJobsController {
   @segment("importjobs")
   @get
   @added(Versions.v2020_02_01)
-  @operationId("ImportJobsController_ListImportjobs")
+  @operationId("ImportJobsController_List")
   importjobs(
     ...ResourceInstanceParameters<ImportSiteResource>
-  ): ArmResponse<V20200201ImportMachinesJobImportMachinesJobCollection>;
+  ): ArmResponse<Azure.Core.PageUpdated<V20200201ImportMachinesJobImportMachinesJobCollection>>;
 
   @doc("Gets the import job with the given job name.")
   @armResourceRead(InnerError)
   @get
   @added(Versions.v2020_02_01)
+  @operationId("ImportJobsController_Get")
   importjob(
     ...ResourceInstanceParameters<ImportSiteResource>,
 
     @doc("Job Arm Name.")
     @path
-    @segment("ImportJobs")
+    @segment("ImportJob")
     jobName: string
   ): ArmResponse<V20200201ImportMachinesJob>;
 
@@ -1434,17 +1439,17 @@ model MasterSite is TrackedResource<MasterSiteProperties> {
 @armResourceOperations
 interface MasterSitesController {
   @added(Versions.v2020_07_07)
-  @operationId("MasterSites_GetSite")
+  @operationId("MasterSites_Get")
   @summary("Method to get a master site.")
   get is ArmResourceReadNoError<MasterSite>;
 
   @added(Versions.v2020_07_07)
-  @operationId("MasterSites_CreateSite")
+  @operationId("MasterSites_Create")
   @doc("Method to create or update a site.")
   create is ArmResourceCreateOrUpdateAsyncNoError<MasterSite>;
 
   @added(Versions.v2020_07_07)
-  @operationId("MasterSites_DeleteSite")
+  @operationId("MasterSites_Delete")
   @doc("Method to delete a site.")
   delete is ArmResourceDeleteSyncNoError<MasterSite>;
 
@@ -1461,7 +1466,7 @@ interface MasterSitesController {
 
   @added(Versions.v2020_07_07)
   @doc("Method to update an existing site.")
-  @operationId("MasterSites_UpdateSite")
+  @operationId("MasterSites_Update")
   update is ArmResourcePatchAsyncNoError<MasterSite, MasterSiteProperties>;
 
   @doc("Method to get error summary from master site for an appliance.")

@@ -374,5 +374,6 @@ model VmwareMachineSoftwareInventory {
   name?: string;
 
   @doc("Gets or sets software inventory properties.")
+  @OpenAPI.extension("x-ms-client-flatten", true)
   properties?: MachineSoftwareInventoryProperties;
 }

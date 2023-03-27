@@ -78,6 +78,7 @@ model ImportDeleteImportMachinesJob {
     type?: string;
 
     @doc("Gets or sets the delete import machines job properties.")
+    @OpenAPI.extension("x-ms-client-flatten", true)
     properties?: CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties;
 
     @doc("Gets or sets the relative ARM name to get job.")
