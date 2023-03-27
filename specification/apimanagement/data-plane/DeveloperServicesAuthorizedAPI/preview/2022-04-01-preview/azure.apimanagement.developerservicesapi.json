@@ -1394,6 +1394,60 @@
           }
         }
       }
+    },
+    "/users/{userId}/tags": {
+      "get": {
+        "operationId": "Tags_ListTags",
+        "description": "List a collection of tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Tag>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
