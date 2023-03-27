@@ -1471,6 +1471,200 @@
         }
       }
     },
+    "/users/{userId}/subscriptions": {
+      "get": {
+        "operationId": "Subscriptions_ListUserSubscriptions",
+        "description": "List a collection of user subscriptions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Subscription"
+                  },
+                  "x-typespec-name": "Subscription[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<Subscription>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/subscriptions/{subscriptionId}": {
+      "get": {
+        "operationId": "Subscriptions_GetUserSubscription",
+        "description": "Get user subscription by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Subscriptions.CommonParams"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Subscriptions_CreateUserSubscription",
+        "description": "Create user subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Subscriptions.CommonParams"
+          },
+          {
+            "name": "userSubscriptionCreate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserSubscriptionCreate"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Subscriptions_UpdateUserSubscription",
+        "description": "Update user subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Subscriptions.CommonParams"
+          },
+          {
+            "name": "userSubscriptionUpdate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserSubscriptionUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/subscriptions/{subscriptionId}/regeneratePrimaryKey": {
+      "post": {
+        "operationId": "Subscriptions_RegenerateUserSubscriptionPrimaryKey",
+        "description": "Regenerate subscription primary key.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Subscriptions.CommonParams"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/subscriptions/{subscriptionId}/regenerateSecondaryKey": {
+      "post": {
+        "operationId": "Subscriptions_RegenerateUserSubscriptionSecondaryKey",
+        "description": "Regenerate subscription secondary key.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Subscriptions.CommonParams"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/tags": {
       "get": {
         "operationId": "Tags_ListTags",
@@ -3031,6 +3225,168 @@
         "serviceTimeMin",
         "serviceTimeMax"
       ]
+    },
+    "Subscription": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the subscription."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the subscription."
+        },
+        "ownerId": {
+          "type": "string",
+          "description": "The owner of the subscription"
+        },
+        "scope": {
+          "type": "string",
+          "description": "Scope like /products/{productId} or /apis or /apis/{apiId} or /."
+        },
+        "state": {
+          "$ref": "#/definitions/SubscriptionState",
+          "description": "Subscription state."
+        },
+        "createdDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription creation date."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription activation date."
+        },
+        "expirationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Subscription expiration date."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when subscription was cancelled or expired."
+        },
+        "notificationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Upcoming subscription expiration notification date."
+        },
+        "primaryKey": {
+          "type": "string",
+          "description": "The subscription's primary key."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "The subscription's secondary key."
+        },
+        "stateComment": {
+          "type": "string",
+          "description": "The subscription's state comment."
+        }
+      },
+      "description": "Subscription model.",
+      "required": [
+        "id",
+        "name",
+        "ownerId",
+        "scope",
+        "state",
+        "createdDate",
+        "startDate",
+        "expirationDate",
+        "endDate",
+        "notificationDate",
+        "primaryKey",
+        "secondaryKey",
+        "stateComment"
+      ]
+    },
+    "SubscriptionState": {
+      "type": "string",
+      "description": "Subscription state.",
+      "enum": [
+        "active",
+        "suspended",
+        "expired",
+        "submitted",
+        "rejected",
+        "cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "The subscription is active."
+          },
+          {
+            "name": "Suspended",
+            "value": "suspended",
+            "description": "Subscription is blocked. User whose subscription is blocked cannot call subscription's product APIs."
+          },
+          {
+            "name": "Expired",
+            "value": "expired",
+            "description": "Subscription is expired. User whose subscription is expired cannot call subscription's product APIs."
+          },
+          {
+            "name": "Submitted",
+            "value": "submitted",
+            "description": "Subscription request has been submitted."
+          },
+          {
+            "name": "Rejected",
+            "value": "rejected",
+            "description": "Subscription request has been rejected."
+          },
+          {
+            "name": "Cancelled",
+            "value": "cancelled",
+            "description": "Subscription request has been cancelled."
+          }
+        ]
+      }
+    },
+    "UserSubscriptionCreate": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "Scope like /products/{productId} or /apis or /apis/{apiId} or /."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the subscription."
+        }
+      },
+      "description": "Create user subscription request.",
+      "required": [
+        "scope",
+        "name"
+      ]
+    },
+    "UserSubscriptionUpdate": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "description": "Scope like /products/{productId} or /apis or /apis/{apiId} or /."
+        },
+        "state": {
+          "$ref": "#/definitions/SubscriptionState",
+          "description": "Subscription state."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the subscription."
+        }
+      },
+      "description": "Update user subscription request."
     }
   },
   "parameters": {
@@ -3077,6 +3433,13 @@
     },
     "Routes.Apis.CommonParams": {
       "name": "apiId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Routes.Subscriptions.CommonParams": {
+      "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",

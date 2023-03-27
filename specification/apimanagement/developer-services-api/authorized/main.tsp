@@ -11,6 +11,7 @@ import "./routes/apiVersionSets.tsp";
 import "./routes/apis.tsp";
 import "./routes/tags.tsp";
 import "./routes/reports.tsp";
+import "./routes/subscriptions.tsp";
 
 using TypeSpec.Http;
 
