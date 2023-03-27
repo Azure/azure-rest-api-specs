@@ -775,11 +775,66 @@
           "description": "Gets the managed disk details"
         },
         "diskRestorePoint": {
-          "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference",
+          "$ref": "#/definitions/DiskRestorePointProperties",
           "description": "Gets the disk restore point Id."
         }
       },
       "description": "Describes a data disk."
+    },
+    "DiskRestorePointProperties": {
+      "properties": {
+        "encryption": {
+          "$ref": "#/definitions/Encryption"
+        },
+        "sourceDiskRestorePoint": {
+          "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference",
+          "description": "Resource Id of the source disk restore point."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference"
+        }
+      ],
+      "description": "Disk Restore Point details."
+    },
+    "Encryption": {
+      "properties": {
+        "diskEncryptionSet": {
+          "$ref": "./computeRPCommon.json#/definitions/DiskEncryptionSetParameters"
+        },
+        "type": {
+          "$ref": "#/definitions/EncryptionType"
+        }
+      },
+      "description": "Encryption at rest settings for disk restore point."
+    },
+    "EncryptionType": {
+      "type": "string",
+      "description": "The type of key used to encrypt the data of the disk restore point.",
+      "enum": [
+        "EncryptionAtRestWithPlatformKey",
+        "EncryptionAtRestWithCustomerKey",
+        "EncryptionAtRestWithPlatformAndCustomerKeys"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "EncryptionAtRestWithPlatformKey",
+            "description": "Disk Restore Point is encrypted at rest with Platform managed key. "
+          },
+          {
+            "value": "EncryptionAtRestWithCustomerKey",
+            "description": "Disk Restore Point is encrypted at rest with Customer managed key that can be changed and revoked by a customer."
+          },
+          {
+            "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
+            "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+          }
+        ]
+      }
     },
     "RestorePoint": {
       "properties": {
