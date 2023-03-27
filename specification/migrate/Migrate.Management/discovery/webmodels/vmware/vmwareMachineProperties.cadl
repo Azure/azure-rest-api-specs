@@ -51,6 +51,7 @@ Microsoft.OffAzure/VMWareSites/RunAsAccounts.
 
   @doc("Gets nested properties.")
   @visibility("read")
+  @OpenAPI.extension("x-ms-client-flatten", true)
   properties?: RunAsAccountRunAsAccountProperties;
 }
 
@@ -300,7 +301,7 @@ the VM.
 
   @doc("Gets the data related to SQL discovery.")
   @visibility("read")
-  sqlDiscovery?: SqlDiscovery;
+  sqlDiscovery?: SQLDiscovery;
 
   @doc("Gets the data related to Web application discovery.")
   @visibility("read")

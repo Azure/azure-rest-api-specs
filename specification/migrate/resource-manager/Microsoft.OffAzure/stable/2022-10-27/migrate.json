@@ -346,51 +346,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure": {
-      "put": {
-        "tags": [
-          "PrivateEndpointConnectionProxyController"
-        ],
-        "operationId": "PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy",
-        "description": "Gets the private endpoint connection proxy.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "description": "Resource create parameters.",
-            "schema": {
-              "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ARM operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequestBody"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy_MaximumSet_Gen.json"
-          },
-          "PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/HyperVSites": {
       "get": {
         "tags": [
@@ -3582,6 +3537,63 @@
             "$ref": "./examples/PrivateEndpointConnectionProxyController_DeletePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "PrivateEndpointConnectionProxyController"
+        ],
+        "operationId": "PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy",
+        "description": "Creates  the private endpoint connection proxy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "required": true,
+            "description": "Site name",
+            "type": "string"
+          },
+          {
+            "name": "pecProxyName",
+            "in": "path",
+            "required": true,
+            "description": " Private endpoint connection proxy name.",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "Resource create parameters.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionProxy"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy_MaximumSet_Gen.json"
+          },
+          "PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateEndpointConnectionProxyController_CreatePrivateEndpointConnectionProxy_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/MasterSites/{siteName}/privateEndpointConnectionProxies/{pecProxyName}/operationsStatus": {
@@ -3899,7 +3911,7 @@
         "tags": [
           "PrivateLinkResourcesController"
         ],
-        "operationId": "PrivateLinkResourcesController_GetPrivateLinkResources",
+        "operationId": "PrivateLinkResourcesController_ListPrivateLinkResources",
         "description": "Gets the private link resource.",
         "parameters": [
           {
@@ -3931,11 +3943,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "PrivateLinkResourcesController_GetPrivateLinkResources_MaximumSet_Gen": {
-            "$ref": "./examples/PrivateLinkResourcesController_GetPrivateLinkResources_MaximumSet_Gen.json"
+          "PrivateLinkResourcesController_ListPrivateLinkResources_MaximumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResourcesController_ListPrivateLinkResources_MaximumSet_Gen.json"
           },
-          "PrivateLinkResourcesController_GetPrivateLinkResources_MinimumSet_Gen": {
-            "$ref": "./examples/PrivateLinkResourcesController_GetPrivateLinkResources_MinimumSet_Gen.json"
+          "PrivateLinkResourcesController_ListPrivateLinkResources_MinimumSet_Gen": {
+            "$ref": "./examples/PrivateLinkResourcesController_ListPrivateLinkResources_MinimumSet_Gen.json"
           }
         }
       }
@@ -3995,7 +4007,7 @@
         "tags": [
           "SqlSitesController"
         ],
-        "operationId": "SqlSitesController_GetSites",
+        "operationId": "SqlSitesController_ListSites",
         "description": "Method to get all sites.",
         "parameters": [
           {
@@ -4027,11 +4039,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SqlSitesController_GetSites_MaximumSet_Gen": {
-            "$ref": "./examples/SqlSitesController_GetSites_MaximumSet_Gen.json"
+          "SqlSitesController_ListSites_MaximumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ListSites_MaximumSet_Gen.json"
           },
-          "SqlSitesController_GetSites_MinimumSet_Gen": {
-            "$ref": "./examples/SqlSitesController_GetSites_MinimumSet_Gen.json"
+          "SqlSitesController_ListSites_MinimumSet_Gen": {
+            "$ref": "./examples/SqlSitesController_ListSites_MinimumSet_Gen.json"
           }
         }
       }
@@ -4892,7 +4904,7 @@
         "tags": [
           "SqlAvailabilityGroupController"
         ],
-        "operationId": "SqlAvailabilityGroupController_GetSqlAvailabilityGroups",
+        "operationId": "SqlAvailabilityGroupController_ListSqlAvailabilityGroups",
         "description": "Gets the sql availability groups.",
         "parameters": [
           {
@@ -4960,11 +4972,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SqlAvailabilityGroupController_GetSqlAvailabilityGroups_MaximumSet_Gen": {
-            "$ref": "./examples/SqlAvailabilityGroupController_GetSqlAvailabilityGroups_MaximumSet_Gen.json"
+          "SqlAvailabilityGroupController_ListSqlAvailabilityGroups_MaximumSet_Gen": {
+            "$ref": "./examples/SqlAvailabilityGroupController_ListSqlAvailabilityGroups_MaximumSet_Gen.json"
           },
-          "SqlAvailabilityGroupController_GetSqlAvailabilityGroups_MinimumSet_Gen": {
-            "$ref": "./examples/SqlAvailabilityGroupController_GetSqlAvailabilityGroups_MinimumSet_Gen.json"
+          "SqlAvailabilityGroupController_ListSqlAvailabilityGroups_MinimumSet_Gen": {
+            "$ref": "./examples/SqlAvailabilityGroupController_ListSqlAvailabilityGroups_MinimumSet_Gen.json"
           }
         }
       }
@@ -5031,7 +5043,7 @@
         "tags": [
           "SqlDatabasesController"
         ],
-        "operationId": "SqlDatabasesController_GetSqlDatabases",
+        "operationId": "SqlDatabasesController_ListSqlDatabases",
         "description": "Gets the sql Databases.",
         "parameters": [
           {
@@ -5099,11 +5111,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SqlDatabasesController_GetSqlDatabases_MaximumSet_Gen": {
-            "$ref": "./examples/SqlDatabasesController_GetSqlDatabases_MaximumSet_Gen.json"
+          "SqlDatabasesController_ListSqlDatabases_MaximumSet_Gen": {
+            "$ref": "./examples/SqlDatabasesController_ListSqlDatabases_MaximumSet_Gen.json"
           },
-          "SqlDatabasesController_GetSqlDatabases_MinimumSet_Gen": {
-            "$ref": "./examples/SqlDatabasesController_GetSqlDatabases_MinimumSet_Gen.json"
+          "SqlDatabasesController_ListSqlDatabases_MinimumSet_Gen": {
+            "$ref": "./examples/SqlDatabasesController_ListSqlDatabases_MinimumSet_Gen.json"
           }
         }
       }
@@ -5170,7 +5182,7 @@
         "tags": [
           "SqlJobsController"
         ],
-        "operationId": "SqlJobsController_GetSqlJobs",
+        "operationId": "SqlJobsController_ListSqlJobs",
         "summary": "Gets the sql Jobs.",
         "description": "List SqlJob resources by SqlSite",
         "parameters": [
@@ -5210,11 +5222,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SqlJobsController_GetSqlJobs_MaximumSet_Gen": {
-            "$ref": "./examples/SqlJobsController_GetSqlJobs_MaximumSet_Gen.json"
+          "SqlJobsController_ListSqlJobs_MaximumSet_Gen": {
+            "$ref": "./examples/SqlJobsController_ListSqlJobs_MaximumSet_Gen.json"
           },
-          "SqlJobsController_GetSqlJobs_MinimumSet_Gen": {
-            "$ref": "./examples/SqlJobsController_GetSqlJobs_MinimumSet_Gen.json"
+          "SqlJobsController_ListSqlJobs_MinimumSet_Gen": {
+            "$ref": "./examples/SqlJobsController_ListSqlJobs_MinimumSet_Gen.json"
           }
         }
       }
@@ -5282,7 +5294,7 @@
         "tags": [
           "SqlServersController"
         ],
-        "operationId": "SqlServersController_GetSqlServers",
+        "operationId": "SqlServersController_ListSqlServers",
         "description": "Gets the sql servers.",
         "parameters": [
           {
@@ -5350,11 +5362,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SqlServersController_GetSqlServers_MaximumSet_Gen": {
-            "$ref": "./examples/SqlServersController_GetSqlServers_MaximumSet_Gen.json"
+          "SqlServersController_ListSqlServers_MaximumSet_Gen": {
+            "$ref": "./examples/SqlServersController_ListSqlServers_MaximumSet_Gen.json"
           },
-          "SqlServersController_GetSqlServers_MinimumSet_Gen": {
-            "$ref": "./examples/SqlServersController_GetSqlServers_MinimumSet_Gen.json"
+          "SqlServersController_ListSqlServers_MinimumSet_Gen": {
+            "$ref": "./examples/SqlServersController_ListSqlServers_MinimumSet_Gen.json"
           }
         }
       }
@@ -5471,7 +5483,7 @@
         "tags": [
           "WebAppSitesController"
         ],
-        "operationId": "WebAppSitesController_GetSites",
+        "operationId": "WebAppSitesController_ListSites",
         "description": "Method to get all sites.",
         "parameters": [
           {
@@ -5503,11 +5515,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "WebAppSitesController_GetSites_MaximumSet_Gen": {
-            "$ref": "./examples/WebAppSitesController_GetSites_MaximumSet_Gen.json"
+          "WebAppSitesController_ListSites_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_ListSites_MaximumSet_Gen.json"
           },
-          "WebAppSitesController_GetSites_MinimumSet_Gen": {
-            "$ref": "./examples/WebAppSitesController_GetSites_MinimumSet_Gen.json"
+          "WebAppSitesController_ListSites_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppSitesController_ListSites_MinimumSet_Gen.json"
           }
         }
       }
@@ -5754,7 +5766,7 @@
         "tags": [
           "WebAppDiscoverySiteDataSourcesController"
         ],
-        "operationId": "WebAppDiscoverySiteDataSourceController_GetDataSources",
+        "operationId": "WebAppDiscoverySiteDataSourceController_ListDataSources",
         "description": "Method to get all Web app data sources in site.",
         "parameters": [
           {
@@ -5793,11 +5805,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "WebAppDiscoverySiteDataSourceController_GetDataSources_MaximumSet_Gen": {
-            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_GetDataSources_MaximumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_ListDataSources_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_ListDataSources_MaximumSet_Gen.json"
           },
-          "WebAppDiscoverySiteDataSourceController_GetDataSources_MinimumSet_Gen": {
-            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_GetDataSources_MinimumSet_Gen.json"
+          "WebAppDiscoverySiteDataSourceController_ListDataSources_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppDiscoverySiteDataSourceController_ListDataSources_MinimumSet_Gen.json"
           }
         }
       }
@@ -6124,7 +6136,7 @@
         "tags": [
           "WebAppExtendedMachinesController"
         ],
-        "operationId": "WebAppExtendedMachinesController_GetMachineExtensions",
+        "operationId": "WebAppExtendedMachinesController_ListMachineExtensions",
         "description": "Method to get all extended machines.",
         "parameters": [
           {
@@ -6192,11 +6204,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "WebAppExtendedMachinesController_GetMachineExtensions_MaximumSet_Gen": {
-            "$ref": "./examples/WebAppExtendedMachinesController_GetMachineExtensions_MaximumSet_Gen.json"
+          "WebAppExtendedMachinesController_ListMachineExtensions_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppExtendedMachinesController_ListMachineExtensions_MaximumSet_Gen.json"
           },
-          "WebAppExtendedMachinesController_GetMachineExtensions_MinimumSet_Gen": {
-            "$ref": "./examples/WebAppExtendedMachinesController_GetMachineExtensions_MinimumSet_Gen.json"
+          "WebAppExtendedMachinesController_ListMachineExtensions_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppExtendedMachinesController_ListMachineExtensions_MinimumSet_Gen.json"
           }
         }
       }
@@ -6263,7 +6275,7 @@
         "tags": [
           "IISWebApplicationsController"
         ],
-        "operationId": "IisWebApplicationsController_GetWebApplications",
+        "operationId": "IisWebApplicationsController_ListWebApplications",
         "description": "Method to get all IIS web application.",
         "parameters": [
           {
@@ -6331,11 +6343,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "IisWebApplicationsController_GetWebApplications_MaximumSet_Gen": {
-            "$ref": "./examples/IisWebApplicationsController_GetWebApplications_MaximumSet_Gen.json"
+          "IisWebApplicationsController_ListWebApplications_MaximumSet_Gen": {
+            "$ref": "./examples/IisWebApplicationsController_ListWebApplications_MaximumSet_Gen.json"
           },
-          "IisWebApplicationsController_GetWebApplications_MinimumSet_Gen": {
-            "$ref": "./examples/IisWebApplicationsController_GetWebApplications_MinimumSet_Gen.json"
+          "IisWebApplicationsController_ListWebApplications_MinimumSet_Gen": {
+            "$ref": "./examples/IisWebApplicationsController_ListWebApplications_MinimumSet_Gen.json"
           }
         }
       }
@@ -6402,7 +6414,7 @@
         "tags": [
           "IISWebServersController"
         ],
-        "operationId": "IisWebServersController_GetWebServers",
+        "operationId": "IisWebServersController_ListWebServers",
         "description": "Method to get all IIS web servers.",
         "parameters": [
           {
@@ -6470,11 +6482,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "IisWebServersController_GetWebServers_MaximumSet_Gen": {
-            "$ref": "./examples/IisWebServersController_GetWebServers_MaximumSet_Gen.json"
+          "IisWebServersController_ListWebServers_MaximumSet_Gen": {
+            "$ref": "./examples/IisWebServersController_ListWebServers_MaximumSet_Gen.json"
           },
-          "IisWebServersController_GetWebServers_MinimumSet_Gen": {
-            "$ref": "./examples/IisWebServersController_GetWebServers_MinimumSet_Gen.json"
+          "IisWebServersController_ListWebServers_MinimumSet_Gen": {
+            "$ref": "./examples/IisWebServersController_ListWebServers_MinimumSet_Gen.json"
           }
         }
       }
@@ -6616,7 +6628,7 @@
         "tags": [
           "WebAppRunAsAccountsController"
         ],
-        "operationId": "WebAppRunAsAccountsController_GetRunAsAccounts",
+        "operationId": "WebAppRunAsAccountsController_ListRunAsAccounts",
         "description": "Method to get all run as accounts.",
         "parameters": [
           {
@@ -6655,11 +6667,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "WebAppRunAsAccountsController_GetRunAsAccounts_MaximumSet_Gen": {
-            "$ref": "./examples/WebAppRunAsAccountsController_GetRunAsAccounts_MaximumSet_Gen.json"
+          "WebAppRunAsAccountsController_ListRunAsAccounts_MaximumSet_Gen": {
+            "$ref": "./examples/WebAppRunAsAccountsController_ListRunAsAccounts_MaximumSet_Gen.json"
           },
-          "WebAppRunAsAccountsController_GetRunAsAccounts_MinimumSet_Gen": {
-            "$ref": "./examples/WebAppRunAsAccountsController_GetRunAsAccounts_MinimumSet_Gen.json"
+          "WebAppRunAsAccountsController_ListRunAsAccounts_MinimumSet_Gen": {
+            "$ref": "./examples/WebAppRunAsAccountsController_ListRunAsAccounts_MinimumSet_Gen.json"
           }
         }
       }
@@ -6776,7 +6788,7 @@
         "tags": [
           "TomcatWebApplicationsController"
         ],
-        "operationId": "TomcatWebApplicationsController_GetWebApplications",
+        "operationId": "TomcatWebApplicationsController_ListWebApplications",
         "description": "Method to get all Tomcat web application.",
         "parameters": [
           {
@@ -6844,11 +6856,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "TomcatWebApplicationsController_GetWebApplications_MaximumSet_Gen": {
-            "$ref": "./examples/TomcatWebApplicationsController_GetWebApplications_MaximumSet_Gen.json"
+          "TomcatWebApplicationsController_ListWebApplications_MaximumSet_Gen": {
+            "$ref": "./examples/TomcatWebApplicationsController_ListWebApplications_MaximumSet_Gen.json"
           },
-          "TomcatWebApplicationsController_GetWebApplications_MinimumSet_Gen": {
-            "$ref": "./examples/TomcatWebApplicationsController_GetWebApplications_MinimumSet_Gen.json"
+          "TomcatWebApplicationsController_ListWebApplications_MinimumSet_Gen": {
+            "$ref": "./examples/TomcatWebApplicationsController_ListWebApplications_MinimumSet_Gen.json"
           }
         }
       }
@@ -6915,7 +6927,7 @@
         "tags": [
           "TomcatWebServersController"
         ],
-        "operationId": "TomcatWebServersController_GetWebServers",
+        "operationId": "TomcatWebServersController_ListWebServers",
         "description": "Method to get all Tomcat web servers.",
         "parameters": [
           {
@@ -6983,11 +6995,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "TomcatWebServersController_GetWebServers_MaximumSet_Gen": {
-            "$ref": "./examples/TomcatWebServersController_GetWebServers_MaximumSet_Gen.json"
+          "TomcatWebServersController_ListWebServers_MaximumSet_Gen": {
+            "$ref": "./examples/TomcatWebServersController_ListWebServers_MaximumSet_Gen.json"
           },
-          "TomcatWebServersController_GetWebServers_MinimumSet_Gen": {
-            "$ref": "./examples/TomcatWebServersController_GetWebServers_MinimumSet_Gen.json"
+          "TomcatWebServersController_ListWebServers_MinimumSet_Gen": {
+            "$ref": "./examples/TomcatWebServersController_ListWebServers_MinimumSet_Gen.json"
           }
         }
       }
@@ -7121,7 +7133,7 @@
         "tags": [
           "WebApplicationsController"
         ],
-        "operationId": "WebApplicationsController_GetWebApplications",
+        "operationId": "WebApplicationsController_ListWebApplications",
         "description": "Method to get all IIS web applications.",
         "parameters": [
           {
@@ -7189,11 +7201,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "WebApplicationsController_GetWebApplications_MaximumSet_Gen": {
-            "$ref": "./examples/WebApplicationsController_GetWebApplications_MaximumSet_Gen.json"
+          "WebApplicationsController_ListWebApplications_MaximumSet_Gen": {
+            "$ref": "./examples/WebApplicationsController_ListWebApplications_MaximumSet_Gen.json"
           },
-          "WebApplicationsController_GetWebApplications_MinimumSet_Gen": {
-            "$ref": "./examples/WebApplicationsController_GetWebApplications_MinimumSet_Gen.json"
+          "WebApplicationsController_ListWebApplications_MinimumSet_Gen": {
+            "$ref": "./examples/WebApplicationsController_ListWebApplications_MinimumSet_Gen.json"
           }
         }
       }
@@ -7203,7 +7215,7 @@
         "tags": [
           "WebServersController"
         ],
-        "operationId": "WebServersController_GetWebServers",
+        "operationId": "WebServersController_ListWebServers",
         "description": "Method to get all web servers.",
         "parameters": [
           {
@@ -7271,11 +7283,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "WebServersController_GetWebServers_MaximumSet_Gen": {
-            "$ref": "./examples/WebServersController_GetWebServers_MaximumSet_Gen.json"
+          "WebServersController_ListWebServers_MaximumSet_Gen": {
+            "$ref": "./examples/WebServersController_ListWebServers_MaximumSet_Gen.json"
           },
-          "WebServersController_GetWebServers_MinimumSet_Gen": {
-            "$ref": "./examples/WebServersController_GetWebServers_MinimumSet_Gen.json"
+          "WebServersController_ListWebServers_MinimumSet_Gen": {
+            "$ref": "./examples/WebServersController_ListWebServers_MinimumSet_Gen.json"
           }
         }
       }
@@ -10865,7 +10877,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ApplianceNonceValueProperties",
-          "description": "Gets or sets the nested properties."
+          "description": "Gets or sets the nested properties.",
+          "x-ms-client-flatten": true
         }
       },
       "description": "AgentManifestNonce REST Resource."
@@ -12605,7 +12618,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the Azure location in which Sites is created."
+          "description": "Gets or sets the Azure location in which Sites is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "description": "A HyperV SiteResource",
@@ -12648,10 +12665,6 @@
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the Azure location in which Sites is created."
         },
         "tags": {
           "type": "object",
@@ -12740,7 +12753,8 @@
         },
         "properties": {
           "$ref": "#/definitions/MachineSoftwareInventoryProperties",
-          "description": "Gets or sets software inventory properties."
+          "description": "Gets or sets software inventory properties.",
+          "x-ms-client-flatten": true
         }
       },
       "description": "HyperV VM software inventory REST resource."
@@ -13875,7 +13889,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the Azure location in which Sites is created."
+          "description": "Gets or sets the Azure location in which Sites is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "description": "A MasterSite",
@@ -13967,10 +13985,6 @@
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the Azure location in which Sites is created."
         },
         "tags": {
           "type": "object",
@@ -14402,6 +14416,7 @@
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionPropertiesV2",
           "description": "Gets the properties of the object.",
+          "x-ms-client-flatten": true,
           "readOnly": true
         }
       },
@@ -17217,6 +17232,7 @@
         "properties": {
           "$ref": "#/definitions/RunAsAccountRunAsAccountProperties",
           "description": "Gets nested properties.",
+          "x-ms-client-flatten": true,
           "readOnly": true
         }
       },
@@ -17266,7 +17282,8 @@
         },
         "properties": {
           "$ref": "#/definitions/CosmosDbDeleteImportedMachinesJobEntityDeleteImportedMachinesJobProperties",
-          "description": "Gets or sets the delete import machines job properties."
+          "description": "Gets or sets the delete import machines job properties.",
+          "x-ms-client-flatten": true
         },
         "id": {
           "type": "string",
@@ -17305,7 +17322,8 @@
         },
         "properties": {
           "$ref": "#/definitions/CosmosDbExportImportedMachinesJobEntityExportImportedMachinesJobEntityProperties",
-          "description": "Gets or sets the export machines job properties."
+          "description": "Gets or sets the export machines job properties.",
+          "x-ms-client-flatten": true
         },
         "id": {
           "type": "string",
@@ -17364,7 +17382,8 @@
         },
         "properties": {
           "$ref": "#/definitions/ImportMachinesJobEntityImportMachinesJobProperties",
-          "description": "Gets or sets the import job properties."
+          "description": "Gets or sets the import job properties.",
+          "x-ms-client-flatten": true
         },
         "id": {
           "type": "string",
@@ -17636,7 +17655,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Gets or sets the Azure location in which Sites is created."
+          "description": "Gets or sets the Azure location in which Sites is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "description": "A VMwareSite",
@@ -17679,10 +17702,6 @@
         "eTag": {
           "type": "string",
           "description": "Gets or sets the eTag for concurrency control."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the Azure location in which Sites is created."
         },
         "tags": {
           "type": "object",
@@ -17751,7 +17770,8 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/VersionedV202001ExportMachineErrorsRequestExportMachineErrorsProperties",
-          "description": "Gets or sets the properties."
+          "description": "Gets or sets the properties.",
+          "x-ms-client-flatten": true
         }
       },
       "description": "The body of export machine errors request."

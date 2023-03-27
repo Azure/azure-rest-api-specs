@@ -241,7 +241,7 @@ interface OperationsCustom {
   @get
   @operationId("Operations_List")
   list(
-   // ...ApiVersionParameter,
+    ...ApiVersionParameter,
 
     @path
     @segment("providers")
@@ -263,4 +263,6 @@ op OperationCustom<
   >,
   ...TParams
 ): ArmDeletedResponse | TResponse ;
+
+
 

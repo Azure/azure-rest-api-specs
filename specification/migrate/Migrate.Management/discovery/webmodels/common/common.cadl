@@ -39,24 +39,6 @@ enum HealthErrorDetailsSource {
   RefreshFabricLayoutDependencyMap,
 }
 
-@doc("Data related to a machine's SQL discovery.")
-model SqlDiscovery {
-  @doc("Gets or sets number of SQL servers successfully discovered by SQL agent.")
-  successfullyDiscoveredServerCount: int64;
-
-  @doc("Gets or sets total number of SQL servers.")
-  totalServerCount: int64;
-
-  @doc("Gets or sets the run as account ID with which SQL Metadata worked successfully")
-  sqlMetadataHydratedRunAsAccountId: string;
-
-  @doc("Gets or sets the discovery pipe used for fetching SQL Server's metadata from registry.")
-  sqlMetadataDiscoveryPipe: string;
-
-  @doc("Gets or sets status of partner discovery.")
-  discoveryScopeStatus: DiscoveryScopeStatus;
-}
-
 @doc("Data related to a machine's WebApps discovery.")
 model WebAppDiscovery {
   @doc("Gets or sets number of successfully discovered web servers..")
@@ -456,6 +438,7 @@ model DependencyMapServiceMapExtensionsExportDependenciesRequest {
 @doc("The body of export machine errors request.")
 model VersionedV202001ExportMachineErrorsRequest {
   @doc("Gets or sets the properties.")
+  @OpenAPI.extension("x-ms-client-flatten", true)
   properties?: VersionedV202001ExportMachineErrorsRequestExportMachineErrorsProperties;
 }
 
@@ -552,6 +535,7 @@ model PendpointConnection {
 
   @doc("Gets the properties of the object.")
   @visibility("read")
+  @OpenAPI.extension("x-ms-client-flatten", true)
   properties?: PrivateEndpointConnectionPropertiesV2;
 }
 
@@ -970,6 +954,7 @@ model NonceRequest {
 @doc("AgentManifestNonce REST Resource.")
 model ApplianceNonce {
   @doc("Gets or sets the nested properties.")
+  @OpenAPI.extension("x-ms-client-flatten", true)
   properties?: ApplianceNonceValueProperties;
 }
 
@@ -999,6 +984,7 @@ model SqlSite {
   eTag?: string;
 
   @doc("Gets or sets the Azure location in which Sites is created.")
+  @visibility("read", "create")
   location?: string;
 }
 
@@ -2055,6 +2041,7 @@ model HyperVVMSoftwareInventory {
   name?: string;
 
   @doc("Gets or sets software inventory properties.")
+  @OpenAPI.extension("x-ms-client-flatten", true)
   properties?: MachineSoftwareInventoryProperties;
 }
 
