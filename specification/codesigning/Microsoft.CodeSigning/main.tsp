@@ -18,10 +18,11 @@ using Autorest;
   "https://{region}.codesigning.azure.net/", 
   "Azure CodeSigning is a service that provides managed code signing for all.", {
     @doc("The region where we will sign code.")
-     region?: string = "eus"
+     region: string
   }
 )
 
+@doc("Azure CodeSigning is a service that provides managed code signing for all.")
 namespace Azure.CodeSigning;
 
 enum Versions {
@@ -30,6 +31,7 @@ enum Versions {
 }
 
 interface CertificateProfileOperations {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @summary("Gets the status of a sign operation.")
   @doc("Gets the status of a sign operation.")
   @example("./examples/CertificateProfile_GetSignOperation.json", "GetSignOperation")
@@ -110,7 +112,7 @@ model SignRequest {
 @doc("The operation status response model.")
 model OperationStatus {
   @doc("Unique ID of the operation.")
-  id?: string;
+  id: string;
 
   @doc("The status of the sign operation.")
   status?: Status;
