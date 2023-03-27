@@ -3,6 +3,7 @@
   "info": {
     "title": "Azure.CodeSigning service",
     "version": "2022-06-15-preview",
+    "description": "Azure CodeSigning is a service that provides managed code signing for all.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -19,9 +20,8 @@
       {
         "name": "region",
         "in": "path",
-        "required": false,
+        "required": true,
         "description": "The region where we will sign code.",
-        "default": "eus",
         "type": "string"
       }
     ]
@@ -394,7 +394,10 @@
           "description": "The resulting sign operation including the signature and signing certificate."
         }
       },
-      "description": "The operation status response model."
+      "description": "The operation status response model.",
+      "required": [
+        "id"
+      ]
     },
     "SignRequest": {
       "type": "object",
