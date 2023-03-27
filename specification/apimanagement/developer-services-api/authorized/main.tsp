@@ -6,6 +6,7 @@ import "./routes/users.tsp";
 import "./routes/confirmations.tsp";
 import "./routes/delegation.tsp";
 import "./routes/identities.tsp";
+import "./routes/products.tsp";
 
 using TypeSpec.Http;
 

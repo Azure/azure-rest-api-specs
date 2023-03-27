@@ -283,9 +283,500 @@
           }
         }
       }
+    },
+    "/users/{userId}/products": {
+      "get": {
+        "operationId": "Products_ListProducts",
+        "description": "List a collection of products.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Product"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Product[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Product>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/products/{productId}": {
+      "get": {
+        "operationId": "Products_GetProduct",
+        "description": "Get the details of the product specified by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.Product"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/products/{productId}/apis": {
+      "get": {
+        "operationId": "Products_ListProductApis",
+        "description": "List a collection of products APIs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Api"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Api[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Api>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/products/{productId}/tags": {
+      "get": {
+        "operationId": "Products_ListProductTags",
+        "description": "List a collection of products tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "name": "productId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Tag>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "DeveloperServicesAPI.Models.Api": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "API identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "API name. Must be 1 to 300 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "API description."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Specifies whether an API subscription is required for accessing the API."
+        },
+        "path": {
+          "type": "string",
+          "description": "Path for API requests."
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiProtocol"
+          },
+          "x-typespec-name": "DeveloperServicesAPI.Models.ApiProtocol[]",
+          "description": "Protocols over which API is made available."
+        },
+        "tagDescriptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.TagDescription"
+          },
+          "x-typespec-name": "DeveloperServicesAPI.Models.TagDescription[]",
+          "description": "Collection of Tag Descriptions included into this API."
+        },
+        "authenticationSettings": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthenticationSettings",
+          "description": "Collection of authentication settings included into this API."
+        },
+        "subscriptionKeyParameterNames": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.SubscriptionKeyParameterNames",
+          "description": "Names of Subscription key parameters used by the API."
+        },
+        "termsOfServiceUrl": {
+          "type": "string",
+          "description": "A URL to the Terms of Service for the API. MUST be in the format of a URL."
+        },
+        "contact": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiContact",
+          "description": "Contact information for the exposed API."
+        },
+        "license": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiLicense",
+          "description": "License information for the exposed API."
+        },
+        "type": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiType",
+          "description": "Type of API."
+        },
+        "apiVersion": {
+          "type": "string",
+          "description": "API version name"
+        },
+        "apiVersionDescription": {
+          "type": "string",
+          "description": "Api version description"
+        },
+        "apiVersionSetId": {
+          "type": "string",
+          "description": "Api version Set Identifier"
+        }
+      },
+      "description": "API contract",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "path",
+        "protocols",
+        "authenticationSettings",
+        "subscriptionKeyParameterNames",
+        "apiVersionSetId"
+      ]
+    },
+    "DeveloperServicesAPI.Models.ApiContact": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The identifying name of the contact person/organization.",
+          "maxLength": 128
+        },
+        "url": {
+          "type": "string",
+          "description": "The URL pointing to the contact information. MUST be in the format of a URL.",
+          "maxLength": 128
+        },
+        "email": {
+          "type": "string",
+          "description": "The email address of the contact person/organization. MUST be in the format of an email address.",
+          "maxLength": 128
+        }
+      },
+      "description": "API contact information",
+      "required": [
+        "name",
+        "url",
+        "email"
+      ]
+    },
+    "DeveloperServicesAPI.Models.ApiLicense": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The license name used for the API.",
+          "maxLength": 128
+        },
+        "url": {
+          "type": "string",
+          "description": "A URL to the license used for the API. MUST be in the format of a URL.",
+          "maxLength": 128
+        }
+      },
+      "description": "API license information",
+      "required": [
+        "name",
+        "url"
+      ]
+    },
+    "DeveloperServicesAPI.Models.ApiProtocol": {
+      "type": "string",
+      "description": "API protocol information",
+      "enum": [
+        "http",
+        "https",
+        "ws",
+        "wss"
+      ],
+      "x-ms-enum": {
+        "name": "ApiProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Http",
+            "value": "http",
+            "description": "HTTP scheme will be supported for API"
+          },
+          {
+            "name": "Https",
+            "value": "https",
+            "description": "HTTPS scheme will be supported for API"
+          },
+          {
+            "name": "Ws",
+            "value": "ws",
+            "description": "WebSocket scheme will be supported for API"
+          },
+          {
+            "name": "Wss",
+            "value": "wss",
+            "description": "WebSocket Secure scheme will be supported for API"
+          }
+        ]
+      }
+    },
+    "DeveloperServicesAPI.Models.ApiType": {
+      "type": "string",
+      "description": "Type of API",
+      "enum": [
+        "http",
+        "soap",
+        "websocket",
+        "graphql"
+      ],
+      "x-ms-enum": {
+        "name": "ApiType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Http",
+            "value": "http",
+            "description": "API is a REST API"
+          },
+          {
+            "name": "Soap",
+            "value": "soap",
+            "description": "API is a SOAP API"
+          },
+          {
+            "name": "WebSocket",
+            "value": "websocket",
+            "description": "API is a WebSocket API"
+          },
+          {
+            "name": "GraphQL",
+            "value": "graphql",
+            "description": "API is a GraphQL API"
+          }
+        ]
+      }
+    },
+    "DeveloperServicesAPI.Models.AuthenticationSettings": {
+      "type": "object",
+      "properties": {
+        "oAuth2AuthenticationSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.OAuth2AuthenticationSettings"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.OAuth2AuthenticationSettings[]",
+          "description": "Collection of OAuth2 authentication settings included into this API."
+        },
+        "openidAuthenticationSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.OpenidAuthenticationSettings"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.OpenidAuthenticationSettings[]",
+          "description": "Collection of OpenID Connect authentication settings included into this API."
+        },
+        "subscriptionKeyRequired": {
+          "type": "boolean",
+          "description": "Specifies whether subscription key is required during call to this API, true - API is included into closed products only, false - API is included into open products alone, null - there is a mix of products."
+        }
+      },
+      "description": "Authentication settings.",
+      "required": [
+        "oAuth2AuthenticationSettings",
+        "openidAuthenticationSettings"
+      ]
+    },
+    "DeveloperServicesAPI.Models.BearerTokenSendingMethod": {
+      "type": "string",
+      "description": "Form of an authorization grant, which the client uses to request the access token.",
+      "enum": [
+        "authorizationHeader",
+        "query"
+      ],
+      "x-ms-enum": {
+        "name": "BearerTokenSendingMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AuthorizationHeader",
+            "value": "authorizationHeader",
+            "description": "Access token will be transmitted in the Authorization header using Bearer schema."
+          },
+          {
+            "name": "Query",
+            "value": "query",
+            "description": "Access token will be transmitted as query parameter."
+          }
+        ]
+      }
+    },
+    "DeveloperServicesAPI.Models.ClientAuthenticationMethod": {
+      "type": "string",
+      "description": "Supported methods of authorization.",
+      "enum": [
+        "Basic",
+        "Body"
+      ],
+      "x-ms-enum": {
+        "name": "ClientAuthenticationMethod",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Basic",
+            "value": "Basic",
+            "description": "Client authentication information will be transmitted in the Authorization header using Basic schema."
+          },
+          {
+            "name": "Body",
+            "value": "Body",
+            "description": "Client authentication information will be transmitted as www-url-form-encoded body parameter."
+          }
+        ]
+      }
+    },
     "DeveloperServicesAPI.Models.Error": {
       "type": "object",
       "properties": {
@@ -321,6 +812,48 @@
         "error"
       ]
     },
+    "DeveloperServicesAPI.Models.GrantType": {
+      "type": "string",
+      "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>.",
+      "enum": [
+        "authorizationCode",
+        "implicit",
+        "resourceOwnerPassword",
+        "clientCredentials",
+        "authorizationCodeWithPkce"
+      ],
+      "x-ms-enum": {
+        "name": "GrantType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AuthorizationCode",
+            "value": "authorizationCode",
+            "description": "<see cref=\"http://tools.ietf.org/html/rfc6749#section-4.1\"/>"
+          },
+          {
+            "name": "Implicit",
+            "value": "implicit",
+            "description": "<see cref=\"http://tools.ietf.org/html/rfc6749#section-4.2\"/>"
+          },
+          {
+            "name": "ResourceOwnerPassword",
+            "value": "resourceOwnerPassword",
+            "description": "<see cref=\"http://tools.ietf.org/html/rfc6749#section-4.3\"/>"
+          },
+          {
+            "name": "ClientCredentials",
+            "value": "clientCredentials",
+            "description": "<see cref=\"http://tools.ietf.org/html/rfc6749#section-4.4\"/>"
+          },
+          {
+            "name": "AuthorizationCodeWithPkce",
+            "value": "authorizationCodeWithPkce",
+            "description": "<see cref=\"http://tools.ietf.org/html/rfc7636\"/>"
+          }
+        ]
+      }
+    },
     "DeveloperServicesAPI.Models.IdentityConfirmationRequest": {
       "type": "object",
       "properties": {
@@ -355,6 +888,408 @@
       "required": [
         "id",
         "provider"
+      ]
+    },
+    "DeveloperServicesAPI.Models.Method": {
+      "type": "string",
+      "description": "HTTP Method.",
+      "enum": [
+        "HEAD",
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE",
+        "OPTIONS",
+        "TRACE",
+        "CONNECT"
+      ],
+      "x-ms-enum": {
+        "name": "Method",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Head",
+            "value": "HEAD",
+            "description": "HTTP HEAD method. <see cref=\"http://tools.ietf.org/html/rfc2616#section-9.4\"/>"
+          },
+          {
+            "name": "Get",
+            "value": "GET",
+            "description": "HTTP GET method. <see cref=\"http://tools.ietf.org/html/rfc2616#section-9.3\"/>"
+          },
+          {
+            "name": "Post",
+            "value": "POST",
+            "description": "HTTP POST method. <see cref=\"http://tools.ietf.org/html/rfc2616#section-9.5\"/>"
+          },
+          {
+            "name": "Put",
+            "value": "PUT",
+            "description": "HTTP PUT method. <see cref=\"http://tools.ietf.org/html/rfc2616#section-9.6\"/>"
+          },
+          {
+            "name": "Patch",
+            "value": "PATCH",
+            "description": "HTTP PATCH method."
+          },
+          {
+            "name": "Delete",
+            "value": "DELETE",
+            "description": "HTTP DELETE method. <see cref=\"http://tools.ietf.org/html/rfc2616#section-9.7\"/>"
+          },
+          {
+            "name": "Options",
+            "value": "OPTIONS",
+            "description": "HTTP OPTIONS method. <see cref=\"http://tools.ietf.org/html/rfc2616#section-9.2\"/>"
+          },
+          {
+            "name": "Trace",
+            "value": "TRACE",
+            "description": "HTTP TRACE method. <see cref=\"http://tools.ietf.org/html/rfc2616#section-9.8\"/>"
+          },
+          {
+            "name": "Connect",
+            "value": "CONNECT",
+            "description": "HTTP CONNECT method. <see cref=\"http://tools.ietf.org/html/rfc2616#section-9.9\"/>"
+          }
+        ]
+      }
+    },
+    "DeveloperServicesAPI.Models.NameValuePair": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "DeveloperServicesAPI.Models.OAuth2AuthenticationSettings": {
+      "type": "object",
+      "properties": {
+        "authorizationServerId": {
+          "type": "string",
+          "description": "OAuth2 authorization server identifier."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Operations scope."
+        },
+        "authorizationServer": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.OAuth2AuthorizationServer",
+          "description": "OAuth2 authorization server."
+        }
+      },
+      "description": "OAuth2 authentication settings.",
+      "required": [
+        "authorizationServerId",
+        "scope"
+      ]
+    },
+    "DeveloperServicesAPI.Models.OAuth2AuthorizationServer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "OAuth2 authorization server identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "OAuth2 authorization server name."
+        },
+        "description": {
+          "type": "string",
+          "description": "OAuth2 authorization server description."
+        },
+        "clientRegistrationEndpoint": {
+          "type": "string",
+          "description": "OAuth2 authorization server client registration endpoint."
+        },
+        "authorizationEndpoint": {
+          "type": "string",
+          "description": "OAuth2 authorization server authorization endpoint <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.2\"/>."
+        },
+        "authorizationMethods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Method"
+          },
+          "x-typespec-name": "DeveloperServicesAPI.Models.Method[]",
+          "description": "Supported methods of authorization."
+        },
+        "clientAuthenticationMethod": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.ClientAuthenticationMethod"
+          },
+          "x-typespec-name": "DeveloperServicesAPI.Models.ClientAuthenticationMethod[]",
+          "description": "Supported methods of authentication."
+        },
+        "tokenBodyParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.NameValuePair"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.NameValuePair[]",
+          "description": "Token request body parameters."
+        },
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "OAuth token endpoint. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.1\"/>."
+        },
+        "useInTestConsole": {
+          "type": "boolean",
+          "description": "Authorization Server may be used in the test console."
+        },
+        "useInApiDocumentation": {
+          "type": "boolean",
+          "description": "Authorization Server may be used in the API documentation."
+        },
+        "supportState": {
+          "type": "boolean",
+          "description": "Authorization Server may support client credentials in body by spec. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.1\"/>."
+        },
+        "defaultScope": {
+          "type": "string",
+          "description": "Scope that is going to applied by default on the console page. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.3\"/>."
+        },
+        "grantTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.GrantType"
+          },
+          "x-typespec-name": "DeveloperServicesAPI.Models.GrantType[]",
+          "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>."
+        },
+        "bearerTokenSendingMethods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.BearerTokenSendingMethod"
+          },
+          "x-typespec-name": "DeveloperServicesAPI.Models.BearerTokenSendingMethod[]",
+          "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application."
+        },
+        "resourceOwnerUsername": {
+          "type": "string",
+          "description": "Username of the resource owner on behalf of whom developer console will make requests."
+        },
+        "resourceOwnerPassword": {
+          "type": "string",
+          "description": "Password of the resource owner on behalf of whom developer console will make requests."
+        }
+      },
+      "description": "OAuth2 authorization server.",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "clientRegistrationEndpoint",
+        "authorizationEndpoint",
+        "authorizationMethods",
+        "clientAuthenticationMethod",
+        "tokenBodyParameters",
+        "tokenEndpoint",
+        "supportState",
+        "defaultScope",
+        "grantTypes",
+        "bearerTokenSendingMethods",
+        "clientId",
+        "resourceOwnerUsername",
+        "resourceOwnerPassword"
+      ]
+    },
+    "DeveloperServicesAPI.Models.OpenidAuthenticationSettings": {
+      "type": "object",
+      "properties": {
+        "openidProviderId": {
+          "type": "string",
+          "description": "OpenID Connect provider identifier."
+        },
+        "bearerTokenSendingMethods": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.BearerTokenSendingMethod"
+          },
+          "x-typespec-name": "DeveloperServicesAPI.Models.BearerTokenSendingMethod[]",
+          "description": "How to send token to the server."
+        },
+        "openidConnectProvider": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.OpenidConnectProvider",
+          "description": "OpenID Connect provider."
+        }
+      },
+      "description": "OpenID Connect authentication settings.",
+      "required": [
+        "openidProviderId",
+        "bearerTokenSendingMethods"
+      ]
+    },
+    "DeveloperServicesAPI.Models.OpenidConnectProvider": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "OpenID Connect Provider identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "OpenID Connect Provider name."
+        },
+        "description": {
+          "type": "string",
+          "description": "OpenID Connect Provider description."
+        },
+        "metadataEndpoint": {
+          "type": "string",
+          "description": "OpenID Connect Provider metadata endpoint."
+        },
+        "useInTestConsole": {
+          "type": "boolean",
+          "description": "Open Id Connect Provider may be used in the test console."
+        },
+        "useInApiDocumentation": {
+          "type": "boolean",
+          "description": "Open Id Connect Provider may be used in the API documentation."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID of developer console which is the client application."
+        }
+      },
+      "description": "OpenID Connect Provider settings.",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "metadataEndpoint",
+        "clientId"
+      ]
+    },
+    "DeveloperServicesAPI.Models.Product": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Product identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Product name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Product description."
+        },
+        "terms": {
+          "type": "string",
+          "description": "Product terms and conditions. Developer will have to accept these terms before he's allowed to call product API."
+        },
+        "subscriptionRequired": {
+          "type": "boolean",
+          "description": "Specifies whether a product subscription is required for accessing APIs included in this product. If true, the product is referred to as \"protected\" and a valid subscription key is required for a request to an API included in the product to succeed. If false, the product is referred to as \"open\" and requests to an API included in the product can be made without a subscription key. If property is omitted when creating a new product it's value is assumed to be true."
+        },
+        "approvalRequired": {
+          "type": "boolean",
+          "description": "Specifies whether subscription approval is required. If false, new subscriptions will be approved automatically enabling developers to call the product’s APIs immediately after subscribing. If true, administrators must manually approve the subscription before the developer can call any of the product’s APIs. Can be present only if subscriptionRequired property is present and has a value of true."
+        },
+        "subscriptionsLimit": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies the number of subscriptions a user can have to this product at the same time. Set to null or omit to allow unlimited per user subscriptions. Can be present only if subscriptionRequired property is present and has a value of false."
+        }
+      },
+      "description": "Product definition.",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "terms"
+      ]
+    },
+    "DeveloperServicesAPI.Models.SubscriptionKeyParameterNames": {
+      "type": "object",
+      "properties": {
+        "header": {
+          "type": "string",
+          "description": "Subscription key header name."
+        },
+        "query": {
+          "type": "string",
+          "description": "Subscription key query string parameter name."
+        }
+      },
+      "description": "Subscription key parameter names.",
+      "required": [
+        "header",
+        "query"
+      ]
+    },
+    "DeveloperServicesAPI.Models.Tag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Tag ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Tag name."
+        }
+      },
+      "description": "Tag definition.",
+      "required": [
+        "id",
+        "name"
+      ]
+    },
+    "DeveloperServicesAPI.Models.TagDescription": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Tag description identifier."
+        },
+        "tagId": {
+          "type": "string",
+          "description": "Tag identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Tag name. Must be 1 to 160 characters long."
+        },
+        "description": {
+          "type": "string",
+          "description": "Tag description. Must be 1 to 1000 characters long."
+        },
+        "externalDocsDescription": {
+          "type": "string",
+          "description": "Tag external documentation description."
+        },
+        "externalDocsUrl": {
+          "type": "string",
+          "description": "Tag external documentation URL."
+        }
+      },
+      "description": "Tag with description.",
+      "required": [
+        "id",
+        "tagId",
+        "name",
+        "description",
+        "externalDocsDescription",
+        "externalDocsUrl"
       ]
     },
     "DeveloperServicesAPI.Models.User": {
