@@ -63,3 +63,7 @@ model NameValuePair {
   name: string;
   value: string;
 }
+
+model UserParams {
+  @path userId: string;
+}

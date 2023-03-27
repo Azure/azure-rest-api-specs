@@ -33,13 +33,82 @@
   },
   "tags": [],
   "paths": {
+    "/confirmations/users/{userId}/identities/basic": {
+      "post": {
+        "operationId": "Confirmations_CreateUserBasicIdentityConfirmation",
+        "description": "Basic identity (Email) confirmation for a User.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "name": "identityConfirmationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.IdentityConfirmationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/delegation/urls/users/{userId}/{action}": {
+      "post": {
+        "operationId": "Delegation_CreateUserDelegationUrl",
+        "description": "User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "name": "action",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userDelegationOperationRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.UserDelegationOperationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.UserDelegationOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}": {
       "get": {
-        "operationId": "GetUser",
+        "operationId": "Users_GetUser",
         "description": "Get a user profile by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/CommonParams"
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
           }
         ],
         "responses": {
@@ -58,11 +127,11 @@
         }
       },
       "patch": {
-        "operationId": "CreateOrUpdateUser",
+        "operationId": "Users_CreateOrUpdateUser",
         "description": "Create or updatea a user by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/CommonParams"
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
           },
           {
             "name": "if-match",
@@ -96,11 +165,11 @@
         }
       },
       "delete": {
-        "operationId": "DeleteUser",
+        "operationId": "Users_DeleteUser",
         "description": "Delete a user by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/CommonParams"
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
           }
         ],
         "responses": {
@@ -153,6 +222,24 @@
         "error"
       ]
     },
+    "DeveloperServicesAPI.Models.IdentityConfirmationRequest": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "string",
+          "description": "The email address to send the confirmation to."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Confirmation reason."
+        }
+      },
+      "description": "API Management Notification Request",
+      "required": [
+        "to",
+        "reason"
+      ]
+    },
     "DeveloperServicesAPI.Models.User": {
       "type": "object",
       "properties": {
@@ -190,6 +277,37 @@
         "lastName",
         "state",
         "registrationDate"
+      ]
+    },
+    "DeveloperServicesAPI.Models.UserDelegationOperationRequest": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Id of product. Is not required for all operations."
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "Id of subscription. Is not required for all operations."
+        }
+      },
+      "description": "User delegation operation request",
+      "required": [
+        "productId",
+        "subscriptionId"
+      ]
+    },
+    "DeveloperServicesAPI.Models.UserDelegationOperationResponse": {
+      "type": "object",
+      "properties": {
+        "redirectUrl": {
+          "type": "string",
+          "description": "Redirect URL"
+        }
+      },
+      "description": "User delegation operation response",
+      "required": [
+        "redirectUrl"
       ]
     },
     "DeveloperServicesAPI.Models.UserState": {
@@ -252,7 +370,7 @@
     }
   },
   "parameters": {
-    "CommonParams": {
+    "DeveloperServicesAPI.Models.UserParams": {
       "name": "userId",
       "in": "path",
       "required": true,

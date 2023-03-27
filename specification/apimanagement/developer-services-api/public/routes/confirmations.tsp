@@ -22,11 +22,3 @@ op CreatePasswordConfirmation(
 op CreateBasicIdentityConfirmation(
   @body identityConfirmationRequest: IdentityConfirmationRequest
 ): NoContentResponse | ErrorResponse;
-
-@route("/confirmations/users/{userId}/identities/basic")
-@doc("Basic identity (Email) confirmation for a User.")
-@post
-op CreateUserBasicIdentityConfirmation(
-  @path userId: string,
-  @body identityConfirmationRequest: IdentityConfirmationRequest
-): NoContentResponse | ErrorResponse;

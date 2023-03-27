@@ -21,12 +21,3 @@ op CreateDelegationSigninUrl(
   @path action: string,
   @body delegationOperationRequest: DelegationOperationRequest
 ): ApiResponse<DelegationOperationResponse>;
-
-@route("/delegation/urls/users/{userId}/{action}")
-@doc("User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout).")
-@post
-op CreateUserDelegationUrl(
-  @path userId: string,
-  @path action: string,
-  @body userDelegationOperationRequest: UserDelegationOperationRequest
-): ApiResponse<UserDelegationOperationResponse>;
