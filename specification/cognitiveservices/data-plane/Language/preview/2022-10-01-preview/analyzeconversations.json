@@ -1409,14 +1409,14 @@
         },
         "duration": {
           "type": "string",
-          "description": "An optional duration value whose formatting is based on ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)."
+          "description": "Duration value whose formatting is based on ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)."
         },
         "modifier": {
           "$ref": "#/definitions/TemporalModifier"
         },
         "timex": {
           "type": "string",
-          "description": "An optional triplet that contains the beginning, the end, and the duration, all stated as ISO 8601 formatted strings."
+          "description": "Triplet that contains the beginning, the end, and the duration, all stated as ISO 8601 formatted strings."
         }
       }
     },
@@ -1469,7 +1469,7 @@
     },
     "TemporalModifier": {
       "type": "string",
-      "description": "Optional modifier of a date/time instance.",
+      "description": "Modifier of a date/time instance.",
       "enum": [
         "AfterApprox",
         "Before",
@@ -1576,7 +1576,7 @@
     },
     "LuisTargetIntentResult": {
       "type": "object",
-      "description": "It's a wrap-up of the LUIS generally available response.",
+      "description": "Wrap-up of the LUIS generally available response.",
       "x-ms-discriminator-value": "Luis",
       "allOf": [
         {
@@ -1592,7 +1592,7 @@
     },
     "QuestionAnsweringTargetIntentResult": {
       "type": "object",
-      "description": "It's a wrap-up of the question-answering knowledge base response.",
+      "description": "Wrap-up of the question-answering knowledge base response.",
       "x-ms-discriminator-value": "QuestionAnswering",
       "allOf": [
         {
@@ -1610,7 +1610,7 @@
       "type": "object",
       "properties": {
         "displayName": {
-          "description": "Optional display name for the analysis job.",
+          "description": "Display name for the analysis job.",
           "type": "string"
         },
         "analysisInput": {
@@ -1942,7 +1942,7 @@
         },
         "subcategory": {
           "type": "string",
-          "description": "(Optional) Entity subtype."
+          "description": "Entity subtype."
         },
         "offset": {
           "type": "integer",
@@ -2040,7 +2040,7 @@
         },
         "redactionSource": {
           "type": "string",
-          "description": "For transcript conversations, this parameter provides information regarding which content type (ITN, text, lexical, masked ITN) should be used for entity detection. The details of the detected entities - like the offset, the length, and the text itself - will correspond to the text type selected here.",
+          "description": "For transcript conversations, this parameter provides information about which content type (ITN, text, lexical, masked ITN) should be used for entity detection. The details of the detected entities - like the offset, the length, and the text itself - will correspond to the text type selected here.",
           "$ref": "#/definitions/TranscriptContentType"
         }
       },
@@ -2253,7 +2253,7 @@
       "properties": {
         "predictionSource": {
           "type": "string",
-          "description": "For transcript conversations, this parameter provides information regarding which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, the length, and the text itself - will correspond to the text type selected here.",
+          "description": "For transcript conversations, this parameter provides information about which content type should be used for sentiment analysis. The details of the sentiment analysis - like the offset, the length, and the text itself - will correspond to the text type selected here.",
           "$ref": "#/definitions/TranscriptContentType"
         }
       },

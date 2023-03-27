@@ -101,7 +101,7 @@
           },
           {
             "default": 20,
-            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
+            "description": "Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "maximum": 50,
             "minimum": 1,
@@ -110,7 +110,7 @@
           },
           {
             "default": 0,
-            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
+            "description": "Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "minimum": 0,
             "name": "$skip",
@@ -154,7 +154,7 @@
           },
           {
             "default": 20,
-            "description": "(Optional) Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
+            "description": "Set the maximum number of results per task. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "maximum": 50,
             "minimum": 1,
@@ -163,7 +163,7 @@
           },
           {
             "default": 0,
-            "description": "(Optional) Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
+            "description": "Set the number of elements to offset in the response. When both $top and $skip are specified, $skip is applied first.",
             "in": "query",
             "minimum": 0,
             "name": "$skip",
@@ -362,7 +362,7 @@
           {
             "name": "domain",
             "in": "query",
-            "description": "(Optional) If specified, sets the PII domain to include only a subset of the entity categories. Possible values are PHI or none.",
+            "description": "If specified, sets the PII domain to include only a subset of the entity categories.",
             "type": "string"
           },
           {
@@ -573,7 +573,7 @@
           {
             "name": "opinionMining",
             "in": "query",
-            "description": "(Optional) If it's set to true, the response will contain not only sentiment prediction but also opinion mining (aspect-based sentiment analysis) results.",
+            "description": "If it's set to true, the response will contain not only sentiment prediction but also opinion mining (aspect-based sentiment analysis) results.",
             "type": "boolean"
           },
           {
@@ -708,7 +708,7 @@
         },
         "language": {
           "type": "string",
-          "description": "(Optional) This is the two-letter ISO 639-1 representation of a language. For example, use \"en\" for English and \"es\" for Spanish. If it's not set, \"en\" for English is the default."
+          "description": "This is the two-letter ISO 639-1 representation of a language. For example, use \"en\" for English and \"es\" for Spanish. If it's not set, \"en\" for English is the default."
         }
       },
       "description": "Contains an input document for the service to analyze."
@@ -1614,7 +1614,7 @@
         },
         "sentiment": {
           "type": "string",
-          "description": "Predicted sentiment for the document (Negative, Neutral, Positive, or Mixed).",
+          "description": "Predicted sentiment for the document.",
           "enum": [
             "positive",
             "neutral",
@@ -2043,7 +2043,7 @@
         },
         "subcategory": {
           "type": "string",
-          "description": "(Optional) Entity subtype."
+          "description": "Entity subtype."
         },
         "offset": {
           "type": "integer",
@@ -2398,7 +2398,7 @@
         },
         "subcategory": {
           "type": "string",
-          "description": "(Optional) Entity subtype."
+          "description": "Entity subtype."
         },
         "offset": {
           "type": "integer",
@@ -2609,7 +2609,7 @@
     "JobDescriptor": {
       "properties": {
         "displayName": {
-          "description": "Optional display name for the analysis job.",
+          "description": "Display name for the analysis job.",
           "type": "string"
         }
       },
@@ -2980,7 +2980,7 @@
       "type": "string"
     },
     "PiiCategories": {
-      "description": "(Optional) Describes the PII categories to return.",
+      "description": "Describes the PII categories to return.",
       "items": {
         "type": "string",
         "x-ms-enum": {
@@ -3193,7 +3193,7 @@
       "name": "stringIndexType",
       "in": "query",
       "type": "string",
-      "description": "(Optional) Specifies the method used to interpret string offsets. It defaults to TextElement (grapheme) according to Unicode v8.0.0. For more information, see https://aka.ms/text-analytics-offsets.",
+      "description": "Specifies the method used to interpret string offsets. It defaults to TextElement (grapheme) according to Unicode v8.0.0. For more information, see https://aka.ms/text-analytics-offsets.",
       "default": "TextElement_v8",
       "enum": [
         "TextElement_v8",
@@ -3221,7 +3221,7 @@
       "x-ms-parameter-location": "method"
     },
     "PiiCategories": {
-      "description": "(Optional) Describes the PII categories to return.",
+      "description": "Describes the PII categories to return.",
       "in": "query",
       "collectionFormat": "csv",
       "items": {
@@ -3422,7 +3422,7 @@
       "x-ms-parameter-location": "method"
     },
     "AnalyzeJobId": {
-      "description": "Job ID for Analyze",
+      "description": "Job ID for Analyze.",
       "in": "path",
       "name": "jobId",
       "required": true,
@@ -3432,7 +3432,7 @@
     "ShowStats": {
       "name": "showStats",
       "in": "query",
-      "description": "(Optional) If it's set to true, the response will contain request and document-level statistics.",
+      "description": "If it's set to true, the response will contain request and document-level statistics.",
       "type": "boolean",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -3440,7 +3440,7 @@
     "LoggingOptOut": {
       "name": "loggingOptOut",
       "in": "query",
-      "description": "(Optional) If it's set to true, you opt out of having your text input logged for troubleshooting. By default, Text Analytics logs your input text for 48 hours, solely to allow for troubleshooting problems in providing you with the Text Analytics natural language processing functions. Setting this parameter to true disables input logging and might limit our ability to remediate problems that occur. For more information, see the Azure Cognitive Services compliance and privacy notes at https://aka.ms/cs-compliance, and the Microsoft Responsible AI principles at https://www.microsoft.com/en-us/ai/responsible-ai.",
+      "description": "If it's set to true, you opt out of having your text input logged for troubleshooting. By default, Text Analytics logs your input text for 48 hours, solely to allow for troubleshooting problems in providing you with the Text Analytics natural language processing functions. Setting this parameter to true disables input logging and might limit our ability to remediate problems that occur. For more information, see the Azure Cognitive Services compliance and privacy notes at https://aka.ms/cs-compliance, and the Microsoft Responsible AI principles at https://www.microsoft.com/en-us/ai/responsible-ai.",
       "type": "boolean",
       "required": false,
       "x-ms-parameter-location": "method"
@@ -3448,7 +3448,7 @@
     "ModelVersion": {
       "name": "model-version",
       "in": "query",
-      "description": "(Optional) This value indicates which model will be used for scoring. If a model version is not specified, the API should default to the latest non-preview version.",
+      "description": "This value indicates which model will be used for scoring. If a model version is not specified, the API should default to the latest non-preview version.",
       "type": "string",
       "required": false,
       "x-ms-parameter-location": "method"

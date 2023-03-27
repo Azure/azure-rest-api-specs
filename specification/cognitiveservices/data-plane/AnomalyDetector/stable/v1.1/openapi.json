@@ -558,19 +558,19 @@
       "properties": {
         "alignMode": {
           "$ref": "#/definitions/Multivariate.AlignMode",
-          "description": "Optional field that indicates how to align different variables to the same\ntime range. It can be either Inner or Outer."
+          "description": "Field that indicates how to align different variables to the same\ntime range."
         },
         "fillNAMethod": {
           "$ref": "#/definitions/Multivariate.FillNAMethod",
-          "description": "Optional field that indicates how missing values will be filled. It can be one of\nPrevious, Subsequent, Linear, Zero, or Fixed."
+          "description": "Field that indicates how missing values will be filled."
         },
         "paddingValue": {
           "type": "number",
           "format": "float",
-          "description": "Optional field. It's required when fillNAMethod is Fixed."
+          "description": "Field that's required when fillNAMethod is Fixed."
         }
       },
-      "description": "An optional field that indicates the manner of aligning multiple variables."
+      "description": "Field that indicates the manner of aligning multiple variables."
     },
     "Multivariate.AnomalyDetectionModel": {
       "type": "object",
@@ -702,7 +702,7 @@
     },
     "Multivariate.DataSchema": {
       "type": "string",
-      "description": "Data schema of the input data source: OneTable or MultiTable. The default is OneTable.",
+      "description": "Data schema of the input data source. The default is OneTable.",
       "enum": [
         "OneTable",
         "MultiTable"
@@ -763,7 +763,7 @@
     },
     "Multivariate.FillNAMethod": {
       "type": "string",
-      "description": "Optional field that indicates how missing values will be filled. It can be one of Previous, Subsequent, Linear, Zero, or Fixed.",
+      "description": "Field that indicates how missing values will be filled.",
       "enum": [
         "Previous",
         "Subsequent",
@@ -785,35 +785,35 @@
         },
         "dataSchema": {
           "$ref": "#/definitions/Multivariate.DataSchema",
-          "description": "Data schema of the input data source: OneTable or MultiTable. The default\nis OneTable."
+          "description": "Data schema of the input data source. The default\nis OneTable."
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Required field that indicates the start date/time of training data, which should be\nin ISO 8601 format."
+          "description": "Field that indicates the start date/time of training data, which should be\nin ISO 8601 format."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Required field that indicates the end date/time of training data, which should be\nin ISO 8601 format."
+          "description": "Field that indicates the end date/time of training data, which should be\nin ISO 8601 format."
         },
         "displayName": {
           "type": "string",
-          "description": "Optional field that indicates the display name of the model. Maximum length is 24\ncharacters.",
+          "description": "Field that indicates the display name of the model. Maximum length is 24\ncharacters.",
           "maxLength": 24
         },
         "slidingWindow": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional field that indicates how many previous time stamps will be used to\ndetect whether the time stamp is an anomaly or not."
+          "description": "Field that indicates how many previous time stamps will be used to\ndetect whether the time stamp is an anomaly or not."
         },
         "alignPolicy": {
           "$ref": "#/definitions/Multivariate.AlignPolicy",
-          "description": "Optional field that indicates the manner of aligning multiple variables."
+          "description": "Field that indicates the manner of aligning multiple variables."
         },
         "status": {
           "$ref": "#/definitions/Multivariate.ModelStatus",
-          "description": "Model status. It can be one of CREATED, RUNNING, READY, or FAILED."
+          "description": "Model status."
         },
         "errors": {
           "type": "array",
@@ -954,17 +954,17 @@
         "topContributorCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional field that specifies the number of top contributed\nvariables for one anomalous time stamp in the response. The default number is\n10."
+          "description": "Field that specifies the number of top contributed\nvariables for one anomalous time stamp in the response. The default number is\n10."
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Required field that indicates the start date/time of data for detection, which should\nbe in ISO 8601 format."
+          "description": "Field that indicates the start date/time of data for detection, which should\nbe in ISO 8601 format."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Required field that indicates the end date/time of data for detection, which should\nbe in ISO 8601 format."
+          "description": "Field that indicates the end date/time of data for detection, which should\nbe in ISO 8601 format."
         }
       },
       "description": "Detection request for batch inference. This is an asynchronous inference that\nwill need another API to get detection results.",
@@ -980,7 +980,7 @@
       "properties": {
         "status": {
           "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionStatus",
-          "description": "Status of detection results. It can be one of CREATED, RUNNING, READY, or FAILED."
+          "description": "Status of detection results."
         },
         "errors": {
           "type": "array",
@@ -1086,7 +1086,7 @@
         "topContributorCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional field that specifies the number of top contributed\nvariables for one anomalous time stamp in the response. The default number is\n10."
+          "description": "Field that specifies the number of top contributed\nvariables for one anomalous time stamp in the response. The default number is\n10."
         }
       },
       "description": "Request of the last detection.",
@@ -1338,12 +1338,12 @@
         "timestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Optional argument that indicates the time stamp of a data point (ISO8601 format)."
+          "description": "Argument that indicates the time stamp of a data point (ISO8601 format)."
         },
         "value": {
           "type": "number",
           "format": "float",
-          "description": "Measurement of that point, which should be float."
+          "description": "Measurement of that point."
         }
       },
       "description": "Definition of input time series points.",
@@ -1365,7 +1365,7 @@
         },
         "granularity": {
           "$ref": "#/definitions/Univariate.TimeGranularity",
-          "description": "Can be only one of yearly, monthly, weekly, daily, hourly, minutely, or\nsecondly. Granularity is used to verify whether the input series is valid."
+          "description": "Granularity is used to verify whether the input series is valid."
         },
         "customInterval": {
           "type": "integer",
@@ -1375,17 +1375,17 @@
         "period": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional argument that indicates the periodic value of a time series. If the value is null or\nnot present, the API will determine the period automatically."
+          "description": "Argument that indicates the periodic value of a time series. If the value is null or\nnot present, the API will determine the period automatically."
         },
         "stableTrendWindow": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional argument that indicates an advanced model parameter. A default stableTrendWindow value will\nbe used in detection."
+          "description": "Argument that indicates an advanced model parameter. A default stableTrendWindow value will\nbe used in detection."
         },
         "threshold": {
           "type": "number",
           "format": "float",
-          "description": "Optional argument that indicates an advanced model parameter between 0.0 and 1.0. The lower the\nvalue is, the larger the trend error is, which means less change point will\nbe accepted."
+          "description": "Argument that indicates an advanced model parameter between 0.0 and 1.0. The lower the\nvalue is, the larger the trend error is, which means less change point will\nbe accepted."
         }
       },
       "description": "Request of change point detection.",
@@ -1437,7 +1437,7 @@
         },
         "granularity": {
           "$ref": "#/definitions/Univariate.TimeGranularity",
-          "description": "Optional argument. It can be one of yearly, monthly, weekly, daily, hourly,\nminutely, secondly, microsecond, or none. If granularity is not present, the value\nis none by default. If granularity is none, the time stamp property in the time\nseries point can be absent."
+          "description": "Argument that indicates time granularity. If granularity is not present, the value\nis none by default. If granularity is none, the time stamp property in the time\nseries point can be absent."
         },
         "customInterval": {
           "type": "integer",
@@ -1447,17 +1447,17 @@
         "period": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional argument that indicates the periodic value of a time series. If the value is null or\nis not present, the API determines the period automatically."
+          "description": "Argument that indicates the periodic value of a time series. If the value is null or\nis not present, the API determines the period automatically."
         },
         "maxAnomalyRatio": {
           "type": "number",
           "format": "float",
-          "description": "Optional argument that indicates an advanced model parameter. It's the maximum anomaly ratio in a time series."
+          "description": "Argument that indicates an advanced model parameter. It's the maximum anomaly ratio in a time series."
         },
         "sensitivity": {
           "type": "integer",
           "format": "int32",
-          "description": "Optional argument that indicates an advanced model parameter between 0 and 99. The lower the value\nis, the larger the margin value is, which means fewer anomalies will be\naccepted."
+          "description": "Argument that indicates an advanced model parameter between 0 and 99. The lower the value\nis, the larger the margin value is, which means fewer anomalies will be\naccepted."
         },
         "imputeMode": {
           "$ref": "#/definitions/Univariate.ImputeMode",
