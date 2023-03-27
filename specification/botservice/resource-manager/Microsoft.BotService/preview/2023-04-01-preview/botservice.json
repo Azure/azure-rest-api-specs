@@ -1507,6 +1507,139 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/networkSecurityPerimeterConfigurations/{associationName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+        "description": "Gets the specified Network Security Perimeter configuration associated with the Bot.",
+        "x-ms-examples": {
+          "Get Network Security Perimeter Configuration": {
+            "$ref": "./examples/GetNetworkSecurityPerimeterConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "./networksecurityperimeter.json#/parameters/AssociationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the Network Security Perimeter configuration successfully.",
+            "schema": {
+              "$ref": "./networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_List",
+        "description": "List Network Security Perimeter configurations associated with the Bot.",
+        "x-ms-examples": {
+          "List Network Security Perimeter Configurations": {
+            "$ref": "./examples/ListNetworkSecurityPerimeterConfigurations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List the Network Security Perimeter configurations successfully.",
+            "schema": {
+              "$ref": "./networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.BotService/botServices/{resourceName}/networkSecurityPerimeterConfigurations/{associationName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "operationId": "NetworkSecurityPerimeterConfigurations_Reconcile",
+        "description": "Reconcile the specified Network Security Perimeter configuration associated with the Bot.",
+        "x-ms-examples": {
+          "Reconcile Network Security Perimeter Configuration": {
+            "$ref": "./examples/ReconcileNetworkSecurityPerimeterConfiguration.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceNameParameter"
+          },
+          {
+            "$ref": "./networksecurityperimeter.json#/parameters/AssociationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request to reconcile the configuration accepted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "x-ms-error-response": true,
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
