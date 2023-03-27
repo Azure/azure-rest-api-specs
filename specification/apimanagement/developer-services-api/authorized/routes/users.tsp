@@ -25,3 +25,8 @@ op CreateOrUpdateUser(
 @doc("Delete a user by its identifier.")
 @delete
 op DeleteUser(...UserParams): NoContentResponse | ErrorResponse;
+
+@route("/users/{userId}/token/revoke")
+@doc("Revoke the token of a user by its identifier.")
+@post
+op RevokeToken(...UserParams): NoContentResponse | ErrorResponse;
