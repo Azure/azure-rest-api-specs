@@ -5,6 +5,7 @@ import "@typespec/openapi3";
 import "./routes/users.tsp";
 import "./routes/confirmations.tsp";
 import "./routes/delegation.tsp";
+import "./routes/identities.tsp";
 
 using TypeSpec.Http;
 

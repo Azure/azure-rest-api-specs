@@ -184,6 +184,105 @@
           }
         }
       }
+    },
+    "/users/{userId}/identities": {
+      "get": {
+        "operationId": "Confirmations_ListUserIdentities",
+        "description": "List a collection of user identities.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.IdentityResult"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.IdentityResult[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.IdentityResult>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/identities/{provider}/{identity}": {
+      "put": {
+        "operationId": "Confirmations_CreateOrUpdateUserIdentityProvider",
+        "description": "Creates or updates the given user identity.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          },
+          {
+            "name": "provider",
+            "in": "path",
+            "required": true,
+            "description": "The provider of the identity.",
+            "type": "string"
+          },
+          {
+            "name": "identity",
+            "in": "path",
+            "required": true,
+            "description": "The identity.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -238,6 +337,24 @@
       "required": [
         "to",
         "reason"
+      ]
+    },
+    "DeveloperServicesAPI.Models.IdentityResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Signed user id."
+        },
+        "provider": {
+          "type": "string",
+          "description": "Identity provider of the user."
+        }
+      },
+      "description": "UserId associate with credentials provided in request.",
+      "required": [
+        "id",
+        "provider"
       ]
     },
     "DeveloperServicesAPI.Models.User": {
@@ -370,6 +487,33 @@
     }
   },
   "parameters": {
+    "DeveloperServicesAPI.Models.ListParams.filter": {
+      "name": "filter",
+      "in": "query",
+      "required": false,
+      "description": "OData filter query option.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DeveloperServicesAPI.Models.ListParams.skip": {
+      "name": "skip",
+      "in": "query",
+      "required": false,
+      "description": "Number of element to skip.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "DeveloperServicesAPI.Models.ListParams.top": {
+      "name": "top",
+      "in": "query",
+      "required": false,
+      "description": "Number of element to take from the top.",
+      "maximum": 100,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
     "DeveloperServicesAPI.Models.UserParams": {
       "name": "userId",
       "in": "path",
