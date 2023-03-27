@@ -1,3 +1,5 @@
+namespace DeveloperServicesAPI.Models;
+
 @doc("Subscription model.")
 model Subscription {
   @doc("The unique identifier of the subscription.")

@@ -1,3 +1,5 @@
+namespace DeveloperServicesAPI.Models;
+
 @doc("Report definition.")
 model Report {
   @doc("Depending on report endpoint specifies product, API, operation or developer name.")
