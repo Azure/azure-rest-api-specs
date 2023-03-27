@@ -74,7 +74,7 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-2022-12
+tag: package-snapshots-2022-11
 ```
 
 
