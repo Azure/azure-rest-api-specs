@@ -117,12 +117,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "registryName",
-            "description": "Name of registry. This is case-insensitive",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -190,12 +185,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "registryName",
-            "description": "Name of registry. This is case-insensitive",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -244,12 +234,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "registryName",
-            "description": "Name of registry. This is case-insensitive",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -307,12 +292,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "registryName",
-            "description": "Name of registry. This is case-insensitive",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -382,12 +362,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "in": "path",
-            "name": "registryName",
-            "description": "Name of registry. This is case-insensitive",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$"
+            "$ref": "#/parameters/RegistryNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -903,6 +878,17 @@
         "user_impersonation": "impersonate your user account"
       },
       "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "parameters": {
+    "RegistryNameParameter": {
+      "name": "registryName",
+      "description": "Name of Azure Machine Learning registry. This is case-insensitive",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$",
+      "x-ms-parameter-location": "method"
     }
   }
 }
