@@ -67,6 +67,38 @@
 
 - rule:
     paths:
+      - "specification/**/*Management/**/*.cadl"
+      - "specification/**/*Management.Shared/**/*.cadl"
+      - "specification/**/resource-management/**/*.cadl"
+      - "specification/**/*Management/**/*.tsp"
+      - "specification/**/*Management.Shared/**/*.tsp"
+      - "specification/**/resource-management/**/*.tsp"
+    reviewers:
+      - raych1
+      - lirenhe
+      - weidongxu-microsoft
+      - ArcturusZhang
+      - chunyu3
+      - msyyc
+      - live1206
+      - tadelesh
+      - haolingdong-msft
+      - archerzz
+      - XiaofeiCao
+      - MaryGao
+
+- rule:
+    paths:
+        - "specification/**/*.cadl"
+        - "specification/**/*.tsp"
+    reviewers:
+        - anuchandy
+        - jhendrixMSFT
+        - tjprescott
+        
+
+- rule:
+    paths:
       - "specification/network/**"
     reviewers:
       - lirenhe
@@ -79,67 +111,29 @@
     paths: "specification/common-types/**"
     reviewers:
       - raych1
-      - akning-ms
-      - leni-msft
-      - ruowan
-      - jianyexi
-      - xiaoxuqi-ms
+      - weidongxu-microsoft
+      - lirenhe
    
       
 - rule:
-    paths: "specification/@(providerhub|sql|appplatform|deviceupdate|servicelinker|imagebuilder|throttling|secretmanagementtestsvc|containerservice|azure-kusto)/**"
+    paths: "specification/providerhub/**"
     reviewers:
       - raych1
-      - xiaoxuqi-ms
-      
-- rule:
-    paths: "specification/voiceservices/**"
-    reviewers:
-      - raych1
-      - xiaoxuqi-ms
-
-- rule:
-    paths: "specification/@(financialdataservices|standbypool)/**"
-    reviewers:
-      - jianyexi
-      - xiaoxuqi-ms
-    branches:
-      - RPSaaSDev
 
 - rule:
     paths: "specification/sql/**"
     reviewers:
       - raych1
-      - xiaoxuqi-ms
     branches:
       - dev-sql-
-      
+
 - rule:
-    paths:
-      - "specification/@(applicationinsights|operationalinsights|eventgrid)/**"
+    paths: "specification/@(financialdataservices|standbypool)/**"
     reviewers:
-      - akning-ms
-      
-      
-- rule:
-    paths: "specification/@(security|edgeorder|synapse)/**"
-    reviewers:
-      - ruowan
-      
-- rule:
-    paths: "specification/powerplatform/**"
-    reviewers:
-      - honghr
-            
-- rule:
-    paths: "specification/signalr/**"
-    reviewers:
-      - leni-msft
-      
-- rule:
-    paths: "specification/eventhub/**"
-    reviewers:
-      - ruowan
+      - live1206
+    branches:
+      - RPSaaSDev
+
 - rule:
     paths: "specification/compute/**"
     reviewers:
@@ -159,70 +153,57 @@
 
 - rule:
     paths:
-      - "specification/authorization/**"
+      - "specification/@(azurestackhci|security)/**"
     reviewers:
-      - ruowan
+      - chunyu3
 
 - rule:
     paths:
-      - "specification/@(resources|datafactory|app)/**"
-    reviewers:
-      - leni-msft
-    branches:
-      - Microsoft.App-
-      
-- rule:
-    paths:
-      - "specification/storage/**"
-    reviewers:
-      - jianyexi
-
-
-- rule:	
-    paths: "specification/mediaservices/**"	
-    reviewers:	
-      - allenjzhang
-      
-- rule:
-    paths:
-      - "specification/containerregistry/**"
-    reviewers:
-      - fengzhou-msft
-
-- rule:
-    paths:
-      - "specification/mixedreality/**"
-      - "specification/hdinsight/**"
-    reviewers:
-      - leni-msft
-
-- rule:
-    paths:
-      - "specification/web/**"
+      - "specification/@(web|app)/**"
     reviewers:
       - weidongxu-microsoft
-      
-- rule:
-    paths: 
-      - "specification/securityinsights/**"
-    reviewers:
-      - dw511214992
-      
 
 - rule:
-    paths:
-      - "specification/videoanalyzer/resource-manager/**"
-      - "specification/cognitiveservices/resource-manager/**"
-      - "specification/dataprotection/**"
+    paths: "specification/@(synapse|azurearcdata)/**"
     reviewers:
-      - xiaoxuqi-ms
-      
+      - msyyc
+
+- rule:
+    paths: "specification/@(workloads|apimanagement)/**"
+    reviewers:
+      - live1206
+
+- rule:
+    paths: "specification/@(securityinsights|impact)/**"
+    reviewers:
+      - tadelesh
+
+- rule:
+    paths: "specification/@(appcomplianceautomation|hybridnetwork)/**"
+    reviewers:
+      - haolingdong-msft
+
+- rule:
+    paths: "specification/@(cost-management|hybridconnectivity)/**"
+    reviewers:
+      - archerzz
+
+- rule:
+    paths: "specification/@(billing|resources)/**"
+    reviewers:
+      - XiaofeiCao
+
+- rule:
+    paths: "specification/@(testbase|appplatform)/**"
+    reviewers:
+      - MaryGao
+
 - rule:
     paths:
       - "documentation/**"
     reviewers:
       - josefree
-      - akning-ms
+      - weshaggard
 
 
 - rule:
@@ -232,8 +213,8 @@
       - ".azure-pipelines/**"	
       - ".azure-pipelines-preproduction/**"	
     reviewers:
-      - akning-ms
-      - raych1
+      - weshaggard
+      - konrad-jamrozik
 
 - rule:
     # manager-plane PR
@@ -243,18 +224,11 @@
       - lirenhe
       - weidongxu-microsoft
       - ArcturusZhang
-      - raych1
-      - akning-ms
-      - leni-msft
-      - ruowan
-      - jianyexi
       - chunyu3
-      - changlong-liu
       - msyyc
-      - qiaozha
-      - dw511214992
-      - honghr
-      - tianxchen-ms
-      - xiaoxuqi-ms
       - live1206
       - tadelesh
+      - haolingdong-msft
+      - archerzz
+      - XiaofeiCao
+      - MaryGao

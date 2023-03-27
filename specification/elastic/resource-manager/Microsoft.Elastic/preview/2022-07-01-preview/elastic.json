@@ -1080,8 +1080,11 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "description": "Default error response.",
@@ -1091,6 +1094,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "createAndAssociateIPFilter_Create": {
             "$ref": "./examples/IPTrafficFilter_Create.json"
@@ -1141,8 +1147,11 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
           },
           "default": {
             "description": "Default error response.",
@@ -1152,6 +1161,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "createAndAssociatePLFilter_Create": {
             "$ref": "./examples/PrivateLinkTrafficFilters_Create.json"
@@ -1191,7 +1203,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Accepted"
           },
           "default": {
             "description": "Default error response.",
@@ -1201,6 +1213,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "AssociateTrafficFilter_Associate": {
             "$ref": "./examples/AssociateTrafficFilter_Update.json"
@@ -1288,7 +1303,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Success"
+            "description": "Accepted"
           },
           "default": {
             "description": "Default error response.",
@@ -1298,6 +1313,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "DetachTrafficFilter_Update": {
             "$ref": "./examples/DetachTrafficFilters_Update.json"
@@ -1587,7 +1605,7 @@
         },
         "business": {
           "description": "Business of the company",
-          "maxLength": 50,
+          "maxLength": 64,
           "type": "string"
         },
         "employeesNumber": {
@@ -1597,12 +1615,12 @@
         },
         "state": {
           "description": "State of the company location.",
-          "maxLength": 50,
+          "maxLength": 64,
           "type": "string"
         },
         "country": {
           "description": "Country of the company location.",
-          "maxLength": 50,
+          "maxLength": 64,
           "type": "string"
         }
       }
@@ -1623,7 +1641,7 @@
         },
         "companyName": {
           "description": "Company name of the user",
-          "maxLength": 50,
+          "maxLength": 64,
           "type": "string"
         },
         "emailAddress": {
