@@ -558,6 +558,9 @@
           },
           "Create FirewallPolicyRuleCollectionGroup With Web Categories": {
             "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json"
+          },
+          "Create FirewallPolicyRuleCollectionGroup With http header to insert": {
+            "$ref": "./examples/FirewallPolicyRuleCollectionGroupWithHttpHeadersToInsert.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1290,6 +1293,14 @@
           "description": "List of destination azure web categories.",
           "items": {
             "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "httpHeadersToInsert": {
+          "type": "array",
+          "description": "List of HTTP/S headers to insert.",
+          "items": {
+            "$ref": "#/definitions/FirewallPolicyHttpHeaderToInsert"
           },
           "x-ms-identifiers": []
         }
@@ -2153,6 +2164,20 @@
             "description": "Describes a single value of the filter",
             "type": "string"
           }
+        }
+      }
+    },
+    "FirewallPolicyHttpHeaderToInsert": {
+      "description": "name and value of HTTP/S header to insert",
+      "type": "object",
+      "properties": {
+        "headerName": {
+          "description": "Contains the name of the header",
+          "type": "string"
+        },
+        "headerValue": {
+          "description": "Contains the value of the header",
+          "type": "string"
         }
       }
     }
