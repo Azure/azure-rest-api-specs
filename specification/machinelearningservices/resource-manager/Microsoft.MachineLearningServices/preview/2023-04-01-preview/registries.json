@@ -878,5 +878,16 @@
       },
       "description": "Azure Active Directory OAuth2 Flow."
     }
+  },
+  "parameters": {
+    "RegistryNameParameter": {
+      "name": "registryName",
+      "description": "Name of Azure Machine Learning registry. This is case-insensitive",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$",
+      "x-ms-parameter-location": "method"
+    }
   }
 }
