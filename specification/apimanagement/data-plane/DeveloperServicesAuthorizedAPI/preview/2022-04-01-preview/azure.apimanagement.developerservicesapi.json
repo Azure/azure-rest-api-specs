@@ -185,6 +185,773 @@
         }
       }
     },
+    "/users/{userId}/apis": {
+      "get": {
+        "operationId": "Apis_ListApis",
+        "description": "List a collection of APIs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Api"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Api[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Api>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}": {
+      "get": {
+        "operationId": "Apis_GetApi",
+        "description": "Get the details of the API specified by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "application/json",
+              "application/vnd.sun.wadl+xml",
+              "application/wsdl+xml",
+              "application/vnd.swagger.doc+json",
+              "application/vnd.oai.openapi",
+              "application/vnd.oai.openapi+json"
+            ]
+          },
+          {
+            "name": "export",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.Api"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/vnd.sun.wadl+xml",
+          "application/wsdl+xml",
+          "application/vnd.swagger.doc+json",
+          "application/vnd.oai.openapi",
+          "application/vnd.oai.openapi+json"
+        ]
+      }
+    },
+    "/users/{userId}/apis/{apiId}/authServers/oauth2": {
+      "get": {
+        "operationId": "Apis_ListApiOAuth2Providers",
+        "description": "List of OAuth 2.0 servers associated with the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthorizationServer"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "DeveloperServicesAPI.Models.AuthorizationServer[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.AuthorizationServer>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/authServers/oauth2/{providerId}": {
+      "get": {
+        "operationId": "Apis_GetApiOAuth2Provider",
+        "description": "Get OAuth 2.0 server specified by its identifier associated with the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "name": "providerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthorizationServer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/authServers/openidconnect": {
+      "get": {
+        "operationId": "Apis_ListApiOpenidProviders",
+        "description": "List of OpenID Connect servers associated with the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthorizationServer"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "DeveloperServicesAPI.Models.AuthorizationServer[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.AuthorizationServer>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/authServers/openidconnect/{providerId}": {
+      "get": {
+        "operationId": "Apis_GetApiOpenidProvider",
+        "description": "Get OpenID Connect server specified by its identifier associated with the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "name": "providerId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthorizationServer"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/hostnames": {
+      "get": {
+        "operationId": "Apis_ListApiHostnames",
+        "description": "Hostnames of the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiHostname"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.ApiHostname[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.ApiHostname>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/operations": {
+      "get": {
+        "operationId": "Apis_ListApiOperations",
+        "description": "Operations of the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Operation"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Operation[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Operation>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/operations/{operationId}": {
+      "get": {
+        "operationId": "Apis_GetApiOperation",
+        "description": "Operation specified by its identifier of the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.Operation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/operations/{operationId}/tags": {
+      "get": {
+        "operationId": "Apis_ListApiOperationTags",
+        "description": "Operation tags specified by its identifier of the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Tag>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/products": {
+      "get": {
+        "operationId": "Apis_ListApiProducts",
+        "description": "List of public products associated with the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Product"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Product[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Product>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/releases": {
+      "get": {
+        "operationId": "Apis_ListApiReleases",
+        "description": "List of releases for the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiRelease"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.ApiRelease[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.ApiRelease>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/schemas": {
+      "get": {
+        "operationId": "Apis_ListApiSchemas",
+        "description": "List a collection of APIs schemas.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiSchema"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.ApiSchema[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.ApiSchema>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/schemas/{schemaId}": {
+      "get": {
+        "operationId": "Apis_GetApiSchema",
+        "description": "Get the details of the APIs schema specified by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "name": "schemaId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiSchema"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/{userId}/apis/{apiId}/tags": {
+      "get": {
+        "operationId": "Apis_ListApiTags",
+        "description": "Tags of the API.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.UserParams"
+          },
+          {
+            "$ref": "#/parameters/Routes.Apis.CommonParams"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+          },
+          {
+            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextLink": {
+                  "type": "string",
+                  "description": "Relative URL to next page of collection."
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
+                  },
+                  "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
+                  "description": "Collection itself."
+                }
+              },
+              "description": "Collection object for listing operations.",
+              "required": [
+                "nextLink",
+                "value"
+              ],
+              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Tag>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/users/{userId}/apiVersionSets": {
       "get": {
         "operationId": "ApiVersionSets_ListApiVersionSets",
@@ -744,6 +1511,24 @@
         "email"
       ]
     },
+    "DeveloperServicesAPI.Models.ApiHostname": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "API hostname identifier."
+        },
+        "value": {
+          "type": "string",
+          "description": "Hostname value."
+        }
+      },
+      "description": "API hostname information",
+      "required": [
+        "id",
+        "value"
+      ]
+    },
     "DeveloperServicesAPI.Models.ApiLicense": {
       "type": "object",
       "properties": {
@@ -799,6 +1584,58 @@
           }
         ]
       }
+    },
+    "DeveloperServicesAPI.Models.ApiRelease": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "API release identifier."
+        },
+        "createdDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Release creation date and time."
+        },
+        "updatedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Release update date and time."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Release notes."
+        }
+      },
+      "description": "API release information",
+      "required": [
+        "id",
+        "createdDateTime",
+        "updatedDateTime",
+        "notes"
+      ]
+    },
+    "DeveloperServicesAPI.Models.ApiSchema": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "API schema identifier."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "Media type of the schema document (e.g. application/json, application/xml)."
+        },
+        "document": {
+          "type": "string",
+          "description": "The document representing the Schema."
+        }
+      },
+      "description": "A Schema used by an API.",
+      "required": [
+        "id",
+        "contentType"
+      ]
     },
     "DeveloperServicesAPI.Models.ApiType": {
       "type": "string",
@@ -934,6 +1771,63 @@
       "required": [
         "oAuth2AuthenticationSettings",
         "openidAuthenticationSettings"
+      ]
+    },
+    "DeveloperServicesAPI.Models.AuthorizationServer": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The unique identifier of the authorization server."
+        },
+        "description": {
+          "type": "string",
+          "description": "The human-readable name of the authorization server."
+        },
+        "clientId": {
+          "type": "string",
+          "description": "The client ID of the authorization server."
+        },
+        "authorizationEndpoint": {
+          "type": "string",
+          "description": "OAuth authorization endpoint <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.2\"/>."
+        },
+        "tokenEndpoint": {
+          "type": "string",
+          "description": "OAuth token endpoint. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.1\"/>."
+        },
+        "defaultScope": {
+          "type": "string",
+          "description": "Scope applied by default on the console page. <see cref=\"http://tools.ietf.org/html/rfc6749#section-3.3\"/>."
+        },
+        "grantTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.GrantType"
+          },
+          "x-typespec-name": "DeveloperServicesAPI.Models.GrantType[]",
+          "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>."
+        },
+        "useInTestConsole": {
+          "type": "boolean",
+          "description": "Authorization Server may be used in the test console."
+        },
+        "useInApiDocumentation": {
+          "type": "boolean",
+          "description": "Authorization Server may be used in the API documentation."
+        }
+      },
+      "description": "External OAuth authorization server settings.",
+      "required": [
+        "name",
+        "description",
+        "clientId",
+        "authorizationEndpoint",
+        "tokenEndpoint",
+        "defaultScope",
+        "grantTypes",
+        "useInTestConsole",
+        "useInApiDocumentation"
       ]
     },
     "DeveloperServicesAPI.Models.BearerTokenSendingMethod": {
@@ -1384,6 +2278,115 @@
         "clientId"
       ]
     },
+    "DeveloperServicesAPI.Models.Operation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Operation identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "Operation name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation description."
+        },
+        "method": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.Method",
+          "description": "Operation method."
+        },
+        "urlTemplate": {
+          "type": "string",
+          "description": "Operation URL template."
+        },
+        "templateParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "description": "Operation URL template parameters."
+        },
+        "request": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.Request",
+          "description": "Operation request details."
+        },
+        "responses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Response"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.Response[]",
+          "description": "Operation responses."
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
+          },
+          "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
+          "description": "Operation tags."
+        }
+      },
+      "description": "API operation details.",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "method",
+        "urlTemplate",
+        "templateParameters",
+        "request",
+        "responses",
+        "tags"
+      ]
+    },
+    "DeveloperServicesAPI.Models.Parameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Parameter description."
+        },
+        "type": {
+          "type": "string",
+          "description": "Parameter type."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Specifies whether parameter is required or not."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Parameter default value."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "Parameter values."
+        },
+        "schemaId": {
+          "type": "string",
+          "description": "Parameter schema identifier."
+        },
+        "typeName": {
+          "type": "string",
+          "description": "Parameter type name."
+        }
+      },
+      "description": "API operation method."
+    },
     "DeveloperServicesAPI.Models.Product": {
       "type": "object",
       "properties": {
@@ -1424,6 +2427,103 @@
         "description",
         "terms"
       ]
+    },
+    "DeveloperServicesAPI.Models.Representation": {
+      "type": "object",
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Representation content type."
+        },
+        "schemaId": {
+          "type": "string",
+          "description": "Schema identifier. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'."
+        },
+        "typeName": {
+          "type": "string",
+          "description": "Type name defined by the schema. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'."
+        },
+        "formParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "description": "Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'."
+        }
+      },
+      "description": "Operation request representation."
+    },
+    "DeveloperServicesAPI.Models.Request": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Request description."
+        },
+        "queryParameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "description": "Collection of operation request query parameters."
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "description": "Collection of operation request headers."
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Representation"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.Representation[]",
+          "description": "Collection of operation request representations."
+        }
+      },
+      "description": "Operation request description."
+    },
+    "DeveloperServicesAPI.Models.Response": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Operation response status code."
+        },
+        "description": {
+          "type": "string",
+          "description": "Operation response description."
+        },
+        "headers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "description": "Collection of operation response headers."
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesAPI.Models.Representation"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesAPI.Models.Representation[]",
+          "description": "Collection of operation response representations."
+        }
+      },
+      "description": "Operation response description."
     },
     "DeveloperServicesAPI.Models.SubscriptionKeyParameterNames": {
       "type": "object",
@@ -1665,6 +2765,13 @@
     },
     "Routes.ApiVersionSets.CommonParams": {
       "name": "versionSetId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Routes.Apis.CommonParams": {
+      "name": "apiId",
       "in": "path",
       "required": true,
       "type": "string",

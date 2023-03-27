@@ -8,6 +8,7 @@ import "./routes/delegation.tsp";
 import "./routes/identities.tsp";
 import "./routes/products.tsp";
 import "./routes/apiVersionSets.tsp";
+import "./routes/apis.tsp";
 
 using TypeSpec.Http;
 

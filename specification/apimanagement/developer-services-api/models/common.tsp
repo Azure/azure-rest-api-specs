@@ -67,3 +67,16 @@ model NameValuePair {
 model UserParams {
   @path userId: string;
 }
+
+model TypedBody<BodyType, ContentType> {
+  @body body: BodyType;
+  @header contentType: ContentType;
+}
+
+alias ContentTypes =
+  | "application/json"
+  | "application/vnd.sun.wadl+xml"
+  | "application/wsdl+xml"
+  | "application/vnd.swagger.doc+json"
+  | "application/vnd.oai.openapi"
+  | "application/vnd.oai.openapi+json";
