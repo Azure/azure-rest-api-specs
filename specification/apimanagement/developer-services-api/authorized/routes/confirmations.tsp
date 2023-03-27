@@ -11,6 +11,6 @@ namespace DeveloperServicesAuthorizedAPI.Routes.Confirmations;
 @doc("Basic identity (Email) confirmation for a User.")
 @post
 op CreateUserBasicIdentityConfirmation(
-    ...UserParams,
-    @body identityConfirmationRequest: IdentityConfirmationRequest
+  ...UserParams,
+  @body identityConfirmationRequest: IdentityConfirmationRequest
 ): NoContentResponse | ErrorResponse;

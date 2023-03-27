@@ -9,8 +9,6 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesPublicAPI.Routes.Products;
 
-//Routes
-
 @route("/products")
 @doc("List a collection of products.")
 @get

@@ -7,8 +7,6 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesPublicAPI.Routes.Confirmations;
 
-//Routes
-
 @route("/confirmations/password")
 @doc("Password reset confirmation.")
 @post

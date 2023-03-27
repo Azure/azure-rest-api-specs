@@ -7,8 +7,6 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesPublicAPI.Routes.Users;
 
-//Routes
-
 @route("/users")
 @doc("Create a new user.")
 @post

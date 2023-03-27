@@ -7,8 +7,6 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesPublicAPI.Routes.Delegation;
 
-//Routes
-
 @route("/delegation/settings")
 @doc("Delegation settings.")
 @get

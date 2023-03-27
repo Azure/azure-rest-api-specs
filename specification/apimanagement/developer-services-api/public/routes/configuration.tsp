@@ -7,8 +7,6 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesPublicAPI.Routes.Configuration;
 
-//Routes
-
 @route("/configuration/content")
 @doc("Get content settings.")
 @get

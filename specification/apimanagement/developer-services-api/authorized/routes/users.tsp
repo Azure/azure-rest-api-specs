@@ -16,9 +16,9 @@ op GetUser(...UserParams): ApiResponse<User>;
 @doc("Create or updatea a user by its identifier.")
 @patch
 op CreateOrUpdateUser(
-    ...UserParams,
-    @header @friendlyName("If-Match") ifMatch: string,
-    @body userUpdate: UserUpdate
+  ...UserParams,
+  @header @friendlyName("If-Match") ifMatch: string,
+  @body userUpdate: UserUpdate
 ): ApiResponse<User>;
 
 @route("/users/{userId}")

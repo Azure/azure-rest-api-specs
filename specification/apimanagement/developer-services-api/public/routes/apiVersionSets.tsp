@@ -8,8 +8,6 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesPublicAPI.Routes.ApiVersionSets;
 
-//Routes
-
 @route("/apiVersionSets")
 @doc("List a collection of API version sets.")
 @get

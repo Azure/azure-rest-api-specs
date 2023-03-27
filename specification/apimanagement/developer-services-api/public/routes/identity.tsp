@@ -7,8 +7,6 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesPublicAPI.Routes.Identity;
 
-//Routes
-
 @route("/identity")
 @doc("Identity of current user.")
 @get

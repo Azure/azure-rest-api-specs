@@ -11,7 +11,7 @@ namespace DeveloperServicesAuthorizedAPI.Routes.Delegation;
 @doc("User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout).")
 @post
 op CreateUserDelegationUrl(
-    ...UserParams,
-    @path action: string,
-    @body userDelegationOperationRequest: UserDelegationOperationRequest
+  ...UserParams,
+  @path action: string,
+  @body userDelegationOperationRequest: UserDelegationOperationRequest
 ): ApiResponse<UserDelegationOperationResponse>;

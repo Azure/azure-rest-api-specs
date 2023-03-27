@@ -11,8 +11,6 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesPublicAPI.Routes.Apis;
 
-//Routes
-
 @route("/apis")
 @doc("List a collection of APIs.")
 @get

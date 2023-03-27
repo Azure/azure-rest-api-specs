@@ -7,8 +7,6 @@ using DeveloperServicesAPI.Models;
 
 namespace DeveloperServicesPublicAPI.Routes.Tags;
 
-//Routes
-
 @route("/tags")
 @doc("List a collection of tags.")
 @get
