@@ -5,7 +5,7 @@ import "../models/configuration.tsp";
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;
 
-namespace DeveloperServicesAPI.Resources.Configuration;
+namespace DeveloperServicesPublicAPI.Routes.Configuration;
 
 //Routes
 

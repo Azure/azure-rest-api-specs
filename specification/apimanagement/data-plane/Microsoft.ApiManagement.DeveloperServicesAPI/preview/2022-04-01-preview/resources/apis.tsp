@@ -9,7 +9,7 @@ import "../models/tag.tsp";
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;
 
-namespace DeveloperServicesAPI.Resources.Apis;
+namespace DeveloperServicesPublicAPI.Routes.Apis;
 
 //Routes
 

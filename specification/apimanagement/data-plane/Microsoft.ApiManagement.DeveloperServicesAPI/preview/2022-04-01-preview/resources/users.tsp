@@ -5,11 +5,11 @@ import "../models/user.tsp";
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;
 
-namespace DeveloperServicesAPI.Resources.Users;
+namespace DeveloperServicesPublicAPI.Routes.Users;
 
 //Routes
 
 @route("/users")
 @doc("Create a new user.")
 @post
-op ListTags(@body userCreate: UserCreate): CreatedApiResponse<User>;
+op CreateUser(@body userCreate: UserCreate): CreatedApiResponse<User>;

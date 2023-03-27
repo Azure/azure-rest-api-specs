@@ -5,7 +5,7 @@ import "../models/delegation.tsp";
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;
 
-namespace DeveloperServicesAPI.Resources.Delegation;
+namespace DeveloperServicesPublicAPI.Routes.Delegation;
 
 //Routes
 

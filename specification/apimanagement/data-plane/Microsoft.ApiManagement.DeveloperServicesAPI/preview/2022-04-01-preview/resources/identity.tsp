@@ -5,7 +5,7 @@ import "../models/identity.tsp";
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;
 
-namespace DeveloperServicesAPI.Resources.Identity;
+namespace DeveloperServicesPublicAPI.Routes.Identity;
 
 //Routes
 

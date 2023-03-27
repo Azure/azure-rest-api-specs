@@ -5,7 +5,7 @@ import "../models/tag.tsp";
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;
 
-namespace DeveloperServicesAPI.Resources.Tags;
+namespace DeveloperServicesPublicAPI.Routes.Tags;
 
 //Routes
 

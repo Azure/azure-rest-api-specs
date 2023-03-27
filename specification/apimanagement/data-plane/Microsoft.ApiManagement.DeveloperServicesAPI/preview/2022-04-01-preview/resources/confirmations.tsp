@@ -5,7 +5,7 @@ import "../models/confirmation.tsp";
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;
 
-namespace DeveloperServicesAPI.Resources.Confirmations;
+namespace DeveloperServicesPublicAPI.Routes.Confirmations;
 
 //Routes
 

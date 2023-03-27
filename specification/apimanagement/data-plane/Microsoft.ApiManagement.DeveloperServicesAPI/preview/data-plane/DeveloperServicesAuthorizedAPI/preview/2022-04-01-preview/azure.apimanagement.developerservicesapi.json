@@ -1,0 +1,263 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Developer Services API - Authorized",
+    "version": "2022-04-01-preview",
+    "description": "Developer Services API - Everything you need to display your APIs.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/users/{userId}": {
+      "get": {
+        "operationId": "GetUser",
+        "description": "Get a user profile by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CommonParams"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "CreateOrUpdateUser",
+        "description": "Create or updatea a user by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CommonParams"
+          },
+          {
+            "name": "if-match",
+            "in": "header",
+            "required": true,
+            "x-ms-client-name": "ifMatch",
+            "type": "string"
+          },
+          {
+            "name": "userUpdate",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.UserUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.User"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteUser",
+        "description": "Delete a user by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/CommonParams"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeveloperServicesAPI.Models.Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "details": {
+          "type": "string",
+          "description": "Error details if exists."
+        }
+      },
+      "description": "Error.",
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "DeveloperServicesAPI.Models.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.Error",
+          "description": "Error itself."
+        }
+      },
+      "description": "Error response object.",
+      "required": [
+        "error"
+      ]
+    },
+    "DeveloperServicesAPI.Models.User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "User id."
+        },
+        "email": {
+          "type": "string",
+          "description": "User email."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "User first name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User last name."
+        },
+        "state": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.UserState",
+          "description": "User state."
+        },
+        "registrationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date of user registration."
+        }
+      },
+      "description": "User profile.",
+      "required": [
+        "id",
+        "email",
+        "firstName",
+        "lastName",
+        "state",
+        "registrationDate"
+      ]
+    },
+    "DeveloperServicesAPI.Models.UserState": {
+      "type": "string",
+      "description": "User state.",
+      "enum": [
+        "active",
+        "blocked",
+        "pending",
+        "deleted"
+      ],
+      "x-ms-enum": {
+        "name": "UserState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Active",
+            "value": "active",
+            "description": "User is active."
+          },
+          {
+            "name": "Blocked",
+            "value": "blocked",
+            "description": "User is blocked. Blocked users cannot authenticate at developer portal or call API."
+          },
+          {
+            "name": "Pending",
+            "value": "pending",
+            "description": "User account is pending. Requires identity confirmation"
+          },
+          {
+            "name": "Deleted",
+            "value": "deleted",
+            "description": "User account is closed. All identities and related entities are removed."
+          }
+        ]
+      }
+    },
+    "DeveloperServicesAPI.Models.UserUpdate": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "User password."
+        },
+        "firstName": {
+          "type": "string",
+          "description": "User first name."
+        },
+        "lastName": {
+          "type": "string",
+          "description": "User last name."
+        },
+        "state": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.UserState",
+          "description": "User state."
+        }
+      },
+      "description": "User update object."
+    }
+  },
+  "parameters": {
+    "CommonParams": {
+      "name": "userId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

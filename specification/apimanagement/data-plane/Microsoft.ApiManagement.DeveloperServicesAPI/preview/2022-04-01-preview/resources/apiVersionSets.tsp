@@ -6,7 +6,7 @@ import "../models/api.tsp";
 using TypeSpec.Http;
 using DeveloperServicesAPI.Models;
 
-namespace DeveloperServicesAPI.Resources.ApiVersionSets;
+namespace DeveloperServicesPublicAPI.Routes.ApiVersionSets;
 
 //Routes
 
