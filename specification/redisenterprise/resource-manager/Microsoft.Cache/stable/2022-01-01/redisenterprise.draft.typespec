@@ -1,0 +1,497 @@
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-providerhub";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using OpenAPI;
+using Autorest;
+
+@autoRoute
+@armResourceAction(TResource)
+@post
+op ArmResourceActionEmptyContentSync<
+  TResource extends ArmResource,
+  TRequest extends object,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+  @doc("The content of the action request")
+  @body
+  body: TRequest
+): TypeSpec.Http.OkResponse | ErrorResponse;
+
+@autoRoute
+@armResourceAction(TResource)
+@post
+@extension("x-ms-long-running-operation", true)
+op ArmResourceActionEmptyAsync<
+  TResource extends ArmResource,
+  TRequest extends object,
+  TBaseParameters = BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+  @doc("The content of the action request")
+  @body
+  body: TRequest
+): TypeSpec.Http.OkResponse | ArmAcceptedResponse | ErrorResponse;
+
+@armProviderNamespace
+@service({
+  title: "RedisEnterpriseManagementClient",
+  version: "2022-01-01",
+})
+@doc("REST API for managing Redis Enterprise resources in Azure.")
+@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+namespace Microsoft.Cache {
+
+  interface Operations extends Azure.ResourceManager.Operations {}
+
+  //TODO: Q: any easier way to define this? A: Not today...
+  //interface OperationStatuses extends Azure.ResourceManager.OperationStatuses {}
+
+  model OperationStatusProperties {
+
+  }
+
+  @doc("Proxy resource for selecting azure location")
+  @locationResource
+  model OperationStatus is ProxyResource<OperationStatusProperties> {
+    @path
+    @doc("Operation ID")
+    @minLength(1)
+    @key("operationId")
+    @pattern("[a-z0-9][-a-z0-9]*")
+    @segment("operationsStatus")
+    @visibility("read")
+    name: string;
+  }
+
+  @armResourceOperations
+  interface OperationsStatus
+  {
+    @doc("Gets information about a database in a RedisEnterprise cluster")
+    get is ArmResourceRead<OperationStatus>;
+  }
+
+  @doc("Describes the RedisEnterprise cluster")
+  model Cluster is TrackedResource<ClusterProperties> {
+    @doc("The SKU to create, which affects price, performance, and features.")
+    sku: Sku;
+
+    @path
+    @doc("Name of cluster")
+    @minLength(1)
+    @key("clusterName")
+    @pattern("[a-z0-9][-a-z0-9]*")
+    @segment("redisEnterprise")
+    @visibility("read")
+    name: string;
+  }
+
+  @doc("The cluster name parameter")
+  model ClusterNameParameter {
+    @path
+    @minLength(1)
+    @doc("Name of the cluster")
+    @pattern("[a-z0-9][-a-z0-9]*")
+    @segment("redisEnterprise")
+    clusterName: string
+  }
+
+  @doc("Describes a Database on a RedisEnterprise cluster")
+  @parentResource(Cluster)
+  model Database is ProxyResource<DatabaseProperties> {
+
+    @path
+    @doc("Name of database")
+    @minLength(1)
+    @key("databaseName")
+    @pattern("[a-z0-9][-a-z0-9]*")
+    @segment("databases")
+    @visibility("read")
+    name: string;
+  }
+
+  @doc("Properties of a Database on a RedisEnterprise cluster")
+  model DatabaseProperties {
+    @doc("Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.")
+    @visibility("read", "create", "update")
+    clientProtocol?: ClientProtocol;
+
+    @doc("Redis eviction policy - default is VolatileLRU")
+    evictionPolicy: EvictionPolicy;
+
+    @visibility("read", "create")
+    @doc("Port number for the database to listen on. E.g. 10000.")
+    port: int16;
+
+    @visibility("read")
+    @doc("Provisioning state of the database")
+    provisioningState: ProvisioningState;
+
+    @doc("Persistence settings")
+    persistence: Persistence;
+  }
+
+  @doc("Persistence-related configuration for the RedisEnterprise database")
+  model Persistence {
+    @doc("Sets whether AOF is enabled. Defaults to false.")
+    aofEnabled: boolean;
+
+    @doc("Sets whether RDB is enabled. Defaults to false.")
+    rdbEnabled: boolean;
+
+    @doc("Sets the frequency at which data is written to disk.")
+    aofFrequency?: AofFrequency;
+
+    @doc("Sets the frequency at which a snapshot of the database is created.")
+    rdbFrequency?: RdbFrequency;
+  }
+
+  enum EvictionPolicy
+  {
+    AllKeysLFU,
+    AllKeysLRU,
+    AllKeysRandom,
+    VolatileLRU,
+    VolatileLFU,
+    VolatileTTL,
+    VolatileRandom,
+    NoEviction
+  }
+
+  enum AofFrequency
+  {
+    perSecond: "1s",
+    always: "always",
+  }
+
+  enum RdbFrequency
+  {
+    perHour: "1h",
+    per6Hours: "6h",
+    per12Hours: "12h",
+  }
+
+  enum ClientProtocol
+  {
+    Encrypted,
+    Plaintext
+  }
+  
+  @doc("Describes a private endpoint connection to a RedisEnterprise cluster")
+  @parentResource(Cluster)
+  model PrivateEndpointConnection is ProxyResource<PrivateEndpointConnectionProperties> {
+
+    @path
+    @doc("Name of private endpoint connection")
+    @minLength(1)
+    @key("privateEndpointConnectionName")
+    @pattern("[a-z0-9][-a-z0-9]*")
+    @segment("privateEndpointConnections")
+    @visibility("read")
+    name: string;
+  }
+
+  @doc("Properties of a PrivateEndpointConnection on a RedisEnterprise cluster")
+  model PrivateEndpointConnectionProperties
+  {
+    @doc("The private endpoint that is connected")
+    privateEndpoint?: PrivateEndpoint;
+
+    @doc("A collection of information about the state of the connection between service consumer and provider.")
+    privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
+
+    @doc("The provisioning state of the private endpoint connection resource.")
+    @visibility("read")
+    provisioningState: PrivateEndpointConnectionProvisioningState;
+  }
+
+  @doc("The private endpoint resource.")
+  model PrivateEndpoint
+  {
+    @doc("The ARM resource id of the private endpoint resource")
+    id?: string;
+  }
+
+  @doc("A collection of information about the state of the connection between service consumer and provider.")
+  model PrivateLinkServiceConnectionState
+  {
+    @doc("A message indicating if changes on the service provider require any updates on the consumer.")
+    actionsRequired: string;
+
+    @doc("The reason for approval/rejection of the connection.")
+    description: string;
+
+    @doc("Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.")
+    status: PrivateEndpointServiceConnectionStatus;
+  }
+
+  @doc("The current provisioning state.")
+  @lroStatus
+  enum PrivateEndpointConnectionProvisioningState
+  {
+    ...Azure.ResourceManager.ResourceProvisioningState,
+    Creating,
+    Deleting,
+  }
+
+  @doc("The private endpoint connection status.")
+  enum PrivateEndpointServiceConnectionStatus {
+    Approved,
+    Pending,
+    Rejected,
+    //TODO: Removed is mentioned somewhere??? Is it real???
+  }
+
+  @doc("Information about private links")
+  @parentResource(Cluster)
+  model PrivateLink is ProxyResource<PrivateLinkProperties> {
+    @path
+    @doc("The name of the resource")
+    @key("privateLinkName")
+    @segment("privateLinkResources")
+    name: string; 
+  }
+
+  @doc("Properties of a private link")
+  model PrivateLinkProperties {
+    @doc("The private link resource group id.")
+    groupId: string;
+
+    @doc("The private link resource required member names.")
+    requiredMembers: string[];
+
+    @doc("The private link resource Private link DNS zone name.")
+    requiredZoneNames: string[];
+  }
+
+  @armResourceOperations
+  interface RedisEnterprise {
+
+    @doc("Lists all RedisEnterprise clusters in a subscription.")
+    listBySubscription is ArmListBySubscription<Cluster>;
+
+    @doc("Lists all RedisEnterprise clusters in a resource group.")
+    listByResourceGroup is ArmResourceListByParent<Cluster>;
+
+    @doc("Gets information about a RedisEnterprise cluster")
+    get is ArmResourceRead<Cluster>;
+
+    @doc("Creates a RedisEnterprise cluster")
+    create is ArmResourceCreateOrUpdateAsync<Cluster>;
+
+    @doc("Updates a RedisEnterprise cluster")
+    update is ArmResourcePatchAsync<Cluster, Cluster>;
+
+    @doc("Deletes a RedisEnterprise cluster and its databases")
+    delete is ArmResourceDeleteAsync<Cluster>;
+  }
+
+  @armResourceOperations
+  interface Databases {
+
+    @doc("Lists all databases in a RedisEnterprise cluster.")
+    listByCluster is ArmResourceListByParent<Database>;
+
+    @doc("Gets information about a database in a RedisEnterprise cluster")
+    get is ArmResourceRead<Database>;
+
+    @doc("Creates a database")
+    create is ArmResourceCreateOrUpdateAsync<Database>;
+
+    @doc("Updates a database")
+    update is ArmResourcePatchAsync<Database, Database>;
+
+    @doc("Deletes a database")
+    delete is ArmResourceDeleteAsync<Database>;
+
+    @doc("Exports RDB file(s)")
+    @action("export")
+    exportRDB is ArmResourceActionEmptyAsync<Database, ExportParameters>;
+
+    @doc("Forcibly unlinks one or more databases from a replication group")
+    forceUnlink is ArmResourceActionEmptyAsync<Database, ForceUnlinkParameters>;
+
+    @doc("Imports RDB file(s)")
+    @action("import")
+    @friendlyName("import")
+    importRDB is ArmResourceActionEmptyAsync<Database, ImportParameters>;
+
+    @doc("Retrieves the access keys for the RedisEnterprise database")
+    @autoRoute
+    @armResourceAction(Database)
+    @post
+    op listKeys(
+      ...ResourceInstanceParameters<Database>
+    ): ArmResponse<AccessKeys> | ErrorResponse;
+
+    @doc("Regenerates an access key for the RedisEnterprise database")
+    regenerateKey is ArmResourceActionAsync<Database, RegenerateKeyParameters, AccessKeys>;
+  }
+
+  @armResourceOperations
+  @parentResource(Cluster)
+  interface PrivateEndpointConnections {
+
+    @doc("Lists all private endpoint connections in a RedisEnterprise cluster.")
+    listByCluster is ArmResourceListByParent<PrivateEndpointConnection>;
+
+    @doc("Gets information about a private endpoint connection in a RedisEnterprise cluster")
+    get is ArmResourceRead<PrivateEndpointConnection>;
+    
+    @doc("Creates a private endpoint connection")
+    create is ArmResourceCreateOrUpdateAsync<PrivateEndpointConnection>;
+
+    @doc("Updates a private endpoint connection")
+    update is ArmResourcePatchAsync<PrivateEndpointConnection, PrivateEndpointConnection>;
+
+    @doc("Deletes a private endpoint connection")
+    delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
+  }
+
+  @armResourceOperations
+  @parentResource(Cluster)
+  interface PrivateLinkResources {
+
+    @doc("Lists all private link resources in a RedisEnterprise cluster.")
+    listByCluster is ArmResourceListByParent<PrivateLink>;
+  }
+
+  @doc("Properties of a RedisEnterprise cluster")
+  model ClusterProperties {
+    @visibility("read")
+    @doc("DNS name of the cluster endpoint")
+    hostName?: string;
+
+    @doc("The minimum TLS version for the cluster to support, e.g. the default of '1.2'.")
+    minTlsVersion?: TlsVersion;
+
+    @visibility("read")
+    @doc("Current provisioning status of the last operation on the cluster.")
+    provisioningState: ProvisioningState;
+
+    @visibility("read")
+    @doc("Current resource status of the cluster.")
+    resourceState?: ResourceState;
+
+    @visibility("read")
+    @doc("Version of redis the cluster supports, e.g. '6'")
+    redisVersion?: string;
+
+    // @visibility("read")
+    // @doc("List of private endpoint connections associated with the specified RedisEnterprise cluster")
+    // privateEndpointConnections: ResourceList<PrivateEndpointConnection>;
+  }
+
+  @doc("SKU parameters supplied to the create RedisEnterprise operation")
+  model Sku {
+    @doc("The type of RedisEnterprise cluster to deploy. Possible values: (Enterprise_E10, EnterpriseFlash_F300 etc.)")
+    name: SkuName;
+    
+    @doc("The size of the RedisEnterprise cluster. Defaults to 2 or 3 depending on SKU. Valid values are (2, 4, 6, ...) for Enterprise SKUs and (3, 9, 15, ...) for Flash SKUs.")
+    @minValue(2)
+    capacity: int32;
+  }
+  
+  enum SkuName {
+    Enterprise_E10,
+    Enterprise_E20,
+    Enterprise_E50,
+    Enterprise_E100,
+    EnterpriseFlash_F300,
+    EnterpriseFlash_F700,
+    EnterpriseFlash_F1500,
+  }
+
+  @lroStatus
+  enum ProvisioningState {
+    ...ResourceProvisioningState,
+    Provisioning,
+    Updating,
+    Deleting,
+    Accepted,
+  }
+
+  enum ResourceState {
+    Running,
+    Creating,
+    CreateFailed,
+    Updating,
+    UpdateFailed,
+    Deleting,
+    DeleteFailed,
+    Enabling,
+    EnableFailed,
+    Disabling,
+    DisableFailed,
+    Disabled,
+  }
+
+  enum TlsVersion {
+    OnePointZero: "1.0",
+    OnePointOne: "1.1",
+    OnePointTwo: "1.2",
+  }
+  
+  @doc("Redis Enterprise access keys response")
+  model AccessKeys {
+    @doc("The current primary key that clients can use to authenticate")
+    @secret
+    "primaryKey": string;
+
+    @doc("The current secondary key that clients can use to authenticate")
+    @secret
+    "secondaryKey": string;
+  }
+
+  @doc("Regenerate access keys request. Specifies which access keys to reset to a new random value.")
+  model RegenerateKeyParameters
+  {
+    @doc("Which access key to regenerate.")
+    keyType: KeyType;
+  }
+
+  enum KeyType
+  {
+    Primary,
+    Secondary,
+  }
+
+  @doc("Import request. Parameters for a Redis Enterprise import operation")
+  model ImportParameters {
+    @doc("SAS URIs for the target blobs to import from")
+    sasUris: SasUri[];
+  }
+
+  @secret
+  scalar SasUri extends string;
+
+  @doc("Export request. Parameters for a Redis Enterprise export operation.")
+  model ExportParameters {
+    @doc("SAS URI for the target container directory to export from")
+    @secret
+    sasUris: SasUri;
+  }
+  
+  scalar RedisEnterpriseResourceIdentifier extends ResourceIdentifier<[{
+    type: "Microsoft.Cache/redisEnterprise"
+  }]>
+  
+  scalar DatabaseResourceIdentifier extends ResourceIdentifier<[{
+    type: "Microsoft.Cache/redisEnterprise/databases"
+  }]>
+
+  @doc("Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation.")
+  model ForceUnlinkParameters {
+    @doc("The resource IDs of the database resources to be unlinked")
+    ids: DatabaseResourceIdentifier[];
+  }
+}
