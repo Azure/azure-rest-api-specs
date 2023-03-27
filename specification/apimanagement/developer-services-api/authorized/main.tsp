@@ -9,6 +9,7 @@ import "./routes/identities.tsp";
 import "./routes/products.tsp";
 import "./routes/apiVersionSets.tsp";
 import "./routes/apis.tsp";
+import "./routes/tags.tsp";
 
 using TypeSpec.Http;
 
