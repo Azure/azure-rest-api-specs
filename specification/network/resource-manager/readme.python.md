@@ -10,6 +10,7 @@ no-namespace-folders: true
 package-version: 1.0.0b1
 combine-operation-files: true
 only-path-and-body-params-positional: true
+version-tolerant: false
 ```
 
 ### Python multi-api
