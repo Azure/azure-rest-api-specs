@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2022-04-01-preview",
+    "userId": "111222333444555",
+    "apiId": "echo-api",
+    "operationId": "create-resource"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "create-resource",
+        "name": "Create resource",
+        "method": "POST",
+        "urlTemplate": "/resource",
+        "templateParameters": [],
+        "description": "A demonstration of a POST call based on the echo backend above. The request body is expected to contain JSON-formatted data (see example below). A policy is used to automatically transform any request sent in JSON directly to XML. In a real-world scenario this could be used to enable modern clients to speak to a legacy backend.",
+        "request": {
+          "queryParameters": [],
+          "headers": [],
+          "representations": [
+            {
+              "contentType": "application/json",
+              "examples": {
+                "default": {
+                  "value": "{\r\n\t\"vehicleType\": \"train\",\r\n\t\"maxSpeed\": 125,\r\n\t\"avgSpeed\": 90,\r\n\t\"speedUnit\": \"mph\"\r\n}"
+                }
+              }
+            }
+          ]
+        },
+        "responses": [
+          {
+            "statusCode": 200,
+            "representations": [],
+            "headers": []
+          }
+        ],
+        "policies": null
+      }
+    }
+  }
+}
