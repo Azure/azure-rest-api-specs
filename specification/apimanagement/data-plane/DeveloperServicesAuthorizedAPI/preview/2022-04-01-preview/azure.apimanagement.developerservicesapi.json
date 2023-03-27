@@ -2259,6 +2259,46 @@
         "error"
       ]
     },
+    "DeveloperServicesAPI.Models.Example": {
+      "type": "object",
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "Short description for the example."
+        },
+        "description": {
+          "type": "string",
+          "description": "Long description for the example."
+        },
+        "value": {
+          "$ref": "#/definitions/object",
+          "description": "Embedded literal example. The `value` field and `externalValue` field are mutually exclusive. To represent examples of media types that cannot naturally represented in JSON or YAML, use a string value to contain the example, escaping where necessary."
+        },
+        "externalValue": {
+          "type": "string",
+          "description": "A URL that points to the literal example."
+        }
+      },
+      "description": "Payload or parameter example.",
+      "required": [
+        "summary",
+        "description",
+        "value",
+        "externalValue"
+      ]
+    },
+    "DeveloperServicesAPI.Models.ExampleObject": {
+      "type": "object",
+      "properties": {
+        "default": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.Example"
+        }
+      },
+      "description": "Payload or parameter example object.",
+      "required": [
+        "default"
+      ]
+    },
     "DeveloperServicesAPI.Models.GrantType": {
       "type": "string",
       "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>.",
@@ -2729,6 +2769,10 @@
         "typeName": {
           "type": "string",
           "description": "Parameter type name."
+        },
+        "examples": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.ExampleObject",
+          "description": "Example definition"
         }
       },
       "description": "API operation method."
@@ -2933,6 +2977,10 @@
         "contentType": {
           "type": "string",
           "description": "Representation content type."
+        },
+        "examples": {
+          "$ref": "#/definitions/DeveloperServicesAPI.Models.ExampleObject",
+          "description": "Example definition"
         },
         "schemaId": {
           "type": "string",
@@ -3387,6 +3435,10 @@
         }
       },
       "description": "User update object."
+    },
+    "object": {
+      "type": "object",
+      "properties": {}
     }
   },
   "parameters": {

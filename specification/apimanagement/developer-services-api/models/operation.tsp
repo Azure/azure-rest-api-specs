@@ -1,3 +1,5 @@
+import "./example.tsp";
+
 namespace DeveloperServicesAPI.Models;
 
 @doc("API operation details.")
@@ -55,7 +57,9 @@ model Parameter {
 
   @doc("Parameter type name.")
   typeName?: string;
-  // examples?: Dictionary<TKey, TValue>;
+
+  @doc("Example definition")
+  examples?: ExampleObject;
 }
 
 @doc("Operation request description.")
@@ -92,8 +96,9 @@ model Response {
 model Representation {
   @doc("Representation content type.")
   contentType?: string;
-  // examples?: Dictionary<TKey, TValue>;
 
+  @doc("Example definition")
+  examples?: ExampleObject;
 
   @doc("Schema identifier. Applicable only if 'contentType' value is neither 'application/x-www-form-urlencoded' nor 'multipart/form-data'.")
   schemaId?: string;
