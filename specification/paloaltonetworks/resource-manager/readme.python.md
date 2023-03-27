@@ -15,5 +15,5 @@ clear-output-folder: true
 
 ``` yaml $(python)
 no-namespace-folders: true
-output-folder: $(python-sdks-folder)/paloaltonetworks/azure-mgmt-paloaltonetworksngfw/azure/mgmt/paloaltonetworksngfw
+output-folder: $(python-sdks-folder)/paloaltonetworksngfw/azure-mgmt-paloaltonetworksngfw/azure/mgmt/paloaltonetworksngfw
 ```
