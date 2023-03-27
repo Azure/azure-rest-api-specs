@@ -10,6 +10,7 @@ import "./cadl/community/community.cadl";
 import "./cadl/virtualEnclave/virtualenclave.cadl";
 import "./cadl/workload/workload.cadl";
 import "./cadl/catalog/catalog.cadl";
+import "./cadl/internalConnection/internalConnection.cadl";
 
 @armProviderNamespace
 @service({title: "Microsoft Mission", version: "2023-02-01-preview"})
@@ -62,6 +63,15 @@ model CatalogResource is TrackedResource<CatalogProperties> {
   name: string;
 }
 
+@doc("Describes an Internal Connection.")
+model InternalConnection is TrackedResource<InternalConnectionProperties> {
+  @key("internalConnectionName")
+  @segment("internalConnections")
+  @doc("The name of the internal connection.")
+  @path
+  name: string;
+}
+
 @doc("Workload Interface")
 @armResourceOperations
 interface Workload extends ResourceOperations<WorkloadResource, WorkloadProperties> {
@@ -104,4 +114,21 @@ interface Catalog extends ResourceOperations<CatalogResource, CatalogProperties>
   delete is ArmResourceDeleteSync<CatalogResource>;
   listByResourceGroup is ArmResourceListByParent<CatalogResource>;
   listBySubscription is ArmListBySubscription<CatalogResource>
+}
+
+@doc("Internal Connections")
+@armResourceOperations
+interface InternalConnections extends ResourceOperations<InternalConnection, InternalConnectionProperties> {
+  @doc("Retrieves information about the model view or the instance view of an internal connection.")
+  get is ArmResourceRead<InternalConnection>;
+  @doc("The operation to create or update an internal connection.")
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<InternalConnection>;
+  @doc("The operation to update an internal connection.")
+  update is ArmResourcePatchAsync<InternalConnection, InternalConnectionProperties>;
+  @doc("The operation to delete an internal connection.")
+  delete is ArmResourceDeleteSync<InternalConnection>;
+  @doc("Lists all of the internal connections in the specified resource group.")
+  listByResourceGroup is ArmResourceListByParent<InternalConnection>;
+  @doc("Lists all of the internal connections in the specified subscription.")
+  listBySubscription is ArmListBySubscription<InternalConnection>
 }

@@ -5,6 +5,7 @@ import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-azure-resource-manager";
 
 import "../shared/provisioningstate.cadl";
+import "../shared/resourceid.cadl";
 import "../virtualEnclave/virtualenclave.cadl";
 
 using Cadl.Http;
@@ -16,10 +17,10 @@ using Azure.ResourceManager;
 @doc("Workload Resource properties")
 model WorkloadProperties{
   @doc("Workload Description.")
-  workloadDescription?: string;
+  description?: string;
 
   @doc("Virtual Enclave Resource Id.")
-  enclaveResourceId?: string;
+  enclaveResourceId?: VirtualEnclaveResourceId;
 
   @doc("Managed Resource Groups.")
   managedResourceGroups?: string[];
@@ -27,7 +28,4 @@ model WorkloadProperties{
   @doc("Provisioning State.")
   @visibility("read")
   provisioningState?: ProvisioningState;
-
-  @doc("Properties of Workload.")
-  resourceProperties?: Record<string>;
 }

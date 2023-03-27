@@ -5,12 +5,26 @@ import "@azure-tools/cadl-azure-core";
 import "@azure-tools/cadl-azure-resource-manager";
 
 import "../shared/provisioningstate.cadl";
+import "../shared/resourceid.cadl";
 
 using Cadl.Http;
 using Cadl.Rest;
 using Cadl.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+
+@doc("EnclaveListItem Properties")
+model EnclaveListItem {
+	@doc("virtual enclave name.")
+	name?: string;
+
+	@doc("virtual enclaves resource id.")
+	resourceId?: VirtualEnclaveResourceId;
+
+	@doc("Provisioning State.")
+	@visibility("read")
+	provisioningState?: ProvisioningState;
+}
 
 @doc("Community Resource Properties")
 model CommunityProperties{
@@ -31,8 +45,5 @@ model CommunityProperties{
   resourceCollection?: string [];
 
   @doc("List of virtual enclaves that a community contains.")
-  virtualEnclaveCollection?: string [];
-
-  @doc("Properties of Community.")
-  resourceProperties?: Record<string>;
+  virtualEnclaveCollection?: Record<EnclaveListItem>;
 }
