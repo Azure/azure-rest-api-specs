@@ -158,5 +158,5 @@ model Eku {
   @key("eku")
   @visibility("read", "update")
   @doc("The element of eku list.")
-  body: string[];
+  ekus: string[];
 }
