@@ -570,7 +570,7 @@
           "description": "Field that's required when fillNAMethod is Fixed."
         }
       },
-      "description": "Field that indicates the manner of aligning multiple variables."
+      "description": "Manner of aligning multiple variables."
     },
     "Multivariate.AnomalyDetectionModel": {
       "type": "object",
@@ -790,26 +790,26 @@
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Field that indicates the start date/time of training data, which should be\nin ISO 8601 format."
+          "description": "Start date/time of training data, which should be\nin ISO 8601 format."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Field that indicates the end date/time of training data, which should be\nin ISO 8601 format."
+          "description": "End date/time of training data, which should be\nin ISO 8601 format."
         },
         "displayName": {
           "type": "string",
-          "description": "Field that indicates the display name of the model. Maximum length is 24\ncharacters.",
+          "description": "Display name of the model. Maximum length is 24\ncharacters.",
           "maxLength": 24
         },
         "slidingWindow": {
           "type": "integer",
           "format": "int32",
-          "description": "Field that indicates how many previous time stamps will be used to\ndetect whether the time stamp is an anomaly or not."
+          "description": "Number of previous time stamps that will be used to\ndetect whether the time stamp is an anomaly or not."
         },
         "alignPolicy": {
           "$ref": "#/definitions/Multivariate.AlignPolicy",
-          "description": "Field that indicates the manner of aligning multiple variables."
+          "description": "Manner of aligning multiple variables."
         },
         "status": {
           "$ref": "#/definitions/Multivariate.ModelStatus",
@@ -954,17 +954,17 @@
         "topContributorCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Field that specifies the number of top contributed\nvariables for one anomalous time stamp in the response. The default number is\n10."
+          "description": "Number of top contributed\nvariables for one anomalous time stamp in the response. The default is\n10."
         },
         "startTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Field that indicates the start date/time of data for detection, which should\nbe in ISO 8601 format."
+          "description": "Start date/time of data for detection, which should\nbe in ISO 8601 format."
         },
         "endTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Field that indicates the end date/time of data for detection, which should\nbe in ISO 8601 format."
+          "description": "End date/time of data for detection, which should\nbe in ISO 8601 format."
         }
       },
       "description": "Detection request for batch inference. This is an asynchronous inference that\nwill need another API to get detection results.",
@@ -1086,7 +1086,7 @@
         "topContributorCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Field that specifies the number of top contributed\nvariables for one anomalous time stamp in the response. The default number is\n10."
+          "description": "Number of top contributed\nvariables for one anomalous time stamp in the response. The default is\n10."
         }
       },
       "description": "Request of the last detection.",
