@@ -13,15 +13,14 @@ using Autorest;
   title: "Azure.CodeSigning service",
 })
 @versioned(Azure.CodeSigning.Versions)
-
 @server(
-  "https://{region}.codesigning.azure.net/", 
-  "Azure CodeSigning is a service that provides managed code signing for all.", {
+  "https://{region}.codesigning.azure.net/",
+  "Azure CodeSigning is a service that provides managed code signing for all.",
+  {
     @doc("The region where we will sign code.")
-     region: string
+    region: string,
   }
 )
-
 @doc("Azure CodeSigning is a service that provides managed code signing for all.")
 namespace Azure.CodeSigning;
 
@@ -34,68 +33,76 @@ interface CertificateProfileOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @summary("Gets the status of a sign operation.")
   @doc("Gets the status of a sign operation.")
-  @example("./examples/CertificateProfile_GetSignOperation.json", "GetSignOperation")
+  @example(
+    "./examples/2022-06-15-preview/CertificateProfile_GetSignOperation.json",
+    "GetSignOperation"
+  )
   @route("/codesigningaccounts/{codeSigningAccountName}/certificateprofiles/{certificateProfileName}/sign/{operationId}")
-  GetSignOperation is Foundations.GetOperationStatus<CodeSignStatus,OperationStatus>;
+  GetSignOperation is Foundations.GetOperationStatus<
+    CodeSignStatus,
+    OperationStatus
+  >;
 
   @summary("Gets a list of Extended Key Usage OIDs that are allowed.")
   @doc("Gets a list of Extended Key Usage OIDs that are allowed.")
-  @example("./examples/CertificateProfile_GetSignEku.json", "GetSignEku")
+  @example(
+    "./examples/2022-06-15-preview/CertificateProfile_GetSignEku.json",
+    "GetSignEku"
+  )
   GetSignEku is ResourceList<Eku>;
 
   @summary("Initiates a sign operation.")
   @doc("Initiates a sign operation.")
-  @example("./examples/CertificateProfile_Sign.json", "Sign")
+  @example("./examples/2022-06-15-preview/CertificateProfile_Sign.json", "Sign")
   @pollingOperation(CertificateProfileOperations.GetSignOperation)
-  Sign is ResourceAction<CertificateProfile,SignRequest,OperationStatus>;
+  Sign is ResourceAction<CertificateProfile, SignRequest, OperationStatus>;
 }
 
 @doc("Algorithms supported for signing.")
 enum SignatureAlgorithm {
-  "RS256",
-  "RS384",
-  "RS512",
-  "PS256",
-  "PS384",
-  "PS512",
-  "ES256",
-  "ES384",
-  "ES512",
-  "ES256K",
+  RS256,
+  RS384,
+  RS512,
+  PS256,
+  PS384,
+  PS512,
+  ES256,
+  ES384,
+  ES512,
+  ES256K,
 }
 
 @doc("Sign status of the operation.")
 @lroStatus
 enum Status {
-  "NotStarted",
-  "Running",
-  "Succeeded",
-  "Failed",
-  "Canceled",
+  NotStarted,
+  Running,
+  Succeeded,
+  Failed,
+  Canceled,
 }
 
 @doc("Code Signing Account")
 @resource("codesigningaccounts")
 model CodeSigningAccount {
-    @key("codeSigningAccountName")
-    @visibility("read", "update")
-    @doc("Azure Code Signing account name.")
-    codeSigningAccountName: string;
+  @key("codeSigningAccountName")
+  @visibility("read", "update")
+  @doc("Azure Code Signing account name.")
+  codeSigningAccountName: string;
 }
 
 @doc("Certificate Profile")
 @resource("certificateprofiles")
 @parentResource(CodeSigningAccount)
 model CertificateProfile {
-    @key("certificateProfileName")
-    @visibility("read", "update")
-    @doc("Azure Code Signing certificate profile name.")
-    certificateProfileName: string;
+  @key("certificateProfileName")
+  @visibility("read", "update")
+  @doc("Azure Code Signing certificate profile name.")
+  certificateProfileName: string;
 }
 
 @doc("The sign request information to be signed.")
 model SignRequest {
-
   @doc("The following algorithm identifiers are supported.")
   signatureAlgorithm: SignatureAlgorithm;
 
