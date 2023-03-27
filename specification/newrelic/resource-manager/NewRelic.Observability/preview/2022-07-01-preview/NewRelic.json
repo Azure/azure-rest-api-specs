@@ -743,6 +743,21 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Switched billing successfully."
+          },
+          "202": {
+            "description": "Switched billing accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+
+          
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. "
           },
