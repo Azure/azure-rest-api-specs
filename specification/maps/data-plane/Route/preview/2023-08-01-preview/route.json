@@ -210,7 +210,7 @@
           "description": "You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. The start and end points of the route cannot be viaWaypoints.",
           "minimum": 2,
           "items": {
-            "$ref": "#/definitions/WaypointFeaturesItem"
+            "$ref": "#/definitions/WayAndViaWaypointFeaturesItem"
           }
         },
         "travelMode": {
@@ -502,9 +502,34 @@
     "FeaturesItem": {
       "type": "object",
       "description": "Feature Item",
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Feature Item",
+          "properties": {
+            "type": {
+              "$ref": "#/definitions/FeaturesItemTypeEnum"
+            },
+            "geometry": {
+              "$ref": "#/definitions/Geometry"
+            },
+            "properties": {
+              "x-ms-client-flatten": true,
+              "$ref": "#/definitions/FeatureProperties"
+            },
+            "bbox": {
+              "$ref": "#/definitions/Bbox"
+            }
+          }
+        }
+      ]
+    },
+    "Geometry": {
+      "type": "object",
+      "description": "Geometry",
       "properties": {
         "type": {
-          "$ref": "#/definitions/FeaturesItemTypeEnum"
+          "type": "string"
         }
       },
       "discriminator": "type",
@@ -512,7 +537,33 @@
         "type"
       ]
     },
-    "WaypointFeaturesItem": {
+    "PointGeometry": {
+      "type": "object",
+      "description": "Feature Item",
+      "x-ms-discriminator-value": "Point",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Geometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+        }
+      ]
+    },
+    "MultiLineStringGeometry": {
+      "type": "object",
+      "description": "Feature Item",
+      "x-ms-discriminator-value": "MultiLineString",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Geometry"
+        },
+        {
+          "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiLineString"
+        }
+      ]
+    },
+    "WayAndViaWaypointFeaturesItem": {
       "type": "object",
       "description": "Waypoint Feature Item",
       "properties": {
@@ -524,7 +575,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WaypointProperties"
+          "$ref": "#/definitions/WayAndViaWaypointProperties"
         }
       },
       "required": [
@@ -533,7 +584,7 @@
         "properties"
       ]
     },
-    "WaypointProperties": {
+    "WayAndViaWaypointProperties": {
       "type": "object",
       "description": "Waypoint properties",
       "properties": {
@@ -543,261 +594,210 @@
           "type": "integer"
         },
         "pointType": {
-          "$ref": "#/definitions/InputPointTypeEnum"
+          "$ref": "#/definitions/WayPointTypeEnum"
         }
       }
     },
-    "ManeuverPointFeaturesItem": {
-      "x-ms-discriminator-value": "Feature",
+    "WaypointProperties": {
+      "x-ms-discriminator-value": "Waypoint",
       "type": "object",
-      "description": "ManeuverPoint Feature Item",
       "allOf": [
         {
-          "$ref": "#/definitions/FeaturesItem"
+          "$ref": "#/definitions/FeatureProperties"
         },
         {
-          "type": "object",
-          "description": "ManeuverPoint properties",
-          "properties": {
-            "geometry": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
-            },
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ManeuverPointProperties"
-            }
-          }
+          "$ref": "#/definitions/ManeuverPointProperties"
         }
-      ],
-      "required": [
-        "type",
-        "geometry",
-        "properties"
       ]
     },
     "ManeuverPointProperties": {
-      "description": "ManeuverPoint Properties",
-      "type": "object",
-      "properties": {
-        "pointTypes": {
-          "description": "point types",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutputPointTypeEnum"
-          }
-        },
-        "legPointIndex": {
-          "$ref": "#/definitions/LegPointIndex"
-        },
-        "compassDirection": {
-          "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
-          "type": "string",
-          "readOnly": true
-        },
-        "steps": {
-          "description": "steps between two consecutive maneuver points",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Step"
-          }
-        },
-        "instruction": {
-          "$ref": "#/definitions/Instruction"
-        },
-        "sideOfStreet": {
-          "$ref": "#/definitions/SideOfStreetEnum"
-        },
-        "signs": {
-          "description": "Signage text for the route. There may be more than one sign value",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          }
-        },
-        "towardsRoadName": {
-          "description": "The name of the street that the route goes towards in the first ManeuverPoint.",
-          "type": "string",
-          "readOnly": true
-        },
-        "exitIdentifier": {
-          "description": "The name or number of the exit associated with this route step.",
-          "type": "string",
-          "readOnly": true
-        },
-        "distanceInMeters": {
-          "description": "The physical distance in meters covered by this route step.",
-          "type": "number",
-          "readOnly": true
-        },
-        "durationInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "ViaWaypointFeaturesItem": {
-      "x-ms-discriminator-value": "Feature",
-      "description": "ViaWaypoint Feature Item",
+      "x-ms-discriminator-value": "ManeuverPoint",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/FeaturesItem"
+          "$ref": "#/definitions/FeatureProperties"
         },
         {
+          "description": "ManeuverPoint Properties",
           "type": "object",
-          "description": "ViaWaypoint properties",
           "properties": {
-            "type": {
-              "$ref": "#/definitions/FeaturesItemTypeEnum"
+            "legPointIndex": {
+              "$ref": "#/definitions/LegPointIndex"
             },
-            "geometry": {
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonPoint"
+            "compassDirection": {
+              "description": "The direction of travel associated with a maneuver on a route, such as south or southwest.",
+              "type": "string",
+              "readOnly": true
             },
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ViaWaypointProperties"
+            "steps": {
+              "description": "steps between two consecutive maneuver points",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Step"
+              }
+            },
+            "instruction": {
+              "$ref": "#/definitions/Instruction"
+            },
+            "sideOfStreet": {
+              "$ref": "#/definitions/SideOfStreetEnum"
+            },
+            "signs": {
+              "description": "Signage text for the route. There may be more than one sign value",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "towardsRoadName": {
+              "description": "The name of the street that the route goes towards in the first ManeuverPoint.",
+              "type": "string",
+              "readOnly": true
+            },
+            "exitIdentifier": {
+              "description": "The name or number of the exit associated with this route step.",
+              "type": "string",
+              "readOnly": true
+            },
+            "distanceInMeters": {
+              "description": "The physical distance in meters covered by this route step.",
+              "type": "number",
+              "readOnly": true
+            },
+            "durationInSeconds": {
+              "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+              "format": "int64",
+              "type": "integer",
+              "readOnly": true
             }
           }
         }
-      ],
-      "required": [
-        "type",
-        "geometry",
-        "properties"
       ]
     },
     "ViaWaypointProperties": {
-      "description": "ViaWaypoint Properties",
-      "type": "object",
-      "properties": {
-        "pointTypes": {
-          "type": "array",
-          "description": "point types",
-          "items": {
-            "$ref": "#/definitions/OutputPointTypeEnum"
-          }
-        },
-        "names": {
-          "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
-          }
-        },
-        "legPointIndex": {
-          "$ref": "#/definitions/LegPointIndex"
-        }
-      }
-    },
-    "RoutePathFeaturesItem": {
-      "x-ms-discriminator-value": "Feature",
-      "description": "RoutePath Feature Item",
+      "x-ms-discriminator-value": "ViaWaypoint",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/FeaturesItem"
+          "$ref": "#/definitions/FeatureProperties"
+        },
+        {
+          "description": "ViaWaypoint Properties",
+          "type": "object",
+          "properties": {
+            "names": {
+              "description": "A street, highway or intersection where the maneuver occurs. If the maneuver is complex, there may be more than one name field in the details collection. The name field may also have no value. This can occur if the name is not known or if a street, highway or intersection does not have a name.",
+              "type": "array",
+              "readOnly": true,
+              "items": {
+                "type": "string"
+              }
+            },
+            "legPointIndex": {
+              "$ref": "#/definitions/LegPointIndex"
+            }
+          }
+        }
+      ]
+    },
+    "RoutePathProperties": {
+      "x-ms-discriminator-value": "RoutePath",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FeatureProperties"
         },
         {
           "type": "object",
           "description": "RoutePath properties",
           "properties": {
-            "type": {
-              "$ref": "#/definitions/FeaturesItemTypeEnum"
+            "resourceId": {
+              "description": "A unique ID for the resource.",
+              "type": "string",
+              "readOnly": true
             },
-            "geometry": {
-              "description": "geometry",
-              "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonMultiLineString"
+            "distanceInMeters": {
+              "description": "The physical distance in meters covered by the entire route.",
+              "type": "number",
+              "readOnly": true
             },
-            "bbox": {
-              "$ref": "#/definitions/Bbox"
+            "durationInSeconds": {
+              "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
+              "format": "int64",
+              "type": "integer",
+              "readOnly": true
             },
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/RoutePathProperties"
+            "durationTrafficInSeconds": {
+              "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
+              "format": "int64",
+              "type": "integer",
+              "readOnly": true
+            },
+            "trafficDataUsed": {
+              "$ref": "#/definitions/TrafficDataUsed"
+            },
+            "trafficCongestion": {
+              "$ref": "#/definitions/TrafficCongestion"
+            },
+            "legs": {
+              "description": "An array of route legs. Check RouteLeg object description for more information.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Leg"
+              }
             }
           }
         }
-      ],
-      "required": [
-        "type",
-        "geometry",
-        "properties"
       ]
     },
-    "RoutePathProperties": {
+    "FeatureProperties": {
       "type": "object",
-      "description": "RoutePath properties",
+      "description": "Feature properties",
       "properties": {
-        "resourceId": {
-          "description": "A unique ID for the resource.",
-          "type": "string",
-          "readOnly": true
-        },
-        "distanceInMeters": {
-          "description": "The physical distance in meters covered by the entire route.",
-          "type": "number",
-          "readOnly": true
-        },
-        "durationInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "durationTrafficInSeconds": {
-          "description": "The time that it takes, in seconds, to travel a corresponding TravelDistance with current traffic conditions. This value is always provided for the complete route and does not depend on the availability of traffic information.",
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "trafficDataUsed": {
-          "$ref": "#/definitions/TrafficDataUsed"
-        },
-        "trafficCongestion": {
-          "$ref": "#/definitions/TrafficCongestion"
-        },
-        "legs": {
-          "description": "An array of route legs. Check RouteLeg object description for more information.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Leg"
-          }
+        "type": {
+          "type": "string"
         }
-      }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
     },
-    "OutputPointTypeEnum": {
-      "description": "point type",
+    "OutputTypeEnum": {
+      "description": "Output type",
       "type": "string",
       "readOnly": true,
       "enum": [
-        "maneuverPoint",
-        "waypoint",
-        "viaWaypoint"
+        "ManeuverPoint",
+        "Waypoint",
+        "ViaWaypoint",
+        "RoutePath"
       ],
       "x-ms-enum": {
-        "name": "OutputPointTypeEnum",
+        "name": "OutputTypeEnum",
         "modelAsString": true,
         "values": [
           {
-            "value": "maneuverPoint",
+            "value": "ManeuverPoint",
             "description": "A maneuverPoint is a specific point on a route or trip where a change in direction or mode of transportation is required or recommended."
           },
           {
-            "value": "waypoint",
+            "value": "Waypoint",
             "description": "A waypoint is a specific location or point along a route or trip that serves as a reference or stopping point."
           },
           {
-            "value": "viaWaypoint",
+            "value": "ViaWaypoint",
             "description": "A viaWaypoint is specific waypoint that must be passed through or visited along a route or trip."
+          },
+          {
+            "value": "RoutePath",
+            "description": "A routePath is a line that represents the path of a route or trip."
           }
         ]
       }
     },
-    "InputPointTypeEnum": {
+    "WayPointTypeEnum": {
       "description": "point type",
       "type": "string",
       "default": "waypoint",
@@ -806,7 +806,7 @@
         "viaWaypoint"
       ],
       "x-ms-enum": {
-        "name": "InputPointTypeEnum",
+        "name": "WayPointTypeEnum",
         "modelAsString": true,
         "values": [
           {
