@@ -1,4 +1,4 @@
-namespace DeveloperServicesAPI.Models;
+namespace DeveloperServicesApi.Models;
 
 @doc("Subscription model.")
 model Subscription {

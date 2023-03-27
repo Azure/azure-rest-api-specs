@@ -1,4 +1,4 @@
-namespace DeveloperServicesAPI.Models;
+namespace DeveloperServicesApi.Models;
 
 @doc("UserId associate with credentials provided in request.")
 model IdentityResult {

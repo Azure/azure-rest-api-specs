@@ -3,9 +3,9 @@ import "../../models/common.tsp";
 import "../../models/identity.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicAPI.Routes.Identity;
+namespace DeveloperServicesPublicApi.Routes.Identity;
 
 @route("/identity")
 @doc("Identity of current user.")

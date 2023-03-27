@@ -1,4 +1,4 @@
-namespace DeveloperServicesAPI.Models;
+namespace DeveloperServicesApi.Models;
 
 @doc("Portal content settings.")
 model ContentSettings {

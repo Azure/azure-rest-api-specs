@@ -1,8 +1,13 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
+using Azure.Core;
+using Azure.Core.Foundations;
+using TypeSpec.Versioning;
 
-namespace DeveloperServicesAPI.Models;
+@useDependency(Azure.Core.Versions.v1_0_Preview_2)
+namespace DeveloperServicesApi.Models;
 
 //API response for 200 with content
 alias ApiResponse<T> = T | ErrorResponse;
@@ -26,46 +31,32 @@ model Created<T> {
 
 @doc("List operations' default parameters.")
 model ListParams {
-  @doc("Number of element to skip.")
-  @query
-  skip?: int32;
-
-  @doc("Number of element to take from the top.")
-  @query
-  @maxValue(100)
-  top?: int32;
-
-  @doc("OData filter query option.")
-  @query
-  filter?: string;
+  ...SkipQueryParameter;
+  ...TopQueryParameter;
+  ...FilterQueryParameter;
 }
 
 @error
 @doc("Error response object.")
 model ErrorResponse {
-  @doc("Error itself.")
+  @doc("Error.")
   error: Error;
 }
 
-@doc("Error.")
-model Error {
-  @doc("Error code.")
-  code: string;
-
-  @doc("Error message.")
-  message: string;
-
-  @doc("Error details if exists.")
-  details?: string;
-}
-
+@doc("Name value pair object.")
 model NameValuePair {
+  @doc("Name of the property.")
   name: string;
+
+  @doc("Value of the property.")
   value: string;
 }
 
+@doc("User resources default parameters.")
 model UserParams {
-  @path userId: string;
+  @doc("The user identifier.")
+  @path
+  userId: string;
 }
 
 model TypedBody<BodyType, ContentType> {

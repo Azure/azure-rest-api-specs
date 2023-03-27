@@ -1,12 +1,14 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/apiVersionSet.tsp";
 import "../../models/api.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using Azure.Core;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedAPI.Routes.ApiVersionSets;
+namespace DeveloperServicesAuthorizedApi.Routes.ApiVersionSets;
 
 @route("/users/{userId}/apiVersionSets")
 @doc("List a collection of API version sets.")
@@ -14,7 +16,7 @@ namespace DeveloperServicesAuthorizedAPI.Routes.ApiVersionSets;
 op ListApiVersionSets(
   ...UserParams,
   ...ListParams
-): ApiResponse<Collection<ApiVersionSet>>;
+): ApiResponse<Page<ApiVersionSet>>;
 
 @route("/users/{userId}/apiVersionSets/{versionSetId}")
 @doc("Get API version set specified by its identifier.")
@@ -28,7 +30,7 @@ op ListApiVersionSetApis(
   ...UserParams,
   ...ListParams,
   ...CommonParams
-): ApiResponse<Collection<Api>>;
+): ApiResponse<Page<Api>>;
 
 model CommonParams {
   @path versionSetId: string;

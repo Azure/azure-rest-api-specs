@@ -1,36 +1,46 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/product.tsp";
 import "../../models/api.tsp";
 import "../../models/tag.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using Azure.Core;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicAPI.Routes.Products;
+namespace DeveloperServicesPublicApi.Routes.Products;
 
 @route("/products")
 @doc("List a collection of products.")
 @get
-op ListProducts(...ListParams): ApiResponse<Collection<Product>>;
+op ListProducts(...ListParams): ApiResponse<Page<Product>>;
 
 @route("/products/{productId}")
 @doc("Get the details of the product specified by its identifier.")
 @get
-op GetProduct(@path productId: string): ApiResponse<Product>;
+op GetProduct(
+  @doc("The product identifier.")
+  @path
+  productId: string
+): ApiResponse<Product>;
 
 @route("/products/{productId}/apis")
 @doc("List a collection of products APIs.")
 @get
 op ListProductApis(
-  @path productId: string,
+  @doc("The product identifier.")
+  @path
+  productId: string,
   ...ListParams
-): ApiResponse<Collection<Api>>;
+): ApiResponse<Page<Api>>;
 
 @route("/products/{productId}/tags")
 @doc("List a collection of products tags.")
 @get
 op ListProductTags(
-  @path productId: string,
+  @doc("The product identifier.")
+  @path
+  productId: string,
   ...ListParams
-): ApiResponse<Collection<Tag>>;
+): ApiResponse<Page<Tag>>;

@@ -1,11 +1,13 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/report.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using Azure.Core;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedAPI.Routes.Reports;
+namespace DeveloperServicesAuthorizedApi.Routes.Reports;
 
 @route("/users/{userId}/reports/{reportType}")
 @doc("List a collection of tags.")
@@ -25,4 +27,4 @@ op ListReports(
   @doc("OData order by query option.")
   @query
   orderBy?: string
-): ApiResponse<Collection<Report>>;
+): ApiResponse<Page<Report>>;

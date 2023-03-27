@@ -3,20 +3,24 @@ import "../../models/common.tsp";
 import "../../models/confirmation.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicAPI.Routes.Confirmations;
+namespace DeveloperServicesPublicApi.Routes.Confirmations;
 
 @route("/confirmations/password")
 @doc("Password reset confirmation.")
 @post
 op CreatePasswordConfirmation(
-  @body confirmationRequest: ConfirmationRequest
+  @doc("The password confirmation request.")
+  @body
+  confirmationRequest: ConfirmationRequest
 ): NoContentResponse | ErrorResponse;
 
 @route("/confirmations/identities/basic")
 @doc("Basic identity (Email) confirmation.")
 @post
 op CreateBasicIdentityConfirmation(
-  @body identityConfirmationRequest: IdentityConfirmationRequest
+  @doc("The identity confirmation request.")
+  @body
+  identityConfirmationRequest: IdentityConfirmationRequest
 ): NoContentResponse | ErrorResponse;

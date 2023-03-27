@@ -27,48 +27,31 @@
         "description": "List a collection of APIs.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Api"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Api[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Api>"
+              "$ref": "#/definitions/PagedApi"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -84,6 +67,7 @@
             "name": "accept",
             "in": "header",
             "required": false,
+            "description": "If sent, the API will be exported in the specified format.",
             "type": "string",
             "enum": [
               "application/json",
@@ -98,6 +82,7 @@
             "name": "export",
             "in": "query",
             "required": false,
+            "description": "If true, the API will be exported in the specified format.",
             "type": "boolean"
           }
         ],
@@ -105,13 +90,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.Api"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         },
@@ -134,49 +119,31 @@
             "$ref": "#/parameters/Routes.Apis.CommonParams"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthorizationServer"
-                  },
-                  "x-ms-identifiers": [],
-                  "x-typespec-name": "DeveloperServicesAPI.Models.AuthorizationServer[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.AuthorizationServer>"
+              "$ref": "#/definitions/PagedAuthorizationServer"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -192,6 +159,7 @@
             "name": "providerId",
             "in": "path",
             "required": true,
+            "description": "OAuth 2.0 server identifier.",
             "type": "string"
           }
         ],
@@ -199,13 +167,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthorizationServer"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.AuthorizationServer"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -220,49 +188,31 @@
             "$ref": "#/parameters/Routes.Apis.CommonParams"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthorizationServer"
-                  },
-                  "x-ms-identifiers": [],
-                  "x-typespec-name": "DeveloperServicesAPI.Models.AuthorizationServer[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.AuthorizationServer>"
+              "$ref": "#/definitions/PagedAuthorizationServer"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -278,6 +228,7 @@
             "name": "providerId",
             "in": "path",
             "required": true,
+            "description": "OpenID Connect server identifier.",
             "type": "string"
           }
         ],
@@ -285,13 +236,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthorizationServer"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.AuthorizationServer"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -306,48 +257,31 @@
             "$ref": "#/parameters/Routes.Apis.CommonParams"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiHostname"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.ApiHostname[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.ApiHostname>"
+              "$ref": "#/definitions/PagedApiHostname"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -360,48 +294,31 @@
             "$ref": "#/parameters/Routes.Apis.CommonParams"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Operation"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Operation[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Operation>"
+              "$ref": "#/definitions/PagedOperation"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -417,6 +334,7 @@
             "name": "operationId",
             "in": "path",
             "required": true,
+            "description": "Operation identifier.",
             "type": "string"
           }
         ],
@@ -424,13 +342,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.Operation"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.Operation"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -445,18 +363,19 @@
             "$ref": "#/parameters/Routes.Apis.CommonParams"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           },
           {
             "name": "operationId",
             "in": "path",
             "required": true,
+            "description": "Operation identifier.",
             "type": "string"
           }
         ],
@@ -464,35 +383,18 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Tag>"
+              "$ref": "#/definitions/PagedTag"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -505,48 +407,31 @@
             "$ref": "#/parameters/Routes.Apis.CommonParams"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Product"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Product[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Product>"
+              "$ref": "#/definitions/PagedProduct"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -559,48 +444,31 @@
             "$ref": "#/parameters/Routes.Apis.CommonParams"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiRelease"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.ApiRelease[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.ApiRelease>"
+              "$ref": "#/definitions/PagedApiRelease"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -613,48 +481,31 @@
             "$ref": "#/parameters/Routes.Apis.CommonParams"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiSchema"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.ApiSchema[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.ApiSchema>"
+              "$ref": "#/definitions/PagedApiSchema"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -670,6 +521,7 @@
             "name": "schemaId",
             "in": "path",
             "required": true,
+            "description": "Schema identifier.",
             "type": "string"
           }
         ],
@@ -677,13 +529,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiSchema"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ApiSchema"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -698,48 +550,31 @@
             "$ref": "#/parameters/Routes.Apis.CommonParams"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Tag>"
+              "$ref": "#/definitions/PagedTag"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -749,48 +584,31 @@
         "description": "List a collection of API version sets.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiVersionSet"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.ApiVersionSet[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.ApiVersionSet>"
+              "$ref": "#/definitions/PagedApiVersionSet"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -807,13 +625,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiVersionSet"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSet"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -825,13 +643,13 @@
         "description": "List a collection of API version set APIs specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           },
           {
             "$ref": "#/parameters/Routes.ApiVersionSets.CommonParams"
@@ -841,35 +659,18 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Api"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Api[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Api>"
+              "$ref": "#/definitions/PagedApi"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -882,13 +683,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ContentSettings"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ContentSettings"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -903,13 +704,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.SignupConfiguration"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.SignupConfiguration"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -924,8 +725,9 @@
             "name": "identityConfirmationRequest",
             "in": "body",
             "required": true,
+            "description": "The identity confirmation request.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.IdentityConfirmationRequest"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityConfirmationRequest"
             }
           }
         ],
@@ -936,7 +738,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -951,8 +753,9 @@
             "name": "confirmationRequest",
             "in": "body",
             "required": true,
+            "description": "The password confirmation request.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ConfirmationRequest"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ConfirmationRequest"
             }
           }
         ],
@@ -963,7 +766,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -978,13 +781,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.DelegationSettings"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.DelegationSettings"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -999,14 +802,16 @@
             "name": "action",
             "in": "path",
             "required": true,
+            "description": "The action to perform.",
             "type": "string"
           },
           {
             "name": "delegationOperationRequest",
             "in": "body",
             "required": true,
+            "description": "The URL to redirect to after the user has signed in.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.DelegationOperationRequest"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.DelegationOperationRequest"
             }
           }
         ],
@@ -1014,13 +819,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.DelegationOperationResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.DelegationOperationResponse"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -1035,13 +840,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.IdentityResult"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -1053,48 +858,31 @@
         "description": "List a collection of products.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Product"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Product[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Product>"
+              "$ref": "#/definitions/PagedProduct"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1107,6 +895,7 @@
             "name": "productId",
             "in": "path",
             "required": true,
+            "description": "The product identifier.",
             "type": "string"
           }
         ],
@@ -1114,13 +903,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.Product"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.Product"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -1135,51 +924,35 @@
             "name": "productId",
             "in": "path",
             "required": true,
+            "description": "The product identifier.",
             "type": "string"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Api"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Api[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Api>"
+              "$ref": "#/definitions/PagedApi"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1192,51 +965,35 @@
             "name": "productId",
             "in": "path",
             "required": true,
+            "description": "The product identifier.",
             "type": "string"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Tag>"
+              "$ref": "#/definitions/PagedTag"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1246,48 +1003,31 @@
         "description": "List a collection of tags.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.skip"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.top"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/DeveloperServicesAPI.Models.ListParams.filter"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nextLink": {
-                  "type": "string",
-                  "description": "Relative URL to next page of collection."
-                },
-                "value": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
-                  },
-                  "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
-                  "description": "Collection itself."
-                }
-              },
-              "description": "Collection object for listing operations.",
-              "required": [
-                "nextLink",
-                "value"
-              ],
-              "x-typespec-name": "DeveloperServicesAPI.Models.Collection<DeveloperServicesAPI.Models.Tag>"
+              "$ref": "#/definitions/PagedTag"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1300,8 +1040,9 @@
             "name": "userCreate",
             "in": "body",
             "required": true,
+            "description": "The user to create.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.UserCreate"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.UserCreate"
             }
           }
         ],
@@ -1309,13 +1050,13 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.User"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.User"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesAPI.Models.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
         }
@@ -1323,7 +1064,60 @@
     }
   },
   "definitions": {
-    "DeveloperServicesAPI.Models.Api": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "Azure.Core.Foundations.Error[]",
+          "description": "An array of details about specific errors that led to this reported error."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "description": "The error object.",
+      "required": [
+        "code",
+        "message",
+        "details"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      },
+      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.",
+      "required": [
+        "code"
+      ]
+    },
+    "DeveloperServicesApi.Models.Api": {
       "type": "object",
       "properties": {
         "id": {
@@ -1349,25 +1143,25 @@
         "protocols": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiProtocol"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiProtocol"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.ApiProtocol[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.ApiProtocol[]",
           "description": "Protocols over which API is made available."
         },
         "tagDescriptions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.TagDescription"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.TagDescription"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.TagDescription[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.TagDescription[]",
           "description": "Collection of Tag Descriptions included into this API."
         },
         "authenticationSettings": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.AuthenticationSettings",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.AuthenticationSettings",
           "description": "Collection of authentication settings included into this API."
         },
         "subscriptionKeyParameterNames": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.SubscriptionKeyParameterNames",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.SubscriptionKeyParameterNames",
           "description": "Names of Subscription key parameters used by the API."
         },
         "termsOfServiceUrl": {
@@ -1375,15 +1169,15 @@
           "description": "A URL to the Terms of Service for the API. MUST be in the format of a URL."
         },
         "contact": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiContact",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiContact",
           "description": "Contact information for the exposed API."
         },
         "license": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiLicense",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiLicense",
           "description": "License information for the exposed API."
         },
         "type": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiType",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiType",
           "description": "Type of API."
         },
         "apiVersion": {
@@ -1411,7 +1205,7 @@
         "apiVersionSetId"
       ]
     },
-    "DeveloperServicesAPI.Models.ApiContact": {
+    "DeveloperServicesApi.Models.ApiContact": {
       "type": "object",
       "properties": {
         "name": {
@@ -1437,7 +1231,7 @@
         "email"
       ]
     },
-    "DeveloperServicesAPI.Models.ApiHostname": {
+    "DeveloperServicesApi.Models.ApiHostname": {
       "type": "object",
       "properties": {
         "id": {
@@ -1455,7 +1249,7 @@
         "value"
       ]
     },
-    "DeveloperServicesAPI.Models.ApiLicense": {
+    "DeveloperServicesApi.Models.ApiLicense": {
       "type": "object",
       "properties": {
         "name": {
@@ -1475,7 +1269,7 @@
         "url"
       ]
     },
-    "DeveloperServicesAPI.Models.ApiProtocol": {
+    "DeveloperServicesApi.Models.ApiProtocol": {
       "type": "string",
       "description": "API protocol information",
       "enum": [
@@ -1511,7 +1305,7 @@
         ]
       }
     },
-    "DeveloperServicesAPI.Models.ApiRelease": {
+    "DeveloperServicesApi.Models.ApiRelease": {
       "type": "object",
       "properties": {
         "id": {
@@ -1541,7 +1335,7 @@
         "notes"
       ]
     },
-    "DeveloperServicesAPI.Models.ApiSchema": {
+    "DeveloperServicesApi.Models.ApiSchema": {
       "type": "object",
       "properties": {
         "id": {
@@ -1563,7 +1357,7 @@
         "contentType"
       ]
     },
-    "DeveloperServicesAPI.Models.ApiType": {
+    "DeveloperServicesApi.Models.ApiType": {
       "type": "string",
       "description": "Type of API",
       "enum": [
@@ -1599,7 +1393,7 @@
         ]
       }
     },
-    "DeveloperServicesAPI.Models.ApiVersionSet": {
+    "DeveloperServicesApi.Models.ApiVersionSet": {
       "type": "object",
       "properties": {
         "id": {
@@ -1615,7 +1409,7 @@
           "description": "API Version Set description."
         },
         "versioningScheme": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.ApiVersionSetScheme",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSetScheme",
           "description": "Versioning scheme."
         },
         "versionQueryName": {
@@ -1637,7 +1431,7 @@
         "versionHeaderName"
       ]
     },
-    "DeveloperServicesAPI.Models.ApiVersionSetScheme": {
+    "DeveloperServicesApi.Models.ApiVersionSetScheme": {
       "type": "string",
       "description": "Versioning scheme types.",
       "enum": [
@@ -1667,25 +1461,25 @@
         ]
       }
     },
-    "DeveloperServicesAPI.Models.AuthenticationSettings": {
+    "DeveloperServicesApi.Models.AuthenticationSettings": {
       "type": "object",
       "properties": {
         "oAuth2AuthenticationSettings": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.OAuth2AuthenticationSettings"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.OAuth2AuthenticationSettings"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.OAuth2AuthenticationSettings[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.OAuth2AuthenticationSettings[]",
           "description": "Collection of OAuth2 authentication settings included into this API."
         },
         "openidAuthenticationSettings": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.OpenidAuthenticationSettings"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.OpenidAuthenticationSettings"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.OpenidAuthenticationSettings[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.OpenidAuthenticationSettings[]",
           "description": "Collection of OpenID Connect authentication settings included into this API."
         },
         "subscriptionKeyRequired": {
@@ -1699,7 +1493,7 @@
         "openidAuthenticationSettings"
       ]
     },
-    "DeveloperServicesAPI.Models.AuthorizationServer": {
+    "DeveloperServicesApi.Models.AuthorizationServer": {
       "type": "object",
       "properties": {
         "name": {
@@ -1729,9 +1523,9 @@
         "grantTypes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.GrantType"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.GrantType"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.GrantType[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.GrantType[]",
           "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>."
         },
         "useInTestConsole": {
@@ -1756,7 +1550,7 @@
         "useInApiDocumentation"
       ]
     },
-    "DeveloperServicesAPI.Models.BearerTokenSendingMethod": {
+    "DeveloperServicesApi.Models.BearerTokenSendingMethod": {
       "type": "string",
       "description": "Form of an authorization grant, which the client uses to request the access token.",
       "enum": [
@@ -1780,7 +1574,7 @@
         ]
       }
     },
-    "DeveloperServicesAPI.Models.ClientAuthenticationMethod": {
+    "DeveloperServicesApi.Models.ClientAuthenticationMethod": {
       "type": "string",
       "description": "Supported methods of authorization.",
       "enum": [
@@ -1804,7 +1598,7 @@
         ]
       }
     },
-    "DeveloperServicesAPI.Models.ConfirmationRequest": {
+    "DeveloperServicesApi.Models.ConfirmationRequest": {
       "type": "object",
       "properties": {
         "to": {
@@ -1817,7 +1611,7 @@
         "to"
       ]
     },
-    "DeveloperServicesAPI.Models.ContentSettings": {
+    "DeveloperServicesApi.Models.ContentSettings": {
       "type": "object",
       "properties": {
         "signinRequired": {
@@ -1827,7 +1621,7 @@
       },
       "description": "Portal content settings."
     },
-    "DeveloperServicesAPI.Models.DelegationOperationRequest": {
+    "DeveloperServicesApi.Models.DelegationOperationRequest": {
       "type": "object",
       "properties": {
         "returnUrl": {
@@ -1840,7 +1634,7 @@
         "returnUrl"
       ]
     },
-    "DeveloperServicesAPI.Models.DelegationOperationResponse": {
+    "DeveloperServicesApi.Models.DelegationOperationResponse": {
       "type": "object",
       "properties": {
         "ssoUri": {
@@ -1853,7 +1647,7 @@
         "ssoUri"
       ]
     },
-    "DeveloperServicesAPI.Models.DelegationSettings": {
+    "DeveloperServicesApi.Models.DelegationSettings": {
       "type": "object",
       "properties": {
         "signin": {
@@ -1867,34 +1661,12 @@
       },
       "description": "Delegation settings."
     },
-    "DeveloperServicesAPI.Models.Error": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message."
-        },
-        "details": {
-          "type": "string",
-          "description": "Error details if exists."
-        }
-      },
-      "description": "Error.",
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "DeveloperServicesAPI.Models.ErrorResponse": {
+    "DeveloperServicesApi.Models.ErrorResponse": {
       "type": "object",
       "properties": {
         "error": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.Error",
-          "description": "Error itself."
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "Error."
         }
       },
       "description": "Error response object.",
@@ -1902,7 +1674,7 @@
         "error"
       ]
     },
-    "DeveloperServicesAPI.Models.Example": {
+    "DeveloperServicesApi.Models.Example": {
       "type": "object",
       "properties": {
         "summary": {
@@ -1930,11 +1702,12 @@
         "externalValue"
       ]
     },
-    "DeveloperServicesAPI.Models.ExampleObject": {
+    "DeveloperServicesApi.Models.ExampleObject": {
       "type": "object",
       "properties": {
         "default": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.Example"
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Example",
+          "description": "example details."
         }
       },
       "description": "Payload or parameter example object.",
@@ -1942,7 +1715,7 @@
         "default"
       ]
     },
-    "DeveloperServicesAPI.Models.GrantType": {
+    "DeveloperServicesApi.Models.GrantType": {
       "type": "string",
       "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>.",
       "enum": [
@@ -1984,7 +1757,7 @@
         ]
       }
     },
-    "DeveloperServicesAPI.Models.IdentityConfirmationRequest": {
+    "DeveloperServicesApi.Models.IdentityConfirmationRequest": {
       "type": "object",
       "properties": {
         "to": {
@@ -2002,7 +1775,7 @@
         "reason"
       ]
     },
-    "DeveloperServicesAPI.Models.IdentityResult": {
+    "DeveloperServicesApi.Models.IdentityResult": {
       "type": "object",
       "properties": {
         "id": {
@@ -2020,7 +1793,7 @@
         "provider"
       ]
     },
-    "DeveloperServicesAPI.Models.Method": {
+    "DeveloperServicesApi.Models.Method": {
       "type": "string",
       "description": "HTTP Method.",
       "enum": [
@@ -2086,22 +1859,25 @@
         ]
       }
     },
-    "DeveloperServicesAPI.Models.NameValuePair": {
+    "DeveloperServicesApi.Models.NameValuePair": {
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the property."
         },
         "value": {
-          "type": "string"
+          "type": "string",
+          "description": "Value of the property."
         }
       },
+      "description": "Name value pair object.",
       "required": [
         "name",
         "value"
       ]
     },
-    "DeveloperServicesAPI.Models.OAuth2AuthenticationSettings": {
+    "DeveloperServicesApi.Models.OAuth2AuthenticationSettings": {
       "type": "object",
       "properties": {
         "authorizationServerId": {
@@ -2113,7 +1889,7 @@
           "description": "Operations scope."
         },
         "authorizationServer": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.OAuth2AuthorizationServer",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.OAuth2AuthorizationServer",
           "description": "OAuth2 authorization server."
         }
       },
@@ -2123,7 +1899,7 @@
         "scope"
       ]
     },
-    "DeveloperServicesAPI.Models.OAuth2AuthorizationServer": {
+    "DeveloperServicesApi.Models.OAuth2AuthorizationServer": {
       "type": "object",
       "properties": {
         "id": {
@@ -2149,26 +1925,26 @@
         "authorizationMethods": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Method"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Method"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.Method[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Method[]",
           "description": "Supported methods of authorization."
         },
         "clientAuthenticationMethod": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.ClientAuthenticationMethod"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.ClientAuthenticationMethod"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.ClientAuthenticationMethod[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.ClientAuthenticationMethod[]",
           "description": "Supported methods of authentication."
         },
         "tokenBodyParameters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.NameValuePair"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.NameValuePair"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.NameValuePair[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.NameValuePair[]",
           "description": "Token request body parameters."
         },
         "tokenEndpoint": {
@@ -2194,17 +1970,17 @@
         "grantTypes": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.GrantType"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.GrantType"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.GrantType[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.GrantType[]",
           "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>."
         },
         "bearerTokenSendingMethods": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.BearerTokenSendingMethod"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.BearerTokenSendingMethod"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.BearerTokenSendingMethod[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.BearerTokenSendingMethod[]",
           "description": "Form of an authorization grant, which the client uses to request the access token. <see cref=\"http://tools.ietf.org/html/rfc6749#section-4\"/>."
         },
         "clientId": {
@@ -2240,7 +2016,7 @@
         "resourceOwnerPassword"
       ]
     },
-    "DeveloperServicesAPI.Models.OpenidAuthenticationSettings": {
+    "DeveloperServicesApi.Models.OpenidAuthenticationSettings": {
       "type": "object",
       "properties": {
         "openidProviderId": {
@@ -2250,13 +2026,13 @@
         "bearerTokenSendingMethods": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.BearerTokenSendingMethod"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.BearerTokenSendingMethod"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.BearerTokenSendingMethod[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.BearerTokenSendingMethod[]",
           "description": "How to send token to the server."
         },
         "openidConnectProvider": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.OpenidConnectProvider",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.OpenidConnectProvider",
           "description": "OpenID Connect provider."
         }
       },
@@ -2266,7 +2042,7 @@
         "bearerTokenSendingMethods"
       ]
     },
-    "DeveloperServicesAPI.Models.OpenidConnectProvider": {
+    "DeveloperServicesApi.Models.OpenidConnectProvider": {
       "type": "object",
       "properties": {
         "id": {
@@ -2307,7 +2083,7 @@
         "clientId"
       ]
     },
-    "DeveloperServicesAPI.Models.Operation": {
+    "DeveloperServicesApi.Models.Operation": {
       "type": "object",
       "properties": {
         "id": {
@@ -2323,7 +2099,7 @@
           "description": "Operation description."
         },
         "method": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.Method",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Method",
           "description": "Operation method."
         },
         "urlTemplate": {
@@ -2333,31 +2109,31 @@
         "templateParameters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Parameter"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Parameter[]",
           "description": "Operation URL template parameters."
         },
         "request": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.Request",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Request",
           "description": "Operation request details."
         },
         "responses": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Response"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Response"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.Response[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Response[]",
           "description": "Operation responses."
         },
         "tags": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Tag"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Tag"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.Tag[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Tag[]",
           "description": "Operation tags."
         }
       },
@@ -2374,7 +2150,7 @@
         "tags"
       ]
     },
-    "DeveloperServicesAPI.Models.Parameter": {
+    "DeveloperServicesApi.Models.Parameter": {
       "type": "object",
       "properties": {
         "name": {
@@ -2414,13 +2190,13 @@
           "description": "Parameter type name."
         },
         "examples": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.ExampleObject",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ExampleObject",
           "description": "Example definition"
         }
       },
       "description": "API operation method."
     },
-    "DeveloperServicesAPI.Models.Product": {
+    "DeveloperServicesApi.Models.Product": {
       "type": "object",
       "properties": {
         "id": {
@@ -2461,7 +2237,7 @@
         "terms"
       ]
     },
-    "DeveloperServicesAPI.Models.Representation": {
+    "DeveloperServicesApi.Models.Representation": {
       "type": "object",
       "properties": {
         "contentType": {
@@ -2469,7 +2245,7 @@
           "description": "Representation content type."
         },
         "examples": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.ExampleObject",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ExampleObject",
           "description": "Example definition"
         },
         "schemaId": {
@@ -2483,16 +2259,16 @@
         "formParameters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Parameter"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Parameter[]",
           "description": "Collection of form parameters. Required if 'contentType' value is either 'application/x-www-form-urlencoded' or 'multipart/form-data'."
         }
       },
       "description": "Operation request representation."
     },
-    "DeveloperServicesAPI.Models.Request": {
+    "DeveloperServicesApi.Models.Request": {
       "type": "object",
       "properties": {
         "description": {
@@ -2502,34 +2278,34 @@
         "queryParameters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Parameter"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Parameter[]",
           "description": "Collection of operation request query parameters."
         },
         "headers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Parameter"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Parameter[]",
           "description": "Collection of operation request headers."
         },
         "representations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Representation"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Representation"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.Representation[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Representation[]",
           "description": "Collection of operation request representations."
         }
       },
       "description": "Operation request description."
     },
-    "DeveloperServicesAPI.Models.Response": {
+    "DeveloperServicesApi.Models.Response": {
       "type": "object",
       "properties": {
         "statusCode": {
@@ -2544,29 +2320,29 @@
         "headers": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Parameter"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Parameter"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.Parameter[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Parameter[]",
           "description": "Collection of operation response headers."
         },
         "representations": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.Representation"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Representation"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesAPI.Models.Representation[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.Representation[]",
           "description": "Collection of operation response representations."
         }
       },
       "description": "Operation response description."
     },
-    "DeveloperServicesAPI.Models.SignupConfiguration": {
+    "DeveloperServicesApi.Models.SignupConfiguration": {
       "type": "object",
       "properties": {
         "termsOfService": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.TermsOfServiceConfiguration",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.TermsOfServiceConfiguration",
           "description": "Terms of service configuration."
         }
       },
@@ -2575,7 +2351,7 @@
         "termsOfService"
       ]
     },
-    "DeveloperServicesAPI.Models.SubscriptionKeyParameterNames": {
+    "DeveloperServicesApi.Models.SubscriptionKeyParameterNames": {
       "type": "object",
       "properties": {
         "header": {
@@ -2593,7 +2369,7 @@
         "query"
       ]
     },
-    "DeveloperServicesAPI.Models.Tag": {
+    "DeveloperServicesApi.Models.Tag": {
       "type": "object",
       "properties": {
         "id": {
@@ -2611,7 +2387,7 @@
         "name"
       ]
     },
-    "DeveloperServicesAPI.Models.TagDescription": {
+    "DeveloperServicesApi.Models.TagDescription": {
       "type": "object",
       "properties": {
         "id": {
@@ -2649,7 +2425,7 @@
         "externalDocsUrl"
       ]
     },
-    "DeveloperServicesAPI.Models.TermsOfServiceConfiguration": {
+    "DeveloperServicesApi.Models.TermsOfServiceConfiguration": {
       "type": "object",
       "properties": {
         "text": {
@@ -2672,7 +2448,7 @@
         "text"
       ]
     },
-    "DeveloperServicesAPI.Models.User": {
+    "DeveloperServicesApi.Models.User": {
       "type": "object",
       "properties": {
         "id": {
@@ -2692,7 +2468,7 @@
           "description": "User last name."
         },
         "state": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.UserState",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.UserState",
           "description": "User state."
         },
         "registrationDate": {
@@ -2711,7 +2487,7 @@
         "registrationDate"
       ]
     },
-    "DeveloperServicesAPI.Models.UserCreate": {
+    "DeveloperServicesApi.Models.UserCreate": {
       "type": "object",
       "properties": {
         "email": {
@@ -2732,7 +2508,7 @@
           "description": "User last name."
         },
         "state": {
-          "$ref": "#/definitions/DeveloperServicesAPI.Models.UserState",
+          "$ref": "#/definitions/DeveloperServicesApi.Models.UserState",
           "description": "User state."
         },
         "note": {
@@ -2746,9 +2522,9 @@
         "identities": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DeveloperServicesAPI.Models.IdentityResult"
+            "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityResult"
           },
-          "x-typespec-name": "DeveloperServicesAPI.Models.IdentityResult[]",
+          "x-typespec-name": "DeveloperServicesApi.Models.IdentityResult[]",
           "description": "Collection of user identities."
         }
       },
@@ -2763,7 +2539,7 @@
         "identities"
       ]
     },
-    "DeveloperServicesAPI.Models.UserState": {
+    "DeveloperServicesApi.Models.UserState": {
       "type": "string",
       "description": "User state.",
       "enum": [
@@ -2799,35 +2575,242 @@
         ]
       }
     },
+    "PagedApi": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
+          },
+          "x-typespec-name": "DeveloperServicesApi.Models.Api[]",
+          "description": "The Api items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of Api items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedApiHostname": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiHostname"
+          },
+          "x-typespec-name": "DeveloperServicesApi.Models.ApiHostname[]",
+          "description": "The ApiHostname items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of ApiHostname items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedApiRelease": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiRelease"
+          },
+          "x-typespec-name": "DeveloperServicesApi.Models.ApiRelease[]",
+          "description": "The ApiRelease items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of ApiRelease items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedApiSchema": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiSchema"
+          },
+          "x-typespec-name": "DeveloperServicesApi.Models.ApiSchema[]",
+          "description": "The ApiSchema items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of ApiSchema items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedApiVersionSet": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSet"
+          },
+          "x-typespec-name": "DeveloperServicesApi.Models.ApiVersionSet[]",
+          "description": "The ApiVersionSet items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of ApiVersionSet items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedAuthorizationServer": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesApi.Models.AuthorizationServer"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "DeveloperServicesApi.Models.AuthorizationServer[]",
+          "description": "The AuthorizationServer items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of AuthorizationServer items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedOperation": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Operation"
+          },
+          "x-typespec-name": "DeveloperServicesApi.Models.Operation[]",
+          "description": "The Operation items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of Operation items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedProduct": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Product"
+          },
+          "x-typespec-name": "DeveloperServicesApi.Models.Product[]",
+          "description": "The Product items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of Product items",
+      "required": [
+        "value"
+      ]
+    },
+    "PagedTag": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeveloperServicesApi.Models.Tag"
+          },
+          "x-typespec-name": "DeveloperServicesApi.Models.Tag[]",
+          "description": "The Tag items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "Paged collection of Tag items",
+      "required": [
+        "value"
+      ]
+    },
     "object": {
       "type": "object",
       "properties": {}
     }
   },
   "parameters": {
-    "DeveloperServicesAPI.Models.ListParams.filter": {
+    "Azure.Core.FilterQueryParameter": {
       "name": "filter",
       "in": "query",
       "required": false,
-      "description": "OData filter query option.",
+      "description": "Filter the result list using the given expression.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "DeveloperServicesAPI.Models.ListParams.skip": {
+    "Azure.Core.SkipQueryParameter": {
       "name": "skip",
       "in": "query",
       "required": false,
-      "description": "Number of element to skip.",
+      "description": "The number of result items to skip.",
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
-    "DeveloperServicesAPI.Models.ListParams.top": {
+    "Azure.Core.TopQueryParameter": {
       "name": "top",
       "in": "query",
       "required": false,
-      "description": "Number of element to take from the top.",
-      "maximum": 100,
+      "description": "The number of result items to return.",
       "type": "integer",
       "format": "int32",
       "x-ms-parameter-location": "method"
@@ -2836,6 +2819,7 @@
       "name": "versionSetId",
       "in": "path",
       "required": true,
+      "description": "API version set identifier.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -2843,6 +2827,7 @@
       "name": "apiId",
       "in": "path",
       "required": true,
+      "description": "API identifier.",
       "type": "string",
       "x-ms-parameter-location": "method"
     }

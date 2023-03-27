@@ -1,11 +1,13 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/subscription.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using Azure.Core;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedAPI.Routes.Subscriptions;
+namespace DeveloperServicesAuthorizedApi.Routes.Subscriptions;
 
 @route("/users/{userId}/subscriptions")
 @doc("List a collection of user subscriptions.")
@@ -13,7 +15,7 @@ namespace DeveloperServicesAuthorizedAPI.Routes.Subscriptions;
 op ListUserSubscriptions(
   ...UserParams,
   ...ListParams
-): ApiResponse<Collection<Subscription>>;
+): ApiResponse<Page<Subscription>>;
 
 @route("/users/{userId}/subscriptions/{subscriptionId}")
 @doc("Get user subscription by its identifier.")
@@ -29,7 +31,10 @@ op GetUserSubscription(
 op CreateUserSubscription(
   ...UserParams,
   ...CommonParams,
-  @body userSubscriptionCreate: UserSubscriptionCreate
+
+  @doc("User subscription create model.")
+  @body
+  userSubscriptionCreate: UserSubscriptionCreate
 ): NoContentResponse | ErrorResponse;
 
 @route("/users/{userId}/subscriptions/{subscriptionId}")
@@ -38,7 +43,10 @@ op CreateUserSubscription(
 op UpdateUserSubscription(
   ...UserParams,
   ...CommonParams,
-  @body userSubscriptionUpdate: UserSubscriptionUpdate
+
+  @doc("User subscription update model.")
+  @body
+  userSubscriptionUpdate: UserSubscriptionUpdate
 ): NoContentResponse | ErrorResponse;
 
 @route("/users/{userId}/subscriptions/{subscriptionId}/regeneratePrimaryKey")
@@ -57,6 +65,9 @@ op RegenerateUserSubscriptionSecondaryKey(
   ...CommonParams
 ): NoContentResponse | ErrorResponse;
 
+@doc("Common parameters.")
 model CommonParams {
-  @path subscriptionId: string;
+  @doc("Subscription identifier.")
+  @path
+  subscriptionId: string;
 }

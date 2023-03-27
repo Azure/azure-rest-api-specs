@@ -3,9 +3,9 @@ import "../../models/common.tsp";
 import "../../models/configuration.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicAPI.Routes.Configuration;
+namespace DeveloperServicesPublicApi.Routes.Configuration;
 
 @route("/configuration/content")
 @doc("Get content settings.")

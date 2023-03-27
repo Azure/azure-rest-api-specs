@@ -3,9 +3,9 @@ import "../../models/common.tsp";
 import "../../models/confirmation.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedAPI.Routes.Confirmations;
+namespace DeveloperServicesAuthorizedApi.Routes.Confirmations;
 
 @route("/confirmations/users/{userId}/identities/basic")
 @doc("Basic identity (Email) confirmation for a User.")

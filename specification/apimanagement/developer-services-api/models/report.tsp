@@ -1,4 +1,4 @@
-namespace DeveloperServicesAPI.Models;
+namespace DeveloperServicesApi.Models;
 
 @doc("Report definition.")
 model Report {

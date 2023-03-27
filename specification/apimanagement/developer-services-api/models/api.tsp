@@ -1,6 +1,6 @@
 import "./authenticationSettings.tsp";
 
-namespace DeveloperServicesAPI.Models;
+namespace DeveloperServicesApi.Models;
 
 @doc("API contract")
 model Api {

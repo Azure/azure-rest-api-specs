@@ -1,11 +1,13 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/identity.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using Azure.Core;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedAPI.Routes.Confirmations;
+namespace DeveloperServicesAuthorizedApi.Routes.Confirmations;
 
 @route("/users/{userId}/identities")
 @doc("List a collection of user identities.")
@@ -13,7 +15,7 @@ namespace DeveloperServicesAuthorizedAPI.Routes.Confirmations;
 op ListUserIdentities(
   ...UserParams,
   ...ListParams
-): ApiResponse<Collection<IdentityResult>>;
+): ApiResponse<Page<IdentityResult>>;
 
 @route("/users/{userId}/identities/{provider}/{identity}")
 @doc("Creates or updates the given user identity.")

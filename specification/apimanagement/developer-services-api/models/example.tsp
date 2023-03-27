@@ -1,7 +1,8 @@
-namespace DeveloperServicesAPI.Models;
+namespace DeveloperServicesApi.Models;
 
 @doc("Payload or parameter example object.")
 model ExampleObject {
+  @doc("example details.")
   default: Example;
 }
 

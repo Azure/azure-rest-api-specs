@@ -1,4 +1,5 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/api.tsp";
 import "../../models/authorizationServer.tsp";
@@ -7,38 +8,45 @@ import "../../models/operation.tsp";
 import "../../models/tag.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using Azure.Core;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicAPI.Routes.Apis;
+namespace DeveloperServicesPublicApi.Routes.Apis;
 
 @route("/apis")
 @doc("List a collection of APIs.")
 @get
-op ListApis(...ListParams): ApiResponse<Collection<Api>>;
+op ListApis(...ListParams): ApiResponse<Page<Api>>;
 
 @route("/apis/{apiId}")
 @doc("Get the details of the API specified by its identifier.")
 @get
 op GetApi(
   ...CommonParams,
-  @header accept?: ContentTypes,
-  @query export?: boolean
+
+  @doc("If sent, the API will be exported in the specified format.")
+  @header
+  accept?: ContentTypes,
+
+  @doc("If true, the API will be exported in the specified format.")
+  @query
+  export?: boolean
 ): ApiResponse<TypedBody<Api, ContentTypes>>;
 
 @route("/apis/{apiId}/schemas")
 @doc("List a collection of APIs schemas.")
 @get
-op ListApiSchemas(
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Collection<ApiSchema>>;
+op ListApiSchemas(...CommonParams, ...ListParams): ApiResponse<Page<ApiSchema>>;
 
 @route("/apis/{apiId}/schemas/{schemaId}")
 @doc("Get the details of the APIs schema specified by its identifier.")
 @get
 op GetApiSchema(
   ...CommonParams,
-  @path schemaId: string
+
+  @doc("Schema identifier.")
+  @path
+  schemaId: string
 ): ApiResponse<ApiSchema>;
 
 @route("/apis/{apiId}/authServers/oauth2")
@@ -47,14 +55,17 @@ op GetApiSchema(
 op ListApiOAuth2Providers(
   ...CommonParams,
   ...ListParams
-): ApiResponse<Collection<AuthorizationServer>>;
+): ApiResponse<Page<AuthorizationServer>>;
 
 @route("/apis/{apiId}/authServers/oauth2/{providerId}")
 @doc("Get OAuth 2.0 server specified by its identifier associated with the API.")
 @get
 op GetApiOAuth2Provider(
   ...CommonParams,
-  @path providerId: string
+
+  @doc("OAuth 2.0 server identifier.")
+  @path
+  providerId: string
 ): ApiResponse<AuthorizationServer>;
 
 @route("/apis/{apiId}/authServers/openidconnect")
@@ -63,23 +74,23 @@ op GetApiOAuth2Provider(
 op ListApiOpenidProviders(
   ...CommonParams,
   ...ListParams
-): ApiResponse<Collection<AuthorizationServer>>;
+): ApiResponse<Page<AuthorizationServer>>;
 
 @route("/apis/{apiId}/authServers/openidconnect/{providerId}")
 @doc("Get OpenID Connect server specified by its identifier associated with the API.")
 @get
 op GetApiOpenidProvider(
   ...CommonParams,
-  @path providerId: string
+
+  @doc("OpenID Connect server identifier.")
+  @path
+  providerId: string
 ): ApiResponse<AuthorizationServer>;
 
 @route("/apis/{apiId}/products")
 @doc("List of public products associated with the API.")
 @get
-op ListApiProducts(
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Collection<Product>>;
+op ListApiProducts(...CommonParams, ...ListParams): ApiResponse<Page<Product>>;
 
 @route("/apis/{apiId}/releases")
 @doc("List of releases for the API.")
@@ -87,12 +98,12 @@ op ListApiProducts(
 op ListApiReleases(
   ...CommonParams,
   ...ListParams
-): ApiResponse<Collection<ApiRelease>>;
+): ApiResponse<Page<ApiRelease>>;
 
 @route("/apis/{apiId}/tags")
 @doc("Tags of the API.")
 @get
-op ListApiTags(...CommonParams, ...ListParams): ApiResponse<Collection<Tag>>;
+op ListApiTags(...CommonParams, ...ListParams): ApiResponse<Page<Tag>>;
 
 @route("/apis/{apiId}/hostnames")
 @doc("Hostnames of the API.")
@@ -100,7 +111,7 @@ op ListApiTags(...CommonParams, ...ListParams): ApiResponse<Collection<Tag>>;
 op ListApiHostnames(
   ...CommonParams,
   ...ListParams
-): ApiResponse<Collection<ApiHostname>>;
+): ApiResponse<Page<ApiHostname>>;
 
 @route("/apis/{apiId}/operations")
 @doc("Operations of the API.")
@@ -108,14 +119,17 @@ op ListApiHostnames(
 op ListApiOperations(
   ...CommonParams,
   ...ListParams
-): ApiResponse<Collection<Operation>>;
+): ApiResponse<Page<Operation>>;
 
 @route("/apis/{apiId}/operations/{operationId}")
 @doc("Operation specified by its identifier of the API.")
 @get
 op GetApiOperation(
   ...CommonParams,
-  @path operationId: string
+
+  @doc("Operation identifier.")
+  @path
+  operationId: string
 ): ApiResponse<Operation>;
 
 @route("/apis/{apiId}/operations/{operationId}/tags")
@@ -124,9 +138,15 @@ op GetApiOperation(
 op ListApiOperationTags(
   ...CommonParams,
   ...ListParams,
-  @path operationId: string
-): ApiResponse<Collection<Tag>>;
 
+  @doc("Operation identifier.")
+  @path
+  operationId: string
+): ApiResponse<Page<Tag>>;
+
+@doc("Common parameters.")
 model CommonParams {
-  @path apiId: string;
+  @doc("API identifier.")
+  @path
+  apiId: string;
 }

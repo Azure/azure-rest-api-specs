@@ -1,4 +1,5 @@
-namespace DeveloperServicesAPI.Models;
+namespace DeveloperServicesApi.Models;
+
 @doc("User profile.")
 model User {
   @doc("User id.")

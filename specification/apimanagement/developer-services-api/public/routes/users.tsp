@@ -3,11 +3,15 @@ import "../../models/common.tsp";
 import "../../models/user.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicAPI.Routes.Users;
+namespace DeveloperServicesPublicApi.Routes.Users;
 
 @route("/users")
 @doc("Create a new user.")
 @post
-op CreateUser(@body userCreate: UserCreate): CreatedApiResponse<User>;
+op CreateUser(
+  @doc("The user to create.")
+  @body
+  userCreate: UserCreate
+): CreatedApiResponse<User>;

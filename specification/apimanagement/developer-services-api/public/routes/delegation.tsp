@@ -3,9 +3,9 @@ import "../../models/common.tsp";
 import "../../models/delegation.tsp";
 
 using TypeSpec.Http;
-using DeveloperServicesAPI.Models;
+using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicAPI.Routes.Delegation;
+namespace DeveloperServicesPublicApi.Routes.Delegation;
 
 @route("/delegation/settings")
 @doc("Delegation settings.")
@@ -16,6 +16,11 @@ op GetDelegationSettings(): ApiResponse<DelegationSettings>;
 @doc("Unauthorized delegation URLs (Signin, Signup).")
 @post
 op CreateDelegationSigninUrl(
-  @path action: string,
-  @body delegationOperationRequest: DelegationOperationRequest
+  @doc("The action to perform.")
+  @path
+  action: string,
+
+  @doc("The URL to redirect to after the user has signed in.")
+  @body
+  delegationOperationRequest: DelegationOperationRequest
 ): ApiResponse<DelegationOperationResponse>;

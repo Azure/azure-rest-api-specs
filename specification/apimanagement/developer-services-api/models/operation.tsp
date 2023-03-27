@@ -1,6 +1,6 @@
 import "./example.tsp";
 
-namespace DeveloperServicesAPI.Models;
+namespace DeveloperServicesApi.Models;
 
 @doc("API operation details.")
 model Operation {
