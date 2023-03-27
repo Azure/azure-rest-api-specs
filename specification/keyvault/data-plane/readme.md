@@ -26,14 +26,31 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-7.4-preview.1
+tag: package-7.4
 ```
 
+
+### Tag: package-7.4
+
+These settings apply only when `--tag=package-7.4` is specified on the command line.
+
+```yaml $(tag) == 'package-7.4'
+input-file:
+  - Microsoft.KeyVault/stable/7.4/backuprestore.json
+  - Microsoft.KeyVault/stable/7.4/certificates.json
+  - Microsoft.KeyVault/stable/7.4/common.json
+  - Microsoft.KeyVault/stable/7.4/keys.json
+  - Microsoft.KeyVault/stable/7.4/rbac.json
+  - Microsoft.KeyVault/stable/7.4/secrets.json
+  - Microsoft.KeyVault/stable/7.4/securitydomain.json
+  - Microsoft.KeyVault/stable/7.4/settings.json
+  - Microsoft.KeyVault/stable/7.4/storage.json
+```
 ### Tag: package-preview-7.4-preview.1
 
 These settings apply only when `--tag=package-preview-7.4-preview.1` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-7.4-preview.1'
+``` yaml $(tag) == 'package-preview-7.4-preview.1'
 input-file:
   - Microsoft.KeyVault/preview/7.4-preview.1/backuprestore.json
   - Microsoft.KeyVault/preview/7.4-preview.1/certificates.json
@@ -50,7 +67,7 @@ input-file:
 
 These settings apply only when `--tag=package-7.3` is specified on the command line.
 
-```yaml $(tag) == 'package-7.3'
+``` yaml $(tag) == 'package-7.3'
 input-file:
   - Microsoft.KeyVault/stable/7.3/backuprestore.json
   - Microsoft.KeyVault/stable/7.3/certificates.json
@@ -175,6 +192,22 @@ input-file:
 ---
 
 # Code Generation
+
+## General
+
+These transforms apply to any generator.
+
+``` yaml
+directive:
+# Rename models back to what they were before 7.4 for autorest-based code generators.
+# Generated names were disambiguated for generators not using autorest but still processing x-ms-enum.name.
+- from: certificates.json
+  where: $.definitions.Action
+  transform: $.properties.action_type["x-ms-enum"].name = "ActionType";
+- from: keys.json
+  where: $.definitions.LifetimeActionsType
+  transform: $.properties.type["x-ms-enum"].name = "ActionType";
+```
 
 ## C#
 
