@@ -341,6 +341,60 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "StandbyVirtualMachinePool"
+        ],
+        "operationId": "StandbyVirtualMachinePool_Update",
+        "description": "Update a StandbyVirtualMachinePoolResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "standbyVirtualMachinePoolName",
+            "in": "path",
+            "required": true,
+            "description": "Name of the standby virtual machine pool",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "required": true,
+            "description": "The resource properties to be updated.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/StandbyVirtualMachinePoolResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v4/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StandbyVirtualMachinePool_Update": {
+            "$ref": "./examples/StandbyVirtualMachinePool_Update_MaximumSet_Gen.json"
+          }
+        }
       }
     }
   },
@@ -443,6 +497,55 @@
         "maxReadyCapacity",
         "virtualMachineStateMixPolicies"
       ]
+    },
+    "StandbyVirtualMachinePoolResourceUpdate": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/StandbyVirtualMachinePoolResourceUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the StandbyVirtualMachinePoolResource."
+    },
+    "StandbyVirtualMachinePoolResourceUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "maxReadyCapacity": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies maximum number of standby VMs. When the pool is attached to VMScaleSets, the limit applies to each VMScaleSet.",
+          "maximum": 2000
+        },
+        "virtualMachineStateMixPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineStatePolicy"
+          },
+          "x-ms-identifiers": [
+            "vmState"
+          ],
+          "x-cadl-name": "VirtualMachineStatePolicy[]",
+          "description": "Specifies list of VirtualMachineStateMixPolicy."
+        },
+        "attachedVirtualMachineScaleSetIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-cadl-name": "string[]",
+          "description": "Specifies list of VMScaleSets' fully qualified resource IDs the pool is attached to. When multiple VMScaleSets are specified, standby VMs are created for each VMScaleSet independently."
+        }
+      },
+      "description": "The updatable properties of the StandbyVirtualMachinePoolResource."
     },
     "VirtualMachineState": {
       "type": "string",

@@ -87,6 +87,7 @@ interface StandbyVirtualMachinePool {
   get is ArmResourceRead<StandbyVirtualMachinePoolResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyVirtualMachinePoolResource>;
   delete is ArmResourceDeleteAsync<StandbyVirtualMachinePoolResource>;
+  update is ArmResourcePatchSync<StandbyVirtualMachinePoolResource, StandbyVirtualMachinePoolResourceProperties>;
   listByResourceGroup is ArmResourceListByParent<StandbyVirtualMachinePoolResource>;
   listBySubscription is ArmListBySubscription<StandbyVirtualMachinePoolResource>;
 }
