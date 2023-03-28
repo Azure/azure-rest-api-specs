@@ -312,10 +312,11 @@
         "responses": {
           "202": {
             "description": "Workspace was successfully deleted",
-            "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/AzureMonitorWorkspace/default?api-version=2023-04-03"
+            "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/AzureMonitorWorkspace/default?api-version=2023-04-03"
           },
           "204": {
-            "description": "Workspace did not exist"
+            "description": "Workspace did not exist",
+            "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000/AzureMonitorWorkspace/default?api-version=2023-04-03"
           },
           "default": {
             "description": "Error",
@@ -331,7 +332,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         }
       }
     }
