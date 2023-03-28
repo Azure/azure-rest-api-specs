@@ -621,7 +621,8 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The API version to use for this operation."
+      "description": "The API version to use for this operation.",
+      "x-ms-parameter-location": "client"
     },
     "GroupIdParameter": {
       "name": "groupId",
@@ -638,7 +639,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The ID of the target subscription."
+      "description": "The ID of the target subscription.",
+      "x-ms-parameter-location": "client"
     },
     "PrivateLinkAssociationIdParameter": {
       "name": "plaId",
@@ -654,7 +656,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the resource management private link.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-z][a-z0-9]*$"
     }
   }
 }
