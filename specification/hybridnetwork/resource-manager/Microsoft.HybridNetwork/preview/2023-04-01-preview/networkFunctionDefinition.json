@@ -621,8 +621,8 @@
           "Delete a network function definition version": {
             "$ref": "./examples/NetworkFunctionDefinitionVersionDelete.json"
           },
-          "Delete a network function definition version for AzureOperatorDistributedServices VNF": {
-            "$ref": "./examples/AODS/VirtualNetworkFunctionDefinitionVersionDelete.json"
+          "Delete a network function definition version for AzureOperatorNexus VNF": {
+            "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionDefinitionVersionDelete.json"
           },
           "Delete a network function definition version for AzureCore VNF": {
             "$ref": "./examples/AzureCore/VirtualNetworkFunctionDefinitionVersionDelete.json"
@@ -695,8 +695,8 @@
           "Create or update a network function definition version resource": {
             "$ref": "./examples/NetworkFunctionDefinitionVersionCreate.json"
           },
-          "Create or update a network function definition version resource for AzureOperatorDistributedServices VNF": {
-            "$ref": "./examples/AODS/VirtualNetworkFunctionDefinitionVersionCreate.json"
+          "Create or update a network function definition version resource for AzureOperatorNexus VNF": {
+            "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionDefinitionVersionCreate.json"
           },
           "Create or update a network function definition version resource for AzureCore VNF": {
             "$ref": "./examples/AzureCore/VirtualNetworkFunctionDefinitionVersionCreate.json"
@@ -754,8 +754,8 @@
           "Get a network function definition version resource": {
             "$ref": "./examples/NetworkFunctionDefinitionVersionGet.json"
           },
-          "Get network function definition version resource for AzureOperatorDistributedServices VNF": {
-            "$ref": "./examples/AODS/VirtualNetworkFunctionDefinitionVersionGet.json"
+          "Get network function definition version resource for AzureOperatorNexus VNF": {
+            "$ref": "./examples/AzureOperatorNexus/VirtualNetworkFunctionDefinitionVersionGet.json"
           },
           "Get network function definition version resource for AzureCore VNF": {
             "$ref": "./examples/AzureCore/VirtualNetworkFunctionDefinitionVersionGet.json"
@@ -1158,7 +1158,7 @@
           "enum": [
             "Unknown",
             "AzureCore",
-            "AzureOperatorDistributedServices"
+            "AzureOperatorNexus"
           ],
           "x-ms-enum": {
             "name": "VirtualNetworkFunctionNFVIType",
@@ -1430,9 +1430,9 @@
         }
       }
     },
-    "AzureOperatorDistributedServicesNetworkFunctionTemplate": {
+    "AzureOperatorNexusNetworkFunctionTemplate": {
       "description": "Azure Operator Distributed Services network function template.",
-      "x-ms-discriminator-value": "AzureOperatorDistributedServices",
+      "x-ms-discriminator-value": "AzureOperatorNexus",
       "type": "object",
       "allOf": [
         {
@@ -1444,7 +1444,7 @@
           "type": "array",
           "description": "Network function applications.",
           "items": {
-            "$ref": "#/definitions/AzureOperatorDistributedServicesNetworkFunctionApplication"
+            "$ref": "#/definitions/AzureOperatorNexusNetworkFunctionApplication"
           },
           "x-ms-identifiers": [
             "name"
@@ -1480,7 +1480,7 @@
         }
       }
     },
-    "AzureOperatorDistributedServicesNetworkFunctionApplication": {
+    "AzureOperatorNexusNetworkFunctionApplication": {
       "description": "Azure Operator Distributed Services network function application definition.",
       "allOf": [
         {
@@ -1502,7 +1502,7 @@
             "ArmTemplate"
           ],
           "x-ms-enum": {
-            "name": "AzureOperatorDistributedServicesArtifactType",
+            "name": "AzureOperatorNexusArtifactType",
             "modelAsString": true
           }
         }
@@ -1548,11 +1548,11 @@
         }
       }
     },
-    "AzureOperatorDistributedServicesNetworkFunctionImageApplication": {
+    "AzureOperatorNexusNetworkFunctionImageApplication": {
       "description": "Azure Operator Distributed Services network function image application definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureOperatorDistributedServicesNetworkFunctionApplication"
+          "$ref": "#/definitions/AzureOperatorNexusNetworkFunctionApplication"
         }
       ],
       "x-ms-discriminator-value": "ImageFile",
@@ -1560,19 +1560,19 @@
       "properties": {
         "artifactProfile": {
           "description": "Azure Operator Distributed Services image artifact profile.",
-          "$ref": "#/definitions/AzureOperatorDistributedServicesImageArtifactProfile"
+          "$ref": "#/definitions/AzureOperatorNexusImageArtifactProfile"
         },
         "deployParametersMappingRuleProfile": {
           "description": "Deploy mapping rule profile.",
-          "$ref": "#/definitions/AzureOperatorDistributedServicesImageDeployMappingRuleProfile"
+          "$ref": "#/definitions/AzureOperatorNexusImageDeployMappingRuleProfile"
         }
       }
     },
-    "AzureOperatorDistributedServicesNetworkFunctionArmTemplateApplication": {
+    "AzureOperatorNexusNetworkFunctionArmTemplateApplication": {
       "description": "Azure Operator Distributed Services network function Template application definition.",
       "allOf": [
         {
-          "$ref": "#/definitions/AzureOperatorDistributedServicesNetworkFunctionApplication"
+          "$ref": "#/definitions/AzureOperatorNexusNetworkFunctionApplication"
         }
       ],
       "x-ms-discriminator-value": "ArmTemplate",
@@ -1580,11 +1580,11 @@
       "properties": {
         "artifactProfile": {
           "description": "Azure Operator Distributed Services Template artifact profile.",
-          "$ref": "#/definitions/AzureOperatorDistributedServicesArmTemplateArtifactProfile"
+          "$ref": "#/definitions/AzureOperatorNexusArmTemplateArtifactProfile"
         },
         "deployParametersMappingRuleProfile": {
           "description": "Deploy mapping rule profile.",
-          "$ref": "#/definitions/AzureOperatorDistributedServicesArmTemplateDeployMappingRuleProfile"
+          "$ref": "#/definitions/AzureOperatorNexusArmTemplateDeployMappingRuleProfile"
         }
       }
     },
@@ -1618,7 +1618,7 @@
         }
       }
     },
-    "AzureOperatorDistributedServicesImageArtifactProfile": {
+    "AzureOperatorNexusImageArtifactProfile": {
       "description": "Azure Operator Distributed Services image artifact profile properties.",
       "type": "object",
       "allOf": [
@@ -1633,7 +1633,7 @@
         }
       }
     },
-    "AzureOperatorDistributedServicesArmTemplateArtifactProfile": {
+    "AzureOperatorNexusArmTemplateArtifactProfile": {
       "description": "Azure Operator Distributed Services vhd artifact profile properties.",
       "type": "object",
       "allOf": [
@@ -1678,7 +1678,7 @@
         }
       }
     },
-    "AzureOperatorDistributedServicesImageDeployMappingRuleProfile": {
+    "AzureOperatorNexusImageDeployMappingRuleProfile": {
       "description": "Azure Operator Distributed Services image deploy mapping rule profile.",
       "type": "object",
       "allOf": [
@@ -1693,7 +1693,7 @@
         }
       }
     },
-    "AzureOperatorDistributedServicesArmTemplateDeployMappingRuleProfile": {
+    "AzureOperatorNexusArmTemplateDeployMappingRuleProfile": {
       "description": "Azure Operator Distributed Services template deploy mapping rule profile.",
       "type": "object",
       "allOf": [
