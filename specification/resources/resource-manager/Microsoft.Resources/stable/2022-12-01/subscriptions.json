@@ -282,6 +282,7 @@
   "definitions": {
     "PairedRegion": {
       "description": "Information regarding paired region.",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -302,6 +303,7 @@
     },
     "AvailabilityZoneMappings": {
       "description": "Availability zone mappings for the region",
+      "type": "object",
       "properties": {
         "logicalZone": {
           "type": "string",
@@ -317,6 +319,7 @@
     },
     "LocationMetadata": {
       "description": "Location metadata information",
+      "type": "object",
       "properties": {
         "regionType": {
           "readOnly": true,
@@ -385,6 +388,7 @@
       }
     },
     "Location": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -433,12 +437,14 @@
           "description": "The availability zone mappings for this region.",
           "items": {
             "$ref": "#/definitions/AvailabilityZoneMappings"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "description": "Location information."
     },
     "LocationListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -451,6 +457,7 @@
       "description": "Location list operation response."
     },
     "Subscription": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -518,6 +525,7 @@
       "description": "Subscription information."
     },
     "SubscriptionPolicies": {
+      "type": "object",
       "properties": {
         "locationPlacementId": {
           "readOnly": true,
@@ -547,6 +555,7 @@
       "description": "Subscription policies."
     },
     "ManagedByTenant": {
+      "type": "object",
       "properties": {
         "tenantId": {
           "readOnly": true,
@@ -557,6 +566,7 @@
       "description": "Information about a tenant managing the subscription."
     },
     "SubscriptionListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -576,6 +586,7 @@
       "description": "Subscription list operation response."
     },
     "TenantIdDescription": {
+      "type": "object",
       "properties": {
         "id": {
           "readOnly": true,
@@ -644,6 +655,7 @@
       "description": "Tenant Id information."
     },
     "TenantListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -663,6 +675,7 @@
       "description": "Tenant Ids information."
     },
     "ResourceName": {
+      "type": "object",
       "description": "Name and Type of the Resource",
       "required": [
         "name",
@@ -680,6 +693,7 @@
       }
     },
     "CheckResourceNameResult": {
+      "type": "object",
       "properties": {
         "name": {
           "description": "Name of Resource",
@@ -705,6 +719,7 @@
       "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word"
     },
     "CloudError": {
+      "type": "object",
       "x-ms-external": true,
       "properties": {
         "error": {
@@ -722,6 +737,7 @@
           "type": "string"
         },
         "display": {
+          "type": "object",
           "description": "The object that represents the operation.",
           "properties": {
             "provider": {
@@ -745,6 +761,7 @@
       }
     },
     "OperationListResult": {
+      "type": "object",
       "description": "Result of the request to list Microsoft.Resources operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
@@ -791,7 +808,8 @@
         },
         "location": {
           "type": "string",
-          "description": "the location of the subscription."
+          "description": "the location of the subscription.",
+          "x-ms-mutability": [ "create", "read" ]
         },
         "availabilityZonePeers": {
           "type": "array",
