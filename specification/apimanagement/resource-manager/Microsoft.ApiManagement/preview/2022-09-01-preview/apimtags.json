@@ -376,6 +376,648 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}/apiLinks": {
+      "get": {
+        "tags": [
+          "TagApiLink"
+        ],
+        "operationId": "TagApiLink_ListByProduct",
+        "description": "Lists a collection of the API links associated with a tag.",
+        "x-ms-examples": {
+          "ApiManagementListProductApis": {
+            "$ref": "./examples/ApiManagementListProductApis.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| apiId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains a collection of API link entities associated with a tag.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagApiLinkCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./definitions.json#/definitions/TagApiLinkContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}/apiLinks/{apiLinkId}": {
+      "get": {
+        "tags": [
+          "TagApiLink"
+        ],
+        "operationId": "TagApiLink_Get",
+        "description": "Gets the API link for the tag.",
+        "x-ms-examples": {
+          "ApiManagementGetProduct": {
+            "$ref": "./examples/ApiManagementGetProduct.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagApiLinkIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified API link entity.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagApiLinkContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TagApiLink"
+        ],
+        "operationId": "TagApiLink_CreateOrUpdate",
+        "description": "Adds an API to the specified tag via link.",
+        "x-ms-examples": {
+          "ApiManagementCreateProductApi": {
+            "$ref": "./examples/ApiManagementCreateProductApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagApiLinkIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The API was successfully added to the tag.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagApiLinkContract"
+            }
+          },
+          "200": {
+            "description": "The specified API is already added to the tag.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagApiLinkContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TagApiLink"
+        ],
+        "operationId": "TagApiLink_Delete",
+        "description": "Deletes the specified API from the specified tag.",
+        "x-ms-examples": {
+          "ApiManagementDeleteProductApi": {
+            "$ref": "./examples/ApiManagementDeleteProductApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagApiLinkIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "API was successfully removed from tag"
+          },
+          "204": {
+            "description": "API successfully removed by previous request or does not exist in tag"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}/operationLinks": {
+      "get": {
+        "tags": [
+          "TagOperationLink"
+        ],
+        "operationId": "TagOperationLink_ListByProduct",
+        "description": "Lists a collection of the operation links associated with a tag.",
+        "x-ms-examples": {
+          "ApiManagementListProductApis": {
+            "$ref": "./examples/ApiManagementListProductApis.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| operationId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains a collection of operation link entities associated with a tag.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagOperationLinkCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./definitions.json#/definitions/TagOperationLinkContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}/operationLinks/{operationLinkId}": {
+      "get": {
+        "tags": [
+          "TagOperationLink"
+        ],
+        "operationId": "TagOperationLink_Get",
+        "description": "Gets the operation link for the tag.",
+        "x-ms-examples": {
+          "ApiManagementGetProduct": {
+            "$ref": "./examples/ApiManagementGetProduct.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagOperationLinkIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified operation link entity.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagOperationLinkContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TagOperationLink"
+        ],
+        "operationId": "TagOperationLink_CreateOrUpdate",
+        "description": "Adds an operation to the specified tag via link.",
+        "x-ms-examples": {
+          "ApiManagementCreateProductApi": {
+            "$ref": "./examples/ApiManagementCreateProductApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagOperationLinkIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The operation was successfully added to the tag.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagOperationLinkContract"
+            }
+          },
+          "200": {
+            "description": "The specified operation is already added to the tag.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagOperationLinkContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TagOperationLink"
+        ],
+        "operationId": "TagOperationLink_Delete",
+        "description": "Deletes the specified operation from the specified tag.",
+        "x-ms-examples": {
+          "ApiManagementDeleteProductApi": {
+            "$ref": "./examples/ApiManagementDeleteProductApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagOperationLinkIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation was successfully removed from tag"
+          },
+          "204": {
+            "description": "Operation successfully removed by previous request or does not exist in tag"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}/productLinks": {
+      "get": {
+        "tags": [
+          "TagProductLink"
+        ],
+        "operationId": "TagProductLink_ListByProduct",
+        "description": "Lists a collection of the product links associated with a tag.",
+        "x-ms-examples": {
+          "ApiManagementListProductApis": {
+            "$ref": "./examples/ApiManagementListProductApis.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "|     Field     |     Usage     |     Supported operators     |     Supported functions     |</br>|-------------|-------------|-------------|-------------|</br>| productId | filter | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |</br>"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains a collection of product link entities associated with a tag.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagProductLinkCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "./definitions.json#/definitions/TagProductLinkContract"
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/tags/{tagId}/productLinks/{productLinkId}": {
+      "get": {
+        "tags": [
+          "TagProductLink"
+        ],
+        "operationId": "TagProductLink_Get",
+        "description": "Gets the product link for the tag.",
+        "x-ms-examples": {
+          "ApiManagementGetProduct": {
+            "$ref": "./examples/ApiManagementGetProduct.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagProductLinkIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified product link entity.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagProductLinkContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TagProductLink"
+        ],
+        "operationId": "TagProductLink_CreateOrUpdate",
+        "description": "Adds a product to the specified tag via link.",
+        "x-ms-examples": {
+          "ApiManagementCreateProductApi": {
+            "$ref": "./examples/ApiManagementCreateProductApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagProductLinkIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The product was successfully added to the tag.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagProductLinkContract"
+            }
+          },
+          "200": {
+            "description": "The specified product is already added to the tag.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/TagProductLinkContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TagProductLink"
+        ],
+        "operationId": "TagProductLink_Delete",
+        "description": "Deletes the specified product from the specified tag.",
+        "x-ms-examples": {
+          "ApiManagementDeleteProductApi": {
+            "$ref": "./examples/ApiManagementDeleteProductApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TagProductLinkIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Product was successfully removed from tag"
+          },
+          "204": {
+            "description": "Product successfully removed by previous request or does not exist in tag"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {},

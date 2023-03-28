@@ -8346,6 +8346,316 @@
         }
       },
       "description": "Wiki update contract details."
+    },
+    "WorkspaceCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkspaceContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged workspace list representation."
+    },
+    "WorkspaceContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WorkspaceContractProperties",
+          "description": "Workspace entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Workspace details."
+    },
+    "WorkspaceContractProperties": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the workspace."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the workspace."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Workspace entity properties."
+    },
+    "ProductApiLinkCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductApiLinkContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Product-API link list representation."
+    },
+    "ProductApiLinkContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProductApiLinkContractProperties",
+          "description": "Product-API link entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Product-API link details."
+    },
+    "ProductApiLinkContractProperties": {
+      "type": "object",
+      "properties": {
+        "apiId": {
+          "type": "string",
+          "description": "Full resource Id of an API."
+        }
+      },
+      "required": [
+        "apiId"
+      ],
+      "description": "Product-API link entity properties."
+    },
+    "ProductGroupLinkCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductGroupLinkContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Product-group link list representation."
+    },
+    "ProductGroupLinkContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProductGroupLinkContractProperties",
+          "description": "Product-group link entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Product-group link details."
+    },
+    "ProductGroupLinkContractProperties": {
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "Full resource Id of a group."
+        }
+      },
+      "required": [
+        "groupId"
+      ],
+      "description": "Product-group link entity properties."
+    },
+    "TagApiLinkCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagApiLinkContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Tag-API link list representation."
+    },
+    "TagApiLinkContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TagApiLinkContractProperties",
+          "description": "Tag-API link entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Tag-API link details."
+    },
+    "TagApiLinkContractProperties": {
+      "type": "object",
+      "properties": {
+        "apiId": {
+          "type": "string",
+          "description": "Full resource Id of an API."
+        }
+      },
+      "required": [
+        "apiId"
+      ],
+      "description": "Tag-API link entity properties."
+    },
+    "TagOperationLinkCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagOperationLinkContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Tag-operation link list representation."
+    },
+    "TagOperationLinkContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TagOperationLinkContractProperties",
+          "description": "Tag-API link entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Tag-operation link details."
+    },
+    "TagOperationLinkContractProperties": {
+      "type": "object",
+      "properties": {
+        "operationId": {
+          "type": "string",
+          "description": "Full resource Id of an API operation."
+        }
+      },
+      "required": [
+        "operationId"
+      ],
+      "description": "Tag-operation link entity properties."
+    },
+    "TagProductLinkCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TagProductLinkContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Tag-product link list representation."
+    },
+    "TagProductLinkContract": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TagProductLinkContractProperties",
+          "description": "Tag-API link entity contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Tag-product link details."
+    },
+    "TagProductLinkContractProperties": {
+      "type": "object",
+      "properties": {
+        "productId": {
+          "type": "string",
+          "description": "Full resource Id of a product."
+        }
+      },
+      "required": [
+        "productId"
+      ],
+      "description": "Tag-product link entity properties."
     }
   },
   "parameters": {}
