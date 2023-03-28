@@ -200,7 +200,7 @@
           "200": {
             "description": "Returns the updated review object",
             "schema": {
-              "$ref": "#/definitions/ArmProxyResourceOfUpdateReviewRequest"
+              "$ref": "#/definitions/ArmPatchReviewDto"
             }
           },
           "default": {
@@ -371,7 +371,7 @@
             "required": true,
             "description": "A comment update request including the new content of the comment",
             "schema": {
-              "$ref": "#/definitions/UpsertCommentRequest"
+              "$ref": "#/definitions/ArmProxyResourceOfUpsertCommentRequest"
             }
           },
           {
@@ -711,11 +711,6 @@
     "ArmProxyResourceOfUpdateReviewRequest": {
       "type": "object",
       "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
-        },
         "properties": {
           "description": "Update review request object for a product",
           "allOf": [
@@ -865,20 +860,25 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ReviewCommentDto"
-        }
+            "$ref": "#/definitions/ReviewCommentDto"
+          }
       }
     },
     "ArmProxyResourceOfUpsertCommentRequest": {
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+        },
         "properties": {
-          "$ref": "#/definitions/UpsertCommentRequest"
+          "description": "Update review request object for a product",
+          "allOf": [
+            {
+              "$ref": "#/definitions/UpsertCommentRequest"
+            }
+          ]
         }
       }
     },
