@@ -5653,6 +5653,19 @@
     }
   },
   "definitions": {
+    "AccessRight": {
+      "description": "Access rights of the access policy.",
+      "type": "string",
+      "enum": [
+        "Read",
+        "Write",
+        "Delete"
+      ],
+      "x-ms-enum": {
+        "name": "AccessRight",
+        "modelAsString": false
+      }
+    },
     "AccessPolicy": {
       "description": "An Access policy.",
       "type": "object",
@@ -5965,6 +5978,15 @@
           "type": "string",
           "format": "date-time-rfc1123",
           "description": "Time handle was last connected to (UTC)"
+        },
+        "AccessRightList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AccessRight"
+          },
+          "xml": {
+            "wrapped": true
+          }
         }
       }
     },
