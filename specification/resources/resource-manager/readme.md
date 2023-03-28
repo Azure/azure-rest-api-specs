@@ -78,13 +78,12 @@ tag: package-2023-01
 ```
 
 
-### Tag: package-2023-01
+### Tag: package-privatelinks-2023-01
 
-These settings apply only when `--tag=package-2023-01` is specified on the command line.
+These settings apply only when `--tag=package-privatelinks-2023-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-01'
+```yaml $(tag) == 'package-privatelinks-2023-01'
 input-file:
-  - Microsoft.Authorization/stable/2023-01-01/locks.json
   - Microsoft.Authorization/stable/2023-01-01/privateLinks.json
 ```
 ### Tag: package-policy-2022-06
