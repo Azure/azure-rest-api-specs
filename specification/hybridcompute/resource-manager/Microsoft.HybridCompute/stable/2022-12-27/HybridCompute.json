@@ -309,7 +309,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -381,7 +381,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1994,49 +1994,6 @@
       },
       "description": "Describes the subnet."
     },
-    "ErrorDetail": {
-      "title": "Error details.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "The error's code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "A human readable error message.",
-          "type": "string"
-        },
-        "target": {
-          "description": "Indicates which property in the request is responsible for the error.",
-          "type": "string"
-        },
-        "details": {
-          "description": "Additional error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          }
-        }
-      },
-      "required": [
-        "code",
-        "message"
-      ]
-    },
-    "ErrorResponse": {
-      "title": "Error response.",
-      "description": "Contains details when the response code indicates an error.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "description": "The error details.",
-          "$ref": "#/definitions/ErrorDetail"
-        }
-      },
-      "required": [
-        "error"
-      ]
-    },
     "MachineAssessPatchesResult": {
       "type": "object",
       "properties": {
@@ -2126,7 +2083,7 @@
           "description": "The operating system type of the machine."
         },
         "errorDetails": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
           "readOnly": true,
           "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
         }
@@ -2446,7 +2403,7 @@
           "description": "The operating system type of the machine."
         },
         "errorDetails": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
           "readOnly": true,
           "description": "The errors that were encountered during execution of the operation. The details array contains the list of them."
         }
