@@ -651,6 +651,7 @@
     "RestorePointSourceMetadata": {
       "properties": {
         "hardwareProfile": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/HardwareProfile",
           "description": "Gets the hardware profile."
         },
@@ -659,31 +660,38 @@
           "description": "Gets the storage profile."
         },
         "osProfile": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/OSProfile",
           "description": "Gets the OS profile."
         },
         "diagnosticsProfile": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/DiagnosticsProfile",
           "description": "Gets the diagnostics profile."
         },
         "licenseType": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the license type, which is for bring your own license scenario."
         },
         "vmId": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the virtual machine unique id."
         },
         "securityProfile": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/SecurityProfile",
           "description": "Gets the security profile."
         },
         "location": {
           "type": "string",
+          "readOnly": true,
           "description": "Location of the VM from which the restore point was created."
         },
         "userData": {
           "type": "string",
+          "readOnly": true,
           "description": "UserData associated with the source VM for which restore point is captured, which is a base-64 encoded value."
         }
       },
@@ -712,6 +720,7 @@
       "properties": {
         "osType": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the Operating System type.",
           "enum": [
             "Windows",
@@ -723,19 +732,23 @@
           }
         },
         "encryptionSettings": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/DiskEncryptionSettings",
           "description": "Gets the disk encryption settings."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the disk name."
         },
         "caching": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/Caching",
           "description": "Gets the caching type."
         },
         "diskSizeGB": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
           "description": "Gets the disk size in GB."
         },
@@ -744,8 +757,8 @@
           "description": "Gets the managed disk details"
         },
         "diskRestorePoint": {
-          "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference",
-          "description": "Gets the disk restore point Id."
+          "$ref": "#/definitions/DiskRestorePointProperties",
+          "description": "Contains Disk Restore Point properties."
         }
       },
       "description": "Describes an Operating System disk."
@@ -754,29 +767,33 @@
       "properties": {
         "lun": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
           "description": "Gets the logical unit number."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "Gets the disk name."
         },
         "caching": {
+          "readOnly": true,
           "$ref": "./computeRPCommon.json#/definitions/Caching",
           "description": "Gets the caching type."
         },
         "diskSizeGB": {
           "type": "integer",
+          "readOnly": true,
           "format": "int32",
           "description": "Gets the initial disk size in GB for blank data disks, and the new desired size for existing OS and Data disks."
         },
         "managedDisk": {
           "$ref": "./computeRPCommon.json#/definitions/ManagedDiskParameters",
-          "description": "Gets the managed disk details"
+          "description": "Contains the managed disk details."
         },
         "diskRestorePoint": {
           "$ref": "#/definitions/DiskRestorePointProperties",
-          "description": "Gets the disk restore point Id."
+          "description": "Contains Disk Restore Point properties."
         }
       },
       "description": "Describes a data disk."
@@ -807,7 +824,7 @@
           "$ref": "#/definitions/EncryptionType"
         }
       },
-      "description": "Encryption at rest settings for disk restore point."
+      "description": "Encryption at rest settings for disk restore point. It is an optional property that can be specified in the input while creating a restore point."
     },
     "EncryptionType": {
       "type": "string",
@@ -831,7 +848,7 @@
           },
           {
             "value": "EncryptionAtRestWithPlatformAndCustomerKeys",
-            "description": "Disk is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
+            "description": "Disk Restore Point is encrypted at rest with 2 layers of encryption. One of the keys is Customer managed and the other key is Platform managed."
           }
         ]
       }
@@ -911,7 +928,6 @@
           "description": "List of disk resource ids that the customer wishes to exclude from the restore point. If no disks are specified, all disks will be included."
         },
         "sourceMetadata": {
-          "readOnly": true,
           "$ref": "#/definitions/RestorePointSourceMetadata",
           "description": "Gets the details of the VM captured at the time of the restore point creation."
         },
