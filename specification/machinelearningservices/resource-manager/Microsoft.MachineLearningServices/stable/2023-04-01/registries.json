@@ -504,11 +504,8 @@
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
-        "location": {
-          "description": "The geo-location where the resource lives.",
-          "type": "string"
-        },
         "properties": {
+          "x-ms-client-flatten": true,
           "description": "Additional attributes of the entity.",
           "$ref": "#/definitions/PartialRegistry"
         },
@@ -571,9 +568,14 @@
         "location": {
           "description": "Same as workspace location.",
           "type": "string",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "description": "Properties of the Private Endpoint Connection",
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-nullable": true
@@ -750,6 +752,7 @@
           "type": "string"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/Registry"
         },
