@@ -529,6 +529,7 @@
       "description": "Geometry",
       "properties": {
         "type": {
+          "description": "Geometry type",
           "type": "string"
         }
       },
@@ -601,6 +602,7 @@
     "WaypointProperties": {
       "x-ms-discriminator-value": "Waypoint",
       "type": "object",
+      "description": "Waypoint properties",
       "allOf": [
         {
           "$ref": "#/definitions/FeatureProperties"
@@ -613,6 +615,7 @@
     "ManeuverPointProperties": {
       "x-ms-discriminator-value": "ManeuverPoint",
       "type": "object",
+      "description": "ManeuverPoint properties",
       "allOf": [
         {
           "$ref": "#/definitions/FeatureProperties"
@@ -678,6 +681,7 @@
     "ViaWaypointProperties": {
       "x-ms-discriminator-value": "ViaWaypoint",
       "type": "object",
+      "description": "ViaWaypoint properties",
       "allOf": [
         {
           "$ref": "#/definitions/FeatureProperties"
@@ -704,6 +708,7 @@
     "RoutePathProperties": {
       "x-ms-discriminator-value": "RoutePath",
       "type": "object",
+      "description": "RoutePath properties",
       "allOf": [
         {
           "$ref": "#/definitions/FeatureProperties"
@@ -756,6 +761,7 @@
       "description": "Feature properties",
       "properties": {
         "type": {
+          "description": "The type of the feature. Possible values are: 'ManeuverPoint', 'Waypoint', 'ViaWaypoint', 'RoutePath'.",
           "type": "string"
         }
       },
