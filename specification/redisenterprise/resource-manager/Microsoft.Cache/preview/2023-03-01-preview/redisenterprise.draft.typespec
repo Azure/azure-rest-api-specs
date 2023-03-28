@@ -122,6 +122,7 @@ namespace Microsoft.Cache {
   interface OperationsStatus // or operationStatuses?
   {
     @doc("Gets information about a database in a RedisEnterprise cluster")
+    @example("OperationsStatusGet.json", "OperationsStatus_Get")
     get(...OperationStatusParameters<Cluster>): ArmResponse<OperationStatusResult> | ErrorResponse;
   }
 
@@ -338,7 +339,7 @@ namespace Microsoft.Cache {
     get is ArmResourceRead<Cluster>;
 
     @doc("Creates a RedisEnterprise cluster")
-    @example("examples/RedisEnterpriseCreateOrUpdate.json", "RedisEnterprise_CreateOrUpdate")
+    @example("examples/RedisEnterpriseCreate.json", "RedisEnterprise_Create")
     create is ArmResourceCreateOrUpdateAsync<Cluster>;
 
     @doc("Updates a RedisEnterprise cluster")
@@ -363,6 +364,7 @@ namespace Microsoft.Cache {
 
     @doc("Creates a database")
     @example("examples/RedisEnterpriseDatabasesCreate.json", "RedisEnterpriseDatabases_Create")
+    @example("examples/RedisEnterpriseDatabasesCreateWithGeoReplication.json", "RedisEnterpriseDatabases_CreateWithGeoReplication")
     create is ArmResourceCreateOrUpdateAsync<Database>;
 
     @doc("Updates a database")
@@ -381,6 +383,10 @@ namespace Microsoft.Cache {
     @doc("Forcibly unlinks one or more databases from a replication group")
     @example("examples/RedisEnterpriseDatabasesForceUnlink.json", "RedisEnterpriseDatabases_ForceUnlink")
     forceUnlink is ArmResourceActionEmptyAsync<Database, ForceUnlinkParameters>;
+    
+    @doc("Forcibly flushes data from all databases in a replication group")
+    @example("examples/RedisEnterpriseDatabasesFlush.json", "RedisEnterpriseDatabases_Flush")
+    fush is ArmResourceActionEmptyAsync<Database, FlushParameters>;
 
     @doc("Imports RDB file(s)")
     @action("import")
@@ -563,6 +569,12 @@ namespace Microsoft.Cache {
   @doc("Parameters for a Redis Enterprise Active Geo Replication Force Unlink operation.")
   model ForceUnlinkParameters {
     @doc("The resource IDs of the database resources to be unlinked")
+    ids: DatabaseResourceIdentifier[];
+  }
+  
+  @doc("Parameters for a Redis Enterprise Active Geo Replication Flush operation.")
+  model FlushParameters {
+    @doc("The resource IDs of the database resources to be flushed")
     ids: DatabaseResourceIdentifier[];
   }
 }

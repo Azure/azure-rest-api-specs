@@ -281,8 +281,8 @@
           }
         },
         "x-ms-examples": {
-          "RedisEnterprise_CreateOrUpdate": {
-            "$ref": "examples/RedisEnterpriseCreateOrUpdate.json"
+          "RedisEnterprise_Create": {
+            "$ref": "examples/RedisEnterpriseCreate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -607,6 +607,9 @@
           }
         },
         "x-ms-examples": {
+          "RedisEnterpriseDatabases_CreateWithGeoReplication": {
+            "$ref": "examples/RedisEnterpriseDatabasesCreateWithGeoReplication.json"
+          },
           "RedisEnterpriseDatabases_Create": {
             "$ref": "examples/RedisEnterpriseDatabasesCreate.json"
           }
@@ -915,6 +918,80 @@
         "x-ms-examples": {
           "RedisEnterpriseDatabases_ForceUnlink": {
             "$ref": "examples/RedisEnterpriseDatabasesForceUnlink.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/databases/{databaseName}/fush": {
+      "post": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_Fush",
+        "description": "Forcibly flushes data from all databases in a replication group",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "description": "Name of cluster",
+            "pattern": "[a-z0-9][-a-z0-9]*",
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "description": "Name of database",
+            "pattern": "[a-z0-9][-a-z0-9]*",
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "description": "The content of the action request",
+            "schema": {
+              "$ref": "#/definitions/FlushParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_Flush": {
+            "$ref": "examples/RedisEnterpriseDatabasesFlush.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1571,6 +1648,11 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "OperationsStatus_Get": {
+            "$ref": "OperationsStatusGet.json"
+          }
         }
       }
     }
@@ -1864,7 +1946,6 @@
       },
       "description": "Properties of a Database on a RedisEnterprise cluster",
       "required": [
-        "port",
         "provisioningState",
         "persistence"
       ]
@@ -1904,7 +1985,6 @@
       },
       "description": "Properties of a Database on a RedisEnterprise cluster",
       "required": [
-        "port",
         "persistence"
       ]
     },
@@ -1955,6 +2035,23 @@
       "description": "Export request. Parameters for a Redis Enterprise export operation.",
       "required": [
         "sasUris"
+      ]
+    },
+    "FlushParameters": {
+      "type": "object",
+      "properties": {
+        "ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseResourceIdentifier"
+          },
+          "x-typespec-name": "DatabaseResourceIdentifier[]",
+          "description": "The resource IDs of the database resources to be flushed"
+        }
+      },
+      "description": "Parameters for a Redis Enterprise Active Geo Replication Flush operation.",
+      "required": [
+        "ids"
       ]
     },
     "ForceUnlinkParameters": {
