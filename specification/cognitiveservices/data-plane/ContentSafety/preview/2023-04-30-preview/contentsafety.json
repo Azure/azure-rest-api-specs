@@ -604,7 +604,10 @@
           "x-ms-identifiers": [],
           "x-typespec-name": "TextListItemInfo[]"
         }
-      }
+      },
+      "required": [
+        "items"
+      ]
     },
     "BatchCreateTextListItemsResponse": {
       "type": "object",
@@ -629,7 +632,10 @@
           },
           "x-typespec-name": "string[]"
         }
-      }
+      },
+      "required": [
+        "itemsIds"
+      ]
     },
     "Image": {
       "type": "object",
@@ -762,14 +768,6 @@
           "x-typespec-name": "TextCategory[]",
           "description": "The categories will be analyzed, if not assigned, a default set of categories'\nanalysis results will be returned."
         },
-        "languages": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-typespec-name": "string[]",
-          "description": "Language hints for text analysis.  Values can contain only the language code (ex.\n\"en\", \"fr\") of BCP 47. If no languages given, the service will detact languages."
-        },
         "blocklistIds": {
           "type": "array",
           "items": {
@@ -859,17 +857,12 @@
           "type": "string",
           "description": "Text list item content.",
           "maxLength": 128
-        },
-        "language": {
-          "type": "string",
-          "description": "Language of this item, Value may contain only the language code (ex. \"en\",\n\"fr\") of BCP 47. If not assigned, \"en\" will be used"
         }
       },
       "description": "Item in Text List",
       "required": [
         "itemId",
-        "text",
-        "language"
+        "text"
       ]
     },
     "TextListItemInfo": {
@@ -884,16 +877,11 @@
           "type": "string",
           "description": "Text list item content.",
           "maxLength": 128
-        },
-        "language": {
-          "type": "string",
-          "description": "Language of this item, Value may contain only the language code (ex. \"en\",\n\"fr\") of BCP 47. If not assigned, \"en\" will be used"
         }
       },
       "description": "Item Info in Text List",
       "required": [
-        "text",
-        "language"
+        "text"
       ]
     },
     "TextListMatchResult": {

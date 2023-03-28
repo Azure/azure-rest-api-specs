@@ -32,12 +32,6 @@ analysis results will be returned.
 """)
   categories?: TextCategory[];
 
-  @doc("""
-Language hints for text analysis.  Values can contain only the language code (ex.
-\"en\", \"fr\") of BCP 47. If no languages given, the service will detact languages.
-""")
-  languages?: string[];
-
   @doc("The ids of blocklists")
   blocklistIds?: string[];
 
@@ -152,12 +146,6 @@ model TextListItem {
   @doc("Text list item content.")
   @maxLength(128)
   text: string;
-
-  @doc("""
-Language of this item, Value may contain only the language code (ex. \"en\",
-\"fr\") of BCP 47. If not assigned, \"en\" will be used
-""")
-  language: string;
 }
 
 @doc("Item Info in Text List")
@@ -169,16 +157,10 @@ model TextListItemInfo{
   @doc("Text list item content.")
   @maxLength(128)
   text: string;
-
-  @doc("""
-Language of this item, Value may contain only the language code (ex. \"en\",
-\"fr\") of BCP 47. If not assigned, \"en\" will be used
-""")
-  language: string;
 }
 
 model BatchCreateTextListItemsRequest{
-  items?: TextListItemInfo[];
+  items: TextListItemInfo[];
 }
 
 model BatchCreateTextListItemsResponse{
@@ -186,5 +168,5 @@ model BatchCreateTextListItemsResponse{
 }
 
 model BatchDeleteTextListItemsRequest{
-  itemsIds?: string[];
+  itemsIds: string[];
 }
