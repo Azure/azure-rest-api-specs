@@ -85,10 +85,6 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
-### Tag: package-preview-2023-01
-
-These settings apply only when `--tag=package-preview-2023-01` is specified on the command line.
-
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
