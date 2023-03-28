@@ -4202,6 +4202,215 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Web/freeTrialStaticWebApps": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Lists all free trial static web apps.",
+        "operationId": "StaticSites_ListFreeTrialStaticWebApps",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntityCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get free trial static web app": {
+            "$ref": "./examples/ListFreeTrialStaticWebApps.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Web/freeTrialStaticWebApps/{freeTrialStaticWebAppName}": {
+      "get": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Gets a free trial static web app.",
+        "operationId": "StaticSites_GetFreeTrialStaticWebApp",
+        "parameters": [
+          {
+            "name": "freeTrialStaticWebAppName",
+            "in": "path",
+            "description": "Name of the free trial static web app.",
+            "required": true,
+            "pattern": "^[a-zA-Z0-9]+$",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a free trial static web app": {
+            "$ref": "./examples/GetFreeTrialStaticWebApp.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Creates a free trial static web app.",
+        "operationId": "StaticSites_CreateFreeTrialStaticWebApp",
+        "parameters": [
+          {
+            "name": "freeTrialStaticWebAppName",
+            "in": "path",
+            "description": "Name of the free trial static web app.",
+            "required": true,
+            "pattern": "^[a-zA-Z0-9]+$",
+            "type": "string"
+          },
+          {
+            "name": "freeTrialStaticWebApp",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntity"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates a free trial static web apps": {
+            "$ref": "./examples/CreateFreeTrialStaticWebApp.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Deletes a free trial static web app.",
+        "operationId": "StaticSites_DeleteFreeTrialStaticWebApp",
+        "parameters": [
+          {
+            "name": "freeTrialStaticWebAppName",
+            "in": "path",
+            "description": "Name of the free trial static web app.",
+            "required": true,
+            "pattern": "^[a-zA-Z0-9]+$",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a free trial static web apps": {
+            "$ref": "./examples/DeleteFreeTrialStaticWebApp.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Web/freeTrialStaticWebApps/{freeTrialStaticWebAppName}/upgrade": {
+      "post": {
+        "tags": [
+          "StaticSites"
+        ],
+        "summary": "Upgrades a free trial static web app.",
+        "operationId": "StaticSites_UpgradeFreeTrialStaticWebApp",
+        "parameters": [
+          {
+            "name": "freeTrialStaticWebAppName",
+            "in": "path",
+            "description": "Name of the free trial static web app.",
+            "required": true,
+            "pattern": "^[a-zA-Z0-9]+$",
+            "type": "string"
+          },
+          {
+            "name": "freeTrialStaticWebApp",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntity"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "200": {
+            "description": "OK."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Upgrades a free trial static web apps": {
+            "$ref": "./examples/UpgradeFreeTrialStaticWebApp.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5507,6 +5716,54 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/StaticSiteLinkedBackendARMResource"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FreeTrialStaticWebAppsProxyEntity": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "./CommonDefinitions.json#/definitions/SkuDescription",
+          "description": "SKU description of the resource."
+        },
+        "properties": {
+          "description": "FreeTrialStaticWebAppsProxyEntity resource specific properties",
+          "type": "object",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/StaticSite"
+            },
+            "staticSiteResourceId": {
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "FreeTrialStaticWebAppsProxyEntityCollection": {
+      "description": "Collection of free trial static web apps.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FreeTrialStaticWebAppsProxyEntity"
           }
         },
         "nextLink": {
