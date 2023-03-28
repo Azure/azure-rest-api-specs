@@ -54,17 +54,17 @@
           "ManagementGroupBudgetsList": {
             "$ref": "./examples/Budgets/List/RBAC/ManagementGroupBudgetsList.json"
           },
-          "BillingAccountBudgetsList-LegacyEA": {
-            "$ref": "./examples/Budgets/List/LegacyEA/BillingAccountBudgetsList-LegacyEA.json"
+          "BillingAccountBudgetsList-EA": {
+            "$ref": "./examples/Budgets/List/EA/BillingAccountBudgetsList-EA.json"
           },
-          "BillingAccountBudgetsList-LegacyEA-CategoryTypeFilter": {
-            "$ref": "./examples/Budgets/List/LegacyEA/BillingAccountBudgetsList-LegacyEA-CategoryTypeFilter.json"
+          "BillingAccountBudgetsList-EA-CategoryTypeFilter": {
+            "$ref": "./examples/Budgets/List/EA/BillingAccountBudgetsList-EA-CategoryTypeFilter.json"
           },
-          "DepartmentBudgetsList-LegacyEA": {
-            "$ref": "./examples/Budgets/List/LegacyEA/DepartmentBudgetsList.json"
+          "DepartmentBudgetsList-EA": {
+            "$ref": "./examples/Budgets/List/EA/DepartmentBudgetsList.json"
           },
-          "EnrollmentAccountBudgetsList-LegacyEA": {
-            "$ref": "./examples/Budgets/List/LegacyEA/EnrollmentAccountBudgetsList.json"
+          "EnrollmentAccountBudgetsList-EA": {
+            "$ref": "./examples/Budgets/List/EA/EnrollmentAccountBudgetsList.json"
           },
           "BillingAccountBudgetsList-MCA": {
             "$ref": "./examples/Budgets/List/MCA/BillingAccountBudgetsList-MCA.json"
@@ -172,14 +172,14 @@
           "CreateOrUpdate-Cost-Subscription-Budget": {
             "$ref": "./examples/Budgets/CreateOrUpdate/Cost/CreateOrUpdate-Cost-Subscription-Budget.json"
           },
-          "CreateOrUpdate-ReservationUtilization-BillingAccountLegacyEA-AlertRule": {
-            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/LegacyEA/CreateOrUpdate-ReservationUtilization-BillingAccountLegacyEA-AlertRule.json"
+          "CreateOrUpdate-ReservationUtilization-BillingAccountEA-AlertRule": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/EA/CreateOrUpdate-ReservationUtilization-BillingAccountEA-AlertRule.json"
           },
-          "CreateOrUpdate-ReservationUtilization-BillingAccountLegacyEA-AlertRule-ReservedResourceTypeFilter": {
-            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/LegacyEA/CreateOrUpdate-ReservationUtilization-BillingAccountLegacyEA-AlertRule-ReservedResourceTypeFilter.json"
+          "CreateOrUpdate-ReservationUtilization-BillingAccountEA-AlertRule-ReservedResourceTypeFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/EA/CreateOrUpdate-ReservationUtilization-BillingAccountEA-AlertRule-ReservedResourceTypeFilter.json"
           },
-          "CreateOrUpdate-ReservationUtilization-BillingAccountLegacyEA-AlertRule-ReservationIdFilter": {
-            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/LegacyEA/CreateOrUpdate-ReservationUtilization-BillingAccountLegacyEA-AlertRule-ReservationIdFilter.json"
+          "CreateOrUpdate-ReservationUtilization-BillingAccountEA-AlertRule-ReservationIdFilter": {
+            "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/EA/CreateOrUpdate-ReservationUtilization-BillingAccountEA-AlertRule-ReservationIdFilter.json"
           },
           "CreateOrUpdate-ReservationUtilization-BillingProfileMCA-AlertRule.json": {
             "$ref": "./examples/Budgets/CreateOrUpdate/ReservationUtilization/MCA/CreateOrUpdate-ReservationUtilization-BillingProfile-AlertRule.json"
@@ -600,7 +600,7 @@
           }
         },
         "threshold": {
-          "description": "Threshold value associated with a notification. It is always percent and has to be between 0 and 100 with a maximum of 2 decimal places.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.\n\n- **CategoryType: Cost** - Notification is sent when the cost exceeded the threshold.\n\n- **CategoryType: ReservationUtilization** - Notification is sent when a reservation has a utilization percentage below the threshold.",
+          "description": "Threshold value associated with a notification. It is always percent with a maximum of 2 decimal places.\n\n Supported for CategoryType(s): Cost, ReservationUtilization.\n\n **CategoryType: Cost** - Must be between 0 and 1000. Notification is sent when the cost exceeded the threshold.\n\n **CategoryType: ReservationUtilization** - Must be between 0 and 100. Notification is sent when a reservation has a utilization percentage below the threshold.",
           "type": "number"
         },
         "frequency": {
@@ -612,7 +612,7 @@
             "Monthly"
           ],
           "x-ms-enum": {
-            "name": "frequency",
+            "name": "Frequency",
             "modelAsString": true,
             "values": [
               {
@@ -729,7 +729,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with budget operations.\n\n Supported scopes for **CategoryType: Cost**\n\n Azure RBAC Scopes:\n- '/subscriptions/{subscriptionId}/' for subscription scope\n- '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope\n- '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope\n\n Legacy EA (Enterprise Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope\n\n MCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope (CSP only)\n\n Supported scopes for **CategoryType: ReservationUtilization**\n\nLegacy EA (Enterprise Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account Scope\n\nMCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+      "description": "The scope associated with budget operations.\n\n Supported scopes for **CategoryType: Cost**\n\n Azure RBAC Scopes:\n- '/subscriptions/{subscriptionId}/' for subscription scope\n- '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope\n- '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope\n\n  EA (Enterprise Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope\n\n MCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope (CSP only)\n\n Supported scopes for **CategoryType: ReservationUtilization**\n\n EA (Enterprise Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account Scope\n\nMCA (Modern Customer Agreement) Scopes:\n- '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
