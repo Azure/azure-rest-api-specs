@@ -58,6 +58,9 @@ namespace AzureMessagingEventGrid {
 
     @doc("Event data specific to the event type.")
     data?: object;
+
+    @doc("Event data specific to the event type, encoded as a base64 string.")
+    data_base64?: bytes;
     
     @doc("Type of event related to the originating occurrence.")
     type: string;
@@ -66,13 +69,13 @@ namespace AzureMessagingEventGrid {
     time?: zonedDateTime;
 
     @doc("The version of the CloudEvents specification which the event uses.")
-    specVersion: string;
+    specversion: string;
 
     @doc("Identifies the schema that data adheres to.")
-    dataSchema?: string;
+    dataschema?: string;
 
     @doc("Content type of data value.")
-    dataContentType?: string;
+    datacontenttype?: string;
 
     @doc("This describes the subject of the event in the context of the event producer (identified by source).")
     subject?: string;
@@ -126,6 +129,12 @@ namespace AzureMessagingEventGrid {
     succeededLockTokens: string[];
   }
 
+  @doc("Lock token input formatting.")
+  model LockTokenInput {
+    @doc("LockToken")
+    lockTokens: string[];
+  }
+
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
 
   @doc("Publish Single Cloud Event to namespace topic.")
@@ -142,7 +151,7 @@ namespace AzureMessagingEventGrid {
     @doc("Single Cloud Event being published.")
     @body 
     event: CloudEventEvent;
-  }, {} >;
+  }, OkResponse>;
 
 
   @doc("Publish Batch of Cloud Events to namespace topic.")
@@ -159,15 +168,11 @@ namespace AzureMessagingEventGrid {
     @doc("Array of Cloud Events being published.")
     @body
     events: CloudEventEvent[];
-  }, {} >;
+  }, OkResponse>;
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive")
   @post op ReceiveBatchOfCloudEvents is Azure.Core.RpcOperation<{
-    @doc("content type")
-    @header("content-type")
-    contentType: "application/json; charset=utf-8";
-
     @doc("Topic Name.")
     @path
     topicName: string;
@@ -178,12 +183,12 @@ namespace AzureMessagingEventGrid {
 
     @doc("Max Events count to be received.")
     @query
-    maxEvents: int32;
+    maxEvents?: int32 = 1;
 
     @doc("Timeout value for receive operation in Seconds. Default is 60 seconds.")
     @query
-    timeout: int32;
-  }, ReceiveResponse >;
+    timeout?: int32 =60;
+  }, ReceiveResponse & CreatedResponse >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
@@ -204,7 +209,7 @@ namespace AzureMessagingEventGrid {
 
     @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
     @body
-    lockTokens: string[];
+    lockTokens: LockTokenInput;
   }, LockTokensResponse >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
