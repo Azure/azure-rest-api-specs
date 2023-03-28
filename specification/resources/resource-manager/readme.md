@@ -74,9 +74,12 @@ tag: package-changes-2022-05
 ```
 
 ``` yaml $(package-snapshots)
-tag: package-privatelinks-2023-01
+tag: package-snapshots-2022-11
 ```
 
+``` yaml $(package-privatelinks)
+tag: package-privatelinks-2023-01
+```
 
 ### Tag: package-privatelinks-2023-01
 
