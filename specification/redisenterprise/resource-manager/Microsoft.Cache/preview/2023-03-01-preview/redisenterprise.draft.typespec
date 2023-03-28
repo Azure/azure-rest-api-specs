@@ -27,6 +27,7 @@ op ArmResourceActionEmptyContentSync<
   body: TRequest
 ): TypeSpec.Http.OkResponse | ErrorResponse;
 
+@doc("Models an Azure POST action that can return a 200 OK result with no response content")
 @autoRoute
 @armResourceAction(TResource)
 @post
@@ -56,28 +57,72 @@ namespace Microsoft.Cache {
   //TODO: Q: any easier way to define this? A: Not today...
   //interface OperationStatuses extends Azure.ResourceManager.OperationStatuses {}
 
-  model OperationStatusProperties {
-
-  }
-
-  @doc("Proxy resource for selecting azure location")
+  @doc("Proxy resource for getting status of a long running operation")
   @locationResource
-  model OperationStatus is ProxyResource<OperationStatusProperties> {
+  model OperationStatusResult {
     @path
-    @doc("Operation ID")
+    @doc("ID of the long running operation")
     @minLength(1)
     @key("operationId")
-    @pattern("[a-z0-9][-a-z0-9]*")
-    @segment("operationsStatus")
     @visibility("read")
-    name: string;
+    id: string;
+    
+    @doc("Name of the async operation")
+    @visibility("read")
+    name?: string;
+    
+    @doc("Current status of the operation. E.g. 'Suceeded', or 'Failed'")
+    @visibility("read")
+    status: string;
+    
+    @doc("Progress of the operation, if known")
+    @visibility("read")
+    percentComplete?: numeric;
+
+    @doc("Resource ID of the resource if known")
+    @visibility("read")
+    resourceId?: string;
+
+    @doc("Start time if known")
+    @visibility("read")
+    startTime?: zonedDateTime;
+
+    @doc("End time if known")
+    @visibility("read")
+    endTime?: zonedDateTime;
+
+    @doc("Status of child operations if known")
+    @visibility("read")
+    operations?: OperationStatusResult[];
+
+    @doc("Error details if known")
+    @visibility("read")
+    errorDetail?: ErrorDetail;
+  }
+
+  model OperationStatusParameters<T extends ArmResource> {
+
+    @doc("ID of the subscription")
+    @segment("Subscriptions") 
+    @path subscriptionId: string;
+
+    ...ProviderNamespace<T>;
+
+    @doc("Location of the long-running operation result")
+    @segment("locations")
+    @path location: string;
+
+    @doc("Unique ID of the long-running operation")
+    @path @segment("OperationStatuses") operationId: string;
+
+   ...ApiVersionParameter;
   }
 
   @armResourceOperations
-  interface OperationsStatus
+  interface OperationsStatus // or operationStatuses?
   {
     @doc("Gets information about a database in a RedisEnterprise cluster")
-    get is ArmResourceRead<OperationStatus>;
+    get(...OperationStatusParameters<Cluster>): ArmResponse<OperationStatusResult> | ErrorResponse;
   }
 
   @doc("Describes the RedisEnterprise cluster")
@@ -105,6 +150,28 @@ namespace Microsoft.Cache {
     clusterName: string
   }
 
+  @doc("Properties of a Database on a RedisEnterprise cluster")
+  model DatabaseProperties {
+    @doc("Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.")
+    @visibility("read", "create", "update")
+    clientProtocol?: ClientProtocol;
+
+    @visibility("read, create", "update")
+    @doc("Redis eviction policy - default is VolatileLRU")
+    evictionPolicy?: EvictionPolicy;
+
+    @visibility("read", "create")
+    @doc("Port number for the database to listen on. E.g. 10000.")
+    port?: integer;
+
+    @visibility("read")
+    @doc("Provisioning state of the database")
+    provisioningState: ProvisioningState;
+
+    @doc("Persistence settings")
+    persistence: Persistence;
+  }
+
   @doc("Describes a Database on a RedisEnterprise cluster")
   @parentResource(Cluster)
   model Database is ProxyResource<DatabaseProperties> {
@@ -117,27 +184,6 @@ namespace Microsoft.Cache {
     @segment("databases")
     @visibility("read")
     name: string;
-  }
-
-  @doc("Properties of a Database on a RedisEnterprise cluster")
-  model DatabaseProperties {
-    @doc("Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.")
-    @visibility("read", "create", "update")
-    clientProtocol?: ClientProtocol;
-
-    @doc("Redis eviction policy - default is VolatileLRU")
-    evictionPolicy: EvictionPolicy;
-
-    @visibility("read", "create")
-    @doc("Port number for the database to listen on. E.g. 10000.")
-    port: int16;
-
-    @visibility("read")
-    @doc("Provisioning state of the database")
-    provisioningState: ProvisioningState;
-
-    @doc("Persistence settings")
-    persistence: Persistence;
   }
 
   @doc("Persistence-related configuration for the RedisEnterprise database")
@@ -271,6 +317,9 @@ namespace Microsoft.Cache {
 
     @doc("The private link resource Private link DNS zone name.")
     requiredZoneNames: string[];
+
+    @doc("The provisioning state of the private link")
+    provisioningState: ProvisioningState;
   }
 
   @armResourceOperations
