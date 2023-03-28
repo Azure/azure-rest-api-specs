@@ -48,18 +48,18 @@
   "paths": {
     "/image:analyze": {
       "post": {
-        "operationId": "ImageOperations_Detect",
+        "operationId": "ImageOperations_Analyze",
         "summary": "Analyze Image",
-        "description": "A sync API for harmful content analysis for image",
+        "description": "A sync API for harmful content analysis for image.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "request",
+            "name": "body",
             "in": "body",
             "required": true,
-            "description": "The analysis request of the image",
+            "description": "The analysis request of the image.",
             "schema": {
               "$ref": "#/definitions/ImageDetectRequest"
             }
@@ -87,11 +87,11 @@
         }
       }
     },
-    "/text/lists": {
+    "/text/blocklists": {
       "get": {
-        "operationId": "TextLists_ListTextLists",
-        "summary": "Get All Text Lists",
-        "description": "Get All Text Lists",
+        "operationId": "TextBlocklists_ListTextBlocklists",
+        "summary": "Get All Text Blocklists",
+        "description": "Get all text blocklists details.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -106,11 +106,11 @@
                 "value": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/TextList"
+                    "$ref": "#/definitions/TextBlocklist"
                   },
                   "x-ms-identifiers": [],
-                  "x-typespec-name": "TextList[]",
-                  "description": "The TextList items on this page"
+                  "x-typespec-name": "TextBlocklist[]",
+                  "description": "The TextBlocklist items on this page"
                 },
                 "nextLink": {
                   "type": "string",
@@ -119,11 +119,11 @@
                   "x-typespec-name": "Rest.ResourceLocation"
                 }
               },
-              "description": "Paged collection of TextList items",
+              "description": "Paged collection of TextBlocklist items",
               "required": [
                 "value"
               ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<TextList, Azure.Core.(anonymous model)>"
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<TextBlocklist, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
@@ -144,20 +144,20 @@
         }
       }
     },
-    "/text/lists/{listName}": {
+    "/text/blocklists/{blocklistName}": {
       "get": {
-        "operationId": "TextLists_GetTextList",
-        "summary": "Get Text List By listId",
-        "description": "Returns text list details of the Text List with list Id equal to list Id passed.",
+        "operationId": "TextBlocklists_GetTextBlocklist",
+        "summary": "Get Text Blocklist By blocklistName",
+        "description": "Returns text blocklist details.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "listName",
+            "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text List Id.",
+            "description": "Text blocklist Name.",
             "maxLength": 64,
             "type": "string"
           }
@@ -166,7 +166,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextList"
+              "$ref": "#/definitions/TextBlocklist"
             }
           },
           "default": {
@@ -184,28 +184,28 @@
         }
       },
       "patch": {
-        "operationId": "TextLists_CreateOrUpdateList",
-        "summary": "Create Or Update Text List",
-        "description": "Updates an Text List by listId, if listId not exists, create a new Text List",
+        "operationId": "TextBlocklists_CreateOrUpdateTextBlocklist",
+        "summary": "Create Or Update Text Blocklist",
+        "description": "Updates a text blocklist, if blocklistName does not exist, create a new blocklist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "listName",
+            "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text List Id.",
+            "description": "Text blocklist Name.",
             "maxLength": 64,
             "type": "string"
           },
           {
-            "name": "resource",
+            "name": "body",
             "in": "body",
             "required": true,
             "description": "The resource instance.",
             "schema": {
-              "$ref": "#/definitions/TextListUpdate"
+              "$ref": "#/definitions/TextBlocklistUpdate"
             }
           }
         ],
@@ -213,13 +213,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextList"
+              "$ref": "#/definitions/TextBlocklist"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/TextList"
+              "$ref": "#/definitions/TextBlocklist"
             }
           },
           "default": {
@@ -240,18 +240,18 @@
         ]
       },
       "delete": {
-        "operationId": "TextLists_DeleteTextList",
-        "summary": "Delete Text List By listId",
-        "description": "Deletes Text List with the list Id equal to list Id passed.",
+        "operationId": "TextBlocklists_DeleteTextBlocklist",
+        "summary": "Delete Text Blocklist By blocklistName",
+        "description": "Deletes a text blocklist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "listName",
+            "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text List Id.",
+            "description": "Text blocklist Name.",
             "maxLength": 64,
             "type": "string"
           }
@@ -275,18 +275,20 @@
         }
       }
     },
-    "/text/lists/{listName}:addItems": {
+    "/text/blocklists/{blocklistName}:addBlockItems": {
       "post": {
-        "operationId": "TextLists_AddItems",
+        "operationId": "TextBlocklists_AddBlockItems",
+        "summary": "Add BlockItems To Text Blocklist",
+        "description": "Add blockItems to a text blocklist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "listName",
+            "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text List Id.",
+            "description": "Text blocklist Name.",
             "maxLength": 64,
             "type": "string"
           },
@@ -294,7 +296,7 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/BatchCreateTextListItemsRequest"
+              "$ref": "#/definitions/BatchCreateTextBlockItemsRequest"
             }
           }
         ],
@@ -302,7 +304,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BatchCreateTextListItemsResponse"
+              "$ref": "#/definitions/BatchCreateTextBlockItemsResponse"
             }
           },
           "default": {
@@ -320,18 +322,20 @@
         }
       }
     },
-    "/text/lists/{listName}:removeItems": {
+    "/text/blocklists/{blocklistName}:removeBlockItems": {
       "post": {
-        "operationId": "TextLists_RemoveItems",
+        "operationId": "TextBlocklists_RemoveBlockItems",
+        "summary": "Remove BlockItems From Text Blocklist",
+        "description": "Remove blockItems from a text blocklist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "listName",
+            "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text List Id.",
+            "description": "Text blocklist Name.",
             "maxLength": 64,
             "type": "string"
           },
@@ -339,7 +343,7 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/BatchDeleteTextListItemsRequest"
+              "$ref": "#/definitions/BatchDeleteTextBlockItemsRequest"
             }
           }
         ],
@@ -362,20 +366,20 @@
         }
       }
     },
-    "/text/lists/{listName}/items": {
+    "/text/blocklists/{blocklistName}/blockItems": {
       "get": {
-        "operationId": "TextLists_ListTextListItems",
-        "summary": "Get All Items By listId",
-        "description": "Get All Items By listId",
+        "operationId": "TextBlocklists_ListTextBlocklistItems",
+        "summary": "Get All BlockItems By blocklistName",
+        "description": "Get all blockItems in a text blocklist",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "listName",
+            "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text List Id.",
+            "description": "Text blocklist Name.",
             "maxLength": 64,
             "type": "string"
           },
@@ -398,11 +402,11 @@
                 "value": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/definitions/TextListItem"
+                    "$ref": "#/definitions/TextBlockItem"
                   },
                   "x-ms-identifiers": [],
-                  "x-typespec-name": "TextListItem[]",
-                  "description": "The TextListItem items on this page"
+                  "x-typespec-name": "TextBlockItem[]",
+                  "description": "The TextBlockItem items on this page"
                 },
                 "nextLink": {
                   "type": "string",
@@ -411,11 +415,11 @@
                   "x-typespec-name": "Rest.ResourceLocation"
                 }
               },
-              "description": "Paged collection of TextListItem items",
+              "description": "Paged collection of TextBlockItem items",
               "required": [
                 "value"
               ],
-              "x-typespec-name": "Azure.Core.Foundations.CustomPage<TextListItem, Azure.Core.(anonymous model)>"
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<TextBlockItem, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
@@ -436,28 +440,28 @@
         }
       }
     },
-    "/text/lists/{listName}/items/{itemId}": {
+    "/text/blocklists/{blocklistName}/blockItems/{blockItemId}": {
       "get": {
-        "operationId": "TextLists_GetTextListItem",
-        "summary": "Get Item By itemId and listId",
-        "description": "Get Item By itemId and listId",
+        "operationId": "TextBlocklists_GetTextBlocklistItem",
+        "summary": "Get BlockItem By blocklistName And blockItemId",
+        "description": "Get blockItem By blockItemId from a text blocklist.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "listName",
+            "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text List Id.",
+            "description": "Text blocklist Name.",
             "maxLength": 64,
             "type": "string"
           },
           {
-            "name": "itemId",
+            "name": "blockItemId",
             "in": "path",
             "required": true,
-            "description": "Item id",
+            "description": "Block Item Id.",
             "maxLength": 64,
             "type": "string"
           }
@@ -466,7 +470,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextListItem"
+              "$ref": "#/definitions/TextBlockItem"
             }
           },
           "default": {
@@ -488,16 +492,16 @@
       "post": {
         "operationId": "TextOperations_Analyze",
         "summary": "Analyze Text",
-        "description": "A sync API for harmful content analysis for text",
+        "description": "A sync API for harmful content analysis for text.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "request",
+            "name": "body",
             "in": "body",
             "required": true,
-            "description": "The analysis request of the text",
+            "description": "The request of text analysis.",
             "schema": {
               "$ref": "#/definitions/TextDetectRequest"
             }
@@ -593,65 +597,55 @@
         "code"
       ]
     },
-    "BatchCreateTextListItemsRequest": {
+    "BatchCreateTextBlockItemsRequest": {
       "type": "object",
       "properties": {
-        "items": {
+        "blockItems": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TextListItemInfo"
+            "$ref": "#/definitions/TextBlockItemInfo"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "TextListItemInfo[]"
+          "x-typespec-name": "TextBlockItemInfo[]",
+          "description": "Array of blockItemInfo to add."
         }
       },
+      "description": "The request to add blockItems to text blocklist.",
       "required": [
-        "items"
+        "blockItems"
       ]
     },
-    "BatchCreateTextListItemsResponse": {
+    "BatchCreateTextBlockItemsResponse": {
       "type": "object",
       "properties": {
-        "items": {
+        "blockItems": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/TextListItem"
+            "$ref": "#/definitions/TextBlockItem"
           },
           "x-ms-identifiers": [],
-          "x-typespec-name": "TextListItem[]"
+          "x-typespec-name": "TextBlockItem[]",
+          "description": "Array of blockItems added."
         }
-      }
+      },
+      "description": "The response of adding blockItems to text blocklist."
     },
-    "BatchDeleteTextListItemsRequest": {
+    "BatchDeleteTextBlockItemsRequest": {
       "type": "object",
       "properties": {
-        "itemsIds": {
+        "blockItemIds": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "x-typespec-name": "string[]"
+          "x-typespec-name": "string[]",
+          "description": "Array of blockItemIds to delete."
         }
       },
+      "description": "The request to delete blockItems from text blocklist.",
       "required": [
-        "itemsIds"
+        "blockItemIds"
       ]
-    },
-    "Image": {
-      "type": "object",
-      "properties": {
-        "content": {
-          "type": "string",
-          "format": "byte",
-          "description": "Base64 encoding of image"
-        },
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "The blob url of image"
-        }
-      },
-      "description": "The content or url of image, if both given, the content field will be used. The maxinum size of image is 4MB, and the image should not be smaller than 50*50."
     },
     "ImageCategory": {
       "type": "string",
@@ -666,18 +660,36 @@
         "modelAsString": true
       }
     },
+    "ImageData": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "format": "byte",
+          "description": "Base64 encoding of image."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The blob url of image."
+        }
+      },
+      "description": "The content or url of image, could be base64 encoding bytes or blob url, if both given, the content field will be used. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time."
+    },
     "ImageDetectMultiSeverityResult": {
       "type": "object",
       "properties": {
         "category": {
-          "$ref": "#/definitions/ImageCategory"
+          "$ref": "#/definitions/ImageCategory",
+          "description": "The image category."
         },
         "riskLevel": {
           "type": "integer",
           "format": "int32",
-          "description": "riskLevel represent the severity of the input, currently its value could be: 0,2,4,6"
+          "description": "The higher the risk level of input content, the larger this value, currently its value could be: 0,2,4,6."
         }
       },
+      "description": "Image analysis result",
       "required": [
         "category",
         "riskLevel"
@@ -687,8 +699,8 @@
       "type": "object",
       "properties": {
         "image": {
-          "$ref": "#/definitions/Image",
-          "description": "The image needs to be scanned"
+          "$ref": "#/definitions/ImageData",
+          "description": "The image needs to be analyzed."
         },
         "categories": {
           "type": "array",
@@ -696,10 +708,10 @@
             "$ref": "#/definitions/ImageCategory"
           },
           "x-typespec-name": "ImageCategory[]",
-          "description": "The categories will be analyzed, if not assigned, default categories will be\nanalyzed"
+          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned."
         }
       },
-      "description": "The analysis request of the image",
+      "description": "The analysis request of the image.",
       "required": [
         "image"
       ]
@@ -708,19 +720,105 @@
       "type": "object",
       "properties": {
         "hateResult": {
-          "$ref": "#/definitions/ImageDetectMultiSeverityResult"
+          "$ref": "#/definitions/ImageDetectMultiSeverityResult",
+          "description": "Analysis result for Hate category."
         },
         "selfHarmResult": {
-          "$ref": "#/definitions/ImageDetectMultiSeverityResult"
+          "$ref": "#/definitions/ImageDetectMultiSeverityResult",
+          "description": "Analysis result for SelfHarm category."
         },
         "sexualResult": {
-          "$ref": "#/definitions/ImageDetectMultiSeverityResult"
+          "$ref": "#/definitions/ImageDetectMultiSeverityResult",
+          "description": "Analysis result for Sexual category."
         },
         "violenceResult": {
-          "$ref": "#/definitions/ImageDetectMultiSeverityResult"
+          "$ref": "#/definitions/ImageDetectMultiSeverityResult",
+          "description": "Analysis result for Violence category."
         }
       },
-      "description": "The analysis response of the image"
+      "description": "The analysis response of the image."
+    },
+    "TextBlockItem": {
+      "type": "object",
+      "properties": {
+        "blockItemId": {
+          "type": "string",
+          "description": "Block Item Id.",
+          "maxLength": 64,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Block item description.",
+          "maxLength": 1024
+        },
+        "text": {
+          "type": "string",
+          "description": "Block item content.",
+          "maxLength": 128
+        }
+      },
+      "description": "Item in TextBlocklist.",
+      "required": [
+        "blockItemId",
+        "text"
+      ]
+    },
+    "TextBlockItemInfo": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Block item description.",
+          "maxLength": 1024
+        },
+        "text": {
+          "type": "string",
+          "description": "Block item content.",
+          "maxLength": 128
+        }
+      },
+      "description": "Block item info in text blocklist.",
+      "required": [
+        "text"
+      ]
+    },
+    "TextBlocklist": {
+      "type": "object",
+      "properties": {
+        "blocklistName": {
+          "type": "string",
+          "description": "Text blocklist Name.",
+          "maxLength": 64,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Text blocklist description.",
+          "maxLength": 1024
+        }
+      },
+      "description": "Text Blocklist.",
+      "required": [
+        "blocklistName"
+      ]
+    },
+    "TextBlocklistUpdate": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Text blocklist description.",
+          "maxLength": 1024
+        }
+      },
+      "description": "Text Blocklist."
     },
     "TextCategory": {
       "type": "string",
@@ -739,14 +837,16 @@
       "type": "object",
       "properties": {
         "category": {
-          "$ref": "#/definitions/TextCategory"
+          "$ref": "#/definitions/TextCategory",
+          "description": "The text category."
         },
         "riskLevel": {
           "type": "integer",
           "format": "int32",
-          "description": "riskLevel represent the severity of the input, currently its value could be: 0,2,4,6"
+          "description": "The higher the risk level of input content, the larger this value, currently its value could be: 0,2,4,6."
         }
       },
+      "description": "Text analysis result.",
       "required": [
         "category",
         "riskLevel"
@@ -757,8 +857,8 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The text needs to be scanned",
-          "maxLength": 7000
+          "description": "The text needs to be scanned.",
+          "maxLength": 1000
         },
         "categories": {
           "type": "array",
@@ -766,22 +866,22 @@
             "$ref": "#/definitions/TextCategory"
           },
           "x-typespec-name": "TextCategory[]",
-          "description": "The categories will be analyzed, if not assigned, a default set of categories'\nanalysis results will be returned."
+          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned."
         },
-        "blocklistIds": {
+        "blocklistNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "x-typespec-name": "string[]",
-          "description": "The ids of blocklists"
+          "description": "The names of blocklists."
         },
         "breakByBlocklists": {
           "type": "boolean",
-          "description": "When set to true, other analysis will be skipped once any of configured\nblocklists was hit. When set to false, all the analysis will be done even when\nblocklists were hit."
+          "description": "When set to true, other analysis will be skipped once any of configured blocklists was hit. When set to false, all the analysis will be done even when blocklists were hit."
         }
       },
-      "description": "The analysis request of the text",
+      "description": "The analysis request of the text.",
       "required": [
         "text"
       ]
@@ -789,147 +889,71 @@
     "TextDetectResponse": {
       "type": "object",
       "properties": {
-        "blocklistMatchResults": {
+        "blocklistsMatchResults": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextListMatchResult"
           },
           "x-ms-identifiers": [],
           "x-typespec-name": "TextListMatchResult[]",
-          "description": "The details of list match"
+          "description": "The details of blocklist match."
         },
         "hateResult": {
-          "$ref": "#/definitions/TextDetectMultiSeverityResult"
+          "$ref": "#/definitions/TextDetectMultiSeverityResult",
+          "description": "Analysis result for Hate category."
         },
         "selfHarmResult": {
-          "$ref": "#/definitions/TextDetectMultiSeverityResult"
+          "$ref": "#/definitions/TextDetectMultiSeverityResult",
+          "description": "Analysis result for SelfHarm category."
         },
         "sexualResult": {
-          "$ref": "#/definitions/TextDetectMultiSeverityResult"
+          "$ref": "#/definitions/TextDetectMultiSeverityResult",
+          "description": "Analysis result for Sexual category."
         },
         "violenceResult": {
-          "$ref": "#/definitions/TextDetectMultiSeverityResult"
+          "$ref": "#/definitions/TextDetectMultiSeverityResult",
+          "description": "Analysis result for Violence category."
         }
       },
       "description": "The analysis response of the text"
     },
-    "TextList": {
-      "type": "object",
-      "properties": {
-        "listName": {
-          "type": "string",
-          "description": "Text List Id.",
-          "maxLength": 64,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "Description for Text List.",
-          "maxLength": 1024
-        }
-      },
-      "description": "Text List.",
-      "required": [
-        "listName"
-      ]
-    },
-    "TextListItem": {
-      "type": "object",
-      "properties": {
-        "itemId": {
-          "type": "string",
-          "description": "Item id",
-          "maxLength": 64,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "Text data description",
-          "maxLength": 1024
-        },
-        "text": {
-          "type": "string",
-          "description": "Text list item content.",
-          "maxLength": 128
-        }
-      },
-      "description": "Item in Text List",
-      "required": [
-        "itemId",
-        "text"
-      ]
-    },
-    "TextListItemInfo": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Text data description",
-          "maxLength": 1024
-        },
-        "text": {
-          "type": "string",
-          "description": "Text list item content.",
-          "maxLength": 128
-        }
-      },
-      "description": "Item Info in Text List",
-      "required": [
-        "text"
-      ]
-    },
     "TextListMatchResult": {
       "type": "object",
       "properties": {
-        "listId": {
+        "blocklistName": {
           "type": "string",
-          "description": "The id of matched custom list",
+          "description": "The name of matched blocklist.",
           "maxLength": 64
         },
-        "itemId": {
+        "blockItemId": {
           "type": "string",
-          "description": "The id of matched item",
+          "description": "The id of matched item.",
           "maxLength": 64
         },
-        "itemText": {
+        "blockItemText": {
           "type": "string",
-          "description": "The content of matched item",
+          "description": "The content of matched item.",
           "maxLength": 128
         },
         "offset": {
           "type": "integer",
           "format": "int32",
-          "description": "The character offset of matched text in original input"
+          "description": "The character offset of matched text in original input."
         },
         "length": {
           "type": "integer",
           "format": "int32",
-          "description": "The length of matched text in original input"
+          "description": "The length of matched text in original input."
         }
       },
-      "description": "The result of custom list match",
+      "description": "The result of blocklist match.",
       "required": [
-        "listId",
-        "itemId",
-        "itemText"
+        "blocklistName",
+        "blockItemId",
+        "blockItemText",
+        "offset",
+        "length"
       ]
-    },
-    "TextListUpdate": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description for Text List.",
-          "maxLength": 1024
-        }
-      },
-      "description": "Text List."
     },
     "Versions": {
       "type": "string",

@@ -1,0 +1,87 @@
+import "@azure-tools/typespec-azure-core";
+import "@typespec/http";
+import "@typespec/rest";
+import "./models.tsp";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
+using Azure.Core.Traits;
+
+namespace ContentSafety;
+
+interface TextOperations {
+  @summary("Analyze Text")
+  @doc("A sync API for harmful content analysis for text.")
+  @route("/text:analyze")
+  @post
+  analyze is Azure.Core.RpcOperation<
+    {
+      @body
+      @doc("The request of text analysis.")
+      body: TextDetectRequest;
+    },
+    TextDetectResponse
+  >;
+}
+
+interface ImageOperations {
+  @summary("Analyze Image")
+  @doc("A sync API for harmful content analysis for image.")
+  @route("/image:analyze")
+  @post
+  analyze is Azure.Core.RpcOperation<
+    {
+      @doc("The analysis request of the image.")
+      @body
+      body: ImageDetectRequest;
+    },
+    ImageDetectResponse
+  >;
+}
+
+interface TextBlocklists {
+  @summary("Get Text Blocklist By blocklistName")
+  @doc("Returns text blocklist details.")
+  getTextBlocklist is Azure.Core.ResourceRead<TextBlocklist>;
+
+  @summary("Create Or Update Text Blocklist")
+  @doc("Updates a text blocklist, if blocklistName does not exist, create a new blocklist.")
+  createOrUpdateTextBlocklist is Azure.Core.ResourceCreateOrUpdate<TextBlocklist>;
+
+  @summary("Delete Text Blocklist By blocklistName")
+  @doc("Deletes a text blocklist.")
+  deleteTextBlocklist is Azure.Core.ResourceDelete<TextBlocklist>;
+
+  @summary("Get All Text Blocklists")
+  @doc("Get all text blocklists details.")
+  listTextBlocklists is Azure.Core.ResourceList<TextBlocklist>;
+
+  @summary("Add BlockItems To Text Blocklist")
+  @doc("Add blockItems to a text blocklist.")
+  addBlockItems is ResourceAction<
+    TextBlocklist,
+    BatchCreateTextBlockItemsRequest,
+    BatchCreateTextBlockItemsResponse
+  >;
+
+  @summary("Remove BlockItems From Text Blocklist")
+  @doc("Remove blockItems from a text blocklist.")
+  removeBlockItems is ResourceAction<
+    TextBlocklist,
+    BatchDeleteTextBlockItemsRequest,
+    NoContentResponse
+  >;
+
+  @summary("Get BlockItem By blocklistName And blockItemId")
+  @doc("Get blockItem By blockItemId from a text blocklist.")
+  getTextBlocklistItem is Azure.Core.ResourceRead<TextBlockItem>;
+
+  @summary("Get All BlockItems By blocklistName")
+  @doc("Get all blockItems in a text blocklist")
+  listTextBlocklistItems is Azure.Core.ResourceList<
+    TextBlockItem,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
+}
