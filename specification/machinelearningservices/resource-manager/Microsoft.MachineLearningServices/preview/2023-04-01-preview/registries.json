@@ -504,14 +504,6 @@
           "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
           "type": "string"
         },
-        "location": {
-          "description": "The geo-location where the resource lives.",
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Additional attributes of the entity.",
@@ -594,6 +586,11 @@
     "PrivateEndpointConnectionProperties": {
       "description": "Properties of the Private Endpoint Connection",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProperties"
+        }
+      ],
       "properties": {
         "groupIds": {
           "description": "The group ids",
@@ -641,22 +638,11 @@
     "PrivateLinkServiceConnectionState": {
       "description": "The connection state.",
       "type": "object",
-      "properties": {
-        "actionsRequired": {
-          "description": "Some RP chose \"None\". Other RPs use this for region expansion.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "description": {
-          "description": "User-defined message that, per NRP doc, may be used for approval-related message.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "status": {
-          "description": "Connection status of the service consumer with the service provider",
-          "$ref": "#/definitions/EndpointServiceConnectionStatus"
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState"
         }
-      },
+      ],
       "additionalProperties": false
     },
     "Registry": {
