@@ -21,7 +21,7 @@ enum ImageCategory {
 }
 
 @doc("The analysis request of the text.")
-model TextDetectRequest {
+model AnalyzeTextOptions {
   @doc("The text needs to be scanned.")
   @maxLength(1000)
   text: string;
@@ -37,25 +37,25 @@ model TextDetectRequest {
 }
 
 @doc("The analysis response of the text")
-model TextDetectResponse {
+model AnalyzeTextResult {
   @doc("The details of blocklist match.")
-  blocklistsMatchResults?: TextListMatchResult[];
+  blocklistsMatchResults?: TextBlocklistMatchResult[];
 
   @doc("Analysis result for Hate category.")
-  hateResult?: TextDetectMultiSeverityResult;
+  hateResult?: TextAnalyzeSeverityResult;
 
   @doc("Analysis result for SelfHarm category.")
-  selfHarmResult?: TextDetectMultiSeverityResult;
+  selfHarmResult?: TextAnalyzeSeverityResult;
 
   @doc("Analysis result for Sexual category.")
-  sexualResult?: TextDetectMultiSeverityResult;
+  sexualResult?: TextAnalyzeSeverityResult;
 
   @doc("Analysis result for Violence category.")
-  violenceResult?: TextDetectMultiSeverityResult;
+  violenceResult?: TextAnalyzeSeverityResult;
 }
 
 @doc("The result of blocklist match.")
-model TextListMatchResult {
+model TextBlocklistMatchResult {
   @doc("The name of matched blocklist.")
   @maxLength(64)
   blocklistName: string;
@@ -76,16 +76,16 @@ model TextListMatchResult {
 }
 
 @doc("Text analysis result.")
-model TextDetectMultiSeverityResult {
+model TextAnalyzeSeverityResult {
   @doc("The text category.")
   category: TextCategory;
 
-  @doc("The higher the risk level of input content, the larger this value, currently its value could be: 0,2,4,6.")
-  riskLevel: int32;
+  @doc("The higher the severity of input content, the larger this value, currently its value could be: 0,2,4,6.")
+  severity: int32;
 }
 
 @doc("The analysis request of the image.")
-model ImageDetectRequest {
+model AnalyzeImageOptions {
   @doc("The image needs to be analyzed.")
   image: ImageData;
 
@@ -103,27 +103,27 @@ model ImageData {
 }
 
 @doc("The analysis response of the image.")
-model ImageDetectResponse {
+model AnalyzeImageResult {
   @doc("Analysis result for Hate category.")
-  hateResult?: ImageDetectMultiSeverityResult;
+  hateResult?: ImageAnalyzeSeverityResult;
 
   @doc("Analysis result for SelfHarm category.")
-  selfHarmResult?: ImageDetectMultiSeverityResult;
+  selfHarmResult?: ImageAnalyzeSeverityResult;
 
   @doc("Analysis result for Sexual category.")
-  sexualResult?: ImageDetectMultiSeverityResult;
+  sexualResult?: ImageAnalyzeSeverityResult;
 
   @doc("Analysis result for Violence category.")
-  violenceResult?: ImageDetectMultiSeverityResult;
+  violenceResult?: ImageAnalyzeSeverityResult;
 }
 
 @doc("Image analysis result")
-model ImageDetectMultiSeverityResult {
+model ImageAnalyzeSeverityResult {
   @doc("The image category.")
   category: ImageCategory;
 
-  @doc("The higher the risk level of input content, the larger this value, currently its value could be: 0,2,4,6.")
-  riskLevel: int32;
+  @doc("The higher the severity of input content, the larger this value, currently its value could be: 0,2,4,6.")
+  severity: int32;
 }
 
 @doc("Text Blocklist.")
@@ -171,19 +171,19 @@ model TextBlockItemInfo {
 }
 
 @doc("The request to add blockItems to text blocklist.")
-model BatchCreateTextBlockItemsRequest {
+model AddBlockItemsOptions {
   @doc("Array of blockItemInfo to add.")
   blockItems: TextBlockItemInfo[];
 }
 
 @doc("The response of adding blockItems to text blocklist.")
-model BatchCreateTextBlockItemsResponse {
+model AddBlockItemsResult {
   @doc("Array of blockItems added.")
   blockItems?: TextBlockItem[];
 }
 
 @doc("The request to delete blockItems from text blocklist.")
-model BatchDeleteTextBlockItemsRequest {
+model RemoveBlockItemsOptions {
   @doc("Array of blockItemIds to delete.")
   blockItemIds: string[];
 }

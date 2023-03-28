@@ -20,9 +20,9 @@ interface TextOperations {
     {
       @body
       @doc("The request of text analysis.")
-      body: TextDetectRequest;
+      body: AnalyzeTextOptions;
     },
-    TextDetectResponse
+    AnalyzeTextResult
   >;
 }
 
@@ -35,9 +35,9 @@ interface ImageOperations {
     {
       @doc("The analysis request of the image.")
       @body
-      body: ImageDetectRequest;
+      body: AnalyzeImageOptions;
     },
-    ImageDetectResponse
+    AnalyzeImageResult
   >;
 }
 
@@ -62,15 +62,15 @@ interface TextBlocklists {
   @doc("Add blockItems to a text blocklist.")
   addBlockItems is ResourceAction<
     TextBlocklist,
-    BatchCreateTextBlockItemsRequest,
-    BatchCreateTextBlockItemsResponse
+    AddBlockItemsOptions,
+    AddBlockItemsResult
   >;
 
   @summary("Remove BlockItems From Text Blocklist")
   @doc("Remove blockItems from a text blocklist.")
   removeBlockItems is ResourceAction<
     TextBlocklist,
-    BatchDeleteTextBlockItemsRequest,
+    RemoveBlockItemsOptions,
     NoContentResponse
   >;
 

@@ -61,7 +61,7 @@
             "required": true,
             "description": "The analysis request of the image.",
             "schema": {
-              "$ref": "#/definitions/ImageDetectRequest"
+              "$ref": "#/definitions/AnalyzeImageOptions"
             }
           }
         ],
@@ -69,7 +69,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ImageDetectResponse"
+              "$ref": "#/definitions/AnalyzeImageResult"
             }
           },
           "default": {
@@ -200,7 +200,7 @@
             "type": "string"
           },
           {
-            "name": "body",
+            "name": "resource",
             "in": "body",
             "required": true,
             "description": "The resource instance.",
@@ -296,7 +296,7 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/BatchCreateTextBlockItemsRequest"
+              "$ref": "#/definitions/AddBlockItemsOptions"
             }
           }
         ],
@@ -304,7 +304,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/BatchCreateTextBlockItemsResponse"
+              "$ref": "#/definitions/AddBlockItemsResult"
             }
           },
           "default": {
@@ -343,7 +343,7 @@
             "name": "body",
             "in": "body",
             "schema": {
-              "$ref": "#/definitions/BatchDeleteTextBlockItemsRequest"
+              "$ref": "#/definitions/RemoveBlockItemsOptions"
             }
           }
         ],
@@ -503,7 +503,7 @@
             "required": true,
             "description": "The request of text analysis.",
             "schema": {
-              "$ref": "#/definitions/TextDetectRequest"
+              "$ref": "#/definitions/AnalyzeTextOptions"
             }
           }
         ],
@@ -511,7 +511,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TextDetectResponse"
+              "$ref": "#/definitions/AnalyzeTextResult"
             }
           },
           "default": {
@@ -531,6 +531,147 @@
     }
   },
   "definitions": {
+    "AddBlockItemsOptions": {
+      "type": "object",
+      "properties": {
+        "blockItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextBlockItemInfo"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "TextBlockItemInfo[]",
+          "description": "Array of blockItemInfo to add."
+        }
+      },
+      "description": "The request to add blockItems to text blocklist.",
+      "required": [
+        "blockItems"
+      ]
+    },
+    "AddBlockItemsResult": {
+      "type": "object",
+      "properties": {
+        "blockItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextBlockItem"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "TextBlockItem[]",
+          "description": "Array of blockItems added."
+        }
+      },
+      "description": "The response of adding blockItems to text blocklist."
+    },
+    "AnalyzeImageOptions": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "$ref": "#/definitions/ImageData",
+          "description": "The image needs to be analyzed."
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageCategory"
+          },
+          "x-typespec-name": "ImageCategory[]",
+          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned."
+        }
+      },
+      "description": "The analysis request of the image.",
+      "required": [
+        "image"
+      ]
+    },
+    "AnalyzeImageResult": {
+      "type": "object",
+      "properties": {
+        "hateResult": {
+          "$ref": "#/definitions/ImageAnalyzeSeverityResult",
+          "description": "Analysis result for Hate category."
+        },
+        "selfHarmResult": {
+          "$ref": "#/definitions/ImageAnalyzeSeverityResult",
+          "description": "Analysis result for SelfHarm category."
+        },
+        "sexualResult": {
+          "$ref": "#/definitions/ImageAnalyzeSeverityResult",
+          "description": "Analysis result for Sexual category."
+        },
+        "violenceResult": {
+          "$ref": "#/definitions/ImageAnalyzeSeverityResult",
+          "description": "Analysis result for Violence category."
+        }
+      },
+      "description": "The analysis response of the image."
+    },
+    "AnalyzeTextOptions": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The text needs to be scanned.",
+          "maxLength": 1000
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextCategory"
+          },
+          "x-typespec-name": "TextCategory[]",
+          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned."
+        },
+        "blocklistNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "The names of blocklists."
+        },
+        "breakByBlocklists": {
+          "type": "boolean",
+          "description": "When set to true, other analysis will be skipped once any of configured blocklists was hit. When set to false, all the analysis will be done even when blocklists were hit."
+        }
+      },
+      "description": "The analysis request of the text.",
+      "required": [
+        "text"
+      ]
+    },
+    "AnalyzeTextResult": {
+      "type": "object",
+      "properties": {
+        "blocklistsMatchResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextBlocklistMatchResult"
+          },
+          "x-ms-identifiers": [],
+          "x-typespec-name": "TextBlocklistMatchResult[]",
+          "description": "The details of blocklist match."
+        },
+        "hateResult": {
+          "$ref": "#/definitions/TextAnalyzeSeverityResult",
+          "description": "Analysis result for Hate category."
+        },
+        "selfHarmResult": {
+          "$ref": "#/definitions/TextAnalyzeSeverityResult",
+          "description": "Analysis result for SelfHarm category."
+        },
+        "sexualResult": {
+          "$ref": "#/definitions/TextAnalyzeSeverityResult",
+          "description": "Analysis result for Sexual category."
+        },
+        "violenceResult": {
+          "$ref": "#/definitions/TextAnalyzeSeverityResult",
+          "description": "Analysis result for Violence category."
+        }
+      },
+      "description": "The analysis response of the text"
+    },
     "Azure.Core.Foundations.Error": {
       "type": "object",
       "properties": {
@@ -597,54 +738,23 @@
         "code"
       ]
     },
-    "BatchCreateTextBlockItemsRequest": {
+    "ImageAnalyzeSeverityResult": {
       "type": "object",
       "properties": {
-        "blockItems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextBlockItemInfo"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "TextBlockItemInfo[]",
-          "description": "Array of blockItemInfo to add."
+        "category": {
+          "$ref": "#/definitions/ImageCategory",
+          "description": "The image category."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The higher the severity of input content, the larger this value, currently its value could be: 0,2,4,6."
         }
       },
-      "description": "The request to add blockItems to text blocklist.",
+      "description": "Image analysis result",
       "required": [
-        "blockItems"
-      ]
-    },
-    "BatchCreateTextBlockItemsResponse": {
-      "type": "object",
-      "properties": {
-        "blockItems": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextBlockItem"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "TextBlockItem[]",
-          "description": "Array of blockItems added."
-        }
-      },
-      "description": "The response of adding blockItems to text blocklist."
-    },
-    "BatchDeleteTextBlockItemsRequest": {
-      "type": "object",
-      "properties": {
-        "blockItemIds": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-typespec-name": "string[]",
-          "description": "Array of blockItemIds to delete."
-        }
-      },
-      "description": "The request to delete blockItems from text blocklist.",
-      "required": [
-        "blockItemIds"
+        "category",
+        "severity"
       ]
     },
     "ImageCategory": {
@@ -676,67 +786,41 @@
       },
       "description": "The content or url of image, could be base64 encoding bytes or blob url, if both given, the content field will be used. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time."
     },
-    "ImageDetectMultiSeverityResult": {
+    "RemoveBlockItemsOptions": {
+      "type": "object",
+      "properties": {
+        "blockItemIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-typespec-name": "string[]",
+          "description": "Array of blockItemIds to delete."
+        }
+      },
+      "description": "The request to delete blockItems from text blocklist.",
+      "required": [
+        "blockItemIds"
+      ]
+    },
+    "TextAnalyzeSeverityResult": {
       "type": "object",
       "properties": {
         "category": {
-          "$ref": "#/definitions/ImageCategory",
-          "description": "The image category."
+          "$ref": "#/definitions/TextCategory",
+          "description": "The text category."
         },
-        "riskLevel": {
+        "severity": {
           "type": "integer",
           "format": "int32",
-          "description": "The higher the risk level of input content, the larger this value, currently its value could be: 0,2,4,6."
+          "description": "The higher the severity of input content, the larger this value, currently its value could be: 0,2,4,6."
         }
       },
-      "description": "Image analysis result",
+      "description": "Text analysis result.",
       "required": [
         "category",
-        "riskLevel"
+        "severity"
       ]
-    },
-    "ImageDetectRequest": {
-      "type": "object",
-      "properties": {
-        "image": {
-          "$ref": "#/definitions/ImageData",
-          "description": "The image needs to be analyzed."
-        },
-        "categories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageCategory"
-          },
-          "x-typespec-name": "ImageCategory[]",
-          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned."
-        }
-      },
-      "description": "The analysis request of the image.",
-      "required": [
-        "image"
-      ]
-    },
-    "ImageDetectResponse": {
-      "type": "object",
-      "properties": {
-        "hateResult": {
-          "$ref": "#/definitions/ImageDetectMultiSeverityResult",
-          "description": "Analysis result for Hate category."
-        },
-        "selfHarmResult": {
-          "$ref": "#/definitions/ImageDetectMultiSeverityResult",
-          "description": "Analysis result for SelfHarm category."
-        },
-        "sexualResult": {
-          "$ref": "#/definitions/ImageDetectMultiSeverityResult",
-          "description": "Analysis result for Sexual category."
-        },
-        "violenceResult": {
-          "$ref": "#/definitions/ImageDetectMultiSeverityResult",
-          "description": "Analysis result for Violence category."
-        }
-      },
-      "description": "The analysis response of the image."
     },
     "TextBlockItem": {
       "type": "object",
@@ -809,115 +893,7 @@
         "blocklistName"
       ]
     },
-    "TextBlocklistUpdate": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Text blocklist description.",
-          "maxLength": 1024
-        }
-      },
-      "description": "Text Blocklist."
-    },
-    "TextCategory": {
-      "type": "string",
-      "enum": [
-        "Hate",
-        "SelfHarm",
-        "Sexual",
-        "Violence"
-      ],
-      "x-ms-enum": {
-        "name": "TextCategory",
-        "modelAsString": true
-      }
-    },
-    "TextDetectMultiSeverityResult": {
-      "type": "object",
-      "properties": {
-        "category": {
-          "$ref": "#/definitions/TextCategory",
-          "description": "The text category."
-        },
-        "riskLevel": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The higher the risk level of input content, the larger this value, currently its value could be: 0,2,4,6."
-        }
-      },
-      "description": "Text analysis result.",
-      "required": [
-        "category",
-        "riskLevel"
-      ]
-    },
-    "TextDetectRequest": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "The text needs to be scanned.",
-          "maxLength": 1000
-        },
-        "categories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextCategory"
-          },
-          "x-typespec-name": "TextCategory[]",
-          "description": "The categories will be analyzed, if not assigned, a default set of categories' analysis results will be returned."
-        },
-        "blocklistNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-typespec-name": "string[]",
-          "description": "The names of blocklists."
-        },
-        "breakByBlocklists": {
-          "type": "boolean",
-          "description": "When set to true, other analysis will be skipped once any of configured blocklists was hit. When set to false, all the analysis will be done even when blocklists were hit."
-        }
-      },
-      "description": "The analysis request of the text.",
-      "required": [
-        "text"
-      ]
-    },
-    "TextDetectResponse": {
-      "type": "object",
-      "properties": {
-        "blocklistsMatchResults": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextListMatchResult"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "TextListMatchResult[]",
-          "description": "The details of blocklist match."
-        },
-        "hateResult": {
-          "$ref": "#/definitions/TextDetectMultiSeverityResult",
-          "description": "Analysis result for Hate category."
-        },
-        "selfHarmResult": {
-          "$ref": "#/definitions/TextDetectMultiSeverityResult",
-          "description": "Analysis result for SelfHarm category."
-        },
-        "sexualResult": {
-          "$ref": "#/definitions/TextDetectMultiSeverityResult",
-          "description": "Analysis result for Sexual category."
-        },
-        "violenceResult": {
-          "$ref": "#/definitions/TextDetectMultiSeverityResult",
-          "description": "Analysis result for Violence category."
-        }
-      },
-      "description": "The analysis response of the text"
-    },
-    "TextListMatchResult": {
+    "TextBlocklistMatchResult": {
       "type": "object",
       "properties": {
         "blocklistName": {
@@ -954,6 +930,30 @@
         "offset",
         "length"
       ]
+    },
+    "TextBlocklistUpdate": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Text blocklist description.",
+          "maxLength": 1024
+        }
+      },
+      "description": "Text Blocklist."
+    },
+    "TextCategory": {
+      "type": "string",
+      "enum": [
+        "Hate",
+        "SelfHarm",
+        "Sexual",
+        "Violence"
+      ],
+      "x-ms-enum": {
+        "name": "TextCategory",
+        "modelAsString": true
+      }
     },
     "Versions": {
       "type": "string",
