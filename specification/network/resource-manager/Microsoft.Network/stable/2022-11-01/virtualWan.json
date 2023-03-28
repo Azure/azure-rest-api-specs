@@ -5253,7 +5253,7 @@
           "200": {
             "description": "Request successful. Lists all the NVA connections under an NVA.",
             "schema": {
-              "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+              "$ref": "#/definitions/NetworkVirtualApplianceConnectionList"
             }
           },
           "default": {
@@ -8992,6 +8992,10 @@
     },
     "NetworkVirtualApplianceConnectionProperties": {
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -9032,9 +9036,6 @@
       "description": "Properties of the NetworkVirtualApplianceConnection subresource."
     },
     "NetworkVirtualApplianceConnection": {
-      "required": [
-        "name"
-      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -9052,6 +9053,18 @@
         }
       ],
       "description": "NetworkVirtualApplianceConnection resource."
+    },
+    "NetworkVirtualApplianceConnectionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkVirtualApplianceConnection"
+          },
+          "description": "The list of NetworkVirtualAppliance connections."
+        }
+      },
+      "description": "NetworkVirtualApplianceConnection list."
     },
     "ListVirtualHubBgpConnectionResults": {
       "properties": {
