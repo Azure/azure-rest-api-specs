@@ -22,5 +22,5 @@ These settings apply only when `--tag=package--2022-11-01-preview` is specified 
 
 ```yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
-  - Azure.Contoso.WidgetManager\preview\2022-11-01-preview\widgets.json
+  - Azure.Contoso.WidgetManager/preview/2022-11-01-preview/widgets.json
 ```
