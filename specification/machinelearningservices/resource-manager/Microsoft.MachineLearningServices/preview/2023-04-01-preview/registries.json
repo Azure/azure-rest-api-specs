@@ -506,9 +506,14 @@
         },
         "location": {
           "description": "The geo-location where the resource lives.",
-          "type": "string"
+          "type": "string",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "description": "Additional attributes of the entity.",
           "$ref": "#/definitions/PartialRegistry"
         },
@@ -574,6 +579,7 @@
           "x-nullable": true
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "description": "Properties of the Private Endpoint Connection",
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-nullable": true
@@ -750,6 +756,7 @@
           "type": "string"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "description": "[Required] Additional attributes of the entity.",
           "$ref": "#/definitions/Registry"
         },
