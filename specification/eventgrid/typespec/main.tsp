@@ -5,11 +5,11 @@ import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 
 enum ServiceApiVersions {
-  v2022_05_01: "2023-06-01-preview"
+  v2023_06_01_preview: "2023-06-01-preview"
 }
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "aeg-sas-key"> | OAuth2Auth<[{
+  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey"> | OAuth2Auth<[{
     type: OAuth2FlowType.implicit,
     authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
     scopes: ["https://eventgrid.azure.net/.default"],
