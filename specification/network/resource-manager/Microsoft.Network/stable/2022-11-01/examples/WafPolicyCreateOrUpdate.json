@@ -88,6 +88,17 @@
               ]
             },
             {
+              "matchVariable": "RequestHeaderNames",
+              "selectorMatchOperator": "EqualsAny",
+              "exclusionManagedRuleSets": [
+                {
+                  "ruleSetType": "OWASP",
+                  "ruleSetVersion": "3.2",
+                  "ruleGroups": []
+                }
+              ]
+            },
+            {
               "matchVariable": "RequestArgNames",
               "selectorMatchOperator": "StartsWith",
               "selector": "test"
@@ -96,6 +107,10 @@
               "matchVariable": "RequestArgValues",
               "selectorMatchOperator": "StartsWith",
               "selector": "test"
+            },
+            {
+              "matchVariable": "RequestHeadersKeys",
+              "selectorMatchOperator": "EqualsAny"
             }
           ]
         },
@@ -148,6 +163,39 @@
                 "operator": "Contains",
                 "matchValues": [
                   "Windows"
+                ]
+              }
+            ],
+            "action": "Block"
+          },
+          {
+            "name": "RateLimitRule3",
+            "priority": 3,
+            "rateLimitDuration": "OneMin",
+            "rateLimitThreshold": 10,
+            "ruleType": "RateLimitRule",
+            "matchConditions": [
+              {
+                "matchVariables": [
+                  {
+                    "variableName": "RemoteAddr",
+                    "selector": null
+                  }
+                ],
+                "operator": "IPMatch",
+                "negationConditon": true,
+                "matchValues": [
+                  "192.168.1.0/24",
+                  "10.0.0.0/24"
+                ]
+              }
+            ],
+            "groupByUserSession": [
+              {
+                "groupByVariables": [
+                  {
+                    "variableName": "ClientAddr"
+                  }
                 ]
               }
             ],
@@ -259,6 +307,16 @@
                 ]
               },
               {
+                "matchVariable": "RequestHeaderNames",
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": []
+                  }
+                ]
+              },
+              {
                 "matchVariable": "RequestArgNames",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
@@ -267,6 +325,9 @@
                 "matchVariable": "RequestArgValues",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
+              },
+              {
+                "matchVariable": "RequestHeaderKeys"
               }
             ]
           },
@@ -325,6 +386,39 @@
                   "negationConditon": false,
                   "matchValues": [
                     "Windows"
+                  ]
+                }
+              ],
+              "action": "Block"
+            },
+            {
+              "name": "RateLimitRule3",
+              "priority": 3,
+              "rateLimitDuration": "OneMin",
+              "rateLimitThreshold": 10,
+              "ruleType": "RateLimitRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": true,
+                  "matchValues": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ]
+                }
+              ],
+              "groupByUserSession": [
+                {
+                  "groupByVariables": [
+                    {
+                      "variableName": "ClientAddr"
+                    }
                   ]
                 }
               ],
@@ -418,6 +512,16 @@
                 ]
               },
               {
+                "matchVariable": "RequestHeaderNames",
+                "exclusionManagedRuleSets": [
+                  {
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.2",
+                    "ruleGroups": []
+                  }
+                ]
+              },
+              {
                 "matchVariable": "RequestArgNames",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
@@ -426,6 +530,9 @@
                 "matchVariable": "RequestArgValues",
                 "selectorMatchOperator": "StartsWith",
                 "selector": "test"
+              },
+              {
+                "matchVariable": "RequestHeaderKeys"
               }
             ]
           },
@@ -484,6 +591,39 @@
                   "negationConditon": false,
                   "matchValues": [
                     "Windows"
+                  ]
+                }
+              ],
+              "action": "Block"
+            },
+            {
+              "name": "RateLimitRule3",
+              "priority": 3,
+              "rateLimitDuration": "OneMin",
+              "rateLimitThreshold": 10,
+              "ruleType": "RateLimitRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": true,
+                  "matchValues": [
+                    "192.168.1.0/24",
+                    "10.0.0.0/24"
+                  ]
+                }
+              ],
+              "groupByUserSession": [
+                {
+                  "groupByVariables": [
+                    {
+                      "variableName": "ClientAddr"
+                    }
                   ]
                 }
               ],
