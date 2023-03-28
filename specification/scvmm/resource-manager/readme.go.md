@@ -14,4 +14,3 @@ module-name: sdk/resourcemanager/scvmm/armscvmm
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 ```
-
