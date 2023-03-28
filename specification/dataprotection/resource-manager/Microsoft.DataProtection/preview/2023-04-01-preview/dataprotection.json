@@ -6961,82 +6961,8 @@
         },
         "immutabilitySettings": {
           "$ref": "#/definitions/ImmutabilitySettings"
-        },
-        "encryptionSettings": {
-            "$ref": "#/definitions/EncryptionSettings"
         }
       }
-    },
-    "EncryptionSettings": {
-        "description": "Class containing encryption settings of vault",
-        "type": "object",
-        "properties": {
-            "state": {
-                "description": "State of encryption",
-                "enum": [
-                    "Disabled",
-                    "Enabled",
-                    "Inconsistent"
-                ],
-                "type": "string",
-                "x-ms-enum": {
-                    "name": "EncryptionState",
-                    "modelAsString": true
-                }
-            },
-            "keyVaultProperties": {
-                "$ref": "#/definitions/CmkKeyVaultProperties",
-                "description": "Key Vault Details"
-            },
-            "kekIdentity": {
-                "$ref": "#/definitions/CmkKekIdentity",
-                "description": "Identity Details"
-            },
-            "infrastructureEncryption": {
-                "description": "State of Infrastructure encryption",
-                "enum": [
-                    "Disabled",
-                    "Enabled"
-                ],
-                "type": "string",
-                "x-ms-enum": {
-                    "name": "InfrastructureEncryptionState",
-                    "modelAsString": true
-                }
-            }
-        }
-    },
-    "CmkKekIdentity": {
-        "description": "Class containing Selected User identity settings of vault",
-        "type": "object",
-        "properties": {
-            "identityType": {
-                "enum": [
-                    "Unknown",
-                    "SystemAssigned",
-                    "UserAssigned",
-                    "None",
-                    "SystemAssignedAndUserAssigned"
-                ],
-                "type": "string",
-                "x-ms-enum": {
-                    "name": "ManagedIdentityType",
-                    "modelAsString": true
-                }
-            },
-            "identityId": {
-                "type": "string"
-            }
-        }
-    },
-    "CmkKeyVaultProperties": {
-        "description": "Class containing CMK settings of the backup vault",
-        "type": "object",
-        "properties": {
-            "keyUri": {
-                "type": "string"
-            }
-        }
     },
     "SoftDeleteSettings": {
       "description": "Soft delete related settings",
