@@ -22,21 +22,23 @@
           },
           "customServices": [
             {
-              "endpoints": [
+              "docker": {
+                "privileged": true
+              },
+              "environmentVariables": {
+                "test_var": {
+                  "type": "local",
+                  "value": "test_val"
+                }
+              },
+              "volumes": [
                 {
-                  "name": "lab",
-                  "target": 8888,
-                  "published": 8888,
-                  "protocol": "http"
+                  "type": "bind",
+                  "read_only": false,
+                  "source": "/home/azureuser/cloudfiles",
+                  "target": "/home/azureuser/cloudfiles"
                 }
               ],
-              "image": {
-                "type": "docker",
-                "reference": "docker.io/jupyter/minimal-notebook:latest"
-              },
-              "name": "jupyter"
-            },
-            {
               "endpoints": [
                 {
                   "name": "connect",
@@ -47,11 +49,9 @@
               ],
               "image": {
                 "type": "docker",
-                "reference": "docker.io/rocker/rstudio:latest"
+                "reference": "ghcr.io/azure/rocker-rstudio-ml-verse:latest"
               },
-              "name": "rocker",
-              "title": "Rocker R ML IDE",
-              "description": "An open source R IDE."
+              "name": "rstudio"
             }
           ],
           "sshSettings": {
