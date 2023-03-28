@@ -838,11 +838,11 @@ input-file:
 - ./Microsoft.Sql/preview/2022-05-01-preview/VirtualClusters.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/InstanceFailoverGroups.json
 - ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabaseRestoreDetails.json
-- ./Microsoft.Sql/preview/2022-05-01-preview/ManagedDatabases.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevalidate.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/DatabaseEncryptionProtectorRevert.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/Databases.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ElasticPools.json
+- ./Microsoft.Sql/preview/2022-08-01-preview/ManagedDatabases.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ManagedInstances.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/ManagedLedgerDigestUploads.json
 - ./Microsoft.Sql/preview/2022-08-01-preview/RecoverableDatabases.json
