@@ -575,7 +575,6 @@
           ]
         },
         "properties": {
-          "x-ms-client-flatten": true,
           "description": "Properties of the Private Endpoint Connection",
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "x-nullable": true
@@ -586,11 +585,6 @@
     "PrivateEndpointConnectionProperties": {
       "description": "Properties of the Private Endpoint Connection",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProperties"
-        }
-      ],
       "properties": {
         "groupIds": {
           "description": "The group ids",
@@ -621,12 +615,12 @@
     "PrivateEndpointResource": {
       "description": "The PE network resource that is linked to this PE connection.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpoint"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "e.g. /subscriptions/{networkSubscriptionId}/resourceGroups/{rgName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}",
-          "type": "string",
-          "x-nullable": true
-        },
         "subnetArmId": {
           "description": "The subnetId that the private endpoint is connected to.",
           "type": "string",
