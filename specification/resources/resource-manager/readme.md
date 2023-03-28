@@ -29,10 +29,6 @@ openapi-type: arm
 tag: package-changes-2022-05
 ```
 
-``` yaml $(package-privatelinks)
-tag: package-privatelinks-2020-05
-```
-
 ``` yaml $(package-features)
 tag: package-features-2021-07
 ```
