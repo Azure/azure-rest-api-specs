@@ -46,7 +46,7 @@ op ArmResourceActionEmptyAsync<
 @armProviderNamespace
 @service({
   title: "RedisEnterpriseManagementClient",
-  version: "2022-01-01",
+  version: "2023-03-01-preview",
 })
 @doc("REST API for managing Redis Enterprise resources in Azure.")
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
@@ -326,21 +326,27 @@ namespace Microsoft.Cache {
   interface RedisEnterprise {
 
     @doc("Lists all RedisEnterprise clusters in a subscription.")
+    @example("examples/RedisEnterpriseList.json", "RedisEnterprise_List")
     listBySubscription is ArmListBySubscription<Cluster>;
 
     @doc("Lists all RedisEnterprise clusters in a resource group.")
+    @example("examples/RedisEnterpriseListByResourceGroup.json", "RedisEnterprise_ListByResourceGroup")
     listByResourceGroup is ArmResourceListByParent<Cluster>;
 
     @doc("Gets information about a RedisEnterprise cluster")
+    @example("examples/RedisEnterpriseGet.json", "RedisEnterprise_Get")
     get is ArmResourceRead<Cluster>;
 
     @doc("Creates a RedisEnterprise cluster")
+    @example("examples/RedisEnterpriseCreateOrUpdate.json", "RedisEnterprise_CreateOrUpdate")
     create is ArmResourceCreateOrUpdateAsync<Cluster>;
 
     @doc("Updates a RedisEnterprise cluster")
+    @example("examples/RedisEnterpriseUpdate.json", "RedisEnterprise_Update")
     update is ArmResourcePatchAsync<Cluster, Cluster>;
 
     @doc("Deletes a RedisEnterprise cluster and its databases")
+    @example("examples/RedisEnterpriseDelete.json", "RedisEnterprise_Delete")
     delete is ArmResourceDeleteAsync<Cluster>;
   }
 
@@ -348,41 +354,51 @@ namespace Microsoft.Cache {
   interface Databases {
 
     @doc("Lists all databases in a RedisEnterprise cluster.")
+    @example("examples/RedisEnterpriseDatabasesListByCluster.json", "RedisEnterpriseDatabases_ListByCluster")
     listByCluster is ArmResourceListByParent<Database>;
 
     @doc("Gets information about a database in a RedisEnterprise cluster")
+    @example("examples/RedisEnterpriseDatabasesGet.json", "RedisEnterpriseDatabases_Get")
     get is ArmResourceRead<Database>;
 
     @doc("Creates a database")
+    @example("examples/RedisEnterpriseDatabasesCreate.json", "RedisEnterpriseDatabases_Create")
     create is ArmResourceCreateOrUpdateAsync<Database>;
 
     @doc("Updates a database")
+    @example("examples/RedisEnterpriseDatabasesUpdate.json", "RedisEnterpriseDatabases_Update")
     update is ArmResourcePatchAsync<Database, Database>;
 
     @doc("Deletes a database")
+    @example("examples/RedisEnterpriseDatabasesDelete.json", "RedisEnterpriseDatabases_Delete")
     delete is ArmResourceDeleteAsync<Database>;
 
     @doc("Exports RDB file(s)")
     @action("export")
+    @example("examples/RedisEnterpriseDatabasesExport.json", "RedisEnterpriseDatabases_Export")
     exportRDB is ArmResourceActionEmptyAsync<Database, ExportParameters>;
 
     @doc("Forcibly unlinks one or more databases from a replication group")
+    @example("examples/RedisEnterpriseDatabasesForceUnlink.json", "RedisEnterpriseDatabases_ForceUnlink")
     forceUnlink is ArmResourceActionEmptyAsync<Database, ForceUnlinkParameters>;
 
     @doc("Imports RDB file(s)")
     @action("import")
     @friendlyName("import")
+    @example("examples/RedisEnterpriseDatabasesImport.json", "RedisEnterpriseDatabases_Import")
     importRDB is ArmResourceActionEmptyAsync<Database, ImportParameters>;
 
     @doc("Retrieves the access keys for the RedisEnterprise database")
     @autoRoute
     @armResourceAction(Database)
     @post
+    @example("examples/RedisEnterpriseDatabasesLisKeys.json", "RedisEnterpriseDatabases_ListKeys")
     op listKeys(
       ...ResourceInstanceParameters<Database>
     ): ArmResponse<AccessKeys> | ErrorResponse;
 
     @doc("Regenerates an access key for the RedisEnterprise database")
+    @example("examples/RedisEnterpriseDatabasesRegenerateKey.json","RedisEnterpriseDatabases_RegenerateKey")
     regenerateKey is ArmResourceActionAsync<Database, RegenerateKeyParameters, AccessKeys>;
   }
 
@@ -391,18 +407,23 @@ namespace Microsoft.Cache {
   interface PrivateEndpointConnections {
 
     @doc("Lists all private endpoint connections in a RedisEnterprise cluster.")
+    @example("examples/RedisEnterprisePrivateEndpointConnectionsListByCluster.json", "RedisEnterprisePrivateEndpointConnections_ListByCluster")
     listByCluster is ArmResourceListByParent<PrivateEndpointConnection>;
 
     @doc("Gets information about a private endpoint connection in a RedisEnterprise cluster")
+    @example("examples/RedisEnterprisePrivateEndpointConnectionsGet.json", "RedisEnterprisePrivateEndpointConnections_Get")
     get is ArmResourceRead<PrivateEndpointConnection>;
     
     @doc("Creates a private endpoint connection")
+    @example("examples/RedisEnterprisePrivateEndpointConnectionsCreateOrUpdate.json", "RedisEnterprisePrivateEndpointConnections_CreateOrUpdate")
     create is ArmResourceCreateOrUpdateAsync<PrivateEndpointConnection>;
 
     @doc("Updates a private endpoint connection")
+    @example("examples/RedisEnterprisePrivateEndpointConnectionsUpdate.json", "RedisEnterprisePrivateEndpointConnections_Update")
     update is ArmResourcePatchAsync<PrivateEndpointConnection, PrivateEndpointConnection>;
 
     @doc("Deletes a private endpoint connection")
+    @example("examples/RedisEnterprisePrivateEndpointConnectionsDelete.json", "RedisEnterprisePrivateEndpointConnections_Delete")
     delete is ArmResourceDeleteAsync<PrivateEndpointConnection>;
   }
 
@@ -411,6 +432,7 @@ namespace Microsoft.Cache {
   interface PrivateLinkResources {
 
     @doc("Lists all private link resources in a RedisEnterprise cluster.")
+    //@example("examples/RedisEnterprisePrivateLinks_ListByCluster.json", )
     listByCluster is ArmResourceListByParent<PrivateLink>;
   }
 

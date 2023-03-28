@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RedisEnterpriseManagementClient",
-    "version": "2022-01-01",
+    "version": "2023-03-01-preview",
     "description": "REST API for managing Redis Enterprise resources in Azure.",
     "x-typespec-generated": [
       {
@@ -121,6 +121,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RedisEnterprise_List": {
+            "$ref": "examples/RedisEnterpriseList.json"
+          }
         }
       }
     },
@@ -158,6 +163,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RedisEnterprise_ListByResourceGroup": {
+            "$ref": "examples/RedisEnterpriseListByResourceGroup.json"
+          }
         }
       }
     },
@@ -200,6 +210,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterprise_Get": {
+            "$ref": "examples/RedisEnterpriseGet.json"
           }
         }
       },
@@ -263,6 +278,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterprise_CreateOrUpdate": {
+            "$ref": "examples/RedisEnterpriseCreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -333,6 +353,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RedisEnterprise_Update": {
+            "$ref": "examples/RedisEnterpriseUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -392,6 +417,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RedisEnterprise_Delete": {
+            "$ref": "examples/RedisEnterpriseDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -441,6 +471,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_ListByCluster": {
+            "$ref": "examples/RedisEnterpriseDatabasesListByCluster.json"
+          }
         }
       }
     },
@@ -492,6 +527,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_Get": {
+            "$ref": "examples/RedisEnterpriseDatabasesGet.json"
           }
         }
       },
@@ -564,6 +604,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_Create": {
+            "$ref": "examples/RedisEnterpriseDatabasesCreate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -643,6 +688,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_Update": {
+            "$ref": "examples/RedisEnterpriseDatabasesUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -709,6 +759,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_Delete": {
+            "$ref": "examples/RedisEnterpriseDatabasesDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -783,6 +838,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_Export": {
+            "$ref": "examples/RedisEnterpriseDatabasesExport.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -850,6 +910,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_ForceUnlink": {
+            "$ref": "examples/RedisEnterpriseDatabasesForceUnlink.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -921,6 +986,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_Import": {
+            "$ref": "examples/RedisEnterpriseDatabasesImport.json"
+          }
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -972,6 +1042,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_ListKeys": {
+            "$ref": "examples/RedisEnterpriseDatabasesLisKeys.json"
           }
         }
       }
@@ -1049,6 +1124,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RedisEnterpriseDatabases_RegenerateKey": {
+            "$ref": "examples/RedisEnterpriseDatabasesRegenerateKey.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1098,6 +1178,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RedisEnterprisePrivateEndpointConnections_ListByCluster": {
+            "$ref": "examples/RedisEnterprisePrivateEndpointConnectionsListByCluster.json"
+          }
         }
       }
     },
@@ -1149,6 +1234,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterprisePrivateEndpointConnections_Get": {
+            "$ref": "examples/RedisEnterprisePrivateEndpointConnectionsGet.json"
           }
         }
       },
@@ -1221,6 +1311,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterprisePrivateEndpointConnections_CreateOrUpdate": {
+            "$ref": "examples/RedisEnterprisePrivateEndpointConnectionsCreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1300,6 +1395,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "RedisEnterprisePrivateEndpointConnections_Update": {
+            "$ref": "examples/RedisEnterprisePrivateEndpointConnectionsUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1366,6 +1466,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "RedisEnterprisePrivateEndpointConnections_Delete": {
+            "$ref": "examples/RedisEnterprisePrivateEndpointConnectionsDelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
