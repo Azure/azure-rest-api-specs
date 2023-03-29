@@ -57,6 +57,7 @@ input-file:
 - Microsoft.Billing/stable/2023-04-01/reservation.json
 - Microsoft.Billing/stable/2023-04-01/transaction.json
 - Microsoft.Billing/stable/2023-04-01/types.json
+- Microsoft.Billing/stable/2023-04-01/department.json
 ```
 
 ### Tag: package-2021-10
