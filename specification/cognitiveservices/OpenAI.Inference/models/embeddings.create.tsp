@@ -4,18 +4,21 @@ import "@typespec/http";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 
-@doc("Schema to create a prompt completion from a deployment")
-@summary("This is EmbeddingsOptions's summary")
+@doc("""
+The configuration information for an embeddings request.
+Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+recommendations, and other similar scenarios.
+""")
 model EmbeddingsOptions {
-    @doc("The ID of the end-user, for use in tracking and rate-limiting.")
+    @doc("""
+    An identifier for the caller or end user of the operation. This may be used for tracking
+    or rate-limiting purposes.
+    """)
+    @projectedName("json", "user")
     user?: string;
 
-    @doc("input type of embedding search to use")
-    @projectedName("json", "input_type")
-    inputType?: string;
-
     @doc("""
-    The model name to provide as part of this completions request.
+    The model name to provide as part of this embeddings request.
     Not applicable to Azure OpenAI, where deployment information should be included in the Azure
     resource URI that's connected to.
     """)
@@ -34,31 +37,38 @@ model EmbeddingsOptions {
     input: string | string[];
 };
 
-@doc("Expected response schema to embeddings request")
+@doc("""
+Representation of the response data from an embeddings request.
+Embeddings measure the relatedness of text strings and are commonly used for search, clustering,
+recommendations, and other similar scenarios.
+""")
 model Embeddings {
-    @doc("Embedding values for the prompts submitted in the request")
+    @doc("Embedding values for the prompts submitted in the request.")
     data: EmbeddingItem[],
 
-    @doc("Usage counts for tokens input using the embeddings API")
+    @doc("Usage counts for tokens input using the embeddings API.")
     usage: EmbeddingsUsage;
 }
 
-@doc("Expected response schema to embeddings object list item request")
+@doc("Representation of a single embeddings relatedness comparison.")
 model EmbeddingItem {
-    @doc("List of embeddings value for the input prompt. These represents a measurement of releated of text strings")
+    @doc("""
+    List of embeddings value for the input prompt. These represent a measurement of the
+    vector-based relatedness of the provided input.
+    """)
     embedding: float32[];
 
-    @doc("Index of the prompt to which the EmbeddingItem corresponds")
+    @doc("Index of the prompt to which the EmbeddingItem corresponds.")
     index: int32;
 }
 
-@doc("Measurment of the amount of tokens used in this request and response")
+@doc("Measurement of the amount of tokens used in this request and response.")
 model EmbeddingsUsage {
-    @doc("Number of tokens sent in the original request")
+    @doc("Number of tokens sent in the original request.")
     @projectedName("json", "prompt_tokens")
     promptTokens: int32,
 
-    @doc("Total number of tokens transacted in this request/response")
+    @doc("Total number of tokens transacted in this request/response.")
     @projectedName("json", "total_tokens")
     totalTokens: int32
 }

@@ -44,7 +44,7 @@ model ChatCompletionsOptions {
     Assistant roles.
     """)
     @projectedName("json", "messages")
-    messages?: ChatMessage[];
+    messages: ChatMessage[];
 
     @doc("The maximum number of tokens to generate.")
     @projectedName("json", "max_tokens")
@@ -83,7 +83,10 @@ model ChatCompletionsOptions {
     @projectedName("csharp", "InternalStringKeyedTokenSelectionBiases")
     logitBias?: Record<int32>;
 
-    @doc("The ID of the end-user, for use in tracking and rate-limiting.")
+    @doc("""
+    An identifier for the caller or end user of the operation. This may be used for tracking
+    or rate-limiting purposes.
+    """)
     @projectedName("json", "user")
     user?: string;
 

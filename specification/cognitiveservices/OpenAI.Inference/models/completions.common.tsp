@@ -23,21 +23,21 @@ enum CompletionsFinishReason {
     Completions are not yet finished. This generally indicates a streaming operation is still in
     progress.
     """)
-    @projectedName("json", "")
-    None,
+    // Note: this is a representation of an explicitly serialized null for finish_reason
+    none,
 
     @doc("Completions ended normally and reached its end of token generation.")
     @projectedName("json", "stop")
-    Stopped,
+    stopped,
 
     @doc("Completions exhausted available token limits before generation could complete.")
     @projectedName("json", "length")
-    TokenLimitReached,
+    tokenLimitReached,
 
     @doc("""
     Completions generated a response that was identified as potentially sensitive per content
     moderation policies.
     """)
     @projectedName("json", "content_filter")
-    ContentFiltered
+    contentFiltered
 }
