@@ -40,7 +40,10 @@
           ]
         },
         "backupPolicy": {
-          "type": "Continuous"
+          "type": "Continuous",
+          "continuousModeProperties": {
+            "tier": "Continuous30Days"
+          }
         },
         "consistencyPolicy": {
           "defaultConsistencyLevel": "BoundedStaleness",
@@ -112,6 +115,12 @@
               "failoverPriority": 0
             }
           ],
+          "backupPolicy": {
+            "type": "Continuous",
+            "continuousModeProperties": {
+              "tier": "Continuous30Days"
+            }
+          },
           "enableFreeTier": false,
           "apiProperties": {},
           "enableAnalyticalStorage": false,
