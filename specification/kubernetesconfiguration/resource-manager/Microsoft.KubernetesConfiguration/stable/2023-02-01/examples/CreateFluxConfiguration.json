@@ -29,9 +29,18 @@
             "timeoutInSeconds": 600,
             "syncIntervalInSeconds": 600,
             "wait": true,
-            "substitute": {
-              "cluster_env": "prod",
-              "replica_count": 2
+            "postBuild": {
+              "substitute": {
+                "cluster_env": "prod",
+                "replica_count": "2"
+              },
+              "substituteFrom": [
+                {
+                  "kind": "ConfigMap",
+                  "name": "cluster-test",
+                  "optional": true
+                }
+              ]
             }
           },
           "srs-kustomization2": {
@@ -44,18 +53,20 @@
             "retryIntervalInSeconds": 600,
             "prune": false,
             "wait": false,
-            "substituteFrom":[
-              {
-                "kind": "ConfigMap",
-                "name": "cluster-values",
-                "optional": true
-              },
-              {
-                "kind": "Secret",
-                "name": "secret-name",
-                "optional": false
-              }
-            ]
+            "postBuild": {
+              "substituteFrom": [
+                {
+                  "kind": "ConfigMap",
+                  "name": "cluster-values",
+                  "optional": true
+                },
+                {
+                  "kind": "Secret",
+                  "name": "secret-name",
+                  "optional": false
+                }
+              ]
+            }
           }
         },
         "waitForReconciliation": true,
@@ -107,9 +118,18 @@
               "timeoutInSeconds": 600,
               "syncIntervalInSeconds": 600,
               "wait": true,
-              "substitute": {
-                "cluster_env": "prod",
-                "replica_count": 2
+              "postBuild": {
+                "substitute": {
+                  "cluster_env": "prod",
+                  "replica_count": "2"
+                },
+                "substituteFrom": [
+                  {
+                    "kind": "ConfigMap",
+                    "name": "cluster-test",
+                    "optional": true
+                  }
+                ]
               }
             },
             "srs-kustomization2": {
@@ -123,18 +143,20 @@
               "retryIntervalInSeconds": 600,
               "prune": false,
               "wait": false,
-              "substituteFrom":[
-                {
-                  "kind": "ConfigMap",
-                  "name": "cluster-values",
-                  "optional": true
-                },
-                {
-                  "kind": "Secret",
-                  "name": "secret-name",
-                  "optional": false
-                }
-              ]
+              "postBuild": {
+                "substituteFrom": [
+                  {
+                    "kind": "ConfigMap",
+                    "name": "cluster-values",
+                    "optional": true
+                  },
+                  {
+                    "kind": "Secret",
+                    "name": "secret-name",
+                    "optional": false
+                  }
+                ]
+              }
             }
           },
           "statuses": [
@@ -259,9 +281,18 @@
               "timeoutInSeconds": 600,
               "syncIntervalInSeconds": 600,
               "wait": true,
-              "substitute": {
-                "cluster_env": "prod",
-                "replica_count": 2
+              "postBuild": {
+                "substitute": {
+                  "cluster_env": "prod",
+                  "replica_count": "2"
+                },
+                "substituteFrom": [
+                  {
+                    "kind": "ConfigMap",
+                    "name": "cluster-test",
+                    "optional": true
+                  }
+                ]
               }
             },
             "srs-kustomization2": {
@@ -275,18 +306,20 @@
               "retryIntervalInSeconds": 600,
               "prune": false,
               "wait": false,
-              "substituteFrom":[
-                {
-                  "kind": "ConfigMap",
-                  "name": "cluster-values",
-                  "optional": true
-                },
-                {
-                  "kind": "Secret",
-                  "name": "secret-name",
-                  "optional": false
-                }
-              ]
+              "postBuild": {
+                "substituteFrom": [
+                  {
+                    "kind": "ConfigMap",
+                    "name": "cluster-values",
+                    "optional": true
+                  },
+                  {
+                    "kind": "Secret",
+                    "name": "secret-name",
+                    "optional": false
+                  }
+                ]
+              }
             }
           },
           "statuses": [
