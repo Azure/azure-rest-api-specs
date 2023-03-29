@@ -35,6 +35,29 @@
       },
       "x-ms-azure-resource": true
     },
+    "ResourceWithoutSystemData": {
+      "title": "Resource",
+      "description": "Common fields that are returned in the response for all Azure Resource Manager resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\""
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
+        }
+      },
+      "x-ms-azure-resource": true
+    },
     "AzureEntityResource": {
       "x-ms-client-name": "AzureEntityResource",
       "title": "Entity Resource",
@@ -95,6 +118,51 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "TrackedResourceWithoutSystemData": {
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithoutSystemData"
+        }
+      ]
+    },
+    "ProxyResourceWithoutSystemData": {
+      "title": "Proxy Resource",
+      "description": "The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithoutSystemData"
         }
       ]
     },
