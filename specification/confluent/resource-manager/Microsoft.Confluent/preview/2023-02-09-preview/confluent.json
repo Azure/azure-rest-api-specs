@@ -1535,11 +1535,11 @@
         }
       }
     },
-    "Access_InviteUserAccountModel": {
-      "description": "Invite User Account model",
+    "Access_InvitedUserDetails": {
+      "description": "Details of the user being invited",
       "type": "object",
       "properties": {
-        "email": {
+        "invitedEmail": {
           "description": "UPN/Email of the user who is being invited",
           "type": "string"
         },
@@ -1550,6 +1550,28 @@
             "AUTH_TYPE_LOCAL",
             "AUTH_TYPE_SSO"
           ]
+        }
+      }
+    },
+    "Access_InviteUserAccountModel": {
+      "description": "Invite User Account model",
+      "type": "object",
+      "properties": {
+        "organizationId": {
+          "description": "Id of the organization",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email of the logged in user",
+          "type": "string"
+        },
+        "upn": {
+          "description": "Upn of the logged in user",
+          "type": "string"
+        },
+        "invitedUserDetails": {
+          "description": "Details of the user who is being invited",
+          "$ref": "#/definitions/Access_InvitedUserDetails"
         }
       }
     }
