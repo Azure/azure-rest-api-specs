@@ -472,19 +472,11 @@
     "PartialManagedServiceIdentity": {
       "description": "Managed service identity (system assigned and/or user assigned identities)",
       "type": "object",
-      "properties": {
-        "type": {
-          "description": "Managed service identity (system assigned and/or user assigned identities)",
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentityType"
-        },
-        "userAssignedIdentities": {
-          "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/PartialUserAssignedIdentity"
-          }
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity"
         }
-      },
+      ],
       "additionalProperties": false
     },
     "PartialRegistry": {
@@ -496,23 +488,6 @@
       "description": "Strictly used in update requests.",
       "type": "object",
       "properties": {
-        "identity": {
-          "description": "Managed service identity (system assigned and/or user assigned identities)",
-          "$ref": "#/definitions/PartialManagedServiceIdentity"
-        },
-        "kind": {
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type.",
-          "type": "string"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Additional attributes of the entity.",
-          "$ref": "#/definitions/PartialRegistry"
-        },
-        "sku": {
-          "description": "Sku details required for ARM contract for Autoscaling.",
-          "$ref": "#/definitions/PartialSku"
-        },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
@@ -552,11 +527,7 @@
       },
       "additionalProperties": false
     },
-    "PartialUserAssignedIdentity": {
-      "type": "object",
-      "additionalProperties": false
-    },
-    "PrivateEndpointConnectionARMResource": {
+    "PrivateEndpointConnection": {
       "description": "Private endpoint connection definition.",
       "type": "object",
       "properties": {
@@ -616,12 +587,12 @@
     "PrivateEndpointResource": {
       "description": "The PE network resource that is linked to this PE connection.",
       "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpoint"
+        }
+      ],
       "properties": {
-        "id": {
-          "description": "e.g. /subscriptions/{networkSubscriptionId}/resourceGroups/{rgName}/providers/Microsoft.Network/privateEndpoints/{privateEndpointName}",
-          "type": "string",
-          "x-nullable": true
-        },
         "subnetArmId": {
           "description": "The subnetId that the private endpoint is connected to.",
           "type": "string",
@@ -679,7 +650,7 @@
           "description": "Private endpoint connections info used for pending connections in private link portal",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateEndpointConnectionARMResource"
+            "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "x-nullable": true
         },
