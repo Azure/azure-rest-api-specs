@@ -1,43 +1,52 @@
 import "../common/machinePropertiesInternal.cadl";
 
 
-
+@doc("replica type")
 enum ReplicaType {
     "Unknown", "DatabaseReplica", "AvailabilityGroupReplica"
 }
 
+@doc("replica type")
 enum ReplicaState {
     "Unknown", "Primary", "Secondary"
 }
 
+@doc("replica type")
 enum ReplicaSyncStatus {
     "Unknown", "Synchronized", "Unsynchronized"
 }
 
+@doc("replica type")
 enum ReplicaCommitMode {
     "Unknown", "Synchronous", "Asynchronous"
 }
 
+@doc("replica read mode ")
 enum ReplicaReadMode {
     "Unknown", "None", "ReadOnly", "ReadWrite"
 }
 
+@doc("replica seed mode")
 enum ReplicaSeedMode {
     "Unknown", "Manual", "Automatic"
 }
 
+@doc("file type")
 enum FileType {
     "Rows", "Log", "Filestream", "NotSupported", "Fulltext"
 }
 
+@doc("sql fci role ")
 enum SqlMachineOverviewFciRole {
     "Unknown", "NotApplicable", "ActiveNode", "PossibleOwnerNode"
 }
 
+@doc("fci instance state ")
 enum FCIInstanceState {
     "Unknown", "Inherited", "Initializing", "Online", "Offline", "Failed", "Pending", "OnlinePending", "OfflinePending"
 }
 
+@doc("sql server statsu")
 enum SqlServerStatus {
     "Unknown", "ContinuePending", "Paused", "PausePending", "Running", "StartPending", "Stopped", "StopPending"
 }

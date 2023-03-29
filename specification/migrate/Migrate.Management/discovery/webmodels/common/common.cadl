@@ -33,6 +33,7 @@ model SiteAgentProperties {
 @knownValues(HealthErrorDetailsSource)
 scalar MicrosoftAzureFDSWebRoleHealthErrorDetailsSource extends string;
 
+@doc("HealthError Details Source")
 enum HealthErrorDetailsSource {
   RefreshFabricLayout,
   RefreshFabricLayoutGuest,
@@ -89,7 +90,7 @@ model SpringBootDiscovery {
 //   @doc("Gets or sets the Architecture of the operating system.")
 //   osArchitecture?: string;
 // }
-
+@doc("DependencyMap DiscoveryScope Status")
 enum DependencyMapDiscoveryScopeStatus {
   "DiscoverySucceededAtleastOnce",
   "DiscoveryFailed",
@@ -210,7 +211,7 @@ It is discovered by the agent from the list of credentials.
   @visibility("read")
   hydratedRunAsAccountId?: string;
 }
-
+@doc("SQLDiscoveryScope Status")
 enum SQLDiscoveryScopeStatus {
   "DiscoverySucceededAtleastOnce",
   "DiscoveryFailed",
@@ -222,6 +223,7 @@ enum SQLDiscoveryScopeStatus {
   "DiscoverySucceeded",
 }
 
+@doc("SQLDiscovery SqlMetadataDiscoveryPipe")
 enum SQLDiscoverySqlMetadataDiscoveryPipe {
   "Unknown",
   "VMware",
@@ -231,6 +233,7 @@ enum SQLDiscoverySqlMetadataDiscoveryPipe {
   "Other",
 }
 
+@doc("Oracle DiscoveryScope Status")
 enum OracleDiscoveryScopeStatus {
   "DiscoverySucceededAtleastOnce",
   "DiscoveryFailed",
@@ -256,6 +259,8 @@ model OperatingSystem {
   @doc("Gets or sets the Architecture of the operating system.")
   osArchitecture?: string;
 }
+
+@doc("Static DiscoveryScopeStatus")
 enum StaticDiscoveryScopeStatus {
   "DiscoverySucceededAtleastOnce",
   "DiscoveryFailed",
@@ -286,6 +291,7 @@ model SQLDiscovery {
   discoveryScopeStatus?: SQLDiscoveryScopeStatus;
 }
 
+@doc("Application Discovery Scope Status")
 enum ApplicationDiscoveryScopeStatus {
   "DiscoverySucceededAtleastOnce",
   "DiscoveryFailed",
@@ -448,6 +454,7 @@ model VersionedV202001ExportMachineErrorsRequestExportMachineErrorsProperties {
   discoveryScope?: VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScope;
 }
 
+@doc("ExportMachineErrorsProperties")
 enum VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScopeKnownValues {
   "AppsAndRoles",
   "DependencyMap",
@@ -461,6 +468,7 @@ enum VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDisc
 scalar VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScope
   extends string;
 
+@doc("PrivateEndpointConnectionProperties")  
 enum PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues {
   "Accepted",
   "InProgress",
@@ -471,6 +479,7 @@ enum PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues {
 @knownValues(PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues)
 scalar PrivateEndpointConnectionPropertiesV2ProvisioningState extends string;
 
+@doc("PrivateLinkServiceConnectionState")
 enum PrivateLinkServiceConnectionStateStatusKnownValues {
   "Approved",
   "Pending",
@@ -576,6 +585,7 @@ model PrivateLinkServiceConnectionState {
   actionsRequired?: string;
 }
 
+@doc("PublicNetworkAccess")
 enum V202007MasterSitePropertiesPublicNetworkAccess {
   "NotSpecified",
   "Enabled",
@@ -827,6 +837,7 @@ model SiteHealthSummaryCollection {
   nextLink?: string;
 }
 
+@doc("LayoutUpdate Sources")
 enum LayoutUpdateSources {
   "RefreshFabricLayout",
   "RefreshFabricLayoutGuest",
@@ -880,6 +891,7 @@ model SiteHealthSummary {
   fabricLayoutUpdateSources?: SiteHealthSummaryFabricLayoutUpdateSourcesItem[];
 }
 
+@doc("SiteHealthSummary FabricLayout UpdateSources")
 enum SiteHealthSummaryFabricLayoutUpdateSourcesItemKnownValues {
   "RefreshFabricLayout",
   "RefreshFabricLayoutGuest",
@@ -1009,6 +1021,8 @@ to the appliance.
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
+
+@doc("SqlSiteProperties DiscoveryScenario")
 enum SqlSitePropertiesDiscoveryScenarioKnownValues {
   "Migrate",
   "DR",
@@ -1096,6 +1110,8 @@ distributed AG.
   @visibility("read")
   provisioningState?: ProvisioningState;
 }
+
+@doc("AvailabilityGroupType")
 enum SqlAvailabilityGroupPropertiesAvailabilityGroupType {
   "Unknown",
   "Traditional",
@@ -1148,6 +1164,7 @@ in case AG is of type DAG.
   sqlAvailabilityGroupReplicaInfo?: SqlAvailabilityGroupReplicaInfo;
 }
 
+@doc("ReplicaType")
 enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaTypeKnownValues {
   "Unknown",
   "DatabaseReplica",
@@ -1157,6 +1174,7 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaTypeKnownValues 
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaType
   extends string;
 
+@doc("ReplicaState")
 enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaStateKnownValues {
   "Unknown",
   "Primary",
@@ -1165,6 +1183,7 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaStateKnownValues
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaState
   extends string;
 
+@doc("ReplicaSyncStatus")  
 enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSyncStatusKnownValues {
   "Unknown",
   "Synchronized",
@@ -1173,6 +1192,7 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSyncStatusKnownV
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSyncStatus
   extends string;
 
+@doc("ReplicaCommitMode")  
 enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaCommitModeKnownValues {
   "Unknown",
   "Synchronous",
@@ -1180,6 +1200,8 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaCommitModeKnownV
 }
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaCommitMode
   extends string;
+
+@doc("ReplicaReadMode")
 enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaReadModeKnownValues {
   "Unknown",
   "None",
@@ -1189,6 +1211,7 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaReadModeKnownVal
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaReadMode
   extends string;
 
+@doc("ReplicaSeedMode")
 enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSeedModeKnownValues {
   "Unknown",
   "Manual",
@@ -1247,6 +1270,7 @@ a value \"true\".
   availabilityGroupName?: string;
 }
 
+@doc("Overview Replica State")
 enum SqlAvailabilityReplicaOverviewReplicaStateKnownValues {
   "Unknown",
   "Primary",
@@ -1277,6 +1301,7 @@ to the appliance.
   provisioningState?: ProvisioningState;
 }
 
+@doc("Discovery Scenario")
 enum WebAppSitePropertiesDiscoveryScenarioKnownValues {
   "Migrate",
   "DR",
@@ -2417,6 +2442,8 @@ model MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStat
 )
 scalar MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatus
   extends string;
+
+@doc("PrivateLinkServiceConnectionStateStatus")
 enum MicrosoftAzureMigratePrivateEndpointModelsPrivateLinkServiceConnectionStateStatusValues {
   "Approved",
   "Pending",
@@ -2438,5 +2465,6 @@ model ServerSoftwareInventory {
   name?: string;
 
   @doc("Gets or sets software inventory properties.")
+  @OpenAPI.extension("x-ms-client-flatten", true)
   properties?: MachineSoftwareInventoryProperties;
 }
