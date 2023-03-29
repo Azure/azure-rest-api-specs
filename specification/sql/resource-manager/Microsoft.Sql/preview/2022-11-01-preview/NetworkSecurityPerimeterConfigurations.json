@@ -138,7 +138,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 OnlyOneAssociationPerServer - A SQL Server may only be associated with one NSP\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 AssociationNotFound - This SQL Server is not associated with any NSP\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
+            "description": "*** Error Responses: ***\n\n * 400 OnlyOneAssociationPerServer - A SQL Server may only be associated with one NSP\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 404 AssociationNotFound - This SQL Server is not associated with any NSP\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 429 SubscriptionTooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 429 SubscriptionTooManyCreateUpdateRequests - Requests beyond max requests that can be processed by available resources.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources."
           },
           "202": {
             "description": "Reconcile NSP Configuration operation accepted"
@@ -212,7 +212,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NSPProvisioningIssue"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -311,7 +312,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NSPConfigAccessRule"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
