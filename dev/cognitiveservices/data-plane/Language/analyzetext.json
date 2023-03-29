@@ -1704,16 +1704,10 @@
       "description": "Represents the confidence scores across all sentiment classes: positive and negative."
     },
     "EntityList": {
-      "description": "(Optional) describes the entity categories to return",
+      "description": "(Optional) describes the entity categories.",
       "items": {
         "type": "string",
-        "x-ms-enum": {
-          "name": "EntityCategory",
-          "modelAsString": true
-        },
         "enum": [
-          "Default",
-          "All",
           "Address",
           "Numeric",
           "Age",
@@ -1747,10 +1741,11 @@
           "Location",
           "GPE",
           "City",
-          "Stage",
+          "State",
           "CountryRegion",
           "Continent",
           "Structural",
+          "Airport",
           "Geological",
           "Organization",
           "MedicalOrganization",
@@ -1765,6 +1760,221 @@
           "Product",
           "ComputingProduct",
           "Skill"
+        ]
+      },
+      "x-ms-enum": {
+        "name": "EntityCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Address",
+            "description": "Specific street-level mentions of locations: house/building numbers, streets, avenues, highways, intersections referenced by name."
+          },
+          {
+            "value": "Numeric",
+            "description": "Numeric values, including digits and number words."
+          },
+          {
+            "value": "Age",
+            "description": "Age-related values."
+          },
+          {
+            "value": "Currency",
+            "description": "Currency-related values."
+          },
+          {
+            "value": "Number",
+            "description": "Numbers without a unit"
+          },
+          {
+            "value": "NumberRange",
+            "description": "Range of Numbers"
+          },
+          {
+            "value": "Percentage",
+            "description": "Percentage-related values."
+          },
+          {
+            "value": "Ordinal",
+            "description": "Ordinal numbers."
+          },
+          {
+            "value": "Temperature",
+            "description": "Temperature-related values."
+          },
+          {
+            "value": "Dimension",
+            "description": "Dimension of measurements"
+          },
+          {
+            "value": "Length",
+            "description": "Length of an object."
+          },
+          {
+            "value": "Weight",
+            "description": "Weight of an object."
+          },
+          {
+            "value": "Height",
+            "description": "Height of an object."
+          },
+          {
+            "value": "Speed",
+            "description": "Speed of an object."
+          },
+          {
+            "value": "Area",
+            "description": "Area of an object."
+          },
+          {
+            "value": "Volume",
+            "description": "Volume of an object."
+          },
+          {
+            "value": "Information",
+            "description": "Unit of measure for digital information."
+          },
+          {
+            "value": "Temporal",
+            "description": "Items relating to time."
+          },
+          {
+            "value": "Date",
+            "description": "Calendar dates."
+          },
+          {
+            "value": "Time",
+            "description": "Times of day."
+          },
+          {
+            "value": "DateTime",
+            "description": "Calendar dates with time."
+          },
+          {
+            "value": "DateRange",
+            "description": "Range of dates."
+          },
+          {
+            "value": "TimeRange",
+            "description": "Range of times."
+          },
+          {
+            "value": "DateTimeRange",
+            "description": "Range of date and time."
+          },
+          {
+            "value": "Duration",
+            "description": "Duration of time."
+          },
+          {
+            "value": "SetTemporal",
+            "description": "Set of time-related values."
+          },
+          {
+            "value": "Event",
+            "description": "Social, sports, business, political, educational, natural, historical, criminal, violent, legal, military events with a timed period."
+          },
+          {
+            "value": "SocialEvent",
+            "description": "Social event-related values."
+          },
+          {
+            "value": "CulturalEvent",
+            "description": "Cultural event-related values."
+          },
+          {
+            "value": "NaturalEvent",
+            "description": "Natural event-related values."
+          },
+          {
+            "value": "Location",
+            "description": "Particular point or place in physical space."
+          },
+          {
+            "value": "GPE",
+            "description": "Cities, countries/regions, states.",
+            "name": "GeoPoliticalEntity"
+          },
+          {
+            "value": "City",
+            "description": "City-related values."
+          },
+          {
+            "value": "State",
+            "description": "State-related values."
+          },
+          {
+            "value": "CountryRegion",
+            "description": "Country or region-related values."
+          },
+          {
+            "value": "Continent",
+            "description": "Continent-related values."
+          },
+          {
+            "value": "Structural",
+            "description": "Manmade structures."
+          },
+          {
+            "value": "Airport",
+            "description": "Airports."
+          },
+          {
+            "value": "Geological",
+            "description": " Geographic and natural features such as rivers, oceans, and deserts."
+          },
+          {
+            "value": "Organization",
+            "description": "Corporations, agencies, and other groups of people defined by some established organizational structure. These labels can include companies, political parties/movements, musical bands, sport clubs, government bodies, and public organizations. Nationalities or religions are not ORGANIZATION."
+          },
+          {
+            "value": "MedicalOrganization",
+            "description": "Medical companies and groups."
+          },
+          {
+            "value": "StockExchange",
+            "description": "Stock exchange groups."
+          },
+          {
+            "value": "SportsOrganization",
+            "description": "Sports-related organizations."
+          },
+          {
+            "value": "Person",
+            "description": "First, last, and middle names, names of fictional characters, and aliases. Titles, such as “Mr.” or “President”, are not considered part of the named entity."
+          },
+          {
+            "value": "PersonType",
+            "description": "Human roles classified by a group membership."
+          },
+          {
+            "value": "Email",
+            "description": "Email addresses."
+          },
+          {
+            "value": "URL",
+            "description": "URLs to websites."
+          },
+          {
+            "value": "IP",
+            "description": "network IP addresses."
+          },
+          {
+            "value": "PhoneNumber",
+            "description": "Phone numbers (US and EU phone numbers only)."
+          },
+          {
+            "value": "Product",
+            "description": "Single or group of commercial, consumable objects, electronics, vehicles, food groups."
+          },
+          {
+            "value": "ComputingProduct",
+            "description": "Computing products."
+          },
+          {
+            "value": "Skill",
+            "description": "A capability, skill, or expertise."
+          }
         ]
       },
       "type": "array",
@@ -1794,7 +2004,7 @@
       ]
     },
     "MatchLongestEntityPolicyType": {
-      "description": "Represents the Match longest overlap policy.",
+      "description": "Represents the Match longest overlap policy. No overlapping entities as far as it is possible. 1. If there are overlapping entities, the longest one will be returned. 2. If the set of characters predicted for 2 or more entities are exactly the same, select the entity that has the higher confidence score.3. If the entity scores are identical, return all entities that are still present after applying the previous rules. 3. If there is partial overlap (as in Hello Text Analytics) follow the above steps starting from 1.  ",
       "allOf": [
         {
           "$ref": "#/definitions/BaseEntityOverlapPolicy"
@@ -1804,7 +2014,7 @@
       "x-ms-discriminator-value": "matchLongest"
     },
     "AllowOverlapEntityPolicyType": {
-      "description": "Represents the allow overlap policy.",
+      "description": "Represents the allow overlap policy. Will apply no post processing logic for the entities. Whatever the model predicts is what will be returned to the user. This allows the user to get a full view of every single model's possible values and apply their own custom logic on entity selection",
       "allOf": [
         {
           "$ref": "#/definitions/BaseEntityOverlapPolicy"
@@ -1821,12 +2031,15 @@
           "$ref": "common.json#/definitions/StringIndexType"
         },
         "inclusionList": {
+          "description": "(Optional) request parameter that limits the output to the requested entity types included in this list. We will apply inclusionList before exclusionList",
           "$ref": "#/definitions/EntityList"
         },
         "exclusionList": {
+          "description": "(Optional) request parameter that filters out any entities that are included the excludeList. When a user specifies an excludeList, they cannot get a prediction returned with an entity in that list. We will apply inclusionList befreo exclusionList",
           "$ref": "#/definitions/EntityList"
         },
         "overlapPolicy": {
+          "description": "(Optional) describes the type of overlap policy to apply to the ner output.",
           "$ref": "#/definitions/BaseEntityOverlapPolicy"
         }
       },
@@ -1946,7 +2159,7 @@
           "type": "string",
           "description": "Tags are to express some similarities/affinity between entities. Entity Tags will be unique globally."
         },
-        "score": {
+        "confidenceScore": {
           "type": "number",
           "format": "double",
           "description": "Detection score between 0 and 1 of the extracted entity."
@@ -2051,7 +2264,7 @@
           "description": "The collection of entity metadata objects.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BaseMd"
+            "$ref": "#/definitions/BaseMetadata"
           }
         }
       }
@@ -2496,7 +2709,61 @@
       ],
       "x-ms-enum": {
         "name": "InformationUnit",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unspecified",
+            "description": "Unspecified information unit."
+          },
+          {
+            "value": "Bit",
+            "description": "Bit information unit. "
+          },
+          {
+            "value": "Kilobit",
+            "description": "Kilobit information unit. Usually defined as 1000 bits or 1024 bits."
+          },
+          {
+            "value": "Megabit",
+            "description": "Megabit information unit. Usually defined as 1000 kilobits or 1024 kilobits."
+          },
+          {
+            "value": "Gigabit",
+            "description": "Gigabit information unit. Usually defined as 1000 megabits or 1024 megabits."
+          },
+          {
+            "value": "Terabit",
+            "description": "Terabit information unit. Usually defined as 1000 gigabits or 1024 gigabits."
+          },
+          {
+            "value": "Petabit",
+            "description": "Petabit information unit. Usually defined as 1000 terabits or 1024 terabits."
+          },
+          {
+            "value": "Byte",
+            "description": "Byte information unit. Usually defined as 8 bits are used to form a byte.."
+          },
+          {
+            "value": "Kilobyte",
+            "description": "Kilobyte information unit. Usually defnined as 1000 bytes or 1024 bytes."
+          },
+          {
+            "value": "Megabyte",
+            "description": "Megabyte information unit. Usually defined as 1000 kilobytes or 1024 kilobytes."
+          },
+          {
+            "value": "Gigabyte",
+            "description": "Gigabyte information unit. Usually defined as 1000 megabytes or 1024 megabytes."
+          },
+          {
+            "value": "Terabyte",
+            "description": "Terabyte information unit. Usually defined as 1000 gigabytes or 1024 gigabytes."
+          },
+          {
+            "value": "Petabyte",
+            "description": "Petabyte information unit. Usually defined as 1000 terabytes or 1024 terabytes."
+          }
+        ]
       },
       "description": "The information (data) Unit of measurement."
     },
@@ -2859,7 +3126,7 @@
         "maximum"
       ]
     },
-    "BaseMd": {
+    "BaseMetadata": {
       "description": "The abstract base class for entity Metadata.",
       "type": "object",
       "discriminator": "metadataKind",
@@ -2868,20 +3135,20 @@
           "description": "The entity Metadata object kind.",
           "type": "string",
           "enum": [
-            "TemporalMd",
-            "NumberMd",
-            "OrdinalMd",
-            "SpeedMd",
-            "WeightMd",
-            "LengthMd",
-            "VolumeMd",
-            "AreaMd",
-            "AgeMd",
-            "InformationMd",
-            "TemperatureMd",
-            "CurrencyMd",
-            "NumberRangeMd",
-            "TemporalSpanMd"
+            "TemporalMetadata",
+            "NumberMetadata",
+            "OrdinalMetadata",
+            "SpeedMetadata",
+            "WeightMetadata",
+            "LengthMetadata",
+            "VolumeMetadata",
+            "AreaMetadata",
+            "AgeMetadata",
+            "InformationMetadata",
+            "TemperatureMetadata",
+            "CurrencyMetadata",
+            "NumberRangeMetadata",
+            "TemporalSpanMetadata"
           ],
           "x-ms-enum": {
             "name": "MetadataKind",
@@ -2893,7 +3160,7 @@
         "metadataKind"
       ]
     },
-    "QuantityMd": {
+    "QuantityMetadata": {
       "description": "Represents Metadata for quantities.",
       "type": "object",
       "properties": {
@@ -2907,18 +3174,18 @@
         "value"
       ]
     },
-    "AgeMd": {
+    "AgeMetadata": {
       "description": "Represents the Age entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityMd"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "AgeMd",
+      "x-ms-discriminator-value": "AgeMetadata",
       "properties": {
         "unit": {
           "$ref": "#/definitions/AgeUnit"
@@ -2928,18 +3195,18 @@
         "unit"
       ]
     },
-    "VolumeMd": {
+    "VolumeMetadata": {
       "description": "Represents the volume entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityMd"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "VolumeMd",
+      "x-ms-discriminator-value": "VolumeMetadata",
       "properties": {
         "unit": {
           "$ref": "#/definitions/VolumeUnit"
@@ -2949,18 +3216,18 @@
         "unit"
       ]
     },
-    "SpeedMd": {
+    "SpeedMetadata": {
       "description": "Represents the speed entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityMd"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "SpeedMd",
+      "x-ms-discriminator-value": "SpeedMetadata",
       "properties": {
         "unit": {
           "$ref": "#/definitions/SpeedUnit"
@@ -2970,18 +3237,18 @@
         "unit"
       ]
     },
-    "AreaMd": {
+    "AreaMetadata": {
       "description": "Represents the area entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityMd"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "AreaMd",
+      "x-ms-discriminator-value": "AreaMetadata",
       "properties": {
         "unit": {
           "$ref": "#/definitions/AreaUnit"
@@ -2991,18 +3258,18 @@
         "unit"
       ]
     },
-    "LengthMd": {
+    "LengthMetadata": {
       "description": "Represents the length entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityMd"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "LengthMd",
+      "x-ms-discriminator-value": "LengthMetadata",
       "properties": {
         "unit": {
           "$ref": "#/definitions/LengthUnit"
@@ -3012,18 +3279,18 @@
         "unit"
       ]
     },
-    "InformationMd": {
+    "InformationMetadata": {
       "description": "Represents the information (data) entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityMd"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "InformationMd",
+      "x-ms-discriminator-value": "InformationMetadata",
       "properties": {
         "unit": {
           "$ref": "#/definitions/InformationUnit"
@@ -3033,18 +3300,18 @@
         "unit"
       ]
     },
-    "TemperatureMd": {
+    "TemperatureMetadata": {
       "description": "Represents the temperature entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityMd"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemperatureMd",
+      "x-ms-discriminator-value": "TemperatureMetadata",
       "properties": {
         "unit": {
           "$ref": "#/definitions/TemperatureUnit"
@@ -3054,18 +3321,18 @@
         "unit"
       ]
     },
-    "WeightMd": {
+    "WeightMetadata": {
       "description": "Represents the weight entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityMd"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "WeightMd",
+      "x-ms-discriminator-value": "WeightMetadata",
       "properties": {
         "unit": {
           "$ref": "#/definitions/WeightUnit"
@@ -3075,18 +3342,18 @@
         "unit"
       ]
     },
-    "CurrencyMd": {
+    "CurrencyMetadata": {
       "description": "Represents the currency entity Metadata model.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         },
         {
-          "$ref": "#/definitions/QuantityMd"
+          "$ref": "#/definitions/QuantityMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "CurrencyMd",
+      "x-ms-discriminator-value": "CurrencyMetadata",
       "properties": {
         "ISO4217": {
           "type": "string",
@@ -3107,15 +3374,15 @@
         "unit"
       ]
     },
-    "TemporalMd": {
+    "TemporalMetadata": {
       "description": "A Metadata for datetime entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemporalMd",
+      "x-ms-discriminator-value": "TemporalMetadata",
       "properties": {
         "timex": {
           "$ref": "#/definitions/TimeExpression"
@@ -3133,18 +3400,18 @@
         "value"
       ]
     },
-    "NumberMd": {
-      "$ref": "#/definitions/NumberMd"
+    "NumberMetadata": {
+      "$ref": "#/definitions/NumberMetadata"
     },
-    "OrdinalMd": {
+    "OrdinalMetadata": {
       "description": "A Metadata for ordinal numbers entity instances.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "OrdinalMd",
+      "x-ms-discriminator-value": "OrdinalMetadata",
       "properties": {
         "offset": {
           "type": "string",
@@ -3164,15 +3431,15 @@
         "value"
       ]
     },
-    "TemporalSpanMd": {
+    "TemporalSpanMetadata": {
       "description": "represents the Metadata of a date and/or time span.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "TemporalSpanMd",
+      "x-ms-discriminator-value": "TemporalSpanMetadata",
       "properties": {
         "begin": {
           "$ref": "#/definitions/TimeExpression"
@@ -3193,15 +3460,15 @@
         }
       }
     },
-    "NumberRangeMd": {
+    "NumberRangeMetadata": {
       "description": "represents the Metadata of numeric intervals.",
       "allOf": [
         {
-          "$ref": "#/definitions/BaseMd"
+          "$ref": "#/definitions/BaseMetadata"
         }
       ],
       "type": "object",
-      "x-ms-discriminator-value": "NumberRangeMd",
+      "x-ms-discriminator-value": "NumberRangeMetadata",
       "properties": {
         "rangeKind": {
           "$ref": "#/definitions/NumericRangeKind"
