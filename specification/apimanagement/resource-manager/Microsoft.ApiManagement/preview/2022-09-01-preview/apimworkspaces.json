@@ -41,11 +41,6 @@
         ],
         "operationId": "Workspace_ListByService",
         "description": "Lists all workspaces of the API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementListDiagnostics": {
-            "$ref": "./examples/ApiManagementListDiagnostics.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -100,11 +95,6 @@
         ],
         "operationId": "Workspace_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the workspace specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadDiagnostic": {
-            "$ref": "./examples/ApiManagementHeadDiagnostic.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -146,11 +136,6 @@
         ],
         "operationId": "Workspace_Get",
         "description": "Gets the details of the workspace specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetDiagnostic": {
-            "$ref": "./examples/ApiManagementGetDiagnostic.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -195,11 +180,6 @@
         ],
         "operationId": "Workspace_CreateOrUpdate",
         "description": "Creates a new workspace or updates an existing one.",
-        "x-ms-examples": {
-          "ApiManagementCreateDiagnostic": {
-            "$ref": "./examples/ApiManagementCreateDiagnostic.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -230,8 +210,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Workspace was successfully created.",
+          "200": {
+            "description": "Workspace successfully updated",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -242,8 +222,8 @@
               "$ref": "./definitions.json#/definitions/WorkspaceContract"
             }
           },
-          "200": {
-            "description": "Workspace successfully updated",
+          "201": {
+            "description": "Workspace was successfully created.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -268,11 +248,6 @@
         ],
         "operationId": "Workspace_Update",
         "description": "Updates the details of the workspace specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementUpdateDiagnostic": {
-            "$ref": "./examples/ApiManagementUpdateDiagnostic.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -329,11 +304,6 @@
         ],
         "operationId": "Workspace_Delete",
         "description": "Deletes the specified workspace.",
-        "x-ms-examples": {
-          "ApiManagementDeleteDiagnostic": {
-            "$ref": "./examples/ApiManagementDeleteDiagnostic.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -377,11 +347,6 @@
         ],
         "operationId": "WorkspacePolicy_ListByApi",
         "description": "Get the policy configuration at the workspace level.",
-        "x-ms-examples": {
-          "ApiManagementListApiPolicies": {
-            "$ref": "./examples/ApiManagementListApiPolicies.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -422,11 +387,6 @@
         ],
         "operationId": "WorkspacePolicy_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the workspace policy specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadApiPolicy": {
-            "$ref": "./examples/ApiManagementHeadApiPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -471,11 +431,6 @@
         ],
         "operationId": "WorkspacePolicy_Get",
         "description": "Get the policy configuration at the API level.",
-        "x-ms-examples": {
-          "ApiManagementGetApiPolicy": {
-            "$ref": "./examples/ApiManagementGetApiPolicy.json"
-          }
-        },
         "produces": [
           "application/json",
           "application/vnd.ms-azure-apim.policy+xml",
@@ -531,14 +486,6 @@
         ],
         "operationId": "WorkspacePolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the workspace.",
-        "x-ms-examples": {
-          "ApiManagementCreateApiPolicy": {
-            "$ref": "./examples/ApiManagementCreateApiPolicy.json"
-          },
-          "ApiManagementCreateApiPolicyNonXmlEncoded": {
-            "$ref": "./examples/ApiManagementCreateApiPolicyNonXmlEncoded.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -572,8 +519,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Workspace policy configuration was successfully created.",
+          "200": {
+            "description": "Workspace policy configuration of the tenant was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PolicyContract"
             },
@@ -584,8 +531,8 @@
               }
             }
           },
-          "200": {
-            "description": "Workspace policy configuration of the tenant was successfully updated.",
+          "201": {
+            "description": "Workspace policy configuration was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PolicyContract"
             },
@@ -610,11 +557,6 @@
         ],
         "operationId": "WorkspacePolicy_Delete",
         "description": "Deletes the policy configuration at the workspace.",
-        "x-ms-examples": {
-          "ApiManagementDeleteApiPolicy": {
-            "$ref": "./examples/ApiManagementDeleteApiPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -663,11 +605,6 @@
         "description": "Lists a collection of named values defined within a workspace in a service instance.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-properties"
-        },
-        "x-ms-examples": {
-          "ApiManagementListNamedValues": {
-            "$ref": "./examples/ApiManagementListNamedValues.json"
-          }
         },
         "parameters": [
           {
@@ -733,11 +670,6 @@
         ],
         "operationId": "WorkspaceNamedValue_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the named value specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadNamedValue": {
-            "$ref": "./examples/ApiManagementHeadNamedValue.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -782,14 +714,6 @@
         ],
         "operationId": "WorkspaceNamedValue_Get",
         "description": "Gets the details of the named value specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetNamedValue": {
-            "$ref": "./examples/ApiManagementGetNamedValue.json"
-          },
-          "ApiManagementGetNamedValueWithKeyVault": {
-            "$ref": "./examples/ApiManagementGetNamedValueWithKeyVault.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -837,14 +761,6 @@
         ],
         "operationId": "WorkspaceNamedValue_CreateOrUpdate",
         "description": "Creates or updates named value.",
-        "x-ms-examples": {
-          "ApiManagementCreateNamedValue": {
-            "$ref": "./examples/ApiManagementCreateNamedValue.json"
-          },
-          "ApiManagementCreateNamedValueWithKeyVault": {
-            "$ref": "./examples/ApiManagementCreateNamedValueWithKeyVault.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -878,8 +794,17 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request to create or update named value was accepted."
+          "200": {
+            "description": "Named value was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/NamedValueContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "201": {
             "description": "Named value was successfully created.",
@@ -893,17 +818,8 @@
               }
             }
           },
-          "200": {
-            "description": "Named value was successfully updated.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/NamedValueContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
+          "202": {
+            "description": "Request to create or update named value was accepted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -923,11 +839,6 @@
         ],
         "operationId": "WorkspaceNamedValue_Update",
         "description": "Updates the specific named value.",
-        "x-ms-examples": {
-          "ApiManagementUpdateNamedValue": {
-            "$ref": "./examples/ApiManagementUpdateNamedValue.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -961,9 +872,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request to create or update named value was accepted."
-          },
           "200": {
             "description": "Named value was successfully updated.",
             "schema": {
@@ -975,6 +883,9 @@
                 "type": "string"
               }
             }
+          },
+          "202": {
+            "description": "Request to create or update named value was accepted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -994,11 +905,6 @@
         ],
         "operationId": "WorkspaceNamedValue_Delete",
         "description": "Deletes specific named value from the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementDeleteNamedValue": {
-            "$ref": "./examples/ApiManagementDeleteNamedValue.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1045,11 +951,6 @@
         ],
         "operationId": "WorkspaceNamedValue_ListValue",
         "description": "Gets the secret of the named value specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementNamedValueListValue": {
-            "$ref": "./examples/ApiManagementNamedValueListValue.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1099,11 +1000,6 @@
         ],
         "operationId": "WorkspaceNamedValue_RefreshSecret",
         "description": "Refresh the secret of the named value specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementRefreshNamedValue": {
-            "$ref": "./examples/ApiManagementRefreshNamedValue.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1125,9 +1021,6 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request to refresh secret was accepted."
-          },
           "200": {
             "description": "Named value was successfully updated.",
             "schema": {
@@ -1139,6 +1032,9 @@
                 "type": "string"
               }
             }
+          },
+          "202": {
+            "description": "Request to refresh secret was accepted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1160,11 +1056,6 @@
         ],
         "operationId": "WorkspaceGlobalSchema_ListByService",
         "description": "Lists a collection of schemas registered with workspace in a service instance.",
-        "x-ms-examples": {
-          "ApiManagementListSchemas": {
-            "$ref": "./examples/ApiManagementListGlobalSchemas.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1222,11 +1113,6 @@
         ],
         "operationId": "WorkspaceGlobalSchema_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Schema specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadApi": {
-            "$ref": "./examples/ApiManagementHeadGlobalSchema.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1271,14 +1157,6 @@
         ],
         "operationId": "WorkspaceGlobalSchema_Get",
         "description": "Gets the details of the Schema specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetSchema1": {
-            "$ref": "./examples/ApiManagementGetGlobalSchema1.json"
-          },
-          "ApiManagementGetSchema2": {
-            "$ref": "./examples/ApiManagementGetGlobalSchema2.json"
-          }
-        },
         "produces": [
           "application/json"
         ],
@@ -1329,14 +1207,6 @@
         ],
         "operationId": "WorkspaceGlobalSchema_CreateOrUpdate",
         "description": "Creates new or updates existing specified Schema of the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementCreateSchema1": {
-            "$ref": "./examples/ApiManagementCreateGlobalSchema1.json"
-          },
-          "ApiManagementCreateSchema2": {
-            "$ref": "./examples/ApiManagementCreateGlobalSchema2.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1370,8 +1240,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The new Schema was successfully added.",
+          "200": {
+            "description": "The Schema details were successfully updated.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -1382,8 +1252,8 @@
               "$ref": "./definitions.json#/definitions/GlobalSchemaContract"
             }
           },
-          "200": {
-            "description": "The Schema details were successfully updated.",
+          "201": {
+            "description": "The new Schema was successfully added.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -1415,11 +1285,6 @@
         ],
         "operationId": "WorkspaceGlobalSchema_Delete",
         "description": "Deletes specific Schema.",
-        "x-ms-examples": {
-          "ApiManagementDeleteSchema": {
-            "$ref": "./examples/ApiManagementDeleteGlobalSchema.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1466,11 +1331,6 @@
         ],
         "operationId": "WorkspaceNotification_ListByService",
         "description": "Lists a collection of properties defined within a service instance.",
-        "x-ms-examples": {
-          "ApiManagementListNotifications": {
-            "$ref": "./examples/ApiManagementListNotifications.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1520,11 +1380,6 @@
         ],
         "operationId": "WorkspaceNotification_Get",
         "description": "Gets the details of the Notification specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetNotification": {
-            "$ref": "./examples/ApiManagementGetNotification.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1566,11 +1421,6 @@
         ],
         "operationId": "WorkspaceNotification_CreateOrUpdate",
         "description": "Create or Update API Management publisher notification for the workspace.",
-        "x-ms-examples": {
-          "ApiManagementCreateNotification": {
-            "$ref": "./examples/ApiManagementCreateNotification.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1617,11 +1467,6 @@
         ],
         "operationId": "WorkspaceNotificationRecipientUser_ListByNotification",
         "description": "Gets the list of the Notification Recipient User subscribed to the notification.",
-        "x-ms-examples": {
-          "ApiManagementListNotificationRecipientUsers": {
-            "$ref": "./examples/ApiManagementListNotificationRecipientUsers.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1665,11 +1510,6 @@
         ],
         "operationId": "WorkspaceNotificationRecipientUser_CheckEntityExists",
         "description": "Determine if the Notification Recipient User is subscribed to the notification.",
-        "x-ms-examples": {
-          "ApiManagementHeadNotificationRecipientUser": {
-            "$ref": "./examples/ApiManagementHeadNotificationRecipientUser.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1714,11 +1554,6 @@
         ],
         "operationId": "WorkspaceNotificationRecipientUser_CreateOrUpdate",
         "description": "Adds the API Management User to the list of Recipients for the Notification.",
-        "x-ms-examples": {
-          "ApiManagementCreateNotificationRecipientUser": {
-            "$ref": "./examples/ApiManagementCreateNotificationRecipientUser.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1743,14 +1578,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Recipient User was successfully added to the notification list.",
+          "200": {
+            "description": "Recipient User is already part of the notification list.",
             "schema": {
               "$ref": "./definitions.json#/definitions/RecipientUserContract"
             }
           },
-          "200": {
-            "description": "Recipient User is already part of the notification list.",
+          "201": {
+            "description": "Recipient User was successfully added to the notification list.",
             "schema": {
               "$ref": "./definitions.json#/definitions/RecipientUserContract"
             }
@@ -1769,11 +1604,6 @@
         ],
         "operationId": "WorkspaceNotificationRecipientUser_Delete",
         "description": "Removes the API Management user from the list of Notification.",
-        "x-ms-examples": {
-          "ApiManagementDeleteNotificationRecipientUser": {
-            "$ref": "./examples/ApiManagementDeleteNotificationRecipientUser.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1820,11 +1650,6 @@
         ],
         "operationId": "WorkspaceNotificationRecipientEmail_ListByNotification",
         "description": "Gets the list of the Notification Recipient Emails subscribed to a notification.",
-        "x-ms-examples": {
-          "ApiManagementListNotificationRecipientEmails": {
-            "$ref": "./examples/ApiManagementListNotificationRecipientEmails.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1868,11 +1693,6 @@
         ],
         "operationId": "WorkspaceNotificationRecipientEmail_CheckEntityExists",
         "description": "Determine if Notification Recipient Email subscribed to the notification.",
-        "x-ms-examples": {
-          "ApiManagementHeadNotificationRecipientEmail": {
-            "$ref": "./examples/ApiManagementHeadNotificationRecipientEmail.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1917,11 +1737,6 @@
         ],
         "operationId": "WorkspaceNotificationRecipientEmail_CreateOrUpdate",
         "description": "Adds the Email address to the list of Recipients for the Notification.",
-        "x-ms-examples": {
-          "ApiManagementCreateNotificationRecipientEmail": {
-            "$ref": "./examples/ApiManagementCreateNotificationRecipientEmail.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1946,14 +1761,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Recipient Email was successfully added to the notification list.",
+          "200": {
+            "description": "Recipient Email is already part of the notification list.",
             "schema": {
               "$ref": "./definitions.json#/definitions/RecipientEmailContract"
             }
           },
-          "200": {
-            "description": "Recipient Email is already part of the notification list.",
+          "201": {
+            "description": "Recipient Email was successfully added to the notification list.",
             "schema": {
               "$ref": "./definitions.json#/definitions/RecipientEmailContract"
             }
@@ -1972,11 +1787,6 @@
         ],
         "operationId": "WorkspaceNotificationRecipientEmail_Delete",
         "description": "Removes the email from the list of Notification.",
-        "x-ms-examples": {
-          "ApiManagementDeleteNotificationRecipientEmail": {
-            "$ref": "./examples/ApiManagementDeleteNotificationRecipientEmail.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2023,11 +1833,6 @@
         ],
         "operationId": "WorkspacePolicyFragment_ListByService",
         "description": "Gets all policy fragments defined within a workspace.",
-        "x-ms-examples": {
-          "ApiManagementListPolicyFragments": {
-            "$ref": "./examples/ApiManagementListPolicyFragments.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2088,11 +1893,6 @@
         ],
         "operationId": "WorkspacePolicyFragment_GetEntityTag",
         "description": "Gets the entity state (Etag) version of a policy fragment.",
-        "x-ms-examples": {
-          "ApiManagementHeadPolicyFragment": {
-            "$ref": "./examples/ApiManagementHeadPolicyFragment.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2137,14 +1937,6 @@
         ],
         "operationId": "WorkspacePolicyFragment_Get",
         "description": "Gets a policy fragment.",
-        "x-ms-examples": {
-          "ApiManagementGetPolicyFragment": {
-            "$ref": "./examples/ApiManagementGetPolicyFragment.json"
-          },
-          "ApiManagementGetPolicyFragmentFormat": {
-            "$ref": "./examples/ApiManagementGetPolicyFragmentFormat.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2195,11 +1987,6 @@
         ],
         "operationId": "WorkspacePolicyFragment_CreateOrUpdate",
         "description": "Creates or updates a policy fragment.",
-        "x-ms-examples": {
-          "ApiManagementCreatePolicy": {
-            "$ref": "./examples/ApiManagementCreatePolicyFragment.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2283,11 +2070,6 @@
         ],
         "operationId": "WorkspacePolicyFragment_Delete",
         "description": "Deletes a policy fragment.",
-        "x-ms-examples": {
-          "ApiManagementDeletePolicy": {
-            "$ref": "./examples/ApiManagementDeletePolicyFragment.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2334,11 +2116,6 @@
         ],
         "operationId": "WorkspacePolicyFragment_ListReferences",
         "description": "Lists policy resources that reference the policy fragment.",
-        "x-ms-examples": {
-          "ApiManagementListPolicyFragmentReferences": {
-            "$ref": "./examples/ApiManagementListPolicyFragmentReferences.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2390,11 +2167,6 @@
         "description": "Lists a collection of groups defined within a workspace in a service instance.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-groups"
-        },
-        "x-ms-examples": {
-          "ApiManagementListGroups": {
-            "$ref": "./examples/ApiManagementListGroups.json"
-          }
         },
         "parameters": [
           {
@@ -2453,11 +2225,6 @@
         ],
         "operationId": "WorkspaceGroup_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the group specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadGroup": {
-            "$ref": "./examples/ApiManagementHeadGroup.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2502,11 +2269,6 @@
         ],
         "operationId": "WorkspaceGroup_Get",
         "description": "Gets the details of the group specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetGroup": {
-            "$ref": "./examples/ApiManagementGetGroup.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2554,14 +2316,6 @@
         ],
         "operationId": "WorkspaceGroup_CreateOrUpdate",
         "description": "Creates or Updates a group.",
-        "x-ms-examples": {
-          "ApiManagementCreateGroup": {
-            "$ref": "./examples/ApiManagementCreateGroup.json"
-          },
-          "ApiManagementCreateGroupExternal": {
-            "$ref": "./examples/ApiManagementCreateGroupExternal.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2595,8 +2349,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Group was created successfully.",
+          "200": {
+            "description": "Group already exists.",
             "schema": {
               "$ref": "./definitions.json#/definitions/GroupContract"
             },
@@ -2607,8 +2361,8 @@
               }
             }
           },
-          "200": {
-            "description": "Group already exists.",
+          "201": {
+            "description": "Group was created successfully.",
             "schema": {
               "$ref": "./definitions.json#/definitions/GroupContract"
             },
@@ -2633,11 +2387,6 @@
         ],
         "operationId": "WorkspaceGroup_Update",
         "description": "Updates the details of the group specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementUpdateGroup": {
-            "$ref": "./examples/ApiManagementUpdateGroup.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2697,11 +2446,6 @@
         ],
         "operationId": "WorkspaceGroup_Delete",
         "description": "Deletes specific group of the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementDeleteGroup": {
-            "$ref": "./examples/ApiManagementDeleteGroup.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2748,11 +2492,6 @@
         ],
         "operationId": "WorkspaceGroupUser_List",
         "description": "Lists a collection of user entities associated with the group.",
-        "x-ms-examples": {
-          "ApiManagementListGroupUsers": {
-            "$ref": "./examples/ApiManagementListGroupUsers.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2813,11 +2552,6 @@
         ],
         "operationId": "WorkspaceGroupUser_CheckEntityExists",
         "description": "Checks that user entity specified by identifier is associated with the group entity.",
-        "x-ms-examples": {
-          "ApiManagementHeadGroupUser": {
-            "$ref": "./examples/ApiManagementHeadGroupUser.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2862,11 +2596,6 @@
         ],
         "operationId": "WorkspaceGroupUser_Create",
         "description": "Add existing user to existing group",
-        "x-ms-examples": {
-          "ApiManagementCreateGroupUser": {
-            "$ref": "./examples/ApiManagementCreateGroupUser.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2891,14 +2620,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The user was successfully added to the group.",
+          "200": {
+            "description": "The specified user is already a member of the specified group.",
             "schema": {
               "$ref": "./definitions.json#/definitions/UserContract"
             }
           },
-          "200": {
-            "description": "The specified user is already a member of the specified group.",
+          "201": {
+            "description": "The user was successfully added to the group.",
             "schema": {
               "$ref": "./definitions.json#/definitions/UserContract"
             }
@@ -2917,11 +2646,6 @@
         ],
         "operationId": "WorkspaceGroupUser_Delete",
         "description": "Remove existing user from existing group.",
-        "x-ms-examples": {
-          "ApiManagementDeleteGroupUser": {
-            "$ref": "./examples/ApiManagementDeleteGroupUser.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -2968,11 +2692,6 @@
         ],
         "operationId": "WorkspaceSubscription_List",
         "description": "Lists all subscriptions of the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementListSubscriptions": {
-            "$ref": "./examples/ApiManagementListSubscriptions.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3030,11 +2749,6 @@
         ],
         "operationId": "WorkspaceSubscription_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadSubscription": {
-            "$ref": "./examples/ApiManagementHeadSubscription.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3079,11 +2793,6 @@
         ],
         "operationId": "WorkspaceSubscription_Get",
         "description": "Gets the specified Subscription entity.",
-        "x-ms-examples": {
-          "ApiManagementGetSubscription": {
-            "$ref": "./examples/ApiManagementGetSubscription.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3131,11 +2840,6 @@
         ],
         "operationId": "WorkspaceSubscription_CreateOrUpdate",
         "description": "Creates or updates the subscription of specified user to the specified product.",
-        "x-ms-examples": {
-          "ApiManagementCreateSubscription": {
-            "$ref": "./examples/ApiManagementCreateSubscription.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3175,8 +2879,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The user was successfully subscribed to the product.",
+          "200": {
+            "description": "The user already subscribed to the product.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -3187,8 +2891,8 @@
               "$ref": "./definitions.json#/definitions/SubscriptionContract"
             }
           },
-          "200": {
-            "description": "The user already subscribed to the product.",
+          "201": {
+            "description": "The user was successfully subscribed to the product.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -3213,11 +2917,6 @@
         ],
         "operationId": "WorkspaceSubscription_Update",
         "description": "Updates the details of a subscription specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementUpdateSubscription": {
-            "$ref": "./examples/ApiManagementUpdateSubscription.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3283,11 +2982,6 @@
         ],
         "operationId": "WorkspaceSubscription_Delete",
         "description": "Deletes the specified subscription.",
-        "x-ms-examples": {
-          "ApiManagementDeleteSubscription": {
-            "$ref": "./examples/ApiManagementDeleteSubscription.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3334,11 +3028,6 @@
         ],
         "operationId": "WorkspaceSubscription_RegeneratePrimaryKey",
         "description": "Regenerates primary key of existing subscription of the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementSubscriptionRegeneratePrimaryKey": {
-            "$ref": "./examples/ApiManagementSubscriptionRegeneratePrimaryKey.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3379,11 +3068,6 @@
         ],
         "operationId": "WorkspaceSubscription_RegenerateSecondaryKey",
         "description": "Regenerates secondary key of existing subscription of the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementSubscriptionRegenerateSecondaryKey": {
-            "$ref": "./examples/ApiManagementSubscriptionRegenerateSecondaryKey.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3424,11 +3108,6 @@
         ],
         "operationId": "WorkspaceSubscription_ListSecrets",
         "description": "Gets the specified Subscription keys.",
-        "x-ms-examples": {
-          "ApiManagementSubscriptionListSecrets": {
-            "$ref": "./examples/ApiManagementSubscriptionListSecrets.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3478,11 +3157,6 @@
         ],
         "operationId": "WorkspaceApiVersionSet_ListByService",
         "description": "Lists a collection of API Version Sets in the specified workspace with a service instance.",
-        "x-ms-examples": {
-          "ApiManagementListApiVersionSets": {
-            "$ref": "./examples/ApiManagementListApiVersionSets.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3540,11 +3214,6 @@
         ],
         "operationId": "WorkspaceApiVersionSet_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Api Version Set specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadApiVersionSet": {
-            "$ref": "./examples/ApiManagementHeadApiVersionSet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3589,11 +3258,6 @@
         ],
         "operationId": "WorkspaceApiVersionSet_Get",
         "description": "Gets the details of the Api Version Set specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetApiVersionSet": {
-            "$ref": "./examples/ApiManagementGetApiVersionSet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3641,11 +3305,6 @@
         ],
         "operationId": "WorkspaceApiVersionSet_CreateOrUpdate",
         "description": "Creates or Updates a Api Version Set.",
-        "x-ms-examples": {
-          "ApiManagementCreateApiVersionSet": {
-            "$ref": "./examples/ApiManagementCreateApiVersionSet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3679,8 +3338,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Api Version Set was successfully created.",
+          "200": {
+            "description": "Api Version Set was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ApiVersionSetContract"
             },
@@ -3691,8 +3350,8 @@
               }
             }
           },
-          "200": {
-            "description": "Api Version Set was successfully updated.",
+          "201": {
+            "description": "Api Version Set was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ApiVersionSetContract"
             },
@@ -3717,11 +3376,6 @@
         ],
         "operationId": "WorkspaceApiVersionSet_Update",
         "description": "Updates the details of the Api VersionSet specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementUpdateApiVersionSet": {
-            "$ref": "./examples/ApiManagementUpdateApiVersionSet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3781,11 +3435,6 @@
         ],
         "operationId": "WorkspaceApiVersionSet_Delete",
         "description": "Deletes specific Api Version Set.",
-        "x-ms-examples": {
-          "ApiManagementDeleteApiVersionSet": {
-            "$ref": "./examples/ApiManagementDeleteApiVersionSet.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3834,11 +3483,6 @@
         "description": "Lists all APIs of the workspace in an API Management service instance.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-apis"
-        },
-        "x-ms-examples": {
-          "ApiManagementListApis": {
-            "$ref": "./examples/ApiManagementListApis.json"
-          }
         },
         "parameters": [
           {
@@ -3911,11 +3555,6 @@
         ],
         "operationId": "WorkspaceApi_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the API specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadApi": {
-            "$ref": "./examples/ApiManagementHeadApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -3960,14 +3599,6 @@
         ],
         "operationId": "WorkspaceApi_Get",
         "description": "Gets the details of the API specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetApiContract": {
-            "$ref": "./examples/ApiManagementGetApiContract.json"
-          },
-          "ApiManagementGetApiRevisionContract": {
-            "$ref": "./examples/ApiManagementGetApiRevision.json"
-          }
-        },
         "produces": [
           "application/json"
         ],
@@ -4018,56 +3649,6 @@
         ],
         "operationId": "WorkspaceApi_CreateOrUpdate",
         "description": "Creates new or updates existing specified API of the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementCreateApiUsingOai3Import": {
-            "$ref": "./examples/ApiManagementCreateApiUsingOai3Import.json"
-          },
-          "ApiManagementCreateApiUsingOai3ImportWithTranslateRequiredQueryParametersConduct": {
-            "$ref": "./examples/ApiManagementCreateApiUsingOai3ImportWithTranslateRequiredQueryParametersConduct.json"
-          },
-          "ApiManagementCreateApiUsingSwaggerImport": {
-            "$ref": "./examples/ApiManagementCreateApiUsingSwaggerImport.json"
-          },
-          "ApiManagementCreateApiUsingWadlImport": {
-            "$ref": "./examples/ApiManagementCreateApiUsingWadlImport.json"
-          },
-          "ApiManagementCreateSoapToRestApiUsingWsdlImport": {
-            "$ref": "./examples/ApiManagementCreateSoapToRestApiUsingWsdlImport.json"
-          },
-          "ApiManagementCreateSoapPassThroughApiUsingWsdlImport": {
-            "$ref": "./examples/ApiManagementCreateSoapPassThroughApiUsingWsdlImport.json"
-          },
-          "ApiManagementCreateApi": {
-            "$ref": "./examples/ApiManagementCreateApi.json"
-          },
-          "ApiManagementCreateApiWithMultipleAuthServers": {
-            "$ref": "./examples/ApiManagementCreateApiWithMultipleAuthServers.json"
-          },
-          "ApiManagementCreateApiWithMultipleOpenIdConnectProviders": {
-            "$ref": "./examples/ApiManagementCreateApiWithMultipleOpenIdConnectProviders.json"
-          },
-          "ApiManagementCreateWebSocketApi": {
-            "$ref": "./examples/ApiManagementCreateWebsocketApi.json"
-          },
-          "ApiManagementCreateApiRevisionFromExistingApi": {
-            "$ref": "./examples/ApiManagementCreateApiRevisionFromExistingApi.json"
-          },
-          "ApiManagementCreateApiNewVersionUsingExistingApi": {
-            "$ref": "./examples/ApiManagementCreateApiNewVersionUsingExistingApi.json"
-          },
-          "ApiManagementCreateApiClone": {
-            "$ref": "./examples/ApiManagementCreateApiClone.json"
-          },
-          "ApiManagementCreateApiWithOpenIdConnect": {
-            "$ref": "./examples/ApiManagementCreateApiWithOpenIdConnect.json"
-          },
-          "ApiManagementCreateApiUsingImportOverrideServiceUrl": {
-            "$ref": "./examples/ApiManagementCreateApiUsingImportOverrideServiceUrl.json"
-          },
-          "ApiManagementCreateGraphQLApi": {
-            "$ref": "./examples/ApiManagementCreateGraphQLApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4101,6 +3682,18 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "API was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ApiContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
           "201": {
             "description": "API was successfully created.",
             "schema": {
@@ -4115,18 +3708,6 @@
           },
           "202": {
             "description": "Request to create or update API was accepted. Location header contains the URL where the status of the long running operation can be checked."
-          },
-          "200": {
-            "description": "API was successfully updated.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/ApiContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4146,11 +3727,6 @@
         ],
         "operationId": "WorkspaceApi_Update",
         "description": "Updates the specified API of the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementUpdateApi": {
-            "$ref": "./examples/ApiManagementUpdateApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4210,11 +3786,6 @@
         ],
         "operationId": "WorkspaceApi_Delete",
         "description": "Deletes the specified API of the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementDeleteApi": {
-            "$ref": "./examples/ApiManagementDeleteApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4268,11 +3839,6 @@
         ],
         "operationId": "WorkspaceApiRevision_ListByService",
         "description": "Lists all revisions of an API.",
-        "x-ms-examples": {
-          "ApiManagementListApiRevisions": {
-            "$ref": "./examples/ApiManagementListApiRevisions.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4333,11 +3899,6 @@
         ],
         "operationId": "WorkspaceApiRelease_ListByService",
         "description": "Lists all releases of an API. An API release is created when making an API Revision current. Releases are also used to rollback to previous revisions. Results will be paged and can be constrained by the $top and $skip parameters.",
-        "x-ms-examples": {
-          "ApiManagementListApiReleases": {
-            "$ref": "./examples/ApiManagementListApiReleases.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4398,11 +3959,6 @@
         ],
         "operationId": "WorkspaceApiRelease_GetEntityTag",
         "description": "Returns the etag of an API release.",
-        "x-ms-examples": {
-          "ApiManagementHeadApiRelease": {
-            "$ref": "./examples/ApiManagementHeadApiRelease.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4450,11 +4006,6 @@
         ],
         "operationId": "WorkspaceApiRelease_Get",
         "description": "Returns the details of an API release.",
-        "x-ms-examples": {
-          "ApiManagementGetApiRelease": {
-            "$ref": "./examples/ApiManagementGetApiRelease.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4505,11 +4056,6 @@
         ],
         "operationId": "WorkspaceApiRelease_CreateOrUpdate",
         "description": "Creates a new Release for the API.",
-        "x-ms-examples": {
-          "ApiManagementCreateApiRelease": {
-            "$ref": "./examples/ApiManagementCreateApiRelease.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4546,8 +4092,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Release was successfully created.",
+          "200": {
+            "description": "Release was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ApiReleaseContract"
             },
@@ -4558,8 +4104,8 @@
               }
             }
           },
-          "200": {
-            "description": "Release was successfully updated.",
+          "201": {
+            "description": "Release was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ApiReleaseContract"
             },
@@ -4584,11 +4130,6 @@
         ],
         "operationId": "WorkspaceApiRelease_Update",
         "description": "Updates the details of the release of the API specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementUpdateApiRelease": {
-            "$ref": "./examples/ApiManagementUpdateApiRelease.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4651,11 +4192,6 @@
         ],
         "operationId": "WorkspaceApiRelease_Delete",
         "description": "Deletes the specified release in the API.",
-        "x-ms-examples": {
-          "ApiManagementDeleteApiRelease": {
-            "$ref": "./examples/ApiManagementDeleteApiRelease.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4705,11 +4241,6 @@
         ],
         "operationId": "WorkspaceApiOperation_ListByApi",
         "description": "Lists a collection of the operations for the specified API.",
-        "x-ms-examples": {
-          "ApiManagementListApiOperations": {
-            "$ref": "./examples/ApiManagementListApiOperations.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4777,11 +4308,6 @@
         ],
         "operationId": "WorkspaceApiOperation_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the API operation specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadApiOperation": {
-            "$ref": "./examples/ApiManagementHeadApiOperation.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4829,14 +4355,6 @@
         ],
         "operationId": "WorkspaceApiOperation_Get",
         "description": "Gets the details of the API Operation specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetApiOperation": {
-            "$ref": "./examples/ApiManagementGetApiOperation.json"
-          },
-          "ApiManagementGetApiOperationPetStore": {
-            "$ref": "./examples/ApiManagementGetApiOperationPetStore.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4887,11 +4405,6 @@
         ],
         "operationId": "WorkspaceApiOperation_CreateOrUpdate",
         "description": "Creates a new operation in the API or updates an existing one.",
-        "x-ms-examples": {
-          "ApiManagementCreateApiOperation": {
-            "$ref": "./examples/ApiManagementCreateApiOperation.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -4928,8 +4441,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Operation was successfully created.",
+          "200": {
+            "description": "Operation was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/OperationContract"
             },
@@ -4940,8 +4453,8 @@
               }
             }
           },
-          "200": {
-            "description": "Operation was successfully updated.",
+          "201": {
+            "description": "Operation was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/OperationContract"
             },
@@ -4966,11 +4479,6 @@
         ],
         "operationId": "WorkspaceApiOperation_Update",
         "description": "Updates the details of the operation in the API specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementUpdateApiOperation": {
-            "$ref": "./examples/ApiManagementUpdateApiOperation.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5033,11 +4541,6 @@
         ],
         "operationId": "WorkspaceApiOperation_Delete",
         "description": "Deletes the specified operation in the API.",
-        "x-ms-examples": {
-          "ApiManagementDeleteApiOperation": {
-            "$ref": "./examples/ApiManagementDeleteApiOperation.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5087,11 +4590,6 @@
         ],
         "operationId": "WorkspaceApiOperationPolicy_ListByOperation",
         "description": "Get the list of policy configuration at the API Operation level.",
-        "x-ms-examples": {
-          "ApiManagementListApiOperationPolicies": {
-            "$ref": "./examples/ApiManagementListApiOperationPolicies.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5138,11 +4636,6 @@
         ],
         "operationId": "WorkspaceApiOperationPolicy_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the API operation policy specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadApiOperationPolicy": {
-            "$ref": "./examples/ApiManagementHeadApiOperationPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5193,11 +4686,6 @@
         ],
         "operationId": "WorkspaceApiOperationPolicy_Get",
         "description": "Get the policy configuration at the API Operation level.",
-        "x-ms-examples": {
-          "ApiManagementGetApiOperationPolicy": {
-            "$ref": "./examples/ApiManagementGetApiOperationPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5254,11 +4742,6 @@
         ],
         "operationId": "WorkspaceApiOperationPolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the API Operation level.",
-        "x-ms-examples": {
-          "ApiManagementCreateApiOperationPolicy": {
-            "$ref": "./examples/ApiManagementCreateApiOperationPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5298,8 +4781,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Api Operation policy configuration was successfully created.",
+          "200": {
+            "description": "Api Operation policy configuration of the tenant was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PolicyContract"
             },
@@ -5310,8 +4793,8 @@
               }
             }
           },
-          "200": {
-            "description": "Api Operation policy configuration of the tenant was successfully updated.",
+          "201": {
+            "description": "Api Operation policy configuration was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PolicyContract"
             },
@@ -5336,11 +4819,6 @@
         ],
         "operationId": "WorkspaceApiOperationPolicy_Delete",
         "description": "Deletes the policy configuration at the Api Operation.",
-        "x-ms-examples": {
-          "ApiManagementDeleteApiOperationPolicy": {
-            "$ref": "./examples/ApiManagementDeleteApiOperationPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5393,11 +4871,6 @@
         ],
         "operationId": "WorkspaceApiPolicy_ListByApi",
         "description": "Get the policy configuration at the API level.",
-        "x-ms-examples": {
-          "ApiManagementListApiPolicies": {
-            "$ref": "./examples/ApiManagementListApiPolicies.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5441,11 +4914,6 @@
         ],
         "operationId": "WorkspaceApiPolicy_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the API policy specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadApiPolicy": {
-            "$ref": "./examples/ApiManagementHeadApiPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5493,11 +4961,6 @@
         ],
         "operationId": "WorkspaceApiPolicy_Get",
         "description": "Get the policy configuration at the API level.",
-        "x-ms-examples": {
-          "ApiManagementGetApiPolicy": {
-            "$ref": "./examples/ApiManagementGetApiPolicy.json"
-          }
-        },
         "produces": [
           "application/json",
           "application/vnd.ms-azure-apim.policy+xml",
@@ -5556,14 +5019,6 @@
         ],
         "operationId": "WorkspaceApiPolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the API.",
-        "x-ms-examples": {
-          "ApiManagementCreateApiPolicy": {
-            "$ref": "./examples/ApiManagementCreateApiPolicy.json"
-          },
-          "ApiManagementCreateApiPolicyNonXmlEncoded": {
-            "$ref": "./examples/ApiManagementCreateApiPolicyNonXmlEncoded.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5600,8 +5055,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Api policy configuration was successfully created.",
+          "200": {
+            "description": "Api policy configuration of the tenant was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PolicyContract"
             },
@@ -5612,8 +5067,8 @@
               }
             }
           },
-          "200": {
-            "description": "Api policy configuration of the tenant was successfully updated.",
+          "201": {
+            "description": "Api policy configuration was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PolicyContract"
             },
@@ -5638,11 +5093,6 @@
         ],
         "operationId": "WorkspaceApiPolicy_Delete",
         "description": "Deletes the policy configuration at the Api.",
-        "x-ms-examples": {
-          "ApiManagementDeleteApiPolicy": {
-            "$ref": "./examples/ApiManagementDeleteApiPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5692,11 +5142,6 @@
         ],
         "operationId": "WorkspaceApiSchema_ListByApi",
         "description": "Get the schema configuration at the API level.",
-        "x-ms-examples": {
-          "ApiManagementListApiSchemas": {
-            "$ref": "./examples/ApiManagementListApiSchemas.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5756,11 +5201,6 @@
         ],
         "operationId": "WorkspaceApiSchema_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the schema specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadApiSchema": {
-            "$ref": "./examples/ApiManagementHeadApiSchema.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5808,11 +5248,6 @@
         ],
         "operationId": "WorkspaceApiSchema_Get",
         "description": "Get the schema configuration at the API level.",
-        "x-ms-examples": {
-          "ApiManagementGetApiSchema": {
-            "$ref": "./examples/ApiManagementGetApiSchema.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5863,11 +5298,6 @@
         ],
         "operationId": "WorkspaceApiSchema_CreateOrUpdate",
         "description": "Creates or updates schema configuration for the API.",
-        "x-ms-examples": {
-          "ApiManagementCreateApiSchema": {
-            "$ref": "./examples/ApiManagementCreateApiSchema.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -5904,8 +5334,17 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Request to create or update Api schema was accepted."
+          "200": {
+            "description": "Api schema configuration of the tenant was successfully updated.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SchemaContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
           },
           "201": {
             "description": "Api schema configuration was successfully created.",
@@ -5919,17 +5358,8 @@
               }
             }
           },
-          "200": {
-            "description": "Api schema configuration of the tenant was successfully updated.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/SchemaContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
-              }
-            }
+          "202": {
+            "description": "Request to create or update Api schema was accepted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -5949,11 +5379,6 @@
         ],
         "operationId": "WorkspaceApiSchema_Delete",
         "description": "Deletes the schema configuration at the Api.",
-        "x-ms-examples": {
-          "ApiManagementDeleteApiSchema": {
-            "$ref": "./examples/ApiManagementDeleteApiSchema.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6010,11 +5435,6 @@
         ],
         "operationId": "WorkspaceApiWiki_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Wiki for an API specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadApiWiki": {
-            "$ref": "./examples/ApiManagementHeadApiWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6059,11 +5479,6 @@
         ],
         "operationId": "WorkspaceApiWiki_Get",
         "description": "Gets the details of the Wiki for an API specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetApiWiki": {
-            "$ref": "./examples/ApiManagementGetApiWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6111,11 +5526,6 @@
         ],
         "operationId": "WorkspaceApiWiki_CreateOrUpdate",
         "description": "Creates a new Wiki for an API or updates an existing one.",
-        "x-ms-examples": {
-          "ApiManagementCreateApiWiki": {
-            "$ref": "./examples/ApiManagementCreateApiWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6149,8 +5559,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Wiki was successfully created.",
+          "200": {
+            "description": "Wiki was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/WikiContract"
             },
@@ -6161,8 +5571,8 @@
               }
             }
           },
-          "200": {
-            "description": "Wiki was successfully updated.",
+          "201": {
+            "description": "Wiki was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/WikiContract"
             },
@@ -6187,11 +5597,6 @@
         ],
         "operationId": "WorkspaceApiWiki_Update",
         "description": "Updates the details of the Wiki for an API specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementUpdateApiWiki": {
-            "$ref": "./examples/ApiManagementUpdateApiWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6251,11 +5656,6 @@
         ],
         "operationId": "WorkspaceApiWiki_Delete",
         "description": "Deletes the specified Wiki from an API.",
-        "x-ms-examples": {
-          "ApiManagementDeleteApiWiki": {
-            "$ref": "./examples/ApiManagementDeleteApiWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6302,11 +5702,6 @@
         ],
         "operationId": "WorkspaceApiWikis_List",
         "description": "Gets the wikis for an API specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementListApiWikis": {
-            "$ref": "./examples/ApiManagementListApiWikis.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6367,11 +5762,6 @@
         ],
         "operationId": "WorkspaceProduct_ListByService",
         "description": "Lists a collection of products in the specified workspace in a service instance.",
-        "x-ms-examples": {
-          "ApiManagementListProducts": {
-            "$ref": "./examples/ApiManagementListProducts.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6443,11 +5833,6 @@
         ],
         "operationId": "WorkspaceProduct_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the product specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadProduct": {
-            "$ref": "./examples/ApiManagementHeadProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6492,11 +5877,6 @@
         ],
         "operationId": "WorkspaceProduct_Get",
         "description": "Gets the details of the product specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetProduct": {
-            "$ref": "./examples/ApiManagementGetProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6544,11 +5924,6 @@
         ],
         "operationId": "WorkspaceProduct_CreateOrUpdate",
         "description": "Creates or Updates a product.",
-        "x-ms-examples": {
-          "ApiManagementCreateProduct": {
-            "$ref": "./examples/ApiManagementCreateProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6582,8 +5957,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Product was successfully created.",
+          "200": {
+            "description": "Product was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ProductContract"
             },
@@ -6594,8 +5969,8 @@
               }
             }
           },
-          "200": {
-            "description": "Product was successfully updated.",
+          "201": {
+            "description": "Product was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ProductContract"
             },
@@ -6620,11 +5995,6 @@
         ],
         "operationId": "WorkspaceProduct_Update",
         "description": "Update existing product details.",
-        "x-ms-examples": {
-          "ApiManagementUpdateProduct": {
-            "$ref": "./examples/ApiManagementUpdateProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6684,11 +6054,6 @@
         ],
         "operationId": "WorkspaceProduct_Delete",
         "description": "Delete product.",
-        "x-ms-examples": {
-          "ApiManagementDeleteProduct": {
-            "$ref": "./examples/ApiManagementDeleteProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6742,11 +6107,6 @@
         ],
         "operationId": "WorkspaceProductApiLink_ListByProduct",
         "description": "Lists a collection of the API links associated with a product.",
-        "x-ms-examples": {
-          "ApiManagementListProductApis": {
-            "$ref": "./examples/ApiManagementListProductApis.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6807,11 +6167,6 @@
         ],
         "operationId": "WorkspaceProductApiLink_Get",
         "description": "Gets the API link for the product.",
-        "x-ms-examples": {
-          "ApiManagementGetProduct": {
-            "$ref": "./examples/ApiManagementGetProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6862,11 +6217,6 @@
         ],
         "operationId": "WorkspaceProductApiLink_CreateOrUpdate",
         "description": "Adds an API to the specified product via link.",
-        "x-ms-examples": {
-          "ApiManagementCreateProductApi": {
-            "$ref": "./examples/ApiManagementCreateProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6891,14 +6241,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The API was successfully added to the product.",
+          "200": {
+            "description": "The specified API is already added to the product.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ProductApiLinkContract"
             }
           },
-          "200": {
-            "description": "The specified API is already added to the product.",
+          "201": {
+            "description": "The API was successfully added to the product.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ProductApiLinkContract"
             }
@@ -6917,11 +6267,6 @@
         ],
         "operationId": "WorkspaceProductApiLink_Delete",
         "description": "Deletes the specified API from the specified product.",
-        "x-ms-examples": {
-          "ApiManagementDeleteProductApi": {
-            "$ref": "./examples/ApiManagementDeleteProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -6968,11 +6313,6 @@
         ],
         "operationId": "WorkspaceProductGroupLink_ListByProduct",
         "description": "Lists a collection of the group links associated with a product.",
-        "x-ms-examples": {
-          "ApiManagementListProductApis": {
-            "$ref": "./examples/ApiManagementListProductApis.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7033,11 +6373,6 @@
         ],
         "operationId": "WorkspaceProductGroupLink_Get",
         "description": "Gets the group link for the product.",
-        "x-ms-examples": {
-          "ApiManagementGetProduct": {
-            "$ref": "./examples/ApiManagementGetProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7088,11 +6423,6 @@
         ],
         "operationId": "WorkspaceProductGroupLink_CreateOrUpdate",
         "description": "Adds a group to the specified product via link.",
-        "x-ms-examples": {
-          "ApiManagementCreateProductApi": {
-            "$ref": "./examples/ApiManagementCreateProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7117,14 +6447,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The group was successfully added to the product.",
+          "200": {
+            "description": "The specified group is already added to the product.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ProductGroupLinkContract"
             }
           },
-          "200": {
-            "description": "The specified group is already added to the product.",
+          "201": {
+            "description": "The group was successfully added to the product.",
             "schema": {
               "$ref": "./definitions.json#/definitions/ProductGroupLinkContract"
             }
@@ -7143,11 +6473,6 @@
         ],
         "operationId": "WorkspaceProductGroupLink_Delete",
         "description": "Deletes the specified group from the specified product.",
-        "x-ms-examples": {
-          "ApiManagementDeleteProductApi": {
-            "$ref": "./examples/ApiManagementDeleteProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7194,11 +6519,6 @@
         ],
         "operationId": "WorkspaceProductPolicy_ListByProduct",
         "description": "Get the policy configuration at the Product level.",
-        "x-ms-examples": {
-          "ApiManagementListProductPolicies": {
-            "$ref": "./examples/ApiManagementListProductPolicies.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7242,11 +6562,6 @@
         ],
         "operationId": "WorkspaceProductPolicy_GetEntityTag",
         "description": "Get the ETag of the policy configuration at the Product level.",
-        "x-ms-examples": {
-          "ApiManagementHeadProductPolicy": {
-            "$ref": "./examples/ApiManagementHeadProductPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7294,11 +6609,6 @@
         ],
         "operationId": "WorkspaceProductPolicy_Get",
         "description": "Get the policy configuration at the Product level.",
-        "x-ms-examples": {
-          "ApiManagementGetProductPolicy": {
-            "$ref": "./examples/ApiManagementGetProductPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7352,11 +6662,6 @@
         ],
         "operationId": "WorkspaceProductPolicy_CreateOrUpdate",
         "description": "Creates or updates policy configuration for the Product.",
-        "x-ms-examples": {
-          "ApiManagementCreateProductPolicy": {
-            "$ref": "./examples/ApiManagementCreateProductPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7393,8 +6698,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Product policy configuration was successfully created.",
+          "200": {
+            "description": "Product policy configuration of the tenant was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PolicyContract"
             },
@@ -7405,8 +6710,8 @@
               }
             }
           },
-          "200": {
-            "description": "Product policy configuration of the tenant was successfully updated.",
+          "201": {
+            "description": "Product policy configuration was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/PolicyContract"
             },
@@ -7431,11 +6736,6 @@
         ],
         "operationId": "WorkspaceProductPolicy_Delete",
         "description": "Deletes the policy configuration at the Product.",
-        "x-ms-examples": {
-          "ApiManagementDeleteProductPolicy": {
-            "$ref": "./examples/ApiManagementDeleteProductPolicy.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7485,11 +6785,6 @@
         ],
         "operationId": "WorkspaceProductWiki_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Wiki for a Product specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadProductWiki": {
-            "$ref": "./examples/ApiManagementHeadProductWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7534,11 +6829,6 @@
         ],
         "operationId": "WorkspaceProductWiki_Get",
         "description": "Gets the details of the Wiki for a Product specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetProductWiki": {
-            "$ref": "./examples/ApiManagementGetProductWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7586,11 +6876,6 @@
         ],
         "operationId": "WorkspaceProductWiki_CreateOrUpdate",
         "description": "Creates a new Wiki for a Product or updates an existing one.",
-        "x-ms-examples": {
-          "ApiManagementCreateProductWiki": {
-            "$ref": "./examples/ApiManagementCreateProductWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7624,8 +6909,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Wiki was successfully created.",
+          "200": {
+            "description": "Wiki was successfully updated.",
             "schema": {
               "$ref": "./definitions.json#/definitions/WikiContract"
             },
@@ -7636,8 +6921,8 @@
               }
             }
           },
-          "200": {
-            "description": "Wiki was successfully updated.",
+          "201": {
+            "description": "Wiki was successfully created.",
             "schema": {
               "$ref": "./definitions.json#/definitions/WikiContract"
             },
@@ -7662,11 +6947,6 @@
         ],
         "operationId": "WorkspaceProductWiki_Update",
         "description": "Updates the details of the Wiki for a Product specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementUpdateProductWiki": {
-            "$ref": "./examples/ApiManagementUpdateProductWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7726,11 +7006,6 @@
         ],
         "operationId": "WorkspaceProductWiki_Delete",
         "description": "Deletes the specified Wiki from a Product.",
-        "x-ms-examples": {
-          "ApiManagementDeleteProductWiki": {
-            "$ref": "./examples/ApiManagementDeleteProductWiki.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7777,11 +7052,6 @@
         ],
         "operationId": "WorkspaceProductWikis_list",
         "description": "Gets the details of the Wiki for a Product specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetApiWiki": {
-            "$ref": "./examples/ApiManagementListProductWikis.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7848,11 +7118,6 @@
         ],
         "operationId": "WorkspaceTag_ListByService",
         "description": "Lists a collection of tags defined within a workspace in a service instance.",
-        "x-ms-examples": {
-          "ApiManagementListTags": {
-            "$ref": "./examples/ApiManagementListTags.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7917,11 +7182,6 @@
         ],
         "operationId": "WorkspaceTag_GetEntityState",
         "description": "Gets the entity state version of the tag specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementHeadTag": {
-            "$ref": "./examples/ApiManagementHeadTag.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -7966,11 +7226,6 @@
         ],
         "operationId": "WorkspaceTag_Get",
         "description": "Gets the details of the tag specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementGetTag": {
-            "$ref": "./examples/ApiManagementGetTag.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8018,11 +7273,6 @@
         ],
         "operationId": "WorkspaceTag_CreateOrUpdate",
         "description": "Creates a tag.",
-        "x-ms-examples": {
-          "ApiManagementCreateTag": {
-            "$ref": "./examples/ApiManagementCreateTag.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8056,8 +7306,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Tag was created successfully.",
+          "200": {
+            "description": "Tag already exists.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -8068,8 +7318,8 @@
               "$ref": "./definitions.json#/definitions/TagContract"
             }
           },
-          "200": {
-            "description": "Tag already exists.",
+          "201": {
+            "description": "Tag was created successfully.",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -8094,11 +7344,6 @@
         ],
         "operationId": "WorkspaceTag_Update",
         "description": "Updates the details of the tag specified by its identifier.",
-        "x-ms-examples": {
-          "ApiManagementUpdateTag": {
-            "$ref": "./examples/ApiManagementUpdateTag.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8158,11 +7403,6 @@
         ],
         "operationId": "WorkspaceTag_Delete",
         "description": "Deletes specific tag of the workspace in an API Management service instance.",
-        "x-ms-examples": {
-          "ApiManagementDeleteTag": {
-            "$ref": "./examples/ApiManagementDeleteTag.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8209,11 +7449,6 @@
         ],
         "operationId": "WorkspaceTagApiLink_ListByProduct",
         "description": "Lists a collection of the API links associated with a tag.",
-        "x-ms-examples": {
-          "ApiManagementListProductApis": {
-            "$ref": "./examples/ApiManagementListProductApis.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8274,11 +7509,6 @@
         ],
         "operationId": "WorkspaceTagApiLink_Get",
         "description": "Gets the API link for the tag.",
-        "x-ms-examples": {
-          "ApiManagementGetProduct": {
-            "$ref": "./examples/ApiManagementGetProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8329,11 +7559,6 @@
         ],
         "operationId": "WorkspaceTagApiLink_CreateOrUpdate",
         "description": "Adds an API to the specified tag via link.",
-        "x-ms-examples": {
-          "ApiManagementCreateProductApi": {
-            "$ref": "./examples/ApiManagementCreateProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8358,14 +7583,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The API was successfully added to the tag.",
+          "200": {
+            "description": "The specified API is already added to the tag.",
             "schema": {
               "$ref": "./definitions.json#/definitions/TagApiLinkContract"
             }
           },
-          "200": {
-            "description": "The specified API is already added to the tag.",
+          "201": {
+            "description": "The API was successfully added to the tag.",
             "schema": {
               "$ref": "./definitions.json#/definitions/TagApiLinkContract"
             }
@@ -8384,11 +7609,6 @@
         ],
         "operationId": "WorkspaceTagApiLink_Delete",
         "description": "Deletes the specified API from the specified tag.",
-        "x-ms-examples": {
-          "ApiManagementDeleteProductApi": {
-            "$ref": "./examples/ApiManagementDeleteProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8435,11 +7655,6 @@
         ],
         "operationId": "WorkspaceTagOperationLink_ListByProduct",
         "description": "Lists a collection of the operation links associated with a tag.",
-        "x-ms-examples": {
-          "ApiManagementListProductApis": {
-            "$ref": "./examples/ApiManagementListProductApis.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8500,11 +7715,6 @@
         ],
         "operationId": "WorkspaceTagOperationLink_Get",
         "description": "Gets the operation link for the tag.",
-        "x-ms-examples": {
-          "ApiManagementGetProduct": {
-            "$ref": "./examples/ApiManagementGetProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8555,11 +7765,6 @@
         ],
         "operationId": "WorkspaceTagOperationLink_CreateOrUpdate",
         "description": "Adds an operation to the specified tag via link.",
-        "x-ms-examples": {
-          "ApiManagementCreateProductApi": {
-            "$ref": "./examples/ApiManagementCreateProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8584,14 +7789,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The operation was successfully added to the tag.",
+          "200": {
+            "description": "The specified operation is already added to the tag.",
             "schema": {
               "$ref": "./definitions.json#/definitions/TagOperationLinkContract"
             }
           },
-          "200": {
-            "description": "The specified operation is already added to the tag.",
+          "201": {
+            "description": "The operation was successfully added to the tag.",
             "schema": {
               "$ref": "./definitions.json#/definitions/TagOperationLinkContract"
             }
@@ -8610,11 +7815,6 @@
         ],
         "operationId": "WorkspaceTagOperationLink_Delete",
         "description": "Deletes the specified operation from the specified tag.",
-        "x-ms-examples": {
-          "ApiManagementDeleteProductApi": {
-            "$ref": "./examples/ApiManagementDeleteProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8661,11 +7861,6 @@
         ],
         "operationId": "WorkspaceTagProductLink_ListByProduct",
         "description": "Lists a collection of the product links associated with a tag.",
-        "x-ms-examples": {
-          "ApiManagementListProductApis": {
-            "$ref": "./examples/ApiManagementListProductApis.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8726,11 +7921,6 @@
         ],
         "operationId": "WorkspaceTagProductLink_Get",
         "description": "Gets the product link for the tag.",
-        "x-ms-examples": {
-          "ApiManagementGetProduct": {
-            "$ref": "./examples/ApiManagementGetProduct.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8781,11 +7971,6 @@
         ],
         "operationId": "WorkspaceTagProductLink_CreateOrUpdate",
         "description": "Adds a product to the specified tag via link.",
-        "x-ms-examples": {
-          "ApiManagementCreateProductApi": {
-            "$ref": "./examples/ApiManagementCreateProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8810,14 +7995,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "The product was successfully added to the tag.",
+          "200": {
+            "description": "The specified product is already added to the tag.",
             "schema": {
               "$ref": "./definitions.json#/definitions/TagProductLinkContract"
             }
           },
-          "200": {
-            "description": "The specified product is already added to the tag.",
+          "201": {
+            "description": "The product was successfully added to the tag.",
             "schema": {
               "$ref": "./definitions.json#/definitions/TagProductLinkContract"
             }
@@ -8836,11 +8021,6 @@
         ],
         "operationId": "WorkspaceTagProductLink_Delete",
         "description": "Deletes the specified product from the specified tag.",
-        "x-ms-examples": {
-          "ApiManagementDeleteProductApi": {
-            "$ref": "./examples/ApiManagementDeleteProductApi.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -8889,14 +8069,6 @@
         ],
         "operationId": "WorkspaceApiExport_Get",
         "description": "Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.",
-        "x-ms-examples": {
-          "ApiManagementGetApiExportInOpenApi2dot0": {
-            "$ref": "./examples/ApiManagementGetApiExportInOpenApi2dot0.json"
-          },
-          "ApiManagementGetApiExportInOpenApi3dot0": {
-            "$ref": "./examples/ApiManagementGetApiExportInOpenApi3dot0.json"
-          }
-        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
