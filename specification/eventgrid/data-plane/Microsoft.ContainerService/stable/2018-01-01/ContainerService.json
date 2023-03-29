@@ -28,6 +28,34 @@
           "type": "string"
         }
       }
+    },
+    "ContainerServiceClusterOutOfSupportEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.ClusterOutOfSupport event",
+      "type": "object",
+      "properties": {
+        "kubernetesVersion": {
+          "description": "The Kubernetes version of the ManagedCluster resource",
+          "type": "string"
+        },
+        "outOfSupport": {
+          "description": "Indicates if the Kubernetes version of the ManagedCluster resource is out of support",
+          "type": "boolean"
+        }
+      }
+    },
+    "ContainerServiceNodePoolRollingProgressEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerService.NodePoolRollingProgress event",
+      "type": "object",
+      "properties": {
+        "nodePoolName": {
+          "description": "The name of the node pool",
+          "type": "string"
+        },
+        "progressState": {
+          "description": "The state of the rolling of the above node pool. Possible values are: \"Started\", \"Succeeded\", \"Failed\"",
+          "type": "string"
+        }
+      }
     }
   }
 }
