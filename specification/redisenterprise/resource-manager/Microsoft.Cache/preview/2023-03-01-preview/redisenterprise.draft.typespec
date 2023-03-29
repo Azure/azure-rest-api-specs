@@ -52,6 +52,7 @@ op ArmResourceActionEmptyAsync<
 @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Cache {
 
+  //@example("examples/OperationsList.json", "Operations_List")
   interface Operations extends Azure.ResourceManager.Operations {}
 
   //TODO: Q: any easier way to define this? A: Not today...
@@ -122,8 +123,34 @@ namespace Microsoft.Cache {
   interface OperationsStatus // or operationStatuses?
   {
     @doc("Gets information about a database in a RedisEnterprise cluster")
-    @example("OperationsStatusGet.json", "OperationsStatus_Get")
+    @example("examples/OperationsStatusGet.json", "OperationsStatus_Get")
     get(...OperationStatusParameters<Cluster>): ArmResponse<OperationStatusResult> | ErrorResponse;
+  }
+
+  interface Skus
+  {
+    @example("examples/RedisEnterpriseSkusList.json", "RedisEnterpriseSkus_List")
+    
+    @doc("Lists all RedisEnterprise skus in a subscription.")
+    listBySubscription is ArmListBySubscription<SkuDetails>;
+  }
+
+  @doc("Properties of RedisEnterprise SKUs")
+  model SkuProperties {
+
+  }
+
+  @doc("Information about RedisEnterprise SKUs")
+  model SkuDetails is ProxyResource<SkuProperties>
+  {
+    @path
+    @doc("Name of SKU")
+    @minLength(1)
+    @key("skuName")
+    @pattern("[a-z0-9][-a-z0-9]*")
+    @segment("skus")
+    @visibility("read")
+    name: string;
   }
 
   @doc("Describes the RedisEnterprise cluster")
@@ -398,7 +425,7 @@ namespace Microsoft.Cache {
     @autoRoute
     @armResourceAction(Database)
     @post
-    @example("examples/RedisEnterpriseDatabasesLisKeys.json", "RedisEnterpriseDatabases_ListKeys")
+    @example("examples/RedisEnterpriseDatabasesListKeys.json", "RedisEnterpriseDatabases_ListKeys")
     op listKeys(
       ...ResourceInstanceParameters<Database>
     ): ArmResponse<AccessKeys> | ErrorResponse;
@@ -421,7 +448,7 @@ namespace Microsoft.Cache {
     get is ArmResourceRead<PrivateEndpointConnection>;
     
     @doc("Creates a private endpoint connection")
-    @example("examples/RedisEnterprisePrivateEndpointConnectionsCreateOrUpdate.json", "RedisEnterprisePrivateEndpointConnections_CreateOrUpdate")
+    @example("examples/RedisEnterprisePrivateEndpointConnectionsCreate.json", "RedisEnterprisePrivateEndpointConnections_Create")
     create is ArmResourceCreateOrUpdateAsync<PrivateEndpointConnection>;
 
     @doc("Updates a private endpoint connection")

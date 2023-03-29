@@ -129,6 +129,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cache/skus": {
+      "get": {
+        "operationId": "Skus_ListBySubscription",
+        "description": "Lists all RedisEnterprise skus in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "RedisEnterpriseSkus_List": {
+            "$ref": "examples/RedisEnterpriseSkusList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise": {
       "get": {
         "tags": [
@@ -1123,7 +1159,7 @@
         },
         "x-ms-examples": {
           "RedisEnterpriseDatabases_ListKeys": {
-            "$ref": "examples/RedisEnterpriseDatabasesLisKeys.json"
+            "$ref": "examples/RedisEnterpriseDatabasesListKeys.json"
           }
         }
       }
@@ -1391,8 +1427,8 @@
           }
         },
         "x-ms-examples": {
-          "RedisEnterprisePrivateEndpointConnections_CreateOrUpdate": {
-            "$ref": "examples/RedisEnterprisePrivateEndpointConnectionsCreateOrUpdate.json"
+          "RedisEnterprisePrivateEndpointConnections_Create": {
+            "$ref": "examples/RedisEnterprisePrivateEndpointConnectionsCreate.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1651,7 +1687,7 @@
         },
         "x-ms-examples": {
           "OperationsStatus_Get": {
-            "$ref": "OperationsStatusGet.json"
+            "$ref": "examples/OperationsStatusGet.json"
           }
         }
       }
@@ -2115,7 +2151,7 @@
         },
         "status": {
           "type": "string",
-          "description": "Current status of the operation. E.g. 'Suceeded', or 'Failed'",
+          "description": "Current status of the operation. E.g. 'Succeeded', or 'Failed'",
           "readOnly": true
         },
         "percentComplete": {
@@ -2510,6 +2546,49 @@
         "capacity"
       ]
     },
+    "SkuDetails": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SkuProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "Information about RedisEnterprise SKUs",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SkuDetailsListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDetails"
+          },
+          "x-typespec-name": "SkuDetails[]",
+          "description": "The SkuDetails items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items",
+          "x-typespec-name": "Rest.ResourceLocation"
+        }
+      },
+      "description": "The response of a SkuDetails list operation.",
+      "required": [
+        "value"
+      ]
+    },
     "SkuName": {
       "type": "string",
       "enum": [
@@ -2525,6 +2604,11 @@
         "name": "SkuName",
         "modelAsString": true
       }
+    },
+    "SkuProperties": {
+      "type": "object",
+      "properties": {},
+      "description": "Properties of RedisEnterprise SKUs"
     },
     "SkuUpdate": {
       "type": "object",
