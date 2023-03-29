@@ -769,12 +769,12 @@
         }
       }
     },
-    "DeploymentStackPropertiesShared": {
-      "description": "Properties shared between a deployment stack and a deployment stack snapshot.",
+    "DeploymentStackProperties": {
+      "type": "object",
       "required": [
         "actionOnUnmanage"
       ],
-      "type": "object",
+      "description": "Deployment stack properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DeploymentStacksError"
@@ -917,15 +917,6 @@
           "description": "The duration of the deployment stack update."
         }
       }
-    },
-    "DeploymentStackProperties": {
-      "type": "object",
-      "description": "Deployment stack properties.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentStackPropertiesShared"
-        }
-      ]
     },
     "DeploymentStackListResult": {
       "description": "List of deployment stacks.",
@@ -1134,49 +1125,6 @@
         }
       }
     },
-    "DeploymentStackSnapshot": {
-      "type": "object",
-      "description": "Deployment stack Snapshot object.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureResourceBase"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Deployment stack snapshot properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DeploymentStackSnapshotProperties"
-        }
-      }
-    },
-    "DeploymentStackSnapshotProperties": {
-      "type": "object",
-      "description": "Deployment stack snapshot properties.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeploymentStackPropertiesShared"
-        }
-      ]
-    },
-    "DeploymentStackSnapshotsListResult": {
-      "description": "List of deployment stack snapshots",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeploymentStackSnapshot"
-          },
-          "description": "An array of deployment stack snapshots."
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The URL to use for getting the next set of results."
-        }
-      }
-    },
     "DeploymentStacksError": {
       "type": "object",
       "properties": {
@@ -1286,17 +1234,6 @@
       "type": "string",
       "pattern": "^[-\\w\\._\\(\\)]+$",
       "description": "Name of the deployment stack.",
-      "minLength": 1,
-      "maxLength": 90,
-      "x-ms-parameter-location": "method"
-    },
-    "DeploymentStackSnapshotParameter": {
-      "name": "snapshotName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$",
-      "description": "The name of the deployment stack Snapshot.",
       "minLength": 1,
       "maxLength": 90,
       "x-ms-parameter-location": "method"
