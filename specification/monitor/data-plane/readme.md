@@ -38,7 +38,8 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - preview/preview/2023-03-01-preview/AzureMetrics_IngestMetrics.json
+  - Microsoft.Insights/preview/2023-03-01-preview/metricBatch.json
+  - preview/2018-09-01-preview/metricsCreate_API.json
 ```
 ### Tag: package-2018-09-preview
 
@@ -161,6 +162,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/preview/2018-09-01-preview/metricsCreate_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2023-03-01-preview/metricBatch.json
 
 ```
 
