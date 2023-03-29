@@ -6,6 +6,7 @@ import "@azure-tools/cadl-azure-resource-manager";
 
 import "../shared/provisioningstate.cadl";
 import "../community/community.cadl";
+import "../shared/resourceid.cadl";
 
 using Cadl.Http;
 using Cadl.Rest;
@@ -23,17 +24,30 @@ model EnclaveVirtualNetwork {
 model EnclaveDefaultSettings
 {
   @doc("Key Vault Resource Id.")
-  keyVaultResourceId?: string;
+  keyVaultResourceId?: KeyVaultResourceId;
   
   @doc("Log Analytics Resource Id.")
-  logAnalyticsResourceId?: string;
+  logAnalyticsResourceId?: LogAnalyticsResourceId;
   
   @doc("Storage Account Resource Id.")
-  storageAccountResourceId?: string;
+  storageAccountResourceId?: StorageAccountResourceId;
+}
+
+@doc("Endpoint Properties")
+model Endpoint
+{
+  @doc("Endpoint Name")
+  name?: string;
+
+  @doc("Endpoint Resource Id.")
+  resourceId?: NsgResourceId;
 }
 
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveProperties {
+
+  @doc("Virtual Enclave Description.")
+  description?: string;
 
   @doc("Provisioning State.")
   @visibility("read")
@@ -43,7 +57,7 @@ model VirtualEnclaveProperties {
   enclaveVirtualNetwork: EnclaveVirtualNetwork;
 
   @doc("Community Resource Id.")
-  communityResourceId: string;
+  communityResourceId: CommunityResourceId;
 
   @doc("Default Settings")
   enclaveDefaultSettings?: EnclaveDefaultSettings;
@@ -51,6 +65,12 @@ model VirtualEnclaveProperties {
   @doc("List of resource ids created by Virtual Enclave.")
   resourceCollection?: string [];
 
-  @doc("Properties of Virtual Enclave.")
-  resourceProperties?: Record<string>;
+  @doc("The source endpoints for the virtual enclave.")
+  @OpenAPI.extension("x-ms-identifiers",["name"])
+  sourceEndpointCollection?: Endpoint [];
+
+  @doc("The destination endpoints for the virtual enclave.")
+  @OpenAPI.extension("x-ms-identifiers",["name"])
+  destEndpointCollection?: Endpoint [];
+
 }
