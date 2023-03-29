@@ -3,7 +3,7 @@
   "info": {
     "title": "MySQLManagementClient",
     "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure MySQL resources including servers, databases, firewall rules and configurations.",
-    "version": "2021-12-01-preview"
+    "version": "2022-09-30-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -493,6 +493,58 @@
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/flexibleServers/{serverName}/resetGtid": {
+      "post": {
+        "tags": [
+          "ServerResetGtid"
+        ],
+        "operationId": "Servers_ResetGtid",
+        "x-ms-examples": {
+          "Reset GTID on a server": {
+            "$ref": "./examples/ServerResetGtid.json"
+          }
+        },
+        "description": "Resets GTID on a server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerGtidSetParameter"
+            },
+            "description": "The required parameters for resetting GTID on a server."
           }
         ],
         "responses": {
@@ -1052,6 +1104,16 @@
       },
       "description": "Server restart parameters."
     },
+    "ServerGtidSetParameter": {
+      "type": "object",
+      "properties": {
+        "gtidSet": {
+          "type": "string",
+          "description": "The gtid set of server."
+        }
+      },
+      "description": "Server gtid set parameters."
+    },
     "Identity": {
       "x-ms-client-flatten": true,
       "type": "object",
@@ -1074,7 +1136,7 @@
           ],
           "x-ms-enum": {
             "name": "ManagedServiceIdentityType",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "userAssignedIdentities": {
@@ -1128,7 +1190,8 @@
       "required": true,
       "type": "string",
       "description": "The name of the server.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     }
   }
 }
