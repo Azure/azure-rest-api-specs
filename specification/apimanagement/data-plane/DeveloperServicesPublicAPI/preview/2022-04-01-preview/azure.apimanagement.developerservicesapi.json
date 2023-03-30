@@ -359,11 +359,18 @@
     },
     "/apis/{apiId}/hostnames": {
       "get": {
-        "operationId": "Apis_ListApiHostnames",
-        "description": "Hostnames of the API.",
+        "operationId": "ApiHostnames_ListApiHostnames",
+        "description": "List a collection of APIs hostnames.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -379,13 +386,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApiHostname"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.Apis.ApiHostnameResource"
+                  },
+                  "x-typespec-name": "Routes.Apis.ApiHostnameResource[]",
+                  "description": "The ApiHostnameResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiHostnameResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.Apis.ApiHostnameResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -396,11 +430,18 @@
     },
     "/apis/{apiId}/operations": {
       "get": {
-        "operationId": "Apis_ListApiOperations",
-        "description": "Operations of the API.",
+        "operationId": "ApiOperations_ListApiOperations",
+        "description": "List a collection of APIs operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -416,13 +457,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedOperation"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.Apis.ApiOperationResource"
+                  },
+                  "x-typespec-name": "Routes.Apis.ApiOperationResource[]",
+                  "description": "The ApiOperationResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiOperationResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.Apis.ApiOperationResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -433,11 +501,18 @@
     },
     "/apis/{apiId}/operations/{operationId}": {
       "get": {
-        "operationId": "Apis_GetApiOperation",
-        "description": "Operation specified by its identifier of the API.",
+        "operationId": "ApiOperations_GetApiOperation",
+        "description": "Get the details of the APIs operation specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "name": "operationId",
@@ -456,8 +531,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -465,11 +546,25 @@
     },
     "/apis/{apiId}/operations/{operationId}/tags": {
       "get": {
-        "operationId": "Apis_ListApiOperationTags",
-        "description": "Operation tags specified by its identifier of the API.",
+        "operationId": "ApiOperationTags_ListApiOperationTags",
+        "description": "List a collection of APIs operation tags.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "Operation identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -479,26 +574,46 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "description": "Operation identifier.",
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTag"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.Apis.ApiOperationTagResource"
+                  },
+                  "x-typespec-name": "Routes.Apis.ApiOperationTagResource[]",
+                  "description": "The ApiOperationTagResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiOperationTagResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.Apis.ApiOperationTagResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -509,11 +624,18 @@
     },
     "/apis/{apiId}/products": {
       "get": {
-        "operationId": "Apis_ListApiProducts",
-        "description": "List of public products associated with the API.",
+        "operationId": "ApiProducts_ListApiProducts",
+        "description": "List a collection of APIs products.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -529,13 +651,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedProduct"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.Apis.ApiProductResource"
+                  },
+                  "x-typespec-name": "Routes.Apis.ApiProductResource[]",
+                  "description": "The ApiProductResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiProductResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.Apis.ApiProductResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -546,11 +695,18 @@
     },
     "/apis/{apiId}/releases": {
       "get": {
-        "operationId": "Apis_ListApiReleases",
-        "description": "List of releases for the API.",
+        "operationId": "ApiReleases_ListApiReleases",
+        "description": "List a collection of APIs releases.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -566,13 +722,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApiRelease"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.Apis.ApiReleaseResource"
+                  },
+                  "x-typespec-name": "Routes.Apis.ApiReleaseResource[]",
+                  "description": "The ApiReleaseResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiReleaseResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.Apis.ApiReleaseResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -699,11 +882,18 @@
     },
     "/apis/{apiId}/tags": {
       "get": {
-        "operationId": "Apis_ListApiTags",
-        "description": "Tags of the API.",
+        "operationId": "ApiTags_ListApiTags",
+        "description": "List a collection of APIs tags.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -719,13 +909,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTag"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.Apis.ApiTagResource"
+                  },
+                  "x-typespec-name": "Routes.Apis.ApiTagResource[]",
+                  "description": "The ApiTagResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiTagResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.Apis.ApiTagResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -2767,52 +2984,6 @@
         "value"
       ]
     },
-    "PagedApiHostname": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiHostname"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.ApiHostname[]",
-          "description": "The ApiHostname items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of ApiHostname items",
-      "required": [
-        "value"
-      ]
-    },
-    "PagedApiRelease": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiRelease"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.ApiRelease[]",
-          "description": "The ApiRelease items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of ApiRelease items",
-      "required": [
-        "value"
-      ]
-    },
     "PagedApiVersionSet": {
       "type": "object",
       "properties": {
@@ -2832,29 +3003,6 @@
         }
       },
       "description": "Paged collection of ApiVersionSet items",
-      "required": [
-        "value"
-      ]
-    },
-    "PagedOperation": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.Operation"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.Operation[]",
-          "description": "The Operation items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of Operation items",
       "required": [
         "value"
       ]
@@ -2925,6 +3073,56 @@
         }
       ]
     },
+    "Routes.Apis.ApiHostnameResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api hostnames resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiHostname"
+        }
+      ]
+    },
+    "Routes.Apis.ApiOperationResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api operations resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Operation"
+        }
+      ]
+    },
+    "Routes.Apis.ApiOperationTagResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api operation tags resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Tag"
+        }
+      ]
+    },
+    "Routes.Apis.ApiProductResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api products resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Product"
+        }
+      ]
+    },
+    "Routes.Apis.ApiReleaseResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api releases resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiRelease"
+        }
+      ]
+    },
     "Routes.Apis.ApiResource": {
       "type": "object",
       "properties": {},
@@ -2942,6 +3140,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/DeveloperServicesApi.Models.ApiSchema"
+        }
+      ]
+    },
+    "Routes.Apis.ApiTagResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api tags resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Tag"
         }
       ]
     },
@@ -2992,14 +3200,6 @@
       "in": "path",
       "required": true,
       "description": "API version set identifier.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Routes.Apis.CommonParams": {
-      "name": "apiId",
-      "in": "path",
-      "required": true,
-      "description": "API identifier.",
       "type": "string",
       "x-ms-parameter-location": "method"
     }

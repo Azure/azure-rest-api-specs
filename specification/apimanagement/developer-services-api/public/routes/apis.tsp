@@ -34,6 +34,7 @@ interface Apis {
   getApi is ResourceRead<ApiResource>;
 }
 
+//TODO: Find a workaround for exporting the API in a specific format.:
 // @route("/apis/{apiId}")
 // @doc("Get the details of the API specified by its identifier.")
 // @get
@@ -112,66 +113,113 @@ interface ApiAuthServersOpenidconnect {
   getApiAuthServersOpenidconnect is ResourceRead<ApiAuthServersOpenidconnectResource>;
 }
 
-@route("/apis/{apiId}/products")
-@doc("List of public products associated with the API.")
-@get
-op ListApiProducts(...CommonParams, ...ListParams): ApiResponse<Page<Product>>;
+@doc("Api products resource model.")
+@resource("products")
+@parentResource(ApiResource)
+model ApiProductResource extends Product {
+  @doc("Product identifier.")
+  @key("productId")
+  @visibility("query")
+  productId: string;
+}
 
-@route("/apis/{apiId}/releases")
-@doc("List of releases for the API.")
-@get
-op ListApiReleases(
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<ApiRelease>>;
+interface ApiProducts {
+  @doc("List a collection of APIs products.")
+  listApiProducts is ResourceList<
+    ApiProductResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
 
-@route("/apis/{apiId}/tags")
-@doc("Tags of the API.")
-@get
-op ListApiTags(...CommonParams, ...ListParams): ApiResponse<Page<Tag>>;
+@doc("Api releases resource model.")
+@resource("releases")
+@parentResource(ApiResource)
+model ApiReleaseResource extends ApiRelease {
+  @doc("Release identifier.")
+  @key("releaseId")
+  @visibility("query")
+  releaseId: string;
+}
 
-@route("/apis/{apiId}/hostnames")
-@doc("Hostnames of the API.")
-@get
-op ListApiHostnames(
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<ApiHostname>>;
+interface ApiReleases {
+  @doc("List a collection of APIs releases.")
+  listApiReleases is ResourceList<
+    ApiReleaseResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
 
-@route("/apis/{apiId}/operations")
-@doc("Operations of the API.")
-@get
-op ListApiOperations(
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<Operation>>;
+@doc("Api tags resource model.")
+@resource("tags")
+@parentResource(ApiResource)
+model ApiTagResource extends Tag {
+  @doc("Tag identifier.")
+  @key("tagId")
+  @visibility("query")
+  tagId: string;
+}
 
-@route("/apis/{apiId}/operations/{operationId}")
-@doc("Operation specified by its identifier of the API.")
-@get
-op GetApiOperation(
-  ...CommonParams,
+interface ApiTags {
+  @doc("List a collection of APIs tags.")
+  listApiTags is ResourceList<
+    ApiTagResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
 
+@doc("Api hostnames resource model.")
+@resource("hostnames")
+@parentResource(ApiResource)
+model ApiHostnameResource extends ApiHostname {
+  @doc("Hostname identifier.")
+  @key("hostnameId")
+  @visibility("query")
+  hostnameId: string;
+}
+
+interface ApiHostnames {
+  @doc("List a collection of APIs hostnames.")
+  listApiHostnames is ResourceList<
+    ApiHostnameResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
+
+@doc("Api operations resource model.")
+@resource("operations")
+@parentResource(ApiResource)
+model ApiOperationResource extends Operation {
   @doc("Operation identifier.")
-  @path
-  operationId: string
-): ApiResponse<Operation>;
+  @key("operationId")
+  @visibility("query")
+  operationId: string;
+}
 
-@route("/apis/{apiId}/operations/{operationId}/tags")
-@doc("Operation tags specified by its identifier of the API.")
-@get
-op ListApiOperationTags(
-  ...CommonParams,
-  ...ListParams,
+interface ApiOperations {
+  @doc("List a collection of APIs operations.")
+  listApiOperations is ResourceList<
+    ApiOperationResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-  @doc("Operation identifier.")
-  @path
-  operationId: string
-): ApiResponse<Page<Tag>>;
+  @doc("Get the details of the APIs operation specified by its identifier.")
+  getApiOperation is ResourceRead<ApiOperationResource>;
+}
 
-@doc("Common parameters.")
-model CommonParams {
-  @doc("API identifier.")
-  @path
-  apiId: string;
+@doc("Api operation tags resource model.")
+@resource("tags")
+@parentResource(ApiOperationResource)
+model ApiOperationTagResource extends Tag {
+  @doc("Tag identifier.")
+  @key("tagId")
+  @visibility("query")
+  tagId: string;
+}
+
+interface ApiOperationTags {
+  @doc("List a collection of APIs operation tags.")
+  listApiOperationTags is ResourceList<
+    ApiOperationTagResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 }
