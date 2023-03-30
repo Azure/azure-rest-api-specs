@@ -9829,9 +9829,20 @@
           "description": "Flag indicating whether the subscription have access in region for Availability Zones(Az)."
         },
         "status": {
-          "type": "string",
           "readOnly": true,
-          "description": "Current buildout status of the region."
+          "type": "string",
+          "description": "Enum to indicate current buildout status of the region.",
+          "enum": [
+            "Uninitialized",
+            "Initializing",
+            "InternallyReady",
+            "Online",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
         }
       }
     },
