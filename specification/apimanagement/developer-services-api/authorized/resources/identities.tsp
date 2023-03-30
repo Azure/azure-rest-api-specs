@@ -19,8 +19,12 @@ interface Identities {
   @doc("Creates or updates the given user identity.")
   @put
   CreateOrUpdateUserIdentityProvider(
-    ...UserParams,
-    ...ListParams,
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...DefaultListQueryParameters,
+
+    @doc("User identifier.")
+    @path
+    userId: string,
 
     @doc("The provider of the identity.")
     @path

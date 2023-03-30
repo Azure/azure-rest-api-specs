@@ -9,22 +9,28 @@ using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesAuthorizedApi.Resources.Reports;
 
-@route("/users/{userId}/reports/{reportType}")
-@doc("List a collection of tags.")
-@get
-op ListReports(
-  ...UserParams,
-  ...ListParams,
+interface Reports {
+  @route("/users/{userId}/reports/{reportType}")
+  @doc("List a collection of tags.")
+  @get
+  ListReports(
+    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...DefaultListQueryParameters,
 
-  @doc("Type of report.")
-  @path
-  reportType: string,
+    @doc("User identifier.")
+    @path
+    userId: string,
 
-  @doc("Aggregate by interval.")
-  @query
-  interval?: string,
+    @doc("Type of report.")
+    @path
+    reportType: string,
 
-  @doc("OData order by query option.")
-  @query
-  orderBy?: string
-): ApiResponse<Page<Report>>;
+    @doc("Aggregate by interval.")
+    @query
+    interval?: string,
+
+    @doc("OData order by query option.")
+    @query
+    orderBy?: string
+  ): ApiResponse<Page<Report>>;
+}

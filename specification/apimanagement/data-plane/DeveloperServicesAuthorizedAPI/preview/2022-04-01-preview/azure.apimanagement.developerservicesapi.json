@@ -1529,7 +1529,7 @@
         "description": "Creates or updates the given user identity.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -1539,6 +1539,13 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "name": "provider",
@@ -1852,7 +1859,7 @@
         "description": "List a collection of tags.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -1862,6 +1869,13 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "name": "reportType",
