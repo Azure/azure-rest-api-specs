@@ -125,9 +125,10 @@ model VMwareSite is TrackedResource<SitesProperties> {
   id: string;
 
   @key("siteName")
-  @segment("VMwareSites")
+  @segment("vmwareSites")
   @doc("Site name")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -243,7 +244,7 @@ Method to enable disable dependency map status for machines
             in a
 site.
 """)
-  @operationId("MwarePropertiesController_UpdateMachineDependencyMapStatus")
+  @operationId("MwarePropertiesController_UpdateDependencyMapStatus")
   UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
     VMwareSite,
     UpdateMachineDepMapStatus
@@ -568,9 +569,10 @@ model HyperVSite is TrackedResource<SiteProperties> {
   "id": string;
 
   @key("siteName")
-  @segment("HyperVSites")
+  @segment("hypervSites")
   @doc("Site name")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -758,7 +760,7 @@ model HypervOperationsStatusResource is ProxyResource<HyperVClusterProperties> {
   @key("clusterName")
   @segment("clusters")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -770,7 +772,7 @@ model HyperVCluster is ProxyResource<HyperVClusterProperties> {
   @key("clusterName")
   @segment("clusters")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -941,7 +943,7 @@ model ServerSiteResource is TrackedResource<SitesProperties> {
   @segment("serverSites")
   @doc("Site name")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -953,14 +955,15 @@ interface ServersController {
   create is ArmResourceCreateOrUpdateAsyncCustom<ServerSiteResource>;
   update is ArmResourcePatchSyncNoError<ServerSiteResource, SitesProperties>;
   delete is ArmResourceDeleteSyncNoError<ServerSiteResource>;
-  // listByParent is ArmResourceListByParentUpdated<ServerSiteResource>;
 
-  // @summary("Get all server sites.")
-  // @doc("Get all the server sites in the subscription.")
-  // @operationId("ServerSites_ListBySubscription")
-  // listBySubscription is ArmListBySubscriptionNoError<ServerSiteResource>;
+  @added(Versions.v2019_05_01_preview)
+  @doc("Get all server sites.")
+  listByParent is ArmResourceListByParentUpdated<ServerSiteResource>;
 
-
+  @added(Versions.v2019_05_01_preview)
+  @operationId("ServerSites_ListBySubscription")
+  listBySubscription is ArmListBySubscriptionNoError<ServerSiteResource>;
+  
   @doc("Operation to refresh a site")
   RefreshSite is ArmResourceActionAsyncNoRequestBody<ServerSiteResource, {}>;
 
@@ -1056,7 +1059,7 @@ interface ServerSitesController {
 
   @doc("Method to get site usage.")
   @added(Versions.v2020_01_01_preview)
-  @operationId("ServerSitesController_GetSiteUsage")
+  @operationId("ServerSitesController_GetSummary")
   summary is ArmResourceActionSyncNoRequestBody<
     ServerSiteResource,
     ServerSiteUsage
@@ -1181,6 +1184,7 @@ model ImportSiteResource is TrackedResource<ImportSitesProperties> {
   @segment("importSites")
   @doc("Site name")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -1266,7 +1270,7 @@ interface ImportJobsController {
   @armResourceRead(InnerError)
   @get
   @added(Versions.v2020_02_01)
-  @operationId("ImportJobsController_Get")
+  @operationId("ImportJobsController_GetImportJob")
   importjob(
     ...ResourceInstanceParameters<ImportSiteResource>,
 
@@ -1280,7 +1284,7 @@ interface ImportJobsController {
   @armResourceUpdate(InnerError)
   @patch
   @added(Versions.v2020_02_01)
-  @operationId("ImportJobsController_Patch")
+  @operationId("ImportJobsController_Update")
   patchDeleteMachinesJob(
     ...ResourceInstanceParameters<ImportSiteResource>,
 
@@ -1361,22 +1365,13 @@ interface ImportSitesController {
   @added(Versions.v2019_05_01_preview)
   delete is ArmResourceDeleteSyncNoError<ImportSiteResource>;
 
-  
-  // listByParent is ArmResourceListByParentUpdated<ImportSiteResource>;
-
-  // @added(Versions.v2019_05_01_preview)
-  // @summary("Get all import sites.")
-  // @doc("Get all the import sites in the subscription.")
-  // @operationId("ImportSites_ListBySubscription")
-  // listBySubscription is ArmListBySubscriptionNoError<ImportSiteResource>;
-
-  @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
   @added(Versions.v2019_05_01_preview)
-  ExportUri is ArmResourceActionSyncNoError<
-    ImportSiteResource,
-    SasUriResponse,
-    SasUriResponse
-  >;
+  @doc("Get all import sites.")
+  listByParent is ArmResourceListByParentUpdated<ImportSiteResource>;
+
+  @added(Versions.v2019_05_01_preview)
+  @operationId("ImportSites_ListBySubscription")
+  listBySubscription is ArmListBySubscriptionNoError<ImportSiteResource>;
 
   @doc("Method to refresh a site.")
   @added(Versions.v2019_05_01_preview)
@@ -1406,9 +1401,10 @@ model MasterSite is TrackedResource<MasterSiteProperties> {
 
 
   @key("siteName")
-  @segment("MasterSites")
+  @segment("masterSites")
   @doc("Site name")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -1567,11 +1563,11 @@ interface PrivateEndpointConnectionProxyController {
   @armResourceRead(InnerError)
   @get
   @added(Versions.v2020_07_07)
-  @operationId("PrivateEndpointConnectionProxyController_Get")
+  @operationId("PrivateEndpointConnectionProxyController_GetOperationStatus")
   @segment("operationsStatus")
   PecOperationStatus(
     ...ResourceInstanceParameters<PrivateEndpointConnectionProxy>
-  ): ArmResponse<IArmAsyncOperationStatus>;
+  ): ArmResponse<iArmAsyncOperationStatus>;
 
   @doc("Gets the private endpoint connection proxy.")
   @added(Versions.v2020_07_07)
