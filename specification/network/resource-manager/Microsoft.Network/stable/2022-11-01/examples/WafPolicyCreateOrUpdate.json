@@ -7,6 +7,25 @@
     "parameters": {
       "location": "WestUs",
       "properties": {
+        "policySettings": {
+          "logScrubbing": {
+            "state": "Enabled",
+            "scrubbingRules": [
+              {
+                "state": "Enabled",
+                "matchVariable": "RequestArgNames",
+                "selectorMatchOperator": "Equals",
+                "selector": "test"
+              },
+              {
+                "state": "Enabled",
+                "matchVariable": "RequestIPAddress",
+                "selectorMatchOperator": "EqualsAny",
+                "selector": "*"
+              }
+            ]
+          }
+        },
         "managedRules": {
           "managedRuleSets": [
             {
@@ -192,7 +211,24 @@
             "fileUploadLimitInMb": 4000,
             "requestBodyCheck": true,
             "customBlockResponseStatusCode": 405,
-            "customBlockResponseBody": "SGVsbG8="
+            "customBlockResponseBody": "SGVsbG8=",
+            "logScrubbing": {
+              "state": "Enabled",
+              "scrubbingRules": [
+                {
+                  "state": "Enabled",
+                  "matchVariable": "RequestArgNames",
+                  "selectorMatchOperator": "Equals",
+                  "selector": "test"
+                },
+                {
+                  "state": "Enabled",
+                  "matchVariable": "RequestIPAddress",
+                  "selectorMatchOperator": "EqualsAny",
+                  "selector": "*"
+                }
+              ]
+            }
           },
           "managedRules": {
             "managedRuleSets": [
