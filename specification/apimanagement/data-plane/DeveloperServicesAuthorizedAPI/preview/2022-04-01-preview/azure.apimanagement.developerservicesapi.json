@@ -191,7 +191,14 @@
         "description": "List a collection of APIs.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -207,13 +214,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApi"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiResource"
+                  },
+                  "x-typespec-name": "Resources.Apis.ApiResource[]",
+                  "description": "The ApiResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -228,15 +262,27 @@
         "description": "Get the details of the API specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "name": "accept",
             "in": "header",
             "required": false,
+            "description": "If sent, the API will be exported in the specified format.",
             "type": "string",
             "enum": [
               "application/json",
@@ -251,6 +297,7 @@
             "name": "export",
             "in": "query",
             "required": false,
+            "description": "If true, the API will be exported in the specified format.",
             "type": "boolean"
           }
         ],
@@ -280,14 +327,25 @@
     },
     "/users/{userId}/apis/{apiId}/authServers/oauth2": {
       "get": {
-        "operationId": "Apis_ListApiOAuth2Providers",
-        "description": "List of OAuth 2.0 servers associated with the API.",
+        "operationId": "Apis_ListApiAuthServersOauth2",
+        "description": "List a collection of APIs OAuth 2.0 servers.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -303,13 +361,41 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedAuthorizationServer"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiAuthServersOauth2Resource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Apis.ApiAuthServersOauth2Resource[]",
+                  "description": "The ApiAuthServersOauth2Resource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiAuthServersOauth2Resource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiAuthServersOauth2Resource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -320,19 +406,31 @@
     },
     "/users/{userId}/apis/{apiId}/authServers/oauth2/{providerId}": {
       "get": {
-        "operationId": "Apis_GetApiOAuth2Provider",
-        "description": "Get OAuth 2.0 server specified by its identifier associated with the API.",
+        "operationId": "Apis_GetApiAuthServersOauth2",
+        "description": "Get the details of the APIs OAuth 2.0 server specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "name": "providerId",
             "in": "path",
             "required": true,
+            "description": "OAuth 2.0 server identifier.",
             "type": "string"
           }
         ],
@@ -345,8 +443,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -354,14 +458,25 @@
     },
     "/users/{userId}/apis/{apiId}/authServers/openidconnect": {
       "get": {
-        "operationId": "Apis_ListApiOpenidProviders",
-        "description": "List of OpenID Connect servers associated with the API.",
+        "operationId": "Apis_ListApiAuthServersOpenidconnect",
+        "description": "List a collection of APIs OpenID Connect servers.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -377,13 +492,41 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedAuthorizationServer"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiAuthServersOpenidconnectResource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Apis.ApiAuthServersOpenidconnectResource[]",
+                  "description": "The ApiAuthServersOpenidconnectResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiAuthServersOpenidconnectResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiAuthServersOpenidconnectResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -394,19 +537,31 @@
     },
     "/users/{userId}/apis/{apiId}/authServers/openidconnect/{providerId}": {
       "get": {
-        "operationId": "Apis_GetApiOpenidProvider",
-        "description": "Get OpenID Connect server specified by its identifier associated with the API.",
+        "operationId": "Apis_GetApiAuthServersOpenidconnect",
+        "description": "Get the details of the APIs OpenID Connect server specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "name": "providerId",
             "in": "path",
             "required": true,
+            "description": "OpenID Connect server identifier.",
             "type": "string"
           }
         ],
@@ -419,8 +574,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -429,13 +590,24 @@
     "/users/{userId}/apis/{apiId}/hostnames": {
       "get": {
         "operationId": "Apis_ListApiHostnames",
-        "description": "Hostnames of the API.",
+        "description": "List a collection of APIs hostnames.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -451,13 +623,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApiHostname"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiHostnameResource"
+                  },
+                  "x-typespec-name": "Resources.Apis.ApiHostnameResource[]",
+                  "description": "The ApiHostnameResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiHostnameResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiHostnameResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -469,13 +668,24 @@
     "/users/{userId}/apis/{apiId}/operations": {
       "get": {
         "operationId": "Apis_ListApiOperations",
-        "description": "Operations of the API.",
+        "description": "List a collection of APIs operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -491,13 +701,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedOperation"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiOperationResource"
+                  },
+                  "x-typespec-name": "Resources.Apis.ApiOperationResource[]",
+                  "description": "The ApiOperationResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiOperationResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiOperationResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -509,19 +746,30 @@
     "/users/{userId}/apis/{apiId}/operations/{operationId}": {
       "get": {
         "operationId": "Apis_GetApiOperation",
-        "description": "Operation specified by its identifier of the API.",
+        "description": "Get the details of the APIs operation specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "name": "operationId",
             "in": "path",
             "required": true,
-            "description": "The identifier of the operation.",
+            "description": "Operation identifier.",
             "type": "string"
           }
         ],
@@ -534,8 +782,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -544,13 +798,31 @@
     "/users/{userId}/apis/{apiId}/operations/{operationId}/tags": {
       "get": {
         "operationId": "Apis_ListApiOperationTags",
-        "description": "Operation tags specified by its identifier of the API.",
+        "description": "List a collection of APIs operation tags.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "description": "Operation identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -560,26 +832,46 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "description": "The identifier of the operation.",
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTag"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiOperationTagResource"
+                  },
+                  "x-typespec-name": "Resources.Apis.ApiOperationTagResource[]",
+                  "description": "The ApiOperationTagResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiOperationTagResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiOperationTagResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -591,13 +883,24 @@
     "/users/{userId}/apis/{apiId}/products": {
       "get": {
         "operationId": "Apis_ListApiProducts",
-        "description": "List of public products associated with the API.",
+        "description": "List a collection of APIs products.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -613,13 +916,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedProduct"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiProductResource"
+                  },
+                  "x-typespec-name": "Resources.Apis.ApiProductResource[]",
+                  "description": "The ApiProductResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiProductResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiProductResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -631,13 +961,24 @@
     "/users/{userId}/apis/{apiId}/releases": {
       "get": {
         "operationId": "Apis_ListApiReleases",
-        "description": "List of releases for the API.",
+        "description": "List a collection of APIs releases.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -653,13 +994,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApiRelease"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiReleaseResource"
+                  },
+                  "x-typespec-name": "Resources.Apis.ApiReleaseResource[]",
+                  "description": "The ApiReleaseResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiReleaseResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiReleaseResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -674,10 +1042,21 @@
         "description": "List a collection of APIs schemas.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -693,13 +1072,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApiSchema"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiSchemaResource"
+                  },
+                  "x-typespec-name": "Resources.Apis.ApiSchemaResource[]",
+                  "description": "The ApiSchemaResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiSchemaResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiSchemaResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -714,15 +1120,27 @@
         "description": "Get the details of the APIs schema specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "name": "schemaId",
             "in": "path",
             "required": true,
+            "description": "Api schema identifier.",
             "type": "string"
           }
         ],
@@ -735,8 +1153,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -745,13 +1169,24 @@
     "/users/{userId}/apis/{apiId}/tags": {
       "get": {
         "operationId": "Apis_ListApiTags",
-        "description": "Tags of the API.",
+        "description": "List a collection of APIs tags.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Apis.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -767,13 +1202,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedTag"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Apis.ApiTagResource"
+                  },
+                  "x-typespec-name": "Resources.Apis.ApiTagResource[]",
+                  "description": "The ApiTagResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiTagResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Apis.ApiTagResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -1457,6 +1919,19 @@
         "details"
       ]
     },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "A response containing error details.",
+      "required": [
+        "error"
+      ]
+    },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
       "properties": {
@@ -1473,6 +1948,11 @@
       "required": [
         "code"
       ]
+    },
+    "Common.UserResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Apis resource model."
     },
     "DeveloperServicesApi.Models.Api": {
       "type": "object",
@@ -3172,75 +3652,6 @@
         "value"
       ]
     },
-    "PagedApiHostname": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiHostname"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.ApiHostname[]",
-          "description": "The ApiHostname items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of ApiHostname items",
-      "required": [
-        "value"
-      ]
-    },
-    "PagedApiRelease": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiRelease"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.ApiRelease[]",
-          "description": "The ApiRelease items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of ApiRelease items",
-      "required": [
-        "value"
-      ]
-    },
-    "PagedApiSchema": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiSchema"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.ApiSchema[]",
-          "description": "The ApiSchema items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of ApiSchema items",
-      "required": [
-        "value"
-      ]
-    },
     "PagedApiVersionSet": {
       "type": "object",
       "properties": {
@@ -3264,30 +3675,6 @@
         "value"
       ]
     },
-    "PagedAuthorizationServer": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.AuthorizationServer"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesApi.Models.AuthorizationServer[]",
-          "description": "The AuthorizationServer items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of AuthorizationServer items",
-      "required": [
-        "value"
-      ]
-    },
     "PagedIdentityResult": {
       "type": "object",
       "properties": {
@@ -3307,29 +3694,6 @@
         }
       },
       "description": "Paged collection of IdentityResult items",
-      "required": [
-        "value"
-      ]
-    },
-    "PagedOperation": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.Operation"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.Operation[]",
-          "description": "The Operation items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of Operation items",
       "required": [
         "value"
       ]
@@ -3427,6 +3791,106 @@
         "value"
       ]
     },
+    "Resources.Apis.ApiAuthServersOauth2Resource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api OAuth 2.0 servers resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.AuthorizationServer"
+        }
+      ]
+    },
+    "Resources.Apis.ApiAuthServersOpenidconnectResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api OpenID Connect servers resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.AuthorizationServer"
+        }
+      ]
+    },
+    "Resources.Apis.ApiHostnameResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api hostnames resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiHostname"
+        }
+      ]
+    },
+    "Resources.Apis.ApiOperationResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api operations resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Operation"
+        }
+      ]
+    },
+    "Resources.Apis.ApiOperationTagResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api operation tags resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Tag"
+        }
+      ]
+    },
+    "Resources.Apis.ApiProductResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api products resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Product"
+        }
+      ]
+    },
+    "Resources.Apis.ApiReleaseResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api releases resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiRelease"
+        }
+      ]
+    },
+    "Resources.Apis.ApiResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Apis resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
+        }
+      ]
+    },
+    "Resources.Apis.ApiSchemaResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api schemas resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiSchema"
+        }
+      ]
+    },
+    "Resources.Apis.ApiTagResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api tags resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Tag"
+        }
+      ]
+    },
     "object": {
       "type": "object",
       "properties": {}
@@ -3438,6 +3902,16 @@
       "in": "query",
       "required": false,
       "description": "Filter the result list using the given expression.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "description": "The API version to use for this operation.",
+      "x-ms-client-name": "apiVersion",
+      "minLength": 1,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -3471,14 +3945,6 @@
       "name": "versionSetId",
       "in": "path",
       "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Resources.Apis.CommonParams": {
-      "name": "apiId",
-      "in": "path",
-      "required": true,
-      "description": "The identifier of the API.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },

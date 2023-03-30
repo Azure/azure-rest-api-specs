@@ -6,155 +6,211 @@ import "../../models/authorizationServer.tsp";
 import "../../models/product.tsp";
 import "../../models/operation.tsp";
 import "../../models/tag.tsp";
+import "../common.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
+using DeveloperServicesAuthorizedApi.Common;
 
 namespace DeveloperServicesAuthorizedApi.Resources.Apis;
 
-@route("/users/{userId}/apis")
-@doc("List a collection of APIs.")
-@get
-op ListApis(...UserParams, ...ListParams): ApiResponse<Page<Api>>;
+interface Apis {
+  @doc("List a collection of APIs.")
+  listApis is ResourceList<
+    ApiResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/users/{userId}/apis/{apiId}")
-@doc("Get the details of the API specified by its identifier.")
-@get
-op GetApi(
-  ...UserParams,
-  ...CommonParams,
-  @header accept?: ContentTypes,
-  @query export?: boolean
-): ApiResponse<TypedBody<Api, ContentTypes>>;
+  //TODO: find a workaround
+  @route("/users/{userId}/apis/{apiId}")
+  @doc("Get the details of the API specified by its identifier.")
+  @get
+  getApi(
+    ...Azure.Core.Foundations.ApiVersionParameter,
 
-@route("/users/{userId}/apis/{apiId}/schemas")
-@doc("List a collection of APIs schemas.")
-@get
-op ListApiSchemas(
-  ...UserParams,
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<ApiSchema>>;
+    @doc("User identifier.")
+    @path
+    userId: string,
 
-@route("/users/{userId}/apis/{apiId}/schemas/{schemaId}")
-@doc("Get the details of the APIs schema specified by its identifier.")
-@get
-op GetApiSchema(
-  ...UserParams,
-  ...CommonParams,
-  @path schemaId: string
-): ApiResponse<ApiSchema>;
+    @doc("API identifier.")
+    @path
+    apiId: string,
 
-@route("/users/{userId}/apis/{apiId}/authServers/oauth2")
-@doc("List of OAuth 2.0 servers associated with the API.")
-@get
-op ListApiOAuth2Providers(
-  ...UserParams,
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<AuthorizationServer>>;
+    @doc("If sent, the API will be exported in the specified format.")
+    @header
+    accept?: ContentTypes,
 
-@route("/users/{userId}/apis/{apiId}/authServers/oauth2/{providerId}")
-@doc("Get OAuth 2.0 server specified by its identifier associated with the API.")
-@get
-op GetApiOAuth2Provider(
-  ...UserParams,
-  ...CommonParams,
-  @path providerId: string
-): ApiResponse<AuthorizationServer>;
+    @doc("If true, the API will be exported in the specified format.")
+    @query
+    export?: boolean
+  ): ApiResponse<TypedBody<Api, ContentTypes>>;
 
-@route("/users/{userId}/apis/{apiId}/authServers/openidconnect")
-@doc("List of OpenID Connect servers associated with the API.")
-@get
-op ListApiOpenidProviders(
-  ...UserParams,
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<AuthorizationServer>>;
+  @doc("List a collection of APIs schemas.")
+  listApiSchemas is ResourceList<
+    ApiSchemaResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/users/{userId}/apis/{apiId}/authServers/openidconnect/{providerId}")
-@doc("Get OpenID Connect server specified by its identifier associated with the API.")
-@get
-op GetApiOpenidProvider(
-  ...UserParams,
-  ...CommonParams,
-  @path providerId: string
-): ApiResponse<AuthorizationServer>;
+  @doc("Get the details of the APIs schema specified by its identifier.")
+  getApiSchema is ResourceRead<ApiSchemaResource>;
 
-@route("/users/{userId}/apis/{apiId}/products")
-@doc("List of public products associated with the API.")
-@get
-op ListApiProducts(
-  ...UserParams,
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<Product>>;
+  @doc("List a collection of APIs OAuth 2.0 servers.")
+  listApiAuthServersOauth2 is ResourceList<
+    ApiAuthServersOauth2Resource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/users/{userId}/apis/{apiId}/releases")
-@doc("List of releases for the API.")
-@get
-op ListApiReleases(
-  ...UserParams,
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<ApiRelease>>;
+  @doc("Get the details of the APIs OAuth 2.0 server specified by its identifier.")
+  getApiAuthServersOauth2 is ResourceRead<ApiAuthServersOauth2Resource>;
 
-@route("/users/{userId}/apis/{apiId}/tags")
-@doc("Tags of the API.")
-@get
-op ListApiTags(
-  ...UserParams,
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<Tag>>;
+  @doc("List a collection of APIs OpenID Connect servers.")
+  listApiAuthServersOpenidconnect is ResourceList<
+    ApiAuthServersOpenidconnectResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/users/{userId}/apis/{apiId}/hostnames")
-@doc("Hostnames of the API.")
-@get
-op ListApiHostnames(
-  ...UserParams,
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<ApiHostname>>;
+  @doc("Get the details of the APIs OpenID Connect server specified by its identifier.")
+  getApiAuthServersOpenidconnect is ResourceRead<ApiAuthServersOpenidconnectResource>;
 
-@route("/users/{userId}/apis/{apiId}/operations")
-@doc("Operations of the API.")
-@get
-op ListApiOperations(
-  ...UserParams,
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<Operation>>;
+  @doc("List a collection of APIs products.")
+  listApiProducts is ResourceList<
+    ApiProductResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/users/{userId}/apis/{apiId}/operations/{operationId}")
-@doc("Operation specified by its identifier of the API.")
-@get
-op GetApiOperation(
-  ...UserParams,
-  ...CommonParams,
+  @doc("List a collection of APIs releases.")
+  listApiReleases is ResourceList<
+    ApiReleaseResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-  @doc("The identifier of the operation.")
-  @path
-  operationId: string
-): ApiResponse<Operation>;
+  @doc("List a collection of APIs tags.")
+  listApiTags is ResourceList<
+    ApiTagResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/users/{userId}/apis/{apiId}/operations/{operationId}/tags")
-@doc("Operation tags specified by its identifier of the API.")
-@get
-op ListApiOperationTags(
-  ...UserParams,
-  ...CommonParams,
-  ...ListParams,
+  @doc("List a collection of APIs hostnames.")
+  listApiHostnames is ResourceList<
+    ApiHostnameResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-  @doc("The identifier of the operation.")
-  @path
-  operationId: string
-): ApiResponse<Page<Tag>>;
+  @doc("List a collection of APIs operations.")
+  listApiOperations is ResourceList<
+    ApiOperationResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@doc("Common parameters.")
-model CommonParams {
-  @doc("The identifier of the API.")
-  @path
+  @doc("Get the details of the APIs operation specified by its identifier.")
+  getApiOperation is ResourceRead<ApiOperationResource>;
+
+  @doc("List a collection of APIs operation tags.")
+  listApiOperationTags is ResourceList<
+    ApiOperationTagResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
+
+@doc("Apis resource model.")
+@resource("apis")
+@parentResource(UserResource)
+model ApiResource extends Api {
+  @doc("API identifier.")
+  @key("apiId")
+  @visibility("query")
   apiId: string;
+}
+
+@doc("Api schemas resource model.")
+@resource("schemas")
+@parentResource(ApiResource)
+model ApiSchemaResource extends ApiSchema {
+  @doc("Api schema identifier.")
+  @key("schemaId")
+  @visibility("query")
+  schemaId: string;
+}
+
+@doc("Api OAuth 2.0 servers resource model.")
+@resource("authServers/oauth2")
+@parentResource(ApiResource)
+model ApiAuthServersOauth2Resource extends AuthorizationServer {
+  @doc("OAuth 2.0 server identifier.")
+  @key("providerId")
+  @visibility("query")
+  providerId: string;
+}
+
+@doc("Api OpenID Connect servers resource model.")
+@resource("authServers/openidconnect")
+@parentResource(ApiResource)
+model ApiAuthServersOpenidconnectResource extends AuthorizationServer {
+  @doc("OpenID Connect server identifier.")
+  @key("providerId")
+  @visibility("query")
+  providerId: string;
+}
+
+@doc("Api products resource model.")
+@resource("products")
+@parentResource(ApiResource)
+model ApiProductResource extends Product {
+  @doc("Product identifier.")
+  @key("productId")
+  @visibility("query")
+  productId: string;
+}
+
+@doc("Api releases resource model.")
+@resource("releases")
+@parentResource(ApiResource)
+model ApiReleaseResource extends ApiRelease {
+  @doc("Release identifier.")
+  @key("releaseId")
+  @visibility("query")
+  releaseId: string;
+}
+
+@doc("Api tags resource model.")
+@resource("tags")
+@parentResource(ApiResource)
+model ApiTagResource extends Tag {
+  @doc("Tag identifier.")
+  @key("tagId")
+  @visibility("query")
+  tagId: string;
+}
+
+@doc("Api hostnames resource model.")
+@resource("hostnames")
+@parentResource(ApiResource)
+model ApiHostnameResource extends ApiHostname {
+  @doc("Hostname identifier.")
+  @key("hostnameId")
+  @visibility("query")
+  hostnameId: string;
+}
+
+@doc("Api operations resource model.")
+@resource("operations")
+@parentResource(ApiResource)
+model ApiOperationResource extends Operation {
+  @doc("Operation identifier.")
+  @key("operationId")
+  @visibility("query")
+  operationId: string;
+}
+
+@doc("Api operation tags resource model.")
+@resource("tags")
+@parentResource(ApiOperationResource)
+model ApiOperationTagResource extends Tag {
+  @doc("Tag identifier.")
+  @key("tagId")
+  @visibility("query")
+  tagId: string;
 }
