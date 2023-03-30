@@ -26,7 +26,7 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-04
+tag: package-2022-10
 azure-validator: false
 ```
 
