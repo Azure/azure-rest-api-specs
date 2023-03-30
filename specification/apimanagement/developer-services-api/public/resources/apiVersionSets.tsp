@@ -12,15 +12,6 @@ using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Resources.ApiVersionSets;
 
-@doc("API version set resource model.")
-@resource("apiVersionSets")
-model ApiVersionSetResource extends Api {
-  @doc("API version set identifier.")
-  @key("versionSetId")
-  @visibility("query")
-  versionSetId: string;
-}
-
 interface ApiVersionSets {
   @doc("List a collection of API version sets.")
   listApiVersionSets is ResourceList<
@@ -30,6 +21,21 @@ interface ApiVersionSets {
 
   @doc("Get API version set specified by its identifier.")
   getApiVersionSet is ResourceRead<ApiVersionSetResource>;
+
+  @doc("List a collection of API version set APIs.")
+  listApiVersionSetApis is ResourceList<
+    ApiVersionSetApiResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
+
+@doc("API version set resource model.")
+@resource("apiVersionSets")
+model ApiVersionSetResource extends Api {
+  @doc("API version set identifier.")
+  @key("versionSetId")
+  @visibility("query")
+  versionSetId: string;
 }
 
 @doc("API version set' API resource model.")
@@ -40,12 +46,4 @@ model ApiVersionSetApiResource extends Api {
   @key("apiId")
   @visibility("query")
   apiId: string;
-}
-
-interface ApiVersionSetApis {
-  @doc("List a collection of API version set APIs.")
-  listApiVersionSetApis is ResourceList<
-    ApiVersionSetApiResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
 }

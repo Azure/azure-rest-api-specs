@@ -15,6 +15,100 @@ using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Resources.Apis;
 
+interface Apis {
+  @doc("List a collection of APIs.")
+  listApis is ResourceList<
+    ApiResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  //TODO: find a workaround
+  @route("/apis/{apiId}")
+  @doc("Get the details of the API specified by its identifier.")
+  @get
+  getApi(
+    ...Azure.Core.Foundations.ApiVersionParameter,
+
+    @doc("API identifier.")
+    @path
+    apiId: string,
+
+    @doc("If sent, the API will be exported in the specified format.")
+    @header
+    accept?: ContentTypes,
+
+    @doc("If true, the API will be exported in the specified format.")
+    @query
+    export?: boolean
+  ): ApiResponse<TypedBody<Api, ContentTypes>>;
+
+  @doc("List a collection of APIs schemas.")
+  listApiSchemas is ResourceList<
+    ApiSchemaResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("Get the details of the APIs schema specified by its identifier.")
+  getApiSchema is ResourceRead<ApiSchemaResource>;
+
+  @doc("List a collection of APIs OAuth 2.0 servers.")
+  listApiAuthServersOauth2 is ResourceList<
+    ApiAuthServersOauth2Resource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("Get the details of the APIs OAuth 2.0 server specified by its identifier.")
+  getApiAuthServersOauth2 is ResourceRead<ApiAuthServersOauth2Resource>;
+
+  @doc("List a collection of APIs OpenID Connect servers.")
+  listApiAuthServersOpenidconnect is ResourceList<
+    ApiAuthServersOpenidconnectResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("Get the details of the APIs OpenID Connect server specified by its identifier.")
+  getApiAuthServersOpenidconnect is ResourceRead<ApiAuthServersOpenidconnectResource>;
+
+  @doc("List a collection of APIs products.")
+  listApiProducts is ResourceList<
+    ApiProductResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("List a collection of APIs releases.")
+  listApiReleases is ResourceList<
+    ApiReleaseResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("List a collection of APIs tags.")
+  listApiTags is ResourceList<
+    ApiTagResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("List a collection of APIs hostnames.")
+  listApiHostnames is ResourceList<
+    ApiHostnameResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("List a collection of APIs operations.")
+  listApiOperations is ResourceList<
+    ApiOperationResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("Get the details of the APIs operation specified by its identifier.")
+  getApiOperation is ResourceRead<ApiOperationResource>;
+
+  @doc("List a collection of APIs operation tags.")
+  listApiOperationTags is ResourceList<
+    ApiOperationTagResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
+
 @doc("Apis resource model.")
 @resource("apis")
 model ApiResource extends Api {
@@ -23,32 +117,6 @@ model ApiResource extends Api {
   @visibility("query")
   apiId: string;
 }
-interface Apis {
-  @doc("List a collection of APIs.")
-  listApis is ResourceList<
-    ApiResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
-}
-
-@route("/apis/{apiId}")
-@doc("Get the details of the API specified by its identifier.")
-@get
-op getApi(
-  ...Azure.Core.Foundations.ApiVersionParameter,
-
-  @doc("API identifier.")
-  @path
-  apiId: string,
-
-  @doc("If sent, the API will be exported in the specified format.")
-  @header
-  accept?: ContentTypes,
-
-  @doc("If true, the API will be exported in the specified format.")
-  @query
-  export?: boolean
-): ApiResponse<TypedBody<Api, ContentTypes>>;
 
 @doc("Api schemas resource model.")
 @resource("schemas")
@@ -58,17 +126,6 @@ model ApiSchemaResource extends ApiSchema {
   @key("schemaId")
   @visibility("query")
   schemaId: string;
-}
-
-interface ApiSchemas {
-  @doc("List a collection of APIs schemas.")
-  listApiSchemas is ResourceList<
-    ApiSchemaResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
-
-  @doc("Get the details of the APIs schema specified by its identifier.")
-  getApiSchema is ResourceRead<ApiSchemaResource>;
 }
 
 @doc("Api OAuth 2.0 servers resource model.")
@@ -81,17 +138,6 @@ model ApiAuthServersOauth2Resource extends AuthorizationServer {
   providerId: string;
 }
 
-interface ApiAuthServersOauth2 {
-  @doc("List a collection of APIs OAuth 2.0 servers.")
-  listApiAuthServersOauth2 is ResourceList<
-    ApiAuthServersOauth2Resource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
-
-  @doc("Get the details of the APIs OAuth 2.0 server specified by its identifier.")
-  getApiAuthServersOauth2 is ResourceRead<ApiAuthServersOauth2Resource>;
-}
-
 @doc("Api OpenID Connect servers resource model.")
 @resource("authServers/openidconnect")
 @parentResource(ApiResource)
@@ -100,17 +146,6 @@ model ApiAuthServersOpenidconnectResource extends AuthorizationServer {
   @key("providerId")
   @visibility("query")
   providerId: string;
-}
-
-interface ApiAuthServersOpenidconnect {
-  @doc("List a collection of APIs OpenID Connect servers.")
-  listApiAuthServersOpenidconnect is ResourceList<
-    ApiAuthServersOpenidconnectResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
-
-  @doc("Get the details of the APIs OpenID Connect server specified by its identifier.")
-  getApiAuthServersOpenidconnect is ResourceRead<ApiAuthServersOpenidconnectResource>;
 }
 
 @doc("Api products resource model.")
@@ -123,14 +158,6 @@ model ApiProductResource extends Product {
   productId: string;
 }
 
-interface ApiProducts {
-  @doc("List a collection of APIs products.")
-  listApiProducts is ResourceList<
-    ApiProductResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
-}
-
 @doc("Api releases resource model.")
 @resource("releases")
 @parentResource(ApiResource)
@@ -139,14 +166,6 @@ model ApiReleaseResource extends ApiRelease {
   @key("releaseId")
   @visibility("query")
   releaseId: string;
-}
-
-interface ApiReleases {
-  @doc("List a collection of APIs releases.")
-  listApiReleases is ResourceList<
-    ApiReleaseResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
 }
 
 @doc("Api tags resource model.")
@@ -159,14 +178,6 @@ model ApiTagResource extends Tag {
   tagId: string;
 }
 
-interface ApiTags {
-  @doc("List a collection of APIs tags.")
-  listApiTags is ResourceList<
-    ApiTagResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
-}
-
 @doc("Api hostnames resource model.")
 @resource("hostnames")
 @parentResource(ApiResource)
@@ -175,14 +186,6 @@ model ApiHostnameResource extends ApiHostname {
   @key("hostnameId")
   @visibility("query")
   hostnameId: string;
-}
-
-interface ApiHostnames {
-  @doc("List a collection of APIs hostnames.")
-  listApiHostnames is ResourceList<
-    ApiHostnameResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
 }
 
 @doc("Api operations resource model.")
@@ -195,17 +198,6 @@ model ApiOperationResource extends Operation {
   operationId: string;
 }
 
-interface ApiOperations {
-  @doc("List a collection of APIs operations.")
-  listApiOperations is ResourceList<
-    ApiOperationResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
-
-  @doc("Get the details of the APIs operation specified by its identifier.")
-  getApiOperation is ResourceRead<ApiOperationResource>;
-}
-
 @doc("Api operation tags resource model.")
 @resource("tags")
 @parentResource(ApiOperationResource)
@@ -214,12 +206,4 @@ model ApiOperationTagResource extends Tag {
   @key("tagId")
   @visibility("query")
   tagId: string;
-}
-
-interface ApiOperationTags {
-  @doc("List a collection of APIs operation tags.")
-  listApiOperationTags is ResourceList<
-    ApiOperationTagResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
 }

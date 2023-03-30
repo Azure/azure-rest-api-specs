@@ -11,6 +11,14 @@ using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Resources.Configuration;
 
+interface Configurations {
+  @doc("Get content settings.")
+  getContentSettings is ResourceRead<ConfigurationContentResource>;
+
+  @doc("Get signup settings.")
+  getSignupSettings is ResourceRead<ConfigurationSignupResource>;
+}
+
 @doc("API configuration content resource model.")
 @resource("configuration")
 model ConfigurationContentResource extends ContentSettings {
@@ -27,12 +35,4 @@ model ConfigurationSignupResource extends SignupConfiguration {
   @key("id")
   @visibility("query")
   id: "signup";
-}
-
-interface Configurations {
-  @doc("Get content settings.")
-  getContentSettings is ResourceRead<ConfigurationContentResource>;
-
-  @doc("Get signup settings.")
-  getSignupSettings is ResourceRead<ConfigurationSignupResource>;
 }

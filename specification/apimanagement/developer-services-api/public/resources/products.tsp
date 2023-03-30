@@ -13,15 +13,6 @@ using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Resources.Products;
 
-@doc("Product resource model.")
-@resource("products")
-model ProductResource extends Product {
-  @doc("Product identifier.")
-  @key("productId")
-  @visibility("query")
-  productId: string;
-}
-
 interface Products {
   @doc("List a collection of products.")
   listProducts is ResourceList<
@@ -31,6 +22,27 @@ interface Products {
 
   @doc("Get the details of the product specified by its identifier.")
   getProduct is ResourceRead<ProductResource>;
+
+  @doc("List a collection of products APIs.")
+  listProductApis is ResourceList<
+    ProductApiResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("List a collection of products tags.")
+  listProductTags is ResourceList<
+    ProductTagResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
+
+@doc("Product resource model.")
+@resource("products")
+model ProductResource extends Product {
+  @doc("Product identifier.")
+  @key("productId")
+  @visibility("query")
+  productId: string;
 }
 
 @doc("Product APIs resource model.")
@@ -43,14 +55,6 @@ model ProductApiResource extends Api {
   apiId: string;
 }
 
-interface ProductApis {
-  @doc("List a collection of products APIs.")
-  listProductApis is ResourceList<
-    ProductApiResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
-}
-
 @doc("Product tags resource model.")
 @resource("tags")
 @parentResource(ProductResource)
@@ -59,12 +63,4 @@ model ProductTagResource extends Tag {
   @key("tagId")
   @visibility("query")
   tagId: string;
-}
-
-interface ProductTags {
-  @doc("List a collection of products tags.")
-  listProductTags is ResourceList<
-    ProductTagResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
 }

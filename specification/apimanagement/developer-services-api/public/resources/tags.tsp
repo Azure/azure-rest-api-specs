@@ -11,6 +11,14 @@ using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Resources.Tags;
 
+interface Tags {
+  @doc("List a collection of tags.")
+  listTags is ResourceList<
+    TagResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
+
 @doc("Tag resource model.")
 @resource("tags")
 model TagResource extends Tag {
@@ -18,12 +26,4 @@ model TagResource extends Tag {
   @key("tagId")
   @visibility("query")
   tagId: string;
-}
-
-interface Tags {
-  @doc("List a collection of tags.")
-  listTags is ResourceList<
-    TagResource,
-    ListQueryParametersTrait<DefaultListQueryParameters>
-  >;
 }
