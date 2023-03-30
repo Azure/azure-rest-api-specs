@@ -1463,33 +1463,58 @@
     },
     "/users/{userId}/identities": {
       "get": {
-        "operationId": "Confirmations_ListUserIdentities",
+        "operationId": "Identities_ListIdentities",
         "description": "List a collection of user identities.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedIdentityResult"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Confirmations.IdentityResource"
+                  },
+                  "x-typespec-name": "Resources.Confirmations.IdentityResource[]",
+                  "description": "The IdentityResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of IdentityResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Confirmations.IdentityResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -1500,7 +1525,7 @@
     },
     "/users/{userId}/identities/{provider}/{identity}": {
       "put": {
-        "operationId": "Confirmations_CreateOrUpdateUserIdentityProvider",
+        "operationId": "Identities_CreateOrUpdateUserIdentityProvider",
         "description": "Creates or updates the given user identity.",
         "parameters": [
           {
@@ -1536,8 +1561,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -3764,29 +3795,6 @@
         "value"
       ]
     },
-    "PagedIdentityResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityResult"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.IdentityResult[]",
-          "description": "The IdentityResult items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of IdentityResult items",
-      "required": [
-        "value"
-      ]
-    },
     "PagedProduct": {
       "type": "object",
       "properties": {
@@ -3997,6 +4005,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/DeveloperServicesApi.Models.Tag"
+        }
+      ]
+    },
+    "Resources.Confirmations.IdentityResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Identity resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityResult"
         }
       ]
     },
