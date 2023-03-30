@@ -2,10 +2,10 @@
   "swagger": "2.0",
   "info": {
     "version": "2023-03-01-preview",
-    "title": "intelligentdataexperiences",
+    "title": "aadcustomsecurityattributesdiagnosticsettings",
     "description": "Azure Active Directory Custom Security Logs Client.",
     "x-ms-code-generation-settings": {
-      "name": "intelligentdataexperiencesClient"
+      "name": "aadcustomsecurityattributesdiagnosticsettingsClient"
     }
   },
   "host": "management.azure.com",
@@ -36,10 +36,11 @@
         "x-ms-examples": {
           "Gets the operations": { "$ref": "./examples/listOperations.json" }
         },
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
         "description": "Operation to return the list of available operations.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -49,7 +50,7 @@
           },
           "default": {
             "description": "Error, failed to get list of AadCustomSecurityAttributesDiagnosticSettings operations.",
-            "schema": { "$ref": "#/definitions/ErrorResponse" }
+            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
           }
         }
       }
@@ -61,13 +62,13 @@
         "description": "Gets the active diagnostic settings list for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error. Request for AadCustomSecurityAttributesDiagnosticSettings diagnostic settings has failed",
-            "schema": { "$ref": "#/definitions/ErrorResponse" }
+            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
           },
           "200": {
             "description": "Successful request to get more information about AadCustomSecurityAttributesDiagnosticSettings diagnostic settings",
@@ -76,26 +77,27 @@
         },
         "x-ms-examples": {
           "Gets the diagnostic settings": { "$ref": "./examples/listDiagnosticSettings.json" }
-        }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     },
-    "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/diagnosticSettings/{name}": {
+    "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/diagnosticSettings/{diagnosticSettingName}": {
       "get": {
         "tags": ["DiagnosticSettings"],
         "operationId": "DiagnosticSettings_Get",
         "description": "Gets the active diagnostic setting for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/NameParameter"
+            "$ref": "#/parameters/DiagnosticSettingName"
           }
         ],
         "responses": {
           "default": {
             "description": "Error. Request for AadCustomSecurityAttributesDiagnosticSettings diagnostic setting has failed.",
-            "schema": { "$ref": "#/definitions/ErrorResponse" }
+            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
           },
           "200": {
             "description": "Successful request to get more information about diagnostic setting",
@@ -115,7 +117,7 @@
         "description": "Creates or updates diagnostic settings for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -125,7 +127,7 @@
             "description": "Parameters supplied to the operation."
           },
           {
-            "$ref": "#/parameters/NameParameter"
+            "$ref": "#/parameters/DiagnosticSettingName"
           }
         ],
         "responses": {
@@ -135,7 +137,7 @@
           },
           "default": {
             "description": "Error. The request to create diagnostic setting has failed.",
-            "schema": { "$ref": "#/definitions/ErrorResponse" }
+            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
           }
         }
       },
@@ -145,19 +147,18 @@
         "description": "Deletes existing diagnostic setting for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/NameParameter"
+            "$ref": "#/parameters/DiagnosticSettingName"
           }
         ],
         "responses": {
           "default": {
             "description": "Error. The request to delete named diagnostic setting has failed.",
-            "schema": { "$ref": "#/definitions/ErrorResponse" }
+            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
           },
-          "200": { "description": "Successful request to remove a diagnostic setting" },
-          "204": { "description": "Successful request to remove a diagnostic setting" }
+          "200": { "description": "Successful request to remove a diagnostic setting" }
         },
         "x-ms-examples": {
           "Deletes the diagnostic setting": { "$ref": "./examples/deleteDiagnosticSetting.json" }
@@ -171,13 +172,13 @@
         "description": "Lists the diagnostic settings categories for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "default": {
             "description": "Error. The request to view diagnostic setting categories has failed.",
-            "schema": { "$ref": "#/definitions/ErrorResponse" }
+            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
           },
           "200": {
             "description": "Successful request to get list of diagnostic setting categories",
@@ -186,38 +187,25 @@
         },
         "x-ms-examples": {
           "Gets the diagnostic setting categories": { "$ref": "./examples/listDiagnosticSettingsCategories.json" }
-        }
+        },
+        "x-ms-pageable": { "nextLinkName": "nextLink" }
       }
     }
   },
   "definitions": {
-    "ProxyOnlyResource": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        }
-      },
-      "x-ms-azure-resource": true,
-      "description": "A proxy only azure resource object.",
-      "type": "object"
-    },
     "RetentionPolicy": {
       "properties": {
         "enabled": {
-          "type": "boolean",
-          "description": "A value indicating whether the retention policy is enabled."
+          "type": "string",
+          "description": "A value indicating whether the retention policy is enabled.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "Enabled",
+            "modelAsString": true
+          }
         },
         "days": {
           "type": "integer",
@@ -248,8 +236,16 @@
           "description": "Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation."
         },
         "enabled": {
-          "type": "boolean",
-          "description": "A value indicating whether this log is enabled."
+          "type": "string",
+          "description": "A value indicating whether this log is enabled.",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "Enabled",
+            "modelAsString": true
+          }
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
@@ -296,7 +292,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -319,39 +315,6 @@
       "description": "Represents a collection of alert rule resources.",
       "type": "object"
     },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "description": "Description of the error.",
-          "type": "string",
-          "readOnly": true
-        },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": { "$ref": "#/definitions/ErrorDefinition" },
-          "readOnly": true,
-          "x-ms-identifiers": []
-        }
-      }
-    },
     "OperationsDiscoveryProperties": {
       "description": "ClientDiscovery properties.",
       "type": "object",
@@ -369,7 +332,7 @@
           "description": "The provider. The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
           "type": "string"
         },
-        "resource": {
+        "resourceType": {
           "description": "The resource. The localized friendly form of the resource related to this action/operation – it should match the public documentation for the resource provider. It should use Title Casing. This value should be unique for a particular URL type (e.g. nested types should *not* reuse their parent’s display.resource field). e.g. \"Virtual Machines\" or \"Scheduler Job Collections\", or \"Virtual Machine VM Sizes\" or \"Scheduler Jobs\"",
           "type": "string"
         },
@@ -404,6 +367,7 @@
           "type": "string"
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/OperationsDiscoveryProperties",
           "description": "Properties. Reserved for future use."
         }
@@ -441,7 +405,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyOnlyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -466,15 +430,7 @@
     }
   },
   "parameters": {
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "The API version to be used with the HTTP request.",
-      "x-ms-parameter-location": "client"
-    },
-    "NameParameter": {
+    "DiagnosticSettingName": {
       "name": "name",
       "in": "path",
       "required": true,
