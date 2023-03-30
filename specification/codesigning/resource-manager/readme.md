@@ -21,14 +21,12 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These settings apply only when `--tag=package-2020-12-14-preview` is specified on the command line.
-
+These are the global settings for the CodeSigning API.
 
 ```yaml
-title: CodeSigningManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2020-12-14-preview
+tag: package-2023-04-30-preview
 ```
 
 
@@ -39,6 +37,15 @@ These settings apply only when `--tag=package-2020-12-14-preview` is specified o
 ```yaml $(tag) == 'package-2020-12-14-preview'
 input-file:
 - Microsoft.CodeSigning/preview/2020-12-14-preview/codeSigningAccount.json
+```
+
+### Tag: package-2023-04-30-preview
+
+These settings apply only when `--tag=package-2023-04-30-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-04-30-preview'
+input-file:
+- Microsoft.CodeSigning/preview/2023-04-30-preview/codeSigningAccount.json
 ```
 
 ---
