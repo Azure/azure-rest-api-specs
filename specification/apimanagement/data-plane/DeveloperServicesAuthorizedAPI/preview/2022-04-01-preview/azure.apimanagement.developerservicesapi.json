@@ -1250,7 +1250,14 @@
         "description": "List a collection of API version sets.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -1266,13 +1273,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApiVersionSet"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.ApiVersionSets.ApiVersionSetResource"
+                  },
+                  "x-typespec-name": "Resources.ApiVersionSets.ApiVersionSetResource[]",
+                  "description": "The ApiVersionSetResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiVersionSetResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.ApiVersionSets.ApiVersionSetResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -1287,10 +1321,21 @@
         "description": "Get API version set specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.ApiVersionSets.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "versionSetId",
+            "in": "path",
+            "required": true,
+            "description": "API version set identifier.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1302,8 +1347,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -1312,10 +1363,24 @@
     "/users/{userId}/apiVersionSets/{versionSetId}/apis": {
       "get": {
         "operationId": "ApiVersionSets_ListApiVersionSetApis",
-        "description": "List a collection of API version set APIs specified by its identifier.",
+        "description": "List a collection of API version set APIs.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "versionSetId",
+            "in": "path",
+            "required": true,
+            "description": "API version set identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -1325,22 +1390,46 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Resources.ApiVersionSets.CommonParams"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApi"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.ApiVersionSets.ApiVersionSetApiResource"
+                  },
+                  "x-typespec-name": "Resources.ApiVersionSets.ApiVersionSetApiResource[]",
+                  "description": "The ApiVersionSetApiResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiVersionSetApiResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.ApiVersionSets.ApiVersionSetApiResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -3652,29 +3741,6 @@
         "value"
       ]
     },
-    "PagedApiVersionSet": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSet"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.ApiVersionSet[]",
-          "description": "The ApiVersionSet items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of ApiVersionSet items",
-      "required": [
-        "value"
-      ]
-    },
     "PagedIdentityResult": {
       "type": "object",
       "properties": {
@@ -3789,6 +3855,26 @@
       "description": "Paged collection of Tag items",
       "required": [
         "value"
+      ]
+    },
+    "Resources.ApiVersionSets.ApiVersionSetApiResource": {
+      "type": "object",
+      "properties": {},
+      "description": "API version set' API resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
+        }
+      ]
+    },
+    "Resources.ApiVersionSets.ApiVersionSetResource": {
+      "type": "object",
+      "properties": {},
+      "description": "API version set resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSet"
+        }
       ]
     },
     "Resources.Apis.ApiAuthServersOauth2Resource": {
@@ -3938,13 +4024,6 @@
       "in": "path",
       "required": true,
       "description": "The user identifier.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Resources.ApiVersionSets.CommonParams": {
-      "name": "versionSetId",
-      "in": "path",
-      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },

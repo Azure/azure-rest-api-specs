@@ -1,37 +1,50 @@
 import "@typespec/rest";
-import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/apiVersionSet.tsp";
 import "../../models/api.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
+using DeveloperServicesAuthorizedApi.Common;
 
 namespace DeveloperServicesAuthorizedApi.Resources.ApiVersionSets;
 
-@route("/users/{userId}/apiVersionSets")
-@doc("List a collection of API version sets.")
-@get
-op ListApiVersionSets(
-  ...UserParams,
-  ...ListParams
-): ApiResponse<Page<ApiVersionSet>>;
+interface ApiVersionSets {
+  @doc("List a collection of API version sets.")
+  listApiVersionSets is ResourceList<
+    ApiVersionSetResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/users/{userId}/apiVersionSets/{versionSetId}")
-@doc("Get API version set specified by its identifier.")
-@get
-op GetApiVersionSet(...UserParams, ...CommonParams): ApiResponse<ApiVersionSet>;
+  @doc("Get API version set specified by its identifier.")
+  getApiVersionSet is ResourceRead<ApiVersionSetResource>;
 
-@route("/users/{userId}/apiVersionSets/{versionSetId}/apis")
-@doc("List a collection of API version set APIs specified by its identifier.")
-@get
-op ListApiVersionSetApis(
-  ...UserParams,
-  ...ListParams,
-  ...CommonParams
-): ApiResponse<Page<Api>>;
+  @doc("List a collection of API version set APIs.")
+  listApiVersionSetApis is ResourceList<
+    ApiVersionSetApiResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
 
-model CommonParams {
-  @path versionSetId: string;
+@doc("API version set resource model.")
+@resource("apiVersionSets")
+@parentResource(UserResource)
+model ApiVersionSetResource extends ApiVersionSet {
+  @doc("API version set identifier.")
+  @key("versionSetId")
+  @visibility("query")
+  versionSetId: string;
+}
+
+@doc("API version set' API resource model.")
+@resource("apis")
+@parentResource(ApiVersionSetResource)
+model ApiVersionSetApiResource extends Api {
+  @doc("API identifier.")
+  @key("apiId")
+  @visibility("query")
+  apiId: string;
 }

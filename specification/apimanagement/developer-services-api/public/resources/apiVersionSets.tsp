@@ -1,5 +1,4 @@
 import "@typespec/rest";
-import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/apiVersionSet.tsp";
 import "../../models/api.tsp";
@@ -31,7 +30,7 @@ interface ApiVersionSets {
 
 @doc("API version set resource model.")
 @resource("apiVersionSets")
-model ApiVersionSetResource extends Api {
+model ApiVersionSetResource extends ApiVersionSet {
   @doc("API version set identifier.")
   @key("versionSetId")
   @visibility("query")

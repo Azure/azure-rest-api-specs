@@ -1,5 +1,4 @@
 import "@typespec/rest";
-import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/identity.tsp";
 

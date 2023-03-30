@@ -1059,7 +1059,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSet"
             }
           },
           "default": {
@@ -2069,6 +2069,74 @@
             "name": "GraphQL",
             "value": "graphql",
             "description": "API is a GraphQL API"
+          }
+        ]
+      }
+    },
+    "DeveloperServicesApi.Models.ApiVersionSet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "API Version Set identifier."
+        },
+        "name": {
+          "type": "string",
+          "description": "API Version Set name."
+        },
+        "description": {
+          "type": "string",
+          "description": "API Version Set description."
+        },
+        "versioningScheme": {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSetScheme",
+          "description": "Versioning scheme."
+        },
+        "versionQueryName": {
+          "type": "string",
+          "description": "Version query name."
+        },
+        "versionHeaderName": {
+          "type": "string",
+          "description": "Version header name."
+        }
+      },
+      "description": "API Version Set",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "versioningScheme",
+        "versionQueryName",
+        "versionHeaderName"
+      ]
+    },
+    "DeveloperServicesApi.Models.ApiVersionSetScheme": {
+      "type": "string",
+      "description": "Versioning scheme types.",
+      "enum": [
+        "Segment",
+        "Query",
+        "Header"
+      ],
+      "x-ms-enum": {
+        "name": "ApiVersionSetScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Segment",
+            "value": "Segment",
+            "description": "Use segment for versioning scheme"
+          },
+          {
+            "name": "Query",
+            "value": "Query",
+            "description": "Use query for versioning scheme"
+          },
+          {
+            "name": "Header",
+            "value": "Header",
+            "description": "Use header for versioning scheme"
           }
         ]
       }
@@ -3203,7 +3271,7 @@
       "description": "API version set resource model.",
       "allOf": [
         {
-          "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSet"
         }
       ]
     },
