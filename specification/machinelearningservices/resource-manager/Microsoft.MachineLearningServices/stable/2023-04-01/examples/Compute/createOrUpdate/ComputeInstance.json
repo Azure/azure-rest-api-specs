@@ -15,6 +15,40 @@
             "id": "test-subnet-resource-id"
           },
           "applicationSharingPolicy": "Personal",
+          "customServices": [
+            {
+              "docker": {
+                "privileged": true
+              },
+              "environmentVariables": {
+                "test_variable": {
+                  "type": "local",
+                  "value": "test_value"
+                }
+              },
+              "volumes": [
+                {
+                  "type": "bind",
+                  "read_only": false,
+                  "source": "/home/azureuser/cloudfiles",
+                  "target": "/home/azureuser/cloudfiles"
+                }
+              ],
+              "endpoints": [
+                {
+                  "name": "connect",
+                  "target": 8787,
+                  "published": 8787,
+                  "protocol": "http"
+                }
+              ],
+              "image": {
+                "type": "docker",
+                "reference": "ghcr.io/azure/rocker-rstudio-ml-verse:latest"
+              },
+              "name": "rstudio"
+            }
+          ],
           "sshSettings": {
             "sshPublicAccess": "Disabled"
           },

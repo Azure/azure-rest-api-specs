@@ -30,6 +30,45 @@
               "adminUserName": "azureuser",
               "sshPort": 22
             },
+            "osImageMetadata": {
+              "currentImageVersion": "22.06.14",
+              "latestImageVersion": "22.07.22",
+              "isLatestOsImageVersion": false
+            },
+            "customServices": [
+              {
+                "docker": {
+                  "privileged": true
+                },
+                "environmentVariables": {
+                  "test_var": {
+                    "type": "local",
+                    "value": "test_val"
+                  }
+                },
+                "volumes": [
+                  {
+                    "type": "bind",
+                    "read_only": false,
+                    "source": "/home/azureuser/cloudfiles",
+                    "target": "/home/azureuser/cloudfiles"
+                  }
+                ],
+                "endpoints": [
+                  {
+                    "name": "connect",
+                    "target": 8787,
+                    "published": 8787,
+                    "protocol": "http"
+                  }
+                ],
+                "image": {
+                  "type": "docker",
+                  "reference": "ghcr.io/azure/rocker-rstudio-ml-verse:latest"
+                },
+                "name": "rstudio"
+              }
+            ],
             "computeInstanceAuthorizationType": "personal",
             "personalComputeInstanceSettings": {
               "assignedUser": {

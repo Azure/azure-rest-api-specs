@@ -3597,6 +3597,22 @@
           "$ref": "#/definitions/ComputeInstanceSshSettings",
           "x-nullable": true
         },
+        "customServices": {
+          "type": "array",
+          "description": "List of Custom Services added to the compute.",
+          "x-nullable": true,
+          "items": {
+            "$ref": "#/definitions/CustomService"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "osImageMetadata": {
+          "readOnly": true,
+          "description": "Returns metadata about the operating system image for this compute instance.",
+          "$ref": "#/definitions/ImageMetadata"
+        },
         "connectivityEndpoints": {
           "readOnly": true,
           "description": "Describes all connectivity endpoints available for this ComputeInstance.",
@@ -4697,6 +4713,268 @@
         "userAssignedIdentity": {
           "description": "The ArmId of the user assigned identity that will be used to access the customer managed key vault",
           "type": "string"
+        }
+      }
+    },
+    "ImageMetadata": {
+      "type": "object",
+      "description": "Returns metadata about the operating system image for this compute instance.",
+      "properties": {
+        "currentImageVersion": {
+          "type": "string",
+          "description": "Specifies the current operating system image version this compute instance is running on."
+        },
+        "latestImageVersion": {
+          "type": "string",
+          "description": "Specifies the latest available operating system image version."
+        },
+        "isLatestOsImageVersion": {
+          "type": "boolean",
+          "description": "Specifies whether this compute instance is running on the latest operating system image."
+        }
+      }
+    },
+    "CustomService": {
+      "type": "object",
+      "description": "Specifies the custom service configuration",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the Custom Service"
+        },
+        "image": {
+          "$ref": "#/definitions/Image",
+          "description": "Describes the Image Specifications"
+        },
+        "environmentVariables": {
+          "type": "object",
+          "description": "Environment Variable for the container",
+          "additionalProperties": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          }
+        },
+        "docker": {
+          "description": "Describes the docker settings for the image",
+          "$ref": "#/definitions/Docker",
+          "x-nullable": true
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "Configuring the endpoints for the container",
+          "items": {
+            "$ref": "#/definitions/Endpoint"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "volumes": {
+          "type": "array",
+          "description": "Configuring the volumes for the container",
+          "items": {
+            "$ref": "#/definitions/VolumeDefinition"
+          },
+          "x-ms-identifiers": [
+            "source",
+            "target"
+          ]
+        }
+      },
+      "additionalProperties": true
+    },
+    "Image": {
+      "type": "object",
+      "description": "Describes the Image Specifications",
+      "properties": {
+        "type": {
+          "default": "docker",
+          "enum": [
+            "docker",
+            "azureml"
+          ],
+          "type": "string",
+          "title": "Type of the image",
+          "description": "Type of the image. Possible values are: docker - For docker images. azureml - For AzureML images",
+          "x-ms-enum": {
+            "name": "ImageType",
+            "modelAsString": true
+          }
+        },
+        "reference": {
+          "type": "string",
+          "description": "Image reference"
+        }
+      },
+      "additionalProperties": true
+    },
+    "EnvironmentVariable": {
+      "type": "object",
+      "description": "Environment Variables for the container",
+      "properties": {
+        "type": {
+          "enum": [
+            "local"
+          ],
+          "default": "local",
+          "title": "Type of Environment Variable",
+          "description": "Type of the Environment Variable. Possible values are: local - For local variable",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnvironmentVariableType",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the Environment variable"
+        }
+      },
+      "additionalProperties": true
+    },
+    "Docker": {
+      "type": "object",
+      "description": "Docker container configuration",
+      "properties": {
+        "privileged": {
+          "type": "boolean",
+          "description": "Indicate whether container shall run in privileged or non-privileged mode.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "Endpoint": {
+      "type": "object",
+      "description": "Describes the endpoint configuration for the container",
+      "properties": {
+        "protocol": {
+          "enum": [
+            "tcp",
+            "udp",
+            "http"
+          ],
+          "default": "tcp",
+          "title": "Endpoint Communication Protocol",
+          "description": "Protocol over which communication will happen over this endpoint",
+          "x-ms-enum": {
+            "name": "protocol",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the Endpoint"
+        },
+        "target": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Application port inside the container."
+        },
+        "published": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Port over which the application is exposed from container.",
+          "x-nullable": true
+        },
+        "hostIp": {
+          "description": "Host IP over which the application is exposed from the container",
+          "type": "string",
+          "x-nullable": true
+        }
+      }
+    },
+    "VolumeDefinition": {
+      "type": "object",
+      "description": "Describes the volume configuration for the container",
+      "properties": {
+        "type": {
+          "enum": [
+            "bind",
+            "volume",
+            "tmpfs",
+            "npipe"
+          ],
+          "default": "bind",
+          "title": "Type of Volume Definition",
+          "description": "Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe",
+          "x-ms-enum": {
+            "name": "VolumeDefinitionType",
+            "modelAsString": true
+          },
+          "type": "string"
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "Indicate whether to mount volume as readOnly. Default value for this is false.",
+          "x-nullable": true
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the mount. For bind mounts this is the host path."
+        },
+        "target": {
+          "type": "string",
+          "description": "Target of the mount. For bind mounts this is the path in the container."
+        },
+        "consistency": {
+          "type": "string",
+          "description": "Consistency of the volume"
+        },
+        "bind": {
+          "$ref": "#/definitions/BindOptions",
+          "description": "Bind Options of the mount"
+        },
+        "volume": {
+          "$ref": "#/definitions/VolumeOptions",
+          "description": "Volume Options of the mount"
+        },
+        "tmpfs": {
+          "$ref": "#/definitions/TmpfsOptions",
+          "description": "tmpfs option of the mount"
+        }
+      }
+    },
+    "VolumeOptions": {
+      "type": "object",
+      "description": "Describes the volume options for the container",
+      "properties": {
+        "nocopy": {
+          "type": "boolean",
+          "description": "Indicate whether volume is nocopy",
+          "x-nullable": true
+        }
+      }
+    },
+    "BindOptions": {
+      "type": "object",
+      "description": "Describes the bind options for the container",
+      "properties": {
+        "propagation": {
+          "type": "string",
+          "description": "Type of Bind Option",
+          "x-nullable": true
+        },
+        "createHostPath": {
+          "type": "boolean",
+          "description": "Indicate whether to create host path.",
+          "x-nullable": true
+        },
+        "selinux": {
+          "type": "string",
+          "description": "Mention the selinux options.",
+          "x-nullable": true
+        }
+      }
+    },
+    "TmpfsOptions": {
+      "description": "Describes the tmpfs options for the container",
+      "type": "object",
+      "properties": {
+        "size": {
+          "format": "int32",
+          "type": "integer",
+          "description": "Mention the Tmpfs size"
         }
       }
     },
