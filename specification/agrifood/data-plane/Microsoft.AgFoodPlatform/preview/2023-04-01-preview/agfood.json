@@ -19724,6 +19724,7 @@
       "required": [
         "authProviderId",
         "partyId",
+        "providerInput",
         "startYear"
       ],
       "type": "object",
@@ -19754,6 +19755,9 @@
           "description": "Use this to pull only the incremental changes from the last run.",
           "default": false,
           "type": "boolean"
+        },
+        "providerInput": {
+          "$ref": "#/definitions/FarmOperationJobProviderInput"
         },
         "id": {
           "description": "Unique job id.",
@@ -19835,6 +19839,22 @@
             "key1": "value1",
             "key2": 123.45
           }
+        }
+      }
+    },
+    "FarmOperationJobProviderInput": {
+      "description": "Schema for provider input for Farm operations job.",
+      "required": [
+        "shapeFileResolution",
+        "shapeFileType"
+      ],
+      "type": "object",
+      "properties": {
+        "shapeFileType": {
+          "$ref": "#/definitions/ShapeFileType"
+        },
+        "shapeFileResolution": {
+          "$ref": "#/definitions/ShapeFileResolution"
         }
       }
     },
@@ -23598,6 +23618,31 @@
             "modelAsString": true
           }
         }
+      }
+    },
+    "ShapeFileResolution": {
+      "description": "Resolution for shapefiles generated from farm operations job.\r\nPossible values of shape file type are taken from https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
+      "enum": [
+        "EachSection",
+        "EachSensor",
+        "OneHertz"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ShapeFileResolution",
+        "modelAsString": true
+      }
+    },
+    "ShapeFileType": {
+      "description": "Shape file type for shapefiles ingested through farm operations job.\r\nPossible values of shape file type are taken from https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
+      "enum": [
+        "Point",
+        "Polygon"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ShapeFileType",
+        "modelAsString": true
       }
     },
     "SoilMoistureModelJob": {
