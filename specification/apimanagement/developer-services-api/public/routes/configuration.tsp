@@ -1,18 +1,38 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/configuration.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.Core;
+using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Routes.Configuration;
 
-@route("/configuration/content")
-@doc("Get content settings.")
-@get
-op GetContentSettings(): ApiResponse<ContentSettings>;
+@doc("API version set resource model.")
+@resource("configuration")
+model ConfigurationContentResource extends ContentSettings {
+  @doc("Configuration content identifier.")
+  @key("id")
+  @visibility("query")
+  id: "content";
+}
 
-@route("/configuration/signup")
-@doc("Get signup settings.")
-@get
-op GetSignupSettings(): ApiResponse<SignupConfiguration>;
+@doc("API version set resource model.")
+@resource("configuration")
+model ConfigurationSignupResource extends SignupConfiguration {
+  @doc("Configuration signup identifier.")
+  @key("id")
+  @visibility("query")
+  id: "signup";
+}
+
+interface Configurations {
+  @doc("Get content settings.")
+  getContentSettings is ResourceRead<ConfigurationContentResource>;
+
+  @doc("Get signup settings.")
+  getSignupSettings is ResourceRead<ConfigurationSignupResource>;
+}

@@ -1126,9 +1126,13 @@
     },
     "/configuration/content": {
       "get": {
-        "operationId": "Configuration_GetContentSettings",
+        "operationId": "Configurations_GetContentSettings",
         "description": "Get content settings.",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -1138,8 +1142,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -1147,9 +1157,13 @@
     },
     "/configuration/signup": {
       "get": {
-        "operationId": "Configuration_GetSignupSettings",
+        "operationId": "Configurations_GetSignupSettings",
         "description": "Get signup settings.",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -1159,8 +1173,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -3156,6 +3176,26 @@
       "allOf": [
         {
           "$ref": "#/definitions/DeveloperServicesApi.Models.Tag"
+        }
+      ]
+    },
+    "Routes.Configuration.ConfigurationContentResource": {
+      "type": "object",
+      "properties": {},
+      "description": "API version set resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ContentSettings"
+        }
+      ]
+    },
+    "Routes.Configuration.ConfigurationSignupResource": {
+      "type": "object",
+      "properties": {},
+      "description": "API version set resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.SignupConfiguration"
         }
       ]
     },
