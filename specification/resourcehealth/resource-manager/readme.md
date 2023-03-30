@@ -168,14 +168,38 @@ csharp:
   client-side-validation: false
   namespace: ResourceHealth
   output-folder: $(csharp-sdks-folder)/resourcehealth/management/Microsoft.ResourceHealth/GeneratedProtocol
+```
 
 ## Go
 
-See configuration in [readme.go.md](./readme.go.md)
+These settings apply only when `--go` is specified on the command line.
+
+```yaml $(go) && $(track2)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+module-name: sdk/resourcemanager/resourcehealth/armresourcehealth
+module: github.com/Azure/azure-sdk-for-go/$(module-name)
+output-folder: $(go-sdk-folder)/$(module-name)
+```
 
 ## Python
 
-See configuration in [readme.python.md](./readme.python.md)
+These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(python)
+azure-arm: true
+license-header: MICROSOFT_MIT_NO_VERSION
+package-name: azure-mgmt-resourcehealth
+namespace: azure.mgmt.resourcehealth
+package-version: 1.0.0b1
+clear-output-folder: true
+```
+
+``` yaml $(python)
+no-namespace-folders: true
+output-folder: $(python-sdks-folder)/resourcehealth/azure-mgmt-resourcehealth/azure/mgmt/resourcehealth
+```
 
 ## Java
 
