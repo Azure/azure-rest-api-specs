@@ -210,7 +210,7 @@
           "description": "You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. The start and end points of the route cannot be viaWaypoints.",
           "minimum": 2,
           "items": {
-            "$ref": "#/definitions/WayAndViaWaypointFeaturesItem"
+            "$ref": "#/definitions/InputWaypointFeaturesItem"
           }
         },
         "travelMode": {
@@ -564,7 +564,7 @@
         }
       ]
     },
-    "WayAndViaWaypointFeaturesItem": {
+    "InputWaypointFeaturesItem": {
       "type": "object",
       "description": "Waypoint Feature Item",
       "properties": {
@@ -576,7 +576,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WayAndViaWaypointProperties"
+          "$ref": "#/definitions/InputWaypointProperties"
         }
       },
       "required": [
@@ -585,7 +585,7 @@
         "properties"
       ]
     },
-    "WayAndViaWaypointProperties": {
+    "InputWaypointProperties": {
       "type": "object",
       "description": "Waypoint properties",
       "properties": {
@@ -595,7 +595,7 @@
           "type": "integer"
         },
         "pointType": {
-          "$ref": "#/definitions/WayPointTypeEnum"
+          "$ref": "#/definitions/InputWaypointTypeEnum"
         }
       }
     },
@@ -740,10 +740,10 @@
               "readOnly": true
             },
             "trafficDataUsed": {
-              "$ref": "#/definitions/TrafficDataUsed"
+              "$ref": "#/definitions/TrafficDataUsedEnum"
             },
             "trafficCongestion": {
-              "$ref": "#/definitions/TrafficCongestion"
+              "$ref": "#/definitions/TrafficCongestionEnum"
             },
             "legs": {
               "description": "An array of route legs. Check RouteLeg object description for more information.",
@@ -761,8 +761,7 @@
       "description": "Feature properties",
       "properties": {
         "type": {
-          "description": "The type of the feature. Possible values are: 'ManeuverPoint', 'Waypoint', 'ViaWaypoint', 'RoutePath'.",
-          "type": "string"
+          "$ref": "#/definitions/FeaturePropertiesTypeEnum"
         }
       },
       "discriminator": "type",
@@ -770,7 +769,7 @@
         "type"
       ]
     },
-    "OutputTypeEnum": {
+    "FeaturePropertiesTypeEnum": {
       "description": "Output type",
       "type": "string",
       "readOnly": true,
@@ -781,7 +780,7 @@
         "RoutePath"
       ],
       "x-ms-enum": {
-        "name": "OutputTypeEnum",
+        "name": "PropertiesTypeEnum",
         "modelAsString": true,
         "values": [
           {
@@ -803,8 +802,8 @@
         ]
       }
     },
-    "WayPointTypeEnum": {
-      "description": "point type",
+    "InputWaypointTypeEnum": {
+      "description": "waypoint type",
       "type": "string",
       "default": "waypoint",
       "enum": [
@@ -812,7 +811,7 @@
         "viaWaypoint"
       ],
       "x-ms-enum": {
-        "name": "WayPointTypeEnum",
+        "name": "InputWaypointTypeEnum",
         "modelAsString": true,
         "values": [
           {
@@ -1474,7 +1473,7 @@
         ]
       }
     },
-    "TrafficDataUsed": {
+    "TrafficDataUsedEnum": {
       "description": "The type of real-time traffic data used to generate the route.",
       "type": "string",
       "enum": [
@@ -1484,7 +1483,7 @@
         "FlowAndClosure"
       ],
       "x-ms-enum": {
-        "name": "TrafficDataUsed",
+        "name": "TrafficDataUsedEnum",
         "modelAsString": true,
         "values": [
           {
@@ -1510,7 +1509,7 @@
         ]
       }
     },
-    "TrafficCongestion": {
+    "TrafficCongestionEnum": {
       "description": "The level of traffic congestion along the route.",
       "type": "string",
       "enum": [
@@ -1521,7 +1520,7 @@
         "Heavy"
       ],
       "x-ms-enum": {
-        "name": "TrafficCongestion",
+        "name": "TrafficCongestionEnum",
         "modelAsString": true,
         "values": [
           {
