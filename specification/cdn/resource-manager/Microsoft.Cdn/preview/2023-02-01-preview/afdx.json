@@ -5054,7 +5054,43 @@
         {
           "$ref": "#/definitions/SecretParameters"
         }
-      ]
+      ],
+      "properties": {
+        "secretSource": {
+          "description": "Resource reference to the Azure Key Vault certificate. Expected to be in format of /subscriptions/{​​​​​​​​​subscriptionId}​​​​​​​​​/resourceGroups/{​​​​​​​​​resourceGroupName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/providers/Microsoft.KeyVault/vaults/{vaultName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​/secrets/{certificateName}​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​",
+          "type": "object",
+          "$ref": "./cdn.json#/definitions/ResourceReference",
+          "readOnly": true
+        },
+        "subject": {
+          "description": "Subject name in the certificate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Certificate expiration date.",
+          "type": "string",
+          "readOnly": true
+        },
+        "certificateAuthority": {
+          "description": "Certificate issuing authority.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subjectAlternativeNames": {
+          "description": "The list of SANs.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "thumbprint": {
+          "description": "Certificate thumbprint.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
     },
     "RuleSetListResult": {
       "description": "Result of the request to list rule sets. It contains a list of rule set objects and a URL link to get the next set of results.",
@@ -5168,7 +5204,8 @@
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
-          "exclusiveMinimum": false
+          "exclusiveMinimum": false,
+          "default": 80
         },
         "httpsPort": {
           "description": "The value of the HTTPS port. Must be between 1 and 65535.",
@@ -5177,7 +5214,8 @@
           "format": "int32",
           "exclusiveMaximum": false,
           "minimum": 1,
-          "exclusiveMinimum": false
+          "exclusiveMinimum": false,
+          "default": 443
         },
         "originHostHeader": {
           "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure Front Door origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. This overrides the host header defined at Endpoint",
@@ -5486,7 +5524,11 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/AFDEndpointProtocols"
-          }
+          },
+          "default": [
+            "Http",
+            "Https"
+          ]
         },
         "patternsToMatch": {
           "description": "The route patterns of the rule.",
@@ -5512,7 +5554,8 @@
           "x-ms-enum": {
             "name": "ForwardingProtocol",
             "modelAsString": true
-          }
+          },
+          "default": "MatchRequest"
         },
         "linkToDefaultDomain": {
           "description": "whether this route will be linked to the default endpoint domain.",
@@ -5524,7 +5567,8 @@
           "x-ms-enum": {
             "name": "LinkToDefaultDomain",
             "modelAsString": true
-          }
+          },
+          "default": "Disabled"
         },
         "httpsRedirect": {
           "description": "Whether to automatically redirect HTTP traffic to HTTPS traffic. Note that this is a easy way to set up this rule and it will be the first rule that gets executed.",
@@ -5536,7 +5580,8 @@
           "x-ms-enum": {
             "name": "httpsRedirect",
             "modelAsString": true
-          }
+          },
+          "default": "Disabled"
         },
         "enabledState": {
           "description": "Whether to enable use of this rule. Permitted values are 'Enabled' or 'Disabled'",
@@ -5682,7 +5727,8 @@
           "x-ms-enum": {
             "name": "MatchProcessingBehavior",
             "modelAsString": true
-          }
+          },
+          "default": "Continue"
         }
       }
     },
