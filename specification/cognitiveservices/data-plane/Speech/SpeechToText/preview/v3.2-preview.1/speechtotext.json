@@ -422,7 +422,7 @@
           {
             "in": "formData",
             "name": "displayName",
-            "description": "The name of this dataset.",
+            "description": "The name of this dataset (required).",
             "required": true,
             "type": "string"
           },
@@ -435,14 +435,14 @@
           {
             "in": "formData",
             "name": "locale",
-            "description": "The locale of this dataset.",
+            "description": "The locale of this dataset (required).",
             "required": true,
             "type": "string"
           },
           {
             "in": "formData",
             "name": "kind",
-            "description": "The kind of the dataset. Possible values are \"Language\", \"Acoustic\", \"Pronunciation\", \"AudioFiles\", \"LanguageMarkdown\", \"OutputFormatting\".",
+            "description": "The kind of the dataset (required). Possible values are \"Language\", \"Acoustic\", \"Pronunciation\", \"AudioFiles\", \"LanguageMarkdown\".",
             "required": true,
             "type": "string"
           },
@@ -2136,7 +2136,7 @@
           "Custom Speech models:"
         ],
         "summary": "Copies a model from one subscription to another.",
-        "description": "This method is obsolete and will be removed in future API version. Please use models/{id}:copy instead.\r\nThis method can be used to copy a model from one speech resource to another one.\r\nOnly custom models can be copied to another speech resource.",
+        "description": "This method can be used to copy a model from one location to another. If the target subscription\r\nkey belongs to a subscription created for another location, the model will be copied to that location.\r\nOnly adapted models are allowed to copy to another subscription.",
         "operationId": "Models_CopyTo",
         "consumes": [
           "application/json"
@@ -2156,7 +2156,7 @@
           {
             "in": "body",
             "name": "modelCopy",
-            "description": "The body contains the key of the target speech resource.",
+            "description": "The body contains the subscription key of the target subscription.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ModelCopy"
@@ -2184,124 +2184,9 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
           "Copy a model": {
             "$ref": "./examples/copy_model.json"
-          }
-        }
-      }
-    },
-    "/models/{id}:copy": {
-      "post": {
-        "tags": [
-          "Custom Speech models:"
-        ],
-        "summary": "Copies a model from one subscription to another.",
-        "description": "This method can be used to copy a model from this speech resource to a target one.\r\nThe authorization is obtained on the target speech resource.\r\nOnly custom models can be copied to another speech resource.",
-        "operationId": "Models_Copy",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "description": "The identifier of the model that will be copied.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "in": "body",
-            "name": "modelCopyAuthorization",
-            "description": "The body contains the authorization to copy to the target speech resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModelCopyAuthorization"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The response contains information about the entity as payload and its location as header.",
-            "schema": {
-              "$ref": "#/definitions/CustomModel"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the created resource.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Copy a model from source resource to target resource": {
-            "$ref": "./examples/copy_model_with_authorization.json"
-          }
-        }
-      }
-    },
-    "/models:authorizecopy": {
-      "post": {
-        "tags": [
-          "Custom Speech models:"
-        ],
-        "summary": "Allows another speech resouce (source) to copy a model to this speech resource (target).",
-        "description": "This method can be used to allow copying a model from another speech resource.\r\nOnly custom models can be copied from another speech resource.",
-        "operationId": "Models_AuthorizeCopy",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "modelCopyAuthorizationDefinition",
-            "description": "The body contains the Azure Resource ID of the source speech resource.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ModelCopyAuthorizationDefinition"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The response contains information about the entity as payload and its location as header.",
-            "schema": {
-              "$ref": "#/definitions/ModelCopyAuthorization"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the created resource.",
-                "type": "string",
-                "format": "uri"
-              }
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create a copy model authorization on target resource": {
-            "$ref": "./examples/create_copy_model_authorization.json"
           }
         }
       }
@@ -3956,14 +3841,6 @@
             "$ref": "#/definitions/DatasetKind"
           },
           "readOnly": true
-        },
-        "supportedOutputFormat": {
-          "description": "Supported output formats.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutputFormatType"
-          },
-          "readOnly": true
         }
       }
     },
@@ -3988,11 +3865,6 @@
         },
         "features": {
           "$ref": "#/definitions/BaseModelFeatures"
-        },
-        "chargeForAdaptation": {
-          "description": "A value indicating whether model adaptation is charged.",
-          "type": "boolean",
-          "readOnly": true
         }
       }
     },
@@ -4134,7 +4006,7 @@
       "properties": {
         "copyTo": {
           "format": "uri",
-          "description": "The location to the model copy action. See operation \"Models_Copy\" for more details.",
+          "description": "The location to the model copy action. See operation \"Models_CopyTo\" for more details.",
           "type": "string",
           "readOnly": true
         },
@@ -4256,8 +4128,7 @@
         "Acoustic",
         "Pronunciation",
         "AudioFiles",
-        "LanguageMarkdown",
-        "OutputFormatting"
+        "LanguageMarkdown"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -4283,10 +4154,6 @@
           {
             "value": "LanguageMarkdown",
             "description": "A language markdown dataset."
-          },
-          {
-            "value": "OutputFormatting",
-            "description": "Dataset that contains rules to customize inverse text normalization, capitalization, reformulation, profanity and also defines tests for dataset validation"
           }
         ]
       }
@@ -4335,9 +4202,6 @@
       "title": "DatasetProperties",
       "type": "object",
       "properties": {
-        "textNormalizationKind": {
-          "$ref": "#/definitions/TextNormalizationKind"
-        },
         "acceptedLineCount": {
           "format": "int32",
           "description": "The number of lines accepted for this data set.",
@@ -5184,85 +5048,6 @@
       "title": "EvaluationProperties",
       "type": "object",
       "properties": {
-        "tokenErrorRate2": {
-          "format": "double",
-          "description": "The token error rate of recognition with model2.",
-          "type": "number",
-          "readOnly": true
-        },
-        "tokenErrorRate1": {
-          "format": "double",
-          "description": "The token error rate of recognition with model1.",
-          "type": "number",
-          "readOnly": true
-        },
-        "tokenCount2": {
-          "format": "int32",
-          "description": "The number of processed tokens by model2.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "correctTokenCount2": {
-          "format": "int32",
-          "description": "The number of correctly recognized tokens by model2.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenSubstitutionCount2": {
-          "format": "int32",
-          "description": "The number of recognized words by model2, that are substitutions.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenDeletionCount2": {
-          "format": "int32",
-          "description": "The number of recognized tokens by model2, that are deletions.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenInsertionCount2": {
-          "format": "int32",
-          "description": "The number of recognized tokens by model2, that are insertions.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenCount1": {
-          "format": "int32",
-          "description": "The number of processed tokens by model1.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "correctTokenCount1": {
-          "format": "int32",
-          "description": "The number of correctly recognized tokens by model1.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenSubstitutionCount1": {
-          "format": "int32",
-          "description": "The number of recognized tokens by model1, that are substitutions.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenDeletionCount1": {
-          "format": "int32",
-          "description": "The number of recognized tokens by model1, that are deletions.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "tokenInsertionCount1": {
-          "format": "int32",
-          "description": "The number of recognized tokens by model1, that are insertions.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "email": {
-          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
-          "type": "string"
-        },
-        "error": {
-          "$ref": "#/definitions/EntityError"
-        },
         "wordErrorRate2": {
           "format": "double",
           "description": "The word error rate of recognition with model2.",
@@ -5358,6 +5143,13 @@
           "description": "The number of recognized words by model1, that are insertions.",
           "type": "integer",
           "readOnly": true
+        },
+        "email": {
+          "description": "The email address to send email notifications to in case the operation completes.\r\nThe value will be removed after successfully sending the email.",
+          "type": "string"
+        },
+        "error": {
+          "$ref": "#/definitions/EntityError"
         }
       }
     },
@@ -5430,8 +5222,7 @@
         "Transcription",
         "TranscriptionReport",
         "EvaluationDetails",
-        "ModelReport",
-        "OutputFormattingData"
+        "ModelReport"
       ],
       "type": "string",
       "readOnly": true,
@@ -5478,10 +5269,6 @@
           {
             "value": "ModelReport",
             "description": "Type of data is model report."
-          },
-          {
-            "value": "OutputFormattingData",
-            "description": "Type of data is output formatting input file."
           }
         ]
       }
@@ -5572,31 +5359,6 @@
         }
       }
     },
-    "LanguageIdentificationMode": {
-      "title": "LanguageIdentificationMode",
-      "description": "The mode used for language identification.",
-      "default": "Continuous",
-      "enum": [
-        "Continuous",
-        "Dominant"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "LanguageIdentificationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Continuous",
-            "description": "Continuous language identification (Default)."
-          },
-          {
-            "value": "Dominant",
-            "description": "Dominant language identification."
-          }
-        ],
-        "default": "Continuous"
-      }
-    },
     "LanguageIdentificationProperties": {
       "title": "LanguageIdentificationProperties",
       "required": [
@@ -5604,9 +5366,6 @@
       ],
       "type": "object",
       "properties": {
-        "mode": {
-          "$ref": "#/definitions/LanguageIdentificationMode"
-        },
         "candidateLocales": {
           "description": "The candidate locales for language identification (example [\"en-US\", \"de-DE\", \"es-ES\"]). A minimum of 2 and a maximum of 10 candidate locales, including the main locale for the transcription, is supported.",
           "type": "array",
@@ -5632,64 +5391,6 @@
       "properties": {
         "targetSubscriptionKey": {
           "description": "The subscription key of the subscription that is the target of the copy operation.",
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
-    "ModelCopyAuthorization": {
-      "title": "ModelCopyAuthorization",
-      "required": [
-        "expirationDateTime",
-        "id",
-        "sourceResourceId",
-        "targetResourceEndpoint",
-        "targetResourceId",
-        "targetResourceRegion"
-      ],
-      "type": "object",
-      "properties": {
-        "targetResourceRegion": {
-          "description": "The region (aka location) of the target speech resource (e.g., westus2).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "targetResourceId": {
-          "description": "The Azure Resource ID of the target speech resource.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "targetResourceEndpoint": {
-          "description": "The endpoint (base url) of the target resource (with custom domain name when it is used).",
-          "minLength": 1,
-          "type": "string"
-        },
-        "sourceResourceId": {
-          "description": "The Azure Resource ID of the source speech resource.",
-          "minLength": 1,
-          "type": "string"
-        },
-        "expirationDateTime": {
-          "format": "date-time",
-          "description": "The expiration date of this copy authorization.",
-          "type": "string"
-        },
-        "id": {
-          "description": "The ID of this copy authorization.",
-          "minLength": 1,
-          "type": "string"
-        }
-      }
-    },
-    "ModelCopyAuthorizationDefinition": {
-      "title": "ModelCopyAuthorizationDefinition",
-      "required": [
-        "sourceResourceId"
-      ],
-      "type": "object",
-      "properties": {
-        "sourceResourceId": {
-          "description": "The Azure Resource ID of the source speech resource.",
           "minLength": 1,
           "type": "string"
         }
@@ -5762,28 +5463,6 @@
         "project": {
           "$ref": "#/definitions/EntityReference"
         }
-      }
-    },
-    "OutputFormatType": {
-      "title": "OutputFormatType",
-      "enum": [
-        "Lexical",
-        "Display"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "OutputFormatType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Lexical",
-            "description": "Model provides the transcription output without formatting."
-          },
-          {
-            "value": "Display",
-            "description": "Model supports display formatting transcriptions output or endpoints."
-          }
-        ]
       }
     },
     "PaginatedBaseModels": {
@@ -6309,29 +5988,6 @@
           {
             "value": "Failed",
             "description": "The long running operation has failed."
-          }
-        ]
-      }
-    },
-    "TextNormalizationKind": {
-      "title": "TextNormalizationKind",
-      "description": "The kind of text normalization.",
-      "enum": [
-        "Default",
-        "Minimal"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "TextNormalizationKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Default",
-            "description": "Default text normalization (e.g. '2 to 3' is replaced by 'two to three' in en-US)."
-          },
-          {
-            "value": "Minimal",
-            "description": "This only removes characters that are not supported by the locale."
           }
         ]
       }
