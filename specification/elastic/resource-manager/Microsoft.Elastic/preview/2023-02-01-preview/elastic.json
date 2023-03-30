@@ -65,6 +65,50 @@
         }
       }
     },
+    "/providers/Microsoft.Elastic/listElasticVersions": {
+      "get": {
+        "tags": [
+          "ElasticVersions"
+        ],
+        "summary": "Get a list of available versions for a region.",
+        "operationId": "ElasticVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "region",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "subscriptionId",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticVersionsListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticVersions_Get": {
+            "$ref": "./examples/ElasticVersions_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/monitors": {
       "get": {
         "tags": [
@@ -1955,6 +1999,17 @@
         "action": {
           "description": "Valid actions for a filtering tag.",
           "$ref": "#/definitions/TagAction"
+        }
+      }
+    },
+    "ElasticVersionsListResponse": {
+      "type": "object",
+      "properties": {
+        "versions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
