@@ -186,7 +186,7 @@
             "required": true,
             "description": "Review to update request object",
             "schema": {
-              "$ref": "#/definitions/ArmProxyResourceOfUpdateReviewRequest"
+              "$ref": "#/definitions/ArmPropertiesOfUpdateReviewRequest"
             }
           },
           {
@@ -200,7 +200,7 @@
           "200": {
             "description": "Returns the updated review object",
             "schema": {
-              "$ref": "#/definitions/ArmPatchReviewDto"
+              "$ref": "#/definitions/ArmProxyResourceOfReviewDto"
             }
           },
           "default": {
@@ -371,7 +371,7 @@
             "required": true,
             "description": "A comment update request including the new content of the comment",
             "schema": {
-              "$ref": "#/definitions/ArmProxyResourceOfUpsertCommentRequest"
+              "$ref": "#/definitions/ArmPropertiesOfUpsertCommentRequest"
             }
           },
           {
@@ -708,7 +708,7 @@
         }
       }
     },
-    "ArmProxyResourceOfUpdateReviewRequest": {
+    "ArmPropertiesOfUpdateReviewRequest": {
       "type": "object",
       "properties": {
         "properties": {
@@ -721,7 +721,7 @@
         }
       }
     },
-    "ArmPatchReviewDto": {
+    "ArmProxyResourceOfReviewDto": {
       "type": "object",
       "allOf": [
         {
@@ -864,7 +864,7 @@
         }
       }
     },
-    "ArmProxyResourceOfUpsertCommentRequest": {
+    "ArmPropertiesOfUpsertCommentRequest": {
       "type": "object",
       "properties": {
         "id": {
