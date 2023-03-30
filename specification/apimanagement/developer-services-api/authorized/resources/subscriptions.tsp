@@ -4,70 +4,99 @@ import "../../models/common.tsp";
 import "../../models/subscription.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
+using DeveloperServicesAuthorizedApi.Common;
 
 namespace DeveloperServicesAuthorizedApi.Resources.Subscriptions;
 
-@route("/users/{userId}/subscriptions")
-@doc("List a collection of user subscriptions.")
-@get
-op ListUserSubscriptions(
-  ...UserParams,
-  ...ListParams
-): ApiResponse<Page<Subscription>>;
+interface Subscriptions {
+  @doc("List a collection of user subscriptions.")
+  listUserSubscriptions is ResourceList<
+    SubscriptionResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/users/{userId}/subscriptions/{subscriptionId}")
-@doc("Get user subscription by its identifier.")
-@get
-op GetUserSubscription(
-  ...UserParams,
-  ...CommonParams
-): ApiResponse<Subscription>;
+  @doc("Get user subscription by its identifier.")
+  getUserSubscription is ResourceRead<SubscriptionResource>;
 
-@route("/users/{userId}/subscriptions/{subscriptionId}")
-@doc("Create user subscription.")
-@post
-op CreateUserSubscription(
-  ...UserParams,
-  ...CommonParams,
+  @route("/users/{userId}/subscriptions/{subscriptionId}")
+  @doc("Create user subscription.")
+  @post
+  CreateUserSubscription(
+    ...Azure.Core.Foundations.ApiVersionParameter,
 
-  @doc("User subscription create model.")
-  @body
-  userSubscriptionCreate: UserSubscriptionCreate
-): NoContentResponse | ErrorResponse;
+    @doc("Subscription identifier.")
+    @path
+    subscriptionId: string,
 
-@route("/users/{userId}/subscriptions/{subscriptionId}")
-@doc("Update user subscription.")
-@patch
-op UpdateUserSubscription(
-  ...UserParams,
-  ...CommonParams,
+    @doc("User identifier.")
+    @path
+    userId: string,
 
-  @doc("User subscription update model.")
-  @body
-  userSubscriptionUpdate: UserSubscriptionUpdate
-): NoContentResponse | ErrorResponse;
+    @doc("User subscription create model.")
+    @body
+    userSubscriptionCreate: UserSubscriptionCreate
+  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
 
-@route("/users/{userId}/subscriptions/{subscriptionId}/regeneratePrimaryKey")
-@doc("Regenerate subscription primary key.")
-@post
-op RegenerateUserSubscriptionPrimaryKey(
-  ...UserParams,
-  ...CommonParams
-): NoContentResponse | ErrorResponse;
+  @route("/users/{userId}/subscriptions/{subscriptionId}")
+  @doc("Update user subscription.")
+  @patch
+  UpdateUserSubscription(
+    ...Azure.Core.Foundations.ApiVersionParameter,
 
-@route("/users/{userId}/subscriptions/{subscriptionId}/regenerateSecondaryKey")
-@doc("Regenerate subscription secondary key.")
-@post
-op RegenerateUserSubscriptionSecondaryKey(
-  ...UserParams,
-  ...CommonParams
-): NoContentResponse | ErrorResponse;
+    @doc("Subscription identifier.")
+    @path
+    subscriptionId: string,
 
-@doc("Common parameters.")
-model CommonParams {
+    @doc("User identifier.")
+    @path
+    userId: string,
+
+    @doc("User subscription update model.")
+    @body
+    userSubscriptionUpdate: UserSubscriptionUpdate
+  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+
+  @route("/users/{userId}/subscriptions/{subscriptionId}/regeneratePrimaryKey")
+  @doc("Regenerate subscription primary key.")
+  @post
+  RegenerateUserSubscriptionPrimaryKey(
+    ...Azure.Core.Foundations.ApiVersionParameter,
+
+    @doc("Subscription identifier.")
+    @path
+    subscriptionId: string,
+
+    @doc("User identifier.")
+    @path
+    userId: string
+  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+
+  @route("/users/{userId}/subscriptions/{subscriptionId}/regenerateSecondaryKey")
+  @doc("Regenerate subscription secondary key.")
+  @post
+  RegenerateUserSubscriptionSecondaryKey(
+    ...Azure.Core.Foundations.ApiVersionParameter,
+
+    @doc("Subscription identifier.")
+    @path
+    subscriptionId: string,
+
+    @doc("User identifier.")
+    @path
+    userId: string
+  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+}
+
+@doc("Subscription resource model.")
+@resource("subscriptions")
+@parentResource(UserResource)
+model SubscriptionResource extends Subscription {
   @doc("Subscription identifier.")
-  @path
+  @key("subscriptionId")
+  @visibility("query")
   subscriptionId: string;
 }

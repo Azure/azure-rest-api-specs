@@ -1924,7 +1924,14 @@
         "description": "List a collection of user subscriptions.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -1940,13 +1947,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedSubscription"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Subscriptions.SubscriptionResource"
+                  },
+                  "x-typespec-name": "Resources.Subscriptions.SubscriptionResource[]",
+                  "description": "The SubscriptionResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of SubscriptionResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Subscriptions.SubscriptionResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -1961,10 +1995,21 @@
         "description": "Get user subscription by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Subscriptions.CommonParams"
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "description": "Subscription identifier.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1976,8 +2021,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -1987,10 +2038,21 @@
         "description": "Create user subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Subscriptions.CommonParams"
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "description": "Subscription identifier.",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "name": "userSubscriptionCreate",
@@ -2008,8 +2070,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -2019,10 +2087,21 @@
         "description": "Update user subscription.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Subscriptions.CommonParams"
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "description": "Subscription identifier.",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "name": "userSubscriptionUpdate",
@@ -2040,8 +2119,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -2053,10 +2138,21 @@
         "description": "Regenerate subscription primary key.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Subscriptions.CommonParams"
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "description": "Subscription identifier.",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2065,8 +2161,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -2078,10 +2180,21 @@
         "description": "Regenerate subscription secondary key.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Resources.Subscriptions.CommonParams"
+            "name": "subscriptionId",
+            "in": "path",
+            "required": true,
+            "description": "Subscription identifier.",
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2090,8 +2203,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -3928,29 +4047,6 @@
         "value"
       ]
     },
-    "PagedSubscription": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.Subscription"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.Subscription[]",
-          "description": "The Subscription items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of Subscription items",
-      "required": [
-        "value"
-      ]
-    },
     "PagedTag": {
       "type": "object",
       "properties": {
@@ -4134,6 +4230,16 @@
         }
       ]
     },
+    "Resources.Subscriptions.SubscriptionResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Subscription resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Subscription"
+        }
+      ]
+    },
     "object": {
       "type": "object",
       "properties": {}
@@ -4181,14 +4287,6 @@
       "in": "path",
       "required": true,
       "description": "The user identifier.",
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "Resources.Subscriptions.CommonParams": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "description": "Subscription identifier.",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
