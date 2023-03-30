@@ -4,9 +4,9 @@
     "title": "Anomaly Detector",
     "version": "v1.1",
     "description": "The Anomaly Detector API detects anomalies automatically in time series data.\nIt supports both a stateless detection mode and a\nstateful detection mode. In stateless mode, there are three functionalities. Entire\nDetect is for detecting the whole series, with the model trained by the time series.\nLast Detect is for detecting the last point, with the model trained by points before.\nChangePoint Detect is for detecting trend changes in the time series. In stateful\nmode, the user can store time series. The stored time series will be used for\ndetection anomalies. In this mode, the user can still use the preceding three\nfunctionalities by only giving a time range without preparing time series on the\nclient side. Besides the preceding three functionalities, the stateful model\nprovides group-based detection and labeling services. By using the labeling\nservice, the user can provide labels for each detection result. These labels will be\nused for retuning or regenerating detection models. Inconsistency detection is\na kind of group-based detection that finds inconsistencies in\na set of time series. By using the anomaly detector service, business customers can\ndiscover incidents and establish a logic flow for root cause analysis.",
-    "x-cadl-generated": [
+    "x-typespec-generated": [
       {
-        "emitter": "@azure-tools/cadl-autorest"
+        "emitter": "@azure-tools/typespec-autorest"
       }
     ]
   },
@@ -88,7 +88,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -137,7 +137,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -186,7 +186,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -224,10 +224,10 @@
         ],
         "responses": {
           "204": {
-            "description": "There is no content to send for this request, but the headers might be useful."
+            "description": "There is no content to send for this request, but the headers may be useful. "
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -266,7 +266,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -310,7 +310,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet finished.",
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
               "operation-id": {
                 "description": "ID of the detection result.",
@@ -326,7 +326,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -376,7 +376,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -419,7 +419,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -462,7 +462,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -505,7 +505,7 @@
             }
           },
           "default": {
-            "description": "Unexpected error response.",
+            "description": "An unexpected error response.",
             "headers": {
               "x-ms-error-code": {
                 "description": "Error code.",
@@ -578,7 +578,8 @@
         "modelId": {
           "type": "string",
           "description": "Model identifier.",
-          "format": "uuid"
+          "format": "uuid",
+          "readOnly": true
         },
         "createdTime": {
           "type": "string",
@@ -639,7 +640,7 @@
             "$ref": "#/definitions/Multivariate.ErrorResponse"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.ErrorResponse[]",
+          "x-typespec-name": "Multivariate.ErrorResponse[]",
           "description": "Error message for the current time stamp."
         }
       },
@@ -675,7 +676,7 @@
             "$ref": "#/definitions/Multivariate.AnomalyInterpretation"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.AnomalyInterpretation[]",
+          "x-typespec-name": "Multivariate.AnomalyInterpretation[]",
           "description": "Interpretation of this anomalous time stamp."
         }
       },
@@ -694,7 +695,7 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
+          "x-typespec-name": "string[]",
           "description": "Correlated variables that have correlation changes under an anomaly."
         }
       },
@@ -737,7 +738,7 @@
             "$ref": "#/definitions/Multivariate.VariableState"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.VariableState[]",
+          "x-typespec-name": "Multivariate.VariableState[]",
           "description": "Variable status."
         }
       },
@@ -821,7 +822,7 @@
             "$ref": "#/definitions/Multivariate.ErrorResponse"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.ErrorResponse[]",
+          "x-typespec-name": "Multivariate.ErrorResponse[]",
           "description": "Error messages after failure to create a model.",
           "readOnly": true
         },
@@ -846,7 +847,7 @@
             "$ref": "#/definitions/Multivariate.AnomalyDetectionModel"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.AnomalyDetectionModel[]",
+          "x-typespec-name": "Multivariate.AnomalyDetectionModel[]",
           "description": "List of models."
         },
         "currentCount": {
@@ -880,7 +881,7 @@
             "type": "integer",
             "format": "int32"
           },
-          "x-cadl-name": "int32[]",
+          "x-typespec-name": "int32[]",
           "description": "Number of passes of the entire training dataset that the\nalgorithm has completed."
         },
         "trainLosses": {
@@ -889,7 +890,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "List of metrics used to assess how the model fits the training data for each\nepoch."
         },
         "validationLosses": {
@@ -898,7 +899,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "List of metrics used to assess how the model fits the validation set for each\nepoch."
         },
         "latenciesInSeconds": {
@@ -907,7 +908,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "Latency for each epoch."
         }
       },
@@ -988,7 +989,7 @@
             "$ref": "#/definitions/Multivariate.ErrorResponse"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.ErrorResponse[]",
+          "x-typespec-name": "Multivariate.ErrorResponse[]",
           "description": "Error message when detection fails."
         },
         "variableStates": {
@@ -997,7 +998,7 @@
             "$ref": "#/definitions/Multivariate.VariableState"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.VariableState[]",
+          "x-typespec-name": "Multivariate.VariableState[]",
           "description": "Variable status."
         },
         "setupInfo": {
@@ -1048,7 +1049,8 @@
         "resultId": {
           "type": "string",
           "description": "Result identifier that's used to fetch the results of an inference call.",
-          "format": "uuid"
+          "format": "uuid",
+          "readOnly": true
         },
         "summary": {
           "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionResultSummary",
@@ -1060,7 +1062,7 @@
             "$ref": "#/definitions/Multivariate.AnomalyState"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.AnomalyState[]",
+          "x-typespec-name": "Multivariate.AnomalyState[]",
           "description": "Detection result for each time stamp."
         }
       },
@@ -1080,7 +1082,7 @@
             "$ref": "#/definitions/Multivariate.VariableValues"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.VariableValues[]",
+          "x-typespec-name": "Multivariate.VariableValues[]",
           "description": "Contains the inference data, including the name, time stamps (ISO 8601), and\nvalues of variables."
         },
         "topContributorCount": {
@@ -1104,7 +1106,7 @@
             "$ref": "#/definitions/Multivariate.VariableState"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.VariableState[]",
+          "x-typespec-name": "Multivariate.VariableState[]",
           "description": "Variable status."
         },
         "results": {
@@ -1113,7 +1115,7 @@
             "$ref": "#/definitions/Multivariate.AnomalyState"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Multivariate.AnomalyState[]",
+          "x-typespec-name": "Multivariate.AnomalyState[]",
           "description": "Anomaly status and information."
         }
       },
@@ -1181,8 +1183,8 @@
           "items": {
             "type": "string"
           },
-          "x-cadl-name": "string[]",
-          "description": "Time stamp of the last detection request."
+          "x-typespec-name": "string[]",
+          "description": "Time stamps of the last detection request."
         },
         "values": {
           "type": "array",
@@ -1190,7 +1192,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "Values of variables."
         }
       },
@@ -1360,7 +1362,7 @@
             "$ref": "#/definitions/Univariate.TimeSeriesPoint"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Univariate.TimeSeriesPoint[]",
+          "x-typespec-name": "Univariate.TimeSeriesPoint[]",
           "description": "Time series data points. Points should be sorted by time stamp in ascending\norder to match the change point detection result."
         },
         "granularity": {
@@ -1408,7 +1410,7 @@
           "items": {
             "type": "boolean"
           },
-          "x-cadl-name": "boolean[]",
+          "x-typespec-name": "boolean[]",
           "description": "isChangePoint contains change point properties for each input point. True means\nan anomaly (either negative or positive) has been detected. The index of the\narray is consistent with the input series."
         },
         "confidenceScores": {
@@ -1417,7 +1419,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "Change point confidence of each point."
         }
       },
@@ -1432,7 +1434,7 @@
             "$ref": "#/definitions/Univariate.TimeSeriesPoint"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "Univariate.TimeSeriesPoint[]",
+          "x-typespec-name": "Univariate.TimeSeriesPoint[]",
           "description": "Time series data points. Points should be sorted by time stamp in ascending\norder to match the anomaly detection result. If the data is not sorted\ncorrectly or there's a duplicated time stamp, the API won't work. In such\na case, an error message is returned."
         },
         "granularity": {
@@ -1488,7 +1490,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "ExpectedValues contains the expected value for each input point. The index of the\narray is consistent with the input series."
         },
         "upperMargins": {
@@ -1497,7 +1499,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "UpperMargins contains the upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which is equal to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in the response can be filtered by\nupperBoundary and lowerBoundary. Adjusting the marginScale value can help filter less\nsignificant anomalies on the client side. The index of the array is\nconsistent with the input series."
         },
         "lowerMargins": {
@@ -1506,7 +1508,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "LowerMargins contains the lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which is equal to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones on the client side. The index of the array is consistent with the input\nseries."
         },
         "isAnomaly": {
@@ -1514,7 +1516,7 @@
           "items": {
             "type": "boolean"
           },
-          "x-cadl-name": "boolean[]",
+          "x-typespec-name": "boolean[]",
           "description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly (either negative or positive) has been detected. The index of the array\nis consistent with the input series."
         },
         "isNegativeAnomaly": {
@@ -1522,7 +1524,7 @@
           "items": {
             "type": "boolean"
           },
-          "x-cadl-name": "boolean[]",
+          "x-typespec-name": "boolean[]",
           "description": "IsNegativeAnomaly contains the anomaly status in a negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series."
         },
         "isPositiveAnomaly": {
@@ -1530,7 +1532,7 @@
           "items": {
             "type": "boolean"
           },
-          "x-cadl-name": "boolean[]",
+          "x-typespec-name": "boolean[]",
           "description": "IsPositiveAnomaly contains the anomaly status in a positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series."
         },
         "severity": {
@@ -1539,7 +1541,7 @@
             "type": "number",
             "format": "float"
           },
-          "x-cadl-name": "float32[]",
+          "x-typespec-name": "float32[]",
           "description": "Severity score for each input point. The larger the value is, the more\nsevere the anomaly is. For normal points, the severity is always 0."
         }
       },
