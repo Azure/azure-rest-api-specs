@@ -35,6 +35,8 @@ interface Apis {
 @doc("Get the details of the API specified by its identifier.")
 @get
 op getApi(
+  ...Azure.Core.Foundations.ApiVersionParameter,
+
   @doc("API identifier.")
   @path
   apiId: string,
