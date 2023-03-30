@@ -70,43 +70,47 @@ interface ApiSchemas {
   getApiSchema is ResourceRead<ApiSchemaResource>;
 }
 
-@route("/apis/{apiId}/authServers/oauth2")
-@doc("List of OAuth 2.0 servers associated with the API.")
-@get
-op ListApiOAuth2Providers(
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<AuthorizationServer>>;
-
-@route("/apis/{apiId}/authServers/oauth2/{providerId}")
-@doc("Get OAuth 2.0 server specified by its identifier associated with the API.")
-@get
-op GetApiOAuth2Provider(
-  ...CommonParams,
-
+@doc("Api OAuth 2.0 servers resource model.")
+@resource("authServers/oauth2")
+@parentResource(ApiResource)
+model ApiAuthServersOauth2Resource extends AuthorizationServer {
   @doc("OAuth 2.0 server identifier.")
-  @path
-  providerId: string
-): ApiResponse<AuthorizationServer>;
+  @key("providerId")
+  @visibility("query")
+  providerId: string;
+}
 
-@route("/apis/{apiId}/authServers/openidconnect")
-@doc("List of OpenID Connect servers associated with the API.")
-@get
-op ListApiOpenidProviders(
-  ...CommonParams,
-  ...ListParams
-): ApiResponse<Page<AuthorizationServer>>;
+interface ApiAuthServersOauth2 {
+  @doc("List a collection of APIs OAuth 2.0 servers.")
+  listApiAuthServersOauth2 is ResourceList<
+    ApiAuthServersOauth2Resource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/apis/{apiId}/authServers/openidconnect/{providerId}")
-@doc("Get OpenID Connect server specified by its identifier associated with the API.")
-@get
-op GetApiOpenidProvider(
-  ...CommonParams,
+  @doc("Get the details of the APIs OAuth 2.0 server specified by its identifier.")
+  getApiAuthServersOauth2 is ResourceRead<ApiAuthServersOauth2Resource>;
+}
 
+@doc("Api OpenID Connect servers resource model.")
+@resource("authServers/openidconnect")
+@parentResource(ApiResource)
+model ApiAuthServersOpenidconnectResource extends AuthorizationServer {
   @doc("OpenID Connect server identifier.")
-  @path
-  providerId: string
-): ApiResponse<AuthorizationServer>;
+  @key("providerId")
+  @visibility("query")
+  providerId: string;
+}
+
+interface ApiAuthServersOpenidconnect {
+  @doc("List a collection of APIs OpenID Connect servers.")
+  listApiAuthServersOpenidconnect is ResourceList<
+    ApiAuthServersOpenidconnectResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("Get the details of the APIs OpenID Connect server specified by its identifier.")
+  getApiAuthServersOpenidconnect is ResourceRead<ApiAuthServersOpenidconnectResource>;
+}
 
 @route("/apis/{apiId}/products")
 @doc("List of public products associated with the API.")
