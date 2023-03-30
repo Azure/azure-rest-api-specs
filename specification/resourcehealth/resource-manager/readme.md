@@ -166,8 +166,8 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: [[ResourceProviderName]]
-  output-folder: $(csharp-sdks-folder)/[[ServiceName]]/management/[[ResourceProviderName]]/GeneratedProtocol
+  namespace: ResourceHealth
+  output-folder: $(csharp-sdks-folder)/resourcehealth/management/Microsoft.ResourceHealth/GeneratedProtocol
 
 ## Go
 
