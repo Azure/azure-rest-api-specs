@@ -9,7 +9,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Routes.Tags;
+namespace DeveloperServicesPublicApi.Resources.Tags;
 
 @doc("Tag resource model.")
 @resource("tags")

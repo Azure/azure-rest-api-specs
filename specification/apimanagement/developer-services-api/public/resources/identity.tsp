@@ -9,7 +9,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Routes.Identity;
+namespace DeveloperServicesPublicApi.Resources.Identity;
 
 @doc("Identity resource model.")
 @resource("identity")

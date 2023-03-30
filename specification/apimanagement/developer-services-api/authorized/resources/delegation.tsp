@@ -5,7 +5,7 @@ import "../../models/delegation.tsp";
 using TypeSpec.Http;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedApi.Routes.Delegation;
+namespace DeveloperServicesAuthorizedApi.Resources.Delegation;
 
 @route("/delegation/urls/users/{userId}/{action}")
 @doc("User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout).")

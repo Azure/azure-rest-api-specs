@@ -2,16 +2,16 @@ import "@typespec/rest";
 import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 
-//Routes
-import "./routes/apis.tsp";
-import "./routes/apiVersionSets.tsp";
-import "./routes/configuration.tsp";
-import "./routes/confirmations.tsp";
-import "./routes/delegation.tsp";
-import "./routes/identity.tsp";
-import "./routes/products.tsp";
-import "./routes/tags.tsp";
-import "./routes/users.tsp";
+//Resources
+import "./resources/apis.tsp";
+import "./resources/apiVersionSets.tsp";
+import "./resources/configuration.tsp";
+import "./resources/confirmations.tsp";
+import "./resources/delegation.tsp";
+import "./resources/identity.tsp";
+import "./resources/products.tsp";
+import "./resources/tags.tsp";
+import "./resources/users.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

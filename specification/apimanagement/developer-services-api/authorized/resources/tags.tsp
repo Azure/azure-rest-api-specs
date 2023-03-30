@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedApi.Routes.Tags;
+namespace DeveloperServicesAuthorizedApi.Resources.Tags;
 
 @route("/users/{userId}/tags")
 @doc("List a collection of tags.")

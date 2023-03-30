@@ -10,7 +10,7 @@ using Azure.Core.Traits;
 using Azure.Core.Foundations;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Routes.Delegation;
+namespace DeveloperServicesPublicApi.Resources.Delegation;
 
 @doc("Delegation resource model.")
 @resource("delegation")

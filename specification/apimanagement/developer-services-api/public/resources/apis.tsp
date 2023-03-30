@@ -13,7 +13,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Routes.Apis;
+namespace DeveloperServicesPublicApi.Resources.Apis;
 
 @doc("Apis resource model.")
 @resource("apis")

@@ -11,7 +11,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedApi.Routes.Apis;
+namespace DeveloperServicesAuthorizedApi.Resources.Apis;
 
 @route("/users/{userId}/apis")
 @doc("List a collection of APIs.")

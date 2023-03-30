@@ -5,7 +5,7 @@ import "../../models/user.tsp";
 using TypeSpec.Http;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedApi.Routes.Users;
+namespace DeveloperServicesAuthorizedApi.Resources.Users;
 
 @route("/users/{userId}")
 @doc("Get a user profile by its identifier.")

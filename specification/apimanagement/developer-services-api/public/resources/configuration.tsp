@@ -9,7 +9,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Routes.Configuration;
+namespace DeveloperServicesPublicApi.Resources.Configuration;
 
 @doc("API configuration content resource model.")
 @resource("configuration")

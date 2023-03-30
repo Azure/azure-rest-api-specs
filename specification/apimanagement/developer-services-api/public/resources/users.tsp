@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.Core.Foundations;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Routes.Users;
+namespace DeveloperServicesPublicApi.Resources.Users;
 
 //TODO: find a workaround
 @route("/users")

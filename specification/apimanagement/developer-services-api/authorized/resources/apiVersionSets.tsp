@@ -8,7 +8,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedApi.Routes.ApiVersionSets;
+namespace DeveloperServicesAuthorizedApi.Resources.ApiVersionSets;
 
 @route("/users/{userId}/apiVersionSets")
 @doc("List a collection of API version sets.")

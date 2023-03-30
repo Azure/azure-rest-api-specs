@@ -6,7 +6,7 @@ using TypeSpec.Http;
 using Azure.Core.Foundations;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Routes.Confirmations;
+namespace DeveloperServicesPublicApi.Resources.Confirmations;
 
 //TODO: find a workaround
 

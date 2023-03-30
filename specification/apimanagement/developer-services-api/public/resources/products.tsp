@@ -11,7 +11,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Routes.Products;
+namespace DeveloperServicesPublicApi.Resources.Products;
 
 @doc("Product resource model.")
 @resource("products")

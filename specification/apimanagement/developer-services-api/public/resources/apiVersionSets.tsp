@@ -10,7 +10,7 @@ using Azure.Core;
 using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesPublicApi.Routes.ApiVersionSets;
+namespace DeveloperServicesPublicApi.Resources.ApiVersionSets;
 
 @doc("API version set resource model.")
 @resource("apiVersionSets")

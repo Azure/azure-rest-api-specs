@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedApi.Routes.Confirmations;
+namespace DeveloperServicesAuthorizedApi.Resources.Confirmations;
 
 @route("/users/{userId}/identities")
 @doc("List a collection of user identities.")

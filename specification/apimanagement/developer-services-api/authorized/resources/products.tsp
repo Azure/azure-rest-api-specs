@@ -9,7 +9,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedApi.Routes.Products;
+namespace DeveloperServicesAuthorizedApi.Resources.Products;
 
 @route("/users/{userId}/products")
 @doc("List a collection of products.")

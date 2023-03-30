@@ -7,7 +7,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using DeveloperServicesApi.Models;
 
-namespace DeveloperServicesAuthorizedApi.Routes.Subscriptions;
+namespace DeveloperServicesAuthorizedApi.Resources.Subscriptions;
 
 @route("/users/{userId}/subscriptions")
 @doc("List a collection of user subscriptions.")
