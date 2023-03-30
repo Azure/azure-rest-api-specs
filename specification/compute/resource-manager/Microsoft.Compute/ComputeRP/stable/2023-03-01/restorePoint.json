@@ -799,9 +799,10 @@
       "description": "Describes a data disk."
     },
     "DiskRestorePointProperties": {
+      "type": "object",
       "properties": {
         "encryption": {
-          "$ref": "#/definitions/Encryption"
+          "$ref": "#/definitions/RestorePointEncryption"
         },
         "sourceDiskRestorePoint": {
           "$ref": "./computeRPCommon.json#/definitions/ApiEntityReference",
@@ -815,7 +816,8 @@
       ],
       "description": "Disk Restore Point details."
     },
-    "Encryption": {
+    "RestorePointEncryption": {
+      "type": "object",
       "properties": {
         "diskEncryptionSet": {
           "$ref": "./computeRPCommon.json#/definitions/DiskEncryptionSetParameters"
