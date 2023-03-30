@@ -26,7 +26,7 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-04-01
+tag: package-2022-10
 azure-validator: false
 ```
 
@@ -35,7 +35,7 @@ azure-validator: false
 
 ### Tag: package-preview-2023-04
 
-These settings apply only when `--tag=package-preview-2023-04-01` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2023-04'
 input-file:
