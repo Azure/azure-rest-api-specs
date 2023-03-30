@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -31,12 +39,18 @@
   "paths": {
     "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "Gets the operations": { "$ref": "./examples/listOperations.json" }
+          "Gets the operations": {
+            "$ref": "./examples/listOperations.json"
+          }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "description": "Operation to return the list of available operations.",
         "parameters": [
           {
@@ -46,18 +60,24 @@
         "responses": {
           "200": {
             "description": "Successful request to get list of AadCustomSecurityAttributesDiagnosticSettings operations.",
-            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult" }
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
           },
           "default": {
             "description": "Error, failed to get list of AadCustomSecurityAttributesDiagnosticSettings operations.",
-            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
     "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/diagnosticSettings": {
       "get": {
-        "tags": ["DiagnosticSettings"],
+        "tags": [
+          "DiagnosticSettings"
+        ],
         "operationId": "DiagnosticSettings_List",
         "description": "Gets the active diagnostic settings list for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
@@ -68,21 +88,29 @@
         "responses": {
           "default": {
             "description": "Error. Request for AadCustomSecurityAttributesDiagnosticSettings diagnostic settings has failed",
-            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           },
           "200": {
             "description": "Successful request to get more information about AadCustomSecurityAttributesDiagnosticSettings diagnostic settings",
-            "schema": { "$ref": "#/definitions/DiagnosticSettingsResourceCollection" }
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResourceCollection"
+            }
           }
         },
         "x-ms-examples": {
-          "Gets the diagnostic settings": { "$ref": "./examples/listDiagnosticSettings.json" }
+          "Gets the diagnostic settings": {
+            "$ref": "./examples/listDiagnosticSettings.json"
+          }
         }
       }
     },
     "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/diagnosticSettings/{diagnosticSettingName}": {
       "get": {
-        "tags": ["DiagnosticSettings"],
+        "tags": [
+          "DiagnosticSettings"
+        ],
         "operationId": "DiagnosticSettings_Get",
         "description": "Gets the active diagnostic setting for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
@@ -96,22 +124,32 @@
         "responses": {
           "default": {
             "description": "Error. Request for AadCustomSecurityAttributesDiagnosticSettings diagnostic setting has failed.",
-            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           },
           "200": {
             "description": "Successful request to get more information about diagnostic setting",
-            "schema": { "$ref": "#/definitions/DiagnosticSettingsResource" }
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            }
           }
         },
         "x-ms-examples": {
-          "Gets the diagnostic setting": { "$ref": "./examples/getDiagnosticSetting.json" }
+          "Gets the diagnostic setting": {
+            "$ref": "./examples/getDiagnosticSetting.json"
+          }
         }
       },
       "put": {
-        "tags": ["DiagnosticSettings"],
+        "tags": [
+          "DiagnosticSettings"
+        ],
         "operationId": "DiagnosticSettings_CreateOrUpdate",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/createOrUpdateDiagnosticSetting.json" }
+          "BatchAccountDelete": {
+            "$ref": "./examples/createOrUpdateDiagnosticSetting.json"
+          }
         },
         "description": "Creates or updates diagnostic settings for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
@@ -122,7 +160,9 @@
             "name": "parameters",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/DiagnosticSettingsResource" },
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            },
             "description": "Parameters supplied to the operation."
           },
           {
@@ -132,16 +172,22 @@
         "responses": {
           "200": {
             "description": "Successful request to create AadCustomSecurityAttributesDiagnosticSettings diagnostic setting.",
-            "schema": { "$ref": "#/definitions/DiagnosticSettingsResource" }
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            }
           },
           "default": {
             "description": "Error. The request to create diagnostic setting has failed.",
-            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
       "delete": {
-        "tags": ["DiagnosticSettings"],
+        "tags": [
+          "DiagnosticSettings"
+        ],
         "operationId": "DiagnosticSettings_Delete",
         "description": "Deletes existing diagnostic setting for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
@@ -155,19 +201,29 @@
         "responses": {
           "default": {
             "description": "Error. The request to delete named diagnostic setting has failed.",
-            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           },
-          "200": { "description": "Successful request to remove a diagnostic setting" },
-          "204": { "description": "No content - successful request to remove a diagnostic setting" }
+          "200": {
+            "description": "Successful request to remove a diagnostic setting"
+          },
+          "204": {
+            "description": "No content - successful request to remove a diagnostic setting"
+          }
         },
         "x-ms-examples": {
-          "Deletes the diagnostic setting": { "$ref": "./examples/deleteDiagnosticSetting.json" }
+          "Deletes the diagnostic setting": {
+            "$ref": "./examples/deleteDiagnosticSetting.json"
+          }
         }
       }
     },
     "/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/diagnosticSettingsCategories": {
       "get": {
-        "tags": ["DiagnosticSettingsCategories"],
+        "tags": [
+          "DiagnosticSettingsCategories"
+        ],
         "operationId": "DiagnosticSettingsCategory_List",
         "description": "Lists the diagnostic settings categories for AadCustomSecurityAttributesDiagnosticSettings.",
         "parameters": [
@@ -178,17 +234,22 @@
         "responses": {
           "default": {
             "description": "Error. The request to view diagnostic setting categories has failed.",
-            "schema": { "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse" }
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
           },
           "200": {
             "description": "Successful request to get list of diagnostic setting categories",
-            "schema": { "$ref": "#/definitions/DiagnosticSettingsCategoryResourceCollection" }
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsCategoryResourceCollection"
+            }
           }
         },
         "x-ms-examples": {
-          "Gets the diagnostic setting categories": { "$ref": "./examples/listDiagnosticSettingsCategories.json" }
-        },
-        "x-ms-pageable": { "nextLinkName": "nextLink" }
+          "Gets the diagnostic setting categories": {
+            "$ref": "./examples/listDiagnosticSettingsCategories.json"
+          }
+        }
       }
     }
   },
@@ -252,7 +313,9 @@
           "description": "The retention policy for this log."
         }
       },
-      "required": [ "enabled" ],
+      "required": [
+        "enabled"
+      ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.",
       "type": "object"
     },
@@ -280,9 +343,13 @@
         },
         "logs": {
           "type": "array",
-          "items": { "$ref": "#/definitions/LogSettings" },
+          "items": {
+            "$ref": "#/definitions/LogSettings"
+          },
           "description": "The list of logs settings.",
-          "x-ms-identifiers": ["category"]
+          "x-ms-identifiers": [
+            "category"
+          ]
         }
       },
       "description": "The diagnostic settings.",
@@ -307,7 +374,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/DiagnosticSettingsResource" },
+          "items": {
+            "$ref": "#/definitions/DiagnosticSettingsResource"
+          },
           "description": "The collection of diagnostic settings resources."
         }
       },
@@ -317,7 +386,9 @@
     "DiagnosticSettingsCategory": {
       "properties": {
         "categoryType": {
-          "enum": [ "Logs" ],
+          "enum": [
+            "Logs"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "categoryType",
@@ -350,7 +421,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/DiagnosticSettingsCategoryResource" },
+          "items": {
+            "$ref": "#/definitions/DiagnosticSettingsCategoryResource"
+          },
           "description": "The collection of diagnostic settings category resources."
         }
       },
