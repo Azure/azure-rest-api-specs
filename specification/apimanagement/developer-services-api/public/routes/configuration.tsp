@@ -11,7 +11,7 @@ using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Routes.Configuration;
 
-@doc("API version set resource model.")
+@doc("API configuration content resource model.")
 @resource("configuration")
 model ConfigurationContentResource extends ContentSettings {
   @doc("Configuration content identifier.")
@@ -20,7 +20,7 @@ model ConfigurationContentResource extends ContentSettings {
   id: "content";
 }
 
-@doc("API version set resource model.")
+@doc("API configuration signup resource model.")
 @resource("configuration")
 model ConfigurationSignupResource extends SignupConfiguration {
   @doc("Configuration signup identifier.")
