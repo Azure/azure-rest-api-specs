@@ -9,7 +9,7 @@ enum ServiceApiVersions {
 }
 
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "SharedAccessKey"> | OAuth2Auth<[{
+  ApiKeyAuth<ApiKeyLocation.header, "aeg-sas-key"> | OAuth2Auth<[{
     type: OAuth2FlowType.implicit,
     authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
     scopes: ["https://eventgrid.azure.net/.default"],
@@ -131,106 +131,124 @@ namespace AzureMessagingEventGrid {
 
   @doc("Lock token input formatting.")
   model LockTokenInput {
-    @doc("LockToken")
+    @doc("LockTokens")
     lockTokens: string[];
   }
+
+  @doc("Topic Resource.")
+  @resource("topics")
+  model TopicResource {
+    @key
+    @doc("Topic Name.")
+    @visibility("read")
+    topicName: string;
+  }
+
+  @doc("Event Subscription Resource.")
+  @resource("eventsubscriptions")
+  @parentResource(TopicResource)
+  model EventSubscription {
+    @key
+    @doc("Event subscription name.")
+    @visibility("read")
+    eventSubscriptionName: string;
+  }
+
+  @doc("Publish operation Response")
+  model PublishResponse {}
+
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}:publish?api-version={apiVersion}}
 
   @doc("Publish Single Cloud Event to namespace topic.")
-  @route("/topics/{topicName}:publish", {shared: true})
-  @post op PublishCloudEvent is Azure.Core.RpcOperation<{
-    @doc("content type")
-    @header("content-type")
-    contentType: "application/cloudevents+json; charset=utf-8";
+  @route("/", {shared: true})
+  @action("publish")
+  @post op PublishCloudEvent is Azure.Core.ResourceAction<
+    TopicResource,
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/cloudevents+json; charset=utf-8";
 
-    @doc("Topic Name.")
-    @path
-    topicName: string;
-
-    @doc("Single Cloud Event being published.")
-    @body 
-    event: CloudEventEvent;
-  }, OkResponse>;
-
+      @doc("Single Cloud Event being published.")
+      @body 
+      event: CloudEventEvent;
+    },
+    PublishResponse
+    >;
 
   @doc("Publish Batch of Cloud Events to namespace topic.")
-  @route("/topics/{topicName}:publish", {shared: true})
-  @post op PublishBatchOfCloudEvents is Azure.Core.RpcOperation<{
-    @doc("content type")
-    @header("content-type")
-    contentType: "application/cloudevents-batch+json; charset=utf-8";
+  @route("/", {shared: true})
+  @action("publish")
+  @post op PublishBatchOfCloudEvents is Azure.Core.ResourceAction<
+    TopicResource,
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/cloudevents-batch+json; charset=utf-8";
 
-    @doc("Topic Name.")
-    @path
-    topicName: string;
+      @doc("Array of Cloud Events being published.")
+      @body
+      events: CloudEventEvent[];
+    },
+    PublishResponse
+    >;
 
-    @doc("Array of Cloud Events being published.")
-    @body
-    events: CloudEventEvent[];
-  }, OkResponse>;
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&timeout=60&maxEvents={maxEvents}
+
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
-  @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive")
-  @post op ReceiveBatchOfCloudEvents is Azure.Core.RpcOperation<{
-    @doc("Topic Name.")
-    @path
-    topicName: string;
+  @action("receive")
+  @post op ReceiveBatchOfCloudEvents is Azure.Core.ResourceAction<
+    EventSubscription,
+    {
+      @doc("Max Events count to be received.")
+      @query
+      maxEvents?: int32 = 1;
 
-    @doc("Event Subscription Name.")
-    @path
-    eventSubscriptionName: string;
-
-    @doc("Max Events count to be received.")
-    @query
-    maxEvents?: int32 = 1;
-
-    @doc("Timeout value for receive operation in Seconds. Default is 60 seconds.")
-    @query
-    timeout?: int32 =60;
-  }, ReceiveResponse & CreatedResponse >;
+      @doc("Timeout value for receive operation in Seconds. Default is 60 seconds.")
+      @query
+      timeout?: int32 =60;
+    },
+    ReceiveResponse & CreatedResponse
+  >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge&apiVersion={apiVersion}
 
+
   @doc("Acknowledge Cloud Events.")
-  @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:acknowledge")
-  @post op AcknowledgeBatchOfCloudEvents is Azure.Core.RpcOperation<{
-    @doc("content type")
-    @header("content-type")
-    contentType: "application/json; charset=utf-8";
+  @action("acknowledge")
+  @post op AcknowledgeBatchOfCloudEvents is Azure.Core.ResourceAction<
+    EventSubscription,
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/json; charset=utf-8";   
 
-    @doc("Topic Name.")
-    @path
-    topicName: string;
+      @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
+      @body
+      lockTokens: LockTokenInput;
+    },
+    LockTokensResponse
+  >;
 
-    @doc("Event Subscription Name.")
-    @path
-    eventSubscriptionName: string;
-
-    @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
-    @body
-    lockTokens: LockTokenInput;
-  }, LockTokensResponse >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release?api-version={apiVersion}
   
   @doc("Release Cloud Events.")
-  @route("/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:release")
-  @post op ReleaseBatchOfCloudEvents is Azure.Core.RpcOperation<{
-    @doc("content type")
-    @header("content-type")
-    contentType: "application/json; charset=utf-8";
+  @action("release")
+  @post op ReleaseBatchOfCloudEvents is Azure.Core.ResourceAction<
+    EventSubscription,
+    {
+      @doc("content type")
+      @header("content-type")
+      contentType: "application/json; charset=utf-8";
 
-    @doc("Topic Name.")
-    @path
-    topicName: string;
+      @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
+      @body    
+      tokens : LockToken[];
+    },
+    LockTokensResponse 
+  >;
 
-    @doc("Event Subscription Name.")
-    @path
-    eventSubscriptionName: string;
-
-    @doc("Array of LockTokens for the corresponding received Cloud Events to be acknowledged.")
-    @body    
-    tokens : LockToken[];
-  }, LockTokensResponse >;
-}
+  }

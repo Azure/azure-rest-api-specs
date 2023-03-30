@@ -48,7 +48,7 @@
     "ApiKeyAuth": {
       "type": "apiKey",
       "in": "header",
-      "name": "aeg-sas-key"
+      "name": "SharedAccessKey"
     },
     "OAuth2Auth": {
       "type": "oauth2",
@@ -63,7 +63,7 @@
   "paths": {
     "/topics/{topicName}:publish": {
       "post": {
-        "operationId": "PublishBatchOfCloudEvents",
+        "operationId": "PublishBatchofCloudEvents",
         "description": "Publish Batch of Cloud Events to namespace topic.",
         "parameters": [
           {
@@ -91,8 +91,13 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {},
+              "x-typespec-name": "{}"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -131,7 +136,7 @@
             "name": "eventSubscriptionName",
             "in": "path",
             "required": true,
-            "description": "Event Subscription Name.",
+            "description": "Event subscription name.",
             "type": "string"
           },
           {
@@ -154,8 +159,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The request has succeeded.",
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/ReceiveResponse"
             }
@@ -194,7 +199,7 @@
             "name": "eventSubscriptionName",
             "in": "path",
             "required": true,
-            "description": "Event Subscription Name.",
+            "description": "Event subscription name.",
             "type": "string"
           },
           {
@@ -251,7 +256,7 @@
             "name": "eventSubscriptionName",
             "in": "path",
             "required": true,
-            "description": "Event Subscription Name.",
+            "description": "Event subscription name.",
             "type": "string"
           },
           {
@@ -429,6 +434,20 @@
         "specversion"
       ]
     },
+    "EventSubscription": {
+      "type": "object",
+      "properties": {
+        "eventSubscriptionName": {
+          "type": "string",
+          "description": "Event subscription name.",
+          "readOnly": true
+        }
+      },
+      "description": "Event Subscription Resource.",
+      "required": [
+        "eventSubscriptionName"
+      ]
+    },
     "FailedLockToken": {
       "type": "object",
       "properties": {
@@ -510,6 +529,11 @@
         "succeededLockTokens"
       ]
     },
+    "PublishResponse": {
+      "type": "object",
+      "properties": {},
+      "description": "Publish operation Response"
+    },
     "ReceiveDetails": {
       "type": "object",
       "properties": {
@@ -544,6 +568,20 @@
       "description": "Details of the Receive operation response.",
       "required": [
         "value"
+      ]
+    },
+    "TopicResource": {
+      "type": "object",
+      "properties": {
+        "topicName": {
+          "type": "string",
+          "description": "Topic Name.",
+          "readOnly": true
+        }
+      },
+      "description": "Topic Resource.",
+      "required": [
+        "topicName"
       ]
     },
     "object": {
