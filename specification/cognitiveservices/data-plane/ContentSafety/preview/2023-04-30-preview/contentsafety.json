@@ -157,7 +157,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name.",
+            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           }
@@ -195,7 +195,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name.",
+            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -251,7 +251,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name.",
+            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           }
@@ -288,7 +288,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name.",
+            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -335,7 +335,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name.",
+            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -379,7 +379,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name.",
+            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -453,7 +453,7 @@
             "name": "blocklistName",
             "in": "path",
             "required": true,
-            "description": "Text blocklist Name.",
+            "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
             "maxLength": 64,
             "type": "string"
           },
@@ -612,7 +612,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description": "The text needs to be scanned.",
+          "description": "The text needs to be scanned. We support at most 1000 unicode code points in text of one request.",
           "maxLength": 1000
         },
         "categories": {
@@ -784,7 +784,7 @@
           "description": "The blob url of image."
         }
       },
-      "description": "The content or url of image, could be base64 encoding bytes or blob url, if both given, the content field will be used. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time."
+      "description": "The content or url of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time."
     },
     "RemoveBlockItemsOptions": {
       "type": "object",
@@ -875,7 +875,7 @@
       "properties": {
         "blocklistName": {
           "type": "string",
-          "description": "Text blocklist Name.",
+          "description": "Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~",
           "maxLength": 64,
           "x-ms-mutability": [
             "read",

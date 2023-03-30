@@ -22,7 +22,7 @@ enum ImageCategory {
 
 @doc("The analysis request of the text.")
 model AnalyzeTextOptions {
-  @doc("The text needs to be scanned.")
+  @doc("The text needs to be scanned. We support at most 1000 unicode code points in text of one request.")
   @maxLength(1000)
   text: string;
 
@@ -93,7 +93,7 @@ model AnalyzeImageOptions {
   categories?: ImageCategory[];
 }
 
-@doc("The content or url of image, could be base64 encoding bytes or blob url, if both given, the content field will be used. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time.")
+@doc("The content or url of image, could be base64 encoding bytes or blob url, if both given, the request will be refused. The maxinum size of image is 2048 pixel * 2048 pixel, no larger than 4MB at the same time.")
 model ImageData {
   @doc("Base64 encoding of image.")
   content?: bytes;
@@ -129,7 +129,7 @@ model ImageAnalyzeSeverityResult {
 @doc("Text Blocklist.")
 @resource("text/blocklists")
 model TextBlocklist {
-  @doc("Text blocklist Name.")
+  @doc("Text blocklist Name. Only support following characters: 0-9  A-Z  a-z  -  .  _  ~")
   @key("blocklistName")
   @visibility("read", "create", "query")
   @maxLength(64)
