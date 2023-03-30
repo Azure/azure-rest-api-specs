@@ -23,13 +23,13 @@ model ApiVersionSetResource extends Api {
 
 interface ApiVersionSets {
   @doc("List a collection of API version sets.")
-  listApis is ResourceList<
+  listApiVersionSets is ResourceList<
     ApiVersionSetResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;
 
   @doc("Get API version set specified by its identifier.")
-  getApi is ResourceRead<ApiVersionSetResource>;
+  getApiVersionSet is ResourceRead<ApiVersionSetResource>;
 }
 
 @doc("API version set' API resource model.")
@@ -44,7 +44,7 @@ model ApiVersionSetApiResource extends Api {
 
 interface ApiVersionSetApis {
   @doc("List a collection of API version set APIs.")
-  listApis is ResourceList<
+  listApiVersionSetApis is ResourceList<
     ApiVersionSetApiResource,
     ListQueryParametersTrait<DefaultListQueryParameters>
   >;

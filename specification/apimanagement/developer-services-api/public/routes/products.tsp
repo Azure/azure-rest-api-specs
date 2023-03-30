@@ -6,41 +6,65 @@ import "../../models/api.tsp";
 import "../../models/tag.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Routes.Products;
 
-@route("/products")
-@doc("List a collection of products.")
-@get
-op ListProducts(...ListParams): ApiResponse<Page<Product>>;
+@doc("Product resource model.")
+@resource("products")
+model ProductResource extends Product {
+  @doc("Product identifier.")
+  @key("productId")
+  @visibility("query")
+  productId: string;
+}
 
-@route("/products/{productId}")
-@doc("Get the details of the product specified by its identifier.")
-@get
-op GetProduct(
-  @doc("The product identifier.")
-  @path
-  productId: string
-): ApiResponse<Product>;
+interface Products {
+  @doc("List a collection of products.")
+  listProducts is ResourceList<
+    ProductResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/products/{productId}/apis")
-@doc("List a collection of products APIs.")
-@get
-op ListProductApis(
-  @doc("The product identifier.")
-  @path
-  productId: string,
-  ...ListParams
-): ApiResponse<Page<Api>>;
+  @doc("Get the details of the product specified by its identifier.")
+  getProduct is ResourceRead<ProductResource>;
+}
 
-@route("/products/{productId}/tags")
-@doc("List a collection of products tags.")
-@get
-op ListProductTags(
-  @doc("The product identifier.")
-  @path
-  productId: string,
-  ...ListParams
-): ApiResponse<Page<Tag>>;
+@doc("Product APIs resource model.")
+@resource("apis")
+@parentResource(ProductResource)
+model ProductApiResource extends Api {
+  @doc("Product identifier.")
+  @key("apiId")
+  @visibility("query")
+  apiId: string;
+}
+
+interface ProductApis {
+  @doc("List a collection of products APIs.")
+  listProductApis is ResourceList<
+    ProductApiResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}
+
+@doc("Product tags resource model.")
+@resource("tags")
+@parentResource(ProductResource)
+model ProductTagResource extends Tag {
+  @doc("Product identifier.")
+  @key("tagId")
+  @visibility("query")
+  tagId: string;
+}
+
+interface ProductTags {
+  @doc("List a collection of products tags.")
+  listProductTags is ResourceList<
+    ProductTagResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+}

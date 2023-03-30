@@ -7,6 +7,7 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.Core.Foundations;
 using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Routes.Delegation;
@@ -25,10 +26,13 @@ interface Delegations {
   getDelegationSettings is ResourceRead<DelegationSettingsResource>;
 }
 
+//TODO: find a workaround
 @route("/delegation/urls/{action}")
 @doc("Unauthorized delegation URLs (Signin, Signup).")
 @post
 op CreateDelegationSigninUrl(
+  ...ApiVersionParameter,
+
   @doc("The action to perform.")
   @path
   action: string,
