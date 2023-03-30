@@ -5,32 +5,47 @@ import "../../models/apiVersionSet.tsp";
 import "../../models/api.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Routes.ApiVersionSets;
 
-@route("/apiVersionSets")
-@doc("List a collection of API version sets.")
-@get
-op ListApiVersionSets(...ListParams): ApiResponse<Page<ApiVersionSet>>;
-
-@route("/apiVersionSets/{versionSetId}")
-@doc("Get API version set specified by its identifier.")
-@get
-op GetApiVersionSet(...CommonParams): ApiResponse<ApiVersionSet>;
-
-@route("/apiVersionSets/{versionSetId}/apis")
-@doc("List a collection of API version set APIs specified by its identifier.")
-@get
-op ListApiVersionSetApis(
-  ...ListParams,
-  ...CommonParams
-): ApiResponse<Page<Api>>;
-
-@doc("Common parameters.")
-model CommonParams {
+@doc("API version set resource model.")
+@resource("apiVersionSets")
+model ApiVersionSetResource extends Api {
   @doc("API version set identifier.")
-  @path
+  @key("versionSetId")
+  @visibility("query")
   versionSetId: string;
+}
+
+interface ApiVersionSets {
+  @doc("List a collection of API version sets.")
+  listApis is ResourceList<
+    ApiVersionSetResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("Get API version set specified by its identifier.")
+  getApi is ResourceRead<ApiVersionSetResource>;
+}
+
+@doc("API version set' API resource model.")
+@resource("apis")
+@parentResource(ApiVersionSetResource)
+model ApiVersionSetApiResource extends Api {
+  @doc("API identifier.")
+  @key("apiId")
+  @visibility("query")
+  apiId: string;
+}
+
+interface ApiVersionSetApis {
+  @doc("List a collection of API version set APIs.")
+  listApis is ResourceList<
+    ApiVersionSetApiResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 }

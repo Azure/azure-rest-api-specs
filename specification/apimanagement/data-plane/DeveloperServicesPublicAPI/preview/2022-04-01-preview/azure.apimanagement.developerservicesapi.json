@@ -953,9 +953,12 @@
     },
     "/apiVersionSets": {
       "get": {
-        "operationId": "ApiVersionSets_ListApiVersionSets",
+        "operationId": "ApiVersionSets_ListApis",
         "description": "List a collection of API version sets.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
@@ -970,13 +973,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApiVersionSet"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.ApiVersionSets.ApiVersionSetResource"
+                  },
+                  "x-typespec-name": "Routes.ApiVersionSets.ApiVersionSetResource[]",
+                  "description": "The ApiVersionSetResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiVersionSetResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.ApiVersionSets.ApiVersionSetResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -987,24 +1017,37 @@
     },
     "/apiVersionSets/{versionSetId}": {
       "get": {
-        "operationId": "ApiVersionSets_GetApiVersionSet",
+        "operationId": "ApiVersionSets_GetApi",
         "description": "Get API version set specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.ApiVersionSets.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "versionSetId",
+            "in": "path",
+            "required": true,
+            "description": "API version set identifier.",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSet"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -1012,9 +1055,19 @@
     },
     "/apiVersionSets/{versionSetId}/apis": {
       "get": {
-        "operationId": "ApiVersionSets_ListApiVersionSetApis",
-        "description": "List a collection of API version set APIs specified by its identifier.",
+        "operationId": "ApiVersionSetApis_ListApis",
+        "description": "List a collection of API version set APIs.",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "versionSetId",
+            "in": "path",
+            "required": true,
+            "description": "API version set identifier.",
+            "type": "string"
+          },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
@@ -1023,22 +1076,46 @@
           },
           {
             "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Routes.ApiVersionSets.CommonParams"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApi"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.ApiVersionSets.ApiVersionSetApiResource"
+                  },
+                  "x-typespec-name": "Routes.ApiVersionSets.ApiVersionSetApiResource[]",
+                  "description": "The ApiVersionSetApiResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiVersionSetApiResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.ApiVersionSets.ApiVersionSetApiResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -1775,74 +1852,6 @@
             "name": "GraphQL",
             "value": "graphql",
             "description": "API is a GraphQL API"
-          }
-        ]
-      }
-    },
-    "DeveloperServicesApi.Models.ApiVersionSet": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "API Version Set identifier."
-        },
-        "name": {
-          "type": "string",
-          "description": "API Version Set name."
-        },
-        "description": {
-          "type": "string",
-          "description": "API Version Set description."
-        },
-        "versioningScheme": {
-          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSetScheme",
-          "description": "Versioning scheme."
-        },
-        "versionQueryName": {
-          "type": "string",
-          "description": "Version query name."
-        },
-        "versionHeaderName": {
-          "type": "string",
-          "description": "Version header name."
-        }
-      },
-      "description": "API Version Set",
-      "required": [
-        "id",
-        "name",
-        "description",
-        "versioningScheme",
-        "versionQueryName",
-        "versionHeaderName"
-      ]
-    },
-    "DeveloperServicesApi.Models.ApiVersionSetScheme": {
-      "type": "string",
-      "description": "Versioning scheme types.",
-      "enum": [
-        "Segment",
-        "Query",
-        "Header"
-      ],
-      "x-ms-enum": {
-        "name": "ApiVersionSetScheme",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Segment",
-            "value": "Segment",
-            "description": "Use segment for versioning scheme"
-          },
-          {
-            "name": "Query",
-            "value": "Query",
-            "description": "Use query for versioning scheme"
-          },
-          {
-            "name": "Header",
-            "value": "Header",
-            "description": "Use header for versioning scheme"
           }
         ]
       }
@@ -2984,29 +2993,6 @@
         "value"
       ]
     },
-    "PagedApiVersionSet": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiVersionSet"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.ApiVersionSet[]",
-          "description": "The ApiVersionSet items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of ApiVersionSet items",
-      "required": [
-        "value"
-      ]
-    },
     "PagedProduct": {
       "type": "object",
       "properties": {
@@ -3051,6 +3037,26 @@
       "description": "Paged collection of Tag items",
       "required": [
         "value"
+      ]
+    },
+    "Routes.ApiVersionSets.ApiVersionSetApiResource": {
+      "type": "object",
+      "properties": {},
+      "description": "API version set' API resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
+        }
+      ]
+    },
+    "Routes.ApiVersionSets.ApiVersionSetResource": {
+      "type": "object",
+      "properties": {},
+      "description": "API version set resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
+        }
       ]
     },
     "Routes.Apis.ApiAuthServersOauth2Resource": {
@@ -3193,14 +3199,6 @@
       "description": "The number of result items to return.",
       "type": "integer",
       "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "Routes.ApiVersionSets.CommonParams": {
-      "name": "versionSetId",
-      "in": "path",
-      "required": true,
-      "description": "API version set identifier.",
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
