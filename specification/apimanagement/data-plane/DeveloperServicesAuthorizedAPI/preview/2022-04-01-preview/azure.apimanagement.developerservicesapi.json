@@ -83,18 +83,27 @@
         "description": "User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout).",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "name": "action",
             "in": "path",
             "required": true,
+            "description": "The action to perform.",
             "type": "string"
           },
           {
             "name": "userDelegationOperationRequest",
             "in": "body",
             "required": true,
+            "description": "The URL to redirect to after the user has signed in.",
             "schema": {
               "$ref": "#/definitions/DeveloperServicesApi.Models.UserDelegationOperationRequest"
             }
