@@ -1,16 +1,29 @@
 import "@typespec/rest";
+import "@azure-tools/typespec-azure-core";
 import "../../models/common.tsp";
 import "../../models/delegation.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.Core;
+using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Routes.Delegation;
 
-@route("/delegation/settings")
-@doc("Delegation settings.")
-@get
-op GetDelegationSettings(): ApiResponse<DelegationSettings>;
+@doc("Delegation resource model.")
+@resource("delegation")
+model DelegationSettingsResource extends DelegationSettings {
+  @doc("Configuration content identifier.")
+  @key("id")
+  @visibility("query")
+  id: "settings";
+}
+
+interface Delegations {
+  @doc("Delegation settings.")
+  getDelegationSettings is ResourceRead<DelegationSettingsResource>;
+}
 
 @route("/delegation/urls/{action}")
 @doc("Unauthorized delegation URLs (Signin, Signup).")

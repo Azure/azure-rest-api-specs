@@ -1262,9 +1262,13 @@
     },
     "/delegation/settings": {
       "get": {
-        "operationId": "Delegation_GetDelegationSettings",
+        "operationId": "Delegations_GetDelegationSettings",
         "description": "Delegation settings.",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
@@ -1274,8 +1278,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -3214,6 +3224,16 @@
       "allOf": [
         {
           "$ref": "#/definitions/DeveloperServicesApi.Models.SignupConfiguration"
+        }
+      ]
+    },
+    "Routes.Delegation.DelegationSettingsResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Delegation resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.DelegationSettings"
         }
       ]
     },
