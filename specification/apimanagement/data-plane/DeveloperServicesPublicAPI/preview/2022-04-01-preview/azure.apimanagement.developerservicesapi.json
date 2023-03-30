@@ -91,14 +91,33 @@
         "description": "Get the details of the API specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
             "name": "apiId",
             "in": "path",
             "required": true,
             "description": "API identifier.",
             "type": "string"
+          },
+          {
+            "name": "accept",
+            "in": "header",
+            "required": false,
+            "description": "If sent, the API will be exported in the specified format.",
+            "type": "string",
+            "enum": [
+              "application/json",
+              "application/vnd.sun.wadl+xml",
+              "application/wsdl+xml",
+              "application/vnd.swagger.doc+json",
+              "application/vnd.oai.openapi",
+              "application/vnd.oai.openapi+json"
+            ]
+          },
+          {
+            "name": "export",
+            "in": "query",
+            "required": false,
+            "description": "If true, the API will be exported in the specified format.",
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -110,17 +129,19 @@
           },
           "default": {
             "description": "An unexpected error response.",
-            "headers": {
-              "x-ms-error-code": {
-                "description": "String error code indicating what went wrong.",
-                "type": "string"
-              }
-            },
             "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
             }
           }
-        }
+        },
+        "produces": [
+          "application/json",
+          "application/vnd.sun.wadl+xml",
+          "application/wsdl+xml",
+          "application/vnd.swagger.doc+json",
+          "application/vnd.oai.openapi",
+          "application/vnd.oai.openapi+json"
+        ]
       }
     },
     "/apis/{apiId}/authServers/oauth2": {
