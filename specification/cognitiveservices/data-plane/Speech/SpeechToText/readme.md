@@ -92,3 +92,12 @@ directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.
 ```
+### Tag: package-preview-v3.2-preview.1
+
+These settings apply only when `--tag=package-preview-v3.2-preview.1` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-v3.2-preview.1'
+input-file:
+  - preview/v3.2-preview.1/speechtotext.json
+```
+
