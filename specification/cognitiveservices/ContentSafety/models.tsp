@@ -22,7 +22,7 @@ enum ImageCategory {
 
 @doc("The analysis request of the text.")
 model AnalyzeTextOptions {
-  @doc("The text needs to be scanned. We support at most 1000 unicode code points in text of one request.")
+  @doc("The text needs to be scanned. We support at most 1000 characters(unicode code points) in text of one request.")
   @maxLength(1000)
   text: string;
 
