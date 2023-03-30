@@ -8,46 +8,67 @@ import "../../models/operation.tsp";
 import "../../models/tag.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
+using Azure.Core.Traits;
 using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Routes.Apis;
 
-@route("/apis")
-@doc("List a collection of APIs.")
-@get
-op ListApis(...ListParams): ApiResponse<Page<Api>>;
+@doc("Apis resource model.")
+@resource("apis")
+model ApiResource extends Api {
+  @doc("API identifier.")
+  @key("apiId")
+  @visibility("query")
+  apiId: string;
+}
+interface Apis {
+  @doc("List a collection of APIs.")
+  listApis is ResourceList<
+    ApiResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
 
-@route("/apis/{apiId}")
-@doc("Get the details of the API specified by its identifier.")
-@get
-op GetApi(
-  ...CommonParams,
+  @doc("Get the details of the API specified by its identifier.")
+  getApi is ResourceRead<ApiResource>;
+}
 
-  @doc("If sent, the API will be exported in the specified format.")
-  @header
-  accept?: ContentTypes,
+// @route("/apis/{apiId}")
+// @doc("Get the details of the API specified by its identifier.")
+// @get
+// op GetApi(
+//   ...CommonParams,
 
-  @doc("If true, the API will be exported in the specified format.")
-  @query
-  export?: boolean
-): ApiResponse<TypedBody<Api, ContentTypes>>;
+//   @doc("If sent, the API will be exported in the specified format.")
+//   @header
+//   accept?: ContentTypes,
 
-@route("/apis/{apiId}/schemas")
-@doc("List a collection of APIs schemas.")
-@get
-op ListApiSchemas(...CommonParams, ...ListParams): ApiResponse<Page<ApiSchema>>;
+//   @doc("If true, the API will be exported in the specified format.")
+//   @query
+//   export?: boolean
+// ): ApiResponse<TypedBody<Api, ContentTypes>>;
 
-@route("/apis/{apiId}/schemas/{schemaId}")
-@doc("Get the details of the APIs schema specified by its identifier.")
-@get
-op GetApiSchema(
-  ...CommonParams,
+@doc("Api schemas resource model.")
+@resource("schemas")
+@parentResource(ApiResource)
+model ApiSchemaResource extends ApiSchema {
+  @doc("Api schema identifier.")
+  @key("schemaId")
+  @visibility("query")
+  schemaId: string;
+}
 
-  @doc("Schema identifier.")
-  @path
-  schemaId: string
-): ApiResponse<ApiSchema>;
+interface ApiSchemas {
+  @doc("List a collection of APIs schemas.")
+  listApiSchemas is ResourceList<
+    ApiSchemaResource,
+    ListQueryParametersTrait<DefaultListQueryParameters>
+  >;
+
+  @doc("Get the details of the APIs schema specified by its identifier.")
+  getApiSchema is ResourceRead<ApiSchemaResource>;
+}
 
 @route("/apis/{apiId}/authServers/oauth2")
 @doc("List of OAuth 2.0 servers associated with the API.")

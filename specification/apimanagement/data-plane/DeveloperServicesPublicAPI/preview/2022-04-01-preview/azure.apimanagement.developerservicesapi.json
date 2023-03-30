@@ -27,6 +27,9 @@
         "description": "List a collection of APIs.",
         "parameters": [
           {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
@@ -40,13 +43,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApi"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.Apis.ApiResource"
+                  },
+                  "x-typespec-name": "Routes.Apis.ApiResource[]",
+                  "description": "The ApiResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.Apis.ApiResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -61,29 +91,14 @@
         "description": "Get the details of the API specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "accept",
-            "in": "header",
-            "required": false,
-            "description": "If sent, the API will be exported in the specified format.",
-            "type": "string",
-            "enum": [
-              "application/json",
-              "application/vnd.sun.wadl+xml",
-              "application/wsdl+xml",
-              "application/vnd.swagger.doc+json",
-              "application/vnd.oai.openapi",
-              "application/vnd.oai.openapi+json"
-            ]
-          },
-          {
-            "name": "export",
-            "in": "query",
-            "required": false,
-            "description": "If true, the API will be exported in the specified format.",
-            "type": "boolean"
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -95,19 +110,17 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
-        },
-        "produces": [
-          "application/json",
-          "application/vnd.sun.wadl+xml",
-          "application/wsdl+xml",
-          "application/vnd.swagger.doc+json",
-          "application/vnd.oai.openapi",
-          "application/vnd.oai.openapi+json"
-        ]
+        }
       }
     },
     "/apis/{apiId}/authServers/oauth2": {
@@ -474,11 +487,18 @@
     },
     "/apis/{apiId}/schemas": {
       "get": {
-        "operationId": "Apis_ListApiSchemas",
+        "operationId": "ApiSchemas_ListApiSchemas",
         "description": "List a collection of APIs schemas.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -494,13 +514,40 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedApiSchema"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Routes.Apis.ApiSchemaResource"
+                  },
+                  "x-typespec-name": "Routes.Apis.ApiSchemaResource[]",
+                  "description": "The ApiSchemaResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ApiSchemaResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Routes.Apis.ApiSchemaResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         },
@@ -511,17 +558,24 @@
     },
     "/apis/{apiId}/schemas/{schemaId}": {
       "get": {
-        "operationId": "Apis_GetApiSchema",
+        "operationId": "ApiSchemas_GetApiSchema",
         "description": "Get the details of the APIs schema specified by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/Routes.Apis.CommonParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "apiId",
+            "in": "path",
+            "required": true,
+            "description": "API identifier.",
+            "type": "string"
           },
           {
             "name": "schemaId",
             "in": "path",
             "required": true,
-            "description": "Schema identifier.",
+            "description": "Api schema identifier.",
             "type": "string"
           }
         ],
@@ -534,8 +588,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
@@ -1098,6 +1158,19 @@
         "code",
         "message",
         "details"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "description": "A response containing error details.",
+      "required": [
+        "error"
       ]
     },
     "Azure.Core.Foundations.InnerError": {
@@ -2644,29 +2717,6 @@
         "value"
       ]
     },
-    "PagedApiSchema": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.ApiSchema"
-          },
-          "x-typespec-name": "DeveloperServicesApi.Models.ApiSchema[]",
-          "description": "The ApiSchema items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of ApiSchema items",
-      "required": [
-        "value"
-      ]
-    },
     "PagedApiVersionSet": {
       "type": "object",
       "properties": {
@@ -2783,6 +2833,26 @@
         "value"
       ]
     },
+    "Routes.Apis.ApiResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Apis resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Api"
+        }
+      ]
+    },
+    "Routes.Apis.ApiSchemaResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Api schemas resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.ApiSchema"
+        }
+      ]
+    },
     "object": {
       "type": "object",
       "properties": {}
@@ -2794,6 +2864,16 @@
       "in": "query",
       "required": false,
       "description": "Filter the result list using the given expression.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "description": "The API version to use for this operation.",
+      "x-ms-client-name": "apiVersion",
+      "minLength": 1,
       "type": "string",
       "x-ms-parameter-location": "method"
     },

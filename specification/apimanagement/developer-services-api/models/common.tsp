@@ -36,6 +36,12 @@ model ListParams {
   ...FilterQueryParameter;
 }
 
+@doc("List operations' default parameters.")
+model DefaultListQueryParameters {
+  ...SkipQueryParameter;
+  ...TopQueryParameter;
+  ...FilterQueryParameter;
+}
 @error
 @doc("Error response object.")
 model ErrorResponse {
