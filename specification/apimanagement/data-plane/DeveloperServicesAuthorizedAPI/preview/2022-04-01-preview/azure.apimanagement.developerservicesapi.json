@@ -131,7 +131,14 @@
         "description": "Get a user profile by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -154,7 +161,14 @@
         "description": "Create or updatea a user by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "name": "if-match",
@@ -192,7 +206,14 @@
         "description": "Delete a user by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -2293,7 +2314,14 @@
         "description": "Revoke the token of a user by its identifier.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           }
         ],
         "responses": {
@@ -4301,14 +4329,6 @@
       "description": "The number of result items to return.",
       "type": "integer",
       "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "DeveloperServicesApi.Models.UserParams": {
-      "name": "userId",
-      "in": "path",
-      "required": true,
-      "description": "The user identifier.",
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }
