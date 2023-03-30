@@ -1940,6 +1940,7 @@
         "tags": [
           "ManagedNetwork"
         ],
+        "description": "Lists the managed network outbound rules for a machine learning workspace.",
         "operationId": "ManagedNetworkSettingsRule_List",
         "produces": [
           "application/json"
@@ -1972,6 +1973,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-examples": {
           "List ManagedNetworkSettingsRule": {
             "$ref": "./examples/ManagedNetwork/listRule.json"
@@ -1984,6 +1988,7 @@
         "tags": [
           "ManagedNetwork"
         ],
+        "description": "Deletes an outbound rule from the managed network of a machine learning workspace.",
         "operationId": "ManagedNetworkSettingsRule_Delete",
         "parameters": [
           {
@@ -2039,6 +2044,7 @@
         "tags": [
           "ManagedNetwork"
         ],
+        "description": "Gets an outbound rule from the managed network of a machine learning workspace.",
         "operationId": "ManagedNetworkSettingsRule_Get",
         "parameters": [
           {
@@ -2081,6 +2087,7 @@
         "tags": [
           "ManagedNetwork"
         ],
+        "description": "Creates or updates an outbound rule in the managed network of a machine learning workspace.",
         "operationId": "ManagedNetworkSettingsRule_CreateOrUpdate",
         "parameters": [
           {
@@ -2099,6 +2106,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
+            "description": "Outbound Rule to be created or updated in the managed network of a machine learning workspace.",
             "in": "body",
             "name": "parameters",
             "required": true,
@@ -2146,7 +2154,8 @@
         "tags": [
           "ManagedNetwork"
         ],
-        "operationId": "ManagedNetworkProvisions_Post",
+        "description": "Provisions the managed network of a machine learning workspace.",
+        "operationId": "ManagedNetworkProvisions_ProvisionManagedNetwork",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
@@ -2170,6 +2179,7 @@
             "$ref": "#/parameters/WorkspaceNameParameter"
           },
           {
+            "description": "Managed Network Provisioning Options for a machine learning workspace.",
             "in": "body",
             "name": "parameters",
             "schema": {
@@ -2178,6 +2188,10 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success.",
+            "$ref": "#/definitions/ManagedNetworkProvisionStatus"
+          },
           "202": {
             "description": "Accepted",
             "headers": {
@@ -6388,21 +6402,8 @@
       "additionalProperties": false,
       "x-ms-discriminator-value": "ManagedIdentity"
     },
-    "ManagedNetworkDto": {
-      "type": "object",
-      "properties": {
-        "isolationMode": {
-          "$ref": "#/definitions/IsolationMode"
-        },
-        "outboundRules": {
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/OutboundRule"
-          }
-        }
-      }
-    },
     "ManagedNetworkProvisionOptions": {
+      "description": "Managed Network Provisioning options for managed network of a machine learning workspace.",
       "type": "object",
       "properties": {
         "includeSpark": {
@@ -6411,6 +6412,7 @@
       }
     },
     "ManagedNetworkProvisionStatus": {
+      "description": "Status of the Provisioning for the managed network of a machine learning workspace.",
       "type": "object",
       "properties": {
         "status": {
@@ -6422,6 +6424,7 @@
       }
     },
     "ManagedNetworkSettings": {
+      "description": "Managed Network settings for a machine learning workspace.",
       "type": "object",
       "properties": {
         "isolationMode": {
@@ -6444,6 +6447,7 @@
       }
     },
     "ManagedNetworkStatus": {
+      "description": "Status for the managed network of a machine learning workspace.",
       "enum": [
         "Inactive",
         "Active"
@@ -6455,6 +6459,7 @@
       }
     },
     "IsolationMode": {
+      "description": "Isolation mode for the managed network of a machine learning workspace.",
       "enum": [
         "Disabled",
         "AllowInternetOutbound",
@@ -6467,6 +6472,7 @@
       }
     },
     "OutboundRuleBasicResource": {
+      "description": "Outbound Rule Basic Resource for the managed network of a machine learning workspace.",
       "required": [
         "properties"
       ],
@@ -6478,12 +6484,14 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OutboundRule"
+          "$ref": "#/definitions/OutboundRule",
+          "x-ms-client-flatten": true
         }
       },
       "additionalProperties": false
     },
     "OutboundRuleListResult": {
+      "description": "List of outbound rules for the managed network of a machine learning workspace.",
       "type": "object",
       "properties": {
         "value": {
@@ -6500,6 +6508,7 @@
       }
     },
     "OutboundRule": {
+      "description": "Outbound Rule for the managed network of a machine learning workspace.",
       "required": [
         "type"
       ],
@@ -6518,6 +6527,7 @@
       "discriminator": "type"
     },
     "RuleCategory": {
+      "description": "Category of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Required",
         "Recommended",
@@ -6530,6 +6540,7 @@
       }
     },
     "RuleStatus": {
+      "description": "Status of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "Inactive",
         "Active"
@@ -6541,6 +6552,7 @@
       }
     },
     "RuleType": {
+      "description": "Type of a managed network Outbound Rule of a machine learning workspace.",
       "enum": [
         "FQDN",
         "PrivateEndpoint",
@@ -6553,6 +6565,7 @@
       }
     },
     "FqdnOutboundRule": {
+      "description": "FQDN Outbound Rule for the managed network of a machine learning workspace.",
       "type": "object",
       "allOf": [
         {
@@ -6567,6 +6580,7 @@
       "x-ms-discriminator-value": "FQDN"
     },
     "PrivateEndpointOutboundRule": {
+      "description": "Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
       "type": "object",
       "allOf": [
         {
@@ -6581,6 +6595,7 @@
       "x-ms-discriminator-value": "PrivateEndpoint"
     },
     "PrivateEndpointDestination": {
+      "description": "Private Endpoint destination for a Private Endpoint Outbound Rule for the managed network of a machine learning workspace.",
       "type": "object",
       "properties": {
         "serviceResourceId": {
@@ -6598,6 +6613,7 @@
       }
     },
     "ServiceTagOutboundRule": {
+      "description": "Service Tag Outbound Rule for the managed network of a machine learning workspace.",
       "type": "object",
       "allOf": [
         {
@@ -6612,6 +6628,7 @@
       "x-ms-discriminator-value": "ServiceTag"
     },
     "ServiceTagDestination": {
+      "description": "Service Tag destination for a Service Tag Outbound Rule for the managed network of a machine learning workspace.",
       "type": "object",
       "properties": {
         "serviceTag": {
