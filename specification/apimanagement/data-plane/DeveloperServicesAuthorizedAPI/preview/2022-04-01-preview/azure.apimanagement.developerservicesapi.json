@@ -39,12 +39,20 @@
         "description": "Basic identity (Email) confirmation for a User.",
         "parameters": [
           {
-            "$ref": "#/parameters/DeveloperServicesApi.Models.UserParams"
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "name": "identityConfirmationRequest",
             "in": "body",
             "required": true,
+            "description": "The identity confirmation request.",
             "schema": {
               "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityConfirmationRequest"
             }
@@ -56,8 +64,14 @@
           },
           "default": {
             "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ErrorResponse"
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
         }
