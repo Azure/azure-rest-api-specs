@@ -65,50 +65,6 @@
         }
       }
     },
-    "/providers/Microsoft.Elastic/listElasticVersions": {
-      "get": {
-        "tags": [
-          "ElasticVersions"
-        ],
-        "summary": "Get a list of available versions for a region.",
-        "operationId": "ElasticVersions_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "region",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "subscriptionId",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ElasticVersionsListResponse"
-            }
-          },
-          "default": {
-            "description": "Default error response.",
-            "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ElasticVersions_Get": {
-            "$ref": "./examples/ElasticVersions_Get.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/monitors": {
       "get": {
         "tags": [
@@ -943,44 +899,37 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/upgrade": {
-      "post": {
+    "/providers/Microsoft.Elastic/listElasticVersions": {
+      "get": {
         "tags": [
-          "DeploymentUpdate"
+          "ElasticVersions"
         ],
-        "summary": "Upgradable version for a monitor resource.",
-        "operationId": "Monitor_Upgrade",
-        "consumes": [
-          "application/json"
-        ],
+        "summary": "Get a list of available versions for a region.",
+        "operationId": "ElasticVersions_Get",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "in": "query",
+            "name": "region",
+            "description": "Region where monitor resource will be deployed",
+            "required": true,
+            "type": "string"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitorNameParameter"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Elastic Monitor Upgrade Parameters",
-            "schema": {
-              "$ref": "#/definitions/ElasticMonitorUpgrade"
-            }
+            "in": "query",
+            "name": "subscriptionId",
+            "description": "Subscription where monitor resource will be deployed",
+            "type": "string"
           }
         ],
         "responses": {
-          "202": {
-            "description": "Success"
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticVersionsListResponse"
+            }
           },
           "default": {
             "description": "Default error response.",
@@ -989,10 +938,9 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Monitor_Upgrade": {
-            "$ref": "./examples/Monitor_Upgrade.json"
+          "ElasticVersions_Get": {
+            "$ref": "./examples/ElasticVersions_Get.json"
           }
         }
       }
@@ -2003,6 +1951,7 @@
       }
     },
     "ElasticVersionsListResponse": {
+      "description": "List of elastic versions available for the monitor resource",
       "type": "object",
       "properties": {
         "versions": {
@@ -2108,7 +2057,7 @@
       "type": "object",
       "properties": {
         "marketplaceSubscription": {
-          "description": "Marketplace Subscription Id",
+          "description": "Marketplace Subscription",
           "type": "object",
           "properties": {
             "id": {
@@ -2118,11 +2067,11 @@
           }
         },
         "marketplaceName": {
-          "description": "Subscription Details: Marketplace SAAS Name",
+          "description": "Marketplace Subscription Details: SAAS Name",
           "type": "string"
         },
         "marketplaceResourceId": {
-          "description": "Subscription Details: Marketplace Resource URI",
+          "description": "Marketplace Subscription Details: Resource URI",
           "type": "string"
         }
       }
