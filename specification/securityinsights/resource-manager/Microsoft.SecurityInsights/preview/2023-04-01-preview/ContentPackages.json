@@ -264,37 +264,20 @@
       "properties": {
         "properties": {
           "description": "package properties",
-          "$ref": "#/definitions/packagePropertiesWithPackageId",
+          "$ref": "#/definitions/packageProperties",
           "x-ms-client-flatten": true
         }
       },
       "type": "object"
     },
-    "packagePropertiesWithPackageId": {
-      "description": "Describes package properties with packageId",
-      "properties": {
-        "packageId": {
-          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
-          "description": "The package id"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/packageProperties"
-        }
-      ],
-      "required": [
-        "packageId",
-        "packageKind",
-        "version",
-        "displayName"
-      ],
-      "type": "object"
-    },
     "packageProperties": {
       "description": "Describes package properties",
       "properties": {
-        "packageKind": {
+        "contentId": {
+          "$ref": "./common/ContentCommonTypes.json#/definitions/metadataContentId",
+          "description": "The package id"
+        },
+        "contentKind": {
           "$ref": "./common/ContentCommonTypes.json#/definitions/metadataPackageKind",
           "description": "The package kind"
         },
@@ -376,7 +359,8 @@
         }
       },
       "required": [
-        "packageKind",
+        "contentId",
+        "contentKind",
         "version",
         "displayName"
       ],
