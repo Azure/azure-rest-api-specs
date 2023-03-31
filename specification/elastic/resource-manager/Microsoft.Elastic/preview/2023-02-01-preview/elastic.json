@@ -65,6 +65,52 @@
         }
       }
     },
+    "/providers/Microsoft.Elastic/listElasticVersions": {
+      "get": {
+        "tags": [
+          "ElasticVersions"
+        ],
+        "summary": "Get a list of available versions for a region.",
+        "operationId": "ElasticVersions_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "region",
+            "description": "Region where monitor resource deployment will took place.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "subscriptionId",
+            "description": "Subscription ID where monitor resource will be deployed.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ElasticVersionsListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ElasticVersions_Get": {
+            "$ref": "./examples/ElasticVersions_Get.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Elastic/monitors": {
       "get": {
         "tags": [
@@ -899,37 +945,44 @@
         }
       }
     },
-    "/providers/Microsoft.Elastic/listElasticVersions": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Elastic/monitors/{monitorName}/upgrade": {
+      "post": {
         "tags": [
-          "ElasticVersions"
+          "DeploymentUpdate"
         ],
-        "summary": "Get a list of available versions for a region.",
-        "operationId": "ElasticVersions_Get",
+        "summary": "Upgradable version for a monitor resource.",
+        "operationId": "Monitor_Upgrade",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "in": "query",
-            "name": "region",
-            "description": "Region where monitor resource will be deployed",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "in": "query",
-            "name": "subscriptionId",
-            "description": "Subscription where monitor resource will be deployed",
-            "type": "string"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/MonitorNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Elastic Monitor Upgrade Parameters",
+            "schema": {
+              "$ref": "#/definitions/ElasticMonitorUpgrade"
+            }
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ElasticVersionsListResponse"
-            }
+          "202": {
+            "description": "Success"
           },
           "default": {
             "description": "Default error response.",
@@ -938,9 +991,10 @@
             }
           }
         },
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "ElasticVersions_Get": {
-            "$ref": "./examples/ElasticVersions_Get.json"
+          "Monitor_Upgrade": {
+            "$ref": "./examples/Monitor_Upgrade.json"
           }
         }
       }
