@@ -48,6 +48,7 @@ input-file:
   - Microsoft.Synapse/stable/2023-05-01/integrationRuntime.json
   - Microsoft.Synapse/stable/2023-05-01/keys.json
   - Microsoft.Synapse/stable/2023-05-01/library.json
+  - Microsoft.Synapse/stable/2023-05-01/listUsage.json
   - Microsoft.Synapse/stable/2023-05-01/operations.json
   - Microsoft.Synapse/stable/2023-05-01/privateEndpointConnections.json
   - Microsoft.Synapse/stable/2023-05-01/privateLinkResources.json
