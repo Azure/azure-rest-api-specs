@@ -133,7 +133,7 @@ namespace AzureMessagingEventGrid {
 
   @doc("Topic Resource.")
   @resource("topics")
-  model TopicResource {
+  model Topic {
     @key
     @doc("Topic Name.")
     @visibility("read")
@@ -142,7 +142,7 @@ namespace AzureMessagingEventGrid {
 
   @doc("Event Subscription Resource.")
   @resource("eventsubscriptions")
-  @parentResource(TopicResource)
+  @parentResource(Topic)
   model EventSubscription {
     @key
     @doc("Event subscription name.")
@@ -161,7 +161,7 @@ namespace AzureMessagingEventGrid {
   @action("publish")
   @internal
   @post op PublishCloudEvent is Azure.Core.ResourceAction<
-    TopicResource,
+    Topic,
     {
       @doc("content type")
       @header("content-type")
@@ -179,7 +179,7 @@ namespace AzureMessagingEventGrid {
   @action("publish")
   @internal
   @post op PublishBatchOfCloudEvents is Azure.Core.ResourceAction<
-    TopicResource,
+    Topic,
     {
       @doc("content type")
       @header("content-type")
@@ -207,7 +207,7 @@ namespace AzureMessagingEventGrid {
 
       @doc("Timeout value for receive operation in Seconds. Default is 60 seconds.")
       @query
-      timeout?: int32 =60;
+      timeout?: int32 = 60;
     },
     ReceiveResponse & CreatedResponse
   >;
