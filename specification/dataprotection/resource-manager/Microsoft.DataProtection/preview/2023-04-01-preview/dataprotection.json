@@ -1691,15 +1691,15 @@
                     "application/json"
                 ],
                 "parameters": [
-                  {
-                    "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
-                },
-                {
-                    "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
-                },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+                    },
                     {
                         "name": "location",
                         "in": "path",
@@ -1752,6 +1752,109 @@
                 "x-ms-examples": {
                     "Validate Cross Region Restore": {
                         "$ref": "./examples/BackupInstanceOperations/ValidateCrossRegionRestore.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/crossRegionRestoreJob": {
+            "post": {
+                "tags": [
+                    "DppJob"
+                ],
+                "operationId": "GetCrossRegionRestoreJob",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "description": "Request body for operation",
+                        "required": true,
+                        "schema": {
+                          "$ref": "#/definitions/CrossRegionRestoreJobRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of Cross Region Restore Jobs",
+                        "schema": {
+                            "$ref": "#/definitions/JobResponse"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Get Cross Region Restore Job": {
+                        "$ref": "./examples/JobCRUD/CrossRegionRestoreJob.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataProtection/locations/{location}/crossRegionRestoreJobs": {
+            "post": {
+                "tags": [
+                    "DppJob"
+                ],
+                "operationId": "ListCrossRegionRestoreJobs",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "location",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "description": "Request body for operation",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CrossRegionRestoreJobsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                  "200": {
+                    "description": "List of Cross Region Restore Jobs",
+                    "schema": {
+                      "$ref": "#/definitions/JobsResponse"
+                    }
+                  }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "x-ms-examples": {
+                    "List Cross Region Restore Jobs": {
+                        "$ref": "./examples/JobCRUD/CrossRegionRestoreJobs.json"
                     }
                 }
             }
@@ -6374,6 +6477,37 @@
                     "type": "string"
                 },
                 "sourceBackupInstanceId": {
+                    "type": "string"
+                }
+            }
+        },
+        "JobResponse": {
+            "type": "object",
+            "properties": {
+                "properties": {
+                    "$ref": "#/definitions/Job"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                }
+            }
+        },
+        "JobsResponse": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/JobResponse"
+                    }
+                },
+                "nextLink": {
                     "type": "string"
                 }
             }
