@@ -42,6 +42,7 @@ interface Subscriptions {
     userSubscriptionCreate: UserSubscriptionCreate
   ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
 
+  //TODO: It returns the body
   @route("/users/{userId}/subscriptions/{subscriptionId}")
   @doc("Update user subscription.")
   @patch
