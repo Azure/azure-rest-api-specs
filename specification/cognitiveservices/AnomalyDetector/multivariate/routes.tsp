@@ -5,6 +5,7 @@ import "./models.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using Azure.Core;
 
 namespace AnomalyDetector.Multivariate;
 
