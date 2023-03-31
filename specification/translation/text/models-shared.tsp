@@ -40,7 +40,7 @@ model ErrorResponse {
 
 @doc("Error details as returned by Translator Service.")
 model ErrorDetails {
-  @doc("Number indetifier of the error.")
+  @doc("Number identifier of the error.")
   code: int32;
 
   @doc("Human readable error description.")

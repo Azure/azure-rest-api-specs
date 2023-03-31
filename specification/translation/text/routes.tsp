@@ -87,7 +87,7 @@ op FindSentenceBoundaries is CustomOperation<
 @doc("Lookup Dictionary Entries")
 op LookupDictionaryEntries is CustomOperation<
   InputTextItem[],
-  DictionaryLookupParamters,
+  DictionaryLookupParameters,
   DictionaryLookupResult,
   {},
   ErrorResponse
@@ -99,7 +99,7 @@ op LookupDictionaryEntries is CustomOperation<
 @doc("Lookup Dictionary Examples")
 op LookupDictionaryExamples is CustomOperation<
   DictionaryExampleTextItem[],
-  DictionaryExamplesParamters,
+  DictionaryExamplesParameters,
   DictionaryExamplesResult,
   {},
   ErrorResponse

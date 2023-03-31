@@ -27,12 +27,12 @@ alias DictionaryBaseParameters = {
 };
 
 @doc("Request parameters for the dictionary lookup API.")
-model DictionaryLookupParamters {
+model DictionaryLookupParameters {
   ...DictionaryBaseParameters;
 }
 
-@doc("Request paramters for the dictionary examples API.")
-model DictionaryExamplesParamters {
+@doc("Request parameters for the dictionary examples API.")
+model DictionaryExamplesParameters {
   ...DictionaryBaseParameters;
 }
 
