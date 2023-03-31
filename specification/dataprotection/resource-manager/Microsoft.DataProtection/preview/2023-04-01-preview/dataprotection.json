@@ -1793,9 +1793,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "List of Cross Region Restore Jobs",
+                        "description": "Details about a Cross Region Restore Job",
                         "schema": {
-                            "$ref": "#/definitions/JobResponse"
+                            "$ref": "#/definitions/AzureBackupJobResource"
                         }
                     },
                     "default": {
@@ -1851,7 +1851,7 @@
                   "200": {
                     "description": "List of Cross Region Restore Jobs",
                     "schema": {
-                      "$ref": "#/definitions/JobsResponse"
+                      "$ref": "#/definitions/AzureBackupJobResourceList"
                     }
                   },
                   "default": {
@@ -6489,37 +6489,6 @@
                     "type": "string"
                 },
                 "sourceBackupInstanceId": {
-                    "type": "string"
-                }
-            }
-        },
-        "JobResponse": {
-            "type": "object",
-            "properties": {
-                "properties": {
-                    "$ref": "#/definitions/Job"
-                },
-                "id": {
-                    "type": "string"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "type": {
-                    "type": "string"
-                }
-            }
-        },
-        "JobsResponse": {
-            "type": "object",
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/JobResponse"
-                    }
-                },
-                "nextLink": {
                     "type": "string"
                 }
             }
