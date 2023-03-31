@@ -381,7 +381,7 @@
     "BillingAccountId": {
       "type": "string",
       "readOnly": true,
-      "description": "Fully-qualified identifier of the billing account where the savings plan is applied. Present only for Enterprise Agreement customers."
+      "description": "Fully-qualified identifier of the billing account where the savings plan is applied."
     },
     "ProvisioningState": {
       "type": "string",
@@ -423,7 +423,8 @@
       "description": "Represents the Savings plan term in ISO 8601 format.",
       "enum": [
         "P1Y",
-        "P3Y"
+        "P3Y",
+        "P5Y"
       ],
       "x-ms-enum": {
         "name": "SavingsPlanTerm",
@@ -471,19 +472,19 @@
     },
     "TenantId": {
       "type": "string",
-      "description": "Tenant ID where the savings plan should apply benefit."
+      "description": "Tenant ID where the savings plan where the benefit is applied."
     },
     "ManagementGroupId": {
       "type": "string",
-      "description": "Fully-qualified identifier of the management group where the benefit must be applied."
+      "description": "Fully-qualified identifier of the management group where the benefit is applied."
     },
     "SubscriptionId": {
       "type": "string",
-      "description": "Fully-qualified identifier of the subscription."
+      "description": "Fully-qualified identifier of the subscription where the benefit is applied."
     },
     "ResourceGroupId": {
       "type": "string",
-      "description": "Fully-qualified identifier of the resource group."
+      "description": "Fully-qualified identifier of the resource group where the benefit is applied."
     },
     "Commitment": {
       "type": "object",
@@ -640,13 +641,13 @@
         "effectiveDateTime": {
           "type": "string",
           "format": "date-time",
-          "description": "DateTime of the savings plan starts providing benefit from.",
+          "description": "DateTime of the savings plan starting when this version is effective from.",
           "readOnly": true
         },
         "benefitStartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "This is the DateTime when the savings plan benefit started.",
+          "description": "This is the DateTime when the savings plan benefit starts.",
           "readOnly": true
         },
         "expiryDateTime": {
@@ -985,7 +986,8 @@
         "Succeeded",
         "Failed",
         "Scheduled",
-        "Cancelled"
+        "Cancelled",
+        "Completed"
       ],
       "x-ms-enum": {
         "name": "PaymentStatus",
@@ -998,7 +1000,7 @@
       "description": "Savings plan utilization",
       "properties": {
         "trend": {
-          "description": "The number of days trend for a savings plan",
+          "description": "The trend for a savings plan's utilization",
           "readOnly": true,
           "type": "string"
         },
@@ -1096,15 +1098,15 @@
       "properties": {
         "valid": {
           "type": "boolean",
-          "description": "Indicates if the provided input was valid"
+          "description": "Indicates if the provided input is valid"
         },
         "reasonCode": {
           "type": "string",
-          "description": "Failure reason code if the provided input was invalid"
+          "description": "Failure reason code if the provided input is invalid"
         },
         "reason": {
           "type": "string",
-          "description": "Failure reason if the provided input was invalid"
+          "description": "Failure reason if the provided input is invalid"
         }
       }
     }
