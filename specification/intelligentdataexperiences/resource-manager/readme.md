@@ -47,7 +47,6 @@ directive:
     reason: Tenant level RPs are not at the subscription level
   - suppress: TopLevelResourcesListBySubscription
     from: aadcustomsecurityattributesdiagnosticsettings.json
-    where: $.paths["DiagnosticSettingsResource"]
     reason: Tenant level RPs are not at the subscription level
 ```
 
