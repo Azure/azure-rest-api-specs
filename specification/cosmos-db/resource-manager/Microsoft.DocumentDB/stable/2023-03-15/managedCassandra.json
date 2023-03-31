@@ -942,6 +942,10 @@
             "cassandraAuditLoggingEnabled": {
               "type": "boolean",
               "description": "Whether Cassandra audit logging is enabled"
+            },
+            "provisionError": {
+              "$ref": "#/definitions/CassandraError",
+              "description": "Error related to resource provisioning."
             }
           }
         }
@@ -989,6 +993,13 @@
           "description": "List relevant information about any connection errors to the Datacenters.",
           "items": {
             "$ref": "#/definitions/ConnectionError"
+          }
+        },
+        "Errors": {
+          "type": "array",
+          "description": "List relevant information about any errors about cluster, data center and connection error.",
+          "items": {
+            "$ref": "#/definitions/CassandraError"
           }
         },
         "dataCenters": {
@@ -1151,6 +1162,27 @@
         }
       }
     },
+    "CassandraError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The code of error that occurred.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message of the error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target resource of the error.",
+          "type": "string"
+        },
+        "additionalErrorInfo": {
+          "description": "Additional information about the error.",
+          "type": "string"
+        }
+      }
+    },
     "CommandPostBody": {
       "description": "Specification of which command to run where",
       "type": "object",
@@ -1294,7 +1326,7 @@
             "diskCapacity": {
               "type": "integer",
               "format": "int32",
-              "description": "Number of disk used for data centers. Default value is 4."
+              "description": "Number of disks attached to each node. Default is 4."
             },
             "availabilityZone": {
               "type": "boolean",
@@ -1306,6 +1338,10 @@
             "deallocated": {
               "type": "boolean",
               "description": "Whether the data center has been deallocated."
+            },
+            "provisionError": {
+              "$ref": "#/definitions/CassandraError",
+              "description": "Error related to resource provisioning."
             }
           }
         }
@@ -1345,7 +1381,10 @@
           "items": {
             "$ref": "#/definitions/Certificate"
           }
-        }
+        },
+        "ConnectionTimeoutInMs": {
+          "description" : "Timeout for connecting to the LDAP server in miliseconds. The default is 5000 ms.",
+          "type": "int32"
       }
     }
   }
