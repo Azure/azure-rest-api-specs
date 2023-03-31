@@ -48,7 +48,7 @@
         "responses": {
           "200": {
             "schema": {
-			  "$ref": "../../../../common/v1/types.json#/definitions/ListUsagesResult"
+              "$ref": "../../../../common/v1/types.json#/definitions/ListUsagesResult"
             },
             "description": ""
           },
@@ -69,7 +69,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/usages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Synapse/workspaces/{workspaceName}/usages": {
       "get": {
         "operationId": "Operations_GetWorkspaceQuotaAndUsage",
         "summary": "Gets the current usage and quota of a workspace.",
@@ -95,7 +95,7 @@
         "responses": {
           "200": {
             "schema": {
-			  "$ref": "#/definitions/ListUsagesResult"
+        "$ref": "#/definitions/ListUsagesResult"
             },
             "description": ""
           },
@@ -118,9 +118,9 @@
     }
   },
   "definitions": {
-	"UsageName": {
-	  "type": "object",
-	  "description": "Name of the usage metrics",
+    "UsageName": {
+      "type": "object",
+      "description": "Name of the usage metrics",
       "properties": {
         "value": {
           "type": "string",
@@ -130,11 +130,10 @@
           "type": "string",
           "description": "The localized name of the usage metric."
         }
-      },
-      "description": "The Usage Names."
+      }
     },
     "Usage": {
-	  "type": "object",
+      "type": "object",
       "description": "Resource usage and limit.",
       "properties": {
         "unit": {
@@ -161,11 +160,10 @@
         "currentValue",
         "limit",
         "name"
-      ],
-      "description": "Describes Resource Usage."
+      ]
     },
     "ListUsagesResult": {
-	  "type": "object",
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
