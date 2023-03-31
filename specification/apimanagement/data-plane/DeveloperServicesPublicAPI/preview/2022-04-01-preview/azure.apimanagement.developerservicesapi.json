@@ -1710,26 +1710,30 @@
     "/users": {
       "post": {
         "operationId": "Users_CreateUser",
-        "description": "Create a new user.",
+        "description": "Create a user by its identifier.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "userCreate",
+            "name": "resource",
             "in": "body",
             "required": true,
-            "description": "The user to create.",
+            "description": "The resource instance.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.UserCreate"
+              "$ref": "#/definitions/Resources.Users.UserCreateResouce"
             }
           }
         ],
         "responses": {
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.User"
+            "headers": {
+              "Location": {
+                "description": "The location of an instance of UserCreateResouce",
+                "type": "string",
+                "format": "uri"
+              }
             }
           },
           "default": {
@@ -3133,45 +3137,6 @@
         "text"
       ]
     },
-    "DeveloperServicesApi.Models.User": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "User id."
-        },
-        "email": {
-          "type": "string",
-          "description": "User email."
-        },
-        "firstName": {
-          "type": "string",
-          "description": "User first name."
-        },
-        "lastName": {
-          "type": "string",
-          "description": "User last name."
-        },
-        "state": {
-          "$ref": "#/definitions/DeveloperServicesApi.Models.UserState",
-          "description": "User state."
-        },
-        "registrationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date of user registration."
-        }
-      },
-      "description": "User profile.",
-      "required": [
-        "id",
-        "email",
-        "firstName",
-        "lastName",
-        "state",
-        "registrationDate"
-      ]
-    },
     "DeveloperServicesApi.Models.UserCreate": {
       "type": "object",
       "properties": {
@@ -3457,6 +3422,25 @@
       "allOf": [
         {
           "$ref": "#/definitions/DeveloperServicesApi.Models.Tag"
+        }
+      ]
+    },
+    "Resources.Users.UserCreateResouce": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "User id.",
+          "readOnly": true
+        }
+      },
+      "description": "The user resource.",
+      "required": [
+        "userId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.UserCreate"
         }
       ]
     },
