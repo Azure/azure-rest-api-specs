@@ -1,0 +1,691 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLServerManagementClient",
+    "description": "The Microsoft Azure management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, VNET rules, security alert policies, log files and configurations with new business model.",
+    "version": "2023-04-15-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "description": "Azure Active Directory OAuth2 Flow",
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/longtermretention/{serverName}/backup": {
+      "post": {
+        "description": "Start the Backup operation",
+        "tags": [
+          "DatasourcePlugin"
+        ],
+        "operationId": "plugin_backup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+              "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BackupRequest"
+            }
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A unique ID provided by the client to identify the specific request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. API finished synchronously with Success.",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The number of seconds to wait before checking the status of the asynchronous operation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error Scenario 4xx/5xx",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "ErrorCode string in the event of a failure.",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sample for Backup API.": {
+            "$ref": "./Examples/backup.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/longtermretention/{serverName}/prebackup": {
+      "post": {
+        "description": "PreBackup operation performs all the checks that are need for the subsequent Backup to succeed.",
+        "tags": [
+          "DatasourcePlugin"
+        ],
+        "operationId": "plugin_prebackup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+              "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Request body for operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PreBackupRequest"
+            }
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A unique ID provided by the client to identify the specific request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. API finished synchronously with Success.",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "Retry-After": {
+                "description": "The number of seconds to wait before checking the status of the asynchronous operation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error Scenario 4xx/5xx",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "ErrorCode string in the event of a failure.",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sample for pre Backup API.": {
+            "$ref": "./Examples/prebackup.json"
+          }
+        },
+        "deprecated": false,
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/longtermretention/{serverName}/operationStatus": {
+      "get": {
+        "description": "Get on operation Status",
+        "tags": [
+          "DatasourcePlugin"
+        ],
+        "operationId": "plugin_operationStatus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+              "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "A unique ID provided by the client to identify the specific request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok. API finished synchronously with Success.",
+            "schema": {
+              "$ref": "#/definitions/Response"
+            },
+            "headers": {
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error Scenario 4xx/5xx",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetail"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "description": "ErrorCode string in the event of a failure.",
+                "type": "string"
+              },
+              "x-ms-request-id": {
+                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Sample for Backup API.": {
+            "$ref": "./Examples/get.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "deprecated": false
+      }
+    }
+  },
+  "definitions": {
+    "BackupRequestBase": {
+      "description": "BackupRequestBase is the base for all backup request.",
+      "required": [
+        "backupSettings"
+      ],
+      "type": "object",
+      "properties": {
+        "scope": {
+          "$ref": "#/definitions/Scope",
+          "description": "Scope"
+        },
+        "backupSettings": {
+          "$ref": "#/definitions/BackupSettings",
+          "description": "Backup Settings"
+        },
+        "targetDetails": {
+          "$ref": "#/definitions/BackupStoreDetails",
+          "description": "Backup Settings"
+        }
+      }
+    },
+    "BackupRequest": {
+      "description": "BackupRequest",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRequestBase"
+        }
+      ],
+      "required": [
+        "targetDetails"
+      ]
+    },
+    "PreBackupRequest": {
+      "description": "PreBackupRequest.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupRequestBase"
+        }
+      ]
+    },
+    "Scope": {
+      "description": "Scope identifies the subset of items within the ARM resource that need to be backed up, or restored.",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "AbsoluteScope": {
+      "description": "Absolute scope identifies the subset of items within the ARM resource that need to be backed up, or restored, using their absolute urls.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scope"
+        }
+      ],
+      "properties": {
+        "absoluteItemIds": {
+          "description": "List of absolute itemIds",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "RangeScope": {
+      "description": "Range scope identifies the subset of items within the ARM resource that need to be backed up, or restored, using start-end based Range objects.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scope"
+        }
+      ],
+      "properties": {
+        "rangeList": {
+          "description": "List of start-end ranges",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Range"
+          }
+        }
+      }
+    },
+    "Range": {
+      "description": "Range captures a start-end of items.",
+      "type": "object",
+      "required": [ "startRange", "endRange" ],
+      "properties": {
+        "startRange": {
+          "description": "startRange",
+          "type": "string"
+        },
+        "endRange": {
+          "description": "endRange",
+          "type": "string"
+        }
+      }
+    },
+    "RegExScope": {
+      "description": "Regex scope identifies the subset of items within the ARM resource that need to be backed up, or restored, using regular expressions.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Scope"
+        }
+      ],
+      "properties": {
+        "regExes": {
+          "description": "List of Regular expressions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BackupSettings": {
+      "description": "backupSettings",
+      "type": "object",
+      "required": [ "backupType", "backupFormat" ],
+      "properties": {
+        "backupType": {
+          "type": "string",
+          "description": "Type of backup like Full, Differential etc."
+        },
+        "backupFormat": {
+          "description": "backupFormat for the current backup.",
+          "enum": [
+            "None",
+            "DPPCollatedFormat",
+            "Zip"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupFormat",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "BackupStoreDetails": {
+      "description": "Details about the target where the backup content will be stored.",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "FullBackupStoreDetails": {
+      "description": "FullBackupStoreDetails is used for scenarios where backup data is streamed/copied over to a storage destination.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupStoreDetails"
+        }
+      ],
+      "properties": {
+        "sasUriList": {
+          "description": "SASUriList of storage containers where backup data is to be streamed/copied.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "OperationalTierStoreDetails": {
+      "description": "OperationalTierDetails is used for scenarios where backup is snapshot based. So we just need a RG placeholder for the snapshot resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BackupStoreDetails"
+        }
+      ],
+      "properties": {
+        "rgNameForSnapshots": {
+          "description": "RGNameForSnapshots is the Resource group where the snapshot resource will be created.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceProperties": {
+      "description": "resource properties per ARM object",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "Type of the specific object - used for deserializing",
+          "type": "string",
+          "readOnly": false
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "ErrorDetail": {
+      "description": "The error detail.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error message."
+        },
+        "target": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The error target."
+        },
+        "details": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
+          },
+          "description": "The error details."
+        },
+        "additionalInfo": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          },
+          "description": "The error additional info."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The additional info."
+        }
+      },
+      "description": "The resource management error additional info."
+    },
+    "Properties": {
+      "description": "Properties",
+      "type": "object"
+    },
+    "PreBackupResponseProperties": {
+      "description": "PreBackupResponseProperties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Properties"
+        }
+      ],
+      "required": [ "numberOfContainers" ],
+      "properties": {
+        "numberOfContainers": {
+          "format": "int32",
+          "description": "Number of storage containers the plugin will use during backup. More than one containers may be used for size limitations, acheiving parallelism, or redundancy etc.",
+          "type": "integer"
+        }
+      }
+    },
+    "BackupResponseProperties": {
+      "description": "BackupResponseProperties",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Properties"
+        }
+      ],
+      "required": [ "datasourceSizeInBytes", "dataTransferredInBytes", "backupMetadata" ],
+
+      "properties": {
+        "datasourceSizeInBytes": {
+          "format": "int64",
+          "description": "Size of datasource in bytes",
+          "type": "integer"
+        },
+        "dataTransferredInBytes": {
+          "format": "int64",
+          "description": "Data transferred in bytes",
+          "type": "integer"
+        },
+        "backupMetadata": {
+          "description": "Metadata to be stored in RP. Store everything that will be required to perform a successful restore using this Recovery point. e.g. Versions, DataFormat etc",
+          "type": "string"
+        }
+      }
+    },
+    "SourceDetails": {
+      "description": "SourceDetails",
+      "type": "object",
+      "required": [
+        "backupMetadata",
+        "storeDetails"
+      ],
+      "properties": {
+        "backupMetadata": {
+          "type": "string",
+          "description": "Metadata of the backup which is being recovered"
+        },
+        "storeDetails": {
+          "$ref": "#/definitions/BackupStoreDetails",
+          "description": "BackupStoreDetails"
+        }
+      }
+    },
+    "Response": {
+      "description": "Response",
+      "type": "object",
+
+      "required": [ "id", "name", "status", "startTime" ],
+
+      "properties": {
+        "id": {
+          "description": "full rp id",
+          "type": "string"
+        },
+        "name": {
+          "description": "name",
+          "type": "string"
+        },
+        "status": {
+          "description": "Service-set extensible enum indicating operation?s kind",
+          "enum": [
+            "Running",
+            "Cancelled",
+            "Failed",
+            "Succeeded"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ExecutionStatus",
+            "modelAsString": true
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorDetail",
+          "description": "Embedded Error Object."
+        },
+        "startTime": {
+          "description": "StartTime",
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "description": "endTime",
+          "format": "date-time",
+          "type": "string"
+        },
+        "properties": {
+          "description": "AdditionalProperties",
+          "$ref": "#/definitions/Properties"
+        },
+        "percentComplete": {
+          "description": "PercentageCompleted",
+          "format": "double",
+          "type": "number"
+        }
+      }
+    }
+  }
+}
