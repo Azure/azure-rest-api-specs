@@ -35,7 +35,7 @@
   "paths": {
     "/confirmations/users/{userId}/identities/basic": {
       "post": {
-        "operationId": "Confirmations_CreateUserBasicIdentityConfirmation",
+        "operationId": "Confirmations_CreateBasicIdentityConfirmation",
         "description": "Basic identity (Email) confirmation for a User.",
         "parameters": [
           {
@@ -49,18 +49,25 @@
             "type": "string"
           },
           {
-            "name": "identityConfirmationRequest",
+            "name": "resource",
             "in": "body",
             "required": true,
-            "description": "The identity confirmation request.",
+            "description": "The resource instance.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityConfirmationRequest"
+              "$ref": "#/definitions/Resources.Confirmations.ConfirmationIdentityResource"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "description": "The location of an instance of ConfirmationIdentityResource",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4258,6 +4265,21 @@
         }
       ]
     },
+    "Resources.Confirmations.ConfirmationIdentityResource": {
+      "type": "object",
+      "properties": {},
+      "description": "The basic identity confirmation resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityConfirmationRequest"
+        }
+      ]
+    },
+    "Resources.Confirmations.ConfirmationsResource": {
+      "type": "object",
+      "properties": {},
+      "description": "The confirmations resource."
+    },
     "Resources.Confirmations.IdentityResource": {
       "type": "object",
       "properties": {},
@@ -4267,6 +4289,11 @@
           "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityResult"
         }
       ]
+    },
+    "Resources.Confirmations.UsersResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Apis resource model."
     },
     "Resources.Products.ProductApiResource": {
       "type": "object",
