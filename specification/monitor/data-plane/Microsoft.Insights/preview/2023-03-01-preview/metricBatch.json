@@ -50,9 +50,6 @@
             "$ref": "#/parameters/MetricNamesParameter"
           },
           {
-            "$ref": "#/parameters/RegionParameter"
-          },
-          {
             "$ref": "#/parameters/AggregationsParameter"
           },
           {
@@ -77,6 +74,12 @@
             "description": "The response to a metrics query.",
             "schema": {
               "$ref": "#/definitions/Response"
+            }
+          },
+          "400": {
+            "description": "The response to a metrics query that results in a bad request, with optional additional information.",
+            "schema": {
+              "$ref": "#/definitions/AdditionalInfoErrorResponse"
             }
           },
           "default": {
@@ -117,7 +120,7 @@
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",
+      "description": "The timespan of the query. It is a string in the following format 'startDateTime_ISO/endDateTime_ISO'.",
       "x-ms-parameter-location": "method"
     },
     "IntervalParameter": {
@@ -134,7 +137,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Metric namespace to query metric definitions for.",
+      "description": "Metric namespace that contains the requested metric names.",
       "x-ms-parameter-location": "method"
     },
     "MetricNamesParameter": {
@@ -169,14 +172,6 @@
       "type": "string",
       "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\nExamples: sum asc.",
       "x-ms-parameter-location": "method"
-    },
-    "RegionParameter": {
-      "name": "region",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The Azure region code (westus, eastus, northeurope, etc) for all of the resourceIds specified. Not required if the region is in the host name.",
-      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
@@ -195,6 +190,37 @@
       "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "AdditionalInfoErrorResponse": {
+      "description": "The response to a metrics query that results in a bad request, with optional additional information.",
+      "type": "object",
+      "properties": {
+        "additionalInfo": {
+          "description": "Additional information about the error",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "The type of the info property (e.g. string).",
+                "type": "string"
+              },
+              "info": {
+                "description": "Additional information related to the error.",
+                "type": "string"
+              }
+            }
+          }
+        },
         "code": {
           "description": "Error code",
           "type": "string"
@@ -227,6 +253,10 @@
           "resourceregion": {
             "type": "string",
             "description": "The region of the resource been queried for metrics."
+          },
+          "resourceid": {
+            "type": "string",
+            "description": "The resource that has been queried for metrics."
           },
           "value": {
             "type": "array",
