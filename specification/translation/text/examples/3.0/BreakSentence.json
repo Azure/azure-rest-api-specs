@@ -12,19 +12,25 @@
     ]
   },
   "responses": {
-    "200": [
-      {
-        "detectedLanguage": {
-          "language": "en",
-          "score": 1.0
-        },
-        "sentLen": [
-          13,
-          11,
-          22
-        ]
-      }
-    ],
+    "200": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-requestid": "Request id for tracing"
+      },
+      "body": [
+        {
+          "detectedLanguage": {
+            "language": "en",
+            "score": 1.0
+          },
+          "sentLen": [
+            13,
+            11,
+            22
+          ]
+        }
+      ]
+    },
     "default": {
       "headers": {
         "Content-Type": "application/json",
