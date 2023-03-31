@@ -366,23 +366,6 @@
       ],
       "type": "object"
     },
-    "PackageInstallationProperties": {
-      "type": "object",
-      "description": "package installation properties.",
-      "properties": {
-        "properties": {
-          "description": "Template Spec properties.",
-          "$ref": "#/definitions/packageProperties"
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "metadataDependencies": {
       "description": "Dependencies for the content item, what other content items it requires to work.  Can describe more complex dependencies using a recursive/nested structure. For a single dependency an id/kind/version can be supplied or operator/criteria for complex dependencies.",
       "type": "object",
@@ -462,7 +445,7 @@
       "name": "packageInstallationProperties",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/PackageInstallationProperties"
+        "$ref": "#/definitions/packageModel"
       },
       "x-ms-parameter-location": "method"
     }
