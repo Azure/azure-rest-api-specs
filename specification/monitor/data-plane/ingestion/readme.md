@@ -1,14 +1,25 @@
 # My API
+
 > see https://aka.ms/autorest
 
 ### Basic Information
+
 These are the global settings for the Ingestion API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2023-01-01
+tag: package-preview-2023-04
 ```
 
+
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2023-04'
+input-file:
+  - preview/2023-04-01-preview/DataCollectionRules.json
+```
 ### Tag: package-2023-01-01
 
 These settings apply only when `--tag=package-2023-01-01` is specified on the command line.
