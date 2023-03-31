@@ -38,6 +38,19 @@ input-file:
   - Microsoft.AadCustomSecurityAttributesDiagnosticSettings/preview/2023-03-01-preview/aadcustomsecurityattributesdiagnosticsettings.json
 ```
 
+## Supression
+```yaml
+directive:
+  - suppress: PathForPutOperation
+    from: aadcustomsecurityattributesdiagnosticsettings.json
+    where: $.paths["/providers/Microsoft.AadCustomSecurityAttributesDiagnosticSettings/diagnosticSettings/{diagnosticSettingName}"]
+    reason: Tenant level RPs are not at the subscription level
+  - suppress: TopLevelResourcesListBySubscription
+    from: aadcustomsecurityattributesdiagnosticsettings.json
+    where: $.paths["DiagnosticSettingsResource"]
+    reason: Tenant level RPs are not at the subscription level
+```
+
 ---
 
 # Code Generation
