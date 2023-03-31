@@ -1225,18 +1225,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "identityConfirmationRequest",
+            "name": "resource",
             "in": "body",
             "required": true,
-            "description": "The identity confirmation request.",
+            "description": "The resource instance.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityConfirmationRequest"
+              "$ref": "#/definitions/Resources.Confirmations.ConfirmationIdentityResource"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "description": "The location of an instance of ConfirmationIdentityResource",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1262,18 +1269,25 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "confirmationRequest",
+            "name": "resource",
             "in": "body",
             "required": true,
-            "description": "The password confirmation request.",
+            "description": "The resource instance.",
             "schema": {
-              "$ref": "#/definitions/DeveloperServicesApi.Models.ConfirmationRequest"
+              "$ref": "#/definitions/Resources.Confirmations.ConfirmationPasswordResource"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "description": "The location of an instance of ConfirmationPasswordResource",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2300,19 +2314,6 @@
         ]
       }
     },
-    "DeveloperServicesApi.Models.ConfirmationRequest": {
-      "type": "object",
-      "properties": {
-        "to": {
-          "type": "string",
-          "description": "The email address to send the confirmation to."
-        }
-      },
-      "description": "API Management Notification Request.",
-      "required": [
-        "to"
-      ]
-    },
     "DeveloperServicesApi.Models.ContentSettings": {
       "type": "object",
       "properties": {
@@ -2885,6 +2886,19 @@
       },
       "description": "API operation method."
     },
+    "DeveloperServicesApi.Models.PasswordConfirmationRequest": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "string",
+          "description": "The email address to send the confirmation to."
+        }
+      },
+      "description": "API Management Notification Request.",
+      "required": [
+        "to"
+      ]
+    },
     "DeveloperServicesApi.Models.Product": {
       "type": "object",
       "properties": {
@@ -3365,6 +3379,26 @@
         }
       ]
     },
+    "Resources.Confirmations.ConfirmationIdentityResource": {
+      "type": "object",
+      "properties": {},
+      "description": "The confirmations resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.IdentityConfirmationRequest"
+        }
+      ]
+    },
+    "Resources.Confirmations.ConfirmationPasswordResource": {
+      "type": "object",
+      "properties": {},
+      "description": "The confirmations resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.PasswordConfirmationRequest"
+        }
+      ]
+    },
     "Resources.Delegation.DelegationSettingsResource": {
       "type": "object",
       "properties": {},
@@ -3427,17 +3461,8 @@
     },
     "Resources.Users.UserCreateResouce": {
       "type": "object",
-      "properties": {
-        "userId": {
-          "type": "string",
-          "description": "User id.",
-          "readOnly": true
-        }
-      },
+      "properties": {},
       "description": "The user resource.",
-      "required": [
-        "userId"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/DeveloperServicesApi.Models.UserCreate"

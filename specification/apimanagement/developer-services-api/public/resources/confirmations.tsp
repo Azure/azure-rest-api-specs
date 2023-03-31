@@ -3,32 +3,35 @@ import "../../models/common.tsp";
 import "../../models/confirmation.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.Core;
 using Azure.Core.Foundations;
 using DeveloperServicesApi.Models;
 
 namespace DeveloperServicesPublicApi.Resources.Confirmations;
 
 interface Confirmations {
-  //TODO: find a workaround
-  @route("/confirmations/password")
   @doc("Password reset confirmation.")
-  @post
-  CreatePasswordConfirmation(
-    ...ApiVersionParameter,
+  createPasswordConfirmation is ResourceCreateWithServiceProvidedName<ConfirmationPasswordResource>;
 
-    @doc("The password confirmation request.")
-    @body
-    confirmationRequest: ConfirmationRequest
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
-
-  @route("/confirmations/identities/basic")
   @doc("Basic identity (Email) confirmation.")
-  @post
-  CreateBasicIdentityConfirmation(
-    ...ApiVersionParameter,
+  createBasicIdentityConfirmation is ResourceCreateWithServiceProvidedName<ConfirmationIdentityResource>;
+}
 
-    @doc("The identity confirmation request.")
-    @body
-    identityConfirmationRequest: IdentityConfirmationRequest
-  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+@doc("The confirmations resource.")
+@resource("confirmations/password")
+model ConfirmationPasswordResource extends PasswordConfirmationRequest {
+  @doc("Password reset confirmation.")
+  @key("default")
+  @visibility("query")
+  default: "";
+}
+
+@doc("The confirmations resource.")
+@resource("confirmations/identities/basic")
+model ConfirmationIdentityResource extends IdentityConfirmationRequest {
+  @doc("The identity confirmation.")
+  @key("default")
+  @visibility("query")
+  default: "";
 }

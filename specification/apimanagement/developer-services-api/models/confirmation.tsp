@@ -1,7 +1,7 @@
 namespace DeveloperServicesApi.Models;
 
 @doc("API Management Notification Request.")
-model ConfirmationRequest {
+model PasswordConfirmationRequest {
   @doc("The email address to send the confirmation to.")
   to: string;
 }

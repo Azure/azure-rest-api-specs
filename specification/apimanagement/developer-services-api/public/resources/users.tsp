@@ -20,6 +20,6 @@ interface Users {
 model UserCreateResouce extends UserCreate {
   @doc("User id.")
   @key("userId")
-  @visibility("read")
+  @visibility("query")
   userId: string;
 }
