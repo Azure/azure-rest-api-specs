@@ -2262,10 +2262,8 @@
       "properties": {
         "metadata": {
           "description": "The collection of entity metadata objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseMetadata"
-          }
+          "type": "object",
+          "$ref": "#/definitions/BaseMetadata"
         }
       }
     },
@@ -3135,7 +3133,10 @@
           "description": "The entity Metadata object kind.",
           "type": "string",
           "enum": [
-            "TemporalMetadata",
+            "DateMetadata",
+            "DateTimeMetadata",
+            "TimeMetadata",
+            "TemporalSetMetadata",
             "NumberMetadata",
             "OrdinalMetadata",
             "SpeedMetadata",
@@ -3374,15 +3375,9 @@
         "unit"
       ]
     },
-    "TemporalMetadata": {
-      "description": "A Metadata for datetime entity instances.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseMetadata"
-        }
-      ],
+    "DateValue": {
+      "description": "Represents the date value.",
       "type": "object",
-      "x-ms-discriminator-value": "TemporalMetadata",
       "properties": {
         "timex": {
           "$ref": "#/definitions/TimeExpression"
@@ -3400,8 +3395,92 @@
         "value"
       ]
     },
+    "BaseTemporalMetadata": {
+      "properties": {
+        "dateValues": {
+          "type": "array",
+          "description": "The list of date values.",
+          "items": {
+            "$ref": "#/definitions/DateValue"
+          }
+        }
+      }
+    },
+    "DateMetadata": {
+      "description": "A Metadata for date entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        },
+        {
+          "$ref": "#/definitions/BaseTemporalMetadata"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "DateMetadata"
+    },
+    "DateTimeMetadata": {
+      "description": "A Metadata for datetime entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        },
+        {
+          "$ref": "#/definitions/BaseTemporalMetadata"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "DateTimeMetadata"
+    },
+    "TemporalSetMetadata": {
+      "description": "A Metadata for temporal set entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        },
+        {
+          "$ref": "#/definitions/BaseTemporalMetadata"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "TemporalSetMetadata"
+    },
+    "TimeMetadata": {
+      "description": "A Metadata for time entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        },
+        {
+          "$ref": "#/definitions/BaseTemporalMetadata"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "TimeMetadata"
+    },
     "NumberMetadata": {
-      "$ref": "#/definitions/NumberMetadata"
+      "description": "A metadata for numeric entity instances.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "type": "object",
+      "x-ms-discriminator-value": "NumberMetadata",
+      "properties": {
+        "numberKind": {
+          "$ref": "#/definitions/NumberKind"
+        },
+        "value": {
+          "type": "number",
+          "format": "double",
+          "description": "A numeric representation of what the extracted text denotes."
+        }
+      },
+      "required": [
+        "numberKind",
+        "value"
+      ]
     },
     "OrdinalMetadata": {
       "description": "A Metadata for ordinal numbers entity instances.",
