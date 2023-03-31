@@ -29,19 +29,11 @@ alias DictionaryBaseParameters = {
 @doc("Request parameters for the dictionary lookup API.")
 model DictionaryLookupParamters {
   ...DictionaryBaseParameters;
-
-  @body
-  @doc("Array of the text to be sent to dictionary.")
-  content: InputTextItem[];
 }
 
 @doc("Request paramters for the dictionary examples API.")
 model DictionaryExamplesParamters {
   ...DictionaryBaseParameters;
-
-  @body
-  @doc("Array of the text to be sent to dictionary.")
-  content: DictionaryExampleTextItem[];
 }
 
 @doc("Response for the dictionary lookup API.")

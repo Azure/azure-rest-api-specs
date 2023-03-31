@@ -12,9 +12,24 @@ using TypeSpec.Http;
 
 namespace TextTranslation;
 
-op CustomOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
+@doc("Defines Text Translation custom Operation")
+op CustomOperation<TBody, TParams, TResponse, Traits = {}, TError = ErrorResponse>(
   ...TParams,
 
+  @doc("Defines the content of the request")
+  @body
+  requestBody: TBody,
+
+  @doc("Mandatory API version parameter")
+  @query("api-version")
+  apiVersion: string
+): TResponse | TError;
+
+@doc("Defines Text Translation custom Operations which doesn't have any content in the request")
+op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
+  ...TParams,
+
+  @doc("Mandatory API version parameter")
   @query("api-version")
   apiVersion: string
 ): TResponse | TError;
@@ -23,7 +38,7 @@ op CustomOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
 @route("languages")
 @summary("Gets the set of languages currently supported by other operations of the Translator.")
 @doc("Gets the set of languages currently supported by other operations of the Translator.")
-op GetLanguages is CustomOperation<
+op GetLanguages is CustomGetOperation<
   GetLanguageParameters,
   GetLanguagesResult,
   {},
@@ -35,6 +50,7 @@ op GetLanguages is CustomOperation<
 @summary("Translate Text")
 @doc("Translate Text")
 op Translate is CustomOperation<
+  InputTextItem[],
   TranslateParameters,
   TranslationResult,
   {},
@@ -46,6 +62,7 @@ op Translate is CustomOperation<
 @summary("Transliterate Text")
 @doc("Transliterate Text")
 op Transliterate is CustomOperation<
+  InputTextItem[],
   TransliterateParameters,
   TransliterateResult,
   {},
@@ -57,6 +74,7 @@ op Transliterate is CustomOperation<
 @summary("Find Sentence Boundaries")
 @doc("Find Sentence Boundaries")
 op FindSentenceBoundaries is CustomOperation<
+  InputTextItem[],
   BreakSentenceParameters,
   BreakSentenceResult,
   {},
@@ -68,6 +86,7 @@ op FindSentenceBoundaries is CustomOperation<
 @summary("Lookup Dictionary Entries")
 @doc("Lookup Dictionary Entries")
 op LookupDictionaryEntries is CustomOperation<
+  InputTextItem[],
   DictionaryLookupParamters,
   DictionaryLookupResult,
   {},
@@ -79,6 +98,7 @@ op LookupDictionaryEntries is CustomOperation<
 @summary("Lookup Dictionary Examples")
 @doc("Lookup Dictionary Examples")
 op LookupDictionaryExamples is CustomOperation<
+  DictionaryExampleTextItem[],
   DictionaryExamplesParamters,
   DictionaryExamplesResult,
   {},

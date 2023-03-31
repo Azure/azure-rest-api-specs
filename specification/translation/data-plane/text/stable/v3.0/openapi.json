@@ -60,11 +60,23 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "description": "Mandatory API version parameter",
             "x-ms-client-name": "apiVersion",
             "type": "string"
           },
           {
-            "$ref": "#/parameters/BreakSentenceParameters.content"
+            "name": "requestBody",
+            "in": "body",
+            "required": true,
+            "description": "Defines the content of the request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InputTextItem"
+              },
+              "x-ms-identifiers": [],
+              "x-typespec-name": "InputTextItem[]"
+            }
           }
         ],
         "responses": {
@@ -96,11 +108,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Response for the Break SEntence API.": {
-            "$ref": "./examples/3.0/BreakSentence.json"
           }
         }
       }
@@ -137,11 +144,23 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "description": "Mandatory API version parameter",
             "x-ms-client-name": "apiVersion",
             "type": "string"
           },
           {
-            "$ref": "#/parameters/DictionaryExamplesParameters.content"
+            "name": "requestBody",
+            "in": "body",
+            "required": true,
+            "description": "Defines the content of the request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DictionaryExampleTextItem"
+              },
+              "x-ms-identifiers": [],
+              "x-typespec-name": "DictionaryExampleTextItem[]"
+            }
           }
         ],
         "responses": {
@@ -173,11 +192,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Response for the dictionary examples API.": {
-            "$ref": "./examples/3.0/DictionaryExamples.json"
           }
         }
       }
@@ -214,11 +228,23 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "description": "Mandatory API version parameter",
             "x-ms-client-name": "apiVersion",
             "type": "string"
           },
           {
-            "$ref": "#/parameters/DictionaryLookupParameters.content"
+            "name": "requestBody",
+            "in": "body",
+            "required": true,
+            "description": "Defines the content of the request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InputTextItem"
+              },
+              "x-ms-identifiers": [],
+              "x-typespec-name": "InputTextItem[]"
+            }
           }
         ],
         "responses": {
@@ -251,11 +277,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Response for the dictionary lookup API": {
-            "$ref": "./examples/3.0/DictionaryLookup.json"
-          }
         }
       }
     },
@@ -286,6 +307,7 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "description": "Mandatory API version parameter",
             "x-ms-client-name": "apiVersion",
             "type": "string"
           }
@@ -318,11 +340,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Supported Languages": {
-            "$ref": "./examples/3.0/GetLanguages.json"
           }
         }
       }
@@ -381,11 +398,23 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "description": "Mandatory API version parameter",
             "x-ms-client-name": "apiVersion",
             "type": "string"
           },
           {
-            "$ref": "#/parameters/TranslateParameters.content"
+            "name": "requestBody",
+            "in": "body",
+            "required": true,
+            "description": "Defines the content of the request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InputTextItem"
+              },
+              "x-ms-identifiers": [],
+              "x-typespec-name": "InputTextItem[]"
+            }
           }
         ],
         "responses": {
@@ -427,11 +456,6 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Translation API response": {
-            "$ref": "./examples/3.0/Translate.json"
-          }
         }
       }
     },
@@ -462,11 +486,23 @@
             "name": "api-version",
             "in": "query",
             "required": true,
+            "description": "Mandatory API version parameter",
             "x-ms-client-name": "apiVersion",
             "type": "string"
           },
           {
-            "$ref": "#/parameters/TransliterateParameters.content"
+            "name": "requestBody",
+            "in": "body",
+            "required": true,
+            "description": "Defines the content of the request",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InputTextItem"
+              },
+              "x-ms-identifiers": [],
+              "x-typespec-name": "InputTextItem[]"
+            }
           }
         ],
         "responses": {
@@ -498,11 +534,6 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Response for the transliteration API": {
-            "$ref": "./examples/3.0/Transliterate.json"
           }
         }
       }
@@ -727,6 +758,24 @@
         }
       ]
     },
+    "DictionaryExamplesParamters": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope."
+        },
+        "to": {
+          "type": "string",
+          "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope."
+        }
+      },
+      "description": "Request paramters for the dictionary examples API.",
+      "required": [
+        "from",
+        "to"
+      ]
+    },
     "DictionaryExamplesResult": {
       "type": "object",
       "properties": {
@@ -771,6 +820,24 @@
         "normalizedSource",
         "displaySource",
         "translations"
+      ]
+    },
+    "DictionaryLookupParamters": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string",
+          "description": "Specifies the language of the input text.\nThe source language must be one of the supported languages included in the dictionary scope."
+        },
+        "to": {
+          "type": "string",
+          "description": "Specifies the language of the output text.\nThe target language must be one of the supported languages included in the dictionary scope."
+        }
+      },
+      "description": "Request parameters for the dictionary lookup API.",
+      "required": [
+        "from",
+        "to"
       ]
     },
     "DictionaryLookupResult": {
@@ -841,7 +908,7 @@
         "code": {
           "type": "integer",
           "format": "int32",
-          "description": "Number identifier of the error."
+          "description": "Number indetifier of the error."
         },
         "message": {
           "type": "string",
@@ -1347,21 +1414,6 @@
     }
   },
   "parameters": {
-    "BreakSentenceParameters.content": {
-      "name": "content",
-      "in": "body",
-      "required": true,
-      "description": "Array of the text for which values the sentence boundaries will be calculated.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/InputTextItem"
-        },
-        "x-ms-identifiers": [],
-        "x-typespec-name": "InputTextItem[]"
-      },
-      "x-ms-parameter-location": "method"
-    },
     "BreakSentenceParameters.language": {
       "name": "language",
       "in": "query",
@@ -1376,36 +1428,6 @@
       "required": false,
       "description": "Script tag identifying the script used by the input text. \nIf a script isn't specified, the default script of the language will be assumed.",
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "DictionaryExamplesParameters.content": {
-      "name": "content",
-      "in": "body",
-      "required": true,
-      "description": "Array of the text to be sent to dictionary.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/DictionaryExampleTextItem"
-        },
-        "x-ms-identifiers": [],
-        "x-typespec-name": "DictionaryExampleTextItem[]"
-      },
-      "x-ms-parameter-location": "method"
-    },
-    "DictionaryLookupParameters.content": {
-      "name": "content",
-      "in": "body",
-      "required": true,
-      "description": "Array of the text to be sent to dictionary.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/InputTextItem"
-        },
-        "x-ms-identifiers": [],
-        "x-typespec-name": "InputTextItem[]"
-      },
       "x-ms-parameter-location": "method"
     },
     "GetLanguageParameters.acceptLanguage": {
@@ -1451,21 +1473,6 @@
       "description": "A string specifying the category (domain) of the translation. This parameter is used to get translations \nfrom a customized system built with Custom Translator. Add the Category ID from your Custom Translator \nproject details to this parameter to use your deployed customized system. Default value is: general.",
       "default": "general",
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "TranslateParameters.content": {
-      "name": "content",
-      "in": "body",
-      "required": true,
-      "description": "Array of the text to be translated.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/InputTextItem"
-        },
-        "x-ms-identifiers": [],
-        "x-typespec-name": "InputTextItem[]"
-      },
       "x-ms-parameter-location": "method"
     },
     "TranslateParameters.from": {
@@ -1571,7 +1578,7 @@
       "name": "textType",
       "in": "query",
       "required": false,
-      "default": "plain",
+      "default": "Plain",
       "type": "string",
       "enum": [
         "plain",
@@ -1611,21 +1618,6 @@
       "required": false,
       "description": "Specifies the script of the translated text.",
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "TransliterateParameters.content": {
-      "name": "content",
-      "in": "body",
-      "required": true,
-      "description": "Array of the text to be transliterated.",
-      "schema": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/InputTextItem"
-        },
-        "x-ms-identifiers": [],
-        "x-typespec-name": "InputTextItem[]"
-      },
       "x-ms-parameter-location": "method"
     },
     "TransliterateParameters.fromScript": {

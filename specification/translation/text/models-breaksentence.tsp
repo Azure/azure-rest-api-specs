@@ -26,10 +26,6 @@ model BreakSentenceParameters {
     If a script isn't specified, the default script of the language will be assumed.
     """)
   script?: string;
-
-  @body
-  @doc("Array of the text for which values the sentence boundaries will be calculated.")
-  content: InputTextItem[];
 }
 
 @doc("Response for the Break SEntence API.")

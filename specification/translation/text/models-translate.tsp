@@ -108,10 +108,6 @@ model TranslateParameters {
     specifies that the service is allowed to fall back to a general system when a custom system doesn't exist.
     """)
   allowFallback?: boolean = true;
-
-  @body
-  @doc("Array of the text to be translated.")
-  content: InputTextItem[];
 }
 
 @doc("Response for the translation API.")

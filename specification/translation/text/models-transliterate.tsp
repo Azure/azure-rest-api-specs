@@ -33,10 +33,6 @@ model TransliterateParameters {
     scripts available for the selected combination of input language and input script.
     """)
   toScript: string;
-
-  @body
-  @doc("Array of the text to be transliterated.")
-  content: InputTextItem[];
 }
 
 @doc("Response for the transliteration API.")
