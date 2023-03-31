@@ -2205,6 +2205,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
             "name": "subscriptionId",
             "in": "path",
             "required": true,
@@ -2212,16 +2219,25 @@
             "type": "string"
           },
           {
-            "name": "userId",
-            "in": "path",
+            "name": "resource",
+            "in": "body",
             "required": true,
-            "description": "User identifier.",
-            "type": "string"
+            "description": "The resource instance.",
+            "schema": {
+              "$ref": "#/definitions/Resources.Subscriptions.SubscriptionPrimaryKeyResource"
+            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "description": "The location of an instance of SubscriptionPrimaryKeyResource",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2247,6 +2263,13 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
             "name": "subscriptionId",
             "in": "path",
             "required": true,
@@ -2254,16 +2277,25 @@
             "type": "string"
           },
           {
-            "name": "userId",
-            "in": "path",
+            "name": "resource",
+            "in": "body",
             "required": true,
-            "description": "User identifier.",
-            "type": "string"
+            "description": "The resource instance.",
+            "schema": {
+              "$ref": "#/definitions/Resources.Subscriptions.SubscriptionSecondaryKeyResource"
+            }
           }
         ],
         "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. "
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "headers": {
+              "Location": {
+                "description": "The location of an instance of SubscriptionSecondaryKeyResource",
+                "type": "string",
+                "format": "uri"
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4325,6 +4357,11 @@
         }
       ]
     },
+    "Resources.Subscriptions.SubscriptionPrimaryKeyResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Subscription primary key resource."
+    },
     "Resources.Subscriptions.SubscriptionResource": {
       "type": "object",
       "properties": {},
@@ -4334,6 +4371,11 @@
           "$ref": "#/definitions/DeveloperServicesApi.Models.Subscription"
         }
       ]
+    },
+    "Resources.Subscriptions.SubscriptionSecondaryKeyResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Subscription secondary key resource."
     },
     "Resources.Tags.TagResource": {
       "type": "object",
