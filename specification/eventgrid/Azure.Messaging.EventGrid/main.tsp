@@ -9,14 +9,7 @@ enum ServiceApiVersions {
   v2023_06_01_preview: "2023-06-01-preview"
 }
 
-@useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "aeg-sas-key"> | OAuth2Auth<[{
-    type: OAuth2FlowType.implicit,
-    authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-    scopes: ["https://eventgrid.azure.net/.default"],
-  }]>
-)
-
+@useAuth({type: AuthType.http, scheme: "SharedAccessKey"})
 @service({
   title: "AzureMessagingEventGridClient",
   version: "2023-06-01-preview"
