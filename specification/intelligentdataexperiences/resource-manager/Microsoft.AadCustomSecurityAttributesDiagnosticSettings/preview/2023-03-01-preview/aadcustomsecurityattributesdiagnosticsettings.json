@@ -176,6 +176,12 @@
               "$ref": "#/definitions/DiagnosticSettingsResource"
             }
           },
+          "201": {
+            "description": "Successful request to create AadCustomSecurityAttributesDiagnosticSettings diagnostic setting.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            }
+          },
           "default": {
             "description": "Error. The request to create diagnostic setting has failed.",
             "schema": {
@@ -257,16 +263,8 @@
     "RetentionPolicy": {
       "properties": {
         "enabled": {
-          "type": "string",
-          "description": "A value indicating whether the retention policy is enabled.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "Enabled",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "A value indicating whether the retention policy is enabled."
         },
         "days": {
           "type": "integer",
@@ -286,8 +284,7 @@
       "properties": {
         "category": {
           "enum": [
-            "AuditLogs",
-            "SignInLogs"
+            "CustomSecurityAttributesAuditLogs"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -297,16 +294,8 @@
           "description": "Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation."
         },
         "enabled": {
-          "type": "string",
-          "description": "A value indicating whether this log is enabled.",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "Enabled",
-            "modelAsString": true
-          }
+          "type": "boolean",
+          "description": "A value indicating whether this log is enabled."
         },
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
@@ -363,10 +352,8 @@
         }
       ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/DiagnosticSettings",
-          "description": "Properties of a Diagnostic Settings Resource."
-        }
+        "$ref": "#/definitions/DiagnosticSettings",
+        "description": "Properties of a Diagnostic Settings Resource."
       },
       "description": "The diagnostic setting resource."
     },
@@ -438,7 +425,10 @@
       "required": true,
       "type": "string",
       "description": "The name of the diagnostic setting.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "[^<>%&:\\?/]*$",
+      "minLength": 3,
+      "maxLength": 260
     }
   }
 }
