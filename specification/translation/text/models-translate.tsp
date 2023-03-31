@@ -138,8 +138,8 @@ model TranslationResult {
 }
 
 enum TextTypeKnownValues {
-  Plain: "plain",
-  Html: "html",
+  Plain: "Plain",
+  Html: "Html",
 }
 
 @doc("Translation text type")
