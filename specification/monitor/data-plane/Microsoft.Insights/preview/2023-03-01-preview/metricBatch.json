@@ -62,10 +62,11 @@
             "$ref": "#/parameters/OrderByParameter"
           },
           {
-            "$ref": "#/parameters/FilterParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The **$filter** is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.",
           },
           {
             "$ref": "#/parameters/ResourceIdList"
@@ -108,14 +109,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The subscription identifier for the resources in this batch."
+      "description": "The subscription identifier for the resources in this batch.",
+      "x-ms-parameter-location": "method"
     },
     "TimespanParameter": {
       "name": "timespan",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'."
+      "description": "The timespan of the query. It is a string with the following format 'startDateTime_ISO/endDateTime_ISO'.",
+      "x-ms-parameter-location": "method"
     },
     "IntervalParameter": {
       "name": "interval",
@@ -123,28 +126,32 @@
       "required": false,
       "type": "string",
       "format": "duration",
-      "description": "The interval (i.e. timegrain) of the query."
+      "description": "The interval (i.e. timegrain) of the query.",
+      "x-ms-parameter-location": "method"
     },
     "MetricNamespaceParameter": {
       "name": "metricnamespace",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Metric namespace to query metric definitions for."
+      "description": "Metric namespace to query metric definitions for.",
+      "x-ms-parameter-location": "method"
     },
     "MetricNamesParameter": {
       "name": "metricnames",
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The names of the metrics (comma separated) to retrieve."
+      "description": "The names of the metrics (comma separated) to retrieve.",
+      "x-ms-parameter-location": "method"
     },
     "AggregationsParameter": {
       "name": "aggregation",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The list of aggregation types (comma separated) to retrieve."
+      "description": "The list of aggregation types (comma separated) to retrieve.",
+      "x-ms-parameter-location": "method"
     },
     "TopParameter": {
       "name": "top",
@@ -152,39 +159,29 @@
       "required": false,
       "type": "integer",
       "format": "int32",
-      "description": "The maximum number of records to retrieve.\nValid only if $filter is specified.\nDefaults to 10."
+      "description": "The maximum number of records to retrieve.\nValid only if $filter is specified.\nDefaults to 10.",
+      "x-ms-parameter-location": "method"
     },
     "OrderByParameter": {
       "name": "orderby",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\nExamples: sum asc."
-    },
-    "FilterParameter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The **$filter** is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**."
+      "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\nExamples: sum asc.",
+      "x-ms-parameter-location": "method"
     },
     "RegionParameter": {
       "name": "region",
       "in": "query",
       "required": false,
       "type": "string",
-      "description": "The Azure region code (westus, eastus, northeurope, etc) for all of the resourceIds specified. Not required if the region is in the host name."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
+      "description": "The Azure region code (westus, eastus, northeurope, etc) for all of the resourceIds specified. Not required if the region is in the host name.",
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
     "ResourceIdList": {
+      "description": "The comma separated list of resource IDs to query metrics for.",
       "type": "array",
       "items": {
         "type": "string"
@@ -195,6 +192,7 @@
       ]
     },
     "ErrorResponse": {
+      "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
         "code": {
@@ -256,6 +254,7 @@
       ]
     },
     "LocalizableString": {
+      "type": "object",
       "required": [
         "value"
       ],
@@ -295,6 +294,7 @@
       }
     },
     "MetricValue": {
+      "type": "object",
       "required": [
         "timeStamp"
       ],
@@ -333,6 +333,7 @@
       "description": "Represents a metric value."
     },
     "MetadataValue": {
+      "type": "object",
       "properties": {
         "name": {
           "$ref": "#/definitions/LocalizableString",
