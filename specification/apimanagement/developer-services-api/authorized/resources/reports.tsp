@@ -10,6 +10,7 @@ using DeveloperServicesApi.Models;
 namespace DeveloperServicesAuthorizedApi.Resources.Reports;
 
 interface Reports {
+  //TODO: find a workaround
   @route("/users/{userId}/reports/{reportType}")
   @doc("List a collection of tags.")
   @get

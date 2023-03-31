@@ -15,6 +15,7 @@ interface Identities {
   @doc("List a collection of user identities.")
   listIdentities is ResourceList<IdentityResource>;
 
+  //TODO: find a workaround
   @route("/users/{userId}/identities/{provider}/{identity}")
   @doc("Creates or updates the given user identity.")
   @put

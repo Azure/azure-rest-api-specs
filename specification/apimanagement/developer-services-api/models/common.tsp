@@ -42,12 +42,6 @@ model DefaultListQueryParameters {
   ...TopQueryParameter;
   ...FilterQueryParameter;
 }
-@error
-@doc("Error response object.")
-model ErrorResponse {
-  @doc("Error.")
-  error: Error;
-}
 
 @doc("Name value pair object.")
 model NameValuePair {

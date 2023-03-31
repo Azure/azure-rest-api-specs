@@ -6,17 +6,19 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.Core.Foundations;
 using DeveloperServicesApi.Models;
 using DeveloperServicesAuthorizedApi.Common;
 
 namespace DeveloperServicesAuthorizedApi.Resources.Users;
 
 interface Users {
+  //TODO: find a workaround
   @route("/users/{userId}")
   @doc("Get a user profile by its identifier.")
   @get
   GetUser(
-    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...ApiVersionParameter,
 
     @doc("User identifier.")
     @path
@@ -27,7 +29,7 @@ interface Users {
   @doc("Create or updatea a user by its identifier.")
   @patch
   CreateOrUpdateUser(
-    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...ApiVersionParameter,
 
     @doc("User identifier.")
     @path
@@ -40,7 +42,7 @@ interface Users {
   @doc("Delete a user by its identifier.")
   @delete
   DeleteUser(
-    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...ApiVersionParameter,
 
     @doc("User identifier.")
     @path
@@ -51,7 +53,7 @@ interface Users {
   @doc("Revoke the token of a user by its identifier.")
   @post
   RevokeToken(
-    ...Azure.Core.Foundations.ApiVersionParameter,
+    ...ApiVersionParameter,
 
     @doc("User identifier.")
     @path
