@@ -176,6 +176,12 @@
               "$ref": "#/definitions/DiagnosticSettingsResource"
             }
           },
+          "201": {
+            "description": "Successful request to create AadCustomSecurityAttributesDiagnosticSettings diagnostic setting.",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            }
+          },
           "default": {
             "description": "Error. The request to create diagnostic setting has failed.",
             "schema": {
@@ -302,7 +308,7 @@
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log.",
       "type": "object"
     },
-    "DiagnosticSettings": {
+    "DiagnosticSetting": {
       "properties": {
         "storageAccountId": {
           "type": "string",
@@ -347,7 +353,8 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DiagnosticSettings",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiagnosticSetting",
           "description": "Properties of a Diagnostic Settings Resource."
         }
       },
