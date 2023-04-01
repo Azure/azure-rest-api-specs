@@ -30,6 +30,7 @@ model SiteAgentProperties {
   keyVaultId?: string;
 }
 
+@doc("Health Error Details Source")
 @knownValues(HealthErrorDetailsSource)
 scalar MicrosoftAzureFDSWebRoleHealthErrorDetailsSource extends string;
 
@@ -465,6 +466,7 @@ enum VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDisc
 @knownValues(
   VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScopeKnownValues
 )
+@doc("Export Machine Errors Properties")
 scalar VersionedV202001ExportMachineErrorsRequestExportMachineErrorsPropertiesDiscoveryScope
   extends string;
 
@@ -477,6 +479,7 @@ enum PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues {
 }
 
 @knownValues(PrivateEndpointConnectionPropertiesV2ProvisioningStateKnownValues)
+@doc(" PrivateEndpointConnection ProvisioningState")
 scalar PrivateEndpointConnectionPropertiesV2ProvisioningState extends string;
 
 @doc("PrivateLinkServiceConnectionState")
@@ -1147,6 +1150,7 @@ enum SqlAvailabilityGroupPropertiesAvailabilityGroupType {
   "Distributed",
 }
 
+@doc("SqlAvailabilityGroup AvailabilityGroupType")
 scalar SqlAvailabilityGroupSqlAvailabilityGroupPropertiesAvailabilityGroupType
   extends string;
 
@@ -1200,6 +1204,7 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaTypeKnownValues 
   "AvailabilityGroupReplica",
 }
 
+@doc("SqlAvailabilityGroup ReplicaType")
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaType
   extends string;
 
@@ -1239,6 +1244,8 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaReadModeKnownVal
   "ReadOnly",
   "ReadWrite",
 }
+
+@doc("SqlAvailabilityGroup ReplicaReadMode")
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaReadMode
   extends string;
 
@@ -1309,6 +1316,7 @@ enum SqlAvailabilityReplicaOverviewReplicaStateKnownValues {
   "Secondary",
 }
 
+@doc("SqlAvailabilityReplica State")
 scalar SqlAvailabilityReplicaOverviewReplicaState extends string;
 
 @doc("Class for Web app site properties.")
@@ -1338,6 +1346,8 @@ enum WebAppSitePropertiesDiscoveryScenarioKnownValues {
   "Migrate",
   "DR",
 }
+
+@doc("WebAppSite DiscoveryScenario")
 scalar WebAppSitePropertiesDiscoveryScenario extends string;
 
 @doc("Web app site usage.")

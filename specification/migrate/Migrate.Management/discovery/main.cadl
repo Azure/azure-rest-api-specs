@@ -461,6 +461,7 @@ model Vcenter is ProxyResource<VcenterProperties> {
   @doc(" VCenters name")
   @key("vcenterName")
   @segment("vCenters")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -515,9 +516,10 @@ interface RunAsAccountsController {
 model VmwareHostResource is ProxyResource<VmwareHostProperties> {
   @doc(" Hosts name")
   @key("hostName")
-  @segment("hosts")
-  @path
   @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @segment("hosts")
+
+  @path
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -784,7 +786,7 @@ model HypervHost is ProxyResource<HypervHostProperties> {
   @key("hostName")
   @segment("hosts")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -1216,7 +1218,7 @@ interface ImportJobsController {
 
     @doc("Job Arm Name.")
     @path
-    @segment("DeleteJobs")
+    @segment("deleteJobs")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     jobName: string
   ): ArmResponse<V20200201DeleteImportMachinesJob>;
@@ -1241,7 +1243,7 @@ interface ImportJobsController {
 
     @doc("Job Arm Name.")
     @path
-    @segment("ExportJobs")
+    @segment("exportJobs")
     @pattern("^[a-zA-Z0-9-]{3,24}$")
     jobName: string
   ): ArmResponse<V20200201ExportImportedMachinesJob>;
@@ -1282,7 +1284,7 @@ interface ImportJobsController {
     @doc("Job Arm Name.")
     @path
     @pattern("^[a-zA-Z0-9-]{3,24}$")
-    @segment("DeleteJobs")
+    @segment("deleteJobs")
     jobName: string,
 
     @doc("Job body with updated properties.")
@@ -1490,6 +1492,7 @@ model PrivateEndpointConnection
   @doc(" Private link resource name.")
   @key("peConnectionName")
   @segment("privateEndpointConnections")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 
@@ -1528,6 +1531,7 @@ model PrivateEndpointConnectionProxy
   @doc(" Private endpoint connection proxy name.")
   @key("pecProxyName")
   @segment("privateEndpointConnectionProxies")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -1578,6 +1582,7 @@ interface PrivateEndpointConnectionProxyController {
 model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
   @doc("Private link resource name.")
   @key("privateLinkResourceName")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @segment("privateLinkResources")
   @path
   name: string;
@@ -1602,6 +1607,7 @@ model SqlSite is ProxyResource<SqlSiteProperties> {
   @doc("SQL site name.")
   @key("sqlSiteName")
   @segment("sqlSites")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -1684,6 +1690,7 @@ model SqlAvailabilityGroup is ProxyResource<SqlAvailabilityGroupProperties> {
   @doc("SQL availability group name.")
   @key("sqlAvailabilityGroupName")
   @segment("sqlAvailabilityGroups")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -1694,7 +1701,8 @@ model SqlAvailabilityGroup is ProxyResource<SqlAvailabilityGroupProperties> {
 model WebAppSite is ProxyResource<WebAppSiteProperties> {
   @doc("Web app site name.")
   @key("webAppSiteName")
-  @segment("WebAppSites")
+  @segment("webAppSites")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -1777,7 +1785,8 @@ interface WebAppSitesController {
 model TomcatWebApplications is ProxyResource<TomcatWebApplicationProperties> {
   @doc("Web application name.")
   @key("webApplicationName")
-  @segment("TomcatWebApplications")
+  @segment("tomcatWebApplications")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -1825,7 +1834,8 @@ interface TomcatWebApplicationsController {
 model TomcatWebServers is ProxyResource<TomcatWebServerProperties> {
   @doc("Web server name.")
   @key("webServerName")
-  @segment("TomcatWebServers")
+  @segment("tomcatWebServers")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -1872,7 +1882,8 @@ interface TomcatWebServersController {
 model IisWebApplications is ProxyResource<IisWebApplicationProperties> {
   @doc("Web application name.")
   @key("webApplicationName")
-  @segment("IisWebApplications")
+  @segment("iisWebApplications")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -1920,7 +1931,8 @@ interface IisWebApplicationsController {
 model IisWebServers is ProxyResource<IisWebServerProperties> {
   @doc("Web server name.")
   @key("webServerName")
-  @segment("IisWebServers")
+  @segment("iisWebServers")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -1968,7 +1980,8 @@ model DiscoverySiteDataSource
   is ProxyResource<DiscoverySiteDataSourceProperties> {
   @doc("Data Source ARM name.")
   @key("discoverySiteDataSourceName")
-  @segment("DiscoverySiteDataSources")
+  @segment("discoverySiteDataSources")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -2002,6 +2015,7 @@ model WebAppExtendedMachine is ProxyResource<WebAppExtendedMachineProperties> {
   @doc("Extended machine name.")
   @key("extendedMachineName")
   @segment("extendedMachines")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -2049,7 +2063,8 @@ model WebRoleV202011PreviewWebApplication
   is ProxyResource<WebRoleV202011PreviewWebApplicationProperties> {
   @doc("Web application name.")
   @key("webApplicationsName")
-  @segment("WebApplications")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @segment("webApplications")
   @path
   name: string;
 }
@@ -2115,7 +2130,8 @@ interface WebAppRunAsAccountsController {
 model WebServer is ProxyResource<WebServerProperties> {
   @doc("Web server name.")
   @key("webServerApplicationsName")
-  @segment("WebServers")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
+  @segment("webServers")
   @path
   name: string;
 }
@@ -2192,6 +2208,7 @@ interface SqlAvailabilityGroupController {
 model SqlServer is ProxyResource<SqlServerProperties> {
   @doc("SQL server name.")
   @key("sqlServerName")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @segment("sqlServers")
   @path
   name: string;
@@ -2239,6 +2256,7 @@ model SqlDatabase is ProxyResource<SqlDatabaseProperties> {
   @doc("SQL Database name.")
   @key("sqlDatabaseName")
   @segment("sqlDatabases")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @path
   name: string;
 }
@@ -2284,6 +2302,7 @@ interface SqlDatabasesController {
 model SqlJob is ProxyResource<JobProperties> {
   @doc("SQL Job name.")
   @key("sqlJobName")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @segment("sqlJobs")
   @path
   name: string;
@@ -2329,6 +2348,7 @@ model SqlDiscoverySiteDataSourceResource
   is ProxyResource<SqlDiscoverySiteDataSourceProperties> {
   @doc("SQL Discovery site data source name.")
   @key("discoverySiteDataSourceName")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @segment("discoverySiteDataSources")
   @path
   name: string;
