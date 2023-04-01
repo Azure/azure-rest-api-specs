@@ -28,7 +28,7 @@ These are the global settings for the Azure Communication Services API.
 title: CommunicationServiceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-03
+tag: package-2023-03-31
 ```
 
 
@@ -36,7 +36,7 @@ tag: package-2023-03
 
 These settings apply only when `--tag=package-2023-03` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-03'
+```yaml $(tag) == 'package-2023-03-31'
 input-file:
   - Microsoft.Communication/stable/2023-03-31/CommunicationServices.json
   - Microsoft.Communication/stable/2023-03-31/Domains.json
