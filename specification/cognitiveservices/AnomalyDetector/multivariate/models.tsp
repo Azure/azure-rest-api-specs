@@ -80,7 +80,7 @@ will need another API to get detection results.
   setupInfo: MultivariateBatchDetectionOptions;
 }
 
-@doc("ErrorResponse contains the code and message that show the error information.")
+@doc("Error information that the API returned.")
 @error
 model ErrorResponse {
 

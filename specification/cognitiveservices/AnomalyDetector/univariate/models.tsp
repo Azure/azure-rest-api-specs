@@ -115,13 +115,13 @@ found.
   period: int32;
 
   @doc("""
-ExpectedValues contains the expected value for each input point. The index of the
+Expected value for each input point. The index of the
 array is consistent with the input series.
 """)
   expectedValues: float32[];
 
   @doc("""
-UpperMargins contains the upper margin of each input point. UpperMargin is used to
+Upper margin of each input point. UpperMargin is used to
 calculate upperBoundary, which is equal to expectedValue + (100 -
 marginScale)*upperMargin. Anomalies in the response can be filtered by
 upperBoundary and lowerBoundary. Adjusting the marginScale value can help filter less
@@ -131,7 +131,7 @@ consistent with the input series.
   upperMargins: float32[];
 
   @doc("""
-LowerMargins contains the lower margin of each input point. LowerMargin is used to
+Lower margin of each input point. LowerMargin is used to
 calculate lowerBoundary, which is equal to expectedValue - (100 -
 marginScale)*lowerMargin. Points between the boundary can be marked as normal
 ones on the client side. The index of the array is consistent with the input
@@ -140,14 +140,14 @@ series.
   lowerMargins: float32[];
 
   @doc("""
-IsAnomaly contains anomaly properties for each input point. True means an
+Anomaly properties for each input point. True means an
 anomaly (either negative or positive) has been detected. The index of the array
 is consistent with the input series.
 """)
   isAnomaly: boolean[];
 
   @doc("""
-IsNegativeAnomaly contains the anomaly status in a negative direction for each input
+Anomaly status in a negative direction for each input
 point. True means a negative anomaly has been detected. A negative anomaly
 means the point is detected as an anomaly and its real value is smaller than
 the expected one. The index of the array is consistent with the input series.
@@ -155,7 +155,7 @@ the expected one. The index of the array is consistent with the input series.
   isNegativeAnomaly: boolean[];
 
   @doc("""
-IsPositiveAnomaly contains the anomaly status in a positive direction for each input
+Anomaly status in a positive direction for each input
 point. True means a positive anomaly has been detected. A positive anomaly
 means the point is detected as an anomaly and its real value is larger than the
 expected one. The index of the array is consistent with the input series.
@@ -287,7 +287,7 @@ found.
   period?: int32;
 
   @doc("""
-isChangePoint contains change point properties for each input point. True means
+Change point properties for each input point. True means
 an anomaly (either negative or positive) has been detected. The index of the
 array is consistent with the input series.
 """)

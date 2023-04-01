@@ -756,7 +756,7 @@
           "description": "Message that explains the error that the service reported."
         }
       },
-      "description": "ErrorResponse contains the code and message that show the error information.",
+      "description": "Error information that the API returned.",
       "required": [
         "code",
         "message"
@@ -1411,7 +1411,7 @@
             "type": "boolean"
           },
           "x-typespec-name": "boolean[]",
-          "description": "isChangePoint contains change point properties for each input point. True means\nan anomaly (either negative or positive) has been detected. The index of the\narray is consistent with the input series."
+          "description": "Change point properties for each input point. True means\nan anomaly (either negative or positive) has been detected. The index of the\narray is consistent with the input series."
         },
         "confidenceScores": {
           "type": "array",
@@ -1491,7 +1491,7 @@
             "format": "float"
           },
           "x-typespec-name": "float32[]",
-          "description": "ExpectedValues contains the expected value for each input point. The index of the\narray is consistent with the input series."
+          "description": "Expected value for each input point. The index of the\narray is consistent with the input series."
         },
         "upperMargins": {
           "type": "array",
@@ -1500,7 +1500,7 @@
             "format": "float"
           },
           "x-typespec-name": "float32[]",
-          "description": "UpperMargins contains the upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which is equal to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in the response can be filtered by\nupperBoundary and lowerBoundary. Adjusting the marginScale value can help filter less\nsignificant anomalies on the client side. The index of the array is\nconsistent with the input series."
+          "description": "Upper margin of each input point. UpperMargin is used to\ncalculate upperBoundary, which is equal to expectedValue + (100 -\nmarginScale)*upperMargin. Anomalies in the response can be filtered by\nupperBoundary and lowerBoundary. Adjusting the marginScale value can help filter less\nsignificant anomalies on the client side. The index of the array is\nconsistent with the input series."
         },
         "lowerMargins": {
           "type": "array",
@@ -1509,7 +1509,7 @@
             "format": "float"
           },
           "x-typespec-name": "float32[]",
-          "description": "LowerMargins contains the lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which is equal to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones on the client side. The index of the array is consistent with the input\nseries."
+          "description": "Lower margin of each input point. LowerMargin is used to\ncalculate lowerBoundary, which is equal to expectedValue - (100 -\nmarginScale)*lowerMargin. Points between the boundary can be marked as normal\nones on the client side. The index of the array is consistent with the input\nseries."
         },
         "isAnomaly": {
           "type": "array",
@@ -1517,7 +1517,7 @@
             "type": "boolean"
           },
           "x-typespec-name": "boolean[]",
-          "description": "IsAnomaly contains anomaly properties for each input point. True means an\nanomaly (either negative or positive) has been detected. The index of the array\nis consistent with the input series."
+          "description": "Anomaly properties for each input point. True means an\nanomaly (either negative or positive) has been detected. The index of the array\nis consistent with the input series."
         },
         "isNegativeAnomaly": {
           "type": "array",
@@ -1525,7 +1525,7 @@
             "type": "boolean"
           },
           "x-typespec-name": "boolean[]",
-          "description": "IsNegativeAnomaly contains the anomaly status in a negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series."
+          "description": "Anomaly status in a negative direction for each input\npoint. True means a negative anomaly has been detected. A negative anomaly\nmeans the point is detected as an anomaly and its real value is smaller than\nthe expected one. The index of the array is consistent with the input series."
         },
         "isPositiveAnomaly": {
           "type": "array",
@@ -1533,7 +1533,7 @@
             "type": "boolean"
           },
           "x-typespec-name": "boolean[]",
-          "description": "IsPositiveAnomaly contains the anomaly status in a positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series."
+          "description": "Anomaly status in a positive direction for each input\npoint. True means a positive anomaly has been detected. A positive anomaly\nmeans the point is detected as an anomaly and its real value is larger than the\nexpected one. The index of the array is consistent with the input series."
         },
         "severity": {
           "type": "array",
