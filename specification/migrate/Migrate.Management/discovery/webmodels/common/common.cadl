@@ -112,6 +112,8 @@ enum DependencyMapDiscoveryScopeStatus {
 @doc("Gets discovery scope for which             error is encountered.")
 @knownValues(HealthErrorDetailsDiscoveryScopeValues)
 scalar HealthErrorDetailsDiscoveryScope extends string;
+
+@doc("Gets discovery scope for which             error is encountered.")
 enum HealthErrorDetailsDiscoveryScopeValues {
   "AppsAndRoles",
   "DependencyMap",
@@ -272,9 +274,8 @@ enum StaticDiscoveryScopeStatus {
   "DiscoverySucceeded",
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Contains data related SQL discovery.")
-model SQLDiscovery {
+model SqlDiscovery {
   @doc(" successfully Discovered ServerCount")
   successfullyDiscoveredServerCount?: int32;
 
@@ -322,9 +323,8 @@ It is discovered by the agent from the list of credentials.
   hydratedRunAsAccountId?: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Second level object.  Data related to a machine's operating system.             Serialized and stored as part of Machine Rest object. ")
-model GuestOSDetails {
+model GuestOsDetails {
   @doc("Gets or sets the type of the operating system.")
   osType?: string;
 
@@ -615,9 +615,8 @@ model MicrosoftAzureMigratePrivateEndpointBodyPrivateEndpointConnectionProxyRequ
   remotePrivateEndpoint?: PrivateEndpointDetails;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("ARM async operation status response model.")
-model iArmAsyncOperationStatus {
+model IarmAsyncOperationStatus {
   @doc("""
   Gets the status of the operation. ARM expects the terminal status to be one
   of
@@ -655,7 +654,6 @@ model PrivateLinkServiceConnection {
   requestMessage?: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("private link service proxy model")
 model PrivateLinkServiceProxy {
   @doc("id value")
@@ -926,6 +924,8 @@ enum SiteHealthSummaryFabricLayoutUpdateSourcesItemKnownValues {
   "RefreshFabricLayoutGuest",
   "RefreshFabricLayoutDependencyMap",
 }
+
+@doc("SiteHealthSummary FabricLayout UpdateSources")
 scalar SiteHealthSummaryFabricLayoutUpdateSourcesItem extends string;
 
 @doc("Class for site properties.")
@@ -1227,6 +1227,8 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaCommitModeKnownV
   "Synchronous",
   "Asynchronous",
 }
+
+@doc("ReplicaCommitMode")  
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaCommitMode
   extends string;
 
@@ -1246,6 +1248,7 @@ enum SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSeedModeKnownVal
   "Manual",
   "Automatic",
 }
+@doc("ReplicaSeedMode")
 scalar SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSeedMode
   extends string;
 
@@ -1355,18 +1358,17 @@ model ProxySiteRefreshBody {
   applianceName?: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Class for web application properties.")
-model IISWebApplicationProperties {
+model IisWebApplicationProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   @doc("Gets the list of application units for the web site.")
   @visibility("read")
-  applications?: IISApplicationUnit[];
+  applications?: IisApplicationUnit[];
 
   @OpenAPI.extension("x-ms-identifiers", [])
   @doc("Gets the list of application units for the web site.")
   @visibility("read")
-  virtualApplications?: IISVirtualApplicationUnit[];
+  virtualApplications?: IisVirtualApplicationUnit[];
 
   @doc("Gets the web server id.")
   @visibility("read")
@@ -1445,12 +1447,11 @@ model IISWebApplicationProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("""
 Second-level object for identification of application units in a web site
 hosted on IIS.
 """)
-model IISApplicationUnit {
+model IisApplicationUnit {
   @doc("Gets or sets the path of the directory.")
   applicationPoolName?: string;
 
@@ -1483,12 +1484,11 @@ model DirectoryPath {
   physical?: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("""
 Second-level object for identification of virtual applications in a web site
 hosted on IIS.
 """)
-model IISVirtualApplicationUnit {
+model IisVirtualApplicationUnit {
   @doc("Gets a value indicating whether the application corresponds to a directory.")
   @visibility("read")
   isVirtualDirectory?: boolean;
@@ -1580,9 +1580,9 @@ discovery is done
   @doc("Gets or sets the size of the directory on the source machine.")
   sourceSize?: string;
 }
-#suppress "@azure-tools/cadl-azure-core/casing-style"
+
 @doc("Class for web server properties.")
-model IISWebServerProperties {
+model IisWebServerProperties {
   @doc("Gets the configuration location.")
   @visibility("read")
   configurationLocation?: string;
@@ -2079,9 +2079,8 @@ model ProcessorInfo {
   numberOfCoresPerSocket?: int32;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("HyperV VM software inventory REST resource.")
-model HyperVVMSoftwareInventory {
+model HypervVmSoftwareInventory {
   @doc("Gets the relative URL to get this VMWare machine.")
   @visibility("read")
   id?: string;
@@ -2283,10 +2282,9 @@ model SqlServerApplication {
   @visibility("read")
   port?: string;
 
-  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("Gets or sets the comma separated IPs of the SQLServer.")
   @visibility("read")
-  commaSeparatedIPs?: string;
+  commaSeparatedIps?: string;
 
   @doc("Gets the status.")
   @visibility("read")
@@ -2296,10 +2294,9 @@ model SqlServerApplication {
   @visibility("read")
   isNamedPipeEnabled?: boolean;
 
-  #suppress "@azure-tools/cadl-azure-core/casing-style"
-  @doc("Gets or sets the value which reflects if Named Pipe is enabled or not.")
+@doc("Gets or sets the value which reflects if Named Pipe is enabled or not.")
   @visibility("read")
-  isTCPIPEnabled?: boolean;
+  isTcpIpEnabled?: boolean;
 
   @doc("Gets the status.")
   @visibility("read")

@@ -51,7 +51,6 @@ enum SqlServerStatus {
     "Unknown", "ContinuePending", "Paused", "PausePending", "Running", "StartPending", "Stopped", "StopPending"
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Class for SQL Server properties.")
 model SqlServerProperties {
 @doc("Gets the Machine Overview properties of all machines on which the SQL server is deployed.")
@@ -61,10 +60,10 @@ model SqlServerProperties {
 "machineOverviewList"?: SqlMachineOverview[];
 
 @doc("Gets or sets the number of databases part of availability group on this SQL instance.")
-"numberOfAGDatabases"?: int32;
+"numberOfAgDatabases"?: int32;
 
 @doc("Gets or sets the FCI properties if the instance is an FCI instance. This would be populated if IsClustered is true.")
-"fciProperties"?: FCIProperties;
+"fciProperties"?: FciProperties;
 
 @doc("Gets or sets the SQL server version.")
 "version"?: string;
@@ -150,9 +149,8 @@ model SqlServerProperties {
 provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("The class representing the properties for an FCI instance.")
-model FCIProperties {
+model FciProperties {
 @doc("Gets or sets the state of the FCI instance.")
 "state"?: FCIInstanceState;
 @doc("Gets or sets the FCI Network Name used to connect to this FCI instance.")
@@ -180,7 +178,6 @@ model SqlMachineOverview {
 }
 
 // Sql Database
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Class for SQL Server database properties.")
 model SqlDatabaseProperties {
 @doc("Gets or sets the Replica overview.")
@@ -204,7 +201,7 @@ model SqlDatabaseProperties {
 "status"?: string;
 
 @doc("Gets or sets the size in Mb.")
-"sizeMB"?: float32;
+"sizeMb"?: float32;
 
 @doc("Gets or sets the SQL database name.")
 "databaseName"?: string;
@@ -233,7 +230,6 @@ provisioningState?: ProvisioningState;
 }
 
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("File Metadata web model.")
 model FileMetaData {
 @doc("Gets or sets the logical name of the file.")
@@ -245,7 +241,7 @@ model FileMetaData {
 "fileType"?: FileType;
 
 @doc("Gets or sets the size of the file in MB.")
-"sizeInMB"?: float32;
+"sizeInMb"?: float32;
 
 @doc("Gets or sets a value indicating whether memory optimized data option is enabled.")
 "isMemoryOptimizedDataOptionEnabled"?: boolean;

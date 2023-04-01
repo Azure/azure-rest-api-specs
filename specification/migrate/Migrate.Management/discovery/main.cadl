@@ -86,24 +86,23 @@ enum Versions {
 }
 
 #suppress "@azure-tools/cadl-azure-resource-manager/no-resource-delete-operation"
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
 @added(Versions.v2018_05_01_preview)
-interface HyperVClusterController {
+interface HypervClusterController {
   @doc("Method to get a Hyper-V cluster.")
   @operationId("HyperVClusters_Get")
-  GetCluster is ArmResourceReadNoError<HyperVCluster>;
+  GetCluster is ArmResourceReadNoError<HypervCluster>;
 
   @operationId("HyperVClusters_Create")
-  PutCluster is ArmResourceCreateOrUpdateAsyncCustom<HyperVCluster>;
+  PutCluster is ArmResourceCreateOrUpdateAsyncCustom<HypervCluster>;
 
   // @tag("HyperVClusterController")
-  // delete is ArmResourceDeleteSyncNoError<HyperVCluster>;
+  // delete is ArmResourceDeleteSyncNoError<HypervCluster>;
 
   @segment("clusters")
   @operationId("HyperVClusters_List")
   GetAllClustersInSite is ArmResourceListByParentUpdated<
-    HyperVCluster,
+    HypervCluster,
     {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
@@ -111,16 +110,15 @@ interface HyperVClusterController {
 
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
     }
   >;
 }
 
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-path-segment-invalid-chars"
-@doc("A VMwareSite")
-model VMwareSite is TrackedResource<SitesProperties> {
+@doc("A VmwareSite")
+model VmwareSite is TrackedResource<SitesProperties> {
   @doc("Gets the relative ARM name to get Web app server instance.")
   id: string;
 
@@ -145,21 +143,21 @@ model VMwareSite is TrackedResource<SitesProperties> {
 interface Sites {
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_Get")
-  get is ArmResourceReadNoError<VMwareSite>;
+  get is ArmResourceReadNoError<VmwareSite>;
 
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_Delete")
-  delete is ArmResourceDeleteSyncNoError<VMwareSite>;
+  delete is ArmResourceDeleteSyncNoError<VmwareSite>;
 
   @doc("Method to refresh a site.")
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_Refresh")
-  refresh is ArmResourceActionAsyncNoRequestBody<VMwareSite, {}>;
+  refresh is ArmResourceActionAsyncNoRequestBody<VmwareSite, {}>;
 
   @doc("Method to get site usage/summary.")
   @added(Versions.v2020_01_01)
   @operationId("Sites_GetSummary")
-  summary is ArmResourceActionSyncNoRequestBody<VMwareSite, VMwareSiteUsage>;
+  summary is ArmResourceActionSyncNoRequestBody<VmwareSite, VmwareSiteUsage>;
 
 
   @doc("Method to get site error summary.")
@@ -169,7 +167,7 @@ interface Sites {
   @get
   @operationId("Sites_GetErrorSummary")
   errorSummary(
-    ...ResourceInstanceParameters<VMwareSite>
+    ...ResourceInstanceParameters<VmwareSite>
   ): ArmResponse<SiteErrorSummary>;
 
   @doc("Method to get site error summary.")
@@ -179,8 +177,8 @@ interface Sites {
   @get
   @operationId("VMwareSitesController_GetUsage")
   usage(
-    ...ResourceInstanceParameters<VMwareSite>
-  ): ArmResponse<VMwareSiteUsage>;
+    ...ResourceInstanceParameters<VmwareSite>
+  ): ArmResponse<VmwareSiteUsage>;
 
   @doc("Method to generate report containing \r\n            machine and the deep discovery of the application installed in the machine.")
   @armResourceAction(InnerError)
@@ -195,49 +193,47 @@ interface Sites {
     }
   )
   ExportMachines(
-    ...ResourceInstanceParameters<VMwareSite>,
+    ...ResourceInstanceParameters<VmwareSite>,
 
-    #suppress "@azure-tools/cadl-azure-core/casing-style"
     @doc("filter query")
     @query
-    $filter?: string
+    filter?: string
   ): ArmAcceptedResponse;
 
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
   @added(Versions.v2020_01_01)
   @operationId("SitesController_ExportMachineErrors")
   ExportMachineErrors is ArmResourceActionNoContentAsyncNoError<
-    VMwareSite,
+    VmwareSite,
     VersionedV202001ExportMachineErrorsRequest
   >;
 
   @added(Versions.v2018_05_01_preview)
   @doc("Method to generate report containing\r\n            machine and the deep discovery of the application installed in the machine.")
   @operationId("SitesController_ExportApplications")
-  ExportApplications is ArmResourceActionNoBodyAsync<VMwareSite>;
+  ExportApplications is ArmResourceActionNoBodyAsync<VmwareSite>;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface VMwareOperationsStatus {
+interface VmwareOperationsStatus {
   @doc("A operation status resource belonging to a site resource.")
   @armResourceRead(InnerError)
   @get
   @added(Versions.v2018_05_01_preview)
   @operationId("VMwareOperationsStatus_Get")
   VmwareOperationStatus(
-    ...ResourceInstanceParameters<VMwareSite>,
+    ...ResourceInstanceParameters<VmwareSite>,
 
     @doc("Operation status  Arm Name.")
     @path
     @segment("operationsStatus")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface VMwarePropertiesController {
+interface VmwarePropertiesController {
   @added(Versions.v2019_05_01_preview)
   @doc("""
 Method to enable disable dependency map status for machines
@@ -246,28 +242,28 @@ site.
 """)
   @operationId("MwarePropertiesController_UpdateDependencyMapStatus")
   UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomUpdateMachineDepMapStatus<
-    VMwareSite,
+    VmwareSite,
     UpdateMachineDepMapStatus
   >;
 
   @added(Versions.v2019_05_01_preview)
   @doc("Method to associate Run as account to machine\r\n            in a site.")
   UpdateRunAsAccount is ArmResourceActionNoContentAsyncCustomUpdateRunAsAccount<
-    VMwareSite,
+    VmwareSite,
     UpdateMachineRunAsAccount
   >;
 
   @added(Versions.v2019_05_01_preview)
   @doc("Method to associate Run as account to machine\r\n            in a site.")
   UpdateTags is ArmResourceActionNoContentAsyncCustomUpdateMachineTags<
-    VMwareSite,
+    VmwareSite,
     UpdateMachineTags
   >;
 
   @added(Versions.v2019_05_01_preview)
   @doc("Method to update properties for machines   in a site.")
   UpdateProperties is ArmResourceActionNoContentAsyncNoErrorMetaDataBody<
-    VMwareSite,
+    VmwareSite,
     MachineMetadataList
   >;
 }
@@ -292,7 +288,7 @@ interface DependencyMapController {
   @added(Versions.v2020_01_01_preview)
   @operationId("DependencyMapController_GenerateCoarseMapAsync")
   generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
-    VMwareSite,
+    VmwareSite,
     DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
   >;
 
@@ -300,7 +296,7 @@ interface DependencyMapController {
   @operationId("DependencyMapController_GenerateDetailedMapAsync")
   @added(Versions.v2020_01_01_preview)
   generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
-    VMwareSite,
+    VmwareSite,
     DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
   >;
 
@@ -308,7 +304,7 @@ interface DependencyMapController {
   @added(Versions.v2020_01_01_preview)
   @operationId("DependencyMapController_ClientGroupMembersAsync")
   clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
-    VMwareSite,
+    VmwareSite,
     DependencyMapServiceMapExtensionsClientGroupMembersRequest
   >;
 
@@ -316,7 +312,7 @@ interface DependencyMapController {
   @operationId("DependencyMapController_ServerGroupMembersAsync")
   @added(Versions.v2020_01_01_preview)
   serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
-    VMwareSite,
+    VmwareSite,
     DependencyMapServiceMapExtensionsServerGroupMembersRequest
   >;
 
@@ -324,7 +320,7 @@ interface DependencyMapController {
   @added(Versions.v2020_01_01_preview)
   @operationId("DependencyMapController_ExportDependencies")
   exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
-    VMwareSite,
+    VmwareSite,
     DependencyMapServiceMapExtensionsExportDependenciesRequest
   >;
 }
@@ -333,39 +329,39 @@ interface DependencyMapController {
 interface VmwareSites {
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_Create")
-  create is ArmResourceCreateOrUpdateSyncCustom<VMwareSite>;
+  create is ArmResourceCreateOrUpdateSyncCustom<VmwareSite>;
 
   // @armResourceUpdate(InnerError)
   // @patch
   // @added(Versions.v2018_05_01_preview)
   // @operationId("Sites_UpdateSite")
-  // @doc("Update a VMwareSite")
+  // @doc("Update a VmwareSite")
   // updateVmwareSite(
-  //   ...ResourceInstanceParameters<VMwareSite>,
+  //   ...ResourceInstanceParameters<VmwareSite>,
 
   @added(Versions.v2018_05_01_preview)
   @operationId("Sites_Update")
-  @doc("Update a VMwareSite")
+  @doc("Update a VmwareSite")
   update is ArmResourcePatchSyncNoError<
-  VMwareSite,
+  VmwareSite,
   SiteProperties
   >;
 
   //   @doc(" body with updated properties.")
   //   @body
-  //   body: VMwareSite
-  // ): ArmResponse<VMwareSite>;
+  //   body: VmwareSite
+  // ): ArmResponse<VmwareSite>;
 
   @added(Versions.v2022_10_27)
   @summary("Get all vmware sites.")
   @doc("Get all the vmware sites in the subscription.")
   @operationId("VMwareSites_ListBySubscription")
-  listBySubscription is ArmListBySubscriptionNoError<VMwareSite>;
+  listBySubscription is ArmListBySubscriptionNoError<VmwareSite>;
 
   @added(Versions.v2020_01_01)
   @summary("Get all vmware sites.")
   @doc("Get all the vmware sites in the resource group.")
-  listByParent is ArmResourceListByParentUpdated<VMwareSite>;
+  listByParent is ArmResourceListByParentUpdated<VmwareSite>;
 
   @doc("Method to get site health summary.")
   @armResourceAction(InnerError)
@@ -373,18 +369,19 @@ interface VmwareSites {
   @post
   @operationId("Sites_ListHealthSummary")
   healthSummary(
-    ...ResourceInstanceParameters<VMwareSite>
+    ...ResourceInstanceParameters<VmwareSite>
   ): ArmResponse<SiteHealthSummaryCollection>;
 }
 
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("An machine resource belonging to a site resource.")
-@parentResource(VMwareSite)
+@parentResource(VmwareSite)
 model MachineResource is ProxyResource<VmwareMachineProperties> {
   @doc("Machine name")
   @key("machineName")
   @segment("machines")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   @doc("Resource tags.")
@@ -407,15 +404,13 @@ interface MachinesController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: int32;
+      top?: int32;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -460,10 +455,9 @@ interface VmwareMachinesController {
   ): ArmResponse<MachineResource>;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("A vcenter resource belonging to a site resource.")
-@parentResource(VMwareSite)
-model VCenter is ProxyResource<VCenterProperties> {
+@parentResource(VmwareSite)
+model Vcenter is ProxyResource<VcenterProperties> {
   @doc(" VCenters name")
   @key("vcenterName")
   @segment("vCenters")
@@ -471,40 +465,39 @@ model VCenter is ProxyResource<VCenterProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
 @added(Versions.v2018_05_01_preview)
-interface VCenterController {
+interface VcenterController {
   @operationId("VCenters_Get")
-  get is ArmResourceReadNoError<VCenter>;
+  get is ArmResourceReadNoError<Vcenter>;
   @operationId("VCenters_Create")
-  create is ArmResourceCreateOrUpdateAsyncCustom<VCenter>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<Vcenter>;
   @operationId("VCenters_Delete")
-  delete is ArmResourceDeleteSyncNoError<VCenter>;
+  delete is ArmResourceDeleteSyncNoError<Vcenter>;
   @operationId("VCenters_List")
   listByParent is ArmResourceListByParentUpdated<
-    VCenter,
+    Vcenter,
     {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
     }
   >;
 }
 
 @doc("A runasaccount resource belonging to a site resource.")
-@parentResource(VMwareSite)
+@parentResource(VmwareSite)
 model VmwareRunAsAccountResource
   is ProxyResource<RunAsAccountRunAsAccountProperties> {
   @doc(" RunAsAccounts name")
   @key("accountName")
   @segment("runAsAccounts")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -518,12 +511,13 @@ interface RunAsAccountsController {
 }
 
 @doc("A host resource belonging to a site resource.")
-@parentResource(VMwareSite)
+@parentResource(VmwareSite)
 model VmwareHostResource is ProxyResource<VmwareHostProperties> {
   @doc(" Hosts name")
   @key("hostName")
   @segment("hosts")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
@@ -542,9 +536,10 @@ interface VmwareHostController {
 }
 
 @doc("A host resource belonging to a site resource.")
-@parentResource(VMwareSite)
+@parentResource(VmwareSite)
 model VmwareJobResource is ProxyResource<JobProperties> {
   @doc(" Jobs name")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("jobName")
   @segment("jobs")
   @path
@@ -561,10 +556,9 @@ interface JobsController {
 }
 
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-path-segment-invalid-chars"
 @doc("A HyperV SiteResource")
-model HyperVSite is TrackedResource<SiteProperties> {
+model HypervSite is TrackedResource<SiteProperties> {
   @doc("Gets the relative ARM name to get Web app server instance.")
   "id": string;
 
@@ -585,14 +579,13 @@ model HyperVSite is TrackedResource<SiteProperties> {
   location?: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface HyperVDependencyMapController {
+interface HypervDependencyMapController {
   @doc("API to generate coarse map for the list of machines.")
   @added(Versions.v2020_08_01_preview)
   @operationId("HyperVDependencyMapController_GenerateCoarseMapAsync")
   generateCoarseMap is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
+    HypervSite,
     DependencyMapServiceMapExtensionsScopeMapRequest
   >;
 
@@ -600,7 +593,7 @@ interface HyperVDependencyMapController {
   @added(Versions.v2020_08_01_preview)
   @operationId("HyperVDependencyMapController_GenerateDetailedMapAsync")
   generateDetailedMap is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
+    HypervSite,
     DependencyMapServiceMapExtensionsSingleMachineDetailedMapRequest
   >;
 
@@ -608,7 +601,7 @@ interface HyperVDependencyMapController {
   @added(Versions.v2020_08_01_preview)
   @operationId("HyperVDependencyMapController_ClientGroupMembersAsync")
   clientGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
+    HypervSite,
     DependencyMapServiceMapExtensionsClientGroupMembersRequest
   >;
 
@@ -616,7 +609,7 @@ interface HyperVDependencyMapController {
   @added(Versions.v2020_08_01_preview)
   @operationId("HyperVDependencyMapController_ServerGroupMembersAsync")
   serverGroupMembers is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
+    HypervSite,
     DependencyMapServiceMapExtensionsServerGroupMembersRequest
   >;
 
@@ -624,7 +617,7 @@ interface HyperVDependencyMapController {
   @added(Versions.v2020_08_01_preview)
   @operationId("HyperVDependencyMapController_ExportDependencies")
   exportDependencies is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
+    HypervSite,
     DependencyMapServiceMapExtensionsExportDependenciesRequest
   >;
 
@@ -632,33 +625,32 @@ interface HyperVDependencyMapController {
   @added(Versions.v2020_08_01_preview)
   @operationId("HyperVMachinesController_UpdateDependencyMapStatus")
   UpdateDependencyMapStatus is ArmResourceActionNoContentAsyncCustomMapRequest<
-    HyperVSite,
+    HypervSite,
     UpdateMachineDepMapStatus
   >;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface HyperVSitesController {
+interface HypervSitesController {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_Get")
-  get is ArmResourceReadNoError<HyperVSite>;
+  get is ArmResourceReadNoError<HypervSite>;
 
   @operationId("HyperVSites_Create")
   @added(Versions.v2018_05_01_preview)
-  create is ArmResourceCreateOrUpdateSyncCustom<HyperVSite>;
+  create is ArmResourceCreateOrUpdateSyncCustom<HypervSite>;
 
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_Update")
-  @doc("Update a HyperVSite")
+  @doc("Update a HypervSite")
   update is ArmResourcePatchSyncNoError<
-  HyperVSite,
+  HypervSite,
   SiteProperties
   >;
 
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_Delete")
-  delete is ArmResourceDeleteSyncNoError<HyperVSite>;
+  delete is ArmResourceDeleteSyncNoError<HypervSite>;
 
   @doc("Method to get site health summary.")
   @armResourceAction(InnerError)
@@ -666,7 +658,7 @@ interface HyperVSitesController {
   @post
   @operationId("HyperVSites_ListHealthSummary")
   healthSummary(
-    ...ResourceInstanceParameters<HyperVSite>
+    ...ResourceInstanceParameters<HypervSite>
   ): ArmResponse<SiteHealthSummaryCollection>;
 
   @doc("Method to get site error summary.")
@@ -676,7 +668,7 @@ interface HyperVSitesController {
   @get
   @operationId("HyperVSitesController_GetErrorSummary")
   errorSummary(
-    ...ResourceInstanceParameters<HyperVSite>,
+    ...ResourceInstanceParameters<HypervSite>,
 
     @doc("Appliance Name")
     @query
@@ -690,24 +682,24 @@ interface HyperVSitesController {
   @get
   @operationId("HyperVSitesController_GetUsage")
   usage(
-    ...ResourceInstanceParameters<HyperVSite>
+    ...ResourceInstanceParameters<HypervSite>
   ): ArmResponse<SiteUsageResponse>;
 
   @doc("Method to refresh a site.")
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVSites_RefreshSite")
-  refresh is ArmResourceActionAsyncNoRequestBody<HyperVSite, {}>;
+  refresh is ArmResourceActionAsyncNoRequestBody<HypervSite, {}>;
 
   @doc("Method to get site usage.")
   @added(Versions.v2020_01_01)
   @operationId("HyperVSites_GetSummary")
-  summary is ArmResourceActionSyncNoRequestBody<HyperVSite, HyperVSiteUsage>;
+  summary is ArmResourceActionSyncNoRequestBody<HypervSite, HypervSiteUsage>;
 
   @doc("Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.")
   @added(Versions.v2020_08_01_preview)
   @operationId("HyperVSitesController_ExportMachineErrors")
   ExportMachineErrors is ArmResourceActionNoContentAsyncNoError<
-    HyperVSite,
+    HypervSite,
     VersionedV202001ExportMachineErrorsRequest
   >;
 }
@@ -718,12 +710,12 @@ interface HypervSites {
   @summary("Get all hyperv  sites.")
   @doc("Get all the hyperv  sites in the subscription.")
   @operationId("HyperVSites_ListBySubscription")
-  listBySubscription is ArmListBySubscriptionNoError<HyperVSite>;
+  listBySubscription is ArmListBySubscriptionNoError<HypervSite>;
 
   @added(Versions.v2022_10_27)
   @summary("Get all hyperv sites.")
   @doc("Get all the hyperv sites in the subscription.")
-  listByParent is ArmResourceListByParentUpdated<HyperVSite>;
+  listByParent is ArmResourceListByParentUpdated<HypervSite>;
 
   @doc("A operation status resource belonging to a site resource.")
   @armResourceRead(InnerError)
@@ -731,31 +723,31 @@ interface HypervSites {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVOperationsStatus_GetOperationStatus")
   HyperVOperationsStatus(
-    ...ResourceInstanceParameters<HyperVSite>,
+    ...ResourceInstanceParameters<HypervSite>,
 
     @doc("Operation status  Arm Name.")
     @path
     //@pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("operationsStatus")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("A job resource belonging to a site resource.")
-@parentResource(HyperVSite)
-model HyperVJob is ProxyResource<JobProperties> {
+@parentResource(HypervSite)
+model HypervJob is ProxyResource<JobProperties> {
   @doc(" Job name")
   @key("jobName")
   @segment("jobs")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
 @doc("A cluster resource belonging to a site resource.")
-@parentResource(HyperVSite)
-model HypervOperationsStatusResource is ProxyResource<HyperVClusterProperties> {
+@parentResource(HypervSite)
+model HypervOperationsStatusResource is ProxyResource<HypervClusterProperties> {
   @doc(" Cluster name")
   @key("clusterName")
   @segment("clusters")
@@ -764,10 +756,9 @@ model HypervOperationsStatusResource is ProxyResource<HyperVClusterProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("A cluster resource belonging to a site resource.")
-@parentResource(HyperVSite)
-model HyperVCluster is ProxyResource<HyperVClusterProperties> {
+@parentResource(HypervSite)
+model HypervCluster is ProxyResource<HypervClusterProperties> {
   @doc(" Cluster ARM name")
   @key("clusterName")
   @segment("clusters")
@@ -776,20 +767,19 @@ model HyperVCluster is ProxyResource<HyperVClusterProperties> {
   name: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @added(Versions.v2018_05_01_preview)
 @armResourceOperations
-interface HyperVJobs {
+interface HypervJobs {
   @operationId("HyperVJobs_GetJ")
-  get is ArmResourceReadNoError<HyperVJob>;
+  get is ArmResourceReadNoError<HypervJob>;
   @operationId("HyperVJobs_List")
-  listByParent is ArmResourceListByParentUpdated<HyperVJob>;
+  listByParent is ArmResourceListByParentUpdated<HypervJob>;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
+
 @doc("A host resource belonging to a site resource.")
-@parentResource(HyperVSite)
-model HyperVHost is ProxyResource<HyperVHostProperties> {
+@parentResource(HypervSite)
+model HypervHost is ProxyResource<HypervHostProperties> {
   @doc(" Host name")
   @key("hostName")
   @segment("hosts")
@@ -799,22 +789,21 @@ model HyperVHost is ProxyResource<HyperVHostProperties> {
 }
 
 #suppress "@azure-tools/cadl-azure-resource-manager/no-resource-delete-operation"
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface HyperVHostController {
+interface HypervHostController {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVHosts_Get")
-  get is ArmResourceReadNoError<HyperVHost>;
+  get is ArmResourceReadNoError<HypervHost>;
 
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVHosts_Create")
-  create is ArmResourceCreateOrUpdateAsyncCustom<HyperVHost>;
+  create is ArmResourceCreateOrUpdateAsyncCustom<HypervHost>;
 
   @segment("hosts")
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVHosts_List")
   listByParent is ArmResourceListByParentUpdated<
-    HyperVHost,
+    HypervHost,
     {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
@@ -822,20 +811,19 @@ interface HyperVHostController {
 
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
     }
   >;
 }
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("A machine resource belonging to a site resource.")
-@parentResource(HyperVSite)
-model HyperVMachine is ProxyResource<HyperVMachineProperties> {
+@parentResource(HypervSite)
+model HypervMachine is ProxyResource<HypervMachineProperties> {
   @doc(" HypervMachine name")
   @key("machineName")
   @segment("machines")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;  
 
   @doc("Resource tags.")
@@ -847,26 +835,24 @@ model HyperVMachine is ProxyResource<HyperVMachineProperties> {
 interface HypervMachinesController {
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVMachines_Get")
-  get is ArmResourceReadNoError<HyperVMachine>;
+  get is ArmResourceReadNoError<HypervMachine>;
 
   @added(Versions.v2018_05_01_preview)
   @operationId("HyperVMachines_List")
   listByParent is ArmResourceListByParentUpdated<
-    HyperVMachine,
+    HypervMachine,
     {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: int32;
+      top?: int32;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -885,8 +871,8 @@ interface HypervMachinesController {
   @operationId("HyperVMachinesController_GetHyperVMachineApplications")
   @get
   applications(
-    ...ResourceInstanceParameters<HyperVMachine>
-  ): ArmResponse<HyperVMachine>;
+    ...ResourceInstanceParameters<HypervMachine>
+  ): ArmResponse<HypervMachine>;
 
   @doc("Method to get a machines software inventory like applications and roles.")
   @armResourceRead(InnerError)
@@ -895,33 +881,32 @@ interface HypervMachinesController {
   @segment("softwareInventory/default")
   @operationId("HypervMachinesController_GetMachineSoftwareInventory")
   GetMachineSoftwareInventory(
-    ...ResourceInstanceParameters<HyperVMachine>
-  ): ArmResponse<HyperVVMSoftwareInventory>;
+    ...ResourceInstanceParameters<HypervMachine>
+  ): ArmResponse<HypervVmSoftwareInventory>;
 
   @added(Versions.v2018_05_01_preview)
   @doc("Method to update custom properties for HYPERV machines\r\n            in a site.")
   UpdateProperties is ArmResourceActionNoContentAsyncNoErrorMetaDataBody<
-    HyperVSite,
+    HypervSite,
     MachineMetadataList
   >;
 }
 
 @doc("A machine resource belonging to a site resource.")
-@parentResource(HyperVSite)
+@parentResource(HypervSite)
 model HypervRunAsAccountResource
   is ProxyResource<RunAsAccountRunAsAccountProperties> {
   @doc(" RunAsAccounts name")
   @key("accountName")
   @segment("runAsAccounts")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @added(Versions.v2018_05_01_preview)
 @armResourceOperations
-interface HyperVRunAsAccountsController {
+interface HypervRunAsAccountsController {
   @operationId("HyperVRunAsAccounts_Get")
   get is ArmResourceReadNoError<HypervRunAsAccountResource>;
 
@@ -984,6 +969,7 @@ interface ServersController {
     @doc("Operation status  Arm Name.")
     @path
     @segment("operationsStatus")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
 
@@ -1125,6 +1111,7 @@ model ServerMachineResource is ProxyResource<ServerProperties> {
   @key("machineName")
   @segment("machines")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   @doc("Resource tags.")
@@ -1142,7 +1129,7 @@ model ServerRunAsAccountResource
   @key("accountName")
   @segment("runAsAccounts")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -1162,7 +1149,7 @@ model ServerJobResource is ProxyResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -1199,6 +1186,7 @@ model ImportJobResource is ProxyResource<JobProperties> {
   @key("jobName")
   @segment("jobs")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -1229,6 +1217,7 @@ interface ImportJobsController {
     @doc("Job Arm Name.")
     @path
     @segment("DeleteJobs")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
     jobName: string
   ): ArmResponse<V20200201DeleteImportMachinesJob>;
 
@@ -1253,6 +1242,7 @@ interface ImportJobsController {
     @doc("Job Arm Name.")
     @path
     @segment("ExportJobs")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
     jobName: string
   ): ArmResponse<V20200201ExportImportedMachinesJob>;
 
@@ -1277,6 +1267,7 @@ interface ImportJobsController {
     @doc("Job Arm Name.")
     @path
     @segment("ImportJob")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
     jobName: string
   ): ArmResponse<V20200201ImportMachinesJob>;
 
@@ -1290,7 +1281,7 @@ interface ImportJobsController {
 
     @doc("Job Arm Name.")
     @path
-    //@pattern("^[a-zA-Z0-9-]{3,24}$")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
     @segment("DeleteJobs")
     jobName: string,
 
@@ -1308,6 +1299,7 @@ model ImportMachineResource is ProxyResource<ImportMachineProperties> {
   @key("machineName")
   @segment("machines")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 
   @doc("Resource tags.")
@@ -1326,15 +1318,13 @@ interface ImportMachinesController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -1390,7 +1380,6 @@ interface ImportSitesController {
   >;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-path-segment-invalid-chars"
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-invalid-envelope-property"
 @doc("A MasterSite")
@@ -1489,6 +1478,7 @@ interface MasterSitesOperationsStatusController {
     @doc("Operation status  Arm Name.")
     @path
     @segment("operationsStatus")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
 }
@@ -1567,7 +1557,7 @@ interface PrivateEndpointConnectionProxyController {
   @segment("operationsStatus")
   PecOperationStatus(
     ...ResourceInstanceParameters<PrivateEndpointConnectionProxy>
-  ): ArmResponse<iArmAsyncOperationStatus>;
+  ): ArmResponse<IarmAsyncOperationStatus>;
 
   @doc("Gets the private endpoint connection proxy.")
   @added(Versions.v2020_07_07)
@@ -1658,10 +1648,9 @@ interface SqlSitesController {
       @query
       applianceName?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter options.")
       @query
-      $filter?: string;
+      filter?: string;
     }
   >;
 
@@ -1748,10 +1737,9 @@ interface WebAppSitesController {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
     }
   >;
 
@@ -1812,15 +1800,13 @@ interface TomcatWebApplicationsController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -1861,15 +1847,13 @@ interface TomcatWebServersController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -1882,46 +1866,42 @@ interface TomcatWebServersController {
   >;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-path-segment-invalid-chars"
 @doc("Web application REST Resource.")
 @parentResource(WebAppSite)
-model IISWebApplications is ProxyResource<IISWebApplicationProperties> {
+model IisWebApplications is ProxyResource<IisWebApplicationProperties> {
   @doc("Web application name.")
   @key("webApplicationName")
-  @segment("IISWebApplications")
+  @segment("IisWebApplications")
   @path
   name: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface IISWebApplicationsController {
+interface IisWebApplicationsController {
   @doc("Method to get an IIS web application.")
   @added(Versions.v2020_11_11_preview)
   @operationId("IISWebApplicationsController_GetWebApplication")
-  get is ArmResourceReadNoError<IISWebApplications>;
+  get is ArmResourceReadNoError<IisWebApplications>;
 
   // #suppress "order is different"
   @added(Versions.v2020_11_11_preview)
   @doc("Method to get all IIS web application.")
   @operationId("IISWebApplicationsController_ListWebApplications")
   listByParent is ArmResourceListByParentUpdated<
-    IISWebApplications,
+    IisWebApplications,
     {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -1934,45 +1914,41 @@ interface IISWebApplicationsController {
   >;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 #suppress "@azure-tools/cadl-azure-resource-manager/arm-resource-path-segment-invalid-chars"
 @doc("Web server REST Resource.")
 @parentResource(WebAppSite)
-model IISWebServers is ProxyResource<IISWebServerProperties> {
+model IisWebServers is ProxyResource<IisWebServerProperties> {
   @doc("Web server name.")
   @key("webServerName")
-  @segment("IISWebServers")
+  @segment("IisWebServers")
   @path
   name: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @armResourceOperations
-interface IISWebServersController {
+interface IisWebServersController {
   @doc("Method to get an IIS web server.")
   @added(Versions.v2020_11_11_preview)
   @operationId("IISWebServersController_GetWebServer")
-  get is ArmResourceReadNoError<IISWebServers>;
+  get is ArmResourceReadNoError<IisWebServers>;
 
   @added(Versions.v2020_11_11_preview)
   @doc("Method to get all IIS web servers.")
   @operationId("IISWebServersController_ListWebServers")
   listByParent is ArmResourceListByParentUpdated<
-    IISWebServers,
+    IisWebServers,
     {
       ...SubscriptionIdParameter;
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -2047,15 +2023,13 @@ interface WebAppExtendedMachinesController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -2092,15 +2066,13 @@ interface WebApplicationsController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -2120,6 +2092,7 @@ model WebAppRunAsAccount is ProxyResource<RunAsAccountProperties> {
   @key("accountName")
   @segment("runasaccounts")
   @path
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -2159,15 +2132,13 @@ interface WebServersController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -2197,15 +2168,13 @@ interface SqlAvailabilityGroupController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -2245,15 +2214,13 @@ interface SqlServersController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -2293,15 +2260,13 @@ interface SqlDatabasesController {
       ...ResourceGroupParameter;
       ...ApiVersionParameter;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("filter query")
       @query
-      $filter?: string;
+      filter?: string;
 
-      #suppress "@azure-tools/cadl-azure-core/casing-style"
       @doc("page size  query")
       @query
-      $top?: string;
+      top?: string;
 
       @query
       @doc("Optional parameter for continuation token.")
@@ -2345,7 +2310,7 @@ model SqlRunAsAccountResource
   @key("accountName")
   @segment("runAsAccounts")
   @path
-  //@pattern("^[a-zA-Z0-9-]{3,24}$")
+  @pattern("^[a-zA-Z0-9-]{3,24}$")
   name: string;
 }
 
@@ -2413,6 +2378,7 @@ interface SqlOperationsStatusController {
     @doc("Operation status  Arm Name.")
     @path
     @segment("operationsStatus")
+    @pattern("^[a-zA-Z0-9-]{3,24}$")
     operationStatusName: string
   ): ArmResponse<OperationStatus>;
 }

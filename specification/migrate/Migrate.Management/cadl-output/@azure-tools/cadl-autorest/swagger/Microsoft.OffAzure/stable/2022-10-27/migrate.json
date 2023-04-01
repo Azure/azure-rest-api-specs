@@ -43,16 +43,16 @@
       "name": "Operations"
     },
     {
-      "name": "HyperVClusterController"
+      "name": "HypervClusterController"
     },
     {
       "name": "Sites"
     },
     {
-      "name": "VMwareOperationsStatus"
+      "name": "VmwareOperationsStatus"
     },
     {
-      "name": "VMwarePropertiesController"
+      "name": "VmwarePropertiesController"
     },
     {
       "name": "WebAppPropertiesController"
@@ -70,7 +70,7 @@
       "name": "VmwareMachinesController"
     },
     {
-      "name": "VCenterController"
+      "name": "VcenterController"
     },
     {
       "name": "RunAsAccountsController"
@@ -82,25 +82,25 @@
       "name": "JobsController"
     },
     {
-      "name": "HyperVDependencyMapController"
+      "name": "HypervDependencyMapController"
     },
     {
-      "name": "HyperVSitesController"
+      "name": "HypervSitesController"
     },
     {
       "name": "HypervSites"
     },
     {
-      "name": "HyperVJobs"
+      "name": "HypervJobs"
     },
     {
-      "name": "HyperVHostController"
+      "name": "HypervHostController"
     },
     {
       "name": "HypervMachinesController"
     },
     {
-      "name": "HyperVRunAsAccountsController"
+      "name": "HypervRunAsAccountsController"
     },
     {
       "name": "ServersController"
@@ -157,10 +157,10 @@
       "name": "TomcatWebServersController"
     },
     {
-      "name": "IISWebApplicationsController"
+      "name": "IisWebApplicationsController"
     },
     {
-      "name": "IISWebServersController"
+      "name": "IisWebServersController"
     },
     {
       "name": "WebAppDiscoverySiteDataSourcesController"
@@ -253,7 +253,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSiteCollection"
+              "$ref": "#/definitions/HypervSiteCollection"
             }
           }
         },
@@ -398,7 +398,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteCollection"
+              "$ref": "#/definitions/VmwareSiteCollection"
             }
           }
         },
@@ -438,7 +438,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSiteCollection"
+              "$ref": "#/definitions/HypervSiteCollection"
             }
           }
         },
@@ -458,10 +458,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}": {
       "get": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSites_Get",
-        "description": "Get a HyperVSite",
+        "description": "Get a HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -485,7 +485,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HypervSite"
             }
           }
         },
@@ -500,10 +500,10 @@
       },
       "put": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSites_Create",
-        "description": "Create a HyperVSite",
+        "description": "Create a HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -528,7 +528,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HypervSite"
             }
           }
         ],
@@ -536,7 +536,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HypervSite"
             }
           }
         },
@@ -551,10 +551,10 @@
       },
       "patch": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSites_Update",
-        "description": "Update a HyperVSite",
+        "description": "Update a HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -579,7 +579,7 @@
             "required": true,
             "description": "The resource properties to be updated.",
             "schema": {
-              "$ref": "#/definitions/HyperVSiteUpdate"
+              "$ref": "#/definitions/HypervSiteUpdate"
             }
           }
         ],
@@ -587,7 +587,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSite"
+              "$ref": "#/definitions/HypervSite"
             }
           }
         },
@@ -602,10 +602,10 @@
       },
       "delete": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSites_Delete",
-        "description": "Delete a HyperVSite",
+        "description": "Delete a HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -646,7 +646,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/clientGroupMembers": {
       "post": {
         "tags": [
-          "HyperVDependencyMapController"
+          "HypervDependencyMapController"
         ],
         "operationId": "HyperVDependencyMapController_ClientGroupMembersAsync",
         "description": "API to list client group members for the selected client group.",
@@ -707,10 +707,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/clusters": {
       "get": {
         "tags": [
-          "HyperVClusterController"
+          "HypervClusterController"
         ],
         "operationId": "HyperVClusters_List",
-        "description": "List HyperVCluster resources by HyperVSite",
+        "description": "List HypervCluster resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -722,7 +722,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
@@ -741,7 +741,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVClusterCollection"
+              "$ref": "#/definitions/HypervClusterCollection"
             }
           }
         },
@@ -761,7 +761,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/clusters/{clusterName}": {
       "get": {
         "tags": [
-          "HyperVClusterController"
+          "HypervClusterController"
         ],
         "operationId": "HyperVClusters_Get",
         "description": "Method to get a Hyper-V cluster.",
@@ -796,7 +796,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVCluster"
+              "$ref": "#/definitions/HypervCluster"
             }
           }
         },
@@ -811,10 +811,10 @@
       },
       "put": {
         "tags": [
-          "HyperVClusterController"
+          "HypervClusterController"
         ],
         "operationId": "HyperVClusters_Create",
-        "description": "Create a HyperVCluster",
+        "description": "Create a HypervCluster",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -847,7 +847,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/HyperVCluster"
+              "$ref": "#/definitions/HypervCluster"
             }
           }
         ],
@@ -880,7 +880,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/errorSummary": {
       "get": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSitesController_GetErrorSummary",
         "description": "Method to get site error summary.",
@@ -931,7 +931,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/exportDependencies": {
       "post": {
         "tags": [
-          "HyperVDependencyMapController"
+          "HypervDependencyMapController"
         ],
         "operationId": "HyperVDependencyMapController_ExportDependencies",
         "description": "API to generate report containing agentless dependencies.",
@@ -992,7 +992,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/exportMachineErrors": {
       "post": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSitesController_ExportMachineErrors",
         "description": "Method to generate report containing \r\n            machine and the errors encountered during guest discovery of the machine.",
@@ -1053,7 +1053,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/generateCoarseMap": {
       "post": {
         "tags": [
-          "HyperVDependencyMapController"
+          "HypervDependencyMapController"
         ],
         "operationId": "HyperVDependencyMapController_GenerateCoarseMapAsync",
         "description": "API to generate coarse map for the list of machines.",
@@ -1114,7 +1114,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/generateDetailedMap": {
       "post": {
         "tags": [
-          "HyperVDependencyMapController"
+          "HypervDependencyMapController"
         ],
         "operationId": "HyperVDependencyMapController_GenerateDetailedMapAsync",
         "description": "API to generate detailed map for a selected machine.",
@@ -1175,7 +1175,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/healthSummary": {
       "post": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSites_ListHealthSummary",
         "description": "Method to get site health summary.",
@@ -1219,10 +1219,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/hosts": {
       "get": {
         "tags": [
-          "HyperVHostController"
+          "HypervHostController"
         ],
         "operationId": "HyperVHosts_List",
-        "description": "List HyperVHost resources by HyperVSite",
+        "description": "List HypervHost resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1234,7 +1234,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
@@ -1253,7 +1253,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVHostCollection"
+              "$ref": "#/definitions/HypervHostCollection"
             }
           }
         },
@@ -1273,10 +1273,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/hosts/{hostName}": {
       "get": {
         "tags": [
-          "HyperVHostController"
+          "HypervHostController"
         ],
         "operationId": "HyperVHosts_Get",
-        "description": "Get a HyperVHost",
+        "description": "Get a HypervHost",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1307,7 +1307,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVHost"
+              "$ref": "#/definitions/HypervHost"
             }
           }
         },
@@ -1322,10 +1322,10 @@
       },
       "put": {
         "tags": [
-          "HyperVHostController"
+          "HypervHostController"
         ],
         "operationId": "HyperVHosts_Create",
-        "description": "Create a HyperVHost",
+        "description": "Create a HypervHost",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1357,7 +1357,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/HyperVHost"
+              "$ref": "#/definitions/HypervHost"
             }
           }
         ],
@@ -1390,10 +1390,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/jobs": {
       "get": {
         "tags": [
-          "HyperVJobs"
+          "HypervJobs"
         ],
         "operationId": "HyperVJobs_List",
-        "description": "List HyperVJob resources by HyperVSite",
+        "description": "List HypervJob resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1417,7 +1417,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVJobCollection"
+              "$ref": "#/definitions/HypervJobCollection"
             }
           }
         },
@@ -1437,10 +1437,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/jobs/{jobName}": {
       "get": {
         "tags": [
-          "HyperVJobs"
+          "HypervJobs"
         ],
         "operationId": "HyperVJobs_GetJ",
-        "description": "Get a HyperVJob",
+        "description": "Get a HypervJob",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1464,6 +1464,7 @@
             "in": "path",
             "required": true,
             "description": " Job name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1471,7 +1472,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVJob"
+              "$ref": "#/definitions/HypervJob"
             }
           }
         },
@@ -1491,7 +1492,7 @@
           "HypervMachinesController"
         ],
         "operationId": "HyperVMachines_List",
-        "description": "List HyperVMachine resources by HyperVSite",
+        "description": "List HypervMachine resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -1503,14 +1504,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -1545,7 +1546,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVMachineCollection"
+              "$ref": "#/definitions/HypervMachineCollection"
             }
           }
         },
@@ -1568,7 +1569,7 @@
           "HypervMachinesController"
         ],
         "operationId": "HyperVMachines_Get",
-        "description": "Get a HyperVMachine",
+        "description": "Get a HypervMachine",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1592,6 +1593,7 @@
             "in": "path",
             "required": true,
             "description": " HypervMachine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1599,7 +1601,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVMachine"
+              "$ref": "#/definitions/HypervMachine"
             }
           }
         },
@@ -1643,6 +1645,7 @@
             "in": "path",
             "required": true,
             "description": " HypervMachine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1650,7 +1653,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVMachine"
+              "$ref": "#/definitions/HypervMachine"
             }
           }
         },
@@ -1694,6 +1697,7 @@
             "in": "path",
             "required": true,
             "description": " HypervMachine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1701,7 +1705,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVVMSoftwareInventory"
+              "$ref": "#/definitions/HypervVmSoftwareInventory"
             }
           }
         },
@@ -1745,6 +1749,7 @@
             "in": "path",
             "required": true,
             "description": "Operation status  Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1769,7 +1774,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/refresh": {
       "post": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSites_RefreshSite",
         "description": "Method to refresh a site.",
@@ -1821,10 +1826,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/runAsAccounts": {
       "get": {
         "tags": [
-          "HyperVRunAsAccountsController"
+          "HypervRunAsAccountsController"
         ],
         "operationId": "HyperVRunAsAccounts_List",
-        "description": "List HypervRunAsAccountResource resources by HyperVSite",
+        "description": "List HypervRunAsAccountResource resources by HypervSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1868,7 +1873,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/runAsAccounts/{accountName}": {
       "get": {
         "tags": [
-          "HyperVRunAsAccountsController"
+          "HypervRunAsAccountsController"
         ],
         "operationId": "HyperVRunAsAccounts_Get",
         "description": "Get a HypervRunAsAccountResource",
@@ -1895,6 +1900,7 @@
             "in": "path",
             "required": true,
             "description": " RunAsAccounts name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -1919,7 +1925,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/serverGroupMembers": {
       "post": {
         "tags": [
-          "HyperVDependencyMapController"
+          "HypervDependencyMapController"
         ],
         "operationId": "HyperVDependencyMapController_ServerGroupMembersAsync",
         "description": "API to list server group members for the selected server group.",
@@ -1980,7 +1986,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/summary": {
       "post": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSites_GetSummary",
         "description": "Method to get site usage.",
@@ -2007,7 +2013,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HyperVSiteUsage"
+              "$ref": "#/definitions/HypervSiteUsage"
             }
           }
         },
@@ -2024,7 +2030,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/updateDependencyMapStatus": {
       "post": {
         "tags": [
-          "HyperVDependencyMapController"
+          "HypervDependencyMapController"
         ],
         "operationId": "HyperVMachinesController_UpdateDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\r\n            in a site.",
@@ -2146,7 +2152,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/hypervSites/{siteName}/usage": {
       "get": {
         "tags": [
-          "HyperVSitesController"
+          "HypervSitesController"
         ],
         "operationId": "HyperVSitesController_GetUsage",
         "description": "Method to get site error summary.",
@@ -2546,6 +2552,7 @@
             "in": "path",
             "required": true,
             "description": "Job Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2595,6 +2602,7 @@
             "in": "path",
             "required": true,
             "description": "Job Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -2702,6 +2710,7 @@
             "in": "path",
             "required": true,
             "description": "Job Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2753,6 +2762,7 @@
             "in": "path",
             "required": true,
             "description": "Job Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2951,6 +2961,7 @@
             "in": "path",
             "required": true,
             "description": " Jobs name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -2990,14 +3001,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -3078,6 +3089,7 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3127,6 +3139,7 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3533,6 +3546,7 @@
             "in": "path",
             "required": true,
             "description": "Operation status  Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -3760,7 +3774,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/iArmAsyncOperationStatus"
+              "$ref": "#/definitions/IarmAsyncOperationStatus"
             }
           }
         },
@@ -4755,7 +4769,7 @@
             "type": "string"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter options.",
@@ -4840,6 +4854,7 @@
             "in": "path",
             "required": true,
             "description": "Operation status  Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -5028,6 +5043,7 @@
             "in": "path",
             "required": true,
             "description": "SQL RunAsAccounts name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -5067,14 +5083,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -5208,14 +5224,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -5463,14 +5479,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -6253,7 +6269,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
@@ -6319,14 +6335,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -6442,10 +6458,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/WebAppSites/{webAppSiteName}/IISWebApplications": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/WebAppSites/{webAppSiteName}/IisWebApplications": {
       "get": {
         "tags": [
-          "IISWebApplicationsController"
+          "IisWebApplicationsController"
         ],
         "operationId": "IisWebApplicationsController_ListWebApplications",
         "description": "Method to get all IIS web application.",
@@ -6460,14 +6476,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -6508,7 +6524,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/IISWebApplicationsCollection"
+              "$ref": "#/definitions/IisWebApplicationsCollection"
             }
           }
         },
@@ -6525,10 +6541,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/WebAppSites/{webAppSiteName}/IISWebApplications/{webApplicationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/WebAppSites/{webAppSiteName}/IisWebApplications/{webApplicationName}": {
       "get": {
         "tags": [
-          "IISWebApplicationsController"
+          "IisWebApplicationsController"
         ],
         "operationId": "IisWebApplicationsController_GetWebApplication",
         "description": "Method to get an IIS web application.",
@@ -6569,7 +6585,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/IISWebApplications"
+              "$ref": "#/definitions/IisWebApplications"
             }
           }
         },
@@ -6583,10 +6599,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/WebAppSites/{webAppSiteName}/IISWebServers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/WebAppSites/{webAppSiteName}/IisWebServers": {
       "get": {
         "tags": [
-          "IISWebServersController"
+          "IisWebServersController"
         ],
         "operationId": "IisWebServersController_ListWebServers",
         "description": "Method to get all IIS web servers.",
@@ -6601,14 +6617,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -6649,7 +6665,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/IISWebServersCollection"
+              "$ref": "#/definitions/IisWebServersCollection"
             }
           }
         },
@@ -6666,10 +6682,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/WebAppSites/{webAppSiteName}/IISWebServers/{webServerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/masterSites/{siteName}/WebAppSites/{webAppSiteName}/IisWebServers/{webServerName}": {
       "get": {
         "tags": [
-          "IISWebServersController"
+          "IisWebServersController"
         ],
         "operationId": "IisWebServersController_GetWebServer",
         "description": "Method to get an IIS web server.",
@@ -6710,7 +6726,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/IISWebServers"
+              "$ref": "#/definitions/IisWebServers"
             }
           }
         },
@@ -6891,6 +6907,7 @@
             "in": "path",
             "required": true,
             "description": "Run as account ARM name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -6981,14 +6998,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -7122,14 +7139,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -7331,14 +7348,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -7414,14 +7431,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -8239,6 +8256,7 @@
             "in": "path",
             "required": true,
             "description": " Jobs name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -8337,6 +8355,7 @@
             "in": "path",
             "required": true,
             "description": " A server machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -8386,6 +8405,7 @@
             "in": "path",
             "required": true,
             "description": " A server machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           },
           {
@@ -8452,6 +8472,7 @@
             "in": "path",
             "required": true,
             "description": " A server machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -8503,6 +8524,7 @@
             "in": "path",
             "required": true,
             "description": " A server machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -8554,6 +8576,7 @@
             "in": "path",
             "required": true,
             "description": " A server machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -8605,6 +8628,7 @@
             "in": "path",
             "required": true,
             "description": "Operation status  Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -8755,6 +8779,7 @@
             "in": "path",
             "required": true,
             "description": " RunAsAccounts name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -9070,7 +9095,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteCollection"
+              "$ref": "#/definitions/VmwareSiteCollection"
             }
           }
         },
@@ -9093,7 +9118,7 @@
           "Sites"
         ],
         "operationId": "Sites_Get",
-        "description": "Get a VMwareSite",
+        "description": "Get a VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9117,7 +9142,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VmwareSite"
             }
           }
         },
@@ -9135,7 +9160,7 @@
           "Sites"
         ],
         "operationId": "Sites_Delete",
-        "description": "Delete a VMwareSite",
+        "description": "Delete a VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9177,7 +9202,7 @@
           "VmwareSites"
         ],
         "operationId": "Sites_Create",
-        "description": "Create a VMwareSite",
+        "description": "Create a VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9202,7 +9227,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VmwareSite"
             }
           }
         ],
@@ -9210,7 +9235,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VmwareSite"
             }
           }
         },
@@ -9228,7 +9253,7 @@
           "VmwareSites"
         ],
         "operationId": "Sites_Update",
-        "description": "Update a VMwareSite",
+        "description": "Update a VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9253,7 +9278,7 @@
             "required": true,
             "description": "The resource properties to be updated.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteUpdate"
+              "$ref": "#/definitions/VmwareSiteUpdate"
             }
           }
         ],
@@ -9261,7 +9286,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSite"
+              "$ref": "#/definitions/VmwareSite"
             }
           }
         },
@@ -9580,7 +9605,7 @@
             "type": "string"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
@@ -9784,8 +9809,8 @@
         "tags": [
           "VmwareHostController"
         ],
-        "operationId": "VmwareHostController_ListByVMwareSite",
-        "description": "List VmwareHostResource resources by VMwareSite",
+        "operationId": "VmwareHostController_ListByVmwareSite",
+        "description": "List VmwareHostResource resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9817,11 +9842,11 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "VmwareHostController_ListByVMwareSite_MaximumSet_Gen": {
-            "$ref": "./examples/VmwareHostController_ListByVMwareSite_MaximumSet_Gen.json"
+          "VmwareHostController_ListByVmwareSite_MaximumSet_Gen": {
+            "$ref": "./examples/VmwareHostController_ListByVmwareSite_MaximumSet_Gen.json"
           },
-          "VmwareHostController_ListByVMwareSite_MinimumSet_Gen": {
-            "$ref": "./examples/VmwareHostController_ListByVMwareSite_MinimumSet_Gen.json"
+          "VmwareHostController_ListByVmwareSite_MinimumSet_Gen": {
+            "$ref": "./examples/VmwareHostController_ListByVmwareSite_MinimumSet_Gen.json"
           }
         }
       }
@@ -9856,6 +9881,7 @@
             "in": "path",
             "required": true,
             "description": " Hosts name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -9883,7 +9909,7 @@
           "JobsController"
         ],
         "operationId": "Jobs_List",
-        "description": "List VmwareJobResource resources by VMwareSite",
+        "description": "List VmwareJobResource resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -9954,6 +9980,7 @@
             "in": "path",
             "required": true,
             "description": " Jobs name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -9981,7 +10008,7 @@
           "MachinesController"
         ],
         "operationId": "Machines_List",
-        "description": "List MachineResource resources by VMwareSite",
+        "description": "List MachineResource resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -9993,14 +10020,14 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
             "type": "string"
           },
           {
-            "name": "$top",
+            "name": "top",
             "in": "query",
             "required": false,
             "description": "page size  query",
@@ -10082,6 +10109,7 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -10133,6 +10161,7 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -10184,6 +10213,7 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -10235,6 +10265,7 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -10294,6 +10325,7 @@
             "in": "path",
             "required": true,
             "description": "Machine name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -10326,7 +10358,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/operationsStatus/{operationStatusName}": {
       "get": {
         "tags": [
-          "VMwareOperationsStatus"
+          "VmwareOperationsStatus"
         ],
         "operationId": "VMwareOperationsStatus_Get",
         "description": "A operation status resource belonging to a site resource.",
@@ -10353,6 +10385,7 @@
             "in": "path",
             "required": true,
             "description": "Operation status  Arm Name.",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -10432,7 +10465,7 @@
           "RunAsAccountsController"
         ],
         "operationId": "RunAsAccounts_List",
-        "description": "List VmwareRunAsAccountResource resources by VMwareSite",
+        "description": "List VmwareRunAsAccountResource resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -10503,6 +10536,7 @@
             "in": "path",
             "required": true,
             "description": " RunAsAccounts name",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$",
             "type": "string"
           }
         ],
@@ -10615,7 +10649,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteUsage"
+              "$ref": "#/definitions/VmwareSiteUsage"
             }
           }
         },
@@ -10632,7 +10666,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/updateDependencyMapStatus": {
       "post": {
         "tags": [
-          "VMwarePropertiesController"
+          "VmwarePropertiesController"
         ],
         "operationId": "MwarePropertiesController_UpdateDependencyMapStatus",
         "description": "Method to enable disable dependency map status for machines\n            in a\nsite.",
@@ -10693,9 +10727,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/updateProperties": {
       "post": {
         "tags": [
-          "VMwarePropertiesController"
+          "VmwarePropertiesController"
         ],
-        "operationId": "VMwarePropertiesController_UpdateProperties",
+        "operationId": "VmwarePropertiesController_UpdateProperties",
         "description": "Method to update properties for machines   in a site.",
         "parameters": [
           {
@@ -10742,11 +10776,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VMwarePropertiesController_UpdateProperties_MaximumSet_Gen": {
-            "$ref": "./examples/VMwarePropertiesController_UpdateProperties_MaximumSet_Gen.json"
+          "VmwarePropertiesController_UpdateProperties_MaximumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateProperties_MaximumSet_Gen.json"
           },
-          "VMwarePropertiesController_UpdateProperties_MinimumSet_Gen": {
-            "$ref": "./examples/VMwarePropertiesController_UpdateProperties_MinimumSet_Gen.json"
+          "VmwarePropertiesController_UpdateProperties_MinimumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateProperties_MinimumSet_Gen.json"
           }
         }
       }
@@ -10754,9 +10788,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/updateRunAsAccount": {
       "post": {
         "tags": [
-          "VMwarePropertiesController"
+          "VmwarePropertiesController"
         ],
-        "operationId": "VMwarePropertiesController_UpdateRunAsAccount",
+        "operationId": "VmwarePropertiesController_UpdateRunAsAccount",
         "description": "Method to associate Run as account to machine\r\n            in a site.",
         "parameters": [
           {
@@ -10803,11 +10837,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VMwarePropertiesController_UpdateRunAsAccount_MaximumSet_Gen": {
-            "$ref": "./examples/VMwarePropertiesController_UpdateRunAsAccount_MaximumSet_Gen.json"
+          "VmwarePropertiesController_UpdateRunAsAccount_MaximumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateRunAsAccount_MaximumSet_Gen.json"
           },
-          "VMwarePropertiesController_UpdateRunAsAccount_MinimumSet_Gen": {
-            "$ref": "./examples/VMwarePropertiesController_UpdateRunAsAccount_MinimumSet_Gen.json"
+          "VmwarePropertiesController_UpdateRunAsAccount_MinimumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateRunAsAccount_MinimumSet_Gen.json"
           }
         }
       }
@@ -10815,9 +10849,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/updateTags": {
       "post": {
         "tags": [
-          "VMwarePropertiesController"
+          "VmwarePropertiesController"
         ],
-        "operationId": "VMwarePropertiesController_UpdateTags",
+        "operationId": "VmwarePropertiesController_UpdateTags",
         "description": "Method to associate Run as account to machine\r\n            in a site.",
         "parameters": [
           {
@@ -10864,11 +10898,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "VMwarePropertiesController_UpdateTags_MaximumSet_Gen": {
-            "$ref": "./examples/VMwarePropertiesController_UpdateTags_MaximumSet_Gen.json"
+          "VmwarePropertiesController_UpdateTags_MaximumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateTags_MaximumSet_Gen.json"
           },
-          "VMwarePropertiesController_UpdateTags_MinimumSet_Gen": {
-            "$ref": "./examples/VMwarePropertiesController_UpdateTags_MinimumSet_Gen.json"
+          "VmwarePropertiesController_UpdateTags_MinimumSet_Gen": {
+            "$ref": "./examples/VmwarePropertiesController_UpdateTags_MinimumSet_Gen.json"
           }
         }
       }
@@ -10903,7 +10937,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VMwareSiteUsage"
+              "$ref": "#/definitions/VmwareSiteUsage"
             }
           }
         },
@@ -10920,10 +10954,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vCenters": {
       "get": {
         "tags": [
-          "VCenterController"
+          "VcenterController"
         ],
         "operationId": "VCenters_List",
-        "description": "List VCenter resources by VMwareSite",
+        "description": "List Vcenter resources by VmwareSite",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -10935,7 +10969,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "$filter",
+            "name": "filter",
             "in": "query",
             "required": false,
             "description": "filter query",
@@ -10954,7 +10988,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VCenterCollection"
+              "$ref": "#/definitions/VcenterCollection"
             }
           }
         },
@@ -10974,10 +11008,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/vmwareSites/{siteName}/vCenters/{vcenterName}": {
       "get": {
         "tags": [
-          "VCenterController"
+          "VcenterController"
         ],
         "operationId": "VCenters_Get",
-        "description": "Get a VCenter",
+        "description": "Get a Vcenter",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11008,7 +11042,7 @@
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/VCenter"
+              "$ref": "#/definitions/Vcenter"
             }
           }
         },
@@ -11023,10 +11057,10 @@
       },
       "put": {
         "tags": [
-          "VCenterController"
+          "VcenterController"
         ],
         "operationId": "VCenters_Create",
-        "description": "Create a VCenter",
+        "description": "Create a Vcenter",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11058,7 +11092,7 @@
             "required": true,
             "description": "Resource create parameters.",
             "schema": {
-              "$ref": "#/definitions/VCenter"
+              "$ref": "#/definitions/Vcenter"
             }
           }
         ],
@@ -11089,10 +11123,10 @@
       },
       "delete": {
         "tags": [
-          "VCenterController"
+          "VcenterController"
         ],
         "operationId": "VCenters_Delete",
-        "description": "Delete a VCenter",
+        "description": "Delete a Vcenter",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11928,7 +11962,7 @@
         "modelAsString": true
       }
     },
-    "FCIProperties": {
+    "FciProperties": {
       "type": "object",
       "properties": {
         "state": {
@@ -11992,7 +12026,7 @@
           "$ref": "#/definitions/FileType",
           "description": "Gets or sets the database file type."
         },
-        "sizeInMB": {
+        "sizeInMb": {
           "type": "number",
           "format": "float",
           "description": "Gets or sets the size of the file in MB."
@@ -12075,7 +12109,7 @@
       },
       "description": "group connectivity information model"
     },
-    "GuestOSDetails": {
+    "GuestOsDetails": {
       "type": "object",
       "properties": {
         "osType": {
@@ -12176,6 +12210,7 @@
     },
     "HealthErrorDetailsDiscoveryScope": {
       "type": "string",
+      "description": "Gets discovery scope for which             error is encountered.",
       "enum": [
         "AppsAndRoles",
         "DependencyMap",
@@ -12202,6 +12237,7 @@
     },
     "HighAvailability": {
       "type": "string",
+      "description": "Value indicating whether the VM is highly available",
       "enum": [
         "Unknown",
         "No",
@@ -12214,6 +12250,7 @@
     },
     "HighAvailabilityValues": {
       "type": "string",
+      "description": "Value indicating whether the VM is highly available",
       "enum": [
         "Unknown",
         "No",
@@ -12224,11 +12261,11 @@
         "modelAsString": true
       }
     },
-    "HyperVCluster": {
+    "HypervCluster": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HyperVClusterProperties",
+          "$ref": "#/definitions/HypervClusterProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -12244,16 +12281,16 @@
         }
       ]
     },
-    "HyperVClusterCollection": {
+    "HypervClusterCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HyperVCluster"
+            "$ref": "#/definitions/HypervCluster"
           },
-          "x-cadl-name": "HyperVCluster[]",
-          "description": "The HyperVCluster items on this page",
+          "x-cadl-name": "HypervCluster[]",
+          "description": "The HypervCluster items on this page",
           "x-ms-identifiers": [],
           "readOnly": true
         },
@@ -12263,9 +12300,9 @@
           "readOnly": true
         }
       },
-      "description": "The response of a HyperVCluster list operation."
+      "description": "The response of a HypervCluster list operation."
     },
-    "HyperVClusterProperties": {
+    "HypervClusterProperties": {
       "type": "object",
       "properties": {
         "createdTimestamp": {
@@ -12321,7 +12358,7 @@
       },
       "description": "The properties of Hyperv Cluster"
     },
-    "HyperVDisk": {
+    "HypervDisk": {
       "type": "object",
       "properties": {
         "instanceId": {
@@ -12359,11 +12396,11 @@
       },
       "description": "Second level object returned as part of Machine REST resource."
     },
-    "HyperVHost": {
+    "HypervHost": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HyperVHostProperties",
+          "$ref": "#/definitions/HypervHostProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -12379,16 +12416,16 @@
         }
       ]
     },
-    "HyperVHostCollection": {
+    "HypervHostCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HyperVHost"
+            "$ref": "#/definitions/HypervHost"
           },
-          "x-cadl-name": "HyperVHost[]",
-          "description": "The HyperVHost items on this page",
+          "x-cadl-name": "HypervHost[]",
+          "description": "The HypervHost items on this page",
           "x-ms-identifiers": [],
           "readOnly": true
         },
@@ -12398,9 +12435,9 @@
           "readOnly": true
         }
       },
-      "description": "The response of a HyperVHost list operation."
+      "description": "The response of a HypervHost list operation."
     },
-    "HyperVHostProperties": {
+    "HypervHostProperties": {
       "type": "object",
       "properties": {
         "createdTimestamp": {
@@ -12442,7 +12479,7 @@
       },
       "description": "The properties of Hyperv Host"
     },
-    "HyperVJob": {
+    "HypervJob": {
       "type": "object",
       "properties": {
         "properties": {
@@ -12462,16 +12499,16 @@
         }
       ]
     },
-    "HyperVJobCollection": {
+    "HypervJobCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HyperVJob"
+            "$ref": "#/definitions/HypervJob"
           },
-          "x-cadl-name": "HyperVJob[]",
-          "description": "The HyperVJob items on this page",
+          "x-cadl-name": "HypervJob[]",
+          "description": "The HypervJob items on this page",
           "x-ms-identifiers": [],
           "readOnly": true
         },
@@ -12481,13 +12518,13 @@
           "readOnly": true
         }
       },
-      "description": "The response of a HyperVJob list operation."
+      "description": "The response of a HypervJob list operation."
     },
-    "HyperVMachine": {
+    "HypervMachine": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HyperVMachineProperties",
+          "$ref": "#/definitions/HypervMachineProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -12511,16 +12548,16 @@
         }
       ]
     },
-    "HyperVMachineCollection": {
+    "HypervMachineCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HyperVMachine"
+            "$ref": "#/definitions/HypervMachine"
           },
-          "x-cadl-name": "HyperVMachine[]",
-          "description": "The HyperVMachine items on this page",
+          "x-cadl-name": "HypervMachine[]",
+          "description": "The HypervMachine items on this page",
           "x-ms-identifiers": [],
           "readOnly": true
         },
@@ -12530,9 +12567,9 @@
           "readOnly": true
         }
       },
-      "description": "The response of a HyperVMachine list operation."
+      "description": "The response of a HypervMachine list operation."
     },
-    "HyperVMachineProperties": {
+    "HypervMachineProperties": {
       "type": "object",
       "properties": {
         "hostProcessorInfo": {
@@ -12581,7 +12618,7 @@
           "description": "Cluster ARM ID.",
           "readOnly": true
         },
-        "maxMemoryMB": {
+        "maxMemoryMb": {
           "type": "integer",
           "format": "int32",
           "description": "Max memory of the virtual machine in MB.",
@@ -12595,20 +12632,20 @@
         "disks": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HyperVDisk"
+            "$ref": "#/definitions/HypervDisk"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "HyperVDisk[]",
+          "x-cadl-name": "HypervDisk[]",
           "description": "Disks attached to the machine.",
           "readOnly": true
         },
         "networkAdapters": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/HyperVNetworkAdapter"
+            "$ref": "#/definitions/HypervNetworkAdapter"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "HyperVNetworkAdapter[]",
+          "x-cadl-name": "HypervNetworkAdapter[]",
           "description": "Network adapters attached to the machine.",
           "readOnly": true
         },
@@ -12681,8 +12718,8 @@
           "type": "string",
           "description": "Gets or sets the firmware."
         },
-        "guestOSDetails": {
-          "$ref": "#/definitions/GuestOSDetails",
+        "guestOsDetails": {
+          "$ref": "#/definitions/GuestOsDetails",
           "description": "Operating System Details extracted from the guest             bu executing script inside the guest VM. ",
           "readOnly": true
         },
@@ -12757,7 +12794,7 @@
           "readOnly": true
         },
         "sqlDiscovery": {
-          "$ref": "#/definitions/SQLDiscovery",
+          "$ref": "#/definitions/SqlDiscovery",
           "description": "Gets the data related to SQL discovery.",
           "readOnly": true
         },
@@ -12786,7 +12823,7 @@
           "format": "int32",
           "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
         },
-        "allocatedMemoryInMB": {
+        "allocatedMemoryInMb": {
           "type": "number",
           "format": "double",
           "description": "Gets or sets the allocated Memory in MB."
@@ -12830,7 +12867,7 @@
       },
       "description": "The properties of AddressResource"
     },
-    "HyperVNetworkAdapter": {
+    "HypervNetworkAdapter": {
       "type": "object",
       "properties": {
         "networkId": {
@@ -12881,175 +12918,11 @@
       },
       "description": "Second level object represented in responses as part of Machine REST resource."
     },
-    "HyperVSite": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SiteProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Gets or sets the eTag for concurrency control."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the Azure location in which Sites is created.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "A HyperV SiteResource",
-      "required": [
-        "id"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "HyperVSiteCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/HyperVSite"
-          },
-          "x-cadl-name": "HyperVSite[]",
-          "description": "The HyperVSite items on this page",
-          "x-ms-identifiers": [],
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items",
-          "readOnly": true
-        }
-      },
-      "description": "The response of a HyperVSite list operation."
-    },
-    "HyperVSiteUpdate": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Gets or sets the eTag for concurrency control."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/HyperVSiteUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the HyperVSite."
-    },
-    "HyperVSiteUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
-        },
-        "agentDetails": {
-          "$ref": "#/definitions/SiteAgentProperties",
-          "description": "Gets or sets the on-premises agent details."
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Gets or sets the Appliance Name."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "The updatable properties of the HyperVSite."
-    },
-    "HyperVSiteUsage": {
-      "type": "object",
-      "properties": {
-        "machineCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of machines discovered in the site."
-        },
-        "runAsAccountCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of run as accounts in the site."
-        },
-        "hostCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of hosts part of the site."
-        },
-        "clusterCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of clusters part of the site."
-        }
-      },
-      "description": "Hyper-V site usage."
-    },
-    "HyperVVMSoftwareInventory": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative URL to get this VMWare machine.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Handled by resource provider.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Gets the Name of the machine.",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/MachineSoftwareInventoryProperties",
-          "description": "Gets or sets software inventory properties.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "HyperV VM software inventory REST resource."
-    },
     "HypervOperationsStatusResource": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HyperVClusterProperties",
+          "$ref": "#/definitions/HypervClusterProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -13106,7 +12979,182 @@
       },
       "description": "The response of a HypervRunAsAccountResource list operation."
     },
-    "IISApplicationUnit": {
+    "HypervSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SiteProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the eTag for concurrency control."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the Azure location in which Sites is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A HyperV SiteResource",
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HypervSiteCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HypervSite"
+          },
+          "x-cadl-name": "HypervSite[]",
+          "description": "The HypervSite items on this page",
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "description": "The response of a HypervSite list operation."
+    },
+    "HypervSiteUpdate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the eTag for concurrency control."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/HypervSiteUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the HypervSite."
+    },
+    "HypervSiteUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
+        }
+      },
+      "description": "The updatable properties of the HypervSite."
+    },
+    "HypervSiteUsage": {
+      "type": "object",
+      "properties": {
+        "machineCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of machines discovered in the site."
+        },
+        "runAsAccountCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of run as accounts in the site."
+        },
+        "hostCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of hosts part of the site."
+        },
+        "clusterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of clusters part of the site."
+        }
+      },
+      "description": "Hyper-V site usage."
+    },
+    "HypervVmSoftwareInventory": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets the relative URL to get this VMWare machine.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Handled by resource provider.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Gets the Name of the machine.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/MachineSoftwareInventoryProperties",
+          "description": "Gets or sets software inventory properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "HyperV VM software inventory REST resource."
+    },
+    "IarmAsyncOperationStatus": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "description": "Gets the status of the operation. ARM expects the terminal status to be one\nof\n            Succeeded/ Failed/ Canceled. All other values imply that the\noperation is still running.",
+          "readOnly": true
+        }
+      },
+      "description": "ARM async operation status response model."
+    },
+    "IisApplicationUnit": {
       "type": "object",
       "properties": {
         "applicationPoolName": {
@@ -13141,7 +13189,7 @@
       },
       "description": "Second-level object for identification of application units in a web site\nhosted on IIS."
     },
-    "IISVirtualApplicationUnit": {
+    "IisVirtualApplicationUnit": {
       "type": "object",
       "properties": {
         "isVirtualDirectory": {
@@ -13165,26 +13213,26 @@
       },
       "description": "Second-level object for identification of virtual applications in a web site\nhosted on IIS."
     },
-    "IISWebApplicationProperties": {
+    "IisWebApplicationProperties": {
       "type": "object",
       "properties": {
         "applications": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IISApplicationUnit"
+            "$ref": "#/definitions/IisApplicationUnit"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "IISApplicationUnit[]",
+          "x-cadl-name": "IisApplicationUnit[]",
           "description": "Gets the list of application units for the web site.",
           "readOnly": true
         },
         "virtualApplications": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IISVirtualApplicationUnit"
+            "$ref": "#/definitions/IisVirtualApplicationUnit"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "IISVirtualApplicationUnit[]",
+          "x-cadl-name": "IisVirtualApplicationUnit[]",
           "description": "Gets the list of application units for the web site.",
           "readOnly": true
         },
@@ -13313,11 +13361,11 @@
       },
       "description": "Class for web application properties."
     },
-    "IISWebApplications": {
+    "IisWebApplications": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/IISWebApplicationProperties",
+          "$ref": "#/definitions/IisWebApplicationProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -13333,16 +13381,16 @@
         }
       ]
     },
-    "IISWebApplicationsCollection": {
+    "IisWebApplicationsCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IISWebApplications"
+            "$ref": "#/definitions/IisWebApplications"
           },
-          "x-cadl-name": "IISWebApplications[]",
-          "description": "The IISWebApplications items on this page",
+          "x-cadl-name": "IisWebApplications[]",
+          "description": "The IisWebApplications items on this page",
           "x-ms-identifiers": [],
           "readOnly": true
         },
@@ -13352,9 +13400,9 @@
           "readOnly": true
         }
       },
-      "description": "The response of a IISWebApplications list operation."
+      "description": "The response of a IisWebApplications list operation."
     },
-    "IISWebServerProperties": {
+    "IisWebServerProperties": {
       "type": "object",
       "properties": {
         "configurationLocation": {
@@ -13451,11 +13499,11 @@
       },
       "description": "Class for web server properties."
     },
-    "IISWebServers": {
+    "IisWebServers": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/IISWebServerProperties",
+          "$ref": "#/definitions/IisWebServerProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -13471,16 +13519,16 @@
         }
       ]
     },
-    "IISWebServersCollection": {
+    "IisWebServersCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IISWebServers"
+            "$ref": "#/definitions/IisWebServers"
           },
-          "x-cadl-name": "IISWebServers[]",
-          "description": "The IISWebServers items on this page",
+          "x-cadl-name": "IisWebServers[]",
+          "description": "The IisWebServers items on this page",
           "x-ms-identifiers": [],
           "readOnly": true
         },
@@ -13490,7 +13538,7 @@
           "readOnly": true
         }
       },
-      "description": "The response of a IISWebServers list operation."
+      "description": "The response of a IisWebServers list operation."
     },
     "ImportDeleteImportMachinesJob": {
       "type": "object",
@@ -13728,7 +13776,7 @@
           "format": "int32",
           "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
         },
-        "allocatedMemoryInMB": {
+        "allocatedMemoryInMb": {
           "type": "number",
           "format": "double",
           "description": "Gets or sets the allocated Memory in MB."
@@ -15218,34 +15266,6 @@
       },
       "description": "Class for run as account properties."
     },
-    "SQLDiscovery": {
-      "type": "object",
-      "properties": {
-        "successfullyDiscoveredServerCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": " successfully Discovered ServerCount"
-        },
-        "totalServerCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "total Server Count"
-        },
-        "sqlMetadataHydratedRunAsAccountId": {
-          "type": "string",
-          "description": "sql Metadata Hydrated RunAsAccountId"
-        },
-        "sqlMetadataDiscoveryPipe": {
-          "$ref": "#/definitions/SQLDiscoverySqlMetadataDiscoveryPipe",
-          "description": "sql Metadata DiscoveryPipe"
-        },
-        "discoveryScopeStatus": {
-          "$ref": "#/definitions/SQLDiscoveryScopeStatus",
-          "description": "discovery Scope Status"
-        }
-      },
-      "description": "Contains data related SQL discovery."
-    },
     "SQLDiscoveryScopeStatus": {
       "type": "string",
       "description": "SQLDiscoveryScope Status",
@@ -15492,8 +15512,8 @@
           "type": "string",
           "description": "Gets or sets the firmware."
         },
-        "guestOSDetails": {
-          "$ref": "#/definitions/GuestOSDetails",
+        "guestOsDetails": {
+          "$ref": "#/definitions/GuestOsDetails",
           "description": "Operating System Details extracted from the guest\n            bu executing\nscript inside the guest VM.",
           "readOnly": true
         },
@@ -15568,7 +15588,7 @@
           "readOnly": true
         },
         "sqlDiscovery": {
-          "$ref": "#/definitions/SQLDiscovery",
+          "$ref": "#/definitions/SqlDiscovery",
           "description": "Gets the data related to SQL discovery.",
           "readOnly": true
         },
@@ -15597,7 +15617,7 @@
           "format": "int32",
           "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
         },
-        "allocatedMemoryInMB": {
+        "allocatedMemoryInMb": {
           "type": "number",
           "format": "float",
           "description": "Gets or sets the allocated Memory in MB."
@@ -16028,7 +16048,8 @@
       "description": "Collection of SiteHealthSummary."
     },
     "SiteHealthSummaryFabricLayoutUpdateSourcesItem": {
-      "type": "string"
+      "type": "string",
+      "description": "SiteHealthSummary FabricLayout UpdateSources"
     },
     "SiteProperties": {
       "type": "object",
@@ -16371,13 +16392,15 @@
       "description": "Class for SQL Server availability replica properties."
     },
     "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaCommitMode": {
-      "type": "string"
+      "type": "string",
+      "description": "ReplicaCommitMode"
     },
     "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaReadMode": {
       "type": "string"
     },
     "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaSeedMode": {
-      "type": "string"
+      "type": "string",
+      "description": "ReplicaSeedMode"
     },
     "SqlAvailabilityGroupSqlAvailabilityReplicaPropertiesReplicaState": {
       "type": "string"
@@ -16505,7 +16528,7 @@
           "type": "string",
           "description": "Gets or sets the status."
         },
-        "sizeMB": {
+        "sizeMb": {
           "type": "number",
           "format": "float",
           "description": "Gets or sets the size in Mb."
@@ -16549,6 +16572,34 @@
         }
       },
       "description": "Class for SQL Server database properties."
+    },
+    "SqlDiscovery": {
+      "type": "object",
+      "properties": {
+        "successfullyDiscoveredServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": " successfully Discovered ServerCount"
+        },
+        "totalServerCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "total Server Count"
+        },
+        "sqlMetadataHydratedRunAsAccountId": {
+          "type": "string",
+          "description": "sql Metadata Hydrated RunAsAccountId"
+        },
+        "sqlMetadataDiscoveryPipe": {
+          "$ref": "#/definitions/SQLDiscoverySqlMetadataDiscoveryPipe",
+          "description": "sql Metadata DiscoveryPipe"
+        },
+        "discoveryScopeStatus": {
+          "$ref": "#/definitions/SQLDiscoveryScopeStatus",
+          "description": "discovery Scope Status"
+        }
+      },
+      "description": "Contains data related SQL discovery."
     },
     "SqlDiscoverySiteDataSourceProperties": {
       "type": "object",
@@ -16783,7 +16834,7 @@
           "description": "Gets or sets the port of the SQLServer.",
           "readOnly": true
         },
-        "commaSeparatedIPs": {
+        "commaSeparatedIps": {
           "type": "string",
           "description": "Gets or sets the comma separated IPs of the SQLServer.",
           "readOnly": true
@@ -16798,7 +16849,7 @@
           "description": "Gets or sets the value which reflects if Named Pipe is enabled or not.",
           "readOnly": true
         },
-        "isTCPIPEnabled": {
+        "isTcpIpEnabled": {
           "type": "boolean",
           "description": "Gets or sets the value which reflects if Named Pipe is enabled or not.",
           "readOnly": true
@@ -16845,13 +16896,13 @@
           "description": "Gets the Machine Overview properties of all machines on which the SQL server is deployed.",
           "readOnly": true
         },
-        "numberOfAGDatabases": {
+        "numberOfAgDatabases": {
           "type": "integer",
           "format": "int32",
           "description": "Gets or sets the number of databases part of availability group on this SQL instance."
         },
         "fciProperties": {
-          "$ref": "#/definitions/FCIProperties",
+          "$ref": "#/definitions/FciProperties",
           "description": "Gets or sets the FCI properties if the instance is an FCI instance. This would be populated if IsClustered is true."
         },
         "version": {
@@ -17901,11 +17952,68 @@
         "modelAsString": true
       }
     },
-    "VCenter": {
+    "VMwareDatastoreType": {
+      "type": "string",
+      "description": "vmware datastore type",
+      "enum": [
+        "Unknown",
+        "CIFS",
+        "NFS",
+        "NFS41",
+        "PMEM",
+        "VFFS",
+        "VMFS",
+        "VSAN",
+        "VVOL"
+      ],
+      "x-ms-enum": {
+        "name": "VMwareDatastoreType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown"
+          },
+          {
+            "name": "Cifs",
+            "value": "CIFS"
+          },
+          {
+            "name": "NFS",
+            "value": "NFS"
+          },
+          {
+            "name": "NFS41",
+            "value": "NFS41"
+          },
+          {
+            "name": "Pmem",
+            "value": "PMEM"
+          },
+          {
+            "name": "Vffs",
+            "value": "VFFS"
+          },
+          {
+            "name": "Vmfs",
+            "value": "VMFS"
+          },
+          {
+            "name": "Vsan",
+            "value": "VSAN"
+          },
+          {
+            "name": "Vvol",
+            "value": "VVOL"
+          }
+        ]
+      }
+    },
+    "Vcenter": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VCenterProperties",
+          "$ref": "#/definitions/VcenterProperties",
           "description": "The resource-specific properties for this resource.",
           "x-ms-client-flatten": true,
           "x-ms-mutability": [
@@ -17921,16 +18029,16 @@
         }
       ]
     },
-    "VCenterCollection": {
+    "VcenterCollection": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VCenter"
+            "$ref": "#/definitions/Vcenter"
           },
-          "x-cadl-name": "VCenter[]",
-          "description": "The VCenter items on this page",
+          "x-cadl-name": "Vcenter[]",
+          "description": "The Vcenter items on this page",
           "x-ms-identifiers": [],
           "readOnly": true
         },
@@ -17940,9 +18048,9 @@
           "readOnly": true
         }
       },
-      "description": "The response of a VCenter list operation."
+      "description": "The response of a Vcenter list operation."
     },
-    "VCenterProperties": {
+    "VcenterProperties": {
       "type": "object",
       "properties": {
         "runAsAccountId": {
@@ -18001,229 +18109,6 @@
         }
       },
       "description": "The properties of VMwareSiteResource"
-    },
-    "VMwareDatastore": {
-      "type": "object",
-      "properties": {
-        "uuid": {
-          "type": "string",
-          "description": "Data store UUID.",
-          "readOnly": true
-        },
-        "capacityInGB": {
-          "type": "number",
-          "format": "float",
-          "description": "Capacity of the data store.",
-          "readOnly": true
-        },
-        "freeSpaceInGB": {
-          "type": "number",
-          "format": "float",
-          "description": "Free space of the data store.",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/VMwareDatastoreType",
-          "description": "Type of the data store.",
-          "readOnly": true
-        },
-        "symbolicName": {
-          "type": "string",
-          "description": "Symbolic name of the data store.",
-          "readOnly": true
-        }
-      },
-      "description": "Second level object returned as part of VMware host REST resource."
-    },
-    "VMwareDatastoreType": {
-      "type": "string",
-      "description": "vmware datastore type",
-      "enum": [
-        "Unknown",
-        "CIFS",
-        "NFS",
-        "NFS41",
-        "PMEM",
-        "VFFS",
-        "VMFS",
-        "VSAN",
-        "VVOL"
-      ],
-      "x-ms-enum": {
-        "name": "VMwareDatastoreType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown"
-          },
-          {
-            "name": "Cifs",
-            "value": "CIFS"
-          },
-          {
-            "name": "NFS",
-            "value": "NFS"
-          },
-          {
-            "name": "NFS41",
-            "value": "NFS41"
-          },
-          {
-            "name": "Pmem",
-            "value": "PMEM"
-          },
-          {
-            "name": "Vffs",
-            "value": "VFFS"
-          },
-          {
-            "name": "Vmfs",
-            "value": "VMFS"
-          },
-          {
-            "name": "Vsan",
-            "value": "VSAN"
-          },
-          {
-            "name": "Vvol",
-            "value": "VVOL"
-          }
-        ]
-      }
-    },
-    "VMwareSite": {
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SitesProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Gets or sets the eTag for concurrency control."
-        },
-        "location": {
-          "type": "string",
-          "description": "Gets or sets the Azure location in which Sites is created.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "description": "A VMwareSite",
-      "required": [
-        "id"
-      ],
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-        }
-      ]
-    },
-    "VMwareSiteCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VMwareSite"
-          },
-          "x-cadl-name": "VMwareSite[]",
-          "description": "The VMwareSite items on this page",
-          "x-ms-identifiers": [],
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The link to the next page of items",
-          "readOnly": true
-        }
-      },
-      "description": "The response of a VMwareSite list operation."
-    },
-    "VMwareSiteUpdate": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Gets the relative ARM name to get Web app server instance."
-        },
-        "eTag": {
-          "type": "string",
-          "description": "Gets or sets the eTag for concurrency control."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-cadl-name": "Record<string>",
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/VMwareSiteUpdateProperties",
-          "x-ms-client-flatten": true
-        }
-      },
-      "description": "The type used for update operations of the VMwareSite."
-    },
-    "VMwareSiteUpdateProperties": {
-      "type": "object",
-      "properties": {
-        "servicePrincipalIdentityDetails": {
-          "$ref": "#/definitions/SiteSpnProperties",
-          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
-        },
-        "agentDetails": {
-          "$ref": "#/definitions/SiteAgentProperties",
-          "description": "Gets or sets the on-premises agent details."
-        },
-        "applianceName": {
-          "type": "string",
-          "description": "Gets or sets the Appliance Name."
-        },
-        "discoverySolutionId": {
-          "type": "string",
-          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The status of the last operation."
-        }
-      },
-      "description": "The updatable properties of the VMwareSite."
-    },
-    "VMwareSiteUsage": {
-      "type": "object",
-      "properties": {
-        "machineCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of machines discovered in the site."
-        },
-        "runAsAccountCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of run as accounts in the site."
-        },
-        "vCenterCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Gets or sets the number of vCenters part of the site."
-        }
-      },
-      "description": "VMware site usage."
     },
     "VersionedV202001ExportMachineErrorsRequest": {
       "type": "object",
@@ -18321,6 +18206,39 @@
         ]
       }
     },
+    "VmwareDatastore": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string",
+          "description": "Data store UUID.",
+          "readOnly": true
+        },
+        "capacityInGb": {
+          "type": "number",
+          "format": "float",
+          "description": "Capacity of the data store.",
+          "readOnly": true
+        },
+        "freeSpaceInGb": {
+          "type": "number",
+          "format": "float",
+          "description": "Free space of the data store.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/VMwareDatastoreType",
+          "description": "Type of the data store.",
+          "readOnly": true
+        },
+        "symbolicName": {
+          "type": "string",
+          "description": "Symbolic name of the data store.",
+          "readOnly": true
+        }
+      },
+      "description": "Second level object returned as part of VMware host REST resource."
+    },
     "VmwareDisk": {
       "type": "object",
       "properties": {
@@ -18395,14 +18313,14 @@
         "datastores": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VMwareDatastore"
+            "$ref": "#/definitions/VmwareDatastore"
           },
           "x-ms-identifiers": [],
-          "x-cadl-name": "VMwareDatastore[]",
+          "x-cadl-name": "VmwareDatastore[]",
           "description": "Gets the data stores.",
           "readOnly": true
         },
-        "vcenterID": {
+        "vcenterId": {
           "type": "string",
           "description": "Gets the V-center ID.",
           "readOnly": true
@@ -18650,8 +18568,8 @@
           "type": "string",
           "description": "Gets or sets the firmware."
         },
-        "guestOSDetails": {
-          "$ref": "#/definitions/GuestOSDetails",
+        "guestOsDetails": {
+          "$ref": "#/definitions/GuestOsDetails",
           "description": "Operating System Details extracted from the guest\n            bu executing\nscript inside the guest VM.",
           "readOnly": true
         },
@@ -18726,7 +18644,7 @@
           "readOnly": true
         },
         "sqlDiscovery": {
-          "$ref": "#/definitions/SQLDiscovery",
+          "$ref": "#/definitions/SqlDiscovery",
           "description": "Gets the data related to SQL discovery.",
           "readOnly": true
         },
@@ -18755,7 +18673,7 @@
           "format": "int32",
           "description": "Gets or sets the Number of Processor Cores \n            allocated for the\nmachine."
         },
-        "allocatedMemoryInMB": {
+        "allocatedMemoryInMb": {
           "type": "number",
           "format": "double",
           "description": "Gets or sets the allocated Memory in MB."
@@ -18906,6 +18824,139 @@
         }
       },
       "description": "The response of a VmwareRunAsAccountResource list operation."
+    },
+    "VmwareSite": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SitesProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the eTag for concurrency control."
+        },
+        "location": {
+          "type": "string",
+          "description": "Gets or sets the Azure location in which Sites is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "description": "A VmwareSite",
+      "required": [
+        "id"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "VmwareSiteCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmwareSite"
+          },
+          "x-cadl-name": "VmwareSite[]",
+          "description": "The VmwareSite items on this page",
+          "x-ms-identifiers": [],
+          "readOnly": true
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "readOnly": true
+        }
+      },
+      "description": "The response of a VmwareSite list operation."
+    },
+    "VmwareSiteUpdate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Gets the relative ARM name to get Web app server instance."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Gets or sets the eTag for concurrency control."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-cadl-name": "Record<string>",
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/VmwareSiteUpdateProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "description": "The type used for update operations of the VmwareSite."
+    },
+    "VmwareSiteUpdateProperties": {
+      "type": "object",
+      "properties": {
+        "servicePrincipalIdentityDetails": {
+          "$ref": "#/definitions/SiteSpnProperties",
+          "description": "Gets or sets the service principal identity details used by agent for\ncommunication\n            to the service."
+        },
+        "agentDetails": {
+          "$ref": "#/definitions/SiteAgentProperties",
+          "description": "Gets or sets the on-premises agent details."
+        },
+        "applianceName": {
+          "type": "string",
+          "description": "Gets or sets the Appliance Name."
+        },
+        "discoverySolutionId": {
+          "type": "string",
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS."
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation."
+        }
+      },
+      "description": "The updatable properties of the VmwareSite."
+    },
+    "VmwareSiteUsage": {
+      "type": "object",
+      "properties": {
+        "machineCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of machines discovered in the site."
+        },
+        "runAsAccountCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of run as accounts in the site."
+        },
+        "vCenterCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets or sets the number of vCenters part of the site."
+        }
+      },
+      "description": "VMware site usage."
     },
     "WebAppDiscovery": {
       "type": "object",
@@ -19732,17 +19783,6 @@
         }
       },
       "description": "Class for web server properties."
-    },
-    "iArmAsyncOperationStatus": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "Gets the status of the operation. ARM expects the terminal status to be one\nof\n            Succeeded/ Failed/ Canceled. All other values imply that the\noperation is still running.",
-          "readOnly": true
-        }
-      },
-      "description": "ARM async operation status response model."
     },
     "object": {
       "type": "object",

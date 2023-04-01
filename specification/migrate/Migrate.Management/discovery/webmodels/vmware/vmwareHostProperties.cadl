@@ -1,5 +1,4 @@
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Class for host properties.")
 model VmwareHostProperties {
   @doc("Gets the timestamp marking VMware host creation.")
@@ -13,11 +12,11 @@ model VmwareHostProperties {
   @doc("Gets the data stores.")
   @visibility("read")
   @OpenAPI.extension("x-ms-identifiers", [])
-  datastores?: VMwareDatastore[];
+  datastores?: VmwareDatastore[];
 
   @doc("Gets the V-center ID.")
   @visibility("read")
-  vcenterID?: string;
+  vcenterId?: string;
 
   @doc("Gets the instance UUID of the vmware host.")
   @visibility("read")
@@ -32,20 +31,19 @@ model VmwareHostProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Second level object returned as part of VMware host REST resource.")
-model VMwareDatastore {
+model VmwareDatastore {
   @doc("Data store UUID.")
   @visibility("read")
   uuid?: string;
 
   @doc("Capacity of the data store.")
   @visibility("read")
-  capacityInGB?: float32;
+  capacityInGb?: float32;
 
   @doc("Free space of the data store.")
   @visibility("read")
-  freeSpaceInGB?: float32;
+  freeSpaceInGb?: float32;
 
   @doc("Type of the data store.")
   @visibility("read")

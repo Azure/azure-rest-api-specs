@@ -28,9 +28,8 @@ model SiteProperties {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Site REST Resource.")
-model HyperVSite {
+model HypervSite {
   @doc("Gets the relative URL to get this Site.")
   @visibility("read")
   id?: string;
@@ -40,7 +39,7 @@ model HyperVSite {
   type?: string;
 
   @doc("Gets or sets the nested properties.")
-  properties?: HyperVSiteHyperVSiteProperties;
+  properties?: HypervSiteHypervSiteProperties;
 
   @doc("Gets or sets the name of the site.")
   name?: string;
@@ -53,9 +52,8 @@ model HyperVSite {
   location?: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Class for Server site properties.")
-model HyperVSiteHyperVSiteProperties {
+model HypervSiteHypervSiteProperties {
   @doc("Gets the Master Site this site is linked to.")
   @visibility("read")
   masterSiteId?: string;
@@ -81,9 +79,8 @@ communication
   serviceEndpoint?: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Hyper-V site usage.")
-model HyperVSiteUsage {
+model HypervSiteUsage {
 @doc("Gets or sets the number of machines discovered in the site.")
 "machineCount"?: int32;
 @doc("Gets or sets the number of run as accounts in the site.")

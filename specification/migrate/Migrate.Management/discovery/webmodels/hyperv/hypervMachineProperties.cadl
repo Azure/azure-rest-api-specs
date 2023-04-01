@@ -9,15 +9,16 @@ namespace Microsoft.OffAzure;
 @doc("Value indicating whether the VM is highly available")
 @knownValues(HighAvailabilityValues)
 scalar HighAvailability extends string;
+
+@doc("Value indicating whether the VM is highly available")
 enum HighAvailabilityValues {
   Unknown,
   No,
   Yes,}
 
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("The properties of AddressResource")
-model HyperVMachineProperties {
+model HypervMachineProperties {
   @added(Versions.v2022_10_27)
   @doc("Gets the Information about Host Processor.")
   @visibility("read")
@@ -55,10 +56,9 @@ model HyperVMachineProperties {
   @visibility("read")
   clusterId?: string;
 
-  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("Max memory of the virtual machine in MB.")
   @visibility("read")
-  maxMemoryMB?: int32;
+  maxMemoryMb?: int32;
 
   @doc("Value indicating whether dynamic memory is enabled for the VM.")
   @visibility("read")
@@ -67,12 +67,12 @@ model HyperVMachineProperties {
   @OpenAPI.extension("x-ms-identifiers", [])
   @doc("Disks attached to the machine.")
   @visibility("read")
-  disks?: HyperVDisk[];
+  disks?: HypervDisk[];
 
   @OpenAPI.extension("x-ms-identifiers", [])
   @doc("Network adapters attached to the machine.")
   @visibility("read")
-  networkAdapters?: HyperVNetworkAdapter[];
+  networkAdapters?: HypervNetworkAdapter[];
 
   @doc("""
 Management server type captured as a string representation of the
@@ -143,10 +143,9 @@ enabled for the VM.
   @doc("Gets or sets the firmware.")
   firmware?: string;
 
-  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("Operating System Details extracted from the guest             bu executing script inside the guest VM. ")
   @visibility("read")
-  guestOSDetails?: GuestOSDetails;
+  guestOsDetails?: GuestOsDetails;
 
   @doc("Number of applications installed in the guest VM.")
   @visibility("read")
@@ -211,7 +210,7 @@ the VM.
 
   @doc("Gets the data related to SQL discovery.")
   @visibility("read")
-  sqlDiscovery?: SQLDiscovery;
+  sqlDiscovery?: SqlDiscovery;
 
   @doc("Gets the data related to Web application discovery.")
   @visibility("read")
@@ -236,9 +235,8 @@ machine.
 """)
   numberOfProcessorCore?: int32;
 
-  #suppress "@azure-tools/cadl-azure-core/casing-style"
   @doc("Gets or sets the allocated Memory in MB.")
-  allocatedMemoryInMB?: float64;
+  allocatedMemoryInMb?: float64;
 
   @doc("Gets or sets the Operating System Details installed on the machine.")
   operatingSystemDetails?: OperatingSystem;
@@ -269,9 +267,8 @@ machine.
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Second level object represented in responses as part of Machine REST resource.")
-model HyperVNetworkAdapter {
+model HypervNetworkAdapter {
   @doc("Network Id.")
   @visibility("read")
   networkId?: string;
@@ -305,9 +302,8 @@ model HyperVNetworkAdapter {
   ipAddressType?: string;
 }
 
-#suppress "@azure-tools/cadl-azure-core/casing-style"
 @doc("Second level object returned as part of Machine REST resource.")
-model HyperVDisk {
+model HypervDisk {
   @doc("Id of the disk.")
   @visibility("read")
   instanceId?: string;
