@@ -32,9 +32,9 @@ tag: package-2023-03-31
 ```
 
 
-### Tag: package-2023-03
+### Tag: package-2023-03-31
 
-These settings apply only when `--tag=package-2023-03` is specified on the command line.
+These settings apply only when `--tag=package-2023-03-31` is specified on the command line.
 
 ```yaml $(tag) == 'package-2023-03-31'
 input-file:
