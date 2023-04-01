@@ -34,6 +34,7 @@ op CustomGetOperation<TParams, TResponse, Traits = {}, TError = ErrorResponse>(
   apiVersion: string
 ): TResponse | TError;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @get
 @route("languages")
 @summary("Gets the set of languages currently supported by other operations of the Translator.")
@@ -45,6 +46,7 @@ op GetLanguages is CustomGetOperation<
   ErrorResponse
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("translate")
 @summary("Translate Text")
@@ -57,6 +59,7 @@ op Translate is CustomOperation<
   ErrorResponse
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("transliterate")
 @summary("Transliterate Text")
@@ -69,6 +72,7 @@ op Transliterate is CustomOperation<
   ErrorResponse
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("breaksentence")
 @summary("Find Sentence Boundaries")
@@ -81,6 +85,7 @@ op FindSentenceBoundaries is CustomOperation<
   ErrorResponse
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("dictionary/lookup")
 @summary("Lookup Dictionary Entries")
@@ -93,6 +98,7 @@ op LookupDictionaryEntries is CustomOperation<
   ErrorResponse
 >;
 
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
 @post
 @route("dictionary/examples")
 @summary("Lookup Dictionary Examples")
