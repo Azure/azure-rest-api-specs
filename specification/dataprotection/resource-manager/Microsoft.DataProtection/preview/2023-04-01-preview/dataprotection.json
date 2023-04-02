@@ -1672,7 +1672,7 @@
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
-                  "final-state-via": "azure-async-operation"
+                    "final-state-via": "azure-async-operation"
                 },
                 "x-ms-examples": {
                     "Trigger Cross Region Restore": {
@@ -1749,7 +1749,7 @@
                     }
                 },
                 "x-ms-long-running-operation-options": {
-                  "final-state-via": "azure-async-operation"
+                    "final-state-via": "azure-async-operation"
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-examples": {
@@ -1870,6 +1870,48 @@
                 "x-ms-examples": {
                     "List Cross Region Restore Jobs": {
                         "$ref": "./examples/CRR/CrossRegionRestoreJobs.json"
+                    }
+                }
+            }
+        },
+        "/{resourceId}/providers/Microsoft.DataProtection/backupInstances": {
+            "get": {
+                "tags": [
+                    "BackupInstancesExtensionRouting"
+                ],
+                "description": "Gets a list backup instances associated with a tracked resource",
+                "operationId": "BackupInstancesExtensionRouting_List",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/BackupInstanceResourceList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                },
+                "x-ms-examples": {
+                    "List BackupInstances associated with an azure resource": {
+                        "$ref": "./examples/BackupInstanceOperations/ListBackupInstancesExtensionRouting.json"
                     }
                 }
             }
