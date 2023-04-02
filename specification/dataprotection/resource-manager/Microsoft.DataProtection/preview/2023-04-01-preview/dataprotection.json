@@ -1787,7 +1787,7 @@
                         "description": "Request body for operation",
                         "required": true,
                         "schema": {
-                          "$ref": "#/definitions/CrossRegionRestoreJobRequest"
+                            "$ref": "#/definitions/CrossRegionRestoreJobRequest"
                         }
                     }
                 ],
@@ -1848,18 +1848,18 @@
                     }
                 ],
                 "responses": {
-                  "200": {
-                    "description": "List of Cross Region Restore Jobs",
-                    "schema": {
-                      "$ref": "#/definitions/AzureBackupJobResourceList"
+                    "200": {
+                        "description": "List of Cross Region Restore Jobs",
+                        "schema": {
+                            "$ref": "#/definitions/AzureBackupJobResourceList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
                     }
-                  },
-                  "default": {
-                      "description": "Error response describing why the operation failed.",
-                      "schema": {
-                          "$ref": "#/definitions/CloudError"
-                      }
-                  }
                 },
                 "x-ms-pageable": {
                     "nextLinkName": "nextLink"
