@@ -9,17 +9,31 @@
     "200": {
       "headers": {},
       "body": {
+        "tags": {},
+        "location": "string",
+        "kind": "string",
+        "identity": {
+          "type": "UserAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "principalId": "00000000-1111-2222-3333-444444444444",
+              "clientId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "sku": {
+          "name": "string",
+          "tier": "Free",
+          "size": "string",
+          "family": "string",
+          "capacity": 1
+        },
         "id": "string",
         "name": "string",
         "type": "string",
         "properties": {
-          "description": "string",
-          "tags": {
-            "string": "string"
-          },
-          "properties": {
-            "string": "string"
-          },
           "regionDetails": [
             {
               "location": "string",
@@ -43,43 +57,42 @@
               ]
             }
           ],
+          "intellectualPropertyPublisher": "string",
+          "publicNetworkAccess": "string",
+          "discoveryUrl": "string",
           "managedResourceGroup": {
             "resourceId": "string"
           },
-          "privateLinkCount": 0,
-          "publicNetworkAccess": "Disabled",
           "mlFlowRegistryUri": "string",
-          "intellectualPropertyPublisher": "string",
-          "discoveryUrl": "string"
+          "privateEndpointConnections": [
+            {
+              "id": "string",
+              "location": "string",
+              "properties": {
+                "provisioningState": "string",
+                "privateEndpoint": {
+                  "id": "string",
+                  "subnetArmId": "string"
+                },
+                "privateLinkServiceConnectionState": {
+                  "status": "Approved",
+                  "description": "string",
+                  "actionsRequired": "string"
+                },
+                "groupIds": [
+                  "string"
+                ]
+              }
+            }
+          ]
         },
         "systemData": {
-          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdAt": "2020-01-01T12:34:56.999+00:45",
           "createdBy": "string",
-          "createdByType": "Application",
-          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:45",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "Key"
-        },
-        "tags": {},
-        "location": "string",
-        "kind": "string",
-        "identity": {
-          "type": "UserAssigned",
-          "principalId": "00000000-1111-2222-3333-444444444444",
-          "tenantId": "00000000-1111-2222-3333-444444444444",
-          "userAssignedIdentities": {
-            "string": {
-              "principalId": "00000000-1111-2222-3333-444444444444",
-              "clientId": "00000000-1111-2222-3333-444444444444"
-            }
-          }
-        },
-        "sku": {
-          "name": "string",
-          "tier": "Basic",
-          "size": "string",
-          "family": "string",
-          "capacity": 1
+          "lastModifiedByType": "User"
         }
       }
     }
