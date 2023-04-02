@@ -1672,7 +1672,7 @@
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-long-running-operation-options": {
-                    "final-state-via": "azure-async-operation"
+                    "final-state-via": "location"
                 },
                 "x-ms-examples": {
                     "Trigger Cross Region Restore": {
@@ -1749,7 +1749,7 @@
                     }
                 },
                 "x-ms-long-running-operation-options": {
-                    "final-state-via": "azure-async-operation"
+                    "final-state-via": "location"
                 },
                 "x-ms-long-running-operation": true,
                 "x-ms-examples": {
@@ -1886,7 +1886,7 @@
                 ],
                 "parameters": [
                     {
-                        "$ref": "#/parameters/ApiVersion"
+                        "$ref": "../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
                     },
                     {
                         "$ref": "#/parameters/ResourceId"
@@ -7887,6 +7887,14 @@
             "required": true,
             "type": "string",
             "x-ms-parameter-location": "method"
+        },
+        "ResourceId": {
+          "name": "resourceId",
+          "in": "path",
+          "description": "ARM path of the resource to be protected using Microsoft.DataProtection",
+          "required": true,
+          "type": "string",
+          "x-ms-parameter-location": "method"
         }
     },
     "securityDefinitions": {
