@@ -4474,6 +4474,40 @@
             ],
             "type": "object"
         },
+        "CrossRegionRestoreJobRequest": {
+            "required": [
+                "sourceRegion",
+                "sourceBackupVaultId",
+                "jobId"
+            ],
+            "type": "object",
+            "properties": {
+                "sourceRegion": {
+                    "type": "string"
+                },
+                "sourceBackupVaultId": {
+                    "type": "string"
+                },
+                "jobId": {
+                    "type": "string"
+                }
+            }
+        },
+        "CrossRegionRestoreJobsRequest": {
+            "required": [
+                "sourceRegion",
+                "sourceBackupVaultId"
+            ],
+            "type": "object",
+            "properties": {
+                "sourceRegion": {
+                    "type": "string"
+                },
+                "sourceBackupVaultId": {
+                    "type": "string"
+                }
+            }
+        },
         "AzureBackupJobResource": {
             "allOf": [
                 {
