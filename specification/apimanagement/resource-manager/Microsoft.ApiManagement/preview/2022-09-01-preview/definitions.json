@@ -1924,6 +1924,10 @@
         "tls": {
           "$ref": "#/definitions/BackendTlsProperties",
           "description": "Backend TLS Properties"
+        },
+        "circuitBreaker": {
+          "$ref": "#/definitions/BackendCircuitBreaker",
+          "description": "Backend Circuit Breaker Configuration"
         }
       },
       "description": "Backend entity base Parameter set."
@@ -2230,6 +2234,100 @@
         }
       },
       "description": "Backend update parameters."
+    },
+    "BackendCircuitBreaker": {
+      "type": "object",
+      "description": "The configuration of the backend circuit breaker",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CircuitBreakerRule"
+          },
+          "maxItems": 15,
+          "description": "The rules for tripping the backend.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "CircuitBreakerRule": {
+      "type": "object",
+      "description": "Rule configuration to trip the backend.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The rule name."
+        },
+        "failureCondition": {
+          "$ref": "#/definitions/CircuitBreakerFailureCondition",
+          "description": "The conditions for tripping the circuit breaker."
+        },
+        "tripDuration": {
+          "type": "string",
+          "format": "duration",
+          "description": "The duration for which the circuit will be tripped."
+        }
+      }
+    },
+    "CircuitBreakerFailureCondition": {
+      "type": "object",
+      "description": "The trip conditions of the circuit breaker",
+      "properties": {
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The threshold for opening the circuit."
+        },
+        "percentage": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The threshold for opening the circuit."
+        },
+        "interval": {
+          "type": "string",
+          "format": "duration",
+          "description": "The interval during which the failures are counted."
+        },
+        "statusCodeRanges": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FailureStatusCodeRange"
+          },
+          "maxItems": 10,
+          "description": "The status code ranges which are considered as failure.",
+          "x-ms-identifiers": []
+        },
+        "errorReasons": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "maxItems": 10,
+          "description": "The error reasons which are considered as failure.",
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "FailureStatusCodeRange": {
+      "type": "object",
+      "description": "The failure http status code range",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum http status code.",
+          "minimum": 200,
+          "maximum": 599
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum http status code.",
+          "minimum": 200,
+          "maximum": 599
+        }
+      }
     },
     "BearerTokenSendingMethodsContract": {
       "type": "string",
