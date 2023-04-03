@@ -858,6 +858,50 @@
         }
       }
     },
+    "PostBuildDefinition": {
+      "description": "The postBuild definitions defining variable substitutions for this Kustomization after kustomize build.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "substitute": {
+          "description": "Key/value pairs holding the variables to be substituted in this Kustomization.",
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "substituteFrom": {
+          "description": "Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/SubstituteFromDefinition"
+          },
+          "x-nullable": true
+        }
+      }
+    },
+    "SubstituteFromDefinition": {
+      "description": "Array of ConfigMaps/Secrets from which the variables are substituted for this Kustomization.",
+      "type": "object",
+      "x-nullable": true,
+      "properties": {
+        "kind": {
+          "description": "Define whether it is ConfigMap or Secret that holds the variables to be used in substitution.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the ConfigMap/Secret that holds the variables to be used in substitution.",
+          "type": "string"
+        },
+        "optional": {
+          "description": "Set to True to proceed without Configmap/Secret, if it is not present.",
+          "type": "boolean",
+          "default": false
+        }
+      }
+    },
     "KustomizationDefinition": {
       "description": "The Kustomization defining how to reconcile the artifact pulled by the source type on the cluster.",
       "type": "object",
@@ -911,6 +955,20 @@
           "description": "Enable/disable re-creating Kubernetes resources on the cluster when patching fails due to an immutable field change.",
           "type": "boolean",
           "default": false
+        },
+        "wait": {
+          "description": "Enable/disable health check for all Kubernetes objects created by this Kustomization.",
+          "type": "boolean",
+          "default": true
+        },
+        "postBuild":{
+          "description": "Used for variable substitution for this Kustomization after kustomize build.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/PostBuildDefinition"
+          },
+          "x-nullable": true
         }
       }
     },

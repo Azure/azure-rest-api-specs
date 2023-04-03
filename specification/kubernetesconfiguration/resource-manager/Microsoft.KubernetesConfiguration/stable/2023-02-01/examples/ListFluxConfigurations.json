@@ -45,7 +45,21 @@
                   "path": "./test/path",
                   "dependsOn": [],
                   "timeoutInSeconds": 600,
-                  "syncIntervalInSeconds": 600
+                  "syncIntervalInSeconds": 600,
+                  "wait": true,
+                  "postBuild": {
+                    "substitute": {
+                      "cluster_env": "prod",
+                      "replica_count": "2"
+                    },
+                    "substituteFrom": [
+                      {
+                        "kind": "ConfigMap",
+                        "name": "cluster-test",
+                        "optional": true
+                      }
+                    ]
+                  }
                 },
                 "srs-kustomization2": {
                   "name": "srs-kustomization2",
@@ -56,7 +70,22 @@
                   "timeoutInSeconds": 600,
                   "syncIntervalInSeconds": 600,
                   "retryIntervalInSeconds": 600,
-                  "prune": false
+                  "prune": false,
+                  "wait": false,
+                  "postBuild": {
+                    "substituteFrom": [
+                      {
+                        "kind": "ConfigMap",
+                        "name": "cluster-values",
+                        "optional": true
+                      },
+                      {
+                        "kind": "Secret",
+                        "name": "secret-name",
+                        "optional": false
+                      }
+                    ]
+                  }
                 }
               },
               "statuses": [
