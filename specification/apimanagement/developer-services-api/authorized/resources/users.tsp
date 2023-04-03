@@ -13,7 +13,6 @@ using DeveloperServicesAuthorizedApi.Common;
 namespace DeveloperServicesAuthorizedApi.Resources.Users;
 
 interface Users {
-  //TODO: find a workaround
   @route("/users/{userId}")
   @doc("Get a user profile by its identifier.")
   @get

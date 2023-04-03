@@ -62,12 +62,35 @@ interface Subscriptions {
     userSubscriptionUpdate: UserSubscriptionUpdate
   ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
 
-  //TODO: body should be empty, it is required
+  @route("/users/{userId}/subscriptions/{subscriptionId}/regeneratePrimaryKey")
   @doc("Regenerate subscription primary key.")
-  regenerateUserSubscriptionPrimaryKey is ResourceCreateWithServiceProvidedName<SubscriptionPrimaryKeyResource>;
+  @post
+  RegenerateUserSubscriptionPrimaryKey(
+    ...Azure.Core.Foundations.ApiVersionParameter,
 
+    @doc("Subscription identifier.")
+    @path
+    subscriptionId: string,
+
+    @doc("User identifier.")
+    @path
+    userId: string
+  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
+
+  @route("/users/{userId}/subscriptions/{subscriptionId}/regenerateSecondaryKey")
   @doc("Regenerate subscription secondary key.")
-  regenerateUserSubscriptionSecondaryKey is ResourceCreateWithServiceProvidedName<SubscriptionSecondaryKeyResource>;
+  @post
+  RegenerateUserSubscriptionSecondaryKey(
+    ...Azure.Core.Foundations.ApiVersionParameter,
+
+    @doc("Subscription identifier.")
+    @path
+    subscriptionId: string,
+
+    @doc("User identifier.")
+    @path
+    userId: string
+  ): NoContentResponse | Azure.Core.Foundations.ErrorResponse;
 }
 
 @doc("Subscription resource model.")
@@ -78,24 +101,4 @@ model SubscriptionResource extends Subscription {
   @key("subscriptionId")
   @visibility("query")
   subscriptionId: string;
-}
-
-@doc("Subscription primary key resource.")
-@resource("regeneratePrimaryKey")
-@parentResource(SubscriptionResource)
-model SubscriptionPrimaryKeyResource {
-  @doc("Subscription primary key default.")
-  @key("default")
-  @visibility("query")
-  default: "";
-}
-
-@doc("Subscription secondary key resource.")
-@resource("regenerateSecondaryKey")
-@parentResource(SubscriptionResource)
-model SubscriptionSecondaryKeyResource {
-  @doc("Subscription secondary key default.")
-  @key("default")
-  @visibility("query")
-  default: "";
 }
