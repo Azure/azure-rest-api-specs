@@ -66,6 +66,9 @@
             "description": "The **$filter** is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**."
           },
           {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
             "$ref": "#/parameters/ResourceIdList"
           }
         ],
@@ -76,16 +79,10 @@
               "$ref": "#/definitions/Response"
             }
           },
-          "400": {
-            "description": "The response to a metrics query that results in a bad request, with optional additional information.",
-            "schema": {
-              "$ref": "#/definitions/AdditionalInfoErrorResponse"
-            }
-          },
           "default": {
             "description": "Describes the format of Error response.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/AdditionalInfoErrorResponse"
             }
           }
         },
@@ -129,7 +126,8 @@
       "required": false,
       "type": "string",
       "format": "duration",
-      "description": "The interval (i.e. timegrain) of the query. The default value is PT1M.",
+      "default": "PT1M",
+      "description": "The interval (i.e. timegrain) of the query.",
       "x-ms-parameter-location": "method"
     },
     "MetricNamespaceParameter": {
@@ -172,31 +170,26 @@
       "type": "string",
       "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\nExamples: sum asc.",
       "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version.",
+      "x-ms-parameter-location": "client"
     }
   },
   "definitions": {
     "ResourceIdList": {
       "description": "The comma separated list of resource IDs to query metrics for.",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "example": [
-        "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1",
-        "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
-      ]
-    },
-    "ErrorResponse": {
-      "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
+        "body": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -272,17 +265,6 @@
         ]
       }
     },
-    "MetricBatchBody": {
-      "description": "List of resource ids to fetch metric namespaces for",
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "example": [
-        "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1",
-        "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
-      ]
-    },
     "LocalizableString": {
       "type": "object",
       "required": [
@@ -320,7 +302,61 @@
       ],
       "x-ms-enum": {
         "name": "Unit",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Count",
+            "description": "Unit of raw quantity."
+          },
+          {
+            "value": "Bytes",
+            "description": "Unit of memory in bytes."
+          },
+          {
+            "value": "Seconds",
+            "description": "Unit of time in seconds."
+          },
+          {
+            "value": "CountPerSecond",
+            "description": "Rate unit of raw quantity per second."
+          },
+          {
+            "value": "BytesPerSecond",
+            "description": "Rate unit of memory in bytes per second."
+          },
+          {
+            "value": "Percent",
+            "description": "Percentage unit."
+          },
+          {
+            "value": "MilliSeconds",
+            "description": "Unit of time in 1/1000th of a second."
+          },
+          {
+            "value": "ByteSeconds",
+            "description": "Unit of data transfer or storage. It is the size of the data in bytes multiplied by the time it takes to transfer or store the data in seconds."
+          },
+          {
+            "value": "Unspecified",
+            "description": "No specified unit."
+          },
+          {
+            "value": "Cores",
+            "description": "Unit of processing power."
+          },
+          {
+            "value": "MilliCores",
+            "description": "Unit of processing power in 1/1000th of a CPU core."
+          },
+          {
+            "value": "NanoCores",
+            "description": "Unit of processing power in one billionth of a CPU core."
+          },
+          {
+            "value": "BitsPerSecond",
+            "description": "Rate unit of binary digits per second."
+          }
+        ]
       }
     },
     "MetricValue": {
