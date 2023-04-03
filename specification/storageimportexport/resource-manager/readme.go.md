@@ -15,11 +15,6 @@ module-name: sdk/resourcemanager/storageimportexport/armstorageimportexport
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
-directive: 
-- from: swagger-document
-  where: $.parameters."Accept-Language"
-  transform: >
-    $["x-ms-parameter-location"] = "method"; 
 ```
 
 ### Go multi-api
