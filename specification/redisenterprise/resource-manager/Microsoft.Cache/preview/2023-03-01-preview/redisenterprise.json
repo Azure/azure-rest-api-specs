@@ -1045,6 +1045,10 @@
             "$ref": "./examples/RedisEnterpriseDeletePrivateEndpointConnection.json"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
@@ -1065,6 +1069,19 @@
         "responses": {
           "200": {
             "description": "OK -- Delete the private endpoint connection successfully."
+          },
+          "202": {
+            "description": "Deletion of specified private endpoint connection was started. GET the URL in the Azure-AsyncOperation or Location headers to retrieve updated status.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "No Content -- The private endpoint connection does not exist."
