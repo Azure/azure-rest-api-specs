@@ -1712,7 +1712,7 @@
                         "description": "Request body for operation",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/CrossRegionRestoreRequestObject"
+                            "$ref": "#/definitions/ValidateCrossRegionRestoreRequestObject"
                         }
                     }
                 ],
@@ -6569,6 +6569,24 @@
                 },
                 "sourceBackupInstanceId": {
                     "type": "string"
+                }
+            }
+        },
+        "ValidateCrossRegionRestoreRequestObject": {
+            "description": "Cross Region Restore Request Object",
+            "required": [
+                "restoreRequestObject",
+                "crossRegionRestoreDetails"
+            ],
+            "type": "object",
+            "properties": {
+                "restoreRequestObject": {
+                    "$ref": "#/definitions/AzureBackupRestoreRequest",
+                    "description": "Gets or sets the restore request object."
+                },
+                "crossRegionRestoreDetails": {
+                    "$ref": "#/definitions/CrossRegionRestoreDetails",
+                    "description": "Cross region restore details."
                 }
             }
         },
