@@ -5577,6 +5577,23 @@
       "title": "CopyOption",
       "type": "object"
     },
+    "CrossRegionRestoreSettings": {
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "CrossRegionRestore state",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CrossRegionRestoreState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "CrossSubscriptionRestoreSettings": {
       "description": "CrossSubscriptionRestore Settings",
       "type": "object",
@@ -6236,6 +6253,9 @@
       "properties": {
         "crossSubscriptionRestoreSettings": {
           "$ref": "#/definitions/CrossSubscriptionRestoreSettings"
+        },
+        "crossRegionRestoreSettings": {
+          "$ref": "#/definitions/CrossRegionRestoreSettings"
         }
       }
     },
