@@ -1240,13 +1240,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The linked server was successfully added.",
+            "description": "The linked server was successfully updated.",
             "schema": {
               "$ref": "#/definitions/RedisLinkedServerWithProperties"
             }
           },
           "201": {
-            "description": "The linked server was successfully added.",
+            "description": "The linked server was successfully created.",
             "schema": {
               "$ref": "#/definitions/RedisLinkedServerWithProperties"
             }
@@ -1301,6 +1301,11 @@
             "description": "Linked server was successfully deleted."
           },
           "202": {
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            },
             "description": "The linked server 'delete' operation was successfully enqueued; follow the Location header to poll for final outcome."
           },
           "default": {
@@ -3299,20 +3304,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Gets subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
     "CacheNameParameter": {
       "name": "cacheName",
       "in": "path",
