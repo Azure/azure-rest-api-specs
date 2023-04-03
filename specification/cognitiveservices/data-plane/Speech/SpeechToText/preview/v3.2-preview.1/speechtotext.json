@@ -4134,6 +4134,12 @@
       "properties": {
         "copyTo": {
           "format": "uri",
+          "description": "The location to the obsolete model copy action. See operation \"Models_CopyTo\" for more details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "copy": {
+          "format": "uri",
           "description": "The location to the model copy action. See operation \"Models_Copy\" for more details.",
           "type": "string",
           "readOnly": true
@@ -6316,7 +6322,7 @@
       "description": "The kind of text normalization.",
       "enum": [
         "Default",
-        "Minimal"
+        "None"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -6328,8 +6334,8 @@
             "description": "Default text normalization (e.g. '2 to 3' is replaced by 'two to three' in en-US)."
           },
           {
-            "value": "Minimal",
-            "description": "This only removes characters that are not supported by the locale."
+            "value": "None",
+            "description": "No text normalization will be applied to the input text. This is an override option that should only be used when text is normalized before the upload."
           }
         ]
       }
