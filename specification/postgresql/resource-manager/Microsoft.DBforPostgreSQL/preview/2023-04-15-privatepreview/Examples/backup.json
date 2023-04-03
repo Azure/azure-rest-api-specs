@@ -1,15 +1,19 @@
 {
   "parameters": {
-    "api-version": "2022-02-01",
-    "x-ms-client-request-id": "D1186BE0-60B4-4ED6-A455-C7DB24D0D5AA",
+    "api-version": "2023-04-15-preview",
+    "x-ms-client-request-id": "F950B900-26D4-4AFB-A07A-1997B6B0E686",
+    "serverName": "pgsqlltrtestserver",
+    "resourceGroupName": "TestGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "parameters": {
       "targetDetails": {
         "objectType": "FullBackupStoreDetails",
         "sasUriList": [ "sasuri1", "sasuri2" ]
       },
       "backupSettings": {
+        "backupName" : "pgltrbackup",
         "backupType": "Full",
-	  "backupFormat": "DPPCollatedFormat"
+	      "backupFormat": "None"
       },
       "scope": {
         "objectType": "AbsoluteScope",
@@ -20,24 +24,23 @@
   "responses": {
     "202": {
       "headers": {
-        "Retry-After": "60",
-        "x-ms-request-id": "D1186BE0-60B4-4ED6-A455-C7DB24D0D5AA",
-        "Azure-AsyncOperation": "https://<service-endpoint>/1"
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/azureAsyncOperation/ffc80e91-03db-4534-b5de-bacb77aa6a81?api-version=2023-04-15-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforPostgreSQL/locations/westcentralus/operationResults/ffc80e91-03db-4534-b5de-bacb77aa6a81?api-version=2023-04-15-preview"
       }
     },
     "200": {
-      "x-ms-request-id": "D1186BE0-60B4-4ED6-A455-C7DB24D0D5AA",
+      "x-ms-request-id": "F950B900-26D4-4AFB-A07A-1997B6B0E686",
       "body": {
-        "id": "/subscriptions/id/locations/westus/operationsStatuses/someguid",
-        "name": "someguid",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/pgsqlltrtestserver/backups/pgltrbackup",
+        "name": "pgltrbackup",
         "status": "Succeeded",
-        "startTime": "2019-03-01T13:00:00Z",
-        "endTime": "2019-03-01T13:00:00Z",
+        "startTime": "2023-03-01T13:00:00Z",
+        "endTime": "2023-03-01T13:00:00Z",
         "properties": {
           "objectType": "BackupResponseProperties",
           "datasourceSizeInBytes": 1024,
           "dataTransferredInBytes": 100,
-          "backupMetadata": "Metadta to be used during recovery"
+          "backupMetadata": "Metadata to be used during recovery"
         },
         "percentComplete": 100
       }

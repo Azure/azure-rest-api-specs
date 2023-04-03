@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/longtermretention/{serverName}/backup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/longtermretention/backup": {
       "post": {
         "description": "Start the Backup operation",
         "tags": [
-          "DatasourcePlugin"
+          "LongTermRetention"
         ],
-        "operationId": "plugin_backup",
+        "operationId": "Backup_Execute",
         "produces": [
           "application/json"
         ],
@@ -108,7 +108,7 @@
           "default": {
             "description": "Error Scenario 4xx/5xx",
             "schema": {
-              "$ref": "#/definitions/ErrorDetail"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -128,16 +128,19 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/longtermretention/{serverName}/prebackup": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/longtermretention/prebackup": {
       "post": {
         "description": "PreBackup operation performs all the checks that are need for the subsequent Backup to succeed.",
         "tags": [
-          "DatasourcePlugin"
+          "LongTermRetention"
         ],
-        "operationId": "plugin_prebackup",
+        "operationId": "PreBackup_Execute",
         "produces": [
           "application/json"
         ],
@@ -184,28 +187,10 @@
               }
             }
           },
-          "202": {
-            "description": "Accepted.",
-            "headers": {
-              "Retry-After": {
-                "description": "The number of seconds to wait before checking the status of the asynchronous operation.",
-                "type": "integer",
-                "format": "int32"
-              },
-              "x-ms-request-id": {
-                "description": "A unique ID for the current operation, service generated. All the resource providers must return this value in the response headers to facilitate debugging.",
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "description": "URL for checking the ongoing status of the operation.",
-                "type": "string"
-              }
-            }
-          },
           "default": {
             "description": "Error Scenario 4xx/5xx",
             "schema": {
-              "$ref": "#/definitions/ErrorDetail"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -224,15 +209,14 @@
             "$ref": "./Examples/prebackup.json"
           }
         },
-        "deprecated": false,
-        "x-ms-long-running-operation": true
+        "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/longtermretention/{serverName}/operationStatus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/longtermretention/operationStatus/{backupName}": {
       "get": {
         "description": "Get on operation Status",
         "tags": [
-          "DatasourcePlugin"
+          "LongTermRetention"
         ],
         "operationId": "plugin_operationStatus",
         "produces": [
@@ -250,6 +234,9 @@
           },
           {
               "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/BackupNameParameter"
           },
           {
             "name": "x-ms-client-request-id",
@@ -275,7 +262,7 @@
           "default": {
             "description": "Error Scenario 4xx/5xx",
             "schema": {
-              "$ref": "#/definitions/ErrorDetail"
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             },
             "headers": {
               "x-ms-error-code": {
@@ -294,7 +281,6 @@
             "$ref": "./Examples/get.json"
           }
         },
-        "x-ms-long-running-operation": true,
         "deprecated": false
       }
     }
@@ -432,6 +418,10 @@
       "type": "object",
       "required": [ "backupType", "backupFormat" ],
       "properties": {
+        "backupName": {
+          "type": "string",
+          "description": "Backup Name for the current backup"
+        },
         "backupType": {
           "type": "string",
           "description": "Type of backup like Full, Differential etc."
@@ -484,21 +474,6 @@
         }
       }
     },
-    "OperationalTierStoreDetails": {
-      "description": "OperationalTierDetails is used for scenarios where backup is snapshot based. So we just need a RG placeholder for the snapshot resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BackupStoreDetails"
-        }
-      ],
-      "properties": {
-        "rgNameForSnapshots": {
-          "description": "RGNameForSnapshots is the Resource group where the snapshot resource will be created.",
-          "type": "string"
-        }
-      }
-    },
     "ResourceProperties": {
       "description": "resource properties per ARM object",
       "required": [
@@ -513,59 +488,6 @@
         }
       },
       "discriminator": "objectType"
-    },
-    "ErrorDetail": {
-      "description": "The error detail.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The error target."
-        },
-        "details": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          },
-          "description": "The error details."
-        },
-        "additionalInfo": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorAdditionalInfo"
-          },
-          "description": "The error additional info."
-        }
-      }
-    },
-    "ErrorAdditionalInfo": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The additional info type."
-        },
-        "info": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The additional info."
-        }
-      },
-      "description": "The resource management error additional info."
     },
     "Properties": {
       "description": "Properties",
@@ -615,24 +537,6 @@
         }
       }
     },
-    "SourceDetails": {
-      "description": "SourceDetails",
-      "type": "object",
-      "required": [
-        "backupMetadata",
-        "storeDetails"
-      ],
-      "properties": {
-        "backupMetadata": {
-          "type": "string",
-          "description": "Metadata of the backup which is being recovered"
-        },
-        "storeDetails": {
-          "$ref": "#/definitions/BackupStoreDetails",
-          "description": "BackupStoreDetails"
-        }
-      }
-    },
     "Response": {
       "description": "Response",
       "type": "object",
@@ -663,7 +567,7 @@
           }
         },
         "error": {
-          "$ref": "#/definitions/ErrorDetail",
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorDetail",
           "description": "Embedded Error Object."
         },
         "startTime": {
@@ -686,6 +590,17 @@
           "type": "number"
         }
       }
+    }
+  },
+  "parameters": {
+    "BackupNameParameter": {
+      "name": "backupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the backup.",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
     }
   }
 }
