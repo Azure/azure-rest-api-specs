@@ -183,15 +183,14 @@
   "definitions": {
     "ResourceIdList": {
       "description": "The comma separated list of resource IDs to query metrics for.",
-      "type": "object",
-      "properties": {
-        "body": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "example": [
+        "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1",
+        "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
+      ]
     },
     "AdditionalInfoErrorResponse": {
       "description": "The response to a metrics query that results in a bad request, with optional additional information.",
