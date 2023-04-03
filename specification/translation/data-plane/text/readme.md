@@ -28,7 +28,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net-track2
  ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
