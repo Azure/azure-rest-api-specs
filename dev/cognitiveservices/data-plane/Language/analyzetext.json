@@ -2119,7 +2119,7 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/EntityWithResolution"
+            "$ref": "#/definitions/Entity"
           }
         }
       },
@@ -2234,23 +2234,6 @@
           }
         }
       ]
-    },
-    "EntityWithResolution": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "properties": {
-        "resolutions": {
-          "description": "The collection of entity resolution objects.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BaseResolution"
-          }
-        }
-      }
     },
     "EntityWithMetadata": {
       "type": "object",
@@ -2407,55 +2390,6 @@
         }
       }
     },
-    "BaseResolution": {
-      "description": "The abstract base class for entity resolutions.",
-      "type": "object",
-      "discriminator": "resolutionKind",
-      "properties": {
-        "resolutionKind": {
-          "description": "The entity resolution object kind.",
-          "type": "string",
-          "enum": [
-            "BooleanResolution",
-            "DateTimeResolution",
-            "NumberResolution",
-            "OrdinalResolution",
-            "SpeedResolution",
-            "WeightResolution",
-            "LengthResolution",
-            "VolumeResolution",
-            "AreaResolution",
-            "AgeResolution",
-            "InformationResolution",
-            "TemperatureResolution",
-            "CurrencyResolution",
-            "NumericRangeResolution",
-            "TemporalSpanResolution"
-          ],
-          "x-ms-enum": {
-            "name": "ResolutionKind",
-            "modelAsString": true
-          }
-        }
-      },
-      "required": [
-        "resolutionKind"
-      ]
-    },
-    "QuantityResolution": {
-      "description": "Represents resolutions for quantities.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The numeric value that the extracted text denotes."
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "AgeUnit": {
       "type": "string",
       "enum": [
@@ -2470,27 +2404,6 @@
         "modelAsString": true
       },
       "description": "The Age Unit of measurement"
-    },
-    "AgeResolution": {
-      "description": "Represents the Age entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "AgeResolution",
-      "properties": {
-        "unit": {
-          "$ref": "#/definitions/AgeUnit"
-        }
-      },
-      "required": [
-        "unit"
-      ]
     },
     "VolumeUnit": {
       "type": "string",
@@ -2530,27 +2443,6 @@
       },
       "description": "The Volume Unit of measurement"
     },
-    "VolumeResolution": {
-      "description": "Represents the volume entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "VolumeResolution",
-      "properties": {
-        "unit": {
-          "$ref": "#/definitions/VolumeUnit"
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
     "SpeedUnit": {
       "type": "string",
       "enum": [
@@ -2575,27 +2467,6 @@
       },
       "description": "The speed Unit of measurement"
     },
-    "SpeedResolution": {
-      "description": "Represents the speed entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "SpeedResolution",
-      "properties": {
-        "unit": {
-          "$ref": "#/definitions/SpeedUnit"
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
     "AreaUnit": {
       "type": "string",
       "enum": [
@@ -2618,27 +2489,6 @@
         "modelAsString": true
       },
       "description": "The area Unit of measurement"
-    },
-    "AreaResolution": {
-      "description": "Represents the area entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "AreaResolution",
-      "properties": {
-        "unit": {
-          "$ref": "#/definitions/AreaUnit"
-        }
-      },
-      "required": [
-        "unit"
-      ]
     },
     "LengthUnit": {
       "type": "string",
@@ -2666,27 +2516,6 @@
         "modelAsString": true
       },
       "description": "The length Unit of measurement"
-    },
-    "LengthResolution": {
-      "description": "Represents the length entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "LengthResolution",
-      "properties": {
-        "unit": {
-          "$ref": "#/definitions/LengthUnit"
-        }
-      },
-      "required": [
-        "unit"
-      ]
     },
     "InformationUnit": {
       "type": "string",
@@ -2765,27 +2594,6 @@
       },
       "description": "The information (data) Unit of measurement."
     },
-    "InformationResolution": {
-      "description": "Represents the information (data) entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "InformationResolution",
-      "properties": {
-        "unit": {
-          "$ref": "#/definitions/InformationUnit"
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
     "TemperatureUnit": {
       "type": "string",
       "enum": [
@@ -2800,27 +2608,6 @@
         "modelAsString": true
       },
       "description": "The temperature Unit of measurement."
-    },
-    "TemperatureResolution": {
-      "description": "Represents the temperature entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "TemperatureResolution",
-      "properties": {
-        "unit": {
-          "$ref": "#/definitions/TemperatureUnit"
-        }
-      },
-      "required": [
-        "unit"
-      ]
     },
     "WeightUnit": {
       "type": "string",
@@ -2848,77 +2635,6 @@
       },
       "description": "The weight Unit of measurement."
     },
-    "WeightResolution": {
-      "description": "Represents the weight entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "WeightResolution",
-      "properties": {
-        "unit": {
-          "$ref": "#/definitions/WeightUnit"
-        }
-      },
-      "required": [
-        "unit"
-      ]
-    },
-    "CurrencyResolution": {
-      "description": "Represents the currency entity resolution model.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        },
-        {
-          "$ref": "#/definitions/QuantityResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "CurrencyResolution",
-      "properties": {
-        "iso4217": {
-          "type": "string",
-          "description": "The alphabetic code based on another ISO standard, ISO 3166, which lists the codes for country names. The first two letters of the ISO 4217 three-letter code are the same as the code for the country name, and, where possible, the third letter corresponds to the first letter of the currency name."
-        },
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "The money amount captured in the extracted entity"
-        },
-        "unit": {
-          "type": "string",
-          "description": "The unit of the amount captured in the extracted entity"
-        }
-      },
-      "required": [
-        "value",
-        "unit"
-      ]
-    },
-    "BooleanResolution": {
-      "description": "A resolution for boolean expressions",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "BooleanResolution",
-      "properties": {
-        "value": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "DateTimeSubKind": {
       "type": "string",
       "enum": [
@@ -2933,36 +2649,6 @@
         "modelAsString": true
       },
       "description": "The DateTime SubKind"
-    },
-    "DateTimeResolution": {
-      "description": "A resolution for datetime entity instances.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "DateTimeResolution",
-      "properties": {
-        "timex": {
-          "$ref": "#/definitions/TimeExpression"
-        },
-        "dateTimeSubKind": {
-          "$ref": "#/definitions/DateTimeSubKind"
-        },
-        "value": {
-          "type": "string",
-          "description": "The actual time that the extracted text denote."
-        },
-        "modifier": {
-          "$ref": "#/definitions/TemporalModifier"
-        }
-      },
-      "required": [
-        "timex",
-        "dateTimeSubKind",
-        "value"
-      ]
     },
     "NumberKind": {
       "type": "string",
@@ -2980,30 +2666,6 @@
       },
       "description": "The type of the extracted number entity."
     },
-    "NumberResolution": {
-      "description": "A resolution for numeric entity instances.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "NumberResolution",
-      "properties": {
-        "numberKind": {
-          "$ref": "#/definitions/NumberKind"
-        },
-        "value": {
-          "type": "number",
-          "format": "double",
-          "description": "A numeric representation of what the extracted text denotes."
-        }
-      },
-      "required": [
-        "numberKind",
-        "value"
-      ]
-    },
     "OrdinalRelativeTo": {
       "type": "string",
       "enum": [
@@ -3016,63 +2678,6 @@
         "modelAsString": true
       },
       "description": "The reference point that the ordinal number denotes."
-    },
-    "OrdinalResolution": {
-      "description": "A resolution for ordinal numbers entity instances.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "OrdinalResolution",
-      "properties": {
-        "offset": {
-          "type": "string",
-          "description": "The offset With respect to the reference (e.g., offset = -1 in \"show me the second to last\""
-        },
-        "relativeTo": {
-          "$ref": "#/definitions/OrdinalRelativeTo"
-        },
-        "value": {
-          "type": "string",
-          "description": "A simple arithmetic expression that the ordinal denotes."
-        }
-      },
-      "required": [
-        "offset",
-        "relativeTo",
-        "value"
-      ]
-    },
-    "TemporalSpanResolution": {
-      "description": "represents the resolution of a date and/or time span.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "TemporalSpanResolution",
-      "properties": {
-        "begin": {
-          "$ref": "#/definitions/TimeExpression"
-        },
-        "end": {
-          "$ref": "#/definitions/TimeExpression"
-        },
-        "duration": {
-          "type": "string",
-          "description": "An optional duration value formatted based on the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)"
-        },
-        "modifier": {
-          "$ref": "#/definitions/TemporalModifier"
-        },
-        "timex": {
-          "type": "string",
-          "description": "An optional triplet containing the beginning, the end, and the duration all stated as ISO 8601 formatted strings."
-        }
-      }
     },
     "NumericRangeKind": {
       "type": "string",
@@ -3093,36 +2698,6 @@
         "modelAsString": true
       },
       "description": "The kind of range that the resolution object represents."
-    },
-    "NumericRangeResolution": {
-      "description": "represents the resolution of numeric intervals.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseResolution"
-        }
-      ],
-      "type": "object",
-      "x-ms-discriminator-value": "NumericRangeResolution",
-      "properties": {
-        "rangeKind": {
-          "$ref": "#/definitions/NumericRangeKind"
-        },
-        "minimum": {
-          "type": "number",
-          "format": "double",
-          "description": "The beginning value of  the interval."
-        },
-        "maximum": {
-          "type": "number",
-          "format": "double",
-          "description": "The ending value of the interval."
-        }
-      },
-      "required": [
-        "rangeKind",
-        "minimum",
-        "maximum"
-      ]
     },
     "BaseMetadata": {
       "description": "The abstract base class for entity Metadata.",
