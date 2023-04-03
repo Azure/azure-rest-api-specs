@@ -36,6 +36,30 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ```yaml $(tag) == 'package-preview-2022-11'
 input-file:
+  - Microsoft.App/preview/2022-11-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2022-11-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2022-11-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2022-11-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2022-11-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2022-11-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2022-11-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-11-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-11-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2022-11-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2022-11-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2022-11-02-preview/Global.json
+  - Microsoft.App/preview/2022-11-02-preview/Jobs.json
+  - Microsoft.App/preview/2022-11-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-11-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-11-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-11-02-preview/SourceControls.json
+```
+### Tag: package-preview-2022-11
+
+These settings apply only when `--tag=package-preview-2022-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2022-11'
+input-file:
   - Microsoft.App/preview/2022-11-01-preview/AuthConfigs.json
   - Microsoft.App/preview/2022-11-01-preview/AvailableWorkloadProfiles.json
   - Microsoft.App/preview/2022-11-01-preview/BillingMeters.json
@@ -54,6 +78,7 @@ input-file:
   - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsStorages.json
   - Microsoft.App/preview/2022-11-01-preview/SourceControls.json
 ```
+
 ### Tag: package-2022-10
 
 These settings apply only when `--tag=package-2022-10` is specified on the command line.
@@ -77,6 +102,7 @@ input-file:
   - Microsoft.App/stable/2022-10-01/ManagedEnvironmentsStorages.json
   - Microsoft.App/stable/2022-10-01/SourceControls.json
 ```
+
 ### Tag: package-preview-2022-06
 
 These settings apply only when `--tag=package-preview-2022-06` is specified on the command line.
