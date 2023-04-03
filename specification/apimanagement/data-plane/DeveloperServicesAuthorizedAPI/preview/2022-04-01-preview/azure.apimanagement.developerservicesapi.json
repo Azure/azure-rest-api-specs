@@ -354,6 +354,13 @@
             "type": "string"
           },
           {
+            "name": "export",
+            "in": "query",
+            "required": false,
+            "description": "If true, the API will be exported in the specified format.",
+            "type": "boolean"
+          },
+          {
             "name": "accept",
             "in": "header",
             "required": false,
@@ -367,13 +374,6 @@
               "application/vnd.oai.openapi",
               "application/vnd.oai.openapi+json"
             ]
-          },
-          {
-            "name": "export",
-            "in": "query",
-            "required": false,
-            "description": "If true, the API will be exported in the specified format.",
-            "type": "boolean"
           }
         ],
         "responses": {
@@ -395,15 +395,7 @@
               "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
             }
           }
-        },
-        "produces": [
-          "application/json",
-          "application/vnd.sun.wadl+xml",
-          "application/wsdl+xml",
-          "application/vnd.swagger.doc+json",
-          "application/vnd.oai.openapi",
-          "application/vnd.oai.openapi+json"
-        ]
+        }
       }
     },
     "/users/{userId}/apis/{apiId}/authServers/oauth2": {

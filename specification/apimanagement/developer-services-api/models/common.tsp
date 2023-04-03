@@ -3,6 +3,7 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
 using Azure.Core;
+using Azure.Core.Traits;
 using Azure.Core.Foundations;
 using TypeSpec.Versioning;
 
@@ -71,3 +72,13 @@ alias ContentTypes =
   | "application/vnd.swagger.doc+json"
   | "application/vnd.oai.openapi"
   | "application/vnd.oai.openapi+json";
+
+@trait
+@added(Azure.Core.Versions.v1_0_Preview_2)
+model ParametersTrait<TParams, Contexts = unknown> {
+  @traitContext(Contexts)
+  params: {
+    @traitLocation(TraitLocation.Parameters)
+    parameters: TParams;
+  };
+}

@@ -16,6 +16,7 @@ interface Identities {
   listIdentities is ResourceList<IdentityResource>;
 
   //TODO: find a workaround
+  //to activate user
   @route("/users/{userId}/identities/{provider}/{identity}")
   @doc("Creates or updates the given user identity.")
   @put
