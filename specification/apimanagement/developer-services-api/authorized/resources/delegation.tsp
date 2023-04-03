@@ -9,7 +9,6 @@ using DeveloperServicesApi.Models;
 namespace DeveloperServicesAuthorizedApi.Resources.Delegation;
 
 interface Delegation {
-  //TODO: find a workaround
   @route("/delegation/urls/users/{userId}/{action}")
   @doc("User specific delegation urls (CloseAccount, ChangePassword, ChangeProfile, Subscribe, Unsubscribe, Renew, Signout).")
   @post

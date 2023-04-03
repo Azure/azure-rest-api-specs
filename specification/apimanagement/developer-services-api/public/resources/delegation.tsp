@@ -15,7 +15,6 @@ interface Delegations {
   @doc("Delegation settings.")
   getDelegationSettings is ResourceRead<DelegationSettingsResource>;
 
-  //TODO: find a workaround
   @route("/delegation/urls/{action}")
   @doc("Unauthorized delegation URLs (Signin, Signup).")
   @post
