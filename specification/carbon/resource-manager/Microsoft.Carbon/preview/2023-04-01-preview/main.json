@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Sustainability",
+    "title": "Carbon",
     "version": "2023-04-01-preview",
-    "description": "Sustainability Report Resource Provider query API.",
+    "description": "Carbon Report Resource Provider query API.",
     "x-cadl-generated": [
       {
         "emitter": "@azure-tools/cadl-autorest"
@@ -44,9 +44,9 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Sustainability/carbonEmissionReports": {
+    "/providers/Microsoft.Carbon/carbonEmissionReports": {
       "post": {
-        "operationId": "SustainabilityService_CarbonEmissionReports",
+        "operationId": "CarbonService_ListCarbonEmissionReports",
         "description": "API for Carbon Emissions Reports",
         "parameters": [
           {
@@ -66,7 +66,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedCarbonEmissionData"
+              "$ref": "#/definitions/CarbonEmissionDataListResult"
             }
           },
           "default": {
@@ -80,13 +80,13 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "SustainabilityService_CarbonEmissionReports": {
+          "CarbonService_ListCarbonEmissionReports": {
             "$ref": "./examples/carbonEmissionsReport.json"
           }
         }
       }
     },
-    "/providers/Microsoft.Sustainability/operations": {
+    "/providers/Microsoft.Carbon/operations": {
       "get": {
         "tags": [
           "Operations"
@@ -156,6 +156,29 @@
         "changeRatioForLastMonth",
         "totalCarbonEmission12MonthsAgo",
         "changeRatioFor12Months"
+      ]
+    },
+    "CarbonEmissionDataListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CarbonEmissionData"
+          },
+          "x-ms-identifiers": [],
+          "x-cadl-name": "CarbonEmissionData[]",
+          "description": "The CarbonEmissionData items on this page"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page of items",
+          "format": "uri"
+        }
+      },
+      "description": "List of carbon emission results",
+      "required": [
+        "value"
       ]
     },
     "CarbonEmissionItemDetailData": {
@@ -341,6 +364,10 @@
           "type": "string",
           "description": "Order by column name"
         },
+        "sortDirection": {
+          "type": "string",
+          "description": "Direction for sorting"
+        },
         "groupCategory": {
           "type": "string",
           "description": "Group category name"
@@ -355,6 +382,7 @@
       "required": [
         "categoryType",
         "orderBy",
+        "sortDirection",
         "groupCategory",
         "pageSize"
       ],
@@ -387,30 +415,6 @@
       ],
       "x-ms-discriminator-value": "OverallSummaryReport"
     },
-    "PagedCarbonEmissionData": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CarbonEmissionData"
-          },
-          "x-ms-identifiers": [],
-          "x-cadl-name": "CarbonEmissionData[]",
-          "description": "The CarbonEmissionData items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-cadl-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of CarbonEmissionData items",
-      "required": [
-        "value"
-      ]
-    },
     "QueryFilter": {
       "type": "object",
       "properties": {
@@ -428,7 +432,8 @@
             "type": "string"
           },
           "x-cadl-name": "string[]",
-          "description": "SubscriptionId list for carbon emissions data"
+          "description": "SubscriptionId list for carbon emissions data",
+          "x-ms-identifiers": []
         },
         "carbonScopeList": {
           "type": "array",
@@ -436,7 +441,8 @@
             "$ref": "#/definitions/EmissionScopeEnum"
           },
           "x-cadl-name": "EmissionScopeEnum[]",
-          "description": "Carbon emission scope for carbon emissions data"
+          "description": "Carbon emission scope for carbon emissions data",
+          "x-ms-identifiers": []
         }
       },
       "description": "Query filter parameter specified by users",
