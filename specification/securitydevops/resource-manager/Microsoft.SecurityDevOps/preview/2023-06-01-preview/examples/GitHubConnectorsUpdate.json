@@ -1,0 +1,46 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "westusrg",
+    "gitHubConnectorName": "testconnector",
+    "api-version": "2023-06-01-preview",
+    "gitHubConnector": {
+      "location": "West US",
+      "tags": {
+        "env": "dev",
+        "client": "dev-client"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SecurityDevOps/gitHubConnectors",
+        "name": "testconnector1",
+        "type": "Microsoft.SecurityDevOps/githubconnectors",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://api-prod.resources.windows-int.net/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SecurityDevOps/locations/WESTUS/operationStatuses/7e430d08-0ed2-4566-bcdc-3508e79f51cd*0000000000000000000000000000000000000000000000000000000000000000?api-version=2023-06-01-preview"
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/westusrg/providers/Microsoft.SecurityDevOps/gitHubConnectors/testconnector",
+        "name": "testconnector",
+        "type": "Microsoft.SecurityDevOps/githubconnectors",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}
