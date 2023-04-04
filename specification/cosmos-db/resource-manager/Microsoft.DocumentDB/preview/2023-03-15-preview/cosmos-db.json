@@ -2382,6 +2382,74 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/partitionMerge": {
+      "post": {
+        "operationId": "SqlResources_SqlDatabasePartitionMerge",
+        "x-ms-examples": {
+          "CosmosDBSqlDatabasePartitionMerge": {
+            "$ref": "./examples/CosmosDBSqlDatabasePartitionMerge.json"
+          }
+        },
+        "description": "Merges the partitions of a SQL database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "mergeParameters",
+            "required": true,
+            "description": "The parameters for the merge operation.",
+            "schema": {
+              "$ref": "#/definitions/MergeParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL database merge operation will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "200": {
+            "description": "The SQL database merge operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionStorageInfoCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/partitionMerge": {
       "post": {
         "operationId": "SqlResources_ListSqlContainerPartitionMerge",
@@ -4399,6 +4467,74 @@
           },
           "204": {
             "description": "The MongoDB collection delete operation was completed successfully."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/partitionMerge": {
+      "post": {
+        "operationId": "MongoDBResources_MongoDBDatabasePartitionMerge",
+        "x-ms-examples": {
+          "CosmosDBMongoDBDatabasePartitionMerge": {
+            "$ref": "./examples/CosmosDBMongoDBDatabasePartitionMerge.json"
+          }
+        },
+        "description": "Merges the partitions of a MongoDB database",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "mergeParameters",
+            "required": true,
+            "description": "The parameters for the merge operation.",
+            "schema": {
+              "$ref": "#/definitions/MergeParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The MongoDB database merge operation will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "200": {
+            "description": "The MongoDB database merge operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PhysicalPartitionStorageInfoCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
