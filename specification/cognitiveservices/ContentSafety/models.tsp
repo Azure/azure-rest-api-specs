@@ -144,7 +144,7 @@ model TextBlocklist {
 @resource("blockItems")
 @parentResource(TextBlocklist)
 model TextBlockItem {
-  @doc("Block Item Id.")
+  @doc("Block Item Id. It will be uuid.")
   @key("blockItemId")
   @visibility("read", "create", "query")
   @maxLength(64)
