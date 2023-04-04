@@ -1582,15 +1582,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
-          },
-          {
             "name": "userId",
             "in": "path",
             "required": true,
@@ -1903,13 +1894,20 @@
         }
       }
     },
-    "/users/{userId}/reports/{reportType}": {
+    "/users/{userId}/reports/byDeveloper": {
       "get": {
-        "operationId": "Reports_ListReports",
-        "description": "List a collection of tags.",
+        "operationId": "Reports_ListReportsByDeveloper",
+        "description": "List a collection of reports by developer.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
           },
           {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
@@ -1921,6 +1919,68 @@
             "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
           },
           {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.interval"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.orderBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Reports.ReportsByDeveloperResource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Reports.ReportsByDeveloperResource[]",
+                  "description": "The ReportsByDeveloperResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ReportsByDeveloperResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Reports.ReportsByDeveloperResource, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/users/{userId}/reports/byEndpoint": {
+      "get": {
+        "operationId": "Reports_ListReportsByEndpoint",
+        "description": "List a collection of reports by endpoint.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
             "name": "userId",
             "in": "path",
             "required": true,
@@ -1928,32 +1988,516 @@
             "type": "string"
           },
           {
-            "name": "reportType",
-            "in": "path",
-            "required": true,
-            "description": "Type of report.",
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "interval",
-            "in": "query",
-            "required": false,
-            "description": "Aggregate by interval.",
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "name": "orderBy",
-            "in": "query",
-            "required": false,
-            "description": "OData order by query option.",
-            "type": "string"
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.interval"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.orderBy"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedReport"
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Reports.ReportsByEndpointResource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Reports.ReportsByEndpointResource[]",
+                  "description": "The ReportsByEndpointResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ReportsByEndpointResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Reports.ReportsByEndpointResource, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/users/{userId}/reports/byOperation": {
+      "get": {
+        "operationId": "Reports_ListReportsByOperation",
+        "description": "List a collection of reports by operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.interval"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.orderBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Reports.ReportsByOperationResource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Reports.ReportsByOperationResource[]",
+                  "description": "The ReportsByOperationResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ReportsByOperationResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Reports.ReportsByOperationResource, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/users/{userId}/reports/byProduct": {
+      "get": {
+        "operationId": "Reports_ListReportsByProduct",
+        "description": "List a collection of reports by product.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.interval"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.orderBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Reports.ReportsByProductResource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Reports.ReportsByProductResource[]",
+                  "description": "The ReportsByProductResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ReportsByProductResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Reports.ReportsByProductResource, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/users/{userId}/reports/byRegion": {
+      "get": {
+        "operationId": "Reports_ListReportsByRegion",
+        "description": "List a collection of reports by region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.interval"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.orderBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Reports.ReportsByRegionResource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Reports.ReportsByRegionResource[]",
+                  "description": "The ReportsByRegionResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ReportsByRegionResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Reports.ReportsByRegionResource, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/users/{userId}/reports/bySubscription": {
+      "get": {
+        "operationId": "Reports_ListReportsBySubscription",
+        "description": "List a collection of reports by subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.interval"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.orderBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Reports.ReportsBySubscriptionResource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Reports.ReportsBySubscriptionResource[]",
+                  "description": "The ReportsBySubscriptionResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ReportsBySubscriptionResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Reports.ReportsBySubscriptionResource, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/users/{userId}/reports/byTime": {
+      "get": {
+        "operationId": "Reports_ListReportsByTime",
+        "description": "List a collection of reports by time.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.interval"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.orderBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Reports.ReportsByTimeResource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Reports.ReportsByTimeResource[]",
+                  "description": "The ReportsByTimeResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ReportsByTimeResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Reports.ReportsByTimeResource, Azure.Core.(anonymous model)>"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "description": "String error code indicating what went wrong.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/users/{userId}/reports/none": {
+      "get": {
+        "operationId": "Reports_ListReports",
+        "description": "List a collection of reports.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "description": "User identifier.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.FilterQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.interval"
+          },
+          {
+            "$ref": "#/parameters/Resources.Reports.QueryParameters.orderBy"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Resources.Reports.ReportsResource"
+                  },
+                  "x-ms-identifiers": [],
+                  "x-typespec-name": "Resources.Reports.ReportsResource[]",
+                  "description": "The ReportsResource items on this page"
+                },
+                "nextLink": {
+                  "type": "string",
+                  "format": "uri",
+                  "description": "The link to the next page of items",
+                  "x-typespec-name": "Rest.ResourceLocation"
+                }
+              },
+              "description": "Paged collection of ReportsResource items",
+              "required": [
+                "value"
+              ],
+              "x-typespec-name": "Azure.Core.Foundations.CustomPage<Resources.Reports.ReportsResource, Azure.Core.(anonymous model)>"
             }
           },
           "default": {
@@ -4113,30 +4657,6 @@
       },
       "description": "User update object."
     },
-    "PagedReport": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DeveloperServicesApi.Models.Report"
-          },
-          "x-ms-identifiers": [],
-          "x-typespec-name": "DeveloperServicesApi.Models.Report[]",
-          "description": "The Report items on this page"
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items",
-          "x-typespec-name": "Rest.ResourceLocation"
-        }
-      },
-      "description": "Paged collection of Report items",
-      "required": [
-        "value"
-      ]
-    },
     "Resources.ApiVersionSets.ApiVersionSetApiResource": {
       "type": "object",
       "properties": {},
@@ -4317,6 +4837,86 @@
         }
       ]
     },
+    "Resources.Reports.ReportsByDeveloperResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Reports by developer resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Report"
+        }
+      ]
+    },
+    "Resources.Reports.ReportsByEndpointResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Reports by endpoint resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Report"
+        }
+      ]
+    },
+    "Resources.Reports.ReportsByOperationResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Reports by operation resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Report"
+        }
+      ]
+    },
+    "Resources.Reports.ReportsByProductResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Reports by product resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Report"
+        }
+      ]
+    },
+    "Resources.Reports.ReportsByRegionResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Reports by region resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Report"
+        }
+      ]
+    },
+    "Resources.Reports.ReportsBySubscriptionResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Reports by subscription resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Report"
+        }
+      ]
+    },
+    "Resources.Reports.ReportsByTimeResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Reports by time resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Report"
+        }
+      ]
+    },
+    "Resources.Reports.ReportsResource": {
+      "type": "object",
+      "properties": {},
+      "description": "Reports resource model.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeveloperServicesApi.Models.Report"
+        }
+      ]
+    },
     "Resources.Subscriptions.SubscriptionResource": {
       "type": "object",
       "properties": {},
@@ -4377,6 +4977,22 @@
       "description": "The number of result items to return.",
       "type": "integer",
       "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Resources.Reports.QueryParameters.interval": {
+      "name": "interval",
+      "in": "query",
+      "required": false,
+      "description": "Aggregate by interval.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "Resources.Reports.QueryParameters.orderBy": {
+      "name": "orderBy",
+      "in": "query",
+      "required": false,
+      "description": "OData order by query option.",
+      "type": "string",
       "x-ms-parameter-location": "method"
     }
   }

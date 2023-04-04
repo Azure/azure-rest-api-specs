@@ -38,7 +38,7 @@ interface Identities {
 @resource("identities")
 @parentResource(UserResource)
 model IdentityResource extends IdentityResult {
-  @doc("Configuration content identifier.")
+  @doc("Identity identifier.")
   @key("default")
   @visibility("query")
   default: "";
