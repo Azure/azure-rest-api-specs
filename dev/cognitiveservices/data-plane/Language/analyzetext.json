@@ -2212,28 +2212,26 @@
       "allOf": [
         {
           "$ref": "#/definitions/Entity"
+        }
+      ],
+      "type": "object",
+      "required": [
+        "type",
+        "tags"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
         },
-        {
-          "type": "object",
-          "required": [
-            "type",
-            "tags"
-          ],
-          "properties": {
-            "type": {
-              "type": "string",
-              "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
-            },
-            "tags": {
-              "type": "array",
-              "description": "List of entity tags. Tags are to express some similarities/affinity between entities.",
-              "items": {
-                "$ref": "#/definitions/EntityTags"
-              }
-            }
+        "tags": {
+          "type": "array",
+          "description": "List of entity tags. Tags are to express some similarities/affinity between entities.",
+          "items": {
+            "$ref": "#/definitions/EntityTags"
           }
         }
-      ]
+      }
     },
     "EntityWithMetadata": {
       "type": "object",
