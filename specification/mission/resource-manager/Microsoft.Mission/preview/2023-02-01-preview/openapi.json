@@ -1968,6 +1968,14 @@
             "$ref": "#/definitions/EnclaveListItem"
           },
           "x-cadl-name": "Record<EnclaveListItem>",
+          "description": "Dictionary of virtual enclaves that a community contains."
+        },
+        "virtualEnclaveList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnclaveListItem"
+          },
+          "x-cadl-name": "EnclaveListItem[]",
           "description": "List of virtual enclaves that a community contains."
         }
       },
@@ -2079,6 +2087,14 @@
             "$ref": "#/definitions/EnclaveListItem"
           },
           "x-cadl-name": "Record<EnclaveListItem>",
+          "description": "Dictionary of virtual enclaves that a community contains."
+        },
+        "virtualEnclaveList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnclaveListItem"
+          },
+          "x-cadl-name": "EnclaveListItem[]",
           "description": "List of virtual enclaves that a community contains."
         }
       },
@@ -2109,9 +2125,18 @@
           "type": "string",
           "description": "virtual enclave name."
         },
-        "resourceId": {
+        "id": {
           "$ref": "#/definitions/VirtualEnclaveResourceId",
           "description": "virtual enclaves resource id."
+        },
+        "creationDatetime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "creation datetime."
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "created by."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
