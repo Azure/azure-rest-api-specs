@@ -4655,7 +4655,8 @@
             "in": "path",
             "description": "Replication protection cluster name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
@@ -4771,7 +4772,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "Azure-AsyncOperation"
         },
         "x-ms-examples": {
           "Create Replication protection Cluster.": {
@@ -22406,14 +22407,17 @@
       "type": "object",
       "properties": {
         "id": {
+          "readOnly": true,
           "description": "The Id.",
           "type": "string"
         },
         "name": {
+          "readOnly": true,
           "description": "The name.",
           "type": "string"
         },
         "type": {
+          "readOnly": true,
           "description": "The Type of the object.",
           "type": "string"
         },
@@ -22421,7 +22425,8 @@
           "$ref": "#/definitions/ReplicationProtectionClusterProperties",
           "description": "The custom data."
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "ReplicationProtectionClusterCollection": {
       "description": "Replication protected item collection.",
@@ -23130,18 +23135,50 @@
       "x-ms-discriminator-value": "ScriptActionTaskDetails"
     },
     "ServiceDefaultError": {
-      "description": "ASR default error model.",
-      "type": "object",
       "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message.",
-          "type": "string"
+        "error": {
+          "type": "object",
+          "description": "ASR default error model.",
+          "properties": {
+            "code": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error code."
+            },
+            "message": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error message."
+            },
+            "target": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The error target."
+            },
+            "details": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ServiceDefaultError"
+              },
+              "x-ms-identifiers": [
+                "/error/code"
+              ],
+              "description": "The error details."
+            },
+            "additionalInfo": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorAdditionalInfo"
+              },
+              "x-ms-identifiers": [],
+              "description": "The error additional info."
+            }
+          }
         }
-      }
+      },
+      "description": "The resource management error response."
     },
     "ServiceError": {
       "description": "ASR error model.",
@@ -23213,9 +23250,6 @@
     "SharedDiskReplicationProviderSpecificSettings": {
       "description": "Replication provider specific settings.",
       "type": "object",
-      "required": [
-        "instanceType"
-      ],
       "properties": {
         "instanceType": {
           "description": "Gets the Instance type.",
