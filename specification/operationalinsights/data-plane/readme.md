@@ -75,6 +75,8 @@ directive:
     transform: $.operationId = "Query"
 ```
 
+### Tag: 20221027Preview
+
 ``` yaml $(tag) == '20221027Preview'
 input-file:
 - Microsoft.OperationalInsights/preview/2022-10-27_Preview/OperationalInsights.json
