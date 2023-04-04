@@ -2,7 +2,7 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
-import "../Contoso.WidgetManager.Shared";
+//import "../Contoso.WidgetManager.Shared";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -32,8 +32,8 @@ model Widget {
   @doc("The ID of the widget's manufacturer.")
   manufacturerId: string;
 
-  @doc("The faked shared model.")
-  sharedModel?: FakedSharedModel;
+//  @doc("The faked shared model.")
+//  sharedModel?: FakedSharedModel;
 }
 
 interface Widgets {

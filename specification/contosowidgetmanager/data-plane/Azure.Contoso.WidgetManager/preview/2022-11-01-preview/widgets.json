@@ -420,40 +420,6 @@
         "modelAsString": true
       }
     },
-    "FakedSharedModel": {
-      "type": "object",
-      "properties": {
-        "tag": {
-          "type": "string",
-          "description": "The tag."
-        },
-        "createdDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The created date."
-        }
-      },
-      "description": "Faked shared model",
-      "required": [
-        "tag",
-        "createdDate"
-      ]
-    },
-    "FakedSharedModelUpdate": {
-      "type": "object",
-      "properties": {
-        "tag": {
-          "type": "string",
-          "description": "The tag."
-        },
-        "createdDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The created date."
-        }
-      },
-      "description": "Faked shared model"
-    },
     "Versions": {
       "type": "string",
       "enum": [
@@ -481,10 +447,6 @@
         "manufacturerId": {
           "type": "string",
           "description": "The ID of the widget's manufacturer."
-        },
-        "sharedModel": {
-          "$ref": "#/definitions/FakedSharedModel",
-          "description": "The faked shared model."
         }
       },
       "description": "A widget.",
@@ -499,10 +461,6 @@
         "manufacturerId": {
           "type": "string",
           "description": "The ID of the widget's manufacturer."
-        },
-        "sharedModel": {
-          "$ref": "#/definitions/FakedSharedModelUpdate",
-          "description": "The faked shared model."
         }
       },
       "description": "A widget."
