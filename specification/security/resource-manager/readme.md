@@ -85,7 +85,6 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
-
 ### Tag: package-preview-2023-03
 
 These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
@@ -93,6 +92,7 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 ```yaml $(tag) == 'package-preview-2023-03'
 input-file:
   - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
+  - Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 ```
 ### Tag: package-preview-2023-02
 
@@ -351,6 +351,7 @@ input-file:
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsScanResultsOperations.json
 - Microsoft.Security/preview/2023-02-01-preview/sqlVulnerabilityAssessmentsBaselineRuleOperations.json
 - Microsoft.Security/preview/2023-03-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2023-01-01-preview/securityOperators.json
 
 
 # Needed when there is more than one input file
