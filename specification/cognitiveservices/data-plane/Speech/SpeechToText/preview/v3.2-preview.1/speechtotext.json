@@ -132,7 +132,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -475,7 +475,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -794,7 +794,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -1471,7 +1471,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -1873,7 +1873,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -2173,7 +2173,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -2229,13 +2229,13 @@
           "201": {
             "description": "The response contains information about the entity as payload and its location as header.",
             "schema": {
-              "$ref": "#/definitions/CustomModel"
+              "$ref": "#/definitions/Operation"
             },
             "headers": {
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -2288,7 +2288,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -2513,6 +2513,99 @@
         }
       }
     },
+    "/operations/{id}": {
+      "get": {
+        "tags": [
+          "Custom Speech projects:"
+        ],
+        "summary": "Gets the operation identified by the given ID.",
+        "operationId": "Operations_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "The identifier of the operation.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an operation": {
+            "$ref": "./examples/get_operation.json"
+          }
+        }
+      }
+    },
+    "/operations": {
+      "get": {
+        "tags": [
+          "Custom Speech projects:"
+        ],
+        "summary": "Gets the list of operations for the authenticated subscription.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/skipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/topQueryParameter"
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "A filtering expression for selecting a subset of the available operations.\r\n            - Supported properties: createdDateTime, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PaginatedOperations"
+            }
+          },
+          "default": {
+            "description": "An error occurred.",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "itemName": "values",
+          "nextLinkName": "@nextLink"
+        },
+        "x-ms-examples": {
+          "Get all operations": {
+            "$ref": "./examples/get_operations.json"
+          },
+          "Get all operations created in 2018 or 2019": {
+            "$ref": "./examples/get_operations_from_2018_and_2019.json"
+          }
+        }
+      }
+    },
     "/projects/locales": {
       "get": {
         "tags": [
@@ -2631,7 +2724,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -3223,7 +3316,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -3610,7 +3703,7 @@
               "Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
-                "format": "url"
+                "format": "uri"
               }
             }
           },
@@ -5768,6 +5861,47 @@
         }
       }
     },
+    "Operation": {
+      "title": "Operation",
+      "required": [
+        "locale"
+      ],
+      "type": "object",
+      "properties": {
+        "targetModelLocation": {
+          "format": "uri",
+          "description": "The location to the model resulting from the copy. See operation \"Models_GetCustomModel\" for more details.",
+          "type": "string",
+          "readOnly": true
+        },
+        "self": {
+          "format": "uri",
+          "description": "The location of this entity.",
+          "type": "string",
+          "readOnly": true
+        },
+        "locale": {
+          "description": "The locale of the contained data.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "lastActionDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the current status was entered.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/Status"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "The time-stamp when the object was created.\r\nThe time stamp is encoded as ISO 8601 date and time format\r\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "OutputFormatType": {
       "title": "OutputFormatType",
       "enum": [
@@ -5899,6 +6033,26 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/File"
+          },
+          "readOnly": true
+        },
+        "@nextLink": {
+          "format": "uri",
+          "description": "A link to the next set of paginated results if there are more entities available; otherwise null.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PaginatedOperations": {
+      "title": "PaginatedOperations",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
           },
           "readOnly": true
         },
