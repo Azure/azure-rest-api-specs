@@ -2513,13 +2513,13 @@
         }
       }
     },
-    "/operations/{id}": {
+    "/operations/models/copy/{id}": {
       "get": {
         "tags": [
-          "Custom Speech projects:"
+          "Custom Speech operations:"
         ],
         "summary": "Gets the operation identified by the given ID.",
-        "operationId": "Operations_Get",
+        "operationId": "Operations_GetModelCopy",
         "produces": [
           "application/json"
         ],
@@ -2550,58 +2550,6 @@
         "x-ms-examples": {
           "Get an operation": {
             "$ref": "./examples/get_operation.json"
-          }
-        }
-      }
-    },
-    "/operations": {
-      "get": {
-        "tags": [
-          "Custom Speech projects:"
-        ],
-        "summary": "Gets the list of operations for the authenticated subscription.",
-        "operationId": "Operations_List",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/skipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/topQueryParameter"
-          },
-          {
-            "in": "query",
-            "name": "filter",
-            "description": "A filtering expression for selecting a subset of the available operations.\r\n            - Supported properties: createdDateTime, locale.\r\n            - Operators:\r\n              - eq, ne are supported for all properties.\r\n              - gt, ge, lt, le are supported for createdDateTime.\r\n              - and, or, not are supported.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/PaginatedOperations"
-            }
-          },
-          "default": {
-            "description": "An error occurred.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "itemName": "values",
-          "nextLinkName": "@nextLink"
-        },
-        "x-ms-examples": {
-          "Get all operations": {
-            "$ref": "./examples/get_operations.json"
-          },
-          "Get all operations created in 2018 or 2019": {
-            "$ref": "./examples/get_operations_from_2018_and_2019.json"
           }
         }
       }
@@ -5674,6 +5622,7 @@
     "LanguageIdentificationMode": {
       "title": "LanguageIdentificationMode",
       "description": "The mode used for language identification.",
+      "default": "Continuous",
       "enum": [
         "Continuous",
         "Dominant"
@@ -5691,7 +5640,8 @@
             "value": "Dominant",
             "description": "Dominant language identification."
           }
-        ]
+        ],
+        "default": "Continuous"
       }
     },
     "LanguageIdentificationProperties": {
@@ -5864,15 +5814,24 @@
     "Operation": {
       "title": "Operation",
       "required": [
+        "id",
         "locale"
       ],
       "type": "object",
       "properties": {
-        "targetModelLocation": {
+        "id": {
+          "format": "uuid",
+          "description": "The identifier of this Operation.",
+          "type": "string"
+        },
+        "result": {
           "format": "uri",
-          "description": "The location to the model resulting from the copy. See operation \"Models_GetCustomModel\" for more details.",
+          "description": "The result when the operation is successful.",
           "type": "string",
           "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/Error"
         },
         "self": {
           "format": "uri",
@@ -6033,26 +5992,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/File"
-          },
-          "readOnly": true
-        },
-        "@nextLink": {
-          "format": "uri",
-          "description": "A link to the next set of paginated results if there are more entities available; otherwise null.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PaginatedOperations": {
-      "title": "PaginatedOperations",
-      "type": "object",
-      "properties": {
-        "values": {
-          "description": "A list of entities limited by either the passed query parameters 'skip' and 'top' or their default values.\r\n            \r\nWhen iterating through a list using pagination and deleting entities in parallel, some entities will be skipped in the results.\r\nIt's recommended to build a list on the client and delete after the fetching of the complete list.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
           },
           "readOnly": true
         },
@@ -6964,7 +6903,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext/v3.2-preview.1",
+    "hostTemplate": "{endpoint}/speechtotext/v3.2-preview1",
     "useSchemePrefix": false,
     "parameters": [
       {
