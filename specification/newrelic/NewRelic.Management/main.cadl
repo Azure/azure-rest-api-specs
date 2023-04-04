@@ -100,7 +100,7 @@ interface Monitors {
   op SwitchBilling(
     ...ResourceInstanceParameters<NewRelicMonitorResource>,
     ...SwitchBillingParameter
-  ): void | ErrorResponse;
+  ): ArmResponse<NewRelicMonitorResource> | ArmAcceptedResponse | void | ErrorResponse;
   
   @post
   @doc("Get metric rules")
