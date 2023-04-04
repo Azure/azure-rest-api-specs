@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-10-27_Preview",
+    "version": "2022-10-27",
     "title": "Azure Log Analytics",
     "description": "This API exposes Azure Log Analytics query capabilities",
     "termsOfService": "https://dev.loganalytics.io/tos",
@@ -1508,13 +1508,19 @@
           "type": "string",
           "enum": [
             "/query"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "path"
+          }
         },
         "method": {
           "type": "string",
           "enum": [
             "POST"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "methodType"
+          }
         },
         "workspace": {
           "description": "Workspace Id to be included in the query",
@@ -1547,7 +1553,8 @@
           "type": "string"
         },
         "status": {
-          "type": "integer"
+          "type": "integer",
+          "format": "int32"
         },
         "body": {
           "type": "object",
