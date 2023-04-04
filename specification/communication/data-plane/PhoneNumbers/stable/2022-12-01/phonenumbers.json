@@ -1423,7 +1423,8 @@
       "name": "api-version",
       "description": "Version of API to invoke",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "client"
     },
     "Endpoint": {
       "in": "path",
@@ -1431,6 +1432,7 @@
       "description": "The communication resource, for example https://resourcename.communication.azure.com",
       "required": true,
       "type": "string",
+      "format": "url",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
     }
