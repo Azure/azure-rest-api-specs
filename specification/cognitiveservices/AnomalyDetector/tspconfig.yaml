@@ -1,3 +1,6 @@
+parameters:
+  "python-sdk-folder":
+    default: "{cwd}/azure-sdk-for-python/"
 emit: [
   "@azure-tools/typespec-autorest",
   "@azure-tools/typespec-python",
@@ -8,9 +11,9 @@ options:
     "output-file": "openapi.json"
     "examples-directory": ./examples
   "@azure-tools/typespec-python":
-    "basic-setup-py": true
     "package-version": 3.0.0b7
     "package-name": azure-ai-anomalydetector
+    "emitter-output-dir": "{python-sdk-folder}/sdk/anomalydetector/{package-name}"
   #   "output-path":
   # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
   "@azure-tools/typespec-java":
