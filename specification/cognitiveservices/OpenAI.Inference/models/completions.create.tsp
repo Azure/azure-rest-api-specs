@@ -192,12 +192,14 @@ model Choice {
     @doc("The log probabilities model for tokens associated with this completions choice.")
     @projectedName("json", "logprobs")
     @projectedName("csharp", "LogProbabilityModel")
-    logprobs?: CompletionsLogProbabilityModel;
+    logprobs?: CompletionsLogProbabilityModel | null;
 
     @doc("Reason for finishing")
     @projectedName("json", "finish_reason")
     finishReason: CompletionsFinishReason;
 }
+
+alias NullableFloat = float32 | null;
 
 @doc("""
 Representation of a log probabilities model for a completions generation.
@@ -210,12 +212,12 @@ model CompletionsLogProbabilityModel {
     @doc("A collection of log probability values for the tokens in this completions data.")
     @projectedName("json", "token_logprobs")
     @projectedName("csharp", "TokenLogProbabilities")
-    tokenLogprobs?: float32[];
+    tokenLogprobs?: NullableFloat[];
 
     @doc("A mapping of tokens to maximum log probability values in this completions data.")
     @projectedName("json", "top_logprobs")
     @projectedName("csharp", "TopLogProbabilities")
-    topLogprobs?: Record<float32>[];
+    topLogprobs?: Record<NullableFloat>[];
 
     @doc("The text offsets associated with tokens in this completions data.")
     @projectedName("json", "text_offset")
