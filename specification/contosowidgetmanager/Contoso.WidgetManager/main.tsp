@@ -21,6 +21,16 @@ enum Versions {
   v2022_11_01_Preview: "2022-11-01-preview",
 }
 
+@doc("Faked shared model")
+model FakedSharedModel {
+  @doc("The tag.")
+  tag: string;
+
+  @doc("The created date.")
+  createdDate: zonedDateTime;
+}
+
+// Temporarily copy the shared model here until we can get code generation to work with a shared project
 @doc("A widget.")
 @resource("widgets")
 model Widget {
@@ -32,8 +42,8 @@ model Widget {
   @doc("The ID of the widget's manufacturer.")
   manufacturerId: string;
 
-//  @doc("The faked shared model.")
-//  sharedModel?: FakedSharedModel;
+  @doc("The faked shared model.")
+  sharedModel?: FakedSharedModel;
 }
 
 interface Widgets {
