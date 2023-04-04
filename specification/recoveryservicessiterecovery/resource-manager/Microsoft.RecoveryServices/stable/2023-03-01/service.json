@@ -4547,11 +4547,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters": {
       "get": {
-        "tags": [ "ReplicationProtectionClusters" ],
+        "tags": [
+          "ReplicationProtectionClusters"
+        ],
         "summary": "Gets the list of Replication protection clusters in fabric, container.",
         "description": "Gets the list of ASR replication protected clusters in the protection container.",
         "operationId": "ReplicationProtectionClusters_ListByReplicationProtectionContainers",
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4570,37 +4574,53 @@
             "in": "path",
             "description": "Fabric name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "Protection container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ReplicationProtectionClusterCollection" }
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionClusterCollection"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
-            "schema": { "$ref": "#/definitions/ServiceDefaultError" }
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
           }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
-        "x-ms-examples": { "Gets the list of Replication protection clusters in fabric, container.": { "$ref": "./examples/ReplicationProtectionClusters_ListByReplicationProtectionContainers.json" } }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the list of Replication protection clusters in fabric, container.": {
+            "$ref": "./examples/ReplicationProtectionClusters_ListByReplicationProtectionContainers.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}": {
       "get": {
-        "tags": [ "ReplicationProtectionClusters" ],
+        "tags": [
+          "ReplicationProtectionClusters"
+        ],
         "summary": "Gets the details of a Replication protection cluster.",
         "description": "Gets the details of an ASR replication protection cluster.",
         "operationId": "ReplicationProtectionClusters_Get",
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4619,14 +4639,16 @@
             "in": "path",
             "description": "Fabric unique name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "Protection container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "replicationProtectionClusterName",
@@ -4639,22 +4661,36 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ReplicationProtectionCluster" }
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionCluster"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
-            "schema": { "$ref": "#/definitions/ServiceDefaultError" }
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
           }
         },
-        "x-ms-examples": { "Gets the details of a Replication protection cluster.": { "$ref": "./examples/ReplicationProtectionClusters_Get.json" } }
+        "x-ms-examples": {
+          "Gets the details of a Replication protection cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_Get.json"
+          }
+        }
       },
       "put": {
-        "tags": [ "ReplicationProtectionClusters" ],
+        "tags": [
+          "ReplicationProtectionClusters"
+        ],
         "summary": "Create Replication protection Cluster.",
         "description": "The operation to create an ASR replication protection cluster item.",
         "operationId": "ReplicationProtectionClusters_Create",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4673,37 +4709,47 @@
             "in": "path",
             "description": "Name of the fabric.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "Protection container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "replicationProtectionClusterName",
             "in": "path",
             "description": "A name for the replication protection cluster.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "replicationProtectionCluster",
             "in": "body",
             "description": "Create replication protection cluster Input.",
             "required": true,
-            "schema": { "$ref": "#/definitions/ReplicationProtectionCluster" }
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionCluster"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ReplicationProtectionCluster" }
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionCluster"
+            }
           },
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionCluster"
+            },
             "headers": {
               "Location": {
                 "type": "string"
@@ -4718,14 +4764,25 @@
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
-            "schema": { "$ref": "#/definitions/ServiceDefaultError" }
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-examples": { "Create Replication protection Cluster.": { "$ref": "./examples/ReplicationProtectionClusters_Create.json" } }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Create Replication protection Cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_Create.json"
+          }
+        }
       },
       "delete": {
-        "tags": [ "ReplicationProtectionClusters" ],
+        "tags": [
+          "ReplicationProtectionClusters"
+        ],
         "summary": "Purge the replication protection cluster.",
         "description": "The operation to purge the replication protection cluster. This operation will force delete the replication protection cluster. Use the remove operation on replication protection cluster to perform a clean disable replication protection cluster.",
         "operationId": "ReplicationProtectionClusters_Purge",
@@ -4747,21 +4804,24 @@
             "in": "path",
             "description": "Fabric name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "Protection container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "replicationProtectionClusterName",
             "in": "path",
             "description": "Replication protection cluster name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
@@ -4769,27 +4829,51 @@
             "description": "OK"
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
           },
           "204": {
             "description": "NoContent"
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
-            "schema": { "$ref": "#/definitions/ServiceDefaultError" }
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-examples": { "Purge the replication protection cluster.": { "$ref": "./examples/ReplicationProtectionClusters_Purge.json" } }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Purge the replication protection cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_Purge.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/operationresults/{jobId}": {
       "get": {
-        "tags": [ "ReplicationProtectionClusters" ],
+        "tags": [
+          "ReplicationProtectionClusters"
+        ],
         "summary": "Tracks the Replication protection cluster async operation.",
         "description": "Track the results of an asynchronous operation on the replication protection cluster.",
         "operationId": "ReplicationProtectionClusters_GetOperationResults",
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4808,50 +4892,66 @@
             "in": "path",
             "description": "Fabric name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "Protection container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "replicationProtectionClusterName",
             "in": "path",
             "description": "Replication protection cluster name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "jobId",
             "in": "path",
             "description": "job id to track.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ReplicationProtectionCluster" }
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionCluster"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
-            "schema": { "$ref": "#/definitions/ServiceDefaultError" }
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
           }
         },
-        "x-ms-examples": { "Tracks the Replication protection cluster async operation.": { "$ref": "./examples/ReplicationProtectionClusters_GetOperationResults.json" } }
+        "x-ms-examples": {
+          "Tracks the Replication protection cluster async operation.": {
+            "$ref": "./examples/ReplicationProtectionClusters_GetOperationResults.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/repairReplication": {
       "post": {
-        "tags": [ "ReplicationProtectionClusters" ],
+        "tags": [
+          "ReplicationProtectionClusters"
+        ],
         "summary": "Resynchronize or repair replication of protection cluster.",
         "description": "The operation to repair replication protection cluster.",
         "operationId": "ReplicationProtectionClusters_RepairReplication",
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4870,45 +4970,76 @@
             "in": "path",
             "description": "Fabric name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "Protection container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "replicationProtectionClusterName",
             "in": "path",
             "description": "Replication protection cluster name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "202": { "description": "Accepted" },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Automation error response describing why the operation failed.",
-            "schema": { "$ref": "#/definitions/ServiceDefaultError" }
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-examples": { "Resynchronize or repair replication of protection cluster.": { "$ref": "./examples/ReplicationProtectionClusters_RepairReplication.json" } }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Resynchronize or repair replication of protection cluster.": {
+            "$ref": "./examples/ReplicationProtectionClusters_RepairReplication.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionClusters/{replicationProtectionClusterName}/unplannedFailover": {
       "post": {
-        "tags": [ "ReplicationProtectionClusters" ],
+        "tags": [
+          "ReplicationProtectionClusters"
+        ],
         "summary": "Execute unplanned cluster failover.",
         "description": "Operation to initiate a failover of the replication protection cluster.",
         "operationId": "ReplicationProtectionClusters_UnplannedFailover",
-        "consumes": [ "application/json" ],
-        "produces": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -4927,42 +5058,69 @@
             "in": "path",
             "description": "Unique fabric name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "protectionContainerName",
             "in": "path",
             "description": "Protection container name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "replicationProtectionClusterName",
             "in": "path",
             "description": "Replication protection cluster name.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
           },
           {
             "name": "failoverInput",
             "in": "body",
             "description": "Failover input.",
             "required": true,
-            "schema": { "$ref": "#/definitions/ClusterUnplannedFailoverInput" }
+            "schema": {
+              "$ref": "#/definitions/ClusterUnplannedFailoverInput"
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
           },
-          "202": { "description": "Accepted" },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "string"
+              }
+            }
+          },
           "default": {
             "description": "Automation error response describing why the operation failed.",
-            "schema": { "$ref": "#/definitions/ServiceDefaultError" }
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-examples": { "Execute unplanned cluster failover.": { "$ref": "./examples/ReplicationProtectionClusters_UnplannedFailover.json" } }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Execute unplanned cluster failover.": {
+            "$ref": "./examples/ReplicationProtectionClusters_UnplannedFailover.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationFabrics/{fabricName}/replicationProtectionContainers/{protectionContainerName}/replicationProtectionContainerMappings": {
@@ -7191,11 +7349,15 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationProtectionClusters": {
       "get": {
-        "tags": [ "ReplicationProtectionClusters" ],
+        "tags": [
+          "ReplicationProtectionClusters"
+        ],
         "summary": "Gets the list of Replication protection clusters in vault.",
         "description": "Gets the list of ASR replication protected clusters in the vault.",
         "operationId": "ReplicationProtectionClusters_List",
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -7227,16 +7389,26 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ReplicationProtectionClusterCollection" }
+            "schema": {
+              "$ref": "#/definitions/ReplicationProtectionClusterCollection"
+            }
           },
           "default": {
             "description": "Automation error response describing why the operation failed.",
-            "schema": { "$ref": "#/definitions/ServiceDefaultError" }
+            "schema": {
+              "$ref": "#/definitions/ServiceDefaultError"
+            }
           }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/ProtectedClustersQueryParameter",
-        "x-ms-examples": { "Gets the list of Replication protection clusters in vault.": { "$ref": "./examples/ReplicationProtectionClusters_List.json" } }
+        "x-ms-examples": {
+          "Gets the list of Replication protection clusters in vault.": {
+            "$ref": "./examples/ReplicationProtectionClusters_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationProtectionContainerMappings": {
@@ -8640,7 +8812,11 @@
     "A2AClusterUnplannedFailoverInput": {
       "description": "A2A provider specific input for unplanned cluster failover.",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/ClusterUnplannedFailoverProviderSpecificInput" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterUnplannedFailoverProviderSpecificInput"
+        }
+      ],
       "properties": {
         "clusterRecoveryPointId": {
           "description": "The cluster recovery point id to be passed to failover to a particular recovery point.",
@@ -8649,7 +8825,9 @@
         "individualNodeRecoveryPoints": {
           "description": "The list of individual node recovery points.",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -10038,7 +10216,11 @@
     "A2AReplicationProtectionClusterDetails": {
       "description": "A2A provider specific settings.",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/ReplicationClusterProviderSpecificSettings" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReplicationClusterProviderSpecificSettings"
+        }
+      ],
       "properties": {
         "multiVmGroupId": {
           "description": "The multi vm group Id.",
@@ -10050,7 +10232,10 @@
         },
         "multiVmGroupCreateOption": {
           "description": "Whether Multi VM group is auto created or specified by user.",
-          "enum": [ "AutoCreated", "UserSpecified" ],
+          "enum": [
+            "AutoCreated",
+            "UserSpecified"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "MultiVmGroupCreateOption",
@@ -10203,7 +10388,11 @@
     "A2ASharedDiskReplicationDetails": {
       "description": "A2A provider specific settings.",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/SharedDiskReplicationProviderSpecificSettings" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedDiskReplicationProviderSpecificSettings"
+        }
+      ],
       "properties": {
         "managementId": {
           "description": "The management Id.",
@@ -10212,12 +10401,18 @@
         "unprotectedDisks": {
           "description": "The list of unprotected disks.",
           "type": "array",
-          "items": { "$ref": "#/definitions/A2AUnprotectedDiskDetails" }
+          "items": {
+            "$ref": "#/definitions/A2AUnprotectedDiskDetails"
+          },
+          "x-ms-identifiers": []
         },
         "protectedManagedDisks": {
           "description": "The list of protected managed disks.",
           "type": "array",
-          "items": { "$ref": "#/definitions/A2AProtectedManagedDiskDetails" }
+          "items": {
+            "$ref": "#/definitions/A2AProtectedManagedDiskDetails"
+          },
+          "x-ms-identifiers": []
         },
         "primaryFabricLocation": {
           "description": "Primary fabric location.",
@@ -10253,7 +10448,10 @@
         "sharedDiskIRErrors": {
           "description": "The IR Errors.",
           "type": "array",
-          "items": { "$ref": "#/definitions/A2ASharedDiskIRErrorDetails" }
+          "items": {
+            "$ref": "#/definitions/A2ASharedDiskIRErrorDetails"
+          },
+          "x-ms-identifiers": []
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -11221,7 +11419,9 @@
     },
     "ClusterUnplannedFailoverInput": {
       "description": "Input definition for unplanned cluster failover.",
-      "required": [ "properties" ],
+      "required": [
+        "properties"
+      ],
       "type": "object",
       "properties": {
         "properties": {
@@ -21747,7 +21947,7 @@
       "description": "Extended location of the resource.",
       "type": "object",
       "properties": {
-        "clusterNodeFQDN": {
+        "clusterNodeFqdn": {
           "description": "The cluster node name.",
           "type": "string"
         },
@@ -22230,7 +22430,9 @@
         "value": {
           "description": "The Replication protection cluster details.",
           "type": "array",
-          "items": { "$ref": "#/definitions/ReplicationProtectionCluster" }
+          "items": {
+            "$ref": "#/definitions/ReplicationProtectionCluster"
+          }
         },
         "nextLink": {
           "description": "The value of next link.",
@@ -22285,7 +22487,9 @@
         "allowedOperations": {
           "description": "The allowed operations on the Replication protection cluster.",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "replicationHealth": {
           "description": "The consolidated protection health for the VM taking any issues with SRS as well as all the replication units associated with the VM's replication group into account. This is a string representation of the ProtectionHealth enumeration.",
@@ -22294,7 +22498,10 @@
         "healthErrors": {
           "description": "List of health errors.",
           "type": "array",
-          "items": { "$ref": "#/definitions/HealthError" }
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          },
+          "x-ms-identifiers": []
         },
         "lastSuccessfulFailoverTime": {
           "format": "date-time",
@@ -22322,19 +22529,23 @@
           "description": "The Agent cluster Id.",
           "type": "string"
         },
-        "clusterFQDN": {
+        "clusterFqdn": {
           "description": "The cluster FQDN.",
           "type": "string"
         },
-        "clusterNodeFQDNs": {
+        "clusterNodeFqdns": {
           "description": "The List of cluster Node FQDNs.",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "clusterProtectedItemIds": {
           "description": "The List of Protected Item Id's.",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "protectionClusterStatus": {
           "description": "The status.",
@@ -22347,7 +22558,10 @@
         "clusterRegisteredNodes": {
           "description": "The registered node details.",
           "type": "array",
-          "items": { "$ref": "#/definitions/RegisteredClusterNodes" }
+          "items": {
+            "$ref": "#/definitions/RegisteredClusterNodes"
+          },
+          "x-ms-identifiers": []
         },
         "providerSpecificDetails": {
           "$ref": "#/definitions/ReplicationClusterProviderSpecificSettings",
@@ -22970,7 +23184,9 @@
         "allowedOperations": {
           "description": "The allowed operations on the Replication protected item.",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "replicationHealth": {
           "description": "The consolidated protection health for the VM taking any issues with SRS as well as all the replication units associated with the VM's replication group into account. This is a string representation of the ProtectionHealth enumeration.",
@@ -22979,7 +23195,10 @@
         "healthErrors": {
           "description": "List of health errors.",
           "type": "array",
-          "items": { "$ref": "#/definitions/HealthError" }
+          "items": {
+            "$ref": "#/definitions/HealthError"
+          },
+          "x-ms-identifiers": []
         },
         "currentScenario": {
           "$ref": "#/definitions/CurrentScenarioDetails",
@@ -26013,6 +26232,7 @@
       "description": "The name of the recovery services vault.",
       "required": true,
       "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$",
       "x-ms-parameter-location": "client"
     },
     "ApiVersion": {
