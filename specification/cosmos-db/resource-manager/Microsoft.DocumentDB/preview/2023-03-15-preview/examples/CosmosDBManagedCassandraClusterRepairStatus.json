@@ -1,0 +1,165 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "cassandra-prod-rg",
+    "clusterName": "cassandra-prod",
+    "api-version": "2023-03-15-preview"
+  },
+  "response": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/dd31ecae-4522-468e-8b27-5befd051dd53/resourceGroups/vs-repair-rg/providers/Microsoft.DocumentDB/cassandraClusters/vs-repair-2/repairStatus/operationResults/184667cd-84cd-4fb7-9566-08670d2a8f6b?api-version=2023-03-01-preview"      
+      }
+    },
+    "200": {
+      "body" : {
+            "jmxPasswordIsSet": null,
+            "jmxUserName": null,
+            "jmx_password_is_set": true,
+            "jmx_username": "jmx_user",
+            "name": "vs-repair-2",
+            "nodesStatus": null,
+            "nodes_status": {
+              "endpointStates": [
+                {
+                  "endpointNames": [
+                    "10.8.0.9",
+                    "10.8.0.7",
+                    "10.8.0.8"
+                  ],
+                  "endpoints": {
+                    "dc-1": {
+                      "rack0": [
+                        {
+                          "Endpoint": "10.8.0.7",
+                          "HostId": "17c811f3-370b-45f0-a7cc-69b79bd3419b",
+                          "Load": 216332.0,
+                          "Rack": "rack0",
+                          "ReleaseVersion": "3.11.13",
+                          "Severity": 0.0,
+                          "Status": "NORMAL - UP",
+                          "Tokens": "17",
+                          "Type": null,
+                          "dc": "dc-1"
+                        }
+                      ],
+                      "rack1": [
+                        {
+                          "Endpoint": "10.8.0.8",
+                          "HostId": "a795eca0-f95b-46ed-92fa-99d9b41798f9",
+                          "Load": 188077.0,
+                          "Rack": "rack1",
+                          "ReleaseVersion": "3.11.13",
+                          "Severity": 0.0,
+                          "Status": "NORMAL - UP",
+                          "Tokens": "17",
+                          "Type": null,
+                          "dc": "dc-1"
+                        }
+                      ],
+                      "rack2": [
+                        {
+                          "Endpoint": "10.8.0.9",
+                          "HostId": "3ee0647a-7731-4f77-ae21-d7c59db2efed",
+                          "Load": 175810.0,
+                          "Rack": "rack2",
+                          "ReleaseVersion": "3.11.13",
+                          "Severity": 0.0,
+                          "Status": "NORMAL - UP",
+                          "Tokens": "17",
+                          "Type": null,
+                          "dc": "dc-1"
+                        }
+                      ]
+                    }
+                  },
+                  "sourceNode": "10.8.0.8",
+                  "totalLoad": 580219.0
+                }
+              ]
+            },
+            "repairRuns": null,
+            "repairSchedules": null,
+            "repair_runs": [
+              {
+                "blacklisted_tables": [],
+                "cause": "example",
+                "cluster_name": "vs-repair-2",
+                "column_families": [
+                  "built_views",
+                  "sstable_activity",
+                  "views_builds_in_progress",
+                  "prepared_statements",
+                  "compaction_history",
+                  "hints",
+                  "peers",
+                  "IndexInfo",
+                  "local",
+                  "batchlog",
+                  "batches",
+                  "available_ranges",
+                  "paxos",
+                  "peer_events",
+                  "transferred_ranges",
+                  "size_estimates",
+                  "range_xfers"
+                ],
+                "datacenters": [],
+                "id": "00000000-0000-0002-0000-000000000000",
+                "incremental_repair": false,
+                "intensity": 0.8999999761581421,
+                "keyspace_name": "system",
+                "last_event": "no events",
+                "nodes": [],
+                "owner": "vs-test",
+                "repair_parallelism": "PARALLEL",
+                "repair_thread_count": 1,
+                "repair_unit_id": "00000000-0000-0002-0000-000000000000",
+                "segments_repaired": 0,
+                "state": "NOT_STARTED",
+                "total_segments": 22
+              },
+              {
+                "blacklisted_tables": [],
+                "cause": "example",
+                "cluster_name": "vs-repair-2",
+                "column_families": [
+                  "dropped_columns",
+                  "types",
+                  "tables",
+                  "indexes",
+                  "keyspaces",
+                  "functions",
+                  "columns",
+                  "aggregates",
+                  "triggers",
+                  "views"
+                ],
+                "datacenters": [],
+                "id": "00000000-0000-0001-0000-000000000000",
+                "incremental_repair": false,
+                "intensity": 0.8999999761581421,
+                "keyspace_name": "system_schema",
+                "last_event": "no events",
+                "nodes": [],
+                "owner": "vs-test",
+                "repair_parallelism": "PARALLEL",
+                "repair_thread_count": 1,
+                "repair_unit_id": "00000000-0000-0001-0000-000000000000",
+                "segments_repaired": 0,
+                "state": "NOT_STARTED",
+                "total_segments": 22
+              }
+            ],
+            "repair_schedules": [],
+            "seedHosts": null,
+            "seed_hosts": [
+              "10.8.0.8",
+              "10.8.0.9",
+              "10.8.0.7"
+            ]
+      }
+    }
+  }
+}
+
