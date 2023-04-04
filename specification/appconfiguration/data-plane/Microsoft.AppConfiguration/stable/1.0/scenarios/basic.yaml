@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ./liveness.yaml
+
+authentication:
+  type: AADToken
+  scope: https://azconfig.io/.default
+
+variables:
+  key:
+    type: string
+    prefix: key
+
+scenarios:
+  - steps:
+      - step: PutKeyValue
+        exampleFile: ../examples/PutKeyValue.json
+      - step: PutLock
+        exampleFile: ../examples/PutLock.json
+      - step: GetKeys
+        exampleFile: ../examples/GetKeys.json
+      - step: CheckKeys
+        exampleFile: ../examples/CheckKeys.json
+      - step: GetKeyValues
+        exampleFile: ../examples/GetKeyValues.json
+      - step: CheckKeyValues
+        exampleFile: ../examples/CheckKeyValues.json
+      - step: DeleteKeyValue
+        exampleFile: ../examples/DeleteKeyValue.json
+      - step: GetKeyValue
+        exampleFile: ../examples/GetKeyValue.json
+      - step: CheckKeyValue
+        exampleFile: ../examples/CheckKeyValue.json
+      - step: GetLabels
+        exampleFile: ../examples/GetLabels.json
+      - step: CheckLabels
+        exampleFile: ../examples/CheckLabels.json
+      - step: DeleteLock
+        exampleFile: ../examples/DeleteLock.json
+      - step: GetRevisions
+        exampleFile: ../examples/GetRevisions.json
+      - step: CheckRevisions
+        exampleFile: ../examples/CheckRevisions.json
