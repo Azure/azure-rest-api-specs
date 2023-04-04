@@ -1,0 +1,38 @@
+parameters:
+  "python-sdk-folder":
+    default: "{project-root}/azure-sdk-for-python/"
+  "java-sdk-folder":
+    default: "{project-root}/azure-sdk-for-java/"
+  "js-sdk-folder":
+    default: "{project-root}/azure-sdk-for-js/"
+  "csharp-sdk-folder":
+    default: "{project-root}/azure-sdk-for-csharp/"
+  "service-directory-name":
+    default: "contosowidgetmanager"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "./data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-directory: "./examples"
+    output-file: widgets.json
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{python-sdk-folder}/sdk/{service-directory-name}/{package-name}"
+    package-mode: "dataplane"
+    package-name: "azure-contoso-widgetmanager"
+  "@azure-tools/typespec-csharp":
+    clear-output-folder: true
+    emitter-output-dir: "{csharp-sdk-folder}/sdk/{service-directory-name}/{namespace}/src"
+    model-namespace: false
+    namespace: Azure.Contoso.WidgetManager
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/contosowidgetmanager-rest"
+    generateMetadata: true
+    generateTest: true
+    packageDetails:
+      name: "@azure-rest/contoso-widgetmanager-rest"
+      description: "Contoso WidgetManager Service"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-contoso-widgetmanager"
+    namespace: com.azure.contoso.widgetmanager
