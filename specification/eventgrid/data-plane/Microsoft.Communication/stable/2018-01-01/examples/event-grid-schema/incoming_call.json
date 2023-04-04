@@ -1,26 +1,39 @@
 {
-  "id": "81fa5460-7d8c-4fb7-bbb7-2d56154e78d9",
+  "id": "e80026e7-e298-46ba-bc42-dab0eda92581",
   "topic": "/subscriptions/{subscription-id}/resourceGroups/{group-name}/providers/Microsoft.Communication/communicationServices/{communication-services-resource-name}",
-  "subject": "/call/{call-id}",
+  "subject": "/caller/{caller-id}/recipient/{recipient-id}",
   "data": {
     "to": {
-      "rawId": "8:acs:5354158b-17b7-489c-9380-95d8821ff76b_0000000c-6c47-7dfd-6d70-224822000cfb",
+      "kind": "communicationUser",
+      "rawId": "{recipient-id}",
       "communicationUser": {
-        "id": "8:acs:5354158b-17b7-489c-9380-95d8821ff76b_0000000c-6c47-7dfd-6d70-224822000cfb"
+        "id": "{recipient-id}"
       }
     },
     "from": {
-      "rawId": "8:acs:0a420b29-555c-4f6b-841e-de8059893bb9_0000000c-6c47-7dfd-6d70-224822000cfb",
+      "kind": "communicationUser",
+      "rawId": "{caller-id}",
       "communicationUser": {
-        "id": "8:acs:0a420b29-555c-4f6b-841e-de8059893bb9_0000000c-6c47-7dfd-6d70-224822000cfb"
+        "id": "{caller-id}"
       }
     },
+    "serverCallId": "{server-call-id}",
     "callerDisplayName": "VOIP Caller",
-    "incomingCallContext": "H4sIAAAAAAAEAMVX+2/bOBL+VwQfcD9cS4sUJUrkwjg4jn3NNa/m0WuL4AKKomw2sqSV6Ee62//9hpbzsnOH4naBKrAicjjffD0iODO/9ZQsitPKmtwoaU1V9sRvvbyp5u6/yXqilwipWiElylgapk",
+    "customContext": {
+      "sipHeaders": {
+        "userToUser": "616d617a6f6e5f6368696;encoding=hex",
+        "X-MS-Custom-myhader1": "35567842",
+        "X-MS-Custom-myhader2": "customsipheadervalue"
+      },
+      "voipHeaders": {
+        "customHeader": "customValue"
+      }
+    },
+    "incomingCallContext": "{incoming-call-contextValue}",
     "correlationId": "correlationId"
   },
   "eventType": "Microsoft.Communication.IncomingCall",
   "dataVersion": "1.0",
   "metadataVersion": "1",
-  "eventTime": "2022-12-30T21:13:45Z"
+  "eventTime": "2023-04-04T17:18:42.5542219Z"
 }
