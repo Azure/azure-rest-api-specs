@@ -1,4 +1,5 @@
 import "@cadl-lang/rest";
+import "@cadl-lang/openapi";
 import "@cadl-lang/versioning";
 import "@azure-tools/cadl-autorest";
 import "@azure-tools/cadl-azure-core";
@@ -10,6 +11,7 @@ using Cadl.Versioning;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
@@ -45,11 +47,18 @@ interface Devices extends ProxyResourceOperationsDevice<Device>{
   @armResourceAction(Device)
   @post
   @doc("Generates the capability image for the device. Use '.unassigned' or '.default' for the device group and product names to generate the image for a device that does not belong to a specific device group and product.")
+  @extension("x-ms-long-running-operation", true)
+  @extension(
+    "x-ms-long-running-operation-options",
+    {
+      "final-state-via": "location",
+    }
+  )
   op generateCapabilityImage(
     ...ResourceInstanceParameters<Device>, 
     @doc("Generate capability image request body.")
     @body generateDeviceCapabilityRequest: GenerateCapabilityImageRequest
-  ): ArmResponse<SignedCapabilityImageResponse> | ErrorResponse;
+  ): ArmResponse<SignedCapabilityImageResponse> | ArmAcceptedResponse | ErrorResponse;
 }
 
 @doc("The properties of device")
