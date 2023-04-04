@@ -32,7 +32,7 @@ tag: package-2020-01-01
 ```
 
 ``` yaml $(package-flexibleservers)
-tag: package-flexibleserver-2021-12-01-preview
+tag: package-flexibleserver-2021-12-01
 ```
 
 ``` yaml $(package-singleservers)
@@ -158,6 +158,22 @@ input-file:
 - Microsoft.DBforMySQL/LogFiles/preview/2021-12-01-preview/LogFiles.json
 - Microsoft.DBforMySQL/ServiceOperations/preview/2021-12-01-preview/ServiceOperations.json
 - Microsoft.DBforMySQL/AAD/preview/2021-12-01-preview/AzureADAdministrator.json
+```
+
+### Tag: package-flexibleserver-2021-12-01
+
+These settings apply only when `--tag=package-flexibleserver-2021-12-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-flexibleserver-2021-12-01'
+input-file:
+- Microsoft.DBforMySQL/Backups/stable/2021-12-01/Backups.json
+- Microsoft.DBforMySQL/Configurations/stable/2021-12-01/Configurations.json
+- Microsoft.DBforMySQL/Databases/stable/2021-12-01/Databases.json
+- Microsoft.DBforMySQL/Firewall/stable/2021-12-01/FirewallRules.json
+- Microsoft.DBforMySQL/FlexibleServers/stable/2021-12-01/FlexibleServers.json
+- Microsoft.DBforMySQL/LogFiles/stable/2021-12-01/LogFiles.json
+- Microsoft.DBforMySQL/ServiceOperations/stable/2021-12-01/ServiceOperations.json
+- Microsoft.DBforMySQL/AAD/stable/2021-12-01/AzureADAdministrator.json
 ```
 
 ## Suppression
