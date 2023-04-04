@@ -456,7 +456,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionTypesList" // TODO: add response body
+              "$ref": "#/definitions/ExtensionTypesList"
             }
           },
           "default": {
@@ -503,7 +503,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionTypesGet" // TODO: add response body
+              "$ref": "#/definitions/ExtensionTypeGet"
             }
           },
           "default": {
@@ -543,7 +543,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ExtensionTypeVersionsList" // TODO: add response body
+              "$ref": "#/definitions/ExtensionTypeVersionsList"
             }
           },
           "default": {
@@ -842,6 +842,113 @@
               }
             }
           }
+        }
+      }
+    },
+    "ExtensionType": {
+      "description": "The Extension Type object.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "releaseTrains": {
+            "description": "The list of release trains of the extension type.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "clusterTypes": { // TODO: should this be oneOf array and string?
+            "description": "The list of cluster types of the extension type.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "supportedScopes": {
+            "defaultScope": {
+              "description": "The default scope of the extension type.",
+              "type": "string"
+            },
+            "properties": {
+              "description": "The list of properties of the extension type.",
+              "type": "object"
+            },
+            // TODO: protected params
+            "id": {
+              "description": "The id of the extension type.",
+              "type": "string"
+            },
+            "name": {
+              "description": "The name of the extension type.",
+              "type": "string"
+            },
+            "type": {
+              "description": "The type of the extension type.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ExtensionTypeVersion": {
+      "description": "The Extension Type Version object.",
+      "type": "object",
+      "properties": {
+        "releaseTrain": {
+          "description": "The Release Train of the extension versions.",
+          "type": "string"
+        },
+        "versions": {
+          "description": "The list of versions of the extension type.",
+          "type": "array",
+          "items": {
+            "description": "The version for the extension type.",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ExtensionTypesList": {
+      "description": "Result of the request to list Extension Types.  It contains a list of ExtensionType objects and a URL link to get the next set of results.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ExtensionType"
+          },
+          "description": "List of Extension Types within a Kubernetes cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of extension type objects, if any."
+        }
+      }
+    },
+    "ExtensionTypeGet": {
+      "description": "Result of the request to get an Extension Type.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/ExtensionType",
+          "readOnly": true,
+          "description": "The Extension Type."
+        }
+      }
+    },
+    "ExtensionTypeVersionsList": {
+      "description": "Result of the request to list Extension Type Versions.  It contains a list of ExtensionTypeVersion objects.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ExtensionTypeVersion"
+          },
+          "description": "List of Extension Type Versions within a Kubernetes cluster."
         }
       }
     }
