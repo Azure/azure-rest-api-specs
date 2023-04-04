@@ -402,6 +402,158 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes": {
+      "get": {
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "List all Extension Types for the location.",
+        "operationId": "ExtensionTypes_LocationList",
+        "x-ms-examples": {
+          "List Extension Types": {
+            "$ref": "./examples/ListExtensionTypesByLocation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "releaseTrain",
+            "in": "query",
+            "description": "Release train",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "publisherId",
+            "in": "query",
+            "description": "Publisher ID of a marketplace extension",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "query",
+            "description": "Offer ID of a marketplace extension",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "planId",
+            "in": "query",
+            "description": "Plan ID of a marketplace extension",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypesList" // TODO: add response body
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        // TODO: is this currently pagable? Going to be pagable? Or is this just always on list routes even if we're not using it "just in case one day"?
+        "x-ms-pagable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionName}": {
+      "get": {
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "Get an extension type for the location.",
+        "operationId": "ExtensionTypes_LocationGet",
+        "x-ms-examples": {
+          "Get Extension Type": {
+            "$ref": "./examples/GetExtensionTypeByLocation.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypesGet" // TODO: add response body
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subcriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionName}/versions": {
+      "get": {
+        "tags": [
+          "Extensions",
+          "ClusterExtensions"
+        ],
+        "description": "List the versions for an extension type and location.",
+        "operationId": "ExtensionTypes_ListVersions",
+        "x-ms-examples": {
+          "List Extension Type Versions": {
+            "$ref": "./examples/ListExtensionTypeVersions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ExtensionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ExtensionTypeVersionsList" // TODO: add response body
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
