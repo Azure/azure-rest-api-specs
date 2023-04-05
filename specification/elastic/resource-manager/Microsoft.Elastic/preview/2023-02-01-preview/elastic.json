@@ -79,12 +79,14 @@
           {
             "in": "query",
             "name": "region",
+            "description": "Region where monitor resource deployment will took place.",
             "required": true,
             "type": "string"
           },
           {
             "in": "query",
             "name": "subscriptionId",
+            "description": "Subscription ID where monitor resource will be deployed.",
             "type": "string"
           }
         ],
@@ -2003,6 +2005,7 @@
       }
     },
     "ElasticVersionsListResponse": {
+      "description": "List of elastic versions available for the monitor resource",
       "type": "object",
       "properties": {
         "versions": {
@@ -2108,7 +2111,7 @@
       "type": "object",
       "properties": {
         "marketplaceSubscription": {
-          "description": "Marketplace Subscription Id",
+          "description": "Marketplace Subscription",
           "type": "object",
           "properties": {
             "id": {
@@ -2118,11 +2121,11 @@
           }
         },
         "marketplaceName": {
-          "description": "Subscription Details: Marketplace SAAS Name",
+          "description": "Marketplace Subscription Details: SAAS Name",
           "type": "string"
         },
         "marketplaceResourceId": {
-          "description": "Subscription Details: Marketplace Resource URI",
+          "description": "Marketplace Subscription Details: Resource URI",
           "type": "string"
         }
       }
