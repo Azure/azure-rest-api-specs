@@ -51,7 +51,7 @@ input-file:
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettings_API.json
 - Microsoft.Insights/preview/2021-05-01-preview/diagnosticsSettingsCategories_API.json
 - Microsoft.Insights/stable/2023-01-01/actionGroups_API.json
-- Microsoft.Insights/preview/2023-03-01-preview/tenantActionGroups_API.json
+- Microsoft.Insights/preview/2023-05-01-preview/tenantActionGroups_API.json
 - Microsoft.Insights/stable/2015-04-01/activityLogs_API.json
 - Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
 - Microsoft.Insights/stable/2015-04-01/tenantActivityLogs_API.json
