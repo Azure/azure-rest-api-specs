@@ -327,15 +327,14 @@
     "selector": {
       "type": "object",
       "description": "Model that represents a selector in the Experiment resource.",
+      "discriminator": "type",
       "properties": {
         "type": {
           "type": "string",
           "description": "Enum of the selector type.",
           "enum": [
-            "Percent",
-            "Random",
-            "Tag",
-            "List"
+            "List",
+            "Query"
           ],
           "x-ms-enum": {
             "name": "SelectorType",
@@ -347,6 +346,25 @@
           "description": "String of the selector ID.",
           "minLength": 1
         },
+        "filter": {
+          "$ref": "#/definitions/filter"
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ],
+      "additionalProperties": true
+    },
+    "listSelector": {
+      "type": "object",
+      "description": "Model that represents a list selector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/selector"
+        }
+      ],
+      "properties": {
         "targets": {
           "type": "array",
           "description": "List of Target references.",
@@ -354,17 +372,43 @@
           "items": {
             "$ref": "#/definitions/targetReference"
           }
-        },
-        "filter": {
-          "$ref": "#/definitions/filter"
         }
       },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "List",
       "required": [
-        "type",
-        "id",
         "targets"
+      ]
+    },
+    "querySelector": {
+      "type": "object",
+      "description": "Model that represents a query selector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/selector"
+        }
       ],
-      "additionalProperties": false
+      "properties": {
+        "queryString": {
+          "type": "string",
+          "description": "Azure Resource Graph (ARG) Query Language query for target resources."
+        },
+        "subscriptionIds": {
+          "type": "array",
+          "description": "Subscription id list to scope resource query.",
+          "items": {
+            "type": "string",
+            "description": "String of the availability zone ID."
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false,
+      "x-ms-discriminator-value": "Query",
+      "required": [
+        "queryString",
+        "subscriptionIds"
+      ]
     },
     "filter": {
       "type": "object",
@@ -379,7 +423,7 @@
           ],
           "x-ms-enum": {
             "name": "FilterType",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
