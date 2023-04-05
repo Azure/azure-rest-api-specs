@@ -11,7 +11,8 @@
       },
       "identity": {
         "userAssignedIdentities": {
-          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {}
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity": {},
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity": {}
         },
         "type": "UserAssigned"
       },
@@ -21,7 +22,9 @@
         "dataEncryption": {
           "type": "AzureKeyVault",
           "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
-          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity"
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+          "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/66f57315bab34b0189daa113fbc78787",
+          "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity"
         },
         "storage": {
           "storageSizeGB": 1024
@@ -48,6 +51,10 @@
             "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity-1": {
               "principalId": "90008082-e024-4cc3-8fcf-63bcdb9cf6b6",
               "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+            },
+            "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity": {
+              "principalId": "0a4e0c6e-7751-4078-ae1f-a477306c11e9",
+              "clientId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
             }
           },
           "type": "UserAssigned"
@@ -66,14 +73,18 @@
           "dataEncryption": {
             "type": "AzureKeyVault",
             "primaryKeyURI": "https://test-kv.vault.azure.net/keys/test-key1/77f57315bab34b0189daa113fbc78787",
-            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity"
+            "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-usermanagedidentity",
+            "geoBackupKeyURI": "https://test-geo-kv.vault.azure.net/keys/test-key1/66f57315bab34b0189daa113fbc78787",
+            "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testresourcegroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-usermanagedidentity",
+            "primaryEncryptionKeyStatus": "Valid",
+            "geoBackupEncryptionKeyStatus": "Valid"
           },
           "storage": {
             "storageSizeGB": 1024
           },
           "backup": {
             "backupRetentionDays": 20,
-            "geoRedundantBackup": "Disabled",
+            "geoRedundantBackup": "Enabled",
             "earliestRestoreDate": "2021-05-26T01:16:58.3723361+00:00"
           },
           "network": {

@@ -54,7 +54,7 @@
             "$ref": "./examples/ServerCreatePointInTimeRestore.json"
           },
           "Create a database as a geo-restore in geo-paired location": {
-            "$ref": "./examples/ServerCreateGeoRestore.json"
+            "$ref": "./examples/ServerCreateGeoRestoreWithDataEncryptionEnabled.json"
           },
           "ServerCreateReplica": {
             "$ref": "./examples/ServerCreateReplica.json"
@@ -770,6 +770,14 @@
           "type": "string",
           "description": "Resource Id for the User assigned identity to be used for data encryption for primary server."
         },
+        "geoBackupKeyURI": {
+          "type": "string",
+          "description": "URI for the key for data encryption for geo-backup of server."
+        },
+        "geoBackupUserAssignedIdentityId": {
+          "type": "string",
+          "description": "Resource Id for the User assigned identity to be used for data encryption for geo-backup of server."
+        },
         "type": {
           "type": "string",
           "description": "Data encryption type to depict if it is System Managed vs Azure Key vault.",
@@ -779,6 +787,36 @@
           ],
           "x-ms-enum": {
             "name": "ArmServerKeyType",
+            "modelAsString": true
+          }
+        },
+        "primaryEncryptionKeyStatus": {
+          "type": "string",
+          "description": "Primary encryption key status for Data encryption enabled server.",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "enum": [
+            "Valid",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "keyStatusEnum",
+            "modelAsString": true
+          }
+        },
+        "geoBackupEncryptionKeyStatus": {
+          "type": "string",
+          "description": "Geo-backup encryption key status for Data encryption enabled server.",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "enum": [
+            "Valid",
+            "Invalid"
+          ],
+          "x-ms-enum": {
+            "name": "keyStatusEnum",
             "modelAsString": true
           }
         }
