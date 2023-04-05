@@ -36,15 +36,14 @@ tag: package-flexibleserver-2022-12-01
 ```
 
 ``` yaml $(package-singleservers)
-tag: package-preview-2023-03
+tag: package-2020-01-01
 ```
 
+### Tag: package-flexibleserver-2023-03-01-preview
 
-### Tag: package-preview-2023-03
+These settings apply only when `--tag=package-flexibleserver-2023-03-01-preview` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2023-03` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2023-03'
+```yaml $(tag) == 'package-flexibleserver-2023-03-01-preview'
 input-file:
   - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Administrators.json
   - Microsoft.DBforPostgreSQL/preview/2023-03-01-preview/Backups.json
