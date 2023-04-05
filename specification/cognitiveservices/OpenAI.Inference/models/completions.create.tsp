@@ -9,15 +9,15 @@ namespace Azure.OpenAI.Completions;
 @doc("Post body schema to create a prompt completion from a deployment")
 model CompletionsOptions {
     @doc("""
-A prompt to complete from, encoded as a string, a list of strings, or
-a list of token lists.
+An optional prompt to complete from, encoded as a string, a list of strings, or
+a list of token lists. Defaults to <|endoftext|>. The prompt to complete from.
 If you would like to provide multiple prompts, use the POST variant of this
 method. Note that <|endoftext|> is the document separator that the model sees
 during training, so if a prompt is not specified the model will generate as if
 from the beginning of a new document. Maximum allowed size of string list is
 2048.
 """)
-    prompt: string | string[];
+    prompt?: string | string[];
 
     @doc("The maximum number of tokens to generate. Has minimum of 0.")
     max_tokens?: int32;
