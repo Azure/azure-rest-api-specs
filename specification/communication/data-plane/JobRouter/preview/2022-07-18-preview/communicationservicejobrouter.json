@@ -156,11 +156,11 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxpagesize",
+            "name": "maxPageSize",
             "description": "Maximum page size",
             "type": "integer",
             "format": "int32",
-            "default": 20
+            "default": -1
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -341,11 +341,11 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxpagesize",
+            "name": "maxPageSize",
             "description": "Maximum page size",
             "type": "integer",
             "format": "int32",
-            "default": 20
+            "default": -1
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -526,11 +526,11 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxpagesize",
+            "name": "maxPageSize",
             "description": "Number of objects to return per page",
             "type": "integer",
             "format": "int32",
-            "default": 20
+            "default": -1
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -672,7 +672,7 @@
           {
             "in": "path",
             "name": "id",
-            "description": "Id of the job.",
+            "description": "",
             "required": true,
             "type": "string"
           },
@@ -980,11 +980,11 @@
           },
           {
             "in": "query",
-            "name": "maxpagesize",
+            "name": "maxPageSize",
             "description": "Number of objects to return per page",
             "type": "integer",
             "format": "int32",
-            "default": 20
+            "default": -1
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1358,11 +1358,11 @@
         "parameters": [
           {
             "in": "query",
-            "name": "maxpagesize",
+            "name": "maxPageSize",
             "description": "Number of objects to return per page",
             "type": "integer",
             "format": "int32",
-            "default": 20
+            "default": -1
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1463,7 +1463,7 @@
           {
             "in": "body",
             "name": "patch",
-            "description": "Model of worker properties to be patched. See also: https://datatracker.ietf.org/doc/html/rfc7386",
+            "description": "Model of worker properties to be created or patched. See also: https://datatracker.ietf.org/doc/html/rfc7386",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RouterWorker"
@@ -1630,11 +1630,11 @@
           },
           {
             "in": "query",
-            "name": "maxpagesize",
+            "name": "maxPageSize",
             "description": "Number of objects to return per page",
             "type": "integer",
             "format": "int32",
-            "default": 20
+            "default": -1
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1747,7 +1747,7 @@
       "type": "object",
       "properties": {
         "note": {
-          "description": "(Optional) A note that will be appended to the jobs' Notes collection with th current timestamp.",
+          "description": "(Optional) A note that will be appended to the jobs' Notes collection with the current timestamp.",
           "maxLength": 2000,
           "minLength": 0,
           "type": "string"
@@ -1762,8 +1762,7 @@
     },
     "CancelJobResult": {
       "description": "Response payload from cancelling a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "ChannelConfiguration": {
       "description": "Represents the capacity a job in this channel will consume from a worker",
@@ -1775,6 +1774,11 @@
         "capacityCostPerJob": {
           "format": "int32",
           "description": "The amount of capacity that an instance of a job of this channel will consume of the total worker capacity.",
+          "type": "integer"
+        },
+        "maxNumberOfJobs": {
+          "format": "int32",
+          "description": "The maximum number of jobs that can be supported concurrently for this channel.",
           "type": "integer"
         }
       }
@@ -1872,7 +1876,7 @@
           "type": "string"
         },
         "note": {
-          "description": "(Optional) A note that will be appended to the jobs' Notes collection with th current timestamp.",
+          "description": "(Optional) A note that will be appended to the jobs' Notes collection with the current timestamp.",
           "maxLength": 2000,
           "minLength": 0,
           "type": "string"
@@ -1881,58 +1885,13 @@
     },
     "CloseJobResult": {
       "description": "Response payload from closing a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "CommunicationError": {
-      "description": "The Communication Services error.",
-      "type": "object",
-      "required": [
-        "code",
-        "message"
-      ],
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The error target."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationError"
-          },
-          "readOnly": true,
-          "description": "Further details about specific errors that led to this error."
-        },
-        "innererror": {
-          "x-ms-client-name": "innerError",
-          "readOnly": true,
-          "$ref": "#/definitions/CommunicationError",
-          "description": "The inner error if any."
-        }
-      }
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationError"
     },
     "CommunicationErrorResponse": {
-      "description": "The Communication Services error.",
-      "type": "object",
-      "required": [
-        "error"
-      ],
-      "properties": {
-        "error": {
-          "description": "The Communication Services error.",
-          "$ref": "#/definitions/CommunicationError"
-        }
-      }
+      "$ref": "../../../Common/stable/2021-03-07/common.json#/definitions/CommunicationErrorResponse"
     },
     "CompleteJobRequest": {
       "description": "Request payload for completing jobs",
@@ -1948,7 +1907,7 @@
           "type": "string"
         },
         "note": {
-          "description": "(Optional) A note that will be appended to the jobs' Notes collection with th current timestamp.",
+          "description": "(Optional) A note that will be appended to the jobs' Notes collection with the current timestamp.",
           "maxLength": 2000,
           "minLength": 0,
           "type": "string"
@@ -1957,8 +1916,7 @@
     },
     "CompleteJobResult": {
       "description": "Response payload from completing a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "ConditionalQueueSelectorAttachment": {
       "description": "Describes a set of label selectors that will be attached if the given condition resolves to true",
@@ -2022,8 +1980,7 @@
     },
     "DeclineJobOfferResult": {
       "description": "Response payload from declining a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "DirectMapRule": {
       "description": "A rule that return the same labels as the input labels.",
@@ -2455,7 +2412,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "exceptionPolicyId": {
           "description": "(Optional) The ID of the exception policy that determines various job escalation rules.",
@@ -2524,6 +2481,24 @@
         }
       },
       "x-ms-discriminator-value": "manual-reclassify"
+    },
+    "Oauth2ClientCredential": {
+      "description": "OAuth2.0 Credentials used to Contoso's Authorization server.\r\nReference: https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/",
+      "type": "object",
+      "properties": {
+        "clientId": {
+          "description": "ClientId for Contoso Authorization server.",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        },
+        "clientSecret": {
+          "description": "Client secret for Contoso Authorization server.",
+          "maxLength": 500,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
     },
     "PassThroughQueueSelectorAttachment": {
       "description": "Attaches a label selector where the value is pass through from the job label with the same key",
@@ -2616,8 +2591,7 @@
     },
     "QueueAssignment": {
       "description": "An assignment of a worker to a queue",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "QueueCollection": {
       "description": "A paged collection of queues.",
@@ -2787,20 +2761,18 @@
         "labelsToUpsert": {
           "description": "(optional) Dictionary containing the labels to update (or add if not existing) in key-value pairs",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
       },
       "x-ms-discriminator-value": "reclassify"
     },
     "ReclassifyJobRequest": {
       "description": "Request payload for reclassifying jobs",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "ReclassifyJobResult": {
       "description": "Response payload from reclassifying a job",
-      "type": "object",
-      "properties": {}
+      "type": "object"
     },
     "RoundRobinMode": {
       "description": "Jobs are distributed in order to workers, starting with the worker that is after the last worker to receive a job.",
@@ -2894,7 +2866,7 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "assignments": {
           "description": "A collection of the assignments of the job.\r\nKey is AssignmentId.",
@@ -2907,7 +2879,7 @@
         "tags": {
           "description": "A set of non-identifying attributes attached to this job",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "notes": {
           "description": "Notes attached to a job, sorted by timestamp",
@@ -2932,7 +2904,7 @@
       }
     },
     "RouterRule": {
-      "description": "A rule of one of the following types:\r\n            \r\nStaticRule:  A rule providing static rules that always return the same result, regardless of input.\r\nDirectMapRule:  A rule that return the same labels as the input labels.\r\nExpressionRule: A rule providing inline expression rules.\r\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.",
+      "description": "A rule of one of the following types:\r\n            \r\nStaticRule:  A rule providing static rules that always return the same result, regardless of input.\r\nDirectMapRule:  A rule that return the same labels as the input labels.\r\nExpressionRule: A rule providing inline expression rules.\r\nAzureFunctionRule: A rule providing a binding to an HTTP Triggered Azure Function.\r\nWebhookRule: A rule providing a binding to a webserver following OAuth2.0 authentication protocol.",
       "required": [
         "kind"
       ],
@@ -2978,12 +2950,12 @@
         "labels": {
           "description": "A set of key/value pairs that are identifying attributes used by the rules engines to make decisions.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "tags": {
           "description": "A set of non-identifying attributes attached to this worker.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         },
         "channelConfigurations": {
           "description": "The channel(s) this worker can handle and their impact on the workers capacity.",
@@ -3218,6 +3190,34 @@
         }
       },
       "x-ms-discriminator-value": "wait-time"
+    },
+    "WebhookRule": {
+      "description": "A rule providing a binding to an external web server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RouterRule"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "authorizationServerUri": {
+          "format": "uri",
+          "description": "Uri for Authorization Server.",
+          "type": "string"
+        },
+        "clientCredential": {
+          "$ref": "#/definitions/Oauth2ClientCredential"
+        },
+        "webhookUri": {
+          "format": "uri",
+          "description": "Uri for Contoso's Web Server.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "webhook-rule"
     },
     "WeightedAllocationQueueSelectorAttachment": {
       "description": "Describes multiple sets of label selectors, of which one will be selected and attached according to a weighting",
