@@ -31,6 +31,10 @@ directive:
     where: '$.info'
     transform: >
       $["version"] = "2018-10-01";
+  - from: applicationGateway.json
+    where: '$.definitions.ApplicationGatewayFirewallExclusion'
+    transform: >
+      $["required"] = ["matchVariable"]
 ```
 
 ### Java multi-api

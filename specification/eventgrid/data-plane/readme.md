@@ -18,7 +18,7 @@ This enables customers to download one EventGrid data plane library instead of h
 
 In order to automate the mapping of event definition with event type, please follow the guidelines below when adding new events to your swagger:
 - The name of a new event definition should have `EventData` suffix. For e.g. `AcsChatMessageReceivedEventData`.
-- The description of the new event should include the event type. This is the `eventType` name in an `EventGridEvent` or `type` name in `CloudEvent`. For e.g. `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event.` Here `Microsoft.Communication.ChatMessageReceived` is the event name.
+- The description of the new event should include the event type. This is the `eventType` name in an `EventGridEvent` or `type` name in `CloudEvent`. For e.g. `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived event."` Here `Microsoft.Communication.ChatMessageReceived` is the event name. If your event is in preview, you may add the word preview: `"Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatMessageReceived preview event."`
 
 A sample valid event definition is shown below:
 ~~~ markdown

@@ -119,7 +119,15 @@
       "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
       "x-ms-parameter-location": "client",
       "schema": {
-        "$ref": "#/definitions/FeatureRequest"
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/definitions/FeatureType"
+          },
+          {
+            "$ref": "#/definitions/FeatureAttributes"
+          }
+        ]
       }
     },
     "FeatureAttributesBody": {
@@ -136,7 +144,7 @@
   "paths": {
     "/features/datasets/{datasetId}": {
       "get": {
-        "description": "The Get Landing Page API provides links to the API definition, the Conformance statements, and the metadata about the feature data in this dataset.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "The Get Landing Page API provides links to the API definition, the Conformance statements, and the metadata about the feature data in this dataset.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_GetLandingPage",
         "x-ms-examples": {
           "GetLandingPage": {
@@ -169,7 +177,7 @@
     },
     "/features/datasets/{datasetId}/api": {
       "get": {
-        "description": "The Get API Definition API provides a description of the capabilities of the Features service. It can be used by developers to understand the API or by development tools to support the implementation of servers and clients.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "The Get API Definition API provides a description of the capabilities of the Features service. It can be used by developers to understand the API or by development tools to support the implementation of servers and clients.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_GetApiDefinition",
         "x-ms-examples": {
           "GetApiDefinition": {
@@ -202,7 +210,7 @@
     },
     "/features/datasets/{datasetId}/conformance": {
       "get": {
-        "description": "The Get Requirements Classes lists all requirements classes specified in the standard that the server conforms to.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "The Get Conformance API lists all requirements classes specified in the standard that the server conforms to.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_ListConformance",
         "x-ms-examples": {
           "GetConformance": {
@@ -235,7 +243,7 @@
     },
     "/features/datasets/{datasetId}/collections": {
       "get": {
-        "description": "The Collections Description API provides descriptions of all the collections in a given dataset.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "The Get Collections API provides a list of all the collections in a given dataset.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_GetCollections",
         "x-ms-examples": {
           "GetCollections": {
@@ -257,7 +265,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/CollectionsResponse"
+              "$ref": "#/definitions/CollectionsResult"
             }
           },
           "default": {
@@ -268,7 +276,7 @@
     },
     "/features/datasets/{datasetId}/collections/{collectionId}": {
       "get": {
-        "description": "The Collections Description API provides descriptions of all the collections in a given dataset. It includes the links to the operations that can be performed on the collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "The Get Collection API returns the collection identified by the provided id in the given dataset.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_GetCollection",
         "x-ms-examples": {
           "GetCollection": {
@@ -293,7 +301,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/Collection"
+              "$ref": "#/definitions/CollectionResult"
             }
           },
           "default": {
@@ -304,7 +312,7 @@
     },
     "/features/datasets/{datasetId}/collections/{collectionId}/definition": {
       "get": {
-        "description": "The Collection Definition API provides the detailed data model of a given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "The Collection Definition API provides the detailed data model of a given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_GetCollectionDefinition",
         "x-ms-examples": {
           "GetCollectionDefinition": {
@@ -329,7 +337,7 @@
           "200": {
             "description": "Ok",
             "schema": {
-              "$ref": "#/definitions/CollectionDefinition"
+              "$ref": "#/definitions/CollectionDefinitionResult"
             }
           },
           "default": {
@@ -340,7 +348,7 @@
     },
     "/features/datasets/{datasetId}/collections/{collectionId}/items": {
       "get": {
-        "description": "The Get Features API returns the list of features in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "The Get Features API returns the list of features in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_GetItems",
         "x-ms-examples": {
           "GetFeatures": {
@@ -383,7 +391,7 @@
         }
       },
       "post": {
-        "description": "This Post Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API creates a feature with the provided attributes in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "This Post Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API creates a feature with the provided attributes in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_Create",
         "x-ms-examples": {
           "PostFeature": {
@@ -422,7 +430,7 @@
     },
     "/features/datasets/{datasetId}/collections/{collectionId}/items/{featureId}": {
       "get": {
-        "description": "The Get Feature API returns the feature identified by the provided id in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "The Get Feature API returns the feature identified by the provided id in the given collection.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_Get",
         "x-ms-examples": {
           "GetFeature": {
@@ -456,7 +464,7 @@
         }
       },
       "put": {
-        "description": "This Put Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API **replaces** the feature identified by the provided id in the given collection, i.e., the request body overwrites all the existing attributes of a feature.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "This Put Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API **replaces** the feature identified by the provided id in the given collection, i.e., the request body overwrites all the existing attributes of a feature.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_Replace",
         "x-ms-examples": {
           "PutFeature": {
@@ -493,7 +501,7 @@
         }
       },
       "patch": {
-        "description": "This Patch Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API **updates** attributes by performing a merge patch on the feature identified by the provided id in the given collection. It allows for the update of individual feature attributes without implicitly overwriting excluded attributes in the request body.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "This Patch Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API **updates** attributes by performing a merge patch on the feature identified by the provided id in the given collection. It allows for the update of individual feature attributes without implicitly overwriting excluded attributes in the request body.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_Update",
         "x-ms-examples": {
           "PatchFeature": {
@@ -530,7 +538,7 @@
         }
       },
       "delete": {
-        "description": "This Delete Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API deletes the feature identified by the provided id in the given collection. Please note that if other existing features are dependent on the requested feature for deletion, the delete request will fail until the dependent features are deleted first.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) of similar type. This grouping is defined by a common schema referred to as [ontology](https://docs.microsoft.com/azure/azure-maps/creator-facility-ontology?pivots=facility-ontology-v2).\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
+        "description": "This Delete Feature API conforms with the **drafted** [Open Geospatial Consortium API - Features - Part 4: Create, Replace, Update and Delete](http://docs.opengeospatial.org/DRAFTS/20-002.html) document. This API deletes the feature identified by the provided id in the given collection. Please note that if other existing features are dependent on the requested feature for deletion, the delete request will fail until the dependent features are deleted first.\n\nThe Features API is a part of [Creator](https://docs.microsoft.com/azure/azure-maps/creator-indoor-maps), which makes it possible to develop applications based on your private indoor map data using Azure Maps API and SDK. Features GET APIs follow the [Open Geospatial Consortium API - Features - Part 1: Core corrigendum](http://www.opengis.net/doc/IS/ogcapi-features-1/1.0.1) standard to query [Datasets](https://docs.microsoft.com/en-us/rest/api/maps/v20220901preview/dataset). Datasets consist of multiple feature collections, which are a grouping of [features](https://tools.ietf.org/html/rfc7946#section-3.2) defined by a common schema.\n\n**Applies to:** see pricing [tiers](https://aka.ms/AzureMapsPricingTier).",
         "operationId": "Features_Delete",
         "x-ms-examples": {
           "DeleteFeature": {
@@ -564,6 +572,7 @@
   },
   "definitions": {
     "LandingPageResult": {
+      "description": "Response after a successful request to the landing page.",
       "type": "object",
       "required": [
         "links"
@@ -582,6 +591,7 @@
       }
     },
     "ApiDefinitionResult": {
+      "description": "Response after a successful request to get the API definition.",
       "type": "object",
       "required": [
         "openapi",
@@ -662,6 +672,7 @@
       }
     },
     "ConformanceResult": {
+      "description": "Response after a successful request to the conformance page.",
       "type": "object",
       "required": [
         "conformsTo"
@@ -706,7 +717,8 @@
         }
       }
     },
-    "CollectionsResponse": {
+    "CollectionsResult": {
+      "description": "Response after a successful request to list collections.",
       "type": "object",
       "required": [
         "links",
@@ -720,7 +732,7 @@
           "description": "All the collections in a given dataset.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Collection"
+            "$ref": "#/definitions/CollectionResult"
           }
         },
         "links": {
@@ -739,7 +751,8 @@
         }
       }
     },
-    "Collection": {
+    "CollectionResult": {
+      "description": "Response after a successful request to get a collection.",
       "type": "object",
       "required": [
         "id",
@@ -748,12 +761,12 @@
       ],
       "properties": {
         "id": {
-          "description": "identifier of the collection used, for example, in URIs",
+          "description": "Identifier of the collection used, for example, in URIs.",
           "type": "string",
           "example": "buildings"
         },
         "title": {
-          "description": "human readable title of the collection",
+          "description": "Human readable title of the collection.",
           "type": "string",
           "example": "Buildings"
         },
@@ -766,7 +779,7 @@
           "example": "feature"
         },
         "description": {
-          "description": "a description of the features in the collection",
+          "description": "A description of the features in the collection.",
           "type": "string",
           "example": "Buildings in the city of Bonn."
         },
@@ -796,8 +809,8 @@
         }
       }
     },
-    "CollectionDefinition": {
-      "description": "collection of GeoJSON features",
+    "CollectionDefinitionResult": {
+      "description": "Response after a successful request to read a collection's definition.",
       "type": "object",
       "required": [
         "id",
@@ -806,12 +819,12 @@
       ],
       "properties": {
         "id": {
-          "description": "identifier of the collection used, for example, in URIs",
+          "description": "Identifier of the collection used, for example, in URIs.",
           "type": "string",
           "example": "buildings"
         },
         "title": {
-          "description": "title of collection",
+          "description": "Title of collection.",
           "type": "string",
           "example": "Feature Class buildings"
         },
@@ -824,11 +837,11 @@
           "example": "feature"
         },
         "description": {
-          "description": "describes the collection",
+          "description": "Describes the collection.",
           "type": "string"
         },
         "geometryType": {
-          "description": "type of geometry returned",
+          "description": "Type of geometry returned.",
           "type": "string",
           "enum": [
             "Point",
@@ -882,7 +895,7 @@
           }
         },
         "properties": {
-          "description": "attributes of the collection used",
+          "description": "Attributes of the collection used.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DefinitionProperty"
@@ -898,6 +911,7 @@
       }
     },
     "DefinitionProperty": {
+      "description": "The definition of a property in a collection.",
       "type": "object",
       "required": [
         "name",
@@ -906,16 +920,16 @@
       ],
       "properties": {
         "name": {
-          "description": "name of attribute",
+          "description": "Name of attribute.",
           "type": "string",
           "example": "external_id"
         },
         "required": {
-          "description": "is attribute required",
+          "description": "Is attribute required.",
           "type": "boolean"
         },
         "type": {
-          "description": "type of attribute",
+          "description": "Type of attribute.",
           "type": "object"
         }
       }
@@ -972,6 +986,7 @@
       }
     },
     "FeatureResult": {
+      "description": "Response after a feature is successfully read.",
       "type": "object",
       "required": [
         "feature"
@@ -1025,14 +1040,6 @@
           "$ref": "#/definitions/FeatureId"
         },
         {
-          "$ref": "#/definitions/FeatureRequest"
-        }
-      ]
-    },
-    "FeatureRequest": {
-      "type": "object",
-      "allOf": [
-        {
           "$ref": "#/definitions/FeatureType"
         },
         {
@@ -1059,13 +1066,14 @@
       }
     },
     "FeatureAttributes": {
+      "description": "The geometry and properties of a feature.",
       "type": "object",
       "properties": {
         "geometry": {
           "$ref": "../../../Common/preview/1.0/common.json#/definitions/GeoJsonGeometry"
         },
         "properties": {
-          "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value.",
+          "description": "Properties can contain any additional metadata about the `Feature` and are defined by the GET Collection Definition API. Value can be any JSON object or a JSON null value, but please note that feature properties not defined in the collection definition will be ignored.",
           "type": "object"
         }
       }
