@@ -69,6 +69,10 @@ tag: package-deploymentscripts-2020-10
 tag: package-templatespecs-2022-02
 ```
 
+``` yaml $(package-deploymentstacks)
+tag: package-deploymentstacks-2022-08-preview
+```
+
 ``` yaml $(package-changes)
 tag: package-changes-2022-05
 ```
@@ -94,6 +98,15 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: PolicyClient
+```
+
+### Tag: package-changes-2023-03-01-preview
+
+These settings apply only when `--tag=package-changes-2023-03-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-changes-2023-03-01-preview'
+input-file:
+- Microsoft.Resources/preview/2023-03-01-preview/changes.json
 ```
 
 ### Tag: package-snapshots-2022-11
@@ -428,6 +441,15 @@ These settings apply only when `--tag=package-templatespecs-2019-06-preview` is 
 ``` yaml $(tag) == 'package-templatespecs-2019-06-preview'
 input-file:
 - Microsoft.Resources/preview/2019-06-01-preview/templateSpecs.json
+```
+
+### Tag: package-deploymentstacks-2022-08-preview
+
+These settings apply only when `--tag=package-deploymentstacks-2022-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-deploymentstacks-2022-08-preview'
+input-file:
+- Microsoft.Resources/preview/2022-08-01-preview/deploymentStacks.json
 ```
 
 ### Tag: package-policy-2016-12
@@ -858,6 +880,10 @@ directive:
       - $.definitions.AzureCliScript.properties
       - $.definitions.AzurePowerShellScript.properties
     reason: Currently systemData is not allowed
+  - from: deploymentStacks.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: OperationsAPI will come from Resources
   - suppress: OperationsAPIImplementation
     from: templateSpecs.json
     where: $.paths
@@ -878,6 +904,10 @@ directive:
     from: templateSpecs.json
     where: $.definitions.TemplateSpecVersion
     reason: Tooling issue
+  - from: deploymentStacks.json
+    suppress: TrackedResourcePatchOperation
+    where: $.definitions
+    reason: Not a tracked resource.
   - suppress: OperationsAPIImplementation
     where: $.paths
     from: dataPolicyManifests.json
@@ -949,7 +979,7 @@ directive:
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].put'
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].patch'
       - '$.paths["/{scope}/providers/Microsoft.Resources/tags/default"].get'
-    reason: The tags API does not support system data  
+    reason: The tags API does not support system data
 ```
 
 ---
@@ -999,6 +1029,7 @@ batch:
   - package-managedapplications: true
   - package-deploymentscripts: true
   - package-templatespecs: true
+  - package-deploymentstacks: true
   - package-changes: true
   - package-snapshots: true
 ```

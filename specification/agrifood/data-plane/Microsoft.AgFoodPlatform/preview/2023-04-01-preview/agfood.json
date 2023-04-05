@@ -19845,16 +19845,37 @@
     "FarmOperationJobProviderInput": {
       "description": "Schema for provider input for Farm operations job.",
       "required": [
-        "shapeFileResolution",
-        "shapeFileType"
+        "shapeResolution",
+        "shapeType"
       ],
       "type": "object",
       "properties": {
-        "shapeFileType": {
-          "$ref": "#/definitions/ShapeFileType"
+        "shapeType": {
+          "description": "Type of shape file to be ingested from JohnDeere.\r\nPossible values of shape file type are taken from - https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
+          "minLength": 1,
+          "enum": [
+            "Point",
+            "Polygon"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShapeType",
+            "modelAsString": true
+          }
         },
-        "shapeFileResolution": {
-          "$ref": "#/definitions/ShapeFileResolution"
+        "shapeResolution": {
+          "description": "Resolution of shape file to be ingested from JohnDeere.\r\nPossible values of shape file resolution are taken from - https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
+          "minLength": 1,
+          "enum": [
+            "EachSection",
+            "EachSensor",
+            "OneHertz"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ShapeResolution",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -23618,31 +23639,6 @@
             "modelAsString": true
           }
         }
-      }
-    },
-    "ShapeFileResolution": {
-      "description": "Resolution for shapefiles generated from farm operations job.\r\nPossible values of shape file type are taken from https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
-      "enum": [
-        "EachSection",
-        "EachSensor",
-        "OneHertz"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ShapeFileResolution",
-        "modelAsString": true
-      }
-    },
-    "ShapeFileType": {
-      "description": "Shape file type for shapefiles ingested through farm operations job.\r\nPossible values of shape file type are taken from https://developer-portal.deere.com/#/myjohndeere/field-operations/field-operations?hash=download-shapefile.",
-      "enum": [
-        "Point",
-        "Polygon"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ShapeFileType",
-        "modelAsString": true
       }
     },
     "SoilMoistureModelJob": {
