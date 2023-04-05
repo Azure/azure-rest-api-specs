@@ -2056,33 +2056,11 @@
           "$ref": "#/definitions/TranscriptContentType"
         },
         "redactionCharacter": {
-          "type": "string",
-          "description": "Optional parameter to use a custom character to be used for redaction in Conversational PII responses. Default character will be *.",
-          "default": "*",
-          "x-ms-enum": {
-            "name": "redactionCharacter",
-            "modelAsString": true
-          },
-          "enum": [
-            "!",
-            "#",
-            "$",
-            "%",
-            "&",
-            "*",
-            "+",
-            "-",
-            "=",
-            "?",
-            "@",
-            "^",
-            "_",
-            "~"
-          ]
+          "$ref": "common.json#/definitions/RedactionCharacter"
         },
         "excludePiiCategories": {
           "description": "List of categories that need to be excluded instead of included.",
-          "$ref": "#/definitions/ConversationPIICategories"
+          "$ref": "#/definitions/ConversationPIICategoryExclude"
         }
       },
       "allOf": [
@@ -2110,6 +2088,27 @@
           "Miscellaneous",
           "All",
           "Default"
+        ]
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "ConversationPIICategoriesExclude": {
+      "description": "Describes the PII categories to exclude for detection. If not provided, 'default' categories will be returned which will vary with the language.",
+      "items": {
+        "type": "string",
+        "x-ms-enum": {
+          "name": "ConversationPIICategoryExclude",
+          "modelAsString": true
+        },
+        "enum": [
+          "Address",
+          "CreditCardNumber",
+          "Email",
+          "Person",
+          "NumericIdentifier",
+          "PhoneNumber",
+          "USSocialSecurityNumber"
         ]
       },
       "type": "array",
