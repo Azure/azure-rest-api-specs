@@ -26,13 +26,13 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/metricBatch": {
+    "/subscriptions/{subscriptionId}/metrics:getBatchMetrics": {
       "post": {
         "tags": [
           "Metrics"
         ],
         "operationId": "Metrics_Batch",
-        "description": "**Lists the metric values for multiple resources**.",
+        "description": "Lists the metric values for multiple resources.",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -59,11 +59,7 @@
             "$ref": "#/parameters/OrderByParameter"
           },
           {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The **$filter** is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**$filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**$filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**$filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**."
+            "$ref": "#/parameters/FilterParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -81,6 +77,12 @@
           },
           "default": {
             "description": "Describes the format of Error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "Error code for specific error that occurred."
+              }
+            },
             "schema": {
               "$ref": "#/definitions/AdditionalInfoErrorResponse"
             }
@@ -160,7 +162,7 @@
       "required": false,
       "type": "integer",
       "format": "int32",
-      "description": "The maximum number of records to retrieve.\nValid only if $filter is specified.\nDefaults to 10.",
+      "description": "The maximum number of records to retrieve.\nValid only if filter is specified.\nDefaults to 10.",
       "x-ms-parameter-location": "method"
     },
     "OrderByParameter": {
@@ -169,6 +171,14 @@
       "required": false,
       "type": "string",
       "description": "The aggregation to use for sorting results and the direction of the sort.\nOnly one order can be specified.\nExamples: sum asc.",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "name": "filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "The filter is used to reduce the set of metric data returned.<br>Example:<br>Metric contains metadata A, B and C.<br>- Return all time series of C where A = a1 and B = b1 or b2<br>**filter=A eq ‘a1’ and B eq ‘b1’ or B eq ‘b2’ and C eq ‘*’**<br>- Invalid variant:<br>**filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘*’ or B = ‘b2’**<br>This is invalid because the logical or operator cannot separate two different metadata names.<br>- Return all time series where A = a1, B = b1 and C = c1:<br>**filter=A eq ‘a1’ and B eq ‘b1’ and C eq ‘c1’**<br>- Return all time series where A = a1<br>**filter=A eq ‘a1’ and B eq ‘*’ and C eq ‘*’**.",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
@@ -183,85 +193,103 @@
   "definitions": {
     "ResourceIdList": {
       "description": "The comma separated list of resource IDs to query metrics for.",
-      "type": "array",
-      "items": {
-        "type": "string"
+      "type": "object",
+      "properties": {
+        "resourceids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       },
-      "example": [
-        "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1",
-        "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
-      ]
+      "example": {
+        "resourceids": [
+          "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage1",
+          "/subscriptions/123456728-abcd-1234-abcd-123456789abc/resourceGroups/TestGroup/providers/Microsoft.Storage/storageAccounts/TestStorage2"
+        ]
+      }
     },
     "AdditionalInfoErrorResponse": {
       "description": "The response to a metrics query that results in a bad request, with optional additional information.",
       "type": "object",
       "properties": {
-        "additionalInfo": {
-          "description": "Additional information about the error",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "type": {
-                "description": "The type of the info property (e.g. string).",
-                "type": "string"
-              },
-              "info": {
-                "description": "Additional information related to the error.",
-                "type": "string"
+        "error": {
+          "description": "Top level error object that contains all relevant information.",
+          "type": "object",
+          "properties": {
+            "additionalInfo": {
+              "description": "Additional information about the error",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "description": "The type of the info property (e.g. string).",
+                    "type": "string"
+                  },
+                  "info": {
+                    "description": "Additional information related to the error.",
+                    "type": "string"
+                  }
+                }
               }
+            },
+            "code": {
+              "description": "Error code",
+              "type": "string"
+            },
+            "message": {
+              "description": "Error message indicating why the operation failed.",
+              "type": "string"
             }
           }
-        },
-        "code": {
-          "description": "Error code",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
         }
       }
     },
     "MetricResultsResponse": {
       "description": "The metrics result for a resource.",
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "timespan": {
-            "type": "string",
-            "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
-          },
-          "interval": {
-            "type": "string",
-            "format": "duration",
-            "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
-          },
-          "namespace": {
-            "type": "string",
-            "description": "The namespace of the metrics been queried"
-          },
-          "resourceregion": {
-            "type": "string",
-            "description": "The region of the resource been queried for metrics."
-          },
-          "resourceid": {
-            "type": "string",
-            "description": "The resource that has been queried for metrics."
-          },
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/Metric"
+      "type": "object",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "timespan": {
+                "type": "string",
+                "description": "The timespan for which the data was retrieved. Its value consists of two datetimes concatenated, separated by '/'.  This may be adjusted in the future and returned back from what was originally requested."
+              },
+              "interval": {
+                "type": "string",
+                "format": "duration",
+                "description": "The interval (window size) for which the metric data was returned in.  This may be adjusted in the future and returned back from what was originally requested.  This is not present if a metadata request was made."
+              },
+              "namespace": {
+                "type": "string",
+                "description": "The namespace of the metrics been queried"
+              },
+              "resourceregion": {
+                "type": "string",
+                "description": "The region of the resource been queried for metrics."
+              },
+              "resourceid": {
+                "type": "string",
+                "description": "The resource that has been queried for metrics."
+              },
+              "value": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Metric"
+                },
+                "description": "the value of the collection."
+              }
             },
-            "description": "the value of the collection."
+            "required": [
+              "timespan",
+              "value"
+            ]
           }
-        },
-        "required": [
-          "timespan",
-          "value"
-        ]
+        }
       }
     },
     "LocalizableString": {
@@ -468,7 +496,7 @@
           "items": {
             "$ref": "#/definitions/MetadataValue"
           },
-          "description": "the metadata values returned if $filter was specified in the call."
+          "description": "the metadata values returned if filter was specified in the call."
         },
         "data": {
           "type": "array",
