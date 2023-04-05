@@ -38,6 +38,19 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-04'
 input-file:
+  - Microsoft.Chaos/preview/2023-04-15-preview/capabilities.json
+  - Microsoft.Chaos/preview/2023-04-15-preview/capabilityTypes.json
+  - Microsoft.Chaos/preview/2023-04-15-preview/experiments.json
+  - Microsoft.Chaos/preview/2023-04-15-preview/operations.json
+  - Microsoft.Chaos/preview/2023-04-15-preview/targetTypes.json
+  - Microsoft.Chaos/preview/2023-04-15-preview/targets.json
+```
+### Tag: package-preview-2023-04
+
+These settings apply only when `--tag=package-preview-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-04'
+input-file:
   - Microsoft.Chaos/preview/2023-04-01-preview/capabilities.json
   - Microsoft.Chaos/preview/2023-04-01-preview/capabilityTypes.json
   - Microsoft.Chaos/preview/2023-04-01-preview/experiments.json
@@ -45,6 +58,7 @@ input-file:
   - Microsoft.Chaos/preview/2023-04-01-preview/targetTypes.json
   - Microsoft.Chaos/preview/2023-04-01-preview/targets.json
 ```
+
 ### Tag: package-preview-2022-10
 
 These settings apply only when `--tag=package-preview-2022-10` is specified on the command line.
