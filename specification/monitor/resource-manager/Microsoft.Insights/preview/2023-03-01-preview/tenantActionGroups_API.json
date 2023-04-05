@@ -280,7 +280,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TenantNotificationRequestBody"
+              "$ref": "#/definitions/NotificationRequestBody"
             },
             "description": "The notification request body which includes the contact details"
           }
@@ -393,60 +393,6 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
-    },
-    "TenantNotificationRequestBody": {
-      "description": "The request body which contain contact detail metadata",
-      "type": "object",
-      "properties": {
-        "alertType": {
-          "type": "string",
-          "maxLength": 30,
-          "description": "The value of the supported alert type. Supported alert type value is: servicehealth"
-        },
-        "emailReceivers": {
-          "x-ms-identifiers": [],
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EmailReceiver"
-          },
-          "description": "The list of email receivers that are part of this action group."
-        },
-        "smsReceivers": {
-          "x-ms-identifiers": [],
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SmsReceiver"
-          },
-          "description": "The list of SMS receivers that are part of this action group."
-        },
-        "webhookReceivers": {
-          "x-ms-identifiers": [],
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WebhookReceiver"
-          },
-          "description": "The list of webhook receivers that are part of this action group."
-        },
-        "azureAppPushReceivers": {
-          "x-ms-identifiers": [],
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AzureAppPushReceiver"
-          },
-          "description": "The list of AzureAppPush receivers that are part of this action group."
-        },
-        "voiceReceivers": {
-          "x-ms-identifiers": [],
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/VoiceReceiver"
-          },
-          "description": "The list of voice receivers that are part of this action group."
-        }
-      },
-      "required": [
-        "alertType"
-      ]
     },
     "TenantActionGroupResource": {
       "description": "A tenant action group resource.",
