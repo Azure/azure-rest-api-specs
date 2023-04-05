@@ -5493,6 +5493,7 @@
         "OutputFormattingData"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "FileKind",
         "modelAsString": true,
@@ -5584,6 +5585,7 @@
         "Healthy"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "HealthStatus",
         "modelAsString": false,
@@ -5824,8 +5826,7 @@
     "Operation": {
       "title": "Operation",
       "required": [
-        "id",
-        "locale"
+        "id"
       ],
       "type": "object",
       "properties": {
@@ -5835,10 +5836,7 @@
           "type": "string"
         },
         "result": {
-          "format": "uri",
-          "description": "The result when the operation is successful.",
-          "type": "string",
-          "readOnly": true
+          "$ref": "#/definitions/OperationResult"
         },
         "error": {
           "$ref": "#/definitions/Error"
@@ -5848,11 +5846,6 @@
           "description": "The location of this entity.",
           "type": "string",
           "readOnly": true
-        },
-        "locale": {
-          "description": "The locale of the contained data.",
-          "minLength": 1,
-          "type": "string"
         },
         "lastActionDateTime": {
           "format": "date-time",
@@ -5870,6 +5863,19 @@
           "readOnly": true
         }
       }
+    },
+    "OperationResult": {
+      "title": "OperationResult",
+      "type": "object",
+      "properties": {
+        "link": {
+          "format": "uri",
+          "description": "The link to the result of the operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "readOnly": true
     },
     "OutputFormatType": {
       "title": "OutputFormatType",
@@ -6398,6 +6404,7 @@
         "Failed"
       ],
       "type": "string",
+      "readOnly": true,
       "x-ms-enum": {
         "name": "Status",
         "modelAsString": false,
