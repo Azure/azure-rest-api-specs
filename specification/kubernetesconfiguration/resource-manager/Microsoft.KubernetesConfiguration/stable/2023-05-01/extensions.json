@@ -466,7 +466,6 @@
             }
           }
         },
-        // TODO: is this currently pagable? Going to be pagable? Or is this just always on list routes even if we're not using it "just in case one day"?
         "x-ms-pagable": {
           "nextLinkName": "nextLink"
         }
@@ -553,6 +552,9 @@
             }
           }
         }
+      },
+      "x-ms-pagable": {
+        "nextLinkName": "nextLink"
       }
     }
   },
@@ -857,7 +859,7 @@
               "type": "string"
             }
           },
-          "clusterTypes": { // TODO: should this be oneOf array and string?
+          "supportedClusterTypes": {
             "description": "The list of cluster types of the extension type.",
             "type": "array",
             "items": {
@@ -871,9 +873,38 @@
             },
             "properties": {
               "description": "The list of properties of the extension type.",
-              "type": "object"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "description": "The key for the parameter",
+                    "type": "string"
+                  },
+                  "isRequired": {
+                    "description": "Is this parameter required",
+                    "type": "boolean"
+                  }
+                }
+              }
             },
-            // TODO: protected params
+            "protectedParameters": {
+              "description": "The list of protected parameters for the extension type.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "description": "The key for the protected parameter",
+                    "type": "string"
+                  },
+                  "isRequired": {
+                    "description": "Is this protected parameter required",
+                    "type": "boolean"
+                  }
+                }
+              }
+            },
             "id": {
               "description": "The id of the extension type.",
               "type": "string"

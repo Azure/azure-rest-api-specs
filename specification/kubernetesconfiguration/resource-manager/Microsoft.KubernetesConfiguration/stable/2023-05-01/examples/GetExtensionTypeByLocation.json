@@ -13,7 +13,7 @@
           "releaseTrains": [
             "preview"
           ],
-          "clusterTypes": [
+          "supportedClusterTypes": [
             "connectedClusters"
           ],
           "supportedScopes": {
@@ -23,6 +23,26 @@
               "defaultReleaseNamespace": "kube-system"
             }
           },
+          "properties": [
+            {
+              "key": "MY_PARAMETER",
+              "isRequired": true
+            },
+            {
+              "key": "MY_OPTIONAL_PARAMETER",
+              "isRequired": false
+            }
+          ],
+          "protectedParameters": [
+            {
+              "key": "MY_PROTECTED_PARAMETER",
+              "isRequired": true
+            },
+            {
+              "key": "MY_OPTIONAL_PROTECTED_PARAMETER",
+              "isRequired": false
+            }
+          ],
           "systemData": {
             "createdBy": "identity",
             "createdByType": "User",

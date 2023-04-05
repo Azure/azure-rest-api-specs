@@ -1,4 +1,3 @@
-
 {
   "parameters": {
     "subcriptionId": "subId1",
@@ -15,7 +14,29 @@
               "releaseTrains": [
                 "stable"
               ],
-              "clusterTypes": "connectedClusters",
+              "supportedClusterTypes": [
+                "connectedClusters"
+              ],
+              "properties": [
+                {
+                  "key": "MY_PARAMETER",
+                  "isRequired": true
+                },
+                {
+                  "key": "MY_OPTIONAL_PARAMETER",
+                  "isRequired": false
+                }
+              ],
+              "protectedParameters": [
+                {
+                  "key": "MY_PROTECTED_PARAMETER",
+                  "isRequired": true
+                },
+                {
+                  "key": "MY_OPTIONAL_PROTECTED_PARAMETER",
+                  "isRequired": false
+                }
+              ],
               "supportedScopes": {
                 "defaultScope": "cluster",
                 "clusterScopeSettings": {
