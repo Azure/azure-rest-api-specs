@@ -4772,7 +4772,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "Azure-AsyncOperation"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create Replication protection Cluster.": {
@@ -23135,10 +23135,12 @@
       "x-ms-discriminator-value": "ScriptActionTaskDetails"
     },
     "ServiceDefaultError": {
+      "description": "The resource management error response.",
+      "type": "object",
       "properties": {
         "error": {
           "type": "object",
-          "description": "ASR default error model.",
+          "description": "ASR error model.",
           "properties": {
             "code": {
               "readOnly": true,
@@ -23177,8 +23179,7 @@
             }
           }
         }
-      },
-      "description": "The resource management error response."
+      }
     },
     "ServiceError": {
       "description": "ASR error model.",
