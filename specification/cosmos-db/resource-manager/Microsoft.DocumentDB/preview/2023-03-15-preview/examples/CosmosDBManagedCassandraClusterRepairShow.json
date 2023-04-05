@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "subscriptionId": "dd31ecae-4522-468e-8b27-5befd051dd53",
+    "resourceGroupName": "cassandra-rg",
+    "clusterName": "cassandra-cluster",
+    "repairRunId": "00000000-0000-0001-0000-000000000000",
+    "api-version": "2023-03-15-preview"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/dd31ecae-4522-468e-8b27-5befd051dd53/resourceGroups/cassandra-rg/providers/Microsoft.DocumentDB/cassandraClusters/cassandra-cluster/repairRuns/00000000-0000-0001-0000-000000000000/show/operationResults/cf1643d8-ad80-4c05-bb73-7b8df6bfbfd9?api-version=2023-03-01-preview"
+      }
+    },
+    "200": {
+      "body": {
+        "adaptiveSchedule": null,
+        "blacklistedTables": [],
+        "cause": "example",
+        "clusterName": "vs-repair-2",
+        "columnFamilies": [
+          "dropped_columns",
+          "types",
+          "tables",
+          "indexes",
+          "keyspaces",
+          "functions",
+          "columns",
+          "aggregates",
+          "triggers",
+          "views"
+        ],
+        "creationTime": null,
+        "currentTime": null,
+        "datacenters": [],
+        "duration": "0 seconds",
+        "endTime": null,
+        "id": "00000000-0000-0001-0000-000000000000",
+        "incrementalRepair": false,
+        "intensity": 0.8999999761581421,
+        "keyspaceName": "system_schema",
+        "lastEvent": "Replica set changed for segment 00000000-0000-0012-0000-000000000000 on range io.cassandrareaper.core.Segment@6515f861",
+        "nodes": [],
+        "owner": "vs-test",
+        "pauseTime": null,
+        "repairParallelism": "PARALLEL",
+        "repairState": null,
+        "repairThreadCount": 1,
+        "repairUnitId": "00000000-0000-0001-0000-000000000000",
+        "segmentTimeout": null,
+        "segmentsRepaired": 0,
+        "startTime": null,
+        "state": "ERROR",
+        "totalSegments": 22
+      }
+    }
+  }
+}
