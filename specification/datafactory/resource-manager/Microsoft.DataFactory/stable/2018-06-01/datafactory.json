@@ -156,6 +156,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/FactoryNameAvailability": {
+      "Get": {
+        "operationId": "FactoryNameAvailability_Get",
+        "x-ms-examples": {
+          "FactoryNameAvailability_Get": {
+            "$ref": "./examples/FactoryNameAvailability_Get.json"
+          }
+        },
+        "description": "Checks if the provided name is available for use or not.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/FactoryNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataFactory/locations/{locationId}/getFeatureValue": {
       "post": {
         "tags": [
@@ -4913,6 +4949,19 @@
       },
       "required": [
         "type"
+      ]
+    },
+    "FactoryNameAvailabilityResponse": {
+      "description": "Factory name availability response.",
+      "type": "object",
+      "properties": {
+        "Available": {
+          "description": "Boolean value representing if name is available for use or not.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "Available"
       ]
     },
     "FactoryListResponse": {
