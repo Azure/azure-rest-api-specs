@@ -91,8 +91,9 @@ directive:
     - phonenumbers.json
     suppress:
     - R2005 #Long running operation status code
+    - R1001 #to suppress (OperationIdNounVerb/R1001/SDKViolation)
     reason:
-      Approval from Azure review board that Long Running Operations can return 202s.
+      Approval from Azure review board that Long Running Operations can return 202s. Cannot rename operation names without breaking changes.
 ```
 
 ---
