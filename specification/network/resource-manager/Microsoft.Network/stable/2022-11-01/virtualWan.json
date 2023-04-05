@@ -5262,6 +5262,9 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -9062,6 +9065,10 @@
             "$ref": "#/definitions/NetworkVirtualApplianceConnection"
           },
           "description": "The list of NetworkVirtualAppliance connections."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
         }
       },
       "description": "NetworkVirtualApplianceConnection list."
@@ -9198,6 +9205,56 @@
         "nextHopIpAddress": {
           "type": "string",
           "description": "The ip address of the next hop."
+        }
+      }
+    },
+    "RoutingConfigurationNfvSubResource": {
+      "properties": {
+        "ResourceUri": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to another subresource.",
+      "x-ms-azure-resource": true
+    },
+    "RoutingConfigurationNfv": {
+      "description": "Nfvrp version of Routing Configuration indicating the associated and propagated route tables for this connection.",
+      "properties": {
+        "associatedRouteTable": {
+          "$ref": "#/definitions/RoutingConfigurationNfvSubResource",
+          "description": "The resource id RouteTable associated with this RoutingConfiguration."
+        },
+        "propagatedRouteTables": {
+          "$ref": "#/definitions/PropagatedRouteTable",
+          "description": "The list of RouteTables to advertise the routes to."
+        },
+        "inboundRouteMap": {
+          "$ref": "#/definitions/RoutingConfigurationNfvSubResource",
+          "description": "The resource id of the RouteMap associated with this RoutingConfiguration for inbound learned routes."
+        },
+        "outboundRouteMap": {
+          "$ref": "#/definitions/RoutingConfigurationNfvSubResource",
+          "description": "The resource id of the RouteMap associated with this RoutingConfiguration for outbound advertised routes."
+        }
+      }
+    },
+    "PropagatedRouteTableNfv": {
+      "description": "Nfv version of the list of RouteTables to advertise the routes to.",
+      "properties": {
+        "labels": {
+          "type": "array",
+          "description": "The list of labels.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ids": {
+          "type": "array",
+          "description": "The list of resource ids of all the RouteTables.",
+          "items": {
+            "$ref": "#/definitions/RoutingConfigurationNfvSubResource"
+          }
         }
       }
     },

@@ -823,7 +823,7 @@
           "200": {
             "description": "Request successful. Lists all the NVA connections under an NVA.",
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/NetworkVirtualApplianceConnection"
+              "$ref": "./virtualWan.json#/definitions/NetworkVirtualApplianceConnectionList"
             }
           },
           "default": {
@@ -832,6 +832,9 @@
               "$ref": "./network.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
