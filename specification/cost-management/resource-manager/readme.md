@@ -26,7 +26,7 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2023-04
+tag: package-2022-10
 azure-validator: false
 ```
 
@@ -48,14 +48,6 @@ input-file:
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.pricesheets.json
   - Microsoft.CostManagement/preview/2023-04-01-preview/scheduledActions.json
-
-  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.markuprules.json
-  - Microsoft.CostManagement/preview/2023-04-01-preview/settings.json
-  - Microsoft.CostManagement/preview/2023-04-01-preview/costmanagement.insights.json
-  - Microsoft.CostManagement/preview/2023-04-01-preview/costallocation.json
-
-  - Microsoft.CostManagement/preview/2019-03-01-preview/costmanagement.json
-  - Microsoft.CostManagement/preview/2018-08-01-preview/costmanagement.json
 ```
 ### Tag: package-2022-10
 
