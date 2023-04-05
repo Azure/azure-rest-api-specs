@@ -169,6 +169,24 @@
         "cleanup": {
           "description": "Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.",
           "type": "boolean"
+        },
+        "customProperties": {
+          "description": "Custom properties are used to tune the data flow runtime performance.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "description": "Name of custom property.",
+                "type": "string"
+              },
+              "value": {
+                "description": "Value of custom property.",
+                "type": "string"
+              }
+            }
+          },
+          "x-ms-identifiers": []
         }
       },
       "additionalProperties": {
