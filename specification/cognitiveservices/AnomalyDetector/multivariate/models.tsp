@@ -17,7 +17,6 @@ enum FillNAMethod {
   "Fixed",
 }
 
-@fixed
 enum MultivariateBatchDetectionStatus {
   Created: "CREATED",
   Running: "RUNNING",
@@ -33,13 +32,11 @@ enum DataSchema {
   "MultiTable",
 }
 
-@fixed
 enum AlignMode {
   "Inner",
   "Outer",
 }
 
-@fixed
 enum ModelStatus {
   Created: "CREATED",
   Running: "RUNNING",
@@ -50,8 +47,8 @@ enum ModelStatus {
 @doc("Detection results for the resultId value.")
 @resource("multivariate/detect-batch")
 model MultivariateDetectionResult {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @doc("Result identifier that's used to fetch the results of an inference call.")
-  @visibility("read")
   @key
   @format("uuid")
   resultId: string;
@@ -96,6 +93,7 @@ model VariableState {
   @doc("Variable name in variable states.")
   variable?: string;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uppercases common acronyms like NA."
   @doc("Proportion of missing values that need to be filled by fillNAMethod.")
   @minValue(0.0)
   @maxValue(1.0)
@@ -245,13 +243,15 @@ detect whether the time stamp is an anomaly or not.
   alignPolicy?: AlignPolicy;
 
   @doc("Model status.")
+  @visibility("read")
   status?: ModelStatus;
 
-  @visibility("read")
   @doc("Error messages after failure to create a model.")
+  @visibility("read")
   errors?: ErrorResponse[];
 
   @doc("Diagnostics information to help inspect the states of a model or variable.")
+  @visibility("read")
   diagnosticsInfo?: DiagnosticsInfo;
 }
 
@@ -263,6 +263,7 @@ time range.
 """)
   alignMode?: AlignMode;
 
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Service uppercases common acronyms like NA."
   @doc("""
 Field that indicates how missing values will be filled.
 """)
@@ -307,8 +308,8 @@ epoch.
 @doc("Response of getting a model.")
 @resource("multivariate/models")
 model AnomalyDetectionModel {
+  #suppress "@azure-tools/typespec-azure-core/key-visibility-required" "Properties in response-only schemas should not be marked readOnly"
   @doc("Model identifier.")
-  @visibility("read")
   @key
   @format("uuid")
   modelId: string;
@@ -384,8 +385,8 @@ model MultivariateLastDetectionResult {
 @doc("Error response.")
 @error
 model ResponseError {
-  @header
+  @header("x-ms-error-code")
   @doc("Error code.")
-  "x-ms-error-code"?: string,
+  msErrorCode?: string,
   ...ErrorResponse
 }

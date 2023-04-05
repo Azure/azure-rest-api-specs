@@ -53,12 +53,13 @@
   ],
   "security": [
     {
-      "ApiKeyAuth": []
+      "AnomalyDetectoryApiKeyAuth": []
     }
   ],
   "securityDefinitions": {
-    "ApiKeyAuth": {
+    "AnomalyDetectoryApiKeyAuth": {
       "type": "apiKey",
+      "description": "The secret key for your Azure Cognitive Services subscription.",
       "in": "header",
       "name": "Ocp-Apim-Subscription-Key"
     }
@@ -161,21 +162,10 @@
         "description": "List models of a resource.",
         "parameters": [
           {
-            "name": "skip",
-            "in": "query",
-            "required": false,
-            "description": "Skip indicates how many models will be skipped.",
-            "default": 0,
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
-            "name": "top",
-            "in": "query",
-            "required": false,
-            "description": "Top indicates how many models will be fetched.",
-            "type": "integer",
-            "format": "int32"
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           }
         ],
         "responses": {
@@ -312,11 +302,11 @@
           "202": {
             "description": "The request has been accepted for processing, but processing has not yet completed.",
             "headers": {
-              "operation-id": {
+              "Operation-Id": {
                 "description": "ID of the detection result.",
                 "type": "string"
               },
-              "operation-location": {
+              "Operation-Location": {
                 "description": "Location of the detection result.",
                 "type": "string"
               }
@@ -542,6 +532,41 @@
         ]
       }
     },
+    "AnomalyDetectoryApiKeyAuth": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "apiKey"
+          ],
+          "description": "API key authentication"
+        },
+        "in": {
+          "type": "string",
+          "enum": [
+            "header"
+          ],
+          "description": "location of the API key"
+        },
+        "name": {
+          "type": "string",
+          "enum": [
+            "Ocp-Apim-Subscription-Key"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          },
+          "description": "name of the API key"
+        }
+      },
+      "description": "The secret key for your Azure Cognitive Services subscription.",
+      "required": [
+        "type",
+        "in",
+        "name"
+      ]
+    },
     "Multivariate.AlignMode": {
       "type": "string",
       "enum": [
@@ -550,7 +575,7 @@
       ],
       "x-ms-enum": {
         "name": "AlignMode",
-        "modelAsString": false
+        "modelAsString": true
       }
     },
     "Multivariate.AlignPolicy": {
@@ -578,8 +603,7 @@
         "modelId": {
           "type": "string",
           "description": "Model identifier.",
-          "format": "uuid",
-          "readOnly": true
+          "format": "uuid"
         },
         "createdTime": {
           "type": "string",
@@ -814,7 +838,8 @@
         },
         "status": {
           "$ref": "#/definitions/Multivariate.ModelStatus",
-          "description": "Model status."
+          "description": "Model status.",
+          "readOnly": true
         },
         "errors": {
           "type": "array",
@@ -828,7 +853,8 @@
         },
         "diagnosticsInfo": {
           "$ref": "#/definitions/Multivariate.DiagnosticsInfo",
-          "description": "Diagnostics information to help inspect the states of a model or variable."
+          "description": "Diagnostics information to help inspect the states of a model or variable.",
+          "readOnly": true
         }
       },
       "description": "Training result of a model, including its status, errors, and diagnostics\ninformation.",
@@ -924,7 +950,7 @@
       ],
       "x-ms-enum": {
         "name": "ModelStatus",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Created",
@@ -1022,7 +1048,7 @@
       ],
       "x-ms-enum": {
         "name": "MultivariateBatchDetectionStatus",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Created",
@@ -1049,8 +1075,7 @@
         "resultId": {
           "type": "string",
           "description": "Result identifier that's used to fetch the results of an inference call.",
-          "format": "uuid",
-          "readOnly": true
+          "format": "uuid"
         },
         "summary": {
           "$ref": "#/definitions/Multivariate.MultivariateBatchDetectionResultSummary",
@@ -1088,13 +1113,13 @@
         "topContributorCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of top contributed\nvariables for one anomalous time stamp in the response. The default is\n10."
+          "description": "Number of top contributed\nvariables for one anomalous time stamp in the response. The default is\n10.",
+          "default": 10
         }
       },
       "description": "Request of the last detection.",
       "required": [
-        "variables",
-        "topContributorCount"
+        "variables"
       ]
     },
     "Multivariate.MultivariateLastDetectionResult": {
@@ -1215,7 +1240,11 @@
           "description": "Message that explains the error that the service reported."
         }
       },
-      "description": "Error information that the API returned."
+      "description": "Error information that the API returned.",
+      "required": [
+        "code",
+        "message"
+      ]
     },
     "Univariate.AnomalyDetectorErrorCodes": {
       "type": "string",
@@ -1293,7 +1322,7 @@
       ],
       "x-ms-enum": {
         "name": "TimeGranularity",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "Yearly",
@@ -1615,5 +1644,24 @@
       ]
     }
   },
-  "parameters": {}
+  "parameters": {
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "required": false,
+      "description": "The number of result items to skip.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "required": false,
+      "description": "The number of result items to return.",
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
