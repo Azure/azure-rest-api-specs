@@ -12,6 +12,14 @@ using Cadl.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
+@doc("List of storage types support by catalog")
+enum CatalogStorageType {
+  @doc("Blob Storage Catalog Type")
+  "BlobCatalog",
+  @doc("Git Storage Catalog Type")
+  "GitCatalog"
+}
+
 @doc("Catalog Connection properties.")
 model CatalogConnectionParams {
   @doc("Catalog Storage's URI.")
@@ -21,7 +29,7 @@ model CatalogConnectionParams {
 @doc("Catalog Core properties.")
 model CatalogCore {
   @doc("Catalog's storage type.")
-  type?: string;
+  type?: CatalogStorageType;
 
   @doc("Catalog Connection properties.")
   catalogConnectionParams?: CatalogConnectionParams;
@@ -45,7 +53,4 @@ model CatalogProperties {
 
   @doc("Catalog Core.")
   catalogCore?: CatalogCore;
-
-  @doc("Properties of Catalog.")
-  resourceProperties?: Record<string>;
 }

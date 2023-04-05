@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlAvailabilityGroupDatabaseName": "testSqlDatabase",
+    "api-version": "2023-03-15-preview",
+    "sqlAvailabilityGroupName": "testsAG",
+    "sqlAvailabilityGroupDatabaseUpdate": {
+      "tags": {
+        "mytag": "myval1"
+      },
+      "properties": {
+        "groupDatabaseId": "00000000-1111-2222-3333-444444444444",
+        "value": [
+          {
+            "replicaName": "sqlServer1",
+            "isLocal": true,
+            "isPrimaryReplica": true,
+            "synchronizationStateDesc": "SYNCHRONIZED",
+            "isCommitParticipant": true,
+            "synchronizationHealthDesc": "HEALTHY",
+            "databaseStateDesc": "ONLINE",
+            "isSuspended": false
+          },
+          {
+            "replicaName": "sqlServer2",
+            "isLocal": false,
+            "isPrimaryReplica": false,
+            "synchronizationStateDesc": "SYNCHRONIZED",
+            "isCommitParticipant": true,
+            "synchronizationHealthDesc": "HEALTHY",
+            "databaseStateDesc": "ONLINE",
+            "isSuspended": false
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "southeastasia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlAvailabilityGroups/testsAG/databases/testSqlDatabase",
+        "name": "testSqlDatabase",
+        "type": "Microsoft.AzureArcData/sqlAvailabilityGroups/databases",
+        "properties": {
+          "groupDatabaseId": "00000000-1111-2222-3333-444444444444",
+          "value": [
+            {
+              "replicaName": "sqlServer1",
+              "isLocal": true,
+              "isPrimaryReplica": true,
+              "synchronizationStateDesc": "SYNCHRONIZED",
+              "isCommitParticipant": true,
+              "synchronizationHealthDesc": "HEALTHY",
+              "databaseStateDesc": "ONLINE",
+              "isSuspended": false
+            },
+            {
+              "replicaName": "sqlServer2",
+              "isLocal": false,
+              "isPrimaryReplica": false,
+              "synchronizationStateDesc": "SYNCHRONIZED",
+              "isCommitParticipant": true,
+              "synchronizationHealthDesc": "HEALTHY",
+              "databaseStateDesc": "ONLINE",
+              "isSuspended": false
+            }
+          ]
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z"
+        },
+        "tags": {
+          "mytag": "myval1"
+        }
+      }
+    }
+  }
+}

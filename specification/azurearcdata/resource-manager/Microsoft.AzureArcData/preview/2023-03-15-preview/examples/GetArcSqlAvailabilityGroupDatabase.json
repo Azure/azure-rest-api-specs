@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "testrg",
+    "sqlAvailabilityGroupDatabaseName": "testSqlDatabase",
+    "sqlAvailabilityGroupName": "testAG",
+    "api-version": "2023-03-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "location": "southeastasia",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlAvailabilityGroups/testsAG/databases/testSqlDatabase",
+        "name": "testSqlDatabase",
+        "type": "Microsoft.AzureArcData/sqlAvailabilityGroups/databases",
+        "properties": {
+          "groupDatabaseId": "00000000-1111-2222-3333-444444444444",
+          "value": [
+            {
+              "replicaName": "sqlServer1",
+              "isLocal": true,
+              "isPrimaryReplica": true,
+              "synchronizationStateDesc": "SYNCHRONIZED",
+              "isCommitParticipant": true,
+              "synchronizationHealthDesc": "HEALTHY",
+              "databaseStateDesc": "ONLINE",
+              "isSuspended": false
+            },
+            {
+              "replicaName": "sqlServer2",
+              "isLocal": false,
+              "isPrimaryReplica": false,
+              "synchronizationStateDesc": "SYNCHRONIZED",
+              "isCommitParticipant": true,
+              "synchronizationHealthDesc": "HEALTHY",
+              "databaseStateDesc": "ONLINE",
+              "isSuspended": false
+            }
+          ]
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  }
+}

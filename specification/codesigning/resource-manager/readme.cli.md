@@ -15,7 +15,6 @@ cli:
     - name: Create Certificate Profile
     - name: Get Certificate Profile   
     - name: List Certificate Profiles
-    - name: Update Certificate Profile
     - name: Delete Certificate Profile
     - name: Delete Code Signing Account
     - name: List Code Signing Account operations

@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "MyResourceGroup",
+    "api-version": "2023-04-30-preview",
+    "accountName": "MyAccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/MyResourceGroup/providers/Microsoft.CodeSigning/codeSigningAccounts/profileA",
+            "name": "profileA",
+            "type": "Microsoft.CodeSigning/codeSigningAccounts/certificateProfiles",
+            "properties": {
+              "profileType": "PublicTrust",
+              "rotationPolicy": "30 Days",
+              "commonName": "Microsoft Corporation",
+              "organization": "Microsoft Corporation",
+              "streetAddress": "123 Bluebonnet",
+              "includeStreetAddress": false,
+              "country": "US",
+              "includeCountry": false,
+              "state": "Texas",
+              "includeState": false,
+              "city": "Dallas",
+              "includeCity": false,
+              "postalCode": "560090",
+              "includePostalCode": true,
+              "enhancedKeyUsage": "1.3.6.1.4.1.311.yy.xxxxxxxx.xxxxxxxx.xxxxxxxxx.xxxxxxxx",
+              "identityValidationId": "123456",
+              "provisioningState": "Succeeded",
+              "certificates": [
+                {
+                  "serialNumber": "xxxxxxxxxxxxxxxxxx",
+                  "subjectName": "CN=Contoso Inc, O=Contoso Inc, L=New York, S=New York, C=US",
+                  "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                  "createdDate": "3/14/2023 5:27:49 PM",
+                  "expiryDate": "3/17/2023 5:27:49 PM",
+                  "status": "Active"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

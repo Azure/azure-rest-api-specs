@@ -1693,10 +1693,7 @@
         }
       },
       "required": [
-        "pipeline",
-        "justification",
-        "connectionTypes",
-        "requirementId"
+        "pipeline"
       ],
       "description": "Properties of connection"
     },
@@ -1911,6 +1908,10 @@
           "type": "string",
           "description": "Remote cloud of the data to be transferred or received"
         },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of this pipeline"
+        },
         "connections": {
           "type": "array",
           "items": {
@@ -1921,6 +1922,13 @@
           "x-ms-identifiers": [
             "id"
           ]
+        },
+        "subscribers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/subscriber"
+          },
+          "description": "Subscribers of this resource"
         },
         "provisioningState": {
           "description": "Provisioning state of the pipeline",
@@ -2016,6 +2024,20 @@
         }
       },
       "description": "The pipelines list result."
+    },
+    "subscriber": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email of the subscriber"
+        },
+        "notifications": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Number specifying what notifications to receive"
+        }
+      }
     },
     "resourceBody": {
       "type": "object",

@@ -405,6 +405,19 @@
           "type": "string",
           "description": "The resource identifier of the CA that have issued this CA, in case this is an intermediate (i.e. non-root) CA. If this is a root CA, this must be null. If specified, the format must be /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Pki/pkis/{pkiName}/certificateAuthorities/{caName}."
         },
+        "certificate": {
+          "type": "string",
+          "description": "The CA certificate in PEM format. Value cannot be modified once set."
+        },
+        "signedCsr": {
+          "type": "string",
+          "description": "The signed CSR for clients to submit for enrollment to an external root CA. PEM format.",
+          "readOnly": true
+        },
+        "chain": {
+          "type": "string",
+          "description": "The complete CA certificate chain in PEM format. The entire chain is required at the time of upload."
+        },
         "certificateProperties": {
           "$ref": "#/definitions/ApiCaCertificateProperties",
           "description": "The properties of the CA certificate."
@@ -562,6 +575,10 @@
           "type": "string",
           "description": "The serial number of the CA certificate.",
           "readOnly": true
+        },
+        "isExternallyIssued": {
+          "type": "boolean",
+          "description": "True if the CA certificate is issued externally, null or false otherwise. Once set, the property cannot be modified."
         }
       }
     },

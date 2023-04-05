@@ -1,13 +1,12 @@
 {
   "parameters": {
-    "subscriptionId": "aaaaa",
-    "resourceGroupName": "rgRoutePolicies",
+    "subscriptionId": "97D66995-95BA-464A-A250-FB6E25E499A8",
+    "resourceGroupName": "resourceGroupName",
     "api-version": "2023-02-01-preview",
-    "routePolicyName": "aaaaaaaaaaaaaaaaaaaaa",
+    "routePolicyName": "routePolicyName",
     "body": {
-      "properties": {},
       "tags": {
-        "key1917": "aaaaaaaaaaaaa"
+        "key8254": ""
       }
     }
   },
@@ -15,60 +14,82 @@
     "200": {
       "body": {
         "properties": {
-          "description": "aaaaaaaa",
-          "conditions": [
+          "statements": [
             {
               "sequenceNumber": 7,
-              "match": {
-                "accessControlListIds": [
-                  "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/accessControlLists/accessControlListName"
+              "condition": {
+                "ipCommunityIds": [
+                  "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/ipCommunities/ipCommunityName"
                 ],
-                "ipCommunityListIds": [
-                  "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/ipCommunityLists/ipCommunityListName"
+                "ipExtendedCommunityIds": [
+                  "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/ipExtendedCommunityName"
                 ],
-                "ipExtendedCommunityListIds": [
-                  ""
-                ]
+                "ipPrefixId": "subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/ipPrefixes/example-ipPrefix"
               },
               "action": {
-                "action": "allow",
-                "set": {
+                "localPreference": 20,
+                "actionType": "Permit",
+                "ipCommunityProperties": {
+                  "add": {
+                    "ipCommunityIds": [
+                      "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/ipCommunities/ipCommunityName"
+                    ]
+                  },
+                  "delete": {
+                    "ipCommunityIds": [
+                      "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/ipCommunities/ipCommunityName"
+                    ]
+                  },
                   "set": {
-                    "ipCommunityListIds": [
-                      "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/ipCommunityLists/ipCommunityListName"
-                    ],
-                    "ipExtendedCommunityListIds": [
-                      ""
+                    "ipCommunityIds": [
+                      "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/ipCommunities/ipCommunityName"
+                    ]
+                  }
+                },
+                "ipExtendedCommunityProperties": {
+                  "add": {
+                    "ipExtendedCommunityIds": [
+                      "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/ipExtendedCommunityName"
+                    ]
+                  },
+                  "delete": {
+                    "ipExtendedCommunityIds": [
+                      "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/ipExtendedCommunityName"
+                    ]
+                  },
+                  "set": {
+                    "ipExtendedCommunityIds": [
+                      "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/ipExtendedCommunities/ipExtendedCommunityName"
                     ]
                   }
                 }
               },
-              "annotation": "aaaaaaaaaaaaaa"
+              "annotation": "annotationValue"
             }
           ],
           "provisioningState": "Succeeded",
-          "annotation": "example routepolicy"
+          "annotation": "annotationValue"
         },
         "tags": {
-          "key8254": "aaaaaaaaaaaaaaaaaaa"
+          "key8254": ""
         },
         "location": "EastUS",
         "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.ManagedNetworkFabric/routePolicies/routePolicyName",
         "name": "routePolicyName",
         "type": "microsoft.managednetworkfabric/routePolicies",
         "systemData": {
-          "createdBy": "d1bd24c7-b27f-477e-86dd-939e107873d7",
+          "createdBy": "User",
           "createdByType": "Application",
-          "createdAt": "2022-09-16T06:09:38.603Z",
+          "createdAt": "2023-03-16T12:42:03.945Z",
           "lastModifiedBy": "email@address.com",
           "lastModifiedByType": "User",
-          "lastModifiedAt": "2022-09-16T06:19:40.603Z"
+          "lastModifiedAt": "2023-03-16T12:42:03.946Z"
         }
       }
     },
     "202": {
       "headers": {
-        "location": "https://foo.com/operationstatus"
+        "location": "https://contoso.com/operationstatus"
       }
     }
   }

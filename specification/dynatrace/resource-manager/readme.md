@@ -48,6 +48,15 @@ input-file:
   - Dynatrace.Observability/preview/2022-10-01-preview/dynatrace.json
 ```
 
+### Tag: package-2023-03-01-preview
+
+These settings apply only when `--tag=package-2023-03-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-03-01-preview'
+input-file:
+  - Dynatrace.Observability/preview/2023-03-01-preview/dynatrace.json
+```
+
 ### Tag: package-2021-09-01-preview
 
 These settings apply only when `--tag=package-2021-09-01-preview` is specified on the command line.

@@ -38,10 +38,6 @@ cli:
       alias:
         - name
         - n
-    - where:
-        group: CertificateProfile
-        op: Update  
-      hidden: true
       
 
 ```

@@ -452,20 +452,12 @@
           "$ref": "./networkFunctionDefinition.json#/definitions/VersionState"
         },
         "networkFunctionType": {
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
+          "$ref": "./common.json#/definitions/NetworkFunctionType",
           "description": "The network function type."
         },
         "nfviType": {
-          "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "The NFVI type."
+          "$ref": "./common.json#/definitions/NFVIType",
+          "description": "The nfvi type for the network function."
         },
         "deployParameters": {
           "type": "string",
@@ -484,11 +476,6 @@
             "name"
           ],
           "description": "The network function definition application overview."
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The URL to get the next set of results."
         }
       },
       "description": "The network function network function definition overview."

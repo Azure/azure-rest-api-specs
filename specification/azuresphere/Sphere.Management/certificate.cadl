@@ -42,7 +42,7 @@ interface Certificates extends ProxyResourceOperationsReadList<Certificate, List
   op retrieveProofOfPossessionNonce(
     ...ResourceInstanceParameters<Certificate>, 
     @doc("Proof of possession nonce request body ")
-    @body request: ProofOfPossessionNonceRequest
+    @body proofOfPossessionNonceRequest: ProofOfPossessionNonceRequest
   ): ArmResponse<ProofOfPossessionNonceResponse> | ErrorResponse;
 }
 
@@ -51,6 +51,26 @@ model CertificateProperties {
   @doc("The certificate as a UTF-8 encoded base 64 string.")
   @visibility("read")
   certificate?: string;
+
+  @visibility("read")
+  @doc("The certificate status.")
+  status?: CertificateStatus;
+
+  @visibility("read")
+  @doc("The certificate subject.")
+  subject?: string;
+
+  @visibility("read")
+  @doc("The certificate thumbprint.")
+  thumbprint?: string;
+
+  @visibility("read")
+  @doc("The certificate expiry date.")
+  expiryUtc?: zonedDateTime;
+
+  @visibility("read")
+  @doc("The certificate not before date.")
+  notBeforeUtc?: zonedDateTime;
 
   @visibility("read")
   @doc("The status of the last operation.")

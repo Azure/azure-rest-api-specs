@@ -859,6 +859,10 @@
             "modelAsString": true
           }
         },
+        "accountId": {
+          "description": "Account Id. For example - the AWS account id.",
+          "type": "string"
+        },
         "tags": {
           "type": "object",
           "description": "Resource's tag type.",
@@ -872,11 +876,6 @@
     "ReportProperties": {
       "type": "object",
       "description": "Report's properties.",
-      "required": [
-        "timeZone",
-        "triggerTime",
-        "resources"
-      ],
       "properties": {
         "id": {
           "type": "string",
@@ -908,7 +907,7 @@
           "readOnly": true
         },
         "offerGuid": {
-          "description": "Report offer Guid.",
+          "description": "A list of comma-separated offerGuids indicates a series of offerGuids that map to the report. For example, \"00000000-0000-0000-0000-000000000001,00000000-0000-0000-0000-000000000002\" and \"00000000-0000-0000-0000-000000000003\".",
           "type": "string"
         },
         "timeZone": {
@@ -985,14 +984,6 @@
     "WebhookProperties": {
       "type": "object",
       "description": "Webhook properties.",
-      "required": [
-        "status",
-        "sendAllEvents",
-        "events",
-        "payloadUrl",
-        "contentType",
-        "enableSslVerification"
-      ],
       "properties": {
         "webhookId": {
           "type": "string",
@@ -1047,7 +1038,8 @@
         "payloadUrl": {
           "type": "string",
           "description": "webhook payload url",
-          "readOnly": false
+          "readOnly": false,
+          "pattern": "^(http(s)?://)[\\S]{0,64994}$"
         },
         "contentType": {
           "type": "string",
@@ -1065,6 +1057,7 @@
           "type": "string",
           "description": "webhook secret token. If not set, this field value is null; otherwise, please set a string value.",
           "readOnly": false,
+          "pattern": "^.{0,2048}$",
           "x-ms-secret": true
         },
         "updateWebhookKey": {
@@ -1369,6 +1362,11 @@
       "properties": {
         "resourceId": {
           "description": "The Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountId": {
+          "description": "Account Id. For example - AWS account Id.",
           "type": "string",
           "readOnly": true
         },
@@ -1706,6 +1704,16 @@
       }
     },
     "TriggerEvaluationResponse": {
+      "type": "object",
+      "description": "Trigger evaluation response.",
+      "properties": {
+        "properties": {
+          "description": "trigger evaluation property.",
+          "$ref": "#/definitions/TriggerEvaluationProperty"
+        }
+      }
+    },
+    "TriggerEvaluationProperty": {
       "type": "object",
       "description": "Trigger evaluation response.",
       "properties": {
@@ -2064,7 +2072,7 @@
       "description": "Report Name.",
       "required": true,
       "type": "string",
-      "pattern": "^[-a-zA-Z0-9_]+$",
+      "pattern": "^[-a-zA-Z0-9_]{1,50}$",
       "x-ms-parameter-location": "method"
     },
     "SnapshotNameParameter": {
@@ -2081,7 +2089,7 @@
       "description": "Webhook Name.",
       "required": true,
       "type": "string",
-      "pattern": "^[-a-zA-Z0-9_]+$",
+      "pattern": "^[-a-zA-Z0-9_]{1,50}$",
       "x-ms-parameter-location": "method"
     },
     "SkipTokenParameter": {

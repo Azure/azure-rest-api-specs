@@ -17,7 +17,7 @@ namespace Microsoft.AzureSphere;
 @doc("An Azure Sphere catalog")
 model Catalog is TrackedResource<CatalogProperties> {
   @doc("Name of catalog")
-  @pattern("^[A-Za-z0-9_-]{1,30}$")
+  @pattern("^[A-Za-z0-9_-]{1,50}$")
   @key("catalogName")
   @path
   @segment("catalogs")
@@ -111,7 +111,7 @@ interface Catalogs extends Azure.ResourceManager.ResourceOperations<Catalog, Cat
     ...ResourceInstanceParameters<Catalog>,
     ...ListQueryParameters,
     @doc("List device groups for catalog.")
-    @body request: ListDeviceGroupsRequest
+    @body listDeviceGroupsRequest: ListDeviceGroupsRequest
   ): ArmResponse<ResourceListResult<DeviceGroup>> | ErrorResponse;
 }
 
