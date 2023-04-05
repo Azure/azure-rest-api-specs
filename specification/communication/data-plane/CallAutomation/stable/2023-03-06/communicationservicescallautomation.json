@@ -721,132 +721,6 @@
         }
       }
     },
-    "/calling/callConnections/{callConnectionId}/participants:mute": {
-      "post": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Mute participants from the call using identifier.",
-        "description": "Mute participants from the call using identifier.",
-        "operationId": "CallConnection_Mute",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "muteParticipantsRequest",
-            "in": "body",
-            "description": "The participants to be muted from the call.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MuteParticipantsRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "Repeatability-Request-ID",
-            "in": "header",
-            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "Repeatability-First-Sent",
-            "in": "header",
-            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "202": {
-            "description": "Returns the mute participants response",
-            "schema": {
-              "$ref": "#/definitions/MuteParticipantsResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Mute participants from the call using identifier.": {
-            "$ref": "./examples/CallConnection_Mute.json"
-          }
-        }
-      }
-    },
-    "/calling/callConnections/{callConnectionId}/participants:unmute": {
-      "post": {
-        "tags": [
-          "MidConnections"
-        ],
-        "summary": "Unmute participants from the call using identifier.",
-        "description": "Unmute participants from the call using identifier.",
-        "operationId": "CallConnection_Unmute",
-        "parameters": [
-          {
-            "name": "callConnectionId",
-            "in": "path",
-            "description": "The call connection id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "unmuteParticipantsRequest",
-            "in": "body",
-            "description": "The participants to be unmuted from the call.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UnmuteParticipantsRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "Repeatability-Request-ID",
-            "in": "header",
-            "description": "If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.",
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "Repeatability-First-Sent",
-            "in": "header",
-            "description": "If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "default": {
-            "description": "Error",
-            "schema": {
-              "$ref": "#/definitions/CommunicationErrorResponse"
-            }
-          },
-          "202": {
-            "description": "Returns the unmute participants response",
-            "schema": {
-              "$ref": "#/definitions/UnmuteParticipantsResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Unmute participants from the call using identifier.": {
-            "$ref": "./examples/CallConnection_Unmute.json"
-          }
-        }
-      }
-    },
     "/calling/callConnections/{callConnectionId}/participants/{participantRawId}": {
       "get": {
         "tags": [
@@ -1749,66 +1623,6 @@
         }
       }
     },
-    "MuteParticipantsRequest": {
-      "description": "The request payload for muting participants from the call.",
-      "required": [
-        "targetParticipants"
-      ],
-      "type": "object",
-      "properties": {
-        "targetParticipants": {
-          "description": "Participants to be muted from the call.\r\nOnly ACS Users are supported.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string"
-        }
-      }
-    },
-    "MuteParticipantsResponse": {
-      "description": "The response payload for muting participants from the call.",
-      "type": "object",
-      "properties": {
-        "operationContext": {
-          "description": "The operation context provided by client.",
-          "type": "string"
-        }
-      }
-    },
-    "UnmuteParticipantsRequest": {
-      "description": "The request payload for unmuting participant from the call.",
-      "required": [
-        "targetParticipants"
-      ],
-      "type": "object",
-      "properties": {
-        "targetParticipants": {
-          "description": "Participants to be unmuted from the call.\r\nOnly ACS Users are supported.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CommunicationIdentifierModel"
-          }
-        },
-        "operationContext": {
-          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
-          "type": "string"
-        }
-      }
-    },
-    "UnmuteParticipantsResponse": {
-      "description": "The response payload for unmuting participants from the call.",
-      "type": "object",
-      "properties": {
-        "operationContext": {
-          "description": "The operation context provided by client.",
-          "type": "string"
-        }
-      }
-    },
     "RecordingContentType": {
       "description": "The content type of call recording.",
       "enum": [
@@ -2471,7 +2285,14 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "#/parameters/Endpoint"
+        "name": "endpoint",
+        "description": "The endpoint of the Azure Communication resource.",
+        "required": true,
+        "type": "string",
+        "format": "url",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client"
       }
     ]
   }
