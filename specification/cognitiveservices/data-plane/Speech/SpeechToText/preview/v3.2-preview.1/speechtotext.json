@@ -1,13 +1,13 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Speech Services API v3.2-preview.1",
-    "description": "Speech Services API v3.2-preview.1.",
+    "title": "Speech Services API v3.2-preview1",
+    "description": "Speech Services API v3.2-preview1.",
     "contact": {
       "name": "Cognitive Services - Speech Services",
       "url": "https://docs.microsoft.com/azure/cognitive-services/speech-service/support"
     },
-    "version": "v3.2-preview.1"
+    "version": "v3.2-preview1"
   },
   "paths": {
     "/datasets/locales": {
@@ -2184,7 +2184,6 @@
             }
           }
         },
-        "deprecated": true,
         "x-ms-examples": {
           "Copy a model": {
             "$ref": "./examples/copy_model.json"
@@ -2226,13 +2225,18 @@
           }
         ],
         "responses": {
-          "201": {
+          "202": {
             "description": "The response contains information about the entity as payload and its location as header.",
             "schema": {
               "$ref": "#/definitions/Operation"
             },
             "headers": {
-              "Location": {
+              "Retry-After": {
+                "description": "The minimum number of seconds to wait before accessing the resource created in this operation.",
+                "type": "integer",
+                "format": "int32"
+              },
+              "Operation-Location": {
                 "description": "The location of the created resource.",
                 "type": "string",
                 "format": "uri"
@@ -2279,17 +2283,10 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The response contains information about the entity as payload and its location as header.",
             "schema": {
               "$ref": "#/definitions/ModelCopyAuthorization"
-            },
-            "headers": {
-              "Location": {
-                "description": "The location of the created resource.",
-                "type": "string",
-                "format": "uri"
-              }
             }
           },
           "default": {
@@ -5636,6 +5633,7 @@
     "LanguageIdentificationMode": {
       "title": "LanguageIdentificationMode",
       "description": "The mode used for language identification.",
+      "default": "Continuous",
       "enum": [
         "Continuous",
         "Dominant"
@@ -5792,10 +5790,7 @@
         },
         "properties": {
           "description": "The configuration for running this model in a container.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
+          "type": "object"
         }
       }
     },
@@ -6923,7 +6918,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/speechtotext/v3.2-preview.1",
+    "hostTemplate": "{endpoint}/speechtotext/v3.2-preview1",
     "useSchemePrefix": false,
     "parameters": [
       {
