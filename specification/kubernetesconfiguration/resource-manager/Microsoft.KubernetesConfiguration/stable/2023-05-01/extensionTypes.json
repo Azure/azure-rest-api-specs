@@ -58,13 +58,6 @@
             "$ref": "#/parameters/LocationQueryParameter"
           },
           {
-            "name": "releaseTrain",
-            "in": "query",
-            "description": "Filter results by release train",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "publisherId",
             "in": "query",
             "description": "Filter results by Publisher ID of a marketplace extension",
@@ -75,13 +68,6 @@
             "name": "offerId",
             "in": "query",
             "description": "Filter results by Offer ID of a marketplace extension",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "planId",
-            "in": "query",
-            "description": "Filter results by Plan ID of a marketplace extension",
             "required": false,
             "type": "string"
           },
@@ -181,6 +167,13 @@
             "$ref": "#/parameters/ExtensionTypeNameParameter"
           },
           {
+            "name": "releaseTrain",
+            "in": "query",
+            "description": "Filter results by release train",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
@@ -231,6 +224,20 @@
           },
           {
             "$ref": "../../common/2022-03-01/parameters.json#/parameters/ClusterNameParameter"
+          },
+          {
+            "name": "publisherId",
+            "in": "query",
+            "description": "Filter results by Publisher ID of a marketplace extension",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "offerId",
+            "in": "query",
+            "description": "Filter results by Offer ID of a marketplace extension",
+            "required": false,
+            "type": "string"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
@@ -480,13 +487,6 @@
       "type": "string",
       "description": "Name of the Extension Type.",
       "x-ms-parameter-location": "method"
-    },
-    "LocationQueryParameter": {
-      "name": "location",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "The name of Azure region."
     }
   }
 }
