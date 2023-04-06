@@ -766,9 +766,8 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the operation, as per Resource-Based Access Control (RBAC). Examples: \"Microsoft.Compute/virtualMachines/write\", \"Microsoft.Compute/virtualMachines/capture/action\"",
-          "type": "string",
-          "readOnly": true
+          "description": "Operation name: {provider}/{resource}/{operation}",
+          "type": "string"
         },
         "isDataAction": {
           "description": "Whether the operation applies to data-plane. This is \"true\" for data-plane operations and \"false\" for ARM/control-plane operations.",
@@ -780,24 +779,20 @@
           "type": "object",
           "properties": {
             "provider": {
-              "description": "The localized friendly form of the resource provider name, e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute\".",
-              "type": "string",
-              "readOnly": true
+              "description": "Service provider: Microsoft.Resources",
+              "type": "string"
             },
             "resource": {
-              "description": "The localized friendly name of the resource type related to this operation. E.g. \"Virtual Machines\" or \"Job Schedule Collections\".",
-              "type": "string",
-              "readOnly": true
+              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+              "type": "string"
             },
             "operation": {
-              "description": "The concise, localized friendly name for the operation; suitable for dropdowns. E.g. \"Create or Update Virtual Machine\", \"Restart Virtual Machine\".",
-              "type": "string",
-              "readOnly": true
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
             },
             "description": {
-              "description": "The short, localized friendly description of the operation; suitable for tool tips and detailed views.",
-              "type": "string",
-              "readOnly": true
+              "description": "Description of the operation.",
+              "type": "string"
             }
           }
         },
