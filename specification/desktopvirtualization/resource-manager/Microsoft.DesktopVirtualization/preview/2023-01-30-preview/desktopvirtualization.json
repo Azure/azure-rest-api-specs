@@ -5462,7 +5462,8 @@
         },
         "hostPoolType": {
           "enum": [
-            "Pooled"
+            "Pooled",
+            "Personal"
           ],
           "x-ms-enum": {
             "name": "ScalingHostPoolType",
@@ -5471,6 +5472,10 @@
               {
                 "value": "Pooled",
                 "description": "Users get a new (random) SessionHost every time it connects to the HostPool."
+              },
+              {
+                "value": "Personal",
+                "description": "Users will be assigned a SessionHost either by administrators (PersonalDesktopAssignmentType = Direct) or upon connecting to the pool (PersonalDesktopAssignmentType = Automatic). They will always be redirected to their assigned SessionHost."
               }
             ]
           },
@@ -5934,10 +5939,37 @@
           ],
           "x-ms-enum": {
             "name": "StartupBehavior",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Session hosts will not be started by the service. This setting depends on Start VM on Connect to be enabled to start the session hosts."
+              },
+              {
+                "value": "WithAssignedUser",
+                "description": "Session hosts with an assigned user will be started during Ramp Up"
+              },
+              {
+                "value": "All",
+                "description": "All personal session hosts in the hostpool will be started during ramp up."
+              }
+            ]
           },
           "type": "string",
           "description": "The desired startup behavior during the ramp up period for personal vms in the hostpool."
+        },
+        "rampUpStartVMOnConnect": {
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true
+          },
+          "default": "Enable",
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp up phase. If this is disabled, session hosts must be turned on using rampUpAutoStartHosts or by turning them on manually."
         },
         "rampUpActionOnDisconnect": {
           "enum": [
@@ -5981,6 +6013,19 @@
           "$ref": "#/definitions/Time",
           "description": "Starting time for peak period."
         },
+        "peakStartVMOnConnect": {
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true
+          },
+          "default": "Enable",
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the peak phase."
+        },
         "peakActionOnDisconnect": {
           "enum": [
             "None",
@@ -6023,6 +6068,19 @@
           "$ref": "#/definitions/Time",
           "description": "Starting time for ramp down period."
         },
+        "rampDownVMOnConnect": {
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true
+          },
+          "default": "Enable",
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the ramp down phase."
+        },
         "rampDownActionOnDisconnect": {
           "enum": [
             "None",
@@ -6064,6 +6122,19 @@
         "offPeakStartTime": {
           "$ref": "#/definitions/Time",
           "description": "Starting time for off-peak period."
+        },
+        "offPeakStartVMOnConnect": {
+          "enum": [
+            "Enable",
+            "Disable"
+          ],
+          "x-ms-enum": {
+            "name": "SetStartVMOnConnect",
+            "modelAsString": true
+          },
+          "default": "Enable",
+          "type": "string",
+          "description": "The desired configuration of Start VM On Connect for the hostpool during the off-peak phase."
         },
         "offPeakActionOnDisconnect": {
           "enum": [
