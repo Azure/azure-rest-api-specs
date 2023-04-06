@@ -81,6 +81,9 @@
             "description": "Filter results by Plan ID of a marketplace extension",
             "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -167,6 +170,9 @@
           },
           {
             "$ref": "#/parameters/ExtensionTypeNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -195,6 +201,36 @@
       "type": "object",
       "properties": {
         "properties": {
+          "isSystemExtension": {
+            "type": "boolean",
+            "description": "Is this Extension Type a system extension."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the extension type"
+          },
+          "publisher": { // is this needed?
+            "type": "string",
+            "description": "Name of the publisher for the Extension Type"
+          },
+          "planInfo": {
+            "type": "object",
+            "required": false, // Is this required (non-marketplace)?
+            "properties": {
+              "publisherId": {
+                "type": "string",
+                "description": "" // TODO
+              },
+              "planId": {
+                "type": "string",
+                "description": "" // TODO
+              },
+              "offerId": {
+                "type": "string",
+                "description": "" // TODO
+              }
+            }
+          },
           "releaseTrains": {
             "description": "The list of release trains of the extension type.",
             "type": "array",
