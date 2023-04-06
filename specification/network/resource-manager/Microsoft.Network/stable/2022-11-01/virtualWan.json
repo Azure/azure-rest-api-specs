@@ -8994,6 +8994,7 @@
       "description": "ExpressRouteConnection list."
     },
     "NetworkVirtualApplianceConnectionProperties": {
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -9039,6 +9040,7 @@
       "description": "Properties of the NetworkVirtualApplianceConnection subresource."
     },
     "NetworkVirtualApplianceConnection": {
+      "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -9058,6 +9060,7 @@
       "description": "NetworkVirtualApplianceConnection resource."
     },
     "NetworkVirtualApplianceConnectionList": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -9209,16 +9212,17 @@
       }
     },
     "RoutingConfigurationNfvSubResource": {
+      "type": "object",
       "properties": {
         "ResourceUri": {
           "type": "string",
           "description": "Resource ID."
         }
       },
-      "description": "Reference to another subresource.",
-      "x-ms-azure-resource": true
+      "description": "Reference to RouteTableV3 associated with the connection."
     },
     "RoutingConfigurationNfv": {
+      "type": "object",
       "description": "NFV version of Routing Configuration indicating the associated and propagated route tables for this connection.",
       "properties": {
         "associatedRouteTable": {
@@ -9240,6 +9244,7 @@
       }
     },
     "PropagatedRouteTableNfv": {
+      "type": "object",
       "description": "Nfv version of the list of RouteTables to advertise the routes to.",
       "properties": {
         "labels": {
@@ -9254,7 +9259,8 @@
           "description": "The list of resource ids of all the RouteTables.",
           "items": {
             "$ref": "#/definitions/RoutingConfigurationNfvSubResource"
-          }
+          },
+          "x-ms-identifiers": [ "ResourceUri" ]
         }
       }
     },
