@@ -719,6 +719,18 @@
           "type": "integer",
           "format": "int32",
           "description": "Max storage allowed for a server."
+        },
+        "autoGrow": {
+          "type": "string",
+          "description": "Flag to enable / disable Storage Auto grow for flexible server.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAutoGrow",
+            "modelAsString": true
+          }
         }
       },
       "description": "Storage properties of a server"
