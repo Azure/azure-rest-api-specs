@@ -45,7 +45,7 @@ namespace AzureMessagingEventGrid {
 
   @doc("Properties of an event published to an Azure Messaging EventGrid Namespace topic using the CloudEvent 1.0 Schema.")
   @internal
-  model CloudEventEvent {
+  model CloudEvent {
     @doc("An identifier for the event. The combination of id and source must be unique for each distinct event.")
     id: string;
 
@@ -95,7 +95,7 @@ namespace AzureMessagingEventGrid {
     brokerProperties: BrokerProperties;
 
     @doc("Cloud Event details.")
-    event: CloudEventEvent;
+    event: CloudEvent;
   }
 
   @doc("Details of the Receive operation response.")
@@ -160,17 +160,13 @@ namespace AzureMessagingEventGrid {
   @route("/", {shared: true})
   @action("publish")
   @internal
-  @post op PublishCloudEvent is Azure.Core.ResourceAction<
+  op PublishCloudEvent is Azure.Core.ResourceAction<
     Topic,
     {
       @doc("content type")
       @header("content-type")
       contentType: "application/cloudevents+json; charset=utf-8";
-
-      @doc("Single Cloud Event being published.")
-      @body 
-      event: CloudEventEvent;
-    },
+    } & CloudEvent,
     PublishResponse
     >;
 
@@ -178,7 +174,7 @@ namespace AzureMessagingEventGrid {
   @route("/", {shared: true})
   @action("publish")
   @internal
-  @post op PublishBatchOfCloudEvents is Azure.Core.ResourceAction<
+  op PublishBatchOfCloudEvents is Azure.Core.ResourceAction<
     Topic,
     {
       @doc("content type")
@@ -187,18 +183,17 @@ namespace AzureMessagingEventGrid {
 
       @doc("Array of Cloud Events being published.")
       @body
-      events: CloudEventEvent[];
+      events: CloudEvent[];
     },
     PublishResponse
     >;
 
   // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:receive?api-Version={apiVersion}&timeout=60&maxEvents={maxEvents}
-
    
   @doc("Receive Batch of Cloud Events from the Event Subscription.")
   @action("receive")
   @internal
-  @post op ReceiveBatchOfCloudEvents is Azure.Core.ResourceAction<
+  op ReceiveBatchOfCloudEvents is Azure.Core.ResourceAction<
     EventSubscription,
     {
       @doc("Max Events count to be received.")
@@ -217,7 +212,7 @@ namespace AzureMessagingEventGrid {
 
   @doc("Acknowledge Cloud Events.")
   @action("acknowledge")
-  @post op AcknowledgeBatchOfCloudEvents is Azure.Core.ResourceAction<
+  op AcknowledgeBatchOfCloudEvents is Azure.Core.ResourceAction<
     EventSubscription,
     {
       @doc("content type")
@@ -236,7 +231,7 @@ namespace AzureMessagingEventGrid {
   
   @doc("Release Cloud Events.")
   @action("release")
-  @post op ReleaseBatchOfCloudEvents is Azure.Core.ResourceAction<
+  op ReleaseBatchOfCloudEvents is Azure.Core.ResourceAction<
     EventSubscription,
     {
       @doc("content type")
