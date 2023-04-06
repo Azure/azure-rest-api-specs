@@ -1392,6 +1392,89 @@
         "documents"
       ]
     },
+    "CustomSentimentResult": {
+      "type": "object",
+      "properties": {
+        "sentiment": {
+          "type": "string",
+          "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative",
+            "mixed"
+          ],
+          "x-ms-enum": {
+            "name": "DocumentSentimentValue",
+            "modelAsString": false
+          }
+        },
+        "confidenceScores": {
+          "description": "Document level sentiment confidence scores between 0 and 1 for each sentiment class.",
+          "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
+        },
+        "sentences": {
+          "type": "array",
+          "description": "Sentence level sentiment analysis.",
+          "items": {
+            "$ref": "#/definitions/CustomSentimentSentenceResult"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DocumentResult"
+        }
+      ],
+      "required": [
+        "sentiment",
+        "confidenceScores",
+        "sentences"
+      ]
+    },
+    "CustomSentimentSentenceResult": {
+      "type": "object",
+      "required": [
+        "text",
+        "sentiment",
+        "confidenceScores",
+        "offset",
+        "length"
+      ],
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "The sentence text."
+        },
+        "sentiment": {
+          "type": "string",
+          "description": "The predicted Sentiment for the sentence.",
+          "enum": [
+            "positive",
+            "neutral",
+            "negative"
+          ],
+          "x-ms-enum": {
+            "name": "SentenceSentimentValue",
+            "modelAsString": false
+          }
+        },
+        "confidenceScores": {
+          "description": "The sentiment confidence score between 0 and 1 for the sentence for all classes.",
+          "$ref": "#/definitions/SentimentConfidenceScorePerLabel"
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sentence offset from the start of the document."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the sentence."
+        }
+      }
+    },
     "SentimentDocumentResult": {
       "type": "object",
       "properties": {
