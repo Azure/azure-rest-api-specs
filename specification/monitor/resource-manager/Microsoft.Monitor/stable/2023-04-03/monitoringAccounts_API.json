@@ -181,7 +181,7 @@
         "tags": [
           "AzureMonitorWorkspaces"
         ],
-        "description": "Create a workspace",
+        "description": "Create or update a workspace",
         "operationId": "AzureMonitorWorkspaces_Create",
         "consumes": [
           "application/json"
@@ -214,6 +214,12 @@
         ],
         "responses": {
           "200": {
+            "description": "Azure Monitor workspace was successfully updated",
+            "schema": {
+              "$ref": "#/definitions/AzureMonitorWorkspaceResource"
+            }
+          },
+          "201": {
             "description": "Azure Monitor workspace was successfully created",
             "schema": {
               "$ref": "#/definitions/AzureMonitorWorkspaceResource"
