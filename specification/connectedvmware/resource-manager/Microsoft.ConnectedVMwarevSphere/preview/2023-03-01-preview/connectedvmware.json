@@ -5373,6 +5373,57 @@
       },
       "description": "Specifies the Security profile settings for the virtual machine."
     },
+    "InfrastructureProfile": {
+      "type": "object",
+      "properties": {
+        "templateId": {
+          "description": "Gets or sets the ARM Id of the template resource to deploy the virtual machine.",
+          "type": "string"
+        },
+        "vCenterId": {
+          "description": "Gets or sets the ARM Id of the vCenter resource in which this resource pool resides.",
+          "type": "string"
+        },
+        "moRefId": {
+          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "inventoryItemId": {
+          "description": "Gets or sets the inventory Item ID for the virtual machine.",
+          "type": "string"
+        },
+        "moName": {
+          "description": "Gets or sets the vCenter Managed Object name for the virtual machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "folderPath": {
+          "description": "Gets or sets the folder path of the vm.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceUuid": {
+          "description": "Gets or sets the instance uuid of the vm.",
+          "type": "string",
+          "readOnly": true
+        },
+        "smbiosUuid": {
+          "type": "string",
+          "description": "Gets or sets the SMBIOS UUID of the vm."
+        },
+        "firmwareType": {
+          "description": "Firmware type",
+          "$ref": "#/definitions/FirmwareType"
+        },
+        "customResourceName": {
+          "description": "Gets the name of the corresponding resource in Kubernetes.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "Specifies the vCenter infrastructure specific settings for the virtual machine."
+    },
     "ExtendedLocation": {
       "type": "object",
       "description": "The extended location.",
@@ -5501,14 +5552,6 @@
       "description": "Describes the properties of a Virtual Machine Instance.",
       "type": "object",
       "properties": {
-        "templateId": {
-          "description": "Gets or sets the ARM Id of the template resource to deploy the virtual machine.",
-          "type": "string"
-        },
-        "vCenterId": {
-          "description": "Gets or sets the ARM Id of the vCenter resource in which this resource pool resides.",
-          "type": "string"
-        },
         "placementProfile": {
           "description": "Placement properties.",
           "$ref": "#/definitions/PlacementProfile"
@@ -5533,50 +5576,12 @@
           "$ref": "#/definitions/SecurityProfile",
           "description": "Gets the security profile."
         },
-        "moRefId": {
-          "description": "Gets or sets the vCenter MoRef (Managed Object Reference) ID for the virtual machine.",
-          "type": "string",
-          "readOnly": true
-        },
-        "inventoryItemId": {
-          "description": "Gets or sets the inventory Item ID for the virtual machine.",
-          "type": "string"
-        },
-        "moName": {
-          "description": "Gets or sets the vCenter Managed Object name for the virtual machine.",
-          "type": "string",
-          "readOnly": true
-        },
-        "folderPath": {
-          "description": "Gets or sets the folder path of the vm.",
-          "type": "string",
-          "readOnly": true
-        },
-        "instanceUuid": {
-          "description": "Gets or sets the instance uuid of the vm.",
-          "type": "string",
-          "readOnly": true
-        },
-        "smbiosUuid": {
-          "type": "string",
-          "description": "Gets or sets the SMBIOS UUID of the vm."
-        },
-        "firmwareType": {
-          "description": "Firmware type",
-          "$ref": "#/definitions/FirmwareType"
+        "infrastructureProfile": {
+          "$ref": "#/definitions/InfrastructureProfile",
+          "description": "Gets the infrastructure profile."
         },
         "powerState": {
           "description": "Gets the power state of the virtual machine.",
-          "type": "string",
-          "readOnly": true
-        },
-        "customResourceName": {
-          "description": "Gets the name of the corresponding resource in Kubernetes.",
-          "type": "string",
-          "readOnly": true
-        },
-        "uuid": {
-          "description": "Gets or sets a unique identifier for this resource.",
           "type": "string",
           "readOnly": true
         },
