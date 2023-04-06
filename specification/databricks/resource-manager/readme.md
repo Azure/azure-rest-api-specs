@@ -4,8 +4,6 @@
 
 This is the AutoRest configuration file for Databricks.
 
-
-
 ---
 
 ### Java multi-api
@@ -18,6 +16,15 @@ batch:
   - tag: package-2018-04-01
 ```
 
+
+### Tag: package-2023-05
+
+These settings apply only when `--tag=package-2023-05` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-05'
+input-file:
+  - Microsoft.Databricks/stable/2023-05-01/accessconnector.json
+```
 ### Tag: package-2023-02-01 and java
 
 These settings apply only when `--tag=package-2023-02-01 --java` is specified on the command line.
@@ -70,8 +77,8 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
 ## Getting Started
+
 To build the SDK for Databricks, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -79,20 +86,20 @@ To build the SDK for Databricks, simply [Install AutoRest](https://aka.ms/autore
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Databricks API.
 
 ``` yaml
 title: AzureDatabricksManagementClient
-description: 'The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.'
+description: The Microsoft Azure management APIs allow end users to operate on Azure Databricks Workspace / Access Connector resources.
 openapi-type: arm
-tag: package-2023-02-01
+tag: package-2023-05
 ```
 
 ### Tag: package-2018-04-01
@@ -138,6 +145,7 @@ input-file:
 ```
 
 ---
+
 # Suppressions
 
 ``` yaml
@@ -151,6 +159,7 @@ directive:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -174,5 +183,3 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-
