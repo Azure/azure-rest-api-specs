@@ -53,7 +53,7 @@ namespace AzureMessagingEventGrid {
     source: string;
 
     @doc("Event data specific to the event type.")
-    data?: object;
+    data?: unknown;
 
     @doc("Event data specific to the event type, encoded as a base64 string.")
     data_base64?: bytes;
