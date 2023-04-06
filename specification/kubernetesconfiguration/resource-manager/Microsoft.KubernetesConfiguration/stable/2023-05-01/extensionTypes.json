@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/extensionTypes": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes": {
       "get": {
         "tags": [
           "ExtensionTypes",
@@ -50,6 +50,9 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/LocationQueryParameter"
@@ -105,7 +108,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionTypeName}": {
       "get": {
         "tags": [
           "ExtensionTypes",
@@ -121,6 +124,9 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/LocationQueryParameter"
@@ -148,7 +154,7 @@
         }
       }
     },
-    "/subcriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/extensionTypes/{extensionTypeName}/versions": {
+    "/subcriptions/{subscriptionId}/providers/Microsoft.KubernetesConfiguration/locations/{location}/extensionTypes/{extensionTypeName}/versions": {
       "get": {
         "tags": [
           "ExtensionTypes",
@@ -164,6 +170,9 @@
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/LocationQueryParameter"
@@ -475,7 +484,7 @@
     "LocationQueryParameter": {
       "name": "location",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "string",
       "description": "The name of Azure region."
     }
