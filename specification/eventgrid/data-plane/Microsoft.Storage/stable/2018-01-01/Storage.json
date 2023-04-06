@@ -447,6 +447,14 @@
         "status": {
           "description": "The status for a storage task.",
           "type": "string"
+          "enum": [
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         },
         "completedDateTime": {
           "description": "The time at which a storage task was completed.",
@@ -463,6 +471,7 @@
         },
         "summaryReportBlobUrl": {
           "description": "The summary report blob url for a storage task",
+          "format": "url",
           "type": "string"
         }
       }
